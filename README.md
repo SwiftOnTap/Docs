@@ -1,2 +1,1 @@
-# iSwiftUI Docs
-## SwiftUI, 100% documented.
+# iSwiftUI Docs - SwiftUI, 100% documented.
