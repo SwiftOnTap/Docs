@@ -7963,29 +7963,67 @@ extension Image : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
+	/// Modifies the image rendering mode as either regular or template.
+	///
+	/// There are two types of rendering modes: 
+	/// - Original
+	/// - Template
+	///
+	/// Original mode will draw the image normally, as-is. Template mode will
+	/// turn all the parts of the image that are not transparent to one color
+	/// that you can set yourself. By default, the color is black.
+	///
+	/// A common use case for this modifier would be like this:
+	///
+	/// 	Image("Bird")
+	/// 		.renderingMode(.template)
+	/// 		.resizable()
+	/// 		.frame(width: 50, height: 50)
+	/// 		.foregroundColor(.blue)
+	///
+	/// The modifier does nothing if renderingMode is `nil`.
+	///
+	/// - Parameter renderingMode: The image rendering mode.
+	///
+	/// - SeeAlso: Image.TemplateRenderingMode.
     public func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> Image
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
-    /// The orientation of an image.
+    /// Constants that specify the intended display orientation for an image.
     @frozen public enum Orientation : UInt8, CaseIterable, Hashable {
 
+    	/// The original pixel data matches the intended display orientation.
         case up
 
+        /// The image has been horizontally flipped from the orientation of its
+        /// original pixel data.
         case upMirrored
 
+        /// The image has been rotated 180° from the orientation of its original
+        /// pixel data.
         case down
 
+        /// The image has been vertically flipped from the orientation of its
+        /// original pixel data.
         case downMirrored
 
+        /// The image has been rotated 90° counterclockwise from the orientation
+        /// of its original pixel data.
         case left
 
+        /// The image has been rotated 90° clockwise and flipped horizontally
+        /// from the orientation of its original pixel data.
         case leftMirrored
 
+        /// The image has been rotated 90° clockwise from the orientation of its
+        /// original pixel data.
         case right
 
+        /// The image has been rotated 90° counterclockwise and flipped
+        /// horizontally from the orientation of its original pixel data.
         case rightMirrored
 
         /// The raw type that can be used to represent all values of the conforming
@@ -8042,10 +8080,16 @@ extension Image {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
+	/// Options for rendering the image normally, or with only 1 color.
     public enum TemplateRenderingMode {
 
+    	/// Render the image as all black except where opacity is 0.
+    	///
+    	/// This is often used if the image is going to be a mask or otherwise
+    	/// used only for its outline.
         case template
 
+        /// Render the image as usual.
         case original
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -8087,10 +8131,19 @@ extension Image {
     @available(macOS 11.0, *)
     public enum Scale {
 
+    	/// The small image scale size.
+    	///
+    	/// - SeeAlso: Image.imageScale(_:)
         case small
 
+        /// The medium image scale size.
+        ///
+        /// - SeeAlso: Image.imageScale(_:)
         case medium
 
+        /// The large image scale size.
+        /// 
+        /// - SeeAlso: Image.imageSclae(_:)
         case large
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -8132,14 +8185,28 @@ extension Image {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
+	/// The different amounts of interpolation that can be applied to an image.
+	///
+	/// Image interpolation is a digital process that occurs when an image is
+	/// either scaled up or scaled down, or when rotating an image.
+	/// 
+	/// Interpolation uses what is known in the image to estimate unknown
+	/// values.
+	/// 
+	/// Interpolation can make scaled up images retain some of their clarity,
+	/// and can make scaled down images look better. 
     public enum Interpolation {
 
+    	/// Apply no interpolation to the image when remapping.
         case none
 
+        /// Apply a low amount of interpolation to the image when remapping.
         case low
 
+        /// Apply a medium amount of interpolation to the image when remapping.
         case medium
 
+        /// Apply a high amount of interpolation to the image when remapping.
         case high
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -8281,6 +8348,15 @@ extension Image {
         public func hash(into hasher: inout Hasher)
     }
 
+    /// Modifies an image to make it resizable.
+    ///
+    /// Applying this modifier before reframing an image or in other ways
+    /// distorting it is necessary otherwise the images view will change, but
+    /// the image itself will not be resized.
+    /// 
+    /// - Parameters:
+    ///   - capInsets: The values to use for the cap insets.
+    ///   - resizingMode: The mode of resizing to use.
     public func resizable(capInsets: EdgeInsets = EdgeInsets(), resizingMode: Image.ResizingMode = .stretch) -> Image
 }
 
@@ -8768,11 +8844,23 @@ extension LabelStyleConfiguration.Title : View {
 extension LabelStyleConfiguration.Icon : View {
 }
 
+/// The different text directions used in different languages.
+///
+/// Examples of left-to-right layout directions are English and Russian.
+/// Examples of right-to-left layout directions are Arabic and Hebrew.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum LayoutDirection : Hashable, CaseIterable {
 
+	/// The text is read and written from left to right.
+	///
+	/// In this layout direction, the leading edge would be on the left side,
+	/// and the trailing edge would be on the right side.
     case leftToRight
 
+    /// The text is read and written from left to right.
+    /// 
+    /// In this layout direction, the leading edge would be on the right side,
+    /// and the trailing edge would be on the left side.
     case rightToLeft
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -9064,6 +9152,12 @@ extension LegibilityWeight {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LinearGradient : ShapeStyle, View {
 
+	/// Creates a new linear gradient from the Gradient colors, the start, and the end.
+	/// 
+	/// - Parameters:
+	///   - gradient: The gradient containing the ordered colors to be used.
+	///   - startPoint: The unit point where the gradient starts.
+	///   - endPoint: The unit point where the gradient ends.
     public init(gradient: Gradient, startPoint: UnitPoint, endPoint: UnitPoint)
 
     /// The type of view representing the body of this view.
@@ -11637,12 +11731,16 @@ public enum PreviewLayout {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewPlatform {
 
+	/// The iOS preview platform.
     case iOS
 
+    /// The macOS preview platform.
     case macOS
 
+    /// The tvOS preview platform.
     case tvOS
 
+    /// The watchOS preview platform.
     case watchOS
 
     /// Returns a Boolean value indicating whether two values are equal.
