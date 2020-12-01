@@ -13644,11 +13644,11 @@ public struct ScrollViewProxy {
     public func scrollTo<ID>(_ id: ID, anchor: UnitPoint? = nil) where ID : Hashable
 }
 
-/// A view whose child is defined as a function of a `ScrollViewProxy`
-/// targeting the scrollable views within the child.
+/// Creates programatic scrolling by ascribing a child defined as a function of a `ScrollViewProxy`.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct ScrollViewReader<Content> : View where Content : View {
 
+    /// A ViewBuilder closure that receives the ScrollViewProxy as a parameter
     public var content: (ScrollViewProxy) -> Content
 
     /// Initializes with the closure `content`. The proxy passed to the
@@ -13668,7 +13668,9 @@ public struct ScrollViewProxy {
     public typealias Body = some View
 }
 
-/// An affordance for creating hierarchical view content.
+/// A container that groups views.
+///
+/// Often used in Lists and Forms to set Parent, Content, and Footer information.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Section<Parent, Content, Footer> {
 }
@@ -13682,6 +13684,12 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     /// implementation of the required `body` property.
     public typealias Body = Never
 
+    /// Initialize a ``Section`` with an explicit header, footer, and content.
+    ///
+    /// - Parameters:
+    ///   - header: A view placed on top
+    ///   - footer: A view placed on bottom
+    ///   - content: The section contents
     public init(header: Parent, footer: Footer, @ViewBuilder content: () -> Content)
 
     public var internalBody: some View { get }
@@ -13690,18 +13698,31 @@ extension Section : View where Parent : View, Content : View, Footer : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Section where Parent == EmptyView, Content : View, Footer : View {
 
+    /// Initialize a ``Section`` with an explicit footer and content.
+    ///
+    /// - Parameters:
+    ///   - footer: A view placed on bottom
+    ///   - content: The section contents
     public init(footer: Footer, @ViewBuilder content: () -> Content)
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Section where Parent : View, Content : View, Footer == EmptyView {
 
+    /// Initialize a ``Section`` with an explicit header and content.
+    ///
+    /// - Parameters:
+    ///   - header: A view placed on top
+    ///   - content: The section contents
     public init(header: Parent, @ViewBuilder content: () -> Content)
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Section where Parent == EmptyView, Content : View, Footer == EmptyView {
 
+    /// Initialize a ``Section`` with specified content.
+    ///
+    /// - Parameters content: The section contents
     public init(@ViewBuilder content: () -> Content)
 }
 
