@@ -3807,6 +3807,7 @@ public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : Cu
 @available(watchOS, unavailable)
 public struct DatePicker<Label> : View where Label : View {
 
+	/// A type alias for the ``DatePickerComponents`` option set used in `DatePicker`. 
     public typealias Components = DatePickerComponents
 
     /// The content and behavior of the view.
@@ -6842,13 +6843,17 @@ extension Font {
         public func hash(into hasher: inout Hasher)
     }
 
+    /// The different types of line spacing.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public enum Leading {
 
+    	/// Normal, medium line spacing.
         case standard
 
+        /// Tight, small line spacing.
         case tight
 
+        /// Loose, large line spacing.
         case loose
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -7103,6 +7108,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ForegroundStyle {
 
+	/// Creates a foreground style.
     @inlinable public init()
 }
 
@@ -7119,6 +7125,13 @@ extension ForegroundStyle : ShapeStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Form<Content> : View where Content : View {
 
+	/// Creates a form from a view builder containing child views.
+	///
+	/// The content of a form is almost always different ``Section``s.
+	///
+	/// - Parameter content: A closure that returns the view to the `Form`.
+	///
+	/// - SeeAlso: Section
     public init(@ViewBuilder content: () -> Content)
 
     /// The content and behavior of the view.
@@ -7188,6 +7201,9 @@ public struct GeometryProxy {
 	/// properties of the parent view.
     public var content: (GeometryProxy) -> Content
 
+    /// Creates a `GeometryReader` parent view using the parent's geometry.
+    ///
+    /// - Parameter content: A closure that takes the geometry of the parent view and returns a content view.
     @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content)
 
     /// The type of view representing the body of this view.
@@ -7588,6 +7604,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 @available(watchOS, unavailable)
 public struct GraphicalDatePickerStyle : DatePickerStyle {
 
+	/// Create a graphical date picker style.
     public init()
 }
 
@@ -9656,6 +9673,9 @@ public protocol ListStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
 
+	/// Creates a localized string key from a ``String`` value.
+	///
+	/// - Parameter value: The value for keying a string.
     public init(_ value: String)
 
     /// Creates an instance initialized to the given string value.
@@ -10511,8 +10531,10 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct Namespace : DynamicProperty {
 
+	/// Create an empty namespace.
     @inlinable public init()
 
+    /// The namespace ID from the property wrapper.
     public var wrappedValue: Namespace.ID { get }
 
     /// A namespace defined by the persistent identity of an
