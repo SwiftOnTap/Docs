@@ -693,18 +693,33 @@ extension Anchor.Source {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Angle {
 
+	/// The size of the angle, measured in radians.
     public var radians: Double
 
+    /// The size of the angle, measured in degrees.
     @inlinable public var degrees: Double
 
+    /// Creates an angle of 0 degrees or 0 radians.
     @inlinable public init()
 
+    /// Creates an angle from a specified number of radians.
+    ///
+    /// - Parameter radians: The number of radians in the angle.
     @inlinable public init(radians: Double)
 
+    /// Creates an angle from a specified number of degrees.
+    ///
+    /// - Parameter degrees: The number of degrees in the angle.
     @inlinable public init(degrees: Double)
 
+    /// Changes the size of an angle to a specified number of radians.
+    ///
+    /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle
 
+    /// Changes the size of an angle to a specified number of degrees.
+    ///
+    /// - Paramter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle
 }
 
@@ -963,28 +978,64 @@ extension Animation {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
+	/// An identity animation, meaning the object appears and disappears without
+	/// any motion or opacity changes.
     public static let `default`: Animation
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
+	/// An animation where the effect starts out slower and ends slower, while
+	/// moving most quickly in the middle.
+	///
+	/// - Parameter duration: How long the effect should last.
     public static func easeInOut(duration: Double) -> Animation
 
+    /// An animation where the effect starts out slower and ends slower, while
+	/// moving most quickly in the middle.
+	///
+	/// Uses the default timing of 1 second.
     public static var easeInOut: Animation { get }
 
+    /// An animation where the effect starts out slower and then ends more quickly.
+    ///
+    /// - Parameter duration: How long the effect should last.
     public static func easeIn(duration: Double) -> Animation
 
+    /// An animation where the effect starts out slower and then ends more quickly.
+    ///
+    /// Uses the default timing of 1 second.
     public static var easeIn: Animation { get }
 
+    /// An animation where the effect starts out more quickly and then slows down.
+    ///
+    /// - Parameter duration: How long the effect should last.
     public static func easeOut(duration: Double) -> Animation
 
+    /// An animation where the effect starts out more quickly and then slows down.
+    ///
+    /// Uses the default timing of 1 second.
     public static var easeOut: Animation { get }
 
+    /// An animation where the effect happens at a constant speed throughout.
+    ///
+    /// - Parameter duration: How long the effect should last.
     public static func linear(duration: Double) -> Animation
 
+    /// An animation where the effect happens at a constant speed throughout.
+    ///
+    /// Uses the default timing of 1 second.
     public static var linear: Animation { get }
 
+    /// An animation with a fully customized timing curve.
+    ///
+    /// - Parameters:
+    ///   - c0x: The first x coefficient.
+    ///   - c0y: The first y coefficient.
+    ///   - c1x: The second x coefficient.
+    ///   - c1y: The second y coefficient.
+    ///   - duration: How long the effect should last.
     public static func timingCurve(_ c0x: Double, _ c0y: Double, _ c1x: Double, _ c1y: Double, duration: Double = 0.35) -> Animation
 }
 
@@ -1011,6 +1062,9 @@ extension Animation {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
+	/// Adds delay to your animation that runs before it starts.
+	///
+	/// - Parameter delay: How long the animation will wait before starting, in seconds.
     public func delay(_ delay: Double) -> Animation
 }
 
@@ -1027,8 +1081,16 @@ extension Animation {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
+	/// Adjusts the number of times the animation should repeat itself.
+	///
+	/// - Parameters:
+	///   - repeatCount: The number of times the animation should repeat.
+	///   - autoreverses: Whether the animation should reverse when repeating.
     public func repeatCount(_ repeatCount: Int, autoreverses: Bool = true) -> Animation
 
+    /// Adjusts whether the animation repeats forever.
+    ///
+    /// - Parameter autoreverses: Whether the animation should reverse when repeating.
     public func repeatForever(autoreverses: Bool = true) -> Animation
 }
 
@@ -2244,8 +2306,14 @@ public struct ButtonStyleConfiguration {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Capsule : Shape {
 
+	/// The capsule shape's rounded corner style.
+	///
+	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
+    /// Creates a new capsule shape from a rounded corner style.
+    ///
+    /// - Parameter style: The rounded corner style of the capsule.
     @inlinable public init(style: RoundedCornerStyle = .circular)
 
     /// Describes this shape as a path within a rectangular frame of reference.
@@ -2290,6 +2358,7 @@ extension Capsule : InsettableShape {
     /// - Returns: A path that describes this shape.
     public func path(in rect: CGRect) -> Path
 
+    /// Creates a new circle `Shape`.
     @inlinable public init()
 
     /// The type defining the data to animate.
@@ -2431,13 +2500,18 @@ extension Color {
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Color {
-
+    
+    /// The common ways of organizing RGB colors for a screen.
     public enum RGBColorSpace {
 
+    	/// Standard RGB, which is what is normally used for apps and web browsers.
         case sRGB
 
+        /// Linear standard RGB colors don't have the gamma curve of sRGB
+        /// applied to them, hence "linear."
         case sRGBLinear
 
+        /// Display P3 is a colorspace created by Apple for their devices.
         case displayP3
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -2475,10 +2549,40 @@ extension Color {
         public func hash(into hasher: inout Hasher)
     }
 
+    /// Create a `Color` from RGB and opacity values along with an optional colorspace.
+    /// 
+    /// The colorspace value defaults to sRGB, which is standard for apps. Note
+    /// also that red, green, blue, and opacity are all specified in values from
+    /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
+    /// divide them by 255 in order to use this initializer.
+    ///
+    /// - Parameters:
+    ///   - colorSpace: The `RGBColorSpace` of the specified color.
+    ///   - red: The red value of the color.
+    ///   - green: The green value of the color.
+    ///   - blue: The blue value of the color.
+    ///   - opacity: The opacity of the color. Defaults to 1.0.
     public init(_ colorSpace: Color.RGBColorSpace = .sRGB, red: Double, green: Double, blue: Double, opacity: Double = 1)
 
+    /// Create a `Color` from grayscale and opacity.
+    ///
+    /// Both the white and the opacity must be specified from 0.0 to 1.0. If
+    /// either of these values are given to you as integers, they will need to
+    /// be divided by their maximum value.
+    ///
+    /// - Parameters:
+    ///   - colorSpace: The `RGBColorSpace` of the specified color.
+    ///   - white: The grayscale value of the color, from 0.0 to 1.0.
+    ///   - opacity: The opacity of the color. Defaults to 1.0.
     public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1)
 
+    /// Creates a `Color` from hue, saturation, brightness, and opacity values.
+    /// 
+    /// - Parameters:
+    ///   - hue: The hue of the color.
+    ///   - saturation: The saturation of the color.
+    ///   - brightness: The brightness of the color.
+    ///   - opacity: The opacity of the color.
     public init(hue: Double, saturation: Double, brightness: Double, opacity: Double = 1)
 }
 
@@ -2499,31 +2603,51 @@ extension Color {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Color {
 
-    /// A set of colors that are used by system elements and applications.
+    /// A clear color `View`, equivalent to an empty view.
     public static let clear: Color
 
+    /// A true black color `View`.
     public static let black: Color
 
+    /// A true white color `View`.
     public static let white: Color
 
+    /// A gray color `View`.
     public static let gray: Color
 
+    /// A stylized red color `View`.
     public static let red: Color
 
+    /// A stylized green color `View`.
     public static let green: Color
 
+    /// A stylized blue color `View`.
     public static let blue: Color
 
+    /// An orange color `View`.
     public static let orange: Color
 
+    /// A stylized yellow color `View`.
     public static let yellow: Color
 
+    /// A pink color `View`.
     public static let pink: Color
 
+    /// A purple color `View`.
     public static let purple: Color
 
+    /// The default color of text, based on the environment.
+    ///
+    /// If you are in light mode, this will be black. If, on the other hand, you
+    /// are in dark mode, this will be white. It is automatically updated for
+    /// you.
     public static let primary: Color
 
+    /// The default color of text, with a little bit of transparency.
+    ///
+    /// If you are in light mode, this will be black with some transparency.
+    /// If the device switches to dark mode, on the other hand, the text will
+    /// dynamically shift to white with a little bit of transparency.
     public static let secondary: Color
 }
 
@@ -2553,6 +2677,10 @@ extension Color {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Color {
 
+	/// Updates the transparency channel of a `Color`, returning a `Color` back.
+	///
+	/// This is different from the ``View/opacity(_:)`` modifier because it
+	/// returns a `Color` object rather than `some View`.
     public func opacity(_ opacity: Double) -> Color
 }
 
@@ -2787,8 +2915,10 @@ extension ColorRenderingMode : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum ColorScheme : CaseIterable {
 
+	/// The color scheme referring to light mode in a device.
     case light
 
+    /// The color scheme referring to dark mode in a device.
     case dark
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -12164,12 +12294,31 @@ extension RoundedCornerStyle : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RoundedRectangle : Shape {
 
+	/// The rounded corner size of the rounded rectangle shape.
+	///
+	/// This would be used instead of corner radius when you want your corners 
+	/// not to be perfect quarter-circles but instead quarter-ellipses.
+	/// Basically, this allows you to specify different width and heights of
+	/// the corners.
     public var cornerSize: CGSize
 
+    /// The rounded corner style of your rounded rectangle's corners.
+    ///
+    /// -SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
+    /// Creates a rounded rectangle with specified rounded corner width and height.
+    ///
+    /// - Parameters:
+    ///   - cornerSize: The size (width and height) of the rectangle's corners.
+    ///   - style: The type of rounded corners. Defaults to circular.
     @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular)
 
+    /// Creates a rounded rectangle with specified rounded corner radius.
+    ///
+    /// - Parameters:
+    ///   - cornerRadius: The radius of the rectangle's corners.
+    ///   - style: The type of rounded corners. Defaults to circular.
     @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular)
 
     /// Describes this shape as a path within a rectangular frame of reference.
