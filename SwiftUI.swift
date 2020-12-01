@@ -5144,6 +5144,7 @@ extension EdgeInsets : Animatable {
 @available(watchOS, unavailable)
 public struct EditButton : View {
 
+	/// Creates an edit button.
     public init()
 
     /// The content and behavior of the view.
@@ -6914,13 +6915,17 @@ extension Font {
     /// A design to use for fonts.
     public enum Design : Hashable {
 
+    	/// The standard sans-serif font design.
         case `default`
 
+        /// A font design with serifs, or small strokes attached to the end of letters.
         @available(watchOS 7.0, *)
         case serif
 
+        /// A rounded font design.
         case rounded
 
+        /// A monospaced font design.
         @available(watchOS 7.0, *)
         case monospaced
 
@@ -7176,6 +7181,11 @@ public struct GeometryProxy {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct GeometryReader<Content> : View where Content : View {
 
+	/// The content displayed within the `GeometryReader` view.
+	///
+	/// Unlike traditional view builders, the content builder is generated from
+	/// a parameter of type `GeometryProxy`, giving you access to the geometric
+	/// properties of the parent view.
     public var content: (GeometryProxy) -> Content
 
     @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content)
@@ -7651,24 +7661,82 @@ public struct GridItem {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Group : ToolbarContent where Content : ToolbarContent {
 
+	/// Creates a `Group` from toolbar content.
+	///
+	/// - Parameter content: A toolbar content builder.
     public init(@ToolbarContentBuilder content: () -> Content)
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Group : CustomizableToolbarContent where Content : CustomizableToolbarContent {
 
+	/// Creates a `Group` from a customizable toolbar content.
+	///
+	/// - Parameter content: A toolbar content builder.
     public init(@ToolbarContentBuilder content: () -> Content)
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Group : Scene where Content : Scene {
 
+	/// Creates a `Group` of from component scenes.
+	///
+	/// - Parameter content: A scene builder.
     @inlinable public init(@SceneBuilder content: () -> Content)
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Group : View where Content : View {
 
+	/// Creates a `Group` from view content.
+	///
+	/// Groups are particularly useful when you want several views to act
+	/// together, like for example, in transitions.
+	///
+	/// Another time when `Group` is useful is when trying to return more than
+	/// 10 views to a view builder at once. For technical reasons, a view
+	/// builder can generally only take 10 views at once. So if you try to do
+	/// this, you'll get an error:
+	/// 
+	/// 	var body: some View {
+	/// 		VStack {
+	/// 			Text("1")
+	/// 			Text("2")
+	/// 			Text("3")
+	/// 			Text("4")
+	/// 			Text("5")
+	/// 			Text("6")
+	/// 			Text("7")
+	/// 			Text("8")
+	/// 			Text("9")
+	/// 			Text("10")
+	/// 			Text("11") // ERROR!
+	/// 		}
+	/// 	}
+	///
+	/// Instead, you should put your text into `Group`s:
+	/// 
+	/// 	var body: some View {
+	/// 		VStack {
+	/// 			Group {
+	/// 				Text("1")
+	/// 				Text("2")
+	/// 				Text("3")
+	/// 				Text("4")
+	/// 				Text("5")
+	/// 			}
+	///				Group {
+	///					Text("6")
+	/// 				Text("7")
+	/// 				Text("8")
+	/// 				Text("9")
+	/// 				Text("10")
+	/// 				Text("11") // No error 😎
+	///				}
+	/// 		}
+	/// 	}
+	/// 
+	/// - Parameter content: A view content builder.
     @inlinable public init(@ViewBuilder content: () -> Content)
 }
 
@@ -7677,6 +7745,9 @@ extension Group : View where Content : View {
 @available(watchOS, unavailable)
 extension Group : Commands where Content : Commands {
 
+	/// Creates a `Group` from command content.
+	///
+	/// - Parameter content: A command content builder.
     @inlinable public init(@CommandsBuilder content: () -> Content)
 }
 
@@ -10624,6 +10695,9 @@ extension NavigationLink {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct NavigationView<Content> : View where Content : View {
 
+	/// Creates a navigation view from a view builder of content.
+	///
+	/// - Parameter content: The view builder of content displayed on the first view in the navigation stack.
     public init(@ViewBuilder content: () -> Content)
 
     /// The type of view representing the body of this view.
@@ -12210,39 +12284,65 @@ public struct ProgressViewStyleConfiguration {
     public var currentValueLabel: ProgressViewStyleConfiguration.CurrentValueLabel?
 }
 
+/// A projection transform is a type of spacial transformation of an object
+/// that can be represented as a 3x3 matrix.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ProjectionTransform {
 
+	/// The top left value in the projection transform matrix.
     public var m11: CGFloat
 
+    /// The top middle value in the projection transform matrix.
     public var m12: CGFloat
 
+    /// The top right value in the projection transform matrix.
     public var m13: CGFloat
 
+    /// The center left value in the projection transform matrix.
     public var m21: CGFloat
 
+    /// The center value in the projection transform matrix.
     public var m22: CGFloat
 
+    /// The center right value in the projection transform matrix.
     public var m23: CGFloat
 
+    /// The bottom left value in the projection transform matrix.
     public var m31: CGFloat
 
+    /// The bottom center value in the projection transform matrix.
     public var m32: CGFloat
 
+    /// The bottom right value in the projection transform matrix.
     public var m33: CGFloat
 
+    /// Creates a projection transform equal to the identity matrix.
     @inlinable public init()
 
+    /// Creates a projection transform from a `CGAffineTransform`.
+    ///
+    /// - Parameter m: The Core Graphics affine transform matrix.
     @inlinable public init(_ m: CGAffineTransform)
 
+    /// Creates a projection transform from a `CATransform3D`.
+    ///
+    /// - Parameter m: The Core Animation 3D transform matrix.
     @inlinable public init(_ m: CATransform3D)
 
+    /// Whether the projection transform matrix is an identity matrix.
     @inlinable public var isIdentity: Bool { get }
 
+    /// Whether the projection transform matrix is an affine transform.
     @inlinable public var isAffine: Bool { get }
 
+    /// Inverts the projection transform matrix if it's invertible.
+    ///
+    /// - Returns: A Boolean of whether the matrix was successfully inverted.
     public mutating func invert() -> Bool
 
+    /// Modifies the projection transform to its inverse if invertable.
+    ///
+    /// - Returns: An inverted projection transform matrix.
     public func inverted() -> ProjectionTransform
 }
 
@@ -12263,6 +12363,10 @@ extension ProjectionTransform : Equatable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ProjectionTransform {
 
+	/// Concatenates two projection transform matrices together to make a new one.
+	/// 
+	/// - Parameter rhs: The projection transform matrix to concatenate.
+	/// - Returns: A new concatenated projection transform matrix.
     @inlinable public func concatenating(_ rhs: ProjectionTransform) -> ProjectionTransform
 }
 
@@ -12275,6 +12379,13 @@ extension ProjectionTransform {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RadialGradient : ShapeStyle, View {
 
+	/// Creates a new radial gradient from a start and end point.
+	/// 
+	/// - Parameters:
+	///   - gradient: The gradient containing the colors to transition through.
+	///   - center: The center of the radial gradient.
+	///   - startRadius: How far from the center to start the gradient.
+	///   - endRadius: 
     public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat)
 
     /// The type of view representing the body of this view.
@@ -12295,6 +12406,7 @@ extension ProjectionTransform {
     /// - Returns: A path that describes this shape.
     public func path(in rect: CGRect) -> Path
 
+    /// Creates a new rectangle shape.
     @inlinable public init()
 
     /// The type defining the data to animate.
