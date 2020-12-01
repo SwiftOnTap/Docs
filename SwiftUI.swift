@@ -12,19 +12,32 @@ import os.log
 import os
 import os.signpost
 
-/// The kind of an Accessibility action. Includes name information for custom
-/// actions
+/// AccessibilityActionKind denotes the type of action for an Accessibility Action to support.
+///
+/// This struct is almost always found as an input to the ``.accessibilityAction()`` View modifier.
+/// To learn more about delivering exceptional accessibility experiences, see [https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience](Delivering an Exceptional Accessibility Experience) or [https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible](iOS Accessibility Tutorial).
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityActionKind : Equatable {
-    
+
+    /// The inferred accessability action inheritted from the view type.
+    ///
+    /// This constant will default to the accessability action associated with the modified object.
+    /// For example, a button, label, or text would all default to their unique accessability behaviors.
     public static let `default`: AccessibilityActionKind
 
+    /// A two finger scrub gesture performed while VoiceOver focus is on or inside the component.
     public static let escape: AccessibilityActionKind
 
+    /// A double tap with two fingers while VoiceOver focus is on or inside the component.
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     @available(macOS, unavailable)
     public static let magicTap: AccessibilityActionKind
 
+    /// Initialize an ``AccessabilityActionKind`` with the name of the action type.
+    ///
+    /// An example of an accessability action name could be "Open address in Maps" or
+    /// "Call Fred" where "Fred" is a string variable. When VoiceOver is on the iPhone
+    /// will read this name to the user. 
     public init(named name: Text)
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -483,7 +496,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///   comparison or some other means.
     ///
     ///   For sets where the set type and element type are the same, like
-    ///   `OptionSet` types, this method returns any intersection between the 
+    ///   `OptionSet` types, this method returns any intersection between the
     ///   set and `[newMember]`, or `nil` if the intersection is empty.
     public mutating func update(with newMember: AccessibilityTraits) -> AccessibilityTraits?
 
@@ -670,7 +683,7 @@ extension Anchor.Source where Value == CGPoint {
     /// An anchor source point defined by the center of the top edge of the current view.
     public static var top: Anchor<CGPoint>.Source { get }
 
-    /// An anchor source point defined by the top trailing corner of the current view. 
+    /// An anchor source point defined by the top trailing corner of the current view.
     public static var topTrailing: Anchor<CGPoint>.Source { get }
 
     /// An anchor source point defined by the center of the leading edge of the current view.
@@ -2006,25 +2019,25 @@ public enum BlendMode {
 
     /// Multiplies the RGB channel numbers (0.0 - 1.0) of each pixel.
     ///
-    /// The result is always a darker picture. 
+    /// The result is always a darker picture.
     case multiply
 
     /// Each RGB pixel value is inverted (subtracted from 1), multiplied together,
     /// and then inverted back.
-    /// 
+    ///
     /// The result is the opposite effect of multiply, and always a lighter
     /// picture. The results are also symmetric, so changing which layer is on
     /// top does not change the final picture.
     ///
     /// The formula for screen is this:
-    ///     
+    ///
     ///     func screen(a: Double, b: Double) {
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
     case screen
 
     /// The parts were the bottom layer is light become lighter, and dark becomes darker.
-    /// 
+    ///
     /// Overlay is a combo of multiply and screen. The formula is this:
     ///
     ///     func overlay(a: Double, b: Double) -> Double {
@@ -2050,14 +2063,14 @@ public enum BlendMode {
     ///
     /// Blending any pixel with white will result in a white pixel. Blending any
     /// color with black will result in an unchanged pixel.
-    /// 
+    ///
     /// This operation is not invertible.
     case colorDodge
 
     /// Divides the inverted bottom layer by the top layer, then inverts the result.
-    /// 
+    ///
     /// The top layer is darkened by an amount determined by the bottom layer.
-    /// 
+    ///
     /// Blending any pixel by white results in no change.
     ///
     /// This operation is not invertible.
@@ -2066,7 +2079,7 @@ public enum BlendMode {
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
     ///
     /// The actual formula for the operation is this:
-    /// 
+    ///
     ///     func softLight(a: Double, b: Double) -> Double {
     ///         if b < 0.5 {
     ///             return 2*a*b + a*a*(1 - 2*b)
@@ -2097,7 +2110,7 @@ public enum BlendMode {
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
     case hue
 
-    /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer. 
+    /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
     case saturation
 
     /// Keeps the brightness of the bottom layer, while taking the hue and saturation of the top layer.
@@ -2123,7 +2136,7 @@ public enum BlendMode {
     case plusDarker
 
     /// Adds the top layer pixels to the bottom layer, than subtracts the result from 1.
-    /// 
+    ///
     /// Displays black where the result is less than 0.0.
     case plusLighter
 
@@ -2623,7 +2636,7 @@ extension Color {
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Color {
-    
+
     /// The common ways of organizing RGB colors for a screen.
     public enum RGBColorSpace {
 
@@ -2673,7 +2686,7 @@ extension Color {
     }
 
     /// Create a `Color` from RGB and opacity values along with an optional colorspace.
-    /// 
+    ///
     /// The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
     /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
@@ -2700,7 +2713,7 @@ extension Color {
     public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1)
 
     /// Creates a `Color` from hue, saturation, brightness, and opacity values.
-    /// 
+    ///
     /// - Parameters:
     ///   - hue: The hue of the color.
     ///   - saturation: The saturation of the color.
@@ -3807,7 +3820,7 @@ public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : Cu
 @available(watchOS, unavailable)
 public struct DatePicker<Label> : View where Label : View {
 
-	/// A type alias for the ``DatePickerComponents`` option set used in `DatePicker`. 
+	/// A type alias for the ``DatePickerComponents`` option set used in `DatePicker`.
     public typealias Components = DatePickerComponents
 
     /// The content and behavior of the view.
@@ -5001,7 +5014,7 @@ extension DynamicViewContent {
         /// An edge set containing the top and bottom edges.
         public static let horizontal: Edge.Set
 
-        /// An edge set containing the leading and trailing edges. 
+        /// An edge set containing the leading and trailing edges.
         public static let vertical: Edge.Set
 
         /// Creates an instance containing just `e`
@@ -7714,7 +7727,7 @@ extension Group : View where Content : View {
 	/// 10 views to a view builder at once. For technical reasons, a view
 	/// builder can generally only take 10 views at once. So if you try to do
 	/// this, you'll get an error:
-	/// 
+	///
 	/// 	var body: some View {
 	/// 		VStack {
 	/// 			Text("1")
@@ -7732,7 +7745,7 @@ extension Group : View where Content : View {
 	/// 	}
 	///
 	/// Instead, you should put your text into `Group`s:
-	/// 
+	///
 	/// 	var body: some View {
 	/// 		VStack {
 	/// 			Group {
@@ -7752,7 +7765,7 @@ extension Group : View where Content : View {
 	///				}
 	/// 		}
 	/// 	}
-	/// 
+	///
 	/// - Parameter content: A view content builder.
     @inlinable public init(@ViewBuilder content: () -> Content)
 }
@@ -8053,7 +8066,7 @@ extension Image {
 
 	/// Modifies the image rendering mode as either regular or template.
 	///
-	/// There are two types of rendering modes: 
+	/// There are two types of rendering modes:
 	/// - Original
 	/// - Template
 	///
@@ -8230,7 +8243,7 @@ extension Image {
         case medium
 
         /// The large image scale size.
-        /// 
+        ///
         /// - SeeAlso: Image.imageSclae(_:)
         case large
 
@@ -8277,12 +8290,12 @@ extension Image {
 	///
 	/// Image interpolation is a digital process that occurs when an image is
 	/// either scaled up or scaled down, or when rotating an image.
-	/// 
+	///
 	/// Interpolation uses what is known in the image to estimate unknown
 	/// values.
-	/// 
+	///
 	/// Interpolation can make scaled up images retain some of their clarity,
-	/// and can make scaled down images look better. 
+	/// and can make scaled down images look better.
     public enum Interpolation {
 
     	/// Apply no interpolation to the image when remapping.
@@ -8441,7 +8454,7 @@ extension Image {
     /// Applying this modifier before reframing an image or in other ways
     /// distorting it is necessary otherwise the images view will change, but
     /// the image itself will not be resized.
-    /// 
+    ///
     /// - Parameters:
     ///   - capInsets: The values to use for the cap insets.
     ///   - resizingMode: The mode of resizing to use.
@@ -8946,7 +8959,7 @@ public enum LayoutDirection : Hashable, CaseIterable {
     case leftToRight
 
     /// The text is read and written from left to right.
-    /// 
+    ///
     /// In this layout direction, the leading edge would be on the right side,
     /// and the trailing edge would be on the left side.
     case rightToLeft
@@ -9241,7 +9254,7 @@ extension LegibilityWeight {
 @frozen public struct LinearGradient : ShapeStyle, View {
 
 	/// Creates a new linear gradient from the Gradient colors, the start, and the end.
-	/// 
+	///
 	/// - Parameters:
 	///   - gradient: The gradient containing the ordered colors to be used.
 	///   - startPoint: The unit point where the gradient starts.
@@ -9684,12 +9697,12 @@ public protocol ListStyle {
     public init(stringLiteral value: String)
 
     /// Creates an instance from a string interpolation.
-    /// 
+    ///
     /// Most `StringInterpolation` types will store information about the
     /// literals and interpolations appended to them in one or more properties.
     /// `init(stringInterpolation:)` should use these properties to initialize
     /// the instance.
-    /// 
+    ///
     /// - Parameter stringInterpolation: An instance of `StringInterpolation`
     ///             which has had each segment of the string literal appended
     ///             to it.
@@ -9703,14 +9716,14 @@ public protocol ListStyle {
     public struct StringInterpolation : StringInterpolationProtocol {
 
         /// Creates an empty instance ready to be filled with string literal content.
-        /// 
+        ///
         /// Don't call this initializer directly. Instead, initialize a variable or
         /// constant using a string literal with interpolated expressions.
-        /// 
+        ///
         /// Swift passes this initializer a pair of arguments specifying the size of
         /// the literal segments and the number of interpolated segments. Use this
         /// information to estimate the amount of storage you will need.
-        /// 
+        ///
         /// - Parameter literalCapacity: The approximate size of all literal segments
         ///   combined. This is meant to be passed to `String.reserveCapacity(_:)`;
         ///   it may be slightly larger or smaller than the sum of the counts of each
@@ -9721,14 +9734,14 @@ public protocol ListStyle {
         public init(literalCapacity: Int, interpolationCount: Int)
 
         /// Appends a literal segment to the interpolation.
-        /// 
+        ///
         /// Don't call this method directly. Instead, initialize a variable or
         /// constant using a string literal with interpolated expressions.
-        /// 
+        ///
         /// Interpolated expressions don't pass through this method; instead, Swift
         /// selects an overload of `appendInterpolation`. For more information, see
         /// the top-level `StringInterpolationProtocol` documentation.
-        /// 
+        ///
         /// - Parameter literal: A string literal containing the characters
         ///   that appear next in the string literal.
         public mutating func appendLiteral(_ literal: String)
@@ -10209,20 +10222,20 @@ public struct MenuStyleConfiguration {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
-    /// Adds an accessibility action to this view.
+    /// Allow an assistive technology to programmatically invoke the actions of the modified view.
     public func accessibilityAction(_ actionKind: AccessibilityActionKind = .default, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier>
 
-    /// Adds a custom accessibility action to the view and all subviews.
+    /// Allow an assistive technology to programmatically invoke the actions of the modified view and all subviews.
     public func accessibilityAction(named name: Text, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier>
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
-    /// Adds a custom accessibility action to the view and all subviews.
+    /// Allow an assistive technology to programmatically invoke the actions of the modified view and all subviews.
     public func accessibilityAction(named nameKey: LocalizedStringKey, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier>
 
-    /// Adds a custom accessibility action to the view and all subviews.
+    /// Allow an assistive technology to programmatically invoke the actions of the modified view and all subviews.
     public func accessibilityAction<S>(named name: S, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> where S : StringProtocol
 }
 
@@ -12386,7 +12399,7 @@ extension ProjectionTransform : Equatable {
 extension ProjectionTransform {
 
 	/// Concatenates two projection transform matrices together to make a new one.
-	/// 
+	///
 	/// - Parameter rhs: The projection transform matrix to concatenate.
 	/// - Returns: A new concatenated projection transform matrix.
     @inlinable public func concatenating(_ rhs: ProjectionTransform) -> ProjectionTransform
@@ -12402,12 +12415,12 @@ extension ProjectionTransform {
 @frozen public struct RadialGradient : ShapeStyle, View {
 
 	/// Creates a new radial gradient from a start and end point.
-	/// 
+	///
 	/// - Parameters:
 	///   - gradient: The gradient containing the colors to transition through.
 	///   - center: The center of the radial gradient.
 	///   - startRadius: How far from the center to start the gradient.
-	///   - endRadius: 
+	///   - endRadius:
     public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat)
 
     /// The type of view representing the body of this view.
@@ -12745,7 +12758,7 @@ extension RoundedCornerStyle : Hashable {
 
 	/// The rounded corner size of the rounded rectangle shape.
 	///
-	/// This would be used instead of corner radius when you want your corners 
+	/// This would be used instead of corner radius when you want your corners
 	/// not to be perfect quarter-circles but instead quarter-ellipses.
 	/// Basically, this allows you to specify different width and heights of
 	/// the corners.
