@@ -654,38 +654,59 @@ extension Anchor.Source where Value == CGRect {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Anchor.Source where Value == CGPoint {
 
+	/// Returns an anchor source point defined by a point `p` in the current view.
+	///
+	/// - Parameter p: The `CGPoint` to anchor.
     public static func point(_ p: CGPoint) -> Anchor<Value>.Source
 
+    /// Returns an anchor source point defined by a point `p` in the current view.
+    ///
+    /// - Parameter p: The `UnitPoint` to anchor.
     public static func unitPoint(_ p: UnitPoint) -> Anchor<Value>.Source
 
+    /// An anchor source point defined by the top leading corner of the current view.
     public static var topLeading: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the center of the top edge of the current view.
     public static var top: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the top trailing corner of the current view. 
     public static var topTrailing: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the center of the leading edge of the current view.
     public static var leading: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the center point of the current view.
     public static var center: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the center of the trailing edge of the current view.
     public static var trailing: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the bottom leading corner of the current view.
     public static var bottomLeading: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the center of the bottom edge of the current view.
     public static var bottom: Anchor<CGPoint>.Source { get }
 
+    /// An anchor source point defined by the bottom trailing corner of the current view.
     public static var bottomTrailing: Anchor<CGPoint>.Source { get }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Anchor.Source {
 
+	/// Creates an anchor source with generic type array from an array of anchor source.
+	///
+	/// - Parameter array: The array of anchor source points.
     public init<T>(_ array: [Anchor<T>.Source]) where Value == [T]
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Anchor.Source {
 
+	/// Creates an anchor source with generic type optional from an optional anchor source.
+	///
+	/// - Parameter anchor: The optional anchor source.
     public init<T>(_ anchor: Anchor<T>.Source?) where Value == T?
 }
 
@@ -798,8 +819,21 @@ extension Angle : Animatable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AngularGradient : ShapeStyle, View {
 
+	/// Creates an angular gradient from a starting and ending angle.
+	///
+	/// - Parameters:
+	///   - gradient: The gradient with the colors to use.
+	///   - center: The unit point that is center of the angular gradient.
+	///   - startAngle: The ``Angle`` where the gradient starts. Defaults to zero.
+	///   - endAngle: The ``Angle`` where the gradient ends. Defaults to zero.
     public init(gradient: Gradient, center: UnitPoint, startAngle: Angle = .zero, endAngle: Angle = .zero)
 
+    /// Creates an angular gradient starting at and angle and going all the way around in a circle.
+    ///
+    /// - Parameters:
+    ///   - gradient: The gradient with the colors to use.
+    ///   - center: The unit point that is center of the angular gradient.
+    ///   - angle: The ``Angle`` where the gradient starts. Defaults to zero.
     public init(gradient: Gradient, center: UnitPoint, angle: Angle = .zero)
 
     /// The type of view representing the body of this view.
@@ -934,6 +968,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     public static func == (a: AnimatablePair<First, Second>, b: AnimatablePair<First, Second>) -> Bool
 }
 
+/// Specifies the timing curve of a changing on-screen value, such as spring or linear.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Animation : Equatable {
 
@@ -1264,6 +1299,7 @@ extension AnyTransition {
     /// Create an instance that type-erases `view`.
     public init<V>(_ view: V) where V : View
 
+    /// Creates an instance that type-erases the parameter.
     public init<V>(erasing view: V) where V : View
 
     /// The type of view representing the body of this view.
@@ -1650,8 +1686,10 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         ///   values of the `OptionSet` type.
         public init(rawValue: Int8)
 
+        /// The option set corresponding to the horizontal axis.
         public static let horizontal: Axis.Set
 
+        /// The option set corresponding to the vertical axis.
         public static let vertical: Axis.Set
 
         /// The type of the elements of an array literal.
@@ -1762,6 +1800,7 @@ extension Axis : RawRepresentable {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct BackgroundStyle {
 
+	/// Creates a new background style.
     @inlinable public init()
 }
 
@@ -1962,46 +2001,130 @@ extension Binding : DynamicProperty {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
+	/// Regular overlapping, with opacity taken into account.
     case normal
 
+    /// Multiplies the RGB channel numbers (0.0 - 1.0) of each pixel.
+    ///
+    /// The result is always a darker picture. 
     case multiply
 
+    /// Each RGB pixel value is inverted (subtracted from 1), multiplied together,
+    /// and then inverted back.
+    /// 
+    /// The result is the opposite effect of multiply, and always a lighter
+    /// picture. The results are also symmetric, so changing which layer is on
+    /// top does not change the final picture.
+    ///
+    /// The formula for screen is this:
+    ///     
+    ///     func screen(a: Double, b: Double) {
+    ///         return 1 - (1 - a) * (1 - b)
+    ///     }
     case screen
 
+    /// The parts were the bottom layer is light become lighter, and dark becomes darker.
+    /// 
+    /// Overlay is a combo of multiply and screen. The formula is this:
+    ///
+    ///     func overlay(a: Double, b: Double) -> Double {
+    ///     	if a > 0.5 {
+    ///     		return 2 * a * b
+    ///     	} else {
+    ///     		return 1 - 2 * (1 - a) * (1 - b)
+    ///     	}
+    ///     }
     case overlay
 
+    /// Takes the darker of the top and bottom picture pixels.
     case darken
 
+    /// Takes the lighter of the top and bottom picture pixels.
     case lighten
 
+    /// Divides the bottom layer by the inversion of the top layer.
+    ///
+    /// Color dodge is inspired by dodging in a darkroom. The bottom layer is
+    /// lightened by an amount determined by the top layer - a brighter top
+    /// layer results in a more brightened bottom layer.
+    ///
+    /// Blending any pixel with white will result in a white pixel. Blending any
+    /// color with black will result in an unchanged pixel.
+    /// 
+    /// This operation is not invertible.
     case colorDodge
 
+    /// Divides the inverted bottom layer by the top layer, then inverts the result.
+    /// 
+    /// The top layer is darkened by an amount determined by the bottom layer.
+    /// 
+    /// Blending any pixel by white results in no change.
+    ///
+    /// This operation is not invertible.
     case colorBurn
 
+    /// Basically, every light color gets a little lighter, and every dark color gets darker.
+    ///
+    /// The actual formula for the operation is this:
+    /// 
+    ///     func softLight(a: Double, b: Double) -> Double {
+    ///         if b < 0.5 {
+    ///             return 2*a*b + a*a*(1 - 2*b)
+    ///         } else {
+    ///         	return 2*a*(1 - b) + sqrt(a)*(2*b - 1)
+    ///         }
+    ///     }
     case softLight
 
+    /// A combination of multiply and screen are applied.
+    ///
+    /// Hard light affects the bottom layer the way that overlay affects the top
+    /// layer, and vice-versa.
     case hardLight
 
+    /// Subtracts the bottom layer from the top layer, and then makes the result positive.
+    ///
+    /// If either layer is black, nothing changes. Blending with white inverts
+    /// the picture.
     case difference
 
+    /// Subtracts the bottom layer from the top layer, and then makes the result positive.
+    ///
+    /// The difference between difference and exclusion is that blending with
+    /// 50% gray will produce 50% gray.
     case exclusion
 
+    /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
     case hue
 
+    /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer. 
     case saturation
 
+    /// Keeps the brightness of the bottom layer, while taking the hue and saturation of the top layer.
     case color
 
+    /// Keeps the hue and saturation of the bottom layer, while taking the brightness of the top layer.
     case luminosity
 
+    /// Shows the bottom layer fully, with the top layer drawn only where it
+    /// intersect the bottom.
     case sourceAtop
 
+    /// The bottom is drawn over the top, and the top is only visible where the
+    /// bottom is transparent.
     case destinationOver
 
+    /// Displays only the bottom layer, and only where the top is transparent.
     case destinationOut
 
+    /// Adds the top layer pixels to the bottom layer.
+    ///
+    /// Displays white where the addition is greater than 1.0.
     case plusDarker
 
+    /// Adds the top layer pixels to the bottom layer, than subtracts the result from 1.
+    /// 
+    /// Displays black where the result is less than 0.0.
     case plusLighter
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -3388,6 +3511,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 public struct CompactDatePickerStyle : DatePickerStyle {
 
+	/// Creates a compact date picker style.
     public init()
 }
 
@@ -3404,6 +3528,7 @@ public struct CompactDatePickerStyle : DatePickerStyle {
     /// - Returns: A path that describes this shape.
     public func path(in rect: CGRect) -> Path
 
+    /// Creates a relative container shape.
     @inlinable public init()
 
     /// The type defining the data to animate.
@@ -3431,8 +3556,12 @@ extension ContainerRelativeShape : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
 
+	/// Fill mode that scales down view so that it can be fully seen in the
+	/// available space, even it it leaves whitespace.
     case fit
 
+    /// Fill mode that scales the view so that it fills the available space
+    /// entirely, even if not all of the view can be seen.
     case fill
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -3476,31 +3605,44 @@ extension ContainerRelativeShape : InsettableShape {
     public static var allCases: [ContentMode] { get }
 }
 
+/// Some options for specifying the preferred size of your content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum ContentSizeCategory : Hashable, CaseIterable {
 
+	/// Extra small content size.
     case extraSmall
 
+    /// Small content size.
     case small
 
+    /// Medium content size.
     case medium
 
+    /// Large content size.
     case large
 
+    /// Extra large content size.
     case extraLarge
 
+    /// Double extra large content size.
     case extraExtraLarge
 
+    /// The largest content size option.
     case extraExtraExtraLarge
 
+    /// A medium content size reflecting the accessibility settings.
     case accessibilityMedium
 
+    /// A large content size reflecting the accessibility settings.
     case accessibilityLarge
 
+    /// An extra large content size reflecting the accessibility settings.
     case accessibilityExtraLarge
 
+    /// An extra, extra large content size reflecting the accessibility settings.
     case accessibilityExtraExtraLarge
 
+    /// A really enormous content size reflecting the accessibility settings.
     case accessibilityExtraExtraExtraLarge
 
     /// A `Bool` value indicating whether the content size category is one that
@@ -3588,21 +3730,27 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
     public init(@ViewBuilder menuItems: () -> MenuItems)
 }
 
+/// A list of spaces for converting between different frames of reference on a screen.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum CoordinateSpace {
 
+	/// The coordinate space representing the entire screen.
     case global
 
+    /// The coordinate space representing the current view.
     case local
 
+    /// A coordinate space chosen by the ``Hashable`` parameter.
     case named(AnyHashable)
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension CoordinateSpace {
 
+	/// Whether or not the coordinate space is ``CoordinateSpace.global``
     public var isGlobal: Bool { get }
 
+    /// Whether or not the coordinate space is ``CoordinateSpace.local``
     public var isLocal: Bool { get }
 }
 
@@ -3937,6 +4085,9 @@ public struct DefaultButtonStyle : PrimitiveButtonStyle {
 @available(watchOS, unavailable)
 public struct DefaultDatePickerStyle : DatePickerStyle {
 
+	/// Creates a default date picker style.
+	///
+	/// - SeeAlso: DatePicker
     public init()
 }
 
@@ -3946,6 +4097,9 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 @available(watchOS, unavailable)
 public struct DefaultGroupBoxStyle : GroupBoxStyle {
 
+	/// Creates a default group box style.
+	///
+	/// - SeeAlso: GroupBoxStyle
     public init()
 
     /// Creates a `View` representing the body of a `GroupBox`.
@@ -4035,6 +4189,9 @@ public struct DefaultMenuStyle : MenuStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultNavigationViewStyle : NavigationViewStyle {
 
+	/// Creates a default navigation view style.
+	///
+	/// - SeeAlso: NavigationView
     public init()
 }
 
@@ -4094,12 +4251,17 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultTabViewStyle : TabViewStyle {
 
+	/// Creates a default tab view style.
+	///
+	/// - SeeAlso: TabView
     public init()
 }
 
+/// The default text field style.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultTextFieldStyle : TextFieldStyle {
 
+	/// Creates a default text field style.
     public init()
 }
 
@@ -4251,6 +4413,7 @@ extension DisclosureGroup where Label == Text {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
+	/// Creates a new ``Divider``.
     public init()
 
     /// The type of view representing the body of this view.
@@ -4763,12 +4926,16 @@ extension DynamicViewContent {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Edge : Int8, CaseIterable {
 
+	/// The rectangle's top edge.
     case top
 
+    /// The rectangle's leading edge.
     case leading
 
+    /// The rectangle's bottom edge.
     case bottom
 
+    /// The rectangle's trailing edge.
     case trailing
 
     /// An efficient set of `Edge`s.
@@ -4815,18 +4982,25 @@ extension DynamicViewContent {
         ///   values of the `OptionSet` type.
         public init(rawValue: Int8)
 
+        /// The edge set's top edge.
         public static let top: Edge.Set
 
+        /// The edge set's leading edge.
         public static let leading: Edge.Set
 
+        /// The edge set's bottom edge.
         public static let bottom: Edge.Set
 
+        /// The edge set's trailing edge.
         public static let trailing: Edge.Set
 
+        /// An edge set containing all 4 edges.
         public static let all: Edge.Set
 
+        /// An edge set containing the top and bottom edges.
         public static let horizontal: Edge.Set
 
+        /// An edge set containing the leading and trailing edges. 
         public static let vertical: Edge.Set
 
         /// Creates an instance containing just `e`
@@ -4910,16 +5084,28 @@ extension Edge : RawRepresentable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EdgeInsets : Equatable {
 
+	/// How far inset the rectangle is from the top edge.
     public var top: CGFloat
 
+    /// How far inset the rectangle is from the leading edge.
     public var leading: CGFloat
 
+    /// How far inset the rectangle is from the bottom edge.
     public var bottom: CGFloat
 
+    /// How far inset the rectangle is from the trailing edge.
     public var trailing: CGFloat
 
+    /// Creates a new `EdgeInsets` from inset parameters.
+    ///
+    /// - Parameters:
+    ///   - top: Inset distance from the top edge.
+    ///   - leading: Inset distance from the leading edge.
+    ///   - bottom: Inset distance from the bottom edge.
+    ///   - trailing: Inset distance from the trailing edge.
     @inlinable public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat)
 
+    /// Creates a new `EdgeInsets` with zero insets on all edges.
     @inlinable public init()
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -5050,6 +5236,7 @@ extension EditMode : Hashable {
     /// - Returns: A path that describes this shape.
     public func path(in rect: CGRect) -> Path
 
+    /// Creates an ellipse shape that stretches to fill its parent view.
     @inlinable public init()
 
     /// The type defining the data to animate.
@@ -5212,11 +5399,13 @@ public struct EmptyCommands : Commands {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyModifier : ViewModifier {
 
+	/// A view modifier that leave the view unchanged.
     public static let identity: EmptyModifier
 
     /// The type of view representing the body.
     public typealias Body = Never
 
+    /// Creates a new modifier that leaves the view unchanged.
     @inlinable public init()
 
     /// Gets the current body of the caller.
@@ -5226,9 +5415,11 @@ public struct EmptyCommands : Commands {
     public func body(content: EmptyModifier.Content) -> EmptyModifier.Body
 }
 
+/// A ``View`` which displays nothing.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyView : View {
 
+	/// Creates a new `EmptyView`.
     @inlinable public init()
 
     /// The type of view representing the body of this view.
@@ -6588,22 +6779,31 @@ extension Font {
     /// A weight to use for fonts.
     @frozen public struct Weight : Hashable {
 
+    	/// A font weight of ultra light.
         public static let ultraLight: Font.Weight
 
+        /// A font weight of thin.
         public static let thin: Font.Weight
 
+        /// A font weight of light.
         public static let light: Font.Weight
 
+        /// A font weight of regular.
         public static let regular: Font.Weight
 
+        /// A font weight of medium.
         public static let medium: Font.Weight
 
+        /// A font weight of semibold.
         public static let semibold: Font.Weight
 
+        /// A font weight of bold.
         public static let bold: Font.Weight
 
+        /// A font weight of heavy.
         public static let heavy: Font.Weight
 
+        /// A font weight of black.
         public static let black: Font.Weight
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -7981,8 +8181,19 @@ extension Image {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
+	/// Adjusts the interpolation property of an image.
+	///
+	/// - Parameter interpolation: The image's interpolation property.
+	///
+	/// - SeeAlso: Image.Interpolation
     public func interpolation(_ interpolation: Image.Interpolation) -> Image
 
+    /// Adjusts the antialiasing properties of an image.
+    ///
+    /// If an image is antialiased, then it resists being distorted when it is
+    /// shrunk to a lower resolution.
+    ///
+    /// - Paramter isAntialiased: Whether the image is antialiased.
     public func antialiased(_ isAntialiased: Bool) -> Image
 }
 
@@ -8017,16 +8228,22 @@ extension Image {
 @available(macOS, unavailable)
 extension Image {
 
+	/// Creates a new `Image` from a specified `UIImage`.
     public init(uiImage: UIImage)
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
+	/// The different ways of resizing an image to fill a view.
     public enum ResizingMode {
 
+    	/// The resizing method of maintaining image properties, positioning
+    	/// several in a grid to fill the space if necessary.
         case tile
 
+        /// The resizing method of stretching the image, distorting the properties
+        /// if necessary.
         case stretch
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -16583,7 +16800,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// initialize the superclass using the ``init(coder:rootView:)`` method
     /// instead.
     ///
-    /// -Parameter coder: The decoder to use during initialization.
+    /// - Parameter coder: The decoder to use during initialization.
     @objc required dynamic public init?(coder aDecoder: NSCoder)
 
     /// Notifies the view controller that its view is about to be added to a
