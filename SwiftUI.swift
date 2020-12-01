@@ -14,15 +14,15 @@ import os.signpost
 
 /// AccessibilityActionKind denotes the type of action for an Accessibility Action to support.
 ///
-/// This struct is almost always found as an input to the ``.accessibilityAction()`` View modifier.
+/// This struct is almost always found as an input to the ``View/accessibilityAction(_:_:)`` View modifier.
 /// To learn more about delivering exceptional accessibility experiences, see [https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience](Delivering an Exceptional Accessibility Experience) or [https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible](iOS Accessibility Tutorial).
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityActionKind : Equatable {
 
-    /// The inferred accessability action inheritted from the view type.
+    /// The inferred accessibility action inheritted from the view type.
     ///
-    /// This constant will default to the accessability action associated with the modified object.
-    /// For example, a button, label, or text would all default to their unique accessability behaviors.
+    /// This constant will default to the accessibility action associated with the modified object.
+    /// For example, a button, label, or text would all default to their unique accessibility behaviors.
     public static let `default`: AccessibilityActionKind
 
     /// A two finger scrub gesture performed while VoiceOver focus is on or inside the component.
@@ -33,11 +33,11 @@ public struct AccessibilityActionKind : Equatable {
     @available(macOS, unavailable)
     public static let magicTap: AccessibilityActionKind
 
-    /// Initialize an ``AccessabilityActionKind`` with the name of the action type.
+    /// Initialize an ``AccessibilityActionKind`` with the name of the action type.
     ///
-    /// An example of an accessability action name could be "Open address in Maps" or
+    /// An example of an accessibility action name could be "Open address in Maps" or
     /// "Call Fred" where "Fred" is a string variable. When VoiceOver is on the iPhone
-    /// will read this name to the user. 
+    /// will read this name to the user.
     public init(named name: Text)
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -55,8 +55,14 @@ public struct AccessibilityActionKind : Equatable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum AccessibilityAdjustmentDirection {
 
+    /// Increment an adjustable component.
+    ///
+    /// VoiceOver generates this action when the component has a role of `adjustable` and the user places focus on it and swipes upward.
     case increment
 
+    /// Decrement an adjustable component.
+    ///
+    /// VoiceOver generates this action when the component has a role of `adjustable` and the user places focus on it and swipes downward.
     case decrement
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -102,6 +108,10 @@ extension AccessibilityAdjustmentDirection : Equatable {
 extension AccessibilityAdjustmentDirection : Hashable {
 }
 
+/// A ``ViewModifier`` used to provide accessibility content.
+///
+/// The `AccessibilityAttachmentModifier` is most commonly found as the modified content in an accessibility modifiers attached to a View.
+/// See ``View/accessibilityAction(_:_:)`` for example usage. See [https://developer.apple.com/documentation/swiftui/view/accessibility/creating_accessible_views?changes=_8](Creating Accessible Views) for an example accessibility project.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityAttachmentModifier : ViewModifier {
 
@@ -109,6 +119,9 @@ public struct AccessibilityAttachmentModifier : ViewModifier {
     public typealias Body = Never
 }
 
+/// Defines the children's behavior of accessibility elements.
+///
+/// See [https://swiftwithmajid.com/2019/09/10/accessibility-in-swiftui/](Accessibility in SwiftUI) for more information on implementing accessibility functionality.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityChildBehavior : Hashable {
 
@@ -162,6 +175,9 @@ extension AccessibilityChildBehavior {
     public static let combine: AccessibilityChildBehavior
 }
 
+/// Pair related views such that one view serves as the view content, and one view serves as the view label.
+///
+/// `AccessibilityLabeledPairRole` is almost always used in conjunction with the ``View/accessibilityLabeledPair(role:id:in:)`` modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public enum AccessibilityLabeledPairRole {
 
@@ -214,6 +230,9 @@ extension AccessibilityLabeledPairRole : Hashable {
     public func hash(into hasher: inout Hasher)
 }
 
+/// A struct used to define the characteristics of a view when accessed for accessibility.
+///
+/// `AccessibilityTraits` are almost always used in conjunction with the ``View/accessibilityAddTraits(_:)`` view modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityTraits : SetAlgebra {
 
@@ -21757,8 +21776,7 @@ extension View {
     public func accessibilityLinkedGroup<ID>(id: ID, in namespace: Namespace.ID) -> some View where ID : Hashable
 
 
-    /// Pairs an accessibility element representing a label with the element
-    /// for the matching content.
+    /// Pairs two views, where one is the content and one is the label, for accessibility purposes.
     ///
     /// Use `accessibilityLabeledPair` with a role of `AccessibilityLabeledPairRole.label`
     /// to identify the label, and a role of `AccessibilityLabeledPairRole.content`
