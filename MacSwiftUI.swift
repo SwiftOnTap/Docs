@@ -491,7 +491,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///   comparison or some other means.
     ///
     ///   For sets where the set type and element type are the same, like
-    ///   `OptionSet` types, this method returns any intersection between the 
+    ///   `OptionSet` types, this method returns any intersection between the
     ///   set and `[newMember]`, or `nil` if the intersection is empty.
     public mutating func update(with newMember: AccessibilityTraits) -> AccessibilityTraits?
 
@@ -9359,12 +9359,12 @@ public protocol ListStyle {
     public init(stringLiteral value: String)
 
     /// Creates an instance from a string interpolation.
-    /// 
+    ///
     /// Most `StringInterpolation` types will store information about the
     /// literals and interpolations appended to them in one or more properties.
     /// `init(stringInterpolation:)` should use these properties to initialize
     /// the instance.
-    /// 
+    ///
     /// - Parameter stringInterpolation: An instance of `StringInterpolation`
     ///             which has had each segment of the string literal appended
     ///             to it.
@@ -9378,14 +9378,14 @@ public protocol ListStyle {
     public struct StringInterpolation : StringInterpolationProtocol {
 
         /// Creates an empty instance ready to be filled with string literal content.
-        /// 
+        ///
         /// Don't call this initializer directly. Instead, initialize a variable or
         /// constant using a string literal with interpolated expressions.
-        /// 
+        ///
         /// Swift passes this initializer a pair of arguments specifying the size of
         /// the literal segments and the number of interpolated segments. Use this
         /// information to estimate the amount of storage you will need.
-        /// 
+        ///
         /// - Parameter literalCapacity: The approximate size of all literal segments
         ///   combined. This is meant to be passed to `String.reserveCapacity(_:)`;
         ///   it may be slightly larger or smaller than the sum of the counts of each
@@ -9396,14 +9396,14 @@ public protocol ListStyle {
         public init(literalCapacity: Int, interpolationCount: Int)
 
         /// Appends a literal segment to the interpolation.
-        /// 
+        ///
         /// Don't call this method directly. Instead, initialize a variable or
         /// constant using a string literal with interpolated expressions.
-        /// 
+        ///
         /// Interpolated expressions don't pass through this method; instead, Swift
         /// selects an overload of `appendInterpolation`. For more information, see
         /// the top-level `StringInterpolationProtocol` documentation.
-        /// 
+        ///
         /// - Parameter literal: A string literal containing the characters
         ///   that appear next in the string literal.
         public mutating func appendLiteral(_ literal: String)
@@ -10549,10 +10549,32 @@ open class NSHostingView<Content> : NSView, NSUserInterfaceValidations, NSDraggi
 
     @objc override dynamic open func menu(for event: NSEvent) -> NSMenu?
 
+    /// The deepest descendant of the accessibility hierarchy that has the focus.
+    ///
+    /// You can assume that the search for the focus has already been narrowed down
+    /// to the accessibility element. Override this method to do deeper searching
+    /// by identifying which child element, if any, may have the focus. If a child
+    /// element does not have the focus, either return `self` or, if available, invoke
+    /// the superclass's implementation. The default `NSView` and `NSCell` implementations
+    /// test whether the accessibility element is an ignored element and, if so, return
+    /// the element’s first unignored parent; otherwise they return `self`
     @objc override dynamic open var accessibilityFocusedUIElement: Any? { get }
 
+    /// The child elements in the accessibility hierarchy.
+    ///
+    /// This property contains references to child elements in the accessibility
+    /// hierarchy. If you create an `NSView` subclass, you don’t typically need to
+    /// set this value. The system automatically populates the `accessibilityChildren`
+    /// property with descendants in the view hierarchy that are also in the accessibility
+    /// hierarchy. If you use an `NSAccessibilityElement` subclass to represent an
+    /// interface element that is not backed by a view, you can either set the `accessibilityChildren`
+    /// property or you can call the `accessibilityAddChildElement`: convenience method.
     @objc override dynamic open func accessibilityChildren() -> [Any]?
 
+    /// Returns the deepest descendant of the accessibility hierarchy that contains the specified point.
+    ///
+    /// - Parameters point: The point being hit-tested, in lower-left relative screen coordinates.
+    /// - Return Value: The deepest accessibility element in the accessibility hierarchy that contains the specified point.
     @objc override dynamic open func accessibilityHitTest(_ point: NSPoint) -> Any?
 
     @objc public func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool
@@ -13528,6 +13550,7 @@ extension Scene {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes two scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Scene where C0 : Scene, C1 : Scene
 
 }
@@ -13535,6 +13558,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes three scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene
 
 }
@@ -13542,6 +13566,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes four scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene
 
 }
@@ -13549,6 +13574,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes five scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene
 
 }
@@ -13556,6 +13582,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes six scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene
 
 }
@@ -13563,6 +13590,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes seven scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene
 
 }
@@ -13570,6 +13598,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes eight scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene
 
 }
@@ -13577,6 +13606,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes nine scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene
 
 }
@@ -13584,6 +13614,7 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
+    /// Passes ten scenes written as children scenes through unmodified.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene, C9 : Scene
 
 }
@@ -23745,4 +23776,3 @@ extension Never : ToolbarContent, CustomizableToolbarContent {
 @available(watchOS, unavailable)
 extension Never : Commands {
 }
-
