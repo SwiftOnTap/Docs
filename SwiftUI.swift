@@ -1242,16 +1242,30 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension AnyTransition {
 
+	/// A transition that moves a view from its current place on screen to another place.
+	/// 
+	/// - Parameter offset: The amount you want to move the view during the transition.
     public static func offset(_ offset: CGSize) -> AnyTransition
 
+    /// A transition that moves a view from its current place on screen to another place.
+    /// 
+    /// - Parameters:
+    ///   - x: The number of points you want to move the view to the right. Negative means move left. Defaults to 0.
+    ///   - y: The number of points you want to move the view down. Negative means move up. Defaults to 0.
     public static func offset(x: CGFloat = 0, y: CGFloat = 0) -> AnyTransition
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension AnyTransition {
 
+	/// A transition that scales a view from its current size down to zero size.
     public static var scale: AnyTransition { get }
 
+    /// A transition that scales a view from its current size to a new size.
+    /// 
+    /// - Parameters: 
+    ///   - scale: The amount you want to scale the view.
+    ///   - anchor: The unit point to have the view scale from.
     public static func scale(scale: CGFloat, anchor: UnitPoint = .center) -> AnyTransition
 }
 
@@ -1460,8 +1474,30 @@ extension App {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
 
+	/// The user default value for the given key.
+	/// 
+	/// This is rarely used directly. Instead, you normally use the property wrapper syntax:
+	/// 
+	///     struct ContentView: View {
+    /// 		@AppStorage("name") var name: String = "Javier"
+    /// 
+    /// 		var body: some View {
+    /// 			TextField(name, text: $name)
+    /// 		}
+    /// 	}
     public var wrappedValue: Value { get nonmutating set }
 
+    /// Provides a binding for the wrapped value.
+    /// 
+    /// You can access this using the $ prefix:
+    /// 
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("name") var name: String = "Javier"
+    /// 
+    /// 		var body: some View {
+    /// 			TextField(name, text: $name)
+    /// 		}
+    /// 	}
     public var projectedValue: Binding<Value> { get }
 }
 
@@ -3457,6 +3493,7 @@ public protocol Commands {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes two command groups written as a child through modified. 
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Commands where C0 : Commands, C1 : Commands
 
 }
@@ -3466,6 +3503,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes three command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands
 
 }
@@ -3475,6 +3513,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes four command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands
 
 }
@@ -3484,6 +3523,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes five command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands
 
 }
@@ -3493,6 +3533,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes six command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands
 
 }
@@ -3502,6 +3543,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes seven command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands
 
 }
@@ -3511,6 +3553,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes eight command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands
 
 }
@@ -3520,6 +3563,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes nine command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands, C8 : Commands
 
 }
@@ -3529,6 +3573,7 @@ extension CommandsBuilder {
 @available(watchOS, unavailable)
 extension CommandsBuilder {
 
+	/// Passes ten command groups written as a child through modified. 
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands, C8 : Commands, C9 : Commands
 
 }
@@ -3759,6 +3804,11 @@ extension ContentSizeCategory {
 @available(watchOS, introduced: 6.0, deprecated: 7.0)
 public struct ContextMenu<MenuItems> where MenuItems : View {
 
+	/// Creates a context menu from a builder of menu items.
+	/// 
+	/// - Parameter menuItems: The builder of menu items to build your context menu.
+	/// 
+	/// - SeeAlso: contextMenu(menuItems:)
     public init(@ViewBuilder menuItems: () -> MenuItems)
 }
 
@@ -4546,6 +4596,7 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 @available(watchOS, unavailable)
 public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 
+	/// Creates a double column navigation view style.
     public init()
 }
 
@@ -4840,6 +4891,11 @@ public struct DropProposal {
     /// The drop operation that the drop proposes to perform.
     public let operation: DropOperation
 
+    /// Creates a drop proposal based on the provided operation.
+    /// 
+    /// - Parameter operation: The drop operation to associate with the proposal.
+    /// 
+    /// - SeeAlso: DropOperation
     public init(operation: DropOperation)
 }
 
@@ -5302,6 +5358,7 @@ extension Ellipse : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyAnimatableData : VectorArithmetic {
 
+	/// Creates an empty animatable data structure.
     @inlinable public init()
 
     /// The zero value.
@@ -5470,6 +5527,7 @@ public struct EmptyCommands : Commands {
 @available(watchOS, unavailable)
 @frozen public struct EmptyWidgetConfiguration : WidgetConfiguration {
 
+	/// Creates an empty widget configuration.
     @inlinable public init()
 
     /// The type of widget configuration representing the body of
@@ -5814,6 +5872,8 @@ extension EnvironmentValues {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension EnvironmentValues {
 
+	/// The object space that you use to manipulate and track changes to
+	/// the environment values.
     public var managedObjectContext: NSManagedObjectContext
 }
 
@@ -6133,8 +6193,15 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EquatableView<Content> : View where Content : Equatable, Content : View {
 
+	/// The current content view that appears in the equatable view.
+	/// 
+	/// If you update this value but it's just the same thing as the old version, then the view
+	/// won't update. That's the "equatable" part of equatable view.
     public var content: Content
 
+    /// Creates a new equatable view from a view.
+    /// 
+    /// - Parameter content: The view you want to use as the body of the equatable view.
     @inlinable public init(content: Content)
 
     /// The type of view representing the body of this view.
@@ -6451,6 +6518,7 @@ public struct FileDocumentConfiguration<Document> where Document : FileDocument 
     /// If `isEditable` is `false`, setting a new value will have no effect.
     public var document: Document { get nonmutating set }
 
+    /// A read-write binding to the current document model.
     public var $document: Binding<Document> { get }
 
     /// The url of the open file document.
@@ -6585,6 +6653,7 @@ public struct FileDocumentWriteConfiguration {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol FocusedValueKey {
 
+	/// The type of the value that the key-value pair is using.
     associatedtype Value
 }
 
@@ -7808,6 +7877,11 @@ extension Group : Commands where Content : Commands {
 @available(watchOS, unavailable)
 public struct GroupBox<Label, Content> : View where Label : View, Content : View {
 
+	/// Creates a group box from a label and a view builder of content.
+	/// 
+	/// - Parameters:
+	///   - label: The label to associate with the grouped content.
+	///   - content: The grouped content to appear with the label.
     public init(label: Label, @ViewBuilder content: () -> Content)
 
     /// The content and behavior of the view.
@@ -7834,6 +7908,9 @@ extension GroupBox where Label == GroupBoxStyleConfiguration.Label, Content == G
 @available(watchOS, unavailable)
 extension GroupBox where Label == EmptyView {
 
+	/// Creates a group box from only content, without including a label.
+	/// 
+	/// - Parameter content: The grouped content that you want in the group box.
     public init(@ViewBuilder content: () -> Content)
 }
 
@@ -9766,16 +9843,118 @@ public protocol ListStyle {
         ///   that appear next in the string literal.
         public mutating func appendLiteral(_ literal: String)
 
+        /// Interpolates the given value’s textual representation into the
+        /// string literal being created.
+        /// 
+        /// Do not call this method directly. It is used by the compiler when
+        /// interpreting string interpolations. Instead, use string
+        /// interpolation to create a new string by including values, literals,
+        /// variables, or expressions enclosed in parentheses, prefixed by a
+        /// backslash (\(…)).
+        /// 
+        /// 	let price = 2
+		///		let number = 3
+		///		let message = """
+        /// 				  If one cookie costs \(price) dollars, \
+        ///                   \(number) cookies cost \(price * number) dollars.
+        ///            	      """
+		///		print(message)
+		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         public mutating func appendInterpolation(_ string: String)
 
+        /// Interpolates the given value’s textual representation into the
+        /// string literal being created.
+        /// 
+        /// Do not call this method directly. It is used by the compiler when
+        /// interpreting string interpolations. Instead, use string
+        /// interpolation to create a new string by including values, literals,
+        /// variables, or expressions enclosed in parentheses, prefixed by a
+        /// backslash (\(…)).
+        /// 
+        /// 	let price = 2
+		///		let number = 3
+		///		let message = """
+        /// 				  If one cookie costs \(price) dollars, \
+        ///                   \(number) cookies cost \(price * number) dollars.
+        ///            	      """
+		///		print(message)
+		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Formatter? = nil) where Subject : ReferenceConvertible
 
+        /// Interpolates the given value’s textual representation into the
+        /// string literal being created.
+        /// 
+        /// Do not call this method directly. It is used by the compiler when
+        /// interpreting string interpolations. Instead, use string
+        /// interpolation to create a new string by including values, literals,
+        /// variables, or expressions enclosed in parentheses, prefixed by a
+        /// backslash (\(…)).
+        /// 
+        /// 	let price = 2
+		///		let number = 3
+		///		let message = """
+        /// 				  If one cookie costs \(price) dollars, \
+        ///                   \(number) cookies cost \(price * number) dollars.
+        ///            	      """
+		///		print(message)
+		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Formatter? = nil) where Subject : NSObject
 
+        /// Interpolates the given value’s textual representation into the
+        /// string literal being created.
+        /// 
+        /// Do not call this method directly. It is used by the compiler when
+        /// interpreting string interpolations. Instead, use string
+        /// interpolation to create a new string by including values, literals,
+        /// variables, or expressions enclosed in parentheses, prefixed by a
+        /// backslash (\(…)).
+        /// 
+        /// 	let price = 2
+		///		let number = 3
+		///		let message = """
+        /// 				  If one cookie costs \(price) dollars, \
+        ///                   \(number) cookies cost \(price * number) dollars.
+        ///            	      """
+		///		print(message)
+		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         public mutating func appendInterpolation<T>(_ value: T) where T : _FormatSpecifiable
 
+        /// Interpolates the given value’s textual representation into the
+        /// string literal being created.
+        /// 
+        /// Do not call this method directly. It is used by the compiler when
+        /// interpreting string interpolations. Instead, use string
+        /// interpolation to create a new string by including values, literals,
+        /// variables, or expressions enclosed in parentheses, prefixed by a
+        /// backslash (\(…)).
+        /// 
+        /// 	let price = 2
+		///		let number = 3
+		///		let message = """
+        /// 				  If one cookie costs \(price) dollars, \
+        ///                   \(number) cookies cost \(price * number) dollars.
+        ///            	      """
+		///		print(message)
+		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         public mutating func appendInterpolation<T>(_ value: T, specifier: String) where T : _FormatSpecifiable
 
+        /// Interpolates the given value’s textual representation into the
+        /// string literal being created.
+        /// 
+        /// Do not call this method directly. It is used by the compiler when
+        /// interpreting string interpolations. Instead, use string
+        /// interpolation to create a new string by including values, literals,
+        /// variables, or expressions enclosed in parentheses, prefixed by a
+        /// backslash (\(…)).
+        /// 
+        /// 	let price = 2
+		///		let number = 3
+		///		let message = """
+        /// 				  If one cookie costs \(price) dollars, \
+        ///                   \(number) cookies cost \(price * number) dollars.
+        ///            	      """
+		///		print(message)
+		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         public mutating func appendInterpolation(_ text: Text)
 
@@ -9814,16 +9993,84 @@ public protocol ListStyle {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension LocalizedStringKey.StringInterpolation {
 
+	    /// Interpolates the given value’s textual representation into the
+        /// string literal being created.
+        /// 
+        /// Do not call this method directly. It is used by the compiler when
+        /// interpreting string interpolations. Instead, use string
+        /// interpolation to create a new string by including values, literals,
+        /// variables, or expressions enclosed in parentheses, prefixed by a
+        /// backslash (\(…)).
+        /// 
+        /// 	let price = 2
+		///		let number = 3
+		///		let message = """
+        /// 				  If one cookie costs \(price) dollars, \
+        ///                   \(number) cookies cost \(price * number) dollars.
+        ///            	      """
+		///		print(message)
+		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
     public mutating func appendInterpolation(_ image: Image)
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension LocalizedStringKey.StringInterpolation {
 
+    /// Interpolates the given value’s textual representation into the
+    /// string literal being created.
+    /// 
+    /// Do not call this method directly. It is used by the compiler when
+    /// interpreting string interpolations. Instead, use string
+    /// interpolation to create a new string by including values, literals,
+    /// variables, or expressions enclosed in parentheses, prefixed by a
+    /// backslash (\(…)).
+    /// 
+    /// 	let price = 2
+	///		let number = 3
+	///		let message = """
+    /// 				  If one cookie costs \(price) dollars, \
+    ///                   \(number) cookies cost \(price * number) dollars.
+    ///            	      """
+	///		print(message)
+	/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
     public mutating func appendInterpolation(_ date: Date, style: Text.DateStyle)
 
+    /// Interpolates the given value’s textual representation into the
+    /// string literal being created.
+    /// 
+    /// Do not call this method directly. It is used by the compiler when
+    /// interpreting string interpolations. Instead, use string
+    /// interpolation to create a new string by including values, literals,
+    /// variables, or expressions enclosed in parentheses, prefixed by a
+    /// backslash (\(…)).
+    /// 
+    /// 	let price = 2
+	///		let number = 3
+	///		let message = """
+    /// 				  If one cookie costs \(price) dollars, \
+    ///                   \(number) cookies cost \(price * number) dollars.
+    ///            	      """
+	///		print(message)
+	/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
     public mutating func appendInterpolation(_ dates: ClosedRange<Date>)
 
+    /// Interpolates the given value’s textual representation into the
+    /// string literal being created.
+    /// 
+    /// Do not call this method directly. It is used by the compiler when
+    /// interpreting string interpolations. Instead, use string
+    /// interpolation to create a new string by including values, literals,
+    /// variables, or expressions enclosed in parentheses, prefixed by a
+    /// backslash (\(…)).
+    /// 
+    /// 	let price = 2
+	///		let number = 3
+	///		let message = """
+    /// 				  If one cookie costs \(price) dollars, \
+    ///                   \(number) cookies cost \(price * number) dollars.
+    ///            	      """
+	///		print(message)
+	/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
     public mutating func appendInterpolation(_ interval: DateInterval)
 }
 
@@ -10820,10 +11067,17 @@ public protocol NavigationViewStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct OffsetShape<Content> : Shape where Content : Shape {
 
+	/// The original shape that you want to move up, down, or both.
     public var shape: Content
 
+    /// The amount you want to move the shape.
     public var offset: CGSize
 
+    /// Use this to take an original shape and move it to a new place on the screen.
+    /// 
+    /// - Parameters:
+    ///   - shape: The original shape that you want to move.
+    ///   - offset: The amount that you want to move the shape.
     @inlinable public init(shape: Content, offset: CGSize)
 
     /// Describes this shape as a path within a rectangular frame of reference.
@@ -11660,6 +11914,7 @@ public struct PlainListStyle : ListStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainTextFieldStyle : TextFieldStyle {
 
+	/// Creates a plain text field style.
     public init()
 }
 
@@ -11667,8 +11922,10 @@ public struct PlainTextFieldStyle : TextFieldStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PopoverAttachmentAnchor {
 
+	/// A rectangular anchor point for the popover attachment.
     case rect(Anchor<CGRect>.Source)
 
+    /// A unit point anchor for the popover attachment.
     case point(UnitPoint)
 }
 
@@ -12606,6 +12863,7 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
     /// need to be done explicitly.
     public var document: Document
 
+    /// A read-only binding to the current document model.
     public var $document: ObservedObject<Document>.Wrapper { get }
 
     /// The url of the open file document.
@@ -12622,12 +12880,21 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RotatedShape<Content> : Shape where Content : Shape {
 
+	/// The original shape to be rotated.
     public var shape: Content
 
+    /// The amount to rotate the original shape.
     public var angle: Angle
 
+    /// The anchor point to rotate the shape around.
     public var anchor: UnitPoint
 
+    /// Creates a rotated shape from an original shape, an angle, and an anchor point.
+    /// 
+    /// - Parameters:
+    ///   - shape: The original shape to rotate.
+    ///   - angle: The angle to rotate the original shape.
+    ///   - anchor: The unit point to rotate the shape around.
     @inlinable public init(shape: Content, angle: Angle, anchor: UnitPoint = .center)
 
     /// Describes this shape as a path within a rectangular frame of reference.
@@ -12715,6 +12982,7 @@ public struct RotationGesture : Gesture {
 @available(watchOS, unavailable)
 public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 
+	/// Creates a rounded border text field style.
     public init()
 }
 
@@ -12922,12 +13190,21 @@ extension RoundedRectangle : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ScaledShape<Content> : Shape where Content : Shape {
 
+	/// The shape to scale.
     public var shape: Content
 
+    /// The scale factor.
     public var scale: CGSize
 
+    /// The unit point to scale the view from.
     public var anchor: UnitPoint
 
+    /// Creates a scaled shape from an original shape, a scale factor, and an anchor point.
+    ///
+    /// - Parameters:
+    ///   - shape: The shape to be scaled.
+    ///   - scale: The factor to scale the shape.
+    ///   - anchor: The unit point to scale the shape from. Defaults to the center.
     @inlinable public init(shape: Content, scale: CGSize, anchor: UnitPoint = .center)
 
     /// Describes this shape as a path within a rectangular frame of reference.
@@ -13693,6 +13970,7 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     ///   - content: The section contents
     public init(header: Parent, footer: Footer, @ViewBuilder content: () -> Content)
 
+    /// The child view displayed in the ``Section``.
     public var internalBody: some View { get }
 }
 
@@ -14134,10 +14412,10 @@ extension ShapeStyle {
 
 }
 
-/// Default View.body implementation to fill a Rectangle with `self`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ShapeStyle where Self : View, Self.Body == _ShapeView<Rectangle, Self> {
 
+	/// Default ``View.body`` implementation to fill a Rectangle with `self`.
     public var body: _ShapeView<Rectangle, Self> { get }
 }
 
@@ -14416,6 +14694,7 @@ extension Spacer : View {
 @available(macOS, unavailable)
 public struct StackNavigationViewStyle : NavigationViewStyle {
 
+	/// Creates a stack navigation view style.
     public init()
 }
 
@@ -15232,6 +15511,12 @@ extension StrokeStyle : Animatable {
     /// The `Action` executed when `publisher` emits an event.
     public var action: (PublisherType.Output) -> Void
 
+    /// Create a view with content the subscribes to a publisher with an action.
+    /// 
+    /// - Parameters:
+    ///   - content: The content that you want displayed in the view.
+    ///   - publisher: The publisher to use for the subscription.
+    ///   - action: The action you want performed in conjunction with the publisher.
     @inlinable public init(content: Content, publisher: PublisherType, action: @escaping (PublisherType.Output) -> Void)
 
     /// The type of view representing the body of this view.
@@ -15320,6 +15605,12 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 extension TabView where SelectionValue == Int {
 
+	/// Creates a tab view from a view builder. The tab view maintains its own selection.
+	/// 
+	/// This is useful if you don't want to have to pass in your own binding
+	/// selection index, and just want the view to default at the first page.
+	/// You will still be able to move tabs, but you won't be able to programmatically
+	/// change tabs from outside the view.
     public init(@ViewBuilder content: () -> Content)
 }
 
@@ -16070,10 +16361,15 @@ extension Text.Case : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum TextAlignment : Hashable, CaseIterable {
 
+	/// Aligns each line of the text to the leading edge, left in left-to-right languages,
+	/// and right in right-to-left languages.
     case leading
 
+    /// Aligns each line of the text with the center of the view.
     case center
 
+    /// Aligns each line of the text to the trailing edge, right in left-to-right languages,
+    /// and left in right-to-left languages.
     case trailing
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -16539,6 +16835,7 @@ public struct ToggleStyleConfiguration {
     /// off.
     public var isOn: Bool { get nonmutating set }
 
+    /// A binding to let you listen to changes in the toggle's "is on" property.
     public var $isOn: Binding<Bool> { get }
 }
 
@@ -16577,9 +16874,10 @@ public protocol ToolbarContent {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_functionBuilder public struct ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing a single toolbar content.
     public static func buildBlock<Content>(_ content: Content) -> some ToolbarContent where Content : ToolbarContent
 
-
+	/// Builds a new coustom toolbar contents structure from a block containing a single custom toolbar content.
     public static func buildBlock<Content>(_ content: Content) -> some CustomizableToolbarContent where Content : CustomizableToolbarContent
 
 }
@@ -16587,6 +16885,7 @@ public protocol ToolbarContent {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 2 toolbar contents.
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent
 
 }
@@ -16594,6 +16893,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 3 toolbar contents.
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent
 
 }
@@ -16601,6 +16901,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 4 toolbar contents.
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent
 
 }
@@ -16608,6 +16909,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 5 toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent
 
 }
@@ -16615,6 +16917,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 6 toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent
 
 }
@@ -16622,6 +16925,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 7 toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent
 
 }
@@ -16629,6 +16933,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 8 toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent
 
 }
@@ -16636,6 +16941,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 9 toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent, C8 : ToolbarContent
 
 }
@@ -16643,6 +16949,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new toolbar contents structure from a block containing 10 toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent, C8 : ToolbarContent, C9 : ToolbarContent
 
 }
@@ -16650,6 +16957,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 2 custom toolbar contents.
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent
 
 }
@@ -16657,6 +16965,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 3 custom toolbar contents.
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent
 
 }
@@ -16664,6 +16973,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 4 custom toolbar contents.
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent
 
 }
@@ -16671,6 +16981,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 5 custom toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent
 
 }
@@ -16678,6 +16989,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 6 custom toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent
 
 }
@@ -16685,6 +16997,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 7 custom toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent
 
 }
@@ -16692,6 +17005,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 8 custom toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent
 
 }
@@ -16699,6 +17013,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 9 custom toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent, C8 : CustomizableToolbarContent
 
 }
@@ -16706,6 +17021,7 @@ extension ToolbarContentBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ToolbarContentBuilder {
 
+	/// Builds a new custom toolbar contents structure from a block containing 10 custom toolbar contents.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent, C8 : CustomizableToolbarContent, C9 : CustomizableToolbarContent
 
 }
@@ -16978,10 +17294,17 @@ extension Transaction {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TransformedShape<Content> : Shape where Content : Shape {
 
+	/// The original shape to be affine transformed.
     public var shape: Content
 
+    /// The affine transformation to apply to the original shape
     public var transform: CGAffineTransform
 
+    /// Creates a new shape from an original shape and an affine transform.
+    /// 
+    /// - Parameter:
+    ///   - shape: The original shape to be affine transformed.
+    ///   - transform: The affine transform to apply to the original shape.
     @inlinable public init(shape: Content, transform: CGAffineTransform)
 
     /// Describes this shape as a path within a rectangular frame of reference.
@@ -17005,11 +17328,18 @@ extension Transaction {
 }
 
 /// A View created from a swift tuple of View values.
+/// 
+/// `TupleView` is mainly used with ``ViewBuilder``, and so you don't really
+/// need to worry about it unless you're making your own view builders.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TupleView<T> : View {
 
+	/// The tuple of views in the ``TupleView``.
     public var value: T
 
+    /// Creates a tuple view.
+    /// 
+    /// - Parameter value: A tuple of any number of views.
     @inlinable public init(_ value: T)
 
     /// The type of view representing the body of this view.
@@ -17080,6 +17410,18 @@ extension UIApplicationDelegateAdaptor where DelegateType : ObservableObject {
 @available(watchOS, unavailable)
 open class UIHostingController<Content> : UIViewController where Content : View {
 
+	/// The key commands that trigger actions on this responder.
+	///
+	/// A responder object that supports hardware keyboard commands can redefine
+	/// this property and use it to return an array of ``UIKit/UIKeyCommand`` objects that
+	/// it supports. Each key command object represents the keyboard sequence to
+	/// recognize and the action method of the responder to call in response.
+	/// 
+	/// The key commands you return from this method are applied to the entire
+	/// responder chain. When an key combination is pressed that matches a key
+	/// command object, UIKit walks the responder chain looking for an object
+	/// that implements the corresponding action method. It calls that method on
+	/// the first object it finds and then stops processing the event.
     @objc override dynamic open var keyCommands: [UIKeyCommand]? { get }
 
     /// Creates a hosting controller object that wraps the specified SwiftUI
@@ -17153,6 +17495,13 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///   using an animation.
     @objc override dynamic open func viewWillDisappear(_ animated: Bool)
 
+    /// Called to notify the view controller that its view is about to layout
+    /// its subviews.
+    /// 
+    /// When a view's bounds change, the view adjusts the position of its
+    /// subviews. Your view controller can override this method to make changes
+    /// before the view lays out its subviews. The default implementation of
+    /// this method does nothing.
     @objc override dynamic open func viewWillLayoutSubviews()
 
     /// The root view of the SwiftUI view hierarchy managed by this view
@@ -17180,16 +17529,136 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// this view controller.
     @objc override dynamic open var preferredStatusBarUpdateAnimation: UIStatusBarAnimation { get }
 
+    /// Called when the system needs the view controller to use for determining
+    /// status bar hidden/unhidden state.
+    /// 
+    /// If your container view controller derives the hidden state of the status
+    /// bar from one of its child view controllers, implement this method to
+    /// specify which child view controller you want to control the hidden/
+    /// unhidden state. If you return `nil` or do not override this method, the
+    /// status bar hidden/unhidden state for `self` is used.
+    ///
+    /// If you change the return value from this method, call the
+    /// ``setNeedsStatusBarAppearanceUpdate()`` method.
+    ///
+    /// - Returns The view controller whose status bar hidden/unhidden status
+    /// should be used. Default return value is `nil`.
     @objc override dynamic open var childForStatusBarHidden: UIViewController? { get }
 
+    /// Notifies the container that the size of its view is about to change.
+    /// 
+    /// This  method is called before changing the size of a presented view
+    /// controller’s view. You can override this method in your own objects and
+    /// use it to perform additional tasks related to the size change. For
+    /// example, a container view controller might use this method to override
+    /// the traits of its embedded child view controllers. Use the provided
+    /// `coordinator` object to animate any changes you make.
+
+	/// If you override this method in your custom view controllers, always call
+	/// super at some point in your implementation so that UIKit can forward the
+	/// size change message appropriately. View controllers forward the size
+	/// change message to their views and child view controllers. Presentation
+	/// controllers forward the size change to their presented view controller.
+	/// 
+	/// - Parameters:
+	///   - size: The new size for the container’s view.
+	///   - coordinator: The transition coordinator object managing the size
+	///   change. You can use this object to animate your changes or get
+	///   information about the transition that is in progress.
     @objc override dynamic open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator)
 
+    /// Called just before the hosting controller is added or removed from a
+    /// container view controller.
+    /// 
+    /// Your hosting controller can override this method when it needs to know
+    /// that it has been added to a container.
+    /// 
+	/// If you are implementing your own container view controller, it must call
+	/// the ``willMove(toParent:)`` method of the child view controller before
+	/// calling the ``removeFromParent()`` method, passing in a parent value of
+	/// `nil`.
+	/// 
+	/// When your custom container calls the ``addChild(_:)`` method, it
+	/// automatically calls the ``willMove(toParent:)`` method of the view
+	/// controller to be added as a child before adding it.
+	/// 
+	/// - Parameter parent: The parent view controller, or `nil` if there is no
+	/// parent.
     @objc override dynamic open func willMove(toParent parent: UIViewController?)
 
+    /// Called after the hosting controller is added or removed from a container
+    /// view controller.
+    /// 
+    /// Your hosting controller can override this method when it wants to react to
+    /// being added to a container.
+    /// 
+	/// If you are implementing your own container view controller, it must call
+	/// the `didMove(toParent:)` method of the child view controller after the
+	/// transition to the new controller is complete or, if there is no
+	/// transition, immediately after calling the `addChild(_:)` method.
+	/// 
+	/// The `removeFromParent()` method automatically calls the
+	/// `didMove(toParent:)` method of the child view controller after it
+	/// removes the child.
+	/// 
+	/// - Parameter parent: The parent view controller, or `nil` if there is no
+	/// parent.
     @objc override dynamic open func didMove(toParent parent: UIViewController?)
 
+    /// Returns the target object that responds to an action.
+    ///
+    /// This method is called whenever an action needs to be invoked by the
+    /// object. The default implementation calls the
+    /// ``canPerformAction(_:withSender:)`` method to determine whether it can
+    /// invoke the action. If the object can invoke the action, it returns
+    /// itself, otherwise it passes the request up the responder chain. Your app
+    /// should override this method if it wants to override how a target is
+    /// selected.
+    /// 
+    /// - Parameters:
+    ///	  - action: A selector that identifies a method associated with a command.
+    ///   - sender: The object calling this method. For the editing menu
+    ///   commands, this is the shared ``UIKit/UIApplication`` object. Depending on the
+    ///   context, you can query the sender for information to help you determine
+    ///   the target of the command.
+    /// 
+    /// - Returns: The object whose action method is invoked to execute the command.
     @objc override dynamic open func target(forAction action: Selector, withSender sender: Any?) -> Any?
 
+    /// Returns a newly initialized view controller with the nib file in the specified bundle.
+    /// 
+    /// This is the designated initializer for this class. When using a 
+    /// storyboard to define your hosting controller and its associated views,
+    /// you never initialize your view controller class directly. Instead, view
+	/// controllers are instantiated by the storyboard either automatically when
+	/// a segue is triggered or programmatically when your app calls the
+	/// ``instantiateViewController(withIdentifier:)`` method of a storyboard
+	/// object. When instantiating a view controller from a storyboard, iOS
+	/// initializes the new view controller by calling its ``init(coder:)``
+	/// method instead of this method and sets the ``nibName`` property to a nib
+	/// file stored inside the storyboard.
+	/// 
+	/// The nib file you specify is not loaded right away. It is loaded the
+	/// first time the view controller's view is accessed. If you want to
+	/// perform additional initialization after the nib file is loaded, override
+	/// the ``viewDidLoad()`` method and perform your tasks there.
+	/// 
+	/// If you specify `nil` for the `nibName` parameter and you do not override
+	/// the ``loadView()`` method, the view controller searches for a nib file
+	/// as described in the ``nibName`` property.
+	/// 
+	/// For more information about how a view controller loads its view, see
+	/// [View Controller Programming Guide for iOS](https://developer.apple.com/library/archive/featuredarticles/ViewControllerPGforiPhoneOS/index.html#//apple_ref/doc/uid/TP40007457).
+	/// 
+	/// - Parameters:
+	///   - nibNameOrNil: The name of the nib file to associate with the view
+	///   controller. The nib file name should not contain any leading path
+	///   information. If you specify `nil`, the ``nibName`` property is set to `nil`.
+	///   - nibBundleOrNil: The bundle in which to search for the nib file.
+	///   This method looks for the nib file in the bundle's language-specific
+	///   project directories first, followed by the Resources directory.
+	/// 
+	/// - Returns: A newly initialized ``UIHostingController`` object.
     @objc override dynamic public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
 }
 
@@ -17292,6 +17761,9 @@ public protocol UIViewControllerRepresentable : View where Self.Body == Never {
     /// instance.
     func makeCoordinator() -> Self.Coordinator
 
+    /// A type alias for the representable's context.
+    /// 
+    /// - SeeAlso: UIViewControllerRepresentableContext
     typealias Context = UIViewControllerRepresentableContext<Self>
 }
 
@@ -17475,6 +17947,9 @@ public protocol UIViewRepresentable : View where Self.Body == Never {
     /// calling the other methods of your representable instance.
     func makeCoordinator() -> Self.Coordinator
 
+    /// A type alias for the representable's context.
+    /// 
+    /// - SeeAlso: UIViewRepresentableContext
     typealias Context = UIViewRepresentableContext<Self>
 }
 
@@ -18424,6 +18899,13 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
+	/// Use this to transform the value of an existing anchor preference.
+	/// 
+	/// - Parameters:
+	///   - key: The key type of the preference key.
+	///   - value: The anchor you provide to the transform closure.
+	///   - transform: A closure that takes an existing preference value and anchor value,
+	///   and can update the existing preference with the given value.
     @inlinable public func transformAnchorPreference<A, K>(key _: K.Type = K.self, value: Anchor<A>.Source, transform: @escaping (inout K.Value, Anchor<A>) -> Void) -> some View where K : PreferenceKey
 
 }
@@ -18446,6 +18928,19 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
+	/// Places a view behind the current view.
+	/// 
+	/// The layout of the original view will be unchanged from this. Its original
+	/// size and location will stay the same.
+	/// 
+	/// If you would like to place a view in front of your current view instead,
+	/// you can use the ``overlay(_:alignment:)`` function.
+	/// 
+	/// - Parameters:
+	///   - background: The view to place behind.
+	///   - alignment: Where to align the behind view relative to the current view. Defaults to center.
+	///
+	/// - SeeAlso: overlay(_:alignment:)
     @inlinable public func background<Background>(_ background: Background, alignment: Alignment = .center) -> some View where Background : View
 
 }
@@ -18453,6 +18948,19 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
+	/// Places a view in front of the current view.
+	/// 
+	/// The layout of the original view will be unchanged from this. Its original
+	/// size and location will stay the same.
+	/// 
+	/// If you would like to place a view behind your current view instead,
+	/// you can use the ``background(_:alignment:)`` function.
+	/// 
+	/// - Parameters:
+	///   - overlay: The view to place in front.
+	///   - alignment: Where to align the in-front view relative to the current view. Defaults to center.
+	/// 
+	/// - SeeAlso: background(_:alignment:)
     @inlinable public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View
 
 
@@ -20080,7 +20588,14 @@ extension View {
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
-
+	
+	/// Use this to set the value of a preference for a specified anchor.
+	/// 
+	/// - Parameters:
+	///   - key: The key type of the preference key.
+	///   - value: The anchor you provide to transform closure.
+	///   - transform: A closure that takes an existing preference value and anchor value,
+	///   and can update the existing preference with the given value.
     @inlinable public func anchorPreference<A, K>(key _: K.Type = K.self, value: Anchor<A>.Source, transform: @escaping (Anchor<A>) -> K.Value) -> some View where K : PreferenceKey
 
 }
@@ -22905,54 +23420,63 @@ extension ViewBuilder {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 2 views in a view builder.
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> TupleView<(C0, C1)> where C0 : View, C1 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 3 views in a view builder.
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleView<(C0, C1, C2)> where C0 : View, C1 : View, C2 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 4 views in a view builder.
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleView<(C0, C1, C2, C3)> where C0 : View, C1 : View, C2 : View, C3 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 5 views in a view builder.
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleView<(C0, C1, C2, C3, C4)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 6 views in a view builder.
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleView<(C0, C1, C2, C3, C4, C5)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 7 views in a view builder.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleView<(C0, C1, C2, C3, C4, C5, C6)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 8 views in a view builder.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 9 views in a view builder.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
+	/// Builds a tuple view for display from 10 views in a view builder.
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View, C9 : View
 }
 
@@ -23095,6 +23619,7 @@ extension ViewModifier {
 @available(watchOS, unavailable)
 public struct WheelDatePickerStyle : DatePickerStyle {
 
+	/// Creates a wheel date picker style.
     public init()
 }
 
@@ -23255,6 +23780,7 @@ public protocol WidgetBundle {
 @available(watchOS, unavailable)
 extension WidgetBundleBuilder {
 
+	/// Builds a new widget from a block containing 2 widgets.
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Widget where C0 : Widget, C1 : Widget
 
 }
@@ -23264,6 +23790,7 @@ extension WidgetBundleBuilder {
 @available(watchOS, unavailable)
 extension WidgetBundleBuilder {
 
+	/// Builds a new widget from a block containing 3 widgets.
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget
 
 }
@@ -23273,6 +23800,7 @@ extension WidgetBundleBuilder {
 @available(watchOS, unavailable)
 extension WidgetBundleBuilder {
 
+	/// Builds a new widget from a block containing 4 widgets.
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget, C3 : Widget
 
 }
@@ -23282,6 +23810,7 @@ extension WidgetBundleBuilder {
 @available(watchOS, unavailable)
 extension WidgetBundleBuilder {
 
+	/// Builds a new widget from a block containing 5 widgets.
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget, C3 : Widget, C4 : Widget
 
 }
@@ -23525,6 +24054,12 @@ extension Never {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension CGPoint {
 
+	/// Applies a projection transform to a given `CGPoint` to return a new
+	/// transofrmed point.
+	/// 
+	/// - Parameter m: The projection transform to apply to the point
+	/// 
+	/// - Returns: A projection transformed `CGPoint`.
     public func applying(_ m: ProjectionTransform) -> CGPoint
 }
 
@@ -23649,6 +24184,9 @@ extension MutableCollection {
 
 extension UIColor {
 
+	/// Creates a new `UIColor` from a SwiftUI `Color`.
+	/// 
+	/// - Parameter color: The SwiftUI `Color` object to use for creating a `UIColor`.
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
     @available(macOS, unavailable)
     public convenience init(_ color: Color)
