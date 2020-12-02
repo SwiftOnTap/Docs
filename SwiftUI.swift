@@ -3977,6 +3977,7 @@ extension DatePicker where Label == Text {
     public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol
 }
 
+/// An efficient option set for the components of a date picker.
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -15102,21 +15103,37 @@ extension Stepper where Label == Text {
     public init<S, V>(_ title: S, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable
 }
 
+/// A structure holding the data needed to stroke a ``Shape`` in a particular style.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct StrokeStyle : Equatable {
 
+	/// The width of the stroke, specified in points.
     public var lineWidth: CGFloat
 
+    /// The style for rendering the endpoint of the stroke line.
     public var lineCap: CGLineCap
 
+    /// The style for rendering the joining point of stroked lines
     public var lineJoin: CGLineJoin
 
+    /// The limit on the ratio of the miter length to stroke width.
     public var miterLimit: CGFloat
 
+    /// The dash array for allowing the stroke to show discontinuities.
     public var dash: [CGFloat]
 
+    /// The dash phase for moving the dashes forward or backward along the stroke.
     public var dashPhase: CGFloat
 
+   	/// Creates a stroke style from its parameters.
+   	///
+   	/// - Parameters:
+   	///   - lineWidth: The stroke line width.
+   	///   - lineCap: The stroke line cap style.
+   	///   - lineJoin: The stroke line join style.
+   	///   - miterLimet: The stroke miter limit.
+   	///   - dash: The stroke dash array.
+   	///   - dashPhase: The stroke dash phase.
     public init(lineWidth: CGFloat = 1, lineCap: CGLineCap = .butt, lineJoin: CGLineJoin = .miter, miterLimit: CGFloat = 10, dash: [CGFloat] = [CGFloat](), dashPhase: CGFloat = 0)
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -17471,35 +17488,54 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     public var environment: EnvironmentValues { get }
 }
 
+/// A dynamic data structure for representing a point in a view.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
 
+	/// The x coordinate of the point, measured in points.
     public var x: CGFloat
 
+    /// The y coordinate of the point, measured in points.
     public var y: CGFloat
 
+    /// Creates a unit point with x and y values of 0.
     @inlinable public init()
 
+    /// Creates a unit point from x and y values.
+    ///
+    /// - Parameters:
+    ///   x: The x coordinate of the unit point.
+    ///   y: The y coordinate of the unit point.
     @inlinable public init(x: CGFloat, y: CGFloat)
 
+    /// A unit point with x and y values of 0.
     public static let zero: UnitPoint
 
+    /// The unit point at the center of a given view.
     public static let center: UnitPoint
 
+    /// The unit point at the middle of the leading edge of a given view.
     public static let leading: UnitPoint
 
+    /// The unit point at the middle of the trailing edge of a given view.
     public static let trailing: UnitPoint
 
+    /// The unit point at the middle of the top edge of a given view.
     public static let top: UnitPoint
 
+    /// The unit point at the middle of the bottom edge of a given view.
     public static let bottom: UnitPoint
 
+    /// The unit point at the top leading corner of a given view.
     public static let topLeading: UnitPoint
 
+    /// The unit point at the top trailing corner of a given view.
     public static let topTrailing: UnitPoint
 
+    /// The unit point at the bottom leading corner of a given view.
     public static let bottomLeading: UnitPoint
 
+    /// The unit point at the bottom trailing corner of a given view.
     public static let bottomTrailing: UnitPoint
 
     /// The hash value.
