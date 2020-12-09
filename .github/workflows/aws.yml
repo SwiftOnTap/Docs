@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -22,15 +24,5 @@ jobs:
         aws-region: us-east-2
 
     - name: Copy files to the S3 bucket
-      continue-on-error: true
       run: |
-        for FILE in *; do 
-          aws s3api head-object --bucket blossom-documentation --key ${FILE}
-
-          if [ $? == 0 ]
-          then
-            echo "trueee"
-          else
-            echo "falseee"
-          fi
-        done
+        echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
