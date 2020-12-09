@@ -27,9 +27,8 @@ jobs:
           aws s3api head-object --bucket blossom-documentation --key $FILE 
           if [ $? == 0 ]
           then
-          echo "name exists"
+          echo "File already exists in S3, skipping"
           else
-          echo "name does not exist"
+          aws s3 sync $FILE s3://blossom-documentation
           fi 
         done
-        aws s3 sync . s3://blossom-documentation
