@@ -26,3 +26,4 @@ jobs:
     - name: Copy files to the S3 bucket
       run: |
         echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
+        echo $CHANGED_FILES
