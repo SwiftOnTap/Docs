@@ -1,7 +1,7 @@
 on:
   push:
     branches: 
-      - master
+      - main
 
 name: Push to S3 bucket
 
