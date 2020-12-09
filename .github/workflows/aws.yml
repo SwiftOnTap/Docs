@@ -29,6 +29,6 @@ jobs:
           then
           echo "File already exists in S3, skipping"
           else
-          aws s3 sync $FILE s3://blossom-documentation
+          echo "file doesn not exist har"
           fi 
         done
