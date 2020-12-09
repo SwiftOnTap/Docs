@@ -22,6 +22,7 @@ jobs:
         aws-region: us-east-2
 
     - name: Copy files to the S3 bucket
+      continue-on-error: true
       run: |
         for FILE in *; do 
           aws s3api head-object --bucket blossom-documentation --key ${FILE}
