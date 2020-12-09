@@ -23,11 +23,13 @@ jobs:
 
     - name: Copy files to the S3 bucket
       run: |
-        for FILE in *; 
-        do aws s3api head-object --bucket blossom-documentation --key $FILE 
-        if [$? == 0]
-        echo "file exists";
-        fi
-        echo $FILE; 
+        for FILE in *; do 
+          aws s3api head-object --bucket blossom-documentation --key $FILE 
+          if [ $? == 0 ]
+          then
+          echo "name exists"
+          else
+          echo "name does not exist"
+          fi 
         done
         aws s3 sync . s3://blossom-documentation
