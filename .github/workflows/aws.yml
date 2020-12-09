@@ -24,11 +24,12 @@ jobs:
     - name: Copy files to the S3 bucket
       run: |
         for FILE in *; do 
-          aws s3api head-object --bucket blossom-documentation --key $FILE 
+          aws s3api head-object --bucket blossom-documentation --key ${FILE}
+
           if [ $? == 0 ]
           then
-          echo "File already exists in S3, skipping"
+            echo "trueee"
           else
-          echo "file doesn not exist har"
-          fi 
+            echo "falseee"
+          fi
         done
