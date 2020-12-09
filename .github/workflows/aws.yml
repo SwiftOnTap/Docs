@@ -23,4 +23,5 @@ jobs:
 
     - name: Copy files to the S3 bucket
       run: |
+        for FILE in *; do echo $FILE; done
         aws s3 sync . s3://blossom-documentation
