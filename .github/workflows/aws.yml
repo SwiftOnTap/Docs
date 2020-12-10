@@ -30,8 +30,8 @@ jobs:
       run: |
         echo $CHANGED_FILES
         for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do 
-        if [[ "$IGNORED_FILES" != *"$i"*]] 
-        then
-        aws s3 cp $i s3://blossom-documentation
-        fi
+        if ! grep -q "$i," <<< $IGNORED_FILES;
+        then;
+        aws s3 cp $i s3://blossom-documentation;
+        fi;
         done
