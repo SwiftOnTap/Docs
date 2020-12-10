@@ -19,7 +19,7 @@ import os.signpost
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityActionKind : Equatable {
 
-    /// The inferred accessibility action inheritted from the view type.
+    /// The inferred accessibility action inherited from the view type.
     ///
     /// This constant will default to the accessibility action associated with the modified object.
     /// For example, a button, label, or text would all default to their unique accessibility behaviors.
