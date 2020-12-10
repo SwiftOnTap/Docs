@@ -26,7 +26,5 @@ jobs:
 
     - name: Copy files to the S3 bucket
       run: |
-        for i in $(echo $CHANGED_FILES | sed "s/,/ /g")
-        do
-            echo "$i"
-        done
+        echo $CHANGED_FILES
+        for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do echo "$i"; done
