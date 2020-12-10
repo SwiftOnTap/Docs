@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      IGNORED_FILES: ".gitignore,aws.yml,"
+      IGNORED_FILES: ".gitignore,.github/workflows/aws.yml,"
 
     steps:
     - name: Checkout
