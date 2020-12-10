@@ -9,6 +9,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    env:
+      IGNORED_FILES: ".gitignore,aws.yml"
 
     steps:
     - name: Checkout
@@ -27,4 +29,8 @@ jobs:
     - name: Copy files to the S3 bucket
       run: |
         echo $CHANGED_FILES
-        for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do aws s3 cp $i s3://blossom-documentation; done
+        for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do 
+        if [[ "$IGNORED_FILES" != *"$i"*]]; then
+        aws s3 cp $i s3://blossom-documentation
+        fi;
+        done
