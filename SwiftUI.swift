@@ -38,7 +38,7 @@ public struct AccessibilityActionKind : Equatable {
     /// An example of an accessibility action name could be "Open address in Maps" or
     /// "Call Fred" where "Fred" is a string variable. When VoiceOver is on the iPhone
     /// will read this name to the user.
-    public init(named name: Text){}
+    public init(named name: Text) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -305,7 +305,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///     emptySet = []
     ///     print(emptySet.isEmpty)
     ///     // Prints "true"
-    public init(){}
+    public init() { }
 
     /// Adds the elements of the given set to the set.
     ///
@@ -542,7 +542,7 @@ public struct AccessibilityTraits : SetAlgebra {
 public struct ActionSheet {
 
     /// Creates an action sheet with the provided buttons.
-    public init(title: Text, message: Text? = nil, buttons: [ActionSheet.Button] = [.cancel()]){}
+    public init(title: Text, message: Text? = nil, buttons: [ActionSheet.Button] = [.cancel()]) { }
 
     /// A button representing an operation of an action sheet presentation.
     public typealias Button = Alert.Button
@@ -553,12 +553,12 @@ public struct ActionSheet {
 public struct Alert {
 
     /// Creates an alert with one button.
-    public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil){}
+    public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { }
 
     /// Creates an alert with two buttons.
     ///
     /// The system determines the visual ordering of the buttons.
-    public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button){}
+    public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) { }
 
     /// A button representing an operation of an alert presentation.
     public struct Button {
@@ -602,7 +602,7 @@ public struct Alert {
     /// - Parameters:
     ///   - horizontal: The alignment on the horizontal axis.
     ///   - vertical: The alignment on the vertical axis.
-    @inlinable public init(horizontal: HorizontalAlignment, vertical: VerticalAlignment){}
+    @inlinable public init(horizontal: HorizontalAlignment, vertical: VerticalAlignment) { }
 
     /// A guide marking the center of the view.
     public static let center: Alignment
@@ -730,7 +730,7 @@ extension Anchor.Source {
 	/// Creates an anchor source with generic type array from an array of anchor source.
 	///
 	/// - Parameter array: The array of anchor source points.
-    public init<T>(_ array: [Anchor<T>.Source]) where Value == [T]{}
+    public init<T>(_ array: [Anchor<T>.Source]) where Value == [T] { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -739,7 +739,7 @@ extension Anchor.Source {
 	/// Creates an anchor source with generic type optional from an optional anchor source.
 	///
 	/// - Parameter anchor: The optional anchor source.
-    public init<T>(_ anchor: Anchor<T>.Source?) where Value == T?{}
+    public init<T>(_ anchor: Anchor<T>.Source?) where Value == T? { }
 }
 
 /// A geometric angle whose value you access in either radians or degrees.
@@ -753,17 +753,17 @@ extension Anchor.Source {
     @inlinable public var degrees: Double
 
     /// Creates an angle of 0 degrees or 0 radians.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// Creates an angle from a specified number of radians.
     ///
     /// - Parameter radians: The number of radians in the angle.
-    @inlinable public init(radians: Double){}
+    @inlinable public init(radians: Double) { }
 
     /// Creates an angle from a specified number of degrees.
     ///
     /// - Parameter degrees: The number of degrees in the angle.
-    @inlinable public init(degrees: Double){}
+    @inlinable public init(degrees: Double) { }
 
     /// Changes the size of an angle to a specified number of radians.
     ///
@@ -858,7 +858,7 @@ extension Angle : Animatable {
 	///   - center: The unit point that is center of the angular gradient.
 	///   - startAngle: The ``Angle`` where the gradient starts. Defaults to zero.
 	///   - endAngle: The ``Angle`` where the gradient ends. Defaults to zero.
-    public init(gradient: Gradient, center: UnitPoint, startAngle: Angle = .zero, endAngle: Angle = .zero){}
+    public init(gradient: Gradient, center: UnitPoint, startAngle: Angle = .zero, endAngle: Angle = .zero) { }
 
     /// Creates an angular gradient starting at and angle and going all the way around in a circle.
     ///
@@ -866,7 +866,7 @@ extension Angle : Animatable {
     ///   - gradient: The gradient with the colors to use.
     ///   - center: The unit point that is center of the angular gradient.
     ///   - angle: The ``Angle`` where the gradient starts. Defaults to zero.
-    public init(gradient: Gradient, center: UnitPoint, angle: Angle = .zero){}
+    public init(gradient: Gradient, center: UnitPoint, angle: Angle = .zero) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -916,7 +916,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     public var second: Second
 
     /// Creates an animated pair with the provided values.
-    @inlinable public init(_ first: First, _ second: Second){}
+    @inlinable public init(_ first: First, _ second: Second) { }
 
     /// The zero value.
     ///
@@ -1228,7 +1228,7 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
     /// Creates an instance from another gesture.
     ///
     /// - Parameter gesture: A gesture that you use to create a new gesture.
-    public init<T>(_ gesture: T) where Value == T.Value, T : Gesture{}
+    public init<T>(_ gesture: T) where Value == T.Value, T : Gesture { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -1343,10 +1343,10 @@ extension AnyTransition {
 @frozen public struct AnyView : View {
 
     /// Create an instance that type-erases `view`.
-    public init<V>(_ view: V) where V : View{}
+    public init<V>(_ view: V) where V : View { }
 
     /// Creates an instance that type-erases the parameter.
-    public init<V>(erasing view: V) where V : View{}
+    public init<V>(erasing view: V) where V : View { }
 
     /// The type of view representing the body of this view.
     ///
@@ -1452,7 +1452,7 @@ public protocol App {
     /// Swift synthesizes a default initializer for structures that don't
     /// provide one. You typically rely on the default initializer for
     /// your app.
-    init(){}
+    init() { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -1513,7 +1513,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Bool{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Bool { }
 
     /// Creates a property that can read and write to an integer user default.
     ///
@@ -1524,7 +1524,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Int{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Int { }
 
     /// Creates a property that can read and write to a double user default.
     ///
@@ -1535,7 +1535,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Double{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Double { }
 
     /// Creates a property that can read and write to a string user default.
     ///
@@ -1546,7 +1546,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == String{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == String { }
 
     /// Creates a property that can read and write to a url user default.
     ///
@@ -1557,7 +1557,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == URL{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == URL { }
 
     /// Creates a property that can read and write to a user default as data.
     ///
@@ -1573,7 +1573,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Data{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Data { }
 
     /// Creates a property that can read and write to an integer user default,
     /// transforming that to `RawRepresentable` data type.
@@ -1597,7 +1597,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == Int{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == Int { }
 
     /// Creates a property that can read and write to a string user default,
     /// transforming that to `RawRepresentable` data type.
@@ -1621,7 +1621,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == String{}
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == String { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -1637,7 +1637,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Bool?{}
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Bool? { }
 
     /// Creates a property that can read and write an Optional integer user
     /// default.
@@ -1649,7 +1649,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Int?{}
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Int? { }
 
     /// Creates a property that can read and write an Optional double user
     /// default.
@@ -1661,7 +1661,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Double?{}
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Double? { }
 
     /// Creates a property that can read and write an Optional string user
     /// default.
@@ -1673,7 +1673,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == String?{}
+    public init(_ key: String, store: UserDefaults? = nil) where Value == String? { }
 
     /// Creates a property that can read and write an Optional URL user
     /// default.
@@ -1685,7 +1685,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == URL?{}
+    public init(_ key: String, store: UserDefaults? = nil) where Value == URL? { }
 
     /// Creates a property that can read and write an Optional data user
     /// default.
@@ -1697,7 +1697,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Data?{}
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Data? { }
 }
 
 /// The horizontal or vertical dimension in a 2D coordinate system.
@@ -1752,7 +1752,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         ///   of `rawValue` potentially represents an element of the option set,
         ///   though raw values may include bits that are not defined as distinct
         ///   values of the `OptionSet` type.
-        public init(rawValue: Int8){}
+        public init(rawValue: Int8) { }
 
         /// The option set corresponding to the horizontal axis.
         public static let horizontal: Axis.Set
@@ -1813,7 +1813,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     // Prints "nil"
     ///
     /// - Parameter rawValue: The raw value to use for the new instance.
-    public init?(rawValue: Int8){}
+    public init?(rawValue: Int8) { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [Axis]
@@ -1869,7 +1869,7 @@ extension Axis : RawRepresentable {
 @frozen public struct BackgroundStyle {
 
 	/// Creates a new background style.
-    @inlinable public init(){}
+    @inlinable public init() { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -1939,7 +1939,7 @@ extension BackgroundStyle : ShapeStyle {
     ///   - set: A closure that sets the binding value. The closure has the
     ///     following parameter:
     ///       - newValue: The new value of the binding value.
-    public init(get: @escaping () -> Value, set: @escaping (Value) -> Void){}
+    public init(get: @escaping () -> Value, set: @escaping (Value) -> Void) { }
 
     /// Creates a binding with a closure that reads from the binding value, and
     /// a closure that applies a transaction when writing to the binding value.
@@ -1951,7 +1951,7 @@ extension BackgroundStyle : ShapeStyle {
     ///     following parameters:
     ///       - newValue: The new value of the binding value.
     ///       - transaction: The transaction to apply when setting a new value.
-    public init(get: @escaping () -> Value, set: @escaping (Value, Transaction) -> Void){}
+    public init(get: @escaping () -> Value, set: @escaping (Value, Transaction) -> Void) { }
 
     /// Creates a binding with an immutable value.
     ///
@@ -2026,20 +2026,20 @@ extension Binding {
     /// Creates a binding by projecting the base value to an optional value.
     ///
     /// - Parameter base: A value to project to an optional value.
-    public init<V>(_ base: Binding<V>) where Value == V?{}
+    public init<V>(_ base: Binding<V>) where Value == V? { }
 
     /// Creates a binding by projecting the base value to an unwrapped value.
     ///
     /// - Parameter base: A value to project to an unwrapped value.
     ///
     /// - Returns: A new binding or `nil` when `base` is `nil`.
-    public init?(_ base: Binding<Value?>){}
+    public init?(_ base: Binding<Value?>) { }
 
     /// Creates a binding by projecting the base value to a hashable value.
     ///
     /// - Parameters:
     ///   - base: A `Hashable` value to project to an `AnyHashable` value.
-    public init<V>(_ base: Binding<V>) where Value == AnyHashable, V : Hashable{}
+    public init<V>(_ base: Binding<V>) where Value == AnyHashable, V : Hashable { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2255,7 +2255,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     ///
     /// By default, the borderless style displays a visual indicator that it
     /// represents a menu.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a menu.
     ///
@@ -2280,7 +2280,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 
     /// Creates a borderless button style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a button.
     ///
@@ -2369,7 +2369,7 @@ public struct Button<Label> : View where Label : View {
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
     ///   - label: A view that describes the purpose of the button's `action`.
-    public init(action: @escaping () -> Void, @ViewBuilder label: () -> Label){}
+    public init(action: @escaping () -> Void, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -2397,7 +2397,7 @@ extension Button where Label == Text {
     ///   - titleKey: The key for the button's localized title, that describes
     ///     the purpose of the button's `action`.
     ///   - action: The action to perform when the user triggers the button.
-    public init(_ titleKey: LocalizedStringKey, action: @escaping () -> Void){}
+    public init(_ titleKey: LocalizedStringKey, action: @escaping () -> Void) { }
 
     /// Creates a button that generates its label from a string.
     ///
@@ -2411,7 +2411,7 @@ extension Button where Label == Text {
     /// - Parameters:
     ///   - title: A string that describes the purpose of the button's `action`.
     ///   - action: The action to perform when the user triggers the button.
-    public init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol{}
+    public init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2439,7 +2439,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     /// - Parameter configuration: A configuration for a style with a custom
     ///   appearance and custom interaction behavior.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public init(_ configuration: PrimitiveButtonStyleConfiguration){}
+    public init(_ configuration: PrimitiveButtonStyleConfiguration) { }
 }
 
 /// A type that applies standard interaction behavior and a custom appearance to
@@ -2505,7 +2505,7 @@ public struct ButtonStyleConfiguration {
     /// Creates a new capsule shape from a rounded corner style.
     ///
     /// - Parameter style: The rounded corner style of the capsule.
-    @inlinable public init(style: RoundedCornerStyle = .circular){}
+    @inlinable public init(style: RoundedCornerStyle = .circular) { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
@@ -2550,7 +2550,7 @@ extension Capsule : InsettableShape {
     public func path(in rect: CGRect) -> Path { }
 
     /// Creates a new circle `Shape`.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -2578,10 +2578,10 @@ extension Circle : InsettableShape {
 public struct CircularProgressViewStyle : ProgressViewStyle {
 
     /// Creates a circular progress view style.
-    public init(){}
+    public init() { }
 
     /// Creates a circular progress view style with a tint color.
-    public init(tint: Color){}
+    public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
     ///
@@ -2686,7 +2686,7 @@ extension Color : View {
 extension Color {
 
     /// Creates a color from an instance of `CGColor`.
-    public init(_ cgColor: CGColor){}
+    public init(_ cgColor: CGColor) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2753,7 +2753,7 @@ extension Color {
     ///   - green: The green value of the color.
     ///   - blue: The blue value of the color.
     ///   - opacity: The opacity of the color. Defaults to 1.0.
-    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, red: Double, green: Double, blue: Double, opacity: Double = 1){}
+    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, red: Double, green: Double, blue: Double, opacity: Double = 1) { }
 
     /// Create a `Color` from grayscale and opacity.
     ///
@@ -2765,7 +2765,7 @@ extension Color {
     ///   - colorSpace: The `RGBColorSpace` of the specified color.
     ///   - white: The grayscale value of the color, from 0.0 to 1.0.
     ///   - opacity: The opacity of the color. Defaults to 1.0.
-    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1){}
+    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1) { }
 
     /// Creates a `Color` from hue, saturation, brightness, and opacity values.
     ///
@@ -2774,7 +2774,7 @@ extension Color {
     ///   - saturation: The saturation of the color.
     ///   - brightness: The brightness of the color.
     ///   - opacity: The opacity of the color.
-    public init(hue: Double, saturation: Double, brightness: Double, opacity: Double = 1){}
+    public init(hue: Double, saturation: Double, brightness: Double, opacity: Double = 1) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2854,7 +2854,7 @@ extension Color {
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
     ///   - bundle: the bundle to search for the color resource in.
-    public init(_ name: String, bundle: Bundle? = nil){}
+    public init(_ name: String, bundle: Bundle? = nil) { }
 }
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -2862,7 +2862,7 @@ extension Color {
 extension Color {
 
     /// Creates a color from an instance of `UIColor`.
-    public init(_ color: UIColor){}
+    public init(_ color: UIColor) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2926,7 +2926,7 @@ public struct ColorPicker<Label> : View where Label : View {
     ///        The system color picker UI sets it's title using the text from
     ///        this view.
     ///
-    public init(selection: Binding<Color>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label){}
+    public init(selection: Binding<Color>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that selects a color.
     ///
@@ -2940,7 +2940,7 @@ public struct ColorPicker<Label> : View where Label : View {
     ///        The system color picker UI sets it's title using the text from
     ///        this view.
     ///
-    public init(selection: Binding<CGColor>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label){}
+    public init(selection: Binding<CGColor>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -2989,7 +2989,7 @@ extension ColorPicker where Label == Text {
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Color>, supportsOpacity: Bool = true){}
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Color>, supportsOpacity: Bool = true) { }
 
     /// Creates a color picker with a text label generated from a title string.
     ///
@@ -3007,7 +3007,7 @@ extension ColorPicker where Label == Text {
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init<S>(_ title: S, selection: Binding<Color>, supportsOpacity: Bool = true) where S : StringProtocol{}
+    public init<S>(_ title: S, selection: Binding<Color>, supportsOpacity: Bool = true) where S : StringProtocol { }
 
     /// Creates a color picker with a text label generated from a title string key.
     ///
@@ -3018,7 +3018,7 @@ extension ColorPicker where Label == Text {
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<CGColor>, supportsOpacity: Bool = true){}
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<CGColor>, supportsOpacity: Bool = true) { }
 
     /// Creates a color picker with a text label generated from a title string.
     ///
@@ -3028,7 +3028,7 @@ extension ColorPicker where Label == Text {
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init<S>(_ title: S, selection: Binding<CGColor>, supportsOpacity: Bool = true) where S : StringProtocol{}
+    public init<S>(_ title: S, selection: Binding<CGColor>, supportsOpacity: Bool = true) where S : StringProtocol { }
 }
 
 /// The working color space for color-compositing operations.
@@ -3159,7 +3159,7 @@ extension ColorScheme {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiUserInterfaceStyle: UIUserInterfaceStyle){}
+    public init?(_ uiUserInterfaceStyle: UIUserInterfaceStyle) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3233,7 +3233,7 @@ extension ColorSchemeContrast {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiAccessibilityContrast: UIAccessibilityContrast){}
+    public init?(_ uiAccessibilityContrast: UIAccessibilityContrast) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3260,15 +3260,15 @@ public struct CommandGroup<Content> : Commands where Content : View {
 
     /// A value describing the addition of the given views to the beginning of
     /// the indicated group.
-    public init(before group: CommandGroupPlacement, @ViewBuilder addition: () -> Content){}
+    public init(before group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { }
 
     /// A value describing the addition of the given views to the end of the
     /// indicated group.
-    public init(after group: CommandGroupPlacement, @ViewBuilder addition: () -> Content){}
+    public init(after group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { }
 
     /// A value describing the complete replacement of the contents of the
     /// indicated group with the given views.
-    public init(replacing group: CommandGroupPlacement, @ViewBuilder addition: () -> Content){}
+    public init(replacing group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { }
 
     /// The type of command group representing the body of this command group.
     public typealias Body = some Commands
@@ -3443,17 +3443,17 @@ public struct CommandMenu<Content> : Commands where Content : View {
     /// specific commands, inserted in the standard location for app menus
     /// (after the View menu, in order with other menus declared without an
     /// explicit location).
-    public init(_ nameKey: LocalizedStringKey, @ViewBuilder content: () -> Content){}
+    public init(_ nameKey: LocalizedStringKey, @ViewBuilder content: () -> Content) { }
 
     /// Creates a new menu for a collection of app-specific commands, inserted
     /// in the standard location for app menus (after the View menu, in order
     /// with other menus declared without an explicit location).
-    public init(_ name: Text, @ViewBuilder content: () -> Content){}
+    public init(_ name: Text, @ViewBuilder content: () -> Content) { }
 
     /// Creates a new menu for a collection of app-specific commands, inserted
     /// in the standard location for app menus (after the View menu, in order
     /// with other menus declared without an explicit location).
-    public init<S>(_ name: S, @ViewBuilder content: () -> Content) where S : StringProtocol{}
+    public init<S>(_ name: S, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 
     /// The type of command group representing the body of this command group.
     public typealias Body = some Commands
@@ -3589,7 +3589,7 @@ extension CommandsBuilder {
 public struct CompactDatePickerStyle : DatePickerStyle {
 
 	/// Creates a compact date picker style.
-    public init(){}
+    public init() { }
 }
 
 /// A shape that is replaced by an inset version of the current
@@ -3606,7 +3606,7 @@ public struct CompactDatePickerStyle : DatePickerStyle {
     public func path(in rect: CGRect) -> Path { }
 
     /// Creates a relative container shape.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -3790,7 +3790,7 @@ extension ContentSizeCategory {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiSizeCategory: UIContentSizeCategory){}
+    public init?(_ uiSizeCategory: UIContentSizeCategory) { }
 }
 
 /// A container for views that you present as menu items in a contextual menu
@@ -3809,7 +3809,7 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 	/// - Parameter menuItems: The builder of menu items to build your context menu.
 	///
 	/// - SeeAlso: contextMenu(menuItems:)
-    public init(@ViewBuilder menuItems: () -> MenuItems){}
+    public init(@ViewBuilder menuItems: () -> MenuItems) { }
 }
 
 /// A list of spaces for converting between different frames of reference on a screen.
@@ -3916,7 +3916,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label){}
+    public init(selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that selects a `Date` in a closed range.
     ///
@@ -3928,7 +3928,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label){}
+    public init(selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that selects a `Date` on or after some start date.
     ///
@@ -3940,7 +3940,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label){}
+    public init(selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that selects a `Date` on or before some end date.
     ///
@@ -3952,7 +3952,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label){}
+    public init(selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 }
 
 @available(iOS 13.0, macOS 10.15, *)
@@ -3970,7 +3970,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]){}
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
     /// Creates an instance that selects a `Date` in a closed range.
     ///
@@ -3983,7 +3983,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]){}
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
     /// Creates an instance that selects a `Date` on or after some start date.
     ///
@@ -3996,7 +3996,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]){}
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
     /// Creates an instance that selects a `Date` on or before some end date.
     ///
@@ -4009,7 +4009,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]){}
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
     /// Creates an instance that selects a `Date` within the given range.
     ///
@@ -4020,7 +4020,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol{}
+    public init<S>(_ title: S, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
     /// Creates an instance that selects a `Date` in a closed range.
     ///
@@ -4032,7 +4032,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol{}
+    public init<S>(_ title: S, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
     /// Creates an instance that selects a `Date` on or after some start date.
     ///
@@ -4044,7 +4044,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol{}
+    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
     /// Creates an instance that selects a `Date` on or before some end date.
     ///
@@ -4056,7 +4056,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol{}
+    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 }
 
 /// An efficient option set for the components of a date picker.
@@ -4098,7 +4098,7 @@ public struct DatePickerComponents : OptionSet {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    public init(rawValue: UInt){}
+    public init(rawValue: UInt) { }
 
     /// Displays hour and minute components based on the locale
     public static let hourAndMinute: DatePickerComponents
@@ -4148,7 +4148,7 @@ public protocol DatePickerStyle {
 public struct DefaultButtonStyle : PrimitiveButtonStyle {
 
     /// Creates a default button style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a button.
     ///
@@ -4172,7 +4172,7 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 	/// Creates a default date picker style.
 	///
 	/// - SeeAlso: DatePicker
-    public init(){}
+    public init() { }
 }
 
 /// The default `GroupBoxStyle`.
@@ -4184,7 +4184,7 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 	/// Creates a default group box style.
 	///
 	/// - SeeAlso: GroupBoxStyle
-    public init(){}
+    public init() { }
 
     /// Creates a `View` representing the body of a `GroupBox`.
     ///
@@ -4205,7 +4205,7 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 public struct DefaultLabelStyle : LabelStyle {
 
     /// Creates a default label style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a label.
     ///
@@ -4226,7 +4226,7 @@ public struct DefaultLabelStyle : LabelStyle {
 public struct DefaultListStyle : ListStyle {
 
     /// Creates a default list style.
-    public init(){}
+    public init() { }
 }
 
 /// The default menu style, based on the menu's context.
@@ -4254,7 +4254,7 @@ public struct DefaultListStyle : ListStyle {
 public struct DefaultMenuStyle : MenuStyle {
 
     /// Creates a default menu style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a menu.
     ///
@@ -4276,7 +4276,7 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 	/// Creates a default navigation view style.
 	///
 	/// - SeeAlso: NavigationView
-    public init(){}
+    public init() { }
 }
 
 /// The default picker style, based on the picker's context.
@@ -4299,7 +4299,7 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 public struct DefaultPickerStyle : PickerStyle {
 
     /// Creates a default picker style.
-    public init(){}
+    public init() { }
 }
 
 /// The default progress view style in the current context of the view being
@@ -4312,7 +4312,7 @@ public struct DefaultPickerStyle : PickerStyle {
 public struct DefaultProgressViewStyle : ProgressViewStyle {
 
     /// Creates a default progress view style.
-    public init(){}
+    public init() { }
 
     /// Creates a view representing the body of a progress view.
     ///
@@ -4338,7 +4338,7 @@ public struct DefaultTabViewStyle : TabViewStyle {
 	/// Creates a default tab view style.
 	///
 	/// - SeeAlso: TabView
-    public init(){}
+    public init() { }
 }
 
 /// The default text field style.
@@ -4346,7 +4346,7 @@ public struct DefaultTabViewStyle : TabViewStyle {
 public struct DefaultTextFieldStyle : TextFieldStyle {
 
 	/// Creates a default text field style.
-    public init(){}
+    public init() { }
 }
 
 /// The default toggle style.
@@ -4367,7 +4367,7 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 public struct DefaultToggleStyle : ToggleStyle {
 
     /// Creates a default toggle style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a toggle.
     ///
@@ -4422,7 +4422,7 @@ public struct DisclosureGroup<Label, Content> : View where Label : View, Content
     /// - Parameters:
     ///   - content: The content shown when the disclosure group expands.
     ///   - label: A view that describes the content of the disclosure group.
-    public init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label){}
+    public init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label) { }
 
     /// Creates a disclosure group with the given label and content views, and
     /// a binding to the expansion state (expanded or collapsed).
@@ -4432,7 +4432,7 @@ public struct DisclosureGroup<Label, Content> : View where Label : View, Content
     ///    expansion state (expanded or collapsed).
     ///   - content: The content shown when the disclosure group expands.
     ///   - label: A view that describes the content of the disclosure group.
-    public init(isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label){}
+    public init(isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -4456,7 +4456,7 @@ extension DisclosureGroup where Label == Text {
     ///   - titleKey: The key for the localized label of `self` that describes
     ///     the content of the disclosure group.
     ///   - content: The content shown when the disclosure group expands.
-    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: @escaping () -> Content){}
+    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: @escaping () -> Content) { }
 
     /// Creates a disclosure group, using a provided localized string key to
     /// create a text view for the label, and a binding to the expansion state
@@ -4468,7 +4468,7 @@ extension DisclosureGroup where Label == Text {
     ///   - isExpanded: A binding to a Boolean value that determines the group's
     ///    expansion state (expanded or collapsed).
     ///   - content: The content shown when the disclosure group expands.
-    public init(_ titleKey: LocalizedStringKey, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content){}
+    public init(_ titleKey: LocalizedStringKey, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) { }
 
     /// Creates a disclosure group, using a provided string to create a
     /// text view for the label.
@@ -4476,7 +4476,7 @@ extension DisclosureGroup where Label == Text {
     /// - Parameters:
     ///   - label: A description of the content of the disclosure group.
     ///   - content: The content shown when the disclosure group expands.
-    public init<S>(_ label: S, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol{}
+    public init<S>(_ label: S, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
 
     /// Creates a disclosure group, using a provided string to create a
     /// text view for the label, and a binding to the expansion state (expanded
@@ -4487,7 +4487,7 @@ extension DisclosureGroup where Label == Text {
     ///   - isExpanded: A binding to a Boolean value that determines the group's
     ///    expansion state (expanded or collapsed).
     ///   - content: The content shown when the disclosure group expands.
-    public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol{}
+    public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
 }
 
 /// A visual element that can be used to separate other content.
@@ -4498,7 +4498,7 @@ extension DisclosureGroup where Label == Text {
 public struct Divider : View {
 
 	/// Creates a new ``Divider``.
-    public init(){}
+    public init() { }
 
     /// The type of view representing the body of this view.
     ///
@@ -4543,7 +4543,7 @@ extension DocumentGroup where Document : FileDocument {
     ///   - newDocument: The initial document used when the user creates
     ///     a new document.
     ///   - editor: The editing UI for the provided document.
-    public init(newDocument: @autoclosure @escaping () -> Document, @ViewBuilder editor: @escaping (FileDocumentConfiguration<Document>) -> Content){}
+    public init(newDocument: @autoclosure @escaping () -> Document, @ViewBuilder editor: @escaping (FileDocumentConfiguration<Document>) -> Content) { }
 
     /// Creates a document group that is able to view file documents.
     ///
@@ -4552,7 +4552,7 @@ extension DocumentGroup where Document : FileDocument {
     ///   - viewer: The viewing UI for the provided document.
     ///
     /// - See Also: `CFBundleTypeRole` with a value of "Viewer"
-    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (FileDocumentConfiguration<Document>) -> Content){}
+    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (FileDocumentConfiguration<Document>) -> Content) { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -4575,7 +4575,7 @@ extension DocumentGroup where Document : ReferenceFileDocument {
     /// Undo support is not automatically provided for this construction of
     /// a `DocumentGroup`, and any updates to the document by the editor view
     /// hierarchy are expected to register undo operations when appropriate.
-    public init(newDocument: @escaping () -> Document, @ViewBuilder editor: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content){}
+    public init(newDocument: @escaping () -> Document, @ViewBuilder editor: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content) { }
 
     /// Creates a document group that is able to view reference file documents.
     ///
@@ -4587,7 +4587,7 @@ extension DocumentGroup where Document : ReferenceFileDocument {
     /// environment object for its subhierarchy.
     ///
     /// - See Also: `CFBundleTypeRole` with a value of "Viewer"
-    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content){}
+    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content) { }
 }
 
 /// A navigation view style represented by a primary view stack that
@@ -4597,7 +4597,7 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a double column navigation view style.
-    public init(){}
+    public init() { }
 }
 
 /// A dragging motion that invokes an action as the drag-event sequence changes.
@@ -4679,7 +4679,7 @@ public struct DragGesture : Gesture {
     ///     succeed.
     ///   - coordinateSpace: The coordinate space of the dragging gesture's
     ///     location.
-    public init(minimumDistance: CGFloat = 10, coordinateSpace: CoordinateSpace = .local){}
+    public init(minimumDistance: CGFloat = 10, coordinateSpace: CoordinateSpace = .local) { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -4896,7 +4896,7 @@ public struct DropProposal {
     /// - Parameter operation: The drop operation to associate with the proposal.
     ///
     /// - SeeAlso: DropOperation
-    public init(operation: DropOperation){}
+    public init(operation: DropOperation) { }
 }
 
 /// An interface for a stored variable that updates an external property of a
@@ -5070,7 +5070,7 @@ extension DynamicViewContent {
         ///   of `rawValue` potentially represents an element of the option set,
         ///   though raw values may include bits that are not defined as distinct
         ///   values of the `OptionSet` type.
-        public init(rawValue: Int8){}
+        public init(rawValue: Int8) { }
 
         /// The edge set's top edge.
         public static let top: Edge.Set
@@ -5094,7 +5094,7 @@ extension DynamicViewContent {
         public static let vertical: Edge.Set
 
         /// Creates an instance containing just `e`
-        public init(_ e: Edge){}
+        public init(_ e: Edge) { }
 
         /// The type of the elements of an array literal.
         public typealias ArrayLiteralElement = Edge.Set.Element
@@ -5132,7 +5132,7 @@ extension DynamicViewContent {
     ///     // Prints "nil"
     ///
     /// - Parameter rawValue: The raw value to use for the new instance.
-    public init?(rawValue: Int8){}
+    public init?(rawValue: Int8) { }
 
     /// The corresponding value of the raw type.
     ///
@@ -5193,10 +5193,10 @@ extension Edge : RawRepresentable {
     ///   - leading: Inset distance from the leading edge.
     ///   - bottom: Inset distance from the bottom edge.
     ///   - trailing: Inset distance from the trailing edge.
-    @inlinable public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat){}
+    @inlinable public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat) { }
 
     /// Creates a new `EdgeInsets` with zero insets on all edges.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -5214,7 +5214,7 @@ extension EdgeInsets {
     /// Create edge insets from the equivalent NSDirectionalEdgeInsets.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
     @available(watchOS, unavailable)
-    public init(_ nsEdgeInsets: NSDirectionalEdgeInsets){}
+    public init(_ nsEdgeInsets: NSDirectionalEdgeInsets) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5235,7 +5235,7 @@ extension EdgeInsets : Animatable {
 public struct EditButton : View {
 
 	/// Creates an edit button.
-    public init(){}
+    public init() { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -5328,7 +5328,7 @@ extension EditMode : Hashable {
     public func path(in rect: CGRect) -> Path { }
 
     /// Creates an ellipse shape that stretches to fill its parent view.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -5359,7 +5359,7 @@ extension Ellipse : InsettableShape {
 @frozen public struct EmptyAnimatableData : VectorArithmetic {
 
 	/// Creates an empty animatable data structure.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The zero value.
     ///
@@ -5450,7 +5450,7 @@ extension Ellipse : InsettableShape {
 public struct EmptyCommands : Commands {
 
     /// Creates an empty group of commands.
-    public init(){}
+    public init() { }
 
     /// The type of command group representing the body of this command group.
     public typealias Body = Never
@@ -5498,7 +5498,7 @@ public struct EmptyCommands : Commands {
     public typealias Body = Never
 
     /// Creates a new modifier that leaves the view unchanged.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// Gets the current body of the caller.
     ///
@@ -5512,7 +5512,7 @@ public struct EmptyCommands : Commands {
 @frozen public struct EmptyView : View {
 
 	/// Creates a new `EmptyView`.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The type of view representing the body of this view.
     ///
@@ -5528,7 +5528,7 @@ public struct EmptyCommands : Commands {
 @frozen public struct EmptyWidgetConfiguration : WidgetConfiguration {
 
 	/// Creates an empty widget configuration.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The type of widget configuration representing the body of
     /// this configuration.
@@ -5594,7 +5594,7 @@ public struct EmptyCommands : Commands {
     /// set a value for a view hierarchy.
     ///
     /// - Parameter keyPath: A key path to a specific resulting value.
-    @inlinable public init(_ keyPath: KeyPath<EnvironmentValues, Value>){}
+    @inlinable public init(_ keyPath: KeyPath<EnvironmentValues, Value>) { }
 
     /// The current value of the environment property.
     ///
@@ -5722,7 +5722,7 @@ public protocol EnvironmentKey {
     public var projectedValue: EnvironmentObject<ObjectType>.Wrapper { get }
 
     /// Creates an environment object.
-    public init(){}
+    public init() { }
 }
 
 /// A collection of environment values propagated through a view hierarchy.
@@ -5809,7 +5809,7 @@ public struct EnvironmentValues : CustomStringConvertible {
     /// Instead, you rely on an environment values' instance
     /// that SwiftUI manages for you when you use the ``Environment``
     /// property wrapper and the ``View/environment(_:_:)`` view modifier.
-    public init(){}
+    public init() { }
 
     /// Accesses the environment value associated with a custom key.
     ///
@@ -6202,7 +6202,7 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
     /// Creates a new equatable view from a view.
     ///
     /// - Parameter content: The view you want to use as the body of the equatable view.
-    @inlinable public init(content: Content){}
+    @inlinable public init(content: Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -6222,7 +6222,7 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
     ///
     /// - Parameter rawValue: The raw value with which to create the key
     ///   modifier.
-    public init(rawValue: Int){}
+    public init(rawValue: Int) { }
 
     /// The Caps Lock key.
     public static let capsLock: EventModifiers
@@ -6295,7 +6295,7 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
     ///   - first: The first of two gestures. This gesture has precedence over
     ///     the other gesture.
     ///   - second: The second of two gestures.
-    @inlinable public init(_ first: First, _ second: Second){}
+    @inlinable public init(_ first: First, _ second: Second) { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -6336,21 +6336,21 @@ extension ExclusiveGesture.Value : Equatable where First.Value : Equatable, Seco
     ///   - predicate: An NSPredicate defines a filter for the fetched results.
     ///   - animation: The animation used for any changes to the fetched
     ///     results.
-    public init(entity: NSEntityDescription, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil){}
+    public init(entity: NSEntityDescription, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil) { }
 
     /// Creates an instance from a fetch request.
     /// - Parameters:
     ///   - fetchRequest: The request used to produce the fetched results.
     ///   - animation: The animation used for any changes to the fetched
     ///     results.
-    public init(fetchRequest: NSFetchRequest<Result>, animation: Animation? = nil){}
+    public init(fetchRequest: NSFetchRequest<Result>, animation: Animation? = nil) { }
 
     /// Creates an instance from a fetch request.
     /// - Parameters:
     ///   - fetchRequest: The request used to produce the fetched results.
     ///   - transaction: The transaction used for any changes to the fetched
     ///     results.
-    public init(fetchRequest: NSFetchRequest<Result>, transaction: Transaction){}
+    public init(fetchRequest: NSFetchRequest<Result>, transaction: Transaction) { }
 
     /// Updates the fetched results.
     ///
@@ -6371,7 +6371,7 @@ extension FetchRequest where Result : NSManagedObject {
     ///   - predicate: An NSPredicate defines a filter for the fetched results.
     ///   - animation: The animation used for any changes to the fetched
     ///     results.
-    public init(sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil){}
+    public init(sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil) { }
 }
 
 /// The FetchedResults collection type represents the results of performing a
@@ -6474,7 +6474,7 @@ public protocol FileDocument {
     static var writableContentTypes: [UTType] { get }
 
     /// Initialize self by reading from the contents of a given `ReadConfiguration`.
-    init(configuration: Self.ReadConfiguration) throws{}
+    init(configuration: Self.ReadConfiguration) throws { }
 
     /// The configuration for reading document contents.
     typealias ReadConfiguration = FileDocumentReadConfiguration
@@ -6581,7 +6581,7 @@ public struct FileDocumentWriteConfiguration {
     ///     number rule instead.
     ///   - antialiased: A Boolean value that indicates whether to use
     ///     antialiasing when rendering the edges of a shape.
-    public init(eoFill: Bool = false, antialiased: Bool = true){}
+    public init(eoFill: Bool = false, antialiased: Bool = true) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -6608,7 +6608,7 @@ public struct FileDocumentWriteConfiguration {
     /// changes and different published bindings go in and out of scope.
     ///
     /// - Parameter keyPath: The key path for the focus value to read.
-    public init(_ keyPath: KeyPath<FocusedValues, Binding<Value>?>){}
+    public init(_ keyPath: KeyPath<FocusedValues, Binding<Value>?>) { }
 
     /// The unwrapped value for the focus key given the current scope and state
     /// of the focused view hierarchy.
@@ -6635,7 +6635,7 @@ public struct FileDocumentWriteConfiguration {
     /// changes and different published values go in and out of scope.
     ///
     /// - Parameter keyPath: The key path for the focus value to read.
-    public init(_ keyPath: KeyPath<FocusedValues, Value?>){}
+    public init(_ keyPath: KeyPath<FocusedValues, Value?>) { }
 
     /// The value for the focus key given the current scope and state of the
     /// focused view hierarchy.
@@ -7103,7 +7103,7 @@ extension Font {
     ///
     ///     // Create SwiftUI Text with the CTFont instance.
     ///     let text = Text("Hello").font(Font(ctFont))
-    public init(_ font: CTFont){}
+    public init(_ font: CTFont) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7165,7 +7165,7 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     ///   - data: The identified data that the ``ForEach`` instance uses to
     ///     create views dynamically.
     ///   - content: The view builder that creates views dynamically.
-    public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content){}
+    public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7186,7 +7186,7 @@ extension ForEach where Content : View {
     ///     dynamically.
     ///   - id: The key path to the provided data's identifier.
     ///   - content: The view builder that creates views dynamically.
-    public init(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder content: @escaping (Data.Element) -> Content){}
+    public init(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder content: @escaping (Data.Element) -> Content) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7202,7 +7202,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// - Parameters:
     ///   - data: A constant range.
     ///   - content: The view builder that creates views dynamically.
-    public init(_ data: Range<Int>, @ViewBuilder content: @escaping (Int) -> Content){}
+    public init(_ data: Range<Int>, @ViewBuilder content: @escaping (Int) -> Content) { }
 }
 
 /// A style that shows the correct fill for the foreground based on the current
@@ -7211,7 +7211,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 @frozen public struct ForegroundStyle {
 
 	/// Creates a foreground style.
-    @inlinable public init(){}
+    @inlinable public init() { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7234,7 +7234,7 @@ public struct Form<Content> : View where Content : View {
 	/// - Parameter content: A closure that returns the view to the `Form`.
 	///
 	/// - SeeAlso: Section
-    public init(@ViewBuilder content: () -> Content){}
+    public init(@ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -7306,7 +7306,7 @@ public struct GeometryProxy {
     /// Creates a `GeometryReader` parent view using the parent's geometry.
     ///
     /// - Parameter content: A closure that takes the geometry of the parent view and returns a content view.
-    @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content){}
+    @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -7469,7 +7469,7 @@ extension Gesture {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    public init(rawValue: UInt32){}
+    public init(rawValue: UInt32) { }
 
     /// Disable all gestures in the subview hierarchy, including the added
     /// gesture.
@@ -7542,14 +7542,14 @@ extension Gesture {
     ///
     /// - Parameter wrappedValue: A wrapped value for the gesture state
     ///   property.
-    public init(wrappedValue: Value){}
+    public init(wrappedValue: Value) { }
 
     /// Creates a view state that's derived from a gesture with an initial
     /// value.
     ///
     /// - Parameter initialValue: An initial value for the gesture state
     ///   property.
-    public init(initialValue: Value){}
+    public init(initialValue: Value) { }
 
     /// Creates a view state that's derived from a gesture with a wrapped state
     /// value and a transaction to reset it.
@@ -7558,7 +7558,7 @@ extension Gesture {
     ///   - wrappedValue: A wrapped value for the gesture state property.
     ///   - resetTransaction: A transaction that provides metadata for view
     ///     updates.
-    public init(wrappedValue: Value, resetTransaction: Transaction){}
+    public init(wrappedValue: Value, resetTransaction: Transaction) { }
 
     /// Creates a view state that's derived from a gesture with an initial state
     /// value and a transaction to reset it.
@@ -7567,7 +7567,7 @@ extension Gesture {
     ///   - initialValue: An initial state value.
     ///   - resetTransaction: A transaction that provides metadata for view
     ///     updates.
-    public init(initialValue: Value, resetTransaction: Transaction){}
+    public init(initialValue: Value, resetTransaction: Transaction) { }
 
     /// Creates a view state that's derived from a gesture with a wrapped state
     /// value and a closure that provides a transaction to reset it.
@@ -7575,7 +7575,7 @@ extension Gesture {
     /// - Parameters:
     ///   - wrappedValue: A wrapped value for the gesture state property.
     ///   - reset: A closure that provides a ``Transaction``.
-    public init(wrappedValue: Value, reset: @escaping (Value, inout Transaction) -> Void){}
+    public init(wrappedValue: Value, reset: @escaping (Value, inout Transaction) -> Void) { }
 
     /// Creates a view state that's derived from a gesture with an initial state
     /// value and a closure that provides a transaction to reset it.
@@ -7583,7 +7583,7 @@ extension Gesture {
     /// - Parameters:
     ///   - initialValue: An initial state value.
     ///   - reset: A closure that provides a ``Transaction``.
-    public init(initialValue: Value, reset: @escaping (Value, inout Transaction) -> Void){}
+    public init(initialValue: Value, reset: @escaping (Value, inout Transaction) -> Void) { }
 
     /// The wrapped value referenced by the gesture state property.
     public var wrappedValue: Value { get }
@@ -7600,13 +7600,13 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///
     /// - Parameter resetTransaction: A transaction that provides metadata for
     ///   view updates.
-    public init(resetTransaction: Transaction = Transaction()){}
+    public init(resetTransaction: Transaction = Transaction()) { }
 
     /// Creates a view state that's derived from a gesture with a closure that
     /// provides a transaction to reset it.
     ///
     /// - Parameter reset: A closure that provides a ``Transaction``.
-    public init(reset: @escaping (Value, inout Transaction) -> Void){}
+    public init(reset: @escaping (Value, inout Transaction) -> Void) { }
 }
 
 /// A gesture that updates the state provided by a gesture's updating callback.
@@ -7637,7 +7637,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///   - state: The wrapped value of a ``GestureState`` property.
     ///   - body: The callback that SwiftUI invokes as the gesture's value
     ///     changes.
-    @inlinable public init(base: Base, state: GestureState<State>, body: @escaping (GestureStateGesture<Base, State>.Value, inout State, inout Transaction) -> Void){}
+    @inlinable public init(base: Base, state: GestureState<State>, body: @escaping (GestureStateGesture<Base, State>.Value, inout State, inout Transaction) -> Void) { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -7660,7 +7660,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         public var location: CGFloat
 
         /// Creates a color stop with a color and location.
-        public init(color: Color, location: CGFloat){}
+        public init(color: Color, location: CGFloat) { }
 
         /// Returns a Boolean value indicating whether two values are equal.
         ///
@@ -7677,13 +7677,13 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     public var stops: [Gradient.Stop]
 
     /// Creates a gradient from an array of color stops.
-    public init(stops: [Gradient.Stop]){}
+    public init(stops: [Gradient.Stop]) { }
 
     /// Creates a gradient from an array of colors.
     ///
     /// The gradient synthesizes its location values to evenly space the colors
     /// along the gradient.
-    public init(colors: [Color]){}
+    public init(colors: [Color]) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -7707,7 +7707,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 public struct GraphicalDatePickerStyle : DatePickerStyle {
 
 	/// Create a graphical date picker style.
-    public init(){}
+    public init() { }
 }
 
 /// A description of a single grid item, such as a row or a column.
@@ -7766,7 +7766,7 @@ public struct GridItem {
     ///   - size: The size of the grid item.
     ///   - spacing: The spacing to use between this and the next item.
     ///   - alignment: The alignment to use for this grid item.
-    public init(_ size: GridItem.Size = .flexible(), spacing: CGFloat? = nil, alignment: Alignment? = nil){}
+    public init(_ size: GridItem.Size = .flexible(), spacing: CGFloat? = nil, alignment: Alignment? = nil) { }
 }
 
 /// An affordance for grouping view content.
@@ -7783,7 +7783,7 @@ extension Group : ToolbarContent where Content : ToolbarContent {
 	/// Creates a `Group` from toolbar content.
 	///
 	/// - Parameter content: A toolbar content builder.
-    public init(@ToolbarContentBuilder content: () -> Content){}
+    public init(@ToolbarContentBuilder content: () -> Content) { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -7792,7 +7792,7 @@ extension Group : CustomizableToolbarContent where Content : CustomizableToolbar
 	/// Creates a `Group` from a customizable toolbar content.
 	///
 	/// - Parameter content: A toolbar content builder.
-    public init(@ToolbarContentBuilder content: () -> Content){}
+    public init(@ToolbarContentBuilder content: () -> Content) { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -7801,7 +7801,7 @@ extension Group : Scene where Content : Scene {
 	/// Creates a `Group` of from component scenes.
 	///
 	/// - Parameter content: A scene builder.
-    @inlinable public init(@SceneBuilder content: () -> Content){}
+    @inlinable public init(@SceneBuilder content: () -> Content) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7856,7 +7856,7 @@ extension Group : View where Content : View {
 	/// 	}
 	///
 	/// - Parameter content: A view content builder.
-    @inlinable public init(@ViewBuilder content: () -> Content){}
+    @inlinable public init(@ViewBuilder content: () -> Content) { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -7867,7 +7867,7 @@ extension Group : Commands where Content : Commands {
 	/// Creates a `Group` from command content.
 	///
 	/// - Parameter content: A command content builder.
-    @inlinable public init(@CommandsBuilder content: () -> Content){}
+    @inlinable public init(@CommandsBuilder content: () -> Content) { }
 }
 
 /// A stylized view with an optional label that is associated with a logical
@@ -7882,7 +7882,7 @@ public struct GroupBox<Label, Content> : View where Label : View, Content : View
 	/// - Parameters:
 	///   - label: The label to associate with the grouped content.
 	///   - content: The grouped content to appear with the label.
-    public init(label: Label, @ViewBuilder content: () -> Content){}
+    public init(label: Label, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -7900,7 +7900,7 @@ public struct GroupBox<Label, Content> : View where Label : View, Content : View
 extension GroupBox where Label == GroupBoxStyleConfiguration.Label, Content == GroupBoxStyleConfiguration.Content {
 
     /// Creates an instance representing the configuration of a `GroupBoxStyle`.
-    public init(_ configuration: GroupBoxStyleConfiguration){}
+    public init(_ configuration: GroupBoxStyleConfiguration) { }
 }
 
 @available(iOS 14.0, macOS 10.15, *)
@@ -7911,7 +7911,7 @@ extension GroupBox where Label == EmptyView {
 	/// Creates a group box from only content, without including a label.
 	///
 	/// - Parameter content: The grouped content that you want in the group box.
-    public init(@ViewBuilder content: () -> Content){}
+    public init(@ViewBuilder content: () -> Content) { }
 }
 
 /// Defines the implementation of all `GroupBox` instances within a view
@@ -7980,7 +7980,7 @@ public struct GroupBoxStyleConfiguration {
 public struct GroupedListStyle : ListStyle {
 
     /// Creates a grouped list style.
-    public init(){}
+    public init() { }
 }
 
 /// A view that arranges its children in a horizontal line.
@@ -7996,7 +7996,7 @@ public struct GroupedListStyle : ListStyle {
     ///     want the stack to choose a default distance for each pair of
     ///     subviews.
     ///   - content: A view builder that creates the content of this stack.
-    @inlinable public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content){}
+    @inlinable public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -8015,7 +8015,7 @@ public struct GroupedListStyle : ListStyle {
     ///
     /// - Parameter id: An identifier that uniquely identifies the horizontal
     ///   alignment.
-    public init(_ id: AlignmentID.Type){}
+    public init(_ id: AlignmentID.Type) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -8069,7 +8069,7 @@ public struct HoverEffect {
 public struct IconOnlyLabelStyle : LabelStyle {
 
     /// Creates an icon-only label style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a label.
     ///
@@ -8112,7 +8112,7 @@ extension Image {
     ///     localization key with which to label the image.
     ///   - bundle: the bundle to search for the image resource and localization
     ///     content. If `nil`, uses the main `Bundle`. Defaults to `nil`.
-    public init(_ name: String, bundle: Bundle? = nil){}
+    public init(_ name: String, bundle: Bundle? = nil) { }
 
     /// Creates a labeled image that you can use as content for controls, with
     /// the specified label.
@@ -8123,7 +8123,7 @@ extension Image {
     ///     the main `Bundle`. Defaults to `nil`.
     ///   - label: The label associated with the image. The label is used for
     ///     things like accessibility.
-    public init(_ name: String, bundle: Bundle? = nil, label: Text){}
+    public init(_ name: String, bundle: Bundle? = nil, label: Text) { }
 
     /// Creates an unlabeled, decorative image.
     ///
@@ -8133,7 +8133,7 @@ extension Image {
     ///   - name: the name of the image resource to lookup
     ///   - bundle: the bundle to search for the image resource. If `nil`, uses
     ///     the main `Bundle`. Defaults to `nil`.
-    public init(decorative name: String, bundle: Bundle? = nil){}
+    public init(decorative name: String, bundle: Bundle? = nil) { }
 
     /// Creates a system symbol image.
     ///
@@ -8145,7 +8145,7 @@ extension Image {
     ///   - systemName: The name of the system symbol image.
     ///     Use the SF Symbols app to look up the names of system symbol images.
     @available(macOS 11.0, *)
-    public init(systemName: String){}
+    public init(systemName: String) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8248,7 +8248,7 @@ extension Image {
         ///     // Prints "nil"
         ///
         /// - Parameter rawValue: The raw value to use for the new instance.
-        public init?(rawValue: UInt8){}
+        public init?(rawValue: UInt8) { }
 
         /// The corresponding value of the raw type.
         ///
@@ -8475,7 +8475,7 @@ extension Image {
     ///   - orientation: the orientation of the image
     ///   - label: The label associated with the image. The label is used for
     ///     things like accessibility.
-    public init(_ cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up, label: Text){}
+    public init(_ cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up, label: Text) { }
 
     /// Creates an unlabeled, decorative image based on a `CGImage`.
     ///
@@ -8486,7 +8486,7 @@ extension Image {
     ///   - scale: the scale factor the image is intended for
     ///     (e.g. 1.0, 2.0, 3.0)
     ///   - orientation: the orientation of the image
-    public init(decorative cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up){}
+    public init(decorative cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up) { }
 }
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -8494,7 +8494,7 @@ extension Image {
 extension Image {
 
 	/// Creates a new `Image` from a specified `UIImage`.
-    public init(uiImage: UIImage){}
+    public init(uiImage: UIImage) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8618,7 +8618,7 @@ extension Image.ResizingMode : Hashable {
     ///     image to draw. The results are undefined if `sourceRect` selects
     ///     areas outside the `[0, 1]` range in either axis.
     ///   - scale: A scale factor applied to the image during rendering.
-    public init(image: Image, sourceRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1), scale: CGFloat = 1){}
+    public init(image: Image, sourceRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1), scale: CGFloat = 1) { }
 }
 
 /// Defines the implementation of all `IndexView` instances within a view
@@ -8638,7 +8638,7 @@ public protocol IndexViewStyle {
 public struct InlinePickerStyle : PickerStyle {
 
     /// Creates an inline picker style.
-    public init(){}
+    public init() { }
 }
 
 /// The instance that describes the behavior and appearance of an inset grouped list.
@@ -8649,7 +8649,7 @@ public struct InlinePickerStyle : PickerStyle {
 public struct InsetGroupedListStyle : ListStyle {
 
     /// Creates an inset grouped list style.
-    public init(){}
+    public init() { }
 }
 
 /// The behavior and appearance of an inset list.
@@ -8659,7 +8659,7 @@ public struct InsetGroupedListStyle : ListStyle {
 public struct InsetListStyle : ListStyle {
 
     /// Creates an inset list style.
-    public init(){}
+    public init() { }
 }
 
 /// A shape type that is able to inset itself to produce another shape.
@@ -8775,7 +8775,7 @@ public struct KeyEquivalent {
     public var character: Character
 
     /// Creates a new key equivalent from the given character value.
-    public init(_ character: Character){}
+    public init(_ character: Character) { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -8786,7 +8786,7 @@ extension KeyEquivalent : ExpressibleByExtendedGraphemeClusterLiteral {
     /// Creates an instance initialized to the given value.
     ///
     /// - Parameter value: The value of the new instance.
-    public init(extendedGraphemeClusterLiteral: Character){}
+    public init(extendedGraphemeClusterLiteral: Character) { }
 
     /// A type that represents an extended grapheme cluster literal.
     ///
@@ -8831,7 +8831,7 @@ public struct KeyboardShortcut {
 
     /// Creates a new keyboard shortcut with the given key equivalent and set of
     /// modifier keys.
-    public init(_ key: KeyEquivalent, modifiers: EventModifiers = .command){}
+    public init(_ key: KeyEquivalent, modifiers: EventModifiers = .command) { }
 }
 
 /// A standard label for user interface items, consisting of an icon with a
@@ -8909,7 +8909,7 @@ public struct KeyboardShortcut {
 public struct Label<Title, Icon> : View where Title : View, Icon : View {
 
     /// Creates a label with a custom title and icon.
-    public init(@ViewBuilder title: () -> Title, @ViewBuilder icon: () -> Icon){}
+    public init(@ViewBuilder title: () -> Title, @ViewBuilder icon: () -> Icon) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -8930,7 +8930,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///    - titleKey: A title generated from a localized string.
     ///    - image: The name of the image resource to lookup.
-    public init(_ titleKey: LocalizedStringKey, image name: String){}
+    public init(_ titleKey: LocalizedStringKey, image name: String) { }
 
     /// Creates a label with a system icon image and a title generated from a
     /// localized string.
@@ -8938,14 +8938,14 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///    - titleKey: A title generated from a localized string.
     ///    - systemImage: The name of the image resource to lookup.
-    public init(_ titleKey: LocalizedStringKey, systemImage name: String){}
+    public init(_ titleKey: LocalizedStringKey, systemImage name: String) { }
 
     /// Creates a label with an icon image and a title generated from a string.
     ///
     /// - Parameters:
     ///    - title: A string to used as the label's title.
     ///    - image: The name of the image resource to lookup.
-    public init<S>(_ title: S, image name: String) where S : StringProtocol{}
+    public init<S>(_ title: S, image name: String) where S : StringProtocol { }
 
     /// Creates a label with a system icon image and a title generated from a
     /// string.
@@ -8953,7 +8953,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///    - title: A string to used as the label's title.
     ///    - systemImage: The name of the image resource to lookup.
-    public init<S>(_ title: S, systemImage name: String) where S : StringProtocol{}
+    public init<S>(_ title: S, systemImage name: String) where S : StringProtocol { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -8978,7 +8978,7 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     ///     }
     ///
     /// - Parameter configuration: The label style to use.
-    public init(_ configuration: LabelStyleConfiguration){}
+    public init(_ configuration: LabelStyleConfiguration) { }
 }
 
 /// A type that applies a custom appearance to all labels within a view.
@@ -9108,7 +9108,7 @@ extension LayoutDirection {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiLayoutDirection: UITraitEnvironmentLayoutDirection){}
+    public init?(_ uiLayoutDirection: UITraitEnvironmentLayoutDirection) { }
 }
 
 /// A container view that arranges its child views in a grid that
@@ -9151,7 +9151,7 @@ public struct LazyHGrid<Content> : View where Content : View {
     ///   parent view.
     ///   - pinnedViews: Views to pin to the bounds of a parent scroll view.
     ///   - content: The content of the grid.
-    public init(rows: [GridItem], alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content){}
+    public init(rows: [GridItem], alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9191,7 +9191,7 @@ public struct LazyHStack<Content> : View where Content : View {
     ///       subviews.
     ///     - pinnedViews: The kinds of child views that will be pinned.
     ///     - content: A view builder that creates the content of this stack.
-    public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content){}
+    public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9236,7 +9236,7 @@ public struct LazyVGrid<Content> : View where Content : View {
     ///   parent view.
     ///   - pinnedViews: Views to pin to the bounds of a parent scroll view.
     ///   - content: The content of the grid.
-    public init(columns: [GridItem], alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content){}
+    public init(columns: [GridItem], alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9277,7 +9277,7 @@ public struct LazyVStack<Content> : View where Content : View {
     ///       subviews.
     ///     - pinnedViews: The kinds of child views that will be pinned.
     ///     - content: A view builder that creates the content of this stack.
-    public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content){}
+    public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9339,7 +9339,7 @@ extension LegibilityWeight {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiLegibilityWeight: UILegibilityWeight){}
+    public init?(_ uiLegibilityWeight: UILegibilityWeight) { }
 }
 
 /// A linear gradient.
@@ -9356,7 +9356,7 @@ extension LegibilityWeight {
 	///   - gradient: The gradient containing the ordered colors to be used.
 	///   - startPoint: The unit point where the gradient starts.
 	///   - endPoint: The unit point where the gradient ends.
-    public init(gradient: Gradient, startPoint: UnitPoint, endPoint: UnitPoint){}
+    public init(gradient: Gradient, startPoint: UnitPoint, endPoint: UnitPoint) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9370,10 +9370,10 @@ extension LegibilityWeight {
 public struct LinearProgressViewStyle : ProgressViewStyle {
 
     /// Creates a linear progress view style.
-    public init(){}
+    public init() { }
 
     /// Creates a linear progress view style with a tint color.
-    public init(tint: Color){}
+    public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
     ///
@@ -9423,7 +9423,7 @@ public struct Link<Label> : View where Label : View {
     /// - Parameters:
     ///     - destination: The URL for the link.
     ///     - label: A view that describes the destination of URL.
-    public init(destination: URL, @ViewBuilder label: () -> Label){}
+    public init(destination: URL, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -9453,7 +9453,7 @@ extension Link where Label == Text {
     ///     - titleKey: The key for the localized title that describes the
     ///       purpose of this link.
     ///     - destination: The URL for the link.
-    public init(_ titleKey: LocalizedStringKey, destination: URL){}
+    public init(_ titleKey: LocalizedStringKey, destination: URL) { }
 
     /// Creates a control, consisting of a URL and a title string, used to
     /// navigate to a URL.
@@ -9472,7 +9472,7 @@ extension Link where Label == Text {
     ///     - title: A text string used as the title for describing the
     ///       underlying `destination` URL.
     ///     - destination: The URL for the link.
-    public init<S>(_ title: S, destination: URL) where S : StringProtocol{}
+    public init<S>(_ title: S, destination: URL) where S : StringProtocol { }
 }
 
 /// A container that presents rows of data arranged in a single column.
@@ -9489,7 +9489,7 @@ public struct List<SelectionValue, Content> : View where SelectionValue : Hashab
     ///   - selection: A binding to a set that identifies selected rows.
     ///   - content: The content of the list.
     @available(watchOS, unavailable)
-    public init(selection: Binding<Set<SelectionValue>>?, @ViewBuilder content: () -> Content){}
+    public init(selection: Binding<Set<SelectionValue>>?, @ViewBuilder content: () -> Content) { }
 
     /// Creates a list with the given content that supports selecting a single
     /// row.
@@ -9501,7 +9501,7 @@ public struct List<SelectionValue, Content> : View where SelectionValue : Hashab
     ///   - selection: A binding to a selected row.
     ///   - content: The content of the list.
     @available(watchOS, unavailable)
-    public init(selection: Binding<SelectionValue?>?, @ViewBuilder content: () -> Content){}
+    public init(selection: Binding<SelectionValue?>?, @ViewBuilder content: () -> Content) { }
 
     /// The content of the list.
     public var body: some View { get }
@@ -9526,7 +9526,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable{}
+    public init<Data, RowContent>(_ data: Data, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
 
     /// Creates a hierarchical list that computes its rows on demand from an
     /// underlying collection of identifiable data, optionally allowing users to
@@ -9540,7 +9540,7 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable{}
+    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
 
     /// Creates a list that identifies its rows based on a key path to the
     /// identifier of the underlying data, optionally allowing users to select
@@ -9553,7 +9553,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View{}
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
 
     /// Creates a hierarchical list that identifies its rows based on a key path
     /// to the identifier of the underlying data, optionally allowing users to
@@ -9574,7 +9574,7 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View{}
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
 
     /// Creates a list that computes its views on demand over a constant range.
     ///
@@ -9588,7 +9588,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<RowContent>(_ data: Range<Int>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View{}
+    public init<RowContent>(_ data: Range<Int>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { }
 
     /// Creates a list that computes its rows on demand from an underlying
     /// collection of identifiable data, optionally allowing users to select a
@@ -9600,7 +9600,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable{}
+    public init<Data, RowContent>(_ data: Data, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
 
     /// Creates a hierarchical list that computes its rows on demand from an
     /// underlying collection of identifiable data, optionally allowing users to
@@ -9620,7 +9620,7 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable{}
+    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
 
     /// Creates a list that identifies its rows based on a key path to the
     /// identifier of the underlying data, optionally allowing users to select a
@@ -9633,7 +9633,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View{}
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
 
     /// Creates a hierarchical list that identifies its rows based on a key path
     /// to the identifier of the underlying data, optionally allowing users to
@@ -9654,7 +9654,7 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View{}
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
 
     /// Creates a list that computes its views on demand over a constant range.
     ///
@@ -9668,7 +9668,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<RowContent>(_ data: Range<Int>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View{}
+    public init<RowContent>(_ data: Range<Int>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -9677,7 +9677,7 @@ extension List where SelectionValue == Never {
     /// Creates a list with the given content.
     ///
     /// - Parameter content: The content of the list.
-    public init(@ViewBuilder content: () -> Content){}
+    public init(@ViewBuilder content: () -> Content) { }
 
     /// Creates a list that computes its rows on demand from an underlying
     /// collection of identifiable data.
@@ -9686,7 +9686,7 @@ extension List where SelectionValue == Never {
     ///   - data: A collection of identifiable data for computing the list.
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
-    public init<Data, RowContent>(_ data: Data, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable{}
+    public init<Data, RowContent>(_ data: Data, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
 
     /// Creates a hierarchical list that computes its rows on demand from an
     /// underlying collection of identifiable data.
@@ -9704,7 +9704,7 @@ extension List where SelectionValue == Never {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable{}
+    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
 
     /// Creates a list that identifies its rows based on a key path to the
     /// identifier of the underlying data.
@@ -9714,7 +9714,7 @@ extension List where SelectionValue == Never {
     ///   - id: The key path to the data model's identifier.
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View{}
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
 
     /// Creates a hierarchical list that identifies its rows based on a key path
     /// to the identifier of the underlying data.
@@ -9733,7 +9733,7 @@ extension List where SelectionValue == Never {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View{}
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
 
     /// Creates a list that computes its views on demand over a constant range.
     ///
@@ -9745,7 +9745,7 @@ extension List where SelectionValue == Never {
     ///   - data: A *constant* range of data to populate the list.
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
-    public init<RowContent>(_ data: Range<Int>, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View{}
+    public init<RowContent>(_ data: Range<Int>, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { }
 }
 
 /// The configuration of a tint effect applied to content within a List.
@@ -9786,12 +9786,12 @@ public protocol ListStyle {
 	/// Creates a localized string key from a ``String`` value.
 	///
 	/// - Parameter value: The value for keying a string.
-    public init(_ value: String){}
+    public init(_ value: String) { }
 
     /// Creates an instance initialized to the given string value.
     ///
     /// - Parameter value: The value of the new instance.
-    public init(stringLiteral value: String){}
+    public init(stringLiteral value: String) { }
 
     /// Creates an instance from a string interpolation.
     ///
@@ -9803,7 +9803,7 @@ public protocol ListStyle {
     /// - Parameter stringInterpolation: An instance of `StringInterpolation`
     ///             which has had each segment of the string literal appended
     ///             to it.
-    public init(stringInterpolation: LocalizedStringKey.StringInterpolation){}
+    public init(stringInterpolation: LocalizedStringKey.StringInterpolation) { }
 
     /// The type each segment of a string literal containing interpolations
     /// should be appended to.
@@ -9828,7 +9828,7 @@ public protocol ListStyle {
         /// - Parameter interpolationCount: The number of interpolations which will be
         ///   appended. Use this value to estimate how much additional capacity will
         ///   be needed for the interpolated segments.
-        public init(literalCapacity: Int, interpolationCount: Int){}
+        public init(literalCapacity: Int, interpolationCount: Int) { }
 
         /// Appends a literal segment to the interpolation.
         ///
@@ -10129,7 +10129,7 @@ public struct LongPressGesture : Gesture {
     ///   - maximumDistance: The maximum distance that the fingers or cursor
     ///     performing the long press can move before the gesture fails.
     @available(tvOS, unavailable)
-    public init(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10){}
+    public init(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10) { }
 
     /// The type representing the gesture's value.
     public typealias Value = Bool
@@ -10183,7 +10183,7 @@ public struct MagnificationGesture : Gesture {
     ///
     /// - Parameter minimumScaleDelta: The minimum scale delta required before
     ///   the gesture starts.
-    public init(minimumScaleDelta: CGFloat = 0.01){}
+    public init(minimumScaleDelta: CGFloat = 0.01) { }
 
     /// The type representing the gesture's value.
     public typealias Value = CGFloat
@@ -10230,7 +10230,7 @@ public struct MagnificationGesture : Gesture {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    @inlinable public init(rawValue: UInt32){}
+    @inlinable public init(rawValue: UInt32) { }
 
     /// The view's position, in window coordinates.
     public static let position: MatchedGeometryProperties
@@ -10323,7 +10323,7 @@ extension Menu {
     /// - Parameters:
     ///     - content: A group of menu items.
     ///     - label: A view describing the content of the menu.
-    public init(@ViewBuilder content: () -> Content, @ViewBuilder label: () -> Label){}
+    public init(@ViewBuilder content: () -> Content, @ViewBuilder label: () -> Label) { }
 
     /// Creates a menu that generates its label from a localized string key.
     ///
@@ -10331,7 +10331,7 @@ extension Menu {
     ///     - titleKey: The key for the link's localized title, which describes
     ///         the contents of the menu.
     ///     - content: A group of menu items.
-    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) where Label == Text{}
+    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) where Label == Text { }
 
     /// Creates a menu that generates its label from a string.
     ///
@@ -10341,7 +10341,7 @@ extension Menu {
     /// - Parameters:
     ///     - title: A string that describes the contents of the menu.
     ///     - content: A group of menu items.
-    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where Label == Text, S : StringProtocol{}
+    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where Label == Text, S : StringProtocol { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -10366,7 +10366,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     ///         }
     ///     }
     ///
-    public init(_ configuration: MenuStyleConfiguration){}
+    public init(_ configuration: MenuStyleConfiguration) { }
 }
 
 /// A picker style that presents the options as a menu when the user presses a
@@ -10387,7 +10387,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 public struct MenuPickerStyle : PickerStyle {
 
     /// Creates a menu picker style.
-    public init(){}
+    public init() { }
 }
 
 /// A type that applies standard interaction behavior and a custom appearance
@@ -10483,7 +10483,7 @@ public struct MenuStyleConfiguration {
     /// - Parameters:
     ///     - content: The content that the modifier changes.
     ///     - modifier: The modifier to apply to the content.
-    @inlinable public init(content: Content, modifier: Modifier){}
+    @inlinable public init(content: Content, modifier: Modifier) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -10812,7 +10812,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 @frozen @propertyWrapper public struct Namespace : DynamicProperty {
 
 	/// Create an empty namespace.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The namespace ID from the property wrapper.
     public var wrappedValue: Namespace.ID { get }
@@ -10928,14 +10928,14 @@ extension NavigationBarItem.TitleDisplayMode : Hashable {
 public struct NavigationLink<Label, Destination> : View where Label : View, Destination : View {
 
     /// Creates an instance that presents `destination`.
-    public init(destination: Destination, @ViewBuilder label: () -> Label){}
+    public init(destination: Destination, @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that presents `destination` when active.
-    public init(destination: Destination, isActive: Binding<Bool>, @ViewBuilder label: () -> Label){}
+    public init(destination: Destination, isActive: Binding<Bool>, @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`.
-    public init<V>(destination: Destination, tag: V, selection: Binding<V?>, @ViewBuilder label: () -> Label) where V : Hashable{}
+    public init<V>(destination: Destination, tag: V, selection: Binding<V?>, @ViewBuilder label: () -> Label) where V : Hashable { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -10952,27 +10952,27 @@ extension NavigationLink where Label == Text {
 
     /// Creates an instance that presents `destination`, with a `Text` label
     /// generated from a title string.
-    public init(_ titleKey: LocalizedStringKey, destination: Destination){}
+    public init(_ titleKey: LocalizedStringKey, destination: Destination) { }
 
     /// Creates an instance that presents `destination`, with a `Text` label
     /// generated from a title string.
-    public init<S>(_ title: S, destination: Destination) where S : StringProtocol{}
+    public init<S>(_ title: S, destination: Destination) where S : StringProtocol { }
 
     /// Creates an instance that presents `destination` when active, with a
     /// `Text` label generated from a title string.
-    public init(_ titleKey: LocalizedStringKey, destination: Destination, isActive: Binding<Bool>){}
+    public init(_ titleKey: LocalizedStringKey, destination: Destination, isActive: Binding<Bool>) { }
 
     /// Creates an instance that presents `destination` when active, with a
     /// `Text` label generated from a title string.
-    public init<S>(_ title: S, destination: Destination, isActive: Binding<Bool>) where S : StringProtocol{}
+    public init<S>(_ title: S, destination: Destination, isActive: Binding<Bool>) where S : StringProtocol { }
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`, with a `Text` label generated from a title string.
-    public init<V>(_ titleKey: LocalizedStringKey, destination: Destination, tag: V, selection: Binding<V?>) where V : Hashable{}
+    public init<V>(_ titleKey: LocalizedStringKey, destination: Destination, tag: V, selection: Binding<V?>) where V : Hashable { }
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`, with a `Text` label generated from a title string.
-    public init<S, V>(_ title: S, destination: Destination, tag: V, selection: Binding<V?>) where S : StringProtocol, V : Hashable{}
+    public init<S, V>(_ title: S, destination: Destination, tag: V, selection: Binding<V?>) where S : StringProtocol, V : Hashable { }
 }
 
 @available(iOS 13.0, *)
@@ -11000,7 +11000,7 @@ public struct NavigationView<Content> : View where Content : View {
 	/// Creates a navigation view from a view builder of content.
 	///
 	/// - Parameter content: The view builder of content displayed on the first view in the navigation stack.
-    public init(@ViewBuilder content: () -> Content){}
+    public init(@ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -11034,7 +11034,7 @@ public protocol NavigationViewStyle {
     /// Creates an observed object with an initial value.
     ///
     /// - Parameter initialValue: An initial value.
-    public init(initialValue: ObjectType){}
+    public init(initialValue: ObjectType) { }
 
     /// Creates an observed object with an initial wrapped value.
     ///
@@ -11042,7 +11042,7 @@ public protocol NavigationViewStyle {
     /// with the `@ObservedObject` attribute, and provide an initial value.
     ///
     /// - Parameter wrappedValue: An initial value.
-    public init(wrappedValue: ObjectType){}
+    public init(wrappedValue: ObjectType) { }
 
     /// The underlying value referenced by the observed object.
     ///
@@ -11078,7 +11078,7 @@ public protocol NavigationViewStyle {
     /// - Parameters:
     ///   - shape: The original shape that you want to move.
     ///   - offset: The amount that you want to move the shape.
-    @inlinable public init(shape: Content, offset: CGSize){}
+    @inlinable public init(shape: Content, offset: CGSize) { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
@@ -11263,7 +11263,7 @@ extension OutlineGroup where ID == Data.Element.ID, Parent : View, Parent == Lea
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ root: DataElement, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element{}
+    public init<DataElement>(_ root: DataElement, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element { }
 
     /// Creates an outline group from a collection of root data elements and
     /// a key path to its children.
@@ -11288,7 +11288,7 @@ extension OutlineGroup where ID == Data.Element.ID, Parent : View, Parent == Lea
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ data: Data, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element{}
+    public init<DataElement>(_ data: Data, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -11321,7 +11321,7 @@ extension OutlineGroup where Parent : View, Parent == Leaf, Subgroup == Disclosu
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ root: DataElement, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element{}
+    public init<DataElement>(_ root: DataElement, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element { }
 
     /// Creates an outline group from a collection of root data elements, the
     /// key path to a data element's identifier, and a key path to its children.
@@ -11347,7 +11347,7 @@ extension OutlineGroup where Parent : View, Parent == Leaf, Subgroup == Disclosu
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ data: Data, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element{}
+    public init<DataElement>(_ data: Data, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -11407,7 +11407,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
     ///
     /// - Parameter backgroundDisplayMode: The display mode of the background of any
     /// page index views receiving this style
-    public init(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = .automatic){}
+    public init(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = .automatic) { }
 }
 
 /// A `TabViewStyle` that implements a paged scrolling `TabView`.
@@ -11431,7 +11431,7 @@ public struct PageTabViewStyle : TabViewStyle {
     }
 
     /// Creates a new `PageTabViewStyle` with an index display mode
-    public init(indexDisplayMode: PageTabViewStyle.IndexDisplayMode = .automatic){}
+    public init(indexDisplayMode: PageTabViewStyle.IndexDisplayMode = .automatic) { }
 }
 
 /// The outline of a 2D shape.
@@ -11439,34 +11439,34 @@ public struct PageTabViewStyle : TabViewStyle {
 @frozen public struct Path : Equatable, LosslessStringConvertible {
 
     /// Creates an empty path.
-    public init(){}
+    public init() { }
 
     /// Creates a path from an immutable shape path.
-    public init(_ path: CGPath){}
+    public init(_ path: CGPath) { }
 
     /// Creates a path from a copy of a mutable shape path.
-    public init(_ path: CGMutablePath){}
+    public init(_ path: CGMutablePath) { }
 
     /// Creates a path as the given rectangle.
-    public init(_ rect: CGRect){}
+    public init(_ rect: CGRect) { }
 
     /// Creates a path as the given rounded rectangle.
-    public init(roundedRect rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular){}
+    public init(roundedRect rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
 
     /// Creates a path as the given rounded rectangle.
-    public init(roundedRect rect: CGRect, cornerRadius: CGFloat, style: RoundedCornerStyle = .circular){}
+    public init(roundedRect rect: CGRect, cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
 
     /// Creates a path as an ellipse inscribed within the given rectangle.
-    public init(ellipseIn rect: CGRect){}
+    public init(ellipseIn rect: CGRect) { }
 
     /// Creates an empty path, and then executes the closure to add the initial
     /// elements.
-    public init(_ callback: (inout Path) -> ()){}
+    public init(_ callback: (inout Path) -> ()) { }
 
     /// Initializes from the result of a previous call to
     /// `Path.stringRepresentation`. Fails if the `string` does not
     /// describe a valid path.
-    public init?(_ string: String){}
+    public init?(_ string: String) { }
 
     /// A description of the path that may be used to recreate the path
     /// via `init?(_:)`.
@@ -11759,7 +11759,7 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
     ///       currently-selected option.
     ///     - label: A view that describes the purpose of selecting an option.
     ///     - content: A view that contains the set of options.
-    public init(selection: Binding<SelectionValue>, label: Label, @ViewBuilder content: () -> Content){}
+    public init(selection: Binding<SelectionValue>, label: Label, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -11789,7 +11789,7 @@ extension Picker where Label == Text {
     ///
     /// To initialize a picker with a string variable, use
     /// ``init(_:selection:content:)-5njtq`` instead.
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content){}
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) { }
 
     /// Creates a picker that generates its label from a string.
     ///
@@ -11805,7 +11805,7 @@ extension Picker where Label == Text {
     ///
     /// To initialize a picker with a localized string key, use
     /// ``init(_:selection:content:)-6lwfn`` instead.
-    public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol{}
+    public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 }
 
 /// A type that specifies the appearance and interaction of all pickers within
@@ -11851,7 +11851,7 @@ public struct PinnedScrollableViews : OptionSet {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    public init(rawValue: UInt32){}
+    public init(rawValue: UInt32) { }
 
     /// The header view of each `Section` will be pinned.
     public static let sectionHeaders: PinnedScrollableViews
@@ -11887,7 +11887,7 @@ public struct PinnedScrollableViews : OptionSet {
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
     /// Creates a plain button style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a button.
     ///
@@ -11907,7 +11907,7 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 public struct PlainListStyle : ListStyle {
 
     /// Creates a plain list style.
-    public init(){}
+    public init() { }
 }
 
 /// A text field style with no decoration.
@@ -11915,7 +11915,7 @@ public struct PlainListStyle : ListStyle {
 public struct PlainTextFieldStyle : TextFieldStyle {
 
 	/// Creates a plain text field style.
-    public init(){}
+    public init() { }
 }
 
 /// An attachment anchor for a popover.
@@ -12064,12 +12064,12 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
     ///     // Prints "nil"
     ///
     /// - Parameter rawValue: The raw value to use for the new instance.
-    public init(rawValue: String){}
+    public init(rawValue: String) { }
 
     /// Creates an instance initialized to the given string value.
     ///
     /// - Parameter value: The value of the new instance.
-    public init(stringLiteral: String){}
+    public init(stringLiteral: String) { }
 
     /// The raw type that can be used to represent all values of the conforming
     /// type.
@@ -12339,7 +12339,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
 
     /// Creates a progress view for showing indeterminate progress, without a
     /// label.
-    public init() where Label == EmptyView{}
+    public init() where Label == EmptyView { }
 
     /// Creates a progress view for showing indeterminate progress that displays
     /// a custom label.
@@ -12347,7 +12347,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
     ///       in progress.
-    public init(@ViewBuilder label: () -> Label){}
+    public init(@ViewBuilder label: () -> Label) { }
 
     /// Creates a progress view for showing indeterminate progress that
     /// generates its label from a localized string.
@@ -12361,7 +12361,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
     ///       describes the task in progress.
-    public init(_ titleKey: LocalizedStringKey) where Label == Text{}
+    public init(_ titleKey: LocalizedStringKey) where Label == Text { }
 
     /// Creates a progress view for showing indeterminate progress that
     /// generates its label from a string.
@@ -12374,7 +12374,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// information about localizing strings. To initialize a progress view with
     /// a localized string key, use the corresponding initializer that takes a
     /// `LocalizedStringKey` instance.
-    public init<S>(_ title: S) where Label == Text, S : StringProtocol{}
+    public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -12393,7 +12393,7 @@ extension ProgressView {
     ///     - total: The full amount representing the complete scope of the
     ///       task, meaning the task is complete if `value` equals `total`. The
     ///       default value is `1.0`.
-    public init<V>(value: V?, total: V = 1.0) where Label == EmptyView, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint{}
+    public init<V>(value: V?, total: V = 1.0) where Label == EmptyView, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
     /// Creates a progress view for showing determinate progress, with a
     /// custom label.
@@ -12411,7 +12411,7 @@ extension ProgressView {
     ///       default value is `1.0`.
     ///     - label: A view builder that creates a view that describes the task
     ///       in progress.
-    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label) where CurrentValueLabel == EmptyView, V : BinaryFloatingPoint{}
+    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label) where CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
     /// Creates a progress view for showing determinate progress, with a
     /// custom label.
@@ -12431,7 +12431,7 @@ extension ProgressView {
     ///       in progress.
     ///     - currentValueLabel: A view builder that creates a view that
     ///       describes the level of completed progress of the task.
-    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label, @ViewBuilder currentValueLabel: () -> CurrentValueLabel) where V : BinaryFloatingPoint{}
+    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label, @ViewBuilder currentValueLabel: () -> CurrentValueLabel) where V : BinaryFloatingPoint { }
 
     /// Creates a progress view for showing determinate progress that generates
     /// its label from a localized string.
@@ -12456,7 +12456,7 @@ extension ProgressView {
     ///     - total: The full amount representing the complete scope of the
     ///       task, meaning the task is complete if `value` equals `total`. The
     ///       default value is `1.0`.
-    public init<V>(_ titleKey: LocalizedStringKey, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint{}
+    public init<V>(_ titleKey: LocalizedStringKey, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
     /// Creates a progress view for showing determinate progress that generates
     /// its label from a string.
@@ -12480,7 +12480,7 @@ extension ProgressView {
     ///     - total: The full amount representing the complete scope of the
     ///       task, meaning the task is complete if `value` equals `total`. The
     ///       default value is `1.0`.
-    public init<S, V>(_ title: S, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, S : StringProtocol, V : BinaryFloatingPoint{}
+    public init<S, V>(_ title: S, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, S : StringProtocol, V : BinaryFloatingPoint { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -12490,7 +12490,7 @@ extension ProgressView {
     ///
     /// The progress view synthesizes a default label using the
     /// `localizedDescription` of the given progress instance.
-    public init(_ progress: Progress) where Label == EmptyView, CurrentValueLabel == EmptyView{}
+    public init(_ progress: Progress) where Label == EmptyView, CurrentValueLabel == EmptyView { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -12516,7 +12516,7 @@ extension ProgressView {
     ///         }
     ///     }
     ///
-    public init(_ configuration: ProgressViewStyleConfiguration) where Label == ProgressViewStyleConfiguration.Label, CurrentValueLabel == ProgressViewStyleConfiguration.CurrentValueLabel{}
+    public init(_ configuration: ProgressViewStyleConfiguration) where Label == ProgressViewStyleConfiguration.Label, CurrentValueLabel == ProgressViewStyleConfiguration.CurrentValueLabel { }
 }
 
 /// A type that applies standard interaction behavior to all progress views
@@ -12629,17 +12629,17 @@ public struct ProgressViewStyleConfiguration {
     public var m33: CGFloat
 
     /// Creates a projection transform equal to the identity matrix.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// Creates a projection transform from a `CGAffineTransform`.
     ///
     /// - Parameter m: The Core Graphics affine transform matrix.
-    @inlinable public init(_ m: CGAffineTransform){}
+    @inlinable public init(_ m: CGAffineTransform) { }
 
     /// Creates a projection transform from a `CATransform3D`.
     ///
     /// - Parameter m: The Core Animation 3D transform matrix.
-    @inlinable public init(_ m: CATransform3D){}
+    @inlinable public init(_ m: CATransform3D) { }
 
     /// Whether the projection transform matrix is an identity matrix.
     @inlinable public var isIdentity: Bool { get }
@@ -12698,7 +12698,7 @@ extension ProjectionTransform {
 	///   - center: The center of the radial gradient.
 	///   - startRadius: How far from the center to start the gradient.
 	///   - endRadius:
-    public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat){}
+    public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -12719,7 +12719,7 @@ extension ProjectionTransform {
     public func path(in rect: CGRect) -> Path { }
 
     /// Creates a new rectangle shape.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -12753,7 +12753,7 @@ public struct RedactionReasons : OptionSet {
     ///
     /// - Parameter rawValue: The raw value with which to create the
     ///   reasons for redaction.
-    public init(rawValue: Int){}
+    public init(rawValue: Int) { }
 
     /// Displayed data should appear as generic placeholders.
     ///
@@ -12806,7 +12806,7 @@ public protocol ReferenceFileDocument : ObservableObject {
     static var writableContentTypes: [UTType] { get }
 
     /// Initialize self by reading from the contents of a given `ReadConfiguration`.
-    init(configuration: Self.ReadConfiguration) throws{}
+    init(configuration: Self.ReadConfiguration) throws { }
 
     /// The configuration for reading document contents.
     typealias ReadConfiguration = FileDocumentReadConfiguration
@@ -12895,7 +12895,7 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
     ///   - shape: The original shape to rotate.
     ///   - angle: The angle to rotate the original shape.
     ///   - anchor: The unit point to rotate the shape around.
-    @inlinable public init(shape: Content, angle: Angle, anchor: UnitPoint = .center){}
+    @inlinable public init(shape: Content, angle: Angle, anchor: UnitPoint = .center) { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
@@ -12967,7 +12967,7 @@ public struct RotationGesture : Gesture {
     ///
     /// - Parameter minimumAngleDelta: The minimum delta required before the
     ///   gesture starts. The default value is a one-degree angle.
-    public init(minimumAngleDelta: Angle = .degrees(1)){}
+    public init(minimumAngleDelta: Angle = .degrees(1)) { }
 
     /// The type representing the gesture's value.
     public typealias Value = Angle
@@ -12983,7 +12983,7 @@ public struct RotationGesture : Gesture {
 public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 
 	/// Creates a rounded border text field style.
-    public init(){}
+    public init() { }
 }
 
 /// Defines the shape of a rounded rectangle's corners.
@@ -13062,14 +13062,14 @@ extension RoundedCornerStyle : Hashable {
     /// - Parameters:
     ///   - cornerSize: The size (width and height) of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
-    @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular){}
+    @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
 
     /// Creates a rounded rectangle with specified rounded corner radius.
     ///
     /// - Parameters:
     ///   - cornerRadius: The radius of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
-    @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular){}
+    @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
@@ -13139,7 +13139,7 @@ extension RoundedRectangle : InsettableShape {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    @inlinable public init(rawValue: UInt){}
+    @inlinable public init(rawValue: UInt) { }
 
     /// The safe area defined by the device and containers within the
     /// user interface, including elements such as top and bottom bars.
@@ -13176,11 +13176,11 @@ extension RoundedRectangle : InsettableShape {
 
     /// Creates the scaled metric with an unscaled value and a text style to
     /// scale relative to.
-    public init(wrappedValue: Value, relativeTo textStyle: Font.TextStyle){}
+    public init(wrappedValue: Value, relativeTo textStyle: Font.TextStyle) { }
 
     /// Creates the scaled metric with an unscaled value using the default
     /// scaling.
-    public init(wrappedValue: Value){}
+    public init(wrappedValue: Value) { }
 
     /// The value scaled based on the current environment.
     public var wrappedValue: Value { get }
@@ -13205,7 +13205,7 @@ extension RoundedRectangle : InsettableShape {
     ///   - shape: The shape to be scaled.
     ///   - scale: The factor to scale the shape.
     ///   - anchor: The unit point to scale the shape from. Defaults to the center.
-    @inlinable public init(shape: Content, scale: CGSize, anchor: UnitPoint = .center){}
+    @inlinable public init(shape: Content, scale: CGSize, anchor: UnitPoint = .center) { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
@@ -13729,35 +13729,35 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if a boolean is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Bool{}
+    public init(wrappedValue: Value, _ key: String) where Value == Bool { }
 
     /// Creates a property that can save and restore an integer.
     ///
     /// - Parameter wrappedValue: The default value if an integer is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Int{}
+    public init(wrappedValue: Value, _ key: String) where Value == Int { }
 
     /// Creates a property that can save and restore a double.
     ///
     /// - Parameter wrappedValue: The default value if a double is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Double{}
+    public init(wrappedValue: Value, _ key: String) where Value == Double { }
 
     /// Creates a property that can save and restore a string.
     ///
     /// - Parameter wrappedValue: The default value if a string is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == String{}
+    public init(wrappedValue: Value, _ key: String) where Value == String { }
 
     /// Creates a property that can save and restore a URL.
     ///
     /// - Parameter wrappedValue: The default value if a URL is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == URL{}
+    public init(wrappedValue: Value, _ key: String) where Value == URL { }
 
     /// Creates a property that can save and restore data.
     ///
@@ -13767,7 +13767,7 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if data is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Data{}
+    public init(wrappedValue: Value, _ key: String) where Value == Data { }
 
     /// Creates a property that can save and restore an integer, transforming it
     /// to a `RawRepresentable` data type.
@@ -13787,7 +13787,7 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if an integer value is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == Int{}
+    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == Int { }
 
     /// Creates a property that can save and restore a string, transforming it
     /// to a `RawRepresentable` data type.
@@ -13807,7 +13807,7 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if a String value is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == String{}
+    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == String { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -13818,42 +13818,42 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Bool?{}
+    public init(_ key: String) where Value == Bool? { }
 
     /// Creates a property that can save and restore an Optional integer.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Int?{}
+    public init(_ key: String) where Value == Int? { }
 
     /// Creates a property that can save and restore an Optional double.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Double?{}
+    public init(_ key: String) where Value == Double? { }
 
     /// Creates a property that can save and restore an Optional string.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == String?{}
+    public init(_ key: String) where Value == String? { }
 
     /// Creates a property that can save and restore an Optional URL.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == URL?{}
+    public init(_ key: String) where Value == URL? { }
 
     /// Creates a property that can save and restore an Optional data.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Data?{}
+    public init(_ key: String) where Value == Data? { }
 }
 
 /// A scrollable view.
@@ -13888,7 +13888,7 @@ public struct ScrollView<Content> : View where Content : View {
     ///     suitable for the platform. The default value for this parameter is
     ///     `true`.
     ///   - content: The view builder that creates the scrollable view.
-    public init(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> Content){}
+    public init(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the scroll view.
     public var body: some View { get }
@@ -13934,7 +13934,7 @@ public struct ScrollViewProxy {
     /// will cause a runtime error) but only from actions created
     /// within `content` such as gesture handlers or the `onChange()`
     /// function.
-    @inlinable public init(@ViewBuilder content: @escaping (ScrollViewProxy) -> Content){}
+    @inlinable public init(@ViewBuilder content: @escaping (ScrollViewProxy) -> Content) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -13968,7 +13968,7 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     ///   - header: A view placed on top
     ///   - footer: A view placed on bottom
     ///   - content: The section contents
-    public init(header: Parent, footer: Footer, @ViewBuilder content: () -> Content){}
+    public init(header: Parent, footer: Footer, @ViewBuilder content: () -> Content) { }
 
     /// The child view displayed in the ``Section``.
     public var internalBody: some View { get }
@@ -13982,7 +13982,7 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
     /// - Parameters:
     ///   - footer: A view placed on bottom
     ///   - content: The section contents
-    public init(footer: Footer, @ViewBuilder content: () -> Content){}
+    public init(footer: Footer, @ViewBuilder content: () -> Content) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -13993,7 +13993,7 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
     /// - Parameters:
     ///   - header: A view placed on top
     ///   - content: The section contents
-    public init(header: Parent, @ViewBuilder content: () -> Content){}
+    public init(header: Parent, @ViewBuilder content: () -> Content) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -14002,7 +14002,7 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
     /// Initialize a ``Section`` with specified content.
     ///
     /// - Parameters content: The section contents
-    public init(@ViewBuilder content: () -> Content){}
+    public init(@ViewBuilder content: () -> Content) { }
 }
 
 /// A control into which the user securely enters private text.
@@ -14030,7 +14030,7 @@ extension SecureField where Label == Text {
     ///   - text: The text to be displayed and edited.
     ///   - onCommit: The action to perform when the user performs an action
     ///     (usually the return key) while the `SecureField` has focus.
-    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void = {}){}
+    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void = {}) { }
 
     /// Creates an instance.
     ///
@@ -14039,7 +14039,7 @@ extension SecureField where Label == Text {
     ///   - text: The text to be displayed and edited.
     ///   - onCommit: The action to perform when the user performs an action
     ///     (usually the return key) while the `SecureField` has focus.
-    public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void = {}) where S : StringProtocol{}
+    public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 }
 
 /// A picker style that presents the options in a segmented control.
@@ -14054,7 +14054,7 @@ extension SecureField where Label == Text {
 public struct SegmentedPickerStyle : PickerStyle {
 
     /// Creates a segmented picker style.
-    public init(){}
+    public init() { }
 }
 
 /// A gesture that's a sequence of two gestures.
@@ -14086,7 +14086,7 @@ public struct SegmentedPickerStyle : PickerStyle {
     /// - Parameters:
     ///   - first: The first gesture of the sequence.
     ///   - second: The second gesture of the sequence.
-    @inlinable public init(_ first: First, _ second: Second){}
+    @inlinable public init(_ first: First, _ second: Second) { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -14429,7 +14429,7 @@ extension ShapeStyle where Self : View, Self.Body == _ShapeView<Rectangle, Self>
 public struct SidebarCommands : Commands {
 
     /// A new value describing the built-in sidebar-related commands.
-    public init(){}
+    public init() { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -14445,7 +14445,7 @@ public struct SidebarCommands : Commands {
 public struct SidebarListStyle : ListStyle {
 
     /// Creates a sidebar list style.
-    public init(){}
+    public init() { }
 }
 
 /// A gesture containing two gestures that can happen at the same time with
@@ -14480,7 +14480,7 @@ public struct SidebarListStyle : ListStyle {
     /// - Parameters:
     ///   - first: The first of two gestures that can happen simultaneously.
     ///   - second: The second of two gestures that can happen simultaneously.
-    @inlinable public init(_ first: First, _ second: Second){}
+    @inlinable public init(_ first: First, _ second: Second) { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -14564,7 +14564,7 @@ extension Slider {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{}
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
     /// Creates an instance that selects a value from within a range.
     ///
@@ -14583,7 +14583,7 @@ extension Slider {
     /// `onEditingChanged` will be called when editing begins and ends. For
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{}
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
@@ -14605,7 +14605,7 @@ extension Slider where ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{}
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
     /// Creates an instance that selects a value from within a range.
     ///
@@ -14623,7 +14623,7 @@ extension Slider where ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{}
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
@@ -14644,7 +14644,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{}
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
     /// Creates an instance that selects a value from within a range.
     ///
@@ -14661,7 +14661,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint{}
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
 /// A flexible space that expands along the major axis of its containing stack
@@ -14675,7 +14675,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// If `nil`, the system default spacing between views is used.
     public var minLength: CGFloat?
 
-    @inlinable public init(minLength: CGFloat? = nil){}
+    @inlinable public init(minLength: CGFloat? = nil) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -14695,7 +14695,7 @@ extension Spacer : View {
 public struct StackNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a stack navigation view style.
-    public init(){}
+    public init() { }
 }
 
 /// A property wrapper type that can read and write a value managed by SwiftUI.
@@ -14741,12 +14741,12 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// `@State private var isPlaying: Bool = false`.
     ///
     /// - Parameter wrappedValue: An initial wrappedValue for a state.
-    public init(wrappedValue value: Value){}
+    public init(wrappedValue value: Value) { }
 
     /// Creates the state with an initial value.
     ///
     /// - Parameter value: An initial value of the state.
-    public init(initialValue value: Value){}
+    public init(initialValue value: Value) { }
 
     /// The underlying value referenced by the state variable.
     ///
@@ -14799,7 +14799,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 extension State where Value : ExpressibleByNilLiteral {
 
     /// Creates a state without an initial value.
-    @inlinable public init(){}
+    @inlinable public init() { }
 }
 
 /// A property wrapper type that instantiates an observable object.
@@ -14862,7 +14862,7 @@ extension State where Value : ExpressibleByNilLiteral {
     /// receives a distinct copy of the data model.
     ///
     /// - Parameter thunk: An initial value for the state object.
-    @inlinable public init(wrappedValue thunk: @autoclosure @escaping () -> ObjectType){}
+    @inlinable public init(wrappedValue thunk: @autoclosure @escaping () -> ObjectType) { }
 
     /// The underlying value referenced by the state object.
     ///
@@ -15033,7 +15033,7 @@ public struct Stepper<Label> : View where Label : View {
     ///       of the `onEditingChanged` closure at the start and end of
     ///       the gesture.
     ///     - label: A view describing the purpose of this stepper.
-    public init(onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label){}
+    public init(onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -15090,7 +15090,7 @@ extension Stepper {
     ///   - label: A view describing the purpose of this stepper.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable{}
+    public init<V>(value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable { }
 
     /// Creates a stepper configured to increment or decrement a binding to a
     /// value using a step value and within a range of values you provide.
@@ -15138,7 +15138,7 @@ extension Stepper {
     ///   - label: A view describing the purpose of this stepper.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable{}
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable { }
 }
 
 @available(iOS 13.0, macOS 10.15, *)
@@ -15209,7 +15209,7 @@ extension Stepper where Label == Text {
     ///      the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }){}
+    public init(_ titleKey: LocalizedStringKey, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) { }
 
     /// Creates a stepper using a title string and that executes closures
     /// you provide when the user clicks or taps the stepper's increment or
@@ -15269,7 +15269,7 @@ extension Stepper where Label == Text {
     ///      the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol{}
+    public init<S>(_ title: S, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol { }
 
     /// Creates a stepper with a title key and configured to increment and
     /// decrement a binding to a value and step amount you provide.
@@ -15312,7 +15312,7 @@ extension Stepper where Label == Text {
     ///       of the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable{}
+    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { }
 
     /// Creates a stepper with a title and configured to increment and
     /// decrement a binding to a value and step amount you provide.
@@ -15353,7 +15353,7 @@ extension Stepper where Label == Text {
     ///       of the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S, V>(_ title: S, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable{}
+    public init<S, V>(_ title: S, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { }
 
     /// Creates a stepper instance that increments and decrements a binding to
     /// a value, by a step size and within a closed range that you provide.
@@ -15398,7 +15398,7 @@ extension Stepper where Label == Text {
     ///       the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable{}
+    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { }
 
     /// Creates a stepper instance that increments and decrements a binding to
     /// a value, by a step size and within a closed range that you provide.
@@ -15441,7 +15441,7 @@ extension Stepper where Label == Text {
     ///       the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S, V>(_ title: S, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable{}
+    public init<S, V>(_ title: S, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { }
 }
 
 /// A structure holding the data needed to stroke a ``Shape`` in a particular style.
@@ -15475,7 +15475,7 @@ extension Stepper where Label == Text {
    	///   - miterLimet: The stroke miter limit.
    	///   - dash: The stroke dash array.
    	///   - dashPhase: The stroke dash phase.
-    public init(lineWidth: CGFloat = 1, lineCap: CGLineCap = .butt, lineJoin: CGLineJoin = .miter, miterLimit: CGFloat = 10, dash: [CGFloat] = [CGFloat](), dashPhase: CGFloat = 0){}
+    public init(lineWidth: CGFloat = 1, lineCap: CGLineCap = .butt, lineJoin: CGLineJoin = .miter, miterLimit: CGFloat = 10, dash: [CGFloat] = [CGFloat](), dashPhase: CGFloat = 0) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -15517,7 +15517,7 @@ extension StrokeStyle : Animatable {
     ///   - content: The content that you want displayed in the view.
     ///   - publisher: The publisher to use for the subscription.
     ///   - action: The action you want performed in conjunction with the publisher.
-    @inlinable public init(content: Content, publisher: PublisherType, action: @escaping (PublisherType.Output) -> Void){}
+    @inlinable public init(content: Content, publisher: PublisherType, action: @escaping (PublisherType.Output) -> Void) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -15535,12 +15535,12 @@ extension StrokeStyle : Animatable {
 public struct SwitchToggleStyle : ToggleStyle {
 
     /// Creates a switch toggle style.
-    public init(){}
+    public init() { }
 
     /// Creates a switch style with a tint color.
     @available(iOS 14.0, macOS 11.0, watchOS 7.0, *)
     @available(tvOS, unavailable)
-    public init(tint: Color){}
+    public init(tint: Color) { }
 
     /// Creates a view representing the body of a toggle.
     ///
@@ -15590,7 +15590,7 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
 
     /// Creates an instance that selects from content associated with
     /// `Selection` values.
-    public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content){}
+    public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -15611,7 +15611,7 @@ extension TabView where SelectionValue == Int {
 	/// selection index, and just want the view to default at the first page.
 	/// You will still be able to move tabs, but you won't be able to programmatically
 	/// change tabs from outside the view.
-    public init(@ViewBuilder content: () -> Content){}
+    public init(@ViewBuilder content: () -> Content) { }
 }
 
 /// A specification for the appearance and interaction of a `TabView`.
@@ -15652,7 +15652,7 @@ public struct TapGesture : Gesture {
     ///
     /// - Parameter count: The required number of taps to complete the tap
     ///   gesture.
-    public init(count: Int = 1){}
+    public init(count: Int = 1) { }
 
     /// The type representing the gesture's value.
     public typealias Value = ()
@@ -15766,7 +15766,7 @@ public struct TapGesture : Gesture {
     /// initializer, which also bypasses localization.
     ///
     /// - Parameter content: A string to display without localization.
-    @inlinable public init(verbatim content: String){}
+    @inlinable public init(verbatim content: String) { }
 
     /// Creates a text view that displays a stored string without localization.
     ///
@@ -15787,7 +15787,7 @@ public struct TapGesture : Gesture {
     /// triggers the ``Text/init(_:tableName:bundle:comment:)`` method instead.
     ///
     /// - Parameter content: The string value to display without localization.
-    public init<S>(_ content: S) where S : StringProtocol{}
+    public init<S>(_ content: S) where S : StringProtocol { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -15805,7 +15805,7 @@ extension Text {
     /// Creates an instance that wraps an `Image`, suitable for concatenating
     /// with other `Text`
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public init(_ image: Image){}
+    public init(_ image: Image) { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -15815,13 +15815,13 @@ extension Text {
     ///
     /// Use this initializer to create a text view that will format `subject`
     /// using `formatter`.
-    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : ReferenceConvertible{}
+    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : ReferenceConvertible { }
 
     /// Creates a text view that displays the formatted representation of a value.
     ///
     /// Use this initializer to create a text view that will format `subject`
     /// using `formatter`.
-    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : NSObject{}
+    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : NSObject { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -15879,13 +15879,13 @@ extension Text {
     /// - Parameters:
     ///     - date: The target date to display.
     ///     - style: The style used when displaying a date.
-    public init(_ date: Date, style: Text.DateStyle){}
+    public init(_ date: Date, style: Text.DateStyle) { }
 
     /// Creates an instance that displays a localized range between two dates.
     ///
     /// - Parameters:
     ///     - dates: The range of dates to display
-    public init(_ dates: ClosedRange<Date>){}
+    public init(_ dates: ClosedRange<Date>) { }
 
     /// Creates an instance that displays a localized time interval.
     ///
@@ -15896,7 +15896,7 @@ extension Text {
     ///
     /// - Parameters:
     ///     - interval: The date interval to display
-    public init(_ interval: DateInterval){}
+    public init(_ interval: DateInterval) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -15939,7 +15939,7 @@ extension Text {
     ///   - bundle: The bundle containing the strings file. If `nil`, use the
     ///     main bundle.
     ///   - comment: Contextual information about this key-value pair.
-    public init(_ key: LocalizedStringKey, tableName: String? = nil, bundle: Bundle? = nil, comment: StaticString? = nil){}
+    public init(_ key: LocalizedStringKey, tableName: String? = nil, bundle: Bundle? = nil, comment: StaticString? = nil) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16333,7 +16333,7 @@ extension Text.DateStyle : Codable {
     /// if the data read is corrupted or otherwise invalid.
     ///
     /// - Parameter decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws{}
+    public init(from decoder: Decoder) throws { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16424,7 +16424,7 @@ extension Text.Case : Hashable {
 public struct TextEditingCommands : Commands {
 
     /// A new value describing the built-in text-editing commands.
-    public init(){}
+    public init() { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -16520,7 +16520,7 @@ public struct TextEditor : View {
     ///
     /// - Parameter text: A ``Binding`` to the variable containing the
     ///    text to edit.
-    public init(text: Binding<String>){}
+    public init(text: Binding<String>) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -16569,7 +16569,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}){}
+    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
 
     /// Creates a text field with a text label generated from a title string.
     ///
@@ -16583,7 +16583,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol{}
+    public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 
     /// Create an instance which binds over an arbitrary type, `T`.
     ///
@@ -16602,7 +16602,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init<T>(_ titleKey: LocalizedStringKey, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}){}
+    public init<T>(_ titleKey: LocalizedStringKey, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
 
     /// Create an instance which binds over an arbitrary type, `T`.
     ///
@@ -16620,7 +16620,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init<S, T>(_ title: S, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol{}
+    public init<S, T>(_ title: S, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 }
 
 /// A specification for the appearance and interaction of a text field.
@@ -16639,7 +16639,7 @@ public protocol TextFieldStyle {
 public struct TextFormattingCommands : Commands {
 
     /// A new value describing the built-in text-formatting commands.
-    public init(){}
+    public init() { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -16653,7 +16653,7 @@ public struct TextFormattingCommands : Commands {
 public struct TitleOnlyLabelStyle : LabelStyle {
 
     /// Creates a title-only label style.
-    public init(){}
+    public init() { }
 
     /// Creates a view that represents the body of a label.
     ///
@@ -16714,7 +16714,7 @@ public struct Toggle<Label> : View where Label : View {
     ///   - isOn: A binding to a property that determines whether the toggle is on
     ///     or off.
     ///   - label: A view that describes the purpose of the toggle.
-    public init(isOn: Binding<Bool>, @ViewBuilder label: () -> Label){}
+    public init(isOn: Binding<Bool>, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -16751,7 +16751,7 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
     ///
     /// - Parameter configuration: A toggle style configuration.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public init(_ configuration: ToggleStyleConfiguration){}
+    public init(_ configuration: ToggleStyleConfiguration) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16771,7 +16771,7 @@ extension Toggle where Label == Text {
     ///     the purpose of the toggle.
     ///   - isOn: A binding to a property that indicates whether the toggle is
     ///    on or off.
-    public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>){}
+    public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>) { }
 
     /// Creates a toggle that generates its label from a string.
     ///
@@ -16786,7 +16786,7 @@ extension Toggle where Label == Text {
     ///   - title: A string that describes the purpose of the toggle.
     ///   - isOn: A binding to a property that indicates whether the toggle is
     ///    on or off.
-    public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol{}
+    public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol { }
 }
 
 /// A type that specifies the appearance and interaction of all toggles within a
@@ -16849,7 +16849,7 @@ public struct ToggleStyleConfiguration {
 public struct ToolbarCommands : Commands {
 
     /// A new value describing the built-in toolbar-related commands.
-    public init(){}
+    public init() { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -17044,7 +17044,7 @@ extension ToolbarItem where ID == Void {
     ///   - placement: Which section of the toolbar
     ///     the item should be placed in.
     ///   - content: The content of the item.
-    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content){}
+    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content) { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -17060,7 +17060,7 @@ extension ToolbarItem : CustomizableToolbarContent where ID == String {
     ///   - showsByDefault: Whether the item appears by default in the toolbar,
     ///     or only shows if the user explicitly adds it via customization.
     ///   - content: The content of the item.
-    public init(id: String, placement: ToolbarItemPlacement = .automatic, showsByDefault: Bool = true, @ViewBuilder content: () -> Content){}
+    public init(id: String, placement: ToolbarItemPlacement = .automatic, showsByDefault: Bool = true, @ViewBuilder content: () -> Content) { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -17082,7 +17082,7 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
     ///    `ToolbarItem`s should be placed in.
     ///  - content: The content of the group. Each view specified in the
     ///    `ViewBuilder` will be given its own `ToolbarItem` in the toolbar.
-    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content){}
+    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content) { }
 
     /// The type of content representing the body of this toolbar content.
     public typealias Body = Never
@@ -17254,7 +17254,7 @@ public struct ToolbarItemPlacement {
 @frozen public struct Transaction {
 
     /// Creates a transaction.
-    @inlinable public init(){}
+    @inlinable public init() { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17264,7 +17264,7 @@ extension Transaction {
     ///
     /// - Parameter animation: The animation to perform when the current state
     ///   changes.
-    public init(animation: Animation?){}
+    public init(animation: Animation?) { }
 
     /// The animation, if any, associated with the current state change.
     public var animation: Animation?
@@ -17305,7 +17305,7 @@ extension Transaction {
     /// - Parameter:
     ///   - shape: The original shape to be affine transformed.
     ///   - transform: The affine transform to apply to the original shape.
-    @inlinable public init(shape: Content, transform: CGAffineTransform){}
+    @inlinable public init(shape: Content, transform: CGAffineTransform) { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
@@ -17340,7 +17340,7 @@ extension Transaction {
     /// Creates a tuple view.
     ///
     /// - Parameter value: A tuple of any number of views.
-    @inlinable public init(_ value: T){}
+    @inlinable public init(_ value: T) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -17366,7 +17366,7 @@ extension Transaction {
     /// own work.
     ///
     /// - Parameter delegate: the type of `UIApplicationDelegate` to use.
-    public init(_ delegateType: DelegateType.Type = DelegateType.self){}
+    public init(_ delegateType: DelegateType.Type = DelegateType.self) { }
 }
 
 @available(iOS 14.0, tvOS 14.0, *)
@@ -17385,7 +17385,7 @@ extension UIApplicationDelegateAdaptor where DelegateType : ObservableObject {
     /// - Note: the instantiated delegate will be placed in the Environment
     ///   and may be accessed by using the `@EnvironmentObject` property wrapper
     ///   in the view hierarchy.
-    public init(_ delegateType: DelegateType.Type = DelegateType.self){}
+    public init(_ delegateType: DelegateType.Type = DelegateType.self) { }
 
     /// A projection of the observed object that creates bindings to its
     /// properties using dynamic member lookup.
@@ -17432,7 +17432,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Returns: A `UIHostingController` object initialized with the
     ///   specified SwiftUI view.
-    public init(rootView: Content){}
+    public init(rootView: Content) { }
 
     /// Creates a hosting controller object from an archive and the specified
     /// SwiftUI view.
@@ -17443,7 +17443,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Returns: A `UIViewController` object that you can present from your
     ///   interface.
-    public init?(coder aDecoder: NSCoder, rootView: Content){}
+    public init?(coder aDecoder: NSCoder, rootView: Content) { }
 
     /// Creates a hosting controller object from the contents of the specified
     /// archive.
@@ -17454,7 +17454,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// instead.
     ///
     /// - Parameter coder: The decoder to use during initialization.
-    @objc required dynamic public init?(coder aDecoder: NSCoder){}
+    @objc required dynamic public init?(coder aDecoder: NSCoder) { }
 
     /// Notifies the view controller that its view is about to be added to a
     /// view hierarchy.
@@ -17659,7 +17659,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 	///   project directories first, followed by the Resources directory.
 	///
 	/// - Returns: A newly initialized ``UIHostingController`` object.
-    @objc override dynamic public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){}
+    @objc override dynamic public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) { }
 }
 
 /// A view that represents a UIKit view controller.
@@ -18036,14 +18036,14 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     public var y: CGFloat
 
     /// Creates a unit point with x and y values of 0.
-    @inlinable public init(){}
+    @inlinable public init() { }
 
     /// Creates a unit point from x and y values.
     ///
     /// - Parameters:
     ///   x: The x coordinate of the unit point.
     ///   y: The y coordinate of the unit point.
-    @inlinable public init(x: CGFloat, y: CGFloat){}
+    @inlinable public init(x: CGFloat, y: CGFloat) { }
 
     /// A unit point with x and y values of 0.
     public static let zero: UnitPoint
@@ -18175,7 +18175,7 @@ extension UserInterfaceSizeClass {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiUserInterfaceSizeClass: UIUserInterfaceSizeClass){}
+    public init?(_ uiUserInterfaceSizeClass: UIUserInterfaceSizeClass) { }
 }
 
 @available(iOS 13.0, *)
@@ -18205,7 +18205,7 @@ extension UserInterfaceSizeClass : Hashable {
     ///     want the stack to choose a default distance for each pair of
     ///     subviews.
     ///   - content: A view builder that creates the content of this stack.
-    @inlinable public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content){}
+    @inlinable public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -18240,7 +18240,7 @@ public protocol VectorArithmetic : AdditiveArithmetic {
     ///
     /// - Parameter id: An identifier that uniquely identifies the vertical
     ///   alignment.
-    public init(_ id: AlignmentID.Type){}
+    public init(_ id: AlignmentID.Type) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -23620,7 +23620,7 @@ extension ViewModifier {
 public struct WheelDatePickerStyle : DatePickerStyle {
 
 	/// Creates a wheel date picker style.
-    public init(){}
+    public init() { }
 }
 
 /// A picker style that presents the options in a scrollable wheel that shows
@@ -23638,7 +23638,7 @@ public struct WheelPickerStyle : PickerStyle {
 
     /// Sets the picker style to display an item wheel from which the user makes
     /// a selection.
-    public init(){}
+    public init() { }
 }
 
 /// The configuration and content of a widget to display on the Home screen or
@@ -23685,7 +23685,7 @@ public protocol Widget {
     associatedtype Body : WidgetConfiguration
 
     /// Creates a widget using `body` as its content.
-    init(){}
+    init() { }
 
     /// The content and behavior of the widget.
     ///
@@ -23725,7 +23725,7 @@ public protocol WidgetBundle {
     associatedtype Body : Widget
 
     /// Creates a widget bundle using the bundle's body as its content.
-    init(){}
+    init() { }
 
     /// Declares the group of widgets that an app supports.
     ///
@@ -23874,7 +23874,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(id: String, @ViewBuilder content: () -> Content){}
+    public init(id: String, @ViewBuilder content: () -> Content) { }
 
     /// Creates a window group with a localized title and an identifier.
     ///
@@ -23890,7 +23890,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ title: Text, id: String, @ViewBuilder content: () -> Content){}
+    public init(_ title: Text, id: String, @ViewBuilder content: () -> Content) { }
 
     /// Creates a window group with a key for localized title string and an
     /// identifier.
@@ -23906,7 +23906,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ titleKey: LocalizedStringKey, id: String, @ViewBuilder content: () -> Content){}
+    public init(_ titleKey: LocalizedStringKey, id: String, @ViewBuilder content: () -> Content) { }
 
     /// Creates a window group with a title string and an identifier.
     ///
@@ -23921,7 +23921,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init<S>(_ title: S, id: String, @ViewBuilder content: () -> Content) where S : StringProtocol{}
+    public init<S>(_ title: S, id: String, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 
     /// Creates a window group.
     ///
@@ -23930,7 +23930,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///
     /// - Parameter content: A closure that creates the content for each
     ///   instance of the group.
-    public init(@ViewBuilder content: () -> Content){}
+    public init(@ViewBuilder content: () -> Content) { }
 
     /// Creates a window group with a localized title.
     ///
@@ -23944,7 +23944,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///   - title: The ``Text`` view to use for the group's title.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ title: Text, @ViewBuilder content: () -> Content){}
+    public init(_ title: Text, @ViewBuilder content: () -> Content) { }
 
     /// Creates a window group with a key for localized title string.
     ///
@@ -23957,7 +23957,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///   - titleKey: The title key to use for the group's title.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content){}
+    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) { }
 
     /// Creates a window group with a title string.
     ///
@@ -23970,7 +23970,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///   - title: The string to use for the title of the group.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where S : StringProtocol{}
+    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 
     /// The content and behavior of the scene.
     ///
@@ -24001,7 +24001,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///   - alignment: The guide for aligning the subviews in this stack on both
     ///     axis.
     ///   - content: A view builder that creates the content of this stack.
-    @inlinable public init(alignment: Alignment = .center, @ViewBuilder content: () -> Content){}
+    @inlinable public init(alignment: Alignment = .center, @ViewBuilder content: () -> Content) { }
 
     /// The type of view representing the body of this view.
     ///
@@ -24035,7 +24035,7 @@ extension NSDirectionalEdgeInsets {
     /// Create edge insets from the equivalent EdgeInsets.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
     @available(watchOS, unavailable)
-    public init(_ edgeInsets: EdgeInsets){}
+    public init(_ edgeInsets: EdgeInsets) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -24189,7 +24189,7 @@ extension UIColor {
 	/// - Parameter color: The SwiftUI `Color` object to use for creating a `UIColor`.
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
     @available(macOS, unavailable)
-    public convenience init(_ color: Color){}
+    public convenience init(_ color: Color) { }
 }
 
 extension UIUserInterfaceStyle {
@@ -24198,7 +24198,7 @@ extension UIUserInterfaceStyle {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ colorScheme: ColorScheme?){}
+    public init(_ colorScheme: ColorScheme?) { }
 }
 
 extension UIAccessibilityContrast {
@@ -24207,7 +24207,7 @@ extension UIAccessibilityContrast {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ colorSchemeContrast: ColorSchemeContrast?){}
+    public init(_ colorSchemeContrast: ColorSchemeContrast?) { }
 }
 
 extension UIContentSizeCategory {
@@ -24216,7 +24216,7 @@ extension UIContentSizeCategory {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ sizeCategory: ContentSizeCategory?){}
+    public init(_ sizeCategory: ContentSizeCategory?) { }
 }
 
 extension UITraitEnvironmentLayoutDirection {
@@ -24225,7 +24225,7 @@ extension UITraitEnvironmentLayoutDirection {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ layoutDirection: LayoutDirection){}
+    public init(_ layoutDirection: LayoutDirection) { }
 }
 
 extension UILegibilityWeight {
@@ -24234,7 +24234,7 @@ extension UILegibilityWeight {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ legibilityWeight: LegibilityWeight?){}
+    public init(_ legibilityWeight: LegibilityWeight?) { }
 }
 
 extension UIUserInterfaceSizeClass {
@@ -24244,7 +24244,7 @@ extension UIUserInterfaceSizeClass {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ sizeClass: UserInterfaceSizeClass?){}
+    public init(_ sizeClass: UserInterfaceSizeClass?) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
