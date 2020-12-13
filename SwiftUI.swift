@@ -15,11 +15,11 @@ import os.signpost
 /// AccessibilityActionKind denotes the type of action for an Accessibility Action to support.
 ///
 /// This struct is almost always found as an input to the ``View/accessibilityAction(_:_:)`` View modifier.
-/// To learn more about delivering exceptional accessibility experiences, see [https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience](Delivering an Exceptional Accessibility Experience) or [https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible](iOS Accessibility Tutorial).
+/// To learn more about delivering exceptional accessibility experiences, see [Delivering an Exceptional Accessibility Experience](https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience) or [iOS Accessibility Tutorial](https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible).
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityActionKind : Equatable {
 
-    /// The inferred accessibility action inheritted from the view type.
+    /// The inferred accessibility action inherited from the view type.
     ///
     /// This constant will default to the accessibility action associated with the modified object.
     /// For example, a button, label, or text would all default to their unique accessibility behaviors.
@@ -111,7 +111,7 @@ extension AccessibilityAdjustmentDirection : Hashable {
 /// A ``ViewModifier`` used to provide accessibility content.
 ///
 /// The `AccessibilityAttachmentModifier` is most commonly found as the modified content in an accessibility modifiers attached to a View.
-/// See ``View/accessibilityAction(_:_:)`` for example usage. See [https://developer.apple.com/documentation/swiftui/view/accessibility/creating_accessible_views?changes=_8](Creating Accessible Views) for an example accessibility project.
+/// See ``View/accessibilityAction(_:_:)`` for example usage. See [Creating Accessible Views](https://developer.apple.com/documentation/swiftui/view/accessibility/creating_accessible_views?changes=_8) for an example accessibility project.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityAttachmentModifier : ViewModifier {
 
@@ -121,7 +121,7 @@ public struct AccessibilityAttachmentModifier : ViewModifier {
 
 /// Defines the children's behavior of accessibility elements.
 ///
-/// See [https://swiftwithmajid.com/2019/09/10/accessibility-in-swiftui/](Accessibility in SwiftUI) for more information on implementing accessibility functionality.
+/// See [Accessibility in SwiftUI](https://swiftwithmajid.com/2019/09/10/accessibility-in-swiftui/) for more information on implementing accessibility functionality.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityChildBehavior : Hashable {
 
