@@ -10,64 +10,64 @@ Your structure only needs to implement one method: `ButtonStyle/makeBody(configu
 
 To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a `ButtonStyle`.
 
-```
-struct BananaView: View {
-    var body: some View {
-        Button("🍌🍌")
-            .buttonStyle(BananaButtonStyle(color: .yellow))
-    }
-}
 
-struct BananaButtonStyle: ButtonStyle {
-    var color: Color
-    func makeBody(configuration: Self.Configuration) -> some View {
-        BananaButton(configuration: configuration, color: color)
-    }
-    
-    struct BananaButton: View {
-        let configuration: BananaButtonStyle.Configuration
-        let color: Color
-        
+    struct BananaView: View {
         var body: some View {
-            configuration.label
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 10).fill(color))
+            Button("🍌🍌")
+                .buttonStyle(BananaButtonStyle(color: .yellow))
         }
     }
-}
-```
+
+    struct BananaButtonStyle: ButtonStyle {
+        var color: Color
+        func makeBody(configuration: Self.Configuration) -> some View {
+            BananaButton(configuration: configuration, color: color)
+        }
+        
+        struct BananaButton: View {
+            let configuration: BananaButtonStyle.Configuration
+            let color: Color
+            
+            var body: some View {
+                configuration.label
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(color))
+            }
+        }
+    }
+
 
 Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`. 
 
-```
-struct BananaView: View {
-    var body: some View {
-        VStack {
-            Button("🍌🍌")
-            Button("🍎🍎")
-            Button("🍑🍑")
-        }
-        .buttonStyle(BananaButtonStyle(color: .yellow))
-    }
-}
 
-struct BananaButtonStyle: ButtonStyle {
-    var color: Color
-    func makeBody(configuration: Self.Configuration) -> some View {
-        BananaButton(configuration: configuration, color: color)
-    }
-    
-    struct BananaButton: View {
-        let configuration: BananaButtonStyle.Configuration
-        let color: Color
-        
+    struct BananaView: View {
         var body: some View {
-            return configuration.label
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 10).fill(color))
+            VStack {
+                Button("🍌🍌")
+                Button("🍎🍎")
+                Button("🍑🍑")
+            }
+            .buttonStyle(BananaButtonStyle(color: .yellow))
         }
     }
-}
-```
+
+    struct BananaButtonStyle: ButtonStyle {
+        var color: Color
+        func makeBody(configuration: Self.Configuration) -> some View {
+            BananaButton(configuration: configuration, color: color)
+        }
+        
+        struct BananaButton: View {
+            let configuration: BananaButtonStyle.Configuration
+            let color: Color
+            
+            var body: some View {
+                return configuration.label
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(color))
+            }
+        }
+    }
+
 
 For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`.
