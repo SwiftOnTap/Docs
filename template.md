@@ -1,14 +1,14 @@
 #  Documentation Template
 
 1. Summary 
-The first line of the file is the symbol's summary. The summary is 1 complete sentence with a period at the end. The summary sentence makes sense out of context (i.e. if the summary appears on another page). In general, the summary is as short as possible while fully explaining the essence of the symbol.
+The first line of the documentation comment is the symbol's summary. The summary is 1 complete sentence with a period at the end. The summary sentence makes sense out of context (i.e. if the summary appears on another page). In general, the summary is as short as possible while fully explaining the essence of the symbol.
 
-The summary is the first line of the documentation comment, and it's separated from the overview by one empty line.
+The summary is separated from the overview by one empty line.
 
 2. Overview
 The overview is a distinct section from the summary, and should make sense on its own. It should not rely on the summary as its first sentence.
 
-Every symbol has an overview. The overview has 6 parts: 
+Every symbol has an overview. The overview has up to 6 parts: 
 1. The overview begins with a complete explanation of what the symbol does.
 
 2. Explain any and all requirements of using the symbol.
@@ -41,10 +41,10 @@ Every symbol has an overview. The overview has 6 parts:
             func foregroundColor(_ color: Color) { ... }
         }
         
-then a link to view is referenced by typing `View`, and links to body and foreground color are `View/body` and `View/foregroundColor(_:)`. The documentation parser will automatically know to display the words "body" and "foregroundColor(_:)" rather than the full path. 
+then a link to view is referenced by typing `View`, and links to body and foreground color are `View/body` and `View/foregroundColor(_:)`. We will provide an explicit path list for duplicative paths (i.e. `Text/init(_:)`).  The documentation parser will automatically know to display the words "body" and "foregroundColor(_:)" rather than the full path. 
     
 
-- Rule: **Do not write incorrect code**. **All** code examples must be run on a simulator before they are added to the documentation.
+- Rule: **Do not write incorrect code**. **All** code examples must be run on a simulator before they are added to the documentation. All code examples should follow best practices. Particularly, look out for correct use of `var` and `let`. 
 
 
 - Rule: Examples should be designed for clarity.
@@ -56,9 +56,9 @@ then a link to view is referenced by typing `View`, and links to body and foregr
             struct BananaView: View {
                 var body: some View {
                     VStack {
-                        Button("🍌🔥") { print("banana") }
-                        Button("🍎🔥") { print("apple") }
-                        Button("🍑🔥") { print("peach") }
+                        Button("🍌🍌") { print("banana") }
+                        Button("🍎🍎") { print("apple") }
+                        Button("🍑🍑") { print("peach") }
                     }
                     .buttonStyle(BananaButtonStyle(color: .yellow))
                 }
@@ -69,9 +69,9 @@ then a link to view is referenced by typing `View`, and links to body and foregr
             struct BananaView: View {
                 var body: some View {
                     VStack {
-                        Button("🍌🔥") 
-                        Button("🍎🔥") 
-                        Button("🍑🔥") 
+                        Button("🍌🍌") 
+                        Button("🍎🍎") 
+                        Button("🍑🍑") 
                     }
                     .buttonStyle(BananaButtonStyle(color: .yellow))
                 }
@@ -85,12 +85,12 @@ then a link to view is referenced by typing `View`, and links to body and foregr
              var color: Color
              
              var body: some View {
-                 Button("🍌🔥")
+                 Button("🍌🍌")
                     .foregroundColor(color)
              }
          }
          
-- Incorrect: Hello world should be "🍌🔥"
+- Incorrect: Hello world should be "🍌🍌"
          
          struct BananaView: View {
              var color: Color
@@ -107,7 +107,7 @@ then a link to view is referenced by typing `View`, and links to body and foregr
               var foo: Color
               
               var body: some View {
-                  Button("🍌🔥")
+                  Button("🍌🍌")
                       .foregroundColor(foo)
               }
           }
@@ -118,7 +118,7 @@ then a link to view is referenced by typing `View`, and links to body and foregr
             var color: Color
             
             var body: some View {
-                Button("🍌🔥")
+                Button("🍌🍌")
                     .foregroundColor(color)
             }
         }
@@ -142,10 +142,10 @@ A symbol that requires a color, should follow:
 3. `Color.orange`
 
 
-- Rule: Comments can be very useful inside of example code blocks, especially in two cases:
+- Rule: Add helpful comments inside of example code blocks, especially in two cases:
     - Displaying the **exact** output of a print statement
     
-            print(projectName) //"Banana Docs"
+            print(projectName) //"Banana🍌 Docs"
         
     - Displaying the value of a variable as it is assigned
         
@@ -175,4 +175,3 @@ Correct:
 - Rule: No paragraph has more than 6 sentences. 
 
 
-- Rule: Use `var` and `let` properly. 
