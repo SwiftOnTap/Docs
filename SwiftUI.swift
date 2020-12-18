@@ -12386,7 +12386,7 @@ extension PreviewProvider {
 /// struct BananaView: View {
 ///     var body: some View {
 ///         VStack {
-///             Button("🍌🔥") { print("banana") }
+///             Button("🍌🍌") { print("banana") }
 ///             Button("🍎🍎") { print("apple") }
 ///             Button("🍑🍑") { print("peach") }
 ///         }
