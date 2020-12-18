@@ -22,7 +22,7 @@ Every symbol has an overview. The overview has up to 6 parts:
 6. Helpful resources. These include web links to tutorials and references to other relavent symbols. 
 
 
-- Rule: You should use the personal pronoun "your" (i.e. your function), as well as command phrases (i.e. use this view). You should never the word "you" (i.e. if you want to) or the passive voice (i.e. the button is pressed).
+- Rule A): You should use the personal pronoun "your" (i.e. your function), as well as command phrases (i.e. use this view). You should never the word "you" (i.e. if you want to) or the passive voice (i.e. the button is pressed).
     Incorrect:
         *If you want* to change the style of your `Button`, *you can* use the `View/buttonStyle(_:)` method.
     Incorrect:
@@ -31,7 +31,7 @@ Every symbol has an overview. The overview has up to 6 parts:
         **To change the style of your** `Button`, **use** the `View/ButtonStyle(_:)` method.
 
 
-- Rule: Any time you reference another symbol, you should make it a link. Links are specified using the usual `Symbol` notation, with backticks on each side. They also must specify the full path of the symbol, including any parent symbols in which it's declared. For example, if we have header code like this,
+- Rule B): Any time you reference another symbol, you should make it a link. Links are specified using the usual `Symbol` notation, with backticks on each side. They also must specify the full path of the symbol, including any parent symbols in which it's declared. For example, if we have header code like this,
 
         protocol View {
             var body: some View { get }
@@ -44,13 +44,13 @@ Every symbol has an overview. The overview has up to 6 parts:
 then a link to view is referenced by typing `View`, and links to body and foreground color are `View/body` and `View/foregroundColor(_:)`. We will provide an explicit path list for duplicative paths (i.e. `Text/init(_:)`).  The documentation parser will automatically know to display the words "body" and "foregroundColor(_:)" rather than the full path. 
     
 
-- Rule: **Do not write incorrect code**. **All** code examples must be run on a simulator before they are added to the documentation. All code examples should follow best practices. Particularly, look out for correct use of `var` and `let`. 
+- Rule C): **Do not write incorrect code**. **All** code examples must be run on a simulator before they are added to the documentation. All code examples should follow best practices. Particularly, look out for correct use of `var` and `let`. 
 
 
-- Rule: Examples should be designed for clarity.
+- Rule D): Examples should be designed for clarity.
 
 
-- Rule: Code examples should have no extra information beyond what the user needs to fully understand how to use the symbol.
+- Rule E): Code examples should have no extra information beyond what the user needs to fully understand how to use the symbol.
     - Incorrect:
     
             struct BananaView: View {
@@ -78,7 +78,7 @@ then a link to view is referenced by typing `View`, and links to body and foregr
             }
 
 
-- Rule: Each variable, structure, function, and any other type that is necessary to understand the core concept of a symbol should be given a clear and distinct name. That name should describe its particular purpose in the specific context where it is declared. Any type that is not central to the core idea of the symbol, should employ the "Banana"+Type naming convention. See the Banana naming convention section for more. 
+- Rule F): Each variable, structure, function, and any other type that is necessary to understand the core concept of a symbol should be given a clear and distinct name. That name should describe its particular purpose in the specific context where it is declared. Any type that is not central to the core idea of the symbol, should employ the "Banana"+Type naming convention. See the Banana naming convention section for more. 
  - Incorrect: ExampleView should be "BananaView""
  
          struct ExampleView: View {
@@ -124,7 +124,7 @@ then a link to view is referenced by typing `View`, and links to body and foregr
         }
 
 
-- Rule: All naming not central to the core idea of the symbol at hand should use the "Banana", "Apple", "Peach" prefix nomenclature scheme. The suffix is always the type. An example would include BananaView, or PeachApp. 
+- Rule G): All naming not central to the core idea of the symbol at hand should use the "Banana", "Apple", "Peach" prefix nomenclature scheme. The suffix is always the type. An example would include BananaView, or PeachApp. 
 
 A symbol that requires a string, should follow: 
 1. 🍌🍌
@@ -152,26 +152,27 @@ A symbol that requires a color, should follow:
             let linesInProject = module.sourceFile.lines //23,067
 
 
-- Rule: Example code does not need its language specified, since it is implied by the source code. Examples should also use code block tab-indent formatting rather than triple backtick (```) indenting:
+- Rule H): Example code does not need its language specified, since it is implied by the source code. Examples should also use code block tab-indent formatting rather than triple backtick (```) indenting:
 
 Incorrect:
             
-/// ```swift
-/// struct BananaView {
-///     var child: String
-/// }
-/// ```
+ ```swift
+ struct BananaView {
+     var child: String
+}
+```
 
 Correct: 
 
-///     struct BananaView {
-///         var child: String
-///     }
+    struct BananaView {
+         var child: String
+    }
 
 
-- Rule: When in doubt, write another example 
+- Rule I): When in doubt, write another example 
 
 
-- Rule: No paragraph has more than 6 sentences. 
+- Rule J): No paragraph should have more than 6 sentences. 
 
 
+- Rule K): Every sentence should sound natural if spoken. 
