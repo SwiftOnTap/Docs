@@ -24184,9 +24184,9 @@ extension MutableCollection {
 
 extension UIColor {
 
-	/// Creates a new `UIColor` from a SwiftUI `Color`.
+	/// Creates a new `UIColor` from a SwiftUI ``Color``.
 	/// 
-	/// - Parameter color: The SwiftUI `Color` object to use for creating a `UIColor`.
+	/// - Parameter color: The SwiftUI ``Color`` object to use for creating a `UIColor`.
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
     @available(macOS, unavailable)
     public convenience init(_ color: Color)
