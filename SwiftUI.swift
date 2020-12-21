@@ -15724,95 +15724,60 @@ public struct TapGesture : Gesture {
     public typealias Body = Never
 }
 
-/// A view that displays one or more lines of read-only text.
+/// A view that displays text.
 ///
-/// A text view draws a string in your app's user interface using a
-/// ``Font/body`` font that's appropriate for the current platform. You can
-/// choose a different standard font, like ``Font/title`` or ``Font/caption``,
-/// using the ``View/font(_:)`` view modifier.
+/// `Text` draws a string in your app and comes equipped with modifiers to customize your text.
 ///
-///     Text("Hamlet")
-///         .font(.title)
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text("🍌🍌")
+///     }
+/// }
+/// ```
 ///
-/// ![A text view showing the name "Hamlet" in a title
-/// font.](SwiftUI-Text-title.png)
+/// `Text` is most commonly initialized with a string, however, it has 9 different initializers.
 ///
-/// If you need finer control over the styling of the text, you can use the same
-/// modifier to configure a system font or choose a custom font. You can also
-/// apply view modifiers like ``Text/bold()`` or ``Text/italic()`` to further
-/// adjust the formatting.
+/// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
-///     Text("by William Shakespeare")
-///         .font(.system(size: 12, weight: .light, design: .serif))
-///         .italic()
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///     }
+/// }
+/// ```
 ///
-/// ![A text view showing by William Shakespeare in a 12 point, light, italic,
-/// serif font.](SwiftUI-Text-font.png)
+/// `Text` also accepts 12 unique modifiers to customize your string.
 ///
-/// A text view always uses exactly the amount of space it needs to display its
-/// rendered contents, but you can affect the view's layout. For example, you
-/// can use the ``View/frame(width:height:alignment:)`` modifier to propose
-/// specific dimensions to the view. If the view accepts the proposal but the
-/// text doesn't fit into the available space, the view uses a combination of
-/// wrapping, tightening, scaling, and truncation to make it fit. With a width
-/// of `100` points but no constraint on the height, a text view might wrap a
-/// long string:
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///             .underline(true, color: .orange)
+///             .font(.system(size: 20, weight: .bold, design: .rounded))
+///     }
+/// }
+/// ```
 ///
-///     Text("To be, or not to be, that is the question:")
-///         .frame(width: 100)
+/// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with `Text`.
 ///
-/// ![A text view showing a quote from Hamlet split over three
-/// lines.](SwiftUI-Text-split.png)
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///             .font(.system(size: 20, weight: .bold, design: .rounded))
+///             .foregroundColor(.orange)
+///     }
+/// }
+/// ```
 ///
-/// Use modifiers like ``View/lineLimit(_:)``, ``View/allowsTightening(_:)``,
-/// ``View/minimumScaleFactor(_:)``, and ``View/truncationMode(_:)`` to
-/// configure how the view handles space constraints. For example, combining a
-/// fixed width and a line limit of `1` results in truncation for text that
-/// doesn't fit in that space:
+/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
 ///
-///     Text("Brevity is the soul of wit.")
-///         .frame(width: 100)
-///         .lineLimit(1)
+/// See ``Text/init(_:tableName:bundle:comment:)`` for more information on how to initialize `Text` with localized strings.
 ///
-/// ![A text view showing a truncated quote from Hamlet starting Brevity is t
-/// and ending with three dots.](SwiftUI-Text-truncated.png)
-///
-/// ### Localizing Strings
-///
-/// If you initialize a text view with a string literal, the view uses the
-/// ``Text/init(_:tableName:bundle:comment:)`` initializer, which interprets the
-/// string as a localization key and searches for the key in the table you
-/// specify, or in the default table if you don't specify one.
-///
-///     Text("pencil") // Searches the default table in the main bundle.
-///
-/// For an app localized in both English and Spanish, the above view displays
-/// "pencil" and "lápiz" for English and Spanish users, respectively. If the
-/// view can't perform localization, it displays the key instead. For example,
-/// if the same app lacks Danish localization, the view displays "pencil" for
-/// users in that locale. Similarly, an app that lacks any localization
-/// information displays "pencil" in any locale.
-///
-/// To explicitly bypass localization for a string literal, use the
-/// ``Text/init(verbatim:)`` initializer.
-///
-///     Text(verbatim: "pencil") // Displays the string "pencil" in any locale.
-///
-/// If you intialize a text view with a variable value, the view uses the
-/// ``Text/init(_:)-9d1g4`` initializer, which doesn't localize the string. However,
-/// you can request localization by creating a ``LocalizedStringKey`` instance
-/// first, which triggers the ``Text/init(_:tableName:bundle:comment:)``
-/// initializer instead:
-///
-///     // Don't localize a string variable...
-///     Text(writingImplement)
-///
-///     // ...unless you explicitly convert it to a localized string key.
-///     Text(LocalizedStringKey(writingImplement))
-///
-/// When localizing a string variable, you can use the default table by omitting
-/// the optional initialization parameters — as in the above example — just like
-/// you might for a string literal.
+/// Use the `View` modifiers ``View/lineLimit(_:)``, ``View/allowsTightening(_:)``,
+/// ``View/minimumScaleFactor(_:)``, and ``View/truncationMode(_:)`` to configure how `Text` handles space constraints.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Text : Equatable {
 
