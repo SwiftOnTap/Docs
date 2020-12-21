@@ -30,7 +30,9 @@ jobs:
       run: |
         for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do
           if ! grep -q "$i," <<< $IGNORED_FILES; then
-            echo "Uploading $i to S3 bucket"
-            aws s3 cp $i s3://blossom-documentation
+            if test -f $i; then
+              echo "Uploading $i to S3 bucket"
+              aws s3 cp $i s3://blossom-documentation
+            fi
           fi
         done
