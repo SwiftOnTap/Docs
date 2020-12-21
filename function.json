@@ -1,0 +1,36 @@
+{
+  "availability": [
+
+  ],
+  "declaration": "",
+  "description": "A chunk of code that performs a task.",
+  "overview": "`Functions` perform a specific task given an input and an output.\n\n```\nstruct ExampleView: View {\n    var body: some View {\n        Text(getFruit())\n   }\n\n    func getFruit() -> String {\n        return [\"🍌🍌\", \"🍏🍏\", \"🍑🍑\"].randomElement()!\n    }\n}\n```\nApple has a great overview on Swift `Functions` [here](https://docs.swift.org/swift-book/LanguageGuide/Functions.html).",
+  "parameters": [
+
+  ],
+  "path": "functions",
+  "relationships": {
+    "conformsTo": [
+
+    ],
+    "typesConformedBy": [
+
+    ],
+    "typesConformingTo": [
+
+    ],
+    "typesInheritedBy": [
+
+    ],
+    "typesInheritingFrom": [
+
+    ]
+  },
+  "returns": "",
+  "throws": "",
+  "title": "Function",
+  "topics": [
+
+  ],
+  "type": "Type"
+}
