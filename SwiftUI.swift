@@ -16670,13 +16670,33 @@ public struct TextEditor : View {
     public typealias Body = some View
 }
 
-/// A control that displays an editable text interface.
+/// A view for editable text.
 ///
-/// You can customize the appearance and interaction of a text field using a
-/// ``TextFieldStyle`` instance. The system resolves this configuration at
-/// runtime. Each platform provides a default style that reflects the platform
-/// style, but you can provide a new style that redefines all text field
-/// instances within a particular environment.
+/// `TextField` provides an interface to display and modify editable text.
+///
+/// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             TextField("Fruit", text: $myFruit)
+///         }
+///     }
+///
+/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             TextField("Fruit", text: $myFruit)
+///                 .textFieldStyle(RoundedBorderTextFieldStyle())
+///                 .padding()
+///         }
+///     }
+///
+/// The ``TextFieldStyle`` protocol and ``View/textFieldStyle(_:)`` modifier provide helpful functionality to implement a well styled `TextField`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct TextField<Label> : View where Label : View {
 
