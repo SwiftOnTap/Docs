@@ -18330,7 +18330,35 @@ extension UserInterfaceSizeClass : Equatable {
 extension UserInterfaceSizeClass : Hashable {
 }
 
-/// A view that arranges its children in a vertical line.
+/// A view that arranges children vertically.
+///
+/// `VStack` is a vertical stack of views.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             VStack {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Modify your stack's alignment or spacing with the built in initializer.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             VStack(alignment: .top, spacing: 32) {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Learn more about the properties of each alignment choice via the ``HorizontalAlignment`` struct.
+///
+/// `VStack` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VStack<Content> : View where Content : View {
 
