@@ -2445,11 +2445,11 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 
 /// This protocol is used to define custom button styles.
 ///
-/// ButtonStyle is a modifier used to define custom styling and standard interaction behavior for buttons based on their interaction state. To provide custom button interaction behavior, use `PrimitiveButtonStyle`.
+/// The ButtonStyle protocol provides a template to create a reusable style for your buttons. The style is aware of whether the button is being pressed, and can modify the view accordingly.
 ///
-/// Your structure only needs to implement one method: `ButtonStyle/makeBody(configuration:)`. Its output is the styled button view.
+/// Your structure only needs to implement one method: `ButtonStyle/makeBody(configuration:)`. This method will output the styled button view.
 ///
-/// To create a custom button style, provide a struct that adheres to `ButtonStyle`.
+/// To build a custom button style, first create a struct that conforms to `ButtonStyle`.
 ///
 /// ```
 /// struct BananaButtonStyle: ButtonStyle {
@@ -2484,9 +2484,9 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// struct BananaView: View {
 ///     var body: some View {
 ///         VStack {
-///             Button("🍌🍌") { print("banana") }
-///             Button("🍎🍎") { print("apple") }
-///             Button("🍑🍑") { print("peach") }
+///             Button("🍌🍌") {}
+///             Button("🍎🍎") {}
+///             Button("🍑🍑") {}
 ///         }
 ///         .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
@@ -2512,6 +2512,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// ```
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`.
+///
+/// To provide custom button interaction behavior, use `PrimitiveButtonStyle`.
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle {
@@ -6733,28 +6735,28 @@ public struct FocusedValues {
 
 /// An environment-dependent font.
 ///
-///Fonts can be applied to your text using `font(_:)`.
+/// Fonts can be applied to your view using `font(_:)`.
 ///
-///```swift
-///Text("🍌")
-///  .font(.largeTitle)
-///```
+/// ```swift
+/// Text("🍌🍌")
+///   .font(.largeTitle)
+/// ```
 ///
-///In addition to standard system font types like `largeTitle` and `body`, Font allows customization of the style and design using `system(_:design:)`
+/// In addition to standard system font types like `largeTitle` and `body`, Font allows customization of the style and design using `system(_:design:)`
 ///
-///```swift
-///Text("🍌")
-///  .font(.system(size: 18.0, weight: .medium, design: .rounded))
-///```
+/// ```swift
+/// Text("🍌🍌")
+///   .font(.system(size: 18.0, weight: .medium, design: .rounded))
+/// ```
 ///
-///Custom fonts can be applied using `Font.custom(_:size:)`
+/// Custom fonts can be applied using `Font/custom(_:size:)`
 ///
-///```swift
-///Text("🍌")
-///  .font(Font.custom("American Typewriter", size: 24))
-///```
+/// ```swift
+/// Text("🍌🍌")
+///   .font(Font.custom("American Typewriter", size: 24))
+/// ```
 ///
-///Font provides many other customizations such as kerning and alignment to style the contents of your text view.
+/// Font provides many other customizations such as kerning and alignment to style the contents of your text view.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Font : Hashable {
 
@@ -9856,53 +9858,46 @@ public struct ListItemTint {
     public static let monochrome: ListItemTint
 }
 
-/// `ListStyle` modifies how a list appears and behaves.
+/// This protocol modifies how a list appears and behaves.
 ///
 /// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a list by using the `listStyle(_:)` modifier.
 ///
 /// ```swift
 /// struct BananaListView: View {
-///   var body: some View {
-///     List {
-///       Text("🍌")
-///       Text("🍎")
+///     var body: some View {
+///         List {
+///             Text("🍌🍌")
+///             Text("🍎🍎")
+///         }
+///         .listStyle(InsetListStyle())
 ///     }
-///     .listStyle(InsetListStyle())  }
 /// }
 /// ```
 ///
-/// Two list styles are included specifically for rendering grouped lists - `View/Styles/GroupedListStyle` and `View/Styles/InsetGroupedListStyle`. These provide styling consistent with OS standards for sectioned lists, including header styling.
+/// Two list styles are included specifically for rendering grouped lists - `View/Styles/GroupedListStyle` and `View/Styles/InsetGroupedListStyle`. These provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
 /// ```swift
 /// List {
-///   Section(header: Text("🍌")) {
-///     Text("🔥")
+///   Section(header: Text("🍌🍌")) {
+///     Text("🔥🔥")
 ///   }
-///   Section(header: Text("🍎")) {
-///   Text("🔥")
+///   Section(header: Text("🍎🍎")) {
+///     Text("🔥🔥")
 ///   }
 /// }
 /// .listStyle(GroupedListStyle())
 /// ```
 ///
-/// Many of SwiftUIs list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All included styles are touched on below.
+/// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All included styles are referenced below.
 ///
-/// `View/Styles/DefaultListStyle` - provides the default list behavior and appearence for the platform.
-///
-/// `View/Styles/GroupedListStyle` - provides default list behavior for grouped lists, including appropriate formating of section headers.
-///
-/// `View/Styles/InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
-///
-/// `View/Styles/InsetListStyle` - is similar to a plain list, but includes additional layout insets.
-///
-/// `View/Styles/PlainListStyle` - provides platform standard list appearance and behavior.
-///
-/// `View/Styles/SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:///swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/).
-///
-/// `View/Styles/EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
-///
-/// `View/Styles/CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+/// - `View/Styles/DefaultListStyle` - provides the default list behavior and appearence for the platform.
+/// - `View/Styles/GroupedListStyle` - provides default list behavior for grouped lists, including appropriate formating of section headers.
+/// - `View/Styles/InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
+/// - `View/Styles/InsetListStyle` - is similar to a plain list, but includes additional layout insets.
+/// - `View/Styles/PlainListStyle` - provides platform standard list appearance and behavior.
+/// - `View/Styles/SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/).
+/// - `View/Styles/EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
+/// - `View/Styles/CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ListStyle {
 }
 
@@ -12344,13 +12339,13 @@ extension PreviewProvider {
     public static var platform: PreviewPlatform? { get }
 }
 
-/// This protcol is used to define custom button styles that define interaction behavior.
+/// This protocol is used to define custom button styles that define both styling and interaction behavior.
 ///
-/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and `PlainButtonStyle`. If only custom styling is needed, use `ButtonStyle` instead.
+/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, allowing that interaction to be customized. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and `PlainButtonStyle`.
 ///
-/// Your structure only needs to implement one method: `PrimitiveButtonStyle/makeBody(configuration:)`. Its output is the styled button view.
+/// Your structure only needs to implement one method: `PrimitiveButtonStyle/makeBody(configuration:)`. The styled button view is output by this method.
 ///
-/// To create a custom `PrimitiveButtonStyle`, define a struct that adheres to the protocol as follows:
+/// To build a custom `PrimitiveButtonStyle`, create a struct that conforms to the protocol.
 ///
 /// ```swift
 /// struct BananaPrimitiveButtonStyle: PrimitiveButtonStyle {
@@ -12365,16 +12360,14 @@ extension PreviewProvider {
 /// }
 /// ```
 ///
-/// `makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which defines a label to display the button view and a `trigger()` to execute its action. Here a gesture may be added to the label to trigger the button action.
+/// `makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which defines a label to display the button view and a `trigger()` to execute its action. Here a gesture is commonly added to the label to trigger the button action.
 ///
-/// Primitive button styles are applied using `View/buttonStyle(_:)`.
+/// Use `View/buttonStyle(_:)` to apply a primitive button style.
 ///
 /// ```swift
 /// struct BananaView: View {
 ///     var body: some View {
-///         Button("🍌🍌") {
-///             print("banana")
-///         }
+///         Button("🍌🍌") {}
 ///         .buttonStyle(BananaPrimitiveButtonStyle())
 ///     }
 /// }
@@ -12386,9 +12379,9 @@ extension PreviewProvider {
 /// struct BananaView: View {
 ///     var body: some View {
 ///         VStack {
-///             Button("🍌🍌") { print("banana") }
-///             Button("🍎🍎") { print("apple") }
-///             Button("🍑🍑") { print("peach") }
+///             Button("🍌🍌") {}
+///             Button("🍎🍎") {}
+///             Button("🍑🍑") {}
 ///         }
 ///         .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
@@ -12401,15 +12394,13 @@ extension PreviewProvider {
 ///     configuration.label
 ///       .background(RoundedRectangle(cornerRadius: 10).fill(color))
 ///       .padding()
-///       .gesture(
-///         TapGesture(count: 1)
-///           .onEnded { _ in configuration.trigger() }
-///       )
+///       .onTapGesture { configuration.trigger() }
 ///   }
 /// }
 /// ```
 ///
 /// For more on how to customize your button style body, check out `PrimitiveButtonStyle/makeBody(configuration:)`.
+///  If only custom styling is needed, use `ButtonStyle` instead.
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PrimitiveButtonStyle {
@@ -15848,59 +15839,35 @@ public struct TapGesture : Gesture {
     public typealias Body = Never
 }
 
-/// This view displays multi-line, read-only text.
+/// This view displays read-only text.
 ///
-/// Text can display a string, image or a localized string. A text view sizes itself to fit the provided content, styling and containing view. An extensive list of modifiers are provided to adjust the layout and spacing of text in this view.
-///
-/// Text view uses the following initializers:
-///
-/// `init(_:tableName:bundle:comment:)` - displays a localized string
-///
-/// `init<S>(S)` - displays a string (where S conforms to StringProtocol)
-///
-/// `init(verbatim: String)` - displays a non-localized string
-///
-/// `init(Image)` - displays an  image
+/// Text can display a string, image or a localized string. By default, an unlimited number of lines can be displayed. A text view sizes itself to fit the provided content, styling and containing view. SwiftUI provides an extensive list of modifiers for adjusting the layout and spacing of text in this view.
 ///
 /// For a non-localized string, Text only requires a string as input.
 ///
-/// ```swift
-/// Text("🍌🍌")
-/// ```
+///     Text("🍌🍌") // Displays "🍌🍌"
 ///
 /// The string will be rendered with the body text style associated with the target platform.
 ///
-/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌 for your current location, the localized string could be displayed with this line:
+/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to "🍌" for your current location, the localized string could be displayed with this line:
 ///
-/// ```
-/// Text("banana")
-/// ```
+///     Text("banana") // Displays "🍌" when "banana" is localized to "🍌"
 ///
-/// To display localized keys coming from a non-standard bundle or string table, see `Text/init(_:tableName:bundle:comment:)`.
+/// If the localization key "banana" is mapped to "🍌" for your current location, but you want to display the string "banana" - use `init(verbatim: String)`.
+///
+///     Text(verbatim: "banana") // Displays "banana" when "banana" is localized to "🍌"
 ///
 /// Images can be displayed in a text view. This enables you to optionally include them inside a text string, where they will resize based on your view's font.
 ///
-/// ```
-/// Text("🔥") + Text(Image(systemName: "flame.fill"))
-/// ```
+///     Text("🔥") + Text(Image(systemName: "flame.fill"))
 ///
 /// See `Font` for info on using fonts styles other than body, using custom fonts, adjusting kerning, alignment and more.
 ///
-/// Several modifiers are available to help you fit text content into a confined area. These adjust spacing and amount of content availabe in a text view in various ways. To learn about these, see the following documentation:
-///
-/// `View/lineLimit(_:)`
-///
-/// `View/minimumScaleFactor(_:)`
-///
-/// `View/allowsTightening(_:)`
-///
-/// `View/truncationMode(_:)`
-///
-/// `View/multilineTextAlignment(_:)`
-///
-/// `View/lineSpacing(_:)`
+/// To display localized keys coming from a non-standard bundle or string table, see `Text/init(_:tableName:bundle:comment:)`.
 ///
 /// To explicitly modify the size of the view, see `View/frame(width:height:alignment:)`.
+///
+/// To modify the number of lines of text displayed, see `Text/lineLimit(_:)`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Text : Equatable {
 
