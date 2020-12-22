@@ -9538,7 +9538,71 @@ extension Link where Label == Text {
     public init<S>(_ title: S, destination: URL) where S : StringProtocol { }
 }
 
-/// A container that presents rows of data arranged in a single column.
+/// A view that presents rows of data.
+///
+/// `List` makes it easy to present rows of data in your view.
+///
+/// `List` has 18 different initializers depending on the nature of your data.
+///
+/// The most basic `List` implementation is a scrollable list.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// `List` can also dynamically render itself from an array of data.
+///
+///     struct ContentView: View {
+///         var myFruit: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///
+///         var body: some View {
+///             List(myFruit, id: \.self) { fruit in
+///                 Text(fruit)
+///             }
+///         }
+///     }
+///
+/// Easily add sections to your `List`.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Section(header: Text("Fruity Companies")) {
+///                     Text("Fruit Loops🥣🌈")
+///                     Text("Banana🍌 Docs")
+///                 }
+///
+///                 Section(header: Text("Fruit Companies")) {
+///                     Text("Apple🍏")
+///                 }
+///             }
+///         }
+///     }
+///
+/// Style your list with the ``View/listStyle(_:)`` modifier.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Section(header: Text("Fruity Companies")) {
+///                     Text("Fruit Loops🥣🌈")
+///                     Text("Banana🍌 Docs")
+///                 }
+///
+///                 Section(header: Text("Fruit Companies")) {
+///                     Text("Apple🍏")
+///                 }
+///             }.listStyle(InsetGroupedListStyle())
+///         }
+///     }
+///
+/// See the ``ListStyle`` protocol and ``View/listStyle(_:)`` for more on implementing lists.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
