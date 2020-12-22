@@ -13227,140 +13227,150 @@ extension RoundedRectangle : InsettableShape {
     public typealias Body
 }
 
-/// A part of an app's user interface with a life cycle managed by the
-/// system.
+/// This protocol is used to create different content areas on the screen.
 ///
-/// You create an ``SwiftUI/App`` by combining one or more instances
-/// that conform to the `Scene` protocol in the app's
-/// ``SwiftUI/App/body-swift.property``. You can use the primitive scenes that
-/// SwiftUI provides, like ``SwiftUI/WindowGroup``, along with custom scenes
-/// that you compose from other scenes. To create a custom scene, declare a
-/// type that conforms to the `Scene` protocol. Implement the required
-/// ``SwiftUI/Scene/body-swift.property`` computed property and provide the
-/// content for your custom scene:
+/// On-screen `Scene`s are the building blocks of any app built entirely in SwiftUI. They can look
+/// different depending on the platform the app is running on. For example, in iOS, the screen usually
+/// only displays one scene at a time. In macOS, every window in an app might be a different scene.
 ///
-///     struct MyScene: Scene {
+/// Scenes can either be custom, or one of the primitives like ``WindowGroup`` or
+/// ``DocumentGroup``.
+///
+/// ### Creating a Scene
+///
+/// #### Using primitive Scenes
+///
+/// Primitive scenes like ``WindowGroup`` can go directly in the body of your ``App``.
+///
+///     @main
+///     struct SuperSimpleApp: App {
 ///         var body: some Scene {
 ///             WindowGroup {
-///                 MyRootView()
+///                 Text("This is an entire app! 🙌")
 ///             }
 ///         }
 ///     }
 ///
-/// A scene acts as a container for a view hierarchy that you want to display
-/// to the user. The system decides when and how to present the view hierarchy
-/// in the user interface in a way that's platform-appropriate and dependent
-/// on the current state of the app. For example, for the window group shown
-/// above, the system lets the user create or remove windows that contain
-/// `MyRootView` on platforms like macOS and iPadOS. On other platforms, the
-/// same view hierarchy might consume the entire display when active.
+/// #### Using custom Scenes
 ///
-/// Read the ``SwiftUI/EnvironmentValues/scenePhase`` environment
-/// value from within a scene or one of its views to check whether a scene is
-/// active or in some other state. You can create a property that contains the
-/// scene phase, which is one of the values in the ``SwiftUI/ScenePhase``
-/// enumeration, using the ``SwiftUI/Environment`` attribute:
+/// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
+/// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
 ///
-///     struct MyScene: Scene {
-///         @Environment(\.scenePhase) private var scenePhase
+///     @main
+///     struct MacCompatibleApp: App {
+///         var body: some Scene {
+///             CustomScene()
+///         }
 ///
-///         // ...
-///     }
-///
-/// The `Scene` protocol provides scene modifiers, defined as protocol methods
-/// with default implementations, that you use to configure a scene. For
-/// example, you can use the ``SwiftUI/Scene/onChange(of:perform:)`` modifier to
-/// trigger an action when a value changes. The following code empties a cache
-/// when all of the scenes in the window group have moved to the background:
-///
-///     struct MyScene: Scene {
-///         @Environment(\.scenePhase) private var scenePhase
-///         @StateObject private var cache = DataCache()
-///
+///     struct CustomScene: Scene {
 ///         var body: some Scene {
 ///             WindowGroup {
-///                 MyRootView()
+///                 Text("This is a mac-compatible app! 💻")
 ///             }
-///             .onChange(of: scenePhase) { newScenePhase in
-///                 if newScenePhase == .background {
-///                     cache.empty()
-///                 }
+///
+///             #if os(macOS)
+///             Settings {
+///                 SettingsView()
+///             }
+///             #endif
+///         }
+///     }
+///
+/// ### Modifiers
+///
+/// Just like how ``Views`` have a bunch of custom modifiers that work right out of the box,
+/// `Scene` provides default implementations of many useful modifiers. These can be used to do things
+/// like adding macOS commands, changing the toolbar, and adding support for app storage.
+///
+/// ### Getting Scene Status
+///
+/// The ``EnvironmentValues/scenePhase`` environment value can easily be read in a scene
+/// to respond to whether the scene is active or in another state. It returns an enumeration of type
+/// ``ScenePhase``.
+///
+///     struct StateAdaptingScene: Scene {
+///         @Environment(\.scenePhase) private var scenePhase
+///         var body: some Scene {
+///             WindowGroup {
+///                 Text(scenePhase == .active ? "Active!" : "Inactive")
 ///             }
 ///         }
 ///     }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol Scene {
 
-    /// The type of scene that represents the body of this scene.
+    /// The type of the body variable in a scene.
     ///
-    /// When you create a custom scene, Swift infers this type from your
-    /// implementation of the required ``SwiftUI/Scene/body-swift.property``
-    /// property.
+    /// This type is automatically inferred from the ``Scene/body-swift.variable`` variable
+    /// when you make a custom Scene, so you don't have to worry about ever interacting with this
+    /// directly.
+    ///
+    /// If you're using a primitive scene like ``WindowGroup``, you might wonder what the body
+    /// type would be. If all scenes are built on scenes built on scenes, where does it start?
+    ///
+    /// Because of exactly that reason, all primitive Scene types set their body type to ``Never``.
+    ///
     associatedtype Body : Scene
 
-    /// The content and behavior of the scene.
+    /// The entry point for building custom Scenes.
     ///
-    /// For any scene that you create, provide a computed `body` property that
-    /// defines the scene as a composition of other scenes. You can assemble a
-    /// scene from primitive scenes that SwiftUI provides, as well as other
-    /// scenes that you've defined.
+    /// This computed property is the only requirement of conforming to the Scene protocol.
+    /// To make a custom Scene, compose `body` with other custom Scenes, or
+    /// with primitive Scenes like ``WindowGroup`` or ``Settings``.
     ///
-    /// Swift infers the scene's ``SwiftUI/Scene/Body-swift.associatedtype``
-    /// associated type based on the contents of the `body` property.
+    ///     @main
+    ///     struct MacCompatibleApp: App {
+    ///         var body: some Scene {
+    ///             CustomScene()
+    ///         }
+    ///
+    ///     struct CustomScene: Scene {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 Text("This is a mac-compatible app! 💻")
+    ///             }
+    ///
+    ///             #if os(macOS)
+    ///             Settings {
+    ///                 SettingsView()
+    ///             }
+    ///             #endif
+    ///         }
+    ///     }
     @SceneBuilder var body: Self.Body { get }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Scene {
 
-    /// Adds an action to perform when the given value changes.
+    /// Use this method to watch for changes in a variable value.
     ///
-    /// Use this modifier to trigger a side effect when a value changes, like
-    /// the value associated with an ``SwiftUI/Environment`` key or a
-    /// ``SwiftUI/Binding``. For example, you can clear a cache when you notice
-    /// that a scene moves to the background:
+    /// This method is most often used to watch for changes in a scene's status (active, inactive, etc.)
     ///
-    ///     struct MyScene: Scene {
+    /// There is a different, but related, method called ``View/onChange(of:perform:)`` that
+    /// can be used on ``Views``.
+    ///
+    ///     struct CustomScene: Scene {
     ///         @Environment(\.scenePhase) private var scenePhase
-    ///         @StateObject private var cache = DataCache()
+    ///         @State private var count = 0
     ///
     ///         var body: some Scene {
     ///             WindowGroup {
-    ///                 MyRootView()
+    ///                 Text("If you're seeing this active was printed.")
     ///             }
     ///             .onChange(of: scenePhase) { newScenePhase in
-    ///                 if newScenePhase == .background {
-    ///                     cache.empty()
+    ///                 if newScenePhase == .active {
+    ///                     print("Active!")
     ///                 }
     ///             }
     ///         }
     ///     }
     ///
-    /// The system calls the `action` closure on the main thread, so avoid
-    /// long-running tasks in the closure. If you need to perform such tasks,
-    /// dispatch to a background queue:
-    ///
-    ///     .onChange(of: scenePhase) { newScenePhase in
-    ///         if newScenePhase == .background {
-    ///             DispatchQueue.global(qos: .background).async {
-    ///                 // ...
-    ///             }
-    ///         }
-    ///     }
-    ///
-    /// The system passes the new value into the closure. If you need the old
-    /// value, capture it in the closure.
-    ///
     /// - Parameters:
-    ///   - value: The value to check when determining whether to run the
-    ///     closure. The value must conform to the
-    ///     <doc://com.apple.documentation/documentation/Swift/Equatable>
-    ///     protocol.
-    ///   - action: A closure to run when the value changes. The closure
-    ///     provides a single `newValue` parameter that indicates the changed
-    ///     value.
+    ///   - value: The value to watch for changes.
+    ///   - action: A function to run when the value changes.
     ///
-    /// - Returns: A scene that triggers an action in response to a change.
+    /// - Returns: A scene that calls a function when a value changes.
     @inlinable public func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some Scene where V : Equatable { }
 
 }
@@ -13370,17 +13380,40 @@ extension Scene {
 @available(watchOS, unavailable)
 extension Scene {
 
-    /// Adds commands to the scene.
+    /// Use this modifier to add a menu and keyboard shortcuts to your macOS and iPadOS apps.
     ///
-    /// Commands are realized in different ways on different platforms. On
-    /// macOS, the main menu uses the available command menus and groups to
-    /// organize its main menu items. Each menu is represented as a top-level
-    /// menu bar menu, and each command group has a corresponding set of menu
-    /// items in one of the top-level menus, delimited by separator menu items.
+    /// This modifier accepts a builder of ``Commands`` to create a menu bar with shortcuts.
     ///
-    /// On iPadOS, commands with keyboard shortcuts are exposed in the shortcut
-    /// discoverability HUD that users see when they hold down the Command (⌘)
-    /// key.
+    /// In macOS, these commands are visible in the menu bar at the top of the screen. On iPadOS,
+    /// these commands are visible when you hold down the Command (⌘) key.
+    ///
+    /// See ``Commands`` for more info on how to build these commands.
+    ///
+    ///     @main
+    ///     struct CommandApp: App {
+    ///         WindowGroup {
+    ///             Text("Press ⌘P to print 🍌")
+    ///         }
+    ///         .commands {
+    ///             PrintCommand()
+    ///         }
+    ///     }
+    ///
+    ///     struct PrintCommand: Commands {
+    ///         var body: some Commands {
+    ///             CommandMenu("Print") {
+    ///                 Button("Print", action: { print("🍌") })
+    ///                     .keyboardShortcut(
+    ///                         KeyboardShortcut(
+    ///                             KeyEquivalent("p"),
+    ///                             modifiers: [.command]))
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter content: The command menus to add to your scene.
+    ///
+    /// - Returns: A scene with command menus and shortcuts.
     public func commands<Content>(@CommandsBuilder content: () -> Content) -> some Scene where Content : Commands { }
 
 }
@@ -13388,16 +13421,37 @@ extension Scene {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Scene {
 
-    /// The default store used by `AppStorage` contained within the scene and
-    /// its view content.
+    /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
     ///
-    /// If unspecified, the default store for a view hierarchy is
-    /// `UserDefaults.standard`, but can be set a to a custom one. For example,
-    /// sharing defaults between an app and an extension can override the
-    /// default store to one created with `UserDefaults.init(suiteName:_)`.
+    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// ``UserDefaults.standard``. Override this default location for all of your
+    /// scene's views by using this modifier.
     ///
-    /// - Parameter store: The user defaults to use as the default
-    ///   store for `AppStorage`.
+    /// There is a similar method for ``View`` called ``View/defaultAppStorage(_:)``
+    ///
+    /// Check out ``UserDefaults`` and ``AppStorage`` for more info on how in-app storage
+    /// works.
+    ///
+    ///     @main
+    ///     struct StorageExampleApp: App {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 StorageExampleView()
+    ///             }
+    ///             .defaultAppStorage(UserDefaults(suiteName: "com.yoursite.your-suite")!)
+    ///         }
+    ///     }
+    ///
+    ///     struct StorageExampleView: View {
+    ///         //Looks for "key" in "com.yoursite.your-suite"
+    ///         @AppStorage("key") var name = "Kanye West"
+    ///
+    ///         var body: some View {
+    ///             TextField("Enter your name", text: $name)
+    ///         }
+    ///     }
+    ///
+    /// - Parameter store: The default user defaults storage site for `@AppStorage`.
     public func defaultAppStorage(_ store: UserDefaults) -> some Scene { }
 
 }
@@ -13430,6 +13484,16 @@ extension Scene {
     ///
     /// On platforms that only allow a single Window/Scene, this method is
     /// ignored.
+    ///
+    ///     @main
+    ///     struct EventHandlingApp: App {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 SelectionView()
+    ///             }
+    ///             .handlesExternalEvents(matching: ["selection"]
+    ///         }
+    ///     }
     ///
     /// - Parameter matching: A Set of Strings that are checked to see
     /// if they are contained in the targetContentIdenfifier. The empty Set
