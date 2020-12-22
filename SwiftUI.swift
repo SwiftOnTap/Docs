@@ -4543,14 +4543,13 @@ extension DisclosureGroup where Label == Text {
     public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
 }
 
-/// A divider that can visually separate views in a stack.
+/// A divider that visually separates views in a stack.
 ///
-/// The `Divider` in its simplest context is a `1pt` thick line across an axis. The color and height of a `Divider` is determined by the system, and cannot be overriden.
-/// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack.
-/// When not in a stack, the divider stretches across the horizontal axis.
+/// The `Divider` in iOS is either a horizontal or a vertical `1pt` thick line. The color and height of a `Divider` is determined by the system, and cannot be overriden. The system is responsible for adapting the appearance of `Divider` as best appropriate for the host platform.
+///
+/// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack. When not in a stack, the divider stretches across the horizontal axis.
 ///
 /// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
-///
 /// ```
 /// VStack {
 ///     Text("My Awesome Book")
@@ -4562,7 +4561,6 @@ extension DisclosureGroup where Label == Text {
 /// ```
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
-///
 /// ```
 /// HStack {
 ///     Text("This is a line of text.")
@@ -5309,10 +5307,9 @@ extension EdgeInsets : Animatable {
 ///
 /// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode`) for content within a container that supports `EditMode.active`.
 /// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
-///
 /// ```
 /// struct ExampleView: View {
-///     @State var fruits = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///     @State var fruits = ["🍌", "🍏", "🍑"]
 ///
 ///     var body: some View {
 ///         NavigationView {
@@ -5641,7 +5638,7 @@ public struct EmptyCommands : Commands {
 /// Toggle(isOn: $myBooleanValue, label: { EmptyView() })
 /// ```
 ///
-/// It can also be used in conjunction with `GeometryReader`:
+/// `EmptyView` can also be used in conjunction with `GeometryReader`:
 ///
 /// ```
 /// struct ContentView: View {
@@ -5660,7 +5657,7 @@ public struct EmptyCommands : Commands {
 ///     }
 /// }
 /// ```
-/// You should account for `EmptyView` when building your own custom UI controls.
+/// Account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
 /// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
