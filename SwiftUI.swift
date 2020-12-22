@@ -2474,6 +2474,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///             configuration.label
 ///                 .padding()
 ///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
+///                 .animation(.spring())
 ///         }
 ///     }
 /// }
@@ -2532,6 +2534,8 @@ public protocol ButtonStyle {
 }
 
 /// The properties of a button.
+///
+/// This property represents the view state of the `Button` that ``ButtonStyle`` modifies. `ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -15836,7 +15840,7 @@ public struct TapGesture : Gesture {
 
 /// A view that displays text.
 ///
-/// `Text` draws a string in your app and comes equipped with modifiers to customize your text.
+/// `Text` draws a string in your app and comes equipped with modifiers to customize your text. A text view sizes itself to fit the provided content, styling and containing view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15884,7 +15888,17 @@ public struct TapGesture : Gesture {
 ///
 /// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
 ///
-/// See ``Text/init(_:tableName:bundle:comment:)`` for more information on how to initialize `Text` with localized strings.
+/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Text("banana")
+///         }
+///     }
+///
+/// See ``Text/init(_:tableName:bundle:comment:)`` for more information on how to initialize `Text` with localized strings. This initializer can be used to display localized keys coming from a non-standard bundle or string table.
+///
+/// Images can be displayed in a text view. This enables your app to optionally include them inside a text string, where they will resize based on your view's font. See ``Text/init(_:)-9a226`` for more on initializing `Text` with images.
 ///
 /// Use the `View` modifiers ``View/lineLimit(_:)``, ``View/allowsTightening(_:)``,
 /// ``View/minimumScaleFactor(_:)``, and ``View/truncationMode(_:)`` to configure how `Text` handles space constraints.
