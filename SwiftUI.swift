@@ -8046,7 +8046,35 @@ public struct GroupedListStyle : ListStyle {
     public init() { }
 }
 
-/// A view that arranges its children in a horizontal line.
+/// A view that arranges children horizontally.
+///
+/// `HStack` is a horizontal stack of views.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             HStack {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Modify your stack's alignment or spacing with the built in initializer.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             HStack(alignment: .top, spacing: 32) {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Learn more about the properties of each alignment choice via the ``VerticalAlignment`` struct.
+///
+/// `HStack` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HStack<Content> : View where Content : View {
 
