@@ -15619,35 +15619,53 @@ public struct SwitchToggleStyle : ToggleStyle {
     public typealias Body = some View
 }
 
-/// A view that switches between multiple child views using interactive user
-/// interface elements.
+/// A parent view to style & navigate child views.
 ///
-/// To create a user interface with tabs, place views in a `TabView` and apply
-/// the ``View/tabItem(_:)`` modifier to the contents of each tab. The following
-/// creates a tab view with three tabs:
+/// `TabView` provides an easy interface to navigate between different views. For example, `TabView` supports swipable views and tab views.
 ///
-///     TabView {
-///         Text("The First Tab")
-///             .tabItem {
-///                 Image(systemName: "1.square.fill")
-///                 Text("First")
+/// Apply the ``View/tabItem(_:)`` to modify the contents of your tabs.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             TabView {
+///                 Text("Bananas🍌🍌")
+///                     .tabItem {
+///                         Image(systemName: "1.circle.fill")
+///                         Text("🍌🍌")
+///                     }
+///                 Text("Apples🍏🍏")
+///                     .tabItem {
+///                         Image(systemName: "2.square.fill")
+///                         Text("🍏🍏")
+///                     }
+///                 Text("Peaches🍑🍑")
+///                     .tabItem {
+///                         Image(systemName: "3.square.fill")
+///                         Text("🍑🍑")
+///                     }
 ///             }
-///         Text("Another Tab")
-///             .tabItem {
-///                 Image(systemName: "2.square.fill")
-///                 Text("Second")
-///             }
-///         Text("The Last Tab")
-///             .tabItem {
-///                 Image(systemName: "3.square.fill")
-///                 Text("Third")
-///             }
+///             .font(.headline)
+///         }
 ///     }
-///     .font(.headline)
 ///
-/// Tab views only support tab items of type ``Text``, ``Image``, or an image
-/// followed by text. Passing any other type of view results in a visible but
-/// empty tab item.
+/// Implement a swipable `TabView` with the ``View/tabViewStyle(_:)`` modifier to adjust navigation type.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             TabView {
+///                 Text("Bananas🍌")
+///                 Text("Apples🍏")
+///                 Text("Peaches🍑")
+///             }
+///             .tabViewStyle(PageTabViewStyle())
+///             .frame(width: 300, height: 600, alignment: .center)
+///             .background(Color(.orange))
+///             .foregroundColor(.white)
+///             .font(.headline)
+///         }
+///     }
+///
+/// To learn more about how to implement `TabView` see ``View/tabViewStyle(_:)`` and ``TabViewStyle``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
