@@ -1334,25 +1334,35 @@ extension AnyTransition {
     public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
 }
 
-/// A type-erased view.
+/// A view that provides type-erasure for views of other types.
 ///
-/// An `AnyView` allows hiding of the type of the `View` value passed to it (similar to how `AnyHashable` allows hiding of the type of `Hashable` value passed to it).
+/// An `AnyView` hides the type of the `View` value passed to it (similar to how `AnyHashable` hides the type of `Hashable` value passed to it).
 ///
 /// To type-erase your view, pass it to `AnyView/init(_:)` like this:
 ///
 /// ```
-/// AnyView(Text("Hello, world!"))
+/// struct ExampleView: View {
+///     var body: some View {
+///         AnyView(Text("Hello, world!"))
+///     }
+/// }
 /// ```
 ///
 /// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
 ///
-/// ````
-/// if foo {
-///     AnyView(Text("Hello, world!"))
-/// } else {
-///     AnyView(Color.red)
+/// ```
+/// struct ExampleView: View {
+///     let foo: Bool
+///
+///     var body: some View {
+///         if foo {
+///             AnyView(Text("Hello, world!"))
+///         } else {
+///             AnyView(Color.red)
+///         }
+///     }
 /// }
-/// ````
+/// ```
 ///
 /// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ``List/init(_:id:selection:rowContent:)``. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or `View/background(_:alignment:)`.
 ///
@@ -4533,14 +4543,13 @@ extension DisclosureGroup where Label == Text {
     public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
 }
 
-/// A visual element that can be used to separate and segregate content.
+/// A divider that can visually separate views in a stack.
 ///
 /// The `Divider` in its simplest context is a `1pt` thick line across an axis. The color and height of a `Divider` is determined by the system, and cannot be overriden.
-///
 /// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack.
 /// When not in a stack, the divider stretches across the horizontal axis.
 ///
-/// For example, you can use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
+/// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
 ///
 /// ```
 /// VStack {
@@ -5302,8 +5311,8 @@ extension EdgeInsets : Animatable {
 /// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
 ///
 /// ```
-/// struct ContentView: View {
-///     @State var fruits = ["🍌", "🍎", "🍑"]
+/// struct ExampleView: View {
+///     @State var fruits = ["🍌🍌", "🍏🍏", "🍑🍑"]
 ///
 ///     var body: some View {
 ///         NavigationView {
@@ -5611,14 +5620,18 @@ public struct EmptyCommands : Commands {
 /// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
 ///
 /// ```
-/// VStack {
-///     Text("Hello")
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack {
+///             Text("Hello")
 ///
-///     EmptyView()
-///         .frame(width: 1000, height: 1000)
-///         .background(Color.red)
+///             EmptyView()
+///                 .frame(width: 1000, height: 1000)
+///                 .background(Color.red)
 ///
-///     Text("World")
+///             Text("World")
+///         }
+///     }
 /// }
 /// ```
 ///
@@ -5649,7 +5662,6 @@ public struct EmptyCommands : Commands {
 /// ```
 /// You should account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
-///
 /// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
 ///     let label: Label
