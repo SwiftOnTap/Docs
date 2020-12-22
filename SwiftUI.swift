@@ -1334,11 +1334,64 @@ extension AnyTransition {
     public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
 }
 
-/// A type-erased view.
+/// A view that provides type-erasure for views of other types.
 ///
-/// An `AnyView` allows changing the type of view used in a given view
-/// hierarchy. Whenever the type of view used with an `AnyView` changes, the old
-/// hierarchy is destroyed and a new hierarchy is created for the new type.
+/// An `AnyView` hides the type of the `View` value passed to it (similar to how `AnyHashable` hides the type of `Hashable` value passed to it).
+///
+/// To type-erase your view, pass it to `AnyView/init(_:)` like this:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         AnyView(Text("Hello, world!"))
+///     }
+/// }
+/// ```
+///
+/// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
+///
+/// ```
+/// struct ExampleView: View {
+///     let foo: Bool
+///
+///     var body: some View {
+///         if foo {
+///             AnyView(Text("Hello, world!"))
+///         } else {
+///             AnyView(Color.red)
+///         }
+///     }
+/// }
+/// ```
+///
+/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ``List/init(_:id:selection:rowContent:)``. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or `View/background(_:alignment:)`.
+///
+/// Consider whether the usage of `AnyView` is appropriate, or even necessary. A common mistake is to use `AnyView` like this:
+///
+/// ```
+/// func makeHelperView() -> some View {
+///     if foo {
+///         return AnyView(Text("Hello, world!"))
+///     } else {
+///         return AnyView(Color.red)
+///     }
+/// }
+/// ```
+///
+/// Wherein adding a `@ViewBuilder` would be more appropriate:
+///
+/// ```
+/// @ViewBuilder
+/// func makeHelperView() -> some View {
+///     if foo {
+///         Text("Hello, world!")
+///     } else {
+///         Color.red
+///     }
+/// }
+/// ```
+///
+/// The latter example performs better as the SwiftUI runtime is given a more explicit type hierarchy, where the switch between `foo` being true or false can only result in a `Text` or a `Color`. The former example erases that information, forcing the SwiftUI runtime to evaluate the actual view type lazily, and thus requires more work to compute and render.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AnyView : View {
 
@@ -4490,10 +4543,33 @@ extension DisclosureGroup where Label == Text {
     public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
 }
 
-/// A visual element that can be used to separate other content.
+/// A divider that visually separates views in a stack.
 ///
-/// When contained in a stack, the divider extends across the minor axis of the
-/// stack, or horizontally when not in a stack.
+/// The `Divider` in iOS is either a horizontal or a vertical `1pt` thick line. The color and height of a `Divider` is determined by the system, and cannot be overriden. The system is responsible for adapting the appearance of `Divider` as best appropriate for the host platform.
+///
+/// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack. When not in a stack, the divider stretches across the horizontal axis.
+///
+/// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
+/// ```
+/// VStack {
+///     Text("My Awesome Book")
+///
+///     Divider()
+///
+///     Text("My Name")
+/// }
+/// ```
+///
+/// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
+/// ```
+/// HStack {
+///     Text("This is a line of text.")
+///
+///     Divider()
+///
+///     Text("This is an unrelated line of text.")
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
@@ -5228,6 +5304,32 @@ extension EdgeInsets : Animatable {
 }
 
 /// A button that toggles the edit mode for the current edit scope.
+///
+/// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode`) for content within a container that supports `EditMode.active`.
+/// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits = ["🍌", "🍏", "🍑"]
+///
+///     var body: some View {
+///         NavigationView {
+///             List {
+///                 ForEach(fruits, id: \.self) { fruit in
+///                     Text(fruit)
+///                 }
+///                 .onDelete { offets in
+///                     fruits.remove(atOffsets: offets)
+///                 }
+///             }
+///             .toolbar {
+///                 EditButton()
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// The title and appearance of an `EditButton` is determined by the system and cannot be overriden.
 @available(iOS 13.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -5507,7 +5609,70 @@ public struct EmptyCommands : Commands {
     public func body(content: EmptyModifier.Content) -> EmptyModifier.Body { }
 }
 
-/// A ``View`` which displays nothing.
+/// A ``View`` that displays nothing.
+///
+/// `EmptyView` is a special view that displays nothing and occupies no space.
+/// Modifying an `EmptyView` does nothing.
+///
+/// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack {
+///             Text("Hello")
+///
+///             EmptyView()
+///                 .frame(width: 1000, height: 1000)
+///                 .background(Color.red)
+///
+///             Text("World")
+///         }
+///     }
+/// }
+/// ```
+///
+/// `EmptyView` has many uses. For example, it can be used to instruct SwiftUI that your UI control does not want a label:
+///
+/// ```
+/// Toggle(isOn: $myBooleanValue, label: { EmptyView() })
+/// ```
+///
+/// `EmptyView` can also be used in conjunction with `GeometryReader`:
+///
+/// ```
+/// struct ContentView: View {
+///     @State var width: CGFloat? = nil
+///
+///     var body: some View {
+///         Text("Hello, world!").background(
+///             GeometryReader { geometry -> EmptyView in
+///                 DispatchQueue.main.async {
+///                     width = geometry.size.width
+///                 }
+///
+///                 return EmptyView()
+///             }
+///         )
+///     }
+/// }
+/// ```
+/// Account for `EmptyView` when building your own custom UI controls.
+/// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
+/// ```
+/// struct MyCustomControl<Label: View, Content: View>: View {
+///     let label: Label
+///     let content: Content
+///
+///     var body: some View {
+///         HStack {
+///             label.accessibility(hidden: label is EmptyView)
+///
+///             content
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyView : View {
 
