@@ -9578,6 +9578,8 @@ extension Link where Label == Text {
 ///
 /// The most basic `List` implementation is a scrollable list.
 ///
+///  ![List Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-1.png)
+///
 ///     struct ExampleView: View {
 ///         var body: some View {
 ///             List {
@@ -9590,6 +9592,8 @@ extension Link where Label == Text {
 ///
 /// `List` can also dynamically render itself from an array of data.
 ///
+///  ![List Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-2.png)
+///
 ///     struct ContentView: View {
 ///         var myFruit: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
 ///
@@ -9601,6 +9605,8 @@ extension Link where Label == Text {
 ///     }
 ///
 /// Easily add sections to your `List`.
+///
+///  ![List Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-3.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -9618,6 +9624,8 @@ extension Link where Label == Text {
 ///     }
 ///
 /// Style your list with the ``View/listStyle(_:)`` modifier.
+///
+///  ![List Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-4.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -15721,6 +15729,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// Apply the ``View/tabItem(_:)`` to modify the contents of your tabs.
 ///
+///  ![Tab View Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-1.png)
+///
 ///     struct ExampleView: View {
 ///         var body: some View {
 ///             TabView {
@@ -15745,6 +15755,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///     }
 ///
 /// Implement a swipable `TabView` with the ``View/tabViewStyle(_:)`` modifier to adjust navigation type.
+///
+///  ![Tab View Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-2.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
