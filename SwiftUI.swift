@@ -2495,14 +2495,79 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     public init(_ configuration: PrimitiveButtonStyleConfiguration) { }
 }
 
-/// A type that applies standard interaction behavior and a custom appearance to
-/// all buttons within a view hierarchy.
+/// This protocol is used to create a custom button style.
 ///
-/// To configure the current button style for a view hierarchy, use the
-/// ``View/buttonStyle(_:)-7qx1`` modifier. Specify a style that conforms to
-/// ``ButtonStyle`` when creating a button that uses the standard button
-/// interaction behavior defined for each platform. To create a button with
-/// custom interaction behavior, use ``PrimitiveButtonStyle`` instead.
+/// The `ButtonStyle` protocol provides a template to create a reusable style for your buttons. It also provides data about the button and its interaction state.
+///
+/// To make a custom style, create a new structure that conforms to `ButtonStyle`. This new style can be easily reused across your application. The style adapts to the user's current interaction state (i.e. on press, on release).
+///
+/// Your structure only needs to implement one method: `ButtonStyle/makeBody(configuration:)`.
+///
+/// To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a `ButtonStyle`.
+///
+/// ```
+/// struct BananaView: View {
+///     var body: some View {
+///         Button("🍌🍌")
+///             .buttonStyle(BananaButtonStyle(color: .yellow))
+///     }
+/// }
+///
+/// struct BananaButtonStyle: ButtonStyle {
+///     var color: Color
+///     func makeBody(configuration: Self.Configuration) -> some View {
+///         BananaButton(configuration: configuration, color: color)
+///     }
+///
+///     struct BananaButton: View {
+///         let configuration: BananaButtonStyle.Configuration
+///         let color: Color
+///
+///         var body: some View {
+///             configuration.label
+///                 .padding()
+///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
+///                 .animation(.spring())
+///         }
+///     }
+/// }
+/// ```
+///
+/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
+///
+/// ```
+/// struct BananaView: View {
+///     var body: some View {
+///         VStack {
+///             Button("🍌🍌")
+///             Button("🍎🍎")
+///             Button("🍑🍑")
+///         }
+///         .buttonStyle(BananaButtonStyle(color: .yellow))
+///     }
+/// }
+///
+/// struct BananaButtonStyle: ButtonStyle {
+///     var color: Color
+///     func makeBody(configuration: Self.Configuration) -> some View {
+///         BananaButton(configuration: configuration, color: color)
+///     }
+///
+///     struct BananaButton: View {
+///         let configuration: BananaButtonStyle.Configuration
+///         let color: Color
+///
+///         var body: some View {
+///             return configuration.label
+///                 .padding()
+///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///         }
+///     }
+/// }
+/// ```
+///
+/// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle {
 
@@ -2522,6 +2587,8 @@ public protocol ButtonStyle {
 }
 
 /// The properties of a button.
+///
+/// This property represents the view state of the `Button` that ``ButtonStyle`` modifies. `ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -8148,7 +8215,35 @@ public struct GroupedListStyle : ListStyle {
     public init() { }
 }
 
-/// A view that arranges its children in a horizontal line.
+/// A view that arranges children horizontally.
+///
+/// `HStack` is a horizontal stack of views.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             HStack {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Modify your stack's alignment or spacing with the built in initializer.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             HStack(alignment: .top, spacing: 32) {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Learn more about the properties of each alignment choice via the ``VerticalAlignment`` struct.
+///
+/// `HStack` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HStack<Content> : View where Content : View {
 
@@ -9640,7 +9735,79 @@ extension Link where Label == Text {
     public init<S>(_ title: S, destination: URL) where S : StringProtocol { }
 }
 
-/// A container that presents rows of data arranged in a single column.
+/// A view that presents rows of data.
+///
+/// `List` makes it easy to present rows of data in your view.
+///
+/// `List` has 18 different initializers depending on the nature of your data.
+///
+/// The most basic `List` implementation is a scrollable list.
+///
+///  ![List Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-1.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// `List` can also dynamically render itself from an array of data.
+///
+///  ![List Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-2.png)
+///
+///     struct ContentView: View {
+///         var myFruit: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///
+///         var body: some View {
+///             List(myFruit, id: \.self) { fruit in
+///                 Text(fruit)
+///             }
+///         }
+///     }
+///
+/// Easily add sections to your `List`.
+///
+///  ![List Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-3.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Section(header: Text("Fruity Companies")) {
+///                     Text("Fruit Loops🥣🌈")
+///                     Text("Banana🍌 Docs")
+///                 }
+///
+///                 Section(header: Text("Fruit Companies")) {
+///                     Text("Apple🍏")
+///                 }
+///             }
+///         }
+///     }
+///
+/// Style your list with the ``View/listStyle(_:)`` modifier.
+///
+///  ![List Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-4.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Section(header: Text("Fruity Companies")) {
+///                     Text("Fruit Loops🥣🌈")
+///                     Text("Banana🍌 Docs")
+///                 }
+///
+///                 Section(header: Text("Fruit Companies")) {
+///                     Text("Apple🍏")
+///                 }
+///             }.listStyle(InsetGroupedListStyle())
+///         }
+///     }
+///
+/// See the ``ListStyle`` protocol and ``View/listStyle(_:)`` for more on implementing lists.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -15785,35 +15952,57 @@ public struct SwitchToggleStyle : ToggleStyle {
     public typealias Body = some View
 }
 
-/// A view that switches between multiple child views using interactive user
-/// interface elements.
+/// A parent view to style & navigate child views.
 ///
-/// To create a user interface with tabs, place views in a `TabView` and apply
-/// the ``View/tabItem(_:)`` modifier to the contents of each tab. The following
-/// creates a tab view with three tabs:
+/// `TabView` provides an easy interface to navigate between different views. For example, `TabView` supports swipable views and tab views.
 ///
-///     TabView {
-///         Text("The First Tab")
-///             .tabItem {
-///                 Image(systemName: "1.square.fill")
-///                 Text("First")
+/// Apply the ``View/tabItem(_:)`` to modify the contents of your tabs.
+///
+///  ![Tab View Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-1.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             TabView {
+///                 Text("Bananas🍌🍌")
+///                     .tabItem {
+///                         Image(systemName: "1.circle.fill")
+///                         Text("🍌🍌")
+///                     }
+///                 Text("Apples🍏🍏")
+///                     .tabItem {
+///                         Image(systemName: "2.square.fill")
+///                         Text("🍏🍏")
+///                     }
+///                 Text("Peaches🍑🍑")
+///                     .tabItem {
+///                         Image(systemName: "3.square.fill")
+///                         Text("🍑🍑")
+///                     }
 ///             }
-///         Text("Another Tab")
-///             .tabItem {
-///                 Image(systemName: "2.square.fill")
-///                 Text("Second")
-///             }
-///         Text("The Last Tab")
-///             .tabItem {
-///                 Image(systemName: "3.square.fill")
-///                 Text("Third")
-///             }
+///             .font(.headline)
+///         }
 ///     }
-///     .font(.headline)
 ///
-/// Tab views only support tab items of type ``Text``, ``Image``, or an image
-/// followed by text. Passing any other type of view results in a visible but
-/// empty tab item.
+/// Implement a swipable `TabView` with the ``View/tabViewStyle(_:)`` modifier to adjust navigation type.
+///
+///  ![Tab View Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-2.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             TabView {
+///                 Text("Bananas🍌")
+///                 Text("Apples🍏")
+///                 Text("Peaches🍑")
+///             }
+///             .tabViewStyle(PageTabViewStyle())
+///             .frame(width: 300, height: 600, alignment: .center)
+///             .background(Color(.orange))
+///             .foregroundColor(.white)
+///             .font(.headline)
+///         }
+///     }
+///
+/// To learn more about how to implement `TabView` see ``View/tabViewStyle(_:)`` and ``TabViewStyle``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -15890,95 +16079,70 @@ public struct TapGesture : Gesture {
     public typealias Body = Never
 }
 
-/// A view that displays one or more lines of read-only text.
+/// A view that displays text.
 ///
-/// A text view draws a string in your app's user interface using a
-/// ``Font/body`` font that's appropriate for the current platform. You can
-/// choose a different standard font, like ``Font/title`` or ``Font/caption``,
-/// using the ``View/font(_:)`` view modifier.
+/// `Text` draws a string in your app and comes equipped with modifiers to customize your text. A text view sizes itself to fit the provided content, styling and containing view.
 ///
-///     Text("Hamlet")
-///         .font(.title)
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text("🍌🍌")
+///     }
+/// }
+/// ```
 ///
-/// ![A text view showing the name "Hamlet" in a title
-/// font.](SwiftUI-Text-title.png)
+/// `Text` is most commonly initialized with a string, however, it has 9 different initializers.
 ///
-/// If you need finer control over the styling of the text, you can use the same
-/// modifier to configure a system font or choose a custom font. You can also
-/// apply view modifiers like ``Text/bold()`` or ``Text/italic()`` to further
-/// adjust the formatting.
+/// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
-///     Text("by William Shakespeare")
-///         .font(.system(size: 12, weight: .light, design: .serif))
-///         .italic()
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///     }
+/// }
+/// ```
 ///
-/// ![A text view showing by William Shakespeare in a 12 point, light, italic,
-/// serif font.](SwiftUI-Text-font.png)
+/// `Text` also accepts 12 unique modifiers to customize your string.
 ///
-/// A text view always uses exactly the amount of space it needs to display its
-/// rendered contents, but you can affect the view's layout. For example, you
-/// can use the ``View/frame(width:height:alignment:)`` modifier to propose
-/// specific dimensions to the view. If the view accepts the proposal but the
-/// text doesn't fit into the available space, the view uses a combination of
-/// wrapping, tightening, scaling, and truncation to make it fit. With a width
-/// of `100` points but no constraint on the height, a text view might wrap a
-/// long string:
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///             .underline(true, color: .orange)
+///             .font(.system(size: 20, weight: .bold, design: .rounded))
+///     }
+/// }
+/// ```
 ///
-///     Text("To be, or not to be, that is the question:")
-///         .frame(width: 100)
+/// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with `Text`.
 ///
-/// ![A text view showing a quote from Hamlet split over three
-/// lines.](SwiftUI-Text-split.png)
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///             .font(.system(size: 20, weight: .bold, design: .rounded))
+///             .foregroundColor(.orange)
+///     }
+/// }
+/// ```
 ///
-/// Use modifiers like ``View/lineLimit(_:)``, ``View/allowsTightening(_:)``,
-/// ``View/minimumScaleFactor(_:)``, and ``View/truncationMode(_:)`` to
-/// configure how the view handles space constraints. For example, combining a
-/// fixed width and a line limit of `1` results in truncation for text that
-/// doesn't fit in that space:
+/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
 ///
-///     Text("Brevity is the soul of wit.")
-///         .frame(width: 100)
-///         .lineLimit(1)
+/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
 ///
-/// ![A text view showing a truncated quote from Hamlet starting Brevity is t
-/// and ending with three dots.](SwiftUI-Text-truncated.png)
+///     struct ExampleView: View {
+///         var body: some View {
+///             Text("banana")
+///         }
+///     }
 ///
-/// ### Localizing Strings
+/// See ``Text/init(_:tableName:bundle:comment:)`` for more information on how to initialize `Text` with localized strings. This initializer can be used to display localized keys coming from a non-standard bundle or string table.
 ///
-/// If you initialize a text view with a string literal, the view uses the
-/// ``Text/init(_:tableName:bundle:comment:)`` initializer, which interprets the
-/// string as a localization key and searches for the key in the table you
-/// specify, or in the default table if you don't specify one.
+/// Images can be displayed in a text view. This enables your app to optionally include them inside a text string, where they will resize based on your view's font. See ``Text/init(_:)-9a226`` for more on initializing `Text` with images.
 ///
-///     Text("pencil") // Searches the default table in the main bundle.
-///
-/// For an app localized in both English and Spanish, the above view displays
-/// "pencil" and "lápiz" for English and Spanish users, respectively. If the
-/// view can't perform localization, it displays the key instead. For example,
-/// if the same app lacks Danish localization, the view displays "pencil" for
-/// users in that locale. Similarly, an app that lacks any localization
-/// information displays "pencil" in any locale.
-///
-/// To explicitly bypass localization for a string literal, use the
-/// ``Text/init(verbatim:)`` initializer.
-///
-///     Text(verbatim: "pencil") // Displays the string "pencil" in any locale.
-///
-/// If you intialize a text view with a variable value, the view uses the
-/// ``Text/init(_:)-9d1g4`` initializer, which doesn't localize the string. However,
-/// you can request localization by creating a ``LocalizedStringKey`` instance
-/// first, which triggers the ``Text/init(_:tableName:bundle:comment:)``
-/// initializer instead:
-///
-///     // Don't localize a string variable...
-///     Text(writingImplement)
-///
-///     // ...unless you explicitly convert it to a localized string key.
-///     Text(LocalizedStringKey(writingImplement))
-///
-/// When localizing a string variable, you can use the default table by omitting
-/// the optional initialization parameters — as in the above example — just like
-/// you might for a string literal.
+/// Use the `View` modifiers ``View/lineLimit(_:)``, ``View/allowsTightening(_:)``,
+/// ``View/minimumScaleFactor(_:)``, and ``View/truncationMode(_:)`` to configure how `Text` handles space constraints.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Text : Equatable {
 
@@ -16761,13 +16925,33 @@ public struct TextEditor : View {
     public typealias Body = some View
 }
 
-/// A control that displays an editable text interface.
+/// A view for editable text.
 ///
-/// You can customize the appearance and interaction of a text field using a
-/// ``TextFieldStyle`` instance. The system resolves this configuration at
-/// runtime. Each platform provides a default style that reflects the platform
-/// style, but you can provide a new style that redefines all text field
-/// instances within a particular environment.
+/// `TextField` provides an interface to display and modify editable text.
+///
+/// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             TextField("Fruit", text: $myFruit)
+///         }
+///     }
+///
+/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             TextField("Fruit", text: $myFruit)
+///                 .textFieldStyle(RoundedBorderTextFieldStyle())
+///                 .padding()
+///         }
+///     }
+///
+/// The ``TextFieldStyle`` protocol and ``View/textFieldStyle(_:)`` modifier provide helpful functionality to implement a well styled `TextField`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct TextField<Label> : View where Label : View {
 
@@ -18421,7 +18605,35 @@ extension UserInterfaceSizeClass : Equatable {
 extension UserInterfaceSizeClass : Hashable {
 }
 
-/// A view that arranges its children in a vertical line.
+/// A view that arranges children vertically.
+///
+/// `VStack` is a vertical stack of views.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             VStack {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Modify your stack's alignment or spacing with the built in initializer.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             VStack(alignment: .top, spacing: 32) {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Learn more about the properties of each alignment choice via the ``HorizontalAlignment`` struct.
+///
+/// `VStack` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VStack<Content> : View where Content : View {
 
