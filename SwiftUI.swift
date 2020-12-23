@@ -1340,6 +1340,8 @@ extension AnyTransition {
 ///
 /// To type-erase your view, pass it to `AnyView/init(_:)` like this:
 ///
+///  ![AnyView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/anyview-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -1350,9 +1352,11 @@ extension AnyTransition {
 ///
 /// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
 ///
+///  ![AnyView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/anyview-example-2.png)
+///
 /// ```
 /// struct ExampleView: View {
-///     let foo: Bool
+///     let foo: Bool = false
 ///
 ///     var body: some View {
 ///         if foo {
@@ -5683,6 +5687,8 @@ public struct EmptyCommands : Commands {
 ///
 /// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
 ///
+/// ![EmptyView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/emptyview-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5707,8 +5713,10 @@ public struct EmptyCommands : Commands {
 ///
 /// `EmptyView` can also be used in conjunction with `GeometryReader`:
 ///
+///  ![EmptyView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/emptyview-example-2.png)
+///
 /// ```
-/// struct ContentView: View {
+/// struct ExampleView: View {
 ///     @State var width: CGFloat? = nil
 ///
 ///     var body: some View {
@@ -16083,6 +16091,8 @@ public struct TapGesture : Gesture {
 ///
 /// `Text` draws a string in your app and comes equipped with modifiers to customize your text. A text view sizes itself to fit the provided content, styling and containing view.
 ///
+/// ![Text Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -16095,6 +16105,8 @@ public struct TapGesture : Gesture {
 ///
 /// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
+///  ![Text Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-2.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -16104,6 +16116,8 @@ public struct TapGesture : Gesture {
 /// ```
 ///
 /// `Text` also accepts 12 unique modifiers to customize your string.
+///
+///  ![Text Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16116,6 +16130,8 @@ public struct TapGesture : Gesture {
 /// ```
 ///
 /// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with `Text`.
+///
+///  ![Text Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
