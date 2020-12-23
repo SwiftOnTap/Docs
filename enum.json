@@ -1,0 +1,36 @@
+{
+  "availability": [
+
+  ],
+  "declaration": "",
+  "description": "A data type with a set of discrete values.",
+  "overview": "`Enumerations` are often user defined types with discrete values.\n\n```\nstruct ExampleView: View {\n    var myFruit: Fruit = .Banana\n\n    var body: some View {\n        switch myFruit {\n        case .Apple:\n            Text(\"🍏🍏\")\n        case .Peach:\n            Text(\"🍑🍑\")\n        default:\n            Text(\"🍌🍌\") // Displays 🍌🍌\n        }\n    }\n}\n\nenum Fruit{\n    case Banana\n    case Apple\n    case Peach\n}\n'''\nApple's documentation on Enumerations can be found [here](https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html).",
+  "parameters": [
+
+  ],
+  "path": "enum",
+  "relationships": {
+    "conformsTo": [
+
+    ],
+    "typesConformedBy": [
+
+    ],
+    "typesConformingTo": [
+
+    ],
+    "typesInheritedBy": [
+
+    ],
+    "typesInheritingFrom": [
+
+    ]
+  },
+  "returns": "",
+  "throws": "",
+  "title": "Enumerations",
+  "topics": [
+
+  ],
+  "type": "Type"
+}
