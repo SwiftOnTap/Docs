@@ -6909,27 +6909,29 @@ public struct FocusedValues {
     public subscript<Key>(key: Key.Type) -> Key.Value? where Key : FocusedValueKey
 }
 
-/// An environment-dependent font.
+/// A font.
 ///
-/// Fonts can be applied to your view using `font(_:)`.
+/// This structure defines a `Font` in SwiftUI. `Font` has many static properties, including font types, and many modifiers, including ways to compare & modify fonts.
 ///
-/// ```swift
+/// Fonts can be applied to your view with the ``View/font(_:)`` modifier.
+///
+/// ```
 /// Text("🍌🍌")
 ///   .font(.largeTitle)
 /// ```
 ///
-/// In addition to standard system font types like `largeTitle` and `body`, Font allows customization of the style and design using `system(_:design:)`
+/// In addition to standard system font types like `largeTitle` and `body`, you can customize your `Font` with the ``Font/system(size:weight:design:)` modifier.
 ///
-/// ```swift
-/// Text("🍌🍌")
-///   .font(.system(size: 18.0, weight: .medium, design: .rounded))
+/// ```
+/// Text("Banana 🍌🍌")
+///   .font(.system(size: 32.0, weight: .bold, design: .rounded))
 /// ```
 ///
-/// Custom fonts can be applied using `Font/custom(_:size:)`
+/// Non system fonts can be applied using `Font/custom(_:size:)`
 ///
-/// ```swift
-/// Text("🍌🍌")
-///   .font(Font.custom("American Typewriter", size: 24))
+/// ```
+/// Text("Banana 🍌🍌")
+///   .font(Font.custom("American Typewriter", size: 32.0))
 /// ```
 ///
 /// Font provides many other customizations such as kerning and alignment to style the contents of your text view.
@@ -10136,10 +10138,10 @@ public struct ListItemTint {
 
 /// This protocol modifies how a list appears and behaves.
 ///
-/// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a list by using the `listStyle(_:)` modifier.
+/// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a list with the ``View/listStyle(_:)`` modifier.
 ///
-/// ```swift
-/// struct BananaListView: View {
+/// ```
+/// struct ExampleView: View {
 ///     var body: some View {
 ///         List {
 ///             Text("🍌🍌")
@@ -10152,7 +10154,7 @@ public struct ListItemTint {
 ///
 /// Two list styles are included specifically for rendering grouped lists - `View/Styles/GroupedListStyle` and `View/Styles/InsetGroupedListStyle`. These provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
-/// ```swift
+/// ```
 /// List {
 ///   Section(header: Text("🍌🍌")) {
 ///     Text("🔥🔥")
@@ -10164,16 +10166,16 @@ public struct ListItemTint {
 /// .listStyle(GroupedListStyle())
 /// ```
 ///
-/// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All included styles are referenced below.
+/// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly referenced below.
 ///
-/// - `View/Styles/DefaultListStyle` - provides the default list behavior and appearence for the platform.
-/// - `View/Styles/GroupedListStyle` - provides default list behavior for grouped lists, including appropriate formating of section headers.
-/// - `View/Styles/InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
-/// - `View/Styles/InsetListStyle` - is similar to a plain list, but includes additional layout insets.
-/// - `View/Styles/PlainListStyle` - provides platform standard list appearance and behavior.
-/// - `View/Styles/SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/).
-/// - `View/Styles/EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
-/// - `View/Styles/CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+/// - `DefaultListStyle` - provides the default list behavior and appearence for the platform.
+/// - `GroupedListStyle` - provides default list behavior for grouped lists, including appropriate formating of section headers.
+/// - `InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
+/// - `InsetListStyle` - is similar to a plain list, but includes additional layout insets.
+/// - `PlainListStyle` - provides platform standard list appearance and behavior.
+/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/).
+/// - `EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
+/// - `CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ListStyle {
 }
 
@@ -12615,69 +12617,60 @@ extension PreviewProvider {
     public static var platform: PreviewPlatform? { get }
 }
 
-/// This protocol is used to define custom button styles that define both styling and interaction behavior.
+/// This protocol is used to define custom button styles.
 ///
-/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, allowing that interaction to be customized. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and `PlainButtonStyle`.
+/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and `PlainButtonStyle`.
 ///
-/// Your structure only needs to implement one method: `PrimitiveButtonStyle/makeBody(configuration:)`. The styled button view is output by this method.
+/// Your structure only needs to implement one method: `makeBody(configuration:)`. The styled button view is output by this method.
 ///
 /// To build a custom `PrimitiveButtonStyle`, create a struct that conforms to the protocol.
 ///
-/// ```swift
-/// struct BananaPrimitiveButtonStyle: PrimitiveButtonStyle {
-///   func makeBody(configuration: Configuration) -> some View {
-///     configuration.label
-///       .foregroundColor(.primary)
-///       .gesture(
-///         TapGesture(count: 1)
-///           .onEnded { _ in configuration.trigger() }
-///       )
-///   }
-/// }
-/// ```
-///
-/// `makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which defines a label to display the button view and a `trigger()` to execute its action. Here a gesture is commonly added to the label to trigger the button action.
+/// `makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which defines a label to display the button view and a `trigger()` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
 ///
 /// Use `View/buttonStyle(_:)` to apply a primitive button style.
 ///
-/// ```swift
-/// struct BananaView: View {
-///     var body: some View {
-///         Button("🍌🍌") {}
-///         .buttonStyle(BananaPrimitiveButtonStyle())
-///     }
-/// }
+/// ```
+///  struct ExampleView: View {
+///      var body: some View {
+///         Button("Banana 🍌🍌")
+///             .buttonStyle(MyPrimitiveButtonStyle())
+///      }
+///  }
+///
+///  struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
+///    func makeBody(configuration: Configuration) -> some View {
+///      configuration.label
+///         .foregroundColor(.primary)
+///         .onTapGesture { configuration.trigger() }
+///    }
+///  }
 /// ```
 ///
 /// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
 ///
 /// ```
-/// struct BananaView: View {
-///     var body: some View {
-///         VStack {
-///             Button("🍌🍌") {}
-///             Button("🍎🍎") {}
-///             Button("🍑🍑") {}
-///         }
-///         .buttonStyle(BananaButtonStyle(color: .yellow))
-///     }
-/// }
+///  struct BananaView: View {
+///      var body: some View {
+///          VStack {
+///              Button("Banana 🍌🍌")
+///              Button("Apple 🍏🍏")
+///              Button("Peach 🍑🍑")
+///          }
+///          .buttonStyle(BananaButtonStyle(color: .yellow))
+///      }
+///  }
 ///
-/// struct BananaButtonStyle: PrimitiveButtonStyle {
-///   var color: Color
+///  struct BananaButtonStyle: PrimitiveButtonStyle {
+///    var color: Color
 ///
-///   func makeBody(configuration: Configuration) -> some View {
-///     configuration.label
-///       .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///       .padding()
-///       .onTapGesture { configuration.trigger() }
-///   }
-/// }
+///    func makeBody(configuration: Configuration) -> some View {
+///        configuration.label
+///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///            .padding()
+///            .onTapGesture { configuration.trigger() }
+///    }
+///  }
 /// ```
-///
-/// For more on how to customize your button style body, check out `PrimitiveButtonStyle/makeBody(configuration:)`.
-///  If only custom styling is needed, use `ButtonStyle` instead.
-
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PrimitiveButtonStyle {
 
