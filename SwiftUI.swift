@@ -1334,11 +1334,68 @@ extension AnyTransition {
     public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
 }
 
-/// A type-erased view.
+/// A view that provides type-erasure for views of other types.
 ///
-/// An `AnyView` allows changing the type of view used in a given view
-/// hierarchy. Whenever the type of view used with an `AnyView` changes, the old
-/// hierarchy is destroyed and a new hierarchy is created for the new type.
+/// An `AnyView` hides the type of the `View` value passed to it (similar to how `AnyHashable` hides the type of `Hashable` value passed to it).
+///
+/// To type-erase your view, pass it to `AnyView/init(_:)` like this:
+///
+///  ![AnyView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/anyview-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         AnyView(Text("Hello, world!"))
+///     }
+/// }
+/// ```
+///
+/// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
+///
+///  ![AnyView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/anyview-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     let foo: Bool = false
+///
+///     var body: some View {
+///         if foo {
+///             AnyView(Text("Hello, world!"))
+///         } else {
+///             AnyView(Color.red)
+///         }
+///     }
+/// }
+/// ```
+///
+/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ``List/init(_:id:selection:rowContent:)``. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or `View/background(_:alignment:)`.
+///
+/// Consider whether the usage of `AnyView` is appropriate, or even necessary. A common mistake is to use `AnyView` like this:
+///
+/// ```
+/// func makeHelperView() -> some View {
+///     if foo {
+///         return AnyView(Text("Hello, world!"))
+///     } else {
+///         return AnyView(Color.red)
+///     }
+/// }
+/// ```
+///
+/// Wherein adding a `@ViewBuilder` would be more appropriate:
+///
+/// ```
+/// @ViewBuilder
+/// func makeHelperView() -> some View {
+///     if foo {
+///         Text("Hello, world!")
+///     } else {
+///         Color.red
+///     }
+/// }
+/// ```
+///
+/// The latter example performs better as the SwiftUI runtime is given a more explicit type hierarchy, where the switch between `foo` being true or false can only result in a `Text` or a `Color`. The former example erases that information, forcing the SwiftUI runtime to evaluate the actual view type lazily, and thus requires more work to compute and render.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AnyView : View {
 
@@ -2443,37 +2500,41 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 }
 
 
-/// This protocol is used to define custom button styles.
+/// This protocol is used to create a custom button style.
 ///
-/// The ButtonStyle protocol provides a template to create a reusable style for your buttons. The style is aware of whether the button is being pressed, and can modify the view accordingly.
+/// The `ButtonStyle` protocol provides a template to create a reusable style for your buttons. It also provides data about the button and its interaction state.
 ///
-/// Your structure only needs to implement one method: `ButtonStyle/makeBody(configuration:)`. This method will output the styled button view.
+/// To make a custom style, create a new structure that conforms to `ButtonStyle`. This new style can be easily reused across your application. The style adapts to the user's current interaction state (i.e. on press, on release).
 ///
-/// To build a custom button style, first create a struct that conforms to `ButtonStyle`.
+/// Your structure only needs to implement one method: `ButtonStyle/makeBody(configuration:)`.
 ///
-/// ```
-/// struct BananaButtonStyle: ButtonStyle {
-///   let color: Color
-///
-///   func makeBody(configuration: Self.Configuration) -> some View {
-///     configuration.label
-///       .padding(.all, 10)
-///       .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///       .scaleEffect(configuration.isPressed ? 0.8: 1)
-///       .animation(.spring())
-///   }
-/// }
-/// ```
-///
-/// Implement `ButtonStyle/makeBody(configuration:)` to create a view representing the body of the button with custom styling appiled. The method accepts a `ButtonStyleConfiguration` representing the state of the button. `ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
-///
-/// Button styles are applied using `View/buttonStyle(_:)`.
+/// To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a `ButtonStyle`.
 ///
 /// ```
 /// struct BananaView: View {
 ///     var body: some View {
-///         Button("🍌🍌") {}
-///         .buttonStyle(BananaButtonStyle(color: .yellow))
+///         Button("🍌🍌")
+///             .buttonStyle(BananaButtonStyle(color: .yellow))
+///     }
+/// }
+///
+/// struct BananaButtonStyle: ButtonStyle {
+///     var color: Color
+///     func makeBody(configuration: Self.Configuration) -> some View {
+///         BananaButton(configuration: configuration, color: color)
+///     }
+///
+///     struct BananaButton: View {
+///         let configuration: BananaButtonStyle.Configuration
+///         let color: Color
+///
+///         var body: some View {
+///             configuration.label
+///                 .padding()
+///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
+///                 .animation(.spring())
+///         }
 ///     }
 /// }
 /// ```
@@ -2484,9 +2545,9 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// struct BananaView: View {
 ///     var body: some View {
 ///         VStack {
-///             Button("🍌🍌") {}
-///             Button("🍎🍎") {}
-///             Button("🍑🍑") {}
+///             Button("🍌🍌")
+///             Button("🍎🍎")
+///             Button("🍑🍑")
 ///         }
 ///         .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
@@ -2511,10 +2572,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// }
 /// ```
 ///
-/// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`.
-///
-/// To provide custom button interaction behavior, use `PrimitiveButtonStyle`.
-
+/// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide custom button interaction behavior, use `PrimitiveButtonStyle`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle {
 
@@ -2534,6 +2592,8 @@ public protocol ButtonStyle {
 }
 
 /// The properties of a button.
+///
+/// This property represents the view state of the `Button` that ``ButtonStyle`` modifies. `ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -4555,10 +4615,33 @@ extension DisclosureGroup where Label == Text {
     public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
 }
 
-/// A visual element that can be used to separate other content.
+/// A divider that visually separates views in a stack.
 ///
-/// When contained in a stack, the divider extends across the minor axis of the
-/// stack, or horizontally when not in a stack.
+/// The `Divider` in iOS is either a horizontal or a vertical `1pt` thick line. The color and height of a `Divider` is determined by the system, and cannot be overriden. The system is responsible for adapting the appearance of `Divider` as best appropriate for the host platform.
+///
+/// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack. When not in a stack, the divider stretches across the horizontal axis.
+///
+/// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
+/// ```
+/// VStack {
+///     Text("My Awesome Book")
+///
+///     Divider()
+///
+///     Text("My Name")
+/// }
+/// ```
+///
+/// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
+/// ```
+/// HStack {
+///     Text("This is a line of text.")
+///
+///     Divider()
+///
+///     Text("This is an unrelated line of text.")
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
@@ -5293,6 +5376,32 @@ extension EdgeInsets : Animatable {
 }
 
 /// A button that toggles the edit mode for the current edit scope.
+///
+/// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode`) for content within a container that supports `EditMode.active`.
+/// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits = ["🍌", "🍏", "🍑"]
+///
+///     var body: some View {
+///         NavigationView {
+///             List {
+///                 ForEach(fruits, id: \.self) { fruit in
+///                     Text(fruit)
+///                 }
+///                 .onDelete { offets in
+///                     fruits.remove(atOffsets: offets)
+///                 }
+///             }
+///             .toolbar {
+///                 EditButton()
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// The title and appearance of an `EditButton` is determined by the system and cannot be overriden.
 @available(iOS 13.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -5572,7 +5681,74 @@ public struct EmptyCommands : Commands {
     public func body(content: EmptyModifier.Content) -> EmptyModifier.Body { }
 }
 
-/// A ``View`` which displays nothing.
+/// A ``View`` that displays nothing.
+///
+/// `EmptyView` is a special view that displays nothing and occupies no space.
+/// Modifying an `EmptyView` does nothing.
+///
+/// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
+///
+/// ![EmptyView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/emptyview-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack {
+///             Text("Hello")
+///
+///             EmptyView()
+///                 .frame(width: 1000, height: 1000)
+///                 .background(Color.red)
+///
+///             Text("World")
+///         }
+///     }
+/// }
+/// ```
+///
+/// `EmptyView` has many uses. For example, it can be used to instruct SwiftUI that your UI control does not want a label:
+///
+/// ```
+/// Toggle(isOn: $myBooleanValue, label: { EmptyView() })
+/// ```
+///
+/// `EmptyView` can also be used in conjunction with `GeometryReader`:
+///
+///  ![EmptyView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/emptyview-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var width: CGFloat? = nil
+///
+///     var body: some View {
+///         Text("Hello, world!").background(
+///             GeometryReader { geometry -> EmptyView in
+///                 DispatchQueue.main.async {
+///                     width = geometry.size.width
+///                 }
+///
+///                 return EmptyView()
+///             }
+///         )
+///     }
+/// }
+/// ```
+/// Account for `EmptyView` when building your own custom UI controls.
+/// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
+/// ```
+/// struct MyCustomControl<Label: View, Content: View>: View {
+///     let label: Label
+///     let content: Content
+///
+///     var body: some View {
+///         HStack {
+///             label.accessibility(hidden: label is EmptyView)
+///
+///             content
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyView : View {
 
@@ -8068,7 +8244,35 @@ public struct GroupedListStyle : ListStyle {
     public init() { }
 }
 
-/// A view that arranges its children in a horizontal line.
+/// A view that arranges children horizontally.
+///
+/// `HStack` is a horizontal stack of views.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             HStack {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Modify your stack's alignment or spacing with the built in initializer.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             HStack(alignment: .top, spacing: 32) {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Learn more about the properties of each alignment choice via the ``VerticalAlignment`` struct.
+///
+/// `HStack` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HStack<Content> : View where Content : View {
 
@@ -9560,7 +9764,79 @@ extension Link where Label == Text {
     public init<S>(_ title: S, destination: URL) where S : StringProtocol { }
 }
 
-/// A container that presents rows of data arranged in a single column.
+/// A view that presents rows of data.
+///
+/// `List` makes it easy to present rows of data in your view.
+///
+/// `List` has 18 different initializers depending on the nature of your data.
+///
+/// The most basic `List` implementation is a scrollable list.
+///
+///  ![List Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-1.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// `List` can also dynamically render itself from an array of data.
+///
+///  ![List Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-2.png)
+///
+///     struct ContentView: View {
+///         var myFruit: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///
+///         var body: some View {
+///             List(myFruit, id: \.self) { fruit in
+///                 Text(fruit)
+///             }
+///         }
+///     }
+///
+/// Easily add sections to your `List`.
+///
+///  ![List Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-3.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Section(header: Text("Fruity Companies")) {
+///                     Text("Fruit Loops🥣🌈")
+///                     Text("Banana🍌 Docs")
+///                 }
+///
+///                 Section(header: Text("Fruit Companies")) {
+///                     Text("Apple🍏")
+///                 }
+///             }
+///         }
+///     }
+///
+/// Style your list with the ``View/listStyle(_:)`` modifier.
+///
+///  ![List Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-4.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             List {
+///                 Section(header: Text("Fruity Companies")) {
+///                     Text("Fruit Loops🥣🌈")
+///                     Text("Banana🍌 Docs")
+///                 }
+///
+///                 Section(header: Text("Fruit Companies")) {
+///                     Text("Apple🍏")
+///                 }
+///             }.listStyle(InsetGroupedListStyle())
+///         }
+///     }
+///
+/// See the ``ListStyle`` protocol and ``View/listStyle(_:)`` for more on implementing lists.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -13405,140 +13681,150 @@ extension RoundedRectangle : InsettableShape {
     public typealias Body
 }
 
-/// A part of an app's user interface with a life cycle managed by the
-/// system.
+/// This protocol is used to create different content areas on the screen.
 ///
-/// You create an ``SwiftUI/App`` by combining one or more instances
-/// that conform to the `Scene` protocol in the app's
-/// ``SwiftUI/App/body-swift.property``. You can use the primitive scenes that
-/// SwiftUI provides, like ``SwiftUI/WindowGroup``, along with custom scenes
-/// that you compose from other scenes. To create a custom scene, declare a
-/// type that conforms to the `Scene` protocol. Implement the required
-/// ``SwiftUI/Scene/body-swift.property`` computed property and provide the
-/// content for your custom scene:
+/// On-screen `Scene`s are the building blocks of any app built entirely in SwiftUI. They can look
+/// different depending on the platform the app is running on. For example, in iOS, the screen usually
+/// only displays one scene at a time. In macOS, every window in an app might be a different scene.
 ///
-///     struct MyScene: Scene {
+/// Scenes can either be custom, or one of the primitives like ``WindowGroup`` or
+/// ``DocumentGroup``.
+///
+/// ### Creating a Scene
+///
+/// #### Using primitive Scenes
+///
+/// Primitive scenes like ``WindowGroup`` can go directly in the body of your ``App``.
+///
+///     @main
+///     struct SuperSimpleApp: App {
 ///         var body: some Scene {
 ///             WindowGroup {
-///                 MyRootView()
+///                 Text("This is an entire app! 🙌")
 ///             }
 ///         }
 ///     }
 ///
-/// A scene acts as a container for a view hierarchy that you want to display
-/// to the user. The system decides when and how to present the view hierarchy
-/// in the user interface in a way that's platform-appropriate and dependent
-/// on the current state of the app. For example, for the window group shown
-/// above, the system lets the user create or remove windows that contain
-/// `MyRootView` on platforms like macOS and iPadOS. On other platforms, the
-/// same view hierarchy might consume the entire display when active.
+/// #### Using custom Scenes
 ///
-/// Read the ``SwiftUI/EnvironmentValues/scenePhase`` environment
-/// value from within a scene or one of its views to check whether a scene is
-/// active or in some other state. You can create a property that contains the
-/// scene phase, which is one of the values in the ``SwiftUI/ScenePhase``
-/// enumeration, using the ``SwiftUI/Environment`` attribute:
+/// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
+/// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
 ///
-///     struct MyScene: Scene {
-///         @Environment(\.scenePhase) private var scenePhase
+///     @main
+///     struct MacCompatibleApp: App {
+///         var body: some Scene {
+///             CustomScene()
+///         }
 ///
-///         // ...
-///     }
-///
-/// The `Scene` protocol provides scene modifiers, defined as protocol methods
-/// with default implementations, that you use to configure a scene. For
-/// example, you can use the ``SwiftUI/Scene/onChange(of:perform:)`` modifier to
-/// trigger an action when a value changes. The following code empties a cache
-/// when all of the scenes in the window group have moved to the background:
-///
-///     struct MyScene: Scene {
-///         @Environment(\.scenePhase) private var scenePhase
-///         @StateObject private var cache = DataCache()
-///
+///     struct CustomScene: Scene {
 ///         var body: some Scene {
 ///             WindowGroup {
-///                 MyRootView()
+///                 Text("This is a mac-compatible app! 💻")
 ///             }
-///             .onChange(of: scenePhase) { newScenePhase in
-///                 if newScenePhase == .background {
-///                     cache.empty()
-///                 }
+///
+///             #if os(macOS)
+///             Settings {
+///                 SettingsView()
+///             }
+///             #endif
+///         }
+///     }
+///
+/// ### Modifiers
+///
+/// Just like how ``Views`` have a bunch of custom modifiers that work right out of the box,
+/// `Scene` provides default implementations of many useful modifiers. These can be used to do things
+/// like adding macOS commands, changing the toolbar, and adding support for app storage.
+///
+/// ### Getting Scene Status
+///
+/// The ``EnvironmentValues/scenePhase`` environment value can easily be read in a scene
+/// to respond to whether the scene is active or in another state. It returns an enumeration of type
+/// ``ScenePhase``.
+///
+///     struct StateAdaptingScene: Scene {
+///         @Environment(\.scenePhase) private var scenePhase
+///         var body: some Scene {
+///             WindowGroup {
+///                 Text(scenePhase == .active ? "Active!" : "Inactive")
 ///             }
 ///         }
 ///     }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol Scene {
 
-    /// The type of scene that represents the body of this scene.
+    /// The type of the body variable in a scene.
     ///
-    /// When you create a custom scene, Swift infers this type from your
-    /// implementation of the required ``SwiftUI/Scene/body-swift.property``
-    /// property.
+    /// This type is automatically inferred from the ``Scene/body-swift.variable`` variable
+    /// when you make a custom Scene, so you don't have to worry about ever interacting with this
+    /// directly.
+    ///
+    /// If you're using a primitive scene like ``WindowGroup``, you might wonder what the body
+    /// type would be. If all scenes are built on scenes built on scenes, where does it start?
+    ///
+    /// Because of exactly that reason, all primitive Scene types set their body type to ``Never``.
+    ///
     associatedtype Body : Scene
 
-    /// The content and behavior of the scene.
+    /// The entry point for building custom Scenes.
     ///
-    /// For any scene that you create, provide a computed `body` property that
-    /// defines the scene as a composition of other scenes. You can assemble a
-    /// scene from primitive scenes that SwiftUI provides, as well as other
-    /// scenes that you've defined.
+    /// This computed property is the only requirement of conforming to the Scene protocol.
+    /// To make a custom Scene, compose `body` with other custom Scenes, or
+    /// with primitive Scenes like ``WindowGroup`` or ``Settings``.
     ///
-    /// Swift infers the scene's ``SwiftUI/Scene/Body-swift.associatedtype``
-    /// associated type based on the contents of the `body` property.
+    ///     @main
+    ///     struct MacCompatibleApp: App {
+    ///         var body: some Scene {
+    ///             CustomScene()
+    ///         }
+    ///
+    ///     struct CustomScene: Scene {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 Text("This is a mac-compatible app! 💻")
+    ///             }
+    ///
+    ///             #if os(macOS)
+    ///             Settings {
+    ///                 SettingsView()
+    ///             }
+    ///             #endif
+    ///         }
+    ///     }
     @SceneBuilder var body: Self.Body { get }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Scene {
 
-    /// Adds an action to perform when the given value changes.
+    /// Use this method to watch for changes in a variable value.
     ///
-    /// Use this modifier to trigger a side effect when a value changes, like
-    /// the value associated with an ``SwiftUI/Environment`` key or a
-    /// ``SwiftUI/Binding``. For example, you can clear a cache when you notice
-    /// that a scene moves to the background:
+    /// This method is most often used to watch for changes in a scene's status (active, inactive, etc.)
     ///
-    ///     struct MyScene: Scene {
+    /// There is a different, but related, method called ``View/onChange(of:perform:)`` that
+    /// can be used on ``Views``.
+    ///
+    ///     struct CustomScene: Scene {
     ///         @Environment(\.scenePhase) private var scenePhase
-    ///         @StateObject private var cache = DataCache()
+    ///         @State private var count = 0
     ///
     ///         var body: some Scene {
     ///             WindowGroup {
-    ///                 MyRootView()
+    ///                 Text("If you're seeing this active was printed.")
     ///             }
     ///             .onChange(of: scenePhase) { newScenePhase in
-    ///                 if newScenePhase == .background {
-    ///                     cache.empty()
+    ///                 if newScenePhase == .active {
+    ///                     print("Active!")
     ///                 }
     ///             }
     ///         }
     ///     }
     ///
-    /// The system calls the `action` closure on the main thread, so avoid
-    /// long-running tasks in the closure. If you need to perform such tasks,
-    /// dispatch to a background queue:
-    ///
-    ///     .onChange(of: scenePhase) { newScenePhase in
-    ///         if newScenePhase == .background {
-    ///             DispatchQueue.global(qos: .background).async {
-    ///                 // ...
-    ///             }
-    ///         }
-    ///     }
-    ///
-    /// The system passes the new value into the closure. If you need the old
-    /// value, capture it in the closure.
-    ///
     /// - Parameters:
-    ///   - value: The value to check when determining whether to run the
-    ///     closure. The value must conform to the
-    ///     <doc://com.apple.documentation/documentation/Swift/Equatable>
-    ///     protocol.
-    ///   - action: A closure to run when the value changes. The closure
-    ///     provides a single `newValue` parameter that indicates the changed
-    ///     value.
+    ///   - value: The value to watch for changes.
+    ///   - action: A function to run when the value changes.
     ///
-    /// - Returns: A scene that triggers an action in response to a change.
+    /// - Returns: A scene that calls a function when a value changes.
     @inlinable public func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some Scene where V : Equatable { }
 
 }
@@ -13548,17 +13834,40 @@ extension Scene {
 @available(watchOS, unavailable)
 extension Scene {
 
-    /// Adds commands to the scene.
+    /// Use this modifier to add a menu and keyboard shortcuts to your macOS and iPadOS apps.
     ///
-    /// Commands are realized in different ways on different platforms. On
-    /// macOS, the main menu uses the available command menus and groups to
-    /// organize its main menu items. Each menu is represented as a top-level
-    /// menu bar menu, and each command group has a corresponding set of menu
-    /// items in one of the top-level menus, delimited by separator menu items.
+    /// This modifier accepts a builder of ``Commands`` to create a menu bar with shortcuts.
     ///
-    /// On iPadOS, commands with keyboard shortcuts are exposed in the shortcut
-    /// discoverability HUD that users see when they hold down the Command (⌘)
-    /// key.
+    /// In macOS, these commands are visible in the menu bar at the top of the screen. On iPadOS,
+    /// these commands are visible when you hold down the Command (⌘) key.
+    ///
+    /// See ``Commands`` for more info on how to build these commands.
+    ///
+    ///     @main
+    ///     struct CommandApp: App {
+    ///         WindowGroup {
+    ///             Text("Press ⌘P to print 🍌")
+    ///         }
+    ///         .commands {
+    ///             PrintCommand()
+    ///         }
+    ///     }
+    ///
+    ///     struct PrintCommand: Commands {
+    ///         var body: some Commands {
+    ///             CommandMenu("Print") {
+    ///                 Button("Print", action: { print("🍌") })
+    ///                     .keyboardShortcut(
+    ///                         KeyboardShortcut(
+    ///                             KeyEquivalent("p"),
+    ///                             modifiers: [.command]))
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter content: The command menus to add to your scene.
+    ///
+    /// - Returns: A scene with command menus and shortcuts.
     public func commands<Content>(@CommandsBuilder content: () -> Content) -> some Scene where Content : Commands { }
 
 }
@@ -13566,16 +13875,37 @@ extension Scene {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Scene {
 
-    /// The default store used by `AppStorage` contained within the scene and
-    /// its view content.
+    /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
     ///
-    /// If unspecified, the default store for a view hierarchy is
-    /// `UserDefaults.standard`, but can be set a to a custom one. For example,
-    /// sharing defaults between an app and an extension can override the
-    /// default store to one created with `UserDefaults.init(suiteName:_)`.
+    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// ``UserDefaults.standard``. Override this default location for all of your
+    /// scene's views by using this modifier.
     ///
-    /// - Parameter store: The user defaults to use as the default
-    ///   store for `AppStorage`.
+    /// There is a similar method for ``View`` called ``View/defaultAppStorage(_:)``
+    ///
+    /// Check out ``UserDefaults`` and ``AppStorage`` for more info on how in-app storage
+    /// works.
+    ///
+    ///     @main
+    ///     struct StorageExampleApp: App {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 StorageExampleView()
+    ///             }
+    ///             .defaultAppStorage(UserDefaults(suiteName: "com.yoursite.your-suite")!)
+    ///         }
+    ///     }
+    ///
+    ///     struct StorageExampleView: View {
+    ///         //Looks for "key" in "com.yoursite.your-suite"
+    ///         @AppStorage("key") var name = "Kanye West"
+    ///
+    ///         var body: some View {
+    ///             TextField("Enter your name", text: $name)
+    ///         }
+    ///     }
+    ///
+    /// - Parameter store: The default user defaults storage site for `@AppStorage`.
     public func defaultAppStorage(_ store: UserDefaults) -> some Scene { }
 
 }
@@ -13608,6 +13938,16 @@ extension Scene {
     ///
     /// On platforms that only allow a single Window/Scene, this method is
     /// ignored.
+    ///
+    ///     @main
+    ///     struct EventHandlingApp: App {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 SelectionView()
+    ///             }
+    ///             .handlesExternalEvents(matching: ["selection"]
+    ///         }
+    ///     }
     ///
     /// - Parameter matching: A Set of Strings that are checked to see
     /// if they are contained in the targetContentIdenfifier. The empty Set
@@ -15734,35 +16074,57 @@ public struct SwitchToggleStyle : ToggleStyle {
     public typealias Body = some View
 }
 
-/// A view that switches between multiple child views using interactive user
-/// interface elements.
+/// A parent view to style & navigate child views.
 ///
-/// To create a user interface with tabs, place views in a `TabView` and apply
-/// the ``View/tabItem(_:)`` modifier to the contents of each tab. The following
-/// creates a tab view with three tabs:
+/// `TabView` provides an easy interface to navigate between different views. For example, `TabView` supports swipable views and tab views.
 ///
-///     TabView {
-///         Text("The First Tab")
-///             .tabItem {
-///                 Image(systemName: "1.square.fill")
-///                 Text("First")
+/// Apply the ``View/tabItem(_:)`` to modify the contents of your tabs.
+///
+///  ![Tab View Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-1.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             TabView {
+///                 Text("Bananas🍌🍌")
+///                     .tabItem {
+///                         Image(systemName: "1.circle.fill")
+///                         Text("🍌🍌")
+///                     }
+///                 Text("Apples🍏🍏")
+///                     .tabItem {
+///                         Image(systemName: "2.square.fill")
+///                         Text("🍏🍏")
+///                     }
+///                 Text("Peaches🍑🍑")
+///                     .tabItem {
+///                         Image(systemName: "3.square.fill")
+///                         Text("🍑🍑")
+///                     }
 ///             }
-///         Text("Another Tab")
-///             .tabItem {
-///                 Image(systemName: "2.square.fill")
-///                 Text("Second")
-///             }
-///         Text("The Last Tab")
-///             .tabItem {
-///                 Image(systemName: "3.square.fill")
-///                 Text("Third")
-///             }
+///             .font(.headline)
+///         }
 ///     }
-///     .font(.headline)
 ///
-/// Tab views only support tab items of type ``Text``, ``Image``, or an image
-/// followed by text. Passing any other type of view results in a visible but
-/// empty tab item.
+/// Implement a swipable `TabView` with the ``View/tabViewStyle(_:)`` modifier to adjust navigation type.
+///
+///  ![Tab View Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-2.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             TabView {
+///                 Text("Bananas🍌")
+///                 Text("Apples🍏")
+///                 Text("Peaches🍑")
+///             }
+///             .tabViewStyle(PageTabViewStyle())
+///             .frame(width: 300, height: 600, alignment: .center)
+///             .background(Color(.orange))
+///             .foregroundColor(.white)
+///             .font(.headline)
+///         }
+///     }
+///
+/// To learn more about how to implement `TabView` see ``View/tabViewStyle(_:)`` and ``TabViewStyle``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -15839,35 +16201,79 @@ public struct TapGesture : Gesture {
     public typealias Body = Never
 }
 
-/// This view displays read-only text.
+
+/// A view that displays read-only text.
 ///
-/// Text can display a string, image or a localized string. By default, an unlimited number of lines can be displayed. A text view sizes itself to fit the provided content, styling and containing view. SwiftUI provides an extensive list of modifiers for adjusting the layout and spacing of text in this view.
+/// `Text` draws a string in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view. By default, an unlimited number of lines can be displayed.
 ///
-/// For a non-localized string, Text only requires a string as input.
+/// ![Text Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-1.png)
 ///
-///     Text("🍌🍌") // Displays "🍌🍌"
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text("🍌🍌")
+///     }
+/// }
+/// ```
 ///
-/// The string will be rendered with the body text style associated with the target platform.
+/// `Text` is most commonly initialized with a string, however, it has 9 different initializers.
 ///
-/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to "🍌" for your current location, the localized string could be displayed with this line:
+/// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
-///     Text("banana") // Displays "🍌" when "banana" is localized to "🍌"
+///  ![Text Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-2.png)
 ///
-/// If the localization key "banana" is mapped to "🍌" for your current location, but you want to display the string "banana" - use `init(verbatim: String)`.
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///     }
+/// }
+/// ```
 ///
-///     Text(verbatim: "banana") // Displays "banana" when "banana" is localized to "🍌"
+/// `Text` also accepts 12 unique modifiers to customize your string.
 ///
-/// Images can be displayed in a text view. This enables you to optionally include them inside a text string, where they will resize based on your view's font.
+///  ![Text Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-3.png)
 ///
-///     Text("🔥") + Text(Image(systemName: "flame.fill"))
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///             .underline(true, color: .orange)
+///             .font(.system(size: 20, weight: .bold, design: .rounded))
+///     }
+/// }
+/// ```
 ///
-/// See `Font` for info on using fonts styles other than body, using custom fonts, adjusting kerning, alignment and more.
+/// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with `Text`.
 ///
-/// To display localized keys coming from a non-standard bundle or string table, see `Text/init(_:tableName:bundle:comment:)`.
+///  ![Text Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-4.png)
 ///
-/// To explicitly modify the size of the view, see `View/frame(width:height:alignment:)`.
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Text(Date(), style: .date)
+///             .font(.system(size: 20, weight: .bold, design: .rounded))
+///             .foregroundColor(.orange)
+///     }
+/// }
+/// ```
 ///
-/// To modify the number of lines of text displayed, see `Text/lineLimit(_:)`.
+/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
+///
+/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Text("banana")
+///         }
+///     }
+///
+/// See ``Text/init(_:tableName:bundle:comment:)`` for more information on how to initialize `Text` with localized strings. This initializer can be used to display localized keys coming from a non-standard bundle or string table.
+///
+/// Images can be displayed in a text view. This enables your app to optionally include them inside a text string, where they will resize based on your view's font. See ``Text/init(_:)-9a226`` for more on initializing `Text` with images.
+///
+/// Use the `View` modifiers ``View/lineLimit(_:)``, ``View/allowsTightening(_:)``,
+/// ``View/minimumScaleFactor(_:)``, and ``View/truncationMode(_:)`` to configure how `Text` handles space constraints.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Text : Equatable {
 
@@ -16650,13 +17056,33 @@ public struct TextEditor : View {
     public typealias Body = some View
 }
 
-/// A control that displays an editable text interface.
+/// A view for editable text.
 ///
-/// You can customize the appearance and interaction of a text field using a
-/// ``TextFieldStyle`` instance. The system resolves this configuration at
-/// runtime. Each platform provides a default style that reflects the platform
-/// style, but you can provide a new style that redefines all text field
-/// instances within a particular environment.
+/// `TextField` provides an interface to display and modify editable text.
+///
+/// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             TextField("Fruit", text: $myFruit)
+///         }
+///     }
+///
+/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             TextField("Fruit", text: $myFruit)
+///                 .textFieldStyle(RoundedBorderTextFieldStyle())
+///                 .padding()
+///         }
+///     }
+///
+/// The ``TextFieldStyle`` protocol and ``View/textFieldStyle(_:)`` modifier provide helpful functionality to implement a well styled `TextField`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct TextField<Label> : View where Label : View {
 
@@ -18310,7 +18736,35 @@ extension UserInterfaceSizeClass : Equatable {
 extension UserInterfaceSizeClass : Hashable {
 }
 
-/// A view that arranges its children in a vertical line.
+/// A view that arranges children vertically.
+///
+/// `VStack` is a vertical stack of views.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             VStack {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Modify your stack's alignment or spacing with the built in initializer.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             VStack(alignment: .top, spacing: 32) {
+///                 Text("🍌🍌")
+///                 Text("🍏🍏")
+///                 Text("🍑🍑")
+///             }
+///         }
+///     }
+///
+/// Learn more about the properties of each alignment choice via the ``HorizontalAlignment`` struct.
+///
+/// `VStack` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VStack<Content> : View where Content : View {
 
@@ -24302,9 +24756,9 @@ extension MutableCollection {
 
 extension UIColor {
 
-	/// Creates a new `UIColor` from a SwiftUI `Color`.
-	///
-	/// - Parameter color: The SwiftUI `Color` object to use for creating a `UIColor`.
+	/// Creates a new `UIColor` from a SwiftUI ``Color``.
+	/// 
+	/// - Parameter color: The SwiftUI ``Color`` object to use for creating a `UIColor`.
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
     @available(macOS, unavailable)
     public convenience init(_ color: Color) { }
