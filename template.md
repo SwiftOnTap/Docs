@@ -1,25 +1,27 @@
 #  Documentation Template
 
-1. Summary 
+## Summary 
 The first line of the documentation comment is the symbol's summary. The summary is 1 complete sentence with a period at the end. The summary sentence makes sense out of context (i.e. if the summary appears on another page). In general, the summary is as short as possible while fully explaining the essence of the symbol.
 
 The summary is separated from the overview by one empty line.
 
-2. Overview
+## Overview
+Banana🍌 Docs is example based documentation. The overview reflects this structure. 
+
 The overview is a distinct section from the summary, and should make sense on its own. It should not rely on the summary as its first sentence.
 
-Every symbol has an overview. The overview has up to 5 parts: 
-1. The overview begins with a complete explanation of what the symbol does. The first sentence of this paragraph should be written in relatively plain english. 
+The overview has 3 parts: 
+1. Symbol overview. The overview begins with a complete explanation of what the symbol does. The first sentence of this paragraph should be written in relatively plain english. 
 
-2. Explain any and all requirements of using the symbol.  For example, `makeBody` is a required property of the `ButtonStyle` protocol and should therefore be mentioned. If a struct has a singular initializer it can be metioned here, but if it has multiple initializers those should be reserved for the topics section. 
+2. Examples. Each example should showcase a specific facet of the symbol. There could be many examples. Each example includes: 
+    A. A discussion of the functionality behind this example. 
+    B. One sentence explaining the example in plain english. 
+    C. A **Crystal clear & runnable example(s)**. The example can have several parts, but the most outer level structure must conform to the `View` protocol.
+    
+3. Helpful resources. These include web links to tutorials and references to other relavent symbols. 
 
-3. **A crystal clear & runnable example**. Each symbols has an example that clearly explains how to use it. The example can have several parts, but the most outer level structure must conform to the `View` protocol. 
 
-4. (Optional) Explain any non-obvious details. For example, the `ButtonStyle` protocol is only used in conjunction with the `buttonStyle()` modifier. 
-
-5. Helpful resources. These include web links to tutorials and references to other relavent symbols. 
-
-
+## Rules 
 - Rule A): You should use the personal pronoun "your" (i.e. your function), as well as command phrases (i.e. use this view). You should never the word "you" (i.e. if you want to) or the passive voice (i.e. the button is pressed).
     Incorrect:
         *If you want* to change the style of your `Button`, *you can* use the `View/buttonStyle(_:)` method.
