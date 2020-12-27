@@ -1935,6 +1935,8 @@ extension BackgroundStyle : ShapeStyle {
 
 /// This type defines a **getter** and a **setter** for a value.
 ///
+/// ### Structure of a `Binding`
+///
 /// A `Binding` is essentially the following structure:
 ///
 /// ```
@@ -1944,7 +1946,12 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// A `Binding` typically represents a reference to a mutable source of truth - such as `@State`, `@ObservedObject` or a reference-writable keypath of an object. To create a `Binding` from a mutable source of truth, prefix the variable name for the source of truth with a dollar sign (`$`).  For example:
+/// ### Creating a `Binding` from `@State `
+///
+/// A `Binding` typically represents a reference to a mutable source of truth - such as `@State`, `@ObservedObject` or a reference-writable keypath of an object. To create a `Binding` from a mutable source of truth, prefix the variable name for the source of truth with a dollar sign (`$`).
+///
+/// For example, a `TextField` can be bound to a state variable:
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
@@ -1959,7 +1966,10 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// A `Binding` is a **two-way connection **to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
 ///
+/// ### Creating a `Binding` from an `ObservableObject`
+///
 /// Here is another example:
+///
 /// ````
 /// class ExampleModel: ObservableObject {
 ///     @Published var isEnabled: Bool = false
@@ -1976,9 +1986,36 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// In this example, the source of truth is an observable object `ExampleModel`, which is owned by `ExampleView` in this case by means of a state object. The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a `Binding` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
 ///
+/// ### Animating Updates via a `Binding`
+///
 /// Since a `Binding` is capable of updating a view's state, the state update can be made to be animated by using `Binding/animation(_:)`. Usage looks as follows:
+///
 /// ```
 /// $myVariable.animation(.default)
+/// ```
+///
+/// ### Creating a `Binding` from a constant
+///
+/// At times, you may want to pass a fixed value as a `Binding`. This is possible via `Binding/constant(_:)`, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
+///
+/// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode.active`.
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits = ["🍌", "🍏", "🍑"]
+///
+///     var body: some View {
+///         List {
+///             ForEach(fruits, id: \.self) { fruit in
+///                 Text(fruit)
+///             }
+///             .onDelete { offets in
+///                 fruits.remove(atOffsets: offets)
+///             }
+///         }
+///         .environment(\.editMode, .constant(.active))
+///     }
+/// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
