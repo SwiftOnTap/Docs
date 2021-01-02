@@ -2499,84 +2499,67 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     public init(_ configuration: PrimitiveButtonStyleConfiguration) { }
 }
 
-/// This protocol is used to create a custom button style.
+
+/// Custom and system button styles use this protocol.
 ///
-/// The `ButtonStyle` protocol provides a template to create a reusable style for your buttons. It also provides data about the button and its interaction state.
+/// Specialize a button's appearance and response to a finger or mouse press with a reusable `ButtonStyle` .
 ///
-/// To make a custom style, create a new structure that conforms to `ButtonStyle`. This new style can be easily reused across your application. The style adapts to the user's current interaction state (i.e. on press, on release).
+/// To apply a style in your app, append the `View/buttonStyle(_:)` modifier to a `Button`. Pass in a ButtonStyle by you or Apple. Appending the modifier to a stack will apply the style to all child buttons, until another modifier sets another style.
 ///
-/// Your structure only needs to implement one method: `ButtonStyle/makeBody(configuration:)`.
-///
-/// To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a `ButtonStyle`.
+/// In the snippet below, the banana and apple buttons will use the subtle `PlainButtonStyle`. The peach button will adopt the more dramatic  `DefaultButtonStyle`. Default styling differs between platforms.
 ///
 /// ```
-/// struct BananaView: View {
-///     var body: some View {
-///         Button("🍌🍌")
-///             .buttonStyle(BananaButtonStyle(color: .yellow))
-///     }
-/// }
-///
-/// struct BananaButtonStyle: ButtonStyle {
-///     var color: Color
-///     func makeBody(configuration: Self.Configuration) -> some View {
-///         BananaButton(configuration: configuration, color: color)
-///     }
-///
-///     struct BananaButton: View {
-///         let configuration: BananaButtonStyle.Configuration
-///         let color: Color
-///
+///     struct ExampleView: View {
 ///         var body: some View {
-///             configuration.label
-///                 .padding()
-///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
-///                 .animation(.spring())
+///             VStack {
+///                 Button("🍌🍌") { tap() }
+///                 Button("🍏🍏") { tap() }
+///                 Button("🍑🍑") { tap() }
+///                     .buttonStyle(DefaultButtonStyle())
+///             }
+///             .buttonStyle(PlainButtonStyle())
 ///         }
+///
+///         func tap() { }
 ///     }
-/// }
 /// ```
 ///
-/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
+/// To make a custom style, create a struct conforming to ButtonStyle. Conformance requires one method, `ButtonStyle/makeBody(configuration:)`. While you can style your button in makeBody by adding modifiers, our recommendation is to define an inner struct as shown below. This approach enables response to the `EnvironmentValues/.isFocused` property on tvOS, for example, to customize your button's animated behaviors based on both press and focus states.
 ///
 /// ```
-/// struct BananaView: View {
-///     var body: some View {
-///         VStack {
-///             Button("🍌🍌")
-///             Button("🍎🍎")
-///             Button("🍑🍑")
-///         }
-///         .buttonStyle(BananaButtonStyle(color: .yellow))
-///     }
-/// }
-///
-/// struct BananaButtonStyle: ButtonStyle {
-///     var color: Color
-///     func makeBody(configuration: Self.Configuration) -> some View {
-///         BananaButton(configuration: configuration, color: color)
-///     }
-///
-///     struct BananaButton: View {
-///         let configuration: BananaButtonStyle.Configuration
-///         let color: Color
-///
+///     struct ExampleView: View {
 ///         var body: some View {
-///             return configuration.label
-///                 .padding()
-///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///              Button("🍌🍌") { }
+///                  .buttonStyle(ExampleButtonStyle(color: Color(.systemOrange)))
 ///         }
 ///     }
-/// }
+///
+///     struct ExampleButtonStyle: ButtonStyle {
+///
+///         var color: Color
+///
+///         func makeBody(configuration: Self.Configuration) -> some View {
+///             Button(config: configuration, color: color)
+///         }
+///
+///         private struct Button: View {
+///             let config: ButtonStyle.Configuration
+///             let color: Color
+///
+///             var body: some View {
+///                 config.label
+///                     .padding()
+///                     .background(color.cornerRadius(10))
+///                     .scaleEffect(config.isPressed ? 0.94 : 1)
+///                     .animation(.spring(), value: config.isPressed)
+///             }
+///         }
+///     }
 /// ```
 ///
-/// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`.
+/// For how to customize your button style body, read `ButtonStyle/makeBody(configuration:)`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle {
-
-    /// A view that represents the body of a button.
-    associatedtype Body : View
 
     /// Creates a view that represents the body of a button.
     ///
@@ -2588,6 +2571,9 @@ public protocol ButtonStyle {
 
     /// The properties of a button.
     typealias Configuration = ButtonStyleConfiguration
+    
+    /// A view that represents the body of a button, which can be inferred from the makeBody method's return type.
+    associatedtype Body : View
 }
 
 /// The properties of a button.
