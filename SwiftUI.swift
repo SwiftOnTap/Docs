@@ -1968,7 +1968,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ### Creating a `Binding` from an `ObservableObject`
 ///
-/// Here is another example:
+/// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
 ///
 /// ````
 /// class ExampleModel: ObservableObject {
@@ -1984,7 +1984,7 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ````
 ///
-/// In this example, the source of truth is an observable object `ExampleModel`, which is owned by `ExampleView` in this case by means of a state object. The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a `Binding` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
+/// The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a `Binding` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
 ///
 /// ### Animating Updates via a `Binding`
 ///
@@ -2017,6 +2017,7 @@ extension BackgroundStyle : ShapeStyle {
 ///     }
 /// }
 /// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
 
@@ -7567,10 +7568,131 @@ public struct GeometryProxy {
     public func frame(in coordinateSpace: CoordinateSpace) -> CGRect { }
 }
 
-/// A container view that defines its content as a function of its own size and
-/// coordinate space.
+/// A type that reads the geometry of its container to produce a view.
 ///
-/// This view returns a flexible preferred size to its parent layout.
+/// ### How it works
+///
+/// `GeometryReader` can be expressed simply with the following pseudocode:
+///
+/// ```
+/// struct GeometryReader<Content: View> {
+///     var content: (GeometryProxy) -> Content
+///
+///     var body: some View {
+///         content(<container geometry>)
+///     }
+/// }
+/// ```
+///
+/// In the implementation above, `<container geometry>` is an instance of ``GeometryProxy``. `GeometryProxy` simply encapsulates the container's frame and safe area insets, provided at runtime by SwiftUI.
+///
+/// ### Using `GeometryReader` to get a container's bounds
+///
+/// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         GeometryReader { (proxy: GeometryProxy) in
+///             Color.green
+///                 .frame(
+///                     width: proxy.size.width / 2,
+///                     height: proxy.size.height / 2
+///                 )
+///         }
+///     }
+/// }
+/// ```
+///
+/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is `.topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
+///
+/// ### Getting a view's frame with `GeometryReader`
+///
+/// `GeometryReader` can also be used with`View/background(_:)`, to acquire the geometry of a target view. Consider `SomeView` in the following example:
+///
+/// ```
+/// struct ExampleView: View {
+///     struct SomeView: View {
+///         var body: some View {
+///             Rectangle()
+///                 .fill(Color.red)
+///                 .frame(width: 500, height: 500)
+///         }
+///     }
+///
+///     @State var someFrame: CGRect? // will be updated after the first layout pass
+///
+///     var body: some View {
+///         VStack {
+///             SomeView()
+///                 .frame(width: 500, height: 500)
+///                 .background(
+///                     GeometryReader { (proxy: GeometryProxy) -> EmptyView in
+///                         if globalFrame != proxy.frame(in: .global) {
+///                             DispatchQueue.main.async {
+///                                 someFrame = proxy.frame(in: .global)
+///                             }
+///                         }
+///
+///                         return EmptyView()
+///                     }
+///                 )
+///             Text("Hello, World!")
+///         }
+///     }
+/// }
+/// ```
+///
+/// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not* the frame of its container, the `VStack`. This is achieved by forcing a `GeometryReader` as a background of `SomeView`, thereby constraining it to `SomeView`'s bounds.
+///
+/// This task of acquiring a view's frame can be done in a generic and reusable way using `ViewModifier`:
+///
+/// ```
+/// struct GetGlobalFrame: ViewModifier {
+///     @Binding var globalFrame: CGRect?
+///
+///     func body(content: Content) -> some View {
+///         content.background(
+///             GeometryReader { (proxy: GeometryProxy) -> EmptyView in
+///                 if globalFrame != proxy.frame(in: .global) {
+///                     DispatchQueue.main.async {
+///                         globalFrame = proxy.frame(in: .global)
+///                     }
+///                 }
+///
+///                 return EmptyView()
+///             }
+///         )
+///     }
+/// }
+/// ```
+///
+/// The modifier above can be used in the following manner:
+///
+/// ```
+/// struct ExampleView: View {
+///     struct SomeView: View {
+///         var body: some View {
+///             Rectangle()
+///                 .fill(Color.red)
+///                 .frame(width: 500, height: 500)
+///         }
+///     }
+///
+///     @State var someFrame: CGRect? // will be updated after the first layout pass
+///
+///     var body: some View {
+///         VStack {
+///             SomeView()
+///                 .frame(width: 500, height: 500)
+///                 .modifier(GetGlobalFrame(globalFrame: $someFrame))
+///
+///             Text("Hello, World!")
+///         }
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct GeometryReader<Content> : View where Content : View {
 
@@ -11370,8 +11492,232 @@ extension NavigationLink {
 
 }
 
-/// A view for presenting a stack of views representing a visible path in a
-/// navigation hierarchy.
+/// A container that adds stack-based navigation to a view, along with a (optional) navigation bar.
+///
+/// ### Setting up a Navigation Stack
+///
+/// A navigation stack is set up simply by wrapping your view in a `NavigationView`
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///         }
+///     }
+/// }
+/// ```
+///
+/// A navigation bar is added by default. The navigation bar can be hidden via  `View/navigationBarHidden(_:)`.
+///
+/// ### Adding a navigation title
+///
+/// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your `NavigationView`:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///                 .navigationTitle("🍏🍏")
+///         }
+///     }
+/// }
+/// ```
+///
+/// `View/navigationTitle(_:)` is only available on iOS 14 and higher. If your application targets iOS 13, please use `View/navigationBarTitle(_:)`.
+///
+/// ### Setting the navigation title display mode
+///
+/// The display mode of a navigation bar title can be controlled via `View/navigationBarTitleDisplayMode(_:)`. There are two main display modes:
+///
+/// - `NavigationBarItem.TitleDisplayMode.inline`
+/// - `NavigationBarItem.TitleDisplayMode.large`
+///
+/// An `.automatic` mode is also present, and represents the system default.
+///
+/// The following example forces a large navigation title:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///                 .navigationTitle("🍏🍏")
+///                 .navigationBarTitleDisplayMode(.large)
+///         }
+///     }
+/// }
+/// ```
+///
+/// ### Navigating to a view
+///
+/// Use `NavigationLink` to add a button that pushes a new view onto the navigation stack.
+///
+/// For example, the following presents `ApplesView` when the link "I want apples!" is pressed:
+///
+/// ```
+/// struct ExampleView: View {
+///     struct ApplesView: View {
+///         var body: some View {
+///             Text("Apples")
+///                 .navigationTitle("🍏🍏")
+///         }
+///     }
+///
+///     var body: some View {
+///         NavigationView {
+///             NavigationLink(destination: ApplesView()) {
+///                 Text("I want apples!")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ### Hiding the navigation bar
+///
+/// The navigation bar is on by default within a `NavigationView`. It can be hidden using `View/navigationBarHidden(_:)`.
+///
+/// For example:
+///
+/// ````
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///                 .navigationBarHidden(true)
+///         }
+///     }
+/// }
+/// ````
+///
+/// Note that the navigation bar can be unhidden by child views. `View/navigationBarHidden(_:)` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
+///
+/// For example, navigating to `SecondScreen` in the following unhides the bar:
+///
+/// ```
+/// struct ExampleView: View {
+///     struct SecondScreen: View {
+///         var body: some View {
+///             Text("Apples")
+///                 .navigationTitle("🍏🍏")
+///                 .navigationBarHidden(false)
+///         }
+///     }
+///
+///     var body: some View {
+///         NavigationView {
+///             VStack {
+///                 Text("Hello, World!")
+///
+///                 NavigationLink(destination: SecondScreen()) {
+///                     Text("Take me to the second screen!")
+///                 }
+///             }
+///             .navigationBarHidden(true)
+///         }
+///     }
+/// }
+/// ```
+///
+/// And popping `SecondScreen` (or navigating back) hides it again, as `SecondScreen` is removed from the view hierarchy, leaving `ExampleView` as the deepest view in the hierarchy - which has hidden the navigation bar.
+///
+/// ### Adding navigation bar items
+///
+/// Use `View/navigationBarItems(leading:trailing:)` to add items to a navigation bar's leading and trailing areas.
+///
+/// For example, the following adds "🍏🍏" to the leading area, and "🍌🍌" to the trailing area:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///         }
+///         .navigationBarItems(leading: Text("🍏🍏"), trailing: Text("🍌🍌"))
+///     }
+/// }
+/// ```
+///
+/// ### Styling a navigation view
+///
+/// Use `View/navigationViewStyle(_:)` to style a navigation view.
+///
+/// For example, the following forces a stack-based navigation style, overriding the default double-colum style on macCatalyst:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///         }
+///         .navigationViewStyle(StackNavigationViewStyle())
+///     }
+/// }
+/// ```
+///
+/// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///         }
+///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
+///     }
+/// }
+/// ```
+///
+/// ### Handling selection
+///
+/// `NavigationLink` provides the ability to observe and/or set the active navigation selection via its initializer `NavigationLink/init(destination:tag:selection:label)`.
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     enum NavigationItem {
+///         case bananas
+///         case apples
+///         case peaches
+///     }
+///
+///     @State var navigatedItem: NavigationItem? = .bananas
+///
+///     var body: some View {
+///         NavigationView {
+///             NavigationLink(
+///                 destination: Text("🍏🍏"),
+///                 tag: NavigationItem.apples,
+///                 selection: $navigatedItem
+///             ) {
+///                 Text("Apples")
+///             }
+///
+///             NavigationLink(
+///                 destination: Text("🍌🍌"),
+///                 tag: NavigationItem.bananas,
+///                 selection: $navigatedItem
+///             ) {
+///                 Text("Bananas")
+///             }
+///
+///             NavigationLink(
+///                 destination: Text("🍑🍑"),
+///                 tag: NavigationItem.peaches,
+///                 selection: $navigatedItem
+///             ) {
+///                 Text("Peaches")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In the example above, the navigation selection is written to a state variable, `navigatedItem`. `navigatedItem` is an optional, because it is possible for the screen to not be navigated to any particular screen (i.e. be at the root view containing the 3 navigation links).
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct NavigationView<Content> : View where Content : View {
 
@@ -15998,57 +16344,162 @@ public struct SwitchToggleStyle : ToggleStyle {
     public typealias Body = some View
 }
 
-/// A parent view to style & navigate child views.
+/// A container view that provides tab-style navigation for its child views.
 ///
-/// `TabView` provides an easy interface to navigate between different views. For example, `TabView` supports swipable views and tab views.
+/// ### Tab-bar based navigation
 ///
-/// Apply the ``View/tabItem(_:)`` to modify the contents of your tabs.
+/// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
 ///
-///  ![Tab View Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-1.png)
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///             TabView {
-///                 Text("Bananas🍌🍌")
-///                     .tabItem {
-///                         Image(systemName: "1.circle.fill")
-///                         Text("🍌🍌")
-///                     }
-///                 Text("Apples🍏🍏")
-///                     .tabItem {
-///                         Image(systemName: "2.square.fill")
-///                         Text("🍏🍏")
-///                     }
-///                 Text("Peaches🍑🍑")
-///                     .tabItem {
-///                         Image(systemName: "3.square.fill")
-///                         Text("🍑🍑")
-///                     }
-///             }
-///             .font(.headline)
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///                 .tabItem {
+///                     Image(systemName: "1.circle.fill")
+///                     Text("🍌🍌")
+///                 }
+///             Text("Apples 🍏🍏")
+///                 .tabItem {
+///                     Image(systemName: "2.square.fill")
+///                     Text("🍏🍏")
+///                 }
+///             Text("Peaches 🍑🍑")
+///                 .tabItem {
+///                     Image(systemName: "3.square.fill")
+///                     Text("🍑🍑")
+///                 }
 ///         }
+///         .font(.headline)
+///     }
+/// }
+/// ```
+///
+/// ### Page-style navigation
+///
+/// Place child views in a `TabView` with a `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
+///
+/// The following example creates a paginated view with the three `Text` child views as individual pages.
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///             Text("Apples 🍏🍏")
+///             Text("Peaches 🍑🍑")
+///         }
+///         .tabViewStyle(PageTabViewStyle())
+///     }
+/// }
+/// ```
+///
+/// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
+///
+///     var body: some View {
+///         TabView {
+///             ForEach(items, id: \.self) {
+///                 Text($0)
+///             }
+///         }
+///         .tabViewStyle(PageTabViewStyle())
+///     }
+/// }
+/// ```
+///
+/// This example supports loading a dynamic list of pages from `items`.
+///
+/// A page-styled `TabView` will add a row of page indicator(s) at the bottom of the container by default. If `View/tabItem(_:)` is used, these indicators each take the form of the corresponding tab item's primary image. If not - these page indicators resort to system defaults.
+///
+/// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
+///
+///     var body: some View {
+///         TabView {
+///             ForEach(items, id: \.self) {
+///                 Text($0)
+///             }
+///         }
+///         .tabViewStyle(PageTabViewStyle())
+///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+///     }
+/// }
+/// ```
+///
+/// ### Handling tab-selection
+///
+/// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
+///
+/// Here is an example that writes tab selection to a state variable:
+///
+/// ```
+/// struct ExampleView: View {
+///     enum TabItem {
+///         case bananas
+///         case apples
+///         case peaches
 ///     }
 ///
-/// Implement a swipable `TabView` with the ``View/tabViewStyle(_:)`` modifier to adjust navigation type.
+///     @State var selectedItem: TabItem = .bananas
 ///
-///  ![Tab View Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/tabview-example-2.png)
+///     var body: some View {
+///         TabView(selection: $selectedItem) {
+///             Text("Bananas 🍌🍌")
+///                 .tabItem {
+///                     Image(systemName: "1.circle.fill")
+///                     Text("🍌🍌")
+///                 }
+///                 .tag(TabItem.bananas)
 ///
-///     struct ExampleView: View {
-///         var body: some View {
-///             TabView {
-///                 Text("Bananas🍌")
-///                 Text("Apples🍏")
-///                 Text("Peaches🍑")
-///             }
-///             .tabViewStyle(PageTabViewStyle())
-///             .frame(width: 300, height: 600, alignment: .center)
-///             .background(Color(.orange))
-///             .foregroundColor(.white)
-///             .font(.headline)
+///             Text("Apples 🍏🍏")
+///                 .tabItem {
+///                     Image(systemName: "2.square.fill")
+///                     Text("🍏🍏")
+///                 }
+///                 .tag(TabItem.apples)
+///
+///             Text("Peaches 🍑🍑")
+///                 .tabItem {
+///                     Image(systemName: "3.square.fill")
+///                     Text("🍑🍑")
+///                 }
+///                 .tag(TabItem.peaches)
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// To learn more about how to implement `TabView` see ``View/tabViewStyle(_:)`` and ``TabViewStyle``.
+/// In this example, each tab item is assigned a unique tag using the user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to the tab selection, `$selectedItem`, and updates it whenever a new tab is selected. `$selectedItem` in turn can also be used to programmatically control tab-selection, as bindings work bidirectionally.
+///
+/// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in the previous example, but it could've just as easily been a `String` or an `Int`.
+///
+/// For example, the following uses a traditional 0-based tab indexing:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var selectedItem: Int = 0
+///
+///     var body: some View {
+///         TabView(selection: $selectedItem) {
+///             Text("Bananas 🍌🍌")
+///                 .tag(0)
+///
+///             Text("Apples 🍏🍏")
+///                 .tag(1)
+///
+///             Text("Peaches 🍑🍑")
+///                 .tag(2)
+///         }
+///     }
+/// }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -17493,8 +17944,66 @@ extension ToolbarContentBuilder {
 
 }
 
-/// A model that represents an item which can be placed in the toolbar
-/// or navigation bar.
+/// A model that represents a toolbar or navigation item.
+///
+/// A `ToolbarItem` is essentially the following structure:
+///
+/// ```
+/// struct ToolbarItem<ID, Content: View> {
+///     let id: ID
+///     let placement: ToolbarItemPlacement
+///     let content: Content
+/// }
+/// ```
+///
+/// -  `id` is responsible for efficient updates to the toolbar item.
+/// - `placement` controls where the item is placed.
+/// - `content` represents the actual content of the item.
+///
+/// ### Adding toolbar items
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///                 .toolbar {
+///                     ToolbarItem(id: "bananas") {
+///                         Text("🍌🍌")
+///                     }
+///
+///                     ToolbarItem(id: "apples") {
+///                         Text("🍏🍏")
+///                     }
+///
+///                     ToolbarItem(id: "peaches") {
+///                         Text("🍑🍑")
+///                     }
+///                 }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ### Placing a toolbar item on the navigation bar
+///
+/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`.
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello, World!")
+///                 .toolbar {
+///                     ToolbarItem(placement: .navigationBarLeading) {
+///                         Spacer()
+///                     }
+///                 }
+///         }
+///     }
+/// }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItem<ID, Content> : ToolbarContent where Content : View {
 
@@ -22403,19 +22912,119 @@ extension View {
     /// - Parameter content: The views representing the content of the toolbar.
     public func toolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content : View { }
 
-
+    
     /// Populates the toolbar or navigation bar with the specified items.
     ///
-    /// - Parameter items: The items representing the content of the toolbar.
+    /// - Parameters:
+    ///   - items: The items representing the content of the toolbar.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("Hello, World!")
+    ///                 .toolbar {
+    ///                     ToolbarItem(id: "bananas") {
+    ///                         Text("🍌🍌")
+    ///                     }
+    ///
+    ///                     ToolbarItem(id: "apples") {
+    ///                         Text("🍏🍏")
+    ///                     }
+    ///
+    ///                     ToolbarItem(id: "peaches") {
+    ///                         Text("🍑🍑")
+    ///                     }
+    ///                 }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Aligning a toolbar item
+    ///
+    /// Think of a toolbar in terms of spacers and items.
+    ///
+    /// For example, this is how a single toolbar item is aligned to the right:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("Hello, World!")
+    ///                 .toolbar {
+    ///                     ToolbarItem(placement: .bottomBar) {
+    ///                         Spacer()
+    ///                     }
+    ///
+    ///                     ToolbarItem(placement: .bottomBar) {
+    ///                         Text("🍌🍌")
+    ///                     }
+    ///                 }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
 
 
-    /// Populates the toolbar or navigation bar with the specified items,
-    /// allowing for user customization.
+    /// Populates the toolbar or navigation bar with the specified items.
     ///
     /// - Parameters:
     ///   - id: A unique identifier for this toolbar.
     ///   - content: The content representing the content of the toolbar.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("Hello, World!")
+    ///                 .toolbar {
+    ///                     ToolbarItem(id: "bananas") {
+    ///                         Text("🍌🍌")
+    ///                     }
+    ///
+    ///                     ToolbarItem(id: "apples") {
+    ///                         Text("🍏🍏")
+    ///                     }
+    ///
+    ///                     ToolbarItem(id: "peaches") {
+    ///                         Text("🍑🍑")
+    ///                     }
+    ///                 }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Aligning a toolbar item
+    ///
+    /// Think of a toolbar in terms of spacers and items.
+    ///
+    /// For example, this is how a single toolbar item is aligned to the right:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("Hello, World!")
+    ///                 .toolbar {
+    ///                     ToolbarItem(placement: .bottomBar) {
+    ///                         Spacer()
+    ///                     }
+    ///
+    ///                     ToolbarItem(placement: .bottomBar) {
+    ///                         Text("🍌🍌")
+    ///                     }
+    ///                 }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func toolbar<Content>(id: String, @ToolbarContentBuilder content: () -> Content) -> some View where Content : CustomizableToolbarContent { }
 
 }
