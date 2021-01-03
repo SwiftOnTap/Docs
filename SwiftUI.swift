@@ -1933,7 +1933,9 @@ extension Axis : RawRepresentable {
 extension BackgroundStyle : ShapeStyle {
 }
 
-/// This type defines a **getter** and a **setter** for a value.
+/// This type handles shared values across views.
+///
+/// `Binding` is a poperty wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection ** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
 ///
 /// ### Structure of a `Binding`
 ///
@@ -1964,7 +1966,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// In the example above, the source of truth is a `@State` variable, named `text`. `text`  represents a `String`, whereas `$text` represents a `Binding<String>`. `TextField`'s initializer accepts a placeholder `String` and a `Binding<String>`. In this example, `TextField` requires a `Binding` to the source of truth as `TextField` must be able to *write back* to the `@State` variable (a **mutable** source of truth).
 ///
-/// A `Binding` is a **two-way connection **to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
+/// Recall, a `Binding` is a **two-way connection **to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
 ///
 /// ### Creating a `Binding` from an `ObservableObject`
 ///
@@ -1988,7 +1990,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ### Animating Updates via a `Binding`
 ///
-/// Since a `Binding` is capable of updating a view's state, the state update can be made to be animated by using `Binding/animation(_:)`. Usage looks as follows:
+/// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with `Binding/animation(_:)`. Usage looks as follows:
 ///
 /// ```
 /// $myVariable.animation(.default)
