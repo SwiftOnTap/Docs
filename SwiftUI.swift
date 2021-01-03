@@ -11740,6 +11740,8 @@ extension NavigationLink {
 ///
 /// In the example above, the navigation selection is written to a state variable, `navigatedItem`. `navigatedItem` is an optional, because it is possible for the screen to not be navigated to any particular screen (i.e. be at the root view containing the 3 navigation links).
 ///
+///  See ``ToolbarItem`` for more on what can be placed in the navigation bar.
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct NavigationView<Content> : View where Content : View {
 
