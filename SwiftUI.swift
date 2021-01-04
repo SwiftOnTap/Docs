@@ -5376,7 +5376,7 @@ extension EdgeInsets : Animatable {
 
 /// A button that toggles the edit mode for the current edit scope.
 ///
-/// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode`) for content within a container that supports `EditMode.active`.
+/// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode``) for content within a container that supports `EditMode.active`.
 /// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
 /// ```
 /// struct ExampleView: View {
