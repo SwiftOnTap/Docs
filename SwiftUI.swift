@@ -1933,7 +1933,9 @@ extension Axis : RawRepresentable {
 extension BackgroundStyle : ShapeStyle {
 }
 
-/// This type defines a **getter** and a **setter** for a value.
+/// This type handles shared values across views.
+///
+/// `Binding` is a poperty wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection ** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
 ///
 /// ### Structure of a `Binding`
 ///
@@ -1964,7 +1966,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// In the example above, the source of truth is a `@State` variable, named `text`. `text`  represents a `String`, whereas `$text` represents a `Binding<String>`. `TextField`'s initializer accepts a placeholder `String` and a `Binding<String>`. In this example, `TextField` requires a `Binding` to the source of truth as `TextField` must be able to *write back* to the `@State` variable (a **mutable** source of truth).
 ///
-/// A `Binding` is a **two-way connection **to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
+/// Recall, a `Binding` is a **two-way connection **to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
 ///
 /// ### Creating a `Binding` from an `ObservableObject`
 ///
@@ -1988,7 +1990,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ### Animating Updates via a `Binding`
 ///
-/// Since a `Binding` is capable of updating a view's state, the state update can be made to be animated by using `Binding/animation(_:)`. Usage looks as follows:
+/// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with `Binding/animation(_:)`. Usage looks as follows:
 ///
 /// ```
 /// $myVariable.animation(.default)
@@ -7586,7 +7588,7 @@ public struct GeometryProxy {
 ///
 /// In the implementation above, `<container geometry>` is an instance of ``GeometryProxy``. `GeometryProxy` simply encapsulates the container's frame and safe area insets, provided at runtime by SwiftUI.
 ///
-/// ### Using `GeometryReader` to get a container's bounds
+/// ### `GeometryReader` to get container bounds
 ///
 /// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
 ///
@@ -7606,7 +7608,7 @@ public struct GeometryProxy {
 ///
 /// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is `.topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
 ///
-/// ### Getting a view's frame with `GeometryReader`
+/// ### `GeometryReader` to get a view's frame
 ///
 /// `GeometryReader` can also be used with`View/background(_:)`, to acquire the geometry of a target view. Consider `SomeView` in the following example:
 ///
@@ -7689,6 +7691,24 @@ public struct GeometryProxy {
 ///
 ///             Text("Hello, World!")
 ///         }
+///     }
+/// }
+///
+/// struct GetGlobalFrame: ViewModifier {
+///     @Binding var globalFrame: CGRect?
+///
+///     func body(content: Content) -> some View {
+///         content.background(
+///             GeometryReader { (proxy: GeometryProxy) -> EmptyView in
+///                 if globalFrame != proxy.frame(in: .global) {
+///                     DispatchQueue.main.async {
+///                         globalFrame = proxy.frame(in: .global)
+///                     }
+///                 }
+///
+///                 return EmptyView()
+///             }
+///         )
 ///     }
 /// }
 /// ```
@@ -11642,9 +11662,11 @@ extension NavigationLink {
 
 }
 
-/// A container that adds stack-based navigation to a view, along with a (optional) navigation bar.
+/// A container for view navigation along with a (optional) navigation bar.
 ///
-/// ### Setting up a Navigation Stack
+/// `NavigationView`is a container that adds stack-based navigation to a view, along with a (optional) navigation bar.
+///
+/// ### Setting up a navigation stack
 ///
 /// A navigation stack is set up simply by wrapping your view in a `NavigationView`
 ///
@@ -11652,7 +11674,7 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///         }
 ///     }
 /// }
@@ -11668,8 +11690,8 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
-///                 .navigationTitle("🍏🍏")
+///             Text("Hello Bananas🍌🍌")
+///                 .navigationTitle("Home")
 ///         }
 ///     }
 /// }
@@ -11692,8 +11714,8 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
-///                 .navigationTitle("🍏🍏")
+///             Text("Hello Bananas🍌🍌")
+///                 .navigationTitle("Home")
 ///                 .navigationBarTitleDisplayMode(.large)
 ///         }
 ///     }
@@ -11708,17 +11730,17 @@ extension NavigationLink {
 ///
 /// ```
 /// struct ExampleView: View {
-///     struct ApplesView: View {
+///     struct BananasView: View {
 ///         var body: some View {
-///             Text("Apples")
-///                 .navigationTitle("🍏🍏")
+///             Text("Bananas")
+///                 .navigationTitle("🍌🍌")
 ///         }
 ///     }
 ///
 ///     var body: some View {
 ///         NavigationView {
-///             NavigationLink(destination: ApplesView()) {
-///                 Text("I want apples!")
+///             NavigationLink(destination: BananasView()) {
+///                 Text("I want bananas!")
 ///             }
 ///         }
 ///     }
@@ -11735,7 +11757,7 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///                 .navigationBarHidden(true)
 ///         }
 ///     }
@@ -11750,8 +11772,8 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     struct SecondScreen: View {
 ///         var body: some View {
-///             Text("Apples")
-///                 .navigationTitle("🍏🍏")
+///             Text("Bananas🍌🍌")
+///                 .navigationTitle("Second Screen")
 ///                 .navigationBarHidden(false)
 ///         }
 ///     }
@@ -11759,7 +11781,7 @@ extension NavigationLink {
 ///     var body: some View {
 ///         NavigationView {
 ///             VStack {
-///                 Text("Hello, World!")
+///                 Text("Hello Bananas🍌🍌")
 ///
 ///                 NavigationLink(destination: SecondScreen()) {
 ///                     Text("Take me to the second screen!")
@@ -11777,7 +11799,7 @@ extension NavigationLink {
 ///
 /// Use `View/navigationBarItems(leading:trailing:)` to add items to a navigation bar's leading and trailing areas.
 ///
-/// For example, the following adds "🍏🍏" to the leading area, and "🍌🍌" to the trailing area:
+/// For example, the following adds "🍌🍌" to the leading area, and "🍏🍏" to the trailing area:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11785,7 +11807,7 @@ extension NavigationLink {
 ///         NavigationView {
 ///             Text("Hello, World!")
 ///         }
-///         .navigationBarItems(leading: Text("🍏🍏"), trailing: Text("🍌🍌"))
+///         .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///     }
 /// }
 /// ```
@@ -11867,6 +11889,8 @@ extension NavigationLink {
 /// ```
 ///
 /// In the example above, the navigation selection is written to a state variable, `navigatedItem`. `navigatedItem` is an optional, because it is possible for the screen to not be navigated to any particular screen (i.e. be at the root view containing the 3 navigation links).
+///
+///  See ``ToolbarItem`` for more on what can be placed in the navigation bar.
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct NavigationView<Content> : View where Content : View {
@@ -16494,7 +16518,9 @@ public struct SwitchToggleStyle : ToggleStyle {
     public typealias Body = some View
 }
 
-/// A container view that provides tab-style navigation for its child views.
+/// A parent view for tab-style navigation.
+///
+/// `TabView` is a container view that provides tab-style navigation for its child views.
 ///
 /// ### Tab-bar based navigation
 ///
@@ -18094,6 +18120,8 @@ extension ToolbarContentBuilder {
 
 }
 
+/// A model to represent a navigation item.
+///
 /// A model that represents a toolbar or navigation item.
 ///
 /// A `ToolbarItem` is essentially the following structure:
@@ -23063,7 +23091,7 @@ extension View {
     public func toolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content : View { }
 
     
-    /// Populates the toolbar or navigation bar with the specified items.
+    /// Populates the toolbar or navigation bar.
     ///
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
@@ -23120,7 +23148,7 @@ extension View {
     public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
 
 
-    /// Populates the toolbar or navigation bar with the specified items.
+    /// Populates the toolbar or navigation bar.
     ///
     /// - Parameters:
     ///   - id: A unique identifier for this toolbar.
