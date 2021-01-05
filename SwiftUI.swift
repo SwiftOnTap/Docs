@@ -9903,79 +9903,229 @@ extension Link where Label == Text {
     public init<S>(_ title: S, destination: URL) where S : StringProtocol { }
 }
 
-/// A view that presents rows of data.
+/// A view that represents a scrollable list of data.
 ///
-/// `List` makes it easy to present rows of data in your view.
+/// ### Creating a `List` with a fixed number of elements
 ///
-/// `List` has 18 different initializers depending on the nature of your data.
+/// For example, the following creates a `List` with three rows of text:
 ///
-/// The most basic `List` implementation is a scrollable list.
-///
-///  ![List Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-1.png)
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///             List {
-///                 Text("🍌🍌")
-///                 Text("🍏🍏")
-///                 Text("🍑🍑")
-///             }
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         List {
+///             Text("Bananas 🍌🍌")
+///             Text("Apples 🍏🍏")
+///             Text("Peaches 🍑🍑")
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// `List` can also dynamically render itself from an array of data.
+/// ### Creating a `List` with a variable number of elements
 ///
-///  ![List Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-2.png)
+/// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
 ///
-///     struct ContentView: View {
-///         var myFruit: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+/// ````
+/// struct ExampleView: View {
+///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
-///         var body: some View {
-///             List(myFruit, id: \.self) { fruit in
+///     var body: some View {
+///         List.init(fruits, id: \.self) { (fruit: String) in
+///             Text(fruit)
+///         }
+///     }
+/// }
+/// ````
+///
+/// This is different from the previous example, because this initializer accepts a `rowContent` parameter that allows the `List` to generate SwiftUI views for the list's rows on-demand.
+///
+/// The `id` parameter requires a key-path to the *identifier* for each row of the `List`. This is required so that `List` can efficiently process changes in the data source (in this example, the array `fruits`). These changes to the data source are animated as insertions, removals and reorders - reflecting the changes in the source.
+///
+/// It is up to the programmer to decide what property best represents the 'identiifer' of a particular type. In this example, the `String` itself is a valid identifier for the data, therefore `\.self` is passed along to the `id` parameter.
+///
+/// ### Creating a `List` with both fixed and dynamic elements
+///
+/// `List` allows you to mix both fixed and dynamic elements using `ForEach`.
+///
+/// The following example displays a `List` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
+///
+///     var body: some View {
+///         List {
+///             Text("Hello, World!")
+///
+///             ForEach(fruits, id: \.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// Easily add sections to your `List`.
+/// As seen in the example prior to this, `ForEach` also accepts an `id` parameter along with a `rowContent`.
 ///
-///  ![List Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-3.png)
+/// ### Adding sections to a `List`
 ///
-///     struct ExampleView: View {
-///         var body: some View {
-///             List {
-///                 Section(header: Text("Fruity Companies")) {
-///                     Text("Fruit Loops🥣🌈")
-///                     Text("Banana🍌 Docs")
-///                 }
+/// The following example demonstrates the usage of `Section`.
 ///
-///                 Section(header: Text("Fruit Companies")) {
-///                     Text("Apple🍏")
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
+///
+///     var body: some View {
+///         List {
+///             Section(header: Text("Not a fruit")) {
+///                 Text("Hello, World!")
+///             }
+///
+///             Section(header: Text("Fruit")) {
+///                 ForEach(fruits, id: \.self) { (fruit: String) in
+///                     Text(fruit)
 ///                 }
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// Style your list with the ``View/listStyle(_:)`` modifier.
+/// A `Section` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
 ///
-///  ![List Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/list-example-4.png)
+/// ### Styling a `List`
 ///
-///     struct ExampleView: View {
-///         var body: some View {
-///             List {
-///                 Section(header: Text("Fruity Companies")) {
-///                     Text("Fruit Loops🥣🌈")
-///                     Text("Banana🍌 Docs")
-///                 }
+/// A `List` can be styled using the `View/listStyle(_:)` modifier.
 ///
-///                 Section(header: Text("Fruit Companies")) {
-///                     Text("Apple🍏")
-///                 }
-///             }.listStyle(InsetGroupedListStyle())
+/// The following example demonstrates how to style a `List` to use a grouped-inset style:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         List {
+///             Text("Bananas 🍌🍌")
+///             Text("Apples 🍏🍏")
+///             Text("Peaches 🍑🍑")
+///         }
+///         .listStyle(InsetGroupedListStyle())
+///     }
+/// }
+/// ```
+///
+/// SwiftUI offers various list styles:
+///
+/// - ``DefaultListStyle``
+/// - ``GroupedListStyle``
+/// - ``InsetGroupedListStyle``
+/// - ``InsetListStyle``
+/// - ``PlainListStyle``
+/// - ``SidebarListStyle``
+///
+/// Note: List styles only modify the appearance of a `List`. They do not affect the order or positioning of rows within the `List`.
+///
+/// ### Setting the background view for a list row
+///
+/// Use `View/listRowBackground(_:)` to set the background view for a given row.
+///
+/// The following example demonstrates how `View/listRowBackground(_:)` can be used to provide specific background colors for a list's rows:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         List {
+///             Text("Bananas 🍌🍌")
+///                 .listRowBackground(Color.yellow)
+///             Text("Apples 🍏🍏")
+///                 .listRowBackground(Color.red)
+///             Text("Peaches 🍑🍑")
+///                 .listRowBackground(Color.orange)
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// See the ``ListStyle`` protocol and ``View/listStyle(_:)`` for more on implementing lists.
+/// A background can be provided for multiple list rows at a time, by applying the `View/listRowBackground(_:)` modifier to `ForEach`.
+///
+/// In the following example, all the rows of the `List` have the background view `Color.yellow`.
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
+///
+///     var body: some View {
+///         List {
+///             ForEach(fruits, id: \.self) { (fruit: String) in
+///                 Text(fruit)
+///             }
+///             .listRowBackground(Color.yellow)
+///         }
+///     }
+/// }
+/// ```
+///
+///
+///
+/// ### Making list rows deletable
+///
+/// Apply the `DynamicViewContent/onDelete(_:)` modifier on a `ForEach` within a `List` to allow the list rows to become deletable.
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits = ["🍌", "🍏", "🍑"]
+///
+///     var body: some View {
+///         NavigationView {
+///             List {
+///                 ForEach(fruits, id: \.self) { fruit in
+///                     Text(fruit)
+///                 }
+///                 .onDelete { offsets in
+///                     fruits.remove(atOffsets: offsets)
+///                 }
+///             }
+///             .toolbar {
+///                 EditButton()
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+///
+///
+/// ### Editing a `List` using `EditButton`
+///
+/// An `EditButton` placed in the navigation bar of a `NavigationView` with a `List` in it can be used to provide an edit button for the `List`.
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits = ["🍌", "🍏", "🍑"]
+///
+///     var body: some View {
+///         NavigationView {
+///             List {
+///                 ForEach(fruits, id: \.self) { fruit in
+///                     Text(fruit)
+///                 }
+///                 .onDelete { offets in
+///                     fruits.remove(atOffsets: offets)
+///                 }
+///             }
+///             .toolbar {
+///                 EditButton()
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ### Further notes
+///
+/// Although `List` is very powerful, it currently has some limitations:
+///
+/// - The separator of a `List` cannot be removed.
+/// - `SidebarListStyle` is broken on maCatalyst.
+/// 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
