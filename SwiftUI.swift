@@ -9923,11 +9923,13 @@ extension Link where Label == Text {
     public init<S>(_ title: S, destination: URL) where S : StringProtocol { }
 }
 
-/// A view that represents a scrollable list of data.
+/// A scrollable list of data.
+///
+/// `List` is a view that represents a scrollable list of data.
 ///
 /// ### Creating a `List` with a fixed number of elements
 ///
-/// For example, the following creates a `List` with three rows of text:
+/// The following creates a `List` with three rows of text:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -9985,7 +9987,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// As seen in the example prior to this, `ForEach` also accepts an `id` parameter along with a `rowContent`.
+/// As seen in the above example, `ForEach` also accepts an `id` parameter along with a `rowContent`.
 ///
 /// ### Adding sections to a `List`
 ///
@@ -10144,7 +10146,7 @@ extension Link where Label == Text {
 /// Although `List` is very powerful, it currently has some limitations:
 ///
 /// - The separator of a `List` cannot be removed.
-/// - `SidebarListStyle` is broken on maCatalyst.
+/// - `SidebarListStyle` is broken on macCatalyst.
 /// 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
