@@ -2510,12 +2510,16 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a `ButtonStyle`.
 ///
+///  ![ButtonStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ButtonStyle-example-1.gif)
+///
 /// ```
-/// struct BananaView: View {
+/// struct ExampleView: View {
 ///     var body: some View {
-///         Button("🍌🍌")
+///         Button("Banana🍌🍌", action: { tap() })
 ///             .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
+///
+///     func tap() { }
 /// }
 ///
 /// struct BananaButtonStyle: ButtonStyle {
@@ -2541,16 +2545,20 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
 ///
+///  ![ButtonStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ButtonStyle-example-2.gif)
+///
 /// ```
-/// struct BananaView: View {
+/// struct ExampleView: View {
 ///     var body: some View {
 ///         VStack {
-///             Button("🍌🍌")
-///             Button("🍎🍎")
-///             Button("🍑🍑")
+///             Button("🍌🍌", action: { tap() })
+///             Button("🍎🍎", action: { tap() })
+///             Button("🍑🍑", action: { tap() })
 ///         }
 ///         .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
+///
+///     func tap() {}
 /// }
 ///
 /// struct BananaButtonStyle: ButtonStyle {
@@ -2567,9 +2575,12 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///             return configuration.label
 ///                 .padding()
 ///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
+///                 .animation(.spring())
 ///         }
 ///     }
 /// }
+
 /// ```
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
@@ -8260,6 +8271,8 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// `HStack` is a horizontal stack of views.
 ///
+///  ![HStack Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/hstack-example-1.png)
+///
 ///     struct ExampleView: View {
 ///         var body: some View {
 ///             HStack {
@@ -8271,6 +8284,8 @@ public struct GroupedListStyle : ListStyle {
 ///     }
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
+///
+///  ![HStack Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/hstack-example-2.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -18748,6 +18763,8 @@ extension UserInterfaceSizeClass : Hashable {
 ///
 /// `VStack` is a vertical stack of views.
 ///
+///  ![VStack Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/vstack-example-1.png)
+///
 ///     struct ExampleView: View {
 ///         var body: some View {
 ///             VStack {
@@ -18760,9 +18777,11 @@ extension UserInterfaceSizeClass : Hashable {
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
 ///
+/// ![VStack Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/vstack-example-2.png)
+///
 ///     struct ExampleView: View {
 ///         var body: some View {
-///             VStack(alignment: .top, spacing: 32) {
+///             VStack(spacing: 32) {
 ///                 Text("🍌🍌")
 ///                 Text("🍏🍏")
 ///                 Text("🍑🍑")
