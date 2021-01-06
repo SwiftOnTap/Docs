@@ -6935,7 +6935,7 @@ public struct FocusedValues {
 /// }
 /// ```
 ///
-/// Non system fonts can be applied using `Font/custom(_:size:)`
+/// Non system-fonts can be applied using `Font/custom(_:size:)`
 ///
 /// ```
 /// struct ExampleView: View {
