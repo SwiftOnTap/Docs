@@ -5429,8 +5429,8 @@ extension EdgeInsets : Animatable {
 ///                 ForEach(fruits, id: \.self) { fruit in
 ///                     Text(fruit)
 ///                 }
-///                 .onDelete { offets in
-///                     fruits.remove(atOffsets: offets)
+///                 .onDelete { offsets in
+///                     fruits.remove(atOffsets: offsets)
 ///                 }
 ///             }
 ///             .toolbar {
