@@ -14820,9 +14820,170 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     public init(_ key: String) where Value == Data? { }
 }
 
-/// A scrollable view.
+
+/// A view that allows the scrolling of its contained views.
 ///
-/// The scroll view displays its content within the scrollable content region.
+/// ### Making a view scrollable
+///
+/// `ScrollView` is a container view that makes its content scrollable. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, the `VStack` containing the text is made scrollable by wrapping it in a `ScrollView`.
+///
+/// Note:
+///
+/// - The content of a `ScrollView` is scrollable regardless of whether all of it fits on screen or not.
+/// - It is not possible to selectively disable the scrolling of a `ScrollView`, while allowing its content to remain interactive. A `View/disabled(_:)` attached to a `ScrollView` will disable both the scrolling and all the interaction with the content visible.
+/// - A `ScrollView`'s scrollable is sized to fit the content view passed to the `ScrollView`.
+/// - `ScrollView` fits to occupy as much space as possible. It is important to distinguish between the actual bounds of the scroll view, and the bounds of the *content* of the `ScrollView`.
+///
+/// ### Setting the direction of scrolling
+///
+/// The default scrolling direction of a `ScrollView` is **vertical**. `ScrollView` supports 3 types of scrolling:
+///
+/// - vertical
+/// - horizontal
+/// - both vertical and horizontal
+///
+/// To set a single allowed direction for a `ScrollView`, specify the axis of direction in the initializer. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(.horizontal) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// This example takes the previous example, and modifies it so that the `ScrollView` scrolls horizontally. This `ScrollView` will **not** scroll vertically, as an explict axis, `.horizontal`, has been specified.
+///
+/// To allow *both* directions of scrolling, pass the set of axes that you want to permit. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView([.horizontal, .vertical]) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, `ScrollView` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
+///
+/// ### Hiding the scroll view indicator
+///
+/// By default, a `ScrollView`'s scroll indicator is visible upon user interaction.
+///
+/// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content)` to hide the scroll indicator(s). For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(.horizontal, showsIndicators: false) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// This `ScrollView` will never show a scroll indicator.
+///
+/// You do not need to specify an axis to use `showsIndicators`. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(showsIndicators: false) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// This `ScrollView`  hides its scroll indicator, with a default `.vertical` scroll direction.
+///
+/// ### Scrolling to an item
+///
+/// To programmatically scroll to a particular item in your `ScrollView`, use `ScrollViewProxy/scrollTo(_:anchor:)`. `ScrollViewProxy` is a type that allows you to control a `ScrollView`, and can be obtained using a `ScrollViewReader`.
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView {
+///             ScrollViewReader { (proxy: ScrollViewProxy) in
+///                 Button("Jump to #8") {
+///                     proxy.scrollTo(8)
+///                 }
+///
+///                 ForEach(1..<101) { number in
+///                     Text("Item #\(number)")
+///                         .id(number)
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, clicking the button reading "Jump to #8", will cause the `ScrollView` to scroll to the item with the ID of the value `8`. To assign an ID to a view, use `View/id(_:)` as is done inside the `ForEach`, for each element.
+///
+/// The call of `proxy.scrollTo(8)` causes the `ScrollView` to scroll to the text reading "Item #8", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, can specify an anchor via `ScrollViewProxy/scrollTo(_:anchor:)`. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView {
+///             ScrollViewReader { (proxy: ScrollViewProxy) in
+///                 Button("Jump to #8") {
+///                     proxy.scrollTo(99, anchor: .top)
+///                 }
+///
+///                 ForEach(1..<101) { number in
+///                     Text("Item #\(number)")
+///                         .id(number)
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, the `ScrollView` still scrolls to "Item #8", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : View where Content : View {
 
