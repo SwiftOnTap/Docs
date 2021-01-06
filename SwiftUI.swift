@@ -6918,8 +6918,8 @@ public struct FocusedValues {
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
-///            Text("Banana🍌🍌")
-///               .font(.largeTitle)
+///         Text("Banana🍌🍌")
+///            .font(.largeTitle)
 ///     }
 /// }
 /// ```
@@ -6929,8 +6929,8 @@ public struct FocusedValues {
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
-///            Text("Banana🍌🍌")
-///               .font(.system(size: 32.0, weight: .bold, design: .rounded))
+///         Text("Banana🍌🍌")
+///             .font(.system(size: 32.0, weight: .bold, design: .rounded))
 ///     }
 /// }
 /// ```
@@ -6940,8 +6940,8 @@ public struct FocusedValues {
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
-///            Text("Banana🍌🍌")
-///               .font(Font.custom("American Typewriter", size: 32.0))
+///         Text("Banana🍌🍌")
+///            .font(Font.custom("American Typewriter", size: 32.0))
 ///     }
 /// }
 /// ```
