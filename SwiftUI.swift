@@ -18167,7 +18167,7 @@ extension ToolbarContentBuilder {
 ///
 /// ### Placing a toolbar item on the navigation bar
 ///
-/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`.
+/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`. For example:
 ///
 /// ```
 /// struct ExampleView: View {
