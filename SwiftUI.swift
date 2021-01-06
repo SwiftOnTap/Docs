@@ -6924,7 +6924,7 @@ public struct FocusedValues {
 /// }
 /// ```
 ///
-/// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)` modifier.
+/// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
 ///
 /// ```
 /// struct ExampleView: View {
