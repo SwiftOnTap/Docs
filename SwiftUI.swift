@@ -10187,9 +10187,10 @@ public struct ListItemTint {
 /// - `InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
 /// - `InsetListStyle` - is similar to a plain list, but includes additional layout insets.
 /// - `PlainListStyle` - provides platform standard list appearance and behavior.
-/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/). **Bug: Currently broken on Mac Catalyst**
+/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/). Currently not working properly on MacCatalyst. 
 /// - `EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
-/// - `CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+/// - `CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ListStyle {
 }
 
