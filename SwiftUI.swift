@@ -4791,23 +4791,31 @@ extension DisclosureGroup where Label == Text {
 ///
 /// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
 /// ```
-/// VStack {
-///     Text("My Awesome Book")
+/// struct ExampleView: View {
+///   var body: some View {
+///     VStack {
+///       Text("My Awesome Book")
 ///
-///     Divider()
+///       Divider()
 ///
-///     Text("My Name")
+///       Text("My Name")
+///     }
+///   }
 /// }
 /// ```
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
 /// ```
-/// HStack {
-///     Text("This is a line of text.")
+/// struct ExampleView: View {
+///   var body: some View {
+///     HStack {
+///       Text("This is a line of text")
 ///
-///     Divider()
+///       Divider()
 ///
-///     Text("This is an unrelated line of text.")
+///       Text("This is an unrelated line of text")
+///     }
+///   }
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -10116,7 +10124,7 @@ extension Link where Label == Text {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
-///         List.init(fruits, id: \.self) { (fruit: String) in
+///         List.init(fruits, id: /\.self) { (fruit: String) in
 ///             Text(fruit)
 ///         }
 ///     }
@@ -10143,7 +10151,7 @@ extension Link where Label == Text {
 ///         List {
 ///             Text("Hello, World!")
 ///
-///             ForEach(fruits, id: \.self) { (fruit: String) in
+///             ForEach(fruits, id: /\.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///         }
@@ -10168,7 +10176,7 @@ extension Link where Label == Text {
 ///             }
 ///
 ///             Section(header: Text("Fruit")) {
-///                 ForEach(fruits, id: \.self) { (fruit: String) in
+///                 ForEach(fruits, id: /\.self) { (fruit: String) in
 ///                     Text(fruit)
 ///                 }
 ///             }
@@ -10240,7 +10248,7 @@ extension Link where Label == Text {
 ///
 ///     var body: some View {
 ///         List {
-///             ForEach(fruits, id: \.self) { (fruit: String) in
+///             ForEach(fruits, id: /\.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///             .listRowBackground(Color.yellow)
@@ -10262,7 +10270,7 @@ extension Link where Label == Text {
 ///     var body: some View {
 ///         NavigationView {
 ///             List {
-///                 ForEach(fruits, id: \.self) { fruit in
+///                 ForEach(fruits, id: /\.self) { fruit in
 ///                     Text(fruit)
 ///                 }
 ///                 .onDelete { offsets in
@@ -10632,15 +10640,19 @@ public struct ListItemTint {
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
 /// ```
-/// List {
-///   Section(header: Text("🍌🍌")) {
-///     Text("🔥🔥")
-///   }
-///   Section(header: Text("🍎🍎")) {
-///     Text("🔥🔥")
-///   }
+/// struct ExampleView: View {
+///     var body: some View {
+///          List {
+///               Section(header: Text("🍌🍌")) {
+///                    Text("🔥🔥")
+///               }
+///               Section(header: Text("🍎🍎")) {
+///                     Text("🔥🔥")
+///               }
+///          }
+///         .listStyle(GroupedListStyle())
+///     }
 /// }
-/// .listStyle(GroupedListStyle())
 /// ```
 ///
 /// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly referenced below.
@@ -13338,15 +13350,17 @@ extension PreviewProvider {
 /// ```
 ///  struct ExampleView: View {
 ///      var body: some View {
-///         Button("Banana 🍌🍌")
+///         Button("Banana 🍌🍌", action: { tap() })
 ///             .buttonStyle(MyPrimitiveButtonStyle())
 ///      }
+///
+///      func tap() {}
 ///  }
 ///
 ///  struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
 ///    func makeBody(configuration: Configuration) -> some View {
 ///      configuration.label
-///         .foregroundColor(.primary)
+///         .foregroundColor(.yellow)
 ///         .onTapGesture { configuration.trigger() }
 ///    }
 ///  }
@@ -13358,12 +13372,14 @@ extension PreviewProvider {
 ///  struct BananaView: View {
 ///      var body: some View {
 ///          VStack {
-///              Button("Banana 🍌🍌")
-///              Button("Apple 🍏🍏")
-///              Button("Peach 🍑🍑")
+///              Button("Banana 🍌🍌", action: { tap() })
+///              Button("Apple 🍏🍏", action: { tap() })
+///              Button("Peach 🍑🍑", action: { tap() })
 ///          }
 ///          .buttonStyle(BananaButtonStyle(color: .yellow))
 ///      }
+///
+///      func tap() {}
 ///  }
 ///
 ///  struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -13371,8 +13387,8 @@ extension PreviewProvider {
 ///
 ///    func makeBody(configuration: Configuration) -> some View {
 ///        configuration.label
-///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
 ///            .padding()
+///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
 ///            .onTapGesture { configuration.trigger() }
 ///    }
 ///  }
@@ -18075,7 +18091,11 @@ public struct TextEditor : View {
 ///         @State var myFruit: String = ""
 ///
 ///         var body: some View {
-///             TextField("Fruit", text: $myFruit)
+///             VStack {
+///                   Text(myFruit)
+///                   TextField("Fruit", text: $myFruit)
+///             }
+///             .padding()
 ///         }
 ///     }
 ///
@@ -18085,6 +18105,7 @@ public struct TextEditor : View {
 ///         @State var myFruit: String = ""
 ///
 ///         var body: some View {
+///             Text(myFruit)
 ///             TextField("Fruit", text: $myFruit)
 ///                 .textFieldStyle(RoundedBorderTextFieldStyle())
 ///                 .padding()
@@ -19489,12 +19510,12 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 ///
 ///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if `isAnimated` is true, and if the view is inactive.
+///         // Check if isAnimated is true, and if the view is inactive.
 ///         if isAnimated && !uiView.isAnimating {
 ///             uiView.startAnimating() // Animate
 ///         }
 ///
-///         // Check if `isAnimated` is false, and if the view is active.
+///         // Check if isAnimated is false, and if the view is active.
 ///         if !isAnimated && uiView.isAnimating {
 ///             uiView.stopAnimating() // Stop animating
 ///         }
@@ -19533,12 +19554,12 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 ///
 ///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if `isAnimated` is true, and if the view is inactive.
+///         // Check if isAnimated is true, and if the view is inactive.
 ///         if isAnimated && !uiView.isAnimating {
 ///             uiView.startAnimating() // Animate
 ///         }
 ///
-///         // Check if `isAnimated` is false, and if the view is active.
+///         // Check if isAnimated is false, and if the view is active.
 ///         if !isAnimated && uiView.isAnimating {
 ///             uiView.stopAnimating() // Stop animating
 ///         }
@@ -19688,7 +19709,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     @Binding var text: String
 ///
 ///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of `Coordinator`
+///         Coordinator(text: self.$text) // create an instance of Coordinator
 ///     }
 ///
 ///     func makeUIView(context: Context) -> UISearchBar {
@@ -19745,7 +19766,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     @Binding var text: String
 ///
 ///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of `Coordinator`
+///         Coordinator(text: self.$text) // create an instance of Coordinator
 ///     }
 ///
 ///     func makeUIView(context: Context) -> UISearchBar {
