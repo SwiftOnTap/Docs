@@ -19602,8 +19602,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
 ///
-/// ![UIViewRepresentable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-1.png)
-///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
 ///     typealias Context = UIViewRepresentableContext<Self>
@@ -19636,7 +19634,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
 ///
-/// ![UIViewRepresentable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-2.png)
+/// ![UIViewRepresentable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19683,8 +19681,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// For example, we can remove the `isAnimated` parameter from `ActivityIndicator`, and use `isEnabled` from the environment instead  via `EnvironmentValues/isEnabled`:
 ///
-/// ![UIViewRepresentable Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-3.png)
-///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
 ///     typealias Context = UIViewRepresentableContext<Self>
@@ -19712,7 +19708,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
 ///
-/// ![UIViewRepresentable Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-4.png)
+/// ![UIViewRepresentable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19754,7 +19750,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// The benefits of using the environment and context become apparent when multiple views are used together. For example:
 ///
-/// ![UIViewRepresentable Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-5.png)
+/// ![UIViewRepresentable Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19804,8 +19800,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// For example, here is an example port of `UISearchBar`:
 ///
-/// ![UIViewRepresentable Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-6.png)
-///
 /// ```
 /// struct SearchBar: UIViewRepresentable {
 ///     class Coordinator: NSObject, UISearchBarDelegate {
@@ -19851,7 +19845,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// Here is example of using the search part port:
 ///
-/// ![UIViewRepresentable Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-7.png)
+/// ![UIViewRepresentable Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
