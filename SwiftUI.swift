@@ -14821,11 +14821,15 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 }
 
 
+/// A view that scrolls.
+///
 /// A view that allows the scrolling of its contained views.
 ///
 /// ### Making a view scrollable
 ///
 /// `ScrollView` is a container view that makes its content scrollable. For example:
+///
+///  ![ScrollView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -14847,7 +14851,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// - The content of a `ScrollView` is scrollable regardless of whether all of it fits on screen or not.
 /// - It is not possible to selectively disable the scrolling of a `ScrollView`, while allowing its content to remain interactive. A `View/disabled(_:)` attached to a `ScrollView` will disable both the scrolling and all the interaction with the content visible.
-/// - A `ScrollView`'s scrollable is sized to fit the content view passed to the `ScrollView`.
+/// - A `ScrollView`'s scrollable region is sized to fit the content view passed to the `ScrollView`.
 /// - `ScrollView` fits to occupy as much space as possible. It is important to distinguish between the actual bounds of the scroll view, and the bounds of the *content* of the `ScrollView`.
 ///
 /// ### Setting the direction of scrolling
@@ -14859,6 +14863,8 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// - both vertical and horizontal
 ///
 /// To set a single allowed direction for a `ScrollView`, specify the axis of direction in the initializer. For example:
+///
+///  ![ScrollView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -14877,6 +14883,8 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// This example takes the previous example, and modifies it so that the `ScrollView` scrolls horizontally. This `ScrollView` will **not** scroll vertically, as an explict axis, `.horizontal`, has been specified.
 ///
 /// To allow *both* directions of scrolling, pass the set of axes that you want to permit. For example:
+///
+///  ![ScrollView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -14900,6 +14908,8 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content)` to hide the scroll indicator(s). For example:
 ///
+///  ![ScrollView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-4.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -14917,6 +14927,8 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// This `ScrollView` will never show a scroll indicator.
 ///
 /// You do not need to specify an axis to use `showsIndicators`. For example:
+///
+///  ![ScrollView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-5.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -14940,13 +14952,15 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// For example:
 ///
+///  ![ScrollView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-6.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView {
 ///             ScrollViewReader { (proxy: ScrollViewProxy) in
-///                 Button("Jump to #8") {
-///                     proxy.scrollTo(8)
+///                 Button("Jump to #32") {
+///                     proxy.scrollTo(32)
 ///                 }
 ///
 ///                 ForEach(1..<101) { number in
@@ -14959,17 +14973,19 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// In this example, clicking the button reading "Jump to #8", will cause the `ScrollView` to scroll to the item with the ID of the value `8`. To assign an ID to a view, use `View/id(_:)` as is done inside the `ForEach`, for each element.
+/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use `View/id(_:)` as is done inside the `ForEach`, for each element.
 ///
-/// The call of `proxy.scrollTo(8)` causes the `ScrollView` to scroll to the text reading "Item #8", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, can specify an anchor via `ScrollViewProxy/scrollTo(_:anchor:)`. For example:
+/// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the text reading "Item #32", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, specify an anchor via `ScrollViewProxy/scrollTo(_:anchor:)`. For example:
+///
+///  ![ScrollView Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-7.gif)
 ///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView {
 ///             ScrollViewReader { (proxy: ScrollViewProxy) in
-///                 Button("Jump to #8") {
-///                     proxy.scrollTo(99, anchor: .top)
+///                 Button("Jump to #32") {
+///                     proxy.scrollTo(32, anchor: .top)
 ///                 }
 ///
 ///                 ForEach(1..<101) { number in
@@ -14982,7 +14998,33 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// In this example, the `ScrollView` still scrolls to "Item #8", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
+/// In this example, the `ScrollView` still scrolls to "Item #32", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
+///
+///
+///  Add a transition to your `ScrollViewProxy/scrollTo(_:anchor:)` with `View/withAnimation(_:_:)`.  For example:
+///
+///  ![ScrollView Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-8.gif)
+///
+///  ```
+///  struct ExampleView: View {
+///      var body: some View {
+///          ScrollView {
+///              ScrollViewReader { (proxy: ScrollViewProxy) in
+///                  Button("Jump to #32") {
+///                     withAnimation(.easeInOut(duration: 60)) {
+///                         proxy.scrollTo(32, anchor: .top)
+///                     }
+///                  }
+///
+///                  ForEach(1..<101) { number in
+///                      Text("Item #\(number)")
+///                          .id(number)
+///                  }
+///              }
+///          }
+///      }
+///  }
+/// ```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : View where Content : View {
@@ -23259,7 +23301,7 @@ extension View {
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
-    /// For example:
+    /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
     ///
     /// ```
     /// struct ExampleView: View {
