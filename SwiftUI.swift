@@ -18174,7 +18174,7 @@ public struct TextEditor : View {
 ///
 /// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
 ///
-/// ![TextField Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-1.png)
+/// ![TextField Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-1.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -18186,7 +18186,7 @@ public struct TextEditor : View {
 ///
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
 ///
-/// ![TextField Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-2.png)
+/// ![TextField Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-2.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
