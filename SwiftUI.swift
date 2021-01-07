@@ -893,6 +893,8 @@ extension Angle : Animatable {
 ///
 /// For example:
 ///
+/// ![Animatable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animable-example-1.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var numberOfShakes: CGFloat = 0
@@ -942,6 +944,8 @@ extension Angle : Animatable {
 /// #### Using `AnimatableModifier` to continuously animate a view along a circle
 ///
 /// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
+///
+/// ![Animatable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animable-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2051,7 +2055,7 @@ extension BackgroundStyle : ShapeStyle {
 
 /// This type handles shared values across views.
 ///
-/// `Binding` is a poperty wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection ** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
+/// `Binding` is a property wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
 ///
 /// ### Structure of a `Binding`
 ///
@@ -2070,11 +2074,14 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// For example, a `TextField` can be bound to a state variable:
 ///
+/// ![Binding Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
 ///
 ///     var body: some View {
+///         Text(text)
 ///         TextField("Placeholder", text: $text)
 ///     }
 /// }
@@ -2088,19 +2095,25 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
 ///
-/// ````
-/// class ExampleModel: ObservableObject {
-///     @Published var isEnabled: Bool = false
-/// }
+/// ![Binding Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-2.png)
 ///
+/// ```
 /// struct ExampleView: View {
 ///     @StateObject var viewModel = ExampleModel()
 ///
+///     var text: String {
+///         viewModel.isEnabled ? "Enabled" : "Disabled"
+///     }
+///
 ///     var body: some View {
-///         Toggle("Enabled", isOn: $viewModel.isEnabled)
+///         Toggle(text, isOn: $viewModel.isEnabled)
 ///     }
 /// }
-/// ````
+///
+/// class ExampleModel: ObservableObject {
+///     @Published var isEnabled: Bool = false
+/// }
+/// ```
 ///
 /// The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a `Binding` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
 ///
@@ -2117,6 +2130,8 @@ extension BackgroundStyle : ShapeStyle {
 /// At times, you may want to pass a fixed value as a `Binding`. This is possible via `Binding/constant(_:)`, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
 ///
 /// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode.active`.
+///
+/// ![Binding Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4790,24 +4805,38 @@ extension DisclosureGroup where Label == Text {
 /// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack. When not in a stack, the divider stretches across the horizontal axis.
 ///
 /// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
+///
+/// ![Divider Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Divider-example-1.png)
+///
 /// ```
-/// VStack {
-///     Text("My Awesome Book")
+/// struct ExampleView: View {
+///   var body: some View {
+///     VStack {
+///       Text("My Awesome Book")
 ///
-///     Divider()
+///       Divider()
 ///
-///     Text("My Name")
+///       Text("My Name")
+///     }
+///   }
 /// }
 /// ```
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
+///
+/// ![Divider Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-2.png)
+///
 /// ```
-/// HStack {
-///     Text("This is a line of text.")
+/// struct ExampleView: View {
+///   var body: some View {
+///     HStack {
+///       Text("This is a line of text")
 ///
-///     Divider()
+///       Divider()
 ///
-///     Text("This is an unrelated line of text.")
+///       Text("This is an unrelated line of text")
+///     }
+///   }
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5547,7 +5576,10 @@ extension EdgeInsets : Animatable {
 ///
 /// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode``) for content within a container that supports `EditMode.active`.
 /// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
-/// ```
+///
+/// ![EditButton Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/EditButton-example-1.gif)
+///
+///```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
 ///
@@ -7083,6 +7115,8 @@ public struct FocusedValues {
 ///
 /// Fonts can be applied to your view with the ``View/font(_:)`` modifier.
 ///
+/// ![Font Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -7094,6 +7128,8 @@ public struct FocusedValues {
 ///
 /// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
 ///
+/// ![Font Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-2.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -7104,6 +7140,8 @@ public struct FocusedValues {
 /// ```
 ///
 /// Non system-fonts can be applied using `Font/custom(_:size:)`
+///
+/// ![Font Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7752,6 +7790,8 @@ public struct GeometryProxy {
 ///
 /// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
 ///
+/// ![GeometryReader Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -7809,6 +7849,8 @@ public struct GeometryProxy {
 ///
 /// This task of acquiring a view's frame can be done in a generic and reusable way using `ViewModifier`:
 ///
+/// ![GeometryReader Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-2.png)
+///
 /// ```
 /// struct GetGlobalFrame: ViewModifier {
 ///     @Binding var globalFrame: CGRect?
@@ -7830,6 +7872,8 @@ public struct GeometryProxy {
 /// ```
 ///
 /// The modifier above can be used in the following manner:
+///
+/// ![GeometryReader Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10095,6 +10139,8 @@ extension Link where Label == Text {
 ///
 /// The following creates a `List` with three rows of text:
 ///
+/// ![List Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -10111,12 +10157,14 @@ extension Link where Label == Text {
 ///
 /// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
 ///
+/// ![List Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-2.png)
+///
 /// ````
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
-///         List.init(fruits, id: \.self) { (fruit: String) in
+///         List.init(fruits, id: /\.self) { (fruit: String) in
 ///             Text(fruit)
 ///         }
 ///     }
@@ -10135,6 +10183,8 @@ extension Link where Label == Text {
 ///
 /// The following example displays a `List` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
 ///
+/// ![List Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-3.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -10143,7 +10193,7 @@ extension Link where Label == Text {
 ///         List {
 ///             Text("Hello, World!")
 ///
-///             ForEach(fruits, id: \.self) { (fruit: String) in
+///             ForEach(fruits, id: /\.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///         }
@@ -10157,6 +10207,8 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates the usage of `Section`.
 ///
+/// ![List Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-4.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -10168,7 +10220,7 @@ extension Link where Label == Text {
 ///             }
 ///
 ///             Section(header: Text("Fruit")) {
-///                 ForEach(fruits, id: \.self) { (fruit: String) in
+///                 ForEach(fruits, id: /\.self) { (fruit: String) in
 ///                     Text(fruit)
 ///                 }
 ///             }
@@ -10184,6 +10236,8 @@ extension Link where Label == Text {
 /// A `List` can be styled using the `View/listStyle(_:)` modifier.
 ///
 /// The following example demonstrates how to style a `List` to use a grouped-inset style:
+///
+/// ![List Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-5.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10215,6 +10269,8 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how `View/listRowBackground(_:)` can be used to provide specific background colors for a list's rows:
 ///
+/// ![List Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-6.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -10234,13 +10290,15 @@ extension Link where Label == Text {
 ///
 /// In the following example, all the rows of the `List` have the background view `Color.yellow`.
 ///
+/// ![List Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-7.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
 ///         List {
-///             ForEach(fruits, id: \.self) { (fruit: String) in
+///             ForEach(fruits, id: /\.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///             .listRowBackground(Color.yellow)
@@ -10255,6 +10313,8 @@ extension Link where Label == Text {
 ///
 /// Apply the `DynamicViewContent/onDelete(_:)` modifier on a `ForEach` within a `List` to allow the list rows to become deletable.
 ///
+/// ![List Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-8.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
@@ -10262,7 +10322,7 @@ extension Link where Label == Text {
 ///     var body: some View {
 ///         NavigationView {
 ///             List {
-///                 ForEach(fruits, id: \.self) { fruit in
+///                 ForEach(fruits, id: /\.self) { fruit in
 ///                     Text(fruit)
 ///                 }
 ///                 .onDelete { offsets in
@@ -10282,6 +10342,8 @@ extension Link where Label == Text {
 /// ### Editing a `List` using `EditButton`
 ///
 /// An `EditButton` placed in the navigation bar of a `NavigationView` with a `List` in it can be used to provide an edit button for the `List`.
+///
+/// ![List Example 9](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-9.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10311,7 +10373,7 @@ extension Link where Label == Text {
 ///
 /// - The separator of a `List` cannot be removed.
 /// - `SidebarListStyle` is broken on macCatalyst.
-/// 
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -10613,6 +10675,8 @@ public struct ListItemTint {
 ///
 /// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a `List` with the ``View/listStyle(_:)`` modifier.
 ///
+/// ![ListStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ListStyle-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -10631,16 +10695,22 @@ public struct ListItemTint {
 ///
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
+/// ![ListStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ListStyle-example-2.png)
+///
 /// ```
-/// List {
-///   Section(header: Text("🍌🍌")) {
-///     Text("🔥🔥")
-///   }
-///   Section(header: Text("🍎🍎")) {
-///     Text("🔥🔥")
-///   }
+/// struct ExampleView: View {
+///     var body: some View {
+///          List {
+///               Section(header: Text("🍌🍌")) {
+///                    Text("🔥🔥")
+///               }
+///               Section(header: Text("🍎🍎")) {
+///                     Text("🔥🔥")
+///               }
+///          }
+///         .listStyle(GroupedListStyle())
+///     }
 /// }
-/// .listStyle(GroupedListStyle())
 /// ```
 ///
 /// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly referenced below.
@@ -10650,7 +10720,7 @@ public struct ListItemTint {
 /// - `InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
 /// - `InsetListStyle` - is similar to a plain list, but includes additional layout insets.
 /// - `PlainListStyle` - provides platform standard list appearance and behavior.
-/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/). Currently not working properly on MacCatalyst. 
+/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/). Currently not working properly on MacCatalyst.
 /// - `EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
 /// - `CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -11879,6 +11949,8 @@ extension NavigationLink {
 ///
 /// A navigation stack is set up simply by wrapping your view in a `NavigationView`
 ///
+/// ![NavigationView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11894,6 +11966,8 @@ extension NavigationLink {
 /// ### Adding a navigation title
 ///
 /// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your `NavigationView`:
+///
+/// ![NavigationView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11919,6 +11993,8 @@ extension NavigationLink {
 ///
 /// The following example forces a large navigation title:
 ///
+/// ![NavigationView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-3.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11936,6 +12012,8 @@ extension NavigationLink {
 /// Use `NavigationLink` to add a button that pushes a new view onto the navigation stack.
 ///
 /// For example, the following presents `ApplesView` when the link "I want apples!" is pressed:
+///
+/// ![NavigationView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11962,6 +12040,8 @@ extension NavigationLink {
 ///
 /// For example:
 ///
+/// ![NavigationView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-5.png)
+///
 /// ````
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11976,6 +12056,8 @@ extension NavigationLink {
 /// Note that the navigation bar can be unhidden by child views. `View/navigationBarHidden(_:)` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
 ///
 /// For example, navigating to `SecondScreen` in the following unhides the bar:
+///
+/// ![NavigationView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-6.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12010,11 +12092,13 @@ extension NavigationLink {
 ///
 /// For example, the following adds "🍌🍌" to the leading area, and "🍏🍏" to the trailing area:
 ///
+/// ![NavigationView Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-7.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///         }
 ///         .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///     }
@@ -12027,11 +12111,13 @@ extension NavigationLink {
 ///
 /// For example, the following forces a stack-based navigation style, overriding the default double-colum style on macCatalyst:
 ///
+/// ![NavigationView Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-8.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///         }
 ///         .navigationViewStyle(StackNavigationViewStyle())
 ///     }
@@ -12040,11 +12126,13 @@ extension NavigationLink {
 ///
 /// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
 ///
+/// ![NavigationView Example 9](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-9.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///         }
 ///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
 ///     }
@@ -12056,6 +12144,8 @@ extension NavigationLink {
 /// `NavigationLink` provides the ability to observe and/or set the active navigation selection via its initializer `NavigationLink/init(destination:tag:selection:label)`.
 ///
 /// For example:
+///
+/// ![NavigationView Example 10](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-10.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13335,18 +13425,22 @@ extension PreviewProvider {
 ///
 /// Use `View/buttonStyle(_:)` to apply a primitive button style.
 ///
+/// ![PrimitiveButtonStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/PrimitiveButtonStyle-example-1.png)
+///
 /// ```
 ///  struct ExampleView: View {
 ///      var body: some View {
-///         Button("Banana 🍌🍌")
+///         Button("Banana 🍌🍌", action: { tap() })
 ///             .buttonStyle(MyPrimitiveButtonStyle())
 ///      }
+///
+///      func tap() {}
 ///  }
 ///
 ///  struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
 ///    func makeBody(configuration: Configuration) -> some View {
 ///      configuration.label
-///         .foregroundColor(.primary)
+///         .foregroundColor(.yellow)
 ///         .onTapGesture { configuration.trigger() }
 ///    }
 ///  }
@@ -13354,16 +13448,20 @@ extension PreviewProvider {
 ///
 /// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
 ///
+/// ![PrimitiveButtonStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/PrimitiveButtonStyle-example-2.png)
+///
 /// ```
 ///  struct BananaView: View {
 ///      var body: some View {
 ///          VStack {
-///              Button("Banana 🍌🍌")
-///              Button("Apple 🍏🍏")
-///              Button("Peach 🍑🍑")
+///              Button("Banana 🍌🍌", action: { tap() })
+///              Button("Apple 🍏🍏", action: { tap() })
+///              Button("Peach 🍑🍑", action: { tap() })
 ///          }
 ///          .buttonStyle(BananaButtonStyle(color: .yellow))
 ///      }
+///
+///      func tap() {}
 ///  }
 ///
 ///  struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -13371,8 +13469,8 @@ extension PreviewProvider {
 ///
 ///    func makeBody(configuration: Configuration) -> some View {
 ///        configuration.label
-///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
 ///            .padding()
+///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
 ///            .onTapGesture { configuration.trigger() }
 ///    }
 ///  }
@@ -14395,6 +14493,8 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// Primitive scenes like ``WindowGroup`` can go directly in the body of your ``App``.
 ///
+/// ![Scene Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Scene-example-1.png)
+///
 ///     @main
 ///     struct SuperSimpleApp: App {
 ///         var body: some Scene {
@@ -14408,6 +14508,8 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
 /// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
+///
+/// ![Scene Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Scene-example-2.png)
 ///
 ///     @main
 ///     struct MacCompatibleApp: App {
@@ -16984,6 +17086,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
 ///
+/// ![TabView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-1.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -17015,6 +17119,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// The following example creates a paginated view with the three `Text` child views as individual pages.
 ///
+/// ![TabView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-2.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -17030,13 +17136,15 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
 ///
+/// ![TabView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-3.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: \.self) {
+///             ForEach(items, id: /\.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -17051,13 +17159,15 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
 ///
+/// ![TabView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-4.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: \.self) {
+///             ForEach(items, id: /\.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -17072,6 +17182,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
 ///
 /// Here is an example that writes tab selection to a state variable:
+///
+/// ![TabView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-5.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17115,6 +17227,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in the previous example, but it could've just as easily been a `String` or an `Int`.
 ///
 /// For example, the following uses a traditional 0-based tab indexing:
+///
+/// ![TabView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-6.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -18071,20 +18185,29 @@ public struct TextEditor : View {
 ///
 /// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
 ///
+/// ![TextField Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-1.gif)
+///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
 ///
 ///         var body: some View {
-///             TextField("Fruit", text: $myFruit)
+///             VStack {
+///                   Text(myFruit)
+///                   TextField("Fruit", text: $myFruit)
+///             }
+///             .padding()
 ///         }
 ///     }
 ///
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
 ///
+/// ![TextField Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-2.gif)
+///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
 ///
 ///         var body: some View {
+///             Text(myFruit)
 ///             TextField("Fruit", text: $myFruit)
 ///                 .textFieldStyle(RoundedBorderTextFieldStyle())
 ///                 .padding()
@@ -19477,6 +19600,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
 ///
+/// ![UIViewRepresentable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-1.png)
+///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
 ///     typealias Context = UIViewRepresentableContext<Self>
@@ -19489,12 +19614,12 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 ///
 ///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if `isAnimated` is true, and if the view is inactive.
+///         // Check if isAnimated is true, and if the view is inactive.
 ///         if isAnimated && !uiView.isAnimating {
 ///             uiView.startAnimating() // Animate
 ///         }
 ///
-///         // Check if `isAnimated` is false, and if the view is active.
+///         // Check if isAnimated is false, and if the view is active.
 ///         if !isAnimated && uiView.isAnimating {
 ///             uiView.stopAnimating() // Stop animating
 ///         }
@@ -19508,6 +19633,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// - No redundant calls are made to `startAnimating` and `stopAnimating`. Redundant calls are guarded against by checking whether `uiView.isAnimating` is true or not. This is a general principle for optimizing the performance of your `UIViewRepresentable`.
 ///
 /// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
+///
+/// ![UIViewRepresentable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19533,12 +19660,12 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 ///
 ///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if `isAnimated` is true, and if the view is inactive.
+///         // Check if isAnimated is true, and if the view is inactive.
 ///         if isAnimated && !uiView.isAnimating {
 ///             uiView.startAnimating() // Animate
 ///         }
 ///
-///         // Check if `isAnimated` is false, and if the view is active.
+///         // Check if isAnimated is false, and if the view is active.
 ///         if !isAnimated && uiView.isAnimating {
 ///             uiView.stopAnimating() // Stop animating
 ///         }
@@ -19553,6 +19680,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// SwiftUI heavily relies on the environment, by way of environment objects (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`). The latter – environment values – are useful for creating intelligent and context-aware UIKit ports.
 ///
 /// For example, we can remove the `isAnimated` parameter from `ActivityIndicator`, and use `isEnabled` from the environment instead  via `EnvironmentValues/isEnabled`:
+///
+/// ![UIViewRepresentable Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-3.png)
 ///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
@@ -19580,6 +19709,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// In this example, `context` is used to access the view's current `environment` (via `context.environment`), giving you access to the latest `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get rid of the `isAnimated` parameter in favor of reading it from the context. This has the added advantage of being passed from any level at the top, because environment values propagate down the view hierarchy.
 ///
 /// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
+///
+/// ![UIViewRepresentable Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19620,6 +19751,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// Using `View/disabled(_:)`, the activity indicator can now be made active or inactive.
 ///
 /// The benefits of using the environment and context become apparent when multiple views are used together. For example:
+///
+/// ![UIViewRepresentable Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-5.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19669,6 +19802,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// For example, here is an example port of `UISearchBar`:
 ///
+/// ![UIViewRepresentable Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-6.png)
+///
 /// ```
 /// struct SearchBar: UIViewRepresentable {
 ///     class Coordinator: NSObject, UISearchBarDelegate {
@@ -19688,7 +19823,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     @Binding var text: String
 ///
 ///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of `Coordinator`
+///         Coordinator(text: self.$text) // create an instance of Coordinator
 ///     }
 ///
 ///     func makeUIView(context: Context) -> UISearchBar {
@@ -19713,6 +19848,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// Text input controls in SwiftUI often take a `Binding<String>` in their initializer, and use it to get/set the latest text entered by the user via control. It's extremely important to note that bindings are bidirectional, because SwiftUI ports of UIKit views must also **get** the latest input from the `Binding`. UIKit patterns typically only require notifying the observer and thus setting the values, but in SwiftUI it is imperative to handle both to be a good SwiftUI citizen.
 ///
 /// Here is example of using the search part port:
+///
+/// ![UIViewRepresentable Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-7.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19745,7 +19882,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     @Binding var text: String
 ///
 ///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of `Coordinator`
+///         Coordinator(text: self.$text) // create an instance of Coordinator
 ///     }
 ///
 ///     func makeUIView(context: Context) -> UISearchBar {
@@ -23835,13 +23972,15 @@ extension View {
     /// - Parameter content: The views representing the content of the toolbar.
     public func toolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content : View { }
 
-    
+
     /// Populates the toolbar or navigation bar.
     ///
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
     /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
+    ///
+    /// ![toolbar Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -23871,6 +24010,8 @@ extension View {
     /// Think of a toolbar in terms of spacers and items.
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
+    ///
+    /// ![toolbar Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -23901,6 +24042,8 @@ extension View {
     ///
     /// For example:
     ///
+    /// ![toolbar Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-3.png)
+    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -23929,6 +24072,8 @@ extension View {
     /// Think of a toolbar in terms of spacers and items.
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
+    ///
+    /// ![toolbar Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -26212,7 +26357,7 @@ extension MutableCollection {
 extension UIColor {
 
 	/// Creates a new `UIColor` from a SwiftUI ``Color``.
-	/// 
+	///
 	/// - Parameter color: The SwiftUI ``Color`` object to use for creating a `UIColor`.
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
     @available(macOS, unavailable)
