@@ -19316,9 +19316,9 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
     public var environment: EnvironmentValues { get }
 }
 
-/// A view that allows you to import a UIKit view into SwiftUI.
+/// A view to import a UIKit view into SwiftUI.
 ///
-/// ### Lifecycle
+/// ### Setup
 ///
 /// To implement a `UIViewRepresentable`, you must implement four main lifecycle functions:
 ///
@@ -19335,9 +19335,9 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// - Upon any state changes, calls  `UIViewRepresentable/updateUIView(_:context:)`
 /// - Upon destruction of the parent container, calls `UIViewRepresentable/dismantleUIView(context:)`
 ///
-/// ### Using `UVIiewRepresentable` to port a simple `UIView`
+/// ### Port a simple `UIView`
 ///
-/// A port of a simple UIKit view, `UIActivityIndicatorView`, would look something like the following:
+/// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
 ///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
@@ -19410,7 +19410,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// In this example, the `ActivityIndicator` from before is used and can be toggled by passing a boolean to `ActivityIndicator/init(isAnimated:)`.
 ///
-/// ### Using `EnvironmentValues` to create a context-aware `UIViewRepresentable`
+/// ### Context-aware `UIViewRepresentable`s
 ///
 /// SwiftUI heavily relies on the environment, by way of environment objects (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`). The latter – environment values – are useful for creating intelligent and context-aware UIKit ports.
 ///
@@ -19497,19 +19497,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///                 ActivityIndicator()
 ///             }
 ///             .disabled(!isAnimating)
-///         }
-///     }
-/// }
-///
-/// struct ExampleView: View {
-///     @State var isAnimating: Bool = false
-///
-///     var body: some View {
-///         VStack {
-///             Toggle("Animating", isOn: $isAnimating)
-///
-///             ActivityIndicator()
-///                 .disabled(!isAnimating)
 ///         }
 ///     }
 /// }
@@ -19638,7 +19625,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// }
 /// ```
 ///
-/// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Apples 🍏🍏"`, `SearchBar` would have an initial search text of `"Apples 🍏🍏"` already loaded.
+/// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar` would have an initial search text of `"Bananas 🍌🍌"` already loaded.
 ///
 /// ### Further notes
 ///
