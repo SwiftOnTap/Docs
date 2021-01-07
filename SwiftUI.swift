@@ -893,7 +893,7 @@ extension Angle : Animatable {
 ///
 /// For example:
 ///
-/// ![Animatable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animable-example-1.gif)
+/// ![Animatable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animatable-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -945,7 +945,7 @@ extension Angle : Animatable {
 ///
 /// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
 ///
-/// ![Animatable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animable-example-2.gif)
+/// ![Animatable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animatable-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2074,7 +2074,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// For example, a `TextField` can be bound to a state variable:
 ///
-/// ![Binding Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-1.png)
+/// ![Binding Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2095,7 +2095,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
 ///
-/// ![Binding Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-2.png)
+/// ![Binding Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2131,7 +2131,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode.active`.
 ///
-/// ![Binding Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.png)
+/// ![Binding Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4824,7 +4824,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
 ///
-/// ![Divider Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-2.png)
+/// ![Divider Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Divider-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17129,6 +17129,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///             Text("Apples 🍏🍏")
 ///             Text("Peaches 🍑🍑")
 ///         }
+///         .foregroundColor(Color.white)
+///         .background(Color.yellow)
 ///         .tabViewStyle(PageTabViewStyle())
 ///     }
 /// }
