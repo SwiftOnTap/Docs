@@ -893,6 +893,8 @@ extension Angle : Animatable {
 ///
 /// For example:
 ///
+/// ![Animatable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animable-example-1.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var numberOfShakes: CGFloat = 0
@@ -942,6 +944,8 @@ extension Angle : Animatable {
 /// #### Using `AnimatableModifier` to continuously animate a view along a circle
 ///
 /// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
+///
+/// ![Animatable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animable-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2051,11 +2055,13 @@ extension BackgroundStyle : ShapeStyle {
 
 /// This type handles shared values across views.
 ///
-/// `Binding` is a poperty wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection ** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
+/// `Binding` is a property wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection ** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
 ///
 /// ### Structure of a `Binding`
 ///
 /// A `Binding` is essentially the following structure:
+///
+/// ![Binding Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-1.png)
 ///
 /// ```
 /// struct Binding<Value> {
@@ -2069,6 +2075,8 @@ extension BackgroundStyle : ShapeStyle {
 /// A `Binding` typically represents a reference to a mutable source of truth - such as `@State`, `@ObservedObject` or a reference-writable keypath of an object. To create a `Binding` from a mutable source of truth, prefix the variable name for the source of truth with a dollar sign (`$`).
 ///
 /// For example, a `TextField` can be bound to a state variable:
+///
+/// ![Binding Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2087,6 +2095,8 @@ extension BackgroundStyle : ShapeStyle {
 /// ### Creating a `Binding` from an `ObservableObject`
 ///
 /// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
+///
+/// ![Binding Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.png)
 ///
 /// ````
 /// class ExampleModel: ObservableObject {
@@ -2108,6 +2118,8 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with `Binding/animation(_:)`. Usage looks as follows:
 ///
+/// ![Binding Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-4.png)
+///
 /// ```
 /// $myVariable.animation(.default)
 /// ```
@@ -2117,6 +2129,8 @@ extension BackgroundStyle : ShapeStyle {
 /// At times, you may want to pass a fixed value as a `Binding`. This is possible via `Binding/constant(_:)`, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
 ///
 /// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode.active`.
+///
+/// ![Binding Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-5.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4790,6 +4804,9 @@ extension DisclosureGroup where Label == Text {
 /// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack. When not in a stack, the divider stretches across the horizontal axis.
 ///
 /// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
+///
+/// ![Divider Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Divider-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///   var body: some View {
@@ -4805,6 +4822,9 @@ extension DisclosureGroup where Label == Text {
 /// ```
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
+///
+/// ![Divider Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-2.png)
+/// 
 /// ```
 /// struct ExampleView: View {
 ///   var body: some View {
@@ -5555,7 +5575,10 @@ extension EdgeInsets : Animatable {
 ///
 /// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode``) for content within a container that supports `EditMode.active`.
 /// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
-/// ```
+///
+/// ![EditButton Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/EditButton-example-1.gif)
+///
+///```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
 ///
@@ -7091,6 +7114,8 @@ public struct FocusedValues {
 ///
 /// Fonts can be applied to your view with the ``View/font(_:)`` modifier.
 ///
+/// ![Font Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -7102,6 +7127,8 @@ public struct FocusedValues {
 ///
 /// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
 ///
+/// ![Font Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-2.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -7112,6 +7139,8 @@ public struct FocusedValues {
 /// ```
 ///
 /// Non system-fonts can be applied using `Font/custom(_:size:)`
+///
+/// ![Font Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7760,6 +7789,8 @@ public struct GeometryProxy {
 ///
 /// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
 ///
+/// ![GeometryReader Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -7817,6 +7848,8 @@ public struct GeometryProxy {
 ///
 /// This task of acquiring a view's frame can be done in a generic and reusable way using `ViewModifier`:
 ///
+/// ![GeometryReader Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-2.png)
+///
 /// ```
 /// struct GetGlobalFrame: ViewModifier {
 ///     @Binding var globalFrame: CGRect?
@@ -7838,6 +7871,8 @@ public struct GeometryProxy {
 /// ```
 ///
 /// The modifier above can be used in the following manner:
+///
+/// ![GeometryReader Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10103,6 +10138,8 @@ extension Link where Label == Text {
 ///
 /// The following creates a `List` with three rows of text:
 ///
+/// ![List Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -10118,6 +10155,8 @@ extension Link where Label == Text {
 /// ### Creating a `List` with a variable number of elements
 ///
 /// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
+///
+/// ![List Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-2.png)
 ///
 /// ````
 /// struct ExampleView: View {
@@ -10143,6 +10182,8 @@ extension Link where Label == Text {
 ///
 /// The following example displays a `List` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
 ///
+/// ![List Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-3.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -10164,6 +10205,8 @@ extension Link where Label == Text {
 /// ### Adding sections to a `List`
 ///
 /// The following example demonstrates the usage of `Section`.
+///
+/// ![List Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10192,6 +10235,8 @@ extension Link where Label == Text {
 /// A `List` can be styled using the `View/listStyle(_:)` modifier.
 ///
 /// The following example demonstrates how to style a `List` to use a grouped-inset style:
+///
+/// ![List Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-5.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10223,6 +10268,8 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how `View/listRowBackground(_:)` can be used to provide specific background colors for a list's rows:
 ///
+/// ![List Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-6.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -10241,6 +10288,8 @@ extension Link where Label == Text {
 /// A background can be provided for multiple list rows at a time, by applying the `View/listRowBackground(_:)` modifier to `ForEach`.
 ///
 /// In the following example, all the rows of the `List` have the background view `Color.yellow`.
+///
+/// ![List Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-7.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10262,6 +10311,8 @@ extension Link where Label == Text {
 /// ### Making list rows deletable
 ///
 /// Apply the `DynamicViewContent/onDelete(_:)` modifier on a `ForEach` within a `List` to allow the list rows to become deletable.
+///
+/// ![List Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-8.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10290,6 +10341,8 @@ extension Link where Label == Text {
 /// ### Editing a `List` using `EditButton`
 ///
 /// An `EditButton` placed in the navigation bar of a `NavigationView` with a `List` in it can be used to provide an edit button for the `List`.
+///
+/// ![List Example 9](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-9.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10621,6 +10674,8 @@ public struct ListItemTint {
 ///
 /// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a `List` with the ``View/listStyle(_:)`` modifier.
 ///
+/// ![ListStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ListStyle-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -10638,6 +10693,8 @@ public struct ListItemTint {
 /// - `View/Styles/InsetGroupedListStyle`
 ///
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
+///
+/// ![ListStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ListStyle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11891,6 +11948,8 @@ extension NavigationLink {
 ///
 /// A navigation stack is set up simply by wrapping your view in a `NavigationView`
 ///
+/// ![NavigationView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11906,6 +11965,8 @@ extension NavigationLink {
 /// ### Adding a navigation title
 ///
 /// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your `NavigationView`:
+///
+/// ![NavigationView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11931,6 +11992,8 @@ extension NavigationLink {
 ///
 /// The following example forces a large navigation title:
 ///
+/// ![NavigationView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-3.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11948,6 +12011,8 @@ extension NavigationLink {
 /// Use `NavigationLink` to add a button that pushes a new view onto the navigation stack.
 ///
 /// For example, the following presents `ApplesView` when the link "I want apples!" is pressed:
+///
+/// ![NavigationView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11974,6 +12039,8 @@ extension NavigationLink {
 ///
 /// For example:
 ///
+/// ![NavigationView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-5.png)
+///
 /// ````
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11988,6 +12055,8 @@ extension NavigationLink {
 /// Note that the navigation bar can be unhidden by child views. `View/navigationBarHidden(_:)` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
 ///
 /// For example, navigating to `SecondScreen` in the following unhides the bar:
+///
+/// ![NavigationView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-6.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12022,6 +12091,8 @@ extension NavigationLink {
 ///
 /// For example, the following adds "🍌🍌" to the leading area, and "🍏🍏" to the trailing area:
 ///
+/// ![NavigationView Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-7.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -12039,6 +12110,8 @@ extension NavigationLink {
 ///
 /// For example, the following forces a stack-based navigation style, overriding the default double-colum style on macCatalyst:
 ///
+/// ![NavigationView Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-8.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -12051,6 +12124,8 @@ extension NavigationLink {
 /// ```
 ///
 /// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
+///
+/// ![NavigationView Example 9](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-9.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12068,6 +12143,8 @@ extension NavigationLink {
 /// `NavigationLink` provides the ability to observe and/or set the active navigation selection via its initializer `NavigationLink/init(destination:tag:selection:label)`.
 ///
 /// For example:
+///
+/// ![NavigationView Example 10](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-10.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13347,6 +13424,8 @@ extension PreviewProvider {
 ///
 /// Use `View/buttonStyle(_:)` to apply a primitive button style.
 ///
+/// ![PrimitiveButtonStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/PrimitiveButtonStyle-example-1.png)
+///
 /// ```
 ///  struct ExampleView: View {
 ///      var body: some View {
@@ -13367,6 +13446,8 @@ extension PreviewProvider {
 /// ```
 ///
 /// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
+///
+/// ![PrimitiveButtonStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/PrimitiveButtonStyle-example-2.png)
 ///
 /// ```
 ///  struct BananaView: View {
@@ -14411,6 +14492,8 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// Primitive scenes like ``WindowGroup`` can go directly in the body of your ``App``.
 ///
+/// ![Scene Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Scene-example-1.png)
+///
 ///     @main
 ///     struct SuperSimpleApp: App {
 ///         var body: some Scene {
@@ -14424,6 +14507,8 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
 /// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
+///
+/// ![Scene Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Scene-example-2.png)
 ///
 ///     @main
 ///     struct MacCompatibleApp: App {
@@ -14456,6 +14541,8 @@ extension RoundedRectangle : InsettableShape {
 /// The ``EnvironmentValues/scenePhase`` environment value can easily be read in a scene
 /// to respond to whether the scene is active or in another state. It returns an enumeration of type
 /// ``ScenePhase``.
+///
+/// ![Scene Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.png)
 ///
 ///     struct StateAdaptingScene: Scene {
 ///         @Environment(\.scenePhase) private var scenePhase
@@ -17000,6 +17087,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
 ///
+/// ![TabView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-1.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -17031,6 +17120,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// The following example creates a paginated view with the three `Text` child views as individual pages.
 ///
+/// ![TabView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-2.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -17045,6 +17136,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ```
 ///
 /// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
+///
+/// ![TabView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17067,6 +17160,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
 ///
+/// ![TabView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-4.gif)
+///
 /// ```
 /// struct ExampleView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -17088,6 +17183,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
 ///
 /// Here is an example that writes tab selection to a state variable:
+///
+/// ![TabView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-5.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17131,6 +17228,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in the previous example, but it could've just as easily been a `String` or an `Int`.
 ///
 /// For example, the following uses a traditional 0-based tab indexing:
+///
+/// ![TabView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-6.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -18087,6 +18186,8 @@ public struct TextEditor : View {
 ///
 /// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
 ///
+/// ![TextField Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-1.gif)
+///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
 ///
@@ -18100,6 +18201,8 @@ public struct TextEditor : View {
 ///     }
 ///
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
+///
+/// ![TextField Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-2.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -19498,6 +19601,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
 ///
+/// ![UIViewRepresentable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-1.png)
+///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
 ///     typealias Context = UIViewRepresentableContext<Self>
@@ -19529,6 +19634,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// - No redundant calls are made to `startAnimating` and `stopAnimating`. Redundant calls are guarded against by checking whether `uiView.isAnimating` is true or not. This is a general principle for optimizing the performance of your `UIViewRepresentable`.
 ///
 /// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
+///
+/// ![UIViewRepresentable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19575,6 +19682,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// For example, we can remove the `isAnimated` parameter from `ActivityIndicator`, and use `isEnabled` from the environment instead  via `EnvironmentValues/isEnabled`:
 ///
+/// ![UIViewRepresentable Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-3.png)
+///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
 ///     typealias Context = UIViewRepresentableContext<Self>
@@ -19601,6 +19710,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// In this example, `context` is used to access the view's current `environment` (via `context.environment`), giving you access to the latest `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get rid of the `isAnimated` parameter in favor of reading it from the context. This has the added advantage of being passed from any level at the top, because environment values propagate down the view hierarchy.
 ///
 /// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
+///
+/// ![UIViewRepresentable Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19641,6 +19752,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// Using `View/disabled(_:)`, the activity indicator can now be made active or inactive.
 ///
 /// The benefits of using the environment and context become apparent when multiple views are used together. For example:
+///
+/// ![UIViewRepresentable Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-5.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19690,6 +19803,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// For example, here is an example port of `UISearchBar`:
 ///
+/// ![UIViewRepresentable Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-6.png)
+///
 /// ```
 /// struct SearchBar: UIViewRepresentable {
 ///     class Coordinator: NSObject, UISearchBarDelegate {
@@ -19734,6 +19849,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// Text input controls in SwiftUI often take a `Binding<String>` in their initializer, and use it to get/set the latest text entered by the user via control. It's extremely important to note that bindings are bidirectional, because SwiftUI ports of UIKit views must also **get** the latest input from the `Binding`. UIKit patterns typically only require notifying the observer and thus setting the values, but in SwiftUI it is imperative to handle both to be a good SwiftUI citizen.
 ///
 /// Here is example of using the search part port:
+///
+/// ![UIViewRepresentable Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-7.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23864,6 +23981,8 @@ extension View {
     ///
     /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
     ///
+    /// ![toolbar Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-1.png)
+    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -23892,6 +24011,8 @@ extension View {
     /// Think of a toolbar in terms of spacers and items.
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
+    ///
+    /// ![toolbar Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -23922,6 +24043,8 @@ extension View {
     ///
     /// For example:
     ///
+    /// ![toolbar Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-3.png)
+    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -23950,6 +24073,8 @@ extension View {
     /// Think of a toolbar in terms of spacers and items.
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
+    ///
+    /// ![toolbar Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
