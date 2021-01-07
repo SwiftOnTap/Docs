@@ -16717,7 +16717,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: \.self) {
+///             ForEach(items, id: /\.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -16738,7 +16738,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: \.self) {
+///             ForEach(items, id: /\.self) {
 ///                 Text($0)
 ///             }
 ///         }
