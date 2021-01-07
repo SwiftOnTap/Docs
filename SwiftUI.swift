@@ -875,7 +875,9 @@ extension Angle : Animatable {
     public typealias Body
 }
 
-/// A type that describes how to animate a view with respect to some change in the view's data.
+/// Animate a view when data changes.
+///
+/// `Animatable` describes how to animate a view with respect to some change in the view's data.
 ///
 /// Use `Animatable` when you are unable to achieve the animation you want with `View/animation(_:)` or `withAnimation`.
 ///
@@ -883,7 +885,9 @@ extension Angle : Animatable {
 ///
 /// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `animatableData`. This is also the reason why `AnimatableData` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 ///
-/// ### Using `AnimatableModifier` to implement a shake effect
+/// ### Implementations
+///
+/// #### Using `AnimatableModifier` to implement a shake effect
 ///
 /// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines `Animatable` and `ViewModifier`. This allows you to decouple the animation effect from the view you want to animate.
 ///
@@ -895,7 +899,7 @@ extension Angle : Animatable {
 ///
 ///     var body: some View {
 ///         VStack {
-///             Text("🍏")
+///             Text("Banana🍌🍌")
 ///                 .font(.largeTitle)
 ///                 .modifier(ShakeEffect(shakeNumber: numberOfShakes))
 ///                 .onAppear {
@@ -935,7 +939,7 @@ extension Angle : Animatable {
 ///
 /// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of `Animation` is used in `withAnimation`, to animate the change from `0` shakes to `10` shakes.
 ///
-/// ### Using `AnimatableModifier` to continuously animate a view along a circle
+/// #### Using `AnimatableModifier` to continuously animate a view along a circle
 ///
 /// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
 ///
@@ -945,7 +949,7 @@ extension Angle : Animatable {
 ///
 ///     var body: some View {
 ///         VStack {
-///             Text("🍏")
+///             Text("Banana🍌🍌")
 ///                 .font(.largeTitle)
 ///                 .modifier(CircleAnimation(radius: 24, progress: progress))
 ///                 .onAppear {
@@ -978,7 +982,7 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// In this example, `Text("🍏")` is animated along a circle continuously.
+/// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
 ///
 /// ``CircleAnimation`` is an implementation of an `AnimatableModifier` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
 ///
