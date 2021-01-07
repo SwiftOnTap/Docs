@@ -7765,8 +7765,6 @@ public struct GeometryProxy {
 ///
 /// `GeometryReader` can be expressed simply with the following pseudocode:
 ///
-/// ![GeometryReader Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-1.png)
-///
 /// ```
 /// struct GeometryReader<Content: View> {
 ///     var content: (GeometryProxy) -> Content
@@ -7783,7 +7781,7 @@ public struct GeometryProxy {
 ///
 /// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
 ///
-/// ![GeometryReader Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-2.png)
+/// ![GeometryReader Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7804,8 +7802,6 @@ public struct GeometryProxy {
 /// ### `GeometryReader` to get a view's frame
 ///
 /// `GeometryReader` can also be used with`View/background(_:)`, to acquire the geometry of a target view. Consider `SomeView` in the following example:
-///
-/// ![GeometryReader Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7844,7 +7840,7 @@ public struct GeometryProxy {
 ///
 /// This task of acquiring a view's frame can be done in a generic and reusable way using `ViewModifier`:
 ///
-/// ![GeometryReader Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-4.png)
+/// ![GeometryReader Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-2.png)
 ///
 /// ```
 /// struct GetGlobalFrame: ViewModifier {
@@ -7868,7 +7864,7 @@ public struct GeometryProxy {
 ///
 /// The modifier above can be used in the following manner:
 ///
-/// ![GeometryReader Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-5.png)
+/// ![GeometryReader Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
