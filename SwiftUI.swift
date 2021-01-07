@@ -19634,7 +19634,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
 ///
-/// ![UIViewRepresentable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-1.png)
+/// ![UIViewRepresentable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19708,7 +19708,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
 ///
-/// ![UIViewRepresentable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-2.png)
+/// ![UIViewRepresentable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19750,7 +19750,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// The benefits of using the environment and context become apparent when multiple views are used together. For example:
 ///
-/// ![UIViewRepresentable Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-3.png)
+/// ![UIViewRepresentable Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19845,7 +19845,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// Here is example of using the search part port:
 ///
-/// ![UIViewRepresentable Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-4.png)
+/// ![UIViewRepresentable Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-4.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19855,7 +19855,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         VStack {
 ///             SearchBar(placeholder: "Enter something here", text: $searchText)
 ///
-///             Text("Entered text: \(searchText)")
+///             Text("Entered text: /\(searchText)")
 ///         }
 ///     }
 /// }
@@ -19865,10 +19865,10 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         @Binding var text: String
 ///
 ///         init(text: Binding<String>) {
-///             _text = text
+///             &#x5f;text = text
 ///         }
 ///
-///         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+///         func searchBar(&#x5f; searchBar: UISearchBar, textDidChange searchText: String) {
 ///             self.text = searchText // set the binding's value to the latest search bar text
 ///         }
 ///     }
