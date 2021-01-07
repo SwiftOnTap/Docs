@@ -10311,7 +10311,7 @@ extension Link where Label == Text {
 ///
 /// - The separator of a `List` cannot be removed.
 /// - `SidebarListStyle` is broken on macCatalyst.
-/// 
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -10650,7 +10650,7 @@ public struct ListItemTint {
 /// - `InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
 /// - `InsetListStyle` - is similar to a plain list, but includes additional layout insets.
 /// - `PlainListStyle` - provides platform standard list appearance and behavior.
-/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/). Currently not working properly on MacCatalyst. 
+/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/). Currently not working properly on MacCatalyst.
 /// - `EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
 /// - `CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -12014,7 +12014,7 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///         }
 ///         .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///     }
@@ -12031,7 +12031,7 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///         }
 ///         .navigationViewStyle(StackNavigationViewStyle())
 ///     }
@@ -12044,7 +12044,7 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello, World!")
+///             Text("Hello Bananas🍌🍌")
 ///         }
 ///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
 ///     }
@@ -23835,7 +23835,7 @@ extension View {
     /// - Parameter content: The views representing the content of the toolbar.
     public func toolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content : View { }
 
-    
+
     /// Populates the toolbar or navigation bar.
     ///
     /// - Parameters:
@@ -26212,7 +26212,7 @@ extension MutableCollection {
 extension UIColor {
 
 	/// Creates a new `UIColor` from a SwiftUI ``Color``.
-	/// 
+	///
 	/// - Parameter color: The SwiftUI ``Color`` object to use for creating a `UIColor`.
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
     @available(macOS, unavailable)
