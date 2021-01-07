@@ -2055,13 +2055,11 @@ extension BackgroundStyle : ShapeStyle {
 
 /// This type handles shared values across views.
 ///
-/// `Binding` is a property wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection ** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
+/// `Binding` is a property wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
 ///
 /// ### Structure of a `Binding`
 ///
 /// A `Binding` is essentially the following structure:
-///
-/// ![Binding Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-1.png)
 ///
 /// ```
 /// struct Binding<Value> {
@@ -2076,13 +2074,14 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// For example, a `TextField` can be bound to a state variable:
 ///
-/// ![Binding Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-2.png)
+/// ![Binding Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
 ///
 ///     var body: some View {
+///         Text(text)
 ///         TextField("Placeholder", text: $text)
 ///     }
 /// }
@@ -2096,29 +2095,31 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
 ///
-/// ![Binding Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.png)
+/// ![Binding Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-2.png)
 ///
-/// ````
-/// class ExampleModel: ObservableObject {
-///     @Published var isEnabled: Bool = false
-/// }
-///
+/// ```
 /// struct ExampleView: View {
 ///     @StateObject var viewModel = ExampleModel()
 ///
+///     var text: String {
+///         viewModel.isEnabled ? "Enabled" : "Disabled"
+///     }
+///
 ///     var body: some View {
-///         Toggle("Enabled", isOn: $viewModel.isEnabled)
+///         Toggle(text, isOn: $viewModel.isEnabled)
 ///     }
 /// }
-/// ````
+///
+/// class ExampleModel: ObservableObject {
+///     @Published var isEnabled: Bool = false
+/// }
+/// ```
 ///
 /// The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a `Binding` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
 ///
 /// ### Animating Updates via a `Binding`
 ///
 /// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with `Binding/animation(_:)`. Usage looks as follows:
-///
-/// ![Binding Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-4.png)
 ///
 /// ```
 /// $myVariable.animation(.default)
@@ -2130,7 +2131,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode.active`.
 ///
-/// ![Binding Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-5.png)
+/// ![Binding Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4824,7 +4825,7 @@ extension DisclosureGroup where Label == Text {
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
 ///
 /// ![Divider Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-2.png)
-/// 
+///
 /// ```
 /// struct ExampleView: View {
 ///   var body: some View {
@@ -14541,8 +14542,6 @@ extension RoundedRectangle : InsettableShape {
 /// The ``EnvironmentValues/scenePhase`` environment value can easily be read in a scene
 /// to respond to whether the scene is active or in another state. It returns an enumeration of type
 /// ``ScenePhase``.
-///
-/// ![Scene Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.png)
 ///
 ///     struct StateAdaptingScene: Scene {
 ///         @Environment(\.scenePhase) private var scenePhase
