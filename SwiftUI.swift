@@ -875,7 +875,123 @@ extension Angle : Animatable {
     public typealias Body
 }
 
-/// A type that describes how to animate a property of a view.
+/// Animate a view when data changes.
+///
+/// `Animatable` describes how to animate a view with respect to some change in the view's data.
+///
+/// Use `Animatable` when you are unable to achieve the animation you want with `View/animation(_:)` or `withAnimation`.
+///
+/// `Animtable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData`, which represents a view's animatable data.
+///
+/// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `animatableData`. This is also the reason why `AnimatableData` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
+///
+/// ### Implementations
+///
+/// #### Using `AnimatableModifier` to implement a shake effect
+///
+/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines `Animatable` and `ViewModifier`. This allows you to decouple the animation effect from the view you want to animate.
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var numberOfShakes: CGFloat = 0
+///
+///     var body: some View {
+///         VStack {
+///             Text("Banana🍌🍌")
+///                 .font(.largeTitle)
+///                 .modifier(ShakeEffect(shakeNumber: numberOfShakes))
+///                 .onAppear {
+///                     withAnimation(.easeIn(duration: 2.0)) {
+///                         numberOfShakes = 10
+///                     }
+///                 }
+///         }
+///     }
+/// }
+///
+/// struct ShakeEffect: AnimatableModifier {
+///     var shakeNumber: CGFloat = 0
+///
+///     var animatableData: CGFloat {
+///         get {
+///             shakeNumber
+///         } set {
+///             shakeNumber = newValue
+///         }
+///     }
+///
+///     func body(content: Content) -> some View {
+///         content
+///             .offset(x: sin(shakeNumber * .pi * 2) * 10)
+///     }
+/// }
+/// ```
+///
+/// This example demonstrates a horizontal "shake effect", applied on a `Text`. When run, the text animates by shaking 10 times. This is achieved by triggering an animation using `withAnimation`, and modifying the `shakeNumber` to go from `0` to `10`.
+///
+/// Note:
+///
+/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through `animatableData`, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
+///
+/// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the runtime needs to be able to interpolate fractionally between `0.0` and `10.0` 'shakes' - and it does so by making use of `CGFloat`'s `VectorArithmetic` conformance.
+///
+/// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of `Animation` is used in `withAnimation`, to animate the change from `0` shakes to `10` shakes.
+///
+/// #### Using `AnimatableModifier` to continuously animate a view along a circle
+///
+/// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var progress: CGFloat = 0
+///
+///     var body: some View {
+///         VStack {
+///             Text("Banana🍌🍌")
+///                 .font(.largeTitle)
+///                 .modifier(CircleAnimation(radius: 24, progress: progress))
+///                 .onAppear {
+///                     withAnimation(Animation.easeInOut(duration: 2.0).repeatForever(autoreverses: false)) {
+///                         progress = 1.0
+///                     }
+///                 }
+///         }
+///     }
+/// }
+///
+/// struct CircleAnimation: AnimatableModifier {
+///     let radius: CGFloat
+///     var progress: CGFloat = 0
+///
+///     var animatableData: CGFloat {
+///         get {
+///             progress
+///         } set {
+///             progress = newValue
+///         }
+///     }
+///
+///     func body(content: Content) -> some View {
+///         content.offset(
+///             x: radius * cos(progress * (2 * CGFloat.pi)),
+///             y: radius * sin(progress * (2 * CGFloat.pi))
+///         )
+///     }
+/// }
+/// ```
+///
+/// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
+///
+/// ``CircleAnimation`` is an implementation of an `AnimatableModifier` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
+///
+/// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using `withAnimation`. The `Animation` used in `withAnimation` is modified using `Animation/repeatForever(autoreverses:)`, in order to create a loop. Note that `autoreverses` is explicitly set as `false` to prevent the animation from being reversed.
+///
+/// ### Further notes
+///
+/// - `Animatable` along with `View` is currently broken on iOS 14, please use `AnimatableModifier`
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol Animatable {
 
@@ -14957,9 +15073,212 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     public init(_ key: String) where Value == Data? { }
 }
 
-/// A scrollable view.
+
+/// A view that scrolls.
 ///
-/// The scroll view displays its content within the scrollable content region.
+/// A view that allows the scrolling of its contained views.
+///
+/// ### Making a view scrollable
+///
+/// `ScrollView` is a container view that makes its content scrollable. For example:
+///
+///  ![ScrollView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, the `VStack` containing the text is made scrollable by wrapping it in a `ScrollView`.
+///
+/// Note:
+///
+/// - The content of a `ScrollView` is scrollable regardless of whether all of it fits on screen or not.
+/// - It is not possible to selectively disable the scrolling of a `ScrollView`, while allowing its content to remain interactive. A `View/disabled(_:)` attached to a `ScrollView` will disable both the scrolling and all the interaction with the content visible.
+/// - A `ScrollView`'s scrollable region is sized to fit the content view passed to the `ScrollView`.
+/// - `ScrollView` fits to occupy as much space as possible. It is important to distinguish between the actual bounds of the scroll view, and the bounds of the *content* of the `ScrollView`.
+///
+/// ### Setting the direction of scrolling
+///
+/// The default scrolling direction of a `ScrollView` is **vertical**. `ScrollView` supports 3 types of scrolling:
+///
+/// - vertical
+/// - horizontal
+/// - both vertical and horizontal
+///
+/// To set a single allowed direction for a `ScrollView`, specify the axis of direction in the initializer. For example:
+///
+///  ![ScrollView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-2.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(.horizontal) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// This example takes the previous example, and modifies it so that the `ScrollView` scrolls horizontally. This `ScrollView` will **not** scroll vertically, as an explict axis, `.horizontal`, has been specified.
+///
+/// To allow *both* directions of scrolling, pass the set of axes that you want to permit. For example:
+///
+///  ![ScrollView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-3.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView([.horizontal, .vertical]) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, `ScrollView` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
+///
+/// ### Hiding the scroll view indicator
+///
+/// By default, a `ScrollView`'s scroll indicator is visible upon user interaction.
+///
+/// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content)` to hide the scroll indicator(s). For example:
+///
+///  ![ScrollView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-4.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(.horizontal, showsIndicators: false) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// This `ScrollView` will never show a scroll indicator.
+///
+/// You do not need to specify an axis to use `showsIndicators`. For example:
+///
+///  ![ScrollView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-5.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(showsIndicators: false) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// This `ScrollView`  hides its scroll indicator, with a default `.vertical` scroll direction.
+///
+/// ### Scrolling to an item
+///
+/// To programmatically scroll to a particular item in your `ScrollView`, use `ScrollViewProxy/scrollTo(_:anchor:)`. `ScrollViewProxy` is a type that allows you to control a `ScrollView`, and can be obtained using a `ScrollViewReader`.
+///
+/// For example:
+///
+///  ![ScrollView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-6.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView {
+///             ScrollViewReader { (proxy: ScrollViewProxy) in
+///                 Button("Jump to #32") {
+///                     proxy.scrollTo(32)
+///                 }
+///
+///                 ForEach(1..<101) { number in
+///                     Text("Item #\(number)")
+///                         .id(number)
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use `View/id(_:)` as is done inside the `ForEach`, for each element.
+///
+/// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the text reading "Item #32", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, specify an anchor via `ScrollViewProxy/scrollTo(_:anchor:)`. For example:
+///
+///  ![ScrollView Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-7.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView {
+///             ScrollViewReader { (proxy: ScrollViewProxy) in
+///                 Button("Jump to #32") {
+///                     proxy.scrollTo(32, anchor: .top)
+///                 }
+///
+///                 ForEach(1..<101) { number in
+///                     Text("Item #\(number)")
+///                         .id(number)
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, the `ScrollView` still scrolls to "Item #32", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
+///
+///
+///  Add a transition to your `ScrollViewProxy/scrollTo(_:anchor:)` with `View/withAnimation(_:_:)`.  For example:
+///
+///  ![ScrollView Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-8.gif)
+///
+///  ```
+///  struct ExampleView: View {
+///      var body: some View {
+///          ScrollView {
+///              ScrollViewReader { (proxy: ScrollViewProxy) in
+///                  Button("Jump to #32") {
+///                     withAnimation(.easeInOut(duration: 60)) {
+///                         proxy.scrollTo(32, anchor: .top)
+///                     }
+///                  }
+///
+///                  ForEach(1..<101) { number in
+///                      Text("Item #\(number)")
+///                          .id(number)
+///                  }
+///              }
+///          }
+///      }
+///  }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : View where Content : View {
 
@@ -19135,40 +19454,322 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
     public var environment: EnvironmentValues { get }
 }
 
-/// A wrapper for a UIKit view that you use to integrate that view into your
-/// SwiftUI view hierarchy.
+/// A view to import a UIKit view into SwiftUI.
 ///
-/// Use a ``UIViewRepresentable`` instance to create and manage a
-/// <doc://com.apple.documentation/documentation/UIKit/UIView> object in your SwiftUI
-/// interface. Adopt this protocol in one of your app's custom instances, and
-/// use its methods to create, update, and tear down your view. The creation and
-/// update processes parallel the behavior of SwiftUI views, and you use them to
-/// configure your view with your app's current state information. Use the
-/// teardown process to remove your view cleanly from your SwiftUI. For example,
-/// you might use the teardown process to notify other objects that the view is
-/// disappearing.
+/// ### Setup
 ///
-/// To add your view into your SwiftUI interface, create your
-/// ``UIViewRepresentable`` instance and add it to your SwiftUI interface. The
-/// system calls the methods of your representable instance at appropriate times
-/// to create and update the view. The following example shows the inclusion of
-/// a custom `MyRepresentedCustomView` structure in the view hierarchy.
+/// To implement a `UIViewRepresentable`, you must implement four main lifecycle functions:
 ///
-///     struct ContentView: View {
-///        var body: some View {
-///           VStack {
-///              Text("Global Sales")
-///              MyRepresentedCustomView()
-///           }
-///        }
+/// - `UIViewRepresentable/makeCoordinator()`
+/// - `UIViewRepresentable/makeUIView(context:)`
+/// - `UIViewRepresentable/updateUIView(_:context:)`
+/// - `UIViewRepresentable/dismantleUIView(context:)` (this is optional, a default implementation is provided if left unimplemented)
+///
+/// The SwiftUI runtime:
+///
+/// - Creates a `Coordinator` using `makeCoordinator()` if necessary.
+/// - Calls `UIViewRepresentable/makeUIView(context:) to create an instance of your` `UIViewType`.
+/// - `UIViewRepresentable/updateUIView(_:context:)` is immediately called *once* after the call to `UIViewRepresentable/makeUIView(context:)` .
+/// - Upon any state changes, calls  `UIViewRepresentable/updateUIView(_:context:)`
+/// - Upon destruction of the parent container, calls `UIViewRepresentable/dismantleUIView(context:)`
+///
+/// ### Port a simple `UIView`
+///
+/// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
+///
+/// ```
+/// struct ActivityIndicator: UIViewRepresentable {
+///     typealias Context = UIViewRepresentableContext<Self>
+///     typealias UIViewType = UIActivityIndicatorView
+///
+///     let isAnimated: Bool
+///
+///     public func makeUIView(context: Context) -> UIViewType {
+///         UIActivityIndicatorView(style: .medium) // create the instance of the view
 ///     }
 ///
-/// The system doesn't automatically communicate changes occurring within your
-/// view to other parts of your SwiftUI interface. When you want your view to
-/// coordinate with other SwiftUI views, you must provide a
-/// ``NSViewControllerRepresentable/Coordinator`` instance to facilitate those
-/// interactions. For example, you use a coordinator to forward target-action
-/// and delegate messages from your view to any SwiftUI views.
+///     public func updateUIView(_ uiView: UIViewType, context: Context) {
+///         // Check if `isAnimated` is true, and if the view is inactive.
+///         if isAnimated && !uiView.isAnimating {
+///             uiView.startAnimating() // Animate
+///         }
+///
+///         // Check if `isAnimated` is false, and if the view is active.
+///         if !isAnimated && uiView.isAnimating {
+///             uiView.stopAnimating() // Stop animating
+///         }
+///     }
+/// }
+/// ```
+///
+/// Note:
+///
+/// - In `updateUIView(_:context:)`, you must handle `isAnimated` being either `true` or `false`.
+/// - No redundant calls are made to `startAnimating` and `stopAnimating`. Redundant calls are guarded against by checking whether `uiView.isAnimating` is true or not. This is a general principle for optimizing the performance of your `UIViewRepresentable`.
+///
+/// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var isAnimating: Bool = false
+///
+///     var body: some View {
+///         VStack {
+///             Toggle("Animating", isOn: $isAnimating)
+///
+///             ActivityIndicator(isAnimated: isAnimating)
+///         }
+///     }
+/// }
+///
+/// struct ActivityIndicator: UIViewRepresentable {
+///     typealias Context = UIViewRepresentableContext<Self>
+///     typealias UIViewType = UIActivityIndicatorView
+///
+///     let isAnimated: Bool
+///
+///     public func makeUIView(context: Context) -> UIViewType {
+///         UIActivityIndicatorView(style: .medium) // create the instance of the view
+///     }
+///
+///     public func updateUIView(_ uiView: UIViewType, context: Context) {
+///         // Check if `isAnimated` is true, and if the view is inactive.
+///         if isAnimated && !uiView.isAnimating {
+///             uiView.startAnimating() // Animate
+///         }
+///
+///         // Check if `isAnimated` is false, and if the view is active.
+///         if !isAnimated && uiView.isAnimating {
+///             uiView.stopAnimating() // Stop animating
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, the `ActivityIndicator` from before is used and can be toggled by passing a boolean to `ActivityIndicator/init(isAnimated:)`.
+///
+/// ### Context-aware `UIViewRepresentable`s
+///
+/// SwiftUI heavily relies on the environment, by way of environment objects (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`). The latter – environment values – are useful for creating intelligent and context-aware UIKit ports.
+///
+/// For example, we can remove the `isAnimated` parameter from `ActivityIndicator`, and use `isEnabled` from the environment instead  via `EnvironmentValues/isEnabled`:
+///
+/// ```
+/// struct ActivityIndicator: UIViewRepresentable {
+///     typealias Context = UIViewRepresentableContext<Self>
+///     typealias UIViewType = UIActivityIndicatorView
+///
+///     public func makeUIView(context: Context) -> UIViewType {
+///         UIActivityIndicatorView(style: .medium) // create the instance of the view
+///     }
+///
+///     public func updateUIView(_ uiView: UIViewType, context: Context) {
+///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
+///         if context.environment.isEnabled && !uiView.isAnimating {
+///             uiView.startAnimating() // Animate
+///         }
+///
+///         // Check if the environment specifies that the view should be disabled, and if the view is active.
+///         if !context.environment.isEnabled && uiView.isAnimating {
+///             uiView.stopAnimating() // Stop animating
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, `context` is used to access the view's current `environment` (via `context.environment`), giving you access to the latest `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get rid of the `isAnimated` parameter in favor of reading it from the context. This has the added advantage of being passed from any level at the top, because environment values propagate down the view hierarchy.
+///
+/// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var isAnimating: Bool = false
+///
+///     var body: some View {
+///         VStack {
+///             Toggle("Animating", isOn: $isAnimating)
+///
+///             ActivityIndicator()
+///                 .disabled(!isAnimating)
+///         }
+///     }
+/// }
+///
+/// struct ActivityIndicator: UIViewRepresentable {
+///     typealias Context = UIViewRepresentableContext<Self>
+///     typealias UIViewType = UIActivityIndicatorView
+///
+///     public func makeUIView(context: Context) -> UIViewType {
+///         UIActivityIndicatorView(style: .medium) // create the instance of the view
+///     }
+///
+///     public func updateUIView(_ uiView: UIViewType, context: Context) {
+///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
+///         if context.environment.isEnabled && !uiView.isAnimating {
+///             uiView.startAnimating() // Animate
+///         }
+///
+///         // Check if the environment specifies that the view should be disabled, and if the view is active.
+///         if !context.environment.isEnabled && uiView.isAnimating {
+///             uiView.stopAnimating() // Stop animating
+///         }
+///     }
+/// }
+/// ```
+///
+/// Using `View/disabled(_:)`, the activity indicator can now be made active or inactive.
+///
+/// The benefits of using the environment and context become apparent when multiple views are used together. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var isAnimating: Bool = false
+///
+///     var body: some View {
+///         VStack {
+///             Toggle("Animating", isOn: $isAnimating)
+///
+///             VStack {
+///                 ActivityIndicator()
+///                 ActivityIndicator()
+///                 ActivityIndicator()
+///             }
+///             .disabled(!isAnimating)
+///         }
+///     }
+/// }
+///
+/// struct ActivityIndicator: UIViewRepresentable {
+///     typealias Context = UIViewRepresentableContext<Self>
+///     typealias UIViewType = UIActivityIndicatorView
+///
+///     public func makeUIView(context: Context) -> UIViewType {
+///         UIActivityIndicatorView(style: .medium) // create the instance of the view
+///     }
+///
+///     public func updateUIView(_ uiView: UIViewType, context: Context) {
+///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
+///         if context.environment.isEnabled && !uiView.isAnimating {
+///             uiView.startAnimating() // Animate
+///         }
+///
+///         // Check if the environment specifies that the view should be disabled, and if the view is active.
+///         if !context.environment.isEnabled && uiView.isAnimating {
+///             uiView.stopAnimating() // Stop animating
+///         }
+///     }
+/// }
+/// ```
+///
+/// A single `View/disabled(_:)` modifier on the `VStack` can now become responsible for enabling/disabling the activity indicators inside the stack. This also allows parent views, that aren't aware of `ExampleView`'s implementation, to control whether views within it are enabled or disabled.
+///
+/// ### Implementing UIKit delegates for a `UIViewRepresentable`
+///
+/// UIKit views often require delegates to communicate events and pass data back and forth with their view controllers. Since SwiftUI is all about modularity and componentization, there is no concept of a "view controller". View representables use the concept of a 'coordinator' to port views reliant on the delegate pattern.
+///
+/// For example, here is an example port of `UISearchBar`:
+///
+/// ```
+/// struct SearchBar: UIViewRepresentable {
+///     class Coordinator: NSObject, UISearchBarDelegate {
+///         @Binding var text: String
+///
+///         init(text: Binding<String>) {
+///             _text = text
+///         }
+///
+///         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+///             self.text = searchText // set the binding's value to the latest search bar text
+///         }
+///     }
+///
+///     let placeholder: String
+///
+///     @Binding var text: String
+///
+///     func makeCoordinator() -> Coordinator {
+///         Coordinator(text: self.$text) // create an instance of `Coordinator`
+///     }
+///
+///     func makeUIView(context: Context) -> UISearchBar {
+///         let searchBar = UISearchBar(frame: .zero)
+///
+///         searchBar.placeholder = placeholder
+///         searchBar.delegate = context.coordinator
+///
+///         return searchBar
+///     }
+///
+///     func updateUIView(_ uiView: UISearchBar, context: Context) {
+///         uiView.text = text // set the search bar's text to the value of the binding
+///     }
+/// }
+/// ```
+///
+/// A search bar is a good example of a complex UIKit view. It is a control responsible for text input with multiple lifecycle events, and it uses the delegate pattern to inform the observer whenever these events occur. In SwiftUI, data is passed using bindings, and there is no concept of a delegate.
+///
+/// The `Coordinator` is the glue between a SwiftUI-style binding-pattern and a UIKit-style delegate-pattern. A `Coordinator` is a state object created and maintained for the lifetime of a `UIViewRepresentable`, that typically implements the primary delegate for the UIKit view being ported. In this case, the `UIViewType` is `UISearchBar` and its primary delegate type is `UISearchBarDelegate`.
+///
+/// Text input controls in SwiftUI often take a `Binding<String>` in their initializer, and use it to get/set the latest text entered by the user via control. It's extremely important to note that bindings are bidirectional, because SwiftUI ports of UIKit views must also **get** the latest input from the `Binding`. UIKit patterns typically only require notifying the observer and thus setting the values, but in SwiftUI it is imperative to handle both to be a good SwiftUI citizen.
+///
+/// Here is example of using the search part port:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var searchText: String = ""
+///
+///     var body: some View {
+///         VStack {
+///             SearchBar(placeholder: "Enter something here", text: $searchText)
+///
+///             Text("Entered text: \(searchText)")
+///         }
+///     }
+/// }
+///
+/// struct SearchBar: UIViewRepresentable {
+///     class Coordinator: NSObject, UISearchBarDelegate {
+///         @Binding var text: String
+///
+///         init(text: Binding<String>) {
+///             _text = text
+///         }
+///
+///         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+///             self.text = searchText // set the binding's value to the latest search bar text
+///         }
+///     }
+///
+///     let placeholder: String
+///
+///     @Binding var text: String
+///
+///     func makeCoordinator() -> Coordinator {
+///         Coordinator(text: self.$text) // create an instance of `Coordinator`
+///     }
+///
+///     func makeUIView(context: Context) -> UISearchBar {
+///         let searchBar = UISearchBar(frame: .zero)
+///
+///         searchBar.placeholder = placeholder
+///         searchBar.delegate = context.coordinator
+///
+///         return searchBar
+///     }
+///
+///     func updateUIView(_ uiView: UISearchBar, context: Context) {
+///         uiView.text = text // set the search bar's text to the value of the binding
+///     }
+/// }
+/// ```
+///
+/// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar` would have an initial search text of `"Bananas 🍌🍌"` already loaded.
+///
+/// ### Further notes
+///
+/// - Creating UIKit views are expensive. That is why they are done once per lifetime of a `UIViewRepresentable`.
+/// - Because the *same* `UIViewType` instance is reused as much as possible, `UIViewRepresentable/updateUIView(_:context:)` is responsible for making sure that the parameters passed via the initializer, and the SwiftUI environment, are always in sync with the UIKit view being managed by the representable.
+///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -23240,7 +23841,7 @@ extension View {
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
-    /// For example:
+    /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
     ///
     /// ```
     /// struct ExampleView: View {
