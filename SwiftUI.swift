@@ -875,7 +875,9 @@ extension Angle : Animatable {
     public typealias Body
 }
 
-/// A type that describes how to animate a view with respect to some change in the view's data.
+/// Animate a view when data changes.
+///
+/// `Animatable` describes how to animate a view with respect to some change in the view's data.
 ///
 /// Use `Animatable` when you are unable to achieve the animation you want with `View/animation(_:)` or `withAnimation`.
 ///
@@ -883,7 +885,9 @@ extension Angle : Animatable {
 ///
 /// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `animatableData`. This is also the reason why `AnimatableData` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 ///
-/// ### Using `AnimatableModifier` to implement a shake effect
+/// ### Implementations
+///
+/// #### Using `AnimatableModifier` to implement a shake effect
 ///
 /// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines `Animatable` and `ViewModifier`. This allows you to decouple the animation effect from the view you want to animate.
 ///
@@ -895,7 +899,7 @@ extension Angle : Animatable {
 ///
 ///     var body: some View {
 ///         VStack {
-///             Text("🍏")
+///             Text("Banana🍌🍌")
 ///                 .font(.largeTitle)
 ///                 .modifier(ShakeEffect(shakeNumber: numberOfShakes))
 ///                 .onAppear {
@@ -935,7 +939,7 @@ extension Angle : Animatable {
 ///
 /// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of `Animation` is used in `withAnimation`, to animate the change from `0` shakes to `10` shakes.
 ///
-/// ### Using `AnimatableModifier` to continuously animate a view along a circle
+/// #### Using `AnimatableModifier` to continuously animate a view along a circle
 ///
 /// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
 ///
@@ -945,7 +949,7 @@ extension Angle : Animatable {
 ///
 ///     var body: some View {
 ///         VStack {
-///             Text("🍏")
+///             Text("Banana🍌🍌")
 ///                 .font(.largeTitle)
 ///                 .modifier(CircleAnimation(radius: 24, progress: progress))
 ///                 .onAppear {
@@ -978,7 +982,7 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// In this example, `Text("🍏")` is animated along a circle continuously.
+/// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
 ///
 /// ``CircleAnimation`` is an implementation of an `AnimatableModifier` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
 ///
@@ -19312,9 +19316,9 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
     public var environment: EnvironmentValues { get }
 }
 
-/// A view that allows you to import a UIKit view into SwiftUI.
+/// A view to import a UIKit view into SwiftUI.
 ///
-/// ### Lifecycle
+/// ### Setup
 ///
 /// To implement a `UIViewRepresentable`, you must implement four main lifecycle functions:
 ///
@@ -19331,9 +19335,9 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// - Upon any state changes, calls  `UIViewRepresentable/updateUIView(_:context:)`
 /// - Upon destruction of the parent container, calls `UIViewRepresentable/dismantleUIView(context:)`
 ///
-/// ### Using `UVIiewRepresentable` to port a simple `UIView`
+/// ### Port a simple `UIView`
 ///
-/// A port of a simple UIKit view, `UIActivityIndicatorView`, would look something like the following:
+/// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
 ///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
@@ -19406,7 +19410,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// In this example, the `ActivityIndicator` from before is used and can be toggled by passing a boolean to `ActivityIndicator/init(isAnimated:)`.
 ///
-/// ### Using `EnvironmentValues` to create a context-aware `UIViewRepresentable`
+/// ### Context-aware `UIViewRepresentable`s
 ///
 /// SwiftUI heavily relies on the environment, by way of environment objects (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`). The latter – environment values – are useful for creating intelligent and context-aware UIKit ports.
 ///
@@ -19493,19 +19497,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///                 ActivityIndicator()
 ///             }
 ///             .disabled(!isAnimating)
-///         }
-///     }
-/// }
-///
-/// struct ExampleView: View {
-///     @State var isAnimating: Bool = false
-///
-///     var body: some View {
-///         VStack {
-///             Toggle("Animating", isOn: $isAnimating)
-///
-///             ActivityIndicator()
-///                 .disabled(!isAnimating)
 ///         }
 ///     }
 /// }
@@ -19634,7 +19625,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// }
 /// ```
 ///
-/// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Apples 🍏🍏"`, `SearchBar` would have an initial search text of `"Apples 🍏🍏"` already loaded.
+/// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar` would have an initial search text of `"Bananas 🍌🍌"` already loaded.
 ///
 /// ### Further notes
 ///
