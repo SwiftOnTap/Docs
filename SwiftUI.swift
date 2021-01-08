@@ -12013,7 +12013,7 @@ extension NavigationLink {
 ///
 /// For example, the following presents `ApplesView` when the link "I want apples!" is pressed:
 ///
-/// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.png)
+/// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12057,7 +12057,7 @@ extension NavigationLink {
 ///
 /// For example, navigating to `SecondScreen` in the following unhides the bar:
 ///
-/// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.png)
+/// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12145,7 +12145,7 @@ extension NavigationLink {
 ///
 /// For example:
 ///
-/// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.png)
+/// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.gif)
 ///
 /// ```
 /// struct ExampleView: View {
