@@ -7742,7 +7742,7 @@ public struct GeometryProxy {
 ///                 .frame(width: 500, height: 500)
 ///                 .background(
 ///                     GeometryReader { (proxy: GeometryProxy) -> EmptyView in
-///                         if globalFrame != proxy.frame(in: .global) {
+///                         if someFrame != proxy.frame(in: .global) {
 ///                             DispatchQueue.main.async {
 ///                                 someFrame = proxy.frame(in: .global)
 ///                             }
@@ -11920,8 +11920,8 @@ extension NavigationLink {
 ///     var body: some View {
 ///         NavigationView {
 ///             Text("Hello, World!")
+///                  .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///         }
-///         .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///     }
 /// }
 /// ```
