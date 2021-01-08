@@ -893,7 +893,7 @@ extension Angle : Animatable {
 ///
 /// For example:
 ///
-/// ![Animatable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animatable-example-1.gif)
+/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -945,7 +945,7 @@ extension Angle : Animatable {
 ///
 /// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
 ///
-/// ![Animatable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Animatable-example-2.gif)
+/// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -1460,7 +1460,7 @@ extension AnyTransition {
 ///
 /// To type-erase your view, pass it to `AnyView/init(_:)` like this:
 ///
-///  ![AnyView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/anyview-example-1.png)
+///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -1472,7 +1472,7 @@ extension AnyTransition {
 ///
 /// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
 ///
-///  ![AnyView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/anyview-example-2.png)
+///  ![AnyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2074,7 +2074,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// For example, a `TextField` can be bound to a state variable:
 ///
-/// ![Binding Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-1.gif)
+/// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2095,7 +2095,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
 ///
-/// ![Binding Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-2.gif)
+/// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2131,7 +2131,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode.active`.
 ///
-/// ![Binding Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Binding-example-3.gif)
+/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2682,7 +2682,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a `ButtonStyle`.
 ///
-///  ![ButtonStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ButtonStyle-example-1.gif)
+///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2717,7 +2717,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
 ///
-///  ![ButtonStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ButtonStyle-example-2.gif)
+///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4806,7 +4806,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
 ///
-/// ![Divider Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Divider-example-1.png)
+/// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4824,7 +4824,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
 ///
-/// ![Divider Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Divider-example-2.png)
+/// ![Divider Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5577,7 +5577,7 @@ extension EdgeInsets : Animatable {
 /// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode``) for content within a container that supports `EditMode.active`.
 /// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
 ///
-/// ![EditButton Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/EditButton-example-1.gif)
+/// ![EditButton Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/EditButton-example-1.gif)
 ///
 ///```
 /// struct ExampleView: View {
@@ -5888,7 +5888,7 @@ public struct EmptyCommands : Commands {
 ///
 /// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
 ///
-/// ![EmptyView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/emptyview-example-1.png)
+/// ![EmptyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5914,7 +5914,7 @@ public struct EmptyCommands : Commands {
 ///
 /// `EmptyView` can also be used in conjunction with `GeometryReader`:
 ///
-///  ![EmptyView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/emptyview-example-2.png)
+///  ![EmptyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7115,7 +7115,7 @@ public struct FocusedValues {
 ///
 /// Fonts can be applied to your view with the ``View/font(_:)`` modifier.
 ///
-/// ![Font Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-1.png)
+/// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7128,7 +7128,7 @@ public struct FocusedValues {
 ///
 /// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
 ///
-/// ![Font Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-2.png)
+/// ![Font Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7141,7 +7141,7 @@ public struct FocusedValues {
 ///
 /// Non system-fonts can be applied using `Font/custom(_:size:)`
 ///
-/// ![Font Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Font-example-3.png)
+/// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7790,7 +7790,7 @@ public struct GeometryProxy {
 ///
 /// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
 ///
-/// ![GeometryReader Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-1.png)
+/// ![GeometryReader Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7849,7 +7849,7 @@ public struct GeometryProxy {
 ///
 /// This task of acquiring a view's frame can be done in a generic and reusable way using `ViewModifier`:
 ///
-/// ![GeometryReader Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-2.png)
+/// ![GeometryReader Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-2.png)
 ///
 /// ```
 /// struct GetGlobalFrame: ViewModifier {
@@ -7873,7 +7873,7 @@ public struct GeometryProxy {
 ///
 /// The modifier above can be used in the following manner:
 ///
-/// ![GeometryReader Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/GeometryReader-example-3.png)
+/// ![GeometryReader Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -8611,7 +8611,7 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// `HStack` is a horizontal stack of views.
 ///
-///  ![HStack Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/hstack-example-1.png)
+///  ![HStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -8625,7 +8625,7 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
 ///
-///  ![HStack Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/hstack-example-2.png)
+///  ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -10139,7 +10139,7 @@ extension Link where Label == Text {
 ///
 /// The following creates a `List` with three rows of text:
 ///
-/// ![List Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-1.png)
+/// ![List Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10157,7 +10157,7 @@ extension Link where Label == Text {
 ///
 /// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
 ///
-/// ![List Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-2.png)
+/// ![List Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-2.png)
 ///
 /// ````
 /// struct ExampleView: View {
@@ -10183,7 +10183,7 @@ extension Link where Label == Text {
 ///
 /// The following example displays a `List` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
 ///
-/// ![List Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-3.png)
+/// ![List Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10207,7 +10207,7 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates the usage of `Section`.
 ///
-/// ![List Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-4.png)
+/// ![List Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10237,7 +10237,7 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how to style a `List` to use a grouped-inset style:
 ///
-/// ![List Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-5.png)
+/// ![List Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-5.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10269,7 +10269,7 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how `View/listRowBackground(_:)` can be used to provide specific background colors for a list's rows:
 ///
-/// ![List Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-6.png)
+/// ![List Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-6.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10290,7 +10290,7 @@ extension Link where Label == Text {
 ///
 /// In the following example, all the rows of the `List` have the background view `Color.yellow`.
 ///
-/// ![List Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-7.png)
+/// ![List Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-7.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10313,7 +10313,7 @@ extension Link where Label == Text {
 ///
 /// Apply the `DynamicViewContent/onDelete(_:)` modifier on a `ForEach` within a `List` to allow the list rows to become deletable.
 ///
-/// ![List Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-8.gif)
+/// ![List Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10343,7 +10343,7 @@ extension Link where Label == Text {
 ///
 /// An `EditButton` placed in the navigation bar of a `NavigationView` with a `List` in it can be used to provide an edit button for the `List`.
 ///
-/// ![List Example 9](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/List-example-9.gif)
+/// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-9.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10675,7 +10675,7 @@ public struct ListItemTint {
 ///
 /// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a `List` with the ``View/listStyle(_:)`` modifier.
 ///
-/// ![ListStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ListStyle-example-1.png)
+/// ![ListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10695,7 +10695,7 @@ public struct ListItemTint {
 ///
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
-/// ![ListStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ListStyle-example-2.png)
+/// ![ListStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11949,7 +11949,7 @@ extension NavigationLink {
 ///
 /// A navigation stack is set up simply by wrapping your view in a `NavigationView`
 ///
-/// ![NavigationView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-1.png)
+/// ![NavigationView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11967,7 +11967,7 @@ extension NavigationLink {
 ///
 /// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your `NavigationView`:
 ///
-/// ![NavigationView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-2.png)
+/// ![NavigationView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11993,7 +11993,7 @@ extension NavigationLink {
 ///
 /// The following example forces a large navigation title:
 ///
-/// ![NavigationView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-3.png)
+/// ![NavigationView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12013,7 +12013,7 @@ extension NavigationLink {
 ///
 /// For example, the following presents `ApplesView` when the link "I want apples!" is pressed:
 ///
-/// ![NavigationView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-4.png)
+/// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12040,7 +12040,7 @@ extension NavigationLink {
 ///
 /// For example:
 ///
-/// ![NavigationView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-5.png)
+/// ![NavigationView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-5.png)
 ///
 /// ````
 /// struct ExampleView: View {
@@ -12057,7 +12057,7 @@ extension NavigationLink {
 ///
 /// For example, navigating to `SecondScreen` in the following unhides the bar:
 ///
-/// ![NavigationView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-6.png)
+/// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12092,7 +12092,7 @@ extension NavigationLink {
 ///
 /// For example, the following adds "🍌🍌" to the leading area, and "🍏🍏" to the trailing area:
 ///
-/// ![NavigationView Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-7.png)
+/// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-7.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12111,7 +12111,7 @@ extension NavigationLink {
 ///
 /// For example, the following forces a stack-based navigation style, overriding the default double-colum style on macCatalyst:
 ///
-/// ![NavigationView Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-8.png)
+/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12126,7 +12126,7 @@ extension NavigationLink {
 ///
 /// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
 ///
-/// ![NavigationView Example 9](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-9.png)
+/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -12145,7 +12145,7 @@ extension NavigationLink {
 ///
 /// For example:
 ///
-/// ![NavigationView Example 10](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/NavigationView-example-10.png)
+/// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13425,7 +13425,7 @@ extension PreviewProvider {
 ///
 /// Use `View/buttonStyle(_:)` to apply a primitive button style.
 ///
-/// ![PrimitiveButtonStyle Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/PrimitiveButtonStyle-example-1.png)
+/// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
 ///
 /// ```
 ///  struct ExampleView: View {
@@ -13448,7 +13448,7 @@ extension PreviewProvider {
 ///
 /// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
 ///
-/// ![PrimitiveButtonStyle Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/PrimitiveButtonStyle-example-2.png)
+/// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
 ///
 /// ```
 ///  struct BananaView: View {
@@ -14493,7 +14493,7 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// Primitive scenes like ``WindowGroup`` can go directly in the body of your ``App``.
 ///
-/// ![Scene Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Scene-example-1.png)
+/// ![Scene Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
 ///
 ///     @main
 ///     struct SuperSimpleApp: App {
@@ -14509,7 +14509,7 @@ extension RoundedRectangle : InsettableShape {
 /// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
 /// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
 ///
-/// ![Scene Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/Scene-example-2.png)
+/// ![Scene Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
 ///
 ///     @main
 ///     struct MacCompatibleApp: App {
@@ -15184,7 +15184,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// `ScrollView` is a container view that makes its content scrollable. For example:
 ///
-///  ![ScrollView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-1.gif)
+///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15219,7 +15219,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// To set a single allowed direction for a `ScrollView`, specify the axis of direction in the initializer. For example:
 ///
-///  ![ScrollView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-2.gif)
+///  ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15239,7 +15239,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// To allow *both* directions of scrolling, pass the set of axes that you want to permit. For example:
 ///
-///  ![ScrollView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-3.gif)
+///  ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15263,7 +15263,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content)` to hide the scroll indicator(s). For example:
 ///
-///  ![ScrollView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-4.gif)
+///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15283,7 +15283,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// You do not need to specify an axis to use `showsIndicators`. For example:
 ///
-///  ![ScrollView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-5.gif)
+///  ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15307,7 +15307,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// For example:
 ///
-///  ![ScrollView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-6.gif)
+///  ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15332,7 +15332,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the text reading "Item #32", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, specify an anchor via `ScrollViewProxy/scrollTo(_:anchor:)`. For example:
 ///
-///  ![ScrollView Example 7](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-7.gif)
+///  ![ScrollView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-7.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15358,7 +15358,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  Add a transition to your `ScrollViewProxy/scrollTo(_:anchor:)` with `View/withAnimation(_:_:)`.  For example:
 ///
-///  ![ScrollView Example 8](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/ScrollView-example-8.gif)
+///  ![ScrollView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-8.gif)
 ///
 ///  ```
 ///  struct ExampleView: View {
@@ -17086,7 +17086,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
 ///
-/// ![TabView Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-1.gif)
+/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17119,7 +17119,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// The following example creates a paginated view with the three `Text` child views as individual pages.
 ///
-/// ![TabView Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-2.gif)
+/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17138,7 +17138,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
 ///
-/// ![TabView Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-3.gif)
+/// ![TabView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17161,7 +17161,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
 ///
-/// ![TabView Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-4.gif)
+/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17185,7 +17185,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// Here is an example that writes tab selection to a state variable:
 ///
-/// ![TabView Example 5](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-5.gif)
+/// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17230,7 +17230,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// For example, the following uses a traditional 0-based tab indexing:
 ///
-/// ![TabView Example 6](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TabView-example-6.gif)
+/// ![TabView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17331,7 +17331,7 @@ public struct TapGesture : Gesture {
 ///
 /// `Text` draws a string in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
 ///
-/// ![Text Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-1.png)
+/// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17345,7 +17345,7 @@ public struct TapGesture : Gesture {
 ///
 /// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
-///  ![Text Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-2.png)
+///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17357,7 +17357,7 @@ public struct TapGesture : Gesture {
 ///
 /// `Text` also accepts 12 unique modifiers to customize your string.
 ///
-///  ![Text Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-3.png)
+///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17371,7 +17371,7 @@ public struct TapGesture : Gesture {
 ///
 /// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with `Text`.
 ///
-///  ![Text Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/text-example-4.png)
+///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -18187,7 +18187,7 @@ public struct TextEditor : View {
 ///
 /// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
 ///
-/// ![TextField Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-1.gif)
+/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -18203,7 +18203,7 @@ public struct TextEditor : View {
 ///
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
 ///
-/// ![TextField Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/TextField-example-2.gif)
+/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -19634,7 +19634,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
 ///
-/// ![UIViewRepresentable Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-1.gif)
+/// ![UIViewRepresentable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19708,7 +19708,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
 ///
-/// ![UIViewRepresentable Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-2.gif)
+/// ![UIViewRepresentable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19750,7 +19750,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// The benefits of using the environment and context become apparent when multiple views are used together. For example:
 ///
-/// ![UIViewRepresentable Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-3.gif)
+/// ![UIViewRepresentable Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -19845,7 +19845,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// Here is example of using the search part port:
 ///
-/// ![UIViewRepresentable Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/UIViewRepresentable-example-4.gif)
+/// ![UIViewRepresentable Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -20224,7 +20224,7 @@ extension UserInterfaceSizeClass : Hashable {
 ///
 /// `VStack` is a vertical stack of views.
 ///
-///  ![VStack Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/vstack-example-1.png)
+///  ![VStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -20238,7 +20238,7 @@ extension UserInterfaceSizeClass : Hashable {
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
 ///
-/// ![VStack Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/vstack-example-2.png)
+/// ![VStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-2.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -23976,7 +23976,7 @@ extension View {
     ///
     /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
     ///
-    /// ![toolbar Example 1](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-1.png)
+    /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -24007,7 +24007,7 @@ extension View {
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
     ///
-    /// ![toolbar Example 2](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-2.png)
+    /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -24038,7 +24038,7 @@ extension View {
     ///
     /// For example:
     ///
-    /// ![toolbar Example 3](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-3.png)
+    /// ![toolbar Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-3.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -24069,7 +24069,7 @@ extension View {
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
     ///
-    /// ![toolbar Example 4](https://raw.githubusercontent.com/AlexFine/alexfine.github.io/master/images/toolbar-example-4.png)
+    /// ![toolbar Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
