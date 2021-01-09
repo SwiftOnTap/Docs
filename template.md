@@ -14,9 +14,10 @@ The overview has 3 parts:
 1. Symbol overview. The overview begins with a complete explanation of what the symbol does. The first sentence of this paragraph should be written in relatively plain english. 
 
 2. Examples. Each example should showcase a specific facet of the symbol. There could be many examples. Each example includes: 
-    A. A discussion of the functionality behind this example. 
-    B. One sentence explaining the example in plain english. 
-    C. A **Crystal clear & runnable example(s)**. The example can have several parts, but the most outer level structure must conform to the `View` protocol.
+    A. "For Example:" before any discussion
+    B. A discussion of the functionality behind this example. 
+    C. One sentence explaining the example in plain english. 
+    D. A **Crystal clear & runnable example(s)**. The example can have several parts, but the most outer level structure must conform to the `View` protocol.
     
 3. Helpful resources. These include web links to tutorials and references to other relavent symbols. 
 
