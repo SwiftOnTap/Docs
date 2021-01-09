@@ -14,12 +14,12 @@ import os.signpost
 
 /// AccessibilityActionKind denotes the type of action for an Accessibility Action to support.
 ///
-/// This struct is almost always found as an input to the ``View/accessibilityAction(_:_:)`` View modifier.
-/// To learn more about delivering exceptional accessibility experiences, see [Delivering an Exceptional Accessibility Experience](https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience) or [iOS Accessibility Tutorial](https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible).
+/// This struct is almost always found as an input to the ~~View/accessibilityAction(_:_:)~~ View modifier.
+/// To learn more about delivering exceptional accessibility experiences, see [https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience](Delivering an Exceptional Accessibility Experience) or [https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible](iOS Accessibility Tutorial).
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityActionKind : Equatable {
 
-    /// The inferred accessibility action inherited from the view type.
+    /// The inferred accessibility action inheritted from the view type.
     ///
     /// This constant will default to the accessibility action associated with the modified object.
     /// For example, a button, label, or text would all default to their unique accessibility behaviors.
@@ -33,12 +33,12 @@ public struct AccessibilityActionKind : Equatable {
     @available(macOS, unavailable)
     public static let magicTap: AccessibilityActionKind
 
-    /// Initialize an ``AccessibilityActionKind`` with the name of the action type.
+    /// Initialize an ~~AccessibilityActionKind~~ with the name of the action type.
     ///
     /// An example of an accessibility action name could be "Open address in Maps" or
     /// "Call Fred" where "Fred" is a string variable. When VoiceOver is on the iPhone
     /// will read this name to the user.
-    public init(named name: Text) { }
+    public init(named name: Text) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -48,7 +48,7 @@ public struct AccessibilityActionKind : Equatable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: AccessibilityActionKind, b: AccessibilityActionKind) -> Bool { }
+    public static func == (a: AccessibilityActionKind, b: AccessibilityActionKind) -> Bool { } { }
 }
 
 /// A directional indicator you use when making an accessibility adjustment.
@@ -73,7 +73,7 @@ public enum AccessibilityAdjustmentDirection {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: AccessibilityAdjustmentDirection, b: AccessibilityAdjustmentDirection) -> Bool { }
+    public static func == (a: AccessibilityAdjustmentDirection, b: AccessibilityAdjustmentDirection) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -97,7 +97,7 @@ public enum AccessibilityAdjustmentDirection {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -108,10 +108,10 @@ extension AccessibilityAdjustmentDirection : Equatable {
 extension AccessibilityAdjustmentDirection : Hashable {
 }
 
-/// A ``ViewModifier`` used to provide accessibility content.
+/// A ~~ViewModifier~~ used to provide accessibility content.
 ///
 /// The `AccessibilityAttachmentModifier` is most commonly found as the modified content in an accessibility modifiers attached to a View.
-/// See ``View/accessibilityAction(_:_:)`` for example usage. See [Creating Accessible Views](https://developer.apple.com/documentation/swiftui/view/accessibility/creating_accessible_views?changes=_8) for an example accessibility project.
+/// See ~~View/accessibilityAction(_:_:)~~ for example usage. See [https://developer.apple.com/documentation/swiftui/view/accessibility/creating_accessible_views?changes=_8](Creating Accessible Views) for an example accessibility project.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityAttachmentModifier : ViewModifier {
 
@@ -121,7 +121,7 @@ public struct AccessibilityAttachmentModifier : ViewModifier {
 
 /// Defines the children's behavior of accessibility elements.
 ///
-/// See [Accessibility in SwiftUI](https://swiftwithmajid.com/2019/09/10/accessibility-in-swiftui/) for more information on implementing accessibility functionality.
+/// See [https://swiftwithmajid.com/2019/09/10/accessibility-in-swiftui/](Accessibility in SwiftUI) for more information on implementing accessibility functionality.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityChildBehavior : Hashable {
 
@@ -138,7 +138,7 @@ public struct AccessibilityChildBehavior : Hashable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -148,7 +148,7 @@ public struct AccessibilityChildBehavior : Hashable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (lhs: AccessibilityChildBehavior, rhs: AccessibilityChildBehavior) -> Bool { }
+    public static func == (lhs: AccessibilityChildBehavior, rhs: AccessibilityChildBehavior) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -177,7 +177,7 @@ extension AccessibilityChildBehavior {
 
 /// Pair related views such that one view serves as the view content, and one view serves as the view label.
 ///
-/// `AccessibilityLabeledPairRole` is almost always used in conjunction with the ``View/accessibilityLabeledPair(role:id:in:)`` modifier.
+/// `AccessibilityLabeledPairRole` is almost always used in conjunction with the ~~View/accessibilityLabeledPair(role:id:in:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public enum AccessibilityLabeledPairRole {
 
@@ -200,7 +200,7 @@ extension AccessibilityChildBehavior {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: AccessibilityLabeledPairRole, b: AccessibilityLabeledPairRole) -> Bool { }
+    public static func == (a: AccessibilityLabeledPairRole, b: AccessibilityLabeledPairRole) -> Bool { } { }
 }
 
 extension AccessibilityLabeledPairRole : Hashable {
@@ -227,12 +227,12 @@ extension AccessibilityLabeledPairRole : Hashable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 /// A struct used to define the characteristics of a view when accessed for accessibility.
 ///
-/// `AccessibilityTraits` are almost always used in conjunction with the ``View/accessibilityAddTraits(_:)`` view modifier.
+/// `AccessibilityTraits` are almost always used in conjunction with the ~~View/accessibilityAddTraits(_:)~~ view modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityTraits : SetAlgebra {
 
@@ -305,7 +305,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///     emptySet = []
     ///     print(emptySet.isEmpty)
     ///     // Prints "true"
-    public init() { }
+    public init() { } { }
 
     /// Adds the elements of the given set to the set.
     ///
@@ -327,7 +327,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///     // Prints "[2, 4, 6, 7, 0, 1, 3]"
     ///
     /// - Parameter other: A set of the same type as the current set.
-    public mutating func formUnion(_ other: AccessibilityTraits) { }
+    public mutating func formUnion(_ other: AccessibilityTraits) { } { }
 
     /// Returns a new set with the elements that are common to both this set and
     /// the given set.
@@ -349,7 +349,7 @@ public struct AccessibilityTraits : SetAlgebra {
     /// - Note: if this set and `other` contain elements that are equal but
     ///   distinguishable (e.g. via `===`), which of these elements is present
     ///   in the result is unspecified.
-    public func intersection(_ other: AccessibilityTraits) -> AccessibilityTraits { }
+    public func intersection(_ other: AccessibilityTraits) -> AccessibilityTraits { } { }
 
     /// Removes the elements of this set that aren't also in the given set.
     ///
@@ -364,7 +364,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///     // Prints "["Bethany", "Eric"]"
     ///
     /// - Parameter other: A set of the same type as the current set.
-    public mutating func formIntersection(_ other: AccessibilityTraits) { }
+    public mutating func formIntersection(_ other: AccessibilityTraits) { } { }
 
     /// Returns a new set with the elements that are either in this set or in the
     /// given set, but not in both.
@@ -382,7 +382,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///
     /// - Parameter other: A set of the same type as the current set.
     /// - Returns: A new set.
-    public func symmetricDifference(_ other: AccessibilityTraits) -> AccessibilityTraits { }
+    public func symmetricDifference(_ other: AccessibilityTraits) -> AccessibilityTraits { } { }
 
     /// Removes the elements of the set that are also in the given set and adds
     /// the members of the given set that are not already in the set.
@@ -400,7 +400,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///     // Prints "["Diana", "Forlani", "Alicia"]"
     ///
     /// - Parameter other: A set of the same type.
-    public mutating func formSymmetricDifference(_ other: AccessibilityTraits) { }
+    public mutating func formSymmetricDifference(_ other: AccessibilityTraits) { } { }
 
     /// Returns a Boolean value that indicates whether the given element exists
     /// in the set.
@@ -419,7 +419,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///
     /// - Parameter member: An element to look for in the set.
     /// - Returns: `true` if `member` exists in the set; otherwise, `false`.
-    public func contains(_ member: AccessibilityTraits) -> Bool { }
+    public func contains(_ member: AccessibilityTraits) -> Bool { } { }
 
     /// Returns a new set with the elements of both this and the given set.
     ///
@@ -446,7 +446,7 @@ public struct AccessibilityTraits : SetAlgebra {
     /// - Note: if this set and `other` contain elements that are equal but
     ///   distinguishable (e.g. via `===`), which of these elements is present
     ///   in the result is unspecified.
-    public func union(_ other: AccessibilityTraits) -> AccessibilityTraits { }
+    public func union(_ other: AccessibilityTraits) -> AccessibilityTraits { } { }
 
     /// Removes the given element and any elements subsumed by the given element.
     ///
@@ -459,7 +459,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///   For sets where the set type and element type are the same, like
     ///   `OptionSet` types, this method returns any intersection between the set
     ///   and `[member]`, or `nil` if the intersection is empty.
-    public mutating func remove(_ member: AccessibilityTraits) -> AccessibilityTraits? { }
+    public mutating func remove(_ member: AccessibilityTraits) -> AccessibilityTraits? { } { }
 
     /// Inserts the given element in the set if it is not already present.
     ///
@@ -491,7 +491,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///   element that was equal to `newMember`. In some cases, `oldMember` may
     ///   be distinguishable from `newMember` by identity comparison or some
     ///   other means.
-    public mutating func insert(_ newMember: AccessibilityTraits) -> (inserted: Bool, memberAfterInsert: AccessibilityTraits) { }
+    public mutating func insert(_ newMember: AccessibilityTraits) -> (inserted: Bool, memberAfterInsert: AccessibilityTraits) { } { }
 
     /// Inserts the given element into the set unconditionally.
     ///
@@ -517,7 +517,7 @@ public struct AccessibilityTraits : SetAlgebra {
     ///   For sets where the set type and element type are the same, like
     ///   `OptionSet` types, this method returns any intersection between the
     ///   set and `[newMember]`, or `nil` if the intersection is empty.
-    public mutating func update(with newMember: AccessibilityTraits) -> AccessibilityTraits? { }
+    public mutating func update(with newMember: AccessibilityTraits) -> AccessibilityTraits? { } { }
 
     /// A type for which the conforming type provides a containment test.
     public typealias Element = AccessibilityTraits
@@ -533,7 +533,7 @@ public struct AccessibilityTraits : SetAlgebra {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: AccessibilityTraits, b: AccessibilityTraits) -> Bool { }
+    public static func == (a: AccessibilityTraits, b: AccessibilityTraits) -> Bool { } { }
 }
 
 /// A storage type for an action sheet presentation.
@@ -542,7 +542,7 @@ public struct AccessibilityTraits : SetAlgebra {
 public struct ActionSheet {
 
     /// Creates an action sheet with the provided buttons.
-    public init(title: Text, message: Text? = nil, buttons: [ActionSheet.Button] = [.cancel()]) { }
+    public init(title: Text, message: Text? = nil, buttons: [ActionSheet.Button] = [.cancel()]) { } { }
 
     /// A button representing an operation of an action sheet presentation.
     public typealias Button = Alert.Button
@@ -553,32 +553,32 @@ public struct ActionSheet {
 public struct Alert {
 
     /// Creates an alert with one button.
-    public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { }
+    public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { } { }
 
     /// Creates an alert with two buttons.
     ///
     /// The system determines the visual ordering of the buttons.
-    public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) { }
+    public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) { } { }
 
     /// A button representing an operation of an alert presentation.
     public struct Button {
 
         /// Creates an `Alert.Button` with the default style.
-        public static func `default`(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
+        public static func `default`(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { } { }
 
         /// Creates an `Alert.Button` that indicates cancellation of some
         /// operation.
-        public static func cancel(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
+        public static func cancel(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { } { }
 
         /// An alert button that indicates cancellation.
         ///
         /// The system automatically chooses the label of the button for the
         /// appropriate locale.
-        public static func cancel(_ action: (() -> Void)? = {}) -> Alert.Button { }
+        public static func cancel(_ action: (() -> Void)? = {}) -> Alert.Button { } { }
 
         /// Creates an `Alert.Button` with a style indicating destruction of
         /// some data.
-        public static func destructive(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
+        public static func destructive(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { } { }
     }
 }
 
@@ -602,7 +602,7 @@ public struct Alert {
     /// - Parameters:
     ///   - horizontal: The alignment on the horizontal axis.
     ///   - vertical: The alignment on the vertical axis.
-    @inlinable public init(horizontal: HorizontalAlignment, vertical: VerticalAlignment) { }
+    @inlinable public init(horizontal: HorizontalAlignment, vertical: VerticalAlignment) { } { }
 
     /// A guide marking the center of the view.
     public static let center: Alignment
@@ -639,26 +639,26 @@ public struct Alert {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: Alignment, b: Alignment) -> Bool { }
+    public static func == (a: Alignment, b: Alignment) -> Bool { } { }
 }
 
 /// Types used to identify alignment guides.
 ///
 /// Types conforming to `AlignmentID` have a corresponding alignment guide
 /// value, typically declared as a static constant property of
-/// ``HorizontalAlignment`` or ``VerticalAlignment``.
+/// ~~HorizontalAlignment~~ or ~~VerticalAlignment~~.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol AlignmentID {
 
     /// The value of the corresponding guide in the given context when not
     /// otherwise set in that context.
-    static func defaultValue(in context: ViewDimensions) -> CGFloat { }
+    static func defaultValue(in context: ViewDimensions) -> CGFloat { } { }
 }
 
 /// An opaque value derived from an anchor source and a particular view.
 ///
 /// You can convert the anchor to a `Value` in the coordinate space of a target
-/// view by using a ``GeometryProxy`` to specify the target view.
+/// view by using a ~~GeometryProxy~~ to specify the target view.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Anchor<Value> {
 
@@ -667,7 +667,7 @@ public protocol AlignmentID {
     ///
     /// SwiftUI passes anchored geometry values around the view tree via
     /// preference keys. It then converts them back into the local coordinate
-    /// space using a ``GeometryProxy`` value.
+    /// space using a ~~GeometryProxy~~ value.
     @frozen public struct Source {
     }
 }
@@ -676,7 +676,7 @@ public protocol AlignmentID {
 extension Anchor.Source where Value == CGRect {
 
     /// Returns an anchor source rect defined by `r` in the current view.
-    public static func rect(_ r: CGRect) -> Anchor<Value>.Source { }
+    public static func rect(_ r: CGRect) -> Anchor<Value>.Source { } { }
 
     /// An anchor source rect defined as the entire bounding rect of the current
     /// view.
@@ -689,12 +689,12 @@ extension Anchor.Source where Value == CGPoint {
 	/// Returns an anchor source point defined by a point `p` in the current view.
 	///
 	/// - Parameter p: The `CGPoint` to anchor.
-    public static func point(_ p: CGPoint) -> Anchor<Value>.Source { }
+    public static func point(_ p: CGPoint) -> Anchor<Value>.Source { } { }
 
     /// Returns an anchor source point defined by a point `p` in the current view.
     ///
     /// - Parameter p: The `UnitPoint` to anchor.
-    public static func unitPoint(_ p: UnitPoint) -> Anchor<Value>.Source { }
+    public static func unitPoint(_ p: UnitPoint) -> Anchor<Value>.Source { } { }
 
     /// An anchor source point defined by the top leading corner of the current view.
     public static var topLeading: Anchor<CGPoint>.Source { get }
@@ -730,7 +730,7 @@ extension Anchor.Source {
 	/// Creates an anchor source with generic type array from an array of anchor source.
 	///
 	/// - Parameter array: The array of anchor source points.
-    public init<T>(_ array: [Anchor<T>.Source]) where Value == [T] { }
+    public init<T>(_ array: [Anchor<T>.Source]) where Value == [T] { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -739,7 +739,7 @@ extension Anchor.Source {
 	/// Creates an anchor source with generic type optional from an optional anchor source.
 	///
 	/// - Parameter anchor: The optional anchor source.
-    public init<T>(_ anchor: Anchor<T>.Source?) where Value == T? { }
+    public init<T>(_ anchor: Anchor<T>.Source?) where Value == T? { } { }
 }
 
 /// A geometric angle whose value you access in either radians or degrees.
@@ -753,27 +753,27 @@ extension Anchor.Source {
     @inlinable public var degrees: Double
 
     /// Creates an angle of 0 degrees or 0 radians.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// Creates an angle from a specified number of radians.
     ///
     /// - Parameter radians: The number of radians in the angle.
-    @inlinable public init(radians: Double) { }
+    @inlinable public init(radians: Double) { } { }
 
     /// Creates an angle from a specified number of degrees.
     ///
     /// - Parameter degrees: The number of degrees in the angle.
-    @inlinable public init(degrees: Double) { }
+    @inlinable public init(degrees: Double) { } { }
 
     /// Changes the size of an angle to a specified number of radians.
     ///
     /// - Parameter radians: The number of radians the new angle should be.
-    @inlinable public static func radians(_ radians: Double) -> Angle { }
+    @inlinable public static func radians(_ radians: Double) -> Angle { } { }
 
     /// Changes the size of an angle to a specified number of degrees.
     ///
     /// - Paramter degrees: The number of degrees the new angle should be.
-    @inlinable public static func degrees(_ degrees: Double) -> Angle { }
+    @inlinable public static func degrees(_ degrees: Double) -> Angle { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -789,7 +789,7 @@ extension Angle : Hashable, Comparable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    @inlinable public static func < (lhs: Angle, rhs: Angle) -> Bool { }
+    @inlinable public static func < (lhs: Angle, rhs: Angle) -> Bool { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -799,7 +799,7 @@ extension Angle : Hashable, Comparable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: Angle, b: Angle) -> Bool { }
+    public static func == (a: Angle, b: Angle) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -823,7 +823,7 @@ extension Angle : Hashable, Comparable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -856,17 +856,17 @@ extension Angle : Animatable {
 	/// - Parameters:
 	///   - gradient: The gradient with the colors to use.
 	///   - center: The unit point that is center of the angular gradient.
-	///   - startAngle: The ``Angle`` where the gradient starts. Defaults to zero.
-	///   - endAngle: The ``Angle`` where the gradient ends. Defaults to zero.
-    public init(gradient: Gradient, center: UnitPoint, startAngle: Angle = .zero, endAngle: Angle = .zero) { }
+	///   - startAngle: The ~~Angle~~ where the gradient starts. Defaults to zero.
+	///   - endAngle: The ~~Angle~~ where the gradient ends. Defaults to zero.
+    public init(gradient: Gradient, center: UnitPoint, startAngle: Angle = .zero, endAngle: Angle = .zero) { } { }
 
     /// Creates an angular gradient starting at and angle and going all the way around in a circle.
     ///
     /// - Parameters:
     ///   - gradient: The gradient with the colors to use.
     ///   - center: The unit point that is center of the angular gradient.
-    ///   - angle: The ``Angle`` where the gradient starts. Defaults to zero.
-    public init(gradient: Gradient, center: UnitPoint, angle: Angle = .zero) { }
+    ///   - angle: The ~~Angle~~ where the gradient starts. Defaults to zero.
+    public init(gradient: Gradient, center: UnitPoint, angle: Angle = .zero) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -875,127 +875,7 @@ extension Angle : Animatable {
     public typealias Body
 }
 
-/// Animate a view when data changes.
-///
-/// `Animatable` describes how to animate a view with respect to some change in the view's data.
-///
-/// Use `Animatable` when you are unable to achieve the animation you want with `View/animation(_:)` or `withAnimation`.
-///
-/// `Animtable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData`, which represents a view's animatable data.
-///
-/// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `animatableData`. This is also the reason why `AnimatableData` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
-///
-/// ### Implementations
-///
-/// #### Using `AnimatableModifier` to implement a shake effect
-///
-/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines `Animatable` and `ViewModifier`. This allows you to decouple the animation effect from the view you want to animate.
-///
-/// For example:
-///
-/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var numberOfShakes: CGFloat = 0
-///
-///     var body: some View {
-///         VStack {
-///             Text("Banana🍌🍌")
-///                 .font(.largeTitle)
-///                 .modifier(ShakeEffect(shakeNumber: numberOfShakes))
-///                 .onAppear {
-///                     withAnimation(.easeIn(duration: 2.0)) {
-///                         numberOfShakes = 10
-///                     }
-///                 }
-///         }
-///     }
-/// }
-///
-/// struct ShakeEffect: AnimatableModifier {
-///     var shakeNumber: CGFloat = 0
-///
-///     var animatableData: CGFloat {
-///         get {
-///             shakeNumber
-///         } set {
-///             shakeNumber = newValue
-///         }
-///     }
-///
-///     func body(content: Content) -> some View {
-///         content
-///             .offset(x: sin(shakeNumber * .pi * 2) * 10)
-///     }
-/// }
-/// ```
-///
-/// This example demonstrates a horizontal "shake effect", applied on a `Text`. When run, the text animates by shaking 10 times. This is achieved by triggering an animation using `withAnimation`, and modifying the `shakeNumber` to go from `0` to `10`.
-///
-/// Note:
-///
-/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through `animatableData`, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
-///
-/// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the runtime needs to be able to interpolate fractionally between `0.0` and `10.0` 'shakes' - and it does so by making use of `CGFloat`'s `VectorArithmetic` conformance.
-///
-/// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of `Animation` is used in `withAnimation`, to animate the change from `0` shakes to `10` shakes.
-///
-/// #### Using `AnimatableModifier` to continuously animate a view along a circle
-///
-/// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
-///
-/// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var progress: CGFloat = 0
-///
-///     var body: some View {
-///         VStack {
-///             Text("Banana🍌🍌")
-///                 .font(.largeTitle)
-///                 .modifier(CircleAnimation(radius: 24, progress: progress))
-///                 .onAppear {
-///                     withAnimation(Animation.easeInOut(duration: 2.0).repeatForever(autoreverses: false)) {
-///                         progress = 1.0
-///                     }
-///                 }
-///         }
-///     }
-/// }
-///
-/// struct CircleAnimation: AnimatableModifier {
-///     let radius: CGFloat
-///     var progress: CGFloat = 0
-///
-///     var animatableData: CGFloat {
-///         get {
-///             progress
-///         } set {
-///             progress = newValue
-///         }
-///     }
-///
-///     func body(content: Content) -> some View {
-///         content.offset(
-///             x: radius * cos(progress * (2 * CGFloat.pi)),
-///             y: radius * sin(progress * (2 * CGFloat.pi))
-///         )
-///     }
-/// }
-/// ```
-///
-/// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
-///
-/// ``CircleAnimation`` is an implementation of an `AnimatableModifier` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
-///
-/// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using `withAnimation`. The `Animation` used in `withAnimation` is modified using `Animation/repeatForever(autoreverses:)`, in order to create a loop. Note that `autoreverses` is explicitly set as `false` to prevent the animation from being reversed.
-///
-/// ### Further notes
-///
-/// - `Animatable` along with `View` is currently broken on iOS 14, please use `AnimatableModifier`
-///
+/// A type that describes how to animate a property of a view.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol Animatable {
 
@@ -1036,7 +916,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     public var second: Second
 
     /// Creates an animated pair with the provided values.
-    @inlinable public init(_ first: First, _ second: Second) { }
+    @inlinable public init(_ first: First, _ second: Second) { } { }
 
     /// The zero value.
     ///
@@ -1049,7 +929,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     /// - Parameters:
     ///   - lhs: The first value to add.
     ///   - rhs: The second value to add.
-    public static func += (lhs: inout AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) { }
+    public static func += (lhs: inout AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) { } { }
 
     /// Subtracts the second value from the first and stores the difference in the
     /// left-hand-side variable.
@@ -1057,7 +937,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     /// - Parameters:
     ///   - lhs: A numeric value.
     ///   - rhs: The value to subtract from `lhs`.
-    public static func -= (lhs: inout AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) { }
+    public static func -= (lhs: inout AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) { } { }
 
     /// Adds two values and produces their sum.
     ///
@@ -1079,7 +959,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     /// - Parameters:
     ///   - lhs: The first value to add.
     ///   - rhs: The second value to add.
-    public static func + (lhs: AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) -> AnimatablePair<First, Second> { }
+    public static func + (lhs: AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) -> AnimatablePair<First, Second> { } { }
 
     /// Subtracts one value from another and produces their difference.
     ///
@@ -1101,10 +981,10 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     /// - Parameters:
     ///   - lhs: A numeric value.
     ///   - rhs: The value to subtract from `lhs`.
-    public static func - (lhs: AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) -> AnimatablePair<First, Second> { }
+    public static func - (lhs: AnimatablePair<First, Second>, rhs: AnimatablePair<First, Second>) -> AnimatablePair<First, Second> { } { }
 
     /// Multiplies each component of this value by the given value.
-    public mutating func scale(by rhs: Double) { }
+    public mutating func scale(by rhs: Double) { } { }
 
     /// The dot-product of this animated pair with itself.
     public var magnitudeSquared: Double { get }
@@ -1117,7 +997,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: AnimatablePair<First, Second>, b: AnimatablePair<First, Second>) -> Bool { }
+    public static func == (a: AnimatablePair<First, Second>, b: AnimatablePair<First, Second>) -> Bool { } { }
 }
 
 /// Specifies the timing curve of a changing on-screen value, such as spring or linear.
@@ -1132,7 +1012,7 @@ public protocol AnimatableModifier : Animatable, ViewModifier {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (lhs: Animation, rhs: Animation) -> Bool { }
+    public static func == (lhs: Animation, rhs: Animation) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1155,11 +1035,11 @@ extension Animation {
     ///   - blendDuration: The duration in seconds over which to
     ///     interpolate changes to the response value of the spring.
     /// - Returns: a spring animation.
-    public static func spring(response: Double = 0.55, dampingFraction: Double = 0.825, blendDuration: Double = 0) -> Animation { }
+    public static func spring(response: Double = 0.55, dampingFraction: Double = 0.825, blendDuration: Double = 0) -> Animation { } { }
 
     /// A convenience for a `spring()` animation with a lower
     /// `response` value, intended for driving interactive animations.
-    public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { }
+    public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1177,7 +1057,7 @@ extension Animation {
 	/// moving most quickly in the middle.
 	///
 	/// - Parameter duration: How long the effect should last.
-    public static func easeInOut(duration: Double) -> Animation { }
+    public static func easeInOut(duration: Double) -> Animation { } { }
 
     /// An animation where the effect starts out slower and ends slower, while
 	/// moving most quickly in the middle.
@@ -1188,7 +1068,7 @@ extension Animation {
     /// An animation where the effect starts out slower and then ends more quickly.
     ///
     /// - Parameter duration: How long the effect should last.
-    public static func easeIn(duration: Double) -> Animation { }
+    public static func easeIn(duration: Double) -> Animation { } { }
 
     /// An animation where the effect starts out slower and then ends more quickly.
     ///
@@ -1198,7 +1078,7 @@ extension Animation {
     /// An animation where the effect starts out more quickly and then slows down.
     ///
     /// - Parameter duration: How long the effect should last.
-    public static func easeOut(duration: Double) -> Animation { }
+    public static func easeOut(duration: Double) -> Animation { } { }
 
     /// An animation where the effect starts out more quickly and then slows down.
     ///
@@ -1208,7 +1088,7 @@ extension Animation {
     /// An animation where the effect happens at a constant speed throughout.
     ///
     /// - Parameter duration: How long the effect should last.
-    public static func linear(duration: Double) -> Animation { }
+    public static func linear(duration: Double) -> Animation { } { }
 
     /// An animation where the effect happens at a constant speed throughout.
     ///
@@ -1223,7 +1103,7 @@ extension Animation {
     ///   - c1x: The second x coefficient.
     ///   - c1y: The second y coefficient.
     ///   - duration: How long the effect should last.
-    public static func timingCurve(_ c0x: Double, _ c0y: Double, _ c1x: Double, _ c1y: Double, duration: Double = 0.35) -> Animation { }
+    public static func timingCurve(_ c0x: Double, _ c0y: Double, _ c1x: Double, _ c1y: Double, duration: Double = 0.35) -> Animation { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1243,7 +1123,7 @@ extension Animation {
     ///     a value in the range [0, 1] representing the magnitude of
     ///     the value being animated.
     /// - Returns: a spring animation.
-    public static func interpolatingSpring(mass: Double = 1.0, stiffness: Double, damping: Double, initialVelocity: Double = 0.0) -> Animation { }
+    public static func interpolatingSpring(mass: Double = 1.0, stiffness: Double, damping: Double, initialVelocity: Double = 0.0) -> Animation { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1252,7 +1132,7 @@ extension Animation {
 	/// Adds delay to your animation that runs before it starts.
 	///
 	/// - Parameter delay: How long the animation will wait before starting, in seconds.
-    public func delay(_ delay: Double) -> Animation { }
+    public func delay(_ delay: Double) -> Animation { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1262,7 +1142,7 @@ extension Animation {
     /// example, if you had `oneSecondAnimation.speed(0.25)`, it would be at 25%
     /// of its normal speed, so you would have an animation that would last 4
     /// seconds.
-    public func speed(_ speed: Double) -> Animation { }
+    public func speed(_ speed: Double) -> Animation { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1273,12 +1153,12 @@ extension Animation {
 	/// - Parameters:
 	///   - repeatCount: The number of times the animation should repeat.
 	///   - autoreverses: Whether the animation should reverse when repeating.
-    public func repeatCount(_ repeatCount: Int, autoreverses: Bool = true) -> Animation { }
+    public func repeatCount(_ repeatCount: Int, autoreverses: Bool = true) -> Animation { } { }
 
     /// Adjusts whether the animation repeats forever.
     ///
     /// - Parameter autoreverses: Whether the animation should reverse when repeating.
-    public func repeatForever(autoreverses: Bool = true) -> Animation { }
+    public func repeatForever(autoreverses: Bool = true) -> Animation { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1348,7 +1228,7 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
     /// Creates an instance from another gesture.
     ///
     /// - Parameter gesture: A gesture that you use to create a new gesture.
-    public init<T>(_ gesture: T) where Value == T.Value, T : Gesture { }
+    public init<T>(_ gesture: T) where Value == T.Value, T : Gesture { } { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -1365,14 +1245,14 @@ extension AnyTransition {
 	/// A transition that moves a view from its current place on screen to another place.
 	///
 	/// - Parameter offset: The amount you want to move the view during the transition.
-    public static func offset(_ offset: CGSize) -> AnyTransition { }
+    public static func offset(_ offset: CGSize) -> AnyTransition { } { }
 
     /// A transition that moves a view from its current place on screen to another place.
     ///
     /// - Parameters:
     ///   - x: The number of points you want to move the view to the right. Negative means move left. Defaults to 0.
     ///   - y: The number of points you want to move the view down. Negative means move up. Defaults to 0.
-    public static func offset(x: CGFloat = 0, y: CGFloat = 0) -> AnyTransition { }
+    public static func offset(x: CGFloat = 0, y: CGFloat = 0) -> AnyTransition { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1386,7 +1266,7 @@ extension AnyTransition {
     /// - Parameters:
     ///   - scale: The amount you want to scale the view.
     ///   - anchor: The unit point to have the view scale from.
-    public static func scale(scale: CGFloat, anchor: UnitPoint = .center) -> AnyTransition { }
+    public static func scale(scale: CGFloat, anchor: UnitPoint = .center) -> AnyTransition { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1412,7 +1292,7 @@ extension AnyTransition {
 
     /// Combines this transition with another, returning a new transition that
     /// is the result of both transitions being applied.
-    public func combined(with other: AnyTransition) -> AnyTransition { }
+    public func combined(with other: AnyTransition) -> AnyTransition { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1420,14 +1300,14 @@ extension AnyTransition {
 
     /// Returns a transition defined between an active modifier and an identity
     /// modifier.
-    public static func modifier<E>(active: E, identity: E) -> AnyTransition where E : ViewModifier { }
+    public static func modifier<E>(active: E, identity: E) -> AnyTransition where E : ViewModifier { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension AnyTransition {
 
     /// Attaches an animation to this transition.
-    public func animation(_ animation: Animation?) -> AnyTransition { }
+    public func animation(_ animation: Animation?) -> AnyTransition { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1443,7 +1323,7 @@ extension AnyTransition {
 
     /// Returns a transition that moves the view away, towards the specified
     /// edge of the view.
-    public static func move(edge: Edge) -> AnyTransition { }
+    public static func move(edge: Edge) -> AnyTransition { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1451,79 +1331,22 @@ extension AnyTransition {
 
     /// Provides a composite transition that uses a different transition for
     /// insertion versus removal.
-    public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
+    public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { } { }
 }
 
-/// A view that provides type-erasure for views of other types.
+/// A type-erased view.
 ///
-/// An `AnyView` hides the type of the `View` value passed to it (similar to how `AnyHashable` hides the type of `Hashable` value passed to it).
-///
-/// To type-erase your view, pass it to `AnyView/init(_:)` like this:
-///
-///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         AnyView(Text("Hello, world!"))
-///     }
-/// }
-/// ```
-///
-/// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
-///
-///  ![AnyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-2.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     let foo: Bool = false
-///
-///     var body: some View {
-///         if foo {
-///             AnyView(Text("Hello, world!"))
-///         } else {
-///             AnyView(Color.red)
-///         }
-///     }
-/// }
-/// ```
-///
-/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ``List/init(_:id:selection:rowContent:)``. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or `View/background(_:alignment:)`.
-///
-/// Consider whether the usage of `AnyView` is appropriate, or even necessary. A common mistake is to use `AnyView` like this:
-///
-/// ```
-/// func makeHelperView() -> some View {
-///     if foo {
-///         return AnyView(Text("Hello, world!"))
-///     } else {
-///         return AnyView(Color.red)
-///     }
-/// }
-/// ```
-///
-/// Wherein adding a `@ViewBuilder` would be more appropriate:
-///
-/// ```
-/// @ViewBuilder
-/// func makeHelperView() -> some View {
-///     if foo {
-///         Text("Hello, world!")
-///     } else {
-///         Color.red
-///     }
-/// }
-/// ```
-///
-/// The latter example performs better as the SwiftUI runtime is given a more explicit type hierarchy, where the switch between `foo` being true or false can only result in a `Text` or a `Color`. The former example erases that information, forcing the SwiftUI runtime to evaluate the actual view type lazily, and thus requires more work to compute and render.
+/// An `AnyView` allows changing the type of view used in a given view
+/// hierarchy. Whenever the type of view used with an `AnyView` changes, the old
+/// hierarchy is destroyed and a new hierarchy is created for the new type.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AnyView : View {
 
     /// Create an instance that type-erases `view`.
-    public init<V>(_ view: V) where V : View { }
+    public init<V>(_ view: V) where V : View { } { }
 
     /// Creates an instance that type-erases the parameter.
-    public init<V>(erasing view: V) where V : View { }
+    public init<V>(erasing view: V) where V : View { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -1535,7 +1358,7 @@ extension AnyTransition {
 /// A type that represents the structure and behavior of an app.
 ///
 /// Create an app by declaring a structure that conforms to the `App` protocol.
-/// Implement the required ``SwiftUI/App/body-swift.property`` computed property
+/// Implement the required ~~SwiftUI/App/body-swift.property~~ computed property
 /// to define the app's content:
 ///
 ///     @main
@@ -1551,10 +1374,10 @@ extension AnyTransition {
 /// [@main](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
 /// attribute to indicate that your custom `App` protocol conformer provides the
 /// entry point into your app. The protocol provides a default implementation of
-/// the ``SwiftUI/App/main()`` method that the system calls to launch your app.
+/// the ~~SwiftUI/App/main()~~ method that the system calls to launch your app.
 /// You can have exactly one entry point among all of your app's files.
 ///
-/// Compose the app's body from instances that conform to the ``SwiftUI/Scene``
+/// Compose the app's body from instances that conform to the ~~SwiftUI/Scene~~
 /// protocol. Each scene contains the root view of a view hierarchy and has a
 /// life cycle managed by the system. SwiftUI provides some concrete scene types
 /// to handle common scenarios, like for displaying documents or settings. You
@@ -1573,10 +1396,10 @@ extension AnyTransition {
 ///     }
 ///
 /// You can declare state in your app to share across all of its scenes. For
-/// example, you can use the ``SwiftUI/StateObject`` attribute to initialize a
+/// example, you can use the ~~SwiftUI/StateObject~~ attribute to initialize a
 /// data model, and then provide that model on a view input as an
-/// ``SwiftUI/ObservedObject`` or through the environment as an
-/// ``SwiftUI/EnvironmentObject`` to scenes in the app:
+/// ~~SwiftUI/ObservedObject~~ or through the environment as an
+/// ~~SwiftUI/EnvironmentObject~~ to scenes in the app:
 ///
 ///     @main
 ///     struct Mail: App {
@@ -1599,7 +1422,7 @@ public protocol App {
     /// The type of scene representing the content of the app.
     ///
     /// When you create a custom app, Swift infers this type from your
-    /// implementation of the required ``SwiftUI/App/body-swift.property``
+    /// implementation of the required ~~SwiftUI/App/body-swift.property~~
     /// property.
     associatedtype Body : Scene
 
@@ -1607,7 +1430,7 @@ public protocol App {
     ///
     /// For any app that you create, provide a computed `body` property that
     /// defines your app's scenes, which are instances that conform to the
-    /// ``SwiftUI/Scene`` protocol. For example, you can create a simple app
+    /// ~~SwiftUI/Scene~~ protocol. For example, you can create a simple app
     /// with a single scene containing a single view:
     ///
     ///     @main
@@ -1619,7 +1442,7 @@ public protocol App {
     ///         }
     ///     }
     ///
-    /// Swift infers the app's ``SwiftUI/App/Body-swift.associatedtype``
+    /// Swift infers the app's ~~SwiftUI/App/Body-swift.associatedtype~~
     /// associated type based on the scene provided by the `body` property.
     @SceneBuilder var body: Self.Body { get }
 
@@ -1629,7 +1452,7 @@ public protocol App {
     /// Swift synthesizes a default initializer for structures that don't
     /// provide one. You typically rely on the default initializer for
     /// your app.
-    init() { }
+    init() { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -1637,13 +1460,13 @@ extension App {
 
     /// Initializes and runs the app.
     ///
-    /// If you precede your ``SwiftUI/App`` conformer's declaration with the
+    /// If you precede your ~~SwiftUI/App~~ conformer's declaration with the
     /// [@main](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
     /// attribute, the system calls the conformer's `main()` method to launch
     /// the app. SwiftUI provides a
     /// default implementation of the method that manages the launch process in
     /// a platform-appropriate way.
-    public static func main() { }
+    public static func main() { } { }
 }
 
 /// A property wrapper type that reflects a value from `UserDefaults` and
@@ -1690,7 +1513,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Bool { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Bool { } { }
 
     /// Creates a property that can read and write to an integer user default.
     ///
@@ -1701,7 +1524,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Int { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Int { } { }
 
     /// Creates a property that can read and write to a double user default.
     ///
@@ -1712,7 +1535,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Double { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Double { } { }
 
     /// Creates a property that can read and write to a string user default.
     ///
@@ -1723,7 +1546,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == String { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == String { } { }
 
     /// Creates a property that can read and write to a url user default.
     ///
@@ -1734,7 +1557,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == URL { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == URL { } { }
 
     /// Creates a property that can read and write to a user default as data.
     ///
@@ -1750,7 +1573,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Data { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Data { } { }
 
     /// Creates a property that can read and write to an integer user default,
     /// transforming that to `RawRepresentable` data type.
@@ -1774,7 +1597,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == Int { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == Int { } { }
 
     /// Creates a property that can read and write to a string user default,
     /// transforming that to `RawRepresentable` data type.
@@ -1798,7 +1621,7 @@ extension AppStorage {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == String { }
+    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value : RawRepresentable, Value.RawValue == String { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -1814,7 +1637,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Bool? { }
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Bool? { } { }
 
     /// Creates a property that can read and write an Optional integer user
     /// default.
@@ -1826,7 +1649,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Int? { }
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Int? { } { }
 
     /// Creates a property that can read and write an Optional double user
     /// default.
@@ -1838,7 +1661,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Double? { }
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Double? { } { }
 
     /// Creates a property that can read and write an Optional string user
     /// default.
@@ -1850,7 +1673,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == String? { }
+    public init(_ key: String, store: UserDefaults? = nil) where Value == String? { } { }
 
     /// Creates a property that can read and write an Optional URL user
     /// default.
@@ -1862,7 +1685,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == URL? { }
+    public init(_ key: String, store: UserDefaults? = nil) where Value == URL? { } { }
 
     /// Creates a property that can read and write an Optional data user
     /// default.
@@ -1874,7 +1697,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Data? { }
+    public init(_ key: String, store: UserDefaults? = nil) where Value == Data? { } { }
 }
 
 /// The horizontal or vertical dimension in a 2D coordinate system.
@@ -1929,7 +1752,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         ///   of `rawValue` potentially represents an element of the option set,
         ///   though raw values may include bits that are not defined as distinct
         ///   values of the `OptionSet` type.
-        public init(rawValue: Int8) { }
+        public init(rawValue: Int8) { } { }
 
         /// The option set corresponding to the horizontal axis.
         public static let horizontal: Axis.Set
@@ -1990,7 +1813,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     // Prints "nil"
     ///
     /// - Parameter rawValue: The raw value to use for the new instance.
-    public init?(rawValue: Int8) { }
+    public init?(rawValue: Int8) { } { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [Axis]
@@ -2046,111 +1869,59 @@ extension Axis : RawRepresentable {
 @frozen public struct BackgroundStyle {
 
 	/// Creates a new background style.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension BackgroundStyle : ShapeStyle {
 }
 
-/// This type handles shared values across views.
+/// A property wrapper type that can read and write a value owned by a source of
+/// truth.
 ///
-/// `Binding` is a property wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. `Binding` defines a **getter** and a **setter** for a value.
+/// Use a binding to create a two-way connection between a property that stores
+/// data, and a view that displays and changes the data. A binding connects a
+/// property to a source of truth stored elsewhere, instead of storing data
+/// directly. For example, a button that toggles between play and pause can
+/// create a binding to a property of its parent view using the `Binding`
+/// property wrapper.
 ///
-/// ### Structure of a `Binding`
+///     struct PlayButton: View {
+///         @Binding var isPlaying: Bool
 ///
-/// A `Binding` is essentially the following structure:
-///
-/// ```
-/// struct Binding<Value> {
-///     let get: () -> Value
-///     let set: (Value) -> ()
-/// }
-/// ```
-///
-/// ### Creating a `Binding` from `@State `
-///
-/// A `Binding` typically represents a reference to a mutable source of truth - such as `@State`, `@ObservedObject` or a reference-writable keypath of an object. To create a `Binding` from a mutable source of truth, prefix the variable name for the source of truth with a dollar sign (`$`).
-///
-/// For example, a `TextField` can be bound to a state variable:
-///
-/// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var text: String = "🍌🍌"
-///
-///     var body: some View {
-///         Text(text)
-///         TextField("Placeholder", text: $text)
-///     }
-/// }
-/// ```
-///
-/// In the example above, the source of truth is a `@State` variable, named `text`. `text`  represents a `String`, whereas `$text` represents a `Binding<String>`. `TextField`'s initializer accepts a placeholder `String` and a `Binding<String>`. In this example, `TextField` requires a `Binding` to the source of truth as `TextField` must be able to *write back* to the `@State` variable (a **mutable** source of truth).
-///
-/// Recall, a `Binding` is a **two-way connection **to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
-///
-/// ### Creating a `Binding` from an `ObservableObject`
-///
-/// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
-///
-/// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @StateObject var viewModel = ExampleModel()
-///
-///     var text: String {
-///         viewModel.isEnabled ? "Enabled" : "Disabled"
-///     }
-///
-///     var body: some View {
-///         Toggle(text, isOn: $viewModel.isEnabled)
-///     }
-/// }
-///
-/// class ExampleModel: ObservableObject {
-///     @Published var isEnabled: Bool = false
-/// }
-/// ```
-///
-/// The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a `Binding` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
-///
-/// ### Animating Updates via a `Binding`
-///
-/// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with `Binding/animation(_:)`. Usage looks as follows:
-///
-/// ```
-/// $myVariable.animation(.default)
-/// ```
-///
-/// ### Creating a `Binding` from a constant
-///
-/// At times, you may want to pass a fixed value as a `Binding`. This is possible via `Binding/constant(_:)`, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
-///
-/// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode.active`.
-///
-/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var fruits = ["🍌", "🍏", "🍑"]
-///
-///     var body: some View {
-///         List {
-///             ForEach(fruits, id: \.self) { fruit in
-///                 Text(fruit)
-///             }
-///             .onDelete { offets in
-///                 fruits.remove(atOffsets: offets)
+///         var body: some View {
+///             Button(action: {
+///                 self.isPlaying.toggle()
+///             }) {
+///                 Image(systemName: isPlaying ? "pause.circle" : "play.circle")
 ///             }
 ///         }
-///         .environment(\.editMode, .constant(.active))
 ///     }
-/// }
-/// ```
 ///
+/// The parent view declares a property to hold the playing state, using the
+/// ~~State~~ property wrapper to indicate that this property is the value's
+/// source of truth.
+///
+///     struct PlayerView: View {
+///         var episode: Episode
+///         @State private var isPlaying: Bool = false
+///
+///         var body: some View {
+///             VStack {
+///                 Text(episode.title)
+///                 Text(episode.showTitle)
+///                 PlayButton(isPlaying: $isPlaying)
+///             }
+///         }
+///     }
+///
+/// When `PlayerView` initializes `PlayButton`, it passes a binding of its state
+/// property into the button's binding property. Applying the `$` prefix to a
+/// property wrapped value returns its ~~State/projectedValue~~, which for a
+/// state property wrapper returns a binding to the value.
+///
+/// Whenever the user taps the `PlayButton`, the `PlayerView` updates its
+/// `isPlaying` state.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
 
@@ -2168,7 +1939,7 @@ extension BackgroundStyle : ShapeStyle {
     ///   - set: A closure that sets the binding value. The closure has the
     ///     following parameter:
     ///       - newValue: The new value of the binding value.
-    public init(get: @escaping () -> Value, set: @escaping (Value) -> Void) { }
+    public init(get: @escaping () -> Value, set: @escaping (Value) -> Void) { } { }
 
     /// Creates a binding with a closure that reads from the binding value, and
     /// a closure that applies a transaction when writing to the binding value.
@@ -2180,19 +1951,19 @@ extension BackgroundStyle : ShapeStyle {
     ///     following parameters:
     ///       - newValue: The new value of the binding value.
     ///       - transaction: The transaction to apply when setting a new value.
-    public init(get: @escaping () -> Value, set: @escaping (Value, Transaction) -> Void) { }
+    public init(get: @escaping () -> Value, set: @escaping (Value, Transaction) -> Void) { } { }
 
     /// Creates a binding with an immutable value.
     ///
     /// Use this method to create a binding to a value that cannot change.
-    /// This can be useful when using a ``PreviewProvider`` to see how a view
+    /// This can be useful when using a ~~PreviewProvider~~ to see how a view
     /// represents different values.
     ///
     ///     // Example of binding to an immutable value.
     ///     PlayButton(isPlaying: Binding.constant(true))
     ///
     /// - Parameter value: An immutable value.
-    public static func constant(_ value: Value) -> Binding<Value> { }
+    public static func constant(_ value: Value) -> Binding<Value> { } { }
 
     /// The underlying value referenced by the binding variable.
     ///
@@ -2255,20 +2026,20 @@ extension Binding {
     /// Creates a binding by projecting the base value to an optional value.
     ///
     /// - Parameter base: A value to project to an optional value.
-    public init<V>(_ base: Binding<V>) where Value == V? { }
+    public init<V>(_ base: Binding<V>) where Value == V? { } { }
 
     /// Creates a binding by projecting the base value to an unwrapped value.
     ///
     /// - Parameter base: A value to project to an unwrapped value.
     ///
     /// - Returns: A new binding or `nil` when `base` is `nil`.
-    public init?(_ base: Binding<Value?>) { }
+    public init?(_ base: Binding<Value?>) { } { }
 
     /// Creates a binding by projecting the base value to a hashable value.
     ///
     /// - Parameters:
     ///   - base: A `Hashable` value to project to an `AnyHashable` value.
-    public init<V>(_ base: Binding<V>) where Value == AnyHashable, V : Hashable { }
+    public init<V>(_ base: Binding<V>) where Value == AnyHashable, V : Hashable { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2276,10 +2047,10 @@ extension Binding {
 
     /// Specifies a transaction for the binding.
     ///
-    /// - Parameter transaction  : An instance of a ``Transaction``.
+    /// - Parameter transaction  : An instance of a ~~Transaction~~.
     ///
     /// - Returns: A new binding.
-    public func transaction(_ transaction: Transaction) -> Binding<Value> { }
+    public func transaction(_ transaction: Transaction) -> Binding<Value> { } { }
 
     /// Specifies an animation to perform when the binding value changes.
     ///
@@ -2287,7 +2058,7 @@ extension Binding {
     ///   value changes.
     ///
     /// - Returns: A new binding.
-    public func animation(_ animation: Animation? = .default) -> Binding<Value> { }
+    public func animation(_ animation: Animation? = .default) -> Binding<Value> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2432,7 +2203,7 @@ public enum BlendMode {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: BlendMode, b: BlendMode) -> Bool { }
+    public static func == (a: BlendMode, b: BlendMode) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -2456,7 +2227,7 @@ public enum BlendMode {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2484,15 +2255,15 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     ///
     /// By default, the borderless style displays a visual indicator that it
     /// represents a menu.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a menu.
     ///
     /// - Parameter configuration: The properties of the menu.
     ///
-    /// The system calls this method for each ``Menu`` instance in a view
+    /// The system calls this method for each ~~Menu~~ instance in a view
     /// hierarchy where this style is the current menu style.
-    public func makeBody(configuration: BorderlessButtonMenuStyle.Configuration) -> some View { }
+    public func makeBody(configuration: BorderlessButtonMenuStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a menu.
@@ -2502,22 +2273,22 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 /// A button style that doesn't apply a border.
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
-/// ``View/buttonStyle(_:)-66fbx`` modifier.
+/// ~~View/buttonStyle(_:)-66fbx~~ modifier.
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 
     /// Creates a borderless button style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a button.
     ///
-    /// The system calls this method for each ``Button`` instance in a view
+    /// The system calls this method for each ~~Button~~ instance in a view
     /// hierarchy where this style is the current button style.
     ///
     /// - Parameter configuration : The properties of the button.
-    public func makeBody(configuration: BorderlessButtonStyle.Configuration) -> some View { }
+    public func makeBody(configuration: BorderlessButtonStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a button.
@@ -2574,16 +2345,16 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///     }
 ///
 /// This pattern extends to most other container views in SwiftUI that have
-/// customizable, interactive content, like forms (instances of ``Form``).
+/// customizable, interactive content, like forms (instances of ~~Form~~).
 ///
 /// ### Styling Buttons
 ///
 /// You can customize a button's appearance and interaction behavior. To add a
 /// custom appearance with standard interaction behavior, create a style that
-/// conforms to the ``ButtonStyle`` protocol. To customize both appearance and
+/// conforms to the ~~ButtonStyle~~ protocol. To customize both appearance and
 /// interaction behavior, create a style that conforms to the
-/// ``PrimitiveButtonStyle`` protocol. To set a specific style for all button
-/// instances within a view, use the ``View/buttonStyle(_:)-66fbx`` modifier:
+/// ~~PrimitiveButtonStyle~~ protocol. To set a specific style for all button
+/// instances within a view, use the ~~View/buttonStyle(_:)-66fbx~~ modifier:
 ///
 ///     HStack {
 ///         Button("Sign In", action: signIn)
@@ -2598,7 +2369,7 @@ public struct Button<Label> : View where Label : View {
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
     ///   - label: A view that describes the purpose of the button's `action`.
-    public init(action: @escaping () -> Void, @ViewBuilder label: () -> Label) { }
+    public init(action: @escaping () -> Void, @ViewBuilder label: () -> Label) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -2615,32 +2386,32 @@ extension Button where Label == Text {
 
     /// Creates a button that generates its label from a localized string key.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// localized key similar to ``Text/init(_:tableName:bundle:comment:)``. See
-    /// ``Text`` for more information about localizing strings.
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// localized key similar to ~~Text/init(_:tableName:bundle:comment:)~~. See
+    /// ~~Text~~ for more information about localizing strings.
     ///
     /// To initialize a button with a string variable, use
-    /// ``Button/init(_:action:)-lpm7`` instead.
+    /// ~~Button/init(_:action:)-lpm7~~ instead.
     ///
     /// - Parameters:
     ///   - titleKey: The key for the button's localized title, that describes
     ///     the purpose of the button's `action`.
     ///   - action: The action to perform when the user triggers the button.
-    public init(_ titleKey: LocalizedStringKey, action: @escaping () -> Void) { }
+    public init(_ titleKey: LocalizedStringKey, action: @escaping () -> Void) { } { }
 
     /// Creates a button that generates its label from a string.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to ``Text/init(_:)-9d1g4``. See ``Text`` for more
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// title similar to ~~Text/init(_:)-9d1g4~~. See ~~Text~~ for more
     /// information about localizing strings.
     ///
     /// To initialize a button with a localized string key, use
-    /// ``Button/init(_:action:)-1asy`` instead.
+    /// ~~Button/init(_:action:)-1asy~~ instead.
     ///
     /// - Parameters:
     ///   - title: A string that describes the purpose of the button's `action`.
     ///   - action: The action to perform when the user triggers the button.
-    public init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol { }
+    public init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2650,8 +2421,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     /// appearance and custom interaction behavior.
     ///
     /// Use this initializer within the
-    /// ``PrimitiveButtonStyle/makeBody(configuration:)`` method of a
-    /// ``PrimitiveButtonStyle`` to create an instance of the button that you
+    /// ~~PrimitiveButtonStyle/makeBody(configuration:)~~ method of a
+    /// ~~PrimitiveButtonStyle~~ to create an instance of the button that you
     /// want to style. This is useful for custom button styles that modify the
     /// current button style, rather than implementing a brand new style.
     ///
@@ -2668,94 +2439,17 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     /// - Parameter configuration: A configuration for a style with a custom
     ///   appearance and custom interaction behavior.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public init(_ configuration: PrimitiveButtonStyleConfiguration) { }
+    public init(_ configuration: PrimitiveButtonStyleConfiguration) { } { }
 }
 
-
-/// This protocol is used to create a custom button style.
+/// A type that applies standard interaction behavior and a custom appearance to
+/// all buttons within a view hierarchy.
 ///
-/// The `ButtonStyle` protocol provides a template to create a reusable style for your buttons. It also provides data about the button and its interaction state.
-///
-/// To make a custom style, create a new structure that conforms to `ButtonStyle`. This new style can be easily reused across your application. The style adapts to the user's current interaction state (i.e. on press, on release).
-///
-/// Your structure only needs to implement one method: `ButtonStyle/makeBody(configuration:)`.
-///
-/// To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a `ButtonStyle`.
-///
-///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Button("Banana🍌🍌", action: { tap() })
-///             .buttonStyle(BananaButtonStyle(color: .yellow))
-///     }
-///
-///     func tap() { }
-/// }
-///
-/// struct BananaButtonStyle: ButtonStyle {
-///     var color: Color
-///     func makeBody(configuration: Self.Configuration) -> some View {
-///         BananaButton(configuration: configuration, color: color)
-///     }
-///
-///     struct BananaButton: View {
-///         let configuration: BananaButtonStyle.Configuration
-///         let color: Color
-///
-///         var body: some View {
-///             configuration.label
-///                 .padding()
-///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
-///                 .animation(.spring())
-///         }
-///     }
-/// }
-/// ```
-///
-/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
-///
-///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         VStack {
-///             Button("🍌🍌", action: { tap() })
-///             Button("🍎🍎", action: { tap() })
-///             Button("🍑🍑", action: { tap() })
-///         }
-///         .buttonStyle(BananaButtonStyle(color: .yellow))
-///     }
-///
-///     func tap() {}
-/// }
-///
-/// struct BananaButtonStyle: ButtonStyle {
-///     var color: Color
-///     func makeBody(configuration: Self.Configuration) -> some View {
-///         BananaButton(configuration: configuration, color: color)
-///     }
-///
-///     struct BananaButton: View {
-///         let configuration: BananaButtonStyle.Configuration
-///         let color: Color
-///
-///         var body: some View {
-///             return configuration.label
-///                 .padding()
-///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
-///                 .animation(.spring())
-///         }
-///     }
-/// }
-
-/// ```
-///
-/// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
+/// To configure the current button style for a view hierarchy, use the
+/// ~~View/buttonStyle(_:)-7qx1~~ modifier. Specify a style that conforms to
+/// ~~ButtonStyle~~ when creating a button that uses the standard button
+/// interaction behavior defined for each platform. To create a button with
+/// custom interaction behavior, use ~~PrimitiveButtonStyle~~ instead.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle {
 
@@ -2764,19 +2458,17 @@ public protocol ButtonStyle {
 
     /// Creates a view that represents the body of a button.
     ///
-    /// The system calls this method for each ``Button`` instance in a view
+    /// The system calls this method for each ~~Button~~ instance in a view
     /// hierarchy where this style is the current button style.
     ///
     /// - Parameter configuration : The properties of the button.
-    func makeBody(configuration: Self.Configuration) -> Self.Body { }
+    func makeBody(configuration: Self.Configuration) -> Self.Body { } { }
 
     /// The properties of a button.
     typealias Configuration = ButtonStyleConfiguration
 }
 
 /// The properties of a button.
-///
-/// This property represents the view state of the `Button` that ``ButtonStyle`` modifies. `ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -2813,14 +2505,14 @@ public struct ButtonStyleConfiguration {
     /// Creates a new capsule shape from a rounded corner style.
     ///
     /// - Parameter style: The rounded corner style of the capsule.
-    @inlinable public init(style: RoundedCornerStyle = .circular) { }
+    @inlinable public init(style: RoundedCornerStyle = .circular) { } { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in r: CGRect) -> Path { }
+    public func path(in r: CGRect) -> Path { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -2836,7 +2528,7 @@ public struct ButtonStyleConfiguration {
 extension Capsule : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
+    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { } { }
 
 
     /// The type of the inset shape.
@@ -2855,10 +2547,10 @@ extension Capsule : InsettableShape {
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// Creates a new circle `Shape`.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -2874,7 +2566,7 @@ extension Capsule : InsettableShape {
 extension Circle : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
+    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { } { }
 
 
     /// The type of the inset shape.
@@ -2886,10 +2578,10 @@ extension Circle : InsettableShape {
 public struct CircularProgressViewStyle : ProgressViewStyle {
 
     /// Creates a circular progress view style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a circular progress view style with a tint color.
-    public init(tint: Color) { }
+    public init(tint: Color) { } { }
 
     /// Creates a view representing the body of a progress view.
     ///
@@ -2901,7 +2593,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
-    public func makeBody(configuration: CircularProgressViewStyle.Configuration) -> some View { }
+    public func makeBody(configuration: CircularProgressViewStyle.Configuration) -> some View { } { }
 
 
     /// A view representing the body of a progress view.
@@ -2933,7 +2625,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -2943,7 +2635,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (lhs: Color, rhs: Color) -> Bool { }
+    public static func == (lhs: Color, rhs: Color) -> Bool { } { }
 
     /// A textual representation of this instance.
     ///
@@ -2994,7 +2686,7 @@ extension Color : View {
 extension Color {
 
     /// Creates a color from an instance of `CGColor`.
-    public init(_ cgColor: CGColor) { }
+    public init(_ cgColor: CGColor) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3021,7 +2713,7 @@ extension Color {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Color.RGBColorSpace, b: Color.RGBColorSpace) -> Bool { }
+        public static func == (a: Color.RGBColorSpace, b: Color.RGBColorSpace) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -3045,7 +2737,7 @@ extension Color {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 
     /// Create a `Color` from RGB and opacity values along with an optional colorspace.
@@ -3061,7 +2753,7 @@ extension Color {
     ///   - green: The green value of the color.
     ///   - blue: The blue value of the color.
     ///   - opacity: The opacity of the color. Defaults to 1.0.
-    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, red: Double, green: Double, blue: Double, opacity: Double = 1) { }
+    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, red: Double, green: Double, blue: Double, opacity: Double = 1) { } { }
 
     /// Create a `Color` from grayscale and opacity.
     ///
@@ -3073,7 +2765,7 @@ extension Color {
     ///   - colorSpace: The `RGBColorSpace` of the specified color.
     ///   - white: The grayscale value of the color, from 0.0 to 1.0.
     ///   - opacity: The opacity of the color. Defaults to 1.0.
-    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1) { }
+    public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1) { } { }
 
     /// Creates a `Color` from hue, saturation, brightness, and opacity values.
     ///
@@ -3082,7 +2774,7 @@ extension Color {
     ///   - saturation: The saturation of the color.
     ///   - brightness: The brightness of the color.
     ///   - opacity: The opacity of the color.
-    public init(hue: Double, saturation: Double, brightness: Double, opacity: Double = 1) { }
+    public init(hue: Double, saturation: Double, brightness: Double, opacity: Double = 1) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3162,7 +2854,7 @@ extension Color {
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
     ///   - bundle: the bundle to search for the color resource in.
-    public init(_ name: String, bundle: Bundle? = nil) { }
+    public init(_ name: String, bundle: Bundle? = nil) { } { }
 }
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -3170,7 +2862,7 @@ extension Color {
 extension Color {
 
     /// Creates a color from an instance of `UIColor`.
-    public init(_ color: UIColor) { }
+    public init(_ color: UIColor) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3178,9 +2870,9 @@ extension Color {
 
 	/// Updates the transparency channel of a `Color`, returning a `Color` back.
 	///
-	/// This is different from the ``View/opacity(_:)`` modifier because it
+	/// This is different from the ~~View/opacity(_:)~~ modifier because it
 	/// returns a `Color` object rather than `some View`.
-    public func opacity(_ opacity: Double) -> Color { }
+    public func opacity(_ opacity: Double) -> Color { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3204,7 +2896,7 @@ extension Color.RGBColorSpace : Hashable {
 /// programmatically or selected from the user's system favorites.
 ///
 /// You use `ColorPicker` by embedding it inside a view hierarchy and
-/// initializing it with a title string and a ``Binding`` to a ``Color``:
+/// initializing it with a title string and a ~~Binding~~ to a ~~Color~~:
 ///
 ///     struct FormattingControls: View {
 ///         @State private var bgColor =
@@ -3225,8 +2917,8 @@ public struct ColorPicker<Label> : View where Label : View {
     /// Creates an instance that selects a color.
     ///
     /// - Parameters:
-    ///     - selection: A ``Binding`` to the variable that displays the
-    ///       selected ``Color``.
+    ///     - selection: A ~~Binding~~ to the variable that displays the
+    ///       selected ~~Color~~.
     ///     - supportsOpacity: A Boolean value that indicates whether the color
     ///       picker allows adjusting the selected color's opacity; the default
     ///       is `true`.
@@ -3234,13 +2926,13 @@ public struct ColorPicker<Label> : View where Label : View {
     ///        The system color picker UI sets it's title using the text from
     ///        this view.
     ///
-    public init(selection: Binding<Color>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label) { }
+    public init(selection: Binding<Color>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label) { } { }
 
     /// Creates an instance that selects a color.
     ///
     /// - Parameters:
-    ///     - selection: A ``Binding`` to the variable that displays the
-    ///       selected ``CGColor``.
+    ///     - selection: A ~~Binding~~ to the variable that displays the
+    ///       selected ~~CGColor~~.
     ///     - supportsOpacity: A Boolean value that indicates whether the color
     ///       picker allows adjusting the selected color's opacity; the default
     ///       is `true`.
@@ -3248,7 +2940,7 @@ public struct ColorPicker<Label> : View where Label : View {
     ///        The system color picker UI sets it's title using the text from
     ///        this view.
     ///
-    public init(selection: Binding<CGColor>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label) { }
+    public init(selection: Binding<CGColor>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -3267,9 +2959,9 @@ extension ColorPicker where Label == Text {
 
     /// Creates a color picker with a text label generated from a title string key.
     ///
-    /// Use ``ColorPicker`` to create a color well that your app uses to allow
-    /// the selection of a ``Color``. The example below creates a color well
-    /// using a ``Binding`` to a property stored in a settings object and title
+    /// Use ~~ColorPicker~~ to create a color well that your app uses to allow
+    /// the selection of a ~~Color~~. The example below creates a color well
+    /// using a ~~Binding~~ to a property stored in a settings object and title
     /// you provide:
     ///
     ///     final class Settings: ObservableObject {
@@ -3292,18 +2984,18 @@ extension ColorPicker where Label == Text {
     ///
     /// - Parameters:
     ///   - titleKey: The key for the localized title of the picker.
-    ///   - selection: A ``Binding`` to the variable that displays the
-    ///     selected ``Color``.
+    ///   - selection: A ~~Binding~~ to the variable that displays the
+    ///     selected ~~Color~~.
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Color>, supportsOpacity: Bool = true) { }
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Color>, supportsOpacity: Bool = true) { } { }
 
     /// Creates a color picker with a text label generated from a title string.
     ///
-    /// Use ``ColorPicker`` to create a color well that your app uses to allow
-    /// the selection of a ``Color``. The example below creates a color well
-    /// using a ``Binding`` and title you provide:
+    /// Use ~~ColorPicker~~ to create a color well that your app uses to allow
+    /// the selection of a ~~Color~~. The example below creates a color well
+    /// using a ~~Binding~~ and title you provide:
     ///
     ///     func showColorPicker(_ title: String, color: Binding<Color>) {{}
     ///         ColorPicker(title, selection: color)
@@ -3311,32 +3003,32 @@ extension ColorPicker where Label == Text {
     ///
     /// - Parameters:
     ///   - title: The title displayed by the color picker.
-    ///   - selection: A ``Binding`` to the variable containing a ``Color``.
+    ///   - selection: A ~~Binding~~ to the variable containing a ~~Color~~.
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init<S>(_ title: S, selection: Binding<Color>, supportsOpacity: Bool = true) where S : StringProtocol { }
+    public init<S>(_ title: S, selection: Binding<Color>, supportsOpacity: Bool = true) where S : StringProtocol { } { }
 
     /// Creates a color picker with a text label generated from a title string key.
     ///
     /// - Parameters:
     ///   - titleKey: The key for the localized title of the picker.
-    ///   - selection: A ``Binding`` to the variable that displays the
-    ///     selected ``CGColor``.
+    ///   - selection: A ~~Binding~~ to the variable that displays the
+    ///     selected ~~CGColor~~.
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<CGColor>, supportsOpacity: Bool = true) { }
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<CGColor>, supportsOpacity: Bool = true) { } { }
 
     /// Creates a color picker with a text label generated from a title string.
     ///
     /// - Parameters:
     ///   - title: The title displayed by the color picker.
-    ///   - selection: A ``Binding`` to the variable containing a ``CGColor``.
+    ///   - selection: A ~~Binding~~ to the variable containing a ~~CGColor~~.
     ///   - supportsOpacity: A Boolean value that indicates whether the color
     ///     picker allows adjustments to the selected color's opacity; the
     ///     default is `true`.
-    public init<S>(_ title: S, selection: Binding<CGColor>, supportsOpacity: Bool = true) where S : StringProtocol { }
+    public init<S>(_ title: S, selection: Binding<CGColor>, supportsOpacity: Bool = true) where S : StringProtocol { } { }
 }
 
 /// The working color space for color-compositing operations.
@@ -3371,7 +3063,7 @@ public enum ColorRenderingMode {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ColorRenderingMode, b: ColorRenderingMode) -> Bool { }
+    public static func == (a: ColorRenderingMode, b: ColorRenderingMode) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -3395,7 +3087,7 @@ public enum ColorRenderingMode {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3428,7 +3120,7 @@ public enum ColorScheme : CaseIterable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ColorScheme, b: ColorScheme) -> Bool { }
+    public static func == (a: ColorScheme, b: ColorScheme) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -3452,7 +3144,7 @@ public enum ColorScheme : CaseIterable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [ColorScheme]
@@ -3467,7 +3159,7 @@ extension ColorScheme {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiUserInterfaceStyle: UIUserInterfaceStyle) { }
+    public init?(_ uiUserInterfaceStyle: UIUserInterfaceStyle) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3502,7 +3194,7 @@ public enum ColorSchemeContrast : CaseIterable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ColorSchemeContrast, b: ColorSchemeContrast) -> Bool { }
+    public static func == (a: ColorSchemeContrast, b: ColorSchemeContrast) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -3526,7 +3218,7 @@ public enum ColorSchemeContrast : CaseIterable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [ColorSchemeContrast]
@@ -3541,7 +3233,7 @@ extension ColorSchemeContrast {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiAccessibilityContrast: UIAccessibilityContrast) { }
+    public init?(_ uiAccessibilityContrast: UIAccessibilityContrast) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3568,15 +3260,15 @@ public struct CommandGroup<Content> : Commands where Content : View {
 
     /// A value describing the addition of the given views to the beginning of
     /// the indicated group.
-    public init(before group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { }
+    public init(before group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { } { }
 
     /// A value describing the addition of the given views to the end of the
     /// indicated group.
-    public init(after group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { }
+    public init(after group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { } { }
 
     /// A value describing the complete replacement of the contents of the
     /// indicated group with the given views.
-    public init(replacing group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { }
+    public init(replacing group: CommandGroupPlacement, @ViewBuilder addition: () -> Content) { } { }
 
     /// The type of command group representing the body of this command group.
     public typealias Body = some Commands
@@ -3751,17 +3443,17 @@ public struct CommandMenu<Content> : Commands where Content : View {
     /// specific commands, inserted in the standard location for app menus
     /// (after the View menu, in order with other menus declared without an
     /// explicit location).
-    public init(_ nameKey: LocalizedStringKey, @ViewBuilder content: () -> Content) { }
+    public init(_ nameKey: LocalizedStringKey, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a new menu for a collection of app-specific commands, inserted
     /// in the standard location for app menus (after the View menu, in order
     /// with other menus declared without an explicit location).
-    public init(_ name: Text, @ViewBuilder content: () -> Content) { }
+    public init(_ name: Text, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a new menu for a collection of app-specific commands, inserted
     /// in the standard location for app menus (after the View menu, in order
     /// with other menus declared without an explicit location).
-    public init<S>(_ name: S, @ViewBuilder content: () -> Content) where S : StringProtocol { }
+    public init<S>(_ name: S, @ViewBuilder content: () -> Content) where S : StringProtocol { } { }
 
     /// The type of command group representing the body of this command group.
     public typealias Body = some Commands
@@ -3789,11 +3481,11 @@ public protocol Commands {
 @_functionBuilder public struct CommandsBuilder {
 
     /// Builds an empty command set from an block containing no statements.
-    public static func buildBlock() -> EmptyCommands { }
+    public static func buildBlock() -> EmptyCommands { } { }
 
     /// Passes a single command group written as a child group through
     /// modified.
-    public static func buildBlock<Content>(_ content: Content) -> Content where Content : Commands { }
+    public static func buildBlock<Content>(_ content: Content) -> Content where Content : Commands { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -3802,7 +3494,7 @@ public protocol Commands {
 extension CommandsBuilder {
 
 	/// Passes two command groups written as a child through modified.
-    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Commands where C0 : Commands, C1 : Commands { }
+    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Commands where C0 : Commands, C1 : Commands { } { }
 
 }
 
@@ -3812,7 +3504,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes three command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands { }
+    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands { } { }
 
 }
 
@@ -3822,7 +3514,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes four command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands { }
+    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands { } { }
 
 }
 
@@ -3832,7 +3524,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes five command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands { }
+    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands { } { }
 
 }
 
@@ -3842,7 +3534,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes six command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands { } { }
 
 }
 
@@ -3852,7 +3544,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes seven command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands { } { }
 
 }
 
@@ -3862,7 +3554,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes eight command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands { } { }
 
 }
 
@@ -3872,7 +3564,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes nine command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands, C8 : Commands { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands, C8 : Commands { } { }
 
 }
 
@@ -3882,7 +3574,7 @@ extension CommandsBuilder {
 extension CommandsBuilder {
 
 	/// Passes ten command groups written as a child through modified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands, C8 : Commands, C9 : Commands { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some Commands where C0 : Commands, C1 : Commands, C2 : Commands, C3 : Commands, C4 : Commands, C5 : Commands, C6 : Commands, C7 : Commands, C8 : Commands, C9 : Commands { } { }
 
 }
 
@@ -3897,7 +3589,7 @@ extension CommandsBuilder {
 public struct CompactDatePickerStyle : DatePickerStyle {
 
 	/// Creates a compact date picker style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A shape that is replaced by an inset version of the current
@@ -3911,10 +3603,10 @@ public struct CompactDatePickerStyle : DatePickerStyle {
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// Creates a relative container shape.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -3930,7 +3622,7 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 extension ContainerRelativeShape : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
+    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { } { }
 
 
     /// The type of the inset shape.
@@ -3957,7 +3649,7 @@ extension ContainerRelativeShape : InsettableShape {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ContentMode, b: ContentMode) -> Bool { }
+    public static func == (a: ContentMode, b: ContentMode) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -3981,7 +3673,7 @@ extension ContainerRelativeShape : InsettableShape {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [ContentMode]
@@ -4043,7 +3735,7 @@ public enum ContentSizeCategory : Hashable, CaseIterable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ContentSizeCategory, b: ContentSizeCategory) -> Bool { }
+    public static func == (a: ContentSizeCategory, b: ContentSizeCategory) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -4067,7 +3759,7 @@ public enum ContentSizeCategory : Hashable, CaseIterable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [ContentSizeCategory]
@@ -4080,16 +3772,16 @@ public enum ContentSizeCategory : Hashable, CaseIterable {
 extension ContentSizeCategory {
 
     /// Returns a Boolean value indicating whether the value of the first argument is less than that of the second argument.
-    public static func < (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { }
+    public static func < (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { } { }
 
     /// Returns a Boolean value indicating whether the value of the first argument is less than or equal to that of the second argument.
-    public static func <= (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { }
+    public static func <= (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { } { }
 
     /// Returns a Boolean value indicating whether the value of the first argument is greater than that of the second argument.
-    public static func > (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { }
+    public static func > (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { } { }
 
     /// Returns a Boolean value indicating whether the value of the first argument is greater than or equal to that of the second argument.
-    public static func >= (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { }
+    public static func >= (lhs: ContentSizeCategory, rhs: ContentSizeCategory) -> Bool { } { }
 }
 
 extension ContentSizeCategory {
@@ -4098,7 +3790,7 @@ extension ContentSizeCategory {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiSizeCategory: UIContentSizeCategory) { }
+    public init?(_ uiSizeCategory: UIContentSizeCategory) { } { }
 }
 
 /// A container for views that you present as menu items in a contextual menu
@@ -4117,7 +3809,7 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 	/// - Parameter menuItems: The builder of menu items to build your context menu.
 	///
 	/// - SeeAlso: contextMenu(menuItems:)
-    public init(@ViewBuilder menuItems: () -> MenuItems) { }
+    public init(@ViewBuilder menuItems: () -> MenuItems) { } { }
 }
 
 /// A list of spaces for converting between different frames of reference on a screen.
@@ -4130,17 +3822,17 @@ public enum CoordinateSpace {
     /// The coordinate space representing the current view.
     case local
 
-    /// A coordinate space chosen by the ``Hashable`` parameter.
+    /// A coordinate space chosen by the ~~Hashable~~ parameter.
     case named(AnyHashable)
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension CoordinateSpace {
 
-	/// Whether or not the coordinate space is ``CoordinateSpace.global``
+	/// Whether or not the coordinate space is ~~CoordinateSpace.global~~
     public var isGlobal: Bool { get }
 
-    /// Whether or not the coordinate space is ``CoordinateSpace.local``
+    /// Whether or not the coordinate space is ~~CoordinateSpace.local~~
     public var isLocal: Bool { get }
 }
 
@@ -4160,7 +3852,7 @@ extension CoordinateSpace : Equatable, Hashable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -4170,7 +3862,7 @@ extension CoordinateSpace : Equatable, Hashable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (lhs: CoordinateSpace, rhs: CoordinateSpace) -> Bool { }
+    public static func == (lhs: CoordinateSpace, rhs: CoordinateSpace) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -4197,7 +3889,7 @@ public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : Cu
 @available(watchOS, unavailable)
 public struct DatePicker<Label> : View where Label : View {
 
-	/// A type alias for the ``DatePickerComponents`` option set used in `DatePicker`.
+	/// A type alias for the ~~DatePickerComponents~~ option set used in `DatePicker`.
     public typealias Components = DatePickerComponents
 
     /// The content and behavior of the view.
@@ -4224,7 +3916,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
+    public init(selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { } { }
 
     /// Creates an instance that selects a `Date` in a closed range.
     ///
@@ -4236,7 +3928,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
+    public init(selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { } { }
 
     /// Creates an instance that selects a `Date` on or after some start date.
     ///
@@ -4248,7 +3940,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
+    public init(selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { } { }
 
     /// Creates an instance that selects a `Date` on or before some end date.
     ///
@@ -4260,7 +3952,7 @@ extension DatePicker {
     ///   - label: A view that describes the use of the date.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
+    public init(selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, *)
@@ -4278,7 +3970,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { } { }
 
     /// Creates an instance that selects a `Date` in a closed range.
     ///
@@ -4291,7 +3983,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { } { }
 
     /// Creates an instance that selects a `Date` on or after some start date.
     ///
@@ -4304,7 +3996,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { } { }
 
     /// Creates an instance that selects a `Date` on or before some end date.
     ///
@@ -4317,7 +4009,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { } { }
 
     /// Creates an instance that selects a `Date` within the given range.
     ///
@@ -4328,7 +4020,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
+    public init<S>(_ title: S, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { } { }
 
     /// Creates an instance that selects a `Date` in a closed range.
     ///
@@ -4340,7 +4032,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
+    public init<S>(_ title: S, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { } { }
 
     /// Creates an instance that selects a `Date` on or after some start date.
     ///
@@ -4352,7 +4044,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
+    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { } { }
 
     /// Creates an instance that selects a `Date` on or before some end date.
     ///
@@ -4364,7 +4056,7 @@ extension DatePicker where Label == Text {
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
+    public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { } { }
 }
 
 /// An efficient option set for the components of a date picker.
@@ -4406,7 +4098,7 @@ public struct DatePickerComponents : OptionSet {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    public init(rawValue: UInt) { }
+    public init(rawValue: UInt) { } { }
 
     /// Displays hour and minute components based on the locale
     public static let hourAndMinute: DatePickerComponents
@@ -4445,26 +4137,26 @@ public protocol DatePickerStyle {
 /// platform. iOS uses the borderless button style by default, whereas macOS,
 /// tvOS, and watchOS use the bordered button style.
 ///
-/// If you create a button inside a container, like a ``List``, the style
+/// If you create a button inside a container, like a ~~List~~, the style
 /// resolves to the recommended style for buttons inside that container for that
 /// specific platform.
 ///
 /// You can override a button's style. To apply the default style to a button,
-/// or to a view that contains buttons, use the ``View/buttonStyle(_:)-66fbx``
+/// or to a view that contains buttons, use the ~~View/buttonStyle(_:)-66fbx~~
 /// modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultButtonStyle : PrimitiveButtonStyle {
 
     /// Creates a default button style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a button.
     ///
-    /// The system calls this method for each ``Button`` instance in a view
+    /// The system calls this method for each ~~Button~~ instance in a view
     /// hierarchy where this style is the current button style.
     ///
     /// - Parameter configuration : The properties of the button.
-    public func makeBody(configuration: DefaultButtonStyle.Configuration) -> some View { }
+    public func makeBody(configuration: DefaultButtonStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a button.
@@ -4480,7 +4172,7 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 	/// Creates a default date picker style.
 	///
 	/// - SeeAlso: DatePicker
-    public init() { }
+    public init() { } { }
 }
 
 /// The default `GroupBoxStyle`.
@@ -4492,7 +4184,7 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 	/// Creates a default group box style.
 	///
 	/// - SeeAlso: GroupBoxStyle
-    public init() { }
+    public init() { } { }
 
     /// Creates a `View` representing the body of a `GroupBox`.
     ///
@@ -4501,7 +4193,7 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
     ///
     /// This method will be called for each instance of `GroupBox` created within
     /// a view hierarchy where this style is the current `GroupBoxStyle`.
-    public func makeBody(configuration: DefaultGroupBoxStyle.Configuration) -> some View { }
+    public func makeBody(configuration: DefaultGroupBoxStyle.Configuration) -> some View { } { }
 
 
     /// A `View` representing the body of a `GroupBox`.
@@ -4513,15 +4205,15 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 public struct DefaultLabelStyle : LabelStyle {
 
     /// Creates a default label style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a label.
     ///
-    /// The system calls this method for each ``Label`` instance in a view
+    /// The system calls this method for each ~~Label~~ instance in a view
     /// hierarchy where this style is the current label style.
     ///
     /// - Parameter configuration: The properties of the label.
-    public func makeBody(configuration: DefaultLabelStyle.Configuration) -> some View { }
+    public func makeBody(configuration: DefaultLabelStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a label.
@@ -4534,7 +4226,7 @@ public struct DefaultLabelStyle : LabelStyle {
 public struct DefaultListStyle : ListStyle {
 
     /// Creates a default list style.
-    public init() { }
+    public init() { } { }
 }
 
 /// The default menu style, based on the menu's context.
@@ -4555,22 +4247,22 @@ public struct DefaultListStyle : ListStyle {
 ///     }
 ///
 /// You can override a menu's style. To apply the default style to a menu, or to
-/// a view that contains a menu, use the ``View/menuStyle(_:)`` modifier.
+/// a view that contains a menu, use the ~~View/menuStyle(_:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct DefaultMenuStyle : MenuStyle {
 
     /// Creates a default menu style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a menu.
     ///
     /// - Parameter configuration: The properties of the menu.
     ///
-    /// The system calls this method for each ``Menu`` instance in a view
+    /// The system calls this method for each ~~Menu~~ instance in a view
     /// hierarchy where this style is the current menu style.
-    public func makeBody(configuration: DefaultMenuStyle.Configuration) -> some View { }
+    public func makeBody(configuration: DefaultMenuStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a menu.
@@ -4584,7 +4276,7 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 	/// Creates a default navigation view style.
 	///
 	/// - SeeAlso: NavigationView
-    public init() { }
+    public init() { } { }
 }
 
 /// The default picker style, based on the picker's context.
@@ -4602,12 +4294,12 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// of a picker.
 ///
 /// You can override a picker’s style. To apply the default style to a picker,
-/// or to a view that contains pickers, use the ``View/pickerStyle(_:)`` modifier.
+/// or to a view that contains pickers, use the ~~View/pickerStyle(_:)~~ modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultPickerStyle : PickerStyle {
 
     /// Creates a default picker style.
-    public init() { }
+    public init() { } { }
 }
 
 /// The default progress view style in the current context of the view being
@@ -4620,7 +4312,7 @@ public struct DefaultPickerStyle : PickerStyle {
 public struct DefaultProgressViewStyle : ProgressViewStyle {
 
     /// Creates a default progress view style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view representing the body of a progress view.
     ///
@@ -4632,7 +4324,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
-    public func makeBody(configuration: DefaultProgressViewStyle.Configuration) -> some View { }
+    public func makeBody(configuration: DefaultProgressViewStyle.Configuration) -> some View { } { }
 
 
     /// A view representing the body of a progress view.
@@ -4646,7 +4338,7 @@ public struct DefaultTabViewStyle : TabViewStyle {
 	/// Creates a default tab view style.
 	///
 	/// - SeeAlso: TabView
-    public init() { }
+    public init() { } { }
 }
 
 /// The default text field style.
@@ -4654,7 +4346,7 @@ public struct DefaultTabViewStyle : TabViewStyle {
 public struct DefaultTextFieldStyle : TextFieldStyle {
 
 	/// Creates a default text field style.
-    public init() { }
+    public init() { } { }
 }
 
 /// The default toggle style.
@@ -4666,24 +4358,24 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 /// - For the Mac idiom, the default toggle style is a checkbox.
 /// - For the TV idom, the default toggle style is a button.
 ///
-/// If you create a toggle inside a container, such as a ``List``, the toggle
+/// If you create a toggle inside a container, such as a ~~List~~, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
 /// style to a toggle, or to a view that contains toggles, use the
-/// ``View/toggleStyle(_:)`` modifier. To revert a custom-styled toggle to the
+/// ~~View/toggleStyle(_:)~~ modifier. To revert a custom-styled toggle to the
 ///  default, use `toggleStyle(DefaultToggleStyle())`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultToggleStyle : ToggleStyle {
 
     /// Creates a default toggle style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a toggle.
     ///
-    /// The system calls this method for each ``Toggle`` instance in a view
+    /// The system calls this method for each ~~Toggle~~ instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
     /// - Parameter configuration: The properties of the toggle.
-    public func makeBody(configuration: DefaultToggleStyle.Configuration) -> some View { }
+    public func makeBody(configuration: DefaultToggleStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the appearance and interaction of a toggle.
@@ -4730,7 +4422,7 @@ public struct DisclosureGroup<Label, Content> : View where Label : View, Content
     /// - Parameters:
     ///   - content: The content shown when the disclosure group expands.
     ///   - label: A view that describes the content of the disclosure group.
-    public init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label) { }
+    public init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label) { } { }
 
     /// Creates a disclosure group with the given label and content views, and
     /// a binding to the expansion state (expanded or collapsed).
@@ -4740,7 +4432,7 @@ public struct DisclosureGroup<Label, Content> : View where Label : View, Content
     ///    expansion state (expanded or collapsed).
     ///   - content: The content shown when the disclosure group expands.
     ///   - label: A view that describes the content of the disclosure group.
-    public init(isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label) { }
+    public init(isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content, @ViewBuilder label: () -> Label) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -4764,7 +4456,7 @@ extension DisclosureGroup where Label == Text {
     ///   - titleKey: The key for the localized label of `self` that describes
     ///     the content of the disclosure group.
     ///   - content: The content shown when the disclosure group expands.
-    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: @escaping () -> Content) { }
+    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: @escaping () -> Content) { } { }
 
     /// Creates a disclosure group, using a provided localized string key to
     /// create a text view for the label, and a binding to the expansion state
@@ -4776,7 +4468,7 @@ extension DisclosureGroup where Label == Text {
     ///   - isExpanded: A binding to a Boolean value that determines the group's
     ///    expansion state (expanded or collapsed).
     ///   - content: The content shown when the disclosure group expands.
-    public init(_ titleKey: LocalizedStringKey, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) { }
+    public init(_ titleKey: LocalizedStringKey, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) { } { }
 
     /// Creates a disclosure group, using a provided string to create a
     /// text view for the label.
@@ -4784,7 +4476,7 @@ extension DisclosureGroup where Label == Text {
     /// - Parameters:
     ///   - label: A description of the content of the disclosure group.
     ///   - content: The content shown when the disclosure group expands.
-    public init<S>(_ label: S, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
+    public init<S>(_ label: S, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { } { }
 
     /// Creates a disclosure group, using a provided string to create a
     /// text view for the label, and a binding to the expansion state (expanded
@@ -4795,55 +4487,18 @@ extension DisclosureGroup where Label == Text {
     ///   - isExpanded: A binding to a Boolean value that determines the group's
     ///    expansion state (expanded or collapsed).
     ///   - content: The content shown when the disclosure group expands.
-    public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { }
+    public init<S>(_ label: S, isExpanded: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) where S : StringProtocol { } { }
 }
 
-/// A divider that visually separates views in a stack.
+/// A visual element that can be used to separate other content.
 ///
-/// The `Divider` in iOS is either a horizontal or a vertical `1pt` thick line. The color and height of a `Divider` is determined by the system, and cannot be overriden. The system is responsible for adapting the appearance of `Divider` as best appropriate for the host platform.
-///
-/// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack. When not in a stack, the divider stretches across the horizontal axis.
-///
-/// For example, use a `Divider` in a `VStack` to create a horizontal line between vertically laid out elements:
-///
-/// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///   var body: some View {
-///     VStack {
-///       Text("My Awesome Book")
-///
-///       Divider()
-///
-///       Text("My Name")
-///     }
-///   }
-/// }
-/// ```
-///
-/// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
-///
-/// ![Divider Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-2.png)
-///
-/// ```
-/// struct ExampleView: View {
-///   var body: some View {
-///     HStack {
-///       Text("This is a line of text")
-///
-///       Divider()
-///
-///       Text("This is an unrelated line of text")
-///     }
-///   }
-/// }
-/// ```
+/// When contained in a stack, the divider extends across the minor axis of the
+/// stack, or horizontally when not in a stack.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
-	/// Creates a new ``Divider``.
-    public init() { }
+	/// Creates a new ~~Divider~~.
+    public init() { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -4865,14 +4520,14 @@ public struct DocumentGroup<Document, Content> : Scene where Content : View {
     /// scene from primitive scenes that SwiftUI provides, as well as other
     /// scenes that you've defined.
     ///
-    /// Swift infers the scene's ``SwiftUI/Scene/Body-swift.associatedtype``
+    /// Swift infers the scene's ~~SwiftUI/Scene/Body-swift.associatedtype~~
     /// associated type based on the contents of the `body` property.
     public var body: some Scene { get }
 
     /// The type of scene that represents the body of this scene.
     ///
     /// When you create a custom scene, Swift infers this type from your
-    /// implementation of the required ``SwiftUI/Scene/body-swift.property``
+    /// implementation of the required ~~SwiftUI/Scene/body-swift.property~~
     /// property.
     public typealias Body = some Scene
 }
@@ -4888,7 +4543,7 @@ extension DocumentGroup where Document : FileDocument {
     ///   - newDocument: The initial document used when the user creates
     ///     a new document.
     ///   - editor: The editing UI for the provided document.
-    public init(newDocument: @autoclosure @escaping () -> Document, @ViewBuilder editor: @escaping (FileDocumentConfiguration<Document>) -> Content) { }
+    public init(newDocument: @autoclosure @escaping () -> Document, @ViewBuilder editor: @escaping (FileDocumentConfiguration<Document>) -> Content) { } { }
 
     /// Creates a document group that is able to view file documents.
     ///
@@ -4897,7 +4552,7 @@ extension DocumentGroup where Document : FileDocument {
     ///   - viewer: The viewing UI for the provided document.
     ///
     /// - See Also: `CFBundleTypeRole` with a value of "Viewer"
-    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (FileDocumentConfiguration<Document>) -> Content) { }
+    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (FileDocumentConfiguration<Document>) -> Content) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -4920,7 +4575,7 @@ extension DocumentGroup where Document : ReferenceFileDocument {
     /// Undo support is not automatically provided for this construction of
     /// a `DocumentGroup`, and any updates to the document by the editor view
     /// hierarchy are expected to register undo operations when appropriate.
-    public init(newDocument: @escaping () -> Document, @ViewBuilder editor: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content) { }
+    public init(newDocument: @escaping () -> Document, @ViewBuilder editor: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content) { } { }
 
     /// Creates a document group that is able to view reference file documents.
     ///
@@ -4932,7 +4587,7 @@ extension DocumentGroup where Document : ReferenceFileDocument {
     /// environment object for its subhierarchy.
     ///
     /// - See Also: `CFBundleTypeRole` with a value of "Viewer"
-    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content) { }
+    public init(viewing documentType: Document.Type, @ViewBuilder viewer: @escaping (ReferenceFileDocumentConfiguration<Document>) -> Content) { } { }
 }
 
 /// A navigation view style represented by a primary view stack that
@@ -4942,15 +4597,15 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a double column navigation view style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A dragging motion that invokes an action as the drag-event sequence changes.
 ///
 /// To recognize a drag gesture on a view, create and configure the gesture, and
-/// then add it to the view using the ``View/gesture(_:including:)`` modifier.
+/// then add it to the view using the ~~View/gesture(_:including:)~~ modifier.
 ///
-/// Add a drag gesture to a ``Circle`` and change its color while the user
+/// Add a drag gesture to a ~~Circle~~ and change its color while the user
 /// performs the drag gesture:
 ///
 ///     struct DragGestureView: View {
@@ -5007,7 +4662,7 @@ public struct DragGesture : Gesture {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: DragGesture.Value, b: DragGesture.Value) -> Bool { }
+        public static func == (a: DragGesture.Value, b: DragGesture.Value) -> Bool { } { }
     }
 
     /// The minimum dragging distance before the gesture succeeds.
@@ -5024,7 +4679,7 @@ public struct DragGesture : Gesture {
     ///     succeed.
     ///   - coordinateSpace: The coordinate space of the dragging gesture's
     ///     location.
-    public init(minimumDistance: CGFloat = 10, coordinateSpace: CoordinateSpace = .local) { }
+    public init(minimumDistance: CGFloat = 10, coordinateSpace: CoordinateSpace = .local) { } { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -5033,14 +4688,14 @@ public struct DragGesture : Gesture {
 /// An interface that you implement to interact with a drop operation in a view
 /// modified to accept drops.
 ///
-/// The ``DropDelegate`` protocol provides a comprehensive and flexible way to
+/// The ~~DropDelegate~~ protocol provides a comprehensive and flexible way to
 /// interact with a drop operation. Specify a drop delegate when you modify a
-/// view to accept drops with the ``View/onDrop(of:delegate:)-6lin8`` method.
+/// view to accept drops with the ~~View/onDrop(of:delegate:)-6lin8~~ method.
 ///
 /// Alternatively, for simple drop cases that don't require the full
 /// functionality of a drop delegate, you can modify a view to accept drops
-/// using the ``View/onDrop(of:isTargeted:perform:)-f15m`` or the
-/// ``View/onDrop(of:isTargeted:perform:)-982eu`` method. These methods handle the
+/// using the ~~View/onDrop(of:isTargeted:perform:)-f15m~~ or the
+/// ~~View/onDrop(of:isTargeted:perform:)-982eu~~ method. These methods handle the
 /// drop using a closure you provide as part of the modifier.
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -5052,7 +4707,7 @@ public protocol DropDelegate {
     ///
     /// Specify the expected types when you apply the drop modifier to the view.
     /// The default implementation returns `true`.
-    func validateDrop(info: DropInfo) -> Bool { }
+    func validateDrop(info: DropInfo) -> Bool { } { }
 
     /// Tells the delegate it can request the item provider data from the given
     /// information.
@@ -5060,27 +4715,27 @@ public protocol DropDelegate {
     /// Incorporate the received data into your app's data model as appropriate.
     /// - Returns: A Boolean that is `true` if the drop was successful, `false`
     ///   otherwise.
-    func performDrop(info: DropInfo) -> Bool { }
+    func performDrop(info: DropInfo) -> Bool { } { }
 
     /// Tells the delegate a validated drop has entered the modified view.
     ///
     /// The default implementation does nothing.
-    func dropEntered(info: DropInfo) { }
+    func dropEntered(info: DropInfo) { } { }
 
     /// Tells the delegate that a validated drop moved inside the modified view.
     ///
     /// Use this method to return a drop proposal containing the operation the
-    /// delegate intends to perform at the drop ``DropInfo/location``. The
+    /// delegate intends to perform at the drop ~~DropInfo/location~~. The
     /// default implementation of this method returns `nil`, which tells the
     /// drop to use the last valid returned value or else
-    /// ``DropOperation/copy``.
-    func dropUpdated(info: DropInfo) -> DropProposal? { }
+    /// ~~DropOperation/copy~~.
+    func dropUpdated(info: DropInfo) -> DropProposal? { } { }
 
     /// Tells the delegate a validated drop operation has exited the modified
     /// view.
     ///
     /// The default implementation does nothing.
-    func dropExited(info: DropInfo) { }
+    func dropExited(info: DropInfo) { } { }
 }
 
 @available(iOS 13.4, macOS 10.15, *)
@@ -5093,27 +4748,27 @@ extension DropDelegate {
     ///
     /// Specify the expected types when you apply the drop modifier to the view.
     /// The default implementation returns `true`.
-    public func validateDrop(info: DropInfo) -> Bool { }
+    public func validateDrop(info: DropInfo) -> Bool { } { }
 
     /// Tells the delegate a validated drop has entered the modified view.
     ///
     /// The default implementation does nothing.
-    public func dropEntered(info: DropInfo) { }
+    public func dropEntered(info: DropInfo) { } { }
 
     /// Tells the delegate that a validated drop moved inside the modified view.
     ///
     /// Use this method to return a drop proposal containing the operation the
-    /// delegate intends to perform at the drop ``DropInfo/location``. The
+    /// delegate intends to perform at the drop ~~DropInfo/location~~. The
     /// default implementation of this method returns `nil`, which tells the
     /// drop to use the last valid returned value or else
-    /// ``DropOperation/copy``.
-    public func dropUpdated(info: DropInfo) -> DropProposal? { }
+    /// ~~DropOperation/copy~~.
+    public func dropUpdated(info: DropInfo) -> DropProposal? { } { }
 
     /// Tells the delegate a validated drop operation has exited the modified
     /// view.
     ///
     /// The default implementation does nothing.
-    public func dropExited(info: DropInfo) { }
+    public func dropExited(info: DropInfo) { } { }
 }
 
 /// The current state of a drop.
@@ -5131,7 +4786,7 @@ public struct DropInfo {
     /// - Parameter contentTypes: The uniform type identifiers to query for.
     /// - Returns: Whether at least one item conforms to one of `contentTypes`.
     @available(iOS 14.0, macOS 11.0, *)
-    public func hasItemsConforming(to contentTypes: [UTType]) -> Bool { }
+    public func hasItemsConforming(to contentTypes: [UTType]) -> Bool { } { }
 
     /// Finds item providers that conform to at least one of the specified
     /// uniform type identifiers.
@@ -5141,7 +4796,7 @@ public struct DropInfo {
     /// - Parameter contentTypes: The uniform type identifiers to query for.
     /// - Returns: The item providers that conforms to `contentTypes`.
     @available(iOS 14.0, macOS 11.0, *)
-    public func itemProviders(for contentTypes: [UTType]) -> [NSItemProvider] { }
+    public func itemProviders(for contentTypes: [UTType]) -> [NSItemProvider] { } { }
 }
 
 @available(iOS, introduced: 13.4, deprecated: 100000.0, message: "Provide `UTType`s as the `types` instead.")
@@ -5152,13 +4807,13 @@ extension DropInfo {
 
     /// Returns whether at least one item conforms to at least one of the
     /// specified uniform type identifiers.
-    public func hasItemsConforming(to types: [String]) -> Bool { }
+    public func hasItemsConforming(to types: [String]) -> Bool { } { }
 
     /// Returns an Array of items that each conform to at least one of the
     /// specified uniform type identifiers.
     ///
     /// This function is only valid during the performDrop() action.
-    public func itemProviders(for types: [String]) -> [NSItemProvider] { }
+    public func itemProviders(for types: [String]) -> [NSItemProvider] { } { }
 }
 
 /// Operation types that determine how a drag and drop session resolves when the
@@ -5188,7 +4843,7 @@ public enum DropOperation {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: DropOperation, b: DropOperation) -> Bool { }
+    public static func == (a: DropOperation, b: DropOperation) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -5212,7 +4867,7 @@ public enum DropOperation {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.4, macOS 10.15, *)
@@ -5241,23 +4896,23 @@ public struct DropProposal {
     /// - Parameter operation: The drop operation to associate with the proposal.
     ///
     /// - SeeAlso: DropOperation
-    public init(operation: DropOperation) { }
+    public init(operation: DropOperation) { } { }
 }
 
 /// An interface for a stored variable that updates an external property of a
 /// view.
 ///
 /// The view gives values to these properties prior to recomputing the view's
-/// ``View/body-swift.property``.
+/// ~~View/body-swift.property~~.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol DynamicProperty {
 
     /// Updates the underlying value of the stored value.
     ///
     /// SwiftUI calls this function before rending a view's
-    /// ``View/body-swift.property`` to ensure the view has the most recent
+    /// ~~View/body-swift.property~~ to ensure the view has the most recent
     /// value.
-    mutating func update() { }
+    mutating func update() { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5266,9 +4921,9 @@ extension DynamicProperty {
     /// Updates the underlying value of the stored value.
     ///
     /// SwiftUI calls this function before rending a view's
-    /// ``View/body-swift.property`` to ensure the view has the most recent
+    /// ~~View/body-swift.property~~ to ensure the view has the most recent
     /// value.
-    public mutating func update() { }
+    public mutating func update() { } { }
 }
 
 /// A type of view that generates views from an underlying collection of data.
@@ -5294,7 +4949,7 @@ extension DynamicViewContent {
     ///
     /// - Returns: A view that calls `action` when elements are deleted from the
     ///   original view.
-    @inlinable public func onDelete(perform action: ((IndexSet) -> Void)?) -> some DynamicViewContent { }
+    @inlinable public func onDelete(perform action: ((IndexSet) -> Void)?) -> some DynamicViewContent { } { }
 
 }
 
@@ -5311,7 +4966,7 @@ extension DynamicViewContent {
     ///
     /// - Returns: A view that calls `action` when elements are moved within the
     ///   original view.
-    @inlinable public func onMove(perform action: ((IndexSet, Int) -> Void)?) -> some DynamicViewContent { }
+    @inlinable public func onMove(perform action: ((IndexSet, Int) -> Void)?) -> some DynamicViewContent { } { }
 
 }
 
@@ -5333,7 +4988,7 @@ extension DynamicViewContent {
     /// - Returns: A view that calls `action` when elements are inserted into
     ///   the original view.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public func onInsert(of supportedContentTypes: [UTType], perform action: @escaping (Int, [NSItemProvider]) -> Void) -> some DynamicViewContent { }
+    public func onInsert(of supportedContentTypes: [UTType], perform action: @escaping (Int, [NSItemProvider]) -> Void) -> some DynamicViewContent { } { }
 
 
     /// Sets the insert action for the dynamic view.
@@ -5353,7 +5008,7 @@ extension DynamicViewContent {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Provide `UTType`s as the `supportedContentTypes` instead.")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Provide `UTType`s as the `supportedContentTypes` instead.")
     @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Provide `UTType`s as the `supportedContentTypes` instead.")
-    public func onInsert(of acceptedTypeIdentifiers: [String], perform action: @escaping (Int, [NSItemProvider]) -> Void) -> some DynamicViewContent { }
+    public func onInsert(of acceptedTypeIdentifiers: [String], perform action: @escaping (Int, [NSItemProvider]) -> Void) -> some DynamicViewContent { } { }
 
 }
 
@@ -5415,7 +5070,7 @@ extension DynamicViewContent {
         ///   of `rawValue` potentially represents an element of the option set,
         ///   though raw values may include bits that are not defined as distinct
         ///   values of the `OptionSet` type.
-        public init(rawValue: Int8) { }
+        public init(rawValue: Int8) { } { }
 
         /// The edge set's top edge.
         public static let top: Edge.Set
@@ -5439,7 +5094,7 @@ extension DynamicViewContent {
         public static let vertical: Edge.Set
 
         /// Creates an instance containing just `e`
-        public init(_ e: Edge) { }
+        public init(_ e: Edge) { } { }
 
         /// The type of the elements of an array literal.
         public typealias ArrayLiteralElement = Edge.Set.Element
@@ -5477,7 +5132,7 @@ extension DynamicViewContent {
     ///     // Prints "nil"
     ///
     /// - Parameter rawValue: The raw value to use for the new instance.
-    public init?(rawValue: Int8) { }
+    public init?(rawValue: Int8) { } { }
 
     /// The corresponding value of the raw type.
     ///
@@ -5538,10 +5193,10 @@ extension Edge : RawRepresentable {
     ///   - leading: Inset distance from the leading edge.
     ///   - bottom: Inset distance from the bottom edge.
     ///   - trailing: Inset distance from the trailing edge.
-    @inlinable public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat) { }
+    @inlinable public init(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat) { } { }
 
     /// Creates a new `EdgeInsets` with zero insets on all edges.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -5551,7 +5206,7 @@ extension Edge : RawRepresentable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: EdgeInsets, b: EdgeInsets) -> Bool { }
+    public static func == (a: EdgeInsets, b: EdgeInsets) -> Bool { } { }
 }
 
 extension EdgeInsets {
@@ -5559,7 +5214,7 @@ extension EdgeInsets {
     /// Create edge insets from the equivalent NSDirectionalEdgeInsets.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
     @available(watchOS, unavailable)
-    public init(_ nsEdgeInsets: NSDirectionalEdgeInsets) { }
+    public init(_ nsEdgeInsets: NSDirectionalEdgeInsets) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5573,35 +5228,6 @@ extension EdgeInsets : Animatable {
 }
 
 /// A button that toggles the edit mode for the current edit scope.
-///
-/// An `EditButton` toggles the `EditMode` (passed via ``EnvironmentValues/editMode``) for content within a container that supports `EditMode.active`.
-/// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
-///
-/// ![EditButton Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/EditButton-example-1.gif)
-///
-///```
-/// struct ExampleView: View {
-///     @State var fruits = ["🍌", "🍏", "🍑"]
-///
-///     var body: some View {
-///         NavigationView {
-///             List {
-///                 ForEach(fruits, id: \.self) { fruit in
-///                     Text(fruit)
-///                 }
-///                 .onDelete { offsets in
-///                     fruits.remove(atOffsets: offsets)
-///                 }
-///             }
-///             .toolbar {
-///                 EditButton()
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// The title and appearance of an `EditButton` is determined by the system and cannot be overriden.
 @available(iOS 13.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -5609,7 +5235,7 @@ extension EdgeInsets : Animatable {
 public struct EditButton : View {
 
 	/// Creates an edit button.
-    public init() { }
+    public init() { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -5651,7 +5277,7 @@ public enum EditMode {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: EditMode, b: EditMode) -> Bool { }
+    public static func == (a: EditMode, b: EditMode) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -5675,7 +5301,7 @@ public enum EditMode {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.0, tvOS 13.0, *)
@@ -5699,10 +5325,10 @@ extension EditMode : Hashable {
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// Creates an ellipse shape that stretches to fill its parent view.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -5718,7 +5344,7 @@ extension EditMode : Hashable {
 extension Ellipse : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
+    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { } { }
 
 
     /// The type of the inset shape.
@@ -5733,7 +5359,7 @@ extension Ellipse : InsettableShape {
 @frozen public struct EmptyAnimatableData : VectorArithmetic {
 
 	/// Creates an empty animatable data structure.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The zero value.
     ///
@@ -5746,7 +5372,7 @@ extension Ellipse : InsettableShape {
     /// - Parameters:
     ///   - lhs: The first value to add.
     ///   - rhs: The second value to add.
-    @inlinable public static func += (lhs: inout EmptyAnimatableData, rhs: EmptyAnimatableData) { }
+    @inlinable public static func += (lhs: inout EmptyAnimatableData, rhs: EmptyAnimatableData) { } { }
 
     /// Subtracts the second value from the first and stores the difference in the
     /// left-hand-side variable.
@@ -5754,7 +5380,7 @@ extension Ellipse : InsettableShape {
     /// - Parameters:
     ///   - lhs: A numeric value.
     ///   - rhs: The value to subtract from `lhs`.
-    @inlinable public static func -= (lhs: inout EmptyAnimatableData, rhs: EmptyAnimatableData) { }
+    @inlinable public static func -= (lhs: inout EmptyAnimatableData, rhs: EmptyAnimatableData) { } { }
 
     /// Adds two values and produces their sum.
     ///
@@ -5776,7 +5402,7 @@ extension Ellipse : InsettableShape {
     /// - Parameters:
     ///   - lhs: The first value to add.
     ///   - rhs: The second value to add.
-    @inlinable public static func + (lhs: EmptyAnimatableData, rhs: EmptyAnimatableData) -> EmptyAnimatableData { }
+    @inlinable public static func + (lhs: EmptyAnimatableData, rhs: EmptyAnimatableData) -> EmptyAnimatableData { } { }
 
     /// Subtracts one value from another and produces their difference.
     ///
@@ -5798,10 +5424,10 @@ extension Ellipse : InsettableShape {
     /// - Parameters:
     ///   - lhs: A numeric value.
     ///   - rhs: The value to subtract from `lhs`.
-    @inlinable public static func - (lhs: EmptyAnimatableData, rhs: EmptyAnimatableData) -> EmptyAnimatableData { }
+    @inlinable public static func - (lhs: EmptyAnimatableData, rhs: EmptyAnimatableData) -> EmptyAnimatableData { } { }
 
     /// Multiplies each component of this value by the given value.
-    @inlinable public mutating func scale(by rhs: Double) { }
+    @inlinable public mutating func scale(by rhs: Double) { } { }
 
     /// The dot-product of this animatable data instance with itself.
     @inlinable public var magnitudeSquared: Double { get }
@@ -5814,7 +5440,7 @@ extension Ellipse : InsettableShape {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: EmptyAnimatableData, b: EmptyAnimatableData) -> Bool { }
+    public static func == (a: EmptyAnimatableData, b: EmptyAnimatableData) -> Bool { } { }
 }
 
 /// An empty group of commands.
@@ -5824,7 +5450,7 @@ extension Ellipse : InsettableShape {
 public struct EmptyCommands : Commands {
 
     /// Creates an empty group of commands.
-    public init() { }
+    public init() { } { }
 
     /// The type of command group representing the body of this command group.
     public typealias Body = Never
@@ -5834,7 +5460,7 @@ public struct EmptyCommands : Commands {
 /// modifiers at compile time.
 ///
 /// Use the empty modifier to switch modifiers at compile time during
-/// development. In the example below, in a debug build the ``Text``
+/// development. In the example below, in a debug build the ~~Text~~
 /// view inside `ContentView` has a yellow background and a red border.
 /// A non-debug build reflects the default system, or container supplied
 /// appearance.
@@ -5872,88 +5498,21 @@ public struct EmptyCommands : Commands {
     public typealias Body = Never
 
     /// Creates a new modifier that leaves the view unchanged.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it.
-    public func body(content: EmptyModifier.Content) -> EmptyModifier.Body { }
+    public func body(content: EmptyModifier.Content) -> EmptyModifier.Body { } { }
 }
 
-/// A ``View`` that displays nothing.
-///
-/// `EmptyView` is a special view that displays nothing and occupies no space.
-/// Modifying an `EmptyView` does nothing.
-///
-/// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
-///
-/// ![EmptyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         VStack {
-///             Text("Hello")
-///
-///             EmptyView()
-///                 .frame(width: 1000, height: 1000)
-///                 .background(Color.red)
-///
-///             Text("World")
-///         }
-///     }
-/// }
-/// ```
-///
-/// `EmptyView` has many uses. For example, it can be used to instruct SwiftUI that your UI control does not want a label:
-///
-/// ```
-/// Toggle(isOn: $myBooleanValue, label: { EmptyView() })
-/// ```
-///
-/// `EmptyView` can also be used in conjunction with `GeometryReader`:
-///
-///  ![EmptyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-2.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var width: CGFloat? = nil
-///
-///     var body: some View {
-///         Text("Hello, world!").background(
-///             GeometryReader { geometry -> EmptyView in
-///                 DispatchQueue.main.async {
-///                     width = geometry.size.width
-///                 }
-///
-///                 return EmptyView()
-///             }
-///         )
-///     }
-/// }
-/// ```
-/// Account for `EmptyView` when building your own custom UI controls.
-/// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
-/// ```
-/// struct MyCustomControl<Label: View, Content: View>: View {
-///     let label: Label
-///     let content: Content
-///
-///     var body: some View {
-///         HStack {
-///             label.accessibility(hidden: label is EmptyView)
-///
-///             content
-///         }
-///     }
-/// }
-/// ```
+/// A ~~View~~ which displays nothing.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyView : View {
 
 	/// Creates a new `EmptyView`.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -5969,7 +5528,7 @@ public struct EmptyCommands : Commands {
 @frozen public struct EmptyWidgetConfiguration : WidgetConfiguration {
 
 	/// Creates an empty widget configuration.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The type of widget configuration representing the body of
     /// this configuration.
@@ -5983,15 +5542,15 @@ public struct EmptyCommands : Commands {
 ///
 /// Use the `Environment` property wrapper to read a value
 /// stored in a view's environment. Indicate the value to read using an
-/// ``EnvironmentValues`` key path in the property declaration. For example, you
+/// ~~EnvironmentValues~~ key path in the property declaration. For example, you
 /// can create a property that reads the color scheme of the current
-/// view using the key path of the ``EnvironmentValues/colorScheme``
+/// view using the key path of the ~~EnvironmentValues/colorScheme~~
 /// property:
 ///
 ///     @Environment(\.colorScheme) var colorScheme: ColorScheme
 ///
 /// You can condition a view's content on the associated value, which
-/// you read from the declared property's ``wrappedValue``. As with any property
+/// you read from the declared property's ~~wrappedValue~~. As with any property
 /// wrapper, you access the wrapped value by directly referring to the property:
 ///
 ///     if colorScheme == .dark { // Checks the wrapped value.
@@ -6008,18 +5567,18 @@ public struct EmptyCommands : Commands {
 /// value. SwiftUI updates some environment values automatically based on system
 /// settings and provides reasonable defaults for others. You can override some
 /// of these, as well as set custom environment values that you define,
-/// using the ``View/environment(_:_:)`` view modifier.
+/// using the ~~View/environment(_:_:)~~ view modifier.
 ///
 /// For the complete list of environment values provided by SwiftUI, see the
-/// properties of the ``EnvironmentValues`` structure. For information about
-/// creating custom environment values, see the ``EnvironmentKey`` protocol.
+/// properties of the ~~EnvironmentValues~~ structure. For information about
+/// creating custom environment values, see the ~~EnvironmentKey~~ protocol.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct Environment<Value> : DynamicProperty {
 
     /// Creates an environment property to read the specified key path.
     ///
     /// Don’t call this initializer directly. Instead, declare a property
-    /// with the ``Environment`` property wrapper, and provide the key path of
+    /// with the ~~Environment~~ property wrapper, and provide the key path of
     /// the environment value that the property should reflect:
     ///
     ///     struct MyView: View {
@@ -6031,17 +5590,17 @@ public struct EmptyCommands : Commands {
     /// SwiftUI automatically updates any parts of `MyView` that depend on
     /// the property when the associated environment value changes.
     /// You can't modify the environment value using a property like this.
-    /// Instead, use the ``View/environment(_:_:)`` view modifier on a view to
+    /// Instead, use the ~~View/environment(_:_:)~~ view modifier on a view to
     /// set a value for a view hierarchy.
     ///
     /// - Parameter keyPath: A key path to a specific resulting value.
-    @inlinable public init(_ keyPath: KeyPath<EnvironmentValues, Value>) { }
+    @inlinable public init(_ keyPath: KeyPath<EnvironmentValues, Value>) { } { }
 
     /// The current value of the environment property.
     ///
     /// The wrapped value property provides primary access to the value's data.
     /// However, you don't access `wrappedValue` directly. Instead, you read the
-    /// property variable created with the ``Environment`` property wrapper:
+    /// property variable created with the ~~Environment~~ property wrapper:
     ///
     ///     @Environment(\.colorScheme) var colorScheme: ColorScheme
     ///
@@ -6059,15 +5618,15 @@ public struct EmptyCommands : Commands {
 /// A key for accessing values in the environment.
 ///
 /// You can create custom environment values by extending the
-/// ``EnvironmentValues`` structure with new properties.
+/// ~~EnvironmentValues~~ structure with new properties.
 /// First declare a new environment key type and specify a value for the
-/// required ``defaultValue`` property:
+/// required ~~defaultValue~~ property:
 ///
 ///     private struct MyEnvironmentKey: EnvironmentKey {
 ///         static let defaultValue: String = "Default value"
 ///     }
 ///
-/// The Swift compiler automatically infers the associated ``Value`` type as the
+/// The Swift compiler automatically infers the associated ~~Value~~ type as the
 /// type you specify for the default value. Then use the key to define a new
 /// environment value property:
 ///
@@ -6081,7 +5640,7 @@ public struct EmptyCommands : Commands {
 /// Clients of your environment value never use the key directly.
 /// Instead, they use the key path of your custom environment value property.
 /// To set the environment value for a view and all its subviews, add the
-/// ``View/environment(_:_:)`` view modifier to that view:
+/// ~~View/environment(_:_:)~~ view modifier to that view:
 ///
 ///     MyView()
 ///         .environment(\.myCustomValue, "Another string")
@@ -6101,7 +5660,7 @@ public struct EmptyCommands : Commands {
 ///         .myCustomValue("Another string")
 ///
 /// To read the value from inside `MyView` or one of its descendants, use the
-/// ``Environment`` property wrapper:
+/// ~~Environment~~ property wrapper:
 ///
 ///     struct MyView: View {
 ///         @Environment(\.myCustomValue) var customValue: String
@@ -6128,7 +5687,7 @@ public protocol EnvironmentKey {
 /// An environment object invalidates the current view whenever the observable
 /// object changes. If you declare a property as an environment object, be sure
 /// to set a corresponding model object on an ancestor view by calling its
-/// ``View/environmentObject(_:)`` modifier.
+/// ~~View/environmentObject(_:)~~ modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct EnvironmentObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -6148,7 +5707,7 @@ public protocol EnvironmentKey {
     ///
     /// This property provides primary access to the value's data. However, you
     /// don't access `wrappedValue` directly. Instead, you use the property
-    /// variable created with the ``EnvironmentObject`` attribute.
+    /// variable created with the ~~EnvironmentObject~~ attribute.
     ///
     /// When a mutable value changes, the new value is immediately available.
     /// However, a view displaying the value is updated asynchronously and may
@@ -6163,26 +5722,26 @@ public protocol EnvironmentKey {
     public var projectedValue: EnvironmentObject<ObjectType>.Wrapper { get }
 
     /// Creates an environment object.
-    public init() { }
+    public init() { } { }
 }
 
 /// A collection of environment values propagated through a view hierarchy.
 ///
 /// SwiftUI exposes a collection of values to your app's views in an
 /// `EnvironmentValues` structure. To read a value from the structure,
-/// declare a property using the ``Environment`` property wrapper and
+/// declare a property using the ~~Environment~~ property wrapper and
 /// specify the value's key path. For example, you can read the current locale:
 ///
 ///     @Environment(\.locale) var locale: Locale
 ///
 /// Use the property you declare to dynamically control a view's layout.
 /// SwiftUI automatically sets or updates many environment values, like
-/// ``EnvironmentValues/pixelLength``, ``EnvironmentValues/scenePhase``, or
-/// ``EnvironmentValues/locale``, based on device characteristics, system state,
-/// or user settings. For others, like ``EnvironmentValues/lineLimit``, SwiftUI
+/// ~~EnvironmentValues/pixelLength~~, ~~EnvironmentValues/scenePhase~~, or
+/// ~~EnvironmentValues/locale~~, based on device characteristics, system state,
+/// or user settings. For others, like ~~EnvironmentValues/lineLimit~~, SwiftUI
 /// provides a reasonable default value.
 ///
-/// You can set or override some values using the ``View/environment(_:_:)``
+/// You can set or override some values using the ~~View/environment(_:_:)~~
 /// view modifier:
 ///
 ///     MyView()
@@ -6194,16 +5753,16 @@ public protocol EnvironmentKey {
 ///
 /// SwiftUI provides dedicated view modifiers for setting some values, which
 /// typically makes your code easier to read. For example, rather than setting
-/// the ``EnvironmentValues/lineLimit`` value directly, as in the previous
-/// example, you should instead use the ``View/lineLimit(_:)`` modifier:
+/// the ~~EnvironmentValues/lineLimit~~ value directly, as in the previous
+/// example, you should instead use the ~~View/lineLimit(_:)~~ modifier:
 ///
 ///     MyView()
 ///         .lineLimit(2)
 ///
 /// In some cases, using a dedicated view modifier provides additional
 /// functionality. For example, you must use the
-/// ``View/preferredColorScheme(_:)`` modifier rather than setting
-/// ``EnvironmentValues/colorScheme`` directly to ensure that the new
+/// ~~View/preferredColorScheme(_:)~~ modifier rather than setting
+/// ~~EnvironmentValues/colorScheme~~ directly to ensure that the new
 /// value propagates up to the presenting container when presenting a view
 /// like a popover:
 ///
@@ -6214,7 +5773,7 @@ public protocol EnvironmentKey {
 ///         }
 ///
 /// Create custom environment values by defining a type that
-/// conforms to the ``EnvironmentKey`` protocol, and then extending the
+/// conforms to the ~~EnvironmentKey~~ protocol, and then extending the
 /// environment values structure with a new property. Use your key to get and
 /// set the value, and provide a dedicated modifier for clients to use when
 /// setting the value:
@@ -6237,26 +5796,26 @@ public protocol EnvironmentKey {
 ///     }
 ///
 /// Clients of your value then access the value in the usual way, reading it
-/// with the ``Environment`` property wrapper, and setting it with the
+/// with the ~~Environment~~ property wrapper, and setting it with the
 /// `myCustomValue` view modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct EnvironmentValues : CustomStringConvertible {
 
     /// Creates an environment values instance.
     ///
-    /// You don't typically create an instance of ``EnvironmentValues``
+    /// You don't typically create an instance of ~~EnvironmentValues~~
     /// directly. Doing so would provide access only to default values that
     /// don't update based on system settings or device characteristics.
     /// Instead, you rely on an environment values' instance
-    /// that SwiftUI manages for you when you use the ``Environment``
-    /// property wrapper and the ``View/environment(_:_:)`` view modifier.
-    public init() { }
+    /// that SwiftUI manages for you when you use the ~~Environment~~
+    /// property wrapper and the ~~View/environment(_:_:)~~ view modifier.
+    public init() { } { }
 
     /// Accesses the environment value associated with a custom key.
     ///
     /// Create custom environment values by defining a key
-    /// that conforms to the ``EnvironmentKey`` protocol, and then using that
-    /// key with the subscript operator of the ``EnvironmentValues`` structure
+    /// that conforms to the ~~EnvironmentKey~~ protocol, and then using that
+    /// key with the subscript operator of the ~~EnvironmentValues~~ structure
     /// to get and set a value for that key:
     ///
     ///     private struct MyEnvironmentKey: EnvironmentKey {
@@ -6271,8 +5830,8 @@ public struct EnvironmentValues : CustomStringConvertible {
     ///     }
     ///
     /// You use custom environment values the same way you use system-provided
-    /// values, setting a value with the ``View/environment(_:_:)`` view
-    /// modifier, and reading values with the ``Environment`` property wrapper.
+    /// values, setting a value with the ~~View/environment(_:_:)~~ view
+    /// modifier, and reading values with the ~~Environment~~ property wrapper.
     /// You can also provide a dedicated view modifier as a convenience for
     /// setting the value:
     ///
@@ -6306,7 +5865,7 @@ extension EnvironmentValues {
 
     /// The preferred size of the content.
     ///
-    /// The default value is ``ContentSizeCategory/large``.
+    /// The default value is ~~ContentSizeCategory/large~~.
     public var sizeCategory: ContentSizeCategory
 }
 
@@ -6354,7 +5913,7 @@ extension EnvironmentValues {
     /// The system sets this value to provide an indication of the
     /// operational state of a scene or collection of scenes. The exact
     /// meaning depends on where you access the value. For more information,
-    /// see ``ScenePhase``.
+    /// see ~~ScenePhase~~.
     public var scenePhase: ScenePhase
 }
 
@@ -6406,7 +5965,7 @@ extension EnvironmentValues {
     /// The size of a pixel on the screen.
     ///
     /// This value is equal to `1` divided by
-    /// ``EnvironmentValues/displayScale``.
+    /// ~~EnvironmentValues/displayScale~~.
     public var pixelLength: CGFloat { get }
 
     /// The font weight to apply to text.
@@ -6428,20 +5987,20 @@ extension EnvironmentValues {
     ///
     /// When writing custom drawing code that depends on the current color
     /// scheme, you should also consider the
-    /// ``EnvironmentValues/colorSchemeContrast`` property. You can specify
+    /// ~~EnvironmentValues/colorSchemeContrast~~ property. You can specify
     /// images and colors in asset catalogs according to either the
-    /// ``ColorScheme/light`` or ``ColorScheme/dark`` color scheme, as well as
+    /// ~~ColorScheme/light~~ or ~~ColorScheme/dark~~ color scheme, as well as
     /// standard or increased contrast. The correct image or color displays
     /// automatically for the current environment.
     ///
     /// You only need to check `colorScheme` and
-    /// ``EnvironmentValues/colorSchemeContrast`` for custom drawing if the
+    /// ~~EnvironmentValues/colorSchemeContrast~~ for custom drawing if the
     /// differences go beyond images and colors.
     ///
     /// Setting the `colorScheme` environment value directly is an advanced use
     /// case, as it changes the color scheme of the contained views but *not* of
     /// the container. Instead, consider using the
-    /// ``View/preferredColorScheme(_:)`` modifier, which propagates to the
+    /// ~~View/preferredColorScheme(_:)~~ modifier, which propagates to the
     /// presentation containing the view.
     public var colorScheme: ColorScheme
 
@@ -6529,8 +6088,8 @@ extension EnvironmentValues {
     /// A value that indicates how text instance aligns its lines when the
     /// content wraps or contains newlines.
     ///
-    /// Use alignment parameters on a parent view to align ``Text`` with respect
-    /// to its parent. Because the horizontal bounds of ``TextField`` never
+    /// Use alignment parameters on a parent view to align ~~Text~~ with respect
+    /// to its parent. Because the horizontal bounds of ~~TextField~~ never
     /// exceed its graphical extent, this value has little to no effect on
     /// single-line text.
     public var multilineTextAlignment: TextAlignment
@@ -6538,7 +6097,7 @@ extension EnvironmentValues {
     /// A value that indicates how the layout truncates the last line of text to
     /// fit into the available space.
     ///
-    /// The default value is ``Text/TruncationMode/tail``.
+    /// The default value is ~~Text/TruncationMode/tail~~.
     public var truncationMode: Text.TruncationMode
 
     /// The distance in points between the bottom of one line fragment and the
@@ -6626,7 +6185,7 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
     associatedtype ResolvedModifier : ViewModifier
 
     /// Resolve to a concrete modifier in the given `environment`.
-    func resolve(in environment: EnvironmentValues) -> Self.ResolvedModifier { }
+    func resolve(in environment: EnvironmentValues) -> Self.ResolvedModifier { } { }
 }
 
 /// A view type that compares itself against its previous value and prevents its
@@ -6643,7 +6202,7 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
     /// Creates a new equatable view from a view.
     ///
     /// - Parameter content: The view you want to use as the body of the equatable view.
-    @inlinable public init(content: Content) { }
+    @inlinable public init(content: Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -6663,7 +6222,7 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
     ///
     /// - Parameter rawValue: The raw value with which to create the key
     ///   modifier.
-    public init(rawValue: Int) { }
+    public init(rawValue: Int) { } { }
 
     /// The Caps Lock key.
     public static let capsLock: EventModifiers
@@ -6736,7 +6295,7 @@ public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
     ///   - first: The first of two gestures. This gesture has precedence over
     ///     the other gesture.
     ///   - second: The second of two gestures.
-    @inlinable public init(_ first: First, _ second: Second) { }
+    @inlinable public init(_ first: First, _ second: Second) { } { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -6753,14 +6312,14 @@ extension ExclusiveGesture.Value : Equatable where First.Value : Equatable, Seco
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ExclusiveGesture<First, Second>.Value, b: ExclusiveGesture<First, Second>.Value) -> Bool { }
+    public static func == (a: ExclusiveGesture<First, Second>.Value, b: ExclusiveGesture<First, Second>.Value) -> Bool { } { }
 }
 
 /// A property wrapper type that makes fetch requests and retrieves the results
 /// from a Core Data store.
 ///
 /// The fetch request and its results use the managed object context provided by
-/// the environment value ``EnvironmentValues/managedObjectContext``.
+/// the environment value ~~EnvironmentValues/managedObjectContext~~.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @propertyWrapper public struct FetchRequest<Result> : DynamicProperty where Result : NSFetchRequestResult {
 
@@ -6777,28 +6336,28 @@ extension ExclusiveGesture.Value : Equatable where First.Value : Equatable, Seco
     ///   - predicate: An NSPredicate defines a filter for the fetched results.
     ///   - animation: The animation used for any changes to the fetched
     ///     results.
-    public init(entity: NSEntityDescription, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil) { }
+    public init(entity: NSEntityDescription, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil) { } { }
 
     /// Creates an instance from a fetch request.
     /// - Parameters:
     ///   - fetchRequest: The request used to produce the fetched results.
     ///   - animation: The animation used for any changes to the fetched
     ///     results.
-    public init(fetchRequest: NSFetchRequest<Result>, animation: Animation? = nil) { }
+    public init(fetchRequest: NSFetchRequest<Result>, animation: Animation? = nil) { } { }
 
     /// Creates an instance from a fetch request.
     /// - Parameters:
     ///   - fetchRequest: The request used to produce the fetched results.
     ///   - transaction: The transaction used for any changes to the fetched
     ///     results.
-    public init(fetchRequest: NSFetchRequest<Result>, transaction: Transaction) { }
+    public init(fetchRequest: NSFetchRequest<Result>, transaction: Transaction) { } { }
 
     /// Updates the fetched results.
     ///
     /// SwiftUI calls this function before rendering a view's
-    /// ``View/body-swift.property`` to ensure the view has the most recent
+    /// ~~View/body-swift.property~~ to ensure the view has the most recent
     /// fetched results.
-    public mutating func update() { }
+    public mutating func update() { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -6812,7 +6371,7 @@ extension FetchRequest where Result : NSManagedObject {
     ///   - predicate: An NSPredicate defines a filter for the fetched results.
     ///   - animation: The animation used for any changes to the fetched
     ///     results.
-    public init(sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil) { }
+    public init(sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, animation: Animation? = nil) { } { }
 }
 
 /// The FetchedResults collection type represents the results of performing a
@@ -6915,7 +6474,7 @@ public protocol FileDocument {
     static var writableContentTypes: [UTType] { get }
 
     /// Initialize self by reading from the contents of a given `ReadConfiguration`.
-    init(configuration: Self.ReadConfiguration) throws { }
+    init(configuration: Self.ReadConfiguration) throws { } { }
 
     /// The configuration for reading document contents.
     typealias ReadConfiguration = FileDocumentReadConfiguration
@@ -6927,7 +6486,7 @@ public protocol FileDocument {
     /// - Returns: The destination to serialize the document contents to. The
     ///   value can be a newly created `FileWrapper` or an updated `FileWrapper`
     ///   of the one provided in `configuration`.
-    func fileWrapper(configuration: Self.WriteConfiguration) throws -> FileWrapper { }
+    func fileWrapper(configuration: Self.WriteConfiguration) throws -> FileWrapper { } { }
 
     /// The configuration for serializing document contents.
     typealias WriteConfiguration = FileDocumentWriteConfiguration
@@ -7022,7 +6581,7 @@ public struct FileDocumentWriteConfiguration {
     ///     number rule instead.
     ///   - antialiased: A Boolean value that indicates whether to use
     ///     antialiasing when rendering the edges of a shape.
-    public init(eoFill: Bool = false, antialiased: Bool = true) { }
+    public init(eoFill: Bool = false, antialiased: Bool = true) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -7032,7 +6591,7 @@ public struct FileDocumentWriteConfiguration {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: FillStyle, b: FillStyle) -> Bool { }
+    public static func == (a: FillStyle, b: FillStyle) -> Bool { } { }
 }
 
 /// A convenience property wrapper for observing and automatically unwrapping
@@ -7049,7 +6608,7 @@ public struct FileDocumentWriteConfiguration {
     /// changes and different published bindings go in and out of scope.
     ///
     /// - Parameter keyPath: The key path for the focus value to read.
-    public init(_ keyPath: KeyPath<FocusedValues, Binding<Value>?>) { }
+    public init(_ keyPath: KeyPath<FocusedValues, Binding<Value>?>) { } { }
 
     /// The unwrapped value for the focus key given the current scope and state
     /// of the focused view hierarchy.
@@ -7076,7 +6635,7 @@ public struct FileDocumentWriteConfiguration {
     /// changes and different published values go in and out of scope.
     ///
     /// - Parameter keyPath: The key path for the focus value to read.
-    public init(_ keyPath: KeyPath<FocusedValues, Value?>) { }
+    public init(_ keyPath: KeyPath<FocusedValues, Value?>) { } { }
 
     /// The value for the focus key given the current scope and state of the
     /// focused view hierarchy.
@@ -7109,48 +6668,10 @@ public struct FocusedValues {
     public subscript<Key>(key: Key.Type) -> Key.Value? where Key : FocusedValueKey
 }
 
-/// A font.
+/// An environment-dependent font.
 ///
-/// This structure defines a `Font` in SwiftUI. `Font` offers shorthands for varying styles of the system font via static properties, such as `Font.body` or `Font.title`.  `Font` also includes many modifiers, including ways to compare & modify fonts.
-///
-/// Fonts can be applied to your view with the ``View/font(_:)`` modifier.
-///
-/// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Text("Banana🍌🍌")
-///            .font(.largeTitle)
-///     }
-/// }
-/// ```
-///
-/// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
-///
-/// ![Font Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-2.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Text("Banana🍌🍌")
-///             .font(.system(size: 32.0, weight: .bold, design: .rounded))
-///     }
-/// }
-/// ```
-///
-/// Non system-fonts can be applied using `Font/custom(_:size:)`
-///
-/// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Text("Banana🍌🍌")
-///            .font(Font.custom("American Typewriter", size: 32.0))
-///     }
-/// }
-/// ```
+/// The system resolves a font's value at the time it uses the font in a given
+/// environment because ~~Font~~ is a late-binding token.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Font : Hashable {
 
@@ -7167,7 +6688,7 @@ public struct FocusedValues {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -7177,7 +6698,7 @@ public struct FocusedValues {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (lhs: Font, rhs: Font) -> Bool { }
+    public static func == (lhs: Font, rhs: Font) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -7229,7 +6750,7 @@ extension Font {
     public static let caption2: Font
 
     /// Gets a system font with the given style and design.
-    public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
+    public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { } { }
 
     /// A dynamic text style to use for fonts.
     public enum TextStyle : CaseIterable {
@@ -7281,7 +6802,7 @@ extension Font {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Font.TextStyle, b: Font.TextStyle) -> Bool { }
+        public static func == (a: Font.TextStyle, b: Font.TextStyle) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -7305,7 +6826,7 @@ extension Font {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
 
         /// A type that can represent a collection of all values of this type.
         public typealias AllCases = [Font.TextStyle]
@@ -7316,13 +6837,13 @@ extension Font {
 extension Font {
 
     /// Adds italics to the font.
-    public func italic() -> Font { }
+    public func italic() -> Font { } { }
 
     /// Adjusts the font to enable all small capitals.
     ///
-    /// See ``Font/lowercaseSmallCaps()`` and ``Font/uppercaseSmallCaps()`` for
+    /// See ~~Font/lowercaseSmallCaps()~~ and ~~Font/uppercaseSmallCaps()~~ for
     /// more details.
-    public func smallCaps() -> Font { }
+    public func smallCaps() -> Font { } { }
 
     /// Adjusts the font to enable lowercase small capitals.
     ///
@@ -7330,7 +6851,7 @@ extension Font {
     /// font. It is generally used for display lines set in large and small
     /// caps, such as titles. It may include forms related to small capitals,
     /// such as old-style figures.
-    public func lowercaseSmallCaps() -> Font { }
+    public func lowercaseSmallCaps() -> Font { } { }
 
     /// Adjusts the font to enable uppercase small capitals.
     ///
@@ -7338,16 +6859,16 @@ extension Font {
     /// generally used for words which would otherwise be set in all caps, such
     /// as acronyms, but which are desired in small-cap form to avoid disrupting
     /// the flow of text.
-    public func uppercaseSmallCaps() -> Font { }
+    public func uppercaseSmallCaps() -> Font { } { }
 
     /// Adjusts the font to use monospace digits.
-    public func monospacedDigit() -> Font { }
+    public func monospacedDigit() -> Font { } { }
 
     /// Sets the weight of the font.
-    public func weight(_ weight: Font.Weight) -> Font { }
+    public func weight(_ weight: Font.Weight) -> Font { } { }
 
     /// Adds bold styling to the font.
-    public func bold() -> Font { }
+    public func bold() -> Font { } { }
 
     /// Create a version of `self` that uses leading (line spacing) adjustment.
     ///
@@ -7357,7 +6878,7 @@ extension Font {
     /// text style with tight line spacing. This modifier may return the
     /// original `Font` unchanged for some fonts.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public func leading(_ leading: Font.Leading) -> Font { }
+    public func leading(_ leading: Font.Leading) -> Font { } { }
 
     /// A weight to use for fonts.
     @frozen public struct Weight : Hashable {
@@ -7397,7 +6918,7 @@ extension Font {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Font.Weight, b: Font.Weight) -> Bool { }
+        public static func == (a: Font.Weight, b: Font.Weight) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -7421,7 +6942,7 @@ extension Font {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 
     /// The different types of line spacing.
@@ -7445,7 +6966,7 @@ extension Font {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Font.Leading, b: Font.Leading) -> Bool { }
+        public static func == (a: Font.Leading, b: Font.Leading) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -7469,7 +6990,7 @@ extension Font {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 }
 
@@ -7481,22 +7002,22 @@ extension Font {
     ///
     /// Use this function to create a system font by specifying the size and
     /// weight, and a type design together. The following styles the system font
-    /// as 17 point, ``Font/Weight/semibold`` text:
+    /// as 17 point, ~~Font/Weight/semibold~~ text:
     ///
     ///     Text("Hello").font(.system(size: 17, weight: .semibold))
     ///
-    /// While the following styles the text as 17 point ``Font/Weight/bold``,
-    /// and applies a `serif` ``Font/Design`` to the system font:
+    /// While the following styles the text as 17 point ~~Font/Weight/bold~~,
+    /// and applies a `serif` ~~Font/Design~~ to the system font:
     ///
     ///     Text("Hello").font(.system(size: 17, weight: .bold, design: .serif))
     ///
-    /// If you want to use the default ``Font/Weight``
-    /// (``Font/Weight/regular``), you don't need to specify the `weight` in the
+    /// If you want to use the default ~~Font/Weight~~
+    /// (~~Font/Weight/regular~~), you don't need to specify the `weight` in the
     /// method. The following example styles the text as 17 point
-    /// ``Font/Weight/regular``, and uses a ``Font/Design/rounded`` system font:
+    /// ~~Font/Weight/regular~~, and uses a ~~Font/Design/rounded~~ system font:
     ///
     ///     Text("Hello").font(.system(size: 17, design: .rounded))
-    public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
+    public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { } { }
 
     /// A design to use for fonts.
     public enum Design : Hashable {
@@ -7523,7 +7044,7 @@ extension Font {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Font.Design, b: Font.Design) -> Bool { }
+        public static func == (a: Font.Design, b: Font.Design) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -7547,7 +7068,7 @@ extension Font {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 }
 
@@ -7556,23 +7077,23 @@ extension Font {
 
     /// Create a custom font with the given `name` and `size` that scales with
     /// the body text style.
-    public static func custom(_ name: String, size: CGFloat) -> Font { }
+    public static func custom(_ name: String, size: CGFloat) -> Font { } { }
 
     /// Create a custom font with the given `name` and `size` that scales
     /// relative to the given `textStyle`.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public static func custom(_ name: String, size: CGFloat, relativeTo textStyle: Font.TextStyle) -> Font { }
+    public static func custom(_ name: String, size: CGFloat, relativeTo textStyle: Font.TextStyle) -> Font { } { }
 
     /// Create a custom font with the given `name` and a fixed `size` that does
     /// not scale with Dynamic Type.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public static func custom(_ name: String, fixedSize: CGFloat) -> Font { }
+    public static func custom(_ name: String, fixedSize: CGFloat) -> Font { } { }
 
     /// Creates a custom font from a platform font instance.
     ///
-    /// Initializing ``Font`` with platform font instance
+    /// Initializing ~~Font~~ with platform font instance
     /// (<doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>) can bridge SwiftUI
-    /// ``Font`` with <doc://com.apple.documentation/documentation/AppKit/NSFont> or
+    /// ~~Font~~ with <doc://com.apple.documentation/documentation/AppKit/NSFont> or
     /// <doc://com.apple.documentation/documentation/UIKit/UIFont>, both of which are
     /// toll-free bridged to
     /// <doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>. For example:
@@ -7582,7 +7103,7 @@ extension Font {
     ///
     ///     // Create SwiftUI Text with the CTFont instance.
     ///     let text = Text("Hello").font(Font(ctFont))
-    public init(_ font: CTFont) { }
+    public init(_ font: CTFont) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7641,10 +7162,10 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     /// generated from that data element loses any current state and animations.
     ///
     /// - Parameters:
-    ///   - data: The identified data that the ``ForEach`` instance uses to
+    ///   - data: The identified data that the ~~ForEach~~ instance uses to
     ///     create views dynamically.
     ///   - content: The view builder that creates views dynamically.
-    public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) { }
+    public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7665,7 +7186,7 @@ extension ForEach where Content : View {
     ///     dynamically.
     ///   - id: The key path to the provided data's identifier.
     ///   - content: The view builder that creates views dynamically.
-    public init(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder content: @escaping (Data.Element) -> Content) { }
+    public init(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder content: @escaping (Data.Element) -> Content) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7676,12 +7197,12 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
-    /// demand over a dynamic range, use ``ForEach/init(_:id:content:)``.
+    /// demand over a dynamic range, use ~~ForEach/init(_:id:content:)~~.
     ///
     /// - Parameters:
     ///   - data: A constant range.
     ///   - content: The view builder that creates views dynamically.
-    public init(_ data: Range<Int>, @ViewBuilder content: @escaping (Int) -> Content) { }
+    public init(_ data: Range<Int>, @ViewBuilder content: @escaping (Int) -> Content) { } { }
 }
 
 /// A style that shows the correct fill for the foreground based on the current
@@ -7690,7 +7211,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 @frozen public struct ForegroundStyle {
 
 	/// Creates a foreground style.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7701,19 +7222,19 @@ extension ForegroundStyle : ShapeStyle {
 /// or inspectors.
 ///
 /// SwiftUI renders forms in a manner appropriate for the platform. For example,
-/// on iOS, forms appear as grouped lists. Use ``Section`` to group different
+/// on iOS, forms appear as grouped lists. Use ~~Section~~ to group different
 /// parts of a form's content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Form<Content> : View where Content : View {
 
 	/// Creates a form from a view builder containing child views.
 	///
-	/// The content of a form is almost always different ``Section``s.
+	/// The content of a form is almost always different ~~Section~~s.
 	///
 	/// - Parameter content: A closure that returns the view to the `Form`.
 	///
 	/// - SeeAlso: Section
-    public init(@ViewBuilder content: () -> Content) { }
+    public init(@ViewBuilder content: () -> Content) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -7734,7 +7255,7 @@ public struct Form<Content> : View where Content : View {
 public protocol GeometryEffect : Animatable, ViewModifier where Self.Body == Never {
 
     /// Returns the current value of the effect.
-    func effectValue(size: CGSize) -> ProjectionTransform { }
+    func effectValue(size: CGSize) -> ProjectionTransform { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7746,7 +7267,7 @@ extension GeometryEffect {
     /// Use this method to disable layout changes during transitions. The view
     /// ignores the transform returned by this method while the view is
     /// performing its layout calculations.
-    @inlinable public func ignoredByLayout() -> _IgnoredByLayoutEffect<Self> { }
+    @inlinable public func ignoredByLayout() -> _IgnoredByLayoutEffect<Self> { } { }
 }
 
 /// A proxy for access to the size and coordinate space (for anchor resolution)
@@ -7765,158 +7286,13 @@ public struct GeometryProxy {
 
     /// Returns the container view's bounds rectangle, converted to a defined
     /// coordinate space.
-    public func frame(in coordinateSpace: CoordinateSpace) -> CGRect { }
+    public func frame(in coordinateSpace: CoordinateSpace) -> CGRect { } { }
 }
 
-/// A type that reads the geometry of its container to produce a view.
+/// A container view that defines its content as a function of its own size and
+/// coordinate space.
 ///
-/// ### How it works
-///
-/// `GeometryReader` can be expressed simply with the following pseudocode:
-///
-/// ```
-/// struct GeometryReader<Content: View> {
-///     var content: (GeometryProxy) -> Content
-///
-///     var body: some View {
-///         content(<container geometry>)
-///     }
-/// }
-/// ```
-///
-/// In the implementation above, `<container geometry>` is an instance of ``GeometryProxy``. `GeometryProxy` simply encapsulates the container's frame and safe area insets, provided at runtime by SwiftUI.
-///
-/// ### `GeometryReader` to get container bounds
-///
-/// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
-///
-/// ![GeometryReader Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         GeometryReader { (proxy: GeometryProxy) in
-///             Color.green
-///                 .frame(
-///                     width: proxy.size.width / 2,
-///                     height: proxy.size.height / 2
-///                 )
-///         }
-///     }
-/// }
-/// ```
-///
-/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is `.topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
-///
-/// ### `GeometryReader` to get a view's frame
-///
-/// `GeometryReader` can also be used with`View/background(_:)`, to acquire the geometry of a target view. Consider `SomeView` in the following example:
-///
-/// ```
-/// struct ExampleView: View {
-///     struct SomeView: View {
-///         var body: some View {
-///             Rectangle()
-///                 .fill(Color.red)
-///                 .frame(width: 500, height: 500)
-///         }
-///     }
-///
-///     @State var someFrame: CGRect? // will be updated after the first layout pass
-///
-///     var body: some View {
-///         VStack {
-///             SomeView()
-///                 .frame(width: 500, height: 500)
-///                 .background(
-///                     GeometryReader { (proxy: GeometryProxy) -> EmptyView in
-///                         if globalFrame != proxy.frame(in: .global) {
-///                             DispatchQueue.main.async {
-///                                 someFrame = proxy.frame(in: .global)
-///                             }
-///                         }
-///
-///                         return EmptyView()
-///                     }
-///                 )
-///             Text("Hello, World!")
-///         }
-///     }
-/// }
-/// ```
-///
-/// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not* the frame of its container, the `VStack`. This is achieved by forcing a `GeometryReader` as a background of `SomeView`, thereby constraining it to `SomeView`'s bounds.
-///
-/// This task of acquiring a view's frame can be done in a generic and reusable way using `ViewModifier`:
-///
-/// ![GeometryReader Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-2.png)
-///
-/// ```
-/// struct GetGlobalFrame: ViewModifier {
-///     @Binding var globalFrame: CGRect?
-///
-///     func body(content: Content) -> some View {
-///         content.background(
-///             GeometryReader { (proxy: GeometryProxy) -> EmptyView in
-///                 if globalFrame != proxy.frame(in: .global) {
-///                     DispatchQueue.main.async {
-///                         globalFrame = proxy.frame(in: .global)
-///                     }
-///                 }
-///
-///                 return EmptyView()
-///             }
-///         )
-///     }
-/// }
-/// ```
-///
-/// The modifier above can be used in the following manner:
-///
-/// ![GeometryReader Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-3.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     struct SomeView: View {
-///         var body: some View {
-///             Rectangle()
-///                 .fill(Color.red)
-///                 .frame(width: 500, height: 500)
-///         }
-///     }
-///
-///     @State var someFrame: CGRect? // will be updated after the first layout pass
-///
-///     var body: some View {
-///         VStack {
-///             SomeView()
-///                 .frame(width: 500, height: 500)
-///                 .modifier(GetGlobalFrame(globalFrame: $someFrame))
-///
-///             Text("Hello, World!")
-///         }
-///     }
-/// }
-///
-/// struct GetGlobalFrame: ViewModifier {
-///     @Binding var globalFrame: CGRect?
-///
-///     func body(content: Content) -> some View {
-///         content.background(
-///             GeometryReader { (proxy: GeometryProxy) -> EmptyView in
-///                 if globalFrame != proxy.frame(in: .global) {
-///                     DispatchQueue.main.async {
-///                         globalFrame = proxy.frame(in: .global)
-///                     }
-///                 }
-///
-///                 return EmptyView()
-///             }
-///         )
-///     }
-/// }
-/// ```
-///
+/// This view returns a flexible preferred size to its parent layout.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct GeometryReader<Content> : View where Content : View {
 
@@ -7930,7 +7306,7 @@ public struct GeometryProxy {
     /// Creates a `GeometryReader` parent view using the parent's geometry.
     ///
     /// - Parameter content: A closure that takes the geometry of the parent view and returns a content view.
-    @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content) { }
+    @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -7968,7 +7344,7 @@ extension Gesture {
     ///   create a new, sequenced gesture.
     ///
     /// - Returns: A gesture that's a sequence of two gestures.
-    @inlinable public func sequenced<Other>(before other: Other) -> SequenceGesture<Self, Other> where Other : Gesture { }
+    @inlinable public func sequenced<Other>(before other: Other) -> SequenceGesture<Self, Other> where Other : Gesture { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7981,7 +7357,7 @@ extension Gesture {
     ///   to create a new, combined gesture.
     ///
     /// - Returns: A gesture with two simultaneous gestures.
-    @inlinable public func simultaneously<Other>(with other: Other) -> SimultaneousGesture<Self, Other> where Other : Gesture { }
+    @inlinable public func simultaneously<Other>(with other: Other) -> SimultaneousGesture<Self, Other> where Other : Gesture { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -7993,7 +7369,7 @@ extension Gesture {
     ///   `action` closure's parameter contains the final value of the gesture.
     ///
     /// - Returns: A gesture that triggers `action` when the gesture ends.
-    public func onEnded(_ action: @escaping (Self.Value) -> Void) -> _EndedGesture<Self> { }
+    public func onEnded(_ action: @escaping (Self.Value) -> Void) -> _EndedGesture<Self> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8007,7 +7383,7 @@ extension Gesture where Self.Value : Equatable {
     ///
     /// - Returns: A gesture that triggers `action` when this gesture's value
     ///   changes.
-    public func onChanged(_ action: @escaping (Self.Value) -> Void) -> _ChangedGesture<Self> { }
+    public func onChanged(_ action: @escaping (Self.Value) -> Void) -> _ChangedGesture<Self> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8015,7 +7391,7 @@ extension Gesture {
 
     /// Returns a gesture that's the result of mapping the given closure over
     /// the gesture.
-    public func map<T>(_ body: @escaping (Self.Value) -> T) -> _MapGesture<Self, T> { }
+    public func map<T>(_ body: @escaping (Self.Value) -> T) -> _MapGesture<Self, T> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8030,7 +7406,7 @@ extension Gesture {
     /// - Returns: A gesture that's the result of combining two gestures where
     ///   only one of them can succeed. SwiftUI gives precedence to the first
     ///   gesture.
-    @inlinable public func exclusively<Other>(before other: Other) -> ExclusiveGesture<Self, Other> where Other : Gesture { }
+    @inlinable public func exclusively<Other>(before other: Other) -> ExclusiveGesture<Self, Other> where Other : Gesture { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8043,7 +7419,7 @@ extension Gesture {
     /// <doc:Adding-Interactivity-with-Gestures>.
     ///
     /// - Parameters:
-    ///   - state: A binding to a view's ``GestureState`` property.
+    ///   - state: A binding to a view's ~~GestureState~~ property.
     ///   - body: The callback that SwiftUI invokes as the gesture's value
     ///     changes. Its `currentState` parameter is the updated state of the
     ///     gesture. The `gestureState` parameter is the previous state of the
@@ -8052,7 +7428,7 @@ extension Gesture {
     /// - Returns: A version of the gesture that updates the provided `state` as
     ///   the originating gesture's value changes, and that resets the `state`
     ///   to its initial value when the users cancels or ends the gesture.
-    @inlinable public func updating<State>(_ state: GestureState<State>, body: @escaping (Self.Value, inout State, inout Transaction) -> Void) -> GestureStateGesture<Self, State> { }
+    @inlinable public func updating<State>(_ state: GestureState<State>, body: @escaping (Self.Value, inout State, inout Transaction) -> Void) -> GestureStateGesture<Self, State> { } { }
 }
 
 /// Options that control how adding a gesture to a view affect's other gestures
@@ -8093,7 +7469,7 @@ extension Gesture {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    public init(rawValue: UInt32) { }
+    public init(rawValue: UInt32) { } { }
 
     /// Disable all gestures in the subview hierarchy, including the added
     /// gesture.
@@ -8134,12 +7510,12 @@ extension Gesture {
 /// ends.
 ///
 /// Declare a property as `@GestureState`, pass as a binding to it as a
-/// parameter to a gesture's ``Gesture/updating(_:body:)`` callback, and receive
+/// parameter to a gesture's ~~Gesture/updating(_:body:)~~ callback, and receive
 /// updates to it. A property that's declared as `@GestureState` implicitly
 /// resets when the gesture becomes inactive, making it suitable for tracking
 /// transient state.
 ///
-/// Add a long-press gesture to a ``Circle``, and update the interface during
+/// Add a long-press gesture to a ~~Circle~~, and update the interface during
 /// the gesture by declaring a property as `@GestureState`:
 ///
 ///     struct SimpleLongPressGestureView: View {
@@ -8166,14 +7542,14 @@ extension Gesture {
     ///
     /// - Parameter wrappedValue: A wrapped value for the gesture state
     ///   property.
-    public init(wrappedValue: Value) { }
+    public init(wrappedValue: Value) { } { }
 
     /// Creates a view state that's derived from a gesture with an initial
     /// value.
     ///
     /// - Parameter initialValue: An initial value for the gesture state
     ///   property.
-    public init(initialValue: Value) { }
+    public init(initialValue: Value) { } { }
 
     /// Creates a view state that's derived from a gesture with a wrapped state
     /// value and a transaction to reset it.
@@ -8182,7 +7558,7 @@ extension Gesture {
     ///   - wrappedValue: A wrapped value for the gesture state property.
     ///   - resetTransaction: A transaction that provides metadata for view
     ///     updates.
-    public init(wrappedValue: Value, resetTransaction: Transaction) { }
+    public init(wrappedValue: Value, resetTransaction: Transaction) { } { }
 
     /// Creates a view state that's derived from a gesture with an initial state
     /// value and a transaction to reset it.
@@ -8191,23 +7567,23 @@ extension Gesture {
     ///   - initialValue: An initial state value.
     ///   - resetTransaction: A transaction that provides metadata for view
     ///     updates.
-    public init(initialValue: Value, resetTransaction: Transaction) { }
+    public init(initialValue: Value, resetTransaction: Transaction) { } { }
 
     /// Creates a view state that's derived from a gesture with a wrapped state
     /// value and a closure that provides a transaction to reset it.
     ///
     /// - Parameters:
     ///   - wrappedValue: A wrapped value for the gesture state property.
-    ///   - reset: A closure that provides a ``Transaction``.
-    public init(wrappedValue: Value, reset: @escaping (Value, inout Transaction) -> Void) { }
+    ///   - reset: A closure that provides a ~~Transaction~~.
+    public init(wrappedValue: Value, reset: @escaping (Value, inout Transaction) -> Void) { } { }
 
     /// Creates a view state that's derived from a gesture with an initial state
     /// value and a closure that provides a transaction to reset it.
     ///
     /// - Parameters:
     ///   - initialValue: An initial state value.
-    ///   - reset: A closure that provides a ``Transaction``.
-    public init(initialValue: Value, reset: @escaping (Value, inout Transaction) -> Void) { }
+    ///   - reset: A closure that provides a ~~Transaction~~.
+    public init(initialValue: Value, reset: @escaping (Value, inout Transaction) -> Void) { } { }
 
     /// The wrapped value referenced by the gesture state property.
     public var wrappedValue: Value { get }
@@ -8224,20 +7600,20 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///
     /// - Parameter resetTransaction: A transaction that provides metadata for
     ///   view updates.
-    public init(resetTransaction: Transaction = Transaction()) { }
+    public init(resetTransaction: Transaction = Transaction()) { } { }
 
     /// Creates a view state that's derived from a gesture with a closure that
     /// provides a transaction to reset it.
     ///
-    /// - Parameter reset: A closure that provides a ``Transaction``.
-    public init(reset: @escaping (Value, inout Transaction) -> Void) { }
+    /// - Parameter reset: A closure that provides a ~~Transaction~~.
+    public init(reset: @escaping (Value, inout Transaction) -> Void) { } { }
 }
 
 /// A gesture that updates the state provided by a gesture's updating callback.
 ///
-/// A gesture's ``Gesture/updating(_:body:)`` callback returns a
+/// A gesture's ~~Gesture/updating(_:body:)~~ callback returns a
 /// `GestureStateGesture` instance for updating a transient state property
-/// that's annotated with the ``GestureState`` property wrapper.
+/// that's annotated with the ~~GestureState~~ property wrapper.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct GestureStateGesture<Base, State> : Gesture where Base : Gesture {
 
@@ -8258,10 +7634,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///
     /// - Parameters:
     ///   - base: The originating gesture.
-    ///   - state: The wrapped value of a ``GestureState`` property.
+    ///   - state: The wrapped value of a ~~GestureState~~ property.
     ///   - body: The callback that SwiftUI invokes as the gesture's value
     ///     changes.
-    @inlinable public init(base: Base, state: GestureState<State>, body: @escaping (GestureStateGesture<Base, State>.Value, inout State, inout Transaction) -> Void) { }
+    @inlinable public init(base: Base, state: GestureState<State>, body: @escaping (GestureStateGesture<Base, State>.Value, inout State, inout Transaction) -> Void) { } { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -8284,7 +7660,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         public var location: CGFloat
 
         /// Creates a color stop with a color and location.
-        public init(color: Color, location: CGFloat) { }
+        public init(color: Color, location: CGFloat) { } { }
 
         /// Returns a Boolean value indicating whether two values are equal.
         ///
@@ -8294,20 +7670,20 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Gradient.Stop, b: Gradient.Stop) -> Bool { }
+        public static func == (a: Gradient.Stop, b: Gradient.Stop) -> Bool { } { }
     }
 
     /// The array of color stops.
     public var stops: [Gradient.Stop]
 
     /// Creates a gradient from an array of color stops.
-    public init(stops: [Gradient.Stop]) { }
+    public init(stops: [Gradient.Stop]) { } { }
 
     /// Creates a gradient from an array of colors.
     ///
     /// The gradient synthesizes its location values to evenly space the colors
     /// along the gradient.
-    public init(colors: [Color]) { }
+    public init(colors: [Color]) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -8317,7 +7693,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: Gradient, b: Gradient) -> Bool { }
+    public static func == (a: Gradient, b: Gradient) -> Bool { } { }
 }
 
 /// A system style of `DatePicker` that displays an interactive calendar or
@@ -8331,13 +7707,13 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 public struct GraphicalDatePickerStyle : DatePickerStyle {
 
 	/// Create a graphical date picker style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A description of a single grid item, such as a row or a column.
 ///
 /// You use `GridItem` instances to configure the layout of items in
-/// ``LazyHGrid`` and ``LazyVGrid`` views. Each grid item specifies layout
+/// ~~LazyHGrid~~ and ~~LazyVGrid~~ views. Each grid item specifies layout
 /// properties like spacing and alignment, which the grid view uses to size and
 /// position all items in a given column or row.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -8390,7 +7766,7 @@ public struct GridItem {
     ///   - size: The size of the grid item.
     ///   - spacing: The spacing to use between this and the next item.
     ///   - alignment: The alignment to use for this grid item.
-    public init(_ size: GridItem.Size = .flexible(), spacing: CGFloat? = nil, alignment: Alignment? = nil) { }
+    public init(_ size: GridItem.Size = .flexible(), spacing: CGFloat? = nil, alignment: Alignment? = nil) { } { }
 }
 
 /// An affordance for grouping view content.
@@ -8407,7 +7783,7 @@ extension Group : ToolbarContent where Content : ToolbarContent {
 	/// Creates a `Group` from toolbar content.
 	///
 	/// - Parameter content: A toolbar content builder.
-    public init(@ToolbarContentBuilder content: () -> Content) { }
+    public init(@ToolbarContentBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -8416,7 +7792,7 @@ extension Group : CustomizableToolbarContent where Content : CustomizableToolbar
 	/// Creates a `Group` from a customizable toolbar content.
 	///
 	/// - Parameter content: A toolbar content builder.
-    public init(@ToolbarContentBuilder content: () -> Content) { }
+    public init(@ToolbarContentBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -8425,7 +7801,7 @@ extension Group : Scene where Content : Scene {
 	/// Creates a `Group` of from component scenes.
 	///
 	/// - Parameter content: A scene builder.
-    @inlinable public init(@SceneBuilder content: () -> Content) { }
+    @inlinable public init(@SceneBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8480,7 +7856,7 @@ extension Group : View where Content : View {
 	/// 	}
 	///
 	/// - Parameter content: A view content builder.
-    @inlinable public init(@ViewBuilder content: () -> Content) { }
+    @inlinable public init(@ViewBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -8491,7 +7867,7 @@ extension Group : Commands where Content : Commands {
 	/// Creates a `Group` from command content.
 	///
 	/// - Parameter content: A command content builder.
-    @inlinable public init(@CommandsBuilder content: () -> Content) { }
+    @inlinable public init(@CommandsBuilder content: () -> Content) { } { }
 }
 
 /// A stylized view with an optional label that is associated with a logical
@@ -8506,7 +7882,7 @@ public struct GroupBox<Label, Content> : View where Label : View, Content : View
 	/// - Parameters:
 	///   - label: The label to associate with the grouped content.
 	///   - content: The grouped content to appear with the label.
-    public init(label: Label, @ViewBuilder content: () -> Content) { }
+    public init(label: Label, @ViewBuilder content: () -> Content) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -8524,7 +7900,7 @@ public struct GroupBox<Label, Content> : View where Label : View, Content : View
 extension GroupBox where Label == GroupBoxStyleConfiguration.Label, Content == GroupBoxStyleConfiguration.Content {
 
     /// Creates an instance representing the configuration of a `GroupBoxStyle`.
-    public init(_ configuration: GroupBoxStyleConfiguration) { }
+    public init(_ configuration: GroupBoxStyleConfiguration) { } { }
 }
 
 @available(iOS 14.0, macOS 10.15, *)
@@ -8535,7 +7911,7 @@ extension GroupBox where Label == EmptyView {
 	/// Creates a group box from only content, without including a label.
 	///
 	/// - Parameter content: The grouped content that you want in the group box.
-    public init(@ViewBuilder content: () -> Content) { }
+    public init(@ViewBuilder content: () -> Content) { } { }
 }
 
 /// Defines the implementation of all `GroupBox` instances within a view
@@ -8558,7 +7934,7 @@ public protocol GroupBoxStyle {
     ///
     /// This method will be called for each instance of `GroupBox` created within
     /// a view hierarchy where this style is the current `GroupBoxStyle`.
-    func makeBody(configuration: Self.Configuration) -> Self.Body { }
+    func makeBody(configuration: Self.Configuration) -> Self.Body { } { }
 
     /// The properties of a `GroupBox` instance being created.
     typealias Configuration = GroupBoxStyleConfiguration
@@ -8604,42 +7980,10 @@ public struct GroupBoxStyleConfiguration {
 public struct GroupedListStyle : ListStyle {
 
     /// Creates a grouped list style.
-    public init() { }
+    public init() { } { }
 }
 
-/// A view that arranges children horizontally.
-///
-/// `HStack` is a horizontal stack of views.
-///
-///  ![HStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///             HStack {
-///                 Text("🍌🍌")
-///                 Text("🍏🍏")
-///                 Text("🍑🍑")
-///             }
-///         }
-///     }
-///
-/// Modify your stack's alignment or spacing with the built in initializer.
-///
-///  ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///             HStack(alignment: .top, spacing: 32) {
-///                 Text("🍌🍌")
-///                 Text("🍏🍏")
-///                 Text("🍑🍑")
-///             }
-///         }
-///     }
-///
-/// Learn more about the properties of each alignment choice via the ``VerticalAlignment`` struct.
-///
-/// `HStack` uses a ``ViewBuilder`` to construct the content.
+/// A view that arranges its children in a horizontal line.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HStack<Content> : View where Content : View {
 
@@ -8652,7 +7996,7 @@ public struct GroupedListStyle : ListStyle {
     ///     want the stack to choose a default distance for each pair of
     ///     subviews.
     ///   - content: A view builder that creates the content of this stack.
-    @inlinable public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) { }
+    @inlinable public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -8671,7 +8015,7 @@ public struct GroupedListStyle : ListStyle {
     ///
     /// - Parameter id: An identifier that uniquely identifies the horizontal
     ///   alignment.
-    public init(_ id: AlignmentID.Type) { }
+    public init(_ id: AlignmentID.Type) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -8681,7 +8025,7 @@ public struct GroupedListStyle : ListStyle {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: HorizontalAlignment, b: HorizontalAlignment) -> Bool { }
+    public static func == (a: HorizontalAlignment, b: HorizontalAlignment) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8725,15 +8069,15 @@ public struct HoverEffect {
 public struct IconOnlyLabelStyle : LabelStyle {
 
     /// Creates an icon-only label style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a label.
     ///
-    /// The system calls this method for each ``Label`` instance in a view
+    /// The system calls this method for each ~~Label~~ instance in a view
     /// hierarchy where this style is the current label style.
     ///
     /// - Parameter configuration: The properties of the label.
-    public func makeBody(configuration: IconOnlyLabelStyle.Configuration) -> some View { }
+    public func makeBody(configuration: IconOnlyLabelStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a label.
@@ -8755,7 +8099,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (lhs: Image, rhs: Image) -> Bool { }
+    public static func == (lhs: Image, rhs: Image) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8768,7 +8112,7 @@ extension Image {
     ///     localization key with which to label the image.
     ///   - bundle: the bundle to search for the image resource and localization
     ///     content. If `nil`, uses the main `Bundle`. Defaults to `nil`.
-    public init(_ name: String, bundle: Bundle? = nil) { }
+    public init(_ name: String, bundle: Bundle? = nil) { } { }
 
     /// Creates a labeled image that you can use as content for controls, with
     /// the specified label.
@@ -8779,7 +8123,7 @@ extension Image {
     ///     the main `Bundle`. Defaults to `nil`.
     ///   - label: The label associated with the image. The label is used for
     ///     things like accessibility.
-    public init(_ name: String, bundle: Bundle? = nil, label: Text) { }
+    public init(_ name: String, bundle: Bundle? = nil, label: Text) { } { }
 
     /// Creates an unlabeled, decorative image.
     ///
@@ -8789,7 +8133,7 @@ extension Image {
     ///   - name: the name of the image resource to lookup
     ///   - bundle: the bundle to search for the image resource. If `nil`, uses
     ///     the main `Bundle`. Defaults to `nil`.
-    public init(decorative name: String, bundle: Bundle? = nil) { }
+    public init(decorative name: String, bundle: Bundle? = nil) { } { }
 
     /// Creates a system symbol image.
     ///
@@ -8801,7 +8145,7 @@ extension Image {
     ///   - systemName: The name of the system symbol image.
     ///     Use the SF Symbols app to look up the names of system symbol images.
     @available(macOS 11.0, *)
-    public init(systemName: String) { }
+    public init(systemName: String) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8840,7 +8184,7 @@ extension Image {
 	/// - Parameter renderingMode: The image rendering mode.
 	///
 	/// - SeeAlso: Image.TemplateRenderingMode.
-    public func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> Image { }
+    public func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> Image { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -8904,7 +8248,7 @@ extension Image {
         ///     // Prints "nil"
         ///
         /// - Parameter rawValue: The raw value to use for the new instance.
-        public init?(rawValue: UInt8) { }
+        public init?(rawValue: UInt8) { } { }
 
         /// The corresponding value of the raw type.
         ///
@@ -8954,7 +8298,7 @@ extension Image {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Image.TemplateRenderingMode, b: Image.TemplateRenderingMode) -> Bool { }
+        public static func == (a: Image.TemplateRenderingMode, b: Image.TemplateRenderingMode) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -8978,7 +8322,7 @@ extension Image {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 
     /// The scale to apply to vector images relative to text.
@@ -9008,7 +8352,7 @@ extension Image {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Image.Scale, b: Image.Scale) -> Bool { }
+        public static func == (a: Image.Scale, b: Image.Scale) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -9032,7 +8376,7 @@ extension Image {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 }
 
@@ -9071,7 +8415,7 @@ extension Image {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Image.Interpolation, b: Image.Interpolation) -> Bool { }
+        public static func == (a: Image.Interpolation, b: Image.Interpolation) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -9095,7 +8439,7 @@ extension Image {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 }
 
@@ -9107,7 +8451,7 @@ extension Image {
 	/// - Parameter interpolation: The image's interpolation property.
 	///
 	/// - SeeAlso: Image.Interpolation
-    public func interpolation(_ interpolation: Image.Interpolation) -> Image { }
+    public func interpolation(_ interpolation: Image.Interpolation) -> Image { } { }
 
     /// Adjusts the antialiasing properties of an image.
     ///
@@ -9115,7 +8459,7 @@ extension Image {
     /// shrunk to a lower resolution.
     ///
     /// - Paramter isAntialiased: Whether the image is antialiased.
-    public func antialiased(_ isAntialiased: Bool) -> Image { }
+    public func antialiased(_ isAntialiased: Bool) -> Image { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -9131,7 +8475,7 @@ extension Image {
     ///   - orientation: the orientation of the image
     ///   - label: The label associated with the image. The label is used for
     ///     things like accessibility.
-    public init(_ cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up, label: Text) { }
+    public init(_ cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up, label: Text) { } { }
 
     /// Creates an unlabeled, decorative image based on a `CGImage`.
     ///
@@ -9142,7 +8486,7 @@ extension Image {
     ///   - scale: the scale factor the image is intended for
     ///     (e.g. 1.0, 2.0, 3.0)
     ///   - orientation: the orientation of the image
-    public init(decorative cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up) { }
+    public init(decorative cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up) { } { }
 }
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -9150,7 +8494,7 @@ extension Image {
 extension Image {
 
 	/// Creates a new `Image` from a specified `UIImage`.
-    public init(uiImage: UIImage) { }
+    public init(uiImage: UIImage) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -9175,7 +8519,7 @@ extension Image {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Image.ResizingMode, b: Image.ResizingMode) -> Bool { }
+        public static func == (a: Image.ResizingMode, b: Image.ResizingMode) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -9199,7 +8543,7 @@ extension Image {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 
     /// Modifies an image to make it resizable.
@@ -9211,7 +8555,7 @@ extension Image {
     /// - Parameters:
     ///   - capInsets: The values to use for the cap insets.
     ///   - resizingMode: The mode of resizing to use.
-    public func resizable(capInsets: EdgeInsets = EdgeInsets(), resizingMode: Image.ResizingMode = .stretch) -> Image { }
+    public func resizable(capInsets: EdgeInsets = EdgeInsets(), resizingMode: Image.ResizingMode = .stretch) -> Image { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -9274,7 +8618,7 @@ extension Image.ResizingMode : Hashable {
     ///     image to draw. The results are undefined if `sourceRect` selects
     ///     areas outside the `[0, 1]` range in either axis.
     ///   - scale: A scale factor applied to the image during rendering.
-    public init(image: Image, sourceRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1), scale: CGFloat = 1) { }
+    public init(image: Image, sourceRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1), scale: CGFloat = 1) { } { }
 }
 
 /// Defines the implementation of all `IndexView` instances within a view
@@ -9294,7 +8638,7 @@ public protocol IndexViewStyle {
 public struct InlinePickerStyle : PickerStyle {
 
     /// Creates an inline picker style.
-    public init() { }
+    public init() { } { }
 }
 
 /// The instance that describes the behavior and appearance of an inset grouped list.
@@ -9305,7 +8649,7 @@ public struct InlinePickerStyle : PickerStyle {
 public struct InsetGroupedListStyle : ListStyle {
 
     /// Creates an inset grouped list style.
-    public init() { }
+    public init() { } { }
 }
 
 /// The behavior and appearance of an inset list.
@@ -9315,7 +8659,7 @@ public struct InsetGroupedListStyle : ListStyle {
 public struct InsetListStyle : ListStyle {
 
     /// Creates an inset list style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A shape type that is able to inset itself to produce another shape.
@@ -9326,7 +8670,7 @@ public protocol InsettableShape : Shape {
     associatedtype InsetShape : InsettableShape
 
     /// Returns `self` inset by `amount`.
-    func inset(by amount: CGFloat) -> Self.InsetShape { }
+    func inset(by amount: CGFloat) -> Self.InsetShape { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -9335,27 +8679,27 @@ extension InsettableShape {
     /// Returns a view that is the result of insetting `self` by
     /// `style.lineWidth / 2`, stroking the resulting shape with
     /// `style`, and then filling with `content`.
-    @inlinable public func strokeBorder<S>(_ content: S, style: StrokeStyle, antialiased: Bool = true) -> some View where S : ShapeStyle { }
+    @inlinable public func strokeBorder<S>(_ content: S, style: StrokeStyle, antialiased: Bool = true) -> some View where S : ShapeStyle { } { }
 
 
     /// Returns a view that is the result of insetting `self` by
     /// `style.lineWidth / 2`, stroking the resulting shape with
     /// `style`, and then filling with the foreground color.
-    @inlinable public func strokeBorder(style: StrokeStyle, antialiased: Bool = true) -> some View { }
+    @inlinable public func strokeBorder(style: StrokeStyle, antialiased: Bool = true) -> some View { } { }
 
 
     /// Returns a view that is the result of filling the `width`-sized
     /// border (aka inner stroke) of `self` with `content`. This is
     /// equivalent to insetting `self` by `width / 2` and stroking the
     /// resulting shape with `width` as the line-width.
-    @inlinable public func strokeBorder<S>(_ content: S, lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View where S : ShapeStyle { }
+    @inlinable public func strokeBorder<S>(_ content: S, lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View where S : ShapeStyle { } { }
 
 
     /// Returns a view that is the result of filling the `width`-sized
     /// border (aka inner stroke) of `self` with the foreground color.
     /// This is equivalent to insetting `self` by `width / 2` and
     /// stroking the resulting shape with `width` as the line-width.
-    @inlinable public func strokeBorder(lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View { }
+    @inlinable public func strokeBorder(lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View { } { }
 
 }
 
@@ -9431,7 +8775,7 @@ public struct KeyEquivalent {
     public var character: Character
 
     /// Creates a new key equivalent from the given character value.
-    public init(_ character: Character) { }
+    public init(_ character: Character) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -9442,7 +8786,7 @@ extension KeyEquivalent : ExpressibleByExtendedGraphemeClusterLiteral {
     /// Creates an instance initialized to the given value.
     ///
     /// - Parameter value: The value of the new instance.
-    public init(extendedGraphemeClusterLiteral: Character) { }
+    public init(extendedGraphemeClusterLiteral: Character) { } { }
 
     /// A type that represents an extended grapheme cluster literal.
     ///
@@ -9487,7 +8831,7 @@ public struct KeyboardShortcut {
 
     /// Creates a new keyboard shortcut with the given key equivalent and set of
     /// modifier keys.
-    public init(_ key: KeyEquivalent, modifiers: EventModifiers = .command) { }
+    public init(_ key: KeyEquivalent, modifiers: EventModifiers = .command) { } { }
 }
 
 /// A standard label for user interface items, consisting of an icon with a
@@ -9529,8 +8873,8 @@ public struct KeyboardShortcut {
 ///     }
 ///
 /// For more extensive customization or to create a completely new label style,
-/// you'll need to adopt the ``LabelStyle`` protocol and implement a
-/// ``LabelStyleConfiguration`` for the new style.
+/// you'll need to adopt the ~~LabelStyle~~ protocol and implement a
+/// ~~LabelStyleConfiguration~~ for the new style.
 ///
 /// To apply a common label style to a group of labels, apply the style
 /// to the view hierarchy that contains the labels:
@@ -9544,7 +8888,7 @@ public struct KeyboardShortcut {
 ///
 /// It's also possible to make labels using views to compose the label's icon
 /// programmatically, rather than using a pre-made image. In this example, the
-/// icon portion of the label uses a filled ``Circle`` overlaid
+/// icon portion of the label uses a filled ~~Circle~~ overlaid
 /// with the user's initials:
 ///
 ///     Label {
@@ -9565,7 +8909,7 @@ public struct KeyboardShortcut {
 public struct Label<Title, Icon> : View where Title : View, Icon : View {
 
     /// Creates a label with a custom title and icon.
-    public init(@ViewBuilder title: () -> Title, @ViewBuilder icon: () -> Icon) { }
+    public init(@ViewBuilder title: () -> Title, @ViewBuilder icon: () -> Icon) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -9586,7 +8930,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///    - titleKey: A title generated from a localized string.
     ///    - image: The name of the image resource to lookup.
-    public init(_ titleKey: LocalizedStringKey, image name: String) { }
+    public init(_ titleKey: LocalizedStringKey, image name: String) { } { }
 
     /// Creates a label with a system icon image and a title generated from a
     /// localized string.
@@ -9594,14 +8938,14 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///    - titleKey: A title generated from a localized string.
     ///    - systemImage: The name of the image resource to lookup.
-    public init(_ titleKey: LocalizedStringKey, systemImage name: String) { }
+    public init(_ titleKey: LocalizedStringKey, systemImage name: String) { } { }
 
     /// Creates a label with an icon image and a title generated from a string.
     ///
     /// - Parameters:
     ///    - title: A string to used as the label's title.
     ///    - image: The name of the image resource to lookup.
-    public init<S>(_ title: S, image name: String) where S : StringProtocol { }
+    public init<S>(_ title: S, image name: String) where S : StringProtocol { } { }
 
     /// Creates a label with a system icon image and a title generated from a
     /// string.
@@ -9609,7 +8953,7 @@ extension Label where Title == Text, Icon == Image {
     /// - Parameters:
     ///    - title: A string to used as the label's title.
     ///    - systemImage: The name of the image resource to lookup.
-    public init<S>(_ title: S, systemImage name: String) where S : StringProtocol { }
+    public init<S>(_ title: S, systemImage name: String) where S : StringProtocol { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -9617,8 +8961,8 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 
     /// Creates a label representing the configuration of a style.
     ///
-    /// You can use this initializer within the ``LabelStyle/makeBody(configuration:)``
-    /// method of a ``LabelStyle`` instance to create an instance of the label
+    /// You can use this initializer within the ~~LabelStyle/makeBody(configuration:)~~
+    /// method of a ~~LabelStyle~~ instance to create an instance of the label
     /// that's being styled. This is useful for custom label styles that only
     /// wish to modify the current style, as opposed to implementing a brand new
     /// style.
@@ -9634,13 +8978,13 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     ///     }
     ///
     /// - Parameter configuration: The label style to use.
-    public init(_ configuration: LabelStyleConfiguration) { }
+    public init(_ configuration: LabelStyleConfiguration) { } { }
 }
 
 /// A type that applies a custom appearance to all labels within a view.
 ///
 /// To configure the current label style for a view hierarchy, use the
-/// ``View/labelStyle(_:)`` modifier.
+/// ~~View/labelStyle(_:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol LabelStyle {
 
@@ -9649,11 +8993,11 @@ public protocol LabelStyle {
 
     /// Creates a view that represents the body of a label.
     ///
-    /// The system calls this method for each ``Label`` instance in a view
+    /// The system calls this method for each ~~Label~~ instance in a view
     /// hierarchy where this style is the current label style.
     ///
     /// - Parameter configuration: The properties of the label.
-    func makeBody(configuration: Self.Configuration) -> Self.Body { }
+    func makeBody(configuration: Self.Configuration) -> Self.Body { } { }
 
     /// The properties of a label.
     typealias Configuration = LabelStyleConfiguration
@@ -9725,7 +9069,7 @@ public enum LayoutDirection : Hashable, CaseIterable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: LayoutDirection, b: LayoutDirection) -> Bool { }
+    public static func == (a: LayoutDirection, b: LayoutDirection) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -9749,7 +9093,7 @@ public enum LayoutDirection : Hashable, CaseIterable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [LayoutDirection]
@@ -9764,7 +9108,7 @@ extension LayoutDirection {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiLayoutDirection: UITraitEnvironmentLayoutDirection) { }
+    public init?(_ uiLayoutDirection: UITraitEnvironmentLayoutDirection) { } { }
 }
 
 /// A container view that arranges its child views in a grid that
@@ -9773,8 +9117,8 @@ extension LayoutDirection {
 /// The grid is "lazy," in that the grid view does not create items until
 /// they are needed.
 ///
-/// In the following example, a ``ScrollView`` contains a `LazyHGrid` that
-/// consists of a horizontally-arranged grid of ``Text`` views, aligned to
+/// In the following example, a ~~ScrollView~~ contains a `LazyHGrid` that
+/// consists of a horizontally-arranged grid of ~~Text~~ views, aligned to
 /// the top of the scroll view. For each column in the grid, the top row shows
 /// a Unicode code point from the "Smileys" group, and the bottom shows its
 /// corresponding emoji.
@@ -9807,7 +9151,7 @@ public struct LazyHGrid<Content> : View where Content : View {
     ///   parent view.
     ///   - pinnedViews: Views to pin to the bounds of a parent scroll view.
     ///   - content: The content of the grid.
-    public init(rows: [GridItem], alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
+    public init(rows: [GridItem], alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9822,7 +9166,7 @@ public struct LazyHGrid<Content> : View where Content : View {
 /// The stack is "lazy," in that the stack view doesn't create items until
 /// it needs to render them onscreen.
 ///
-/// In the following example, a ``ScrollView`` contains a `LazyHStack` that
+/// In the following example, a ~~ScrollView~~ contains a `LazyHStack` that
 /// consists of a horizontal row of text views. The stack aligns to the top
 /// of the scroll view and uses 10-point spacing between each text view.
 ///
@@ -9847,7 +9191,7 @@ public struct LazyHStack<Content> : View where Content : View {
     ///       subviews.
     ///     - pinnedViews: The kinds of child views that will be pinned.
     ///     - content: A view builder that creates the content of this stack.
-    public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
+    public init(alignment: VerticalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9862,8 +9206,8 @@ public struct LazyHStack<Content> : View where Content : View {
 /// The grid is "lazy," in that the grid view does not create items until
 /// they are needed.
 ///
-/// In the following example, a ``ScrollView`` contains a
-/// `LazyVGrid` consisting of a two-column grid of ``Text`` views, showing
+/// In the following example, a ~~ScrollView~~ contains a
+/// `LazyVGrid` consisting of a two-column grid of ~~Text~~ views, showing
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
 ///      var columns: [GridItem] =
@@ -9892,7 +9236,7 @@ public struct LazyVGrid<Content> : View where Content : View {
     ///   parent view.
     ///   - pinnedViews: Views to pin to the bounds of a parent scroll view.
     ///   - content: The content of the grid.
-    public init(columns: [GridItem], alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
+    public init(columns: [GridItem], alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9907,7 +9251,7 @@ public struct LazyVGrid<Content> : View where Content : View {
 /// The stack is "lazy," in that the stack view doesn't create items until
 /// it needs to render them onscreen.
 ///
-/// In the following example, a ``ScrollView`` contains a `LazyVStack` that
+/// In the following example, a ~~ScrollView~~ contains a `LazyVStack` that
 /// consists of a vertical row of text views. The stack aligns to the
 /// leading edge of the scroll view, and uses default spacing between the
 /// text views.
@@ -9933,7 +9277,7 @@ public struct LazyVStack<Content> : View where Content : View {
     ///       subviews.
     ///     - pinnedViews: The kinds of child views that will be pinned.
     ///     - content: A view builder that creates the content of this stack.
-    public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { }
+    public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -9962,7 +9306,7 @@ public enum LegibilityWeight : Hashable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: LegibilityWeight, b: LegibilityWeight) -> Bool { }
+    public static func == (a: LegibilityWeight, b: LegibilityWeight) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -9986,7 +9330,7 @@ public enum LegibilityWeight : Hashable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 extension LegibilityWeight {
@@ -9995,7 +9339,7 @@ extension LegibilityWeight {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiLegibilityWeight: UILegibilityWeight) { }
+    public init?(_ uiLegibilityWeight: UILegibilityWeight) { } { }
 }
 
 /// A linear gradient.
@@ -10012,7 +9356,7 @@ extension LegibilityWeight {
 	///   - gradient: The gradient containing the ordered colors to be used.
 	///   - startPoint: The unit point where the gradient starts.
 	///   - endPoint: The unit point where the gradient ends.
-    public init(gradient: Gradient, startPoint: UnitPoint, endPoint: UnitPoint) { }
+    public init(gradient: Gradient, startPoint: UnitPoint, endPoint: UnitPoint) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -10026,10 +9370,10 @@ extension LegibilityWeight {
 public struct LinearProgressViewStyle : ProgressViewStyle {
 
     /// Creates a linear progress view style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a linear progress view style with a tint color.
-    public init(tint: Color) { }
+    public init(tint: Color) { } { }
 
     /// Creates a view representing the body of a progress view.
     ///
@@ -10041,7 +9385,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
-    public func makeBody(configuration: LinearProgressViewStyle.Configuration) -> some View { }
+    public func makeBody(configuration: LinearProgressViewStyle.Configuration) -> some View { } { }
 
 
     /// A view representing the body of a progress view.
@@ -10066,9 +9410,9 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 /// browser.
 ///
 /// As with other views, you can style links using standard view modifiers
-/// depending on the view type of the link's label. For example, a ``Text``
-/// label could be modified with a custom ``View/font(_:)`` or
-/// ``View/foregroundColor(_:)`` to customize the appearance of the link in
+/// depending on the view type of the link's label. For example, a ~~Text~~
+/// label could be modified with a custom ~~View/font(_:)~~ or
+/// ~~View/foregroundColor(_:)~~ to customize the appearance of the link in
 /// your app's UI.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Link<Label> : View where Label : View {
@@ -10079,7 +9423,7 @@ public struct Link<Label> : View where Label : View {
     /// - Parameters:
     ///     - destination: The URL for the link.
     ///     - label: A view that describes the destination of URL.
-    public init(destination: URL, @ViewBuilder label: () -> Label) { }
+    public init(destination: URL, @ViewBuilder label: () -> Label) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -10097,7 +9441,7 @@ extension Link where Label == Text {
     /// Creates a control, consisting of a URL and a title key, used to
     /// navigate to a URL.
     ///
-    /// Use ``Link`` to create a control that your app uses to navigate to a
+    /// Use ~~Link~~ to create a control that your app uses to navigate to a
     /// URL that you provide. The example below creates a link to
     /// `example.com` and uses `Visit Example Co` as the title key to
     /// generate a link-styled view in your app:
@@ -10109,12 +9453,12 @@ extension Link where Label == Text {
     ///     - titleKey: The key for the localized title that describes the
     ///       purpose of this link.
     ///     - destination: The URL for the link.
-    public init(_ titleKey: LocalizedStringKey, destination: URL) { }
+    public init(_ titleKey: LocalizedStringKey, destination: URL) { } { }
 
     /// Creates a control, consisting of a URL and a title string, used to
     /// navigate to a URL.
     ///
-    /// Use ``Link`` to create a control that your app uses to navigate to a
+    /// Use ~~Link~~ to create a control that your app uses to navigate to a
     /// URL that you provide. The example below creates a link to
     /// `example.com` and displays the title string you provide as a
     /// link-styled view in your app:
@@ -10128,252 +9472,10 @@ extension Link where Label == Text {
     ///     - title: A text string used as the title for describing the
     ///       underlying `destination` URL.
     ///     - destination: The URL for the link.
-    public init<S>(_ title: S, destination: URL) where S : StringProtocol { }
+    public init<S>(_ title: S, destination: URL) where S : StringProtocol { } { }
 }
 
-/// A scrollable list of data.
-///
-/// `List` is a view that represents a scrollable list of data.
-///
-/// ### Creating a `List` with a fixed number of elements
-///
-/// The following creates a `List` with three rows of text:
-///
-/// ![List Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         List {
-///             Text("Bananas 🍌🍌")
-///             Text("Apples 🍏🍏")
-///             Text("Peaches 🍑🍑")
-///         }
-///     }
-/// }
-/// ```
-///
-/// ### Creating a `List` with a variable number of elements
-///
-/// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
-///
-/// ![List Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-2.png)
-///
-/// ````
-/// struct ExampleView: View {
-///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
-///
-///     var body: some View {
-///         List.init(fruits, id: /\.self) { (fruit: String) in
-///             Text(fruit)
-///         }
-///     }
-/// }
-/// ````
-///
-/// This is different from the previous example, because this initializer accepts a `rowContent` parameter that allows the `List` to generate SwiftUI views for the list's rows on-demand.
-///
-/// The `id` parameter requires a key-path to the *identifier* for each row of the `List`. This is required so that `List` can efficiently process changes in the data source (in this example, the array `fruits`). These changes to the data source are animated as insertions, removals and reorders - reflecting the changes in the source.
-///
-/// It is up to the programmer to decide what property best represents the 'identiifer' of a particular type. In this example, the `String` itself is a valid identifier for the data, therefore `\.self` is passed along to the `id` parameter.
-///
-/// ### Creating a `List` with both fixed and dynamic elements
-///
-/// `List` allows you to mix both fixed and dynamic elements using `ForEach`.
-///
-/// The following example displays a `List` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
-///
-/// ![List Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-3.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
-///
-///     var body: some View {
-///         List {
-///             Text("Hello, World!")
-///
-///             ForEach(fruits, id: /\.self) { (fruit: String) in
-///                 Text(fruit)
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// As seen in the above example, `ForEach` also accepts an `id` parameter along with a `rowContent`.
-///
-/// ### Adding sections to a `List`
-///
-/// The following example demonstrates the usage of `Section`.
-///
-/// ![List Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-4.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
-///
-///     var body: some View {
-///         List {
-///             Section(header: Text("Not a fruit")) {
-///                 Text("Hello, World!")
-///             }
-///
-///             Section(header: Text("Fruit")) {
-///                 ForEach(fruits, id: /\.self) { (fruit: String) in
-///                     Text(fruit)
-///                 }
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// A `Section` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
-///
-/// ### Styling a `List`
-///
-/// A `List` can be styled using the `View/listStyle(_:)` modifier.
-///
-/// The following example demonstrates how to style a `List` to use a grouped-inset style:
-///
-/// ![List Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-5.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         List {
-///             Text("Bananas 🍌🍌")
-///             Text("Apples 🍏🍏")
-///             Text("Peaches 🍑🍑")
-///         }
-///         .listStyle(InsetGroupedListStyle())
-///     }
-/// }
-/// ```
-///
-/// SwiftUI offers various list styles:
-///
-/// - ``DefaultListStyle``
-/// - ``GroupedListStyle``
-/// - ``InsetGroupedListStyle``
-/// - ``InsetListStyle``
-/// - ``PlainListStyle``
-/// - ``SidebarListStyle``
-///
-/// Note: List styles only modify the appearance of a `List`. They do not affect the order or positioning of rows within the `List`.
-///
-/// ### Setting the background view for a list row
-///
-/// Use `View/listRowBackground(_:)` to set the background view for a given row.
-///
-/// The following example demonstrates how `View/listRowBackground(_:)` can be used to provide specific background colors for a list's rows:
-///
-/// ![List Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-6.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         List {
-///             Text("Bananas 🍌🍌")
-///                 .listRowBackground(Color.yellow)
-///             Text("Apples 🍏🍏")
-///                 .listRowBackground(Color.red)
-///             Text("Peaches 🍑🍑")
-///                 .listRowBackground(Color.orange)
-///         }
-///     }
-/// }
-/// ```
-///
-/// A background can be provided for multiple list rows at a time, by applying the `View/listRowBackground(_:)` modifier to `ForEach`.
-///
-/// In the following example, all the rows of the `List` have the background view `Color.yellow`.
-///
-/// ![List Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-7.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
-///
-///     var body: some View {
-///         List {
-///             ForEach(fruits, id: /\.self) { (fruit: String) in
-///                 Text(fruit)
-///             }
-///             .listRowBackground(Color.yellow)
-///         }
-///     }
-/// }
-/// ```
-///
-///
-///
-/// ### Making list rows deletable
-///
-/// Apply the `DynamicViewContent/onDelete(_:)` modifier on a `ForEach` within a `List` to allow the list rows to become deletable.
-///
-/// ![List Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var fruits = ["🍌", "🍏", "🍑"]
-///
-///     var body: some View {
-///         NavigationView {
-///             List {
-///                 ForEach(fruits, id: /\.self) { fruit in
-///                     Text(fruit)
-///                 }
-///                 .onDelete { offsets in
-///                     fruits.remove(atOffsets: offsets)
-///                 }
-///             }
-///             .toolbar {
-///                 EditButton()
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-///
-///
-/// ### Editing a `List` using `EditButton`
-///
-/// An `EditButton` placed in the navigation bar of a `NavigationView` with a `List` in it can be used to provide an edit button for the `List`.
-///
-/// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-9.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var fruits = ["🍌", "🍏", "🍑"]
-///
-///     var body: some View {
-///         NavigationView {
-///             List {
-///                 ForEach(fruits, id: \.self) { fruit in
-///                     Text(fruit)
-///                 }
-///                 .onDelete { offets in
-///                     fruits.remove(atOffsets: offets)
-///                 }
-///             }
-///             .toolbar {
-///                 EditButton()
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// ### Further notes
-///
-/// Although `List` is very powerful, it currently has some limitations:
-///
-/// - The separator of a `List` cannot be removed.
-/// - `SidebarListStyle` is broken on macCatalyst.
-///
+/// A container that presents rows of data arranged in a single column.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct List<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
@@ -10387,7 +9489,7 @@ public struct List<SelectionValue, Content> : View where SelectionValue : Hashab
     ///   - selection: A binding to a set that identifies selected rows.
     ///   - content: The content of the list.
     @available(watchOS, unavailable)
-    public init(selection: Binding<Set<SelectionValue>>?, @ViewBuilder content: () -> Content) { }
+    public init(selection: Binding<Set<SelectionValue>>?, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a list with the given content that supports selecting a single
     /// row.
@@ -10399,7 +9501,7 @@ public struct List<SelectionValue, Content> : View where SelectionValue : Hashab
     ///   - selection: A binding to a selected row.
     ///   - content: The content of the list.
     @available(watchOS, unavailable)
-    public init(selection: Binding<SelectionValue?>?, @ViewBuilder content: () -> Content) { }
+    public init(selection: Binding<SelectionValue?>?, @ViewBuilder content: () -> Content) { } { }
 
     /// The content of the list.
     public var body: some View { get }
@@ -10424,7 +9526,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
+    public init<Data, RowContent>(_ data: Data, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { } { }
 
     /// Creates a hierarchical list that computes its rows on demand from an
     /// underlying collection of identifiable data, optionally allowing users to
@@ -10438,7 +9540,7 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
+    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { } { }
 
     /// Creates a list that identifies its rows based on a key path to the
     /// identifier of the underlying data, optionally allowing users to select
@@ -10451,7 +9553,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { } { }
 
     /// Creates a hierarchical list that identifies its rows based on a key path
     /// to the identifier of the underlying data, optionally allowing users to
@@ -10472,13 +9574,13 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { } { }
 
     /// Creates a list that computes its views on demand over a constant range.
     ///
     /// This instance only reads the initial value of `data` and doesn't need to
     /// identify views across updates. To compute views on demand over a dynamic
-    /// range, use ``List/init(_:id:selection:rowContent:)-8ef64``.
+    /// range, use ~~List/init(_:id:selection:rowContent:)-8ef64~~.
     ///
     /// - Parameters:
     ///   - data: A *constant* range of data to populate the list.
@@ -10486,7 +9588,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<RowContent>(_ data: Range<Int>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { }
+    public init<RowContent>(_ data: Range<Int>, selection: Binding<Set<SelectionValue>>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { } { }
 
     /// Creates a list that computes its rows on demand from an underlying
     /// collection of identifiable data, optionally allowing users to select a
@@ -10498,7 +9600,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
+    public init<Data, RowContent>(_ data: Data, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { } { }
 
     /// Creates a hierarchical list that computes its rows on demand from an
     /// underlying collection of identifiable data, optionally allowing users to
@@ -10518,7 +9620,7 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
+    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { } { }
 
     /// Creates a list that identifies its rows based on a key path to the
     /// identifier of the underlying data, optionally allowing users to select a
@@ -10531,7 +9633,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { } { }
 
     /// Creates a hierarchical list that identifies its rows based on a key path
     /// to the identifier of the underlying data, optionally allowing users to
@@ -10552,13 +9654,13 @@ extension List {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { } { }
 
     /// Creates a list that computes its views on demand over a constant range.
     ///
     /// This instance only reads the initial value of `data` and doesn't need to
     /// identify views across updates. To compute views on demand over a dynamic
-    /// range, use ``List/init(_:id:selection:rowContent:)-9r2hz``.
+    /// range, use ~~List/init(_:id:selection:rowContent:)-9r2hz~~.
     ///
     /// - Parameters:
     ///   - data: A *constant* range of data to populate the list.
@@ -10566,7 +9668,7 @@ extension List {
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
     @available(watchOS, unavailable)
-    public init<RowContent>(_ data: Range<Int>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { }
+    public init<RowContent>(_ data: Range<Int>, selection: Binding<SelectionValue?>?, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -10575,7 +9677,7 @@ extension List where SelectionValue == Never {
     /// Creates a list with the given content.
     ///
     /// - Parameter content: The content of the list.
-    public init(@ViewBuilder content: () -> Content) { }
+    public init(@ViewBuilder content: () -> Content) { } { }
 
     /// Creates a list that computes its rows on demand from an underlying
     /// collection of identifiable data.
@@ -10584,7 +9686,7 @@ extension List where SelectionValue == Never {
     ///   - data: A collection of identifiable data for computing the list.
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
-    public init<Data, RowContent>(_ data: Data, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
+    public init<Data, RowContent>(_ data: Data, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, HStack<RowContent>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { } { }
 
     /// Creates a hierarchical list that computes its rows on demand from an
     /// underlying collection of identifiable data.
@@ -10602,7 +9704,7 @@ extension List where SelectionValue == Never {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { }
+    public init<Data, RowContent>(_ data: Data, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, Data.Element.ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, RowContent : View, Data.Element : Identifiable { } { }
 
     /// Creates a list that identifies its rows based on a key path to the
     /// identifier of the underlying data.
@@ -10612,7 +9714,7 @@ extension List where SelectionValue == Never {
     ///   - id: The key path to the data model's identifier.
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { } { }
 
     /// Creates a hierarchical list that identifies its rows based on a key path
     /// to the identifier of the underlying data.
@@ -10631,19 +9733,19 @@ extension List where SelectionValue == Never {
     @available(iOS 14.0, macOS 11.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { }
+    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, children: KeyPath<Data.Element, Data?>, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == OutlineGroup<Data, ID, RowContent, RowContent, DisclosureGroup<RowContent, OutlineSubgroupChildren>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View { } { }
 
     /// Creates a list that computes its views on demand over a constant range.
     ///
     /// This instance only reads the initial value of `data` and doesn't need to
     /// identify views across updates. To compute views on demand over a dynamic
-    /// range, use ``List/init(_:id:rowContent:)``.
+    /// range, use ~~List/init(_:id:rowContent:)~~.
     ///
     /// - Parameters:
     ///   - data: A *constant* range of data to populate the list.
     ///   - rowContent: A view builder that creates the view for a single row of
     ///     the list.
-    public init<RowContent>(_ data: Range<Int>, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { }
+    public init<RowContent>(_ data: Range<Int>, @ViewBuilder rowContent: @escaping (Int) -> RowContent) where Content == ForEach<Range<Int>, Int, HStack<RowContent>>, RowContent : View { } { }
 }
 
 /// The configuration of a tint effect applied to content within a List.
@@ -10656,14 +9758,14 @@ public struct ListItemTint {
     ///
     /// This tint effect is fixed and not overridable by other
     /// system effects.
-    public static func fixed(_ tint: Color) -> ListItemTint { }
+    public static func fixed(_ tint: Color) -> ListItemTint { } { }
 
     /// An explicit tint color that is overridable.
     ///
     /// This tint effect is overridable by system effects, for
     /// example when the system has a custom user accent
     /// color on macOS.
-    public static func preferred(_ tint: Color) -> ListItemTint { }
+    public static func preferred(_ tint: Color) -> ListItemTint { } { }
 
     /// A standard grayscale tint effect.
     ///
@@ -10671,58 +9773,7 @@ public struct ListItemTint {
     public static let monochrome: ListItemTint
 }
 
-/// This protocol modifies how a list appears and behaves.
-///
-/// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a `List` with the ``View/listStyle(_:)`` modifier.
-///
-/// ![ListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         List {
-///             Text("🍌🍌")
-///             Text("🍎🍎")
-///         }
-///         .listStyle(InsetListStyle())
-///     }
-/// }
-/// ```
-///
-/// Two list styles are included specifically for rendering grouped lists:
-/// - `View/Styles/GroupedListStyle`
-/// - `View/Styles/InsetGroupedListStyle`
-///
-/// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
-///
-/// ![ListStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-2.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///          List {
-///               Section(header: Text("🍌🍌")) {
-///                    Text("🔥🔥")
-///               }
-///               Section(header: Text("🍎🍎")) {
-///                     Text("🔥🔥")
-///               }
-///          }
-///         .listStyle(GroupedListStyle())
-///     }
-/// }
-/// ```
-///
-/// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly referenced below.
-///
-/// - `DefaultListStyle` - provides the default list behavior and appearence for the platform.
-/// - `GroupedListStyle` - provides default list behavior for grouped lists, including appropriate formating of section headers.
-/// - `InsetGroupedListStyle` - is a variation of GroupedListStyle with insets including row backgrounds with rounded corners.
-/// - `InsetListStyle` - is similar to a plain list, but includes additional layout insets.
-/// - `PlainListStyle` - provides platform standard list appearance and behavior.
-/// - `SidebarListStyle` - provides styling and behavior designed for an application level navigation bar used in iPadOS and MacOS. An example implementation can be found [here](https:swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/). Currently not working properly on MacCatalyst.
-/// - `EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
-/// - `CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.
+/// A protocol that describes the behavior and appearance of a list.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ListStyle {
 }
@@ -10732,15 +9783,15 @@ public protocol ListStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
 
-	/// Creates a localized string key from a ``String`` value.
+	/// Creates a localized string key from a ~~String~~ value.
 	///
 	/// - Parameter value: The value for keying a string.
-    public init(_ value: String) { }
+    public init(_ value: String) { } { }
 
     /// Creates an instance initialized to the given string value.
     ///
     /// - Parameter value: The value of the new instance.
-    public init(stringLiteral value: String) { }
+    public init(stringLiteral value: String) { } { }
 
     /// Creates an instance from a string interpolation.
     ///
@@ -10752,7 +9803,7 @@ public protocol ListStyle {
     /// - Parameter stringInterpolation: An instance of `StringInterpolation`
     ///             which has had each segment of the string literal appended
     ///             to it.
-    public init(stringInterpolation: LocalizedStringKey.StringInterpolation) { }
+    public init(stringInterpolation: LocalizedStringKey.StringInterpolation) { } { }
 
     /// The type each segment of a string literal containing interpolations
     /// should be appended to.
@@ -10777,7 +9828,7 @@ public protocol ListStyle {
         /// - Parameter interpolationCount: The number of interpolations which will be
         ///   appended. Use this value to estimate how much additional capacity will
         ///   be needed for the interpolated segments.
-        public init(literalCapacity: Int, interpolationCount: Int) { }
+        public init(literalCapacity: Int, interpolationCount: Int) { } { }
 
         /// Appends a literal segment to the interpolation.
         ///
@@ -10790,7 +9841,7 @@ public protocol ListStyle {
         ///
         /// - Parameter literal: A string literal containing the characters
         ///   that appear next in the string literal.
-        public mutating func appendLiteral(_ literal: String) { }
+        public mutating func appendLiteral(_ literal: String) { } { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
@@ -10809,7 +9860,7 @@ public protocol ListStyle {
         ///            	      """
 		///		print(message)
 		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-        public mutating func appendInterpolation(_ string: String) { }
+        public mutating func appendInterpolation(_ string: String) { } { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
@@ -10828,7 +9879,7 @@ public protocol ListStyle {
         ///            	      """
 		///		print(message)
 		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-        public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Formatter? = nil) where Subject : ReferenceConvertible { }
+        public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Formatter? = nil) where Subject : ReferenceConvertible { } { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
@@ -10847,7 +9898,7 @@ public protocol ListStyle {
         ///            	      """
 		///		print(message)
 		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-        public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Formatter? = nil) where Subject : NSObject { }
+        public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Formatter? = nil) where Subject : NSObject { } { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
@@ -10866,7 +9917,7 @@ public protocol ListStyle {
         ///            	      """
 		///		print(message)
 		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-        public mutating func appendInterpolation<T>(_ value: T) where T : _FormatSpecifiable { }
+        public mutating func appendInterpolation<T>(_ value: T) where T : _FormatSpecifiable { } { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
@@ -10885,7 +9936,7 @@ public protocol ListStyle {
         ///            	      """
 		///		print(message)
 		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-        public mutating func appendInterpolation<T>(_ value: T, specifier: String) where T : _FormatSpecifiable { }
+        public mutating func appendInterpolation<T>(_ value: T, specifier: String) where T : _FormatSpecifiable { } { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
@@ -10905,7 +9956,7 @@ public protocol ListStyle {
 		///		print(message)
 		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-        public mutating func appendInterpolation(_ text: Text) { }
+        public mutating func appendInterpolation(_ text: Text) { } { }
 
         /// The type that should be used for literal segments.
         public typealias StringLiteralType = String
@@ -10936,7 +9987,7 @@ public protocol ListStyle {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: LocalizedStringKey, b: LocalizedStringKey) -> Bool { }
+    public static func == (a: LocalizedStringKey, b: LocalizedStringKey) -> Bool { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -10959,7 +10010,7 @@ extension LocalizedStringKey.StringInterpolation {
         ///            	      """
 		///		print(message)
 		/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-    public mutating func appendInterpolation(_ image: Image) { }
+    public mutating func appendInterpolation(_ image: Image) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -10982,7 +10033,7 @@ extension LocalizedStringKey.StringInterpolation {
     ///            	      """
 	///		print(message)
 	/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-    public mutating func appendInterpolation(_ date: Date, style: Text.DateStyle) { }
+    public mutating func appendInterpolation(_ date: Date, style: Text.DateStyle) { } { }
 
     /// Interpolates the given value’s textual representation into the
     /// string literal being created.
@@ -11001,7 +10052,7 @@ extension LocalizedStringKey.StringInterpolation {
     ///            	      """
 	///		print(message)
 	/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-    public mutating func appendInterpolation(_ dates: ClosedRange<Date>) { }
+    public mutating func appendInterpolation(_ dates: ClosedRange<Date>) { } { }
 
     /// Interpolates the given value’s textual representation into the
     /// string literal being created.
@@ -11020,16 +10071,16 @@ extension LocalizedStringKey.StringInterpolation {
     ///            	      """
 	///		print(message)
 	/// 	// Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
-    public mutating func appendInterpolation(_ interval: DateInterval) { }
+    public mutating func appendInterpolation(_ interval: DateInterval) { } { }
 }
 
 /// A gesture that succeeds when the user performs a long press.
 ///
 /// To recognize a long-press gesture on a view, create and configure the
-/// gesture, then add it to the view using the ``View/gesture(_:including:)``
+/// gesture, then add it to the view using the ~~View/gesture(_:including:)~~
 /// modifier.
 ///
-/// Add a long-press gesture to a ``Circle`` to animate its color from blue to
+/// Add a long-press gesture to a ~~Circle~~ to animate its color from blue to
 /// red, and then change it to green when the gesture ends:
 ///
 ///     struct LongPressGestureView: View {
@@ -11078,7 +10129,7 @@ public struct LongPressGesture : Gesture {
     ///   - maximumDistance: The maximum distance that the fingers or cursor
     ///     performing the long press can move before the gesture fails.
     @available(tvOS, unavailable)
-    public init(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10) { }
+    public init(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10) { } { }
 
     /// The type representing the gesture's value.
     public typealias Value = Bool
@@ -11093,9 +10144,9 @@ public struct LongPressGesture : Gesture {
 /// A magnification gesture tracks how a magnification event sequence changes.
 /// To recognize a magnification gesture on a view, create and configure the
 /// gesture, and then add it to the view using the
-/// ``View/gesture(_:including:)`` modifier.
+/// ~~View/gesture(_:including:)~~ modifier.
 ///
-/// Add a magnification gesture to a ``Circle`` that changes its size while the
+/// Add a magnification gesture to a ~~Circle~~ that changes its size while the
 /// user performs the gesture:
 ///
 ///     struct MagnificationGestureView: View {
@@ -11132,7 +10183,7 @@ public struct MagnificationGesture : Gesture {
     ///
     /// - Parameter minimumScaleDelta: The minimum scale delta required before
     ///   the gesture starts.
-    public init(minimumScaleDelta: CGFloat = 0.01) { }
+    public init(minimumScaleDelta: CGFloat = 0.01) { } { }
 
     /// The type representing the gesture's value.
     public typealias Value = CGFloat
@@ -11179,7 +10230,7 @@ public struct MagnificationGesture : Gesture {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    @inlinable public init(rawValue: UInt32) { }
+    @inlinable public init(rawValue: UInt32) { } { }
 
     /// The view's position, in window coordinates.
     public static let position: MatchedGeometryProperties
@@ -11224,7 +10275,7 @@ public struct MagnificationGesture : Gesture {
 ///         }
 ///     }
 ///
-/// You can create the menu's title with a ``LocalizedStringKey``, as seen in
+/// You can create the menu's title with a ~~LocalizedStringKey~~, as seen in
 /// the previous example, or with a view builder that creates multiple views,
 /// such as an image and a text view:
 ///
@@ -11238,7 +10289,7 @@ public struct MagnificationGesture : Gesture {
 ///
 /// ### Styling Menus
 ///
-/// Use the ``View/menuStyle(_:)`` modifier to change the style of all menus
+/// Use the ~~View/menuStyle(_:)~~ modifier to change the style of all menus
 /// in a view. The following example shows how to apply a custom style:
 ///
 ///     Menu("Editing") {
@@ -11272,7 +10323,7 @@ extension Menu {
     /// - Parameters:
     ///     - content: A group of menu items.
     ///     - label: A view describing the content of the menu.
-    public init(@ViewBuilder content: () -> Content, @ViewBuilder label: () -> Label) { }
+    public init(@ViewBuilder content: () -> Content, @ViewBuilder label: () -> Label) { } { }
 
     /// Creates a menu that generates its label from a localized string key.
     ///
@@ -11280,17 +10331,17 @@ extension Menu {
     ///     - titleKey: The key for the link's localized title, which describes
     ///         the contents of the menu.
     ///     - content: A group of menu items.
-    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) where Label == Text { }
+    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) where Label == Text { } { }
 
     /// Creates a menu that generates its label from a string.
     ///
     /// To create the label with a localized string key, use
-    /// ``Menu/init(_:content:)-7v768`` instead.
+    /// ~~Menu/init(_:content:)-7v768~~ instead.
     ///
     /// - Parameters:
     ///     - title: A string that describes the contents of the menu.
     ///     - content: A group of menu items.
-    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where Label == Text, S : StringProtocol { }
+    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where Label == Text, S : StringProtocol { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -11300,8 +10351,8 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 
     /// Creates a menu based on a style configuration.
     ///
-    /// Use this initializer within the ``MenuStyle/makeBody(configuration:)``
-    /// method of a ``MenuStyle`` instance to create an instance of the menu
+    /// Use this initializer within the ~~MenuStyle/makeBody(configuration:)~~
+    /// method of a ~~MenuStyle~~ instance to create an instance of the menu
     /// being styled. This is useful for custom menu styles that modify the
     /// current menu style.
     ///
@@ -11315,35 +10366,35 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     ///         }
     ///     }
     ///
-    public init(_ configuration: MenuStyleConfiguration) { }
+    public init(_ configuration: MenuStyleConfiguration) { } { }
 }
 
 /// A picker style that presents the options as a menu when the user presses a
 /// button, or as a submenu when nested within a larger menu.
 ///
 /// Use this style when there are more than five options. Consider using
-/// ``InlinePickerStyle`` when there are fewer than five options.
+/// ~~InlinePickerStyle~~ when there are fewer than five options.
 ///
 /// The button itself indicates the selected option. You can include additional
 /// controls in the set of options, such as a button to customize the list of
 /// options.
 ///
 /// To apply this style to a picker, or to a view that contains pickers, use the
-/// ``View/pickerStyle(_:)`` modifier.
+/// ~~View/pickerStyle(_:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct MenuPickerStyle : PickerStyle {
 
     /// Creates a menu picker style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A type that applies standard interaction behavior and a custom appearance
 /// to all menus within a view hierarchy.
 ///
 /// To configure the current menu style for a view hiearchy, use the
-/// ``View/menuStyle(_:)`` modifier.
+/// ~~View/menuStyle(_:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -11356,9 +10407,9 @@ public protocol MenuStyle {
     ///
     /// - Parameter configuration: The properties of the menu.
     ///
-    /// The system calls this method for each ``Menu`` instance in a view
+    /// The system calls this method for each ~~Menu~~ instance in a view
     /// hierarchy where this style is the current menu style.
-    func makeBody(configuration: Self.Configuration) -> Self.Body { }
+    func makeBody(configuration: Self.Configuration) -> Self.Body { } { }
 
     /// The properties of a menu.
     typealias Configuration = MenuStyleConfiguration
@@ -11366,7 +10417,7 @@ public protocol MenuStyle {
 
 /// A configuration of a menu.
 ///
-/// Use the ``Menu/init(_:)`` initializer of ``Menu`` to create an
+/// Use the ~~Menu/init(_:)~~ initializer of ~~Menu~~ to create an
 /// instance using the current menu style, which you can modify to create a
 /// custom style.
 ///
@@ -11425,34 +10476,34 @@ public struct MenuStyleConfiguration {
     /// A structure that the defines the content and modifier needed to produce
     /// a new view or view modifier.
     ///
-    /// If `content` is a ``View`` and `modifier` is a ``ViewModifier``, the
-    /// result is a ``View``. If `content` and `modifier` are both view
-    /// modifiers, then the result is a new ``ViewModifier`` combining them.
+    /// If `content` is a ~~View~~ and `modifier` is a ~~ViewModifier~~, the
+    /// result is a ~~View~~. If `content` and `modifier` are both view
+    /// modifiers, then the result is a new ~~ViewModifier~~ combining them.
     ///
     /// - Parameters:
     ///     - content: The content that the modifier changes.
     ///     - modifier: The modifier to apply to the content.
-    @inlinable public init(content: Content, modifier: Modifier) { }
+    @inlinable public init(content: Content, modifier: Modifier) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
     /// Allow an assistive technology to programmatically invoke the actions of the modified view.
-    public func accessibilityAction(_ actionKind: AccessibilityActionKind = .default, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityAction(_ actionKind: AccessibilityActionKind = .default, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Allow an assistive technology to programmatically invoke the actions of the modified view and all subviews.
-    public func accessibilityAction(named name: Text, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityAction(named name: Text, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
     /// Allow an assistive technology to programmatically invoke the actions of the modified view and all subviews.
-    public func accessibilityAction(named nameKey: LocalizedStringKey, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityAction(named nameKey: LocalizedStringKey, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Allow an assistive technology to programmatically invoke the actions of the modified view and all subviews.
-    public func accessibilityAction<S>(named name: S, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> where S : StringProtocol { }
+    public func accessibilityAction<S>(named name: S, _ handler: @escaping () -> Void) -> ModifiedContent<Content, Modifier> where S : StringProtocol { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -11466,7 +10517,7 @@ extension ModifiedContent : Equatable where Content : Equatable, Modifier : Equa
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ModifiedContent<Content, Modifier>, b: ModifiedContent<Content, Modifier>) -> Bool { }
+    public static func == (a: ModifiedContent<Content, Modifier>, b: ModifiedContent<Content, Modifier>) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -11500,7 +10551,7 @@ extension ModifiedContent : Scene where Content : Scene, Modifier : _SceneModifi
     /// scene from primitive scenes that SwiftUI provides, as well as other
     /// scenes that you've defined.
     ///
-    /// Swift infers the scene's ``SwiftUI/Scene/Body-swift.associatedtype``
+    /// Swift infers the scene's ~~SwiftUI/Scene/Body-swift.associatedtype~~
     /// associated type based on the contents of the `body` property.
     public var body: ModifiedContent<Content, Modifier>.Body { get }
 }
@@ -11509,7 +10560,7 @@ extension ModifiedContent : Scene where Content : Scene, Modifier : _SceneModifi
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
     /// Specifies whether to hide this view from system accessibility features.
-    public func accessibilityHidden(_ hidden: Bool) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityHidden(_ hidden: Bool) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds a label to the view that describes its contents.
     ///
@@ -11517,51 +10568,51 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// For example, you could use this method to label a button that plays music with the text "Play".
     /// Don't include text in the label that repeats information that users already have. For example,
     /// don't use the label "Play button" because a button already has a trait that identifies it as a button.
-    public func accessibilityLabel(_ label: Text) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityLabel(_ label: Text) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
     /// Use this method to describe the value represented by a view, but only if that's different than the
     /// view's label. For example, for a slider that you label as "Volume" using accessibilityLabel(),
     /// you can provide the current volume setting, like "60%", using accessibilityValue().
-    public func accessibilityValue(_ value: Text) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityValue(_ value: Text) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
     ///
     /// Provide a hint in the form of a brief phrase, like "Purchases the item" or
     /// "Downloads the attachment".
-    public func accessibilityHint(_ hint: Text) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityHint(_ hint: Text) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
     /// If you don't specify any input labels, the user can still refer to the view using the accessibility
     /// label that you add with the accessibilityLabel() modifier. Provide labels in descending order
     /// of importance. Voice Control and Full Keyboard Access use the input labels.
-    public func accessibilityInputLabels(_ inputLabels: [Text]) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityInputLabels(_ inputLabels: [Text]) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds the given traits to the view.
-    public func accessibilityAddTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityAddTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Removes the given traits from this view.
-    public func accessibilityRemoveTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityRemoveTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Uses the specified string to identify the view.
     ///
     /// Use this value for testing. It isn't visible to the user.
-    public func accessibilityIdentifier(_ identifier: String) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityIdentifier(_ identifier: String) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Sets the sort priority order for this view's accessibility
     /// element, relative to other elements at the same level.
     ///
     /// Higher numbers are sorted first. The default sort priority is zero.
-    public func accessibilitySortPriority(_ sortPriority: Double) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilitySortPriority(_ sortPriority: Double) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Specifies the point where activations occur in the view.
-    public func accessibilityActivationPoint(_ activationPoint: CGPoint) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityActivationPoint(_ activationPoint: CGPoint) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Specifies the unit point where activations occur in the view.
-    public func accessibilityActivationPoint(_ activationPoint: UnitPoint) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityActivationPoint(_ activationPoint: UnitPoint) -> ModifiedContent<Content, Modifier> { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -11573,7 +10624,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// For example, you could use this method to label a button that plays music with the text "Play".
     /// Don't include text in the label that repeats information that users already have. For example,
     /// don't use the label "Play button" because a button already has a trait that identifies it as a button.
-    public func accessibilityLabel(_ labelKey: LocalizedStringKey) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityLabel(_ labelKey: LocalizedStringKey) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds a label to the view that describes its contents.
     ///
@@ -11581,35 +10632,35 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// For example, you could use this method to label a button that plays music with the text "Play".
     /// Don't include text in the label that repeats information that users already have. For example,
     /// don't use the label "Play button" because a button already has a trait that identifies it as a button.
-    public func accessibilityLabel<S>(_ label: S) -> ModifiedContent<Content, Modifier> where S : StringProtocol { }
+    public func accessibilityLabel<S>(_ label: S) -> ModifiedContent<Content, Modifier> where S : StringProtocol { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
     /// Use this method to describe the value represented by a view, but only if that's different than the
     /// view's label. For example, for a slider that you label as "Volume" using accessibilityLabel(),
     /// you can provide the current volume setting, like "60%", using accessibilityValue().
-    public func accessibilityValue(_ valueKey: LocalizedStringKey) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityValue(_ valueKey: LocalizedStringKey) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
     /// Use this method to describe the value represented by a view, but only if that's different than the
     /// view's label. For example, for a slider that you label as "Volume" using accessibilityLabel(),
     /// you can provide the current volume setting, like "60%", using accessibilityValue().
-    public func accessibilityValue<S>(_ value: S) -> ModifiedContent<Content, Modifier> where S : StringProtocol { }
+    public func accessibilityValue<S>(_ value: S) -> ModifiedContent<Content, Modifier> where S : StringProtocol { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
     ///
     /// Provide a hint in the form of a brief phrase, like "Purchases the item" or
     /// "Downloads the attachment".
-    public func accessibilityHint(_ hintKey: LocalizedStringKey) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityHint(_ hintKey: LocalizedStringKey) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
     ///
     /// Provide a hint in the form of a brief phrase, like "Purchases the item" or
     /// "Downloads the attachment".
-    public func accessibilityHint<S>(_ hint: S) -> ModifiedContent<Content, Modifier> where S : StringProtocol { }
+    public func accessibilityHint<S>(_ hint: S) -> ModifiedContent<Content, Modifier> where S : StringProtocol { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
@@ -11619,7 +10670,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// > Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
-    public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
@@ -11629,7 +10680,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// > Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
-    public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Content, Modifier> where S : StringProtocol { }
+    public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Content, Modifier> where S : StringProtocol { } { }
 }
 
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
@@ -11639,7 +10690,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityHidden(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityHidden(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityHidden(_:)")
-    public func accessibility(hidden: Bool) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(hidden: Bool) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds a label to the view that describes its contents.
     ///
@@ -11651,7 +10702,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityLabel(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityLabel(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityLabel(_:)")
-    public func accessibility(label: Text) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(label: Text) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
@@ -11662,7 +10713,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityValue(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityValue(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityValue(_:)")
-    public func accessibility(value: Text) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(value: Text) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
@@ -11673,7 +10724,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityHint(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityHint(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityHint(_:)")
-    public func accessibility(hint: Text) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(hint: Text) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
@@ -11684,21 +10735,21 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityInputLabels(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityInputLabels(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityInputLabels(_:)")
-    public func accessibility(inputLabels: [Text]) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(inputLabels: [Text]) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Adds the given traits to the view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
-    public func accessibility(addTraits traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(addTraits traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Removes the given traits from this view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
-    public func accessibility(removeTraits traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(removeTraits traits: AccessibilityTraits) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Uses the specified string to identify the view.
     ///
@@ -11707,13 +10758,13 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityIdentifier(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityIdentifier(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityIdentifier(_:)")
-    public func accessibility(identifier: String) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(identifier: String) -> ModifiedContent<Content, Modifier> { } { }
 
     @available(iOS, deprecated, introduced: 13.0)
     @available(macOS, deprecated, introduced: 10.15)
     @available(tvOS, deprecated, introduced: 13.0)
     @available(watchOS, deprecated, introduced: 6)
-    public func accessibility(selectionIdentifier: AnyHashable) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(selectionIdentifier: AnyHashable) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Sets the sort priority order for this view's accessibility
     /// element, relative to other elements at the same level.
@@ -11723,35 +10774,35 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilitySortPriority(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilitySortPriority(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilitySortPriority(_:)")
-    public func accessibility(sortPriority: Double) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(sortPriority: Double) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Specifies the point where activations occur in the view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
-    public func accessibility(activationPoint: CGPoint) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(activationPoint: CGPoint) -> ModifiedContent<Content, Modifier> { } { }
 
     /// Specifies the unit point where activations occur in the view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
-    public func accessibility(activationPoint: UnitPoint) -> ModifiedContent<Content, Modifier> { }
+    public func accessibility(activationPoint: UnitPoint) -> ModifiedContent<Content, Modifier> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
     /// Adds an accessibility scroll action to the view.
-    public func accessibilityScrollAction(_ handler: @escaping (Edge) -> Void) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityScrollAction(_ handler: @escaping (Edge) -> Void) -> ModifiedContent<Content, Modifier> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
     /// Adds an accessibility adjustable action to the view.
-    public func accessibilityAdjustableAction(_ handler: @escaping (AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Content, Modifier> { }
+    public func accessibilityAdjustableAction(_ handler: @escaping (AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Content, Modifier> { } { }
 }
 
 /// A dynamic property type that allows access to a namespace defined
@@ -11761,7 +10812,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 @frozen @propertyWrapper public struct Namespace : DynamicProperty {
 
 	/// Create an empty namespace.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The namespace ID from the property wrapper.
     public var wrappedValue: Namespace.ID { get }
@@ -11792,7 +10843,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
 
         /// Returns a Boolean value indicating whether two values are equal.
         ///
@@ -11802,7 +10853,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Namespace.ID, b: Namespace.ID) -> Bool { }
+        public static func == (a: Namespace.ID, b: Namespace.ID) -> Bool { } { }
     }
 }
 
@@ -11834,7 +10885,7 @@ public struct NavigationBarItem {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: NavigationBarItem.TitleDisplayMode, b: NavigationBarItem.TitleDisplayMode) -> Bool { }
+        public static func == (a: NavigationBarItem.TitleDisplayMode, b: NavigationBarItem.TitleDisplayMode) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -11858,7 +10909,7 @@ public struct NavigationBarItem {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 }
 
@@ -11877,14 +10928,14 @@ extension NavigationBarItem.TitleDisplayMode : Hashable {
 public struct NavigationLink<Label, Destination> : View where Label : View, Destination : View {
 
     /// Creates an instance that presents `destination`.
-    public init(destination: Destination, @ViewBuilder label: () -> Label) { }
+    public init(destination: Destination, @ViewBuilder label: () -> Label) { } { }
 
     /// Creates an instance that presents `destination` when active.
-    public init(destination: Destination, isActive: Binding<Bool>, @ViewBuilder label: () -> Label) { }
+    public init(destination: Destination, isActive: Binding<Bool>, @ViewBuilder label: () -> Label) { } { }
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`.
-    public init<V>(destination: Destination, tag: V, selection: Binding<V?>, @ViewBuilder label: () -> Label) where V : Hashable { }
+    public init<V>(destination: Destination, tag: V, selection: Binding<V?>, @ViewBuilder label: () -> Label) where V : Hashable { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -11901,27 +10952,27 @@ extension NavigationLink where Label == Text {
 
     /// Creates an instance that presents `destination`, with a `Text` label
     /// generated from a title string.
-    public init(_ titleKey: LocalizedStringKey, destination: Destination) { }
+    public init(_ titleKey: LocalizedStringKey, destination: Destination) { } { }
 
     /// Creates an instance that presents `destination`, with a `Text` label
     /// generated from a title string.
-    public init<S>(_ title: S, destination: Destination) where S : StringProtocol { }
+    public init<S>(_ title: S, destination: Destination) where S : StringProtocol { } { }
 
     /// Creates an instance that presents `destination` when active, with a
     /// `Text` label generated from a title string.
-    public init(_ titleKey: LocalizedStringKey, destination: Destination, isActive: Binding<Bool>) { }
+    public init(_ titleKey: LocalizedStringKey, destination: Destination, isActive: Binding<Bool>) { } { }
 
     /// Creates an instance that presents `destination` when active, with a
     /// `Text` label generated from a title string.
-    public init<S>(_ title: S, destination: Destination, isActive: Binding<Bool>) where S : StringProtocol { }
+    public init<S>(_ title: S, destination: Destination, isActive: Binding<Bool>) where S : StringProtocol { } { }
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`, with a `Text` label generated from a title string.
-    public init<V>(_ titleKey: LocalizedStringKey, destination: Destination, tag: V, selection: Binding<V?>) where V : Hashable { }
+    public init<V>(_ titleKey: LocalizedStringKey, destination: Destination, tag: V, selection: Binding<V?>) where V : Hashable { } { }
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`, with a `Text` label generated from a title string.
-    public init<S, V>(_ title: S, destination: Destination, tag: V, selection: Binding<V?>) where S : StringProtocol, V : Hashable { }
+    public init<S, V>(_ title: S, destination: Destination, tag: V, selection: Binding<V?>) where S : StringProtocol, V : Hashable { } { }
 }
 
 @available(iOS 13.0, *)
@@ -11937,267 +10988,19 @@ extension NavigationLink {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func isDetailLink(_ isDetailLink: Bool) -> some View { }
+    public func isDetailLink(_ isDetailLink: Bool) -> some View { } { }
 
 }
 
-/// A container for view navigation along with a (optional) navigation bar.
-///
-/// `NavigationView`is a container that adds stack-based navigation to a view, along with a (optional) navigation bar.
-///
-/// ### Setting up a navigation stack
-///
-/// A navigation stack is set up simply by wrapping your view in a `NavigationView`
-///
-/// ![NavigationView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-1.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
-///         }
-///     }
-/// }
-/// ```
-///
-/// A navigation bar is added by default. The navigation bar can be hidden via  `View/navigationBarHidden(_:)`.
-///
-/// ### Adding a navigation title
-///
-/// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your `NavigationView`:
-///
-/// ![NavigationView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-2.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
-///                 .navigationTitle("Home")
-///         }
-///     }
-/// }
-/// ```
-///
-/// `View/navigationTitle(_:)` is only available on iOS 14 and higher. If your application targets iOS 13, please use `View/navigationBarTitle(_:)`.
-///
-/// ### Setting the navigation title display mode
-///
-/// The display mode of a navigation bar title can be controlled via `View/navigationBarTitleDisplayMode(_:)`. There are two main display modes:
-///
-/// - `NavigationBarItem.TitleDisplayMode.inline`
-/// - `NavigationBarItem.TitleDisplayMode.large`
-///
-/// An `.automatic` mode is also present, and represents the system default.
-///
-/// The following example forces a large navigation title:
-///
-/// ![NavigationView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-3.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
-///                 .navigationTitle("Home")
-///                 .navigationBarTitleDisplayMode(.large)
-///         }
-///     }
-/// }
-/// ```
-///
-/// ### Navigating to a view
-///
-/// Use `NavigationLink` to add a button that pushes a new view onto the navigation stack.
-///
-/// For example, the following presents `ApplesView` when the link "I want apples!" is pressed:
-///
-/// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     struct BananasView: View {
-///         var body: some View {
-///             Text("Bananas")
-///                 .navigationTitle("🍌🍌")
-///         }
-///     }
-///
-///     var body: some View {
-///         NavigationView {
-///             NavigationLink(destination: BananasView()) {
-///                 Text("I want bananas!")
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// ### Hiding the navigation bar
-///
-/// The navigation bar is on by default within a `NavigationView`. It can be hidden using `View/navigationBarHidden(_:)`.
-///
-/// For example:
-///
-/// ![NavigationView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-5.png)
-///
-/// ````
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
-///                 .navigationBarHidden(true)
-///         }
-///     }
-/// }
-/// ````
-///
-/// Note that the navigation bar can be unhidden by child views. `View/navigationBarHidden(_:)` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
-///
-/// For example, navigating to `SecondScreen` in the following unhides the bar:
-///
-/// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     struct SecondScreen: View {
-///         var body: some View {
-///             Text("Bananas🍌🍌")
-///                 .navigationTitle("Second Screen")
-///                 .navigationBarHidden(false)
-///         }
-///     }
-///
-///     var body: some View {
-///         NavigationView {
-///             VStack {
-///                 Text("Hello Bananas🍌🍌")
-///
-///                 NavigationLink(destination: SecondScreen()) {
-///                     Text("Take me to the second screen!")
-///                 }
-///             }
-///             .navigationBarHidden(true)
-///         }
-///     }
-/// }
-/// ```
-///
-/// And popping `SecondScreen` (or navigating back) hides it again, as `SecondScreen` is removed from the view hierarchy, leaving `ExampleView` as the deepest view in the hierarchy - which has hidden the navigation bar.
-///
-/// ### Adding navigation bar items
-///
-/// Use `View/navigationBarItems(leading:trailing:)` to add items to a navigation bar's leading and trailing areas.
-///
-/// For example, the following adds "🍌🍌" to the leading area, and "🍏🍏" to the trailing area:
-///
-/// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-7.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
-///         }
-///         .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
-///     }
-/// }
-/// ```
-///
-/// ### Styling a navigation view
-///
-/// Use `View/navigationViewStyle(_:)` to style a navigation view.
-///
-/// For example, the following forces a stack-based navigation style, overriding the default double-colum style on macCatalyst:
-///
-/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
-///         }
-///         .navigationViewStyle(StackNavigationViewStyle())
-///     }
-/// }
-/// ```
-///
-/// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
-///
-/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
-///         }
-///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
-///     }
-/// }
-/// ```
-///
-/// ### Handling selection
-///
-/// `NavigationLink` provides the ability to observe and/or set the active navigation selection via its initializer `NavigationLink/init(destination:tag:selection:label)`.
-///
-/// For example:
-///
-/// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     enum NavigationItem {
-///         case bananas
-///         case apples
-///         case peaches
-///     }
-///
-///     @State var navigatedItem: NavigationItem? = .bananas
-///
-///     var body: some View {
-///         NavigationView {
-///             NavigationLink(
-///                 destination: Text("🍏🍏"),
-///                 tag: NavigationItem.apples,
-///                 selection: $navigatedItem
-///             ) {
-///                 Text("Apples")
-///             }
-///
-///             NavigationLink(
-///                 destination: Text("🍌🍌"),
-///                 tag: NavigationItem.bananas,
-///                 selection: $navigatedItem
-///             ) {
-///                 Text("Bananas")
-///             }
-///
-///             NavigationLink(
-///                 destination: Text("🍑🍑"),
-///                 tag: NavigationItem.peaches,
-///                 selection: $navigatedItem
-///             ) {
-///                 Text("Peaches")
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// In the example above, the navigation selection is written to a state variable, `navigatedItem`. `navigatedItem` is an optional, because it is possible for the screen to not be navigated to any particular screen (i.e. be at the root view containing the 3 navigation links).
-///
-///  See ``ToolbarItem`` for more on what can be placed in the navigation bar.
-///
+/// A view for presenting a stack of views representing a visible path in a
+/// navigation hierarchy.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct NavigationView<Content> : View where Content : View {
 
 	/// Creates a navigation view from a view builder of content.
 	///
 	/// - Parameter content: The view builder of content displayed on the first view in the navigation stack.
-    public init(@ViewBuilder content: () -> Content) { }
+    public init(@ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -12231,7 +11034,7 @@ public protocol NavigationViewStyle {
     /// Creates an observed object with an initial value.
     ///
     /// - Parameter initialValue: An initial value.
-    public init(initialValue: ObjectType) { }
+    public init(initialValue: ObjectType) { } { }
 
     /// Creates an observed object with an initial wrapped value.
     ///
@@ -12239,7 +11042,7 @@ public protocol NavigationViewStyle {
     /// with the `@ObservedObject` attribute, and provide an initial value.
     ///
     /// - Parameter wrappedValue: An initial value.
-    public init(wrappedValue: ObjectType) { }
+    public init(wrappedValue: ObjectType) { } { }
 
     /// The underlying value referenced by the observed object.
     ///
@@ -12275,14 +11078,14 @@ public protocol NavigationViewStyle {
     /// - Parameters:
     ///   - shape: The original shape that you want to move.
     ///   - offset: The amount that you want to move the shape.
-    @inlinable public init(shape: Content, offset: CGSize) { }
+    @inlinable public init(shape: Content, offset: CGSize) { } { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = AnimatablePair<Content.AnimatableData, CGSize.AnimatableData>
@@ -12301,7 +11104,7 @@ public protocol NavigationViewStyle {
 extension OffsetShape : InsettableShape where Content : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> OffsetShape<Content.InsetShape> { }
+    @inlinable public func inset(by amount: CGFloat) -> OffsetShape<Content.InsetShape> { } { }
 
     /// The type of the inset shape.
     public typealias InsetShape = OffsetShape<Content.InsetShape>
@@ -12309,9 +11112,9 @@ extension OffsetShape : InsettableShape where Content : InsettableShape {
 
 /// Provides functionality for opening a URL.
 ///
-/// The `OpenURLAction` instance in the app's ``Environment`` offers
+/// The `OpenURLAction` instance in the app's ~~Environment~~ offers
 /// a handler that you can use to open a URL in response to some action.
-/// Use the ``EnvironmentValues/openURL`` environment value to get the handler.
+/// Use the ~~EnvironmentValues/openURL~~ environment value to get the handler.
 /// Then call the action's handler when you need to open a URL. For example,
 /// you can open a support URL in response to when a user taps a button:
 ///
@@ -12340,12 +11143,12 @@ public struct OpenURLAction {
     ///
     /// Use this method to attempt to open a URL. This function handles the
     /// calling of the platform specific URL handler contained in the
-    /// `openURL` property stored the app's ``Environment``, and is used when
-    /// you call the function ``openURL(:_)``.
+    /// `openURL` property stored the app's ~~Environment~~, and is used when
+    /// you call the function ~~openURL(:_)~~.
     ///
     /// - Parameters:
     ///   - url: The URL to open.
-    public func callAsFunction(_ url: URL) { }
+    public func callAsFunction(_ url: URL) { } { }
 
     /// Asynchronously opens a URL, following system conventions.
     ///
@@ -12362,7 +11165,7 @@ public struct OpenURLAction {
     ///     opening the URL. The closure takes a Boolean that indicates whether
     ///     the URL can be opened.
     @available(watchOS, unavailable)
-    public func callAsFunction(_ url: URL, completion: @escaping (Bool) -> Void) { }
+    public func callAsFunction(_ url: URL, completion: @escaping (Bool) -> Void) { } { }
 }
 
 /// A structure that computes views and disclosure groups on demand from an
@@ -12460,7 +11263,7 @@ extension OutlineGroup where ID == Data.Element.ID, Parent : View, Parent == Lea
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ root: DataElement, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element { }
+    public init<DataElement>(_ root: DataElement, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element { } { }
 
     /// Creates an outline group from a collection of root data elements and
     /// a key path to its children.
@@ -12485,7 +11288,7 @@ extension OutlineGroup where ID == Data.Element.ID, Parent : View, Parent == Lea
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ data: Data, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element { }
+    public init<DataElement>(_ data: Data, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where ID == DataElement.ID, DataElement : Identifiable, DataElement == Data.Element { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -12518,7 +11321,7 @@ extension OutlineGroup where Parent : View, Parent == Leaf, Subgroup == Disclosu
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ root: DataElement, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element { }
+    public init<DataElement>(_ root: DataElement, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element { } { }
 
     /// Creates an outline group from a collection of root data elements, the
     /// key path to a data element's identifier, and a key path to its children.
@@ -12544,7 +11347,7 @@ extension OutlineGroup where Parent : View, Parent == Leaf, Subgroup == Disclosu
     ///     leaf in the tree, like a regular file in a file system.
     ///   - content: A view builder that produces a content view based on an
     ///    element in `data`.
-    public init<DataElement>(_ data: Data, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element { }
+    public init<DataElement>(_ data: Data, id: KeyPath<DataElement, ID>, children: KeyPath<DataElement, Data?>, @ViewBuilder content: @escaping (DataElement) -> Leaf) where DataElement == Data.Element { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, *)
@@ -12564,8 +11367,8 @@ extension OutlineGroup : View where Parent : View, Leaf : View, Subgroup : View 
 
 /// A type-erased view representing the children in an outline subgroup.
 ///
-/// ``OutlineGroup`` uses this type as a generic constraint for the `Content`
-/// of the ``DisclosureGroup`` instances it creates.
+/// ~~OutlineGroup~~ uses this type as a generic constraint for the `Content`
+/// of the ~~DisclosureGroup~~ instances it creates.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -12604,7 +11407,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
     ///
     /// - Parameter backgroundDisplayMode: The display mode of the background of any
     /// page index views receiving this style
-    public init(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = .automatic) { }
+    public init(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = .automatic) { } { }
 }
 
 /// A `TabViewStyle` that implements a paged scrolling `TabView`.
@@ -12628,7 +11431,7 @@ public struct PageTabViewStyle : TabViewStyle {
     }
 
     /// Creates a new `PageTabViewStyle` with an index display mode
-    public init(indexDisplayMode: PageTabViewStyle.IndexDisplayMode = .automatic) { }
+    public init(indexDisplayMode: PageTabViewStyle.IndexDisplayMode = .automatic) { } { }
 }
 
 /// The outline of a 2D shape.
@@ -12636,34 +11439,34 @@ public struct PageTabViewStyle : TabViewStyle {
 @frozen public struct Path : Equatable, LosslessStringConvertible {
 
     /// Creates an empty path.
-    public init() { }
+    public init() { } { }
 
     /// Creates a path from an immutable shape path.
-    public init(_ path: CGPath) { }
+    public init(_ path: CGPath) { } { }
 
     /// Creates a path from a copy of a mutable shape path.
-    public init(_ path: CGMutablePath) { }
+    public init(_ path: CGMutablePath) { } { }
 
     /// Creates a path as the given rectangle.
-    public init(_ rect: CGRect) { }
+    public init(_ rect: CGRect) { } { }
 
     /// Creates a path as the given rounded rectangle.
-    public init(roundedRect rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
+    public init(roundedRect rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular) { } { }
 
     /// Creates a path as the given rounded rectangle.
-    public init(roundedRect rect: CGRect, cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
+    public init(roundedRect rect: CGRect, cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { } { }
 
     /// Creates a path as an ellipse inscribed within the given rectangle.
-    public init(ellipseIn rect: CGRect) { }
+    public init(ellipseIn rect: CGRect) { } { }
 
     /// Creates an empty path, and then executes the closure to add the initial
     /// elements.
-    public init(_ callback: (inout Path) -> ()) { }
+    public init(_ callback: (inout Path) -> ()) { } { }
 
     /// Initializes from the result of a previous call to
     /// `Path.stringRepresentation`. Fails if the `string` does not
     /// describe a valid path.
-    public init?(_ string: String) { }
+    public init?(_ string: String) { } { }
 
     /// A description of the path that may be used to recreate the path
     /// via `init?(_:)`.
@@ -12682,7 +11485,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///
     /// If `eoFill` is true, this method uses the even-odd rule to define which
     /// points are inside the path. Otherwise, it uses the non-zero rule.
-    public func contains(_ p: CGPoint, eoFill: Bool = false) -> Bool { }
+    public func contains(_ p: CGPoint, eoFill: Bool = false) -> Bool { } { }
 
     /// An element of a path.
     @frozen public enum Element : Equatable {
@@ -12721,22 +11524,22 @@ public struct PageTabViewStyle : TabViewStyle {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Path.Element, b: Path.Element) -> Bool { }
+        public static func == (a: Path.Element, b: Path.Element) -> Bool { } { }
     }
 
     /// Calls `body` with each element in the path.
-    public func forEach(_ body: (Path.Element) -> Void) { }
+    public func forEach(_ body: (Path.Element) -> Void) { } { }
 
     /// Returns a stroked copy of the path using `style` to define how the
     /// stroked outline is created.
-    public func strokedPath(_ style: StrokeStyle) -> Path { }
+    public func strokedPath(_ style: StrokeStyle) -> Path { } { }
 
     /// Returns a partial copy of the path.
     ///
     /// The returned path contains the region between `from` and `to`, both of
     /// which must be fractions between zero and one defining points
     /// linearly-interpolated along the path.
-    public func trimmedPath(from: CGFloat, to: CGFloat) -> Path { }
+    public func trimmedPath(from: CGFloat, to: CGFloat) -> Path { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -12746,7 +11549,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: Path, b: Path) -> Bool { }
+    public static func == (a: Path, b: Path) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -12757,7 +11560,7 @@ extension Path : Shape {
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in _: CGRect) -> Path { }
+    public func path(in _: CGRect) -> Path { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -12773,51 +11576,51 @@ extension Path : Shape {
 extension Path {
 
     /// Begins a new subpath at the specified point.
-    public mutating func move(to p: CGPoint) { }
+    public mutating func move(to p: CGPoint) { } { }
 
     /// Appends a straight line segment from the current point to the specified
     /// point.
-    public mutating func addLine(to p: CGPoint) { }
+    public mutating func addLine(to p: CGPoint) { } { }
 
     /// Adds a quadratic Bézier curve to the path, with the specified end point
     /// and control point.
-    public mutating func addQuadCurve(to p: CGPoint, control cp: CGPoint) { }
+    public mutating func addQuadCurve(to p: CGPoint, control cp: CGPoint) { } { }
 
     /// Adds a cubic Bézier curve to the path, with the specified end point and
     /// control points.
-    public mutating func addCurve(to p: CGPoint, control1 cp1: CGPoint, control2 cp2: CGPoint) { }
+    public mutating func addCurve(to p: CGPoint, control1 cp1: CGPoint, control2 cp2: CGPoint) { } { }
 
     /// Closes and completes the current subpath.
-    public mutating func closeSubpath() { }
+    public mutating func closeSubpath() { } { }
 
     /// Adds a rectangular subpath to the path.
-    public mutating func addRect(_ rect: CGRect, transform: CGAffineTransform = .identity) { }
+    public mutating func addRect(_ rect: CGRect, transform: CGAffineTransform = .identity) { } { }
 
     /// Adds a rounded rectangle to the path.
-    public mutating func addRoundedRect(in rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular, transform: CGAffineTransform = .identity) { }
+    public mutating func addRoundedRect(in rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular, transform: CGAffineTransform = .identity) { } { }
 
     /// Adds an ellipse to the path.
-    public mutating func addEllipse(in rect: CGRect, transform: CGAffineTransform = .identity) { }
+    public mutating func addEllipse(in rect: CGRect, transform: CGAffineTransform = .identity) { } { }
 
     /// Adds a sequence of rectangular subpaths to the path.
-    public mutating func addRects(_ rects: [CGRect], transform: CGAffineTransform = .identity) { }
+    public mutating func addRects(_ rects: [CGRect], transform: CGAffineTransform = .identity) { } { }
 
     /// Adds a sequence of connected straight-line segments to the path.
-    public mutating func addLines(_ lines: [CGPoint]) { }
+    public mutating func addLines(_ lines: [CGPoint]) { } { }
 
     /// Adds an arc of a circle to the path, specified with a radius and a
     /// difference in angle.
-    public mutating func addRelativeArc(center: CGPoint, radius: CGFloat, startAngle: Angle, delta: Angle, transform: CGAffineTransform = .identity) { }
+    public mutating func addRelativeArc(center: CGPoint, radius: CGFloat, startAngle: Angle, delta: Angle, transform: CGAffineTransform = .identity) { } { }
 
     /// Adds an arc of a circle to the path, specified with a radius and angles.
-    public mutating func addArc(center: CGPoint, radius: CGFloat, startAngle: Angle, endAngle: Angle, clockwise: Bool, transform: CGAffineTransform = .identity) { }
+    public mutating func addArc(center: CGPoint, radius: CGFloat, startAngle: Angle, endAngle: Angle, clockwise: Bool, transform: CGAffineTransform = .identity) { } { }
 
     /// Adds an arc of a circle to the path, specified with a radius and two
     /// tangent lines.
-    public mutating func addArc(tangent1End p1: CGPoint, tangent2End p2: CGPoint, radius: CGFloat, transform: CGAffineTransform = .identity) { }
+    public mutating func addArc(tangent1End p1: CGPoint, tangent2End p2: CGPoint, radius: CGFloat, transform: CGAffineTransform = .identity) { } { }
 
     /// Appends a copy of the given path to this path.
-    public mutating func addPath(_ path: Path, transform: CGAffineTransform = .identity) { }
+    public mutating func addPath(_ path: Path, transform: CGAffineTransform = .identity) { } { }
 
     /// Returns the last point in the path, or nil if the path contains
     /// no points.
@@ -12825,10 +11628,10 @@ extension Path {
 
     /// Returns a path constructed by applying the transform to all points of
     /// the path.
-    public func applying(_ transform: CGAffineTransform) -> Path { }
+    public func applying(_ transform: CGAffineTransform) -> Path { } { }
 
     /// Returns a path constructed by translating `self` by `(dx, dy)`.
-    public func offsetBy(dx: CGFloat, dy: CGFloat) -> Path { }
+    public func offsetBy(dx: CGFloat, dy: CGFloat) -> Path { } { }
 }
 
 /// A control for selecting from a set of mutually exclusive values.
@@ -12849,9 +11652,9 @@ extension Path {
 ///         var id: String { self.rawValue }
 ///     }
 ///
-/// You can create a picker to select among these values by providing ``Text``
+/// You can create a picker to select among these values by providing ~~Text~~
 /// views in the picker initializer's content. You can optionally provide a
-/// string as the first parameter; if you do, the picker creates a ``Text``
+/// string as the first parameter; if you do, the picker creates a ~~Text~~
 /// label using this string:
 ///
 ///     @State private var selectedFlavor = Flavor.chocolate
@@ -12869,7 +11672,7 @@ extension Path {
 /// ### Iterating Over a Picker’s Options
 ///
 /// To provide selection values for the `Picker` without explicitly listing
-/// each option, you can create the picker with a ``ForEach`` construct, like
+/// each option, you can create the picker with a ~~ForEach~~ construct, like
 /// this:
 ///
 ///     Picker("Flavor", selection: $selectedFlavor) {
@@ -12878,15 +11681,15 @@ extension Path {
 ///         }
 ///     }
 ///
-/// In this case, ``ForEach`` automatically assigns a tag to the selection
+/// In this case, ~~ForEach~~ automatically assigns a tag to the selection
 /// views, using each option's `id`, which it can do because `Flavor` conforms
 /// to the <doc://com.apple.documentation/documentation/Swift/Identifiable>
 /// protocol.
 ///
 /// On the other hand, if the selection type doesn't match the input to the
-/// ``ForEach``, you need to provide an explicit tag. The following example
+/// ~~ForEach~~, you need to provide an explicit tag. The following example
 /// shows a picker that's bound to a `Topping` type, even though the options
-/// are all `Flavor` instances. Each option uses ``View/tag(_:)`` to associate
+/// are all `Flavor` instances. Each option uses ~~View/tag(_:)~~ to associate
 /// a topping with the flavor it displays.
 ///
 ///     enum Topping: String, CaseIterable, Identifiable {
@@ -12918,13 +11721,13 @@ extension Path {
 /// ### Styling Pickers
 ///
 /// You can customize the appearance and interaction of pickers by creating
-/// styles that conform to the ``PickerStyle`` protocol. You create your own style
-/// or use one of the styles provided by SwiftUI, like ``SegmentedPickerStyle``
-/// or ``PopUpButtonPickerStyle``.
+/// styles that conform to the ~~PickerStyle~~ protocol. You create your own style
+/// or use one of the styles provided by SwiftUI, like ~~SegmentedPickerStyle~~
+/// or ~~PopUpButtonPickerStyle~~.
 ///
 /// To set a specific style for all picker instances within a view, use the
-/// ``View/pickerStyle(_:)`` modifier. The following example adds a second binding
-/// type, `Topping`, and applies the ``SegmentedPickerStyle`` to two pickers:
+/// ~~View/pickerStyle(_:)~~ modifier. The following example adds a second binding
+/// type, `Topping`, and applies the ~~SegmentedPickerStyle~~ to two pickers:
 ///
 ///     @State private var selectedFlavor = Flavor.chocolate
 ///     @State private var selectedTopping = Topping.nuts
@@ -12956,7 +11759,7 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
     ///       currently-selected option.
     ///     - label: A view that describes the purpose of selecting an option.
     ///     - content: A view that contains the set of options.
-    public init(selection: Binding<SelectionValue>, label: Label, @ViewBuilder content: () -> Content) { }
+    public init(selection: Binding<SelectionValue>, label: Label, @ViewBuilder content: () -> Content) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -12980,13 +11783,13 @@ extension Picker where Label == Text {
     ///       currently-selected option.
     ///     - content: A view that contains the set of options.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// localized key similar to ``Text/init(_:tableName:bundle:comment:)``. See
-    /// ``Text`` for more information about localizing strings.
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// localized key similar to ~~Text/init(_:tableName:bundle:comment:)~~. See
+    /// ~~Text~~ for more information about localizing strings.
     ///
     /// To initialize a picker with a string variable, use
-    /// ``init(_:selection:content:)-5njtq`` instead.
-    public init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) { }
+    /// ~~init(_:selection:content:)-5njtq~~ instead.
+    public init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a picker that generates its label from a string.
     ///
@@ -12996,13 +11799,13 @@ extension Picker where Label == Text {
     ///       currently-selected option.
     ///     - content: A view that contains the set of options.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to ``Text/init(_:)-9d1g4``. See ``Text`` for more
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// title similar to ~~Text/init(_:)-9d1g4~~. See ~~Text~~ for more
     /// information about localizing strings.
     ///
     /// To initialize a picker with a localized string key, use
-    /// ``init(_:selection:content:)-6lwfn`` instead.
-    public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { }
+    /// ~~init(_:selection:content:)-6lwfn~~ instead.
+    public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { } { }
 }
 
 /// A type that specifies the appearance and interaction of all pickers within
@@ -13048,7 +11851,7 @@ public struct PinnedScrollableViews : OptionSet {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    public init(rawValue: UInt32) { }
+    public init(rawValue: UInt32) { } { }
 
     /// The header view of each `Section` will be pinned.
     public static let sectionHeaders: PinnedScrollableViews
@@ -13079,20 +11882,20 @@ public struct PinnedScrollableViews : OptionSet {
 /// of the button.
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
-/// ``View/buttonStyle(_:)-66fbx`` modifier.
+/// ~~View/buttonStyle(_:)-66fbx~~ modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
     /// Creates a plain button style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a button.
     ///
-    /// The system calls this method for each ``Button`` instance in a view
+    /// The system calls this method for each ~~Button~~ instance in a view
     /// hierarchy where this style is the current button style.
     ///
     /// - Parameter configuration : The properties of the button.
-    public func makeBody(configuration: PlainButtonStyle.Configuration) -> some View { }
+    public func makeBody(configuration: PlainButtonStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a button.
@@ -13104,7 +11907,7 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 public struct PlainListStyle : ListStyle {
 
     /// Creates a plain list style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A text field style with no decoration.
@@ -13112,7 +11915,7 @@ public struct PlainListStyle : ListStyle {
 public struct PlainTextFieldStyle : TextFieldStyle {
 
 	/// Creates a plain text field style.
-    public init() { }
+    public init() { } { }
 }
 
 /// An attachment anchor for a popover.
@@ -13155,7 +11958,7 @@ public protocol PreferenceKey {
     ///   - value: The value accumulated through previous calls to this method.
     ///     The implementation should modify this value.
     ///   - nextValue: A closure that returns the next value in the sequence.
-    static func reduce(value: inout Self.Value, nextValue: () -> Self.Value) { }
+    static func reduce(value: inout Self.Value, nextValue: () -> Self.Value) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -13183,7 +11986,7 @@ public struct PreferredColorSchemeKey : PreferenceKey {
     ///   - value: The value accumulated through previous calls to this method.
     ///     The implementation should modify this value.
     ///   - nextValue: A closure that returns the next value in the sequence.
-    public static func reduce(value: inout PreferredColorSchemeKey.Value, nextValue: () -> PreferredColorSchemeKey.Value) { }
+    public static func reduce(value: inout PreferredColorSchemeKey.Value, nextValue: () -> PreferredColorSchemeKey.Value) { } { }
 }
 
 /// An indication whether a view is currently presented by another view.
@@ -13196,7 +11999,7 @@ public struct PresentationMode {
     /// Dismisses the view if it is currently presented.
     ///
     /// If `isPresented` is false, `dismiss()` is a no-op.
-    public mutating func dismiss() { }
+    public mutating func dismiss() { } { }
 }
 
 /// A specification for the context of a `PreviewContext`
@@ -13261,12 +12064,12 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
     ///     // Prints "nil"
     ///
     /// - Parameter rawValue: The raw value to use for the new instance.
-    public init(rawValue: String) { }
+    public init(rawValue: String) { } { }
 
     /// Creates an instance initialized to the given string value.
     ///
     /// - Parameter value: The value of the new instance.
-    public init(stringLiteral: String) { }
+    public init(stringLiteral: String) { } { }
 
     /// The raw type that can be used to represent all values of the conforming
     /// type.
@@ -13334,7 +12137,7 @@ public enum PreviewPlatform {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: PreviewPlatform, b: PreviewPlatform) -> Bool { }
+    public static func == (a: PreviewPlatform, b: PreviewPlatform) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -13358,7 +12161,7 @@ public enum PreviewPlatform {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -13371,7 +12174,7 @@ extension PreviewPlatform : Hashable {
 
 /// A type that produces view previews in Xcode.
 ///
-/// Xcode statically discovers types that conform to the ``PreviewProvider``
+/// Xcode statically discovers types that conform to the ~~PreviewProvider~~
 /// protocol in your app, and generates previews for each provider it discovers.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreviewProvider : _PreviewProvider {
@@ -13395,7 +12198,7 @@ public protocol PreviewProvider : _PreviewProvider {
     /// The platform on which to run the provider.
     ///
     /// If the preview provider returns `nil` for this property, Xcode infers
-    /// the platform based on the file in which the ``PreviewProvider`` is
+    /// the platform based on the file in which the ~~PreviewProvider~~ is
     /// defined. Return `nil` only when the file is in a target that supports
     /// multiple platforms.
     static var platform: PreviewPlatform? { get }
@@ -13407,74 +12210,20 @@ extension PreviewProvider {
     /// The platform on which to run the provider.
     ///
     /// If the preview provider returns `nil` for this property, Xcode infers
-    /// the platform based on the file in which the ``PreviewProvider`` is
+    /// the platform based on the file in which the ~~PreviewProvider~~ is
     /// defined. Return `nil` only when the file is in a target that supports
     /// multiple platforms.
     public static var platform: PreviewPlatform? { get }
 }
 
-/// This protocol is used to define custom button styles.
+/// A type that applies custom interaction behavior and a custom appearance to
+/// all buttons within a view hierarchy.
 ///
-/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and `PlainButtonStyle`.
-///
-/// Your structure only needs to implement one method: `makeBody(configuration:)`. The desired button view is output by this method.
-///
-/// To build a custom `PrimitiveButtonStyle`, create a struct that conforms to the protocol.
-///
-/// `makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which passes the original label to display the button view and a `trigger()` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
-///
-/// Use `View/buttonStyle(_:)` to apply a primitive button style.
-///
-/// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
-///
-/// ```
-///  struct ExampleView: View {
-///      var body: some View {
-///         Button("Banana 🍌🍌", action: { tap() })
-///             .buttonStyle(MyPrimitiveButtonStyle())
-///      }
-///
-///      func tap() {}
-///  }
-///
-///  struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
-///    func makeBody(configuration: Configuration) -> some View {
-///      configuration.label
-///         .foregroundColor(.yellow)
-///         .onTapGesture { configuration.trigger() }
-///    }
-///  }
-/// ```
-///
-/// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
-///
-/// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
-///
-/// ```
-///  struct BananaView: View {
-///      var body: some View {
-///          VStack {
-///              Button("Banana 🍌🍌", action: { tap() })
-///              Button("Apple 🍏🍏", action: { tap() })
-///              Button("Peach 🍑🍑", action: { tap() })
-///          }
-///          .buttonStyle(BananaButtonStyle(color: .yellow))
-///      }
-///
-///      func tap() {}
-///  }
-///
-///  struct BananaButtonStyle: PrimitiveButtonStyle {
-///    let color: Color
-///
-///    func makeBody(configuration: Configuration) -> some View {
-///        configuration.label
-///            .padding()
-///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///            .onTapGesture { configuration.trigger() }
-///    }
-///  }
-/// ```
+/// To configure the current button style for a view hierarchy, use the
+/// ~~View/buttonStyle(_:)-66fbx~~ modifier. Specify a style that conforms to
+/// ~~PrimitiveButtonStyle~~ to create a button with custom interaction
+/// behavior. To create a button with the standard button interaction behavior
+/// defined for each platform, use ~~ButtonStyle~~ instead.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PrimitiveButtonStyle {
 
@@ -13483,11 +12232,11 @@ public protocol PrimitiveButtonStyle {
 
     /// Creates a view that represents the body of a button.
     ///
-    /// The system calls this method for each ``Button`` instance in a view
+    /// The system calls this method for each ~~Button~~ instance in a view
     /// hierarchy where this style is the current button style.
     ///
     /// - Parameter configuration : The properties of the button.
-    func makeBody(configuration: Self.Configuration) -> Self.Body { }
+    func makeBody(configuration: Self.Configuration) -> Self.Body { } { }
 
     /// The properties of a button.
     typealias Configuration = PrimitiveButtonStyleConfiguration
@@ -13511,7 +12260,7 @@ public struct PrimitiveButtonStyleConfiguration {
     public let label: PrimitiveButtonStyleConfiguration.Label
 
     /// Performs the button's action.
-    public func trigger() { }
+    public func trigger() { } { }
 }
 
 /// A view that shows the progress towards completion of a task.
@@ -13548,11 +12297,11 @@ public struct PrimitiveButtonStyleConfiguration {
 /// ### Styling Progress Views
 ///
 /// You can customize the appearance and interaction of progress views by
-/// creating styles that conform to the ``ProgressViewStyle`` protocol. To set a
+/// creating styles that conform to the ~~ProgressViewStyle~~ protocol. To set a
 /// specific style for all progress view instances within a view, use the
-/// ``View/progressViewStyle(_:)`` modifier. In the following example, a custom
+/// ~~View/progressViewStyle(_:)~~ modifier. In the following example, a custom
 /// style adds a dark blue shadow to all progress views within the enclosing
-/// ``VStack``:
+/// ~~VStack~~:
 ///
 ///     struct ShadowedProgressViews: View {
 ///         var body: some View {
@@ -13590,7 +12339,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
 
     /// Creates a progress view for showing indeterminate progress, without a
     /// label.
-    public init() where Label == EmptyView { }
+    public init() where Label == EmptyView { } { }
 
     /// Creates a progress view for showing indeterminate progress that displays
     /// a custom label.
@@ -13598,21 +12347,21 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
     ///       in progress.
-    public init(@ViewBuilder label: () -> Label) { }
+    public init(@ViewBuilder label: () -> Label) { } { }
 
     /// Creates a progress view for showing indeterminate progress that
     /// generates its label from a localized string.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// localized key similar to ``Text/init(_:tableName:bundle:comment:)``. See
-    /// ``Text`` for more information about localizing strings. To initialize a
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// localized key similar to ~~Text/init(_:tableName:bundle:comment:)~~. See
+    /// ~~Text~~ for more information about localizing strings. To initialize a
     /// indeterminate progress view with a string variable, use
     /// the corresponding initializer that takes a `StringProtocol` instance.
     ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
     ///       describes the task in progress.
-    public init(_ titleKey: LocalizedStringKey) where Label == Text { }
+    public init(_ titleKey: LocalizedStringKey) where Label == Text { } { }
 
     /// Creates a progress view for showing indeterminate progress that
     /// generates its label from a string.
@@ -13620,12 +12369,12 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// - Parameters:
     ///     - title: A string that describes the task in progress.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to ``Text/init(verbatim:)``. See ``Text`` for more
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// title similar to ~~Text/init(verbatim:)~~. See ~~Text~~ for more
     /// information about localizing strings. To initialize a progress view with
     /// a localized string key, use the corresponding initializer that takes a
     /// `LocalizedStringKey` instance.
-    public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
+    public init<S>(_ title: S) where Label == Text, S : StringProtocol { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -13644,7 +12393,7 @@ extension ProgressView {
     ///     - total: The full amount representing the complete scope of the
     ///       task, meaning the task is complete if `value` equals `total`. The
     ///       default value is `1.0`.
-    public init<V>(value: V?, total: V = 1.0) where Label == EmptyView, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
+    public init<V>(value: V?, total: V = 1.0) where Label == EmptyView, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { } { }
 
     /// Creates a progress view for showing determinate progress, with a
     /// custom label.
@@ -13662,7 +12411,7 @@ extension ProgressView {
     ///       default value is `1.0`.
     ///     - label: A view builder that creates a view that describes the task
     ///       in progress.
-    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label) where CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
+    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label) where CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { } { }
 
     /// Creates a progress view for showing determinate progress, with a
     /// custom label.
@@ -13682,7 +12431,7 @@ extension ProgressView {
     ///       in progress.
     ///     - currentValueLabel: A view builder that creates a view that
     ///       describes the level of completed progress of the task.
-    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label, @ViewBuilder currentValueLabel: () -> CurrentValueLabel) where V : BinaryFloatingPoint { }
+    public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label, @ViewBuilder currentValueLabel: () -> CurrentValueLabel) where V : BinaryFloatingPoint { } { }
 
     /// Creates a progress view for showing determinate progress that generates
     /// its label from a localized string.
@@ -13692,9 +12441,9 @@ extension ProgressView {
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// localized key similar to ``Text/init(_:tableName:bundle:comment:)``. See
-    /// ``Text`` for more information about localizing strings. To initialize a
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// localized key similar to ~~Text/init(_:tableName:bundle:comment:)~~. See
+    /// ~~Text~~ for more information about localizing strings. To initialize a
     ///  determinate progress view with a string variable, use
     ///  the corresponding initializer that takes a `StringProtocol` instance.
     ///
@@ -13707,7 +12456,7 @@ extension ProgressView {
     ///     - total: The full amount representing the complete scope of the
     ///       task, meaning the task is complete if `value` equals `total`. The
     ///       default value is `1.0`.
-    public init<V>(_ titleKey: LocalizedStringKey, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
+    public init<V>(_ titleKey: LocalizedStringKey, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { } { }
 
     /// Creates a progress view for showing determinate progress that generates
     /// its label from a string.
@@ -13717,8 +12466,8 @@ extension ProgressView {
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to ``Text/init(verbatim:)``. See ``Text`` for more
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// title similar to ~~Text/init(verbatim:)~~. See ~~Text~~ for more
     /// information about localizing strings. To initialize a determinate
     /// progress view with a localized string key, use the corresponding
     /// initializer that takes a `LocalizedStringKey` instance.
@@ -13731,7 +12480,7 @@ extension ProgressView {
     ///     - total: The full amount representing the complete scope of the
     ///       task, meaning the task is complete if `value` equals `total`. The
     ///       default value is `1.0`.
-    public init<S, V>(_ title: S, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, S : StringProtocol, V : BinaryFloatingPoint { }
+    public init<S, V>(_ title: S, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, S : StringProtocol, V : BinaryFloatingPoint { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -13741,7 +12490,7 @@ extension ProgressView {
     ///
     /// The progress view synthesizes a default label using the
     /// `localizedDescription` of the given progress instance.
-    public init(_ progress: Progress) where Label == EmptyView, CurrentValueLabel == EmptyView { }
+    public init(_ progress: Progress) where Label == EmptyView, CurrentValueLabel == EmptyView { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -13750,8 +12499,8 @@ extension ProgressView {
     /// Creates a progress view based on a style configuration.
     ///
     /// You can use this initializer within the
-    /// ``ProgressViewStyle/makeBody(configuration:)`` method of a
-    /// ``ProgressViewStyle`` to create an instance of the styled progress view.
+    /// ~~ProgressViewStyle/makeBody(configuration:)~~ method of a
+    /// ~~ProgressViewStyle~~ to create an instance of the styled progress view.
     /// This is useful for custom progress view styles that only modify the
     /// current progress view style, as opposed to implementing a brand new
     /// style.
@@ -13767,14 +12516,14 @@ extension ProgressView {
     ///         }
     ///     }
     ///
-    public init(_ configuration: ProgressViewStyleConfiguration) where Label == ProgressViewStyleConfiguration.Label, CurrentValueLabel == ProgressViewStyleConfiguration.CurrentValueLabel { }
+    public init(_ configuration: ProgressViewStyleConfiguration) where Label == ProgressViewStyleConfiguration.Label, CurrentValueLabel == ProgressViewStyleConfiguration.CurrentValueLabel { } { }
 }
 
 /// A type that applies standard interaction behavior to all progress views
 /// within a view hierarchy.
 ///
 /// To configure the current progress view style for a view hiearchy, use the
-/// ``View/progressViewStyle(_:)`` modifier.
+/// ~~View/progressViewStyle(_:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol ProgressViewStyle {
 
@@ -13791,7 +12540,7 @@ public protocol ProgressViewStyle {
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
-    func makeBody(configuration: Self.Configuration) -> Self.Body { }
+    func makeBody(configuration: Self.Configuration) -> Self.Body { } { }
 
     /// A type alias for the properties of a progress view instance.
     typealias Configuration = ProgressViewStyleConfiguration
@@ -13880,17 +12629,17 @@ public struct ProgressViewStyleConfiguration {
     public var m33: CGFloat
 
     /// Creates a projection transform equal to the identity matrix.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// Creates a projection transform from a `CGAffineTransform`.
     ///
     /// - Parameter m: The Core Graphics affine transform matrix.
-    @inlinable public init(_ m: CGAffineTransform) { }
+    @inlinable public init(_ m: CGAffineTransform) { } { }
 
     /// Creates a projection transform from a `CATransform3D`.
     ///
     /// - Parameter m: The Core Animation 3D transform matrix.
-    @inlinable public init(_ m: CATransform3D) { }
+    @inlinable public init(_ m: CATransform3D) { } { }
 
     /// Whether the projection transform matrix is an identity matrix.
     @inlinable public var isIdentity: Bool { get }
@@ -13901,12 +12650,12 @@ public struct ProgressViewStyleConfiguration {
     /// Inverts the projection transform matrix if it's invertible.
     ///
     /// - Returns: A Boolean of whether the matrix was successfully inverted.
-    public mutating func invert() -> Bool { }
+    public mutating func invert() -> Bool { } { }
 
     /// Modifies the projection transform to its inverse if invertable.
     ///
     /// - Returns: An inverted projection transform matrix.
-    public func inverted() -> ProjectionTransform { }
+    public func inverted() -> ProjectionTransform { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -13920,7 +12669,7 @@ extension ProjectionTransform : Equatable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ProjectionTransform, b: ProjectionTransform) -> Bool { }
+    public static func == (a: ProjectionTransform, b: ProjectionTransform) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -13930,7 +12679,7 @@ extension ProjectionTransform {
 	///
 	/// - Parameter rhs: The projection transform matrix to concatenate.
 	/// - Returns: A new concatenated projection transform matrix.
-    @inlinable public func concatenating(_ rhs: ProjectionTransform) -> ProjectionTransform { }
+    @inlinable public func concatenating(_ rhs: ProjectionTransform) -> ProjectionTransform { } { }
 }
 
 /// A radial gradient.
@@ -13949,7 +12698,7 @@ extension ProjectionTransform {
 	///   - center: The center of the radial gradient.
 	///   - startRadius: How far from the center to start the gradient.
 	///   - endRadius:
-    public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat) { }
+    public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -13967,10 +12716,10 @@ extension ProjectionTransform {
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// Creates a new rectangle shape.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
@@ -13986,7 +12735,7 @@ extension ProjectionTransform {
 extension Rectangle : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
+    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { } { }
 
 
     /// The type of the inset shape.
@@ -14004,7 +12753,7 @@ public struct RedactionReasons : OptionSet {
     ///
     /// - Parameter rawValue: The raw value with which to create the
     ///   reasons for redaction.
-    public init(rawValue: Int) { }
+    public init(rawValue: Int) { } { }
 
     /// Displayed data should appear as generic placeholders.
     ///
@@ -14057,7 +12806,7 @@ public protocol ReferenceFileDocument : ObservableObject {
     static var writableContentTypes: [UTType] { get }
 
     /// Initialize self by reading from the contents of a given `ReadConfiguration`.
-    init(configuration: Self.ReadConfiguration) throws { }
+    init(configuration: Self.ReadConfiguration) throws { } { }
 
     /// The configuration for reading document contents.
     typealias ReadConfiguration = FileDocumentReadConfiguration
@@ -14072,7 +12821,7 @@ public protocol ReferenceFileDocument : ObservableObject {
     ///
     /// - Parameter contentType: The content type being written, for which the
     ///   snapshot should be created.
-    func snapshot(contentType: UTType) throws -> Self.Snapshot { }
+    func snapshot(contentType: UTType) throws -> Self.Snapshot { } { }
 
     /// Serialize the snapshot to file contents for a specified `type`.
     ///
@@ -14084,7 +12833,7 @@ public protocol ReferenceFileDocument : ObservableObject {
     /// - Returns: The destination to serialize the document contents to. The
     ///   value can be a newly created `FileWrapper` or an updated `FileWrapper`
     ///   of the one provided in `configuration`.
-    func fileWrapper(snapshot: Self.Snapshot, configuration: Self.WriteConfiguration) throws -> FileWrapper { }
+    func fileWrapper(snapshot: Self.Snapshot, configuration: Self.WriteConfiguration) throws -> FileWrapper { } { }
 
     /// The configurations for serializing document contents.
     typealias WriteConfiguration = FileDocumentWriteConfiguration
@@ -14146,14 +12895,14 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
     ///   - shape: The original shape to rotate.
     ///   - angle: The angle to rotate the original shape.
     ///   - anchor: The unit point to rotate the shape around.
-    @inlinable public init(shape: Content, angle: Angle, anchor: UnitPoint = .center) { }
+    @inlinable public init(shape: Content, angle: Angle, anchor: UnitPoint = .center) { } { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = AnimatablePair<Content.AnimatableData, AnimatablePair<Angle.AnimatableData, UnitPoint.AnimatableData>>
@@ -14172,7 +12921,7 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
 extension RotatedShape : InsettableShape where Content : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> RotatedShape<Content.InsetShape> { }
+    @inlinable public func inset(by amount: CGFloat) -> RotatedShape<Content.InsetShape> { } { }
 
     /// The type of the inset shape.
     public typealias InsetShape = RotatedShape<Content.InsetShape>
@@ -14183,10 +12932,10 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 ///
 /// A rotation gesture tracks how a rotation event sequence changes. To
 /// recognize a rotation gesture on a view, create and configure the gesture,
-/// and then add it to the view using the ``View/gesture(_:including:)``
+/// and then add it to the view using the ~~View/gesture(_:including:)~~
 /// modifier.
 ///
-/// Add a rotation gesture to a ``Rectangle`` and apply a rotation effect:
+/// Add a rotation gesture to a ~~Rectangle~~ and apply a rotation effect:
 ///
 ///     struct RotationGestureView: View {
 ///         @State var angle = Angle(degrees: 0.0)
@@ -14218,7 +12967,7 @@ public struct RotationGesture : Gesture {
     ///
     /// - Parameter minimumAngleDelta: The minimum delta required before the
     ///   gesture starts. The default value is a one-degree angle.
-    public init(minimumAngleDelta: Angle = .degrees(1)) { }
+    public init(minimumAngleDelta: Angle = .degrees(1)) { } { }
 
     /// The type representing the gesture's value.
     public typealias Value = Angle
@@ -14234,7 +12983,7 @@ public struct RotationGesture : Gesture {
 public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 
 	/// Creates a rounded border text field style.
-    public init() { }
+    public init() { } { }
 }
 
 /// Defines the shape of a rounded rectangle's corners.
@@ -14255,7 +13004,7 @@ public enum RoundedCornerStyle {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: RoundedCornerStyle, b: RoundedCornerStyle) -> Bool { }
+    public static func == (a: RoundedCornerStyle, b: RoundedCornerStyle) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -14279,7 +13028,7 @@ public enum RoundedCornerStyle {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -14313,21 +13062,21 @@ extension RoundedCornerStyle : Hashable {
     /// - Parameters:
     ///   - cornerSize: The size (width and height) of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
-    @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
+    @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular) { } { }
 
     /// Creates a rounded rectangle with specified rounded corner radius.
     ///
     /// - Parameters:
     ///   - cornerRadius: The radius of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
-    @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
+    @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { } { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// The data to animate.
     public var animatableData: CGSize.AnimatableData
@@ -14346,7 +13095,7 @@ extension RoundedCornerStyle : Hashable {
 extension RoundedRectangle : InsettableShape {
 
     /// Returns `self` inset by `amount`.
-    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
+    @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { } { }
 
 
     /// The type of the inset shape.
@@ -14390,7 +13139,7 @@ extension RoundedRectangle : InsettableShape {
     ///   of `rawValue` potentially represents an element of the option set,
     ///   though raw values may include bits that are not defined as distinct
     ///   values of the `OptionSet` type.
-    @inlinable public init(rawValue: UInt) { }
+    @inlinable public init(rawValue: UInt) { } { }
 
     /// The safe area defined by the device and containers within the
     /// user interface, including elements such as top and bottom bars.
@@ -14427,11 +13176,11 @@ extension RoundedRectangle : InsettableShape {
 
     /// Creates the scaled metric with an unscaled value and a text style to
     /// scale relative to.
-    public init(wrappedValue: Value, relativeTo textStyle: Font.TextStyle) { }
+    public init(wrappedValue: Value, relativeTo textStyle: Font.TextStyle) { } { }
 
     /// Creates the scaled metric with an unscaled value using the default
     /// scaling.
-    public init(wrappedValue: Value) { }
+    public init(wrappedValue: Value) { } { }
 
     /// The value scaled based on the current environment.
     public var wrappedValue: Value { get }
@@ -14456,14 +13205,14 @@ extension RoundedRectangle : InsettableShape {
     ///   - shape: The shape to be scaled.
     ///   - scale: The factor to scale the shape.
     ///   - anchor: The unit point to scale the shape from. Defaults to the center.
-    @inlinable public init(shape: Content, scale: CGSize, anchor: UnitPoint = .center) { }
+    @inlinable public init(shape: Content, scale: CGSize, anchor: UnitPoint = .center) { } { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = AnimatablePair<Content.AnimatableData, AnimatablePair<CGSize.AnimatableData, UnitPoint.AnimatableData>>
@@ -14478,155 +13227,141 @@ extension RoundedRectangle : InsettableShape {
     public typealias Body
 }
 
-/// This protocol is used to create different content areas on the screen.
+/// A part of an app's user interface with a life cycle managed by the
+/// system.
 ///
-/// On-screen `Scene`s are the building blocks of any app built entirely in SwiftUI. They can look
-/// different depending on the platform the app is running on. For example, in iOS, the screen usually
-/// only displays one scene at a time. In macOS, every window in an app might be a different scene.
+/// You create an ~~SwiftUI/App~~ by combining one or more instances
+/// that conform to the `Scene` protocol in the app's
+/// ~~SwiftUI/App/body-swift.property~~. You can use the primitive scenes that
+/// SwiftUI provides, like ~~SwiftUI/WindowGroup~~, along with custom scenes
+/// that you compose from other scenes. To create a custom scene, declare a
+/// type that conforms to the `Scene` protocol. Implement the required
+/// ~~SwiftUI/Scene/body-swift.property~~ computed property and provide the
+/// content for your custom scene:
 ///
-/// Scenes can either be custom, or one of the primitives like ``WindowGroup`` or
-/// ``DocumentGroup``.
-///
-/// ### Creating a Scene
-///
-/// #### Using primitive Scenes
-///
-/// Primitive scenes like ``WindowGroup`` can go directly in the body of your ``App``.
-///
-/// ![Scene Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
-///
-///     @main
-///     struct SuperSimpleApp: App {
+///     struct MyScene: Scene {
 ///         var body: some Scene {
 ///             WindowGroup {
-///                 Text("This is an entire app! 🙌")
+///                 MyRootView()
 ///             }
 ///         }
 ///     }
 ///
-/// #### Using custom Scenes
+/// A scene acts as a container for a view hierarchy that you want to display
+/// to the user. The system decides when and how to present the view hierarchy
+/// in the user interface in a way that's platform-appropriate and dependent
+/// on the current state of the app. For example, for the window group shown
+/// above, the system lets the user create or remove windows that contain
+/// `MyRootView` on platforms like macOS and iPadOS. On other platforms, the
+/// same view hierarchy might consume the entire display when active.
 ///
-/// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
-/// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
+/// Read the ~~SwiftUI/EnvironmentValues/scenePhase~~ environment
+/// value from within a scene or one of its views to check whether a scene is
+/// active or in some other state. You can create a property that contains the
+/// scene phase, which is one of the values in the ~~SwiftUI/ScenePhase~~
+/// enumeration, using the ~~SwiftUI/Environment~~ attribute:
 ///
-/// ![Scene Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
-///
-///     @main
-///     struct MacCompatibleApp: App {
-///         var body: some Scene {
-///             CustomScene()
-///         }
-///
-///     struct CustomScene: Scene {
-///         var body: some Scene {
-///             WindowGroup {
-///                 Text("This is a mac-compatible app! 💻")
-///             }
-///
-///             #if os(macOS)
-///             Settings {
-///                 SettingsView()
-///             }
-///             #endif
-///         }
-///     }
-///
-/// ### Modifiers
-///
-/// Just like how ``Views`` have a bunch of custom modifiers that work right out of the box,
-/// `Scene` provides default implementations of many useful modifiers. These can be used to do things
-/// like adding macOS commands, changing the toolbar, and adding support for app storage.
-///
-/// ### Getting Scene Status
-///
-/// The ``EnvironmentValues/scenePhase`` environment value can easily be read in a scene
-/// to respond to whether the scene is active or in another state. It returns an enumeration of type
-/// ``ScenePhase``.
-///
-///     struct StateAdaptingScene: Scene {
+///     struct MyScene: Scene {
 ///         @Environment(\.scenePhase) private var scenePhase
+///
+///         // ...
+///     }
+///
+/// The `Scene` protocol provides scene modifiers, defined as protocol methods
+/// with default implementations, that you use to configure a scene. For
+/// example, you can use the ~~SwiftUI/Scene/onChange(of:perform:)~~ modifier to
+/// trigger an action when a value changes. The following code empties a cache
+/// when all of the scenes in the window group have moved to the background:
+///
+///     struct MyScene: Scene {
+///         @Environment(\.scenePhase) private var scenePhase
+///         @StateObject private var cache = DataCache()
+///
 ///         var body: some Scene {
 ///             WindowGroup {
-///                 Text(scenePhase == .active ? "Active!" : "Inactive")
+///                 MyRootView()
+///             }
+///             .onChange(of: scenePhase) { newScenePhase in
+///                 if newScenePhase == .background {
+///                     cache.empty()
+///                 }
 ///             }
 ///         }
 ///     }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol Scene {
 
-    /// The type of the body variable in a scene.
+    /// The type of scene that represents the body of this scene.
     ///
-    /// This type is automatically inferred from the ``Scene/body-swift.variable`` variable
-    /// when you make a custom Scene, so you don't have to worry about ever interacting with this
-    /// directly.
-    ///
-    /// If you're using a primitive scene like ``WindowGroup``, you might wonder what the body
-    /// type would be. If all scenes are built on scenes built on scenes, where does it start?
-    ///
-    /// Because of exactly that reason, all primitive Scene types set their body type to ``Never``.
-    ///
+    /// When you create a custom scene, Swift infers this type from your
+    /// implementation of the required ~~SwiftUI/Scene/body-swift.property~~
+    /// property.
     associatedtype Body : Scene
 
-    /// The entry point for building custom Scenes.
+    /// The content and behavior of the scene.
     ///
-    /// This computed property is the only requirement of conforming to the Scene protocol.
-    /// To make a custom Scene, compose `body` with other custom Scenes, or
-    /// with primitive Scenes like ``WindowGroup`` or ``Settings``.
+    /// For any scene that you create, provide a computed `body` property that
+    /// defines the scene as a composition of other scenes. You can assemble a
+    /// scene from primitive scenes that SwiftUI provides, as well as other
+    /// scenes that you've defined.
     ///
-    ///     @main
-    ///     struct MacCompatibleApp: App {
-    ///         var body: some Scene {
-    ///             CustomScene()
-    ///         }
-    ///
-    ///     struct CustomScene: Scene {
-    ///         var body: some Scene {
-    ///             WindowGroup {
-    ///                 Text("This is a mac-compatible app! 💻")
-    ///             }
-    ///
-    ///             #if os(macOS)
-    ///             Settings {
-    ///                 SettingsView()
-    ///             }
-    ///             #endif
-    ///         }
-    ///     }
+    /// Swift infers the scene's ~~SwiftUI/Scene/Body-swift.associatedtype~~
+    /// associated type based on the contents of the `body` property.
     @SceneBuilder var body: Self.Body { get }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Scene {
 
-    /// Use this method to watch for changes in a variable value.
+    /// Adds an action to perform when the given value changes.
     ///
-    /// This method is most often used to watch for changes in a scene's status (active, inactive, etc.)
+    /// Use this modifier to trigger a side effect when a value changes, like
+    /// the value associated with an ~~SwiftUI/Environment~~ key or a
+    /// ~~SwiftUI/Binding~~. For example, you can clear a cache when you notice
+    /// that a scene moves to the background:
     ///
-    /// There is a different, but related, method called ``View/onChange(of:perform:)`` that
-    /// can be used on ``Views``.
-    ///
-    ///     struct CustomScene: Scene {
+    ///     struct MyScene: Scene {
     ///         @Environment(\.scenePhase) private var scenePhase
-    ///         @State private var count = 0
+    ///         @StateObject private var cache = DataCache()
     ///
     ///         var body: some Scene {
     ///             WindowGroup {
-    ///                 Text("If you're seeing this active was printed.")
+    ///                 MyRootView()
     ///             }
     ///             .onChange(of: scenePhase) { newScenePhase in
-    ///                 if newScenePhase == .active {
-    ///                     print("Active!")
+    ///                 if newScenePhase == .background {
+    ///                     cache.empty()
     ///                 }
     ///             }
     ///         }
     ///     }
     ///
-    /// - Parameters:
-    ///   - value: The value to watch for changes.
-    ///   - action: A function to run when the value changes.
+    /// The system calls the `action` closure on the main thread, so avoid
+    /// long-running tasks in the closure. If you need to perform such tasks,
+    /// dispatch to a background queue:
     ///
-    /// - Returns: A scene that calls a function when a value changes.
-    @inlinable public func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some Scene where V : Equatable { }
+    ///     .onChange(of: scenePhase) { newScenePhase in
+    ///         if newScenePhase == .background {
+    ///             DispatchQueue.global(qos: .background).async {
+    ///                 // ...
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// The system passes the new value into the closure. If you need the old
+    /// value, capture it in the closure.
+    ///
+    /// - Parameters:
+    ///   - value: The value to check when determining whether to run the
+    ///     closure. The value must conform to the
+    ///     <doc://com.apple.documentation/documentation/Swift/Equatable>
+    ///     protocol.
+    ///   - action: A closure to run when the value changes. The closure
+    ///     provides a single `newValue` parameter that indicates the changed
+    ///     value.
+    ///
+    /// - Returns: A scene that triggers an action in response to a change.
+    @inlinable public func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some Scene where V : Equatable { } { }
 
 }
 
@@ -14635,79 +13370,35 @@ extension Scene {
 @available(watchOS, unavailable)
 extension Scene {
 
-    /// Use this modifier to add a menu and keyboard shortcuts to your macOS and iPadOS apps.
+    /// Adds commands to the scene.
     ///
-    /// This modifier accepts a builder of ``Commands`` to create a menu bar with shortcuts.
+    /// Commands are realized in different ways on different platforms. On
+    /// macOS, the main menu uses the available command menus and groups to
+    /// organize its main menu items. Each menu is represented as a top-level
+    /// menu bar menu, and each command group has a corresponding set of menu
+    /// items in one of the top-level menus, delimited by separator menu items.
     ///
-    /// In macOS, these commands are visible in the menu bar at the top of the screen. On iPadOS,
-    /// these commands are visible when you hold down the Command (⌘) key.
-    ///
-    /// See ``Commands`` for more info on how to build these commands.
-    ///
-    ///     @main
-    ///     struct CommandApp: App {
-    ///         WindowGroup {
-    ///             Text("Press ⌘P to print 🍌")
-    ///         }
-    ///         .commands {
-    ///             PrintCommand()
-    ///         }
-    ///     }
-    ///
-    ///     struct PrintCommand: Commands {
-    ///         var body: some Commands {
-    ///             CommandMenu("Print") {
-    ///                 Button("Print", action: { print("🍌") })
-    ///                     .keyboardShortcut(
-    ///                         KeyboardShortcut(
-    ///                             KeyEquivalent("p"),
-    ///                             modifiers: [.command]))
-    ///             }
-    ///         }
-    ///     }
-    ///
-    /// - Parameter content: The command menus to add to your scene.
-    ///
-    /// - Returns: A scene with command menus and shortcuts.
-    public func commands<Content>(@CommandsBuilder content: () -> Content) -> some Scene where Content : Commands { }
+    /// On iPadOS, commands with keyboard shortcuts are exposed in the shortcut
+    /// discoverability HUD that users see when they hold down the Command (⌘)
+    /// key.
+    public func commands<Content>(@CommandsBuilder content: () -> Content) -> some Scene where Content : Commands { } { }
 
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Scene {
 
-    /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
+    /// The default store used by `AppStorage` contained within the scene and
+    /// its view content.
     ///
-    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
-    /// ``UserDefaults.standard``. Override this default location for all of your
-    /// scene's views by using this modifier.
+    /// If unspecified, the default store for a view hierarchy is
+    /// `UserDefaults.standard`, but can be set a to a custom one. For example,
+    /// sharing defaults between an app and an extension can override the
+    /// default store to one created with `UserDefaults.init(suiteName:_)`.
     ///
-    /// There is a similar method for ``View`` called ``View/defaultAppStorage(_:)``
-    ///
-    /// Check out ``UserDefaults`` and ``AppStorage`` for more info on how in-app storage
-    /// works.
-    ///
-    ///     @main
-    ///     struct StorageExampleApp: App {
-    ///         var body: some Scene {
-    ///             WindowGroup {
-    ///                 StorageExampleView()
-    ///             }
-    ///             .defaultAppStorage(UserDefaults(suiteName: "com.yoursite.your-suite")!)
-    ///         }
-    ///     }
-    ///
-    ///     struct StorageExampleView: View {
-    ///         //Looks for "key" in "com.yoursite.your-suite"
-    ///         @AppStorage("key") var name = "Kanye West"
-    ///
-    ///         var body: some View {
-    ///             TextField("Enter your name", text: $name)
-    ///         }
-    ///     }
-    ///
-    /// - Parameter store: The default user defaults storage site for `@AppStorage`.
-    public func defaultAppStorage(_ store: UserDefaults) -> some Scene { }
+    /// - Parameter store: The user defaults to use as the default
+    ///   store for `AppStorage`.
+    public func defaultAppStorage(_ store: UserDefaults) -> some Scene { } { }
 
 }
 
@@ -14740,20 +13431,10 @@ extension Scene {
     /// On platforms that only allow a single Window/Scene, this method is
     /// ignored.
     ///
-    ///     @main
-    ///     struct EventHandlingApp: App {
-    ///         var body: some Scene {
-    ///             WindowGroup {
-    ///                 SelectionView()
-    ///             }
-    ///             .handlesExternalEvents(matching: ["selection"]
-    ///         }
-    ///     }
-    ///
     /// - Parameter matching: A Set of Strings that are checked to see
     /// if they are contained in the targetContentIdenfifier. The empty Set
     /// and empty Strings never match. The String value "*" always matches.
-    public func handlesExternalEvents(matching conditions: Set<String>) -> some Scene { }
+    public func handlesExternalEvents(matching conditions: Set<String>) -> some Scene { } { }
 
 }
 
@@ -14763,14 +13444,14 @@ extension Scene {
 @_functionBuilder public struct SceneBuilder {
 
     /// Passes a single scene written as a child scene through unmodified.
-    public static func buildBlock<Content>(_ content: Content) -> Content where Content : Scene { }
+    public static func buildBlock<Content>(_ content: Content) -> Content where Content : Scene { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
     /// Passes two scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Scene where C0 : Scene, C1 : Scene { }
+    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Scene where C0 : Scene, C1 : Scene { } { }
 
 }
 
@@ -14778,7 +13459,7 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes three scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene { }
+    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene { } { }
 
 }
 
@@ -14786,7 +13467,7 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes four scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene { }
+    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene { } { }
 
 }
 
@@ -14794,7 +13475,7 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes five scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene { }
+    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene { } { }
 
 }
 
@@ -14802,7 +13483,7 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes six scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene { } { }
 
 }
 
@@ -14810,7 +13491,7 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes seven scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene { } { }
 
 }
 
@@ -14818,7 +13499,7 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes eight scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene { } { }
 
 }
 
@@ -14826,7 +13507,7 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes nine scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene { } { }
 
 }
 
@@ -14834,24 +13515,24 @@ extension SceneBuilder {
 extension SceneBuilder {
 
     /// Passes ten scenes written as children scenes through unmodified.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene, C9 : Scene { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene, C9 : Scene { } { }
 
 }
 
 /// An indication of a scene's operational state.
 ///
-/// The system moves your app's ``Scene`` instances through phases that reflect
+/// The system moves your app's ~~Scene~~ instances through phases that reflect
 /// a scene's operational state. You can trigger actions when the phase changes.
-/// Read the current phase by observing the ``EnvironmentValues/scenePhase``
-/// value in the ``Environment``:
+/// Read the current phase by observing the ~~EnvironmentValues/scenePhase~~
+/// value in the ~~Environment~~:
 ///
 ///     @Environment(\.scenePhase) private var scenePhase
 ///
 /// How you interpret the value depends on where it's read from.
-/// If you read the phase from inside a ``View`` instance, you obtain a value
+/// If you read the phase from inside a ~~View~~ instance, you obtain a value
 /// that reflects the phase of the scene that contains the view. The following
-/// example uses the ``SwiftUI/View/onChange(of:perform:)`` method to enable
-/// a timer whenever the enclosing scene enters the ``ScenePhase/active`` phase
+/// example uses the ~~SwiftUI/View/onChange(of:perform:)~~ method to enable
+/// a timer whenever the enclosing scene enters the ~~ScenePhase/active~~ phase
 /// and disable the timer when entering any other phase:
 ///
 ///     struct MyView: View {
@@ -14866,13 +13547,13 @@ extension SceneBuilder {
 ///         }
 ///     }
 ///
-/// If you read the phase from within an ``App`` instance, you obtain an
+/// If you read the phase from within an ~~App~~ instance, you obtain an
 /// aggregate value that reflects the phases of all the scenes in your app. The
-/// app reports a value of ``ScenePhase/active`` if any scene is active, or a
-/// value of ``ScenePhase/inactive`` when no scenes are active. This includes
+/// app reports a value of ~~ScenePhase/active~~ if any scene is active, or a
+/// value of ~~ScenePhase/inactive~~ when no scenes are active. This includes
 /// multiple scene instances created from a single scene declaration; for
-/// example, from a ``WindowGroup``. When an app enters the
-/// ``ScenePhase/background`` phase, expect the app to terminate soon after.
+/// example, from a ~~WindowGroup~~. When an app enters the
+/// ~~ScenePhase/background~~ phase, expect the app to terminate soon after.
 /// You can use that opportunity to free any resources:
 ///
 ///     @main
@@ -14892,7 +13573,7 @@ extension SceneBuilder {
 ///         }
 ///     }
 ///
-/// If you read the phase from within a custom ``Scene`` instance, the value
+/// If you read the phase from within a custom ~~Scene~~ instance, the value
 /// similarly reflects an aggregation of all the scenes that make up the custom
 /// scene:
 ///
@@ -14920,7 +13601,7 @@ public enum ScenePhase : Comparable {
     /// The `background` phase can precede termination, so do any cleanup work
     /// immediately upon entering this state. For example, close any open files
     /// and network connections. However, a scene can also return to the
-    /// the ``ScenePhase/active`` phase from the background.
+    /// the ~~ScenePhase/active~~ phase from the background.
     ///
     /// Expect an app that enters the `background` phase to terminate.
     case background
@@ -14931,10 +13612,10 @@ public enum ScenePhase : Comparable {
     /// timers and free any unnecessary resources. The scene might be completely
     /// hidden in the user interface or otherwise unavailable to the user.
     /// In macOS, scenes only pass through this phase temporarily on their way
-    /// to the ``ScenePhase/background`` phase.
+    /// to the ~~ScenePhase/background~~ phase.
     ///
     /// An app or custom scene in this phase contains no scene instances in the
-    /// ``ScenePhase/active`` phase.
+    /// ~~ScenePhase/active~~ phase.
     case inactive
 
     /// The scene is in the foreground and interactive.
@@ -14955,7 +13636,7 @@ public enum ScenePhase : Comparable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: ScenePhase, b: ScenePhase) -> Bool { }
+    public static func == (a: ScenePhase, b: ScenePhase) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -14979,7 +13660,7 @@ public enum ScenePhase : Comparable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// Returns a Boolean value indicating whether the value of the first
     /// argument is less than that of the second argument.
@@ -14991,7 +13672,7 @@ public enum ScenePhase : Comparable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func < (a: ScenePhase, b: ScenePhase) -> Bool { }
+    public static func < (a: ScenePhase, b: ScenePhase) -> Bool { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -15048,35 +13729,35 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if a boolean is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Bool { }
+    public init(wrappedValue: Value, _ key: String) where Value == Bool { } { }
 
     /// Creates a property that can save and restore an integer.
     ///
     /// - Parameter wrappedValue: The default value if an integer is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Int { }
+    public init(wrappedValue: Value, _ key: String) where Value == Int { } { }
 
     /// Creates a property that can save and restore a double.
     ///
     /// - Parameter wrappedValue: The default value if a double is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Double { }
+    public init(wrappedValue: Value, _ key: String) where Value == Double { } { }
 
     /// Creates a property that can save and restore a string.
     ///
     /// - Parameter wrappedValue: The default value if a string is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == String { }
+    public init(wrappedValue: Value, _ key: String) where Value == String { } { }
 
     /// Creates a property that can save and restore a URL.
     ///
     /// - Parameter wrappedValue: The default value if a URL is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == URL { }
+    public init(wrappedValue: Value, _ key: String) where Value == URL { } { }
 
     /// Creates a property that can save and restore data.
     ///
@@ -15086,7 +13767,7 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if data is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value == Data { }
+    public init(wrappedValue: Value, _ key: String) where Value == Data { } { }
 
     /// Creates a property that can save and restore an integer, transforming it
     /// to a `RawRepresentable` data type.
@@ -15106,7 +13787,7 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if an integer value is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == Int { }
+    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == Int { } { }
 
     /// Creates a property that can save and restore a string, transforming it
     /// to a `RawRepresentable` data type.
@@ -15126,7 +13807,7 @@ extension SceneStorage {
     /// - Parameter wrappedValue: The default value if a String value is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
-    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == String { }
+    public init(wrappedValue: Value, _ key: String) where Value : RawRepresentable, Value.RawValue == String { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -15137,250 +13818,47 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Bool? { }
+    public init(_ key: String) where Value == Bool? { } { }
 
     /// Creates a property that can save and restore an Optional integer.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Int? { }
+    public init(_ key: String) where Value == Int? { } { }
 
     /// Creates a property that can save and restore an Optional double.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Double? { }
+    public init(_ key: String) where Value == Double? { } { }
 
     /// Creates a property that can save and restore an Optional string.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == String? { }
+    public init(_ key: String) where Value == String? { } { }
 
     /// Creates a property that can save and restore an Optional URL.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == URL? { }
+    public init(_ key: String) where Value == URL? { } { }
 
     /// Creates a property that can save and restore an Optional data.
     ///
     /// Defaults to nil if there is no restored value
     ///
     /// - Parameter key: a key used to save and restore the value.
-    public init(_ key: String) where Value == Data? { }
+    public init(_ key: String) where Value == Data? { } { }
 }
 
-
-/// A view that scrolls.
+/// A scrollable view.
 ///
-/// A view that allows the scrolling of its contained views.
-///
-/// ### Making a view scrollable
-///
-/// `ScrollView` is a container view that makes its content scrollable. For example:
-///
-///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         ScrollView {
-///             VStack {
-///                 Text("Bananas 🍌🍌")
-///                 Text("Apples 🍏🍏")
-///                 Text("Peaches 🍑🍑")
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// In this example, the `VStack` containing the text is made scrollable by wrapping it in a `ScrollView`.
-///
-/// Note:
-///
-/// - The content of a `ScrollView` is scrollable regardless of whether all of it fits on screen or not.
-/// - It is not possible to selectively disable the scrolling of a `ScrollView`, while allowing its content to remain interactive. A `View/disabled(_:)` attached to a `ScrollView` will disable both the scrolling and all the interaction with the content visible.
-/// - A `ScrollView`'s scrollable region is sized to fit the content view passed to the `ScrollView`.
-/// - `ScrollView` fits to occupy as much space as possible. It is important to distinguish between the actual bounds of the scroll view, and the bounds of the *content* of the `ScrollView`.
-///
-/// ### Setting the direction of scrolling
-///
-/// The default scrolling direction of a `ScrollView` is **vertical**. `ScrollView` supports 3 types of scrolling:
-///
-/// - vertical
-/// - horizontal
-/// - both vertical and horizontal
-///
-/// To set a single allowed direction for a `ScrollView`, specify the axis of direction in the initializer. For example:
-///
-///  ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         ScrollView(.horizontal) {
-///             VStack {
-///                 Text("Bananas 🍌🍌")
-///                 Text("Apples 🍏🍏")
-///                 Text("Peaches 🍑🍑")
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// This example takes the previous example, and modifies it so that the `ScrollView` scrolls horizontally. This `ScrollView` will **not** scroll vertically, as an explict axis, `.horizontal`, has been specified.
-///
-/// To allow *both* directions of scrolling, pass the set of axes that you want to permit. For example:
-///
-///  ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         ScrollView([.horizontal, .vertical]) {
-///             VStack {
-///                 Text("Bananas 🍌🍌")
-///                 Text("Apples 🍏🍏")
-///                 Text("Peaches 🍑🍑")
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// In this example, `ScrollView` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
-///
-/// ### Hiding the scroll view indicator
-///
-/// By default, a `ScrollView`'s scroll indicator is visible upon user interaction.
-///
-/// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content)` to hide the scroll indicator(s). For example:
-///
-///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         ScrollView(.horizontal, showsIndicators: false) {
-///             VStack {
-///                 Text("Bananas 🍌🍌")
-///                 Text("Apples 🍏🍏")
-///                 Text("Peaches 🍑🍑")
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// This `ScrollView` will never show a scroll indicator.
-///
-/// You do not need to specify an axis to use `showsIndicators`. For example:
-///
-///  ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         ScrollView(showsIndicators: false) {
-///             VStack {
-///                 Text("Bananas 🍌🍌")
-///                 Text("Apples 🍏🍏")
-///                 Text("Peaches 🍑🍑")
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// This `ScrollView`  hides its scroll indicator, with a default `.vertical` scroll direction.
-///
-/// ### Scrolling to an item
-///
-/// To programmatically scroll to a particular item in your `ScrollView`, use `ScrollViewProxy/scrollTo(_:anchor:)`. `ScrollViewProxy` is a type that allows you to control a `ScrollView`, and can be obtained using a `ScrollViewReader`.
-///
-/// For example:
-///
-///  ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         ScrollView {
-///             ScrollViewReader { (proxy: ScrollViewProxy) in
-///                 Button("Jump to #32") {
-///                     proxy.scrollTo(32)
-///                 }
-///
-///                 ForEach(1..<101) { number in
-///                     Text("Item #\(number)")
-///                         .id(number)
-///                 }
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use `View/id(_:)` as is done inside the `ForEach`, for each element.
-///
-/// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the text reading "Item #32", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, specify an anchor via `ScrollViewProxy/scrollTo(_:anchor:)`. For example:
-///
-///  ![ScrollView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-7.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         ScrollView {
-///             ScrollViewReader { (proxy: ScrollViewProxy) in
-///                 Button("Jump to #32") {
-///                     proxy.scrollTo(32, anchor: .top)
-///                 }
-///
-///                 ForEach(1..<101) { number in
-///                     Text("Item #\(number)")
-///                         .id(number)
-///                 }
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-/// In this example, the `ScrollView` still scrolls to "Item #32", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
-///
-///
-///  Add a transition to your `ScrollViewProxy/scrollTo(_:anchor:)` with `View/withAnimation(_:_:)`.  For example:
-///
-///  ![ScrollView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-8.gif)
-///
-///  ```
-///  struct ExampleView: View {
-///      var body: some View {
-///          ScrollView {
-///              ScrollViewReader { (proxy: ScrollViewProxy) in
-///                  Button("Jump to #32") {
-///                     withAnimation(.easeInOut(duration: 60)) {
-///                         proxy.scrollTo(32, anchor: .top)
-///                     }
-///                  }
-///
-///                  ForEach(1..<101) { number in
-///                      Text("Item #\(number)")
-///                          .id(number)
-///                  }
-///              }
-///          }
-///      }
-///  }
-/// ```
-///
+/// The scroll view displays its content within the scrollable content region.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : View where Content : View {
 
@@ -15389,7 +13867,7 @@ public struct ScrollView<Content> : View where Content : View {
 
     /// The scrollable axes of the scroll view.
     ///
-    /// The default value is ``Axis/vertical``.
+    /// The default value is ~~Axis/vertical~~.
     public var axes: Axis.Set
 
     /// A value that indicates whether the scroll view displays the scrollable
@@ -15410,7 +13888,7 @@ public struct ScrollView<Content> : View where Content : View {
     ///     suitable for the platform. The default value for this parameter is
     ///     `true`.
     ///   - content: The view builder that creates the scrollable view.
-    public init(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> Content) { }
+    public init(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true, @ViewBuilder content: () -> Content) { } { }
 
     /// The content and behavior of the scroll view.
     public var body: some View { get }
@@ -15441,7 +13919,7 @@ public struct ScrollViewProxy {
     /// view, `.bottom` aligns the bottom of the identified view to the
     /// bottom of the scroll view, and so on.
     ///
-    public func scrollTo<ID>(_ id: ID, anchor: UnitPoint? = nil) where ID : Hashable { }
+    public func scrollTo<ID>(_ id: ID, anchor: UnitPoint? = nil) where ID : Hashable { } { }
 }
 
 /// Creates programatic scrolling by ascribing a child defined as a function of a `ScrollViewProxy`.
@@ -15456,7 +13934,7 @@ public struct ScrollViewProxy {
     /// will cause a runtime error) but only from actions created
     /// within `content` such as gesture handlers or the `onChange()`
     /// function.
-    @inlinable public init(@ViewBuilder content: @escaping (ScrollViewProxy) -> Content) { }
+    @inlinable public init(@ViewBuilder content: @escaping (ScrollViewProxy) -> Content) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -15484,47 +13962,47 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     /// implementation of the required `body` property.
     public typealias Body = Never
 
-    /// Initialize a ``Section`` with an explicit header, footer, and content.
+    /// Initialize a ~~Section~~ with an explicit header, footer, and content.
     ///
     /// - Parameters:
     ///   - header: A view placed on top
     ///   - footer: A view placed on bottom
     ///   - content: The section contents
-    public init(header: Parent, footer: Footer, @ViewBuilder content: () -> Content) { }
+    public init(header: Parent, footer: Footer, @ViewBuilder content: () -> Content) { } { }
 
-    /// The child view displayed in the ``Section``.
+    /// The child view displayed in the ~~Section~~.
     public var internalBody: some View { get }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Section where Parent == EmptyView, Content : View, Footer : View {
 
-    /// Initialize a ``Section`` with an explicit footer and content.
+    /// Initialize a ~~Section~~ with an explicit footer and content.
     ///
     /// - Parameters:
     ///   - footer: A view placed on bottom
     ///   - content: The section contents
-    public init(footer: Footer, @ViewBuilder content: () -> Content) { }
+    public init(footer: Footer, @ViewBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Section where Parent : View, Content : View, Footer == EmptyView {
 
-    /// Initialize a ``Section`` with an explicit header and content.
+    /// Initialize a ~~Section~~ with an explicit header and content.
     ///
     /// - Parameters:
     ///   - header: A view placed on top
     ///   - content: The section contents
-    public init(header: Parent, @ViewBuilder content: () -> Content) { }
+    public init(header: Parent, @ViewBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Section where Parent == EmptyView, Content : View, Footer == EmptyView {
 
-    /// Initialize a ``Section`` with specified content.
+    /// Initialize a ~~Section~~ with specified content.
     ///
     /// - Parameters content: The section contents
-    public init(@ViewBuilder content: () -> Content) { }
+    public init(@ViewBuilder content: () -> Content) { } { }
 }
 
 /// A control into which the user securely enters private text.
@@ -15552,7 +14030,7 @@ extension SecureField where Label == Text {
     ///   - text: The text to be displayed and edited.
     ///   - onCommit: The action to perform when the user performs an action
     ///     (usually the return key) while the `SecureField` has focus.
-    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void = {}) { }
+    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void = {}) { } { }
 
     /// Creates an instance.
     ///
@@ -15561,22 +14039,22 @@ extension SecureField where Label == Text {
     ///   - text: The text to be displayed and edited.
     ///   - onCommit: The action to perform when the user performs an action
     ///     (usually the return key) while the `SecureField` has focus.
-    public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
+    public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void = {}) where S : StringProtocol { } { }
 }
 
 /// A picker style that presents the options in a segmented control.
 ///
 /// To apply this style to a picker, or to a view that contains pickers, use the
-/// ``View/pickerStyle(_:)`` modifier.
+/// ~~View/pickerStyle(_:)~~ modifier.
 ///
-/// > Note: The segmented picker style supports ``Text`` and ``Image`` segments only.
+/// > Note: The segmented picker style supports ~~Text~~ and ~~Image~~ segments only.
 /// Any other view results in a visible, but empty, segment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
 public struct SegmentedPickerStyle : PickerStyle {
 
     /// Creates a segmented picker style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A gesture that's a sequence of two gestures.
@@ -15608,7 +14086,7 @@ public struct SegmentedPickerStyle : PickerStyle {
     /// - Parameters:
     ///   - first: The first gesture of the sequence.
     ///   - second: The second gesture of the sequence.
-    @inlinable public init(_ first: First, _ second: Second) { }
+    @inlinable public init(_ first: First, _ second: Second) { } { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -15625,7 +14103,7 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: SequenceGesture<First, Second>.Value, b: SequenceGesture<First, Second>.Value) -> Bool { }
+    public static func == (a: SequenceGesture<First, Second>.Value, b: SequenceGesture<First, Second>.Value) -> Bool { } { }
 }
 
 /// A 2D shape that you can use when drawing a view.
@@ -15644,7 +14122,7 @@ public protocol Shape : Animatable, View {
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    func path(in rect: CGRect) -> Path { }
+    func path(in rect: CGRect) -> Path { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -15691,7 +14169,7 @@ extension Shape {
     ///   - endFraction: The fraction of the way through drawing this shape
     ///     where drawing ends.
     /// - Returns: A shape built by capturing a portion of this shape's path.
-    @inlinable public func trim(from startFraction: CGFloat = 0, to endFraction: CGFloat = 1) -> some Shape { }
+    @inlinable public func trim(from startFraction: CGFloat = 0, to endFraction: CGFloat = 1) -> some Shape { } { }
 
 }
 
@@ -15717,7 +14195,7 @@ extension Shape {
     ///   to the right and down.
     ///
     /// - Returns: A shape offset by the specified amount.
-    @inlinable public func offset(_ offset: CGSize) -> OffsetShape<Self> { }
+    @inlinable public func offset(_ offset: CGSize) -> OffsetShape<Self> { } { }
 
     /// Changes the relative position of this shape using the specified point.
     ///
@@ -15738,7 +14216,7 @@ extension Shape {
     ///   to the right and down.
     ///
     /// - Returns: A shape offset by the specified amount.
-    @inlinable public func offset(_ offset: CGPoint) -> OffsetShape<Self> { }
+    @inlinable public func offset(_ offset: CGPoint) -> OffsetShape<Self> { } { }
 
     /// Changes the relative position of this shape using the specified point.
     ///
@@ -15762,7 +14240,7 @@ extension Shape {
     ///     Negative numbers are up and positive numbers are down.
     ///
     /// - Returns: A shape offset by the specified amount.
-    @inlinable public func offset(x: CGFloat = 0, y: CGFloat = 0) -> OffsetShape<Self> { }
+    @inlinable public func offset(x: CGFloat = 0, y: CGFloat = 0) -> OffsetShape<Self> { } { }
 
     /// Scales this shape without changing its bounding frame.
     ///
@@ -15777,7 +14255,7 @@ extension Shape {
     ///     y-axis.
     ///
     /// - Returns: A scaled form of this shape.
-    @inlinable public func scale(x: CGFloat = 1, y: CGFloat = 1, anchor: UnitPoint = .center) -> ScaledShape<Self> { }
+    @inlinable public func scale(x: CGFloat = 1, y: CGFloat = 1, anchor: UnitPoint = .center) -> ScaledShape<Self> { } { }
 
     /// Scales this shape without changing its bounding frame.
     ///
@@ -15787,7 +14265,7 @@ extension Shape {
     ///   on.
     ///
     /// - Returns: A scaled form of this shape.
-    @inlinable public func scale(_ scale: CGFloat, anchor: UnitPoint = .center) -> ScaledShape<Self> { }
+    @inlinable public func scale(_ scale: CGFloat, anchor: UnitPoint = .center) -> ScaledShape<Self> { } { }
 
     /// Rotates this shape around an anchor point at the angle you specify.
     ///
@@ -15804,7 +14282,7 @@ extension Shape {
     ///   - anchor: The point to rotate the shape around.
     ///
     /// - Returns: A rotated shape.
-    @inlinable public func rotation(_ angle: Angle, anchor: UnitPoint = .center) -> RotatedShape<Self> { }
+    @inlinable public func rotation(_ angle: Angle, anchor: UnitPoint = .center) -> RotatedShape<Self> { } { }
 
     /// Applies an affine transform to this shape.
     ///
@@ -15815,7 +14293,7 @@ extension Shape {
     ///   shape.
     ///
     /// - Returns: A transformed shape, based on its matrix values.
-    @inlinable public func transform(_ transform: CGAffineTransform) -> TransformedShape<Self> { }
+    @inlinable public func transform(_ transform: CGAffineTransform) -> TransformedShape<Self> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -15825,14 +14303,14 @@ extension Shape {
     /// that will ask it to create its path from a rect of `size`. This
     /// does not affect the layout properties of any views created from
     /// the shape (e.g. by filling it).
-    @inlinable public func size(_ size: CGSize) -> some Shape { }
+    @inlinable public func size(_ size: CGSize) -> some Shape { } { }
 
 
     /// Returns a new version of self representing the same shape, but
     /// that will ask it to create its path from a rect of size
     /// `(width, height)`. This does not affect the layout properties
     /// of any views created from the shape (e.g. by filling it).
-    @inlinable public func size(width: CGFloat, height: CGFloat) -> some Shape { }
+    @inlinable public func size(width: CGFloat, height: CGFloat) -> some Shape { } { }
 
 }
 
@@ -15845,7 +14323,7 @@ extension Shape {
     ///   - content: The color or gradient to use when filling this shape.
     ///   - style: The style options that determine how the fill renders.
     /// - Returns: A shape filled with the color or gradient you supply.
-    @inlinable public func fill<S>(_ content: S, style: FillStyle = FillStyle()) -> some View where S : ShapeStyle { }
+    @inlinable public func fill<S>(_ content: S, style: FillStyle = FillStyle()) -> some View where S : ShapeStyle { } { }
 
 
     /// Fills this shape with the foreground color.
@@ -15853,7 +14331,7 @@ extension Shape {
     /// - Parameter style: The style options that determine how the fill
     ///   renders.
     /// - Returns: A shape filled with the foreground color.
-    @inlinable public func fill(style: FillStyle = FillStyle()) -> some View { }
+    @inlinable public func fill(style: FillStyle = FillStyle()) -> some View { } { }
 
 
     /// Traces the outline of this shape with a color or gradient.
@@ -15879,7 +14357,7 @@ extension Shape {
     ///     whether the stroke is dashed --- that determine how to render this
     ///     shape.
     /// - Returns: A stroked shape.
-    @inlinable public func stroke<S>(_ content: S, style: StrokeStyle) -> some View where S : ShapeStyle { }
+    @inlinable public func stroke<S>(_ content: S, style: StrokeStyle) -> some View where S : ShapeStyle { } { }
 
 
     /// Traces the outline of this shape with a color or gradient.
@@ -15892,7 +14370,7 @@ extension Shape {
     ///   - content: The color or gradient with which to stroke this shape.
     ///   - lineWidth: The width of the stroke that outlines this shape.
     /// - Returns: A stroked shape.
-    @inlinable public func stroke<S>(_ content: S, lineWidth: CGFloat = 1) -> some View where S : ShapeStyle { }
+    @inlinable public func stroke<S>(_ content: S, lineWidth: CGFloat = 1) -> some View where S : ShapeStyle { } { }
 
 }
 
@@ -15910,13 +14388,13 @@ extension Shape {
 
     /// Returns a new shape that is a stroked copy of `self`, using the
     /// contents of `style` to define the stroke characteristics.
-    @inlinable public func stroke(style: StrokeStyle) -> some Shape { }
+    @inlinable public func stroke(style: StrokeStyle) -> some Shape { } { }
 
 
     /// Returns a new shape that is a stroked copy of `self` with
     /// line-width defined by `lineWidth` and all other properties of
     /// `StrokeStyle` having their default values.
-    @inlinable public func stroke(lineWidth: CGFloat = 1) -> some Shape { }
+    @inlinable public func stroke(lineWidth: CGFloat = 1) -> some Shape { } { }
 
 }
 
@@ -15930,14 +14408,14 @@ extension ShapeStyle {
 
     /// Return a new paint value matching `self` except using `rect` to
     /// map unit-space coordinates to absolute coordinates.
-    @inlinable public func `in`(_ rect: CGRect) -> some ShapeStyle { }
+    @inlinable public func `in`(_ rect: CGRect) -> some ShapeStyle { } { }
 
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ShapeStyle where Self : View, Self.Body == _ShapeView<Rectangle, Self> {
 
-	/// Default ``View.body`` implementation to fill a Rectangle with `self`.
+	/// Default ~~View.body~~ implementation to fill a Rectangle with `self`.
     public var body: _ShapeView<Rectangle, Self> { get }
 }
 
@@ -15951,7 +14429,7 @@ extension ShapeStyle where Self : View, Self.Body == _ShapeView<Rectangle, Self>
 public struct SidebarCommands : Commands {
 
     /// A new value describing the built-in sidebar-related commands.
-    public init() { }
+    public init() { } { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -15967,7 +14445,7 @@ public struct SidebarCommands : Commands {
 public struct SidebarListStyle : ListStyle {
 
     /// Creates a sidebar list style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A gesture containing two gestures that can happen at the same time with
@@ -16002,7 +14480,7 @@ public struct SidebarListStyle : ListStyle {
     /// - Parameters:
     ///   - first: The first of two gestures that can happen simultaneously.
     ///   - second: The second of two gestures that can happen simultaneously.
-    @inlinable public init(_ first: First, _ second: Second) { }
+    @inlinable public init(_ first: First, _ second: Second) { } { }
 
     /// The type of gesture representing the body of `Self`.
     public typealias Body = Never
@@ -16019,7 +14497,7 @@ extension SimultaneousGesture.Value : Equatable where First.Value : Equatable, S
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: SimultaneousGesture<First, Second>.Value, b: SimultaneousGesture<First, Second>.Value) -> Bool { }
+    public static func == (a: SimultaneousGesture<First, Second>.Value, b: SimultaneousGesture<First, Second>.Value) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16047,7 +14525,7 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 /// A control for selecting a value from a bounded linear range of values.
@@ -16086,7 +14564,7 @@ extension Slider {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { } { }
 
     /// Creates an instance that selects a value from within a range.
     ///
@@ -16105,7 +14583,7 @@ extension Slider {
     /// `onEditingChanged` will be called when editing begins and ends. For
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
@@ -16127,7 +14605,7 @@ extension Slider where ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { } { }
 
     /// Creates an instance that selects a value from within a range.
     ///
@@ -16145,7 +14623,7 @@ extension Slider where ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
@@ -16166,7 +14644,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { } { }
 
     /// Creates an instance that selects a value from within a range.
     ///
@@ -16183,7 +14661,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// example, on iOS, a `Slider` is considered to be actively editing while
     /// the user is touching the knob and sliding it around the track.
     @available(tvOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { } { }
 }
 
 /// A flexible space that expands along the major axis of its containing stack
@@ -16197,7 +14675,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// If `nil`, the system default spacing between views is used.
     public var minLength: CGFloat?
 
-    @inlinable public init(minLength: CGFloat? = nil) { }
+    @inlinable public init(minLength: CGFloat? = nil) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -16217,7 +14695,7 @@ extension Spacer : View {
 public struct StackNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a stack navigation view style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A property wrapper type that can read and write a value managed by SwiftUI.
@@ -16226,9 +14704,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// state value changes, the view invalidates its appearance and recomputes the
 /// body. Use the state as the single source of truth for a given view.
 ///
-/// A ``State`` instance isn't the value itself; it's a means of reading and
+/// A ~~State~~ instance isn't the value itself; it's a means of reading and
 /// writing the value. To access a state's underlying value, use its variable
-/// name, which returns the ``State/wrappedValue`` property value.
+/// name, which returns the ~~State/wrappedValue~~ property value.
 ///
 /// You should only access a state property from inside the view's body, or from
 /// methods called by it. For this reason, declare your state properties as
@@ -16237,7 +14715,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// To pass a state property to another view in the view hierarchy, use the
 /// variable name with the `$` prefix operator. This retrieves a binding of the
-/// state property from its ``State/projectedValue`` property. For example, in
+/// state property from its ~~State/projectedValue~~ property. For example, in
 /// the following code example `PlayerView` passes its state property
 /// `isPlaying` to `PlayButton` using `$isPlaying`:
 ///
@@ -16263,12 +14741,12 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// `@State private var isPlaying: Bool = false`.
     ///
     /// - Parameter wrappedValue: An initial wrappedValue for a state.
-    public init(wrappedValue value: Value) { }
+    public init(wrappedValue value: Value) { } { }
 
     /// Creates the state with an initial value.
     ///
     /// - Parameter value: An initial value of the state.
-    public init(initialValue value: Value) { }
+    public init(initialValue value: Value) { } { }
 
     /// The underlying value referenced by the state variable.
     ///
@@ -16321,13 +14799,13 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 extension State where Value : ExpressibleByNilLiteral {
 
     /// Creates a state without an initial value.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 }
 
 /// A property wrapper type that instantiates an observable object.
 ///
-/// Create a state object in a ``SwiftUI/View``, ``SwiftUI/App``, or
-/// ``SwiftUI/Scene`` by applying the `@StateObject` attribute to a property
+/// Create a state object in a ~~SwiftUI/View~~, ~~SwiftUI/App~~, or
+/// ~~SwiftUI/Scene~~ by applying the `@StateObject` attribute to a property
 /// declaration and providing an initial value that conforms to the
 /// <doc://com.apple.documentation/documentation/Combine/ObservableObject>
 /// protocol:
@@ -16342,23 +14820,23 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     Text(model.title) // Updates the view any time `title` changes.
 ///
 /// You can pass the state object into a property that has the
-/// ``SwiftUI/ObservedObject`` attribute. You can alternatively add the object
+/// ~~SwiftUI/ObservedObject~~ attribute. You can alternatively add the object
 /// to the environment of a view hierarchy by applying the
-/// ``SwiftUI/View/environmentObject(_:)`` modifier:
+/// ~~SwiftUI/View/environmentObject(_:)~~ modifier:
 ///
 ///     ContentView()
 ///         .environmentObject(model)
 ///
 /// If you create an environment object as shown in the code above, you can
 /// read the object inside `ContentView` or any of its descendants
-/// using the ``SwiftUI/EnvironmentObject`` attribute:
+/// using the ~~SwiftUI/EnvironmentObject~~ attribute:
 ///
 ///     @EnvironmentObject var model: DataModel
 ///
-/// Get a ``SwiftUI/Binding`` to one of the state object's properties using the
+/// Get a ~~SwiftUI/Binding~~ to one of the state object's properties using the
 /// `$` operator. Use a binding when you want to create a two-way connection to
 /// one of the object's properties. For example, you can let a
-/// ``SwiftUI/Toggle`` control a Boolean value called `isEnabled` stored in the
+/// ~~SwiftUI/Toggle~~ control a Boolean value called `isEnabled` stored in the
 /// model:
 ///
 ///     Toggle("Enabled", isOn: $model.isEnabled)
@@ -16368,8 +14846,8 @@ extension State where Value : ExpressibleByNilLiteral {
     /// Creates a new state object with an initial wrapped value.
     ///
     /// You don’t call this initializer directly. Instead, declare a property
-    /// with the `@StateObject` attribute in a ``SwiftUI/View``,
-    /// ``SwiftUI/App``, or ``SwiftUI/Scene``, and provide an initial value:
+    /// with the `@StateObject` attribute in a ~~SwiftUI/View~~,
+    /// ~~SwiftUI/App~~, or ~~SwiftUI/Scene~~, and provide an initial value:
     ///
     ///     struct MyView: View {
     ///         @StateObject var model = DataModel()
@@ -16384,7 +14862,7 @@ extension State where Value : ExpressibleByNilLiteral {
     /// receives a distinct copy of the data model.
     ///
     /// - Parameter thunk: An initial value for the state object.
-    @inlinable public init(wrappedValue thunk: @autoclosure @escaping () -> ObjectType) { }
+    @inlinable public init(wrappedValue thunk: @autoclosure @escaping () -> ObjectType) { } { }
 
     /// The underlying value referenced by the state object.
     ///
@@ -16409,7 +14887,7 @@ extension State where Value : ExpressibleByNilLiteral {
     /// Use the projected value to pass a binding value down a view hierarchy.
     /// To get the projected value, prefix the property variable with `$`. For
     /// example, you can get a binding to a model's `isEnabled` Boolean so that
-    /// a ``SwiftUI/Toggle`` view can control the value:
+    /// a ~~SwiftUI/Toggle~~ view can control the value:
     ///
     ///     struct MyView: View {
     ///         @StateObject var model = DataModel()
@@ -16431,7 +14909,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///  * Operate strictly over a prescribed range.
 ///  * Step by specific amounts over a stepper's range of possible values.
 ///
-/// The example below uses an array that holds a number of ``Color`` values,
+/// The example below uses an array that holds a number of ~~Color~~ values,
 /// a local state variable, `value`, to set the control's background
 /// color, and title label. When the user clicks or taps on the stepper's
 /// increment or decrement buttons SwiftUI executes the relevant
@@ -16505,7 +14983,7 @@ public struct Stepper<Label> : View where Label : View {
     /// executes closures you provide when the user clicks or taps the
     /// stepper's increment or decrement buttons.
     ///
-    /// The example below uses an array that holds a number of ``Color`` values,
+    /// The example below uses an array that holds a number of ~~Color~~ values,
     /// a local state variable, `value`, to set the control's background
     /// color, and title label. When the user clicks or taps on the stepper's
     /// increment or decrement buttons SwiftUI executes the relevant
@@ -16555,7 +15033,7 @@ public struct Stepper<Label> : View where Label : View {
     ///       of the `onEditingChanged` closure at the start and end of
     ///       the gesture.
     ///     - label: A view describing the purpose of this stepper.
-    public init(onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) { }
+    public init(onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -16600,7 +15078,7 @@ extension Stepper {
     ///   increment or decrement buttons.](SwiftUI-Stepper-value-step.png)
     ///
     /// - Parameters:
-    ///   - value: The ``Binding`` to a value that you provide.
+    ///   - value: The ~~Binding~~ to a value that you provide.
     ///   - step: The amount to increment or decrement `value` each time the
     ///     user clicks or taps the stepper's increment or decrement buttons.
     ///     Defaults to `1`.
@@ -16612,7 +15090,7 @@ extension Stepper {
     ///   - label: A view describing the purpose of this stepper.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable { }
+    public init<V>(value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable { } { }
 
     /// Creates a stepper configured to increment or decrement a binding to a
     /// value using a step value and within a range of values you provide.
@@ -16646,7 +15124,7 @@ extension Stepper {
     /// prescribed range of 1 though 50.](SwiftUI-Stepper-value-step-range.png)
     ///
     /// - Parameters:
-    ///   - value: A ``Binding`` to a value that you provide.
+    ///   - value: A ~~Binding~~ to a value that you provide.
     ///   - bounds: A closed range that describes the upper and lower bounds
     ///     permitted by the stepper.
     ///   - step: The amount to increment or decrement the stepper when the
@@ -16660,7 +15138,7 @@ extension Stepper {
     ///   - label: A view describing the purpose of this stepper.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable { }
+    public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, *)
@@ -16674,12 +15152,12 @@ extension Stepper where Label == Text {
     ///
     /// Use this initializer to create a stepper with a custom title that
     /// executes closures you provide when either of the stepper's increment
-    /// or decrement buttons are pressed. This version of ``Stepper`` doesn't
+    /// or decrement buttons are pressed. This version of ~~Stepper~~ doesn't
     /// take a binding to a value, nor does it allow you to specify a range of
     /// acceptable values, or a step value -- it simply calls the closures you
     /// provide when the control's buttons are pressed.
     ///
-    /// The example below uses an array that holds a number of ``Color`` values,
+    /// The example below uses an array that holds a number of ~~Color~~ values,
     /// a local state variable, `value`, to set the control's background
     /// color, and title label. When the user clicks or taps on the stepper's
     /// increment or decrement buttons SwiftUI executes the relevant
@@ -16731,7 +15209,7 @@ extension Stepper where Label == Text {
     ///      the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ titleKey: LocalizedStringKey, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) { }
+    public init(_ titleKey: LocalizedStringKey, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) { } { }
 
     /// Creates a stepper using a title string and that executes closures
     /// you provide when the user clicks or taps the stepper's increment or
@@ -16741,7 +15219,7 @@ extension Stepper where Label == Text {
     /// control with a custom title that executes closures you provide when
     /// the user clicks or taps on the stepper's increment or decrement buttons.
     ///
-    /// The example below uses an array that holds a number of ``Color`` values,
+    /// The example below uses an array that holds a number of ~~Color~~ values,
     /// a local state variable, `value`, to set the control's background
     /// color, and title label. When the user clicks or taps on the stepper's
     /// increment or decrement buttons SwiftUI executes the relevant
@@ -16791,7 +15269,7 @@ extension Stepper where Label == Text {
     ///      the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S>(_ title: S, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol { }
+    public init<S>(_ title: S, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol { } { }
 
     /// Creates a stepper with a title key and configured to increment and
     /// decrement a binding to a value and step amount you provide.
@@ -16823,7 +15301,7 @@ extension Stepper where Label == Text {
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
     ///       the purpose of the stepper.
-    ///     - value: A ``Binding`` to a value that you provide.
+    ///     - value: A ~~Binding~~ to a value that you provide.
     ///     - step: The amount to increment or decrement `value` each time the
     ///       user clicks or taps the stepper's plus or minus button,
     ///       respectively.  Defaults to `1`.
@@ -16834,7 +15312,7 @@ extension Stepper where Label == Text {
     ///       of the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { }
+    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { } { }
 
     /// Creates a stepper with a title and configured to increment and
     /// decrement a binding to a value and step amount you provide.
@@ -16864,7 +15342,7 @@ extension Stepper where Label == Text {
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
-    ///     - value: The ``Binding`` to a value that you provide.
+    ///     - value: The ~~Binding~~ to a value that you provide.
     ///     - step: The amount to increment or decrement `value` each time the
     ///       user clicks or taps the stepper's increment or decrement button,
     ///       respectively. Defaults to `1`.
@@ -16875,7 +15353,7 @@ extension Stepper where Label == Text {
     ///       of the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S, V>(_ title: S, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { }
+    public init<S, V>(_ title: S, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { } { }
 
     /// Creates a stepper instance that increments and decrements a binding to
     /// a value, by a step size and within a closed range that you provide.
@@ -16907,7 +15385,7 @@ extension Stepper where Label == Text {
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
     ///       the purpose of the stepper.
-    ///     - value: A ``Binding`` to a value that your provide.
+    ///     - value: A ~~Binding~~ to a value that your provide.
     ///     - bounds: A closed range that describes the upper and lower bounds
     ///       permitted by the stepper.
     ///     - step: The amount to increment or decrement `value` each time the
@@ -16920,7 +15398,7 @@ extension Stepper where Label == Text {
     ///       the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { }
+    public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { } { }
 
     /// Creates a stepper instance that increments and decrements a binding to
     /// a value, by a step size and within a closed range that you provide.
@@ -16950,7 +15428,7 @@ extension Stepper where Label == Text {
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
-    ///     - value: A ``Binding`` to a value that your provide.
+    ///     - value: A ~~Binding~~ to a value that your provide.
     ///     - bounds: A closed range that describes the upper and lower bounds
     ///       permitted by the stepper.
     ///     - step: The amount to increment or decrement `value` each time the
@@ -16963,10 +15441,10 @@ extension Stepper where Label == Text {
     ///       the gesture.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init<S, V>(_ title: S, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { }
+    public init<S, V>(_ title: S, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { } { }
 }
 
-/// A structure holding the data needed to stroke a ``Shape`` in a particular style.
+/// A structure holding the data needed to stroke a ~~Shape~~ in a particular style.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct StrokeStyle : Equatable {
 
@@ -16997,7 +15475,7 @@ extension Stepper where Label == Text {
    	///   - miterLimet: The stroke miter limit.
    	///   - dash: The stroke dash array.
    	///   - dashPhase: The stroke dash phase.
-    public init(lineWidth: CGFloat = 1, lineCap: CGLineCap = .butt, lineJoin: CGLineJoin = .miter, miterLimit: CGFloat = 10, dash: [CGFloat] = [CGFloat](), dashPhase: CGFloat = 0) { }
+    public init(lineWidth: CGFloat = 1, lineCap: CGLineCap = .butt, lineJoin: CGLineJoin = .miter, miterLimit: CGFloat = 10, dash: [CGFloat] = [CGFloat](), dashPhase: CGFloat = 0) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -17007,7 +15485,7 @@ extension Stepper where Label == Text {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: StrokeStyle, b: StrokeStyle) -> Bool { }
+    public static func == (a: StrokeStyle, b: StrokeStyle) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17039,7 +15517,7 @@ extension StrokeStyle : Animatable {
     ///   - content: The content that you want displayed in the view.
     ///   - publisher: The publisher to use for the subscription.
     ///   - action: The action you want performed in conjunction with the publisher.
-    @inlinable public init(content: Content, publisher: PublisherType, action: @escaping (PublisherType.Output) -> Void) { }
+    @inlinable public init(content: Content, publisher: PublisherType, action: @escaping (PublisherType.Output) -> Void) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -17051,211 +15529,68 @@ extension StrokeStyle : Animatable {
 /// A toggle style that displays a leading label and a trailing switch.
 ///
 /// To apply this style to a toggle, or to a view that contains toggles, use the
-/// ``View/toggleStyle(_:)`` modifier.
+/// ~~View/toggleStyle(_:)~~ modifier.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct SwitchToggleStyle : ToggleStyle {
 
     /// Creates a switch toggle style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a switch style with a tint color.
     @available(iOS 14.0, macOS 11.0, watchOS 7.0, *)
     @available(tvOS, unavailable)
-    public init(tint: Color) { }
+    public init(tint: Color) { } { }
 
     /// Creates a view representing the body of a toggle.
     ///
-    /// The system calls this method for each ``Toggle`` instance in a view
+    /// The system calls this method for each ~~Toggle~~ instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
     /// - Parameter configuration: The properties of the toggle, such as its
     ///   label and its “on” state.
-    public func makeBody(configuration: SwitchToggleStyle.Configuration) -> some View { }
+    public func makeBody(configuration: SwitchToggleStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the appearance and interaction of a toggle.
     public typealias Body = some View
 }
 
-/// A parent view for tab-style navigation.
+/// A view that switches between multiple child views using interactive user
+/// interface elements.
 ///
-/// `TabView` is a container view that provides tab-style navigation for its child views.
+/// To create a user interface with tabs, place views in a `TabView` and apply
+/// the ~~View/tabItem(_:)~~ modifier to the contents of each tab. The following
+/// creates a tab view with three tabs:
 ///
-/// ### Tab-bar based navigation
-///
-/// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
-///
-/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         TabView {
-///             Text("Bananas 🍌🍌")
-///                 .tabItem {
-///                     Image(systemName: "1.circle.fill")
-///                     Text("🍌🍌")
-///                 }
-///             Text("Apples 🍏🍏")
-///                 .tabItem {
-///                     Image(systemName: "2.square.fill")
-///                     Text("🍏🍏")
-///                 }
-///             Text("Peaches 🍑🍑")
-///                 .tabItem {
-///                     Image(systemName: "3.square.fill")
-///                     Text("🍑🍑")
-///                 }
-///         }
-///         .font(.headline)
-///     }
-/// }
-/// ```
-///
-/// ### Page-style navigation
-///
-/// Place child views in a `TabView` with a `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
-///
-/// The following example creates a paginated view with the three `Text` child views as individual pages.
-///
-/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         TabView {
-///             Text("Bananas 🍌🍌")
-///             Text("Apples 🍏🍏")
-///             Text("Peaches 🍑🍑")
-///         }
-///         .foregroundColor(Color.white)
-///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle())
-///     }
-/// }
-/// ```
-///
-/// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
-///
-/// ![TabView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-3.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
-///
-///     var body: some View {
-///         TabView {
-///             ForEach(items, id: /\.self) {
-///                 Text($0)
+///     TabView {
+///         Text("The First Tab")
+///             .tabItem {
+///                 Image(systemName: "1.square.fill")
+///                 Text("First")
 ///             }
-///         }
-///         .tabViewStyle(PageTabViewStyle())
-///     }
-/// }
-/// ```
-///
-/// This example supports loading a dynamic list of pages from `items`.
-///
-/// A page-styled `TabView` will add a row of page indicator(s) at the bottom of the container by default. If `View/tabItem(_:)` is used, these indicators each take the form of the corresponding tab item's primary image. If not - these page indicators resort to system defaults.
-///
-/// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
-///
-/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
-///
-///     var body: some View {
-///         TabView {
-///             ForEach(items, id: /\.self) {
-///                 Text($0)
+///         Text("Another Tab")
+///             .tabItem {
+///                 Image(systemName: "2.square.fill")
+///                 Text("Second")
 ///             }
-///         }
-///         .tabViewStyle(PageTabViewStyle())
-///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+///         Text("The Last Tab")
+///             .tabItem {
+///                 Image(systemName: "3.square.fill")
+///                 Text("Third")
+///             }
 ///     }
-/// }
-/// ```
+///     .font(.headline)
 ///
-/// ### Handling tab-selection
-///
-/// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
-///
-/// Here is an example that writes tab selection to a state variable:
-///
-/// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     enum TabItem {
-///         case bananas
-///         case apples
-///         case peaches
-///     }
-///
-///     @State var selectedItem: TabItem = .bananas
-///
-///     var body: some View {
-///         TabView(selection: $selectedItem) {
-///             Text("Bananas 🍌🍌")
-///                 .tabItem {
-///                     Image(systemName: "1.circle.fill")
-///                     Text("🍌🍌")
-///                 }
-///                 .tag(TabItem.bananas)
-///
-///             Text("Apples 🍏🍏")
-///                 .tabItem {
-///                     Image(systemName: "2.square.fill")
-///                     Text("🍏🍏")
-///                 }
-///                 .tag(TabItem.apples)
-///
-///             Text("Peaches 🍑🍑")
-///                 .tabItem {
-///                     Image(systemName: "3.square.fill")
-///                     Text("🍑🍑")
-///                 }
-///                 .tag(TabItem.peaches)
-///         }
-///     }
-/// }
-/// ```
-///
-/// In this example, each tab item is assigned a unique tag using the user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to the tab selection, `$selectedItem`, and updates it whenever a new tab is selected. `$selectedItem` in turn can also be used to programmatically control tab-selection, as bindings work bidirectionally.
-///
-/// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in the previous example, but it could've just as easily been a `String` or an `Int`.
-///
-/// For example, the following uses a traditional 0-based tab indexing:
-///
-/// ![TabView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var selectedItem: Int = 0
-///
-///     var body: some View {
-///         TabView(selection: $selectedItem) {
-///             Text("Bananas 🍌🍌")
-///                 .tag(0)
-///
-///             Text("Apples 🍏🍏")
-///                 .tag(1)
-///
-///             Text("Peaches 🍑🍑")
-///                 .tag(2)
-///         }
-///     }
-/// }
-///
+/// Tab views only support tab items of type ~~Text~~, ~~Image~~, or an image
+/// followed by text. Passing any other type of view results in a visible but
+/// empty tab item.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
     /// Creates an instance that selects from content associated with
     /// `Selection` values.
-    public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
+    public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -17276,7 +15611,7 @@ extension TabView where SelectionValue == Int {
 	/// selection index, and just want the view to default at the first page.
 	/// You will still be able to move tabs, but you won't be able to programmatically
 	/// change tabs from outside the view.
-    public init(@ViewBuilder content: () -> Content) { }
+    public init(@ViewBuilder content: () -> Content) { } { }
 }
 
 /// A specification for the appearance and interaction of a `TabView`.
@@ -17287,8 +15622,8 @@ public protocol TabViewStyle {
 /// A gesture that recognizes one or more taps.
 ///
 /// To recognize a tap gesture on a view, create and configure the gesture, and
-/// then add it to the view using the ``View/gesture(_:including:)`` modifier.
-/// The following code adds a tap gesture to a ``Circle`` that toggles the color
+/// then add it to the view using the ~~View/gesture(_:including:)~~ modifier.
+/// The following code adds a tap gesture to a ~~Circle~~ that toggles the color
 /// of the circle.
 ///
 ///     struct TapGestureView: View {
@@ -17317,7 +15652,7 @@ public struct TapGesture : Gesture {
     ///
     /// - Parameter count: The required number of taps to complete the tap
     ///   gesture.
-    public init(count: Int = 1) { }
+    public init(count: Int = 1) { } { }
 
     /// The type representing the gesture's value.
     public typealias Value = ()
@@ -17326,79 +15661,95 @@ public struct TapGesture : Gesture {
     public typealias Body = Never
 }
 
-
-/// A view that displays read-only text.
+/// A view that displays one or more lines of read-only text.
 ///
-/// `Text` draws a string in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
+/// A text view draws a string in your app's user interface using a
+/// ~~Font/body~~ font that's appropriate for the current platform. You can
+/// choose a different standard font, like ~~Font/title~~ or ~~Font/caption~~,
+/// using the ~~View/font(_:)~~ view modifier.
 ///
-/// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
+///     Text("Hamlet")
+///         .font(.title)
 ///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Text("🍌🍌")
-///     }
-/// }
-/// ```
+/// ![A text view showing the name "Hamlet" in a title
+/// font.](SwiftUI-Text-title.png)
 ///
-/// `Text` is most commonly initialized with a string, however, it has 9 different initializers.
+/// If you need finer control over the styling of the text, you can use the same
+/// modifier to configure a system font or choose a custom font. You can also
+/// apply view modifiers like ~~Text/bold()~~ or ~~Text/italic()~~ to further
+/// adjust the formatting.
 ///
-/// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
+///     Text("by William Shakespeare")
+///         .font(.system(size: 12, weight: .light, design: .serif))
+///         .italic()
 ///
-///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
+/// ![A text view showing by William Shakespeare in a 12 point, light, italic,
+/// serif font.](SwiftUI-Text-font.png)
 ///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Text(Date(), style: .date)
-///     }
-/// }
-/// ```
+/// A text view always uses exactly the amount of space it needs to display its
+/// rendered contents, but you can affect the view's layout. For example, you
+/// can use the ~~View/frame(width:height:alignment:)~~ modifier to propose
+/// specific dimensions to the view. If the view accepts the proposal but the
+/// text doesn't fit into the available space, the view uses a combination of
+/// wrapping, tightening, scaling, and truncation to make it fit. With a width
+/// of `100` points but no constraint on the height, a text view might wrap a
+/// long string:
 ///
-/// `Text` also accepts 12 unique modifiers to customize your string.
+///     Text("To be, or not to be, that is the question:")
+///         .frame(width: 100)
 ///
-///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
+/// ![A text view showing a quote from Hamlet split over three
+/// lines.](SwiftUI-Text-split.png)
 ///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Text(Date(), style: .date)
-///             .underline(true, color: .orange)
-///             .font(.system(size: 20, weight: .bold, design: .rounded))
-///     }
-/// }
-/// ```
+/// Use modifiers like ~~View/lineLimit(_:)~~, ~~View/allowsTightening(_:)~~,
+/// ~~View/minimumScaleFactor(_:)~~, and ~~View/truncationMode(_:)~~ to
+/// configure how the view handles space constraints. For example, combining a
+/// fixed width and a line limit of `1` results in truncation for text that
+/// doesn't fit in that space:
 ///
-/// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with `Text`.
+///     Text("Brevity is the soul of wit.")
+///         .frame(width: 100)
+///         .lineLimit(1)
 ///
-///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
+/// ![A text view showing a truncated quote from Hamlet starting Brevity is t
+/// and ending with three dots.](SwiftUI-Text-truncated.png)
 ///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Text(Date(), style: .date)
-///             .font(.system(size: 20, weight: .bold, design: .rounded))
-///             .foregroundColor(.orange)
-///     }
-/// }
-/// ```
+/// ### Localizing Strings
 ///
-/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
+/// If you initialize a text view with a string literal, the view uses the
+/// ~~Text/init(_:tableName:bundle:comment:)~~ initializer, which interprets the
+/// string as a localization key and searches for the key in the table you
+/// specify, or in the default table if you don't specify one.
 ///
-/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
+///     Text("pencil") // Searches the default table in the main bundle.
 ///
-///     struct ExampleView: View {
-///         var body: some View {
-///             Text("banana")
-///         }
-///     }
+/// For an app localized in both English and Spanish, the above view displays
+/// "pencil" and "lápiz" for English and Spanish users, respectively. If the
+/// view can't perform localization, it displays the key instead. For example,
+/// if the same app lacks Danish localization, the view displays "pencil" for
+/// users in that locale. Similarly, an app that lacks any localization
+/// information displays "pencil" in any locale.
 ///
-/// See ``Text/init(_:tableName:bundle:comment:)`` for more information on how to initialize `Text` with localized strings. This initializer can be used to display localized keys coming from a non-standard bundle or string table.
+/// To explicitly bypass localization for a string literal, use the
+/// ~~Text/init(verbatim:)~~ initializer.
 ///
-/// Images can be displayed in a text view. This enables your app to optionally include them inside a text string, where they will resize based on your view's font. See ``Text/init(_:)-9a226`` for more on initializing `Text` with images.
+///     Text(verbatim: "pencil") // Displays the string "pencil" in any locale.
 ///
-/// Use the `View` modifiers ``View/lineLimit(_:)``, ``View/allowsTightening(_:)``,
-/// ``View/minimumScaleFactor(_:)``, and ``View/truncationMode(_:)`` to configure how `Text` handles space constraints.
+/// If you intialize a text view with a variable value, the view uses the
+/// ~~Text/init(_:)-9d1g4~~ initializer, which doesn't localize the string. However,
+/// you can request localization by creating a ~~LocalizedStringKey~~ instance
+/// first, which triggers the ~~Text/init(_:tableName:bundle:comment:)~~
+/// initializer instead:
+///
+///     // Don't localize a string variable...
+///     Text(writingImplement)
+///
+///     // ...unless you explicitly convert it to a localized string key.
+///     Text(LocalizedStringKey(writingImplement))
+///
+/// When localizing a string variable, you can use the default table by omitting
+/// the optional initialization parameters — as in the above example — just like
+/// you might for a string literal.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Text : Equatable {
 
@@ -17410,12 +15761,12 @@ public struct TapGesture : Gesture {
     ///     Text(verbatim: "pencil") // Displays the string "pencil" in any locale.
     ///
     /// If you want to localize a string literal before displaying it, use the
-    /// ``Text/init(_:tableName:bundle:comment:)`` initializer instead. If you
-    /// want to display a string variable, use the ``Text/init(_:)-9d1g4``
+    /// ~~Text/init(_:tableName:bundle:comment:)~~ initializer instead. If you
+    /// want to display a string variable, use the ~~Text/init(_:)-9d1g4~~
     /// initializer, which also bypasses localization.
     ///
     /// - Parameter content: A string to display without localization.
-    @inlinable public init(verbatim content: String) { }
+    @inlinable public init(verbatim content: String) { } { }
 
     /// Creates a text view that displays a stored string without localization.
     ///
@@ -17426,17 +15777,17 @@ public struct TapGesture : Gesture {
     ///
     /// SwiftUI doesn't call the `init(_:)` method when you initialize a text
     /// view with a string literal as the input. Instead, a string literal
-    /// triggers the ``Text/init(_:tableName:bundle:comment:)`` method — which
-    /// treats the input as a ``LocalizedStringKey`` instance — and attempts to
+    /// triggers the ~~Text/init(_:tableName:bundle:comment:)~~ method — which
+    /// treats the input as a ~~LocalizedStringKey~~ instance — and attempts to
     /// perform localization.
     ///
     /// By default, SwiftUI assumes that you don't want to localize stored
     /// strings, but if you do, you can first create a localized string key from
     /// the value, and initialize the text view with that. Using a key as input
-    /// triggers the ``Text/init(_:tableName:bundle:comment:)`` method instead.
+    /// triggers the ~~Text/init(_:tableName:bundle:comment:)~~ method instead.
     ///
     /// - Parameter content: The string value to display without localization.
-    public init<S>(_ content: S) where S : StringProtocol { }
+    public init<S>(_ content: S) where S : StringProtocol { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -17446,7 +15797,7 @@ public struct TapGesture : Gesture {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: Text, b: Text) -> Bool { }
+    public static func == (a: Text, b: Text) -> Bool { } { }
 }
 
 extension Text {
@@ -17454,7 +15805,7 @@ extension Text {
     /// Creates an instance that wraps an `Image`, suitable for concatenating
     /// with other `Text`
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public init(_ image: Image) { }
+    public init(_ image: Image) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -17464,13 +15815,13 @@ extension Text {
     ///
     /// Use this initializer to create a text view that will format `subject`
     /// using `formatter`.
-    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : ReferenceConvertible { }
+    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : ReferenceConvertible { } { }
 
     /// Creates a text view that displays the formatted representation of a value.
     ///
     /// Use this initializer to create a text view that will format `subject`
     /// using `formatter`.
-    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : NSObject { }
+    public init<Subject>(_ subject: Subject, formatter: Formatter) where Subject : NSObject { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -17528,13 +15879,13 @@ extension Text {
     /// - Parameters:
     ///     - date: The target date to display.
     ///     - style: The style used when displaying a date.
-    public init(_ date: Date, style: Text.DateStyle) { }
+    public init(_ date: Date, style: Text.DateStyle) { } { }
 
     /// Creates an instance that displays a localized range between two dates.
     ///
     /// - Parameters:
     ///     - dates: The range of dates to display
-    public init(_ dates: ClosedRange<Date>) { }
+    public init(_ dates: ClosedRange<Date>) { } { }
 
     /// Creates an instance that displays a localized time interval.
     ///
@@ -17545,7 +15896,7 @@ extension Text {
     ///
     /// - Parameters:
     ///     - interval: The date interval to display
-    public init(_ interval: DateInterval) { }
+    public init(_ interval: DateInterval) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17569,17 +15920,17 @@ extension Text {
     /// typically contains the unlocalized string.
     ///
     /// If you initialize a text view with a string variable rather than a
-    /// string literal, the view triggers the ``Text/init(_:)-9d1g4``
+    /// string literal, the view triggers the ~~Text/init(_:)-9d1g4~~
     /// initializer instead, because it assumes that you don't want localization
     /// in that case. If you do want to localize the value stored in a string
     /// variable, you can choose to call the `init(_:tableName:bundle:comment:)`
-    /// initializer by first creating a ``LocalizedStringKey`` instance from the
+    /// initializer by first creating a ~~LocalizedStringKey~~ instance from the
     /// string variable:
     ///
     ///     Text(LocalizedStringKey(someString)) // Localizes the contents of `someString`.
     ///
     /// If you have a string literal that you don't want to localize, use the
-    /// ``Text/init(verbatim:)`` initializer instead.
+    /// ~~Text/init(verbatim:)~~ initializer instead.
     ///
     /// - Parameters:
     ///   - key: The key for a string in the table identified by `tableName`.
@@ -17588,7 +15939,7 @@ extension Text {
     ///   - bundle: The bundle containing the strings file. If `nil`, use the
     ///     main bundle.
     ///   - comment: Contextual information about this key-value pair.
-    public init(_ key: LocalizedStringKey, tableName: String? = nil, bundle: Bundle? = nil, comment: StaticString? = nil) { }
+    public init(_ key: LocalizedStringKey, tableName: String? = nil, bundle: Bundle? = nil, comment: StaticString? = nil) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17602,7 +15953,7 @@ extension Text {
     ///
     /// - Returns: A new text view containing the combined contents of the two
     ///   input text views.
-    public static func + (lhs: Text, rhs: Text) -> Text { }
+    public static func + (lhs: Text, rhs: Text) -> Text { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17613,7 +15964,7 @@ extension Text {
     ///
     /// When a text view contains more text than it's able to display, the view
     /// might truncate the text and place an ellipsis (...) at the truncation
-    /// point. Use the ``View/truncationMode(_:)`` modifier with one of the
+    /// point. Use the ~~View/truncationMode(_:)~~ modifier with one of the
     /// `TruncationMode` values to indicate which part of the text to
     /// truncate, either at the beginning, in the middle, or at the end.
     public enum TruncationMode {
@@ -17647,7 +15998,7 @@ extension Text {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Text.TruncationMode, b: Text.TruncationMode) -> Bool { }
+        public static func == (a: Text.TruncationMode, b: Text.TruncationMode) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -17671,7 +16022,7 @@ extension Text {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 
     /// A scheme for transforming the capitalization of characters within text.
@@ -17700,7 +16051,7 @@ extension Text {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: Text.Case, b: Text.Case) -> Bool { }
+        public static func == (a: Text.Case, b: Text.Case) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -17724,7 +16075,7 @@ extension Text {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 }
 
@@ -17760,7 +16111,7 @@ extension Text {
     ///
     /// - Parameter color: The color to use when displaying this text.
     /// - Returns: A text view that uses the color value you supply.
-    public func foregroundColor(_ color: Color?) -> Text { }
+    public func foregroundColor(_ color: Color?) -> Text { } { }
 
     /// Sets the default font for text in the view.
     ///
@@ -17787,24 +16138,24 @@ extension Text {
     ///
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
-    public func font(_ font: Font?) -> Text { }
+    public func font(_ font: Font?) -> Text { } { }
 
     /// Sets the font weight of the text.
     ///
     /// - Parameter weight: One of the available font weights.
     ///
     /// - Returns: Text that uses the font weight you specify.
-    public func fontWeight(_ weight: Font.Weight?) -> Text { }
+    public func fontWeight(_ weight: Font.Weight?) -> Text { } { }
 
     /// Applies a bold font weight to the text.
     ///
     /// - Returns: Bold text.
-    public func bold() -> Text { }
+    public func bold() -> Text { } { }
 
     /// Applies italics to the text.
     ///
     /// - Returns: Italic text.
-    public func italic() -> Text { }
+    public func italic() -> Text { } { }
 
     /// Applies a strikethrough to the text.
     ///
@@ -17815,7 +16166,7 @@ extension Text {
     ///     strikethrough uses the default foreground color.
     ///
     /// - Returns: Text with a line through its center.
-    public func strikethrough(_ active: Bool = true, color: Color? = nil) -> Text { }
+    public func strikethrough(_ active: Bool = true, color: Color? = nil) -> Text { } { }
 
     /// Applies an underline to the text.
     ///
@@ -17826,7 +16177,7 @@ extension Text {
     ///     underline uses the default foreground color.
     ///
     /// - Returns: Text with a line running along its baseline.
-    public func underline(_ active: Bool = true, color: Color? = nil) -> Text { }
+    public func underline(_ active: Bool = true, color: Color? = nil) -> Text { } { }
 
     /// Sets the spacing, or kerning, between characters.
     ///
@@ -17867,15 +16218,15 @@ extension Text {
     /// The letter combination ffl does not act as a ligature in either
     /// case.](SwiftUI-Text-kerning-3.png)
     ///
-    /// - Important: If you add both the ``Text/tracking(_:)`` and
-    ///   ``Text/kerning(_:)`` modifiers to a view, the view applies the
+    /// - Important: If you add both the ~~Text/tracking(_:)~~ and
+    ///   ~~Text/kerning(_:)~~ modifiers to a view, the view applies the
     ///   tracking and ignores the kerning.
     ///
     /// - Parameter kerning: The spacing to use between individual characters in
     ///   this text.
     ///
     /// - Returns: Text with the specified amount of kerning.
-    public func kerning(_ kerning: CGFloat) -> Text { }
+    public func kerning(_ kerning: CGFloat) -> Text { } { }
 
     /// Sets the tracking for the text.
     ///
@@ -17896,20 +16247,20 @@ extension Text {
     /// increasing spacing between the characters in each
     /// group.](SwiftUI-Text-tracking.png)
     ///
-    /// The effect of tracking resembles that of the ``Text/kerning(_:)``
+    /// The effect of tracking resembles that of the ~~Text/kerning(_:)~~
     /// modifier, but adds or removes trailing whitespace, rather than changing
     /// character offsets. Also, using any nonzero amount of tracking disables
     /// nonessential ligatures, whereas kerning attempts to maintain ligatures.
     ///
-    /// - Important: If you add both the ``Text/tracking(_:)`` and
-    ///   ``Text/kerning(_:)`` modifiers to a view, the view applies the
+    /// - Important: If you add both the ~~Text/tracking(_:)~~ and
+    ///   ~~Text/kerning(_:)~~ modifiers to a view, the view applies the
     ///   tracking and ignores the kerning.
     ///
     /// - Parameter tracking: The amount of additional space, in points, that
     ///   the view should add to each character cluster after layout.
     ///
     /// - Returns: Text with the specified amount of tracking.
-    public func tracking(_ tracking: CGFloat) -> Text { }
+    public func tracking(_ tracking: CGFloat) -> Text { } { }
 
     /// Sets the vertical offset for the text relative to its baseline.
     ///
@@ -17940,14 +16291,14 @@ extension Text {
     ///
     /// The first view, with a negative offset, grows downward to handle the
     /// lowered text. The last view, with a positive offset, grows upward. The
-    /// enclosing ``HStack`` instance, shown in gray, ensures all the text views
+    /// enclosing ~~HStack~~ instance, shown in gray, ensures all the text views
     /// remain aligned at their top edge, regardless of the offset.
     ///
     /// - Parameter baselineOffset: The amount to shift the text vertically (up
     ///   or down) relative to its baseline.
     ///
     /// - Returns: Text that's above or below its baseline.
-    public func baselineOffset(_ baselineOffset: CGFloat) -> Text { }
+    public func baselineOffset(_ baselineOffset: CGFloat) -> Text { } { }
 }
 
 extension Text.DateStyle : Equatable {
@@ -17960,7 +16311,7 @@ extension Text.DateStyle : Equatable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: Text.DateStyle, b: Text.DateStyle) -> Bool { }
+    public static func == (a: Text.DateStyle, b: Text.DateStyle) -> Bool { } { }
 }
 
 extension Text.DateStyle : Codable {
@@ -17974,7 +16325,7 @@ extension Text.DateStyle : Codable {
     /// encoder's format.
     ///
     /// - Parameter encoder: The encoder to write data to.
-    public func encode(to encoder: Encoder) throws { }
+    public func encode(to encoder: Encoder) throws { } { }
 
     /// Creates a new instance by decoding from the given decoder.
     ///
@@ -17982,7 +16333,7 @@ extension Text.DateStyle : Codable {
     /// if the data read is corrupted or otherwise invalid.
     ///
     /// - Parameter decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws { }
+    public init(from decoder: Decoder) throws { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -18029,7 +16380,7 @@ extension Text.Case : Hashable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: TextAlignment, b: TextAlignment) -> Bool { }
+    public static func == (a: TextAlignment, b: TextAlignment) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -18053,7 +16404,7 @@ extension Text.Case : Hashable {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// A type that can represent a collection of all values of this type.
     public typealias AllCases = [TextAlignment]
@@ -18073,7 +16424,7 @@ extension Text.Case : Hashable {
 public struct TextEditingCommands : Commands {
 
     /// A new value describing the built-in text-editing commands.
-    public init() { }
+    public init() { } { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -18087,12 +16438,12 @@ public struct TextEditingCommands : Commands {
 /// A text editor view allows you to display and edit multiline, scrollable
 /// text in your app's user interface. By default, the text editor view styles
 /// the text using characteristics inherited from the environment, like
-/// ``View/font(_:)``, ``View/foregroundColor(_:)``, and
-/// ``View/multilineTextAlignment(_:)``.
+/// ~~View/font(_:)~~, ~~View/foregroundColor(_:)~~, and
+/// ~~View/multilineTextAlignment(_:)~~.
 ///
 /// You create a text editor by adding a `TextEditor` instance to the
 /// body of your view, and initialize it by passing in a
-/// ``Binding`` to a string variable in your app:
+/// ~~Binding~~ to a string variable in your app:
 ///
 ///     struct TextEditingView: View {
 ///         @State private var fullText: String = "This is some editable text..."
@@ -18119,10 +16470,10 @@ public struct TextEditingCommands : Commands {
 ///     }
 ///
 /// If you want to change the spacing or font scaling aspects of the text, you
-/// can use modifiers like ``View/lineLimit(_:)``,
-/// ``View/lineSpacing(_:)``, and ``View/minimumScaleFactor(_:)`` to configure
+/// can use modifiers like ~~View/lineLimit(_:)~~,
+/// ~~View/lineSpacing(_:)~~, and ~~View/minimumScaleFactor(_:)~~ to configure
 /// how the view displays text depending on the space constraints. For example,
-/// here the ``View/lineSpacing(_:)`` modifier sets the spacing between lines
+/// here the ~~View/lineSpacing(_:)~~ modifier sets the spacing between lines
 /// to 5 points:
 ///
 ///     struct TextEditingView: View {
@@ -18142,7 +16493,7 @@ public struct TextEditor : View {
 
     /// Creates a plain text editor.
     ///
-    /// Use a ``TextEditor`` instance to create a view in which users can enter
+    /// Use a ~~TextEditor~~ instance to create a view in which users can enter
     /// and edit long-form text.
     ///
     /// In this example, the text editor renders gray text using the 13
@@ -18167,9 +16518,9 @@ public struct TextEditor : View {
     /// individual elements within the editor's view. The styles you set apply
     /// globally to all text in the view.
     ///
-    /// - Parameter text: A ``Binding`` to the variable containing the
+    /// - Parameter text: A ~~Binding~~ to the variable containing the
     ///    text to edit.
-    public init(text: Binding<String>) { }
+    public init(text: Binding<String>) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -18181,42 +16532,13 @@ public struct TextEditor : View {
     public typealias Body = some View
 }
 
-/// A view for editable text.
+/// A control that displays an editable text interface.
 ///
-/// `TextField` provides an interface to display and modify editable text.
-///
-/// `TextField` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
-///
-/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
-///
-///     struct ExampleView: View {
-///         @State var myFruit: String = ""
-///
-///         var body: some View {
-///             VStack {
-///                   Text(myFruit)
-///                   TextField("Fruit", text: $myFruit)
-///             }
-///             .padding()
-///         }
-///     }
-///
-/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
-///
-/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
-///
-///     struct ExampleView: View {
-///         @State var myFruit: String = ""
-///
-///         var body: some View {
-///             Text(myFruit)
-///             TextField("Fruit", text: $myFruit)
-///                 .textFieldStyle(RoundedBorderTextFieldStyle())
-///                 .padding()
-///         }
-///     }
-///
-/// The ``TextFieldStyle`` protocol and ``View/textFieldStyle(_:)`` modifier provide helpful functionality to implement a well styled `TextField`.
+/// You can customize the appearance and interaction of a text field using a
+/// ~~TextFieldStyle~~ instance. The system resolves this configuration at
+/// runtime. Each platform provides a default style that reflects the platform
+/// style, but you can provide a new style that redefines all text field
+/// instances within a particular environment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct TextField<Label> : View where Label : View {
 
@@ -18247,7 +16569,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
+    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { } { }
 
     /// Creates a text field with a text label generated from a title string.
     ///
@@ -18261,7 +16583,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
+    public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { } { }
 
     /// Create an instance which binds over an arbitrary type, `T`.
     ///
@@ -18280,7 +16602,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init<T>(_ titleKey: LocalizedStringKey, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
+    public init<T>(_ titleKey: LocalizedStringKey, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { } { }
 
     /// Create an instance which binds over an arbitrary type, `T`.
     ///
@@ -18298,7 +16620,7 @@ extension TextField where Label == Text {
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user hits the return key) while the text
     ///     field has focus.
-    public init<S, T>(_ title: S, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
+    public init<S, T>(_ title: S, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { } { }
 }
 
 /// A specification for the appearance and interaction of a text field.
@@ -18317,7 +16639,7 @@ public protocol TextFieldStyle {
 public struct TextFormattingCommands : Commands {
 
     /// A new value describing the built-in text-formatting commands.
-    public init() { }
+    public init() { } { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -18331,15 +16653,15 @@ public struct TextFormattingCommands : Commands {
 public struct TitleOnlyLabelStyle : LabelStyle {
 
     /// Creates a title-only label style.
-    public init() { }
+    public init() { } { }
 
     /// Creates a view that represents the body of a label.
     ///
-    /// The system calls this method for each ``Label`` instance in a view
+    /// The system calls this method for each ~~Label~~ instance in a view
     /// hierarchy where this style is the current label style.
     ///
     /// - Parameter configuration: The properties of the label.
-    public func makeBody(configuration: TitleOnlyLabelStyle.Configuration) -> some View { }
+    public func makeBody(configuration: TitleOnlyLabelStyle.Configuration) -> some View { } { }
 
 
     /// A view that represents the body of a label.
@@ -18374,8 +16696,8 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 /// ### Styling Toggles
 ///
 /// You can customize the appearance and interaction of toggles by creating
-/// styles that conform to the ``ToggleStyle`` protocol. To set a specific style
-/// for all toggle instances within a view, use the ``View/toggleStyle(_:)``
+/// styles that conform to the ~~ToggleStyle~~ protocol. To set a specific style
+/// for all toggle instances within a view, use the ~~View/toggleStyle(_:)~~
 /// modifier:
 ///
 ///     VStack {
@@ -18392,7 +16714,7 @@ public struct Toggle<Label> : View where Label : View {
     ///   - isOn: A binding to a property that determines whether the toggle is on
     ///     or off.
     ///   - label: A view that describes the purpose of the toggle.
-    public init(isOn: Binding<Bool>, @ViewBuilder label: () -> Label) { }
+    public init(isOn: Binding<Bool>, @ViewBuilder label: () -> Label) { } { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -18410,7 +16732,7 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
     /// Creates a toggle based on a toggle style configuration.
     ///
     /// You can use this initializer within the
-    /// ``ToggleStyle/makeBody(configuration:)`` method of a ``ToggleStyle`` to
+    /// ~~ToggleStyle/makeBody(configuration:)~~ method of a ~~ToggleStyle~~ to
     /// create an instance of the styled toggle. This is useful for custom
     /// toggle styles that only modify the current toggle style, as opposed to
     /// implementing a brand new style.
@@ -18429,7 +16751,7 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
     ///
     /// - Parameter configuration: A toggle style configuration.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public init(_ configuration: ToggleStyleConfiguration) { }
+    public init(_ configuration: ToggleStyleConfiguration) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -18437,41 +16759,41 @@ extension Toggle where Label == Text {
 
     /// Creates a toggle that generates its label from a localized string key.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// localized key similar to ``Text/init(_:tableName:bundle:comment:)``. See
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// localized key similar to ~~Text/init(_:tableName:bundle:comment:)~~. See
     /// `Text` for more information about localizing strings.
     ///
     /// To initialize a toggle with a string variable, use
-    /// ``Toggle/init(_:isOn:)-2qurm`` instead.
+    /// ~~Toggle/init(_:isOn:)-2qurm~~ instead.
     ///
     /// - Parameters:
     ///   - titleKey: The key for the toggle's localized title, that describes
     ///     the purpose of the toggle.
     ///   - isOn: A binding to a property that indicates whether the toggle is
     ///    on or off.
-    public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>) { }
+    public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>) { } { }
 
     /// Creates a toggle that generates its label from a string.
     ///
-    /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to ``Text/init(_:)-9d1g4``. See `Text` for more
+    /// This initializer creates a ~~Text~~ view on your behalf, and treats the
+    /// title similar to ~~Text/init(_:)-9d1g4~~. See `Text` for more
     /// information about localizing strings.
     ///
     /// To initialize a toggle with a localized string key, use
-    /// ``Toggle/init(_:isOn:)-8qx3l`` instead.
+    /// ~~Toggle/init(_:isOn:)-8qx3l~~ instead.
     ///
     /// - Parameters:
     ///   - title: A string that describes the purpose of the toggle.
     ///   - isOn: A binding to a property that indicates whether the toggle is
     ///    on or off.
-    public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol { }
+    public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol { } { }
 }
 
 /// A type that specifies the appearance and interaction of all toggles within a
 /// view hierarchy.
 ///
 /// To configure the current toggle style for a view hiearchy, use the
-/// ``View/toggleStyle(_:)`` modifier.
+/// ~~View/toggleStyle(_:)~~ modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ToggleStyle {
 
@@ -18480,12 +16802,12 @@ public protocol ToggleStyle {
 
     /// Creates a view that represents the body of a toggle.
     ///
-    /// The system calls this method for each ``Toggle`` instance in a view
+    /// The system calls this method for each ~~Toggle~~ instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
     /// - Parameter configuration: The properties of the toggle, such as its
     ///   label and its “on” state.
-    func makeBody(configuration: Self.Configuration) -> Self.Body { }
+    func makeBody(configuration: Self.Configuration) -> Self.Body { } { }
 
     /// The properties of a toggle instance.
     typealias Configuration = ToggleStyleConfiguration
@@ -18527,7 +16849,7 @@ public struct ToggleStyleConfiguration {
 public struct ToolbarCommands : Commands {
 
     /// A new value describing the built-in toolbar-related commands.
-    public init() { }
+    public init() { } { }
 
     /// The composition of commands that comprise the command group.
     public var body: some Commands { get }
@@ -18553,10 +16875,10 @@ public protocol ToolbarContent {
 @_functionBuilder public struct ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing a single toolbar content.
-    public static func buildBlock<Content>(_ content: Content) -> some ToolbarContent where Content : ToolbarContent { }
+    public static func buildBlock<Content>(_ content: Content) -> some ToolbarContent where Content : ToolbarContent { } { }
 
 	/// Builds a new coustom toolbar contents structure from a block containing a single custom toolbar content.
-    public static func buildBlock<Content>(_ content: Content) -> some CustomizableToolbarContent where Content : CustomizableToolbarContent { }
+    public static func buildBlock<Content>(_ content: Content) -> some CustomizableToolbarContent where Content : CustomizableToolbarContent { } { }
 
 }
 
@@ -18564,7 +16886,7 @@ public protocol ToolbarContent {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 2 toolbar contents.
-    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent { }
+    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent { } { }
 
 }
 
@@ -18572,7 +16894,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 3 toolbar contents.
-    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent { } { }
 
 }
 
@@ -18580,7 +16902,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 4 toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent { } { }
 
 }
 
@@ -18588,7 +16910,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 5 toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent { } { }
 
 }
 
@@ -18596,7 +16918,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 6 toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent { } { }
 
 }
 
@@ -18604,7 +16926,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 7 toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent { } { }
 
 }
 
@@ -18612,7 +16934,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 8 toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent { } { }
 
 }
 
@@ -18620,7 +16942,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 9 toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent, C8 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent, C8 : ToolbarContent { } { }
 
 }
 
@@ -18628,7 +16950,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new toolbar contents structure from a block containing 10 toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent, C8 : ToolbarContent, C9 : ToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some ToolbarContent where C0 : ToolbarContent, C1 : ToolbarContent, C2 : ToolbarContent, C3 : ToolbarContent, C4 : ToolbarContent, C5 : ToolbarContent, C6 : ToolbarContent, C7 : ToolbarContent, C8 : ToolbarContent, C9 : ToolbarContent { } { }
 
 }
 
@@ -18636,7 +16958,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 2 custom toolbar contents.
-    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18644,7 +16966,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 3 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18652,7 +16974,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 4 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18660,7 +16982,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 5 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18668,7 +16990,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 6 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18676,7 +16998,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 7 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18684,7 +17006,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 8 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18692,7 +17014,7 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 9 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent, C8 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent, C8 : CustomizableToolbarContent { } { }
 
 }
 
@@ -18700,72 +17022,12 @@ extension ToolbarContentBuilder {
 extension ToolbarContentBuilder {
 
 	/// Builds a new custom toolbar contents structure from a block containing 10 custom toolbar contents.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent, C8 : CustomizableToolbarContent, C9 : CustomizableToolbarContent { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some CustomizableToolbarContent where C0 : CustomizableToolbarContent, C1 : CustomizableToolbarContent, C2 : CustomizableToolbarContent, C3 : CustomizableToolbarContent, C4 : CustomizableToolbarContent, C5 : CustomizableToolbarContent, C6 : CustomizableToolbarContent, C7 : CustomizableToolbarContent, C8 : CustomizableToolbarContent, C9 : CustomizableToolbarContent { } { }
 
 }
 
-/// A model to represent a navigation item.
-///
-/// A model that represents a toolbar or navigation item.
-///
-/// A `ToolbarItem` is essentially the following structure:
-///
-/// ```
-/// struct ToolbarItem<ID, Content: View> {
-///     let id: ID
-///     let placement: ToolbarItemPlacement
-///     let content: Content
-/// }
-/// ```
-///
-/// -  `id` is responsible for efficient updates to the toolbar item.
-/// - `placement` controls where the item is placed.
-/// - `content` represents the actual content of the item.
-///
-/// ### Adding toolbar items
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello, World!")
-///                 .toolbar {
-///                     ToolbarItem(id: "bananas") {
-///                         Text("🍌🍌")
-///                     }
-///
-///                     ToolbarItem(id: "apples") {
-///                         Text("🍏🍏")
-///                     }
-///
-///                     ToolbarItem(id: "peaches") {
-///                         Text("🍑🍑")
-///                     }
-///                 }
-///         }
-///     }
-/// }
-/// ```
-///
-/// ### Placing a toolbar item on the navigation bar
-///
-/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`. For example:
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         NavigationView {
-///             Text("Hello, World!")
-///                 .toolbar {
-///                     ToolbarItem(placement: .navigationBarLeading) {
-///                         Spacer()
-///                     }
-///                 }
-///         }
-///     }
-/// }
-/// ```
-///
+/// A model that represents an item which can be placed in the toolbar
+/// or navigation bar.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItem<ID, Content> : ToolbarContent where Content : View {
 
@@ -18782,7 +17044,7 @@ extension ToolbarItem where ID == Void {
     ///   - placement: Which section of the toolbar
     ///     the item should be placed in.
     ///   - content: The content of the item.
-    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content) { }
+    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -18798,7 +17060,7 @@ extension ToolbarItem : CustomizableToolbarContent where ID == String {
     ///   - showsByDefault: Whether the item appears by default in the toolbar,
     ///     or only shows if the user explicitly adds it via customization.
     ///   - content: The content of the item.
-    public init(id: String, placement: ToolbarItemPlacement = .automatic, showsByDefault: Bool = true, @ViewBuilder content: () -> Content) { }
+    public init(id: String, placement: ToolbarItemPlacement = .automatic, showsByDefault: Bool = true, @ViewBuilder content: () -> Content) { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -18820,7 +17082,7 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
     ///    `ToolbarItem`s should be placed in.
     ///  - content: The content of the group. Each view specified in the
     ///    `ViewBuilder` will be given its own `ToolbarItem` in the toolbar.
-    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content) { }
+    public init(placement: ToolbarItemPlacement = .automatic, @ViewBuilder content: () -> Content) { } { }
 
     /// The type of content representing the body of this toolbar content.
     public typealias Body = Never
@@ -18986,13 +17248,13 @@ public struct ToolbarItemPlacement {
 /// Use a transaction to pass an animation between views in a view hierarchy.
 ///
 /// The root transaction for a state change comes from the binding that changed,
-/// plus any global values set by calling ``withTransaction(_:_:)`` or
-/// ``withAnimation(_:_:)``.
+/// plus any global values set by calling ~~withTransaction(_:_:)~~ or
+/// ~~withAnimation(_:_:)~~.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Transaction {
 
     /// Creates a transaction.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -19002,7 +17264,7 @@ extension Transaction {
     ///
     /// - Parameter animation: The animation to perform when the current state
     ///   changes.
-    public init(animation: Animation?) { }
+    public init(animation: Animation?) { } { }
 
     /// The animation, if any, associated with the current state change.
     public var animation: Animation?
@@ -19010,7 +17272,7 @@ extension Transaction {
     /// A Boolean value that indicates whether views should disable animations.
     ///
     /// This value is `true` during the initial phase of a two-part transition
-    /// update, to prevent ``View/animation(_:)`` from inserting new animations
+    /// update, to prevent ~~View/animation(_:)~~ from inserting new animations
     /// into the transaction.
     public var disablesAnimations: Bool
 }
@@ -19043,14 +17305,14 @@ extension Transaction {
     /// - Parameter:
     ///   - shape: The original shape to be affine transformed.
     ///   - transform: The affine transform to apply to the original shape.
-    @inlinable public init(shape: Content, transform: CGAffineTransform) { }
+    @inlinable public init(shape: Content, transform: CGAffineTransform) { } { }
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
-    public func path(in rect: CGRect) -> Path { }
+    public func path(in rect: CGRect) -> Path { } { }
 
     /// The type defining the data to animate.
     public typealias AnimatableData = Content.AnimatableData
@@ -19067,18 +17329,18 @@ extension Transaction {
 
 /// A View created from a swift tuple of View values.
 ///
-/// `TupleView` is mainly used with ``ViewBuilder``, and so you don't really
+/// `TupleView` is mainly used with ~~ViewBuilder~~, and so you don't really
 /// need to worry about it unless you're making your own view builders.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TupleView<T> : View {
 
-	/// The tuple of views in the ``TupleView``.
+	/// The tuple of views in the ~~TupleView~~.
     public var value: T
 
     /// Creates a tuple view.
     ///
     /// - Parameter value: A tuple of any number of views.
-    @inlinable public init(_ value: T) { }
+    @inlinable public init(_ value: T) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -19104,7 +17366,7 @@ extension Transaction {
     /// own work.
     ///
     /// - Parameter delegate: the type of `UIApplicationDelegate` to use.
-    public init(_ delegateType: DelegateType.Type = DelegateType.self) { }
+    public init(_ delegateType: DelegateType.Type = DelegateType.self) { } { }
 }
 
 @available(iOS 14.0, tvOS 14.0, *)
@@ -19123,7 +17385,7 @@ extension UIApplicationDelegateAdaptor where DelegateType : ObservableObject {
     /// - Note: the instantiated delegate will be placed in the Environment
     ///   and may be accessed by using the `@EnvironmentObject` property wrapper
     ///   in the view hierarchy.
-    public init(_ delegateType: DelegateType.Type = DelegateType.self) { }
+    public init(_ delegateType: DelegateType.Type = DelegateType.self) { } { }
 
     /// A projection of the observed object that creates bindings to its
     /// properties using dynamic member lookup.
@@ -19139,7 +17401,7 @@ extension UIApplicationDelegateAdaptor where DelegateType : ObservableObject {
 /// Create a `UIHostingController` object when you want to integrate SwiftUI
 /// views into a UIKit view hierarchy. At creation time, specify the SwiftUI
 /// view you want to use as the root view for this view controller; you can
-/// change that view later using the ``SwiftUI/UIHostingController/rootView``
+/// change that view later using the ~~SwiftUI/UIHostingController/rootView~~
 /// property. Use the hosting controller like you would any other view
 /// controller, by presenting it or embedding it as a child view controller
 /// in your interface.
@@ -19151,7 +17413,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 	/// The key commands that trigger actions on this responder.
 	///
 	/// A responder object that supports hardware keyboard commands can redefine
-	/// this property and use it to return an array of ``UIKit/UIKeyCommand`` objects that
+	/// this property and use it to return an array of ~~UIKit/UIKeyCommand~~ objects that
 	/// it supports. Each key command object represents the keyboard sequence to
 	/// recognize and the action method of the responder to call in response.
 	///
@@ -19170,7 +17432,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Returns: A `UIHostingController` object initialized with the
     ///   specified SwiftUI view.
-    public init(rootView: Content) { }
+    public init(rootView: Content) { } { }
 
     /// Creates a hosting controller object from an archive and the specified
     /// SwiftUI view.
@@ -19181,18 +17443,18 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Returns: A `UIViewController` object that you can present from your
     ///   interface.
-    public init?(coder aDecoder: NSCoder, rootView: Content) { }
+    public init?(coder aDecoder: NSCoder, rootView: Content) { } { }
 
     /// Creates a hosting controller object from the contents of the specified
     /// archive.
     ///
     /// The default implementation of this method throws an exception. To create
     /// your view controller from an archive, override this method and
-    /// initialize the superclass using the ``init(coder:rootView:)`` method
+    /// initialize the superclass using the ~~init(coder:rootView:)~~ method
     /// instead.
     ///
     /// - Parameter coder: The decoder to use during initialization.
-    @objc required dynamic public init?(coder aDecoder: NSCoder) { }
+    @objc required dynamic public init?(coder aDecoder: NSCoder) { } { }
 
     /// Notifies the view controller that its view is about to be added to a
     /// view hierarchy.
@@ -19205,7 +17467,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Parameter animated: If `true`, the view is being added
     ///   using an animation.
-    @objc override dynamic open func viewWillAppear(_ animated: Bool) { }
+    @objc override dynamic open func viewWillAppear(_ animated: Bool) { } { }
 
     /// Notifies the view controller that its view has been added to a
     /// view hierarchy.
@@ -19218,7 +17480,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Parameter animated: If `true`, the view is being added
     ///   using an animation.
-    @objc override dynamic open func viewDidAppear(_ animated: Bool) { }
+    @objc override dynamic open func viewDidAppear(_ animated: Bool) { } { }
 
     /// Notifies the view controller that its view will be removed from a
     /// view hierarchy.
@@ -19231,7 +17493,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Parameter animated: If `true`, the view is being removed
     ///   using an animation.
-    @objc override dynamic open func viewWillDisappear(_ animated: Bool) { }
+    @objc override dynamic open func viewWillDisappear(_ animated: Bool) { } { }
 
     /// Called to notify the view controller that its view is about to layout
     /// its subviews.
@@ -19240,7 +17502,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// subviews. Your view controller can override this method to make changes
     /// before the view lays out its subviews. The default implementation of
     /// this method does nothing.
-    @objc override dynamic open func viewWillLayoutSubviews() { }
+    @objc override dynamic open func viewWillLayoutSubviews() { } { }
 
     /// The root view of the SwiftUI view hierarchy managed by this view
     /// controller.
@@ -19252,9 +17514,9 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     ///
     /// - Returns: The size that offers the best fit for the root view and its
     ///   contents.
-    public func sizeThatFits(in size: CGSize) -> CGSize { }
+    public func sizeThatFits(in size: CGSize) -> CGSize { } { }
 
-    @objc override dynamic open func preferredContentSizeDidChange(forChildContentContainer container: UIContentContainer) { }
+    @objc override dynamic open func preferredContentSizeDidChange(forChildContentContainer container: UIContentContainer) { } { }
 
     /// The preferred status bar style for the view controller.
     @objc override dynamic open var preferredStatusBarStyle: UIStatusBarStyle { get }
@@ -19277,7 +17539,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// status bar hidden/unhidden state for `self` is used.
     ///
     /// If you change the return value from this method, call the
-    /// ``setNeedsStatusBarAppearanceUpdate()`` method.
+    /// ~~setNeedsStatusBarAppearanceUpdate()~~ method.
     ///
     /// - Returns The view controller whose status bar hidden/unhidden status
     /// should be used. Default return value is `nil`.
@@ -19303,7 +17565,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 	///   - coordinator: The transition coordinator object managing the size
 	///   change. You can use this object to animate your changes or get
 	///   information about the transition that is in progress.
-    @objc override dynamic open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) { }
+    @objc override dynamic open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) { } { }
 
     /// Called just before the hosting controller is added or removed from a
     /// container view controller.
@@ -19312,17 +17574,17 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// that it has been added to a container.
     ///
 	/// If you are implementing your own container view controller, it must call
-	/// the ``willMove(toParent:)`` method of the child view controller before
-	/// calling the ``removeFromParent()`` method, passing in a parent value of
+	/// the ~~willMove(toParent:)~~ method of the child view controller before
+	/// calling the ~~removeFromParent()~~ method, passing in a parent value of
 	/// `nil`.
 	///
-	/// When your custom container calls the ``addChild(_:)`` method, it
-	/// automatically calls the ``willMove(toParent:)`` method of the view
+	/// When your custom container calls the ~~addChild(_:)~~ method, it
+	/// automatically calls the ~~willMove(toParent:)~~ method of the view
 	/// controller to be added as a child before adding it.
 	///
 	/// - Parameter parent: The parent view controller, or `nil` if there is no
 	/// parent.
-    @objc override dynamic open func willMove(toParent parent: UIViewController?) { }
+    @objc override dynamic open func willMove(toParent parent: UIViewController?) { } { }
 
     /// Called after the hosting controller is added or removed from a container
     /// view controller.
@@ -19341,13 +17603,13 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 	///
 	/// - Parameter parent: The parent view controller, or `nil` if there is no
 	/// parent.
-    @objc override dynamic open func didMove(toParent parent: UIViewController?) { }
+    @objc override dynamic open func didMove(toParent parent: UIViewController?) { } { }
 
     /// Returns the target object that responds to an action.
     ///
     /// This method is called whenever an action needs to be invoked by the
     /// object. The default implementation calls the
-    /// ``canPerformAction(_:withSender:)`` method to determine whether it can
+    /// ~~canPerformAction(_:withSender:)~~ method to determine whether it can
     /// invoke the action. If the object can invoke the action, it returns
     /// itself, otherwise it passes the request up the responder chain. Your app
     /// should override this method if it wants to override how a target is
@@ -19356,12 +17618,12 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// - Parameters:
     ///	  - action: A selector that identifies a method associated with a command.
     ///   - sender: The object calling this method. For the editing menu
-    ///   commands, this is the shared ``UIKit/UIApplication`` object. Depending on the
+    ///   commands, this is the shared ~~UIKit/UIApplication~~ object. Depending on the
     ///   context, you can query the sender for information to help you determine
     ///   the target of the command.
     ///
     /// - Returns: The object whose action method is invoked to execute the command.
-    @objc override dynamic open func target(forAction action: Selector, withSender sender: Any?) -> Any? { }
+    @objc override dynamic open func target(forAction action: Selector, withSender sender: Any?) -> Any? { } { }
 
     /// Returns a newly initialized view controller with the nib file in the specified bundle.
     ///
@@ -19370,20 +17632,20 @@ open class UIHostingController<Content> : UIViewController where Content : View 
     /// you never initialize your view controller class directly. Instead, view
 	/// controllers are instantiated by the storyboard either automatically when
 	/// a segue is triggered or programmatically when your app calls the
-	/// ``instantiateViewController(withIdentifier:)`` method of a storyboard
+	/// ~~instantiateViewController(withIdentifier:)~~ method of a storyboard
 	/// object. When instantiating a view controller from a storyboard, iOS
-	/// initializes the new view controller by calling its ``init(coder:)``
-	/// method instead of this method and sets the ``nibName`` property to a nib
+	/// initializes the new view controller by calling its ~~init(coder:)~~
+	/// method instead of this method and sets the ~~nibName~~ property to a nib
 	/// file stored inside the storyboard.
 	///
 	/// The nib file you specify is not loaded right away. It is loaded the
 	/// first time the view controller's view is accessed. If you want to
 	/// perform additional initialization after the nib file is loaded, override
-	/// the ``viewDidLoad()`` method and perform your tasks there.
+	/// the ~~viewDidLoad()~~ method and perform your tasks there.
 	///
 	/// If you specify `nil` for the `nibName` parameter and you do not override
-	/// the ``loadView()`` method, the view controller searches for a nib file
-	/// as described in the ``nibName`` property.
+	/// the ~~loadView()~~ method, the view controller searches for a nib file
+	/// as described in the ~~nibName~~ property.
 	///
 	/// For more information about how a view controller loads its view, see
 	/// [View Controller Programming Guide for iOS](https://developer.apple.com/library/archive/featuredarticles/ViewControllerPGforiPhoneOS/index.html#//apple_ref/doc/uid/TP40007457).
@@ -19391,18 +17653,18 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 	/// - Parameters:
 	///   - nibNameOrNil: The name of the nib file to associate with the view
 	///   controller. The nib file name should not contain any leading path
-	///   information. If you specify `nil`, the ``nibName`` property is set to `nil`.
+	///   information. If you specify `nil`, the ~~nibName~~ property is set to `nil`.
 	///   - nibBundleOrNil: The bundle in which to search for the nib file.
 	///   This method looks for the nib file in the bundle's language-specific
 	///   project directories first, followed by the Resources directory.
 	///
-	/// - Returns: A newly initialized ``UIHostingController`` object.
-    @objc override dynamic public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) { }
+	/// - Returns: A newly initialized ~~UIHostingController~~ object.
+    @objc override dynamic public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) { } { }
 }
 
 /// A view that represents a UIKit view controller.
 ///
-/// Use a ``UIViewControllerRepresentable`` instance to create and manage a
+/// Use a ~~UIViewControllerRepresentable~~ instance to create and manage a
 /// <doc://com.apple.documentation/documentation/UIKit/UIViewController> object in your
 /// SwiftUI interface. Adopt this protocol in one of your app's custom
 /// instances, and use its methods to create, update, and tear down your view
@@ -19414,14 +17676,14 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 /// disappearing.
 ///
 /// To add your view controller into your SwiftUI interface, create your
-/// ``UIViewControllerRepresentable`` instance and add it to your SwiftUI
+/// ~~UIViewControllerRepresentable~~ instance and add it to your SwiftUI
 /// interface. The system calls the methods of your custom instance at
 /// appropriate times.
 ///
 /// The system doesn't automatically communicate changes occurring within your
 /// view controller to other parts of your SwiftUI interface. When you want your
 /// view controller to coordinate with other SwiftUI views, you must provide a
-/// ``NSViewControllerRepresentable/Coordinator`` instance to facilitate those
+/// ~~NSViewControllerRepresentable/Coordinator~~ instance to facilitate those
 /// interactions. For example, you use a coordinator to forward target-action
 /// and delegate messages from your view controller to any SwiftUI views.
 @available(iOS 13.0, tvOS 13.0, *)
@@ -19439,7 +17701,7 @@ public protocol UIViewControllerRepresentable : View where Self.Body == Never {
     /// contents of the `context` parameter. The system calls this method only
     /// once, when it creates your view controller for the first time. For all
     /// subsequent updates, the system calls the
-    /// ``UIViewControllerRepresentable/updateUIViewController(_:context:)``
+    /// ~~UIViewControllerRepresentable/updateUIViewController(_:context:)~~
     /// method.
     ///
     /// - Parameter context: A context structure containing information about
@@ -19447,7 +17709,7 @@ public protocol UIViewControllerRepresentable : View where Self.Body == Never {
     ///
     /// - Returns: Your UIKit view controller configured with the provided
     ///   information.
-    func makeUIViewController(context: Self.Context) -> Self.UIViewControllerType { }
+    func makeUIViewController(context: Self.Context) -> Self.UIViewControllerType { } { }
 
     /// Updates the state of the specified view controller with new information
     /// from SwiftUI.
@@ -19462,7 +17724,7 @@ public protocol UIViewControllerRepresentable : View where Self.Body == Never {
     ///   - uiViewController: Your custom view controller object.
     ///   - context: A context structure containing information about the current
     ///     state of the system.
-    func updateUIViewController(_ uiViewController: Self.UIViewControllerType, context: Self.Context) { }
+    func updateUIViewController(_ uiViewController: Self.UIViewControllerType, context: Self.Context) { } { }
 
     /// Cleans up the presented view controller (and coordinator) in
     /// anticipation of their removal.
@@ -19476,7 +17738,7 @@ public protocol UIViewControllerRepresentable : View where Self.Body == Never {
     ///   - coordinator: The custom coordinator instance you use to communicate
     ///     changes back to SwiftUI. If you do not use a custom coordinator, the
     ///     system provides a default instance.
-    static func dismantleUIViewController(_ uiViewController: Self.UIViewControllerType, coordinator: Self.Coordinator) { }
+    static func dismantleUIViewController(_ uiViewController: Self.UIViewControllerType, coordinator: Self.Coordinator) { } { }
 
     /// A type to coordinate with the view controller.
     associatedtype Coordinator = Void
@@ -19493,11 +17755,11 @@ public protocol UIViewControllerRepresentable : View where Self.Body == Never {
     /// coordinator is unnecessary.
     ///
     /// SwiftUI calls this method before calling the
-    /// ``UIViewControllerRepresentable/makeUIViewController(context:)`` method.
+    /// ~~UIViewControllerRepresentable/makeUIViewController(context:)~~ method.
     /// The system provides your coordinator either directly or as part of a
     /// context structure when calling the other methods of your representable
     /// instance.
-    func makeCoordinator() -> Self.Coordinator { }
+    func makeCoordinator() -> Self.Coordinator { } { }
 
     /// A type alias for the representable's context.
     ///
@@ -19521,11 +17783,11 @@ extension UIViewControllerRepresentable where Self.Coordinator == Void {
     /// coordinator is unnecessary.
     ///
     /// SwiftUI calls this method before calling the
-    /// ``UIViewControllerRepresentable/makeUIViewController(context:)`` method.
+    /// ~~UIViewControllerRepresentable/makeUIViewController(context:)~~ method.
     /// The system provides your coordinator either directly or as part of a
     /// context structure when calling the other methods of your representable
     /// instance.
-    public func makeCoordinator() -> Self.Coordinator { }
+    public func makeCoordinator() -> Self.Coordinator { } { }
 }
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -19544,7 +17806,7 @@ extension UIViewControllerRepresentable {
     ///   - coordinator: The custom coordinator instance you use to communicate
     ///     changes back to SwiftUI. If you do not use a custom coordinator, the
     ///     system provides a default instance.
-    public static func dismantleUIViewController(_ uiViewController: Self.UIViewControllerType, coordinator: Self.Coordinator) { }
+    public static func dismantleUIViewController(_ uiViewController: Self.UIViewControllerType, coordinator: Self.Coordinator) { } { }
 
     /// Declares the content and behavior of this view.
     public var body: Never { get }
@@ -19553,10 +17815,10 @@ extension UIViewControllerRepresentable {
 /// Contextual information about the state of the system that you use to create
 /// and update your UIKit view controller.
 ///
-/// A ``UIViewControllerRepresentableContext`` structure contains details about
+/// A ~~UIViewControllerRepresentableContext~~ structure contains details about
 /// the current state of the system. When creating and updating your view
 /// controller, the system creates one of these structures and passes it to the
-/// appropriate method of your custom ``UIViewControllerRepresentable``
+/// appropriate method of your custom ~~UIViewControllerRepresentable~~
 /// instance. Use the information in this structure to configure your view
 /// controller. For example, use the provided environment values to configure
 /// the appearance of your view controller and views. Don't create this
@@ -19579,330 +17841,40 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
     public var environment: EnvironmentValues { get }
 }
 
-/// A view to import a UIKit view into SwiftUI.
+/// A wrapper for a UIKit view that you use to integrate that view into your
+/// SwiftUI view hierarchy.
 ///
-/// ### Setup
+/// Use a ~~UIViewRepresentable~~ instance to create and manage a
+/// <doc://com.apple.documentation/documentation/UIKit/UIView> object in your SwiftUI
+/// interface. Adopt this protocol in one of your app's custom instances, and
+/// use its methods to create, update, and tear down your view. The creation and
+/// update processes parallel the behavior of SwiftUI views, and you use them to
+/// configure your view with your app's current state information. Use the
+/// teardown process to remove your view cleanly from your SwiftUI. For example,
+/// you might use the teardown process to notify other objects that the view is
+/// disappearing.
 ///
-/// To implement a `UIViewRepresentable`, you must implement four main lifecycle functions:
+/// To add your view into your SwiftUI interface, create your
+/// ~~UIViewRepresentable~~ instance and add it to your SwiftUI interface. The
+/// system calls the methods of your representable instance at appropriate times
+/// to create and update the view. The following example shows the inclusion of
+/// a custom `MyRepresentedCustomView` structure in the view hierarchy.
 ///
-/// - `UIViewRepresentable/makeCoordinator()`
-/// - `UIViewRepresentable/makeUIView(context:)`
-/// - `UIViewRepresentable/updateUIView(_:context:)`
-/// - `UIViewRepresentable/dismantleUIView(context:)` (this is optional, a default implementation is provided if left unimplemented)
-///
-/// The SwiftUI runtime:
-///
-/// - Creates a `Coordinator` using `makeCoordinator()` if necessary.
-/// - Calls `UIViewRepresentable/makeUIView(context:) to create an instance of your` `UIViewType`.
-/// - `UIViewRepresentable/updateUIView(_:context:)` is immediately called *once* after the call to `UIViewRepresentable/makeUIView(context:)` .
-/// - Upon any state changes, calls  `UIViewRepresentable/updateUIView(_:context:)`
-/// - Upon destruction of the parent container, calls `UIViewRepresentable/dismantleUIView(context:)`
-///
-/// ### Port a simple `UIView`
-///
-/// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
-///
-/// ```
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     let isAnimated: Bool
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
+///     struct ContentView: View {
+///        var body: some View {
+///           VStack {
+///              Text("Global Sales")
+///              MyRepresentedCustomView()
+///           }
+///        }
 ///     }
 ///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if isAnimated is true, and if the view is inactive.
-///         if isAnimated && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if isAnimated is false, and if the view is active.
-///         if !isAnimated && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
-///         }
-///     }
-/// }
-/// ```
-///
-/// Note:
-///
-/// - In `updateUIView(_:context:)`, you must handle `isAnimated` being either `true` or `false`.
-/// - No redundant calls are made to `startAnimating` and `stopAnimating`. Redundant calls are guarded against by checking whether `uiView.isAnimating` is true or not. This is a general principle for optimizing the performance of your `UIViewRepresentable`.
-///
-/// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
-///
-/// ![UIViewRepresentable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var isAnimating: Bool = false
-///
-///     var body: some View {
-///         VStack {
-///             Toggle("Animating", isOn: $isAnimating)
-///
-///             ActivityIndicator(isAnimated: isAnimating)
-///         }
-///     }
-/// }
-///
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     let isAnimated: Bool
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
-///     }
-///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if isAnimated is true, and if the view is inactive.
-///         if isAnimated && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if isAnimated is false, and if the view is active.
-///         if !isAnimated && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
-///         }
-///     }
-/// }
-/// ```
-///
-/// In this example, the `ActivityIndicator` from before is used and can be toggled by passing a boolean to `ActivityIndicator/init(isAnimated:)`.
-///
-/// ### Context-aware `UIViewRepresentable`s
-///
-/// SwiftUI heavily relies on the environment, by way of environment objects (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`). The latter – environment values – are useful for creating intelligent and context-aware UIKit ports.
-///
-/// For example, we can remove the `isAnimated` parameter from `ActivityIndicator`, and use `isEnabled` from the environment instead  via `EnvironmentValues/isEnabled`:
-///
-/// ```
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
-///     }
-///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
-///         if context.environment.isEnabled && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if the environment specifies that the view should be disabled, and if the view is active.
-///         if !context.environment.isEnabled && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
-///         }
-///     }
-/// }
-/// ```
-///
-/// In this example, `context` is used to access the view's current `environment` (via `context.environment`), giving you access to the latest `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get rid of the `isAnimated` parameter in favor of reading it from the context. This has the added advantage of being passed from any level at the top, because environment values propagate down the view hierarchy.
-///
-/// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
-///
-/// ![UIViewRepresentable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var isAnimating: Bool = false
-///
-///     var body: some View {
-///         VStack {
-///             Toggle("Animating", isOn: $isAnimating)
-///
-///             ActivityIndicator()
-///                 .disabled(!isAnimating)
-///         }
-///     }
-/// }
-///
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
-///     }
-///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
-///         if context.environment.isEnabled && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if the environment specifies that the view should be disabled, and if the view is active.
-///         if !context.environment.isEnabled && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
-///         }
-///     }
-/// }
-/// ```
-///
-/// Using `View/disabled(_:)`, the activity indicator can now be made active or inactive.
-///
-/// The benefits of using the environment and context become apparent when multiple views are used together. For example:
-///
-/// ![UIViewRepresentable Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var isAnimating: Bool = false
-///
-///     var body: some View {
-///         VStack {
-///             Toggle("Animating", isOn: $isAnimating)
-///
-///             VStack {
-///                 ActivityIndicator()
-///                 ActivityIndicator()
-///                 ActivityIndicator()
-///             }
-///             .disabled(!isAnimating)
-///         }
-///     }
-/// }
-///
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
-///     }
-///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
-///         if context.environment.isEnabled && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if the environment specifies that the view should be disabled, and if the view is active.
-///         if !context.environment.isEnabled && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
-///         }
-///     }
-/// }
-/// ```
-///
-/// A single `View/disabled(_:)` modifier on the `VStack` can now become responsible for enabling/disabling the activity indicators inside the stack. This also allows parent views, that aren't aware of `ExampleView`'s implementation, to control whether views within it are enabled or disabled.
-///
-/// ### Implementing UIKit delegates for a `UIViewRepresentable`
-///
-/// UIKit views often require delegates to communicate events and pass data back and forth with their view controllers. Since SwiftUI is all about modularity and componentization, there is no concept of a "view controller". View representables use the concept of a 'coordinator' to port views reliant on the delegate pattern.
-///
-/// For example, here is an example port of `UISearchBar`:
-///
-/// ```
-/// struct SearchBar: UIViewRepresentable {
-///     class Coordinator: NSObject, UISearchBarDelegate {
-///         @Binding var text: String
-///
-///         init(text: Binding<String>) {
-///             _text = text
-///         }
-///
-///         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-///             self.text = searchText // set the binding's value to the latest search bar text
-///         }
-///     }
-///
-///     let placeholder: String
-///
-///     @Binding var text: String
-///
-///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of Coordinator
-///     }
-///
-///     func makeUIView(context: Context) -> UISearchBar {
-///         let searchBar = UISearchBar(frame: .zero)
-///
-///         searchBar.placeholder = placeholder
-///         searchBar.delegate = context.coordinator
-///
-///         return searchBar
-///     }
-///
-///     func updateUIView(_ uiView: UISearchBar, context: Context) {
-///         uiView.text = text // set the search bar's text to the value of the binding
-///     }
-/// }
-/// ```
-///
-/// A search bar is a good example of a complex UIKit view. It is a control responsible for text input with multiple lifecycle events, and it uses the delegate pattern to inform the observer whenever these events occur. In SwiftUI, data is passed using bindings, and there is no concept of a delegate.
-///
-/// The `Coordinator` is the glue between a SwiftUI-style binding-pattern and a UIKit-style delegate-pattern. A `Coordinator` is a state object created and maintained for the lifetime of a `UIViewRepresentable`, that typically implements the primary delegate for the UIKit view being ported. In this case, the `UIViewType` is `UISearchBar` and its primary delegate type is `UISearchBarDelegate`.
-///
-/// Text input controls in SwiftUI often take a `Binding<String>` in their initializer, and use it to get/set the latest text entered by the user via control. It's extremely important to note that bindings are bidirectional, because SwiftUI ports of UIKit views must also **get** the latest input from the `Binding`. UIKit patterns typically only require notifying the observer and thus setting the values, but in SwiftUI it is imperative to handle both to be a good SwiftUI citizen.
-///
-/// Here is example of using the search part port:
-///
-/// ![UIViewRepresentable Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
-///
-/// ```
-/// struct ExampleView: View {
-///     @State var searchText: String = ""
-///
-///     var body: some View {
-///         VStack {
-///             SearchBar(placeholder: "Enter something here", text: $searchText)
-///
-///             Text("Entered text: /\(searchText)")
-///         }
-///     }
-/// }
-///
-/// struct SearchBar: UIViewRepresentable {
-///     class Coordinator: NSObject, UISearchBarDelegate {
-///         @Binding var text: String
-///
-///         init(text: Binding<String>) {
-///             &#x5f;text = text
-///         }
-///
-///         func searchBar(&#x5f; searchBar: UISearchBar, textDidChange searchText: String) {
-///             self.text = searchText // set the binding's value to the latest search bar text
-///         }
-///     }
-///
-///     let placeholder: String
-///
-///     @Binding var text: String
-///
-///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of Coordinator
-///     }
-///
-///     func makeUIView(context: Context) -> UISearchBar {
-///         let searchBar = UISearchBar(frame: .zero)
-///
-///         searchBar.placeholder = placeholder
-///         searchBar.delegate = context.coordinator
-///
-///         return searchBar
-///     }
-///
-///     func updateUIView(_ uiView: UISearchBar, context: Context) {
-///         uiView.text = text // set the search bar's text to the value of the binding
-///     }
-/// }
-/// ```
-///
-/// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar` would have an initial search text of `"Bananas 🍌🍌"` already loaded.
-///
-/// ### Further notes
-///
-/// - Creating UIKit views are expensive. That is why they are done once per lifetime of a `UIViewRepresentable`.
-/// - Because the *same* `UIViewType` instance is reused as much as possible, `UIViewRepresentable/updateUIView(_:context:)` is responsible for making sure that the parameters passed via the initializer, and the SwiftUI environment, are always in sync with the UIKit view being managed by the representable.
-///
+/// The system doesn't automatically communicate changes occurring within your
+/// view to other parts of your SwiftUI interface. When you want your view to
+/// coordinate with other SwiftUI views, you must provide a
+/// ~~NSViewControllerRepresentable/Coordinator~~ instance to facilitate those
+/// interactions. For example, you use a coordinator to forward target-action
+/// and delegate messages from your view to any SwiftUI views.
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -19917,14 +17889,14 @@ public protocol UIViewRepresentable : View where Self.Body == Never {
     /// Configure the view using your app's current data and contents of the
     /// `context` parameter. The system calls this method only once, when it
     /// creates your view for the first time. For all subsequent updates, the
-    /// system calls the ``UIViewRepresentable/updateUIView(_:context:)``
+    /// system calls the ~~UIViewRepresentable/updateUIView(_:context:)~~
     /// method.
     ///
     /// - Parameter context: A context structure containing information about
     ///   the current state of the system.
     ///
     /// - Returns: Your UIKit view configured with the provided information.
-    func makeUIView(context: Self.Context) -> Self.UIViewType { }
+    func makeUIView(context: Self.Context) -> Self.UIViewType { } { }
 
     /// Updates the state of the specified view with new information from
     /// SwiftUI.
@@ -19939,7 +17911,7 @@ public protocol UIViewRepresentable : View where Self.Body == Never {
     ///   - uiView: Your custom view object.
     ///   - context: A context structure containing information about the current
     ///     state of the system.
-    func updateUIView(_ uiView: Self.UIViewType, context: Self.Context) { }
+    func updateUIView(_ uiView: Self.UIViewType, context: Self.Context) { } { }
 
     /// Cleans up the presented UIKit view (and coordinator) in anticipation of
     /// their removal.
@@ -19953,7 +17925,7 @@ public protocol UIViewRepresentable : View where Self.Body == Never {
     ///   - coordinator: The custom coordinator instance you use to communicate
     ///     changes back to SwiftUI. If you do not use a custom coordinator, the
     ///     system provides a default instance.
-    static func dismantleUIView(_ uiView: Self.UIViewType, coordinator: Self.Coordinator) { }
+    static func dismantleUIView(_ uiView: Self.UIViewType, coordinator: Self.Coordinator) { } { }
 
     /// A type to coordinate with the view.
     associatedtype Coordinator = Void
@@ -19970,10 +17942,10 @@ public protocol UIViewRepresentable : View where Self.Body == Never {
     /// unnecessary.
     ///
     /// SwiftUI calls this method before calling the
-    /// ``UIViewRepresentable/makeUIView(context:)`` method. The system provides
+    /// ~~UIViewRepresentable/makeUIView(context:)~~ method. The system provides
     /// your coordinator either directly or as part of a context structure when
     /// calling the other methods of your representable instance.
-    func makeCoordinator() -> Self.Coordinator { }
+    func makeCoordinator() -> Self.Coordinator { } { }
 
     /// A type alias for the representable's context.
     ///
@@ -19997,10 +17969,10 @@ extension UIViewRepresentable where Self.Coordinator == Void {
     /// unnecessary.
     ///
     /// SwiftUI calls this method before calling the
-    /// ``UIViewRepresentable/makeUIView(context:)`` method. The system provides
+    /// ~~UIViewRepresentable/makeUIView(context:)~~ method. The system provides
     /// your coordinator either directly or as part of a context structure when
     /// calling the other methods of your representable instance.
-    public func makeCoordinator() -> Self.Coordinator { }
+    public func makeCoordinator() -> Self.Coordinator { } { }
 }
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -20019,7 +17991,7 @@ extension UIViewRepresentable {
     ///   - coordinator: The custom coordinator instance you use to communicate
     ///     changes back to SwiftUI. If you do not use a custom coordinator, the
     ///     system provides a default instance.
-    public static func dismantleUIView(_ uiView: Self.UIViewType, coordinator: Self.Coordinator) { }
+    public static func dismantleUIView(_ uiView: Self.UIViewType, coordinator: Self.Coordinator) { } { }
 
     /// Declares the content and behavior of this view.
     public var body: Never { get }
@@ -20028,10 +18000,10 @@ extension UIViewRepresentable {
 /// Contextual information about the state of the system that you use to create
 /// and update your UIKit view.
 ///
-/// A ``UIViewRepresentableContext`` structure contains details about the
+/// A ~~UIViewRepresentableContext~~ structure contains details about the
 /// current state of the system. When creating and updating your view, the
 /// system creates one of these structures and passes it to the appropriate
-/// method of your custom ``UIViewRepresentable`` instance. Use the information
+/// method of your custom ~~UIViewRepresentable~~ instance. Use the information
 /// in this structure to configure your view. For example, use the provided
 /// environment values to configure the appearance of your view. Don't create
 /// this structure yourself.
@@ -20064,14 +18036,14 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     public var y: CGFloat
 
     /// Creates a unit point with x and y values of 0.
-    @inlinable public init() { }
+    @inlinable public init() { } { }
 
     /// Creates a unit point from x and y values.
     ///
     /// - Parameters:
     ///   x: The x coordinate of the unit point.
     ///   y: The y coordinate of the unit point.
-    @inlinable public init(x: CGFloat, y: CGFloat) { }
+    @inlinable public init(x: CGFloat, y: CGFloat) { } { }
 
     /// A unit point with x and y values of 0.
     public static let zero: UnitPoint
@@ -20125,7 +18097,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -20135,7 +18107,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: UnitPoint, b: UnitPoint) -> Bool { }
+    public static func == (a: UnitPoint, b: UnitPoint) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -20169,7 +18141,7 @@ public enum UserInterfaceSizeClass {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: UserInterfaceSizeClass, b: UserInterfaceSizeClass) -> Bool { }
+    public static func == (a: UserInterfaceSizeClass, b: UserInterfaceSizeClass) -> Bool { } { }
 
     /// The hash value.
     ///
@@ -20193,7 +18165,7 @@ public enum UserInterfaceSizeClass {
     ///
     /// - Parameter hasher: The hasher to use when combining the components
     ///   of this instance.
-    public func hash(into hasher: inout Hasher) { }
+    public func hash(into hasher: inout Hasher) { } { }
 }
 
 extension UserInterfaceSizeClass {
@@ -20203,7 +18175,7 @@ extension UserInterfaceSizeClass {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init?(_ uiUserInterfaceSizeClass: UIUserInterfaceSizeClass) { }
+    public init?(_ uiUserInterfaceSizeClass: UIUserInterfaceSizeClass) { } { }
 }
 
 @available(iOS 13.0, *)
@@ -20220,39 +18192,7 @@ extension UserInterfaceSizeClass : Equatable {
 extension UserInterfaceSizeClass : Hashable {
 }
 
-/// A view that arranges children vertically.
-///
-/// `VStack` is a vertical stack of views.
-///
-///  ![VStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///             VStack {
-///                 Text("🍌🍌")
-///                 Text("🍏🍏")
-///                 Text("🍑🍑")
-///             }
-///         }
-///     }
-///
-/// Modify your stack's alignment or spacing with the built in initializer.
-///
-/// ![VStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-2.png)
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///             VStack(spacing: 32) {
-///                 Text("🍌🍌")
-///                 Text("🍏🍏")
-///                 Text("🍑🍑")
-///             }
-///         }
-///     }
-///
-/// Learn more about the properties of each alignment choice via the ``HorizontalAlignment`` struct.
-///
-/// `VStack` uses a ``ViewBuilder`` to construct the content.
+/// A view that arranges its children in a vertical line.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VStack<Content> : View where Content : View {
 
@@ -20265,7 +18205,7 @@ extension UserInterfaceSizeClass : Hashable {
     ///     want the stack to choose a default distance for each pair of
     ///     subviews.
     ///   - content: A view builder that creates the content of this stack.
-    @inlinable public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) { }
+    @inlinable public init(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -20279,12 +18219,12 @@ extension UserInterfaceSizeClass : Hashable {
 /// `VectorArithmetic` extends the `AdditiveArithmetic` protocol with scalar
 /// multiplication and a way to query the vector magnitude of the value. Use
 /// this type as the `animatableData` associated type of a type that conforms to
-/// the ``Animatable`` protocol.
+/// the ~~Animatable~~ protocol.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol VectorArithmetic : AdditiveArithmetic {
 
     /// Multiplies each component of this value by the given value.
-    mutating func scale(by rhs: Double) { }
+    mutating func scale(by rhs: Double) { } { }
 
     /// Returns the dot-product of this vector arithmetic instance with itself.
     var magnitudeSquared: Double { get }
@@ -20300,7 +18240,7 @@ public protocol VectorArithmetic : AdditiveArithmetic {
     ///
     /// - Parameter id: An identifier that uniquely identifies the vertical
     ///   alignment.
-    public init(_ id: AlignmentID.Type) { }
+    public init(_ id: AlignmentID.Type) { } { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
@@ -20310,7 +18250,7 @@ public protocol VectorArithmetic : AdditiveArithmetic {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (a: VerticalAlignment, b: VerticalAlignment) -> Bool { }
+    public static func == (a: VerticalAlignment, b: VerticalAlignment) -> Bool { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -20335,8 +18275,8 @@ extension VerticalAlignment {
 /// A type that represents part of your app's user interface and provides
 /// modifiers that you use to configure views.
 ///
-/// You create custom views by declaring types that conform to the ``View``
-/// protocol. Implement the required ``View/body-swift.property`` computed
+/// You create custom views by declaring types that conform to the ~~View~~
+/// protocol. Implement the required ~~View/body-swift.property~~ computed
 /// property to provide the content for your custom view.
 ///
 ///     struct MyView: View {
@@ -20346,23 +18286,23 @@ extension VerticalAlignment {
 ///     }
 ///
 /// Assemble the view's body by combining one or more of the primitive views
-/// provided by SwiftUI, like the ``Text`` instance in the example above, plus
+/// provided by SwiftUI, like the ~~Text~~ instance in the example above, plus
 /// other custom views that you define, into a hierarchy of views.
 ///
-/// The ``View`` protocol provides a large set of modifiers, defined as protocol
+/// The ~~View~~ protocol provides a large set of modifiers, defined as protocol
 /// methods with default implementations, that you use to position and configure
 /// views in the layout of your app. Modifiers typically work by wrapping the
 /// view instance on which you call them in another view with the specified
-/// characteristics. For example, adding the ``View/opacity(_:)`` modifier to a
+/// characteristics. For example, adding the ~~View/opacity(_:)~~ modifier to a
 /// text view returns a new view with some amount of transparency:
 ///
 ///     Text("Hello, World!")
 ///         .opacity(0.5) // Display partially transparent text.
 ///
 /// The effects of a modifier typically propagate to any child views that don't
-/// explicitly override the modifier. For example, a ``VStack`` instance on its
+/// explicitly override the modifier. For example, a ~~VStack~~ instance on its
 /// own acts only to vertically stack other views, and has no text to display.
-/// Therefore, a ``View/font(_:)`` modifier that you apply to the stack has no
+/// Therefore, a ~~View/font(_:)~~ modifier that you apply to the stack has no
 /// effect on the stack itself. Yet the font modifier does apply to any of the
 /// stack's child views, some of which might display text. On the other hand,
 /// you can locally override the stack's modifier by adding another to a
@@ -20378,8 +18318,8 @@ extension VerticalAlignment {
 ///
 /// You commonly chain modifiers, each wrapping the result of the previous one.
 /// For example, you can wrap a text view in an invisible box with a given width
-/// using the ``View/frame(width:height:alignment:)`` modifier to influence its
-/// layout, and then use the ``View/border(_:width:)`` modifier to draw an
+/// using the ~~View/frame(width:height:alignment:)~~ modifier to influence its
+/// layout, and then use the ~~View/border(_:width:)~~ modifier to draw an
 /// outline around that:
 ///
 ///     Text("Title")
@@ -20428,7 +18368,7 @@ extension View {
     /// Sets the style for date pickers within this view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func datePickerStyle<S>(_ style: S) -> some View where S : DatePickerStyle { }
+    public func datePickerStyle<S>(_ style: S) -> some View where S : DatePickerStyle { } { }
 
 }
 
@@ -20446,7 +18386,7 @@ extension View {
     ///     currently-presented sheet and replaces it with a new sheet.
     ///   - onDismiss: A closure executed when the sheet dismisses.
     ///   - content: A closure returning the content of the sheet.
-    public func sheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
+    public func sheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { } { }
 
 
     /// Presents a sheet when a given condition is true.
@@ -20455,7 +18395,7 @@ extension View {
     ///   - isPresented: A binding to whether the sheet is presented.
     ///   - onDismiss: A closure executed when the sheet dismisses.
     ///   - content: A closure returning the content of the sheet.
-    public func sheet<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View { }
+    public func sheet<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View { } { }
 
 }
 
@@ -20474,7 +18414,7 @@ extension View {
     ///     currently-presented modal view and replace it by a new modal view.
     ///   - onDismiss: A closure executed when the modal view dismisses.
     ///   - content: A closure returning the content of the modal view.
-    public func fullScreenCover<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
+    public func fullScreenCover<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { } { }
 
 
     /// Presents a modal view that covers as much of the screen as
@@ -20484,7 +18424,7 @@ extension View {
     ///   - isPresented: A binding to whether the modal view is presented.
     ///   - onDismiss: A closure executed when the modal view dismisses.
     ///   - content: A closure returning the content of the modal view.
-    public func fullScreenCover<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View { }
+    public func fullScreenCover<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View { } { }
 
 }
 
@@ -20494,7 +18434,7 @@ extension View {
     /// Adds an action to perform when this view recognizes a long press
     /// gesture.
     @available(tvOS, unavailable)
-    public func onLongPressGesture(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10, pressing: ((Bool) -> Void)? = nil, perform action: @escaping () -> Void) -> some View { }
+    public func onLongPressGesture(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10, pressing: ((Bool) -> Void)? = nil, perform action: @escaping () -> Void) -> some View { } { }
 
 }
 
@@ -20507,7 +18447,7 @@ extension View {
     /// proper names and street addresses are examples where autocorrection can
     /// negatively affect the user's ability complete a data entry task.
     ///
-    /// In the example below configures a ``TextField`` with the `.default`
+    /// In the example below configures a ~~TextField~~ with the `.default`
     /// keyboard. Disabling autocorrection allows the user to enter arbitrary
     /// text without the autocorrection system offering suggestions or
     /// attempting to override their input.
@@ -20520,7 +18460,7 @@ extension View {
     ///   autocorrection is disabled for this view.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
     @available(watchOS, unavailable)
-    public func disableAutocorrection(_ disable: Bool?) -> some View { }
+    public func disableAutocorrection(_ disable: Bool?) -> some View { } { }
 
 }
 
@@ -20532,7 +18472,7 @@ extension View {
     /// Sets the style for the index view within the current environment.
     ///
     /// - Parameter style: The style to apply to this view.
-    public func indexViewStyle<S>(_ style: S) -> some View where S : IndexViewStyle { }
+    public func indexViewStyle<S>(_ style: S) -> some View where S : IndexViewStyle { } { }
 
 }
 
@@ -20541,7 +18481,7 @@ extension View {
 
     /// Provides a closure that vends the drag representation to be used for a
     /// particular data element.
-    @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
+    @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { } { }
 
 }
 
@@ -20549,7 +18489,7 @@ extension View {
 extension View {
 
     /// Adds a condition for whether the view's view hierarchy is deletable.
-    @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { }
+    @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { } { }
 
 }
 
@@ -20557,7 +18497,7 @@ extension View {
 extension View {
 
     /// Adds a condition for whether the view's view hierarchy is movable.
-    @inlinable public func moveDisabled(_ isDisabled: Bool) -> some View { }
+    @inlinable public func moveDisabled(_ isDisabled: Bool) -> some View { } { }
 
 }
 
@@ -20580,7 +18520,7 @@ extension View {
     ///   drop operation, beginning with user gesture input.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func onDrag(_ data: @escaping () -> NSItemProvider) -> some View { }
+    public func onDrag(_ data: @escaping () -> NSItemProvider) -> some View { } { }
 
 }
 
@@ -20588,20 +18528,20 @@ extension View {
 extension View {
 
     /// Adds an accessibility action to this view.
-    public func accessibilityAction(_ actionKind: AccessibilityActionKind = .default, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityAction(_ actionKind: AccessibilityActionKind = .default, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a custom accessibility action to the view and all subviews.
-    public func accessibilityAction(named name: Text, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityAction(named name: Text, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension View {
 
     /// Adds a custom accessibility action to the view and all subviews.
-    public func accessibilityAction(named nameKey: LocalizedStringKey, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityAction(named nameKey: LocalizedStringKey, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a custom accessibility action to the view and all subviews.
-    public func accessibilityAction<S>(named name: S, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { }
+    public func accessibilityAction<S>(named name: S, _ handler: @escaping () -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -20610,7 +18550,7 @@ extension View {
     /// Sets the style for the tab view within the the current environment.
     ///
     /// - Parameter style: The style to apply to this tab view.
-    public func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle { }
+    public func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle { } { }
 
 }
 
@@ -20621,14 +18561,14 @@ extension View {
     /// custom appearance and custom interaction behavior.
     ///
     /// To set a specific style for all button instances within a view, use the
-    /// ``View/buttonStyle(_:)-66fbx`` modifier:
+    /// ~~View/buttonStyle(_:)-66fbx~~ modifier:
     ///
     ///     HStack {
     ///         Button("Sign In", action: signIn)
     ///         Button("Register", action: register)
     ///     }
     ///     .buttonStyle(BorderedButtonStyle())
-    public func buttonStyle<S>(_ style: S) -> some View where S : PrimitiveButtonStyle { }
+    public func buttonStyle<S>(_ style: S) -> some View where S : PrimitiveButtonStyle { } { }
 
 }
 
@@ -20646,7 +18586,7 @@ extension View {
     ///
     /// - Returns: A view that triggers `action` when `publisher` emits an
     ///   event.
-    @inlinable public func onReceive<P>(_ publisher: P, perform action: @escaping (P.Output) -> Void) -> some View where P : Publisher, P.Failure == Never { }
+    @inlinable public func onReceive<P>(_ publisher: P, perform action: @escaping (P.Output) -> Void) -> some View where P : Publisher, P.Failure == Never { } { }
 
 }
 
@@ -20655,7 +18595,7 @@ extension View {
 
     /// Applies a modifier to a view and returns a new view.
     ///
-    /// Use this modifier to combine a ``View`` and a ``ViewModifier``, to
+    /// Use this modifier to combine a ~~View~~ and a ~~ViewModifier~~, to
     /// create a new view. For example, if you create a view modifier for
     /// a new kind of caption with blue text surrounded by a rounded rectangle:
     ///
@@ -20672,7 +18612,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// You can use ``modifier(_:)`` to extend ``View`` to create new modifier
+    /// You can use ~~modifier(_:)~~ to extend ~~View~~ to create new modifier
     /// for applying the `BorderedCaption` defined above:
     ///
     ///     extension View {
@@ -20695,7 +18635,7 @@ extension View {
     ///  rectangle.](SwiftUI-View-ViewModifier.png)
     ///
     /// - Parameter modifier: The modifier to apply to this view.
-    @inlinable public func modifier<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
+    @inlinable public func modifier<T>(_ modifier: T) -> ModifiedContent<Self, T> { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -20709,7 +18649,7 @@ extension View {
     ///
     /// - Parameter active: A true value ignores the system Smart Invert
     ///   setting. A false value follows the system setting.
-    @inlinable public func accessibilityIgnoresInvertColors(_ active: Bool = true) -> some View { }
+    @inlinable public func accessibilityIgnoresInvertColors(_ active: Bool = true) -> some View { } { }
 
 }
 
@@ -20717,7 +18657,7 @@ extension View {
 extension View {
 
     /// Configures whether this view participates in hit test operations.
-    @inlinable public func allowsHitTesting(_ enabled: Bool) -> some View { }
+    @inlinable public func allowsHitTesting(_ enabled: Bool) -> some View { } { }
 
 }
 
@@ -20730,7 +18670,7 @@ extension View {
     ///   call has no effect.
     ///
     /// - Returns: A view that triggers `action` when this view appears.
-    @inlinable public func onAppear(perform action: (() -> Void)? = nil) -> some View { }
+    @inlinable public func onAppear(perform action: (() -> Void)? = nil) -> some View { } { }
 
 
     /// Adds an action to perform when this view disappears.
@@ -20739,7 +18679,7 @@ extension View {
     ///   call has no effect.
     ///
     /// - Returns: A view that triggers `action` when this view disappears.
-    @inlinable public func onDisappear(perform action: (() -> Void)? = nil) -> some View { }
+    @inlinable public func onDisappear(perform action: (() -> Void)? = nil) -> some View { } { }
 
 }
 
@@ -20748,7 +18688,7 @@ extension View where Self : Equatable {
 
     /// Prevents the view from updating its child view when its new value is the
     /// same as its old value.
-    @inlinable public func equatable() -> EquatableView<Self> { }
+    @inlinable public func equatable() -> EquatableView<Self> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 14.0, *)
@@ -20760,7 +18700,7 @@ extension View {
     /// Use contextual menus to add actions that change depending on the user's
     /// current focus and task.
     ///
-    /// The following example creates a ``Text`` view with a contextual menu.
+    /// The following example creates a ~~Text~~ view with a contextual menu.
     /// Note that the actions invoked by the menu selection could be coded
     /// directly inside the button closures or, as shown below, invoked via
     /// function references.
@@ -20785,7 +18725,7 @@ extension View {
     ///
     /// - Parameter menuItems: A `contextMenu` that contains one or more menu items.
     /// - Returns: A view that adds a contextual menu to this view.
-    public func contextMenu<MenuItems>(@ViewBuilder menuItems: () -> MenuItems) -> some View where MenuItems : View { }
+    public func contextMenu<MenuItems>(@ViewBuilder menuItems: () -> MenuItems) -> some View where MenuItems : View { } { }
 
 }
 
@@ -20801,7 +18741,7 @@ extension View {
     /// children to the view. This modifier allows for the contextual menu to be
     /// conditionally available by passing `nil` as the value for `contextMenu`.
     ///
-    /// In the example below a ``ContextMenu`` that contains four menu items is
+    /// In the example below a ~~ContextMenu~~ that contains four menu items is
     /// created and is passed into the `contextMenu(_:)` modifier. The
     /// attachment of context menu is controlled by the Boolean value
     /// `shouldShowMenu` which is `true`, enabling the contextual menu.
@@ -20839,7 +18779,7 @@ extension View {
     ///   present as menu items in a contextual menu.
     ///
     /// - Returns: A view that adds a contextual menu to this view.
-    public func contextMenu<MenuItems>(_ contextMenu: ContextMenu<MenuItems>?) -> some View where MenuItems : View { }
+    public func contextMenu<MenuItems>(_ contextMenu: ContextMenu<MenuItems>?) -> some View where MenuItems : View { } { }
 
 }
 
@@ -20859,7 +18799,7 @@ extension View {
     ///     }
     ///     .menuStyle(ButtonMenuStyle())
     ///
-    public func menuStyle<S>(_ style: S) -> some View where S : MenuStyle { }
+    public func menuStyle<S>(_ style: S) -> some View where S : MenuStyle { } { }
 
 }
 
@@ -20868,17 +18808,17 @@ extension View {
 
     /// Attaches a gesture to the view with a lower precedence than gestures
     /// defined by the view.
-    public func gesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
+    public func gesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { } { }
 
 
     /// Attaches a gesture to the view with a higher precedence than gestures
     /// defined by the view.
-    public func highPriorityGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
+    public func highPriorityGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { } { }
 
 
     /// Attaches a gesture to the view to process simultaneously with gestures
     /// defined by the view.
-    public func simultaneousGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
+    public func simultaneousGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { } { }
 
 }
 
@@ -20908,7 +18848,7 @@ extension View {
     ///     succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View { }
+    public func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View { } { }
 
 
     /// Presents a system interface for allowing the user to import multiple
@@ -20934,7 +18874,7 @@ extension View {
     ///     succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View { }
+    public func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], allowsMultipleSelection: Bool, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View { } { }
 
 }
 
@@ -20945,14 +18885,14 @@ extension View {
     /// custom appearance and standard interaction behavior.
     ///
     /// To set a specific style for all button instances within a view, use the
-    /// ``View/buttonStyle(_:)-66fbx`` modifier:
+    /// ~~View/buttonStyle(_:)-66fbx~~ modifier:
     ///
     ///     HStack {
     ///         Button("Sign In", action: signIn)
     ///         Button("Register", action: register)
     ///     }
     ///     .buttonStyle(BorderedButtonStyle())
-    public func buttonStyle<S>(_ style: S) -> some View where S : ButtonStyle { }
+    public func buttonStyle<S>(_ style: S) -> some View where S : ButtonStyle { } { }
 
 }
 
@@ -20966,7 +18906,7 @@ extension View {
 	///   - value: The anchor you provide to the transform closure.
 	///   - transform: A closure that takes an existing preference value and anchor value,
 	///   and can update the existing preference with the given value.
-    @inlinable public func transformAnchorPreference<A, K>(key _: K.Type = K.self, value: Anchor<A>.Source, transform: @escaping (inout K.Value, Anchor<A>) -> Void) -> some View where K : PreferenceKey { }
+    @inlinable public func transformAnchorPreference<A, K>(key _: K.Type = K.self, value: Anchor<A>.Source, transform: @escaping (inout K.Value, Anchor<A>) -> Void) -> some View where K : PreferenceKey { } { }
 
 }
 
@@ -20977,11 +18917,11 @@ extension View {
     ///
     /// Adding a redaction is an additive process: any redaction
     /// provided will be added to the reasons provided by the parent.
-    public func redacted(reason: RedactionReasons) -> some View { }
+    public func redacted(reason: RedactionReasons) -> some View { } { }
 
 
     /// Removes any reason to apply a redaction to this view hierarchy.
-    public func unredacted() -> some View { }
+    public func unredacted() -> some View { } { }
 
 }
 
@@ -20994,14 +18934,14 @@ extension View {
 	/// size and location will stay the same.
 	///
 	/// If you would like to place a view in front of your current view instead,
-	/// you can use the ``overlay(_:alignment:)`` function.
+	/// you can use the ~~overlay(_:alignment:)~~ function.
 	///
 	/// - Parameters:
 	///   - background: The view to place behind.
 	///   - alignment: Where to align the behind view relative to the current view. Defaults to center.
 	///
 	/// - SeeAlso: overlay(_:alignment:)
-    @inlinable public func background<Background>(_ background: Background, alignment: Alignment = .center) -> some View where Background : View { }
+    @inlinable public func background<Background>(_ background: Background, alignment: Alignment = .center) -> some View where Background : View { } { }
 
 }
 
@@ -21014,14 +18954,14 @@ extension View {
 	/// size and location will stay the same.
 	///
 	/// If you would like to place a view behind your current view instead,
-	/// you can use the ``background(_:alignment:)`` function.
+	/// you can use the ~~background(_:alignment:)~~ function.
 	///
 	/// - Parameters:
 	///   - overlay: The view to place in front.
 	///   - alignment: Where to align the in-front view relative to the current view. Defaults to center.
 	///
 	/// - SeeAlso: background(_:alignment:)
-    @inlinable public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View { }
+    @inlinable public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View { } { }
 
 
     /// Adds a border to this view with the specified style and width.
@@ -21053,7 +18993,7 @@ extension View {
     ///
     /// - Returns: A view that adds a border with the specified style and width
     ///   to this view.
-    @inlinable public func border<S>(_ content: S, width: CGFloat = 1) -> some View where S : ShapeStyle { }
+    @inlinable public func border<S>(_ content: S, width: CGFloat = 1) -> some View where S : ShapeStyle { } { }
 
 }
 
@@ -21089,7 +19029,7 @@ extension View {
     ///
     /// - Returns: A view that constrains this view's dimensions to the aspect
     ///   ratio of the given size using `contentMode` as its scaling algorithm.
-    @inlinable public func aspectRatio(_ aspectRatio: CGFloat? = nil, contentMode: ContentMode) -> some View { }
+    @inlinable public func aspectRatio(_ aspectRatio: CGFloat? = nil, contentMode: ContentMode) -> some View { } { }
 
 
     /// Constrains this view's dimensions to the aspect ratio of the given size.
@@ -21119,7 +19059,7 @@ extension View {
     ///
     /// - Returns: A view that constrains this view's dimensions to
     ///   `aspectRatio`, using `contentMode` as its scaling algorithm.
-    @inlinable public func aspectRatio(_ aspectRatio: CGSize, contentMode: ContentMode) -> some View { }
+    @inlinable public func aspectRatio(_ aspectRatio: CGSize, contentMode: ContentMode) -> some View { } { }
 
 
     /// Scales this view to fit its parent.
@@ -21137,12 +19077,12 @@ extension View {
     /// frame.](SwiftUI-View-scaledToFit-1.png)
     ///
     /// This method is equivalent to calling
-    /// ``View/aspectRatio(_:contentMode:)-5ehx6`` with a `nil` aspectRatio and
-    /// a content mode of ``ContentMode/fit``.
+    /// ~~View/aspectRatio(_:contentMode:)-5ehx6~~ with a `nil` aspectRatio and
+    /// a content mode of ~~ContentMode/fit~~.
     ///
     /// - Returns: A view that scales this view to fit its parent, maintaining
     ///   this view's aspect ratio.
-    @inlinable public func scaledToFit() -> some View { }
+    @inlinable public func scaledToFit() -> some View { } { }
 
 
     /// Scales this view to fill its parent.
@@ -21160,12 +19100,12 @@ extension View {
     /// frame.](SwiftUI-View-scaledToFill-1.png)
     ///
     /// This method is equivalent to calling
-    /// ``View/aspectRatio(_:contentMode:)-5ehx6`` with a `nil` aspectRatio and
-    /// a content mode of ``ContentMode/fill``.
+    /// ~~View/aspectRatio(_:contentMode:)-5ehx6~~ with a `nil` aspectRatio and
+    /// a content mode of ~~ContentMode/fill~~.
     ///
     /// - Returns: A view that scales this view to fill its parent, maintaining
     ///   this view's aspect ratio.
-    @inlinable public func scaledToFill() -> some View { }
+    @inlinable public func scaledToFill() -> some View { } { }
 
 }
 
@@ -21174,7 +19114,7 @@ extension View {
 
     /// Fixes this view at its ideal size in the specified dimensions.
     ///
-    /// This function behaves like ``View/fixedSize()``, except with
+    /// This function behaves like ~~View/fixedSize()~~, except with
     /// `fixedSize(horizontal:vertical:)` the fixing of the axes can be
     /// optionally specified in one or both dimensions. For example, if you
     /// horizontally fix a text view before wrapping it in the frame view,
@@ -21200,7 +19140,7 @@ extension View {
     ///
     /// - Returns: A view that fixes this view at its ideal size in the
     ///   dimensions specified by `horizontal` and `vertical`.
-    @inlinable public func fixedSize(horizontal: Bool, vertical: Bool) -> some View { }
+    @inlinable public func fixedSize(horizontal: Bool, vertical: Bool) -> some View { } { }
 
 
     /// Fixes this view at its ideal size.
@@ -21209,7 +19149,7 @@ extension View {
     /// each child view it contains. If the child view doesn't need a fixed size
     /// it can accept and conform to the size offered by the parent.
     ///
-    /// For example, a ``Text`` view placed in an explicitly sized frame wraps
+    /// For example, a ~~Text~~ view placed in an explicitly sized frame wraps
     /// and truncates its string to remain within its parent's bounds:
     ///
     ///     Text("A single line of text, too long to fit in a box.")
@@ -21239,10 +19179,10 @@ extension View {
     /// particular view and how you have configured it.
     ///
     /// To create a view that fixes the view's size in either the horizontal or
-    /// vertical dimensions, see ``View/fixedSize(horizontal:vertical:)``.
+    /// vertical dimensions, see ~~View/fixedSize(horizontal:vertical:)~~.
     ///
     /// - Returns: A view that fixes this view at its ideal size.
-    @inlinable public func fixedSize() -> some View { }
+    @inlinable public func fixedSize() -> some View { } { }
 
 }
 
@@ -21258,7 +19198,7 @@ extension View {
     ///   the primary color.
     ///
     /// - Returns: A view that uses the foreground color you supply.
-    @inlinable public func foregroundColor(_ color: Color?) -> some View { }
+    @inlinable public func foregroundColor(_ color: Color?) -> some View { } { }
 
 }
 
@@ -21266,7 +19206,7 @@ extension View {
 extension View {
 
     /// Sets the style for pickers within this view.
-    public func pickerStyle<S>(_ style: S) -> some View where S : PickerStyle { }
+    public func pickerStyle<S>(_ style: S) -> some View where S : PickerStyle { } { }
 
 }
 
@@ -21291,14 +19231,14 @@ extension View {
     /// insets.](SwiftUI-View-padding-insets.png)
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
-    /// ``View/padding(_:_:)``. To pad all outside edges of a view with an
-    /// amount you specify, see ``View/padding(_:)-9f33x``.
+    /// ~~View/padding(_:_:)~~. To pad all outside edges of a view with an
+    /// amount you specify, see ~~View/padding(_:)-9f33x~~.
     ///
     /// - Parameter insets: The edges and amounts to inset.
     ///
     /// - Returns: A view that pads this view using the specified edge insets
     ///   with specified amount of padding.
-    @inlinable public func padding(_ insets: EdgeInsets) -> some View { }
+    @inlinable public func padding(_ insets: EdgeInsets) -> some View { } { }
 
 
     /// A view that pads this view inside the specified edge insets with a
@@ -21321,9 +19261,9 @@ extension View {
     /// edge.](SwiftUI-View-padding-2.png)
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
-    /// the edges of the view, see ``View/padding(_:)-6pgqq``. To pad all
+    /// the edges of the view, see ~~View/padding(_:)-6pgqq~~. To pad all
     /// outside edges of a view with an amount you specify, see
-    /// ``View/padding(_:)-9f33x``.
+    /// ~~View/padding(_:)-9f33x~~.
     ///
     /// - Parameters:
     ///   - edges: The set of edges along which to pad this view; if `nil` the
@@ -21333,7 +19273,7 @@ extension View {
     ///
     /// - Returns: A view that pads this view using the specified edge insets
     ///   with specified amount of padding.
-    @inlinable public func padding(_ edges: Edge.Set = .all, _ length: CGFloat? = nil) -> some View { }
+    @inlinable public func padding(_ edges: Edge.Set = .all, _ length: CGFloat? = nil) -> some View { } { }
 
 
     /// Pads the view along all edges by the specified amount.
@@ -21355,7 +19295,7 @@ extension View {
     /// - Parameter length: The amount to pad this view on each edge.
     ///
     /// - Returns: A view that pads this view by the amount you specify.
-    @inlinable public func padding(_ length: CGFloat) -> some View { }
+    @inlinable public func padding(_ length: CGFloat) -> some View { } { }
 
 }
 
@@ -21383,7 +19323,7 @@ extension View {
     /// - Parameter offset: The distance to offset this view.
     ///
     /// - Returns: A view that offsets this view by `offset`.
-    @inlinable public func offset(_ offset: CGSize) -> some View { }
+    @inlinable public func offset(_ offset: CGSize) -> some View { } { }
 
 
     /// Offset this view by the specified horizontal and vertical distances.
@@ -21408,7 +19348,7 @@ extension View {
     ///   - y: The vertical distance to offset this view.
     ///
     /// - Returns: A view that offsets this view by `x` and `y`.
-    @inlinable public func offset(x: CGFloat = 0, y: CGFloat = 0) -> some View { }
+    @inlinable public func offset(x: CGFloat = 0, y: CGFloat = 0) -> some View { } { }
 
 }
 
@@ -21419,10 +19359,10 @@ extension View {
     ///
     /// Use `alignmentGuide(_:computeValue:)` to calculate specific offsets
     /// to reposition views in relationship to one another. You can return a
-    /// constant or can use the ``ViewDimensions`` argument to the closure to
+    /// constant or can use the ~~ViewDimensions~~ argument to the closure to
     /// calculate a return value.
     ///
-    /// In the example below, the ``HStack`` is offset by a constant of 50
+    /// In the example below, the ~~HStack~~ is offset by a constant of 50
     /// points to the right of center:
     ///
     ///     VStack {
@@ -21447,24 +19387,24 @@ extension View {
     /// horizontal alignment guide.](SwiftUI-View-HAlignmentGuide.png)
     ///
     /// - Parameters:
-    ///   - g: A ``HorizontalAlignment`` value at which to a base the offset.
+    ///   - g: A ~~HorizontalAlignment~~ value at which to a base the offset.
     ///   - computeValue: A closure that returns the offset value to apply to
     ///     this view.
     ///
     /// - Returns: A view modified with respect to its horizontal alignment
     ///   according to the computation performed in the method's closure.
-    @inlinable public func alignmentGuide(_ g: HorizontalAlignment, computeValue: @escaping (ViewDimensions) -> CGFloat) -> some View { }
+    @inlinable public func alignmentGuide(_ g: HorizontalAlignment, computeValue: @escaping (ViewDimensions) -> CGFloat) -> some View { } { }
 
 
     /// Sets the view's vertical alignment.
     ///
     /// Use `alignmentGuide(_:computeValue:)` to calculate specific offsets
     /// to reposition views in relationship to one another. You can return a
-    /// constant or can use the ``ViewDimensions`` argument to the closure to
+    /// constant or can use the ~~ViewDimensions~~ argument to the closure to
     /// calculate a return value.
     ///
     /// In the example below, the weather emoji are offset 20 points from the
-    /// vertical center of the ``HStack``.
+    /// vertical center of the ~~HStack~~.
     ///
     ///     VStack {
     ///         Text("Today's Weather")
@@ -21490,13 +19430,13 @@ extension View {
     /// vertical alignment guide.](SwiftUI-View-VAlignmentGuide.png)
     ///
     /// - Parameters:
-    ///   - g: A ``VerticalAlignment`` value at which to a base the offset.
+    ///   - g: A ~~VerticalAlignment~~ value at which to a base the offset.
     ///   - computeValue: A closure that returns the offset value to apply to
     ///     this view.
     ///
     /// - Returns: A view modified with respect to its vertical alignment
     ///   according to the computation performed in the method's closure.
-    @inlinable public func alignmentGuide(_ g: VerticalAlignment, computeValue: @escaping (ViewDimensions) -> CGFloat) -> some View { }
+    @inlinable public func alignmentGuide(_ g: VerticalAlignment, computeValue: @escaping (ViewDimensions) -> CGFloat) -> some View { } { }
 
 }
 
@@ -21519,7 +19459,7 @@ extension View {
     ///   view.
     ///
     /// - Returns: A view that fixes the center of this view at `position`.
-    @inlinable public func position(_ position: CGPoint) -> some View { }
+    @inlinable public func position(_ position: CGPoint) -> some View { } { }
 
 
     /// Positions the center of this view at the specified coordinates in its
@@ -21537,7 +19477,7 @@ extension View {
     ///   - y: The y-coordinate at which to place the center of this view.
     ///
     /// - Returns: A view that fixes the center of this view at `x` and `y`.
-    @inlinable public func position(x: CGFloat = 0, y: CGFloat = 0) -> some View { }
+    @inlinable public func position(x: CGFloat = 0, y: CGFloat = 0) -> some View { } { }
 
 }
 
@@ -21581,7 +19521,7 @@ extension View {
     ///
     /// - Returns: A view that may extend outside of the screen's safe area
     ///   on the edges specified by `edges`.
-    @inlinable public func edgesIgnoringSafeArea(_ edges: Edge.Set) -> some View { }
+    @inlinable public func edgesIgnoringSafeArea(_ edges: Edge.Set) -> some View { } { }
 
 }
 
@@ -21600,7 +19540,7 @@ extension View {
     ///
     /// - Returns: a new view with its safe area expanded.
     ///
-    @inlinable public func ignoresSafeArea(_ regions: SafeAreaRegions = .all, edges: Edge.Set = .all) -> some View { }
+    @inlinable public func ignoresSafeArea(_ regions: SafeAreaRegions = .all, edges: Edge.Set = .all) -> some View { } { }
 
 }
 
@@ -21610,15 +19550,15 @@ extension View {
     /// Sets the environment value of the specified key path to the given value.
     ///
     /// Use this modifier to set one of the writable properties of the
-    /// ``EnvironmentValues`` structure, including custom values that you
+    /// ~~EnvironmentValues~~ structure, including custom values that you
     /// create. For example, you can set the value associated with the
-    /// ``EnvironmentValues/truncationMode`` key:
+    /// ~~EnvironmentValues/truncationMode~~ key:
     ///
     ///     MyView()
     ///         .environment(\.truncationMode, .head)
     ///
     /// You then read the value inside `MyView` or one of its descendants
-    /// using the ``Environment`` property wrapper:
+    /// using the ~~Environment~~ property wrapper:
     ///
     ///     struct MyView: View {
     ///         @Environment(\.truncationMode) var truncationMode: Text.TruncationMode
@@ -21627,27 +19567,27 @@ extension View {
     ///     }
     ///
     /// SwiftUI provides dedicated view modifiers for setting most
-    /// environment values, like the ``View/truncationMode(_:)``
-    /// modifier which sets the ``EnvironmentValues/truncationMode`` value:
+    /// environment values, like the ~~View/truncationMode(_:)~~
+    /// modifier which sets the ~~EnvironmentValues/truncationMode~~ value:
     ///
     ///     MyView()
     ///         .truncationMode(.head)
     ///
     /// Prefer the dedicated modifier when available, and offer your own when
     /// defining custom environment values, as described in
-    /// ``EnvironmentKey``.
+    /// ~~EnvironmentKey~~.
     ///
-    /// The ``View/environment(_:_:)`` modifier affects the given view,
+    /// The ~~View/environment(_:_:)~~ modifier affects the given view,
     /// as well as that view's descendant views. It has no effect
     /// outside the view hierarchy on which you call it.
     ///
     /// - Parameters:
     ///   - keyPath: A key path that indicates the property of the
-    ///     ``EnvironmentValues`` structure to update.
+    ///     ~~EnvironmentValues~~ structure to update.
     ///   - value: The new value to set for the item specified by `keyPath`.
     ///
     /// - Returns: A view that has the given value set in its environment.
-    @inlinable public func environment<V>(_ keyPath: WritableKeyPath<EnvironmentValues, V>, _ value: V) -> some View { }
+    @inlinable public func environment<V>(_ keyPath: WritableKeyPath<EnvironmentValues, V>, _ value: V) -> some View { } { }
 
 }
 
@@ -21681,7 +19621,7 @@ extension View {
     ///
     /// - Parameter value: A relative front-to-back ordering for this view; the
     ///   default is `0`.
-    @inlinable public func zIndex(_ value: Double) -> some View { }
+    @inlinable public func zIndex(_ value: Double) -> some View { } { }
 
 }
 
@@ -21708,7 +19648,7 @@ extension View {
     /// - Parameter transform: A
     /// <doc://com.apple.documentation/documentation/CoreGraphics/CGAffineTransform> to
     /// apply to the view.
-    @inlinable public func transformEffect(_ transform: CGAffineTransform) -> some View { }
+    @inlinable public func transformEffect(_ transform: CGAffineTransform) -> some View { } { }
 
 }
 
@@ -21726,7 +19666,7 @@ extension View {
     ///   - content: A closure returning the action sheet to present.
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     @available(macOS, unavailable)
-    public func actionSheet<T>(item: Binding<T?>, content: (T) -> ActionSheet) -> some View where T : Identifiable { }
+    public func actionSheet<T>(item: Binding<T?>, content: (T) -> ActionSheet) -> some View where T : Identifiable { } { }
 
 
     /// Presents an action sheet when a given condition is true.
@@ -21737,7 +19677,7 @@ extension View {
     ///   - content: A closure returning the `ActionSheet` to present.
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     @available(macOS, unavailable)
-    public func actionSheet(isPresented: Binding<Bool>, content: () -> ActionSheet) -> some View { }
+    public func actionSheet(isPresented: Binding<Bool>, content: () -> ActionSheet) -> some View { } { }
 
 }
 
@@ -21753,10 +19693,10 @@ extension View {
     /// On macOS, customization of the accent color is only applied if the
     /// "Multicolor" accent color is selected in System Preferences.
     ///
-    /// In the example below, the outer ``VStack`` contains two child views, the
-    /// first is a ``VStack`` containing a default accented button. The second
-    /// ``VStack`` contains a button and a slider both of which adopt the purple
-    /// accent color of their containing view. Note that the ``Text`` element
+    /// In the example below, the outer ~~VStack~~ contains two child views, the
+    /// first is a ~~VStack~~ containing a default accented button. The second
+    /// ~~VStack~~ contains a button and a slider both of which adopt the purple
+    /// accent color of their containing view. Note that the ~~Text~~ element
     /// used as a label alongside the `Slider` retains its default color.
     ///
     ///     VStack {
@@ -21785,7 +19725,7 @@ extension View {
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
     @available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
-    @inlinable public func accentColor(_ accentColor: Color?) -> some View { }
+    @inlinable public func accentColor(_ accentColor: Color?) -> some View { } { }
 
 }
 
@@ -21810,7 +19750,7 @@ extension View {
     ///
     /// - Returns: A view that controls whether users can interact with this
     ///   view.
-    @inlinable public func disabled(_ disabled: Bool) -> some View { }
+    @inlinable public func disabled(_ disabled: Bool) -> some View { } { }
 
 }
 
@@ -21832,9 +19772,9 @@ extension View {
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
-    ///   - anchor: The location with a default of ``UnitPoint/center`` that
+    ///   - anchor: The location with a default of ~~UnitPoint/center~~ that
     ///     defines a point at which the rotation is anchored.
-    @inlinable public func rotationEffect(_ angle: Angle, anchor: UnitPoint = .center) -> some View { }
+    @inlinable public func rotationEffect(_ angle: Angle, anchor: UnitPoint = .center) -> some View { } { }
 
 }
 
@@ -21860,10 +19800,10 @@ extension View {
     /// - Parameters:
     ///   - scale: A <doc://com.apple.documentation/documentation/CoreGraphics/CGSize> that
     ///     represents the horizontal and vertical amount to scale the view.
-    ///   - anchor: The point with a default of ``UnitPoint/center`` that
+    ///   - anchor: The point with a default of ~~UnitPoint/center~~ that
     ///     defines the location within the view from which to apply the
     ///     transformation.
-    @inlinable public func scaleEffect(_ scale: CGSize, anchor: UnitPoint = .center) -> some View { }
+    @inlinable public func scaleEffect(_ scale: CGSize, anchor: UnitPoint = .center) -> some View { } { }
 
 
     /// Scales this view's rendered output by the given amount in both the
@@ -21885,9 +19825,9 @@ extension View {
     /// - Parameters:
     ///   - s: The amount to scale the view in the view in both the horizontal
     ///     and vertical directions.
-    ///   - anchor: The anchor point with a default of ``UnitPoint/center`` that
+    ///   - anchor: The anchor point with a default of ~~UnitPoint/center~~ that
     ///     indicates the starting position for the scale operation.
-    @inlinable public func scaleEffect(_ s: CGFloat, anchor: UnitPoint = .center) -> some View { }
+    @inlinable public func scaleEffect(_ s: CGFloat, anchor: UnitPoint = .center) -> some View { } { }
 
 
     /// Scales this view's rendered output by the given horizontal and vertical
@@ -21913,7 +19853,7 @@ extension View {
     ///     The default value is `1.0`.
     ///   - anchor: The anchor point that indicates the starting position for
     ///     the scale operation.
-    @inlinable public func scaleEffect(x: CGFloat = 1.0, y: CGFloat = 1.0, anchor: UnitPoint = .center) -> some View { }
+    @inlinable public func scaleEffect(x: CGFloat = 1.0, y: CGFloat = 1.0, anchor: UnitPoint = .center) -> some View { } { }
 
 }
 
@@ -21925,7 +19865,7 @@ extension View {
     /// Use `blur(radius:opaque:)` to apply a gaussian blur effect to the
     /// rendering of this view.
     ///
-    /// The example below shows two ``Text`` views, the first with no blur
+    /// The example below shows two ~~Text~~ views, the first with no blur
     /// effects, the second with `blur(radius:opaque:)` applied with the
     /// `radius` set to `2`. The larger the radius, the more diffuse the
     /// effect.
@@ -21950,7 +19890,7 @@ extension View {
     ///   - opaque: A Boolean value that indicates whether the blur renderer
     ///     permits transparency in the blur output. Set to `true` to create an
     ///     opaque blur, or set to `false` to permit transparency.
-    @inlinable public func blur(radius: CGFloat, opaque: Bool = false) -> some View { }
+    @inlinable public func blur(radius: CGFloat, opaque: Bool = false) -> some View { } { }
 
 }
 
@@ -21984,7 +19924,7 @@ extension View {
     ///   brightening) that represents the intensity of the brightness effect.
     ///
     /// - Returns: A view that brightens this view by the specified amount.
-    @inlinable public func brightness(_ amount: Double) -> some View { }
+    @inlinable public func brightness(_ amount: Double) -> some View { } { }
 
 }
 
@@ -22038,7 +19978,7 @@ extension View {
     /// red and green colors.](SwiftUI-View-colorInvert.png)
     ///
     /// - Returns: A view that inverts its colors.
-    @inlinable public func colorInvert() -> some View { }
+    @inlinable public func colorInvert() -> some View { } { }
 
 }
 
@@ -22049,7 +19989,7 @@ extension View {
     ///
     /// The following example shows two versions of the same image side by side;
     /// at left is the original, and at right is a duplicate with the
-    /// `colorMultiply(_:)` modifier applied with ``Color/purple``.
+    /// `colorMultiply(_:)` modifier applied with ~~Color/purple~~.
     ///
     ///     struct InnerCircleView: View {
     ///         var body: some View {
@@ -22089,7 +20029,7 @@ extension View {
     /// - Parameter color: The color to bias this view toward.
     ///
     /// - Returns: A view with a color multiplication effect.
-    @inlinable public func colorMultiply(_ color: Color) -> some View { }
+    @inlinable public func colorMultiply(_ color: Color) -> some View { } { }
 
 }
 
@@ -22142,7 +20082,7 @@ extension View {
     ///   values invert colors in addition to applying contrast.
     ///
     /// - Returns: A view that applies color contrast to this view.
-    @inlinable public func contrast(_ amount: Double) -> some View { }
+    @inlinable public func contrast(_ amount: Double) -> some View { } { }
 
 }
 
@@ -22180,7 +20120,7 @@ extension View {
     ///   1.0 are less colorful.
     ///
     /// - Returns: A view that adds a grayscale effect to this view.
-    @inlinable public func grayscale(_ amount: Double) -> some View { }
+    @inlinable public func grayscale(_ amount: Double) -> some View { } { }
 
 }
 
@@ -22218,7 +20158,7 @@ extension View {
     ///   view.
     ///
     /// - Returns: A view that applies a hue rotation effect to this view.
-    @inlinable public func hueRotation(_ angle: Angle) -> some View { }
+    @inlinable public func hueRotation(_ angle: Angle) -> some View { } { }
 
 }
 
@@ -22231,8 +20171,8 @@ extension View {
     /// a popover or window. Views may read the color scheme using the
     /// `colorScheme` environment value.
     ///
-    /// In the example below the presentation containing the ``VStack`` has its
-    /// color scheme set to ``ColorScheme/dark``:
+    /// In the example below the presentation containing the ~~VStack~~ has its
+    /// color scheme set to ~~ColorScheme/dark~~:
     ///
     ///     VStack {
     ///         Button(action: {}) {
@@ -22247,7 +20187,7 @@ extension View {
     /// - Parameter colorScheme: The color scheme for this view.
     ///
     /// - Returns: A view that wraps this view and sets the color scheme.
-    @inlinable public func preferredColorScheme(_ colorScheme: ColorScheme?) -> some View { }
+    @inlinable public func preferredColorScheme(_ colorScheme: ColorScheme?) -> some View { } { }
 
 }
 
@@ -22296,7 +20236,7 @@ extension View {
     /// view.](SwiftUI-luminanceToAlpha.png)
     ///
     /// - Returns: A view that applies a luminance to alpha effect to this view.
-    @inlinable public func luminanceToAlpha() -> some View { }
+    @inlinable public func luminanceToAlpha() -> some View { } { }
 
 }
 
@@ -22333,7 +20273,7 @@ extension View {
     /// - Parameter amount: The amount of saturation to apply to this view.
     ///
     /// - Returns: A view that adjusts the saturation of this view.
-    @inlinable public func saturation(_ amount: Double) -> some View { }
+    @inlinable public func saturation(_ amount: Double) -> some View { } { }
 
 }
 
@@ -22341,7 +20281,7 @@ extension View {
 extension View {
 
     /// Associates a transition with the view.
-    @inlinable public func transition(_ t: AnyTransition) -> some View { }
+    @inlinable public func transition(_ t: AnyTransition) -> some View { } { }
 
 }
 
@@ -22382,7 +20322,7 @@ extension View {
     ///   opaque).
     ///
     /// - Returns: A view that sets the transparency of this view.
-    @inlinable public func opacity(_ opacity: Double) -> some View { }
+    @inlinable public func opacity(_ opacity: Double) -> some View { } { }
 
 }
 
@@ -22399,7 +20339,7 @@ extension View {
     ///
     /// - Returns: A view that applies `animation` to this view whenever `value`
     ///   changes.
-    @inlinable public func animation<V>(_ animation: Animation?, value: V) -> some View where V : Equatable { }
+    @inlinable public func animation<V>(_ animation: Animation?, value: V) -> some View where V : Equatable { } { }
 
 }
 
@@ -22413,7 +20353,7 @@ extension View {
     /// type that conforms to the <doc://com.apple.documentation/documentation/Swift/Hashable>
     /// protocol.
     ///
-    /// In the example below, the ``ForEach`` loop in the ``Picker`` view
+    /// In the example below, the ~~ForEach~~ loop in the ~~Picker~~ view
     /// builder iterates over the `Flavor` enumeration. It extracts the text raw
     /// value of each enumeration element for use as the row item label and uses
     /// the enumeration item itself as input to the `tag(_:)` modifier.
@@ -22441,7 +20381,7 @@ extension View {
     ///   to use as the view's tag.
     ///
     /// - Returns: A view with the specified tag set.
-    @inlinable public func tag<V>(_ tag: V) -> some View where V : Hashable { }
+    @inlinable public func tag<V>(_ tag: V) -> some View where V : Hashable { } { }
 
 }
 
@@ -22451,11 +20391,11 @@ extension View {
     /// Sets the blend mode for compositing this view with overlapping views.
     ///
     /// Use `blendMode(_:)` to combine overlapping views and use a different
-    /// visual effect to produce the result. The ``BlendMode`` enumeration
+    /// visual effect to produce the result. The ~~BlendMode~~ enumeration
     /// defines many possible effects.
     ///
     /// In the example below, the two overlapping rectangles have a
-    /// ``BlendMode\colorBurn`` effect applied, which effectively removes the
+    /// ~~BlendMode\colorBurn~~ effect applied, which effectively removes the
     /// non-overlapping portion of the second image:
     ///
     ///     HStack {
@@ -22470,10 +20410,10 @@ extension View {
     /// ![Two overlapping rectangles showing the effect of the blend mode view
     /// modifier applying the colorBurn effect.](SwiftUI-blendMode.png)
     ///
-    /// - Parameter blendMode: The ``BlendMode`` for compositing this view.
+    /// - Parameter blendMode: The ~~BlendMode~~ for compositing this view.
     ///
     /// - Returns: A view that applies `blendMode` to this view.
-    @inlinable public func blendMode(_ blendMode: BlendMode) -> some View { }
+    @inlinable public func blendMode(_ blendMode: BlendMode) -> some View { } { }
 
 }
 
@@ -22486,7 +20426,7 @@ extension View {
     /// list row item.
     ///
     /// In the example below, the `Flavor` enumeration provides content for list
-    /// items. The SwiftUI ``List`` builder iterates over the `Flavor`
+    /// items. The SwiftUI ~~List~~ builder iterates over the `Flavor`
     /// enumeration and extracts the raw value of each of its elements using the
     /// resulting text to create each list row item. After the list builder
     /// finishes, the `listRowBackground(_:)` modifier places the view you
@@ -22507,11 +20447,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// - Parameter view: The ``View`` to use as the background behind the list
+    /// - Parameter view: The ~~View~~ to use as the background behind the list
     ///   row view.
     ///
     /// - Returns: A list row view with `view` as its background view.
-    @inlinable public func listRowBackground<V>(_ view: V?) -> some View where V : View { }
+    @inlinable public func listRowBackground<V>(_ view: V?) -> some View where V : View { } { }
 
 }
 
@@ -22555,12 +20495,12 @@ extension View {
     ///     The default is `false`; if set to `true`, the alpha channel of the
     ///     image must be `1`.
     ///   - colorMode: One of the working color space and storage formats
-    ///     defined in ``ColorRenderingMode``. The default is
-    ///     ``ColorRenderingMode/nonLinear``.
+    ///     defined in ~~ColorRenderingMode~~. The default is
+    ///     ~~ColorRenderingMode/nonLinear~~.
     ///
     /// - Returns: A view that composites this view's contents into an offscreen
     ///   image before display.
-    public func drawingGroup(opaque: Bool = false, colorMode: ColorRenderingMode = .nonLinear) -> some View { }
+    public func drawingGroup(opaque: Bool = false, colorMode: ColorRenderingMode = .nonLinear) -> some View { } { }
 
 }
 
@@ -22577,9 +20517,9 @@ extension View {
     /// applying effects to this view.
     ///
     /// In the example below the `compositingGroup()` modifier separates the
-    /// application of effects into stages. It applies the ``View/opacity(_:)``
+    /// application of effects into stages. It applies the ~~View/opacity(_:)~~
     /// effect to the VStack before the `blur(radius:)` effect is applied to the
-    /// views inside the enclosed ``ZStack``. This limits the scope of the
+    /// views inside the enclosed ~~ZStack~~. This limits the scope of the
     /// opacity change to the outermost view.
     ///
     ///     VStack {
@@ -22601,7 +20541,7 @@ extension View {
     /// rendered.](SwiftUI-View-compositingGroup.png)
     ///
     /// - Returns: A view that wraps this view in a compositing group.
-    @inlinable public func compositingGroup() -> some View { }
+    @inlinable public func compositingGroup() -> some View { } { }
 
 }
 
@@ -22623,26 +20563,26 @@ extension View {
     /// development:
     ///  - "Mac"
     ///  - "Mac Catalyst"
-    @inlinable public func previewDevice(_ value: PreviewDevice?) -> some View { }
+    @inlinable public func previewDevice(_ value: PreviewDevice?) -> some View { } { }
 
 
     /// Overrides the size of the container for the preview.
     ///
-    /// The default value is ``PreviewLayout/device``.
-    @inlinable public func previewLayout(_ value: PreviewLayout) -> some View { }
+    /// The default value is ~~PreviewLayout/device~~.
+    @inlinable public func previewLayout(_ value: PreviewLayout) -> some View { } { }
 
 
     /// Provides a user visible name shown in the editor.
     ///
     /// The default value is `nil`.
-    @inlinable public func previewDisplayName(_ value: String?) -> some View { }
+    @inlinable public func previewDisplayName(_ value: String?) -> some View { } { }
 
 
     /// Declares a context for the preview.
     ///
     /// - Parameter value: The context for the preview; the default is `nil`.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    @inlinable public func previewContext<C>(_ value: C) -> some View where C : PreviewContext { }
+    @inlinable public func previewContext<C>(_ value: C) -> some View where C : PreviewContext { } { }
 
 }
 
@@ -22656,7 +20596,7 @@ extension View {
 	///   - value: The anchor you provide to transform closure.
 	///   - transform: A closure that takes an existing preference value and anchor value,
 	///   and can update the existing preference with the given value.
-    @inlinable public func anchorPreference<A, K>(key _: K.Type = K.self, value: Anchor<A>.Source, transform: @escaping (Anchor<A>) -> K.Value) -> some View where K : PreferenceKey { }
+    @inlinable public func anchorPreference<A, K>(key _: K.Type = K.self, value: Anchor<A>.Source, transform: @escaping (Anchor<A>) -> K.Value) -> some View where K : PreferenceKey { } { }
 
 }
 
@@ -22692,7 +20632,7 @@ extension View {
     ///
     /// - Returns: A view that clips this view to `shape`, using `style` to
     ///   define the shape's rasterization.
-    @inlinable public func clipShape<S>(_ shape: S, style: FillStyle = FillStyle()) -> some View where S : Shape { }
+    @inlinable public func clipShape<S>(_ shape: S, style: FillStyle = FillStyle()) -> some View where S : Shape { } { }
 
 
     /// Clips this view to its bounding rectangular frame.
@@ -22717,7 +20657,7 @@ extension View {
     ///   rectangle.
     ///
     /// - Returns: A view that clips this view to its bounding frame.
-    @inlinable public func clipped(antialiased: Bool = false) -> some View { }
+    @inlinable public func clipped(antialiased: Bool = false) -> some View { } { }
 
 
     /// Clips this view to its bounding frame, with the specified corner radius.
@@ -22744,7 +20684,7 @@ extension View {
     ///
     /// - Returns: A view that clips this view to its bounding frame with the
     ///   specified corner radius.
-    @inlinable public func cornerRadius(_ radius: CGFloat, antialiased: Bool = true) -> some View { }
+    @inlinable public func cornerRadius(_ radius: CGFloat, antialiased: Bool = true) -> some View { } { }
 
 }
 
@@ -22785,7 +20725,7 @@ extension View {
     ///     view.
     ///
     /// - Returns: A view that adds a shadow to this view.
-    @inlinable public func shadow(color: Color = Color(.sRGBLinear, white: 0, opacity: 0.33), radius: CGFloat, x: CGFloat = 0, y: CGFloat = 0) -> some View { }
+    @inlinable public func shadow(color: Color = Color(.sRGBLinear, white: 0, opacity: 0.33), radius: CGFloat, x: CGFloat = 0, y: CGFloat = 0) -> some View { } { }
 
 }
 
@@ -22795,7 +20735,7 @@ extension View {
     /// Sets the style for toggles within this view.
     ///
     /// To set a specific style for all toggle instances within a view, use the
-    /// ``View/toggleStyle(_:)`` modifier, as follows:
+    /// ~~View/toggleStyle(_:)~~ modifier, as follows:
     ///
     ///     VStack {
     ///         Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
@@ -22804,7 +20744,7 @@ extension View {
     ///     .toggleStyle(SwitchToggleStyle())
     ///
     /// - Parameter style: The style to set.
-    public func toggleStyle<S>(_ style: S) -> some View where S : ToggleStyle { }
+    public func toggleStyle<S>(_ style: S) -> some View where S : ToggleStyle { } { }
 
 }
 
@@ -22815,7 +20755,7 @@ extension View {
     ///
     /// Use `colorScheme(_:)` to set the color scheme for the view to which you
     /// apply it and any subviews. If you want to set the color scheme for all
-    /// views in the presentation, use ``View/preferredColorScheme(_:)``
+    /// views in the presentation, use ~~View/preferredColorScheme(_:)~~
     /// instead.
     ///
     /// - Parameter colorScheme: The color scheme for this view.
@@ -22825,7 +20765,7 @@ extension View {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "preferredColorScheme(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "preferredColorScheme(_:)")
     @available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "preferredColorScheme(_:)")
-    @inlinable public func colorScheme(_ colorScheme: ColorScheme) -> some View { }
+    @inlinable public func colorScheme(_ colorScheme: ColorScheme) -> some View { } { }
 
 
     /// Scales images within the view according to one of the relative sizes
@@ -22860,7 +20800,7 @@ extension View {
     /// - Parameter scale: One of the relative sizes provided by the image scale
     ///   enumeration.
     @available(macOS 11.0, *)
-    @inlinable public func imageScale(_ scale: Image.Scale) -> some View { }
+    @inlinable public func imageScale(_ scale: Image.Scale) -> some View { } { }
 
 
     /// Sets the default font for text in this view.
@@ -22872,9 +20812,9 @@ extension View {
     /// hierarchy as part of the environment, and remains in effect unless
     /// overridden at the level of an individual view or view container.
     ///
-    /// Here, the outermost ``VStack`` applies a 16-point system font as a
-    /// default font to views contained in that ``VStack``. Inside that stack,
-    /// the example applies a ``Font/largeTitle`` font to just the first text
+    /// Here, the outermost ~~VStack~~ applies a 16-point system font as a
+    /// default font to views contained in that ~~VStack~~. Inside that stack,
+    /// the example applies a ~~Font/largeTitle~~ font to just the first text
     /// view; this explicitly overrides the default. The remaining stack and the
     /// views contained with it continue to use the 16-point system font set by
     /// their containing view:
@@ -22896,7 +20836,7 @@ extension View {
     /// - Parameter font: The default font to use in this view.
     ///
     /// - Returns: A view with the default font set to the value you supply.
-    @inlinable public func font(_ font: Font?) -> some View { }
+    @inlinable public func font(_ font: Font?) -> some View { } { }
 
 }
 
@@ -22955,16 +20895,16 @@ extension View {
     ///
     /// - Returns: A view with fixed dimensions of `width` and `height`, for the
     ///   parameters that are non-`nil`.
-    @inlinable public func frame(width: CGFloat? = nil, height: CGFloat? = nil, alignment: Alignment = .center) -> some View { }
+    @inlinable public func frame(width: CGFloat? = nil, height: CGFloat? = nil, alignment: Alignment = .center) -> some View { } { }
 
 
     /// Positions this view within an invisible frame.
     ///
-    /// Use ``SwiftUI/View/frame(width:height:alignment:)`` or
-    /// ``SwiftUI/View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)``
+    /// Use ~~SwiftUI/View/frame(width:height:alignment:)~~ or
+    /// ~~SwiftUI/View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)~~
     /// instead.
     @available(*, deprecated, message: "Please pass one or more parameters.")
-    @inlinable public func frame() -> some View { }
+    @inlinable public func frame() -> some View { } { }
 
 }
 
@@ -23011,7 +20951,7 @@ extension View {
     ///
     /// - Returns: A view with flexible dimensions given by the call's non-`nil`
     ///   parameters.
-    @inlinable public func frame(minWidth: CGFloat? = nil, idealWidth: CGFloat? = nil, maxWidth: CGFloat? = nil, minHeight: CGFloat? = nil, idealHeight: CGFloat? = nil, maxHeight: CGFloat? = nil, alignment: Alignment = .center) -> some View { }
+    @inlinable public func frame(minWidth: CGFloat? = nil, idealWidth: CGFloat? = nil, maxWidth: CGFloat? = nil, minHeight: CGFloat? = nil, idealHeight: CGFloat? = nil, maxHeight: CGFloat? = nil, alignment: Alignment = .center) -> some View { } { }
 
 }
 
@@ -23023,7 +20963,7 @@ extension View {
     /// Sets the style for group boxes within this view.
     ///
     /// - Parameter style: The style to apply to boxes within this view.
-    public func groupBoxStyle<S>(_ style: S) -> some View where S : GroupBoxStyle { }
+    public func groupBoxStyle<S>(_ style: S) -> some View where S : GroupBoxStyle { } { }
 
 }
 
@@ -23033,7 +20973,7 @@ extension View {
     /// Sets the tab bar item associated with this view.
     ///
     /// Use `tabItem(_:)` to configure a view as a tab bar item in a
-    /// ``TabView``. The example below adds two views as tabs in a ``TabView``:
+    /// ~~TabView~~. The example below adds two views as tabs in a ~~TabView~~:
     ///
     ///     struct View1: View {
     ///         var body: some View {
@@ -23069,7 +21009,7 @@ extension View {
     /// view.](SwiftUI-View-tabItem.png)
     ///
     /// - Parameter label: The tab bar item to associate with this view.
-    public func tabItem<V>(@ViewBuilder _ label: () -> V) -> some View where V : View { }
+    public func tabItem<V>(@ViewBuilder _ label: () -> V) -> some View where V : View { } { }
 
 }
 
@@ -23094,7 +21034,7 @@ extension View {
     ///   - content: A closure returning the content of the popover.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func popover<Item, Content>(item: Binding<Item?>, attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: Edge = .top, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
+    public func popover<Item, Content>(item: Binding<Item?>, attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: Edge = .top, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { } { }
 
 
     /// Presents a popover when a given condition is true.
@@ -23108,7 +21048,7 @@ extension View {
     ///   - content: A closure returning the content of the popover.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func popover<Content>(isPresented: Binding<Bool>, attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: Edge = .top, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View { }
+    public func popover<Content>(isPresented: Binding<Bool>, attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: Edge = .top, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View { } { }
 
 }
 
@@ -23125,7 +21065,7 @@ extension View {
     ///     }
     ///     .labelStyle(MyCustomLabelStyle())
     ///
-    public func labelStyle<S>(_ style: S) -> some View where S : LabelStyle { }
+    public func labelStyle<S>(_ style: S) -> some View where S : LabelStyle { } { }
 
 }
 
@@ -23146,7 +21086,7 @@ extension View {
     ///
     /// - Returns: A view that triggers `action` when the pointer enters or
     ///   exits this view's frame.
-    @inlinable public func onHover(perform action: @escaping (Bool) -> Void) -> some View { }
+    @inlinable public func onHover(perform action: @escaping (Bool) -> Void) -> some View { } { }
 
 }
 
@@ -23163,7 +21103,7 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func hoverEffect(_ effect: HoverEffect = .automatic) -> some View { }
+    public func hoverEffect(_ effect: HoverEffect = .automatic) -> some View { } { }
 
 }
 
@@ -23175,7 +21115,7 @@ extension View {
     /// Hidden views are invisible and can't receive or respond to interactions.
     ///
     /// - Returns: A hidden view.
-    @inlinable public func hidden() -> some View { }
+    @inlinable public func hidden() -> some View { } { }
 
 }
 
@@ -23188,7 +21128,7 @@ extension View {
     /// specialized input needs, such as entering email addresses or phone
     /// numbers.
     ///
-    /// The example below presents a ``TextField`` to input an email address.
+    /// The example below presents a ~~TextField~~ to input an email address.
     /// Setting the text field's keyboard type to `.emailAddress` ensures the
     /// user can only enter correctly formatted email addresses.
     ///
@@ -23208,7 +21148,7 @@ extension View {
     @available(iOS 13.0, tvOS 13.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public func keyboardType(_ type: UIKeyboardType) -> some View { }
+    public func keyboardType(_ type: UIKeyboardType) -> some View { } { }
 
 }
 
@@ -23235,7 +21175,7 @@ extension View {
     @available(iOS 13.0, tvOS 13.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public func autocapitalization(_ style: UITextAutocapitalizationType) -> some View { }
+    public func autocapitalization(_ style: UITextAutocapitalizationType) -> some View { } { }
 
 }
 
@@ -23268,7 +21208,7 @@ extension View {
     ///     the data being displayed by the view.
     ///   - namespace: The namespace in which defines the `id`. New
     ///     namespaces are created by adding an `@Namespace()` variable
-    ///     to a ``View`` type and reading its value in the view's body
+    ///     to a ~~View~~ type and reading its value in the view's body
     ///     method.
     ///   - properties: The properties to copy from the source view.
     ///   - anchor: The relative location in the view used to produce
@@ -23279,7 +21219,7 @@ extension View {
     /// - Returns: A new view that defines an entry in the global
     ///   database of views synchronizing their geometry.
     ///
-    @inlinable public func matchedGeometryEffect<ID>(id: ID, in namespace: Namespace.ID, properties: MatchedGeometryProperties = .frame, anchor: UnitPoint = .center, isSource: Bool = true) -> some View where ID : Hashable { }
+    @inlinable public func matchedGeometryEffect<ID>(id: ID, in namespace: Namespace.ID, properties: MatchedGeometryProperties = .frame, anchor: UnitPoint = .center, isSource: Bool = true) -> some View where ID : Hashable { } { }
 
 }
 
@@ -23296,7 +21236,7 @@ extension View {
     ///
     /// - Returns: A view that triggers `action` when the value for `key`
     ///   changes.
-    @inlinable public func onPreferenceChange<K>(_ key: K.Type = K.self, perform action: @escaping (K.Value) -> Void) -> some View where K : PreferenceKey, K.Value : Equatable { }
+    @inlinable public func onPreferenceChange<K>(_ key: K.Type = K.self, perform action: @escaping (K.Value) -> Void) -> some View where K : PreferenceKey, K.Value : Equatable { } { }
 
 }
 
@@ -23305,7 +21245,7 @@ extension View {
 
     /// Sets the style for navigation views within this view.
     @available(watchOS 7.0, *)
-    public func navigationViewStyle<S>(_ style: S) -> some View where S : NavigationViewStyle { }
+    public func navigationViewStyle<S>(_ style: S) -> some View where S : NavigationViewStyle { } { }
 
 }
 
@@ -23313,7 +21253,7 @@ extension View {
 extension View {
 
     /// Sets the style for lists within this view.
-    public func listStyle<S>(_ style: S) -> some View where S : ListStyle { }
+    public func listStyle<S>(_ style: S) -> some View where S : ListStyle { } { }
 
 }
 
@@ -23321,7 +21261,7 @@ extension View {
 extension View {
 
     /// Applies a transformation to a preference value.
-    @inlinable public func transformPreference<K>(_ key: K.Type = K.self, _ callback: @escaping (inout K.Value) -> Void) -> some View where K : PreferenceKey { }
+    @inlinable public func transformPreference<K>(_ key: K.Type = K.self, _ callback: @escaping (inout K.Value) -> Void) -> some View where K : PreferenceKey { } { }
 
 }
 
@@ -23347,7 +21287,7 @@ extension View {
     ///
     /// - Returns: A view that conditionally flips its contents horizontally
     ///   when the layout direction is right-to-left.
-    @inlinable public func flipsForRightToLeftLayoutDirection(_ enabled: Bool) -> some View { }
+    @inlinable public func flipsForRightToLeftLayoutDirection(_ enabled: Bool) -> some View { } { }
 
 }
 
@@ -23373,7 +21313,7 @@ extension View {
     @available(iOS 13.0, tvOS 13.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    @inlinable public func textContentType(_ textContentType: UITextContentType?) -> some View { }
+    @inlinable public func textContentType(_ textContentType: UITextContentType?) -> some View { } { }
 
 }
 
@@ -23409,7 +21349,7 @@ extension View {
     ///   labels that are external/separate from the rest of the control's
     ///   interface like `Toggle`, but not to controls like a bordered button
     ///   where the label is inside the button's border.
-    public func labelsHidden() -> some View { }
+    public func labelsHidden() -> some View { } { }
 
 }
 
@@ -23433,7 +21373,7 @@ extension View {
     ///
     /// If multiple controls are associated with the same shortcut, the first
     /// one found is used.
-    public func keyboardShortcut(_ key: KeyEquivalent, modifiers: EventModifiers = .command) -> some View { }
+    public func keyboardShortcut(_ key: KeyEquivalent, modifiers: EventModifiers = .command) -> some View { } { }
 
 
     /// Assigns a keyboard shortcut to the modified control.
@@ -23451,7 +21391,7 @@ extension View {
     ///
     /// If multiple controls are associated with the same shortcut, the first
     /// one found is used.
-    public func keyboardShortcut(_ shortcut: KeyboardShortcut) -> some View { }
+    public func keyboardShortcut(_ shortcut: KeyboardShortcut) -> some View { } { }
 
 }
 
@@ -23463,22 +21403,22 @@ extension View {
     ///
     /// Use `navigationBarHidden(_:)` to hide the navigation bar. This modifier
     /// only takes effect when this view is inside of and visible within a
-    /// ``NavigationView``.
+    /// ~~NavigationView~~.
     ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   navigation bar.
     @available(macOS, unavailable)
-    public func navigationBarHidden(_ hidden: Bool) -> some View { }
+    public func navigationBarHidden(_ hidden: Bool) -> some View { } { }
 
 
     /// Sets the title in the navigation bar for this view.
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar.
     /// This modifier only takes effect when this view is inside of and visible
-    /// within a ``NavigationView``.
+    /// within a ~~NavigationView~~.
     ///
     /// The example below shows setting the title of the navigation bar using a
-    /// ``Text`` view:
+    /// ~~Text~~ view:
     ///
     ///     struct FlavorView: View {
     ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
@@ -23502,21 +21442,21 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "navigationTitle(_:)")
     @available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "navigationTitle(_:)")
-    public func navigationBarTitle(_ title: Text) -> some View { }
+    public func navigationBarTitle(_ title: Text) -> some View { } { }
 
 
     /// Sets the title of this view's navigation bar with a localized string.
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
-    /// using a ``LocalizedStringKey`` that will be used to search for a
+    /// using a ~~LocalizedStringKey~~ that will be used to search for a
     /// matching localized string in the application's localizable strings
     /// assets.
     ///
     /// This modifier only takes effect when this view is inside of and visible
-    /// within a ``NavigationView``.
+    /// within a ~~NavigationView~~.
     ///
     /// In the example below, a string constant is used to access a
-    /// ``LocalizedStringKey`` that will be resolved at run time to provide a
+    /// ~~LocalizedStringKey~~ that will be resolved at run time to provide a
     /// title for the navigation bar. If the localization key cannot be
     /// resolved, the text of the key name will be used as the title text.
     ///
@@ -23539,14 +21479,14 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "navigationTitle(_:)")
     @available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "navigationTitle(_:)")
-    public func navigationBarTitle(_ titleKey: LocalizedStringKey) -> some View { }
+    public func navigationBarTitle(_ titleKey: LocalizedStringKey) -> some View { } { }
 
 
     /// Sets the title of this view's navigation bar with a string.
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
     /// using a `String`. This modifier only takes effect when this view is
-    /// inside of and visible within a ``NavigationView``.
+    /// inside of and visible within a ~~NavigationView~~.
     ///
     /// In the example below, text for the navigation bar title is provided
     /// using a string:
@@ -23571,20 +21511,20 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "navigationTitle(_:)")
     @available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "navigationTitle(_:)")
-    public func navigationBarTitle<S>(_ title: S) -> some View where S : StringProtocol { }
+    public func navigationBarTitle<S>(_ title: S) -> some View where S : StringProtocol { } { }
 
 
     /// Sets the title and display mode in the navigation bar for this view.
     ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
-    /// from one of the ``NavigationBarItem/TitleDisplayMode`` styles. This
+    /// from one of the ~~NavigationBarItem/TitleDisplayMode~~ styles. This
     /// modifier only takes effect when this view is inside of and visible
-    /// within a ``NavigationView``.
+    /// within a ~~NavigationView~~.
     ///
     /// In the example below, text for the navigation bar title is provided
-    /// using a ``Text`` view. The navigation bar title's
-    /// ``NavigationBarItem/TitleDisplayMode`` is set to `.inline` which places
+    /// using a ~~Text~~ view. The navigation bar title's
+    /// ~~NavigationBarItem/TitleDisplayMode~~ is set to `.inline` which places
     /// the navigation bar title in the bounds of the navigation bar.
     ///
     ///     struct FlavorView: View {
@@ -23607,20 +21547,20 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func navigationBarTitle(_ title: Text, displayMode: NavigationBarItem.TitleDisplayMode) -> some View { }
+    public func navigationBarTitle(_ title: Text, displayMode: NavigationBarItem.TitleDisplayMode) -> some View { } { }
 
 
     /// Sets the title and display mode in the navigation bar for this view.
     ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
-    /// from one of the ``NavigationBarItem/TitleDisplayMode`` styles. This
+    /// from one of the ~~NavigationBarItem/TitleDisplayMode~~ styles. This
     /// modifier only takes effect when this view is inside of and visible
-    /// within a ``NavigationView``.
+    /// within a ~~NavigationView~~.
     ///
     /// In the example below, text for the navigation bar title is provided
     /// using a string. The navigation bar title's
-    /// ``NavigationBarItem/TitleDisplayMode`` is set to `.inline` which places
+    /// ~~NavigationBarItem/TitleDisplayMode~~ is set to `.inline` which places
     /// the navigation bar title in the bounds of the navigation bar.
     ///
     ///     struct FlavorView: View {
@@ -23648,7 +21588,7 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func navigationBarTitle(_ titleKey: LocalizedStringKey, displayMode: NavigationBarItem.TitleDisplayMode) -> some View { }
+    public func navigationBarTitle(_ titleKey: LocalizedStringKey, displayMode: NavigationBarItem.TitleDisplayMode) -> some View { } { }
 
 
     /// Sets the title and display mode in the navigation bar for this view.
@@ -23694,7 +21634,7 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func navigationBarTitle<S>(_ title: S, displayMode: NavigationBarItem.TitleDisplayMode) -> some View where S : StringProtocol { }
+    public func navigationBarTitle<S>(_ title: S, displayMode: NavigationBarItem.TitleDisplayMode) -> some View where S : StringProtocol { } { }
 
 
     /// Hides the navigation bar back button for the view.
@@ -23703,12 +21643,12 @@ extension View {
     /// view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
-    /// within a ``NavigationView``.
+    /// within a ~~NavigationView~~.
     ///
     /// - Parameter hidesBackButton: A Boolean value that indicates whether to
     ///   hide the back button.
     @available(macOS, unavailable)
-    public func navigationBarBackButtonHidden(_ hidesBackButton: Bool) -> some View { }
+    public func navigationBarBackButtonHidden(_ hidesBackButton: Bool) -> some View { } { }
 
 }
 
@@ -23723,7 +21663,7 @@ extension View {
     ///   - value: The focus value to export.
     /// - Returns: A modified representation of this view.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public func focusedValue<Value>(_ keyPath: WritableKeyPath<FocusedValues, Value?>, _ value: Value) -> some View { }
+    public func focusedValue<Value>(_ keyPath: WritableKeyPath<FocusedValues, Value?>, _ value: Value) -> some View { } { }
 
 }
 
@@ -23735,7 +21675,7 @@ extension View {
     /// Use `multilineTextAlignment(_:)` to select an alignment for all of the
     /// text in this view or view hierarchy.
     ///
-    /// In the example below, the contents of the ``Text`` view are center
+    /// In the example below, the contents of the ~~Text~~ view are center
     /// aligned. This also applies to the interpolated newline placed in the
     /// middle of the text since "multiple lines" refers to all of the text
     /// inside the view, regardless of any internal formatting or inclusion of
@@ -23751,9 +21691,9 @@ extension View {
     /// - Parameter alignment: A value that you use to left-, right-, or
     ///   center-align the text within a view.
     ///
-    /// - Returns: A view that aligns the lines of multiline ``Text`` instances
+    /// - Returns: A view that aligns the lines of multiline ~~Text~~ instances
     ///   it contains.
-    @inlinable public func multilineTextAlignment(_ alignment: TextAlignment) -> some View { }
+    @inlinable public func multilineTextAlignment(_ alignment: TextAlignment) -> some View { } { }
 
 
     /// Sets the truncation mode for lines of text that are too long to fit in
@@ -23781,7 +21721,7 @@ extension View {
     ///
     /// - Returns: A view that truncates text at different points in a line
     ///   depending on the mode you select.
-    @inlinable public func truncationMode(_ mode: Text.TruncationMode) -> some View { }
+    @inlinable public func truncationMode(_ mode: Text.TruncationMode) -> some View { } { }
 
 
     /// Sets the amount of space between lines of text in this view.
@@ -23789,7 +21729,7 @@ extension View {
     /// Use `lineSpacing(_:)` to set the amount of spacing from the bottom of
     /// one line to the top of the next for text elements in the view.
     ///
-    /// In the ``Text`` view in the example below, 10 points separate the bottom
+    /// In the ~~Text~~ view in the example below, 10 points separate the bottom
     /// of one line to the top of the next as the text field wraps inside this
     /// view. Applying `lineSpacing(_:)` to a view hierarchy applies the line
     /// spacing to all text elements contained in the view.
@@ -23803,7 +21743,7 @@ extension View {
     ///
     /// - Parameter lineSpacing: The amount of space between the bottom of one
     ///   line and the top of the next line in points.
-    @inlinable public func lineSpacing(_ lineSpacing: CGFloat) -> some View { }
+    @inlinable public func lineSpacing(_ lineSpacing: CGFloat) -> some View { } { }
 
 
     /// Sets whether text in this view can compress the space between characters
@@ -23838,7 +21778,7 @@ extension View {
     ///
     /// - Returns: A view that can compress the space between characters when
     ///   necessary to fit text in a line.
-    @inlinable public func allowsTightening(_ flag: Bool) -> some View { }
+    @inlinable public func allowsTightening(_ flag: Bool) -> some View { } { }
 
 
     /// Sets the maximum number of lines that text can occupy in this view.
@@ -23846,13 +21786,13 @@ extension View {
     /// Use `lineLimit(_:)` to cap the number of lines that an individual text
     /// element can display.
     ///
-    /// The line limit applies to all ``Text`` instances within a hierarchy. For
-    /// example, an ``HStack`` with multiple pieces of text longer than three
+    /// The line limit applies to all ~~Text~~ instances within a hierarchy. For
+    /// example, an ~~HStack~~ with multiple pieces of text longer than three
     /// lines caps each piece of text to three lines rather than capping the
-    /// total number of lines across the ``HStack``.
+    /// total number of lines across the ~~HStack~~.
     ///
     /// In the example below, the `lineLimit(_:)` operator limits the very long
-    /// line in the ``Text`` element to the 2 lines that fit within the view's
+    /// line in the ~~Text~~ element to the 2 lines that fit within the view's
     /// bounds:
     ///
     ///     Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator.")
@@ -23864,9 +21804,9 @@ extension View {
     ///
     /// - Parameter number: The line limit. If `nil`, no line limit applies.
     ///
-    /// - Returns: A view that limits the number of lines that ``Text``
+    /// - Returns: A view that limits the number of lines that ~~Text~~
     ///   instances display.
-    @inlinable public func lineLimit(_ number: Int?) -> some View { }
+    @inlinable public func lineLimit(_ number: Int?) -> some View { } { }
 
 
     /// Sets the minimum amount that text in this view scales down to fit in the
@@ -23877,8 +21817,8 @@ extension View {
     /// example, a label with a minimum scale factor of `0.5` draws its text in
     /// a font size as small as half of the actual font if needed.
     ///
-    /// In the example below, the ``HStack`` contains a ``Text`` label with a
-    /// line limit of `1`, that is next to a ``TextField``. To allow the label
+    /// In the example below, the ~~HStack~~ contains a ~~Text~~ label with a
+    /// line limit of `1`, that is next to a ~~TextField~~. To allow the label
     /// to fit into the available space, the `minimumScaleFactor(_:)` modifier
     /// shrinks the text as needed to fit into the available space.
     ///
@@ -23896,7 +21836,7 @@ extension View {
     ///   specify the minimum amount of text scaling that this view permits.
     ///
     /// - Returns: A view that limits the amount of text downscaling.
-    @inlinable public func minimumScaleFactor(_ factor: CGFloat) -> some View { }
+    @inlinable public func minimumScaleFactor(_ factor: CGFloat) -> some View { } { }
 
 
     /// Sets a transform for the case of the text contained in this view when
@@ -23905,11 +21845,11 @@ extension View {
     /// The default value is `nil`, displaying the text without any case
     /// changes.
     ///
-    /// - Parameter textCase: One of the ``Text/Case`` enumerations; the
+    /// - Parameter textCase: One of the ~~Text/Case~~ enumerations; the
     ///   default is `nil`.
     /// - Returns: A view that transforms the case of the text.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    @inlinable public func textCase(_ textCase: Text.Case?) -> some View { }
+    @inlinable public func textCase(_ textCase: Text.Case?) -> some View { } { }
 
 }
 
@@ -23918,7 +21858,7 @@ extension View {
 extension View {
 
     /// Adds an action to perform when this view recognizes a tap gesture.
-    public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View { }
+    public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View { } { }
 
 }
 
@@ -23931,11 +21871,11 @@ extension View {
     /// list items.
     ///
     /// In the example below, the `Flavor` enumeration provides content for list
-    /// items. The SwiftUI ``List`` builder iterates over the `Flavor`
+    /// items. The SwiftUI ~~List~~ builder iterates over the `Flavor`
     /// enumeration and extracts the raw value of each of its elements using the
     /// resulting text to create each list row item. After the list builder
     /// finishes, the `listRowInsets(_:)` modifier changes the edge insets of
-    /// each row of the list according to the ``EdgeInsets`` values you provide.
+    /// each row of the list according to the ~~EdgeInsets~~ values you provide.
     ///
     ///     struct ListRowInsets: View {
     ///         enum Flavor: String, CaseIterable, Identifiable {
@@ -23951,11 +21891,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// - Parameter insets: ``EdgeInsets`` to apply to the edges of the view.
+    /// - Parameter insets: ~~EdgeInsets~~ to apply to the edges of the view.
     ///
     /// - Returns: A view that uses the given edge insets when used as a list
     ///   cell.
-    @inlinable public func listRowInsets(_ insets: EdgeInsets?) -> some View { }
+    @inlinable public func listRowInsets(_ insets: EdgeInsets?) -> some View { } { }
 
 }
 
@@ -23966,130 +21906,22 @@ extension View {
     /// whose content is the specified views.
     ///
     /// - Parameter content: The views representing the content of the toolbar.
-    public func toolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content : View { }
+    public func toolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content : View { } { }
 
 
-    /// Populates the toolbar or navigation bar.
+    /// Populates the toolbar or navigation bar with the specified items.
     ///
-    /// - Parameters:
-    ///   - items: The items representing the content of the toolbar.
-    ///
-    /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
-    ///
-    /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         NavigationView {
-    ///             Text("Hello, World!")
-    ///                 .toolbar {
-    ///                     ToolbarItem(id: "bananas") {
-    ///                         Text("🍌🍌")
-    ///                     }
-    ///
-    ///                     ToolbarItem(id: "apples") {
-    ///                         Text("🍏🍏")
-    ///                     }
-    ///
-    ///                     ToolbarItem(id: "peaches") {
-    ///                         Text("🍑🍑")
-    ///                     }
-    ///                 }
-    ///         }
-    ///     }
-    /// }
-    /// ```
-    ///
-    /// ### Aligning a toolbar item
-    ///
-    /// Think of a toolbar in terms of spacers and items.
-    ///
-    /// For example, this is how a single toolbar item is aligned to the right:
-    ///
-    /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         NavigationView {
-    ///             Text("Hello, World!")
-    ///                 .toolbar {
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Spacer()
-    ///                     }
-    ///
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Text("🍌🍌")
-    ///                     }
-    ///                 }
-    ///         }
-    ///     }
-    /// }
-    /// ```
-    public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
+    /// - Parameter items: The items representing the content of the toolbar.
+    public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { } { }
 
 
-    /// Populates the toolbar or navigation bar.
+    /// Populates the toolbar or navigation bar with the specified items,
+    /// allowing for user customization.
     ///
     /// - Parameters:
     ///   - id: A unique identifier for this toolbar.
     ///   - content: The content representing the content of the toolbar.
-    ///
-    /// For example:
-    ///
-    /// ![toolbar Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-3.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         NavigationView {
-    ///             Text("Hello, World!")
-    ///                 .toolbar {
-    ///                     ToolbarItem(id: "bananas") {
-    ///                         Text("🍌🍌")
-    ///                     }
-    ///
-    ///                     ToolbarItem(id: "apples") {
-    ///                         Text("🍏🍏")
-    ///                     }
-    ///
-    ///                     ToolbarItem(id: "peaches") {
-    ///                         Text("🍑🍑")
-    ///                     }
-    ///                 }
-    ///         }
-    ///     }
-    /// }
-    /// ```
-    ///
-    /// ### Aligning a toolbar item
-    ///
-    /// Think of a toolbar in terms of spacers and items.
-    ///
-    /// For example, this is how a single toolbar item is aligned to the right:
-    ///
-    /// ![toolbar Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-4.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         NavigationView {
-    ///             Text("Hello, World!")
-    ///                 .toolbar {
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Spacer()
-    ///                     }
-    ///
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Text("🍌🍌")
-    ///                     }
-    ///                 }
-    ///         }
-    ///     }
-    /// }
-    /// ```
-    public func toolbar<Content>(id: String, @ToolbarContentBuilder content: () -> Content) -> some View where Content : CustomizableToolbarContent { }
+    public func toolbar<Content>(id: String, @ToolbarContentBuilder content: () -> Content) -> some View where Content : CustomizableToolbarContent { } { }
 
 }
 
@@ -24097,7 +21929,7 @@ extension View {
 extension View {
 
     /// Specifies whether to hide this view from system accessibility features.
-    public func accessibilityHidden(_ hidden: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityHidden(_ hidden: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a label to the view that describes its contents.
     ///
@@ -24105,21 +21937,21 @@ extension View {
     /// For example, you could use this method to label a button that plays music with the text "Play".
     /// Don't include text in the label that repeats information that users already have. For example,
     /// don't use the label "Play button" because a button already has a trait that identifies it as a button.
-    public func accessibilityLabel(_ label: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityLabel(_ label: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
     /// Use this method to describe the value represented by a view, but only if that's different than the
     /// view's label. For example, for a slider that you label as "Volume" using accessibilityLabel(),
     /// you can provide the current volume setting, like "60%", using accessibilityValue().
-    public func accessibilityValue(_ value: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityValue(_ value: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
     ///
     /// Provide a hint in the form of a brief phrase, like "Purchases the item" or
     /// "Downloads the attachment".
-    public func accessibilityHint(_ hint: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityHint(_ hint: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
@@ -24131,30 +21963,30 @@ extension View {
     ///   `accessibilityLabel()` modifier.
     ///
     /// - Parameter inputLabels: An array of Text elements to use as input labels.
-    public func accessibilityInputLabels(_ inputLabels: [Text]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityInputLabels(_ inputLabels: [Text]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds the given traits to the view.
-    public func accessibilityAddTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityAddTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Removes the given traits from this view.
-    public func accessibilityRemoveTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityRemoveTraits(_ traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Uses the specified string to identify the view.
     ///
     /// Use this value for testing. It isn't visible to the user.
-    public func accessibilityIdentifier(_ identifier: String) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityIdentifier(_ identifier: String) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Sets the sort priority order for this view's accessibility element,
     /// relative to other elements at the same level.
     ///
     /// Higher numbers are sorted first. The default sort priority is zero.
-    public func accessibilitySortPriority(_ sortPriority: Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilitySortPriority(_ sortPriority: Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Specifies the point where activations occur in the view.
-    public func accessibilityActivationPoint(_ activationPoint: CGPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityActivationPoint(_ activationPoint: CGPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Specifies the unit point where activations occur in the view.
-    public func accessibilityActivationPoint(_ activationPoint: UnitPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityActivationPoint(_ activationPoint: UnitPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -24166,7 +21998,7 @@ extension View {
     /// For example, you could use this method to label a button that plays music with the text "Play".
     /// Don't include text in the label that repeats information that users already have. For example,
     /// don't use the label "Play button" because a button already has a trait that identifies it as a button.
-    public func accessibilityLabel(_ labelKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityLabel(_ labelKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a label to the view that describes its contents.
     ///
@@ -24174,35 +22006,35 @@ extension View {
     /// For example, you could use this method to label a button that plays music with the text "Play".
     /// Don't include text in the label that repeats information that users already have. For example,
     /// don't use the label "Play button" because a button already has a trait that identifies it as a button.
-    public func accessibilityLabel<S>(_ label: S) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { }
+    public func accessibilityLabel<S>(_ label: S) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
     /// Use this method to describe the value represented by a view, but only if that's different than the
     /// view's label. For example, for a slider that you label as "Volume" using accessibilityLabel(),
     /// you can provide the current volume setting, like "60%", using accessibilityValue().
-    public func accessibilityValue(_ valueKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityValue(_ valueKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
     /// Use this method to describe the value represented by a view, but only if that's different than the
     /// view's label. For example, for a slider that you label as "Volume" using accessibilityLabel(),
     /// you can provide the current volume setting, like "60%", using accessibilityValue().
-    public func accessibilityValue<S>(_ value: S) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { }
+    public func accessibilityValue<S>(_ value: S) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
     ///
     /// Provide a hint in the form of a brief phrase, like "Purchases the item" or
     /// "Downloads the attachment".
-    public func accessibilityHint(_ hintKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityHint(_ hintKey: LocalizedStringKey) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
     ///
     /// Provide a hint in the form of a brief phrase, like "Purchases the item" or
     /// "Downloads the attachment".
-    public func accessibilityHint<S>(_ hint: S) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { }
+    public func accessibilityHint<S>(_ hint: S) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
@@ -24212,7 +22044,7 @@ extension View {
     /// > Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
-    public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
@@ -24222,7 +22054,7 @@ extension View {
     /// > Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
-    public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { }
+    public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { } { }
 }
 
 extension View {
@@ -24232,7 +22064,7 @@ extension View {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityHidden(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityHidden(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityHidden(_:)")
-    public func accessibility(hidden: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(hidden: Bool) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a label to the view that describes its contents.
     ///
@@ -24244,7 +22076,7 @@ extension View {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityLabel(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityLabel(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityLabel(_:)")
-    public func accessibility(label: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(label: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds a textual description of the value that the view contains.
     ///
@@ -24255,7 +22087,7 @@ extension View {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityValue(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityValue(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityValue(_:)")
-    public func accessibility(value: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(value: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Communicates to the user what happens after performing the view's
     /// action.
@@ -24266,7 +22098,7 @@ extension View {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityHint(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityHint(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityHint(_:)")
-    public func accessibility(hint: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(hint: Text) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Sets alternate input labels with which users identify a view.
     ///
@@ -24275,28 +22107,28 @@ extension View {
     ///
     /// > Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
-    ///   ``accessibility(label:)`` modifier.
+    ///   ~~accessibility(label:)~~ modifier.
     ///
     /// - Parameter inputLabels: An array of Text elements to use as input labels.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityInputLabels(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityInputLabels(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityInputLabels(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityInputLabels(_:)")
-    public func accessibility(inputLabels: [Text]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(inputLabels: [Text]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Adds the given traits to the view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityAddTraits(_:)")
-    public func accessibility(addTraits traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(addTraits traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Removes the given traits from this view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityRemoveTraits(_:)")
-    public func accessibility(removeTraits traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(removeTraits traits: AccessibilityTraits) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Uses the specified string to identify the view.
     ///
@@ -24305,7 +22137,7 @@ extension View {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityIdentifier(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityIdentifier(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityIdentifier(_:)")
-    public func accessibility(identifier: String) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(identifier: String) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Sets a selection identifier for this view's accessibility element.
     ///
@@ -24315,7 +22147,7 @@ extension View {
     @available(macOS, deprecated, introduced: 10.15)
     @available(tvOS, deprecated, introduced: 13.0)
     @available(watchOS, deprecated, introduced: 6)
-    public func accessibility(selectionIdentifier: AnyHashable) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(selectionIdentifier: AnyHashable) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Sets the sort priority order for this view's accessibility element,
     /// relative to other elements at the same level.
@@ -24325,21 +22157,21 @@ extension View {
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilitySortPriority(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilitySortPriority(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilitySortPriority(_:)")
-    public func accessibility(sortPriority: Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(sortPriority: Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Specifies the point where activations occur in the view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
-    public func accessibility(activationPoint: CGPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(activationPoint: CGPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 
     /// Specifies the unit point where activations occur in the view.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
     @available(watchOS, introduced: 6, deprecated: 100000.0, renamed: "accessibilityActivationPoint(_:)")
-    public func accessibility(activationPoint: UnitPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibility(activationPoint: UnitPoint) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -24349,7 +22181,7 @@ extension View {
     ///
     /// When the proxy value specified by the `id` parameter changes, the
     /// identity of the view — for example, its state — is reset.
-    @inlinable public func id<ID>(_ id: ID) -> some View where ID : Hashable { }
+    @inlinable public func id<ID>(_ id: ID) -> some View where ID : Hashable { } { }
 
 }
 
@@ -24358,12 +22190,12 @@ extension View {
 
     /// Uses the specified preference value from the view to produce another
     /// view as an overlay atop the first view.
-    @inlinable public func overlayPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
+    @inlinable public func overlayPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { } { }
 
 
     /// Uses the specified preference value from the view to produce another
     /// view as a background to the first view.
-    @inlinable public func backgroundPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
+    @inlinable public func backgroundPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { } { }
 
 }
 
@@ -24408,7 +22240,7 @@ extension View {
     ///   - newValue: The new value that failed the comparison check.
     ///
     /// - Returns: A view that fires an action when the specified value changes.
-    @inlinable public func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some View where V : Equatable { }
+    @inlinable public func onChange<V>(of value: V, perform action: @escaping (V) -> Void) -> some View where V : Equatable { } { }
 
 }
 
@@ -24424,7 +22256,7 @@ extension View {
     ///         .progressViewStyle(CircularProgressViewStyle())
     ///
     /// - Parameter style: The progress view style to use for this view.
-    public func progressViewStyle<S>(_ style: S) -> some View where S : ProgressViewStyle { }
+    public func progressViewStyle<S>(_ style: S) -> some View where S : ProgressViewStyle { } { }
 
 }
 
@@ -24449,7 +22281,7 @@ extension View {
     ///     has succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileMover(isPresented: Binding<Bool>, file: URL?, onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View { }
+    public func fileMover(isPresented: Binding<Bool>, file: URL?, onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View { } { }
 
 
     /// Presents a system interface for allowing the user to move a collection
@@ -24468,7 +22300,7 @@ extension View {
     ///     has succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileMover<C>(isPresented: Binding<Bool>, files: C, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View where C : Collection, C.Element == URL { }
+    public func fileMover<C>(isPresented: Binding<Bool>, files: C, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View where C : Collection, C.Element == URL { } { }
 
 }
 
@@ -24484,7 +22316,7 @@ extension View {
     ///
     /// - Parameter tint: The tint effect to use, or nil to not override the
     ///   inherited tint.
-    @inlinable public func listItemTint(_ tint: ListItemTint?) -> some View { }
+    @inlinable public func listItemTint(_ tint: ListItemTint?) -> some View { } { }
 
 
     /// Sets a fixed tint color associated with specific content in a list.
@@ -24499,7 +22331,7 @@ extension View {
     ///
     /// - Parameter color: The color to use to tint the content, or nil to not
     ///   override the inherited tint.
-    @inlinable public func listItemTint(_ tint: Color?) -> some View { }
+    @inlinable public func listItemTint(_ tint: Color?) -> some View { } { }
 
 }
 
@@ -24522,7 +22354,7 @@ extension View {
     ///   - namespace: The namespace to use to organize linked accessibility
     ///     elements. All elements marked with `accessibilityLink` in this
     ///     namespace and with the specified `id` will be linked together.
-    public func accessibilityLinkedGroup<ID>(id: ID, in namespace: Namespace.ID) -> some View where ID : Hashable { }
+    public func accessibilityLinkedGroup<ID>(id: ID, in namespace: Namespace.ID) -> some View where ID : Hashable { } { }
 
 
     /// Pairs two views, where one is the content and one is the label, for accessibility purposes.
@@ -24543,7 +22375,7 @@ extension View {
     ///   - namespace: The namespace used to organize label and content. Label
     ///     and content under the same namespace with matching identifiers will
     ///     be paired together.
-    public func accessibilityLabeledPair<ID>(role: AccessibilityLabeledPairRole, id: ID, in namespace: Namespace.ID) -> some View where ID : Hashable { }
+    public func accessibilityLabeledPair<ID>(role: AccessibilityLabeledPairRole, id: ID, in namespace: Namespace.ID) -> some View where ID : Hashable { } { }
 
 }
 
@@ -24571,13 +22403,13 @@ extension View {
     ///   - angle: The angle at which to rotate the view.
     ///   - axis: The `x`, `y` and `z` elements that specify the axis of
     ///     rotation.
-    ///   - anchor: The location with a default of ``UnitPoint/center`` that
+    ///   - anchor: The location with a default of ~~UnitPoint/center~~ that
     ///     defines a point in 3D space about which the rotation is anchored.
     ///   - anchorZ: The location with a default of `0` that defines a point in
     ///     3D space about which the rotation is anchored.
     ///   - perspective: The relative vanishing point with a default of `1` for
     ///     this rotation.
-    @inlinable public func rotation3DEffect(_ angle: Angle, axis: (x: CGFloat, y: CGFloat, z: CGFloat), anchor: UnitPoint = .center, anchorZ: CGFloat = 0, perspective: CGFloat = 1) -> some View { }
+    @inlinable public func rotation3DEffect(_ angle: Angle, axis: (x: CGFloat, y: CGFloat, z: CGFloat), anchor: UnitPoint = .center, anchorZ: CGFloat = 0, perspective: CGFloat = 1) -> some View { } { }
 
 }
 
@@ -24586,7 +22418,7 @@ extension View {
 
     /// Transforms the environment value of the specified key path with the
     /// given function.
-    @inlinable public func transformEnvironment<V>(_ keyPath: WritableKeyPath<EnvironmentValues, V>, transform: @escaping (inout V) -> Void) -> some View { }
+    @inlinable public func transformEnvironment<V>(_ keyPath: WritableKeyPath<EnvironmentValues, V>, transform: @escaping (inout V) -> Void) -> some View { } { }
 
 }
 
@@ -24594,7 +22426,7 @@ extension View {
 extension View {
 
     /// Adds an accessibility scroll action to the view.
-    public func accessibilityScrollAction(_ handler: @escaping (Edge) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityScrollAction(_ handler: @escaping (Edge) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -24634,21 +22466,21 @@ extension View {
     ///         }
     ///     }
     ///
-    /// Here, the ``VStack`` in the `ContentView` named “stack” is composed of a
-    /// red frame with a custom ``Circle`` view ``View/overlay(_:alignment:)``
+    /// Here, the ~~VStack~~ in the `ContentView` named “stack” is composed of a
+    /// red frame with a custom ~~Circle~~ view ~~View/overlay(_:alignment:)~~
     /// at its center.
     ///
-    /// The `circle` view has an attached ``DragGesture`` that targets the
+    /// The `circle` view has an attached ~~DragGesture~~ that targets the
     /// enclosing VStack's coordinate space. As the gesture recognizer's closure
     /// registers events inside `circle` it stores them in the shared `location`
-    /// state variable and the ``VStack`` displays the coordinates in a ``Text``
+    /// state variable and the ~~VStack~~ displays the coordinates in a ~~Text~~
     /// view.
     ///
     /// ![A screenshot showing an example of finding a named view and tracking
     /// relative locations in that view.](SwiftUI-View-coordinateSpace.png)
     ///
     /// - Parameter name: A name used to identify this coordinate space.
-    @inlinable public func coordinateSpace<T>(name: T) -> some View where T : Hashable { }
+    @inlinable public func coordinateSpace<T>(name: T) -> some View where T : Hashable { } { }
 
 }
 
@@ -24663,7 +22495,7 @@ extension View {
     ///     with the even-odd winding number rule.
     ///
     /// - Returns: A view that uses the given shape for hit testing.
-    @inlinable public func contentShape<S>(_ shape: S, eoFill: Bool = false) -> some View where S : Shape { }
+    @inlinable public func contentShape<S>(_ shape: S, eoFill: Bool = false) -> some View where S : Shape { } { }
 
 }
 
@@ -24671,7 +22503,7 @@ extension View {
 extension View {
 
     /// Sets a value for the given preference.
-    @inlinable public func preference<K>(key: K.Type = K.self, value: K.Value) -> some View where K : PreferenceKey { }
+    @inlinable public func preference<K>(key: K.Type = K.self, value: K.Value) -> some View where K : PreferenceKey { } { }
 
 }
 
@@ -24690,7 +22522,7 @@ extension View {
     ///
     /// - Returns: A view that wraps this view and applies `transformation` to
     ///   all transactions used within the view.
-    @inlinable public func transaction(_ transform: @escaping (inout Transaction) -> Void) -> some View { }
+    @inlinable public func transaction(_ transform: @escaping (inout Transaction) -> Void) -> some View { } { }
 
 
     /// Applies the given animation to all animatable values within this view.
@@ -24704,7 +22536,7 @@ extension View {
     ///
     /// - Returns: A view that wraps this view and applies `animation` to all
     ///   animatable values used within the view.
-    @inlinable public func animation(_ animation: Animation?) -> some View { }
+    @inlinable public func animation(_ animation: Animation?) -> some View { } { }
 
 }
 
@@ -24712,7 +22544,7 @@ extension View {
 extension View {
 
     /// Wraps this view as a new accessibility element.
-    public func accessibilityElement(children: AccessibilityChildBehavior = .ignore) -> some View { }
+    public func accessibilityElement(children: AccessibilityChildBehavior = .ignore) -> some View { } { }
 
 }
 
@@ -24733,7 +22565,7 @@ extension View {
     ///     to `true`.
     ///   - update: A function that modifies the passed-in activity for
     ///     advertisement.
-    public func userActivity(_ activityType: String, isActive: Bool = true, _ update: @escaping (NSUserActivity) -> ()) -> some View { }
+    public func userActivity(_ activityType: String, isActive: Bool = true, _ update: @escaping (NSUserActivity) -> ()) -> some View { } { }
 
 
     /// Advertises a user activity type.
@@ -24751,7 +22583,7 @@ extension View {
     ///     `guard element = element else { return }`.
     ///    - update: A function that modifies the passed-in activity for
     ///    advertisement.
-    public func userActivity<P>(_ activityType: String, element: P?, _ update: @escaping (P, NSUserActivity) -> ()) -> some View { }
+    public func userActivity<P>(_ activityType: String, element: P?, _ update: @escaping (P, NSUserActivity) -> ()) -> some View { } { }
 
 
     /// Registers a handler to invoke when the view receives the specified
@@ -24763,7 +22595,7 @@ extension View {
     ///     <doc://com.apple.documentation/documentation/Foundation/NSUserActivity>
     ///     object as its parameter
     ///     when delivering the activity to the scene or window the view is in.
-    public func onContinueUserActivity(_ activityType: String, perform action: @escaping (NSUserActivity) -> ()) -> some View { }
+    public func onContinueUserActivity(_ activityType: String, perform action: @escaping (NSUserActivity) -> ()) -> some View { } { }
 
 
     /// Registers a handler to invoke when the view receives a url for the
@@ -24777,7 +22609,7 @@ extension View {
     ///  <doc://com.apple.documentation/documentation/Foundation/URL>
     ///  object as its parameter when delivering the URL to the scene or window
     ///  the view is in.
-    public func onOpenURL(perform action: @escaping (URL) -> ()) -> some View { }
+    public func onOpenURL(perform action: @escaping (URL) -> ()) -> some View { } { }
 
 }
 
@@ -24810,7 +22642,7 @@ extension View {
     /// the Scene this View is in allows handling the External Event.
     /// The empty Set and empty Strings never match. The String value
     /// "*" always matches.
-    public func handlesExternalEvents(preferring: Set<String>, allowing: Set<String>) -> some View { }
+    public func handlesExternalEvents(preferring: Set<String>, allowing: Set<String>) -> some View { } { }
 
 }
 
@@ -24843,7 +22675,7 @@ extension View {
     ///     has succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileExporter<D>(isPresented: Binding<Bool>, document: D?, contentType: UTType, defaultFilename: String? = nil, onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View where D : FileDocument { }
+    public func fileExporter<D>(isPresented: Binding<Bool>, document: D?, contentType: UTType, defaultFilename: String? = nil, onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View where D : FileDocument { } { }
 
 
     /// Presents a system interface for allowing the user to export a collection
@@ -24867,7 +22699,7 @@ extension View {
     ///     has succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileExporter<C>(isPresented: Binding<Bool>, documents: C, contentType: UTType, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View where C : Collection, C.Element : FileDocument { }
+    public func fileExporter<C>(isPresented: Binding<Bool>, documents: C, contentType: UTType, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View where C : Collection, C.Element : FileDocument { } { }
 
 
     /// Presents a system interface for allowing the user to export an in-memory
@@ -24894,7 +22726,7 @@ extension View {
     ///     has succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileExporter<D>(isPresented: Binding<Bool>, document: D?, contentType: UTType, defaultFilename: String? = nil, onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View where D : ReferenceFileDocument { }
+    public func fileExporter<D>(isPresented: Binding<Bool>, document: D?, contentType: UTType, defaultFilename: String? = nil, onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View where D : ReferenceFileDocument { } { }
 
 
     /// Presents a system interface for allowing the user to export a collection
@@ -24918,7 +22750,7 @@ extension View {
     ///     has succeeded or failed.
     ///   - result: A `Result` indicating whether the operation succeeded or
     ///     failed.
-    public func fileExporter<C>(isPresented: Binding<Bool>, documents: C, contentType: UTType, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View where C : Collection, C.Element : ReferenceFileDocument { }
+    public func fileExporter<C>(isPresented: Binding<Bool>, documents: C, contentType: UTType, onCompletion: @escaping (Result<[URL], Error>) -> Void) -> some View where C : Collection, C.Element : ReferenceFileDocument { } { }
 
 }
 
@@ -24946,9 +22778,9 @@ extension View {
     ///             .border(Color.gray)
     ///     }
     ///
-    /// In the example above, the first ``Text`` element has the default
+    /// In the example above, the first ~~Text~~ element has the default
     /// priority `0` which causes its view to shrink dramatically due to the
-    /// higher priority of the second ``Text`` element, even though all of their
+    /// higher priority of the second ~~Text~~ element, even though all of their
     /// other attributes (font, font size and character count) are the same.
     ///
     /// ![A screenshot showing twoText views different layout
@@ -24960,7 +22792,7 @@ extension View {
     ///
     /// - Parameter value: The priority by which a parent layout apportions
     ///   space to the child.
-    @inlinable public func layoutPriority(_ value: Double) -> some View { }
+    @inlinable public func layoutPriority(_ value: Double) -> some View { } { }
 
 }
 
@@ -24968,7 +22800,7 @@ extension View {
 extension View {
 
     /// Sets the style for text fields within this view.
-    public func textFieldStyle<S>(_ style: S) -> some View where S : TextFieldStyle { }
+    public func textFieldStyle<S>(_ style: S) -> some View where S : TextFieldStyle { } { }
 
 }
 
@@ -24992,7 +22824,7 @@ extension View {
     ///
     /// - Parameter mask: The view whose alpha the rendering system applies to
     ///   the specified view.
-    @inlinable public func mask<Mask>(_ mask: Mask) -> some View where Mask : View { }
+    @inlinable public func mask<Mask>(_ mask: Mask) -> some View where Mask : View { } { }
 
 }
 
@@ -25012,7 +22844,7 @@ extension View {
     /// and Mission Control.
     ///
     /// - Parameter title: The title to display.
-    public func navigationTitle(_ title: Text) -> some View { }
+    public func navigationTitle(_ title: Text) -> some View { } { }
 
 
     /// Configures the view's title for purposes of navigation,
@@ -25029,7 +22861,7 @@ extension View {
     /// and Mission Control.
     ///
     /// - Parameter titleKey: The key to a localized string to display.
-    public func navigationTitle(_ titleKey: LocalizedStringKey) -> some View { }
+    public func navigationTitle(_ titleKey: LocalizedStringKey) -> some View { } { }
 
 
     /// Configures the view's title for purposes of navigation, using a string.
@@ -25045,7 +22877,7 @@ extension View {
     /// and Mission Control.
     ///
     /// - Parameter title: The string to display.
-    public func navigationTitle<S>(_ title: S) -> some View where S : StringProtocol { }
+    public func navigationTitle<S>(_ title: S) -> some View where S : StringProtocol { } { }
 
 }
 
@@ -25058,7 +22890,7 @@ extension View {
     /// Configures the title display mode for this view.
     ///
     /// - Parameter displayMode: The style to use for displaying the title.
-    public func navigationBarTitleDisplayMode(_ displayMode: NavigationBarItem.TitleDisplayMode) -> some View { }
+    public func navigationBarTitleDisplayMode(_ displayMode: NavigationBarItem.TitleDisplayMode) -> some View { } { }
 
 }
 
@@ -25066,7 +22898,7 @@ extension View {
 extension View {
 
     /// Adds an accessibility adjustable action to the view.
-    public func accessibilityAdjustableAction(_ handler: @escaping (AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
+    public func accessibilityAdjustableAction(_ handler: @escaping (AccessibilityAdjustmentDirection) -> Void) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -25081,7 +22913,7 @@ extension View {
     ///
     /// - Parameter store: The user defaults to use as the default
     ///   store for `AppStorage`.
-    public func defaultAppStorage(_ store: UserDefaults) -> some View { }
+    public func defaultAppStorage(_ store: UserDefaults) -> some View { } { }
 
 }
 
@@ -25111,7 +22943,7 @@ extension View {
     ///
     /// - Returns: A view that provides a drop destination for a drag
     ///   operation of the specified types.
-    public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
+    public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { } { }
 
 
     /// Defines the destination of a drag and drop operation that handles the
@@ -25137,7 +22969,7 @@ extension View {
     ///
     /// - Returns: A view that provides a drop destination for a drag
     ///   operation of the specified types.
-    public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
+    public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { } { }
 
 
     /// Defines the destination of a drag and drop operation using behavior
@@ -25151,13 +22983,13 @@ extension View {
     ///     If the drag and drop operation doesn't contain any of the supported
     ///     types, then this drop destination doesn't activate and `isTargeted`
     ///     doesn't update.
-    ///   - delegate: A type that conforms to the ``DropDelegate`` protocol. You
+    ///   - delegate: A type that conforms to the ~~DropDelegate~~ protocol. You
     ///     have comprehensive control over drop behavior when you use a
     ///     delegate.
     ///
     /// - Returns: A view that provides a drop destination for a drag
     ///   operation of the specified types.
-    public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
+    public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { } { }
 
 }
 
@@ -25189,7 +23021,7 @@ extension View {
     ///   operation of the specified types.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
+    public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { } { }
 
 
     /// Defines the destination for a drag and drop operation with the same size
@@ -25216,7 +23048,7 @@ extension View {
     ///   operation of the specified types.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
+    public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { } { }
 
 
     /// Defines the destination for a drag and drop operation with the same size
@@ -25236,7 +23068,7 @@ extension View {
     ///   operation of the specified types.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func onDrop(of supportedTypes: [String], delegate: DropDelegate) -> some View { }
+    public func onDrop(of supportedTypes: [String], delegate: DropDelegate) -> some View { } { }
 
 }
 
@@ -25261,8 +23093,8 @@ extension View {
     /// ![A screenshot showing text rotated 30 degrees around the axis pointing
     /// out of the screen.](SwiftUI-View-projectionEffect.png)
     ///
-    /// - Parameter transform: A ``ProjectionTransform`` to apply to the view.
-    @inlinable public func projectionEffect(_ transform: ProjectionTransform) -> some View { }
+    /// - Parameter transform: A ~~ProjectionTransform~~ to apply to the view.
+    @inlinable public func projectionEffect(_ transform: ProjectionTransform) -> some View { } { }
 
 }
 
@@ -25284,7 +23116,7 @@ extension View {
     ///     .help("Compose a new message")
     ///
     /// - Parameter textKey: The key for the localized text to use as help.
-    public func help(_ textKey: LocalizedStringKey) -> some View { }
+    public func help(_ textKey: LocalizedStringKey) -> some View { } { }
 
 
     /// Adds help text to a view using a text view that you provide.
@@ -25300,7 +23132,7 @@ extension View {
     ///         .help(Text("Adjust the opacity of the selected \(selectedShape.name)"))
     ///
     /// - Parameter text: The Text view to use as help.
-    public func help(_ text: Text) -> some View { }
+    public func help(_ text: Text) -> some View { } { }
 
 
     /// Adds help text to a view using a string that you provide.
@@ -25317,7 +23149,7 @@ extension View {
     ///         .help(pointOfInterest.name)
     ///
     /// - Parameter text: The text to use as help.
-    public func help<S>(_ text: S) -> some View where S : StringProtocol { }
+    public func help<S>(_ text: S) -> some View where S : StringProtocol { } { }
 
 }
 
@@ -25335,7 +23167,7 @@ extension View {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public func statusBar(hidden: Bool) -> some View { }
+    public func statusBar(hidden: Bool) -> some View { } { }
 
 }
 
@@ -25348,7 +23180,7 @@ extension View {
     ///
     /// - Parameter object: the object to store and make available to
     ///     the view's subhiearchy.
-    @inlinable public func environmentObject<T>(_ object: T) -> some View where T : ObservableObject { }
+    @inlinable public func environmentObject<T>(_ object: T) -> some View where T : ObservableObject { } { }
 
 }
 
@@ -25364,7 +23196,7 @@ extension View {
     ///     If the identity changes, the system dismisses a
     ///     currently-presented alert and replace it by a new alert.
     ///   - content: A closure returning the alert to present.
-    public func alert<Item>(item: Binding<Item?>, content: (Item) -> Alert) -> some View where Item : Identifiable { }
+    public func alert<Item>(item: Binding<Item?>, content: (Item) -> Alert) -> some View where Item : Identifiable { } { }
 
 
     /// Presents an alert to the user.
@@ -25372,7 +23204,7 @@ extension View {
     /// - Parameters:
     ///   - isPresented: A binding to whether the alert should be shown.
     ///   - content: A closure returning the alert to present.
-    public func alert(isPresented: Binding<Bool>, content: () -> Alert) -> some View { }
+    public func alert(isPresented: Binding<Bool>, content: () -> Alert) -> some View { } { }
 
 }
 
@@ -25384,11 +23216,11 @@ extension View {
     /// to the leading and trailing edges of the navigation bar for this view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
-    /// within a ``NavigationView``.
+    /// within a ~~NavigationView~~.
     ///
     /// On iOS 14 and later, the leading item supplements a visible back button,
     /// instead of replacing it, by default. To hide the back button, use
-    /// ``View/navigationBarBackButtonHidden(_:)``.
+    /// ~~View/navigationBarBackButtonHidden(_:)~~.
     ///
     /// The example below adds buttons to the leading and trailing edges of
     /// the button area of the navigation view:
@@ -25429,7 +23261,7 @@ extension View {
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public func navigationBarItems<L, T>(leading: L, trailing: T) -> some View where L : View, T : View { }
+    public func navigationBarItems<L, T>(leading: L, trailing: T) -> some View where L : View, T : View { } { }
 
 
     /// Sets the navigation bar items for this view.
@@ -25438,11 +23270,11 @@ extension View {
     /// leading edge of the navigation bar for this view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
-    /// within a ``NavigationView``.
+    /// within a ~~NavigationView~~.
     ///
     /// On iOS 14 and later, the leading item supplements a visible back button,
     /// instead of replacing it, by default. To hide the back button, use
-    /// ``View/navigationBarBackButtonHidden(_:)``.
+    /// ~~View/navigationBarBackButtonHidden(_:)~~.
     ///
     /// The example below adds buttons to the leading edge of the button area
     /// of the navigation view:
@@ -25477,7 +23309,7 @@ extension View {
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public func navigationBarItems<L>(leading: L) -> some View where L : View { }
+    public func navigationBarItems<L>(leading: L) -> some View where L : View { } { }
 
 
     /// Configures the navigation bar items for this view.
@@ -25485,7 +23317,7 @@ extension View {
     /// Use `navigationBarItems(trailing:)` to add navigation bar items to the
     /// trailing edge of the navigation bar for this view. This modifier only
     /// takes effect when this view is inside of and visible within a
-    /// ``NavigationView``.
+    /// ~~NavigationView~~.
     ///
     /// The example below adds buttons to the trailing edge of the button area
     /// of the navigation view:
@@ -25519,13 +23351,13 @@ extension View {
     @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public func navigationBarItems<T>(trailing: T) -> some View where T : View { }
+    public func navigationBarItems<T>(trailing: T) -> some View where T : View { } { }
 
 }
 
 /// A custom parameter attribute that constructs views from closures.
 ///
-/// You typically use ``ViewBuilder`` as a parameter attribute for child
+/// You typically use ~~ViewBuilder~~ as a parameter attribute for child
 /// view-producing closure parameters, allowing those closures to provide
 /// multiple child views. For example, the following `contextMenu` function
 /// accepts a closure that produces one or more views via the view builder.
@@ -25550,13 +23382,13 @@ extension View {
 @_functionBuilder public struct ViewBuilder {
 
     /// Builds an empty view from a block containing no statements.
-    public static func buildBlock() -> EmptyView { }
+    public static func buildBlock() -> EmptyView { } { }
 
     /// Passes a single view written as a child view through unmodified.
     ///
     /// An example of a single view written as a child view is
     /// `{ Text("Hello") }`.
-    public static func buildBlock<Content>(_ content: Content) -> Content where Content : View { }
+    public static func buildBlock<Content>(_ content: Content) -> Content where Content : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -25565,15 +23397,15 @@ extension ViewBuilder {
     /// Provides support for “if” statements in multi-statement closures,
     /// producing an optional view that is visible only when the condition
     /// evaluates to `true`.
-    public static func buildIf<Content>(_ content: Content?) -> Content? where Content : View { }
+    public static func buildIf<Content>(_ content: Content?) -> Content? where Content : View { } { }
 
     /// Provides support for "if" statements in multi-statement closures,
     /// producing conditional content for the "then" branch.
-    public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
+    public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { } { }
 
     /// Provides support for "if-else" statements in multi-statement closures,
     /// producing conditional content for the "else" branch.
-    public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
+    public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { } { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -25582,70 +23414,70 @@ extension ViewBuilder {
     /// Provides support for "if" statements with `#available()` clauses in
     /// multi-statement closures, producing conditional content for the "then"
     /// branch, i.e. the conditionally-available branch.
-    public static func buildLimitedAvailability<Content>(_ content: Content) -> AnyView where Content : View { }
+    public static func buildLimitedAvailability<Content>(_ content: Content) -> AnyView where Content : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 2 views in a view builder.
-    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> TupleView<(C0, C1)> where C0 : View, C1 : View { }
+    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> TupleView<(C0, C1)> where C0 : View, C1 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 3 views in a view builder.
-    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleView<(C0, C1, C2)> where C0 : View, C1 : View, C2 : View { }
+    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleView<(C0, C1, C2)> where C0 : View, C1 : View, C2 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 4 views in a view builder.
-    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleView<(C0, C1, C2, C3)> where C0 : View, C1 : View, C2 : View, C3 : View { }
+    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleView<(C0, C1, C2, C3)> where C0 : View, C1 : View, C2 : View, C3 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 5 views in a view builder.
-    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleView<(C0, C1, C2, C3, C4)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View { }
+    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleView<(C0, C1, C2, C3, C4)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 6 views in a view builder.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleView<(C0, C1, C2, C3, C4, C5)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleView<(C0, C1, C2, C3, C4, C5)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 7 views in a view builder.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleView<(C0, C1, C2, C3, C4, C5, C6)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleView<(C0, C1, C2, C3, C4, C5, C6)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 8 views in a view builder.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 9 views in a view builder.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 10 views in a view builder.
-    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View, C9 : View { }
+    public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View, C9 : View { } { }
 }
 
 /// A view's size and its alignment guides in its own coordinate space.
@@ -25684,13 +23516,13 @@ extension ViewDimensions : Equatable {
     /// - Parameters:
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
-    public static func == (lhs: ViewDimensions, rhs: ViewDimensions) -> Bool { }
+    public static func == (lhs: ViewDimensions, rhs: ViewDimensions) -> Bool { } { }
 }
 
 /// A modifier that you apply to a view or another view modifier, producing a
 /// different version of the original value.
 ///
-/// Adopt the ``ViewModifier`` protocol when you want to create a reusable
+/// Adopt the ~~ViewModifier~~ protocol when you want to create a reusable
 /// modifier that you can apply to any view. The example below combines several
 /// modifiers to create a new modifier that you can use to create blue caption
 /// text surrounded by a rounded rectangle:
@@ -25708,9 +23540,9 @@ extension ViewDimensions : Equatable {
 ///         }
 ///     }
 ///
-/// You can apply ``modifier(_:)`` directly to a view, but a more common and
-/// idiomatic approach uses ``modifier(_:)`` to define an extension to
-/// ``View`` itself that incorporates the view modifier:
+/// You can apply ~~modifier(_:)~~ directly to a view, but a more common and
+/// idiomatic approach uses ~~modifier(_:)~~ to define an extension to
+/// ~~View~~ itself that incorporates the view modifier:
 ///
 ///     extension View {
 ///         func borderedCaption() -> some View {{}
@@ -25740,7 +23572,7 @@ public protocol ViewModifier {
     ///
     /// `content` is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it.
-    func body(content: Self.Content) -> Self.Body { }
+    func body(content: Self.Content) -> Self.Body { } { }
 
     /// The content view type passed to `body()`.
     typealias Content
@@ -25753,7 +23585,7 @@ extension ViewModifier where Self.Body == Never {
     ///
     /// `content` is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it.
-    public func body(content: Self.Content) -> Self.Body { }
+    public func body(content: Self.Content) -> Self.Body { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -25761,7 +23593,7 @@ extension ViewModifier {
 
     /// Returns a new modifier that is the result of concatenating
     /// `self` with `modifier`.
-    @inlinable public func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
+    @inlinable public func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -25770,12 +23602,12 @@ extension ViewModifier {
     /// Returns a new version of the modifier that will apply the
     /// transaction mutation function `transform` to all transactions
     /// within the modifier.
-    @inlinable public func transaction(_ transform: @escaping (inout Transaction) -> Void) -> some ViewModifier { }
+    @inlinable public func transaction(_ transform: @escaping (inout Transaction) -> Void) -> some ViewModifier { } { }
 
 
     /// Returns a new version of the modifier that will apply
     /// `animation` to all animatable values within the modifier.
-    @inlinable public func animation(_ animation: Animation?) -> some ViewModifier { }
+    @inlinable public func animation(_ animation: Animation?) -> some ViewModifier { } { }
 
 }
 
@@ -25788,7 +23620,7 @@ extension ViewModifier {
 public struct WheelDatePickerStyle : DatePickerStyle {
 
 	/// Creates a wheel date picker style.
-    public init() { }
+    public init() { } { }
 }
 
 /// A picker style that presents the options in a scrollable wheel that shows
@@ -25798,7 +23630,7 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// such as alphabetically.
 ///
 /// To apply this style to a picker, or to a view that contains pickers, use the
-/// ``View/pickerStyle(_:)`` modifier.
+/// ~~View/pickerStyle(_:)~~ modifier.
 @available(iOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -25806,7 +23638,7 @@ public struct WheelPickerStyle : PickerStyle {
 
     /// Sets the picker style to display an item wheel from which the user makes
     /// a selection.
-    public init() { }
+    public init() { } { }
 }
 
 /// The configuration and content of a widget to display on the Home screen or
@@ -25849,18 +23681,18 @@ public protocol Widget {
     /// The type of configuration representing the content of the widget.
     ///
     /// When you create a custom widget, Swift infers this type from your
-    /// implementation of the required ``Widget/body-swift.property`` property.
+    /// implementation of the required ~~Widget/body-swift.property~~ property.
     associatedtype Body : WidgetConfiguration
 
     /// Creates a widget using `body` as its content.
-    init() { }
+    init() { } { }
 
     /// The content and behavior of the widget.
     ///
     /// For any widgets that you create, provide a computed `body` property that
     /// defines the widget as a composition of SwiftUI views.
     ///
-    /// Swift infers the widget's ``SwiftUI/Scene/Body-swift.associatedtype``
+    /// Swift infers the widget's ~~SwiftUI/Scene/Body-swift.associatedtype~~
     /// associated type based on the contents of the `body` property.
     var body: Self.Body { get }
 }
@@ -25888,12 +23720,12 @@ public protocol WidgetBundle {
     /// The type of widget that represents the content of the bundle.
     ///
     /// When you support more than one widget, Swift infers this type from your
-    /// implementation of the required ``WidgetBundle/body-swift.property``
+    /// implementation of the required ~~WidgetBundle/body-swift.property~~
     /// property.
     associatedtype Body : Widget
 
     /// Creates a widget bundle using the bundle's body as its content.
-    init() { }
+    init() { } { }
 
     /// Declares the group of widgets that an app supports.
     ///
@@ -25916,7 +23748,7 @@ public protocol WidgetBundle {
 /// A custom attribute that constructs a widget bundle's body.
 ///
 /// Use the `@WidgetBundleBuilder` attribute to group multiple widgets listed
-/// in the ``WidgetBundle/body-swift.property`` property of a widget bundle.
+/// in the ~~WidgetBundle/body-swift.property~~ property of a widget bundle.
 /// For example, the following code defines a widget bundle that consists of
 /// two widgets.
 ///
@@ -25934,12 +23766,12 @@ public protocol WidgetBundle {
 @_functionBuilder public struct WidgetBundleBuilder {
 
     /// Builds an empty Widget from an block containing no statements, `{ }`.
-    public static func buildBlock() -> some Widget { }
+    public static func buildBlock() -> some Widget { } { }
 
 
     /// Builds a single Widget written as a child view (e..g, `{ MyWidget() }`)
     /// through unmodified.
-    public static func buildBlock<Content>(_ content: Content) -> some Widget where Content : Widget { }
+    public static func buildBlock<Content>(_ content: Content) -> some Widget where Content : Widget { } { }
 
 }
 
@@ -25949,7 +23781,7 @@ public protocol WidgetBundle {
 extension WidgetBundleBuilder {
 
 	/// Builds a new widget from a block containing 2 widgets.
-    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Widget where C0 : Widget, C1 : Widget { }
+    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Widget where C0 : Widget, C1 : Widget { } { }
 
 }
 
@@ -25959,7 +23791,7 @@ extension WidgetBundleBuilder {
 extension WidgetBundleBuilder {
 
 	/// Builds a new widget from a block containing 3 widgets.
-    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget { }
+    public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget { } { }
 
 }
 
@@ -25969,7 +23801,7 @@ extension WidgetBundleBuilder {
 extension WidgetBundleBuilder {
 
 	/// Builds a new widget from a block containing 4 widgets.
-    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget, C3 : Widget { }
+    public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget, C3 : Widget { } { }
 
 }
 
@@ -25979,7 +23811,7 @@ extension WidgetBundleBuilder {
 extension WidgetBundleBuilder {
 
 	/// Builds a new widget from a block containing 5 widgets.
-    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget, C3 : Widget, C4 : Widget { }
+    public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Widget where C0 : Widget, C1 : Widget, C2 : Widget, C3 : Widget, C4 : Widget { } { }
 
 }
 
@@ -26024,11 +23856,11 @@ public protocol WidgetConfiguration {
 ///
 /// Every window created from the group maintains independent state. For
 /// example, for each new window created from the group the system allocates new
-/// storage for any ``State`` or ``StateObject`` variables instantiated by the
+/// storage for any ~~State~~ or ~~StateObject~~ variables instantiated by the
 /// scene's view hierarchy.
 ///
 /// You typically use a window group for the main interface of an app that isn't
-/// document-based. For document-based apps, use a ``DocumentGroup`` instead.
+/// document-based. For document-based apps, use a ~~DocumentGroup~~ instead.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct WindowGroup<Content> : Scene where Content : View {
 
@@ -26042,7 +23874,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(id: String, @ViewBuilder content: () -> Content) { }
+    public init(id: String, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a window group with a localized title and an identifier.
     ///
@@ -26053,12 +23885,12 @@ public struct WindowGroup<Content> : Scene where Content : View {
     /// The system ignores any text styling in the title.
     ///
     /// - Parameters:
-    ///   - title: The ``Text`` view to use for the group's title.
+    ///   - title: The ~~Text~~ view to use for the group's title.
     ///   - id: A string that uniquely identifies the window group. Identifiers
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ title: Text, id: String, @ViewBuilder content: () -> Content) { }
+    public init(_ title: Text, id: String, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a window group with a key for localized title string and an
     /// identifier.
@@ -26074,7 +23906,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ titleKey: LocalizedStringKey, id: String, @ViewBuilder content: () -> Content) { }
+    public init(_ titleKey: LocalizedStringKey, id: String, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a window group with a title string and an identifier.
     ///
@@ -26089,7 +23921,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///     must be unique among the window groups in your app.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init<S>(_ title: S, id: String, @ViewBuilder content: () -> Content) where S : StringProtocol { }
+    public init<S>(_ title: S, id: String, @ViewBuilder content: () -> Content) where S : StringProtocol { } { }
 
     /// Creates a window group.
     ///
@@ -26098,7 +23930,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///
     /// - Parameter content: A closure that creates the content for each
     ///   instance of the group.
-    public init(@ViewBuilder content: () -> Content) { }
+    public init(@ViewBuilder content: () -> Content) { } { }
 
     /// Creates a window group with a localized title.
     ///
@@ -26109,10 +23941,10 @@ public struct WindowGroup<Content> : Scene where Content : View {
     /// The system ignores any text styling in the title.
     ///
     /// - Parameters:
-    ///   - title: The ``Text`` view to use for the group's title.
+    ///   - title: The ~~Text~~ view to use for the group's title.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ title: Text, @ViewBuilder content: () -> Content) { }
+    public init(_ title: Text, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a window group with a key for localized title string.
     ///
@@ -26125,7 +23957,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///   - titleKey: The title key to use for the group's title.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) { }
+    public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) { } { }
 
     /// Creates a window group with a title string.
     ///
@@ -26138,7 +23970,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///   - title: The string to use for the title of the group.
     ///   - content: A closure that creates the content for each instance
     ///     of the group.
-    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where S : StringProtocol { }
+    public init<S>(_ title: S, @ViewBuilder content: () -> Content) where S : StringProtocol { } { }
 
     /// The content and behavior of the scene.
     ///
@@ -26147,14 +23979,14 @@ public struct WindowGroup<Content> : Scene where Content : View {
     /// scene from primitive scenes that SwiftUI provides, as well as other
     /// scenes that you've defined.
     ///
-    /// Swift infers the scene's ``SwiftUI/Scene/Body-swift.associatedtype``
+    /// Swift infers the scene's ~~SwiftUI/Scene/Body-swift.associatedtype~~
     /// associated type based on the contents of the `body` property.
     public var body: some Scene { get }
 
     /// The type of scene that represents the body of this scene.
     ///
     /// When you create a custom scene, Swift infers this type from your
-    /// implementation of the required ``SwiftUI/Scene/body-swift.property``
+    /// implementation of the required ~~SwiftUI/Scene/body-swift.property~~
     /// property.
     public typealias Body = some Scene
 }
@@ -26169,7 +24001,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///   - alignment: The guide for aligning the subviews in this stack on both
     ///     axis.
     ///   - content: A view builder that creates the content of this stack.
-    @inlinable public init(alignment: Alignment = .center, @ViewBuilder content: () -> Content) { }
+    @inlinable public init(alignment: Alignment = .center, @ViewBuilder content: () -> Content) { } { }
 
     /// The type of view representing the body of this view.
     ///
@@ -26181,10 +24013,10 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// Returns the result of recomputing the view's body with the provided
 /// animation.
 ///
-/// This function sets the given ``Animation`` as the ``Transaction/animation``
-/// property of the thread's current ``Transaction``.
+/// This function sets the given ~~Animation~~ as the ~~Transaction/animation~~
+/// property of the thread's current ~~Transaction~~.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { }
+public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { } { }
 
 /// Executes a closure with the specified transaction and returns the result.
 ///
@@ -26196,14 +24028,14 @@ public func withAnimation<Result>(_ animation: Animation? = .default, _ body: ()
 /// - Returns: The result of executing the closure with the specified
 ///   transaction.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public func withTransaction<Result>(_ transaction: Transaction, _ body: () throws -> Result) rethrows -> Result { }
+public func withTransaction<Result>(_ transaction: Transaction, _ body: () throws -> Result) rethrows -> Result { } { }
 
 extension NSDirectionalEdgeInsets {
 
     /// Create edge insets from the equivalent EdgeInsets.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
     @available(watchOS, unavailable)
-    public init(_ edgeInsets: EdgeInsets) { }
+    public init(_ edgeInsets: EdgeInsets) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -26228,7 +24060,7 @@ extension CGPoint {
 	/// - Parameter m: The projection transform to apply to the point
 	///
 	/// - Returns: A projection transformed `CGPoint`.
-    public func applying(_ m: ProjectionTransform) -> CGPoint { }
+    public func applying(_ m: ProjectionTransform) -> CGPoint { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -26269,7 +24101,7 @@ extension NSUserActivity {
         /// - Parameters:
         ///   - lhs: A value to compare.
         ///   - rhs: Another value to compare.
-        public static func == (a: NSUserActivity.TypedPayloadError, b: NSUserActivity.TypedPayloadError) -> Bool { }
+        public static func == (a: NSUserActivity.TypedPayloadError, b: NSUserActivity.TypedPayloadError) -> Bool { } { }
 
         /// The hash value.
         ///
@@ -26293,7 +24125,7 @@ extension NSUserActivity {
         ///
         /// - Parameter hasher: The hasher to use when combining the components
         ///   of this instance.
-        public func hash(into hasher: inout Hasher) { }
+        public func hash(into hasher: inout Hasher) { } { }
     }
 
     /// Given a Codable Swift type, return an instance decoded from the
@@ -26301,13 +24133,13 @@ extension NSUserActivity {
     ///
     /// - Parameter type: the instance type to be decoded from userInfo
     /// - Returns: the type safe instance or raises if it can't be decoded
-    public func typedPayload<T>(_ type: T.Type) throws -> T where T : Decodable, T : Encodable { }
+    public func typedPayload<T>(_ type: T.Type) throws -> T where T : Decodable, T : Encodable { } { }
 
     /// Given an instance of a Codable Swift type, encode it into the
     /// NSUserActivity's userInfo dictionary
     ///
     /// - Parameter payload: the instance to be converted to userInfo
-    public func setTypedPayload<T>(_ payload: T) throws where T : Decodable, T : Encodable { }
+    public func setTypedPayload<T>(_ payload: T) throws where T : Decodable, T : Encodable { } { }
 }
 
 extension Never : Scene {
@@ -26338,7 +24170,7 @@ extension RangeReplaceableCollection where Self : MutableCollection {
     /// Removes all the elements at the specified offsets from the collection.
     ///
     /// - Complexity: O(*n*) where *n* is the length of the collection.
-    public mutating func remove(atOffsets offsets: IndexSet) { }
+    public mutating func remove(atOffsets offsets: IndexSet) { } { }
 }
 
 extension MutableCollection {
@@ -26347,17 +24179,17 @@ extension MutableCollection {
     /// destination offset, preserving ordering.
     ///
     /// - Complexity: O(*n* log *n*), where *n* is the length of the collection.
-    public mutating func move(fromOffsets source: IndexSet, toOffset destination: Int) { }
+    public mutating func move(fromOffsets source: IndexSet, toOffset destination: Int) { } { }
 }
 
 extension UIColor {
 
-	/// Creates a new `UIColor` from a SwiftUI ``Color``.
+	/// Creates a new `UIColor` from a SwiftUI `Color`.
 	///
-	/// - Parameter color: The SwiftUI ``Color`` object to use for creating a `UIColor`.
+	/// - Parameter color: The SwiftUI `Color` object to use for creating a `UIColor`.
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
     @available(macOS, unavailable)
-    public convenience init(_ color: Color) { }
+    public convenience init(_ color: Color) { } { }
 }
 
 extension UIUserInterfaceStyle {
@@ -26366,7 +24198,7 @@ extension UIUserInterfaceStyle {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ colorScheme: ColorScheme?) { }
+    public init(_ colorScheme: ColorScheme?) { } { }
 }
 
 extension UIAccessibilityContrast {
@@ -26375,7 +24207,7 @@ extension UIAccessibilityContrast {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ colorSchemeContrast: ColorSchemeContrast?) { }
+    public init(_ colorSchemeContrast: ColorSchemeContrast?) { } { }
 }
 
 extension UIContentSizeCategory {
@@ -26384,7 +24216,7 @@ extension UIContentSizeCategory {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ sizeCategory: ContentSizeCategory?) { }
+    public init(_ sizeCategory: ContentSizeCategory?) { } { }
 }
 
 extension UITraitEnvironmentLayoutDirection {
@@ -26393,7 +24225,7 @@ extension UITraitEnvironmentLayoutDirection {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ layoutDirection: LayoutDirection) { }
+    public init(_ layoutDirection: LayoutDirection) { } { }
 }
 
 extension UILegibilityWeight {
@@ -26402,7 +24234,7 @@ extension UILegibilityWeight {
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ legibilityWeight: LegibilityWeight?) { }
+    public init(_ legibilityWeight: LegibilityWeight?) { } { }
 }
 
 extension UIUserInterfaceSizeClass {
@@ -26412,7 +24244,7 @@ extension UIUserInterfaceSizeClass {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
-    public init(_ sizeClass: UserInterfaceSizeClass?) { }
+    public init(_ sizeClass: UserInterfaceSizeClass?) { } { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -26449,7 +24281,7 @@ extension CGRect : Animatable {
 extension Float : VectorArithmetic {
 
     /// Multiplies each component of this value by the given value.
-    public mutating func scale(by rhs: Double) { }
+    public mutating func scale(by rhs: Double) { } { }
 
     /// Returns the dot-product of this vector arithmetic instance with itself.
     public var magnitudeSquared: Double { get }
@@ -26459,7 +24291,7 @@ extension Float : VectorArithmetic {
 extension Double : VectorArithmetic {
 
     /// Multiplies each component of this value by the given value.
-    public mutating func scale(by rhs: Double) { }
+    public mutating func scale(by rhs: Double) { } { }
 
     /// Returns the dot-product of this vector arithmetic instance with itself.
     public var magnitudeSquared: Double { get }
@@ -26469,7 +24301,7 @@ extension Double : VectorArithmetic {
 extension CGFloat : VectorArithmetic {
 
     /// Multiplies each component of this value by the given value.
-    public mutating func scale(by rhs: Double) { }
+    public mutating func scale(by rhs: Double) { } { }
 
     /// Returns the dot-product of this vector arithmetic instance with itself.
     public var magnitudeSquared: Double { get }
