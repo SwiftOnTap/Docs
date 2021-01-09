@@ -141,7 +141,8 @@ A symbol that requires a string, should follow:
 3. `Color.pink`
 
 
-- Rule: Add helpful comments inside of example code blocks, especially in two cases:
+- Rule H) Add helpful comments inside of example code blocks but you should NEVER use backticks(`) in these comments. 
+    Comments are especially useful in two cases:
     - Displaying the **exact** output of a print statement
     
             print(projectName) //"Banana🍌 Docs"
@@ -151,7 +152,7 @@ A symbol that requires a string, should follow:
             let linesInProject = module.sourceFile.lines //23,067
 
 
-- Rule H): Example code does not need its language specified, since it is implied by the source code. Examples should also use code block tab-indent formatting rather than triple backtick (```) indenting:
+- Rule I): Example code does not need its language specified, since it is implied by the source code. Examples should also use code block tab-indent formatting rather than triple backtick (```) indenting:
 
 Incorrect:
             
@@ -168,10 +169,10 @@ Correct:
     }
 
 
-- Rule I): When in doubt, write another example 
+- Rule J): When in doubt, write another example 
 
 
-- Rule J): No paragraph should have more than 6 sentences. 
+- Rule K): No paragraph should have more than 6 sentences. 
 
 
-- Rule K): Every sentence should sound natural if spoken. 
+- Rule L): Every sentence should sound natural if spoken. 
