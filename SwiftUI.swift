@@ -10159,7 +10159,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-2.png)
 ///
-/// ~~~~
+/// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
@@ -10169,7 +10169,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~~~
+/// ```
 ///
 /// This is different from the previous example, because this initializer accepts a `rowContent` parameter that allows the `List` to generate SwiftUI views for the list's rows on-demand.
 ///
@@ -12042,7 +12042,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-5.png)
 ///
-/// ~~~~
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -12051,7 +12051,7 @@ extension NavigationLink {
 ///         }
 ///     }
 /// }
-/// ~~~~
+/// ```
 ///
 /// Note that the navigation bar can be unhidden by child views. `View/navigationBarHidden(_:)` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
 ///
