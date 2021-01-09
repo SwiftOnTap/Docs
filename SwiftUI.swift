@@ -895,7 +895,7 @@ extension Angle : Animatable {
 ///
 /// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var numberOfShakes: CGFloat = 0
 ///
@@ -929,7 +929,7 @@ extension Angle : Animatable {
 ///             .offset(x: sin(shakeNumber * .pi * 2) * 10)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// This example demonstrates a horizontal "shake effect", applied on a `Text`. When run, the text animates by shaking 10 times. This is achieved by triggering an animation using `withAnimation`, and modifying the `shakeNumber` to go from `0` to `10`.
 ///
@@ -947,7 +947,7 @@ extension Angle : Animatable {
 ///
 /// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var progress: CGFloat = 0
 ///
@@ -984,7 +984,7 @@ extension Angle : Animatable {
 ///         )
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
 ///
@@ -1462,19 +1462,19 @@ extension AnyTransition {
 ///
 ///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         AnyView(Text("Hello, world!"))
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
 ///
 ///  ![AnyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     let foo: Bool = false
 ///
@@ -1486,13 +1486,13 @@ extension AnyTransition {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ~~List/init(_:id:selection:rowContent:)~~. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or `View/background(_:alignment:)`.
 ///
 /// Consider whether the usage of `AnyView` is appropriate, or even necessary. A common mistake is to use `AnyView` like this:
 ///
-/// ~~`
+/// ```
 /// func makeHelperView() -> some View {
 ///     if foo {
 ///         return AnyView(Text("Hello, world!"))
@@ -1500,11 +1500,11 @@ extension AnyTransition {
 ///         return AnyView(Color.red)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Wherein adding a `@ViewBuilder` would be more appropriate:
 ///
-/// ~~`
+/// ```
 /// @ViewBuilder
 /// func makeHelperView() -> some View {
 ///     if foo {
@@ -1513,7 +1513,7 @@ extension AnyTransition {
 ///         Color.red
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// The latter example performs better as the SwiftUI runtime is given a more explicit type hierarchy, where the switch between `foo` being true or false can only result in a `Text` or a `Color`. The former example erases that information, forcing the SwiftUI runtime to evaluate the actual view type lazily, and thus requires more work to compute and render.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2061,12 +2061,12 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// A `Binding` is essentially the following structure:
 ///
-/// ~~`
+/// ```
 /// struct Binding<Value> {
 ///     let get: () -> Value
 ///     let set: (Value) -> ()
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Creating a `Binding` from `@State `
 ///
@@ -2076,7 +2076,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
 ///
@@ -2085,7 +2085,7 @@ extension BackgroundStyle : ShapeStyle {
 ///         TextField("Placeholder", text: $text)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In the example above, the source of truth is a `@State` variable, named `text`. `text`  represents a `String`, whereas `$text` represents a `Binding<String>`. `TextField`'s initializer accepts a placeholder `String` and a `Binding<String>`. In this example, `TextField` requires a `Binding` to the source of truth as `TextField` must be able to *write back* to the `@State` variable (a **mutable** source of truth).
 ///
@@ -2097,7 +2097,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @StateObject var viewModel = ExampleModel()
 ///
@@ -2113,7 +2113,7 @@ extension BackgroundStyle : ShapeStyle {
 /// class ExampleModel: ObservableObject {
 ///     @Published var isEnabled: Bool = false
 /// }
-/// ~~`
+/// ```
 ///
 /// The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a `Binding` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
 ///
@@ -2121,9 +2121,9 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with `Binding/animation(_:)`. Usage looks as follows:
 ///
-/// ~~`
+/// ```
 /// $myVariable.animation(.default)
-/// ~~`
+/// ```
 ///
 /// ### Creating a `Binding` from a constant
 ///
@@ -2133,7 +2133,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
 ///
@@ -2149,7 +2149,7 @@ extension BackgroundStyle : ShapeStyle {
 ///         .environment(\.editMode, .constant(.active))
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
@@ -2684,7 +2684,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 ///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Button("Banana🍌🍌", action: { tap() })
@@ -2713,13 +2713,13 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
 ///
 ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         VStack {
@@ -2753,7 +2753,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///     }
 /// }
 
-/// ~~`
+/// ```
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -4808,7 +4808,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///   var body: some View {
 ///     VStack {
@@ -4820,13 +4820,13 @@ extension DisclosureGroup where Label == Text {
 ///     }
 ///   }
 /// }
-/// ~~`
+/// ```
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
 ///
 /// ![Divider Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///   var body: some View {
 ///     HStack {
@@ -4838,7 +4838,7 @@ extension DisclosureGroup where Label == Text {
 ///     }
 ///   }
 /// }
-/// ~~`
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
@@ -5579,7 +5579,7 @@ extension EdgeInsets : Animatable {
 ///
 /// ![EditButton Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/EditButton-example-1.gif)
 ///
-///~~`
+///```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
 ///
@@ -5599,7 +5599,7 @@ extension EdgeInsets : Animatable {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// The title and appearance of an `EditButton` is determined by the system and cannot be overriden.
 @available(iOS 13.0, *)
@@ -5890,7 +5890,7 @@ public struct EmptyCommands : Commands {
 ///
 /// ![EmptyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         VStack {
@@ -5904,19 +5904,19 @@ public struct EmptyCommands : Commands {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// `EmptyView` has many uses. For example, it can be used to instruct SwiftUI that your UI control does not want a label:
 ///
-/// ~~`
+/// ```
 /// Toggle(isOn: $myBooleanValue, label: { EmptyView() })
-/// ~~`
+/// ```
 ///
 /// `EmptyView` can also be used in conjunction with `GeometryReader`:
 ///
 ///  ![EmptyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var width: CGFloat? = nil
 ///
@@ -5932,10 +5932,10 @@ public struct EmptyCommands : Commands {
 ///         )
 ///     }
 /// }
-/// ~~`
+/// ```
 /// Account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
-/// ~~`
+/// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
 ///     let label: Label
 ///     let content: Content
@@ -5948,7 +5948,7 @@ public struct EmptyCommands : Commands {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyView : View {
 
@@ -7117,40 +7117,40 @@ public struct FocusedValues {
 ///
 /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text("Banana🍌🍌")
 ///            .font(.largeTitle)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ~~Font/system(size:weight:design:)~~ modifier.
 ///
 /// ![Font Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text("Banana🍌🍌")
 ///             .font(.system(size: 32.0, weight: .bold, design: .rounded))
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Non system-fonts can be applied using `Font/custom(_:size:)`
 ///
 /// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text("Banana🍌🍌")
 ///            .font(Font.custom("American Typewriter", size: 32.0))
 ///     }
 /// }
-/// ~~`
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Font : Hashable {
 
@@ -7774,7 +7774,7 @@ public struct GeometryProxy {
 ///
 /// `GeometryReader` can be expressed simply with the following pseudocode:
 ///
-/// ~~`
+/// ```
 /// struct GeometryReader<Content: View> {
 ///     var content: (GeometryProxy) -> Content
 ///
@@ -7782,7 +7782,7 @@ public struct GeometryProxy {
 ///         content(<container geometry>)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In the implementation above, `<container geometry>` is an instance of ~~GeometryProxy~~. `GeometryProxy` simply encapsulates the container's frame and safe area insets, provided at runtime by SwiftUI.
 ///
@@ -7792,7 +7792,7 @@ public struct GeometryProxy {
 ///
 /// ![GeometryReader Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         GeometryReader { (proxy: GeometryProxy) in
@@ -7804,7 +7804,7 @@ public struct GeometryProxy {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is `.topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
 ///
@@ -7812,7 +7812,7 @@ public struct GeometryProxy {
 ///
 /// `GeometryReader` can also be used with`View/background(_:)`, to acquire the geometry of a target view. Consider `SomeView` in the following example:
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     struct SomeView: View {
 ///         var body: some View {
@@ -7843,7 +7843,7 @@ public struct GeometryProxy {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not* the frame of its container, the `VStack`. This is achieved by forcing a `GeometryReader` as a background of `SomeView`, thereby constraining it to `SomeView`'s bounds.
 ///
@@ -7851,7 +7851,7 @@ public struct GeometryProxy {
 ///
 /// ![GeometryReader Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct GetGlobalFrame: ViewModifier {
 ///     @Binding var globalFrame: CGRect?
 ///
@@ -7869,13 +7869,13 @@ public struct GeometryProxy {
 ///         )
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// The modifier above can be used in the following manner:
 ///
 /// ![GeometryReader Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-3.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     struct SomeView: View {
 ///         var body: some View {
@@ -7915,7 +7915,7 @@ public struct GeometryProxy {
 ///         )
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct GeometryReader<Content> : View where Content : View {
@@ -10141,7 +10141,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         List {
@@ -10151,7 +10151,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Creating a `List` with a variable number of elements
 ///
@@ -10185,7 +10185,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-3.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
@@ -10199,7 +10199,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// As seen in the above example, `ForEach` also accepts an `id` parameter along with a `rowContent`.
 ///
@@ -10209,7 +10209,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-4.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
@@ -10227,7 +10227,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// A `Section` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
 ///
@@ -10239,7 +10239,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-5.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         List {
@@ -10250,7 +10250,7 @@ extension Link where Label == Text {
 ///         .listStyle(InsetGroupedListStyle())
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// SwiftUI offers various list styles:
 ///
@@ -10271,7 +10271,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-6.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         List {
@@ -10284,7 +10284,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// A background can be provided for multiple list rows at a time, by applying the `View/listRowBackground(_:)` modifier to `ForEach`.
 ///
@@ -10292,7 +10292,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-7.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
@@ -10305,7 +10305,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 ///
 ///
@@ -10315,7 +10315,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
 ///
@@ -10335,7 +10335,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 ///
 ///
@@ -10345,7 +10345,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-9.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
 ///
@@ -10365,7 +10365,7 @@ extension Link where Label == Text {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Further notes
 ///
@@ -10677,7 +10677,7 @@ public struct ListItemTint {
 ///
 /// ![ListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         List {
@@ -10687,7 +10687,7 @@ public struct ListItemTint {
 ///         .listStyle(InsetListStyle())
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Two list styles are included specifically for rendering grouped lists:
 /// - `View/Styles/GroupedListStyle`
@@ -10697,7 +10697,7 @@ public struct ListItemTint {
 ///
 /// ![ListStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///          List {
@@ -10711,7 +10711,7 @@ public struct ListItemTint {
 ///         .listStyle(GroupedListStyle())
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly referenced below.
 ///
@@ -11951,7 +11951,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -11959,7 +11959,7 @@ extension NavigationLink {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// A navigation bar is added by default. The navigation bar can be hidden via  `View/navigationBarHidden(_:)`.
 ///
@@ -11969,7 +11969,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -11978,7 +11978,7 @@ extension NavigationLink {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// `View/navigationTitle(_:)` is only available on iOS 14 and higher. If your application targets iOS 13, please use `View/navigationBarTitle(_:)`.
 ///
@@ -11995,7 +11995,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-3.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -12005,7 +12005,7 @@ extension NavigationLink {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Navigating to a view
 ///
@@ -12015,7 +12015,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     struct BananasView: View {
 ///         var body: some View {
@@ -12032,7 +12032,7 @@ extension NavigationLink {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Hiding the navigation bar
 ///
@@ -12059,7 +12059,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     struct SecondScreen: View {
 ///         var body: some View {
@@ -12082,7 +12082,7 @@ extension NavigationLink {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// And popping `SecondScreen` (or navigating back) hides it again, as `SecondScreen` is removed from the view hierarchy, leaving `ExampleView` as the deepest view in the hierarchy - which has hidden the navigation bar.
 ///
@@ -12094,7 +12094,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-7.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -12103,7 +12103,7 @@ extension NavigationLink {
 ///         .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Styling a navigation view
 ///
@@ -12113,7 +12113,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -12122,13 +12122,13 @@ extension NavigationLink {
 ///         .navigationViewStyle(StackNavigationViewStyle())
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
 ///
 /// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -12137,7 +12137,7 @@ extension NavigationLink {
 ///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Handling selection
 ///
@@ -12147,7 +12147,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     enum NavigationItem {
 ///         case bananas
@@ -12185,7 +12185,7 @@ extension NavigationLink {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In the example above, the navigation selection is written to a state variable, `navigatedItem`. `navigatedItem` is an optional, because it is possible for the screen to not be navigated to any particular screen (i.e. be at the root view containing the 3 navigation links).
 ///
@@ -13427,7 +13427,7 @@ extension PreviewProvider {
 ///
 /// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
 ///
-/// ~~`
+/// ```
 ///  struct ExampleView: View {
 ///      var body: some View {
 ///         Button("Banana 🍌🍌", action: { tap() })
@@ -13444,13 +13444,13 @@ extension PreviewProvider {
 ///         .onTapGesture { configuration.trigger() }
 ///    }
 ///  }
-/// ~~`
+/// ```
 ///
 /// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
 ///
 /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
 ///
-/// ~~`
+/// ```
 ///  struct BananaView: View {
 ///      var body: some View {
 ///          VStack {
@@ -13474,7 +13474,7 @@ extension PreviewProvider {
 ///            .onTapGesture { configuration.trigger() }
 ///    }
 ///  }
-/// ~~`
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PrimitiveButtonStyle {
 
@@ -15186,7 +15186,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView {
@@ -15198,7 +15198,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, the `VStack` containing the text is made scrollable by wrapping it in a `ScrollView`.
 ///
@@ -15221,7 +15221,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView(.horizontal) {
@@ -15233,7 +15233,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// This example takes the previous example, and modifies it so that the `ScrollView` scrolls horizontally. This `ScrollView` will **not** scroll vertically, as an explict axis, `.horizontal`, has been specified.
 ///
@@ -15241,7 +15241,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView([.horizontal, .vertical]) {
@@ -15253,7 +15253,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, `ScrollView` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
 ///
@@ -15265,7 +15265,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView(.horizontal, showsIndicators: false) {
@@ -15277,7 +15277,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// This `ScrollView` will never show a scroll indicator.
 ///
@@ -15285,7 +15285,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView(showsIndicators: false) {
@@ -15297,7 +15297,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// This `ScrollView`  hides its scroll indicator, with a default `.vertical` scroll direction.
 ///
@@ -15309,7 +15309,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView {
@@ -15326,7 +15326,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use `View/id(_:)` as is done inside the `ForEach`, for each element.
 ///
@@ -15334,7 +15334,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-7.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         ScrollView {
@@ -15351,7 +15351,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, the `ScrollView` still scrolls to "Item #32", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
 ///
@@ -15360,7 +15360,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-8.gif)
 ///
-///  ~~`
+///  ```
 ///  struct ExampleView: View {
 ///      var body: some View {
 ///          ScrollView {
@@ -15379,7 +15379,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///          }
 ///      }
 ///  }
-/// ~~`
+/// ```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : View where Content : View {
@@ -17088,7 +17088,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         TabView {
@@ -17111,7 +17111,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         .font(.headline)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Page-style navigation
 ///
@@ -17121,7 +17121,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         TabView {
@@ -17134,13 +17134,13 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         .tabViewStyle(PageTabViewStyle())
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
 ///
 /// ![TabView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-3.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
@@ -17153,7 +17153,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         .tabViewStyle(PageTabViewStyle())
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
@@ -17163,7 +17163,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
@@ -17177,7 +17177,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Handling tab-selection
 ///
@@ -17187,7 +17187,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     enum TabItem {
 ///         case bananas
@@ -17222,7 +17222,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, each tab item is assigned a unique tag using the user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to the tab selection, `$selectedItem`, and updates it whenever a new tab is selected. `$selectedItem` in turn can also be used to programmatically control tab-selection, as bindings work bidirectionally.
 ///
@@ -17232,7 +17232,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var selectedItem: Int = 0
 ///
@@ -17333,13 +17333,13 @@ public struct TapGesture : Gesture {
 ///
 /// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text("🍌🍌")
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// `Text` is most commonly initialized with a string, however, it has 9 different initializers.
 ///
@@ -17347,19 +17347,19 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text(Date(), style: .date)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// `Text` also accepts 12 unique modifiers to customize your string.
 ///
 ///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text(Date(), style: .date)
@@ -17367,13 +17367,13 @@ public struct TapGesture : Gesture {
 ///             .font(.system(size: 20, weight: .bold, design: .rounded))
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// `Text` conforms to the ~~View~~ protocol. Therefore, any modifiers that return `some View`, such as ~~View/foregroundColor(_:)~~, are compatible with `Text`.
 ///
 ///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text(Date(), style: .date)
@@ -17381,7 +17381,7 @@ public struct TapGesture : Gesture {
 ///             .foregroundColor(.orange)
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
 ///
@@ -18710,13 +18710,13 @@ extension ToolbarContentBuilder {
 ///
 /// A `ToolbarItem` is essentially the following structure:
 ///
-/// ~~`
+/// ```
 /// struct ToolbarItem<ID, Content: View> {
 ///     let id: ID
 ///     let placement: ToolbarItemPlacement
 ///     let content: Content
 /// }
-/// ~~`
+/// ```
 ///
 /// -  `id` is responsible for efficient updates to the toolbar item.
 /// - `placement` controls where the item is placed.
@@ -18724,7 +18724,7 @@ extension ToolbarContentBuilder {
 ///
 /// ### Adding toolbar items
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -18745,13 +18745,13 @@ extension ToolbarContentBuilder {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// ### Placing a toolbar item on the navigation bar
 ///
 /// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`. For example:
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
@@ -18764,7 +18764,7 @@ extension ToolbarContentBuilder {
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItem<ID, Content> : ToolbarContent where Content : View {
@@ -19602,7 +19602,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
 ///
-/// ~~`
+/// ```
 /// struct ActivityIndicator: UIViewRepresentable {
 ///     typealias Context = UIViewRepresentableContext<Self>
 ///     typealias UIViewType = UIActivityIndicatorView
@@ -19625,7 +19625,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Note:
 ///
@@ -19636,7 +19636,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// ![UIViewRepresentable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var isAnimating: Bool = false
 ///
@@ -19671,7 +19671,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, the `ActivityIndicator` from before is used and can be toggled by passing a boolean to `ActivityIndicator/init(isAnimated:)`.
 ///
@@ -19681,7 +19681,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// For example, we can remove the `isAnimated` parameter from `ActivityIndicator`, and use `isEnabled` from the environment instead  via `EnvironmentValues/isEnabled`:
 ///
-/// ~~`
+/// ```
 /// struct ActivityIndicator: UIViewRepresentable {
 ///     typealias Context = UIViewRepresentableContext<Self>
 ///     typealias UIViewType = UIActivityIndicatorView
@@ -19702,7 +19702,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, `context` is used to access the view's current `environment` (via `context.environment`), giving you access to the latest `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get rid of the `isAnimated` parameter in favor of reading it from the context. This has the added advantage of being passed from any level at the top, because environment values propagate down the view hierarchy.
 ///
@@ -19710,7 +19710,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// ![UIViewRepresentable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var isAnimating: Bool = false
 ///
@@ -19744,7 +19744,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// Using `View/disabled(_:)`, the activity indicator can now be made active or inactive.
 ///
@@ -19752,7 +19752,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// ![UIViewRepresentable Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var isAnimating: Bool = false
 ///
@@ -19790,7 +19790,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         }
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// A single `View/disabled(_:)` modifier on the `VStack` can now become responsible for enabling/disabling the activity indicators inside the stack. This also allows parent views, that aren't aware of `ExampleView`'s implementation, to control whether views within it are enabled or disabled.
 ///
@@ -19800,7 +19800,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// For example, here is an example port of `UISearchBar`:
 ///
-/// ~~`
+/// ```
 /// struct SearchBar: UIViewRepresentable {
 ///     class Coordinator: NSObject, UISearchBarDelegate {
 ///         @Binding var text: String
@@ -19835,7 +19835,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         uiView.text = text // set the search bar's text to the value of the binding
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// A search bar is a good example of a complex UIKit view. It is a control responsible for text input with multiple lifecycle events, and it uses the delegate pattern to inform the observer whenever these events occur. In SwiftUI, data is passed using bindings, and there is no concept of a delegate.
 ///
@@ -19847,7 +19847,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// ![UIViewRepresentable Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
 ///
-/// ~~`
+/// ```
 /// struct ExampleView: View {
 ///     @State var searchText: String = ""
 ///
@@ -19894,7 +19894,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         uiView.text = text // set the search bar's text to the value of the binding
 ///     }
 /// }
-/// ~~`
+/// ```
 ///
 /// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar` would have an initial search text of `"Bananas 🍌🍌"` already loaded.
 ///
@@ -23978,7 +23978,7 @@ extension View {
     ///
     /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
     ///
-    /// ~~`
+    /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         NavigationView {
@@ -23999,7 +23999,7 @@ extension View {
     ///         }
     ///     }
     /// }
-    /// ~~`
+    /// ```
     ///
     /// ### Aligning a toolbar item
     ///
@@ -24009,7 +24009,7 @@ extension View {
     ///
     /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
     ///
-    /// ~~`
+    /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         NavigationView {
@@ -24026,7 +24026,7 @@ extension View {
     ///         }
     ///     }
     /// }
-    /// ~~`
+    /// ```
     public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
 
 
@@ -24040,7 +24040,7 @@ extension View {
     ///
     /// ![toolbar Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-3.png)
     ///
-    /// ~~`
+    /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         NavigationView {
@@ -24061,7 +24061,7 @@ extension View {
     ///         }
     ///     }
     /// }
-    /// ~~`
+    /// ```
     ///
     /// ### Aligning a toolbar item
     ///
@@ -24071,7 +24071,7 @@ extension View {
     ///
     /// ![toolbar Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-4.png)
     ///
-    /// ~~`
+    /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         NavigationView {
@@ -24088,7 +24088,7 @@ extension View {
     ///         }
     ///     }
     /// }
-    /// ~~`
+    /// ```
     public func toolbar<Content>(id: String, @ToolbarContentBuilder content: () -> Content) -> some View where Content : CustomizableToolbarContent { }
 
 }
