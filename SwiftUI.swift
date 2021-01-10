@@ -648,7 +648,8 @@ public struct Alert {
 /// value, typically declared as a static constant property of
 /// ~~HorizontalAlignment~~ or ~~VerticalAlignment~~.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol AlignmentID {
+public protocol AlignmentID{ }
+extension AlignmentID {
 
     /// The value of the corresponding guide in the given context when not
     /// otherwise set in that context.
@@ -997,7 +998,8 @@ extension Angle : Animatable {
 /// - `Animatable` along with `View` is currently broken on iOS 14, please use `AnimatableModifier`
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol Animatable {
+public protocol Animatable{ }
+extension Animatable {
 
     /// The type defining the data to animate.
     associatedtype AnimatableData : VectorArithmetic
@@ -1022,7 +1024,8 @@ extension Animatable where Self.AnimatableData == EmptyAnimatableData {
 
 /// A modifier that can create another modifier with animation.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol AnimatableModifier : Animatable, ViewModifier {
+public protocol AnimatableModifier : Animatable, ViewModifier{ }
+extension AnimatableModifier : Animatable, ViewModifier {
 }
 
 /// A pair of animatable values, which is itself animatable.
@@ -1594,7 +1597,8 @@ extension AnyTransition {
 ///     }
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol App {
+public protocol App{ }
+extension App {
 
     /// The type of scene representing the content of the app.
     ///
@@ -2757,7 +2761,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ButtonStyle {
+public protocol ButtonStyle{ }
+extension ButtonStyle {
 
     /// A view that represents the body of a button.
     associatedtype Body : View
@@ -3772,7 +3777,8 @@ public struct CommandMenu<Content> : Commands where Content : View {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol Commands {
+public protocol Commands{ }
+extension Commands {
 
     /// The type of command group representing the body of this command group.
     associatedtype Body : Commands
@@ -4185,7 +4191,8 @@ extension CoordinateSpace : Equatable, Hashable {
 /// Conforming types represent items that can be placed in various locations
 /// in a customizable toolbar.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent {
+public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent{ }
+extension CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent {
 }
 
 /// A control for selecting an absolute date.
@@ -4436,7 +4443,8 @@ public struct DatePickerComponents : OptionSet {
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol DatePickerStyle {
+public protocol DatePickerStyle{ }
+extension DatePickerStyle {
 }
 
 /// The default button style, based on the button's context.
@@ -5045,7 +5053,8 @@ public struct DragGesture : Gesture {
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol DropDelegate {
+public protocol DropDelegate{ }
+extension DropDelegate {
 
     /// Tells the delegate that a drop containing items conforming to one of the
     /// expected types entered a view that accepts drops.
@@ -5250,7 +5259,8 @@ public struct DropProposal {
 /// The view gives values to these properties prior to recomputing the view's
 /// ~~View/body-swift.property~~.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol DynamicProperty {
+public protocol DynamicProperty{ }
+extension DynamicProperty {
 
     /// Updates the underlying value of the stored value.
     ///
@@ -5273,7 +5283,8 @@ extension DynamicProperty {
 
 /// A type of view that generates views from an underlying collection of data.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol DynamicViewContent : View {
+public protocol DynamicViewContent : View{ }
+extension DynamicViewContent : View {
 
     /// The type of the underlying collection of data.
     associatedtype Data : Collection
@@ -6112,7 +6123,8 @@ public struct EmptyCommands : Commands {
 ///     }
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol EnvironmentKey {
+public protocol EnvironmentKey{ }
+extension EnvironmentKey {
 
     /// The associated type representing the type of the environment key's
     /// value.
@@ -6620,7 +6632,8 @@ extension EnvironmentValues {
 /// A modifier that must resolve to a concrete modifier in an environment before
 /// use.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never {
+public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never{ }
+extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 
     /// The type of modifier to use after being resolved.
     associatedtype ResolvedModifier : ViewModifier
@@ -6904,7 +6917,8 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol FileDocument {
+public protocol FileDocument{ }
+extension FileDocument {
 
     /// The types the document is able to open.
     static var readableContentTypes: [UTType] { get }
@@ -7092,7 +7106,8 @@ public struct FileDocumentWriteConfiguration {
 /// Unlike `EnvironmentKey`, `FocusedValuesHostKey` has no default value
 /// requirement, because the default value for a key is always `nil`.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol FocusedValueKey {
+public protocol FocusedValueKey{ }
+extension FocusedValueKey {
 
 	/// The type of the value that the key-value pair is using.
     associatedtype Value
@@ -7731,7 +7746,8 @@ public struct Form<Content> : View where Content : View {
 /// The only change the effect makes to the view's ancestors and descendants is
 /// to change the coordinate transform to and from them.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol GeometryEffect : Animatable, ViewModifier where Self.Body == Never {
+public protocol GeometryEffect : Animatable, ViewModifier where Self.Body == Never{ }
+extension GeometryEffect : Animatable, ViewModifier where Self.Body == Never {
 
     /// Returns the current value of the effect.
     func effectValue(size: CGSize) -> ProjectionTransform { }
@@ -7945,7 +7961,8 @@ public struct GeometryProxy {
 /// Create custom gestures by declaring types that conform to the `Gesture`
 /// protocol.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol Gesture {
+public protocol Gesture{ }
+extension Gesture {
 
     /// The type representing the gesture's value.
     associatedtype Value
@@ -8546,7 +8563,8 @@ extension GroupBox where Label == EmptyView {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol GroupBoxStyle {
+public protocol GroupBoxStyle{ }
+extension GroupBoxStyle {
 
     /// A `View` representing the body of a `GroupBox`.
     associatedtype Body : View
@@ -9285,7 +9303,8 @@ extension Image.ResizingMode : Hashable {
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public protocol IndexViewStyle {
+public protocol IndexViewStyle{ }
+extension IndexViewStyle {
 }
 
 /// A `PickerStyle` where each option is displayed inline with
@@ -9320,7 +9339,8 @@ public struct InsetListStyle : ListStyle {
 
 /// A shape type that is able to inset itself to produce another shape.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol InsettableShape : Shape {
+public protocol InsettableShape : Shape{ }
+extension InsettableShape : Shape {
 
     /// The type of the inset shape.
     associatedtype InsetShape : InsettableShape
@@ -9642,7 +9662,8 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// To configure the current label style for a view hierarchy, use the
 /// ~~View/labelStyle(_:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol LabelStyle {
+public protocol LabelStyle{ }
+extension LabelStyle {
 
     /// A view that represents the body of a label.
     associatedtype Body : View
@@ -10724,7 +10745,8 @@ public struct ListItemTint {
 /// - `EllipticalListStyle` - provides an elliptical list experience on WatchOS, including haptic feedback and unique animation when scrolling.
 /// - `CarouselListStyle` - provides a coverflow-like experience on WatchOS lists including scroll animations that shrinks cells off-screen.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ListStyle {
+public protocol ListStyle{ }
+extension ListStyle {
 }
 
 /// The key used to look up a string in a strings file or strings dictionary
@@ -11347,7 +11369,8 @@ public struct MenuPickerStyle : PickerStyle {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol MenuStyle {
+public protocol MenuStyle{ }
+extension MenuStyle {
 
     /// A view that represents the body of a menu.
     associatedtype Body : View
@@ -12208,7 +12231,8 @@ public struct NavigationView<Content> : View where Content : View {
 
 /// A specification for the appearance and interaction of a `NavigationView`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
-public protocol NavigationViewStyle {
+public protocol NavigationViewStyle{ }
+extension NavigationViewStyle {
 }
 
 /// A property wrapper type that subscribes to an observable object and
@@ -13008,7 +13032,8 @@ extension Picker where Label == Text {
 /// A type that specifies the appearance and interaction of all pickers within
 /// a view hierarchy.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PickerStyle {
+public protocol PickerStyle{ }
+extension PickerStyle {
 }
 
 /// A set of view types that may be pinned to the bounds of a scroll view.
@@ -13131,7 +13156,8 @@ public enum PopoverAttachmentAnchor {
 /// A view with multiple children automatically combines its values for a given
 /// preference into a single value visible to its ancestors.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PreferenceKey {
+public protocol PreferenceKey{ }
+extension PreferenceKey {
 
     /// The type of value produced by this preference.
     associatedtype Value
@@ -13201,7 +13227,8 @@ public struct PresentationMode {
 
 /// A specification for the context of a `PreviewContext`
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol PreviewContext {
+public protocol PreviewContext{ }
+extension PreviewContext {
 
     /// Returns the context's value of `Key`, or `Key.defaultValue`
     /// if the context does not define a value for the key.
@@ -13212,7 +13239,8 @@ public protocol PreviewContext {
 ///
 /// The default value is nil.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol PreviewContextKey {
+public protocol PreviewContextKey{ }
+extension PreviewContextKey {
 
     /// The type of the value returned by the key.
     associatedtype Value
@@ -13374,7 +13402,8 @@ extension PreviewPlatform : Hashable {
 /// Xcode statically discovers types that conform to the ~~PreviewProvider~~
 /// protocol in your app, and generates previews for each provider it discovers.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PreviewProvider : _PreviewProvider {
+public protocol PreviewProvider : _PreviewProvider{ }
+extension PreviewProvider : _PreviewProvider {
 
     /// The type to preview.
     associatedtype Previews : View
@@ -13476,7 +13505,8 @@ extension PreviewProvider {
 ///  }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PrimitiveButtonStyle {
+public protocol PrimitiveButtonStyle{ }
+extension PrimitiveButtonStyle {
 
     /// A view that represents the body of a button.
     associatedtype Body : View
@@ -13776,7 +13806,8 @@ extension ProgressView {
 /// To configure the current progress view style for a view hiearchy, use the
 /// ~~View/progressViewStyle(_:)~~ modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol ProgressViewStyle {
+public protocol ProgressViewStyle{ }
+extension ProgressViewStyle {
 
     /// A view representing the body of a progress view.
     associatedtype Body : View
@@ -14040,7 +14071,8 @@ public struct RedactionReasons : OptionSet {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol ReferenceFileDocument : ObservableObject {
+public protocol ReferenceFileDocument : ObservableObject{ }
+extension ReferenceFileDocument : ObservableObject {
 
     /// A type of the document snapshot that can be used for serialization
     /// in parallel to the main document being editable.
@@ -14552,7 +14584,8 @@ extension RoundedRectangle : InsettableShape {
 ///         }
 ///     }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol Scene {
+public protocol Scene{ }
+extension Scene {
 
     /// The type of the body variable in a scene.
     ///
@@ -15637,7 +15670,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// the natural size of the view that contains it. Alternatively, you can define
 /// shapes in terms of absolute coordinates.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol Shape : Animatable, View {
+public protocol Shape : Animatable, View{ }
+extension Shape : Animatable, View {
 
     /// Describes this shape as a path within a rectangular frame of reference.
     ///
@@ -15922,7 +15956,8 @@ extension Shape {
 
 /// A way to turn a shape into a view.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ShapeStyle {
+public protocol ShapeStyle{ }
+extension ShapeStyle {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -17281,7 +17316,8 @@ extension TabView where SelectionValue == Int {
 
 /// A specification for the appearance and interaction of a `TabView`.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol TabViewStyle {
+public protocol TabViewStyle{ }
+extension TabViewStyle {
 }
 
 /// A gesture that recognizes one or more taps.
@@ -18303,7 +18339,8 @@ extension TextField where Label == Text {
 
 /// A specification for the appearance and interaction of a text field.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol TextFieldStyle {
+public protocol TextFieldStyle{ }
+extension TextFieldStyle {
 }
 
 /// A built-in set of commands for transforming the styles applied to selections
@@ -18473,7 +18510,8 @@ extension Toggle where Label == Text {
 /// To configure the current toggle style for a view hiearchy, use the
 /// ~~View/toggleStyle(_:)~~ modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ToggleStyle {
+public protocol ToggleStyle{ }
+extension ToggleStyle {
 
     /// A view that represents the appearance and interaction of a toggle.
     associatedtype Body : View
@@ -18539,7 +18577,8 @@ public struct ToolbarCommands : Commands {
 /// Conforming types represent items that can be placed in various locations
 /// in a toolbar.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol ToolbarContent {
+public protocol ToolbarContent{ }
+extension ToolbarContent {
 
     /// The type of content representing the body of this toolbar content.
     associatedtype Body : ToolbarContent
@@ -19427,7 +19466,8 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public protocol UIViewControllerRepresentable : View where Self.Body == Never {
+public protocol UIViewControllerRepresentable : View where Self.Body == Never{ }
+extension UIViewControllerRepresentable : View where Self.Body == Never {
 
     /// The type of view controller to present.
     associatedtype UIViewControllerType : UIViewController
@@ -19906,7 +19946,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public protocol UIViewRepresentable : View where Self.Body == Never {
+public protocol UIViewRepresentable : View where Self.Body == Never{ }
+extension UIViewRepresentable : View where Self.Body == Never {
 
     /// The type of view to present.
     associatedtype UIViewType : UIView
@@ -20281,7 +20322,8 @@ extension UserInterfaceSizeClass : Hashable {
 /// this type as the `animatableData` associated type of a type that conforms to
 /// the ~~Animatable~~ protocol.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol VectorArithmetic : AdditiveArithmetic {
+public protocol VectorArithmetic : AdditiveArithmetic{ }
+extension VectorArithmetic : AdditiveArithmetic {
 
     /// Multiplies each component of this value by the given value.
     mutating func scale(by rhs: Double) { }
@@ -20408,7 +20450,8 @@ extension VerticalAlignment {
 /// gray rectangle that hugs the text. A caption reads, "Apply the border
 /// first."](SwiftUI-View-2.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol View {
+public protocol View{ }
+extension View {
 
     /// The type of view representing the body of this view.
     ///
@@ -25731,7 +25774,8 @@ extension ViewDimensions : Equatable {
 ///  caption in blue text surrounded by a rounded
 ///  rectangle.](SwiftUI-View-ViewModifier.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ViewModifier {
+public protocol ViewModifier{ }
+extension ViewModifier {
 
     /// The type of view representing the body.
     associatedtype Body : View
@@ -25844,7 +25888,8 @@ public struct WheelPickerStyle : PickerStyle {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol Widget {
+public protocol Widget{ }
+extension Widget {
 
     /// The type of configuration representing the content of the widget.
     ///
@@ -25883,7 +25928,8 @@ public protocol Widget {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol WidgetBundle {
+public protocol WidgetBundle{ }
+extension WidgetBundle {
 
     /// The type of widget that represents the content of the bundle.
     ///
@@ -25987,7 +26033,8 @@ extension WidgetBundleBuilder {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol WidgetConfiguration {
+public protocol WidgetConfiguration{ }
+extension WidgetConfiguration {
 
     /// The type of widget configuration representing the body of
     /// this configuration.
