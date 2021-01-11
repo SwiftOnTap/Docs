@@ -12115,15 +12115,15 @@ extension NavigationLink {
 ///
 /// For example, the following adds "🍌🍌" to the leading area, and "🍏🍏" to the trailing area:
 ///
-/// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-7.png)
+/// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-11.png)
 ///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
 ///             Text("Hello Bananas🍌🍌")
+///                  .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///         }
-///         .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///     }
 /// }
 /// ```
