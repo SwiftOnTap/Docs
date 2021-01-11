@@ -10373,7 +10373,7 @@ extension Link where Label == Text {
 ///     var body: some View {
 ///         NavigationView {
 ///             List {
-///                 ForEach(fruits, id: \.self) { fruit in
+///                 ForEach(fruits, id: /\.self) { fruit in
 ///                     Text(fruit)
 ///                 }
 ///                 .onDelete { offets in
