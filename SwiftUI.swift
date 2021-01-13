@@ -11968,6 +11968,10 @@ extension NavigationLink {
 ///
 /// `NavigationView`is a container that adds stack-based navigation to a view, along with a (optional) navigation bar.
 ///
+/// ### Examples
+///
+/// ![Navigation View App](https://swiftwithmajid.com/public/sidebar.png)
+///
 /// ### Setting up a navigation stack
 ///
 /// A navigation stack is set up simply by wrapping your view in a `NavigationView`
