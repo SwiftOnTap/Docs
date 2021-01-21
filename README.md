@@ -1,7 +1,7 @@
 # BananaDocs
 SwiftUI Documentation Project 
 
-This project is a massive undertaking! Our dream is for this to be a fully community maintained project – where the community earns 100% of their banana🍌 work.
+This project is a massive undertaking! Our dream is for this to be a fully community maintained project 🙂.
 
 ## How to Contribute
 
@@ -12,8 +12,7 @@ It's really important to follow the [Documentation Template](https://github.com/
 
 This is a great example of a fully documented page: [Button Style](https://github.com/BananaDocs/BananaDocs/wiki/ButtonStyle-Documentation-Example)
 
-If you want to see the current status of documentation, feel free to check out [BananaDocs](https://bananadocs.org)
+If you want to see the current status of documentation, check out [BananaDocs](https://bananadocs.org)
 
-We're really excited to provide this for the community and hope to finish documenting with your help!!
-
+We're super excited by the possibility of fully community maintained documentation website 😄
 
