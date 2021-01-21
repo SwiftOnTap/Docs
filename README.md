@@ -10,6 +10,8 @@ Documentation additions should be written directly in the comment blocks of the 
 
 It's really important to follow the [Documentation Template](https://github.com/BananaDocs/BananaDocs/wiki/Documentation-Template) when making any changes. 
 
+This is a great example of a fully documented page: [Button Style](https://github.com/BananaDocs/BananaDocs/wiki/ButtonStyle-Documentation-Example)
+
 If you want to see the current status of documentation, feel free to check out [BananaDocs](https://bananadocs.org)
 
 We're really excited to provide this for the community and hope to finish documenting with your help!!
