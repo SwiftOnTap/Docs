@@ -2532,7 +2532,6 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///         }
 ///     }
 /// }
-
 /// ```
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
