@@ -1,7 +1,7 @@
 # BananaDocs
 SwiftUI Documentation Project 
 
-This project is a massive undertaking! Our dream is for this to be a fully community maintained project 🙂.
+This project is a massive undertaking! We want this to be a fully community maintained project 🙂.
 
 ## How to Contribute
 
