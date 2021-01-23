@@ -1,7 +1,8 @@
+<h1 align="center"> <a href= "https://bananadocs.org"> Banana🍌 Docs </a> </h1>
+
 > <h3 align="center"> "That's the one truth of anything anywhere, Apple documentation sucks" – @aazav </h3>
 > <h2 align="center"> <b>Now, you can edit them. </b></h2> 
 
-<h1 align="center"> <a href= "https://bananadocs.org"> Banana🍌 Docs </a> </h1>
 
 
 ## How It Works
