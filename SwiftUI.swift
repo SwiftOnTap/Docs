@@ -20468,7 +20468,33 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Sets the style for date pickers within this view.
+    /// The view modifier that changes a date picker's style.
+    ///
+    /// Use this modifier to change the style of a view hierarchy's date pickers.
+    ///
+    /// There are currently 5 date picker styles:
+    /// - ``DefaultDatePickerStyle`` on iOS and macOS
+    /// - ``WheelDatePickerStyle`` on iOS
+    /// - ``FieldDatePickerStyle`` on macOS
+    /// - ``GraphicalDatePickerStyle`` on macOS
+    /// - ``StepperFieldDatePickerStyle`` on macOS
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var selectedDate = Date()
+    ///
+    ///         var body: some View {
+    ///             DatePicker(selection: $selectedDate) {
+    ///                 Text("Date")
+    ///             }
+    ///             .datePickerStyle(WheelDatePickerStyle())
+    ///         }
+    ///     }
+    ///
+    ///
+    /// - Parameters:
+    ///   - style: The desired date picker style, conforming to ``DatePickerStyle``.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func datePickerStyle<S>(_ style: S) -> some View where S : DatePickerStyle { }
@@ -20478,17 +20504,62 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Presents a sheet using the given item as a data source
-    /// for the sheet's content.
+    /// The view modifier that presents a sheet when a given value is not nil.
+    ///
+    /// Use this modifier to present a sheet over the current view when you need to pass the sheet a value.
+    /// The sheet will be presented only when the binding value you pass it is not nil.
+    ///
+    /// If your sheet doesn't need an `item` parameter, use
+    /// ``View/sheet(isPresented:onDismiss:content)`` instead.
+    ///
+    ///
+    /// For a sheet-like view that takes up the full screen, use
+    /// ``View/fullScreenCover(item:onDismiss:content)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let text: String
+    ///     }
+    ///
+    ///     struct ContentView: View {
+    ///         @State private var item: Item? = nil
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Button("🍌 Sheet") {
+    ///                     item = Item(text: "🍌🍌")
+    ///                 }
+    ///                 Button("🍑 Sheet") {
+    ///                     item = Item(text: "🍑🍑")
+    ///                 }
+    ///            }
+    ///              .sheet(item: $item,
+    ///                     onDismiss: { print("dismissed!") },
+    ///                     content: { ExampleSheet(item: $0) })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         let item: Item
+    ///         @Environment (\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text(item.text)
+    ///                 Button("Tap to Dismiss") {
+    ///                     presentationMode.wrappedValue.dismiss()
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - item: A binding to an optional source of truth for the sheet.
-    ///     When representing a non-`nil` item, the system uses `content` to
-    ///     create a sheet representation of the item.
-    ///     If the identity changes, the system dismisses a
-    ///     currently-presented sheet and replaces it with a new sheet.
-    ///   - onDismiss: A closure executed when the sheet dismisses.
-    ///   - content: A closure returning the content of the sheet.
+    ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
+    ///   when this value is not `nil`.
+    ///   - onDismiss: A function that runs when the sheet disappears.
+    ///   - content: A view builder closure that takes in the `item` and returns the sheet.
     public func sheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
 
 
@@ -20506,22 +20577,99 @@ extension View {
 @available(macOS, unavailable)
 extension View {
 
-    /// Presents a modal view that covers as much of the screen as
-    /// possible using the given item as a data source for the sheet's content.
+    /// The view modifier that presents an overlaid full screen view.
+    ///
+    /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
+    /// and exits the screen from the bottom.
+    ///
+    /// If your full screen cover does not need a parameter, use
+    /// ``View/fullScreenCover(isPresented:onDismiss:content:)`` instead.
+    ///
+    /// For a cover view that does not take up the full screen, use
+    /// ``View/sheet(item:onDismiss:content:)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let text: String
+    ///     }
+    ///
+    ///     struct ContentView: View {
+    ///         @State private var item: Item? = nil
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Button("🍌 Sheet") {
+    ///                     item = Item(text: "🍌🍌")
+    ///                 }
+    ///                 Button("🍑 Sheet") {
+    ///                     item = Item(text: "🍑🍑")
+    ///                 }
+    ///            }
+    ///              .fullScreenCover(item: $item,
+    ///                     onDismiss: { print("dismissed!") },
+    ///                     content: { ExampleSheet(item: $0) })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         let item: Item
+    ///         @Environment (\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text(item.text)
+    ///                 Button("Tap to Dismiss") {
+    ///                     presentationMode.wrappedValue.dismiss()
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - item: A binding to an optional source of truth for the cover
-    ///     modal view. When representing a non-nil item, the system uses
-    ///     `content` to create a modal representation of the item.
-    ///     If the identity of `item` changes, the system will dismiss a
-    ///     currently-presented modal view and replace it by a new modal view.
-    ///   - onDismiss: A closure executed when the modal view dismisses.
-    ///   - content: A closure returning the content of the modal view.
+    ///   - item: A binding value passed to `content` to build the full screen cover. The full screen
+    ///   cover will show when the value is not `nil`.
+    ///   - onDismiss: A function that runs when the sheet disappears.
+    ///   - content: A view builder closure that takes in the `item` and returns the full screen cover.
     public func fullScreenCover<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
 
 
-    /// Presents a modal view that covers as much of the screen as
-    /// possible when a given condition is true.
+    /// The view modifier that presents an overlaid full screen view.
+    ///
+    /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
+    /// and exits the screen from the bottom.
+    ///
+    /// If your full screen cover needs a custom parameter, use
+    /// ``View/fullScreenCover(item:onDismiss:content:)`` instead.
+    ///
+    /// For a cover view that does not take up the full screen, use
+    /// ``View/sheet(item:onDismiss:content:)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showCover: Bool = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showCover = true
+    ///             }
+    ///             .fullScreenCover(isPresented: $showCover,
+    ///                 onDismiss: { print("dismissed!") },
+    ///                 content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the modal view is presented.
@@ -20534,8 +20682,32 @@ extension View {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 14.0, *)
 extension View {
 
-    /// Adds an action to perform when this view recognizes a long press
-    /// gesture.
+    /// The view modifier that calls a function after a long press.
+    ///
+    /// Use this modifier to call a function when the user long presses on a view.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var pressed = false
+    ///         @State private var longPressed = false
+    ///
+    ///         var body: some View {
+    ///             Text(longPressed ? "✅" : "Press me")
+    ///                 .font(.title)
+    ///                 .background(pressed ? Color.green : Color.clear)
+    ///                 .onLongPressGesture(minimumDuration: 1.0,
+    ///                     maximumDistance: 5,
+    ///                     pressing: { pressing in pressed = pressing },
+    ///                     perform: { longPressed.toggle() })
+    ///         }
+    ///     }
+    ///
+    /// - Parameters:
+    ///   - minimumDuration: How long it takes to detect a long press.
+    ///   - maximumDistance: How far the user can drag before the long press is canceled.
+    ///   - pressing: A closure takes in whether the view is being pressed.
+    ///   - action: A closure called when the long press happens.
     @available(tvOS, unavailable)
     public func onLongPressGesture(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10, pressing: ((Bool) -> Void)? = nil, perform action: @escaping () -> Void) -> some View { }
 
