@@ -9,7 +9,7 @@ This project is a massive undertaking! We want this to be a fully community main
 ### 1. You edit code & submit PR 
 ![Edit code](https://i.ibb.co/HYLx4JR/Screen-Shot-2021-01-22-at-2-42-29-PM.jpg)
 ### 2. We merge PR & wesbite auto updated 
-![AWS](https://i.ibb.co/6DLcHkS/aws-logo-smile-1200x630.png)
+![Pipeline](https://i.ibb.co/L51XLc8/Screen-Shot-2021-01-22-at-5-30-40-PM.png)
 ### 3. Your Work is live! 
 ![Banana Docs](https://i.ibb.co/wpQHbPj/Screen-Shot-2021-01-22-at-2-08-24-PM.jpg)
 
