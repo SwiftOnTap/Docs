@@ -6,11 +6,11 @@ This project is a massive undertaking! We want this to be a fully community main
 
 ## How Banana🍌 Works
 
-1. You edit the code & submit a PR 
+### 1. You edit code & submit PR 
 ![Edit code](https://i.ibb.co/HYLx4JR/Screen-Shot-2021-01-22-at-2-42-29-PM.jpg)
-2. We merge your PR & it's auto uploaded  
+### 2. We merge PR & wesbite auto updated 
 ![AWS](https://i.ibb.co/6DLcHkS/aws-logo-smile-1200x630.png)
-3. Your work is live! 
+### 3. Your Work is live! 
 ![Banana Docs](https://i.ibb.co/wpQHbPj/Screen-Shot-2021-01-22-at-2-08-24-PM.jpg)
 
 
