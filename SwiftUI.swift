@@ -2756,7 +2756,6 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///         }
 ///     }
 /// }
-
 /// ```
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
@@ -6908,42 +6907,547 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
     public typealias Indices = Range<Int>
 }
 
-/// A document model definition used to serialize documents to and from file
-/// contents.
+/// The protocol used to serialize a document to and from a file.
 ///
-/// Conformance to `FileDocument` is expected to have value semantics and be
-/// thread-safe. Serialization and deserialization will be done on a background
-/// thread.
+/// Conform to this protocol to move a document between its file representation and its "swift-usable"
+/// representation.
+///
+/// This protocol is very similar to ``ReferenceFileDocument``, with the difference being whether the data
+/// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
+/// - `struct` --> ``FileDocument``
+/// - `class` --> `ReferenceFileDocument`
+///
+/// Don't worry about thread safety when using `ReferenceFileDocument`, since
+/// deserialization and serialization are done on a background thread.
+///
+/// - Note: If your app will have documents, it very likely will be easiest to begin from Apple's own
+/// Document app template. To do this, go to *File > New > Project*, and then use *Document App*.
+///
+/// ### Example
+///
+/// #### App structure
+///
+/// To begin, update the scene definition to use ``DocumentGroup``.
+///
+///     import SwiftUI
+///
+///     @main
+///     struct ExampleApp: App {
+///         var body: some Scene {
+///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+///                 ContentView(document: file.$document)
+///             }
+///         }
+///     }
+///
+/// #### FileDocument conformance
+///
+/// Next, conform to the `FileDocument` protocol by implementing these properties:
+/// - A: ``FileDocument/readableContentTypes``
+/// - B: ``FileDocument/init(configuration:)``
+/// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     struct ExampleDocument: FileDocument {
+///         var text: String
+///
+///         init(text: String = "This is a brand new document! 📃") {
+///             self.text = text
+///         }
+///
+///         // A
+///         static var readableContentTypes: [UTType] { [.exampleText] }
+///
+///         // B
+///         init(configuration: ReadConfiguration) throws {
+///             guard let data = configuration.file.regularFileContents,
+///                 let string = String(data: data, encoding: .utf8)
+///             else {
+///                 throw CocoaError(.fileReadCorruptFile)
+///             }
+///             text = string
+///         }
+///
+///         // C
+///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///             let data = text.data(using: .utf8)!
+///             return .init(regularFileWithContents: data)
+///         }
+///     }
+///
+/// #### View implementation
+///
+/// Finally, use the ``TextEditor`` view to edit the document file.
+///
+///     import SwiftUI
+///
+///     struct ExampleView: View {
+///         @Binding var document: ExampleDocument
+///
+///         var body: some View {
+///             TextEditor(text: $document.text)
+///         }
+///     }
+///
+/// #### UTType settings
+///
+/// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+/// follow these steps:
+/// 1. Go to the Xcode project settings.
+/// 2. Click on your target to the left.
+/// 3. Expand the "Document Types" tab.
+/// 4. Click *"Click here to add additional document type properties"*
+/// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+/// 6. Ensure the **Type** is *String*.
+/// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+/// 8. Change the **Types** (top right) to *com.example.plain-text*.
+///
+///
+/// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     extension UTType {
+///         static var exampleText: UTType {
+///             UTType(importedAs: "com.example.plain-text")
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol FileDocument{ }
 extension FileDocument {
 
-    /// The types the document is able to open.
+    /// The file types the ``FileDocument`` document is able to open.
+    ///
+    /// The readable types of a document should be specified in its declaration. Often,
+    /// the process of creating a document-based app requires a custom UTType object.
+    ///
+    /// In the following example, we create a custom readable content type called `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     static var readableContentTypes: [UTType] { get }
 
-    /// The types the document is able to save or export to.
+    /// The file types that a file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     static var writableContentTypes: [UTType] { get }
 
-    /// Initialize self by reading from the contents of a given `ReadConfiguration`.
+    /// Initialize the file document from the contents of a file.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn how to use the configuration parameter.
+    ///
+    /// In the following example, the initializer parses the configuration parameter
+    /// to pull out the simple text `String` from the document.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     init(configuration: Self.ReadConfiguration) throws { }
 
-    /// The configuration for reading document contents.
+    /// A type alias for referring to the configuration for reading document contents.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn everything about what this
+    /// type alias refers to within the ``FileDocument`` protocol.
+    ///
+    /// This type alias is primarily used in the protocol's required initializer,
+    /// ``FileDocument/init(configuration:)``
+    /// as the type of its configuration parameter.
     typealias ReadConfiguration = FileDocumentReadConfiguration
 
-    /// Serialize the document to file contents for a specified `configuration`.
-    /// - Parameter configuration: the configuration for the current document
-    ///   contents.
+    /// Serialize the document with the specified configuration.
     ///
-    /// - Returns: The destination to serialize the document contents to. The
-    ///   value can be a newly created `FileWrapper` or an updated `FileWrapper`
-    ///   of the one provided in `configuration`.
+    /// This is essentially the "saving" function in a file document.
+    ///
+    /// In the following example, the `fileWrapper(snapshot:configuration:)` function
+    /// simply uses the struct's `text` variable to create a new ``FileWrapper`` object.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: The ``FileDocumentWriteConfiguration`` used
+    /// to serialize the document.
+    ///
+    /// - Returns: The destination for the serialized the document. It can be a newly created
+    /// ``FileWrapper` or an updated ``FileWrapper` from the one provided by `configuration`.
     func fileWrapper(configuration: Self.WriteConfiguration) throws -> FileWrapper { }
 
-    /// The configuration for serializing document contents.
+    /// A type alias used for the configuration when writing a file document.
+    ///
+    /// Since this is just a type alias, see ``FileDocumentWriteConfiguration`` for
+    /// full information on what this type does.
     typealias WriteConfiguration = FileDocumentWriteConfiguration
 }
 
@@ -6952,9 +7456,105 @@ extension FileDocument {
 @available(watchOS, unavailable)
 extension FileDocument {
 
-    /// The types the document is able to save or export to.
+    /// The types that a file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     public static var writableContentTypes: [UTType] { get }
 }
 
@@ -14063,62 +14663,808 @@ public struct RedactionReasons : OptionSet {
     public typealias RawValue = Int
 }
 
-/// A document model definition used to serialize reference type documents to
-/// and from file contents.
+/// The protocol used to serialize a reference type document to and from a file.
 ///
-/// Conformance to `ReferenceFileDocument` is expected to be thread-safe, and
-/// deserialization and serialization will be done on a background thread.
+/// Conform to this protocol to move a document between its file representation and its "swift-usable"
+/// representation.
+///
+/// This protocol is very similar to ``FileDocument``, with the difference being whether the data
+/// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
+/// - `struct` --> ``FileDocument``
+/// - `class` --> `ReferenceFileDocument`
+///
+/// While the two protocols are similar, `ReferenceFileDocument` has the unique challenge
+/// of the user editing a document while it is being written to a file. For this reason,
+/// ``ReferenceFileDocument/snapshot`` must be used. See the example for more details.
+///
+/// Don't worry about thread safety when using `ReferenceFileDocument`, since
+/// deserialization and serialization are done on a background thread.
+///
+/// - Note: If your app will have documents, it very likely will be easiest to begin from Apple's own
+/// Document app template. To do this, go to *File > New > Project*, and then use *Document App*.
+///
+/// ### Example
+///
+/// #### App structure
+///
+/// To begin, update the scene definition to use ``DocumentGroup``.
+///
+///     import SwiftUI
+///
+///     @main
+///     struct ExampleApp: App {
+///         var body: some Scene {
+///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+///                 ContentView(document: file.document)
+///             }
+///         }
+///     }
+///
+/// #### ReferenceFileDocument conformance
+///
+/// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+/// - A: ``ReferenceFileDocument/readableContentTypes``
+/// - B: ``ReferenceFileDocument/init(configuration:)``
+/// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+/// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     class ExampleDocument: ReferenceFileDocument {
+///         @Published var text: String
+///
+///         init(text: String = "This is a brand new document! 📃") {
+///             self.text = text
+///         }
+///
+///         // A
+///         static var readableContentTypes: [UTType] { [.exampleText] }
+///
+///         // B
+///         required init(configuration: ReadConfiguration) throws {
+///             guard let data = configuration.file.regularFileContents,
+///                 let string = String(data: data, encoding: .utf8)
+///             else {
+///                 throw CocoaError(.fileReadCorruptFile)
+///             }
+///             text = string
+///         }
+///
+///         // C
+///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+///             let data = snapshot.data(using: .utf8)!
+///             return .init(regularFileWithContents: data)
+///         }
+///
+///         // D
+///         func snapshot(contentType: UTType) throws -> String {
+///             return text
+///         }
+///     }
+///
+/// #### View implementation
+///
+/// Finally, use the ``TextEditor`` view to edit the document file.
+///
+///     import SwiftUI
+///
+///     struct ExampleView: View {
+///         @ObservedObject var document: ExampleDocument
+///         var body: some View {
+///             TextEditor(text: $document.text)
+///         }
+///     }
+///
+/// #### UTType settings
+///
+/// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+/// follow these steps:
+/// 1. Go to the Xcode project settings.
+/// 2. Click on your target to the left.
+/// 3. Expand the "Document Types" tab.
+/// 4. Click *"Click here to add additional document type properties"*
+/// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+/// 6. Ensure the **Type** is *String*.
+/// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+/// 8. Change the **Types** (top right) to *com.example.plain-text*.
+///
+///
+/// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     extension UTType {
+///         static var exampleText: UTType {
+///             UTType(importedAs: "com.example.plain-text")
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol ReferenceFileDocument : ObservableObject{ }
 extension ReferenceFileDocument : ObservableObject {
 
-    /// A type of the document snapshot that can be used for serialization
+    /// The type of the the document snapshot used for serialization
     /// in parallel to the main document being editable.
     ///
-    /// - See Also: `snapshot(contentType:)`
+    /// This associated type is resolved when a class conforming to the ``ReferenceFileDocument``
+    /// protocol implements the required
+    /// ``ReferenceFileDocument/snapshot(contentType:)`` method.
+    /// It is the return type of this function.
+    ///
+    /// In the following example, the `snapshot(contentType:)` method returns a `String`,
+    /// so the associated type `Snapshot` would resolve to `String`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     associatedtype Snapshot
 
-    /// The types the document is able to open.
+    /// The types the ``ReferenceFileDocument`` document is able to open.
+    ///
+    /// The readable types of a document should be specified in its declaration. Very often,
+    /// the process of creating a document-based app requires a custom UTType object.
+    ///
+    /// In the following example, we create a custom readable content type called `exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     static var readableContentTypes: [UTType] { get }
 
-    /// The types the document is able to save or export to.
+    /// The types that a reference file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     static var writableContentTypes: [UTType] { get }
 
-    /// Initialize self by reading from the contents of a given `ReadConfiguration`.
+    /// Initialize the reference file document from the contents of a file.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn how to use the configuration parameter.
+    ///
+    /// In the following example, the required initializer parses the configuration parameter
+    /// to pull out the simple text `String` from the document.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: The read-configuration for creating a reference file document.
     init(configuration: Self.ReadConfiguration) throws { }
 
-    /// The configuration for reading document contents.
+    /// A type alias for referring to the configuration for reading document contents.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn everything about what this
+    /// type alias refers to within the ``ReferenceFileDocument`` protocol.
+    ///
+    /// This type alias is primarily used in the protocol's required initializer,
+    /// ``ReferenceFileDocument/init(configuration:)``
+    /// as the type of its configuration parameter.
     typealias ReadConfiguration = FileDocumentReadConfiguration
 
-    /// Create a snapshot of the current state of the document, which will be
-    /// used for serialization while `self` becomes editable by the user.
+    /// Creates a snapshot of the current document, which will be
+    /// used for serialization, while `self` becomes editable by the user.
     ///
-    /// When saving a `ReferenceFileDocument`, edits to the document are blocked
-    /// until snapshot with a copy of any mutable references can be created.
+    /// Taking a snapshot of the document is necessary because the data is stored as a reference
+    /// type. This means that if a separate snapshot was not taken, the user could potentially edit
+    /// the data while it's in the process of being serialized.
+    /// See ``ReferenceFileDocument`` for more information on this.
+    ///
+    /// A `ReferenceFileDocument` blocks edits to the document while it's being saved
+    /// until snapshot can be created
     /// Once the snapshot is created, the document becomes editable in parallel
-    /// to the snapshot being serialized using `write(snaphot:to:contentType:)`.
+    /// to the snapshot being serialized.
+    ///
+    /// The following example shows how to use
+    /// ``ReferenceFileDocument/snapshot(contentType:)``
+    /// along with the rest of the required methods to create a document-based app.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
     ///
     /// - Parameter contentType: The content type being written, for which the
     ///   snapshot should be created.
     func snapshot(contentType: UTType) throws -> Self.Snapshot { }
 
-    /// Serialize the snapshot to file contents for a specified `type`.
+    /// Serializes the document from a snapshot with the specified configuration.
+    ///
+    /// This is essentially the "saving" function in a reference file document.
+    ///
+    /// In the following example, the `fileWrapper(snapshot:configuration:)` function
+    /// simply uses the snapshot to save a new ``FileWrapper`` object.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - snapshot: The snapshot of the document containing the state required
-    ///     to be saved.
-    ///   - configuration: The configuration for the current document contents.
+    ///   - snapshot: A snapshot of the document with the data to serialize.
+    ///   - configuration: The ``FileDocumentWriteConfiguration`` used to serialize the document.
     ///
-    /// - Returns: The destination to serialize the document contents to. The
-    ///   value can be a newly created `FileWrapper` or an updated `FileWrapper`
-    ///   of the one provided in `configuration`.
+    /// - Returns: The destination for the serialized the document. It can be a newly created
+    /// ``FileWrapper` or an updated ``FileWrapper` from the one provided by `configuration`.
     func fileWrapper(snapshot: Self.Snapshot, configuration: Self.WriteConfiguration) throws -> FileWrapper { }
 
-    /// The configurations for serializing document contents.
+    /// A type alias used for the configuration when writing a reference file document.
+    ///
+    /// Since this is just a type alias, see ``FileDocumentWriteConfiguration`` for
+    /// full information on what this type does.
     typealias WriteConfiguration = FileDocumentWriteConfiguration
 }
 
@@ -14127,9 +15473,110 @@ extension ReferenceFileDocument : ObservableObject {
 @available(watchOS, unavailable)
 extension ReferenceFileDocument {
 
-    /// The types the document is able to save or export to.
+    /// The types that a reference file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     public static var writableContentTypes: [UTType] { get }
 }
 
@@ -20715,24 +22162,34 @@ extension View {
 
 extension View {
 
-    /// Sets whether to disable autocorrection for this view.
+    /// The view modifier that disables autocorrection.
     ///
-    /// Use `disableAutocorrection(_:)` when the effect of autocorrection would
-    /// make it more difficult for the user to input information. The entry of
-    /// proper names and street addresses are examples where autocorrection can
-    /// negatively affect the user's ability complete a data entry task.
+    /// Use this modifier when the  autocorrection in a text field would
+    /// make it more difficult for the user to input information. Some examples of where this
+    /// might be the case include:
+    /// - proper names
+    /// - street addresses
     ///
-    /// In the example below configures a `TextField` with the `.default`
-    /// keyboard. Disabling autocorrection allows the user to enter arbitrary
+    /// - Note: If the user has turned *off* autocorrection in their device settings, there is no way
+    /// to use this modifier to force autocorrection to turn *on*.
+    ///
+    /// In the example below, disabling autocorrection allows the user to enter their
     /// text without the autocorrection system offering suggestions or
     /// attempting to override their input.
     ///
-    ///     TextField("1234 Main St.", text: $address)
-    ///         .keyboardType(.default)
-    ///         .disableAutocorrection(true)
+    ///     struct ExampleView: View {
+    ///         @State private var address1 = ""
+    ///         @State private var address2 = ""
     ///
-    /// - Parameter enabled: A Boolean value that indicates whether
-    ///   autocorrection is disabled for this view.
+    ///         var body: some View {
+    ///             TextField("1234 Main St.", text: $address1)
+    ///                 .disableAutocorrection(true)
+    ///             TextField("Label this address", text: $address2)
+    ///                 .disableAutocorrection(false)
+    ///         }
+    ///     }
+    ///
+    /// - Parameter disable: Whether autocorrection is disabled for the view.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
     @available(watchOS, unavailable)
     public func disableAutocorrection(_ disable: Bool?) -> some View { }
@@ -20754,8 +22211,26 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Provides a closure that vends the drag representation to be used for a
-    /// particular data element.
+    /// The view modifier that sets the item provider used for drag and drop.
+    ///
+    /// Use this modifier to set the item provider when dragging and dropping a view. This is most
+    /// commonly used on larger screen sizes like iPad and Mac.
+    ///
+    /// The example below uses system images in a ``List`` view to drag and drop onto the Photos
+    /// app.
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             List {
+    ///                 Label("Mustache", systemImage: "mustache")
+    ///                     .itemProvider {
+    ///                         NSItemProvider(object:  UIImage(systemName: "mustache")!)
+    ///                     }
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter action: A function that returns an NSItemProvider.
     @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
 
 }
@@ -20763,7 +22238,44 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a condition for whether the view's view hierarchy is deletable.
+    /// The view modifier that disables a list item's delete action.
+    ///
+    /// Use this modifier to disable a list item's delete action. When a list is editable, swiping left
+    /// on it will expose a red "DELETE" button. To disable this feature on specific items in the list,
+    /// use this modifier.
+    ///
+    /// In the following example, only the first item can be deleted.
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let name: String
+    ///         let undeletable: Bool
+    ///     }
+    ///
+    ///     class Model: ObservableObject {
+    ///         @Published var rows: [Item] = [
+    ///             Item(name: "Swipe ⬅️ to delete me", undeletable: false),
+    ///             Item(name: "Try deleting me, you can't 😊", undeletable: true),
+    ///         ]
+    ///     }
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject private var model = Model()
+    ///
+    ///         var body: some View {
+    ///             List {
+    ///                 ForEach(model.rows) { item in
+    ///                     Text(item.name)
+    ///                         .deleteDisabled(item.undeletable)
+    ///                 }
+    ///                 .onDelete { offsets in
+    ///                     model.rows.remove(atOffsets: offsets)
+    ///                 }
+    ///             }
+    ///        }
+    ///     }
+    ///
+    /// - Parameter isDisabled: Whether the view's delete functionality is disabled.
     @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { }
 
 }
@@ -20771,7 +22283,48 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a condition for whether the view's view hierarchy is movable.
+    /// The view modifier that disables a list item's "move" action.
+    ///
+    /// Use this modifier to disable a list item's move action. When enabled, putting a list into edit mode
+    /// will expose 3 lines on the right side. The user will then be able to move the row around in the list.
+    /// To disable this feature on specific items in the list, use this modifier.
+    ///
+    /// In the following example, only the first item can be moved.
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let name: String
+    ///         let unmovable: Bool
+    ///     }
+    ///
+    ///     class Model: ObservableObject {
+    ///         @Published var rows: [Item] = [
+    ///             Item(name: "Move me! ↕️", unmovable: false),
+    ///             Item(name: "I'm fixed as a rock 🗿", unmovable: true)
+    ///         ]
+    ///     }
+    ///
+    ///     struct ContentView: View {
+    ///         @ObservedObject private var model = Model()
+    ///
+    ///         var body: some View {
+    ///             NavigationView {
+    ///                 List {
+    ///                     ForEach(model.rows) { item in
+    ///                         Text(item.name)
+    ///                             .moveDisabled(item.unmovable)
+    ///                     }
+    ///                     .onMove { source, destination in
+    ///                         model.rows.move(fromOffsets: source,
+    ///                                         toOffset: destination)
+    ///                     }
+    ///                 }
+    ///                 .navigationBarItems(trailing: EditButton())
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter isDisabled: Whether the view's move functionality is disabled.
     @inlinable public func moveDisabled(_ isDisabled: Bool) -> some View { }
 
 }
@@ -20781,18 +22334,28 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Activates this view as the source of a drag and drop operation.
+    /// The view modifier that makes a view draggable by providing dragged info.
     ///
-    /// Applying the `onDrag(_:)` modifier adds the appropriate gestures for
-    /// drag and drop to this view. When a drag operation begins, a rendering of
-    /// this view is generated and used as the preview image.
+    /// Use this modifier to add the appropriate gestures for
+    /// drag and drop to a view. When a dragging begins, a rendering of
+    /// the view is generated and used as the preview image.
     ///
-    /// - Parameter data: A closure that returns a single
-    /// <doc://com.apple.documentation/documentation/Foundation/NSItemProvider> that
-    /// represents the draggable data from this view.
+    /// In the following simple example, the image view can be dragged.
     ///
-    /// - Returns: A view that activates this view as the source of a drag and
-    ///   drop operation, beginning with user gesture input.
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Image(systemName: "mustache")
+    ///                 .onDrag {
+    ///                     NSItemProvider(object: UIImage(systemName: "mustache")!)
+    ///                 }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter data: A function that returns an
+    /// [NSItemProvider](https://developer.apple.com/documentation/foundation/nsitemprovider)
+    /// object storing draggable data from a view.
+    ///
+    /// - Returns: A view that can be used as the source of drag and drop.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrag(_ data: @escaping () -> NSItemProvider) -> some View { }
