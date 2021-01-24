@@ -2505,6 +2505,21 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 
 /// A button style that doesn't apply a border.
 ///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+/// ```
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("PlainBanana🍌🍌", action: {}).buttonStyle(PlainButtonStyle())
+///                  Button("BorderlessBanana🍌🍌", action: {}).buttonStyle(BorderlessButtonStyle())
+///                  Button("DefaultBanana🍌🍌", action: {}).buttonStyle(DefaultButtonStyle())
+///           
+///              }.font(.title2)
+///          }
+///      }
+/// ```
+///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// `View/buttonStyle(_:)-66fbx` modifier.
 @available(iOS 13.0, macOS 10.15, *)
@@ -3897,6 +3912,20 @@ extension CommandsBuilder {
 /// This style is useful when space is constrained and users expect to
 /// make specific date and time selections. Some variants may include rich
 /// editing controls in a popup.
+///
+/// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///          var body: some View {     
+///             DatePicker("Date",selection: $date)
+///              .datePickerStyle(CompactDatePickerStyle())
+///              .padding()
+///          }
+///      }
+/// ```
+///
 @available(iOS 14.0, macCatalyst 13.4, macOS 10.15.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4452,6 +4481,21 @@ extension DatePickerStyle {
 /// If you create a button directly on a blank canvas, the style varies by
 /// platform. iOS uses the borderless button style by default, whereas macOS,
 /// tvOS, and watchOS use the bordered button style.
+/// 
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+/// ```
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("PlainBanana🍌🍌", action: {}).buttonStyle(PlainButtonStyle())
+///                  Button("BorderlessBanana🍌🍌", action: {}).buttonStyle(BorderlessButtonStyle())
+///                  Button("DefaultBanana🍌🍌", action: {}).buttonStyle(DefaultButtonStyle())
+///           
+///              }.font(.title2)
+///          }
+///      }
+/// ```
 ///
 /// If you create a button inside a container, like a `List`, the style
 /// resolves to the recommended style for buttons inside that container for that
@@ -4480,6 +4524,20 @@ public struct DefaultButtonStyle : PrimitiveButtonStyle {
 }
 
 /// The default `DatePicker` style.
+///
+/// ![DefaultDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///          var body: some View {     
+///              DatePicker("Date",selection: $date)
+///              .datePickerStyle(DefaultDatePickerStyle())
+///              .padding()
+///          }
+///      }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4492,6 +4550,24 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 }
 
 /// The default `GroupBoxStyle`.
+///
+/// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
+/// 
+/// ```
+///     struct ExampleView: View {
+///         @State var date: Date = Date()
+///         var body: some View {
+///             GroupBox(
+///             label: Label("Banana🍌🍌", systemImage: "heart.fill")
+///             .foregroundColor(.yellow)
+///             .groupBoxStyle(DefaultGroupBoxStyle())
+///                 ) {
+///              Text("Go Bananas")   
+///              }.padding()
+///         }
+///      }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4517,6 +4593,18 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 }
 
 /// The default label style in the current context.
+///
+/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+/// 
+/// ```
+///    struct ExampleView: View {
+///        @State var date: Date = Date()
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill").labelStyle(DefaultLabelStyle())
+///        }
+///    }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultLabelStyle : LabelStyle {
 
@@ -4538,6 +4626,21 @@ public struct DefaultLabelStyle : LabelStyle {
 
 /// The instance that describes a platform's default behavior and appearance for
 /// a list.
+///
+/// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }.listStyle(DefaultListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultListStyle : ListStyle {
 
@@ -4609,6 +4712,25 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// whether the picker appears in a container view — when setting the appearance
 /// of a picker.
 ///
+/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+/// 
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑" ]
+///         @State private var selectedFruit = 0
+///        var body: some View {
+///             VStack {
+///                 Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                     ForEach(0..<fruits.count) {
+///                         Text(self.fruits[$0])
+///                     }
+///                 }
+///                 Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///             }.pickerStyle(DefaultPickerStyle())
+///         }
+///     }
+/// ```
+///
 /// You can override a picker’s style. To apply the default style to a picker,
 /// or to a view that contains pickers, use the `View/pickerStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -4673,6 +4795,20 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 ///   switch.
 /// - For the Mac idiom, the default toggle style is a checkbox.
 /// - For the TV idom, the default toggle style is a button.
+///
+/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+/// 
+/// ```
+/// struct ExampleView: View {
+///   @State private var status = true
+///        var body: some View {
+///            Toggle(isOn: $status) {
+///                Text("Banana🍌🍌")
+///            }.toggleStyle(DefaultToggleStyle())
+///            .padding()
+///        }
+///    }
+/// ```
 ///
 /// If you create a toggle inside a container, such as a `List`, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
@@ -7359,6 +7495,27 @@ extension Font {
     public func monospacedDigit() -> Font { }
 
     /// Sets the weight of the font.
+    /// 
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// 
+    /// ```
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text("ultraLight 🍌").fontWeight(Font.Weight.ultraLight)
+    ///                 Text("thin🍌").fontWeight(Font.Weight.thin)
+    ///                 Text("light🍌").fontWeight(Font.Weight.light)
+    ///                 Text("regular🍌").fontWeight(Font.Weight.regular)
+    ///                 Text("medium🍌").fontWeight(Font.Weight.medium)
+    ///                 Text("semibold🍌").fontWeight(Font.Weight.semibold)
+    ///                 Text("bold🍌").fontWeight(Font.Weight.bold)
+    ///                 Text("heavy🍌").fontWeight(Font.Weight.heavy)
+    ///                 Text("black🍌").fontWeight(Font.Weight.black)
+    ///            }.font(.title)
+    ///         }
+    ///     }
+    /// ```
+    /// 
     public func weight(_ weight: Font.Weight) -> Font { }
 
     /// Adds bold styling to the font.
@@ -8342,6 +8499,20 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///
 /// This style is useful when wanting to allow browsing through days in a
 /// calendar, or when the look of a clock face is appropriate.
+///
+/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///          var body: some View {     
+///              DatePicker("Date",selection: $date)
+///             .datePickerStyle(GraphicalDatePickerStyle())
+///              .padding()
+///          }
+///      }
+/// ```
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -8616,6 +8787,21 @@ public struct GroupBoxStyleConfiguration {
 }
 
 /// The instance that describes the behavior and appearance of a grouped list.
+///
+/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }.listStyle(GroupedListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -8736,6 +8922,18 @@ public struct HoverEffect {
 }
 
 /// A label style that only displays the icon of the label.
+///
+/// ![IconOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-icon-only-example-1.png)
+/// 
+///
+/// ```
+///    struct ExampleView: View {
+///        @State var date: Date = Date()
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill").labelStyle(IconOnlyLabelStyle())
+///        }
+///    }
+/// ```
 ///
 /// The title of the label is still used for non-visual descriptions, such as
 /// VoiceOver.
@@ -9317,6 +9515,21 @@ public struct InlinePickerStyle : PickerStyle {
 }
 
 /// The instance that describes the behavior and appearance of an inset grouped list.
+///
+/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }.listStyle(InsetGroupedListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -9328,6 +9541,21 @@ public struct InsetGroupedListStyle : ListStyle {
 }
 
 /// The behavior and appearance of an inset list.
+///
+/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }.listStyle(InsetListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -11346,6 +11574,25 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 /// Use this style when there are more than five options. Consider using
 /// `InlinePickerStyle` when there are fewer than five options.
 ///
+/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
+/// 
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
+///         @State private var selectedFruit = 0
+///        var body: some View {
+///             VStack {
+///                 Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                     ForEach(0..<fruits.count) {
+///                         Text(self.fruits[$0])
+///                     }
+///                 }
+///                 Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///             }.pickerStyle(MenuPickerStyle())
+///         }
+///     }
+/// ```
+///
 /// The button itself indicates the selected option. You can include additional
 /// controls in the set of options, such as a button to customize the list of
 /// options.
@@ -13102,6 +13349,21 @@ public struct PinnedScrollableViews : OptionSet {
 /// A button style that doesn't style or decorate its content while idle, but
 /// may apply a visual effect to indicate the pressed, focused, or enabled state
 /// of the button.
+/// 
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+/// ```
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("PlainBanana🍌🍌", action: {}).buttonStyle(PlainButtonStyle())
+///                  Button("BorderlessBanana🍌🍌", action: {}).buttonStyle(BorderlessButtonStyle())
+///                  Button("DefaultBanana🍌🍌", action: {}).buttonStyle(DefaultButtonStyle())
+///           
+///              }.font(.title2)
+///          }
+///      }
+/// ```
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// `View/buttonStyle(_:)-66fbx` modifier.
@@ -13125,6 +13387,21 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 }
 
 /// The instance that describes the behavior and appearance of a plain list.
+///
+/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }.listStyle(PlainListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainListStyle : ListStyle {
 
@@ -15599,6 +15876,26 @@ extension SecureField where Label == Text {
 
 /// A picker style that presents the options in a segmented control.
 ///
+/// ![SegmentedPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-segmented-example-1.gif)
+/// 
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
+///         @State private var selectedFruit = 0
+///        var body: some View {
+///             VStack {
+///                 Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                     ForEach(0..<fruits.count) {
+///                         Text(self.fruits[$0])
+///                     }
+///                 }
+///                 Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///             }.pickerStyle(SegmentedPickerStyle())
+///         }
+///     }
+/// ```
+///
+///
 /// To apply this style to a picker, or to a view that contains pickers, use the
 /// `View/pickerStyle(_:)` modifier.
 ///
@@ -15996,6 +16293,21 @@ public struct SidebarCommands : Commands {
 }
 
 /// The behavior and appearance of a sidebar or source list.
+///
+/// ![SidebarListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-sidebar-example-1.png)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }.listStyle(SidebarListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -17085,6 +17397,20 @@ extension StrokeStyle : Animatable {
 
 /// A toggle style that displays a leading label and a trailing switch.
 ///
+/// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+/// 
+/// ```
+/// struct ExampleView: View {
+///   @State private var status = true
+///        var body: some View {
+///            Toggle(isOn: $status) {
+///                Text("Banana🍌🍌")
+///            }.toggleStyle(SwitchToggleStyle())
+///            .padding()
+///        }
+///    }
+/// ```
+///
 /// To apply this style to a toggle, or to a view that contains toggles, use the
 /// `View/toggleStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
@@ -17629,8 +17955,21 @@ extension Text {
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Text {
-
+    /// 
+    /// ![plus Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-plus-example-1.png)
+    /// 
     /// Concatenates the text in two text views in a new text view.
+    ///
+    /// ```
+    ///struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///             .font(.title)
+    ///         + Text("Apple🍎🍎")
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - lhs: The first text view with text to combine.
@@ -17781,18 +18120,23 @@ extension Text {
     ///
     /// Use this method to change the color of the text rendered by a text view.
     ///
-    /// For example, you can display the names of the colors red, green, and
-    /// blue in their respective colors:
+    /// For example, you can change the color of Banana🍌🍌 to yellow and Apple 🍎🍎 to red.
     ///
-    ///     HStack {
-    ///         Text("Red").foregroundColor(.red)
-    ///         Text("Green").foregroundColor(.green)
-    ///         Text("Blue").foregroundColor(.blue)
+    /// 
+    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
+    /// 
+    /// ```
+    ///     struct ExampleView: View {
+    ///        var body: some View {
+    ///            VStack {
+    ///              Text("Banana🍌🍌").foregroundColor(.yellow)
+    ///              Text("Apple 🍎🍎").foregroundColor(.red)
+    ///              Text("Peach 🍑🍑").foregroundColor(.orange)
+    ///            }.font(.largeTitle)
     ///     }
+    /// }
     ///
-    /// ![Three text views arranged horizontally, each containing
-    ///     the name of a color displayed in that
-    ///     color.](SwiftUI-Text-foregroundColor.png)
+    /// ```
     ///
     /// - Parameter color: The color to use when displaying this text.
     /// - Returns: A text view that uses the color value you supply.
@@ -17824,26 +18168,90 @@ extension Text {
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
     public func font(_ font: Font?) -> Text { }
-
-    /// Sets the font weight of the text.
     ///
+    /// Sets the font weight of the text.
+    /// 
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// 
+    /// ```
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text("ultraLight 🍌").fontWeight(Font.Weight.ultraLight)
+    ///                 Text("thin🍌").fontWeight(Font.Weight.thin)
+    ///                 Text("light🍌").fontWeight(Font.Weight.light)
+    ///                 Text("regular🍌").fontWeight(Font.Weight.regular)
+    ///                 Text("medium🍌").fontWeight(Font.Weight.medium)
+    ///                 Text("semibold🍌").fontWeight(Font.Weight.semibold)
+    ///                 Text("bold🍌").fontWeight(Font.Weight.bold)
+    ///                 Text("heavy🍌").fontWeight(Font.Weight.heavy)
+    ///                 Text("black🍌").fontWeight(Font.Weight.black)
+    ///            }.font(.title)
+    ///         }
+    ///     }
+    /// ```
+    /// 
     /// - Parameter weight: One of the available font weights.
     ///
     /// - Returns: Text that uses the font weight you specify.
     public func fontWeight(_ weight: Font.Weight?) -> Text { }
 
     /// Applies a bold font weight to the text.
-    ///
+    /// 
+    /// ![Bold Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-bold-example-1.png)
+    /// 
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .bold()
+    ///             .font(.title)
+    ///     }
+    /// } 
+    /// ```
+    /// 
     /// - Returns: Bold text.
     public func bold() -> Text { }
 
     /// Applies italics to the text.
     ///
+    /// ![Italic Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-italic-example-1.png)
+    /// 
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .italic()
+    ///             .font(.title)
+    ///     }
+    /// } 
+    /// ```
+    /// 
     /// - Returns: Italic text.
     public func italic() -> Text { }
 
     /// Applies a strikethrough to the text.
     ///
+    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
+    /// 
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌 ")
+    ///             .strikethrough(false)
+   ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .strikethrough()
+    ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .strikethrough(true, color: .yellow)
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
+    /// 
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has a
     ///     strikethrough applied.
@@ -17855,6 +18263,26 @@ extension Text {
 
     /// Applies an underline to the text.
     ///
+    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
+    /// 
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline(false)
+   ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline()
+    ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline(true, color: .yellow)
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
+    /// 
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has an
     ///     underline.
@@ -18364,6 +18792,19 @@ public struct TextFormattingCommands : Commands {
 }
 
 /// A label style that only displays the title of the label.
+///
+/// ![TitleOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-title-only-example-1.png)
+/// 
+///
+/// ```
+///    struct ExampleView: View {
+///        @State var date: Date = Date()
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill").labelStyle(TitleOnlyLabelStyle())
+///        }
+///    }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct TitleOnlyLabelStyle : LabelStyle {
 
@@ -25825,6 +26266,20 @@ extension ViewModifier {
 
 /// A system style of date picker that displays each component as columns
 /// in a scrollable wheel.
+///
+/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
+/// 
+/// ```
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///          var body: some View {     
+///              DatePicker("Date",selection: $date)
+///              .datePickerStyle(WheelDatePickerStyle())
+///              .padding()
+///          }
+///      }
+/// ```
+///
 @available(iOS 13.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -25837,6 +26292,25 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 
 /// A picker style that presents the options in a scrollable wheel that shows
 /// the selected option and a few neighboring options.
+///
+/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+/// 
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑"]
+///         @State private var selectedFruit = 0
+///        var body: some View {
+///             VStack {
+///                 Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                     ForEach(0..<fruits.count) {
+///                         Text(self.fruits[$0])
+///                     }
+///                 }
+///                 Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///             }.pickerStyle(WheelPickerStyle())
+///         }
+///     }
+/// ```
 ///
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
