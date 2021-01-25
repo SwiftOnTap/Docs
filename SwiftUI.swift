@@ -6263,7 +6263,7 @@ extension DynamicViewContent {
     ///     the view. The closure takes two arguments: The first argument is the
     ///     offset relative to the dynamic view's underlying collection of data.
     ///     The second argument is an array of
-    ///     https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Foundation/NSItemProvider> items that
+    ///     <doc://com.apple.documentation/documentation/Foundation/NSItemProvider> items that
     ///     represents the data that you want to insert.
     ///
     /// - Returns: A view that calls `action` when elements are inserted into
@@ -8511,11 +8511,11 @@ extension Font {
     /// Creates a custom font from a platform font instance.
     ///
     /// Initializing `Font` with platform font instance
-    /// (https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreText/CTFont-q6r>) can bridge SwiftUI
-    /// `Font` with https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/AppKit/NSFont> or
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/UIKit/UIFont>, both of which are
+    /// (<doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>) can bridge SwiftUI
+    /// `Font` with <doc://com.apple.documentation/documentation/AppKit/NSFont> or
+    /// <doc://com.apple.documentation/documentation/UIKit/UIFont>, both of which are
     /// toll-free bridged to
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreText/CTFont-q6r>. For example:
+    /// <doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>. For example:
     ///
     ///     // Use native Core Text API to create desired ctFont.
     ///     let ctFont = CTFontCreateUIFontForLanguage(.system, 12, nil)!
@@ -13829,7 +13829,7 @@ extension Path {
 ///
 /// In this case, `ForEach` automatically assigns a tag to the selection
 /// views, using each option's `id`, which it can do because `Flavor` conforms
-/// to the https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Swift/Identifiable>
+/// to the <doc://com.apple.documentation/documentation/Swift/Identifiable>
 /// protocol.
 ///
 /// On the other hand, if the selection type doesn't match the input to the
@@ -17289,7 +17289,7 @@ extension State where Value : ExpressibleByNilLiteral {
 /// Create a state object in a `SwiftUI/View`, `SwiftUI/App`, or
 /// `SwiftUI/Scene` by applying the `@StateObject` attribute to a property
 /// declaration and providing an initial value that conforms to the
-/// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Combine/ObservableObject>
+/// <doc://com.apple.documentation/documentation/Combine/ObservableObject>
 /// protocol:
 ///
 ///     @StateObject var model = DataModel()
@@ -20367,7 +20367,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 /// A view that represents a UIKit view controller.
 ///
 /// Use a `UIViewControllerRepresentable` instance to create and manage a
-/// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/UIKit/UIViewController> object in your
+/// <doc://com.apple.documentation/documentation/UIKit/UIViewController> object in your
 /// SwiftUI interface. Adopt this protocol in one of your app's custom
 /// instances, and use its methods to create, update, and tear down your view
 /// controller. The creation and update processes parallel the behavior of
@@ -21541,7 +21541,7 @@ extension View {
     /// this view is generated and used as the preview image.
     ///
     /// - Parameter data: A closure that returns a single
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Foundation/NSItemProvider> that
+    /// <doc://com.apple.documentation/documentation/Foundation/NSItemProvider> that
     /// represents the draggable data from this view.
     ///
     /// - Returns: A view that activates this view as the source of a drag and
@@ -22032,7 +22032,7 @@ extension View {
     ///
     /// Use `aspectRatio(_:contentMode:)` to constrain a view's dimensions to an
     /// aspect ratio specified by a
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreGraphics/CGFloat> using the specified
+    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGFloat> using the specified
     /// content mode.
     ///
     /// If this view is resizable, the resulting view will have `aspectRatio` as
@@ -22064,7 +22064,7 @@ extension View {
     ///
     /// Use `aspectRatio(_:contentMode:)` to contstrain a view's dimentsions to
     /// an aspect ratio specified by a
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreGraphics/CGSize>.
+    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGSize>.
     ///
     /// If this view is resizable, the resulting view uses `aspectRatio` as its
     /// own aspect ratio. In this example, the purple ellipse has a 3:4
@@ -22476,7 +22476,7 @@ extension View {
     ///
     /// Use the `position(_:)` modifier to place the center of a view at a
     /// specific coordinate in the parent view using a
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreGraphics/CGPoint> to specify the `x`
+    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGPoint> to specify the `x`
     /// and `y` offset.
     ///
     ///     Text("Position by passing a CGPoint()")
@@ -22660,7 +22660,7 @@ extension View {
     ///
     /// Use `transformEffect(_:)` to rotate, scale, translate, or skew the
     /// output of the view according to the provided
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreGraphics/CGAffineTransform>.
+    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGAffineTransform>.
     ///
     /// In the example below, the text is rotated at -30˚ on the `y` axis.
     ///
@@ -22674,7 +22674,7 @@ extension View {
     /// the y axis.](SwiftUI-View-transformEffect.png)
     ///
     /// - Parameter transform: A
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreGraphics/CGAffineTransform> to
+    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGAffineTransform> to
     /// apply to the view.
     @inlinable public func transformEffect(_ transform: CGAffineTransform) -> some View { }
 
@@ -22826,7 +22826,7 @@ extension View {
     /// pixels.](SwiftUI-View-scaleEffect.png)
     ///
     /// - Parameters:
-    ///   - scale: A https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/CoreGraphics/CGSize> that
+    ///   - scale: A <doc://com.apple.documentation/documentation/CoreGraphics/CGSize> that
     ///     represents the horizontal and vertical amount to scale the view.
     ///   - anchor: The point with a default of `UnitPoint/center` that
     ///     defines the location within the view from which to apply the
@@ -23378,7 +23378,7 @@ extension View {
     ///
     /// Use `tag(_:)` to differentiate between a number of views for the purpose
     /// of selecting controls like pickers and lists. Tag values can be of any
-    /// type that conforms to the https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Swift/Hashable>
+    /// type that conforms to the <doc://com.apple.documentation/documentation/Swift/Hashable>
     /// protocol.
     ///
     /// In the example below, the `ForEach` loop in the `Picker` view
@@ -23386,7 +23386,7 @@ extension View {
     /// value of each enumeration element for use as the row item label and uses
     /// the enumeration item itself as input to the `tag(_:)` modifier.
     /// The tag identifier can be any value that conforms to the
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Swift/Hashable> protocol:
+    /// <doc://com.apple.documentation/documentation/Swift/Hashable> protocol:
     ///
     ///     struct FlavorPicker: View {
     ///         enum Flavor: String, CaseIterable, Identifiable {
@@ -23405,7 +23405,7 @@ extension View {
     ///     }
     ///
     /// - SeeAlso: `List`, `Picker`, `Hashable`
-    /// - Parameter tag: A https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Swift/Hashable> value
+    /// - Parameter tag: A <doc://com.apple.documentation/documentation/Swift/Hashable> value
     ///   to use as the view's tag.
     ///
     /// - Returns: A view with the specified tag set.
@@ -24165,14 +24165,14 @@ extension View {
     ///
     /// There are several different kinds of specialized keyboard types
     /// available though the
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/UIKit/UIKeyboardType> enumeration. To
+    /// <doc://com.apple.documentation/documentation/UIKit/UIKeyboardType> enumeration. To
     /// specify the default system keyboard type, use `.default`.
     ///
     /// ![A screenshot showing the use of a specialized keyboard type with a
     /// text field.](SwiftUI-View-keyboardType.png)
     ///
     /// - Parameter type: One of the keyboard types defined in the
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/UIKit/UIKeyboardType> enumeration.
+    /// <doc://com.apple.documentation/documentation/UIKit/UIKeyboardType> enumeration.
     @available(iOS 13.0, tvOS 13.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
@@ -24193,12 +24193,12 @@ extension View {
     ///     TextField("Last, First", text: $fullName)
     ///         .autocapitalization(UITextAutocapitalizationType.words)
     ///
-    /// The https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
+    /// The <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
     /// enumeration defines the available capitalization modes. The default is
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType/sentences>.
+    /// <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType/sentences>.
     ///
     /// - Parameter style: One of the autocapitalization modes defined in the
-    /// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
+    /// <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
     /// enumeration.
     @available(iOS 13.0, tvOS 13.0, *)
     @available(macOS, unavailable)
@@ -25728,7 +25728,7 @@ extension View {
     /// - Parameters:
     ///   - activityType: The type of activity to handle.
     ///   - action: A function to call that takes a
-    ///     https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Foundation/NSUserActivity>
+    ///     <doc://com.apple.documentation/documentation/Foundation/NSUserActivity>
     ///     object as its parameter
     ///     when delivering the activity to the scene or window the view is in.
     public func onContinueUserActivity(_ activityType: String, perform action: @escaping (NSUserActivity) -> ()) -> some View { }
@@ -25739,10 +25739,10 @@ extension View {
     ///
     /// > Note: This method handles the reception of Universal Links,
     ///   rather than a
-    ///   https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Foundation/NSUserActivity>.
+    ///   <doc://com.apple.documentation/documentation/Foundation/NSUserActivity>.
     ///
     /// - Parameter action: A function that takes a
-    ///  https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/Foundation/URL>
+    ///  <doc://com.apple.documentation/documentation/Foundation/URL>
     ///  object as its parameter when delivering the URL to the scene or window
     ///  the view is in.
     public func onOpenURL(perform action: @escaping (URL) -> ()) -> some View { }
@@ -27372,16 +27372,16 @@ public struct WheelPickerStyle : PickerStyle {
 ///
 /// For information about adding a widget extension to your app, and keeping
 /// your widget up to date, see
-/// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/WidgetKit/Creating-a-Widget-Extension>
+/// <doc://com.apple.documentation/documentation/WidgetKit/Creating-a-Widget-Extension>
 /// and
-/// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/WidgetKit/Keeping-a-Widget-Up-To-Date>,
+/// <doc://com.apple.documentation/documentation/WidgetKit/Keeping-a-Widget-Up-To-Date>,
 /// respectively.
 ///
 /// By adding a custom SiriKit intent definition, you can let users customize
 /// their widgets to show the information that's most relevant to them. If
 /// you've already added support for Siri or Shortcuts, you're well on your way
 /// to supporting customizable widgets. For more information, see
-/// https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/com.apple.documentation/documentation/WidgetKit/Making-a-Configurable-Widget>.
+/// <doc://com.apple.documentation/documentation/WidgetKit/Making-a-Configurable-Widget>.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
