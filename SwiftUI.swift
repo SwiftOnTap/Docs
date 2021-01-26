@@ -6977,6 +6977,8 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 ///         }
 ///     }
 ///
+/// Note that in this example, we create a custom ``FileDocument/readableContentTypes`` called `UTType.exampleText`.
+///
 /// #### View implementation
 ///
 /// Finally, use the ``TextEditor`` view to edit the document file.
@@ -7026,102 +7028,6 @@ extension FileDocument {
     ///
     /// The readable types of a document should be specified in its declaration. Often,
     /// the process of creating a document-based app requires a custom UTType object.
-    ///
-    /// In the following example, we create a custom readable content type called `UTType.exampleText`.
-    ///
-    /// ### Example
-    ///
-    /// #### App structure
-    ///
-    /// To begin, update the scene definition to use ``DocumentGroup``.
-    ///
-    ///     import SwiftUI
-    ///
-    ///     @main
-    ///     struct ExampleApp: App {
-    ///         var body: some Scene {
-    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.$document)
-    ///             }
-    ///         }
-    ///     }
-    ///
-    /// #### FileDocument conformance
-    ///
-    /// Next, conform to the `FileDocument` protocol by implementing these properties:
-    /// - A: ``FileDocument/readableContentTypes``
-    /// - B: ``FileDocument/init(configuration:)``
-    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
-    ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
-    ///
-    ///     struct ExampleDocument: FileDocument {
-    ///         var text: String
-    ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = text.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///     }
-    ///
-    /// #### View implementation
-    ///
-    /// Finally, use the ``TextEditor`` view to edit the document file.
-    ///
-    ///     import SwiftUI
-    ///
-    ///     struct ExampleView: View {
-    ///         @Binding var document: ExampleDocument
-    ///
-    ///         var body: some View {
-    ///             TextEditor(text: $document.text)
-    ///         }
-    ///     }
-    ///
-    /// #### UTType settings
-    ///
-    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
-    /// follow these steps:
-    /// 1. Go to the Xcode project settings.
-    /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
-    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
-    ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
-    ///
-    ///     extension UTType {
-    ///         static var exampleText: UTType {
-    ///             UTType(importedAs: "com.example.plain-text")
-    ///         }
-    ///     }
-    ///
     static var readableContentTypes: [UTType] { get }
 
     /// The file types that a file document is able to save or export to.
@@ -7132,30 +7038,17 @@ extension FileDocument {
     ///
     /// ### Example
     ///
-    /// #### App structure
-    ///
-    /// To begin, update the scene definition to use ``DocumentGroup``.
-    ///
     ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
     ///
     ///     @main
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.$document)
+    ///                 ExampleView(document: file.$document)
     ///             }
     ///         }
     ///     }
-    ///
-    /// #### FileDocument conformance
-    ///
-    /// Next, conform to the `FileDocument` protocol by implementing these properties:
-    /// - A: ``FileDocument/readableContentTypes``
-    /// - B: ``FileDocument/init(configuration:)``
-    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
-    ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
     ///
     ///     struct ExampleDocument: FileDocument {
     ///         var text: String
@@ -7184,12 +7077,6 @@ extension FileDocument {
     ///         }
     ///     }
     ///
-    /// #### View implementation
-    ///
-    /// Finally, use the ``TextEditor`` view to edit the document file.
-    ///
-    ///     import SwiftUI
-    ///
     ///     struct ExampleView: View {
     ///         @Binding var document: ExampleDocument
     ///
@@ -7197,25 +7084,6 @@ extension FileDocument {
     ///             TextEditor(text: $document.text)
     ///         }
     ///     }
-    ///
-    /// #### UTType settings
-    ///
-    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
-    /// follow these steps:
-    /// 1. Go to the Xcode project settings.
-    /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
-    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
-    ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
     ///
     ///     extension UTType {
     ///         static var exampleText: UTType {
@@ -21915,7 +21783,7 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// The view modifier that changes a date picker's style.
+    /// A view modifier to change a date picker style.
     ///
     /// Use this modifier to change the style of a view hierarchy's date pickers.
     ///
@@ -21951,7 +21819,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// The view modifier that presents a sheet when a given value is not nil.
+    /// Present a sheet when a given value is not nil.
     ///
     /// Use this modifier to present a sheet over the current view when you need to pass the sheet a value.
     /// The sheet will be presented only when the binding value you pass it is not nil.
@@ -21970,7 +21838,7 @@ extension View {
     ///         let text: String
     ///     }
     ///
-    ///     struct ContentView: View {
+    ///     struct ExampleView: View {
     ///         @State private var item: Item? = nil
     ///
     ///         var body: some View {
@@ -21981,10 +21849,10 @@ extension View {
     ///                 Button("🍑 Sheet") {
     ///                     item = Item(text: "🍑🍑")
     ///                 }
-    ///            }
-    ///              .sheet(item: $item,
-    ///                     onDismiss: { print("dismissed!") },
-    ///                     content: { ExampleSheet(item: $0) })
+    ///             }
+    ///             .sheet(item: $item,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet(item: $0) })
     ///         }
     ///     }
     ///
@@ -22024,7 +21892,7 @@ extension View {
 @available(macOS, unavailable)
 extension View {
 
-    /// The view modifier that presents an overlaid full screen view.
+    /// Present a sheet overlaid over the full screen.
     ///
     /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
     /// and exits the screen from the bottom.
@@ -22082,7 +21950,7 @@ extension View {
     public func fullScreenCover<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
 
 
-    /// The view modifier that presents an overlaid full screen view.
+    /// Present a sheet overlaid over the full screen without a custom parameter.
     ///
     /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
     /// and exits the screen from the bottom.
@@ -22129,7 +21997,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 14.0, *)
 extension View {
 
-    /// The view modifier that calls a function after a long press.
+    /// A modifier to call a function after a long press.
     ///
     /// Use this modifier to call a function when the user long presses on a view.
     ///
@@ -22162,7 +22030,7 @@ extension View {
 
 extension View {
 
-    /// The view modifier that disables autocorrection.
+    /// A modifier to disable autocorrection.
     ///
     /// Use this modifier when the  autocorrection in a text field would
     /// make it more difficult for the user to input information. Some examples of where this
@@ -22211,7 +22079,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// The view modifier that sets the item provider used for drag and drop.
+    /// Sets the item provider used for drag and drop.
     ///
     /// Use this modifier to set the item provider when dragging and dropping a view. This is most
     /// commonly used on larger screen sizes like iPad and Mac.
@@ -22238,7 +22106,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// The view modifier that disables a list item's delete action.
+    /// Disable a list item's delete action.
     ///
     /// Use this modifier to disable a list item's delete action. When a list is editable, swiping left
     /// on it will expose a red "DELETE" button. To disable this feature on specific items in the list,
@@ -22283,7 +22151,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// The view modifier that disables a list item's "move" action.
+    /// Disable a list item's "move" action.
     ///
     /// Use this modifier to disable a list item's move action. When enabled, putting a list into edit mode
     /// will expose 3 lines on the right side. The user will then be able to move the row around in the list.
@@ -22334,7 +22202,7 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// The view modifier that makes a view draggable by providing dragged info.
+    /// Make a view draggable by providing dragged info.
     ///
     /// Use this modifier to add the appropriate gestures for
     /// drag and drop to a view. When a dragging begins, a rendering of
