@@ -5069,7 +5069,7 @@ public struct DragGesture : Gesture {
 ///     .onDrag{ return NSItemProvider(object: "🍌🍌" as NSString) }
 /// ```
 ///
-/// #### Create a drop `View`
+/// #### Creating a drop `View`
 /// Use `onDrop` to create a view that accepts "drops" from dragged data. There are three versions of the `onDrop` modifier:
 ///
 /// 1. `View/onDrop(of:isTargeted:perform)-bae65` is the simplest implementation. Specify a closure to execute when content is dropped.
@@ -5101,7 +5101,7 @@ public struct DragGesture : Gesture {
 /// }
 /// ```
 ///
-/// #### Conform to DropDelegate
+/// #### Conforming to DropDelegate
 /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to `DropDelegate`.
 ///
 /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
