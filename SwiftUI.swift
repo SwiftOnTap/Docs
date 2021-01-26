@@ -5063,7 +5063,7 @@ public struct DragGesture : Gesture {
 /// Use `NSItemProvider` to define the specific data dragged from that view.
 ///
 /// ```
-/// ///  Text to drag
+/// //  Text to drag
 /// Text(text)
 ///     .font(.title)
 ///     .onDrag{ return NSItemProvider(object: "🍌🍌" as NSString) }
@@ -5084,12 +5084,12 @@ public struct DragGesture : Gesture {
 ///
 ///     var body: some View {
 ///         HStack {
-///             ///  Text to drag
+///             //  Text to drag
 ///             Text(text)
 ///                 .font(.title)
 ///                 .onDrag{ return NSItemProvider(object: self.text as NSItemProviderWriting) }
 ///
-///             ///  Area to drop
+///             //  Area to drop
 ///             RoundedRectangle(cornerRadius: 10)
 ///                 .frame(width: 150, height: 150)
 ///                 .onDrop(of: ["text"], isTargeted: nil, perform: { _ in
@@ -5112,12 +5112,12 @@ public struct DragGesture : Gesture {
 ///
 ///     var body: some View {
 ///         HStack {
-///             ///  Text to drag
+///             //  Text to drag
 ///             Text(text)
 ///                 .font(.title)
 ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
 ///
-///             ///  Area to drop
+///             //  Area to drop
 ///             RoundedRectangle(cornerRadius: 10)
 ///                 .frame(width: 150, height: 150)
 ///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
@@ -5177,18 +5177,18 @@ public struct DragGesture : Gesture {
 /// struct MyDropDelegate: DropDelegate {
 ///     @Binding var color: Color
 ///
-///     ///  This function is executed when the user "drops" their object
+///     //  This function is executed when the user "drops" their object
 ///     func performDrop(info: DropInfo) -> Bool {
-///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
 ///         if let item = info.itemProviders(for: ["public.text"]).first {
-///             ///  Load the item
+///             //  Load the item
 ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-///                 ///  Cast NSSecureCoding to Ddata
+///                 //  Cast NSSecureCoding to Ddata
 ///                 if let data = text as? Data {
-///                     ///  Extract string from data
+///                     //  Extract string from data
 ///                     let inputStr = String(decoding: data, as: UTF8.self)
 ///
-///                     ///  Conditionally change color given text string
+///                     //  Conditionally change color given text string
 ///                     if inputStr == "🍌🍌" {
 ///                         self.color = .yellow
 ///                     } else if inputStr == "🍏🍏" {
@@ -5201,7 +5201,7 @@ public struct DragGesture : Gesture {
 ///                 }
 ///             }
 ///         } else {
-///             ///  If no text was received in our drop, return false
+///             //  If no text was received in our drop, return false
 ///             return false
 ///         }
 ///
@@ -5244,18 +5244,18 @@ public struct DragGesture : Gesture {
 /// struct MyDropDelegate: DropDelegate {
 ///     @Binding var color: Color
 ///
-///     ///  Drop entered called
+///     //  Drop entered called
 ///     func dropEntered(info: DropInfo) {
 ///         ///  Change color if color was previously black
 ///         self.color = (self.color == .black) ? .gray : self.color
 ///     }
 ///
-///     ///  Drop entered called
+///     //  Drop entered called
 ///     func dropExited(info: DropInfo) {
 ///         self.color = .init(white: 0.40)
 ///     }
 ///
-///     ///  Drop has been updated
+///     //  Drop has been updated
 ///     func dropUpdated(info: DropInfo) -> DropProposal? {
 ///         ///  Don't allow more items to be dropped if a Banana was dropped
 ///         if self.color == .yellow {
@@ -5265,18 +5265,18 @@ public struct DragGesture : Gesture {
 ///         }
 ///     }
 ///
-///     ///  This function is executed when the user "drops" their object
+///     //  This function is executed when the user "drops" their object
 ///     func performDrop(info: DropInfo) -> Bool {
-///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
 ///         if let item = info.itemProviders(for: ["public.text"]).first {
-///             ///  Load the item
+///             //  Load the item
 ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-///                 ///  Cast NSSecureCoding to Ddata
+///                 //  Cast NSSecureCoding to Ddata
 ///                 if let data = text as? Data {
-///                     ///  Extract string from data
+///                     //  Extract string from data
 ///                     let inputStr = String(decoding: data, as: UTF8.self)
 ///
-///                     ///  Conditionally change color given text string
+///                     //  Conditionally change color given text string
 ///                     if inputStr == "🍌🍌" {
 ///                         self.color = .yellow
 ///                     } else if inputStr == "🍏🍏" {
@@ -5289,7 +5289,7 @@ public struct DragGesture : Gesture {
 ///                 }
 ///             }
 ///         } else {
-///             ///  If no text was received in our drop, return false
+///             //  If no text was received in our drop, return false
 ///             return false
 ///         }
 ///
@@ -5344,9 +5344,9 @@ extension DropDelegate {
     /// struct MyDropDelegate: DropDelegate {
     ///     @Binding var color: Color
     ///
-    ///     ///  Validates the drop
+    ///     //  Validates the drop
     ///     func validateDrop(info: DropInfo) -> Bool {
-    ///         ///  This function will fail, because the URI is "public.text" not "public.file-url"
+    ///         //  This function will fail, because the URI is "public.text" not "public.file-url"
     ///         if info.hasItemsConforming(to: ["public.image"]) {
     ///             return true
     ///         } else {
@@ -5355,18 +5355,18 @@ extension DropDelegate {
     ///         }
     ///     }
     ///
-    ///     ///  This function is executed when the user "drops" their object
+    ///     //  This function is executed when the user "drops" their object
     ///     func performDrop(info: DropInfo) -> Bool {
-    ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
     ///         if let item = info.itemProviders(for: ["public.text"]).first {
-    ///             ///  Load the item
+    ///             //  Load the item
     ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                 ///  Cast NSSecureCoding to Ddata
+    ///                 //  Cast NSSecureCoding to Ddata
     ///                 if let data = text as? Data {
-    ///                     ///  Extract string from data
+    ///                     //  Extract string from data
     ///                     let inputStr = String(decoding: data, as: UTF8.self)
     ///
-    ///                     ///  Conditionally change color given text string
+    ///                     //  Conditionally change color given text string
     ///                     if inputStr == "🍌🍌" {
     ///                         self.color = .yellow
     ///                     } else if inputStr == "🍏🍏" {
@@ -5379,7 +5379,7 @@ extension DropDelegate {
     ///                 }
     ///             }
     ///         } else {
-    ///             ///  If no text was received in our drop, return false
+    ///             //  If no text was received in our drop, return false
     ///             return false
     ///         }
     ///
@@ -5422,18 +5422,18 @@ extension DropDelegate {
     /// struct MyDropDelegate: DropDelegate {
     ///     @Binding var color: Color
     ///
-    ///     ///  This function is executed when the user "drops" their object
+    ///     //  This function is executed when the user "drops" their object
     ///     func performDrop(info: DropInfo) -> Bool {
-    ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
     ///         if let item = info.itemProviders(for: ["public.text"]).first {
-    ///             ///  Load the item
+    ///             //  Load the item
     ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                 ///  Cast NSSecureCoding to Ddata
+    ///                 //  Cast NSSecureCoding to Ddata
     ///                 if let data = text as? Data {
-    ///                     ///  Extract string from data
+    ///                     //  Extract string from data
     ///                     let inputStr = String(decoding: data, as: UTF8.self)
     ///
-    ///                     ///  Conditionally change color given text string
+    ///                     //  Conditionally change color given text string
     ///                     if inputStr == "🍌🍌" {
     ///                         self.color = .yellow
     ///                     } else if inputStr == "🍏🍏" {
@@ -5446,7 +5446,7 @@ extension DropDelegate {
     ///                 }
     ///             }
     ///         } else {
-    ///             ///  If no text was received in our drop, return false
+    ///             //  If no text was received in our drop, return false
     ///             return false
     ///         }
     ///
@@ -5489,24 +5489,24 @@ extension DropDelegate {
     /// struct MyDropDelegate: DropDelegate {
     ///     @Binding var color: Color
     ///
-    ///     ///  Drop entered called
+    ///     //  Drop entered called
     ///     func dropEntered(info: DropInfo) {
-    ///         ///  Change color if color was previously black
+    ///         //  Change color if color was previously black
     ///         self.color = (self.color == .black) ? .gray : self.color
     ///     }
     ///
-    ///     ///  This function is executed when the user "drops" their object
+    ///     //  This function is executed when the user "drops" their object
     ///     func performDrop(info: DropInfo) -> Bool {
-    ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
     ///         if let item = info.itemProviders(for: ["public.text"]).first {
-    ///             ///  Load the item
+    ///             //  Load the item
     ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                 ///  Cast NSSecureCoding to Ddata
+    ///                 //  Cast NSSecureCoding to Ddata
     ///                 if let data = text as? Data {
-    ///                     ///  Extract string from data
+    ///                     //  Extract string from data
     ///                     let inputStr = String(decoding: data, as: UTF8.self)
     ///
-    ///                     ///  Conditionally change color given text string
+    ///                     //  Conditionally change color given text string
     ///                     if inputStr == "🍌🍌" {
     ///                         self.color = .yellow
     ///                     } else if inputStr == "🍏🍏" {
@@ -5519,7 +5519,7 @@ extension DropDelegate {
     ///                 }
     ///             }
     ///         } else {
-    ///             ///  If no text was received in our drop, return false
+    ///             //  If no text was received in our drop, return false
     ///             return false
     ///         }
     ///
@@ -5562,9 +5562,9 @@ extension DropDelegate {
     /// struct MyDropDelegate: DropDelegate {
     ///     @Binding var color: Color
     ///
-    ///     /// /  Drop has been updated
+    ///     //  Drop has been updated
     ///     func dropUpdated(info: DropInfo) -> DropProposal? {
-    ///         /// /  Don't allow more items to be dropped if a Banana was dropped
+    ///         //  Don't allow more items to be dropped if a Banana was dropped
     ///         if self.color == .yellow {
     ///             return DropProposal(operation: .forbidden)
     ///         } else {
@@ -5572,18 +5572,18 @@ extension DropDelegate {
     ///         }
     ///     }
     ///
-    ///     /// /  This function is executed when the user "drops" their object
+    ///     //  This function is executed when the user "drops" their object
     ///     func performDrop(info: DropInfo) -> Bool {
-    ///         /// /  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
     ///         if let item = info.itemProviders(for: ["public.text"]).first {
-    ///             /// /  Load the item
+    ///             //  Load the item
     ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                 /// /  Cast NSSecureCoding to Ddata
+    ///                 //  Cast NSSecureCoding to Ddata
     ///                 if let data = text as? Data {
-    ///                     /// /  Extract string from data
+    ///                     //  Extract string from data
     ///                     let inputStr = String(decoding: data, as: UTF8.self)
     ///
-    ///                     /// /  Conditionally change color given text string
+    ///                     //  Conditionally change color given text string
     ///                     if inputStr == "🍌🍌" {
     ///                         self.color = .yellow
     ///                     } else if inputStr == "🍏🍏" {
@@ -5596,7 +5596,7 @@ extension DropDelegate {
     ///                 }
     ///             }
     ///         } else {
-    ///             /// /  If no text was received in our drop, return false
+    ///             //  If no text was received in our drop, return false
     ///             return false
     ///         }
     ///
@@ -5639,23 +5639,23 @@ extension DropDelegate {
     /// struct MyDropDelegate: DropDelegate {
     ///     @Binding var color: Color
     ///
-    ///     ///  Drop entered called
+    ///     // Drop entered called
     ///     func dropExited(info: DropInfo) {
     ///         self.color = .init(white: 0.40)
     ///     }
     ///
-    ///     ///  This function is executed when the user "drops" their object
+    ///     // This function is executed when the user "drops" their object
     ///     func performDrop(info: DropInfo) -> Bool {
-    ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
     ///         if let item = info.itemProviders(for: ["public.text"]).first {
-    ///             ///  Load the item
+    ///             // Load the item
     ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                 ///  Cast NSSecureCoding to Ddata
+    ///                 // Cast NSSecureCoding to Ddata
     ///                 if let data = text as? Data {
-    ///                     ///  Extract string from data
+    ///                     // Extract string from data
     ///                     let inputStr = String(decoding: data, as: UTF8.self)
     ///
-    ///                     ///  Conditionally change color given text string
+    ///                     //  Conditionally change color given text string
     ///                     if inputStr == "🍌🍌" {
     ///                         self.color = .yellow
     ///                     } else if inputStr == "🍏🍏" {
@@ -5668,7 +5668,7 @@ extension DropDelegate {
     ///                 }
     ///             }
     ///         } else {
-    ///             ///  If no text was received in our drop, return false
+    ///             // If no text was received in our drop, return false
     ///             return false
     ///         }
     ///
@@ -5715,9 +5715,9 @@ extension DropDelegate {
       /// struct MyDropDelegate: DropDelegate {
       ///     @Binding var color: Color
       ///
-      ///     ///  Validates the drop
+      ///     // Validates the drop
       ///     func validateDrop(info: DropInfo) -> Bool {
-      ///         ///  This function will fail, because the URI is "public.text" not "public.file-url"
+      ///         // This function will fail, because the URI is "public.text" not "public.file-url"
       ///         if info.hasItemsConforming(to: ["public.image"]) {
       ///             return true
       ///         } else {
@@ -5726,18 +5726,18 @@ extension DropDelegate {
       ///         }
       ///     }
       ///
-      ///     ///  This function is executed when the user "drops" their object
+      ///     // This function is executed when the user "drops" their object
       ///     func performDrop(info: DropInfo) -> Bool {
-      ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
       ///         if let item = info.itemProviders(for: ["public.text"]).first {
-      ///             ///  Load the item
+      ///             // Load the item
       ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-      ///                 ///  Cast NSSecureCoding to Ddata
+      ///                 // Cast NSSecureCoding to Ddata
       ///                 if let data = text as? Data {
-      ///                     ///  Extract string from data
+      ///                     // Extract string from data
       ///                     let inputStr = String(decoding: data, as: UTF8.self)
       ///
-      ///                     ///  Conditionally change color given text string
+      ///                     // Conditionally change color given text string
       ///                     if inputStr == "🍌🍌" {
       ///                         self.color = .yellow
       ///                     } else if inputStr == "🍏🍏" {
@@ -5750,7 +5750,7 @@ extension DropDelegate {
       ///                 }
       ///             }
       ///         } else {
-      ///             ///  If no text was received in our drop, return false
+      ///             // If no text was received in our drop, return false
       ///             return false
       ///         }
       ///
@@ -5793,18 +5793,18 @@ extension DropDelegate {
       /// struct MyDropDelegate: DropDelegate {
       ///     @Binding var color: Color
       ///
-      ///     ///  This function is executed when the user "drops" their object
+      ///     // This function is executed when the user "drops" their object
       ///     func performDrop(info: DropInfo) -> Bool {
-      ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
       ///         if let item = info.itemProviders(for: ["public.text"]).first {
-      ///             ///  Load the item
+      ///             // Load the item
       ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-      ///                 ///  Cast NSSecureCoding to Ddata
+      ///                 // Cast NSSecureCoding to Ddata
       ///                 if let data = text as? Data {
-      ///                     ///  Extract string from data
+      ///                     // Extract string from data
       ///                     let inputStr = String(decoding: data, as: UTF8.self)
       ///
-      ///                     ///  Conditionally change color given text string
+      ///                     // Conditionally change color given text string
       ///                     if inputStr == "🍌🍌" {
       ///                         self.color = .yellow
       ///                     } else if inputStr == "🍏🍏" {
@@ -5817,7 +5817,7 @@ extension DropDelegate {
       ///                 }
       ///             }
       ///         } else {
-      ///             ///  If no text was received in our drop, return false
+      ///             // If no text was received in our drop, return false
       ///             return false
       ///         }
       ///
@@ -5860,24 +5860,24 @@ extension DropDelegate {
       /// struct MyDropDelegate: DropDelegate {
       ///     @Binding var color: Color
       ///
-      ///     ///  Drop entered called
+      ///     // Drop entered called
       ///     func dropEntered(info: DropInfo) {
-      ///         ///  Change color if color was previously black
+      ///         // Change color if color was previously black
       ///         self.color = (self.color == .black) ? .gray : self.color
       ///     }
       ///
-      ///     ///  This function is executed when the user "drops" their object
+      ///     // This function is executed when the user "drops" their object
       ///     func performDrop(info: DropInfo) -> Bool {
-      ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
       ///         if let item = info.itemProviders(for: ["public.text"]).first {
-      ///             ///  Load the item
+      ///             // Load the item
       ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-      ///                 ///  Cast NSSecureCoding to Ddata
+      ///                 // Cast NSSecureCoding to Ddata
       ///                 if let data = text as? Data {
-      ///                     ///  Extract string from data
+      ///                     //  Extract string from data
       ///                     let inputStr = String(decoding: data, as: UTF8.self)
       ///
-      ///                     ///  Conditionally change color given text string
+      ///                     // Conditionally change color given text string
       ///                     if inputStr == "🍌🍌" {
       ///                         self.color = .yellow
       ///                     } else if inputStr == "🍏🍏" {
@@ -5890,7 +5890,7 @@ extension DropDelegate {
       ///                 }
       ///             }
       ///         } else {
-      ///             ///  If no text was received in our drop, return false
+      ///             // If no text was received in our drop, return false
       ///             return false
       ///         }
       ///
@@ -5933,9 +5933,9 @@ extension DropDelegate {
       /// struct MyDropDelegate: DropDelegate {
       ///     @Binding var color: Color
       ///
-      ///     /// /  Drop has been updated
+      ///     //  Drop has been updated
       ///     func dropUpdated(info: DropInfo) -> DropProposal? {
-      ///         /// /  Don't allow more items to be dropped if a Banana was dropped
+      ///         // Don't allow more items to be dropped if a Banana was dropped
       ///         if self.color == .yellow {
       ///             return DropProposal(operation: .forbidden)
       ///         } else {
@@ -5943,18 +5943,18 @@ extension DropDelegate {
       ///         }
       ///     }
       ///
-      ///     /// /  This function is executed when the user "drops" their object
+      ///     // This function is executed when the user "drops" their object
       ///     func performDrop(info: DropInfo) -> Bool {
-      ///         /// /  Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
       ///         if let item = info.itemProviders(for: ["public.text"]).first {
-      ///             /// /  Load the item
+      ///             //  Load the item
       ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-      ///                 /// /  Cast NSSecureCoding to Ddata
+      ///                 //  Cast NSSecureCoding to Ddata
       ///                 if let data = text as? Data {
-      ///                     /// /  Extract string from data
+      ///                     //  Extract string from data
       ///                     let inputStr = String(decoding: data, as: UTF8.self)
       ///
-      ///                     /// /  Conditionally change color given text string
+      ///                     // Conditionally change color given text string
       ///                     if inputStr == "🍌🍌" {
       ///                         self.color = .yellow
       ///                     } else if inputStr == "🍏🍏" {
@@ -5967,7 +5967,7 @@ extension DropDelegate {
       ///                 }
       ///             }
       ///         } else {
-      ///             /// /  If no text was received in our drop, return false
+      ///             //  If no text was received in our drop, return false
       ///             return false
       ///         }
       ///
@@ -6010,23 +6010,23 @@ extension DropDelegate {
       /// struct MyDropDelegate: DropDelegate {
       ///     @Binding var color: Color
       ///
-      ///     ///  Drop entered called
+      ///     //  Drop entered called
       ///     func dropExited(info: DropInfo) {
       ///         self.color = .init(white: 0.40)
       ///     }
       ///
-      ///     ///  This function is executed when the user "drops" their object
+      ///     //  This function is executed when the user "drops" their object
       ///     func performDrop(info: DropInfo) -> Bool {
-      ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
       ///         if let item = info.itemProviders(for: ["public.text"]).first {
-      ///             ///  Load the item
+      ///             //  Load the item
       ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-      ///                 ///  Cast NSSecureCoding to Ddata
+      ///                 //  Cast NSSecureCoding to Ddata
       ///                 if let data = text as? Data {
-      ///                     ///  Extract string from data
+      ///                     //  Extract string from data
       ///                     let inputStr = String(decoding: data, as: UTF8.self)
       ///
-      ///                     ///  Conditionally change color given text string
+      ///                     //  Conditionally change color given text string
       ///                     if inputStr == "🍌🍌" {
       ///                         self.color = .yellow
       ///                     } else if inputStr == "🍏🍏" {
@@ -6039,7 +6039,7 @@ extension DropDelegate {
       ///                 }
       ///             }
       ///         } else {
-      ///             ///  If no text was received in our drop, return false
+      ///             //  If no text was received in our drop, return false
       ///             return false
       ///         }
       ///
@@ -26110,12 +26110,12 @@ extension View {
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
     ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider in
-    ///                     ///  Load the first item in the NSItemProvider array
+    ///                     // Load the first item in the NSItemProvider array
     ///                     if let item = itemProvider.first {
     ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                             ///  Cast NSSecureCoding to Ddata
+    ///                             // Cast NSSecureCoding to Ddata
     ///                             if let data = text as? Data {
-    ///                                 ///  Extract string from data
+    ///                                 // Extract string from data
     ///                                 let droppedString = String(decoding: data, as: UTF8.self)
     ///
     ///                                 if droppedString == bananas {
@@ -26192,12 +26192,12 @@ extension View {
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
     ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider, _ in
-    ///                     ///  Load the first item in the NSItemProvider array
+    ///                     // Load the first item in the NSItemProvider array
     ///                     if let item = itemProvider.first {
     ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                             ///  Cast NSSecureCoding to Ddata
+    ///                             // Cast NSSecureCoding to Ddata
     ///                             if let data = text as? Data {
-    ///                                 ///  Extract string from data
+    ///                                 // Extract string from data
     ///                                 let droppedString = String(decoding: data, as: UTF8.self)
     ///
     ///                                 if droppedString == bananas {
@@ -26239,11 +26239,11 @@ extension View {
     ///                     .frame(width: 150, height: 150)
     ///                     .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, location in
     ///
-    ///                         ///  If dropped on the bottom half the rectangle, add to bottom.
+    ///                         // If dropped on the bottom half the rectangle, add to bottom.
     ///                         if location.y > geometry.size.height/2 {
     ///                             bottomBananas += "🍌"
     ///                         } else {
-    ///                             ///  Else, add to top
+    ///                             // Else, add to top
     ///                             topBananas += "🍌"
     ///                         }
     ///
@@ -26286,12 +26286,12 @@ extension View {
     ///
     ///     var body: some View {
     ///         HStack {
-    ///             ///  Text to drag
+    ///             // Text to drag
     ///             Text(text)
     ///                 .font(.title)
     ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
     ///
-    ///             ///  Area to drop
+    ///             // Area to drop
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
     ///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
@@ -26343,20 +26343,20 @@ extension View {
     /// struct MyDropDelegate: DropDelegate {
     ///     @Binding var color: Color
     ///
-    ///     ///  Drop entered called
+    ///     // Drop entered called
     ///     func dropEntered(info: DropInfo) {
-    ///         ///  Change color if color was previously black
+    ///         // Change color if color was previously black
     ///         self.color = (self.color == .black) ? .gray : self.color
     ///     }
     ///
-    ///     ///  Drop entered called
+    ///     // Drop entered called
     ///     func dropExited(info: DropInfo) {
     ///         self.color = .init(white: 0.40)
     ///     }
     ///
-    ///     ///  Drop has been updated
+    ///     // Drop has been updated
     ///     func dropUpdated(info: DropInfo) -> DropProposal? {
-    ///         ///  Don't allow more items to be dropped if a Banana was dropped
+    ///         // Don't allow more items to be dropped if a Banana was dropped
     ///         if self.color == .yellow {
     ///             return DropProposal(operation: .forbidden)
     ///         } else {
@@ -26364,18 +26364,18 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     ///  This function is executed when the user "drops" their object
+    ///     // This function is executed when the user "drops" their object
     ///     func performDrop(info: DropInfo) -> Bool {
-    ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
     ///         if let item = info.itemProviders(for: ["public.text"]).first {
-    ///             ///  Load the item
+    ///             //  Load the item
     ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                 ///  Cast NSSecureCoding to Ddata
+    ///                 //  Cast NSSecureCoding to Ddata
     ///                 if let data = text as? Data {
-    ///                     ///  Extract string from data
+    ///                     //  Extract string from data
     ///                     let inputStr = String(decoding: data, as: UTF8.self)
     ///
-    ///                     ///  Conditionally change color given text string
+    ///                     //  Conditionally change color given text string
     ///                     if inputStr == "🍌🍌" {
     ///                         self.color = .yellow
     ///                     } else if inputStr == "🍏🍏" {
@@ -26388,7 +26388,7 @@ extension View {
     ///                 }
     ///             }
     ///         } else {
-    ///             ///  If no text was received in our drop, return false
+    ///             //  If no text was received in our drop, return false
     ///             return false
     ///         }
     ///
@@ -26471,12 +26471,12 @@ extension View {
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
     ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider in
-    ///                     ///  Load the first item in the NSItemProvider array
+    ///                     //  Load the first item in the NSItemProvider array
     ///                     if let item = itemProvider.first {
     ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                             ///  Cast NSSecureCoding to Ddata
+    ///                             //  Cast NSSecureCoding to Ddata
     ///                             if let data = text as? Data {
-    ///                                 ///  Extract string from data
+    ///                                 //  Extract string from data
     ///                                 let droppedString = String(decoding: data, as: UTF8.self)
     ///
     ///                                 if droppedString == bananas {
@@ -26555,12 +26555,12 @@ extension View {
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
     ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider, _ in
-    ///                     ///  Load the first item in the NSItemProvider array
+    ///                     //  Load the first item in the NSItemProvider array
     ///                     if let item = itemProvider.first {
     ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                             ///  Cast NSSecureCoding to Ddata
+    ///                             //  Cast NSSecureCoding to Ddata
     ///                             if let data = text as? Data {
-    ///                                 ///  Extract string from data
+    ///                                 //  Extract string from data
     ///                                 let droppedString = String(decoding: data, as: UTF8.self)
     ///
     ///                                 if droppedString == bananas {
@@ -26602,11 +26602,11 @@ extension View {
     ///                     .frame(width: 150, height: 150)
     ///                     .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, location in
     ///
-    ///                         ///  If dropped on the bottom half the rectangle, add to bottom.
+    ///                         //  If dropped on the bottom half the rectangle, add to bottom.
     ///                         if location.y > geometry.size.height/2 {
     ///                             bottomBananas += "🍌"
     ///                         } else {
-    ///                             ///  Else, add to top
+    ///                             //  Else, add to top
     ///                             topBananas += "🍌"
     ///                         }
     ///
@@ -26651,12 +26651,12 @@ extension View {
     ///
     ///     var body: some View {
     ///         HStack {
-    ///             ///  Text to drag
+    ///             //  Text to drag
     ///             Text(text)
     ///                 .font(.title)
     ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
     ///
-    ///             ///  Area to drop
+    ///             //  Area to drop
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
     ///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
@@ -26708,18 +26708,18 @@ extension View {
     /// struct MyDropDelegate: DropDelegate {
     ///     @Binding var color: Color
     ///
-    ///     ///  Drop entered called
+    ///     //  Drop entered called
     ///     func dropEntered(info: DropInfo) {
-    ///         ///  Change color if color was previously black
+    ///         //  Change color if color was previously black
     ///         self.color = (self.color == .black) ? .gray : self.color
     ///     }
     ///
-    ///     ///  Drop entered called
+    ///     //  Drop entered called
     ///     func dropExited(info: DropInfo) {
     ///         self.color = .init(white: 0.40)
     ///     }
     ///
-    ///     ///  Drop has been updated
+    ///     //  Drop has been updated
     ///     func dropUpdated(info: DropInfo) -> DropProposal? {
     ///         ///  Don't allow more items to be dropped if a Banana was dropped
     ///         if self.color == .yellow {
@@ -26729,18 +26729,18 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     ///  This function is executed when the user "drops" their object
+    ///     //  This function is executed when the user "drops" their object
     ///     func performDrop(info: DropInfo) -> Bool {
-    ///         ///  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
     ///         if let item = info.itemProviders(for: ["public.text"]).first {
-    ///             ///  Load the item
+    ///             //  Load the item
     ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
-    ///                 ///  Cast NSSecureCoding to Ddata
+    ///                 //  Cast NSSecureCoding to Ddata
     ///                 if let data = text as? Data {
-    ///                     ///  Extract string from data
+    ///                     //  Extract string from data
     ///                     let inputStr = String(decoding: data, as: UTF8.self)
     ///
-    ///                     ///  Conditionally change color given text string
+    ///                     //  Conditionally change color given text string
     ///                     if inputStr == "🍌🍌" {
     ///                         self.color = .yellow
     ///                     } else if inputStr == "🍏🍏" {
@@ -26753,7 +26753,7 @@ extension View {
     ///                 }
     ///             }
     ///         } else {
-    ///             ///  If no text was received in our drop, return false
+    ///             //  If no text was received in our drop, return false
     ///             return false
     ///         }
     ///
