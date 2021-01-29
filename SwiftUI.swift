@@ -2852,6 +2852,38 @@ extension Capsule : InsettableShape {
 ///
 /// The circle's radius equals half the length of the frame rectangle's smallest
 /// edge.
+///
+/// By default, a circle is black, and takes up the space of its container.
+///
+///     Circle()
+///
+/// ![Circle Example 1](images/Circle-example-1.png)
+///
+/// You can define a circle with a specific color and frame:
+///
+///     Circle()
+///         .fill(Color.blue)
+///         .frame(width: 200, height: 200)
+///
+/// ![Circle Example 2](images/Circle-example-2.png)
+///
+/// To add a border, inset the circle by half of the border width to keep the
+/// total size:
+///
+///     Circle()
+///         .inset(by: 10)
+///         .stroke(Color.blue, lineWidth: 20)
+///
+/// ![Circle Example 3](Circle-example-3.png)
+///
+/// A circle can be described as a path within a specific rectangular frame:
+///
+///     Circle()
+///         .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+///         .fill(Color.blue)
+///
+/// ![Circle Example 4](Circle-example-4.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
