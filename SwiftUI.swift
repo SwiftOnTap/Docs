@@ -13579,7 +13579,7 @@ public struct PrimitiveButtonStyleConfiguration {
     ///
     /// ### Styling Progress Views
     ///
-    /// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of `ProgressView`. The structure passed to you the
+    /// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of `ProgressView`. The structure passed to the
     /// `progressViewStyle(_:)` modifier applies to all `ProgressView` instances in the children of that `View`.
     ///
     /// In this example, the same style is applied to two `ProgressView` instances that are children of a `VStack`:
