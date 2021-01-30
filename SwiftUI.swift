@@ -13550,11 +13550,11 @@ public struct PrimitiveButtonStyleConfiguration {
 ///
 ///     struct IndeterminateProgressViews: View {
 ///         var body: some View {
-///           VStack {
+///            VStack {
 ///               ProgressView()
 ///               ProgressView(value: Double?(nil))
 ///               ProgressView(value: -1)
-///           }
+///            }
 ///         }
 ///     }
 ///
@@ -13598,9 +13598,14 @@ public struct PrimitiveButtonStyleConfiguration {
 ///
 /// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the `DefaultProgressViewStyle`. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the `ProgressView` will be visible in the unfilled portion of the loading bar.
 ///
-///To swap the colors, you can approximate how `Color.gray.opacity(0.1)` would look on a given background. Swapping the default colors will cause the blue background to show through the translucent gray, so it won't look right.
+/// To swap the colors, you can approximate how `Color.gray.opacity(0.1)` would look on a given background. Swapping the default colors will cause the blue background to show through the translucent gray, so it won't look right.
 ///
-
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(InvertedColorProgressViewStyle())
+///         }
+///      }
 ///
 ///     struct InvertedColorProgressViewStyle: ProgressViewStyle {
 ///         func makeBody(configuration: Configuration) -> some View {
@@ -13612,17 +13617,31 @@ public struct PrimitiveButtonStyleConfiguration {
 ///
 ///To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
 ///
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(InvertedDirectionProgressViewStyle())
+///         }
+///      }
+///
 ///     struct InvertedDirectionProgressViewStyle: ProgressViewStyle {
 ///         func makeBody(configuration: Configuration) -> some View {
-///          GeometryReader { geometry in
-///             ProgressView(configuration)
-///              .frame(height: geometry.size.height)
-///              .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+///             GeometryReader { geometry in
+///                 ProgressView(configuration)
+///                     .frame(height: geometry.size.height)
+///                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+///             }
 ///         }
-///       }
 ///     }
 ///
 ///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of `GeometryReader` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
+///
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(VerticalProgressViewStyle())
+///         }
+///      }
 ///
 ///     struct VerticalProgressViewStyle: ProgressViewStyle {
 ///         func makeBody(configuration: Configuration) -> some View {
@@ -13636,6 +13655,14 @@ public struct PrimitiveButtonStyleConfiguration {
 ///      }
 ///
 ///  To invert the direction of progress in the vertical style, merely apply the `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
+///
+///
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(InvertedVerticalProgressViewStyle())
+///         }
+///      }
 ///
 ///     struct InvertedVerticalProgressViewStyle: ProgressViewStyle {
 ///          func makeBody(configuration: Configuration) -> some View {
