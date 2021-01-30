@@ -2855,6 +2855,8 @@ extension Capsule : InsettableShape {
 ///
 /// By default, a circle is black, and takes up the space of its container.
 ///
+/// ![Circle Example 1](images/Circle-example-1.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -2863,9 +2865,9 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// ![Circle Example 1](images/Circle-example-1.png)
-///
 /// You can define a circle with a specific color and frame:
+///
+/// ![Circle Example 2](images/Circle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2877,10 +2879,10 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// ![Circle Example 2](images/Circle-example-2.png)
-///
 /// To add a border, inset the circle by half of the border width to keep the
 /// total size:
+///
+/// ![Circle Example 3](Circle-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2892,9 +2894,9 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// ![Circle Example 3](Circle-example-3.png)
-///
 /// A circle can be described as a path within a specific rectangular frame:
+///
+/// ![Circle Example 4](Circle-example-4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2905,8 +2907,6 @@ extension Capsule : InsettableShape {
 ///     }
 /// }
 /// ```
-///
-/// ![Circle Example 4](Circle-example-4.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
