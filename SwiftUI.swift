@@ -13544,110 +13544,110 @@ public struct PrimitiveButtonStyleConfiguration {
     public func trigger() { }
 }
 
-    /// An animated loading bar or "spinner" shown when an ongoing task has started but is not yet complete
-    ///
-    /// A progress view is a combination of `UIProgressView` and `UIActivityIndicatorView` from UIKit. When initialized without arguments, it resembles `UIActivityIndicatorView`, an indeterminate progress indicator or “spinner”.
-    ///
-    ///     struct IndeterminateProgressViews: View {
-    ///       var body: some View {
-    ///         VStack {
-    ///           ProgressView()
-    ///           ProgressView(value: Double?(nil))
-    ///           ProgressView(value: -1)
-    ///         }
-    ///       }
-    ///     }
-    ///
-    /// When initialized with a value `ProgressView` looks like `UIProgressView`, a loading bar that fills up from left to right. There are notable exceptions featured in the example above. For example, a value of nil or less than 0.0 shows an indeterminate progress indicator or “spinner”."
-    /// The value can be any generic type that conforms to the `BinaryFloatingPoint` protocol, which includes     `CGFloat`, `Double`, `Float`, `Float16` and `Float80`.
-    ///
-    ///     struct DeteriminateProgressViews: View {
-    ///       @State var value = Double()
-    ///       var body: some View {
-    ///         VStack {
-    ///           Slider(value: $value, in: 0...1)
-    ///           ProgressView(value: value)
-    ///           ProgressView(value: value, total: 1)
-    ///           ProgressView(value: value, total: 2)
-    ///           ProgressView(value: value) {
-    ///             Text("Label")
-    ///           }
-    ///           ProgressView("Title", value: value)
-    ///         }
-    ///       }
-    ///     }
-    ///
-    /// ### Styling Progress Views
-    ///
-    /// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of `ProgressView`. The structure passed to the
-    /// `progressViewStyle(_:)` modifier applies to all `ProgressView` instances in the children of that `View`.
-    ///
-    /// In this example, the same style is applied to two `ProgressView` instances that are children of a `VStack`:
-    ///
-    ///     struct DefaultProgressViews: View {
-    ///         var body: some View {
-    ///             VStack {
-    ///                 ProgressView(value: 0.25)
-    ///                   .accentColor(.red)
-    ///                 ProgressView(value: 0.75)
-    ///                   .background(.black)
-    ///             }
-    ///             .progressViewStyle(DefaultProgressViewStyle())
-    ///         }
-    ///     }
-    ///
-    /// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the `DefaultProgressViewStyle`. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the `ProgressView` will be visible in the unfilled portion of the loading bar.
-    ///
-    ///To swap the colors, you can approximate how `Color.gray.opacity(0.1)` would look on a given background. Swapping the default colors will cause the blue background to show through the translucent gray, so it won't look right.
-    ///
+/// An animated loading bar or "spinner" shown when an ongoing task has started but is not yet complete
+///
+/// A progress view is a combination of `UIProgressView` and `UIActivityIndicatorView` from UIKit. When initialized without arguments, it resembles `UIActivityIndicatorView`, an indeterminate progress indicator or “spinner”.
+///
+///     struct IndeterminateProgressViews: View {
+///         var body: some View {
+///           VStack {
+///               ProgressView()
+///               ProgressView(value: Double?(nil))
+///               ProgressView(value: -1)
+///           }
+///         }
+///     }
+///
+/// When initialized with a value `ProgressView` looks like `UIProgressView`, a loading bar that fills up from left to right. There are notable exceptions featured in the example above. For example, a value of nil or less than 0.0 shows an indeterminate progress indicator or “spinner”."
+/// The value can be any generic type that conforms to the `BinaryFloatingPoint` protocol, which includes     `CGFloat`, `Double`, `Float`, `Float16` and `Float80`.
+///
+///     struct DeteriminateProgressViews: View {
+///         @State var value = Double()
+///         var body: some View {
+///             VStack {
+///                 Slider(value: $value, in: 0...1)
+///                 ProgressView(value: value)
+///                 ProgressView(value: value, total: 1)
+///                 ProgressView(value: value, total: 2)
+///                 ProgressView(value: value) {
+///                     Text("Label")
+///                 }
+///                 ProgressView("Title", value: value)
+///             }
+///         }
+///     }
+///
+/// ### Styling Progress Views
+///
+/// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of `ProgressView`. The structure passed to the
+/// `progressViewStyle(_:)` modifier applies to all `ProgressView` instances in the children of that `View`.
+///
+/// In this example, the same style is applied to two `ProgressView` instances that are children of a `VStack`:
+///
+///     struct DefaultProgressViews: View {
+///         var body: some View {
+///             VStack {
+///                 ProgressView(value: 0.25)
+///                   .accentColor(.red)
+///                 ProgressView(value: 0.75)
+///                   .background(.black)
+///             }
+///             .progressViewStyle(DefaultProgressViewStyle())
+///         }
+///     }
+///
+/// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the `DefaultProgressViewStyle`. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the `ProgressView` will be visible in the unfilled portion of the loading bar.
+///
+///To swap the colors, you can approximate how `Color.gray.opacity(0.1)` would look on a given background. Swapping the default colors will cause the blue background to show through the translucent gray, so it won't look right.
+///
 
-    ///
-    ///     struct InvertedColorProgressViewStyle: ProgressViewStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {
-    ///           ProgressView(configuration)
-    ///            .background(Color.blue)
-    ///            .accentColor(Color(red: 0.894, green: 0.894, blue: 0.902))
-    ///         }
-    ///     }
-    ///
-    ///To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
-    ///
-    ///     struct InvertedDirectionProgressViewStyle: ProgressViewStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {
-    ///          GeometryReader { geometry in
-    ///             ProgressView(configuration)
-    ///              .frame(height: geometry.size.height)
-    ///              .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-    ///         }
-    ///       }
-    ///     }
-    ///
-    ///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of `GeometryReader` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
-    ///
-    ///     struct VerticalProgressViewStyle: ProgressViewStyle {
-    ///       func makeBody(configuration: Configuration) -> some View {
-    ///         GeometryReader { geometry in
-    ///           ProgressView(configuration)
-    ///              .frame(width: geometry.size.height)
-    ///              .offset(x: geometry.size.height / 2, y: geometry.size.height / 2)
-    ///              .rotationEffect(.degrees(90))
-    ///          }
-    ///        }
-    ///      }
-    ///
-    ///  To invert the direction of progress in the vertical style, merely apply the `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
-    ///
-    ///     struct InvertedVerticalProgressViewStyle: ProgressViewStyle {
-    ///      func makeBody(configuration: Configuration) -> some View {
-    ///       GeometryReader { geometry in
-    ///         ProgressView(configuration)
-    ///            .frame(width: geometry.size.height)
-    ///            .rotationEffect(.degrees(90))
-    ///            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-    ///            .offset(x: -(geometry.size.height / 2), y: geometry.size.height / 2)
-    ///         }
-    ///       }
-    ///     }
+///
+///     struct InvertedColorProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///           ProgressView(configuration)
+///            .background(Color.blue)
+///            .accentColor(Color(red: 0.894, green: 0.894, blue: 0.902))
+///         }
+///     }
+///
+///To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
+///
+///     struct InvertedDirectionProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///          GeometryReader { geometry in
+///             ProgressView(configuration)
+///              .frame(height: geometry.size.height)
+///              .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+///         }
+///       }
+///     }
+///
+///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of `GeometryReader` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
+///
+///     struct VerticalProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///           GeometryReader { geometry in
+///             ProgressView(configuration)
+///                 .frame(width: geometry.size.height)
+///                 .offset(x: geometry.size.height / 2, y: geometry.size.height / 2)
+///                 .rotationEffect(.degrees(90))
+///             }
+///         }
+///      }
+///
+///  To invert the direction of progress in the vertical style, merely apply the `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
+///
+///     struct InvertedVerticalProgressViewStyle: ProgressViewStyle {
+///          func makeBody(configuration: Configuration) -> some View {
+///              GeometryReader { geometry in
+///                  ProgressView(configuration)
+///                     .frame(width: geometry.size.height)
+///                     .rotationEffect(.degrees(90))
+///                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+///                     .offset(x: -(geometry.size.height / 2), y: geometry.size.height / 2)
+///              }
+///          }
+///     }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, CurrentValueLabel : View {
 
