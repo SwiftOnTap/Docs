@@ -2865,8 +2865,8 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// Define a circle with a specific color and frame with the `fill` and `frame` 
-/// modifiers. For example:
+/// Define a circle with a specific color and frame with the `Circle/fill()` 
+/// and `Circle/frame(width:height:)` modifiers. For example:
 ///
 /// ![Circle Example 2](images/Circle-example-2.png)
 ///
@@ -2880,9 +2880,9 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// To add a border, use the `stroke` modifier, and use the `inset` modifier to
-/// inset the circle by half of the border width to keep the circle at its
-/// original size:
+/// To add a border, use the `Circle/stroke(:lineWidth:)` modifier, and use 
+/// the `Circle/inset(by:)` modifier to inset the circle by half of the border 
+/// width to keep the circle at its original size:
 ///
 /// ![Circle Example 3](Circle-example-3.png)
 ///
@@ -2897,7 +2897,7 @@ extension Capsule : InsettableShape {
 /// ```
 ///
 /// A circle can be described as a path within a specific rectangular frame
-/// using the `path` modifier:
+/// using the `Circle/path(in:)` modifier:
 ///
 /// ![Circle Example 4](Circle-example-4.png)
 ///
@@ -2914,22 +2914,22 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// > Describes this shape as a path within a rectangular frame of reference.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// > - Parameter rect: The frame of reference for describing this shape.
     ///
-    /// - Returns: A path that describes this shape.
+    /// > - Returns: A path that describes this shape.
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a new circle `Shape`.
+    /// > Creates a new circle `Shape`.
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
