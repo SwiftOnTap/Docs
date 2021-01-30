@@ -2853,7 +2853,7 @@ extension Capsule : InsettableShape {
 /// The circle's radius equals half the length of the frame rectangle's smallest
 /// edge.
 ///
-/// By default, a circle is black, and takes up the space of its container.
+/// By default, a circle is black, and takes up the space of its container:
 ///
 /// ![Circle Example 1](images/Circle-example-1.png)
 ///
@@ -2865,7 +2865,8 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// You can define a circle with a specific color and frame:
+/// Define a circle with a specific color and frame with the `fill` and `frame` 
+/// modifiers. For example:
 ///
 /// ![Circle Example 2](images/Circle-example-2.png)
 ///
@@ -2879,8 +2880,9 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// To add a border, inset the circle by half of the border width to keep the
-/// total size:
+/// To add a border, use the `stroke` modifier, and use the `inset` modifier to
+/// inset the circle by half of the border width to keep the circle at its
+/// original size:
 ///
 /// ![Circle Example 3](Circle-example-3.png)
 ///
@@ -2894,7 +2896,8 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// A circle can be described as a path within a specific rectangular frame:
+/// A circle can be described as a path within a specific rectangular frame
+/// using the `path` modifier:
 ///
 /// ![Circle Example 4](Circle-example-4.png)
 ///
