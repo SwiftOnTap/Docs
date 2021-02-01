@@ -15997,19 +15997,14 @@ extension Scene {
     ///         WindowGroup {
     ///             Text("Press ⌘P to print 🍌")
     ///         }
-    ///         .commands {
-    ///             PrintCommand()
-    ///         }
+    ///         .commands { PrintCommand() }
     ///     }
     ///
     ///     struct PrintCommand: Commands {
     ///         var body: some Commands {
     ///             CommandMenu("Print") {
     ///                 Button("Print", action: { print("🍌") })
-    ///                     .keyboardShortcut(
-    ///                         KeyboardShortcut(
-    ///                             KeyEquivalent("p"),
-    ///                             modifiers: [.command]))
+    ///                     .keyboardShortcut(KeyboardShortcut(KeyEquivalent("p"), modifiers: [.command]))
     ///             }
     ///         }
     ///     }
