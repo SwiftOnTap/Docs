@@ -23,8 +23,3 @@ Documentation additions should be written directly in the comment blocks of the 
 Remember to follow the [Documentation Template](https://github.com/BananaDocs/BananaDocs/wiki/Documentation-Template) when making any changes. 
 
 If you want to see the current status of documentation, check out [BananaDocs](https://bananadocs.org)
-
-
-## Example Page 
-![Banana Example](https://i.ibb.co/NN7cKSB/bananadocs-org-d-buttonstyle-2.jpg)
-
