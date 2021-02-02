@@ -2865,7 +2865,7 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// Define a circle with a specific color and frame with the `Circle/fill()` 
+/// Define a Circle with a specific color and frame with the `Shape/fill()` 
 /// and `Circle/frame(width:height:)` modifiers. For example:
 ///
 /// ![Circle Example 2](images/Circle-example-2.png)
@@ -2896,32 +2896,35 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// A circle can be described as a path within a specific rectangular frame
-/// using the `Circle/path(in:)` modifier:
-///
-/// ![Circle Example 4](Circle-example-4.png)
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Circle()
-///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
-///             .fill(Color.blue)
-///     }
-/// }
-/// ```
-///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
-    /// > Describes this shape as a path within a rectangular frame of reference.
+    /// A circle can be described as a path within a specific rectangular frame
+    /// using the `Circle/path(in:)` modifier:
     ///
-    /// > - Parameter rect: The frame of reference for describing this shape.
+    /// ![Circle Example 4](Circle-example-4.png)
     ///
-    /// > - Returns: A path that describes this shape.
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// > Creates a new circle `Shape`.
+    /// Creates a circle.
+    ///
+    /// ![Circle Example 1](images/Circle-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
     /// > The type defining the data to animate.
@@ -2937,7 +2940,20 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Circle : InsettableShape {
 
-    /// > Returns `self` inset by `amount`.
+    /// Returns a Circle insetted by the amount specified. For example, 
+    /// insetting by 10 points returns a Circle that fills its container, with
+    /// 10 points inset on all four side.
+    ///
+    /// ![Circle Example 5](Circle-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
