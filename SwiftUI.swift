@@ -4194,10 +4194,63 @@ public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : Cu
 extension CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent {
 }
 
-/// A control for selecting an absolute date.
+/// A picker control for selecting dates.
 ///
-/// It can be configured to only display specific components of the date, but
-/// still results in picking a complete `Date` instance.
+/// You create a picker by providing 3 things:
+/// 1. a selection binding
+/// 2. a label
+/// 3. the editable parts of the date
+///
+/// There are four types of pickers, and three types of labels, making 12 total initializers.
+///
+/// Picker types:
+/// 1. Unlimited range
+/// 2. Closed range (maximum and minimum)
+/// 3. From range (minimum only)
+/// 4. Through range (maximum only)
+///
+/// Label types:
+/// 1. String
+/// 2. Localized string key
+/// 3. View
+///
+/// A simple example looks like this:
+///
+/// ```
+/// struct DatePickerView: View {
+///     @State private var date = Date()
+///
+///     var body: some View {
+///         DatePicker("Date", selection: $date)
+///     }
+/// }
+/// ```
+///
+/// ### Styling Date Pickers
+///
+/// You can customize the appearance and interaction of date pickers using one of the
+/// ``DatePickerStyle``s provided by SwiftUI. The full list of styles is:
+/// - ``DefaultDatePickerStyle`` (iOS and macOS)
+/// - ``WheelDatePickerStyle`` (iOS)
+/// - ``FieldDatePickerStyle`` (macOS)
+/// - ``GraphicalDatePickerStyle`` (macOS)
+/// - ``StepperFieldDatePickerStyle`` (macOS)
+///
+/// Currently, you cannot create your own custom ``DatePickerStyle``.
+///
+/// To set a specific style for all picker instances within a view, use the
+/// ``View/datePickerStyle(_:)`` modifier.
+///
+/// ```
+/// struct StyledDatePickerView: View {
+///     @State private var date = Date()
+///
+///     var body: some View {
+///         DatePicker(selection: $date, label: { Text("Date") })
+///             .datePickerStyle(WheelDatePickerStyle())
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4221,49 +4274,104 @@ public struct DatePicker<Label> : View where Label : View {
 @available(watchOS, unavailable)
 extension DatePicker {
 
-    /// Creates an instance that selects a `Date` with an unbounded range.
+    /// Creates a date picker with unlimited range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
-    /// Creates an instance that selects a `Date` in a closed range.
+    /// Creates a date picker with closed range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    in: Date()...Date().advanced(by: 3600 * 90),
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The inclusive range of selectable dates.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The maximum and minimum dates.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
-    /// Creates an instance that selects a `Date` on or after some start date.
+    /// Creates a date picker with "from" range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    in: Date()...,
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range from some selectable start date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a minimum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
-    /// Creates an instance that selects a `Date` on or before some end date.
+    /// Creates a date picker with "through" range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    in: ...Date(),
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range before some selectable end date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a maximum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
@@ -4274,99 +4382,205 @@ extension DatePicker {
 @available(watchOS, unavailable)
 extension DatePicker where Label == Text {
 
-    /// Creates an instance that selects a `Date` with an unbounded range.
+    /// Creates a date picker with unlimited range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date"),
+    ///                    selection: $date,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` in a closed range.
+    /// Creates a date picker with closed range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date and time"),
+    ///                    selection: $date,
+    ///                    in: Date()...Date().advance(by: 3600 * 90),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The inclusive range of selectable dates.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The maximum and minimum dates.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` on or after some start date.
+    /// Creates a date picker with "from" range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date and time"),
+    ///                    selection: $date,
+    ///                    in: Date()...,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range from some selectable start date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a minimum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` on or before some end date.
+    /// Creates a date picker with "through" range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date and time"),
+    ///                    selection: $date,
+    ///                    in: ...Date(),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range before some selectable end date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a maximum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` within the given range.
+    /// Creates a date picker with unlimited range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init<S>(_ title: S, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
-    /// Creates an instance that selects a `Date` in a closed range.
+    /// Creates a date picker with closed range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    in: Date()...Date().advance(by: 3600 * 90),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The inclusive range of selectable dates.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The maximum and minimum dates.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init<S>(_ title: S, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
-    /// Creates an instance that selects a `Date` on or after some start date.
+    /// Creates a date picker with "from" range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    in: Date()...,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range from some selectable start date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a minimum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
-    /// Creates an instance that selects a `Date` on or before some end date.
+    /// Creates a date picker with "through" range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    in: ...Date(),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range before some selectable end date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a maximum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -13323,13 +13537,19 @@ extension Path {
     public func offsetBy(dx: CGFloat, dy: CGFloat) -> Path { }
 }
 
-/// A control for selecting from a set of mutually exclusive values.
+/// A control that lets you select an item.
 ///
-/// You create a picker by providing a selection binding, a label, and the
-/// content for the picker to display. Set the `selection` parameter to a bound
-/// property that provides the value to display as the current selection. Set
-/// the label to a view that visually describes the purpose of selecting content
-/// in the picker, and then provide the content for the picker to display.
+/// You create a picker by providing 3 things:
+/// 1. a selection binding
+/// 2. a label
+/// 3. content for the picker to display.
+///
+/// Set the `selection` parameter to a "current selection" binding.
+///
+/// Set the label to a view that describes the purpose of selecting content
+/// in the picker.
+///
+/// The content is what the picker displays.
 ///
 /// For example, consider the following enumeration of ice cream flavors:
 ///
@@ -13342,18 +13562,24 @@ extension Path {
 ///     }
 ///
 /// You can create a picker to select among these values by providing `Text`
-/// views in the picker initializer's content. You can optionally provide a
-/// string as the first parameter; if you do, the picker creates a `Text`
-/// label using this string:
+/// views in the picker initializer's content:
 ///
+/// ![Picker Ice Cream](/picker-ice-cream.png)
+///
+/// ```
+/// struct IceCreamView: View {
 ///     @State private var selectedFlavor = Flavor.chocolate
 ///
-///     Picker("Flavor", selection: $selectedFlavor) {
-///         Text("Chocolate").tag(Flavor.chocolate)
-///         Text("Vanilla").tag(Flavor.vanilla)
-///         Text("Strawberry").tag(Flavor.strawberry)
+///     var body: some View {
+///         Picker("Flavor", selection: $selectedFlavor) {
+///             Text("Chocolate 🍫").tag(Flavor.chocolate)
+///             Text("Vanilla 🍦").tag(Flavor.vanilla)
+///             Text("Strawberry 🍓").tag(Flavor.strawberry)
+///         }
+///         Text("Selected flavor: \(selectedFlavor.rawValue)")
 ///     }
-///     Text("Selected flavor: \(selectedFlavor.rawValue)")
+/// }
+/// ```
 ///
 /// You append a tag to each text view so that the type of each selection
 /// matches the type of the bound state variable.
@@ -13364,48 +13590,72 @@ extension Path {
 /// each option, you can create the picker with a `ForEach` construct, like
 /// this:
 ///
-///     Picker("Flavor", selection: $selectedFlavor) {
-///         ForEach(Flavor.allCases) { flavor in
-///             Text(flavor.rawValue.capitalized)
-///         }
-///     }
+/// ```
+/// struct IceCreamView: View {
+///     @State private var selectedFlavor = Flavor.chocolate
 ///
-/// In this case, `ForEach` automatically assigns a tag to the selection
-/// views, using each option's `id`, which it can do because `Flavor` conforms
-/// to the <doc://com.apple.documentation/documentation/Swift/Identifiable>
-/// protocol.
-///
-/// On the other hand, if the selection type doesn't match the input to the
-/// `ForEach`, you need to provide an explicit tag. The following example
-/// shows a picker that's bound to a `Topping` type, even though the options
-/// are all `Flavor` instances. Each option uses `View/tag(_:)` to associate
-/// a topping with the flavor it displays.
-///
-///     enum Topping: String, CaseIterable, Identifiable {
-///         case nuts
-///         case cookies
-///         case blueberries
-///
-///         var id: String { self.rawValue }
-///     }
-///     extension Flavor {
-///         var suggestedTopping: Topping {
-///             switch self {
-///             case .chocolate: return .nuts
-///             case .vanilla: return .cookies
-///             case .strawberry: return .blueberries
+///     var body: some View {
+///         Picker("Flavor", selection: $selectedFlavor) {
+///             ForEach(Flavor.allCases) { flavor in
+///                 Text(flavor.rawValue.capitalized)
 ///             }
 ///         }
 ///     }
-///     @State var suggestedTopping: Topping = .cookies
+/// }
+/// ```
 ///
-///     Picker("Suggest a topping for:", selection: $suggestedTopping) {
-///         ForEach(Flavor.allCases) { flavor in
-///             Text(flavor.rawValue.capitalized)
-///                 .tag(flavor.suggestedTopping)
+/// In this case, `ForEach` automatically assigns a tag to the selection
+/// views, using each option's `id`, which it can do because `Flavor` conforms
+/// to the [Identifiable](https://developer.apple.com/documentation/swift/identifiable)
+/// protocol.
+///
+/// However, if the selection type doesn't match the input to the
+/// `ForEach`, you need to provide an explicit tag. The following example
+/// shows a picker that has a binding to a `Topping` type, even though the options
+/// are all `Flavor` instances. Each option uses `View/tag(_:)` to associate
+/// a topping with the flavor it displays.
+///
+/// ![Picker Toppings](/picker-toppings.png)
+///
+/// ```
+/// enum Flavor: String, CaseIterable, Identifiable {
+///     case chocolate
+///     case vanilla
+///     case strawberry
+///
+///     var id: String { self.rawValue }
+///     var suggestedTopping: Topping {
+///         switch self {
+///         case .chocolate:
+///             return .nuts
+///         case .vanilla:
+///             return .cookies
+///         case .strawberry:
+///             return .blueberries
 ///         }
 ///     }
-///     Text("suggestedTopping: \(suggestedTopping.rawValue)")
+/// }
+/// enum Topping: String, CaseIterable, Identifiable {
+///     case nuts
+///     case cookies
+///     case blueberries
+///
+///     var id: String { self.rawValue }
+/// }
+///
+/// struct ContentView: View {
+///     @State private var suggestedTopping: Topping = .cookies
+///     var body: some View {
+///         Picker("Suggest a topping for:", selection: $suggestedTopping) {
+///             ForEach(Flavor.allCases) { flavor in
+///                 Text(flavor.rawValue.capitalized)
+///                     .tag(flavor.suggestedTopping)
+///             }
+///         }
+///         Text("suggestedTopping: \(suggestedTopping.rawValue)")
+///     }
+/// }
+/// ```
 ///
 /// ### Styling Pickers
 ///
@@ -13415,39 +13665,45 @@ extension Path {
 /// or `PopUpButtonPickerStyle`.
 ///
 /// To set a specific style for all picker instances within a view, use the
-/// `View/pickerStyle(_:)` modifier. The following example adds a second binding
-/// type, `Topping`, and applies the `SegmentedPickerStyle` to two pickers:
+/// `View/pickerStyle(_:)` modifier.
 ///
+/// ![Picker Segmented with Ice Cream](picker-segmented-ice-cream.png)
+///
+/// ```
+/// struct ContentView: View {
 ///     @State private var selectedFlavor = Flavor.chocolate
-///     @State private var selectedTopping = Topping.nuts
-///
-///     VStack {
+///     var body: some View {
 ///         Picker("Flavor", selection: $selectedFlavor) {
-///             ForEach(Flavor.allCases) { flavor in
-///                 Text(flavor.rawValue.capitalized)
-///             }
+///             Text("chocolate").tag(Flavor.chocolate)
+///             Text("vanilla").tag(Flavor.vanilla)
 ///         }
-///         Picker("Topping", selection: $selectedTopping) {
-///             ForEach(Topping.allCases) { flavor in
-///                 Text(flavor.rawValue.capitalized)
-///             }
-///         }
-///
-///         Text("Selected flavor: \(selectedFlavor.rawValue)")
-///         Text("Selected toppping: \(selectedTopping.rawValue)")
+///         .pickerStyle(SegmentedPickerStyle())
 ///     }
-///     .pickerStyle(SegmentedPickerStyle())
-///
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Picker<Label, SelectionValue, Content> : View where Label : View, SelectionValue : Hashable, Content : View {
 
-    /// Creates a picker that displays a custom label.
+    /// Creates a picker with a custom label.
+    ///
+    /// ```
+    /// struct PickerView: View {
+    ///     @State private var selection: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Picker(selection: $selection, label: Label("Pick emoji", systemImage: "face.smiling") {
+    ///             Text("🍑").tag(1)
+    ///             Text("🗿").tag(2)
+    ///             Text("🍌").tag(3)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///     - selection: A binding to a property that determines the
-    ///       currently-selected option.
-    ///     - label: A view that describes the purpose of selecting an option.
-    ///     - content: A view that contains the set of options.
+    ///     - selection: A binding to the currently selected option.
+    ///     - label: A view used for the picker's label.
+    ///     - content: A closure that returns the picker's options.
     public init(selection: Binding<SelectionValue>, label: Label, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
@@ -13463,37 +13719,48 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Picker where Label == Text {
 
-    /// Creates a picker that generates its label from a localized string key.
+    /// Creates a picker with a localized string key label.
+    ///
+    /// ```
+    /// struct PickerView: View {
+    ///     @State private var selection: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Picker(LocalizedStringKey("Pick emoji"), selection: $selection) {
+    ///             Text("🍑").tag(1)
+    ///             Text("🗿").tag(2)
+    ///             Text("🍌").tag(3)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///     - titleKey: A localized string key that describes the purpose of
-    ///       selecting an option.
-    ///     - selection: A binding to a property that determines the
-    ///       currently-selected option.
-    ///     - content: A view that contains the set of options.
-    ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// localized key similar to `Text/init(_:tableName:bundle:comment:)`. See
-    /// `Text` for more information about localizing strings.
-    ///
-    /// To initialize a picker with a string variable, use
-    /// `init(_:selection:content:)-5njtq` instead.
+    ///     - titleKey: A localized string key used for the picker's label.
+    ///     - selection: A binding to the currently selected option.
+    ///     - content: A closure that returns the picker's options.
     public init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) { }
 
-    /// Creates a picker that generates its label from a string.
+    /// Creates a picker with a string label.
+    ///
+    /// ```
+    /// struct PickerView: View {
+    ///     @State private var selection: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Picker("Pick emoji 🤑", selection: $selection) {
+    ///             Text("🍑").tag(1)
+    ///             Text("🗿").tag(2)
+    ///             Text("🍌").tag(3)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///     - title: A string that describes the purpose of selecting an option.
-    ///     - selection: A binding to a property that determines the
-    ///       currently-selected option.
-    ///     - content: A view that contains the set of options.
-    ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// title similar to `Text/init(_:)-9d1g4`. See `Text` for more
-    /// information about localizing strings.
-    ///
-    /// To initialize a picker with a localized string key, use
-    /// `init(_:selection:content:)-6lwfn` instead.
+    ///     - title: A string used for the pikcer's label.
+    ///     - selection: A binding to the currently selected option.
+    ///     - content: A closure that returns the picker's options.
     public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 }
 
@@ -19737,13 +20004,12 @@ public struct TitleOnlyLabelStyle : LabelStyle {
     public typealias Body = some View
 }
 
-/// A control that toggles between on and off states.
+/// An on-off switch.
 ///
-/// You create a toggle by providing an `isOn` binding and a label. Bind `isOn`
-/// to a Boolean property that determines whether the toggle is on or off. Set
-/// the label to a view that visually describes the purpose of switching between
-/// toggle states. For example:
+/// Create a toggle by providing an `isOn` binding and a label.
 ///
+/// ```
+/// struct SwitchView: View {
 ///     @State private var vibrateOnRing = false
 ///
 ///     var body: some View {
@@ -19751,38 +20017,65 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 ///             Text("Vibrate on Ring")
 ///         }
 ///     }
+/// }
+/// ```
 ///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
 /// parameter, instead of a trailing closure:
 ///
+/// ```
+/// struct SwitchView: View {
 ///     @State private var vibrateOnRing = true
 ///
 ///     var body: some View {
 ///         Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
 ///     }
+/// }
+/// ```
 ///
 /// ### Styling Toggles
 ///
-/// You can customize the appearance and interaction of toggles by creating
-/// styles that conform to the `ToggleStyle` protocol. To set a specific style
-/// for all toggle instances within a view, use the `View/toggleStyle(_:)`
-/// modifier:
+/// You can customize the appearance of toggles by using a ``ToggleStyle``, or creating your own
+/// styles that conform to the ``ToggleStyle`` protocol. Available styles include:
+/// - ``DefaultToggleStyle``
+/// - ``SwitchToggleStyle``
+/// - ``CheckboxToggleStyle``
 ///
-///     VStack {
-///         Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
-///         Toggle("Vibrate on Silent", isOn: $vibrateOnSilent)
+/// To set the style, use the ``View/toggleStyle(_:)`` modifier:
+///
+/// ```
+/// struct RingerView: View {
+///     @State private var vibrateOnRing = true
+///     @State private var vibrateOnSilent = true
+///     var body: some View {
+///         VStack {
+///             Toggle("Vibrate on Ring 🔔", isOn: $vibrateOnRing)
+///             Toggle("Vibrate on Silent 🔕", isOn: $vibrateOnSilent)
+///         }
+///         .toggleStyle(SwitchToggleStyle())
 ///     }
-///     .toggleStyle(SwitchToggleStyle())
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Toggle<Label> : View where Label : View {
 
-    /// Creates a toggle that displays a custom label.
+    /// Creates an on-off switch with a custom label.
+    ///
+    /// ```
+    /// struct ToggleView: View {
+    ///     @State private var on = false
+    ///     var body: some View {
+    ///         Toggle(isOn: $on, label: {
+    ///             Text("Airplane Mode ✈️")
+    ///          })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - isOn: A binding to a property that determines whether the toggle is on
-    ///     or off.
-    ///   - label: A view that describes the purpose of the toggle.
+    ///   - isOn: A boolean binding connected to whether the toggle is on.
+    ///   - label: A closure that returns the toggle label.
     public init(isOn: Binding<Bool>, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
@@ -19798,27 +20091,34 @@ public struct Toggle<Label> : View where Label : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Toggle where Label == ToggleStyleConfiguration.Label {
 
-    /// Creates a toggle based on a toggle style configuration.
+    /// Creates a an on-off switch based on a toggle style configuration.
     ///
-    /// You can use this initializer within the
+    /// Use this initializer **only** within the
     /// `ToggleStyle/makeBody(configuration:)` method of a `ToggleStyle` to
-    /// create an instance of the styled toggle. This is useful for custom
-    /// toggle styles that only modify the current toggle style, as opposed to
+    /// create a toggle for configuring. This is useful for new custom
+    /// toggle styles that only modify the current toggle style, instead of
     /// implementing a brand new style.
     ///
     /// For example, the following style adds a red border around the toggle,
     /// but otherwise preserves the toggle's current style:
     ///
-    ///     struct RedBorderedToggleStyle : ToggleStyle {
+    ///     struct RedBorderedToggleStyle: ToggleStyle {
     ///         typealias Body = Toggle
-    ///
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             Toggle(configuration)
     ///                 .border(Color.red)
     ///         }
     ///     }
     ///
-    /// - Parameter configuration: A toggle style configuration.
+    ///     struct ContentView: View {
+    ///         @State private var on = true
+    ///         var body: some View {
+    ///             Toggle("🍌🍌", isOn: $on)
+    ///                 .toggleStyle(RedBorderedToggleStyle())
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: A toggle style configuration, passed from makeBody(configuration:).
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public init(_ configuration: ToggleStyleConfiguration) { }
 }
@@ -19826,35 +20126,40 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Toggle where Label == Text {
 
-    /// Creates a toggle that generates its label from a localized string key.
+    /// Creates an on-off switch with a localized string key label.
     ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// localized key similar to `Text/init(_:tableName:bundle:comment:)`. See
-    /// `Text` for more information about localizing strings.
+    /// Uses a localized string key to create a toggle.
     ///
-    /// To initialize a toggle with a string variable, use
-    /// `Toggle/init(_:isOn:)-2qurm` instead.
+    /// ```
+    /// struct LocalizedToggleView: View {
+    ///     @State private var on = false
+    ///     var body: some View {
+    ///         Toggle(LocalizedStringKey("Airplane Mode"), isOn: $on)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the toggle's localized title, that describes
-    ///     the purpose of the toggle.
-    ///   - isOn: A binding to a property that indicates whether the toggle is
-    ///    on or off.
+    ///   - titleKey: A localized string label.
+    ///   - isOn: A boolean binding connected to whether the toggle is on.
     public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>) { }
 
-    /// Creates a toggle that generates its label from a string.
+    /// Creates an on-off switch with a string label.
     ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// title similar to `Text/init(_:)-9d1g4`. See `Text` for more
-    /// information about localizing strings.
+    /// Uses a string to create a toggle.
     ///
-    /// To initialize a toggle with a localized string key, use
-    /// `Toggle/init(_:isOn:)-8qx3l` instead.
+    /// ```
+    /// struct SettingsToggleView: View {
+    ///     @State private var on = false
+    ///     var body: some View {
+    ///         Toggle("Airplane Mode ✈️", isOn: $on)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: A string that describes the purpose of the toggle.
-    ///   - isOn: A binding to a property that indicates whether the toggle is
-    ///    on or off.
+    ///   - title: A string label.
+    ///   - isOn: A boolean binding connected to whether the toggle is on.
     public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol { }
 }
 
