@@ -16870,40 +16870,84 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
     public init(@ViewBuilder content: () -> Content) { }
 }
 
-/// A control into which the user securely enters private text.
+/// A text field for entering private text, usually a password.
+///
+/// A secure field is just like a ``TextField``, except the entered text is shown as dots instead of
+/// as the actual text.
+///
+/// ```
+/// struct PasswordView: View {
+///     @State private var password = ""
+///     var body: some View {
+///         SecureField("Password", text: $password)
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct SecureField<Label> : View where Label : View {
 
-    /// The content and behavior of the view.
+    /// The body of a secure field, which is the underlying TextField.
+    ///
+    /// ```
+    /// struct PasswordView: View {
+    ///     @State private var password = ""
+    ///     var body: some View {
+    ///         let field = SecureField("Password", text: $password)
+    ///         return field.onAppear { print(field.body) } //"TextField<Text>(..."
+    ///     }
+    /// }
+    /// ```
     public var body: some View { get }
 
     /// The type of view representing the body of this view.
     ///
     /// When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
+    ///
+    /// In this instance, the type evaluates to ``TextField``, since the body of a ``SecureField``
+    /// is a text field.
+    ///
+    /// ```
+    /// struct PasswordView: View {
+    ///     @State private var password = ""
+    ///     var body: some View {
+    ///         SecureField("Password", text: $password, onCommit: {
+    ///             print("Password has been entered ✅")
+    ///         })
+    ///     }
+    /// }
+    /// ```
     public typealias Body = some View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SecureField where Label == Text {
 
-    /// Creates an instance.
+    /// Creates a text field for entering private text, usually a password, with a LocalizedStringKey placeholder.
+    ///
+    /// ```
+    /// struct PasswordView: View {
+    ///     @State private var password = ""
+    ///     var body: some View {
+    ///         SecureField(LocalizedStringKey("Password"), text: $password, onCommit: {
+    ///             print("Password has been entered ✅")
+    ///         })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - text: The text to be displayed and edited.
-    ///   - onCommit: The action to perform when the user performs an action
-    ///     (usually the return key) while the `SecureField` has focus.
+    ///   - titleKey: The localized string key placeholder, which is visible when the field is empty.
+    ///   - text: A binding variable to the displayed and edited text.
+    ///   - onCommit: The function called when the user hits the return key.
     public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void = {}) { }
 
-    /// Creates an instance.
+    /// Creates a text field for entering private text, usually a password, with a String placeholder.
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - text: The text to be displayed and edited.
-    ///   - onCommit: The action to perform when the user performs an action
-    ///     (usually the return key) while the `SecureField` has focus.
+    ///   - title: The string placeholder, which is visible when the field is empty.
+    ///   - text: A binding variable to the displayed and edited text.
+    ///   - onCommit: The function called when the user hits the return key.
     public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 }
 
