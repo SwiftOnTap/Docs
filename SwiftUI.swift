@@ -10048,28 +10048,59 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     public typealias Body = some View
 }
 
-/// A control for navigating to a URL.
+
+
+
+///  Before Link was added to SwiftUI, there was no way equivalent of a hyperlink outside of a WKWebView. It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time. In this example, I’m using the convenience initialiser of Button that only takes a title string (or localized string key), as this is as small as I could get the code in its original form.
 ///
-/// You create a link by providing a destination URL and a title. The title
-/// tells the user the purpose of the link, which can be either a string, or a
-/// title key that returns a localized string used to construct a label
-/// displayed to the user in your app's UI. The example below creates a link to
-/// `example.com` and displays the title string you provide as a
-/// link-styled view in your app:
+///  ````
+///  struct LinkStyleView: View {
+///    let urlString = "https://apple.com"
 ///
-///     Link("View Our Terms of Service",
-///           destination: URL(string: "https://www.example.com/TOS.html")!)
-///
-/// When a user taps or clicks a `Link`, where the URL opens depends on the
-/// contents of the URL. For example, a Universal Link will open in the
-/// associated app, if possible, but otherwise in the user's default web
-/// browser.
-///
-/// As with other views, you can style links using standard view modifiers
-/// depending on the view type of the link's label. For example, a ~~Text~~
-/// label could be modified with a custom ~~View/font(_:)~~ or
-/// ~~View/foregroundColor(_:)~~ to customize the appearance of the link in
-/// your app's UI.
+///    var body: some View {
+///      Group {
+///        if URL(string: urlString) != nil {
+///          //The old way to create a Link-style Button
+///          Button("Read more") {
+///            if let url = URL(string: urlString) {
+///              UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
+///                }
+///              }
+///          } else {
+///          EmptyView()
+///            .onAppear { assertionFailure("URL was nil") }
+///        }
+///      }
+///    }
+///  }
+///  In iOS 14, we now have Link, which does the action part of the Button above for us. I didn’t like how Apple’s documentation unsafely unwraps a URL using the ‘!’ operator, because this is an extremely bad practice that I’m surprised they would encourage in a code sample. Sure, they may know that this particular URL is created successfully because they link to example.com/TOS.html, a site owned by the Internet Assigned Numbers Authority (IANA) that convert URLs to IP addresses.
+
+///  But if you leave it up to your human certainty that a URL string is valid, sooner or later you’re going to make a mistake.
+
+///  Any app that unexpectedly finds nil when unsafely unwrapping an optional will crash instantly.
+
+///  That’s why my example above takes a few more lines than Apple’s example, but it does it safely. This example is really hampered by the lack of optional binding (if let or guard let) in the first version of SwiftUI, as I am instead restricted to comparing my URL to nil to ensure it exists. When this comparison confirms that the URL is not nil, this still doesn’t mean I can use it in the Button without unwrapping it first. This is why there’s a slightly confusing additional step in the Button action, which optionally binds the URL to ensure that it is not nil.
+
+///  I could have put the assertionFailure in an else statement after the if let in the Button action, but I wanted to add the EmptyView for consistency with my Link example. An else statement containing EmptyView is not required, as any if statement around the only occupant of a ViewBuilder closure will return EmptyView when the if condition is false. But I wanted to add this explicitly to show what would happen if our URL was nil. The user would see nothing, but an assertion would be triggered for the developer in debug mode.
+
+///  This would allow us to be aware that the URL was nil, but without causing a crash for the end-user.
+///  ```
+///  struct ExampleView: View {
+///    let urlString = "https://mediu
+///    var body: some View {
+///      Group {
+///        if let url = URL(string: urlString) {
+///          //The new way to create a Link
+///          Link("Read more", destination: url)
+///         } else {
+///           EmptyView()
+///             .onAppear { assertionFailure("URL was nil") }
+///         }
+///      }
+///    }
+///  }
+
+///  Now that SwiftUI supports if let, I can directly create properties like the URL and create Views that use that data. Just as before, the link is only shown when the URL can be created, but we don’t need to do multiple checks just to make sure that’s the case.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Link<Label> : View where Label : View {
 
