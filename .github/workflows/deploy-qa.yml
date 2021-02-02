@@ -27,12 +27,14 @@ jobs:
       run: |
         for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do
           if ! grep -q "$i," <<< $IGNORED_FILES; then
-            if [test -f $i] && [$i == *.swift]; then
-              echo "Uploading $i to S3 docs bucket"
-              aws s3 cp $i s3://blossom-documentation-qa
-            elif [test -f $i] && [$i == images/*]; then
-              echo "Uploading $i to S3 asset bucket"
-              aws s3 cp $i s3://bananadocs-documentation-assets-qa
+            if test -f $i; then
+              if [[ $i == *.swift ]] then
+                echo "Uploading $i to S3 docs bucket"
+                aws s3 cp $i s3://blossom-documentation-qa
+              elif [[ $i == images/* ]] then
+                echo "Uploading $i to S3 asset bucket"
+                aws s3 cp $i s3://bananadocs-documentation-assets-qa
+              fi
             fi
           fi
         done
