@@ -28,6 +28,7 @@ jobs:
         for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do
           if ! grep -q "$i," <<< $IGNORED_FILES; then
             if test -f $i; then
+              echo $i
               if [[ $i == *.swift ]]; then
                 echo "Uploading $i to S3 docs bucket"
                 aws s3 cp $i s3://blossom-documentation-qa
