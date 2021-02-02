@@ -17706,7 +17706,30 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
     public func hash(into hasher: inout Hasher) { }
 }
 
-/// A control for selecting a value from a bounded linear range of values.
+/// A control for selecting a value from a bounded range.
+///
+/// A slider is a circle on a track. The user can move the circle from left to right to pick between
+/// values. The slider takes a binding that the user updates.
+///
+/// The most basic example looks like this:
+///
+/// ```
+/// struct SliderView: View {
+///     @State private var value: Double = 0
+///
+///     var body: some View {
+///         Slider(value: $value)
+///     }
+/// }
+/// ```
+///
+/// In general, a slider has these four options:
+/// 1. Add a label
+/// 2. Change maximum and minimum values
+/// 3. Create a step size
+/// 4. Call a function when slider editing chances.
+///
+/// The slider's different initializers use different combinations of these options.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct Slider<Label, ValueLabel> : View where Label : View, ValueLabel : View {
@@ -17725,42 +17748,61 @@ public struct Slider<Label, ValueLabel> : View where Label : View, ValueLabel : 
 @available(tvOS, unavailable)
 extension Slider {
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label and max/min labels.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                minimumValueLabel: Text("🐢"),
+    ///                maximumValueLabel: Text("🐇"),
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - minimumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - maximumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - minimumValueLabel: A view used as a label on the minimum value side of the slider.
+    ///   - maximumValueLabel: A view used as a label on the maximum value side of the slider.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label, max/min labels, and a step size.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                step: 10,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                minimumValueLabel: Text("🐢"),
+    ///                maximumValueLabel: Text("🐇"),
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - step: The distance between each valid value.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - minimumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - maximumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - step: The distance between values on the slider. Defaults to 1.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - minimumValueLabel: A view used as a label on the minimum value side of the slider.
+    ///   - maximumValueLabel: A view used as a label on the maximum value side of the slider.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
@@ -17768,38 +17810,53 @@ extension Slider {
 @available(tvOS, unavailable)
 extension Slider where ValueLabel == EmptyView {
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label and a step size.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                step: 10,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - step: The distance between each valid value.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - step: The distance between values on the slider. Defaults to 1.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
@@ -17808,36 +17865,48 @@ extension Slider where ValueLabel == EmptyView {
 @available(tvOS, unavailable)
 extension Slider where Label == EmptyView, ValueLabel == EmptyView {
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                onEditingChanged: { began in print("began? \(began)") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
-    @available(tvOS, unavailable)
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a a slider with a step size.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                step: 10,
+    ///                onEditingChanged: { began in print("began? \(began)") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - step: The distance between each valid value.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - step: The distance between values on the slider. Defaults to 1.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
