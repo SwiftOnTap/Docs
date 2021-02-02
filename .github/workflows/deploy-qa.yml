@@ -25,7 +25,9 @@ jobs:
 
     - name: Copy changes files to S3
       run: |
+        echo $CHANGED_FILES
         for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do
+          echo $i
           if ! grep -q "$i," <<< $IGNORED_FILES; then
             if test -f $i; then
               echo $i
