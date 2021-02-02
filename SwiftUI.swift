@@ -17911,17 +17911,97 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
-/// A flexible space that expands along the major axis of its containing stack
-/// layout, or on both axes if not contained in a stack.
+/// A flexible empty view that expands to take up as much space as possible.
+///
+/// Spacers are commonly used inside of stacks, like ``VStack``, ``HStack``, and ``ZStack``.
+/// In a stack, they take up as much space as possible, so push everything else to the side.
+///
+/// In the following ``HStack``, a spacer is used to align the text to the right:
+///
+/// ```
+/// struct SpacerView: View {
+///     var body: some View {
+///         HStack {
+///             Spacer()
+///             Text("Ouch I'm crammed ➡️🤕")
+///         }
+///     }
+/// }
+/// ```
+///
+/// A spacer can also be framed to take a specific amount of space:
+///
+/// ```
+/// struct SpacerView: View {
+///     var body: some View {
+///         VStack {
+///             Spacer()
+///             Text("I'm 15 points off the ground 😇")
+///             Spacer()
+///                 .frame(height: 15)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Spacer {
 
-    /// The minimum length this spacer can be shrunk to, along the axis or axes
-    /// of expansion.
+    /// The minimum length the spacer will take up.
     ///
-    /// If `nil`, the system default spacing between views is used.
+    /// If `nil`, the spacer will take up no space or the whole space, and its layout will be
+    /// the last priority.
+    ///
+    /// This property is usually specified using ``Spacer/init(minLength:)``,
+    /// but it can also be specified directly:
+    ///
+    /// ```
+    /// struct SpacerMinLengthView: View {
+    ///     @State private var spacer = Spacer()
+    ///     var body: some View {
+    ///         HStack {
+    ///             spacer
+    ///             Button("Cram!") { spacer.minLength = 300 }
+    ///             Text("Ouch I'm crammed ➡️🤕")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var minLength: CGFloat?
 
+    /// Creates a spacer view.
+    ///
+    /// A spacer is a flexible empty view that expands to take up as much space as possible.
+    /// Spacers are commonly used inside of stacks, like ``VStack``, ``HStack``, and ``ZStack``.
+    /// In a stack, they take up as much space as possible, so push everything else to the side.
+    ///
+    /// In the following ``HStack``, a spacer is used to align the text to the right:
+    ///
+    /// ```
+    /// struct SpacerView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Spacer()
+    ///             Text("Ouch I'm crammed ➡️🤕")
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Spacers ordinarily take up only as much space is left by other views. However,
+    /// your spacer can also specify a minimum length:
+    ///
+    /// ```
+    /// struct BigSpacerView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Spacer(minLength: 300)
+    ///             Text("I'm REALLY crammed 😵")
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter minLength: The minimum amount of space the spacer will take up.
     @inlinable public init(minLength: CGFloat? = nil) { }
 
     /// The type of view representing the body of this view.
