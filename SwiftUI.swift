@@ -2874,9 +2874,9 @@ extension Capsule : InsettableShape {
 /// The circle's radius equals half the length of the frame rectangle's smallest
 /// edge.
 ///
-/// By default, a circle is black, and takes up the space of its container:
+/// By default, a Circle is black, and takes up the space of its container:
 ///
-/// ![Circle Example 1](images/Circle-example-1.png)
+/// ![Circle init example](images/Circle-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2889,7 +2889,7 @@ extension Capsule : InsettableShape {
 /// Define a Circle with a specific color and frame with the `Shape/fill()` 
 /// and `View/frame(width:height:)` modifiers. For example:
 ///
-/// ![Circle Example 2](images/Circle-example-2.png)
+/// ![Circle fill and frame example](images/Circle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2905,7 +2905,7 @@ extension Capsule : InsettableShape {
 /// the `Circle/inset(by:)` modifier to inset the circle by half of the border 
 /// width to keep the circle at its original size:
 ///
-/// ![Circle Example 3](Circle-example-3.png)
+/// ![Circle inset and stroke example](Circle-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2920,8 +2920,8 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
-    /// A circle can be described as a path within a specific rectangular frame
-    /// using the `Circle/path(in:)` modifier:
+    /// A Circle can be described as a path within a specific `CGRect` using the
+    /// `Circle/path(in:)` modifier:
     ///
     /// ![Circle path example](Circle-example-4.png)
     ///
@@ -2935,7 +2935,7 @@ extension Capsule : InsettableShape {
     /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a circle.
+    /// Creates a Circle.
     ///
     /// ![Circle init example](images/Circle-example-1.png)
     ///
@@ -16104,26 +16104,78 @@ extension ProjectionTransform {
     public typealias Body
 }
 
-/// A rectangular shape aligned inside the frame of the view containing it.
+/// A Rectangle is a rectangular `Shape` that by default, aligns itself inside of the view containing it.
+///
+/// To define a Rectangle with a specific color and frame, use the `Shape/fill()` 
+/// and `View/frame(width:height:)` modifiers:
+///
+/// ![Rectangle fill and frame example](images/rectangle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Rectangle()
+///             .fill(Color.green)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
+/// the `Rectangle/inset(by:)` modifier to inset the rectangle by half of the 
+/// border width to keep the rectangle at its original size:
+///
+/// ![Rectangle inset and stroke example](rectangle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Rectangle()
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Rectangle : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// A Rectangle can be described as a path within a specific `CGRect` using
+    /// the `Rectangle/path(in:)` modifier:
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// ![Rectangle path example](rectangle-example-3.png)
     ///
-    /// - Returns: A path that describes this shape.
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a new rectangle shape.
+    /// Creates a Rectangle, that by default, aligns itself inside of the view
+    /// containing it.
+    ///
+    /// ![Rectangle init example](images/rectangle-example-4.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -16131,11 +16183,24 @@ extension ProjectionTransform {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Rectangle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Rectangle insetted by the amount specified. For example, 
+    /// insetting by 10 points returns a Rectangle that fills its container, 
+    /// with 10 points inset on all four side.
+    ///
+    /// ![Rectangle inset example](rectangle-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
