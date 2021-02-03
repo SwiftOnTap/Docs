@@ -2828,6 +2828,46 @@ public struct ButtonStyleConfiguration {
 ///
 /// A capsule shape is equivalent to a rounded rectangle where the corner radius
 /// is chosen as half the length of the rectangle's smallest edge.
+
+
+
+/// A Capsule is a rectangular `Shape` that by default, aligns itself inside of 
+/// the view containing it. It differs from `RoundedRectangle` in that its 
+/// corner radius is half the length of the retangle's smallest edge. In effect,
+/// it creates a "pill" shape.
+///
+/// To define a Capsule with a specific color and frame, use the `Shape/fill()` 
+/// and `View/frame(width:height:)` modifiers:
+///
+/// ![Capsule fill and frame example](images/capsule-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Capsule()
+///             .fill(Color.orange)
+///             .frame(width: 250, height: 100)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
+/// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the 
+/// border width to keep the Capsule at its original size:
+///
+/// ![Capsule inset and stroke example](capsule-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Capsule()
+///             .inset(by: 10)
+///             .stroke(Color.orange, lineWidth: 20)
+///             .frame(width: 250, height: 100)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Capsule : Shape {
 
@@ -2836,16 +2876,43 @@ public struct ButtonStyleConfiguration {
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
-    /// Creates a new capsule shape from a rounded corner style.
+    /// Creates an Ellipse that aligns itself inside of the view containing it 
+    /// by default.
     ///
-    /// - Parameter style: The rounded corner style of the capsule.
+    /// A style may be optionally passed into the initializer, with the options
+    /// `circular` and `continuous`. These styles have subtle but noticeable
+    /// differences:
+    ///
+    /// ![Ellipse init example](images/ellipse-example-3.png)
+    ///
+    /// ```
+    /// `struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             Capsule(style: .circular)
+    ///                 .frame(width: 250, height: 100)
+    /// 
+    ///             Capsule(style: .continuous)
+    ///                 .frame(width: 250, height: 100)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(style: RoundedCornerStyle = .circular) { }
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// A Capsule can be described as a path within a specific `CGRect` using
+    /// the `Capsule/path(in:)` modifier:
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// ![Capsule path example](capsule-example-3.png)
     ///
-    /// - Returns: A path that describes this shape.
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 75, height: 200))
+    ///     }
+    /// }
+    /// ```
     public func path(in r: CGRect) -> Path { }
 
     /// The type defining the data to animate.
@@ -7106,7 +7173,7 @@ extension EditMode : Hashable {
 @frozen public struct Ellipse : Shape {
 
     /// An Ellipse can be described as a path within a specific `CGRect` using
-    /// the `Rectangle/path(in:)` modifier:
+    /// the `Ellipse/path(in:)` modifier:
     ///
     /// ![Ellipse path example](ellipse-example-3.png)
     ///
