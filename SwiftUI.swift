@@ -2864,7 +2864,8 @@ public struct ButtonStyleConfiguration {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Capsule : Shape {
 
-	/// The capsule shape's rounded corner style.
+	/// The Capsule's rounded corner style, based on the value passed in its
+    /// initializer.
 	///
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
@@ -2908,12 +2909,12 @@ public struct ButtonStyleConfiguration {
     /// ```
     public func path(in r: CGRect) -> Path { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
