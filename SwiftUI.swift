@@ -19850,25 +19850,30 @@ public struct TextEditingCommands : Commands {
     public typealias Body = some Commands
 }
 
-/// A view that can display and edit long-form text.
+/// A multi-line text field.
 ///
 /// A text editor view allows you to display and edit multiline, scrollable
-/// text in your app's user interface. By default, the text editor view styles
-/// the text using characteristics inherited from the environment, like
-/// `View/font(_:)`, `View/foregroundColor(_:)`, and
-/// `View/multilineTextAlignment(_:)`.
+/// text in your app's user interface. The text editor responds to usual
+/// view modifiers like:
+/// - `View/font(_:)`
+/// - `View/foregroundColor(_:)`
+/// - `View/multilineTextAlignment(_:)`
+///
+/// ### Creating a text editor
 ///
 /// You create a text editor by adding a `TextEditor` instance to the
 /// body of your view, and initialize it by passing in a
 /// `Binding` to a string variable in your app:
 ///
 ///     struct TextEditingView: View {
-///         @State private var fullText: String = "This is some editable text..."
+///         @State private var fullText = "This is some editable text..."
 ///
 ///         var body: some View {
 ///             TextEditor(text: $fullText)
 ///         }
 ///     }
+///
+/// ### Styling a text editor
 ///
 /// To style the text, use the standard view modifiers to configure a system
 /// font, set a custom font, or change the color of the view's text.
@@ -19877,7 +19882,7 @@ public struct TextEditingCommands : Commands {
 /// custom font:
 ///
 ///     struct TextEditingView: View {
-///         @State private var fullText: String = "This is some editable text..."
+///         @State private var fullText = "This is some editable text..."
 ///
 ///         var body: some View {
 ///             TextEditor(text: $fullText)
@@ -19894,13 +19899,13 @@ public struct TextEditingCommands : Commands {
 /// to 5 points:
 ///
 ///     struct TextEditingView: View {
-///         @State private var fullText: String = "This is some editable text..."
+///         @State private var fullText = "This is some editable text..."
 ///
 ///         var body: some View {
 ///             TextEditor(text: $fullText)
-///                 .foregroundColor(Color.gray)
-///                 .font(.custom("HelveticaNeue", size: 13))
+///                 .lineLimit(3)
 ///                 .lineSpacing(5)
+///                 .minimumScaleFactor(0.5)
 ///         }
 ///     }
 @available(iOS 14.0, macOS 11.0, *)
@@ -19908,7 +19913,7 @@ public struct TextEditingCommands : Commands {
 @available(watchOS, unavailable)
 public struct TextEditor : View {
 
-    /// Creates a plain text editor.
+    /// Creates a multi-line text field.
     ///
     /// Use a `TextEditor` instance to create a view in which users can enter
     /// and edit long-form text.
@@ -19930,10 +19935,6 @@ public struct TextEditor : View {
     /// You can define the styling for the text within the view, including the
     /// text color, font, and line spacing. You define these styles by applying
     /// standard view modifiers to the view.
-    ///
-    /// The default text editor doesn't support rich text, such as styling of
-    /// individual elements within the editor's view. The styles you set apply
-    /// globally to all text in the view.
     ///
     /// - Parameter text: A `Binding` to the variable containing the
     ///    text to edit.
