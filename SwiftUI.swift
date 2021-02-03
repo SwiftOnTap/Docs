@@ -8740,10 +8740,20 @@ public struct IconOnlyLabelStyle : LabelStyle {
     public typealias Body = some View
 }
 
-/// A view that displays an environment-dependent image.
+/// A view that displays a drawable resource
 ///
-/// An `Image` is a late-binding token; the system resolves its actual value
-/// only when it's about to use the image in a given environment.
+/// Images in SwiftUI are much easier than in UIKit. Instead of needing to create a UIImage(named: “Your file name”) and assigning it to yourUIImageView.image, Image is about as easy to create as Text.
+///
+/// Just pass it a String and it’ll set it to a file with that name. If you launch your app and it doesn’t have a file with that name, you’ll get a useful console message saying:
+///
+///  ```No image named ‘Your file name’ found in asset catalog for main bundle.```
+///
+/// If you find images not turning up in your app, you may want to search for this in the console.
+///
+/// ### Image is not resizable by default
+/// You must call the .resizable() modifier on your Image before making changes to its size in subsequent modifiers The scaledToFit modifier will lock the aspect ratio of your image and scale it to the maximum size it can be without being too large for the screen. The scaledToFill modifier also scales your image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink your image to fit the available space.
+/// ### SF Symbols
+/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black. To use these in your images, simply label the String you pass into your Image as systemName. It’s probably worth downloading the SF Symbols Mac app so that you can find out what the system name is for the symbols you want to use. Using SF Symbols gives your app a consistent look that will probably be taking over the iOS ecosystem in the coming years due to the flexibility and accessibility of these free symbols.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Image : Equatable {
 
