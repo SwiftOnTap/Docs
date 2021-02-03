@@ -8764,12 +8764,11 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// Just pass it a String and it’ll set it to a file with that name. If you launch your app and it doesn’t have a file with that name, you’ll get a useful console message saying:
 ///
-///  ```No image named ‘Your file name’ found in asset catalog for main bundle.```
+///  `No image named ‘Your file name’ found in asset catalog for main bundle.`
 ///
 /// If you find images not turning up in your app, you may want to search for this in the console.
 ///
-/// ```import SwiftUI
-///
+/// ```
 /// struct ExampleView: View {
 ///   var body: some View {
 ///     List {
@@ -8791,11 +8790,11 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// }```
 /// ### Image is not resizable by default
 ///
-/// You must call the .resizable() modifier on your Image before making changes to its size in subsequent modifiers The scaledToFit modifier will lock the aspect ratio of your image and scale it to the maximum size it can be without being too large for the screen. The scaledToFill modifier also scales your image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink your image to fit the available space.
+/// The `.resizable()` modifier must come first on an Image before making changes to its size in subsequent modifiers. The `scaledToFit` modifier will lock the aspect ratio of the image and scale it to the maximum size it can be without being too large for the screen. The `scaledToFill` modifier also scales the image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink the image to fit the available space.
 ///
 /// ### SF Symbols
 ///
-/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black. To use these in your images, simply label the String you pass into your Image as systemName. It’s probably worth downloading the SF Symbols Mac app so that you can find out what the system name is for the symbols you want to use. Using SF Symbols gives your app a consistent look that will probably be taking over the iOS ecosystem in the coming years due to the flexibility and accessibility of these free symbols.
+/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black. To use these in custom images, simply label the String is passed into an Image as systemName. It’s probably worth downloading the SF Symbols Mac app to make the symbol names easier to find. Using SF Symbols gives your app a consistent look that will probably be taking over the iOS ecosystem in the coming years due to the flexibility and accessibility of these free symbols.
 ///
 /// Xcode 12 brought support for use in Mac apps. Attempting to use Image(systemNamed:) to use an SF Symbol in Xcode 11 causes the error “Extraneous argument label ‘systemNamed:’ in call”. This means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -10106,30 +10105,23 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 }
 
 
-
-
+///  A button that opens a URL
+///
 ///  Before Link was added to SwiftUI, there was no way equivalent of a hyperlink outside of a WKWebView. It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time.
 ///
 ///  ```
-///  struct LinkStyleView: View {
-///    let urlString = "https://apple.com"
-///
-///    var body: some View {
-///      Group {
-///        if URL(string: urlString) != nil {
-///          //The old way to create a Link-style Button
-///          Button("Read more") {
-///            if let url = URL(string: urlString) {
-///              UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
-///                }
-///              }
-///          } else {
-///          EmptyView()
-///            .onAppear { assertionFailure("URL was nil") }
-///        }
-///      }
-///    }
-///  }```
+///  if URL(string: urlString) != nil {
+///    //The old way to create a Link-style Button
+///    Button("Read more") {
+///      if let url = URL(string: urlString) {
+///        UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
+///            }
+///          }
+///        } else {
+///         EmptyView()
+///          .onAppear { assertionFailure("URL was nil") }
+///  }
+///     ```
 ///
 ///  In iOS 14 there is the option of Link, which does the action part of the Button above for us. Apple’s documentation unsafely unwraps a URL using the ‘!’ operator, but this is an extremely bad practice. You may know that this particular URL is created successfully because it links to example.com/TOS.html, a site owned by the Internet Assigned Numbers Authority (IANA) that convert URLs to IP addresses. But it's a mistake to assume that a URL string is valid and force unwrap the optional.
 
@@ -10140,7 +10132,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///  This would allow us to be aware that the URL was nil, but without causing a crash for the end-user.
 ///  ```
 ///  struct ExampleView: View {
-///    let urlString = "https://apple.com"
+///    let urlString = "bananadocs.org"
 ///    var body: some View {
 ///      Group {
 ///        if let url = URL(string: urlString) {
@@ -10153,7 +10145,8 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///      }
 ///    }
 ///  }
-
+///  ```
+///
 ///  Now that SwiftUI supports if let, it is possible to directly create properties like the URL and create Views that use that data. Just as before, the link is only shown when the URL can be created, but it is not necessary to do multiple checks just to make sure that this is the case.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Link<Label> : View where Label : View {
