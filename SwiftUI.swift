@@ -3195,7 +3195,7 @@ extension Color.RGBColorSpace : Equatable {
 extension Color.RGBColorSpace : Hashable {
 }
 
-/// A control used to select a color from the system color picker UI.
+/// A view that lets the user choose a color.
 ///
 /// The color picker provides a color well that shows the currently selected
 /// color, and displays the larger system color picker that allows users to
@@ -3207,17 +3207,25 @@ extension Color.RGBColorSpace : Hashable {
 /// of the selected color, and strips out opacity from any color set
 /// programmatically or selected from the user's system favorites.
 ///
+/// In general, there are 3 types of color picker titles, and 2 binding types, for 6 initializers total.
+///
+/// Title types:
+/// 1. String
+/// 2. Localized string key
+/// 3. View
+///
+/// Binding types:
+/// 1. ``CGColor``
+/// 2. ``Color``
+///
 /// You use `ColorPicker` by embedding it inside a view hierarchy and
 /// initializing it with a title string and a `Binding` to a `Color`:
 ///
-///     struct FormattingControls: View {
-///         @State private var bgColor =
-///             Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
+///     struct ColorView: View {
+///         @State private var color = Color.red
 ///
 ///         var body: some View {
-///             VStack {
-///                 ColorPicker("Alignment Guides", selection: $bgColor)
-///             }
+///             ColorPicker("Choose a color! 🎨", selection: $color)
 ///         }
 ///     }
 ///
@@ -3226,7 +3234,19 @@ extension Color.RGBColorSpace : Hashable {
 @available(watchOS, unavailable)
 public struct ColorPicker<Label> : View where Label : View {
 
-    /// Creates an instance that selects a color.
+    /// Creates a color picker with a view title and Color binding.
+    ///
+    /// ```
+    /// struct ColorView: View {
+    ///     @State private var color = Color.orange
+    ///
+    ///     var body: some View {
+    ///         ColorPicker(selection: $color, supportOpacity: false) {
+    ///             Image(systemName: "eyedropper")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - selection: A `Binding` to the variable that displays the
@@ -3240,7 +3260,19 @@ public struct ColorPicker<Label> : View where Label : View {
     ///
     public init(selection: Binding<Color>, supportsOpacity: Bool = true, @ViewBuilder label: () -> Label) { }
 
-    /// Creates an instance that selects a color.
+    /// Creates a color picker with a view title and CGColor binding.
+    ///
+    /// ```
+    /// struct ColorView: View {
+    ///     @State private var color = CGColor(gray: 1.0, alpha: 0.5)
+    ///
+    ///     var body: some View {
+    ///         ColorPicker(selection: $color, supportOpacity: false) {
+    ///             Image(systemName: "eyedropper")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - selection: A `Binding` to the variable that displays the
@@ -3269,30 +3301,24 @@ public struct ColorPicker<Label> : View where Label : View {
 @available(watchOS, unavailable)
 extension ColorPicker where Label == Text {
 
-    /// Creates a color picker with a text label generated from a title string key.
+    /// Creates a color picker with a localized string key title and Color binding.
     ///
     /// Use `ColorPicker` to create a color well that your app uses to allow
     /// the selection of a `Color`. The example below creates a color well
     /// using a `Binding` to a property stored in a settings object and title
     /// you provide:
     ///
-    ///     final class Settings: ObservableObject {
-    ///         @Published var alignmentGuideColor =
-    ///             Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
-    ///     }
+    /// ```
+    /// struct ColorView: View {
+    ///     @State private var color = Color.orange
     ///
-    ///     struct FormattingControls: View {
-    ///         @State private var settings = Settings()
-    ///
-    ///         var body: some View {
-    ///             VStack {
-    ///                 // Other formatting controls.
-    ///                 ColorPicker("Alignment Guides",
-    ///                     selection: $settings.alignmentGuideColor
-    ///                 )
-    ///             }
-    ///         }
+    ///     var body: some View {
+    ///         ColorPicker(LocalizedStringKey("Choose a color"),
+    ///                     selection: $color,
+    ///                     supportOpacity: false)
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - titleKey: The key for the localized title of the picker.
@@ -3303,15 +3329,23 @@ extension ColorPicker where Label == Text {
     ///     default is `true`.
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Color>, supportsOpacity: Bool = true) { }
 
-    /// Creates a color picker with a text label generated from a title string.
+    /// Creates a color picker with a string title and Color binding.
     ///
     /// Use `ColorPicker` to create a color well that your app uses to allow
     /// the selection of a `Color`. The example below creates a color well
     /// using a `Binding` and title you provide:
     ///
-    ///     func showColorPicker(_ title: String, color: Binding<Color>) {{}
-    ///         ColorPicker(title, selection: color)
+    /// ```
+    /// struct ColorView: View {
+    ///     @State private var color = Color.orange
+    ///
+    ///     var body: some View {
+    ///         ColorPicker("Choose a color 🎨",
+    ///                     selection: $color,
+    ///                     supportOpacity: false)
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - title: The title displayed by the color picker.
@@ -3321,7 +3355,19 @@ extension ColorPicker where Label == Text {
     ///     default is `true`.
     public init<S>(_ title: S, selection: Binding<Color>, supportsOpacity: Bool = true) where S : StringProtocol { }
 
-    /// Creates a color picker with a text label generated from a title string key.
+    /// Creates a color picker with a localized string key title and a CGColor binding.
+    ///
+    /// ```
+    /// struct ColorView: View {
+    ///     @State private var color = CGColor(gray: 1.0, alpha: 0.5)
+    ///
+    ///     var body: some View {
+    ///         ColorPicker(LocalizedStringKey("Choose a color"),
+    ///                     selection: $color,
+    ///                     supportOpacity: false)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - titleKey: The key for the localized title of the picker.
@@ -3332,7 +3378,19 @@ extension ColorPicker where Label == Text {
     ///     default is `true`.
     public init(_ titleKey: LocalizedStringKey, selection: Binding<CGColor>, supportsOpacity: Bool = true) { }
 
-    /// Creates a color picker with a text label generated from a title string.
+    /// Creates a color picker with a string title and a CGColor binding.
+    ///
+    /// ```
+    /// struct ColorView: View {
+    ///     @State private var color = CGColor(gray: 1.0, alpha: 0.5)
+    ///
+    ///     var body: some View {
+    ///         ColorPicker("Choose a color 🎨",
+    ///                     selection: $color,
+    ///                     supportOpacity: false)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - title: The title displayed by the color picker.
@@ -18226,85 +18284,46 @@ extension State where Value : ExpressibleByNilLiteral {
     public var projectedValue: ObservedObject<ObjectType>.Wrapper { get }
 }
 
-/// A control that performs increment and decrement actions.
+/// Two side-by-side plus/minus buttons.
 ///
-/// Use a stepper control when you want the user to have granular control while
-/// incrementing or decrementing a value. For example, you can use a stepper
-/// to:
+/// Use a stepper to give user control
+/// incrementing or decrementing a discrete value.
 ///
-///  * Change a value up or down by `1`.
-///  * Operate strictly over a prescribed range.
-///  * Step by specific amounts over a stepper's range of possible values.
+/// - Note: For changing a continuous value, use ``Slider`` instead.
 ///
-/// The example below uses an array that holds a number of `Color` values,
-/// a local state variable, `value`, to set the control's background
-/// color, and title label. When the user clicks or taps on the stepper's
-/// increment or decrement buttons SwiftUI executes the relevant
-/// closure that updates `value`, wrapping the `value` to prevent overflow.
-/// SwiftUI then re-renders the view, updating the text and background
-/// color to match the current index:
+/// In general, there are 3 different stepper label types, and 3 different increment/decrement
+/// types, for a total of 9 different initializers.
 ///
-///     struct StepperView: View {
-///         @State private var value = 0
-///         let colors: [Color] = [.orange, .red, .gray, .blue,
-///                                .green, .purple, .pink]
+/// Label types:
+/// 1. String
+/// 2. Localized string key
+/// 3. View
 ///
-///         func incrementStep() {{}
-///             value += 1
-///             if value >= colors.count { value = 0 }
-///         }
+/// Increment/decrement types:
+/// 1. Increment and decrement actions
+/// 2. Closed range binding
+/// 3. Unlimited range binding
 ///
-///         func decrementStep() {{}
-///             value -= 1
-///             if value < 0 { value = colors.count - 1 }
-///         }
+/// Here is a very simple example:
 ///
-///         var body: some View {
-///             Stepper(onIncrement: incrementStep,
-///                 onDecrement: decrementStep) {
-///                 Text("Value: \(value) Color: \(colors[value].description)")
-///             }
-///             .padding(5)
-///             .background(colors[value])
-///         }
-///    }
+/// ```
+/// struct StepperView: View {
+///     @State private var value = 0
 ///
-/// ![A view displaying a stepper that uses a text view for stepper's title
-///   and that changes the background color of its view when incremented or
-///   decremented. The view selects the new background color from a
-///    predefined array of colors using the stepper's value as the
-///   index.](SwiftUI-Stepper-increment-decrement-closures.png)
-///
-/// The following example shows a stepper that displays the effect of
-/// incrementing or decrementing a value with the step size of `step` with
-/// the bounds defined by `range`:
-///
-///     struct StepperView: View {
-///         @State private var value = 0
-///         let step = 5
-///         let range = 1...50
-///
-///         var body: some View {
-///             Stepper(value: $value,
-///                     in: range,
-///                     step: step) {
-///                 Text("Current: \(value) in \(range.description) " +
-///                      "stepping by \(step)")
-///             }
-///                 .padding(10)
+///     var body: some View {
+///         Stepper(onIncrement: { value += 1 },
+///                 onDecrement: { value -= 1 }) {
+///             Text("\(value)")
 ///         }
 ///     }
-///
-/// ![A view displaying a stepper with a step size of five, and a
-/// prescribed range of 1 though 50.](SwiftUI-Stepper-value-step-range.png)
-///
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct Stepper<Label> : View where Label : View {
 
-    /// Creates a stepper instance that performs the closures you provide when
-    /// the user increments or decrements the stepper.
+    /// Creates a stepper with a view label and increment/decrement actions.
     ///
     /// Use this initializer to create a control with a custom title that
     /// executes closures you provide when the user clicks or taps the
@@ -18323,12 +18342,12 @@ public struct Stepper<Label> : View where Label : View {
     ///         let colors: [Color] = [.orange, .red, .gray, .blue, .green,
     ///                                .purple, .pink]
     ///
-    ///         func incrementStep() {{}
+    ///         func incrementStep() {
     ///             value += 1
     ///             if value >= colors.count { value = 0 }
     ///         }
     ///
-    ///         func decrementStep() {{}
+    ///         func decrementStep() {
     ///             value -= 1
     ///             if value < 0 { value = colors.count - 1 }
     ///         }
@@ -18338,16 +18357,9 @@ public struct Stepper<Label> : View where Label : View {
     ///                 onDecrement: decrementStep) {
     ///                 Text("Value: \(value) Color: \(colors[value].description)")
     ///             }
-    ///             .padding(5)
     ///             .background(colors[value])
     ///         }
     ///    }
-    ///
-    /// ![A view displaying a stepper that uses a text view for stepper's title
-    ///   and that changes the background color of its view when incremented or
-    ///   decremented. The view selects the new background color from a
-    ///    predefined array of colors using the stepper's value as the
-    ///   index.](SwiftUI-Stepper-increment-decrement-closures.png)
     ///
     /// - Parameters:
     ///     - onIncrement: The closure to execute when the user clicks or taps
@@ -18377,8 +18389,7 @@ public struct Stepper<Label> : View where Label : View {
 @available(watchOS, unavailable)
 extension Stepper {
 
-    /// Creates a stepper configured to increment or decrement a binding to a
-    /// value using a step value you provide.
+    /// Creates a stepper with a view label and unlimited range binding.
     ///
     /// Use this initializer to create a stepper that increments or decrements
     /// a bound value by a specific amount each time the user
@@ -18396,13 +18407,8 @@ extension Stepper {
     ///                     step: step) {
     ///                 Text("Current value: \(value), step: \(step)")
     ///             }
-    ///                 .padding(10)
     ///         }
     ///     }
-    ///
-    /// ![A view displaying a stepper that increments or decrements a value by
-    ///   a specified amount each time the user clicks or taps the stepper's
-    ///   increment or decrement buttons.](SwiftUI-Stepper-value-step.png)
     ///
     /// - Parameters:
     ///   - value: The `Binding` to a value that you provide.
@@ -18419,8 +18425,7 @@ extension Stepper {
     @available(watchOS, unavailable)
     public init<V>(value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : Strideable { }
 
-    /// Creates a stepper configured to increment or decrement a binding to a
-    /// value using a step value and within a range of values you provide.
+    /// Creates a stepper with a view label and closed range binding.
     ///
     /// Use this initializer to create a stepper that increments or decrements
     /// a binding to value by the step size you provide within the given bounds.
@@ -18443,12 +18448,8 @@ extension Stepper {
     ///                 Text("Current: \(value) in \(range.description) " +
     ///                      "stepping by \(step)")
     ///             }
-    ///                 .padding(10)
     ///         }
     ///     }
-    ///
-    /// ![A view displaying a stepper with a step size of five, and a
-    /// prescribed range of 1 though 50.](SwiftUI-Stepper-value-step-range.png)
     ///
     /// - Parameters:
     ///   - value: A `Binding` to a value that you provide.
@@ -18473,9 +18474,7 @@ extension Stepper {
 @available(watchOS, unavailable)
 extension Stepper where Label == Text {
 
-    /// Creates a stepper that uses a title key and executes the closures
-    /// you provide when the user clicks or taps the stepper's increment and
-    /// decrement buttons.
+    /// Creates a stepper with a localized string key binding and increment/decrement actions.
     ///
     /// Use this initializer to create a stepper with a custom title that
     /// executes closures you provide when either of the stepper's increment
@@ -18497,12 +18496,12 @@ extension Stepper where Label == Text {
     ///         let colors: [Color] = [.orange, .red, .gray, .blue, .green,
     ///                                .purple, .pink]
     ///
-    ///         func incrementStep() {{}
+    ///         func incrementStep() {
     ///             value += 1
     ///             if value >= colors.count { value = 0 }
     ///         }
     ///
-    ///         func decrementStep() {{}
+    ///         func decrementStep() {
     ///             value -= 1
     ///             if value < 0 { value = colors.count - 1 }
     ///         }
@@ -18511,16 +18510,9 @@ extension Stepper where Label == Text {
     ///             Stepper("Value: \(value) Color: \(colors[value].description)",
     ///                      onIncrement: incrementStep,
     ///                      onDecrement: decrementStep)
-    ///             .padding(5)
     ///             .background(colors[value])
     ///         }
     ///     }
-    ///
-    /// ![A view displaying a stepper that uses a title key for the stepper's
-    /// localized title and that changes the background color of its view
-    /// when incremented or decremented selecting a color from a predefined
-    /// array using the stepper value as the
-    /// index.](SwiftUI-Stepper-increment-decrement-closures.png)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
@@ -18538,9 +18530,7 @@ extension Stepper where Label == Text {
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) { }
 
-    /// Creates a stepper using a title string and that executes closures
-    /// you provide when the user clicks or taps the stepper's increment or
-    /// decrement buttons.
+    /// Creates a stepper with a string label and increment/decrement actions.
     ///
     /// Use `Stepper(_:onIncrement:onDecrement:onEditingChanged:)` to create a
     /// control with a custom title that executes closures you provide when
@@ -18560,28 +18550,21 @@ extension Stepper where Label == Text {
     ///         let colors: [Color] = [.orange, .red, .gray, .blue, .green,
     ///                                .purple, .pink]
     ///
-    ///         func incrementStep() {{}
+    ///         func incrementStep() {
     ///             value += 1
     ///             if value >= colors.count { value = 0 }
     ///         }
     ///
-    ///         func decrementStep() {{}
+    ///         func decrementStep() {
     ///             value -= 1
     ///             if value < 0 { value = colors.count - 1 }
     ///         }
     ///
     ///         var body: some View {
     ///             Stepper(title, onIncrement: incrementStep, onDecrement: decrementStep)
-    ///                 .padding(5)
     ///                 .background(colors[value])
     ///         }
     ///     }
-    ///
-    /// ![A view displaying a stepper that uses a string for the stepper's title
-    ///   and that changes the background color of its view when incremented or
-    ///   decremented selecting a color from a predefined array using the
-    ///   stepper's value as the
-    ///   index.](SwiftUI-Stepper-increment-decrement-closures.png)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
@@ -18598,10 +18581,9 @@ extension Stepper where Label == Text {
     @available(watchOS, unavailable)
     public init<S>(_ title: S, onIncrement: (() -> Void)?, onDecrement: (() -> Void)?, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol { }
 
-    /// Creates a stepper with a title key and configured to increment and
-    /// decrement a binding to a value and step amount you provide.
+    /// Creates a stepper with a localized string key label and unlimited range binding.
     ///
-    /// Use `Stepper(_:value:step:onEditingChanged:)` to create a stepper with a
+    /// Use ``Stepper(_:value:step:onEditingChanged:)`` to create a stepper with a
     /// custom title that increments or decrements a binding to value by the
     /// step size you specify.
     ///
@@ -18617,13 +18599,8 @@ extension Stepper where Label == Text {
     ///             Stepper("Current value: \(value), step: \(step)",
     ///                     value: $value,
     ///                     step: step)
-    ///                 .padding(10)
     ///         }
     ///     }
-    ///
-    /// ![A view displaying a stepper that increments or decrements by 5 each
-    ///   time the user clicks or taps on the control's increment or decrement
-    ///   buttons, respectively.](SwiftUI-Stepper-value-step.png)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
@@ -18641,10 +18618,9 @@ extension Stepper where Label == Text {
     @available(watchOS, unavailable)
     public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { }
 
-    /// Creates a stepper with a title and configured to increment and
-    /// decrement a binding to a value and step amount you provide.
+    /// Creates a stepper with a string label and unlimited range binding.
     ///
-    /// Use `Stepper(_:value:step:onEditingChanged:)` to create a stepper with a
+    /// Use ``Stepper(_:value:step:onEditingChanged:)`` to create a stepper with a
     /// custom title that increments or decrements a binding to value by the
     /// step size you specify.
     ///
@@ -18659,13 +18635,8 @@ extension Stepper where Label == Text {
     ///
     ///         var body: some View {
     ///             Stepper(title, value: $value, step: step)
-    ///                 .padding(10)
     ///         }
     ///     }
-    ///
-    /// ![A view displaying a stepper that increments or decrements by 1 each
-    ///   time the control's buttons
-    ///   are pressed.](SwiftUI-Stepper-value-step.png)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
@@ -18682,8 +18653,7 @@ extension Stepper where Label == Text {
     @available(watchOS, unavailable)
     public init<S, V>(_ title: S, value: Binding<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { }
 
-    /// Creates a stepper instance that increments and decrements a binding to
-    /// a value, by a step size and within a closed range that you provide.
+    /// Creates a stepper with a localized string key label and closed range binding.
     ///
     /// Use `Stepper(_:value:in:step:onEditingChanged:)` to create a stepper
     /// that increments or decrements a value within a specific range of values
@@ -18706,9 +18676,6 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![A view displaying a stepper that increments or decrements within a
-    ///   specified range and step size.](SwiftUI-Stepper-value-step-range.png)
-    ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
     ///       the purpose of the stepper.
@@ -18727,8 +18694,7 @@ extension Stepper where Label == Text {
     @available(watchOS, unavailable)
     public init<V>(_ titleKey: LocalizedStringKey, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : Strideable { }
 
-    /// Creates a stepper instance that increments and decrements a binding to
-    /// a value, by a step size and within a closed range that you provide.
+    /// Creates a stepper with a string label and closed range binding.
     ///
     /// Use `Stepper(_:value:in:step:onEditingChanged:)` to create a stepper
     /// that increments or decrements a value within a specific range of values
@@ -18746,12 +18712,8 @@ extension Stepper where Label == Text {
     ///                     value: $value,
     ///                     in: range,
     ///                     step: step)
-    ///                 .padding(10)
     ///         }
     ///     }
-    ///
-    /// ![A view displaying a stepper that increments or decrements within a
-    ///   specified range and step size.](SwiftUI-Stepper-value-step-range.png)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
