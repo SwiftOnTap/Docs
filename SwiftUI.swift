@@ -8750,10 +8750,36 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// If you find images not turning up in your app, you may want to search for this in the console.
 ///
+/// ```import SwiftUI
+///
+/// struct ExampleView: View {
+///   var body: some View {
+///     List {
+///       Image("Your file name")
+///       Image("Your file name", bundle: Bundle.main)
+///         .resizable()
+///         .frame(width: 100)
+///       Image("Your file name", label: Text("My image label"))
+///         .resizable()
+///         .scaledToFit()
+///       Image(decorative: "Your file name")
+///         .resizable()
+///         .scaledToFill()
+///       Image(systemName: "gamecontroller")
+///       Image(uiImage: UIImage(named: "Your file name")!)
+///       Image(decorative: UIImage(named: "Your file name")!.cgImage!, scale: 0.5, orientation: .rightMirrored)
+///     }
+///   }
+/// }```
 /// ### Image is not resizable by default
+///
 /// You must call the .resizable() modifier on your Image before making changes to its size in subsequent modifiers The scaledToFit modifier will lock the aspect ratio of your image and scale it to the maximum size it can be without being too large for the screen. The scaledToFill modifier also scales your image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink your image to fit the available space.
+///
 /// ### SF Symbols
+///
 /// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black. To use these in your images, simply label the String you pass into your Image as systemName. It’s probably worth downloading the SF Symbols Mac app so that you can find out what the system name is for the symbols you want to use. Using SF Symbols gives your app a consistent look that will probably be taking over the iOS ecosystem in the coming years due to the flexibility and accessibility of these free symbols.
+///
+/// Xcode 12 brought support for use in Mac apps. Attempting to use Image(systemNamed:) to use an SF Symbol in Xcode 11 causes the error “Extraneous argument label ‘systemNamed:’ in call”. This means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Image : Equatable {
 
