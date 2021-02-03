@@ -2935,7 +2935,8 @@ extension Capsule : InsettableShape {
     /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a Circle.
+    /// Creates a Circle that aligns itself inside of the view containing it 
+    /// by default.
     ///
     /// ![Circle init example](images/Circle-example-1.png)
     ///
@@ -7065,26 +7066,80 @@ extension EditMode : Equatable {
 extension EditMode : Hashable {
 }
 
-/// An ellipse aligned inside the frame of the view containing it.
+/// An Ellipse is a circular `Shape` that by default, aligns itself inside of 
+/// the view containing it. It differs from `Circle` in that its width and 
+/// height are not necessarily equal.
+///
+/// To define an Ellipse with a specific color and frame, use the `Shape/fill()` 
+/// and `View/frame(width:height:)` modifiers:
+///
+/// ![Ellipse fill and frame example](images/ellipse-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Ellipse()
+///             .fill(Color.purple)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
+/// the `Ellipse/inset(by:)` modifier to inset the Ellipse by half of the 
+/// border width to keep the Ellipse at its original size:
+///
+/// ![Ellipse inset and stroke example](ellipse-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Ellipse()
+///             .inset(by: 10)
+///             .stroke(Color.purple, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Ellipse : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// An Ellipse can be described as a path within a specific `CGRect` using
+    /// the `Rectangle/path(in:)` modifier:
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// ![Ellipse path example](ellipse-example-3.png)
     ///
-    /// - Returns: A path that describes this shape.
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 150))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates an ellipse shape that stretches to fill its parent view.
+    /// Creates an Ellipse that aligns itself inside of the view containing it 
+    /// by default.
+    ///
+    /// ![Ellipse init example](images/ellipse-example-4.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -16156,8 +16211,8 @@ extension ProjectionTransform {
     /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a Rectangle, that by default, aligns itself inside of the view
-    /// containing it.
+    /// Creates a Rectangle that aligns itself inside of the view containing it
+    /// by default.
     ///
     /// ![Rectangle init example](images/rectangle-example-4.png)
     ///
