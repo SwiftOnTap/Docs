@@ -23,7 +23,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
 
-    - name: Copy changes files to S3
+    - name: Copy file changes to S3
       run: |
         for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do
           if ! grep -q "$i," <<< $IGNORED_FILES; then
