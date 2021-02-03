@@ -2887,7 +2887,7 @@ extension Capsule : InsettableShape {
 /// ```
 ///
 /// Define a Circle with a specific color and frame with the `Shape/fill()` 
-/// and `Circle/frame(width:height:)` modifiers. For example:
+/// and `View/frame(width:height:)` modifiers. For example:
 ///
 /// ![Circle Example 2](images/Circle-example-2.png)
 ///
@@ -2901,7 +2901,7 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// To add a border, use the `Circle/stroke(:lineWidth:)` modifier, and use 
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
 /// the `Circle/inset(by:)` modifier to inset the circle by half of the border 
 /// width to keep the circle at its original size:
 ///
@@ -2923,7 +2923,7 @@ extension Capsule : InsettableShape {
     /// A circle can be described as a path within a specific rectangular frame
     /// using the `Circle/path(in:)` modifier:
     ///
-    /// ![Circle Example 4](Circle-example-4.png)
+    /// ![Circle path example](Circle-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -2937,7 +2937,7 @@ extension Capsule : InsettableShape {
 
     /// Creates a circle.
     ///
-    /// ![Circle Example 1](images/Circle-example-1.png)
+    /// ![Circle init example](images/Circle-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -2965,7 +2965,7 @@ extension Circle : InsettableShape {
     /// insetting by 10 points returns a Circle that fills its container, with
     /// 10 points inset on all four side.
     ///
-    /// ![Circle Example 5](Circle-example-5.png)
+    /// ![Circle inset example](Circle-example-5.png)
     ///
     /// ```
     /// struct ExampleView: View {
