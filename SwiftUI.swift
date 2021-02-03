@@ -2939,7 +2939,7 @@ extension Capsule : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -7238,7 +7238,7 @@ extension Ellipse : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
