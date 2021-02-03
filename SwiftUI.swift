@@ -10140,7 +10140,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///  This would allow us to be aware that the URL was nil, but without causing a crash for the end-user.
 ///  ```
 ///  struct ExampleView: View {
-///    let urlString = "https://mediu
+///    let urlString = "https://apple.com"
 ///    var body: some View {
 ///      Group {
 ///        if let url = URL(string: urlString) {
