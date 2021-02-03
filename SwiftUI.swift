@@ -2928,7 +2928,20 @@ public struct ButtonStyleConfiguration {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Capsule : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Capsule insetted by the amount specified. For example, 
+    /// insetting by 10 points returns a Capsule that fills its container, 
+    /// with 10 points inset on all four side.
+    ///
+    /// ![Capsule inset example](capsule-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
@@ -7214,7 +7227,20 @@ extension EditMode : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Ellipse : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Ellipse insetted by the amount specified. For example, 
+    /// insetting by 10 points returns a Ellipse that fills its container, 
+    /// with 10 points inset on all four side.
+    ///
+    /// ![Ellipse inset example](ellipse-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
