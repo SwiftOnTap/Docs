@@ -5,7 +5,7 @@
   "declaration": "",
   "description": "A data type for storing multiple values.",
   "overview": "Structures are complex objects that can store constants, variables, and functions. \n\n For example, a structure can be used to create a user object with a welcome message that's shared across your application.\n\n```\nstruct ExampleView: View {\n    var Kalil = User(name: \"Kalil\", age: 21)\n    \n    var body: some View {\n        Text(Kalil.createWelcomeMessage())\n    }\n}\n\nstruct User {\n    var name: String;\n    var age: Int;\n    \n    func createWelcomeMessage()->String {\n        return \"Hey \(name)! Welcome to Banana🍌 Docs🙂\"\n    }\n}\n```\n See [Apple's `Struct` documention](https://docs.swift.org/swift-book/LanguageGuide/ClassesAndStructures.html) for the official guide. To quickly reference the difference between a ``Struct`` and a ``Class``, see slide 24 of [this Stanford lecture](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l2.pdf). To learn more about ``Struct`` vs ``Class``, watch 15:30 to 28:00 of [this Stanford lecture](https://www.youtube.com/watch?v=4GjXq2Sr55Q&feature=youtu.be) which explains both well.",
-  "parameters": [
+  "parameters": [ddd
 
   ],
   "path": "struct",
