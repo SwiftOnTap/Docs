@@ -2824,13 +2824,6 @@ public struct ButtonStyleConfiguration {
     public let isPressed: Bool
 }
 
-/// A capsule shape aligned inside the frame of the view containing it.
-///
-/// A capsule shape is equivalent to a rounded rectangle where the corner radius
-/// is chosen as half the length of the rectangle's smallest edge.
-
-
-
 /// A Capsule is a rectangular `Shape` that by default, aligns itself inside of 
 /// the view containing it. It differs from `RoundedRectangle` in that its 
 /// corner radius is half the length of the retangle's smallest edge. In effect,
