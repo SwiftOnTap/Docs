@@ -3011,7 +3011,43 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 
 /// An environment-dependent color.
 ///
-/// A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
+/// `Color` represents an environment-dependent color that conforms to `View`. Colors conformance to `View` means that a color can be used as a view itself.
+///
+/// For example:
+///
+/// ![Color Example One](color-example-one.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Color.yellow
+///         }
+///     }
+///
+/// Color also conforms to `ShapeStyle` which allows it to serve as a fill or stroke on a shape.
+///
+/// For example:
+///
+/// ![Color Example Two](color-example-two.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .fill(Color.yellow)
+///         }
+///     }
+///
+/// And as a stroke:
+///
+/// ![Color Example Three](color-example-three.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .stroke(Color.yellow)
+///         }
+///     }
+///
+/// **Note**: A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Color : Hashable, CustomStringConvertible {
