@@ -2824,6 +2824,8 @@ public struct ButtonStyleConfiguration {
     public let isPressed: Bool
 }
 
+/// A pill-style shape.
+///
 /// A Capsule is a rectangular `Shape` that by default, aligns itself inside of 
 /// the view containing it. It differs from `RoundedRectangle` in that its 
 /// corner radius is half the length of the retangle's smallest edge. In effect,
@@ -2943,10 +2945,10 @@ extension Capsule : InsettableShape {
     public typealias InsetShape = some InsettableShape
 }
 
-/// A circle centered on the frame of the view containing it.
+/// A circle shape.
 ///
-/// The circle's radius equals half the length of the frame rectangle's smallest
-/// edge.
+/// A Circle is centered on the frame of the view containing it. The circle's 
+/// radius equals half the length of the frame rectangle's smallest edge.
 ///
 /// By default, a Circle is black, and takes up the space of its container:
 ///
@@ -7140,6 +7142,9 @@ extension EditMode : Equatable {
 extension EditMode : Hashable {
 }
 
+/// An ellipse shape, similar to a circle but with potentially different width 
+/// and height.
+///
 /// An Ellipse is a circular `Shape` that by default, aligns itself inside of 
 /// the view containing it. It differs from `Circle` in that its width and 
 /// height are not necessarily equal.
@@ -16246,10 +16251,11 @@ extension ProjectionTransform {
     public typealias Body
 }
 
-/// A Rectangle is a rectangular `Shape` that by default, aligns itself inside of the view containing it.
+/// A rectangle shape.
 ///
-/// To define a Rectangle with a specific color and frame, use the `Shape/fill()` 
-/// and `View/frame(width:height:)` modifiers:
+/// A Rectangle is a rectangular `Shape` that by default, aligns itself inside 
+/// of the view containing it. To define a Rectangle with a specific color and 
+/// frame, use the `Shape/fill()` and `View/frame(width:height:)` modifiers:
 ///
 /// ![Rectangle fill and frame example](rectangle-example-1.png)
 ///
@@ -17491,10 +17497,12 @@ extension RoundedCornerStyle : Equatable {
 extension RoundedCornerStyle : Hashable {
 }
 
+/// A rectangle shape with rounded corners.
+///
 /// A RoundedRectangle is a rectangular `Shape` with rounded corners that by 
 /// default, aligns itself inside of the view containing it.
 ///
-/// A RoundedRectangle must be created with a specific corner radius or size.
+/// It must be created with a specific corner radius or size.
 /// The example below creates a RoundedRectangle with a corner radius of 20, 
 /// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
 /// to set the color to blue and the frame to 250 by 150.
