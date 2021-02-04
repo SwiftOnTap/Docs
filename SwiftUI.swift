@@ -2886,7 +2886,7 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// Define a Circle with a specific color and frame with the `Shape/fill()` 
+/// Define a Circle with a specific color and frame with the `Shape/fill()`
 /// and `Circle/frame(width:height:)` modifiers. For example:
 ///
 /// ![Circle Example 2](images/Circle-example-2.png)
@@ -2901,8 +2901,8 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// To add a border, use the `Circle/stroke(:lineWidth:)` modifier, and use 
-/// the `Circle/inset(by:)` modifier to inset the circle by half of the border 
+/// To add a border, use the `Circle/stroke(:lineWidth:)` modifier, and use
+/// the `Circle/inset(by:)` modifier to inset the circle by half of the border
 /// width to keep the circle at its original size:
 ///
 /// ![Circle Example 3](Circle-example-3.png)
@@ -2961,7 +2961,7 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Circle : InsettableShape {
 
-    /// Returns a Circle insetted by the amount specified. For example, 
+    /// Returns a Circle insetted by the amount specified. For example,
     /// insetting by 10 points returns a Circle that fills its container, with
     /// 10 points inset on all four side.
     ///
@@ -3295,6 +3295,28 @@ extension Color : ShapeStyle {
 extension Color {
 
     /// Creates a named color.
+    ///
+    /// To declare a color with a `name` create your color in the `Assets.xcassets` folder.
+    ///
+    /// ![Create Color Name](color-name-showcase.png)
+    ///
+    /// Create a light theme and dark theme color to adjust your view depending on the user's environment.
+    ///
+    /// Next, run your app in both light theme and dark theme. Your color will automatically change.
+    ///
+    /// Light theme:
+    /// ![Color Light Theme](color-name-light.png)
+    ///
+    /// Dark theme:
+    /// ![Color Dark Theme](color-name-dark.png)
+    ///
+    /// Code:
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color("Pink")
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
