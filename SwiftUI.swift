@@ -16257,7 +16257,7 @@ extension ProjectionTransform {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Rectangle()
-///             .fill(Color.green)
+///             .fill(Color.blue)
 ///             .frame(width: 250, height: 150)
 ///     }
 /// }
@@ -17491,8 +17491,78 @@ extension RoundedCornerStyle : Equatable {
 extension RoundedCornerStyle : Hashable {
 }
 
-/// A rectangular shape with rounded corners, aligned inside the frame of the
-/// view containing it.
+/// A RoundedRectangle is a rectangular `Shape` with rounded corners that by 
+/// default, aligns itself inside of the view containing it.
+///
+/// A RoundedRectangle must be created with a specific corner radius or size.
+/// The example below creates a RoundedRectangle with a corner radius of 20, 
+/// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
+/// to set the color to blue and the frame to 250 by 150.
+///
+/// ![RoundedRectangle corner radius, fill, and frame example](images/roundedrectangle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 20)
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// The example below uses the same modifiers, but defines a corner size
+/// rather than a corner radius.
+///
+/// ![RoundedRectangle corner size, fill, and frame example](images/roundedrectangle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerSize: CGSize(width: 30, height: 10))
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// The RoundedRectangle initializer includes an optional parameter for 
+/// specifying the `style`, a `RoundedCornerStyle` that can either be `circular`
+/// or `continuous`. These styles have subtle but noticeable differences:
+///
+/// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack(spacing: 20) {
+///             RoundedRectangle(cornerRadius: 50, style: .circular)
+///                 .frame(width: 250, height: 150)
+///     
+///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+///                 .frame(width: 250, height: 150)
+///         }
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
+/// the `RoundedRectangle/inset(by:)` modifier to inset the RoundedRectangle by 
+/// half of the border width to keep the RoundedRectangle at its original size:
+///
+/// ![RoundedRectangle inset and stroke example](roundedrectangle-example-4.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 40)
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RoundedRectangle : Shape {
 
@@ -17502,43 +17572,122 @@ extension RoundedCornerStyle : Hashable {
 	/// not to be perfect quarter-circles but instead quarter-ellipses.
 	/// Basically, this allows you to specify different width and heights of
 	/// the corners.
+    ///
+    /// ![RoundedRectangle cornerSize example](roundedrectangle-example-6.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerSize: CGSize(width: 30, height: 20))
+    ///                 .frame(width: 250, height: 150)
+    /// 
+    ///             RoundedRectangle(cornerSize: CGSize(width: 20, height: 40))
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var cornerSize: CGSize
 
     /// The rounded corner style of your rounded rectangle's corners.
     ///
+    /// These styles have subtle but noticeable differences:
+    ///
+    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: .circular)
+    ///                 .frame(width: 250, height: 150)
+    ///     
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// -SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
-    /// Creates a rounded rectangle with specified rounded corner width and height.
+    /// Creates a RoundedRectangle with specified rounded corner width and height.
     ///
     /// - Parameters:
     ///   - cornerSize: The size (width and height) of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
+    ///
+    /// ![RoundedRectangle init with cornerSize example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(
+    ///                 cornerSize: CGSize(width: 20, height: 10)
+    ///             )
+    ///             .frame(width: 250, height: 150)
+    /// 
+    ///             RoundedRectangle(
+    ///                 cornerSize: CGSize(width: 20, height: 10),
+    ///                 style: .continuous
+    ///             )
+    ///             .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
 
-    /// Creates a rounded rectangle with specified rounded corner radius.
+    /// Creates a RoundedRectangle with specified rounded corner radius.
     ///
     /// - Parameters:
     ///   - cornerRadius: The radius of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
+    ///
+    /// ![RoundedRectangle init with cornerRadius example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50) // Style defaults to circular
+    ///                 .frame(width: 250, height: 150)
+    ///     
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// A RoundedRectangle can be described as a path within a specific `CGRect`
+    /// using the `RoundedRectangle/path(in:)` modifier:
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// ![RoundedRectangle path example](roundedrectangle-example-7.png)
     ///
-    /// - Returns: A path that describes this shape.
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 75, height: 200))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// The data to animate.
+    /// > The data to animate.
     public var animatableData: CGSize.AnimatableData
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = CGSize.AnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -17546,11 +17695,24 @@ extension RoundedCornerStyle : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension RoundedRectangle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a RoundedRectangle insetted by the amount specified. For 
+    /// example, insetting by 10 points returns a Capsule that fills its 
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![RoundedRectangle inset example](roundedrectangle-example-8.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 20)
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
