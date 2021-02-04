@@ -2832,7 +2832,7 @@ public struct ButtonStyleConfiguration {
 /// To define a Capsule with a specific color and frame, use the `Shape/fill()` 
 /// and `View/frame(width:height:)` modifiers:
 ///
-/// ![Capsule fill and frame example](images/capsule-example-1.png)
+/// ![Capsule fill and frame example](capsule-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2877,7 +2877,7 @@ public struct ButtonStyleConfiguration {
     /// `circular` and `continuous`. These styles have subtle but noticeable
     /// differences:
     ///
-    /// ![Ellipse init example](images/ellipse-example-3.png)
+    /// ![Ellipse init example](ellipse-example-3.png)
     ///
     /// ```
     /// `struct ExampleView: View {
@@ -2950,7 +2950,7 @@ extension Capsule : InsettableShape {
 ///
 /// By default, a Circle is black, and takes up the space of its container:
 ///
-/// ![Circle init example](images/Circle-example-1.png)
+/// ![Circle init example](Circle-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2963,7 +2963,7 @@ extension Capsule : InsettableShape {
 /// Define a Circle with a specific color and frame with the `Shape/fill()` 
 /// and `View/frame(width:height:)` modifiers. For example:
 ///
-/// ![Circle fill and frame example](images/Circle-example-2.png)
+/// ![Circle fill and frame example](Circle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -3012,7 +3012,7 @@ extension Capsule : InsettableShape {
     /// Creates a Circle that aligns itself inside of the view containing it 
     /// by default.
     ///
-    /// ![Circle init example](images/Circle-example-1.png)
+    /// ![Circle init example](Circle-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -7147,7 +7147,7 @@ extension EditMode : Hashable {
 /// To define an Ellipse with a specific color and frame, use the `Shape/fill()` 
 /// and `View/frame(width:height:)` modifiers:
 ///
-/// ![Ellipse fill and frame example](images/ellipse-example-1.png)
+/// ![Ellipse fill and frame example](ellipse-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7197,7 +7197,7 @@ extension EditMode : Hashable {
     /// Creates an Ellipse that aligns itself inside of the view containing it 
     /// by default.
     ///
-    /// ![Ellipse init example](images/ellipse-example-4.png)
+    /// ![Ellipse init example](ellipse-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -16251,7 +16251,7 @@ extension ProjectionTransform {
 /// To define a Rectangle with a specific color and frame, use the `Shape/fill()` 
 /// and `View/frame(width:height:)` modifiers:
 ///
-/// ![Rectangle fill and frame example](images/rectangle-example-1.png)
+/// ![Rectangle fill and frame example](rectangle-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16301,7 +16301,7 @@ extension ProjectionTransform {
     /// Creates a Rectangle that aligns itself inside of the view containing it
     /// by default.
     ///
-    /// ![Rectangle init example](images/rectangle-example-4.png)
+    /// ![Rectangle init example](rectangle-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -17499,7 +17499,7 @@ extension RoundedCornerStyle : Hashable {
 /// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
 /// to set the color to blue and the frame to 250 by 150.
 ///
-/// ![RoundedRectangle corner radius, fill, and frame example](images/roundedrectangle-example-1.png)
+/// ![RoundedRectangle corner radius, fill, and frame example](roundedrectangle-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17514,7 +17514,7 @@ extension RoundedCornerStyle : Hashable {
 /// The example below uses the same modifiers, but defines a corner size
 /// rather than a corner radius.
 ///
-/// ![RoundedRectangle corner size, fill, and frame example](images/roundedrectangle-example-2.png)
+/// ![RoundedRectangle corner size, fill, and frame example](roundedrectangle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
