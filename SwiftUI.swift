@@ -3131,6 +3131,17 @@ extension Color : View {
 extension Color {
 
     /// Creates a color from an instance of `CGColor`.
+    ///
+    /// ![CGColor Init](color-cgcolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let cgColor = CGColor(red: 1.00, green: 0.60, blue: 0.60, alpha: 1.0)
+    ///
+    ///         var body: some View {
+    ///             Color(cgColor)
+    ///         }
+    ///     }
+    /// 
     public init(_ cgColor: CGColor) { }
 }
 
@@ -3187,7 +3198,15 @@ extension Color {
 
     /// Create a `Color` from RGB and opacity values along with an optional colorspace.
     ///
-    /// The colorspace value defaults to sRGB, which is standard for apps. Note
+    /// ![Color RGB](color-rgb-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(red: 1.0, green: 0.6, blue: 0.6, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
     /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
     /// divide them by 255 in order to use this initializer.
@@ -3202,7 +3221,15 @@ extension Color {
 
     /// Create a `Color` from grayscale and opacity.
     ///
-    /// Both the white and the opacity must be specified from 0.0 to 1.0. If
+    /// ![Color White/Opacity](color-white-opacity.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(white: 0.2, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
     /// be divided by their maximum value.
     ///
@@ -3213,6 +3240,16 @@ extension Color {
     public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1) { }
 
     /// Creates a `Color` from hue, saturation, brightness, and opacity values.
+    ///
+    /// ![Hue Color Init](color-hue-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(hue: 0.5, saturation: 0.60, brightness: 0.90)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
     /// - Parameters:
     ///   - hue: The hue of the color.
@@ -3329,6 +3366,17 @@ extension Color {
 extension Color {
 
     /// Creates a color from an instance of `UIColor`.
+    ///
+    /// ![UIColor Init](color-uicolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let uiColor = UIColor.yellow
+    ///
+    ///         var body: some View {
+    ///             Color(uiColor)
+    ///         }
+    ///     }
+    ///
     public init(_ color: UIColor) { }
 }
 
