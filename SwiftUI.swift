@@ -3105,6 +3105,16 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// The conversion of `p` to a string in the assignment to `s` uses the
     /// `Point` type's `description` property.
+    ///
+    /// To call this property directly, try:
+    ///
+    /// ![Description](color-description.png)
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text(Color.yellow.description)
+    ///        }
+    ///    }
     public var description: String { get }
 
     /// The hash value.
@@ -3141,7 +3151,7 @@ extension Color {
     ///             Color(cgColor)
     ///         }
     ///     }
-    /// 
+    ///
     public init(_ cgColor: CGColor) { }
 }
 
@@ -3264,6 +3274,13 @@ extension Color {
 
     /// A color that represents the system or application accent color.
     ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
+    ///                .accentColor(Color.accentColor)
+    ///        }
+    ///    }
+    ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
     /// application or system accent color will be used.
@@ -3280,36 +3297,121 @@ extension Color {
     public static let clear: Color
 
     /// A true black color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.black
+    ///        }
+    ///    }
+    ///
     public static let black: Color
 
     /// A true white color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.white
+    ///        }
+    ///    }
+    ///
     public static let white: Color
 
     /// A gray color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.gray
+    ///        }
+    ///    }
+    ///
     public static let gray: Color
 
     /// A stylized red color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.red
+    ///        }
+    ///    }
+    ///
     public static let red: Color
 
     /// A stylized green color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.green
+    ///        }
+    ///    }
+    ///
     public static let green: Color
 
     /// A stylized blue color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.blue
+    ///        }
+    ///    }
+    ///
     public static let blue: Color
 
     /// An orange color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.orange
+    ///        }
+    ///    }
+    ///
     public static let orange: Color
 
     /// A stylized yellow color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.yellow
+    ///        }
+    ///    }
+    ///
     public static let yellow: Color
 
     /// A pink color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.pink
+    ///        }
+    ///    }
+    ///
     public static let pink: Color
 
     /// A purple color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.purple
+    ///        }
+    ///    }
+    ///
     public static let purple: Color
 
     /// The default color of text, based on the environment.
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
+    ///
+    /// Code:
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text("Bananas 🍌🍌")
+    ///                .accentColor(.primary)
+    ///        }
+    ///    }
     ///
     /// If you are in light mode, this will be black. If, on the other hand, you
     /// are in dark mode, this will be white. It is automatically updated for
@@ -3385,6 +3487,18 @@ extension Color {
 
 	/// Updates the transparency channel of a `Color`, returning a `Color` back.
 	///
+  ///
+  /// ![Color Opacity](color-opacity.png)
+  ///
+  ///     struct ExampleView: View {
+  ///            var body: some View {
+  ///                ZStack {
+  ///                    Text("Banana 🍌🍌")
+  ///                    Color.pink.opacity(0.80)
+  ///                }
+  ///            }
+  ///        }
+  ///
 	/// This is different from the `View/opacity(_:)` modifier because it
 	/// returns a `Color` object rather than `some View`.
     public func opacity(_ opacity: Double) -> Color { }
