@@ -11972,42 +11972,69 @@ public struct MagnificationGesture : Gesture {
 
 /// A control for presenting a menu of actions.
 ///
+/// A menu is created from a view builder of different views. Each
+/// acceptable view will be shown as a different row in the menu.
+/// The canonical view for using in a menu is ``Button``, but
+/// these views also work: ``Menu``, ``Text``, ``Button``,
+/// ``Link``, ``Label``, ``Divider``, and ``Image``.
+///
+/// There are 3 different initializers, one for each of the different label types:
+/// 1. String
+/// 2. Localized string key
+/// 3. View
+///
 /// The following example presents a menu of three buttons and a submenu, which
 /// contains three buttons of its own.
 ///
-///     Menu("Actions") {
-///         Button("Duplicate", action: duplicate)
-///         Button("Rename", action: rename)
-///         Button("Delete…", action: delete)
-///         Menu("Copy") {
-///             Button("Copy", action: copy)
-///             Button("Copy Formatted", action: copyFormatted)
-///             Button("Copy Library Path", action: copyPath)
+/// ```
+/// struct MenuView: View {
+///     var body: some View {
+///         Menu("Actions") {
+///             Button("Duplicate", action: { print("‼️") })
+///             Button("Delete…", action: { print("🗑") })
+///             Menu("Copy") {
+///                 Button("Copy", action: { print("📑") })
+///                 Button("Copy Formatted", action: { print("🔤") })
+///             }
 ///         }
 ///     }
+/// }
+/// ```
 ///
 /// You can create the menu's title with a `LocalizedStringKey`, as seen in
 /// the previous example, or with a view builder that creates multiple views,
 /// such as an image and a text view:
 ///
-///     Menu {
-///         Button("Open in Preview", action: openInPreview)
-///         Button("Save as PDF", action: saveAsPDF)
-///     } label: {
-///         Image(systemName: "document")
-///         Text("PDF")
+/// ```
+/// struct MenuView: View {
+///     var body: some View {
+///         Menu {
+///             Button("Open in Preview", action: { })
+///             Button("Save as PDF", action: { })
+///         } label: {
+///             Image(systemName: "doc")
+///             Text("PDF")
+///         }
 ///     }
+/// }
+/// ```
 ///
 /// ### Styling Menus
 ///
 /// Use the `View/menuStyle(_:)` modifier to change the style of all menus
 /// in a view. The following example shows how to apply a custom style:
 ///
-///     Menu("Editing") {
-///         Button("Set In Point", action: setInPoint)
-///         Button("Set Out Point", action: setOutPoint)
+/// ```
+/// struct MenuView: View {
+///     var body: some View {
+///         Menu("Editing") {
+///             Button("Set In Point", action: { })
+///             Button("Set Out Point", action: { })
+///         }
+///         .menuStyle(EditingControlsMenuStyle())
 ///     }
-///     .menuStyle(EditingControlsMenuStyle())
+/// }
+/// ```
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -12029,14 +12056,43 @@ public struct Menu<Label, Content> : View where Label : View, Content : View {
 @available(watchOS, unavailable)
 extension Menu {
 
-    /// Creates a menu with a custom label.
+    /// Creates a menu with a view label.
+    ///
+    /// ```
+    /// struct MenuView: View {
+    ///     var body: some View {
+    ///         Menu {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         } label: {
+    ///             Image(systemName: "doc")
+    ///             Text("PDF")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - content: A group of menu items.
     ///     - label: A view describing the content of the menu.
     public init(@ViewBuilder content: () -> Content, @ViewBuilder label: () -> Label) { }
 
-    /// Creates a menu that generates its label from a localized string key.
+    /// Creates a menu with a localized string key label.
+    ///
+    /// ```
+    /// struct MenuView: View {
+    ///     var body: some View {
+    ///         Menu(LocalizedStringKey("Actions")) {
+    ///             Button("Duplicate", action: { print("‼️") })
+    ///             Button("Delete…", action: { print("🗑") })
+    ///             Menu("Copy") {
+    ///                 Button("Copy", action: { print("📑") })
+    ///                 Button("Copy Formatted", action: { print("🔤") })
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - titleKey: The key for the link's localized title, which describes
@@ -12044,10 +12100,22 @@ extension Menu {
     ///     - content: A group of menu items.
     public init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) where Label == Text { }
 
-    /// Creates a menu that generates its label from a string.
+    /// Creates a menu with a string label.
     ///
-    /// To create the label with a localized string key, use
-    /// `Menu/init(_:content:)-7v768` instead.
+    /// ```
+    /// struct MenuView: View {
+    ///     var body: some View {
+    ///         Menu("Actions") {
+    ///             Button("Duplicate", action: { print("‼️") })
+    ///             Button("Delete…", action: { print("🗑") })
+    ///             Menu("Copy") {
+    ///                 Button("Copy", action: { print("📑") })
+    ///                 Button("Copy Formatted", action: { print("🔤") })
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - title: A string that describes the contents of the menu.
@@ -22221,7 +22289,7 @@ extension VerticalAlignment {
 /// gray rectangle that hugs the text. A caption reads, "Apply the border
 /// first."](SwiftUI-View-2.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol View{ }
+public protocol View { }
 extension View {
 
     /// The type of view representing the body of this view.
@@ -22250,6 +22318,8 @@ extension View {
     /// - ``GraphicalDatePickerStyle`` on macOS
     /// - ``StepperFieldDatePickerStyle`` on macOS
     ///
+    /// See ``DatePicker`` and ``DatePickerStyle`` for more.
+    ///
     /// Use the modifier like this:
     ///
     ///     struct ExampleView: View {
@@ -22263,7 +22333,6 @@ extension View {
     ///         }
     ///     }
     ///
-    ///
     /// - Parameters:
     ///   - style: The desired date picker style, conforming to ``DatePickerStyle``.
     @available(tvOS, unavailable)
@@ -22275,7 +22344,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Present a sheet when a given value is not nil.
+    /// A view modifier that presents a sheet when a given value is not nil.
     ///
     /// Use this modifier to present a sheet over the current view when you need to pass the sheet a value.
     /// The sheet will be presented only when the binding value you pass it is not nil.
@@ -22334,7 +22403,7 @@ extension View {
     public func sheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
 
 
-    /// Presents a sheet when a given condition is true.
+    /// A view modifier that presents a sheet when a given condition is true.
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
@@ -22348,7 +22417,7 @@ extension View {
 @available(macOS, unavailable)
 extension View {
 
-    /// Present a sheet overlaid over the full screen.
+    /// A view modifier that presents a sheet overlaid over the full screen.
     ///
     /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
     /// and exits the screen from the bottom.
@@ -22406,7 +22475,7 @@ extension View {
     public func fullScreenCover<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
 
 
-    /// Present a sheet overlaid over the full screen without a custom parameter.
+    /// A view modifier that presents a sheet overlaid over the full screen without a custom parameter.
     ///
     /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
     /// and exits the screen from the bottom.
@@ -22453,7 +22522,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 14.0, *)
 extension View {
 
-    /// A modifier to call a function after a long press.
+    /// A view modifier that calls a function after a long press.
     ///
     /// Use this modifier to call a function when the user long presses on a view.
     ///
@@ -22486,7 +22555,7 @@ extension View {
 
 extension View {
 
-    /// A modifier to disable autocorrection.
+    /// A view modifier that disables autocorrection.
     ///
     /// Use this modifier when the  autocorrection in a text field would
     /// make it more difficult for the user to input information. Some examples of where this
@@ -22525,9 +22594,31 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Sets the style for the index view within the current environment.
+    /// A view modifier that sets the tab view page dots style.
     ///
-    /// - Parameter style: The style to apply to this view.
+    /// Use this modifier when your ``TabView`` uses the ``PageTabViewStyle``.
+    /// You can pass this modifier an instance of any type that conforms to the
+    /// ``IndexViewStyle`` protocol.
+    ///
+    /// This changes the style of the page dots.
+    ///
+    /// See ``IndexViewStyle`` and ``PageIndexViewStyle``for more info on
+    /// the parameter.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Page 1️⃣")
+    ///             Color.pink
+    ///         }
+    ///         .tabViewStyle(PageTabViewStyle())
+    ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter style: The ``IndexViewStyle`` style to apply to this view.
     public func indexViewStyle<S>(_ style: S) -> some View where S : IndexViewStyle { }
 
 }
@@ -22535,7 +22626,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the item provider used for drag and drop.
+    /// A view modifier that sets the item provider used for drag and drop.
     ///
     /// Use this modifier to set the item provider when dragging and dropping a view. This is most
     /// commonly used on larger screen sizes like iPad and Mac.
@@ -22737,8 +22828,19 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds an action to perform when this view detects data emitted by the
-    /// given publisher.
+    /// A view modifier that calls a function whenever a value is received by a publisher.
+    ///
+    /// ```
+    /// struct ReceiverView: View {
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .default).autoconnect()
+    ///
+    ///     @State var time = ""
+    ///     var body: some View {
+    ///         Text(time)
+    ///             .onReceive(timer) { t in time = String(describing: t) }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - publisher: The publisher to subscribe to.
@@ -22755,7 +22857,11 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Applies a modifier to a view and returns a new view.
+    /// A view modifier that applies a modifier to a view and returns a new view.
+    ///
+    /// Whenever you reuse a bunch of view modifiers together, it's a good idea
+    /// to encapsulate them by creating a new ``ViewModifier``. Then, call that
+    /// new modifier using this.
     ///
     /// Use this modifier to combine a `View` and a `ViewModifier`, to
     /// create a new view. For example, if you create a view modifier for
@@ -22818,7 +22924,18 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Configures whether this view participates in hit test operations.
+    /// A view modifier that enables/disables user interaction.
+    ///
+    /// ```
+    /// struct HitDisabledView: View {
+    ///     var body: some View {
+    ///         Button("Can't touch this 🎶") { /*this never happens*/ }
+    ///             .allowsHitTesting(false)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter enabled: A boolean for whether the view allows user interaction.
     @inlinable public func allowsHitTesting(_ enabled: Bool) -> some View { }
 
 }
@@ -22826,7 +22943,19 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds an action to perform when this view appears.
+    /// A view modifier that performs an action when the view appears.
+    ///
+    /// This is an extremely useful modifier for setting up any actions needed
+    /// when the page first is loaded.
+    ///
+    /// ```
+    /// struct AppearedView: View {
+    ///     var body: some View {
+    ///         Text("If you're reading this 🍌 was printed")
+    ///             .onAppear { print("🍌") }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter action: The action to perform. If `action` is `nil`, the
     ///   call has no effect.
@@ -22835,7 +22964,16 @@ extension View {
     @inlinable public func onAppear(perform action: (() -> Void)? = nil) -> some View { }
 
 
-    /// Adds an action to perform when this view disappears.
+    /// A view modifier that performs an action when the view disappears.
+    ///
+    /// ```
+    /// struct DisappearingView: View {
+    ///     var body: some View {
+    ///         Text("When you close this 🍌 WILL be printed")
+    ///             .onDisappear { print("🍌") }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter action: The action to perform. If `action` is `nil`, the
     ///   call has no effect.
@@ -22848,8 +22986,26 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View where Self : Equatable {
 
-    /// Prevents the view from updating its child view when its new value is the
+    /// A view modifier that prevents the view from updating its child view when its new value is the
     /// same as its old value.
+    ///
+    /// Use this modifier as an easier way of creating an ``EquatableView``.
+    ///
+    /// This line:
+    ///
+    /// ```
+    /// EquatableView(content: Text("☮️"))
+    /// ```
+    ///
+    /// is equal to this line:
+    ///
+    /// ```
+    /// Text("☮️").equatable()
+    /// ```
+    ///
+    /// For more info on equatable views, check out ``EquatableView``.
+    /// For an in-depth overview of when to use equatable views, check out this
+    /// fantastic article: [The Mystery Behind View Equality](https://swiftui-lab.com/equatableview/).
     @inlinable public func equatable() -> EquatableView<Self> { }
 }
 
@@ -22857,7 +23013,7 @@ extension View where Self : Equatable {
 @available(watchOS, introduced: 6.0, deprecated: 7.0)
 extension View {
 
-    /// Adds a context menu to the view.
+    /// A view modifier that provides right click (macOS) or long hold (iOS) menu items.
     ///
     /// Use contextual menus to add actions that change depending on the user's
     /// current focus and task.
@@ -22867,23 +23023,19 @@ extension View {
     /// directly inside the button closures or, as shown below, invoked via
     /// function references.
     ///
-    ///     func selectHearts() {{}
-    ///         // Act on hearts selection.
+    /// ```
+    /// struct ContextMenuView: View {
+    ///     var body: some View {
+    ///         Text("Favorite Card Suit")
+    ///             .contextMenu {
+    ///                 Button("♥️ - Hearts", action: { })
+    ///                 Button("♣️ - Clubs", action: { })
+    ///                 Button("♠️ - Spades", action: { })
+    ///                 Button("♦️ - Diamonds", action: { })
+    ///             }
     ///     }
-    ///     func selectClubs() { ... }{}
-    ///     func selectSpades() { ... }{}
-    ///     func selectDiamonds() { ... }{}
-    ///
-    ///     Text("Favorite Card Suit")
-    ///         .padding()
-    ///         .contextMenu {
-    ///             Button("♥️ - Hearts", action: selectHearts)
-    ///             Button("♣️ - Clubs", action: selectClubs)
-    ///             Button("♠️ - Spades", action: selectSpades)
-    ///             Button("♦️ - Diamonds", action: selectDiamonds)
-    ///         }
-    ///
-    /// ![A context menu showing four menu items.](SwiftUI-contextMenu.png)
+    /// }
+    /// ```
     ///
     /// - Parameter menuItems: A `contextMenu` that contains one or more menu items.
     /// - Returns: A view that adds a contextual menu to this view.
@@ -22897,7 +23049,7 @@ extension View {
 @available(watchOS, introduced: 6.0, deprecated: 7.0)
 extension View {
 
-    /// Attaches a context menu and its children to the view.
+    /// A deprecated view modifier that attaches a context menu and its children to the view.
     ///
     /// Use `contextMenu(_:)` to attach a contextual menu struct and its
     /// children to the view. This modifier allows for the contextual menu to be
@@ -22912,12 +23064,12 @@ extension View {
     /// directly inside the button closures or, as shown below, invoked via
     /// function references.
     ///
-    ///     func selectHearts() {{}
+    ///     func selectHearts() {
     ///         // Act on hearts selection.
     ///     }
-    ///     func selectClubs() { ... }{}
-    ///     func selectSpades() { ... }{}
-    ///     func selectDiamonds() { ... }{}
+    ///     func selectClubs() { ... }
+    ///     func selectSpades() { ... }
+    ///     func selectDiamonds() { ... }
     ///
     ///     let menuItems = ContextMenu {
     ///         Button("♥️ - Hearts", action: selectHearts)
@@ -22950,17 +23102,33 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Sets the style for menus within this view.
+    /// A view modifier that sets the style for menus.
     ///
     /// To set a specific style for all menu instances within a view, use the
-    /// `menuStyle(_:)` modifier:
+    /// `menuStyle(_:)` modifier. Pass an instance of a struct that
+    /// conforms to the ``MenuStyle`` protocol.
     ///
-    ///     Menu("PDF") {
-    ///         Button("Open in Preview", action: openInPreview)
-    ///         Button("Save as PDF", action: saveAsPDF)
+    /// Existing menu styles include:
+    /// - ``DefaultMenuButtonStyle``
+    /// - ``BorderlessMenuButtonStyle``
+    /// - ``BorderedMenuButtonStyle`` (on macOS)
+    ///
+    /// The ``MenuStyle`` protocol also supports custom structures.
+    ///
+    /// ```
+    /// struct ButtonStyleView: View {
+    ///     var body: some View {
+    ///         Menu("PDF") {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         }
+    ///         .menuStyle(ButtonMenuStyle())
     ///     }
-    ///     .menuStyle(ButtonMenuStyle())
+    /// }
+    /// ```
     ///
+    /// - Parameter style: Your desired ``MenuStyle``.
+    /// - Returns: A view with styled menus.
     public func menuStyle<S>(_ style: S) -> some View where S : MenuStyle { }
 
 }
@@ -22968,18 +23136,103 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Attaches a gesture to the view with a lower precedence than gestures
-    /// defined by the view.
+    /// A view modifier that connects a gesture to the view, with lower priority than existing gestures.
+    ///
+    /// Use this modifier to attach a gesture to a view.
+    ///
+    /// Make sure that your first parameter conforms to the ``Gesture`` protocol. For
+    /// more information about the second parameter, check out ``GestureMask``.
+    ///
+    /// - Note: If the view already has gestures defined, they will override any
+    /// gesture attached using this view modifier. To attach a gesture with a
+    /// higher priority than gestures already attached to the view, use
+    /// ``View/highPriorityGesture(_:including:)``. To attach
+    /// a gesture with the same priority as gestures already attached to the view, use
+    /// ``View/simultaneousGesture(_:including:)``.
+    ///
+    /// ```
+    /// struct DoubleTapView: View {
+    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     var body: some View {
+    ///         Text("Double tap me 👇")
+    ///             .gesture(g)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - gesture: The gesture to connect to the view.
+    ///   - mask: The ``GestureMask`` to use.
     public func gesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
 
 
-    /// Attaches a gesture to the view with a higher precedence than gestures
-    /// defined by the view.
+    /// A view modifier that connects a gesture to the view, with higher priority than existing gestures.
+    ///
+    /// Use this modifier to attach a gesture to a view. Using this modifier will ensure
+    /// that the gesture is not overridden by any gestures already defined
+    /// in the view.
+    ///
+    /// Make sure that your first parameter conforms to the ``Gesture`` protocol. For
+    /// more information about the second parameter, check out ``GestureMask``.
+    ///
+    /// - Note: This modifier will override any gestures already defined in
+    /// the view. If you would prefer gestures already defined in the view override
+    /// the gesture defined here, use
+    /// ``View/gesture(_:including:)`` instead. If you would
+    /// rather that all gestures be executed simultaneously, use
+    /// ``View/simultaneousGesture(_:including:)``.
+    ///
+    /// ```
+    /// struct DoubleTapView: View {
+    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Text("Double tap me 👇")
+    ///                 .onTapGesture { /*this never happens*/ }
+    ///         }
+    ///         .highPriorityGesture(g)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - gesture: The gesture to connect to the view.
+    ///   - mask: The ``GestureMask`` to use.
     public func highPriorityGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
 
 
-    /// Attaches a gesture to the view to process simultaneously with gestures
-    /// defined by the view.
+    /// A view modifier that connects a gesture to the view, with equal priority to existing gestures.
+    ///
+    /// Use this modifier to attach a gesture to a view. Using this modifier will ensure
+    /// that the gesture is not overridden by any gestures already defined
+    /// in the view.
+    ///
+    /// Make sure that your first parameter conforms to the ``Gesture`` protocol. For
+    /// more information about the second parameter, check out ``GestureMask``.
+    ///
+    /// - Note: This modifier will not override any gestures already defined in
+    /// the view. If you would prefer gestures already defined in the view override
+    /// the gesture defined here, use
+    /// ``View/gesture(_:including:)`` instead. If you would instead
+    /// prefer that this gesture override gestures already defined in the view,
+    /// use ``View/highPriorityGesture(_:including:)``.
+    ///
+    /// ```
+    /// struct DoubleTapView: View {
+    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Text("Double tap me 👇")
+    ///                 .onTapGesture { print("1️⃣") }
+    ///         }
+    ///         .simultaneousGesture(g)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - gesture: The gesture to connect to the view.
+    ///   - mask: The ``GestureMask`` to use.
     public func simultaneousGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
 
 }
@@ -22989,7 +23242,7 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Presents a system interface for allowing the user to import an existing
+    /// A view modifier that presents a system interface for allowing the user to import an existing
     /// file.
     ///
     /// In order for the interface to appear, `isPresented` must be `true`. When
@@ -23001,6 +23254,40 @@ extension View {
     /// - Note: Changing `allowedContentTypes` while the file importer is
     ///   presented will have no immediate effect, however will apply the next
     ///   time it is presented.
+    ///   
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
+    ///
+    /// struct ContentView: View {
+    ///     @State private var showImporter = false
+    ///     @State private var textInFile = ""
+    ///
+    ///     var body: some View {
+    ///         Button("Import File 📁") {
+    ///             showImporter = true
+    ///         }
+    ///         .fileImporter(isPresented: $showImporter,
+    ///                       allowedContentTypes: [.plainText]) { result in
+    ///
+    ///              switch result {
+    ///              case .failure(let error):
+    ///                  print("Error selecting file: \(error.localizedDescription:)")
+    ///              case .success(let url):
+    ///                 do {
+    ///                     if url.startAccessingSecurityScopedResource() {
+    ///                         textInFile = try String(contentsOf: url)
+    ///                         url.stopAccessingSecurityScopedResource()
+    ///                     }
+    ///                 } catch let error {
+    ///                     print("Error reading file \(error.localizedDescription)")
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// ```
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the interface should be shown.
@@ -23013,7 +23300,7 @@ extension View {
     public func fileImporter(isPresented: Binding<Bool>, allowedContentTypes: [UTType], onCompletion: @escaping (Result<URL, Error>) -> Void) -> some View { }
 
 
-    /// Presents a system interface for allowing the user to import multiple
+    /// A view modifier that presents a system interface for allowing the user to import multiple
     /// files.
     ///
     /// In order for the interface to appear, `isPresented` must be `true`. When
@@ -23025,6 +23312,44 @@ extension View {
     /// - Note: Changing `allowedContentTypes` or `allowsMultipleSelection`
     ///   while the file importer is presented will have no immediate effect,
     ///   however will apply the next time it is presented.
+    ///
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
+    ///
+    /// struct ContentView: View {
+    ///     @State private var showImporter = false
+    ///     @State private var textInFiles = [String]()
+    ///
+    ///     var body: some View {
+    ///         Button("Import Files 📁📂") {
+    ///             showImporter = true
+    ///         }
+    ///         .fileImporter(isPresented: $showImporter,
+    ///                       allowedContentTypes: [.plainText],
+    ///                       allowsMultipleSelection: true) { result in
+    ///
+    ///              switch result {
+    ///              case .failure(let error):
+    ///                  print("Error selecting file: \(error.localizedDescription:)")
+    ///              case .success(let urls):
+    ///                 textInFiles = []
+    ///                 for url in urls {
+    ///                     do {
+    ///                         if url.startAccessingSecurityScopedResource() {
+    ///                             textInFiles.append(try String(contentsOf: url))
+    ///                             url.stopAccessingSecurityScopedResource()
+    ///                         }
+    ///                     } catch let error {
+    ///                         print("Error reading file \(error.localizedDescription)")
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// ```
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the interface should be shown.
@@ -23075,14 +23400,68 @@ extension View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension View {
 
-    /// Adds a reason to apply a redaction to this view hierarchy.
+    /// A view modifier that replaces content with a smart placeholder.
+    ///
+    /// Use this modifier to add a redaction reason to a view hierarchy. Redaction
+    /// reasons often update the appearance of the view. Currently,
+    /// there is only 1 redaction reason: ``RedactionReasons.placeholder``.
+    /// Adding this reason to the view will replace the view with a placeholder graphic.
     ///
     /// Adding a redaction is an additive process: any redaction
     /// provided will be added to the reasons provided by the parent.
+    ///
+    /// ```
+    /// struct RedactedView: View {
+    ///     var body: some View {
+    ///         Label("Taylor Swift", systemImage: "person.fill")
+    ///         Label("Kanye West", systemImage: "person.fill")
+    ///             .redacted(reason: .placeholder)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Your child view can also read the redacted reason from its environment:
+    ///
+    /// ```
+    /// struct RedactedView: View {
+    ///     var body: some View {
+    ///         ChildView()
+    ///             .redacted(reason: .placeholder)
+    ///     }
+    /// }
+    ///
+    /// struct ChildView: View {
+    ///     @Environment(\.redactionReasons) var redactionReasons
+    ///     var redacted: Bool { redactionReasons.contains(.placeholder) }
+    ///
+    ///     var body: some View {
+    ///         if !redacted {
+    ///             Text("If you're reading this I'm not redacted")
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// - Parameter reason: The reason for redacting the content.
     public func redacted(reason: RedactionReasons) -> some View { }
 
 
-    /// Removes any reason to apply a redaction to this view hierarchy.
+    /// A view modifier that removes all redaction reasons from a view.
+    ///
+    /// ```
+    /// struct UnredactedView: View {
+    ///     var body: some View {
+    ///         ChildView()
+    ///             .redacted(reason: .placeholder)
+    ///     }
+    /// }
+    ///
+    /// struct ChildView: View {
+    ///     var body: some View {
+    ///         Text("You can't redact me 😎")
+    ///             .unredacted()
+    ///     }
+    /// }
+    /// ```
     public func unredacted() -> some View { }
 
 }
@@ -23097,6 +23476,15 @@ extension View {
 	///
 	/// If you would like to place a view in front of your current view instead,
 	/// you can use the `overlay(_:alignment:)` function.
+    ///
+    /// ```
+    /// struct OverlayView: View {
+    ///     var body: some View {
+    ///         Text("I have a floral background")
+    ///             .background(Text("🌸🌹🌺💐"))
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameters:
 	///   - background: The view to place behind.
@@ -23110,13 +23498,22 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-	/// Places a view in front of the current view.
+	/// A view modifier that places a view in front of the current view.
 	///
 	/// The layout of the original view will be unchanged from this. Its original
 	/// size and location will stay the same.
 	///
 	/// If you would like to place a view behind your current view instead,
 	/// you can use the `background(_:alignment:)` function.
+    ///
+    /// ```
+    /// struct OverlayView: View {
+    ///     var body: some View {
+    ///         Text("I'm covered by clouds")
+    ///             .overlay(Text("🌤⛅️☁️🌦"))
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameters:
 	///   - overlay: The view to place in front.
@@ -23126,27 +23523,47 @@ extension View {
     @inlinable public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View { }
 
 
-    /// Adds a border to this view with the specified style and width.
+    /// A view modifier that adds a border to the view with the specified style and width.
     ///
     /// Use `border(_:width:)` to draw a border of a specified width around the
     /// view's frame. By default, the border appears inside the bounds of this
     /// view. In this example, the four-point wide border covers the text:
     ///
-    ///     Text("Purple border inside the view bounds")
-    ///         .border(Color.purple, width: 4)
-    ///
-    /// ![A screenshot showing showing border styles and thickness around a
-    /// view.](SwiftUI-View-border-1.png)
+    /// ```
+    /// struct BorderView: View {
+    ///     var body: some View {
+    ///         Text("Purple border inside the view bounds")
+    ///             .border(Color.purple, width: 4)
+    ///     }
+    /// }
+    /// ```
     ///
     /// To place a border around the outside of this view, apply padding of the
     /// same width before adding the border:
     ///
-    ///     Text("Purple border outside the view bounds.")
-    ///         .padding(4)
-    ///         .border(Color.purple, width: 4)
+    /// ```
+    /// struct PaddedBorderView {
+    ///     var body: some View {
+    ///         Text("Purple border outside the view bounds.")
+    ///             .padding(4)
+    ///             .border(Color.purple, width: 4)
+    ///     }
+    /// }
+    /// ```
     ///
-    /// ![A screenshot showing showing padded border styles and
-    /// thickness.](SwiftUI-View-border-2.png)
+    /// A border doesn't have to be a plain color - it can be any ``ShapeStyle``, for example,
+    /// a ``LinearGradient``:
+    ///
+    /// ```
+    /// struct GradientBorderView {
+    ///     var body: some View {
+    ///         Text("Gradient border.")
+    ///             .border(LinearGradient(gradient: Gradient(color: [.purple, .pink]),
+    ///                                    startPoint: .top,
+    ///                                    endPoint: .bottom), width: 4)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - content: The border style.
@@ -23162,25 +23579,26 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Constrains this view's dimensions to the specified aspect ratio.
+    /// A view modifier that constrains this view's dimensions to the specified aspect ratio.
     ///
     /// Use `aspectRatio(_:contentMode:)` to constrain a view's dimensions to an
-    /// aspect ratio specified by a
-    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGFloat> using the specified
-    /// content mode.
+    /// aspect ratio specified by a [CGFloat](https://developer.apple.com/documentation/coregraphics/cgfloat)
+    /// using the specified content mode.
     ///
     /// If this view is resizable, the resulting view will have `aspectRatio` as
     /// its aspect ratio. In this example, the purple ellipse has a 3:4
     /// width-to-height ratio, and scales to fit its frame:
     ///
-    ///     Ellipse()
-    ///         .fill(Color.purple)
-    ///         .aspectRatio(0.75, contentMode: .fit)
-    ///         .frame(width: 200, height: 200)
-    ///         .border(Color(white: 0.75))
-    ///
-    /// ![A view showing a purple ellipse that has a 3:4 width-to-height ratio,
-    /// and scales to fit its frame.](SwiftUI-View-aspectRatio-cgfloat.png)
+    /// ```
+    /// struct EllipseView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .fill(Color.purple)
+    ///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// ```
     ///
     /// - Parameters:
     ///   - aspectRatio: The ratio of width to height to use for the resulting
@@ -23194,24 +23612,25 @@ extension View {
     @inlinable public func aspectRatio(_ aspectRatio: CGFloat? = nil, contentMode: ContentMode) -> some View { }
 
 
-    /// Constrains this view's dimensions to the aspect ratio of the given size.
+    /// A view modifier that constrains this view's dimensions to the aspect ratio of the given size.
     ///
     /// Use `aspectRatio(_:contentMode:)` to contstrain a view's dimentsions to
-    /// an aspect ratio specified by a
-    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGSize>.
+    /// an aspect ratio specified by a [CGSize](https://developer.apple.com/documentation/coregraphics/cgsize).
     ///
     /// If this view is resizable, the resulting view uses `aspectRatio` as its
     /// own aspect ratio. In this example, the purple ellipse has a 3:4
     /// width-to-height ratio, and scales to fill its frame:
     ///
-    ///     Ellipse()
-    ///         .fill(Color.purple)
-    ///         .aspectRatio(CGSize(width: 3, height: 4), contentMode: .fill)
-    ///         .frame(width: 200, height: 200)
-    ///         .border(Color(white: 0.75))
-    ///
-    /// ![A view showing a purple ellipse that has a 3:4 width-to-height ratio,
-    /// and scales to fill its frame.](SwiftUI-View-aspectRatio.png)
+    /// ```
+    /// struct EllipseView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .fill(Color.purple)
+    ///             .aspectRatio(CGSize(width: 3, height: 4), contentMode: .fill)
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// ```
     ///
     /// - Parameters:
     ///   - aspectRatio: A size that specifies the ratio of width to height to
@@ -23224,19 +23643,22 @@ extension View {
     @inlinable public func aspectRatio(_ aspectRatio: CGSize, contentMode: ContentMode) -> some View { }
 
 
-    /// Scales this view to fit its parent.
+    /// A view modifier that scales this view to fit its parent.
     ///
     /// Use `scaledToFit()` to scale this view to fit its parent, while
     /// maintaining the view's aspect ratio as the view scales.
     ///
-    ///     Circle()
-    ///         .fill(Color.pink)
-    ///         .scaledToFit()
-    ///         .frame(width: 300, height: 150)
-    ///         .border(Color(white: 0.75))
-    ///
-    /// ![A screenshot of pink circle scaled to fit its
-    /// frame.](SwiftUI-View-scaledToFit-1.png)
+    /// ```
+    /// struct FitView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .fill(Color.pink)
+    ///             .scaledToFit()
+    ///             .frame(width: 300, height: 150)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// }
+    /// ```
     ///
     /// This method is equivalent to calling
     /// `View/aspectRatio(_:contentMode:)-5ehx6` with a `nil` aspectRatio and
@@ -23247,19 +23669,22 @@ extension View {
     @inlinable public func scaledToFit() -> some View { }
 
 
-    /// Scales this view to fill its parent.
+    /// A view modifier that scales this view to fill its parent.
     ///
     /// Use `scaledToFill()` to scale this view to fill its parent, while
     /// maintaining the view's aspect ratio as the view scales:
     ///
-    ///     Circle()
-    ///         .fill(Color.pink)
-    ///         .scaledToFill()
-    ///         .frame(width: 300, height: 150)
-    ///         .border(Color(white: 0.75))
-    ///
-    /// ![A screenshot of pink circle scaled to fill its
-    /// frame.](SwiftUI-View-scaledToFill-1.png)
+    /// ```
+    /// struct FillView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .fill(Color.pink)
+    ///             .scaledToFill()
+    ///             .frame(width: 300, height: 150)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// }
+    /// ```
     ///
     /// This method is equivalent to calling
     /// `View/aspectRatio(_:contentMode:)-5ehx6` with a `nil` aspectRatio and
@@ -23274,7 +23699,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Fixes this view at its ideal size in the specified dimensions.
+    /// A view modifier that fixes this view at its ideal size in the specified dimensions.
     ///
     /// This function behaves like `View/fixedSize()`, except with
     /// `fixedSize(horizontal:vertical:)` the fixing of the axes can be
@@ -23283,16 +23708,19 @@ extension View {
     /// you're telling the text view to maintain its ideal _width_. The view
     /// calculates this to be the space needed to represent the entire string.
     ///
-    ///     Text("A single line of text, too long to fit in a box.")
-    ///         .fixedSize(horizontal: true, vertical: false)
-    ///         .frame(width: 200, height: 200)
-    ///         .border(Color.gray)
+    /// ```
+    /// struct FixedSizeView: View {
+    ///     var body: some View {
+    ///         Text("A single line of text, too long to fit in a box.")
+    ///             .fixedSize(horizontal: true, vertical: false)
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
-    ///
-    /// ![A screenshot showing a text view exceeding the bounds of its
-    /// parent.](SwiftUI-View-fixedSize-3.png)
     ///
     /// - Parameters:
     ///   - horizontal: A Boolean value that indicates whether to fix the width
@@ -23305,7 +23733,7 @@ extension View {
     @inlinable public func fixedSize(horizontal: Bool, vertical: Bool) -> some View { }
 
 
-    /// Fixes this view at its ideal size.
+    /// A view modifier that fixes this view at its ideal size.
     ///
     /// During the layout of the view hierarchy, each view proposes a size to
     /// each child view it contains. If the child view doesn't need a fixed size
@@ -23314,26 +23742,32 @@ extension View {
     /// For example, a `Text` view placed in an explicitly sized frame wraps
     /// and truncates its string to remain within its parent's bounds:
     ///
-    ///     Text("A single line of text, too long to fit in a box.")
-    ///         .frame(width: 200, height: 200)
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing the text in a text view contained within its
-    /// parent.](SwiftUI-View-fixedSize-1.png)
+    /// ```
+    /// struct FixedSizeView: View {
+    ///     var body: some View {
+    ///         Text("A single line of text, too long to fit in a box.")
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// The `fixedSize()` modifier can be used to create a view that maintains
     /// the *ideal size* of its children both dimensions:
     ///
-    ///     Text("A single line of text, too long to fit in a box.")
-    ///         .fixedSize()
-    ///         .frame(width: 200, height: 200)
-    ///         .border(Color.gray)
+    /// ```
+    /// struct FixedSizeView: View {
+    ///     var body: some View {
+    ///         Text("A single line of text, too long to fit in a box.")
+    ///             .fixedSize()
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
-    ///
-    /// ![A screenshot showing a text view exceeding the bounds of its
-    /// parent.](SwiftUI-View-fixedSize-2.png)
     ///
     /// You can think of `fixedSize()` as the creation of a *counter proposal*
     /// to the view size proposed to a view by its parent. The ideal size of a
@@ -23351,7 +23785,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the color of the foreground elements displayed by this view.
+    /// A view modifier that sets the color of the foreground elements displayed by this view.
     ///
     /// - Parameter color: The foreground color to use when displaying this
     ///   view. Pass `nil` to remove any custom foreground color and to allow
@@ -23464,8 +23898,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Offset this view by the horizontal and vertical amount specified in the
-    /// offset parameter.
+    /// A view modifier that translates this view horizontally and vertically by a CGSize.
     ///
     /// Use `offset(_:)` to to shift the displayed contents by the amount
     /// specified in the `offset` parameter.
@@ -23474,13 +23907,16 @@ extension View {
     /// contents; in the example below the gray border drawn by this view
     /// surrounds the original position of the text:
     ///
-    ///     Text("Offset by passing CGSize()")
-    ///         .border(Color.green)
-    ///         .offset(CGSize(width: 20, height: 25))
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing a view that offset from its original position a
-    /// CGPoint to specify the x and y offset.](SwiftUI-View-offset.png)
+    /// ```
+    /// struct OffsetView: View {
+    ///     var body: some View {
+    ///         Text("Offset by passing CGSize()")
+    ///             .border(Color.green)
+    ///             .offset(CGSize(width: 20, height: 25))
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter offset: The distance to offset this view.
     ///
@@ -23488,7 +23924,7 @@ extension View {
     @inlinable public func offset(_ offset: CGSize) -> some View { }
 
 
-    /// Offset this view by the specified horizontal and vertical distances.
+    /// A view modifier this view by the specified horizontal and vertical CGFloats.
     ///
     /// Use `offset(x:y:)` to to shift the displayed contents by the amount
     /// specified in the `x` and `y` parameters.
@@ -23497,13 +23933,16 @@ extension View {
     /// contents; in the example below the gray border drawn by this view
     /// surrounds the original position of the text:
     ///
-    ///     Text("Offset by passing horizontal & vertical distance")
-    ///         .border(Color.green)
-    ///         .offset(x: 20, y: 50)
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing a view that offset from its original position
-    /// using and x and y offset.](swiftui-offset-xy.png)
+    /// ```
+    /// struct OffsetView: View {
+    ///     var body: some View {
+    ///         Text("Offset by passing horizontal & vertical distance")
+    ///             .border(Color.green)
+    ///             .offset(x: 20, y: 50)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - x: The horizontal distance to offset this view.
@@ -23605,17 +24044,23 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Positions the center of this view at the specified point in its parent's
+    /// A view modifier that positions the center of this view at the specified point in its parent's
     /// coordinate space.
     ///
     /// Use the `position(_:)` modifier to place the center of a view at a
-    /// specific coordinate in the parent view using a
-    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGPoint> to specify the `x`
+    /// specific coordinate in the parent view using a [CGPoint](https://developer.apple.com/documentation/coregraphics/cgpoint)
+    /// to specify the `x`
     /// and `y` offset.
     ///
-    ///     Text("Position by passing a CGPoint()")
-    ///         .position(CGPoint(x: 175, y: 100))
-    ///         .border(Color.gray)
+    /// ```
+    /// struct PositionView: View {
+    ///     var body: some View {
+    ///         Text("Position by passing a CGPoint()")
+    ///             .position(CGPoint(x: 175, y: 100))
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter position: The point at which to place the center of this
     ///   view.
@@ -23624,15 +24069,21 @@ extension View {
     @inlinable public func position(_ position: CGPoint) -> some View { }
 
 
-    /// Positions the center of this view at the specified coordinates in its
+    /// A view modifier that positions the center of this view at the specified coordinates in its
     /// parent's coordinate space.
     ///
     /// Use the `position(x:y:)` modifier to place the center of a view at a
     /// specific coordinate in the parent view using an `x` and `y` offset.
     ///
-    ///     Text("Position by passing the x and y coordinates")
-    ///         .position(x: 175, y: 100)
-    ///         .border(Color.gray)
+    /// ```
+    /// struct PositionView: View {
+    ///     var body: some View {
+    ///         Text("Position by passing the x and y coordinates")
+    ///             .position(x: 175, y: 100)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - x: The x-coordinate at which to place the center of this view.
@@ -23650,7 +24101,8 @@ extension View {
 extension View {
 
     /// Changes the view's proposed area to extend outside the screen's safe
-    /// areas.
+    ///
+    /// **DEPRECATED**: use ``View/ignoresSafeArea(_:edges:)`` instead.
     ///
     /// Use `edgesIgnoringSafeArea(_:)` to change the area proposed for this
     /// view so that — were the proposal accepted — this view could extend
@@ -23690,7 +24142,35 @@ extension View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension View {
 
-    /// Expands the view out of its safe area.
+    /// A view modifier that expands the view out of its safe area.
+    ///
+    /// Use this modifier to extend your content beyond the safe area.
+    ///
+    /// There are two parameters: the safe area regions to ignore, and the edges that
+    /// you would like to ignore those safe areas.
+    ///
+    /// The first parameter is of type ``SafeAreaRegions``. The options are:
+    /// - `.container`: The navigation bar and bottom bar on iPhone X+.
+    /// - `.keyboard`: The software keyboard area.
+    /// - `.all`: All safe areas
+    ///
+    /// The second parameter has edge options:
+    /// - `.leading`
+    /// - `.trailing`
+    /// - `.top`
+    /// - `.bottom`
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere")
+    ///         }
+    ///         .ignoresSafeArea(.all, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - regions: the kinds of rectangles removed from the safe area
@@ -23709,7 +24189,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the environment value of the specified key path to the given value.
+    /// A view modifier that sets the environment value of the specified key path to the given value.
     ///
     /// Use this modifier to set one of the writable properties of the
     /// `EnvironmentValues` structure, including custom values that you
@@ -23756,7 +24236,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Controls the display order of overlapping views.
+    /// A view modifier that controls the display order of overlapping views.
     ///
     /// Use `zIndex(_:)` when you want to control the front-to-back ordering of
     /// views.
@@ -23764,22 +24244,25 @@ extension View {
     /// In this example there are two overlapping rotated rectangles. The
     /// frontmost is represented by the larger index value.
     ///
-    ///     VStack {
-    ///         Rectangle()
-    ///             .fill(Color.yellow)
-    ///             .frame(width: 100, height: 100, alignment: .center)
-    ///             .zIndex(1) // Top layer.
+    /// ```
+    /// struct ZIndexView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .fill(Color.yellow)
+    ///                 .frame(width: 100, height: 100, alignment: .center)
+    ///                 .zIndex(1) // Top layer.
     ///
-    ///         Rectangle()
-    ///             .fill(Color.red)
-    ///             .frame(width: 100, height: 100, alignment: .center)
-    ///             .rotationEffect(.degrees(45))
-    ///             // Here a zIndex of 0 is the default making
-    ///             // this the bottom layer.
+    ///             Rectangle()
+    ///                 .fill(Color.red)
+    ///                 .frame(width: 100, height: 100, alignment: .center)
+    ///                 .rotationEffect(.degrees(45))
+    ///                 // Here a zIndex of 0 is the default making
+    ///                 // this the bottom layer.
+    ///         }
     ///     }
-    ///
-    /// ![A screenshot showing two overlapping rectangles. The frontmost view is
-    /// represented by the larger zIndex value.](SwiftUI-View-zIndex.png)
+    /// }
+    /// ```
     ///
     /// - Parameter value: A relative front-to-back ordering for this view; the
     ///   default is `0`.
@@ -23790,34 +24273,70 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Applies an affine transformation to this view's rendered output.
+    /// A view modifier that applies an affine transformation to this view's rendered output.
     ///
     /// Use `transformEffect(_:)` to rotate, scale, translate, or skew the
     /// output of the view according to the provided
-    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGAffineTransform>.
+    /// [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
     ///
     /// In the example below, the text is rotated at -30˚ on the `y` axis.
     ///
+    /// ```
+    /// struct TransformView: View {
     ///     let transform = CGAffineTransform(rotationAngle: -30 * (.pi / 180))
     ///
-    ///     Text("Projection effect using transforms")
-    ///         .transformEffect(transform)
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot of a view showing text that is rotated at -30 degrees on
-    /// the y axis.](SwiftUI-View-transformEffect.png)
+    ///     var body: some View {
+    ///         Text("Projection effect using transforms")
+    ///             .transformEffect(transform)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter transform: A
-    /// <doc://com.apple.documentation/documentation/CoreGraphics/CGAffineTransform> to
-    /// apply to the view.
+    /// [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
     @inlinable public func transformEffect(_ transform: CGAffineTransform) -> some View { }
 
 }
 
 extension View {
 
-    /// Presents an action sheet using the given item as a data source for the
-    /// sheet's content.
+    /// A view modifier that presents an action sheet that is passed a value.
+    ///
+    /// Use this modifier when your action sheet needs a passed value.
+    /// The action will show when the value is not `nil`, and will set the
+    /// value back to `nil` when it's dismissed.
+    ///
+    ///
+    /// For more info on how to build an action sheet, check out ``ActionSheet``.
+    /// To learn about action sheet's different buttons, see ``ActionSheet/Button``.
+    ///
+    /// ```
+    /// struct Emoji: Identifiable {
+    ///     let id = UUID()
+    ///     let name: String
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     @State private var selection: Emoji?
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Button("Eat 🍌") { selection = Emoji(name: "🍌") }
+    ///             Button("Eat 🍑") { selection = Emoji(name: "🍑") }
+    ///         }
+    ///         .actionSheet(item: $selection) { selection in
+    ///             let confirm = ActionSheet.Button.default(Text("Confirm \(selection.name)") { /*action here*/ }
+    ///             let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /*action here*/ }
+    ///             let buttons = [save, cancel]
+    ///
+    ///             return ActionSheet(title: Text("Food alert!"),
+    ///                                message: Text("You have made a selection"),
+    ///                                buttons: buttons)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the action
@@ -23831,7 +24350,29 @@ extension View {
     public func actionSheet<T>(item: Binding<T?>, content: (T) -> ActionSheet) -> some View where T : Identifiable { }
 
 
-    /// Presents an action sheet when a given condition is true.
+    /// A view modifier that presents an action sheet when a given condition is true.
+    ///
+    /// For more info on how to build an action sheet, check out ``ActionSheet``.
+    /// To learn about action sheet's different buttons, see ``ActionSheet/Button``.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State private var showActionSheet = false
+    ///
+    ///     var body: some View {
+    ///         Button("Eat 🍌") { showActionSheet = true }
+    ///             .actionSheet(isPresented: $showActionSheet) {
+    ///                 let confirm = ActionSheet.Button.default(Text("Confirm") { /*action here*/ }
+    ///                 let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /*action here*/ }
+    ///                 let buttons = [save, cancel]
+    ///
+    ///                 return ActionSheet(title: Text("Food alert!"),
+    ///                                message: Text("You have made a selection"),
+    ///                                buttons: buttons)
+    ///             }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the action sheet should be
@@ -23846,7 +24387,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the accent color for this view and the views it contains.
+    /// A view modifier that sets the accent color for this view and the views it contains.
     ///
     /// Use `accentColor(_:)` when you want to apply a broad theme color to
     /// your app's user interface. Some styles of controls use the accent color
@@ -23861,28 +24402,30 @@ extension View {
     /// accent color of their containing view. Note that the `Text` element
     /// used as a label alongside the `Slider` retains its default color.
     ///
-    ///     VStack {
-    ///         VStack {
-    ///             Button(action: {}) {
-    ///                 Text("Regular Button")
-    ///             }
-    ///         }.padding()
-    ///         VStack {
-    ///             Button(action: {}) {
-    ///                 Text("Accented Button")
-    ///             }
-    ///             HStack {
-    ///                 Text("Accented Slider")
-    ///                 Slider(value: $sliderValue, in: -100...100, step: 0.1)
-    ///             }
-    ///         }.accentColor(.purple)
-    ///     }
+    /// ```
+    /// struct AccentColorView: View {
+    ///     @State var sliderValue = 0.5
     ///
-    /// ![A VStack showing two child views: one VStack containing a default
-    /// accented button, and a second VStack where the VStack has a purple
-    /// accent color applied. The accent color modifies the enclosed button and
-    /// slider, but not the color of a Text item used as a label for the
-    /// slider.](SwiftUI-View-accentColor.png)
+    ///     var body: some View {
+    ///         VStack {
+    ///             VStack {
+    ///                 Button(action: { }) {
+    ///                     Text("Regular Button")
+    ///                 }
+    ///             }
+    ///             VStack {
+    ///                 Button(action: { }) {
+    ///                     Text("Accented Button")
+    ///                 }
+    ///                 Slider(value: $sliderValue) {
+    ///                     Text("Accented Slider")
+    ///                 }
+    ///             }
+    ///             .accentColor(.purple)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
@@ -23894,18 +24437,17 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a condition that controls whether users can interact with this
+    /// A view modifier that adds a condition that controls whether users can interact with this
     /// view.
     ///
-    /// The higher views in a view hierarchy can override the value you set on
-    /// this view. In the following example, the button isn't interactive
-    /// because the outer `disabled(_:)` modifier overrides the inner one:
-    ///
-    ///     HStack {
-    ///         Button(Text("Press")) {}
-    ///         .disabled(false)
+    /// ```
+    /// struct CantTouchThisView: View {
+    ///     var body: some View {
+    ///         Button(Text("Can't touch this 🎶")) { }
+    ///             .disabled(false)
     ///     }
-    ///     .disabled(true)
+    /// }
+    /// ```
     ///
     /// - Parameter disabled: A Boolean value that determines whether users can
     ///   interact with this view.
@@ -23919,18 +24461,21 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Rotates this view's rendered output around the specified point.
+    /// A view modifier that rotates this view's rendered output around the specified point.
     ///
     /// Use `rotationEffect(_:anchor:)` to rotate the view by a specific amount.
     ///
     /// In the example below, the text is rotated by 22˚.
     ///
-    ///     Text("Rotation by passing an angle in degrees")
-    ///         .rotationEffect(.degrees(22))
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing rotation effect rotating the text 22 degrees with
-    /// respect to its view.](SwiftUI-View-rotationEffect.png)
+    /// ```
+    /// struct RotationView: View {
+    ///     var body: some View {
+    ///         Text("Rotation by passing an angle in degrees")
+    ///             .rotationEffect(.degrees(22))
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
@@ -23943,24 +24488,27 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Scales this view's rendered output by the given vertical and horizontal
+    /// A view modifier that scales this view's rendered output by the given vertical and horizontal
     /// size amounts, relative to an anchor point.
     ///
     /// Use `scaleEffect(_:anchor:)` to scale a view by applying a scaling
     /// transform of a specific size, specified by `scale`.
     ///
-    ///     Image(systemName: "envelope.badge.fill")
-    ///         .resizable()
-    ///         .frame(width: 100, height: 100, alignment: .center)
-    ///         .foregroundColor(Color.red)
-    ///         .scaleEffect(CGSize(x: 0.9, y: 1.3), anchor: .leading)
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing a red envelope scaled to a size of 90x130
-    /// pixels.](SwiftUI-View-scaleEffect.png)
+    /// ```
+    /// struct ScaleView: View {
+    ///     var body: some View {
+    ///         Image(systemName: "envelope.badge.fill")
+    ///             .resizable()
+    ///             .frame(width: 100, height: 100, alignment: .center)
+    ///             .foregroundColor(Color.red)
+    ///             .scaleEffect(CGSize(x: 0.9, y: 1.3), anchor: .leading)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - scale: A <doc://com.apple.documentation/documentation/CoreGraphics/CGSize> that
+    ///   - scale: A [CGSize](https://developer.apple.com/documentation/CoreGraphics/CGSize) that
     ///     represents the horizontal and vertical amount to scale the view.
     ///   - anchor: The point with a default of `UnitPoint/center` that
     ///     defines the location within the view from which to apply the
@@ -23968,21 +24516,24 @@ extension View {
     @inlinable public func scaleEffect(_ scale: CGSize, anchor: UnitPoint = .center) -> some View { }
 
 
-    /// Scales this view's rendered output by the given amount in both the
+    /// A view modifier that this view's rendered output by the given amount in both the
     /// horizontal and vertical directions, relative to an anchor point.
     ///
     /// Use `scaleEffect(_:anchor:)` to apply a horizontally and vertically
     /// scaling transform to a view.
     ///
-    ///     Image(systemName: "envelope.badge.fill")
-    ///         .resizable()
-    ///         .frame(width: 100, height: 100, alignment: .center)
-    ///         .foregroundColor(Color.red)
-    ///         .scaleEffect(2, anchor: .leading)
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing a 100x100 pixel red envelope scaled up to 2x the
-    /// size of its view.](SwiftUI-View-scaleEffect-cgfloat.png)
+    /// ```
+    /// struct ScaleView: View {
+    ///     var body: some View {
+    ///         Image(systemName: "envelope.badge.fill")
+    ///             .resizable()
+    ///             .frame(width: 100, height: 100, alignment: .center)
+    ///             .foregroundColor(Color.red)
+    ///             .scaleEffect(2, anchor: .leading)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - s: The amount to scale the view in the view in both the horizontal
@@ -23992,21 +24543,24 @@ extension View {
     @inlinable public func scaleEffect(_ s: CGFloat, anchor: UnitPoint = .center) -> some View { }
 
 
-    /// Scales this view's rendered output by the given horizontal and vertical
+    /// A view modifier that scales this view's rendered output by the given horizontal and vertical
     /// amounts, relative to an anchor point.
     ///
     /// Use `scaleEffect(x:y:anchor:)` to apply a scaling transform to a view by
     /// a specific horizontal and vertical amount.
     ///
-    ///     Image(systemName: "envelope.badge.fill")
-    ///         .resizable()
-    ///         .frame(width: 100, height: 100, alignment: .center)
-    ///         .foregroundColor(Color.red)
-    ///         .scaleEffect(x: 0.5, y: 0.5, anchor: .bottomTrailing)
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing a 100x100 pixel red envelope scaled down 50% in
-    /// both the x and y axes.](SwiftUI-View-scaleEffect-xy.png)
+    /// ```
+    /// struct ScaleView: View {
+    ///     var body: some View {
+    ///         Image(systemName: "envelope.badge.fill")
+    ///             .resizable()
+    ///             .frame(width: 100, height: 100, alignment: .center)
+    ///             .foregroundColor(Color.red)
+    ///             .scaleEffect(x: 0.5, y: 0.5, anchor: .bottomTrailing)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - x: An amount that represents the horizontal amount to scale the
@@ -24022,7 +24576,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Applies a Gaussian blur to this view.
+    /// A view modifier that applies a Gaussian blur to this view.
     ///
     /// Use `blur(radius:opaque:)` to apply a gaussian blur effect to the
     /// rendering of this view.
@@ -24032,19 +24586,15 @@ extension View {
     /// `radius` set to `2`. The larger the radius, the more diffuse the
     /// effect.
     ///
-    ///     struct Blur: View {
+    ///     struct BlurView: View {
     ///         var body: some View {
     ///             VStack {
     ///                 Text("This is some text.")
-    ///                     .padding()
     ///                 Text("This is some blurry text.")
     ///                     .blur(radius: 2.0)
     ///             }
     ///         }
     ///     }
-    ///
-    /// ![A screenshot showing the effect of applying gaussian blur effect to
-    /// the rendering of a view.](SwiftUI-View-blurRadius.png)
     ///
     /// - Parameters:
     ///   - radius: The radial size of the blur. A blur is more diffuse when its
@@ -24059,13 +24609,13 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Brightens this view by the specified amount.
+    /// A view modifier that brightens this view by the specified amount.
     ///
     /// Use `brightness(_:)` to brighten the intensity of the colors in a view.
     /// The example below shows a series of red squares, with their brightness
     /// increasing from 0 (fully red) to 100% (white) in 20% increments.
     ///
-    ///     struct Brightness: View {
+    ///     struct BrightnessView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 ForEach(0..<6) {
@@ -24079,9 +24629,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Rendering showing the effects of brightness adjustments in 20%
-    /// increments from fully-red to white.](SwiftUI-View-brightness.png)
-    ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
     ///
@@ -24093,7 +24640,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Inverts the colors in this view.
+    /// A view modifier that inverts the colors in this view.
     ///
     /// The `colorInvert()` modifier inverts all of the colors in a view so that
     /// each color displays as its complementary color. For example, blue
@@ -24135,10 +24682,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Two red squares with centered green circles with one showing the
-    /// effect of color inversion, which yields teal and purple replacing the
-    /// red and green colors.](SwiftUI-View-colorInvert.png)
-    ///
     /// - Returns: A view that inverts its colors.
     @inlinable public func colorInvert() -> some View { }
 
@@ -24147,7 +24690,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a color multiplication effect to this view.
+    /// A view modifier that adds a color multiplication effect to this view.
     ///
     /// The following example shows two versions of the same image side by side;
     /// at left is the original, and at right is a duplicate with the
@@ -24185,9 +24728,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![A screenshot showing two images showing the effect of multiplying the
-    /// colors of an image with another color.](SwiftUI-View-colorMultiply.png)
-    ///
     /// - Parameter color: The color to bias this view toward.
     ///
     /// - Returns: A view with a color multiplication effect.
@@ -24198,7 +24738,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the contrast and separation between similar colors in this view.
+    /// A view modifier that sets the contrast and separation between similar colors in this view.
     ///
     /// Apply contrast to a view to increase or decrease the separation between
     /// similar colors in the view.
@@ -24237,9 +24777,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Demonstration of the effect of contrast on a view applying contrast
-    /// values from -20% to 100% contrast.](SwiftUI-View-contrast.png)
-    ///
     /// - Parameter amount: The intensity of color contrast to apply. negative
     ///   values invert colors in addition to applying contrast.
     ///
@@ -24251,7 +24788,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a grayscale effect to this view.
+    /// A view modifier that adds a grayscale effect to this view.
     ///
     /// A grayscale effect reduces the intensity of colors in this view.
     ///
@@ -24273,10 +24810,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Rendering showing the effects of grayscale adjustments in
-    /// approximately 20% increments from fully-red at 0% to fully desaturated
-    /// at 99%.](SwiftUI-View-grayscale.png)
-    ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
     ///   1.0 are less colorful.
@@ -24289,7 +24822,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Applies a hue rotation effect to this view.
+    /// A view modiffier that applies a hue rotation effect to this view.
     ///
     /// Use hue rotation effect to shift all of the colors in a view according
     /// to the angle you specify.
@@ -24313,9 +24846,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Shows the effect of hueRotation on a linear
-    /// gradient.](SwiftUI-hueRotation.png)
-    ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
     ///
@@ -24327,7 +24857,7 @@ extension View {
 @available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the preferred color scheme for this presentation.
+    /// A view modifier that sets the preferred color scheme for this presentation.
     ///
     /// The color scheme applies to the nearest enclosing presentation, such as
     /// a popover or window. Views may read the color scheme using the
@@ -24336,15 +24866,20 @@ extension View {
     /// In the example below the presentation containing the `VStack` has its
     /// color scheme set to `ColorScheme/dark`:
     ///
+    /// ```
+    /// struct DarkView: View {
     ///     VStack {
-    ///         Button(action: {}) {
+    ///         Button(action: { }) {
     ///             Text(" Button")
     ///         }
     ///         HStack {
-    ///             Text(" Slider").accentColor(Color.green)
+    ///             Text("Slider").accentColor(Color.green)
     ///             Slider(value: $sliderValue, in: -100...100, step: 0.1)
     ///         }
-    ///     }.preferredColorScheme(.dark)
+    ///     }
+    ///     .preferredColorScheme(.dark)
+    /// }
+    /// ```
     ///
     /// - Parameter colorScheme: The color scheme for this view.
     ///
@@ -24356,7 +24891,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a luminance to alpha effect to this view.
+    /// A view modifier that adds a luminance to alpha effect to this view.
     ///
     /// The `luminanceToAlpha()` modifier creates a semitransparent mask out of
     /// the view to which you you apply. The dark regions in a view become
@@ -24391,12 +24926,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![The example below shows two views: the first is a red square with an
-    /// overlaid green circle; the second is a copy of the first view with where
-    /// the luminanceToAlpha() modifier transforms the view's brightness levels
-    /// into an equivalent grayscale version of the
-    /// view.](SwiftUI-luminanceToAlpha.png)
-    ///
     /// - Returns: A view that applies a luminance to alpha effect to this view.
     @inlinable public func luminanceToAlpha() -> some View { }
 
@@ -24405,7 +24934,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adjusts the color saturation of this view.
+    /// A view modifier that adjusts the color saturation of this view.
     ///
     /// Use color saturation to increase or decrease the intensity of colors in
     /// a view.
@@ -24413,7 +24942,7 @@ extension View {
     /// The example below shows a series of red squares with their saturation
     /// increasing from 0 (gray) to 100% (fully-red) in 20% increments:
     ///
-    ///     struct Saturation: View {
+    ///     struct SaturationView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 ForEach(0..<6) {
@@ -24427,11 +24956,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Rendering showing the effects of saturation adjustments in 20%
-    /// increments from gray at 0% to fully-red at
-    /// 100%.](SwiftUI-View-saturation.png)
-    ///
-    /// - SeeAlso: `contrast(_:)`
+    /// - SeeAlso: `View/contrast(_:)`
     /// - Parameter amount: The amount of saturation to apply to this view.
     ///
     /// - Returns: A view that adjusts the saturation of this view.
@@ -24442,7 +24967,52 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Associates a transition with the view.
+    /// A view modifier that adds a transition to this view when it appears and disappears.
+    ///
+    /// Use this modifier to apply an effect to a view, such as a fade, scale, or slide
+    /// when the view appears and disappears from the screen.
+    ///
+    /// The transition is only one part of the equation - a timer curve (animation)
+    /// must also be specified. There are two ways to specify the associated animation:
+    /// 1. With ``View/animation(_:)``.
+    /// 2. Explicitly, using ``withAnimation(_:_:)``.
+    ///
+    /// See ``AnyTransition`` for more on how to create a transition.
+    ///
+    /// ### Using animation(_:)
+    ///
+    /// ```
+    /// struct ImplicitTransitionView: View {
+    ///     @State var showBanana = false
+    ///
+    ///     var body: some View {
+    ///         Button("Toggle") { show.toggle() }
+    ///         if showBanana {
+    ///             Text("🍌")
+    ///                 .animation(.easeInOut)
+    ///                 .transition(.slide)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using withAnimation(_:_:)
+    ///
+    /// ```
+    /// struct ExplicitTransitionView: View {
+    ///     @State var showBanana = false
+    ///
+    ///     var body: some View {
+    ///         Button("Toggle") {
+    ///             withAnimation(.easeInOut) { show.toggle() }
+    ///         }
+    ///         if showBanana {
+    ///             Text("🍌")
+    ///                 .transition(.slide)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public func transition(_ t: AnyTransition) -> some View { }
 
 }
@@ -24450,7 +25020,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the transparency of this view.
+    /// A view modivier that sets the transparency of this view.
     ///
     /// Apply opacity to reveal views that are behind another view or to
     /// de-emphasize a view.
@@ -24463,7 +25033,7 @@ extension View {
     /// The top yellow rectangle has its opacity set to 50%, allowing the
     /// occluded portion of the bottom rectangle to be visible:
     ///
-    ///     struct Opacity: View {
+    ///     struct OpacityView: View {
     ///         var body: some View {
     ///             VStack {
     ///                 Color.yellow.frame(width: 100, height: 100, alignment: .center)
@@ -24476,10 +25046,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Two overlaid rectangles, where the topmost has its opacity set to 50%,
-    /// which allows the occluded portion of the bottom rectangle to be
-    /// visible.](SwiftUI-View-opacity.png)
-    ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
     ///
@@ -24491,7 +25057,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Applies the given animation to this view when the specified value
+    /// A view modifier that applies the given animation to this view when the specified value
     /// changes.
     ///
     /// - Parameters:
