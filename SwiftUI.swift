@@ -14708,8 +14708,182 @@ public protocol NavigationViewStyle{ }
 extension NavigationViewStyle {
 }
 
-/// A property wrapper type that subscribes to an observable object and
-/// invalidates a view whenever the observable object changes.
+/// A SwiftUI property wrapper that subscribes to an observable object.
+///
+/// - Like `@StateObject`, this type subscribes to the observable object and invalidates a view whenever the observable object changes.
+/// - Unlike `@StateObject,` `@ObservedObject` does not persist the object in state. Objects are only *assigned* to `@ObservedObject`, they should be initialized and persistent by an ancestor view.
+///
+/// ### Usage
+///
+/// In the following example, an observable object is assigned to an `@ObservedObject` variable:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
+/// struct ExampleView: View {
+///     @ObservedObject var appModel = AppModel.shared
+///
+///     var body: some View {
+///         VStack {
+///             Text(appModel.fruitName)
+///
+///             Button("Change Text") {
+///                 appModel.fruitName = "Banana"
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In the example above, `ExampleView` will update its displayed text to "Banana" when the button labeled "Change Text" is pressed. This is because `ExampleView` has subscribed to `AppModel.shared` via the `@ObservedObject` `appModel` variable.
+///
+/// Whenever the object referenced by `appModel` (which is `AppModel.shared` in this case) emits a change, `ExampleView` will be invalidated and redrawn.
+///
+/// ### Creating bindings
+///
+/// Just like `@State`, `@EnvironmentObject` and `@StateObject`, `@ObservedObject` allows you to create a `Binding` to an object using the `$` prefix syntax.
+///
+/// For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
+/// struct ExampleView: View {
+///     @ObservedObject var appModel = AppModel.shared
+///
+///     var body: some View {
+///         TextField("Enter fruit name", text: $appModel.fruitName)
+///     }
+/// }
+/// ```
+///
+/// In this example, a two-way connection is established between `appModel.fruitName` and `TextField`, by using the `$` prefix to create a `Binding<String>`. This allows `TextField` to update the `fruitName` variable when the user enters text, and also to update its own displayed text if `fruitName` is changed programmatically.
+///
+/// ### Passing an observable object to a child view using `@ObservedObject`
+///
+/// Pass an observable object like you would pass any other variable down to a child view. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     struct ChildView: View {
+///         @ObservedObject var appModel: AppModel
+///
+///         var body: some View {
+///             TextField("Enter fruit name", text: $appModel.fruitName)
+///         }
+///     }
+///
+///     var body: some View {
+///         ChildView(appModel: appModel)
+///     }
+/// }
+/// ```
+///
+/// It is a common pattern for a parent view to create a `@StateObject` to hold an observable object, and then to pass it down to a child using an `@ObservedObject`. `@StateObject` **owns** the object, `@ObservedObject` simply holds a reference to the object.
+///
+/// ### Comparison with `@StateObject`
+///
+/// Consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @StateObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// `ExampleView` creates a vertical stack of a `Toggle`, and a view that describes the toggle, `ToggleDescription`.
+///
+/// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Flip the toggle twice. Note that even though `ToggleDescription` is refreshed, nothing is printed further.
+///
+/// Now consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @ObservedObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// This example is identical to the previous example **except** for the fact that `@StateObject` has been replaced with `@ObservedObject`. Run this code now, and observe the following print again:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Now flip the toggle twice. The console will print the following:
+///
+/// ```
+/// Initialized
+/// Initialized
+/// ```
+///
+/// This highlights the fundamental difference between `@StateObject` and `@ObservedObject`.
+///
+/// -  `@StateObject` instantiates and holds the object in state.
+/// -  `@ObservedObject` is *assigned* an object, and **does not** hold it in state
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @propertyWrapper @frozen public struct ObservedObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -20074,7 +20248,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// - `changeText` is not a `mutating ` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
 /// - All modifications to a state variable **must** happen on the main thread. Modifying a state variable on a background thread may lead to undefined behavior.
-///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct State<Value> : DynamicProperty {
 
@@ -20161,7 +20334,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     @Published var foo: Bool = false
 /// }
 ///
-/// struct ContentView: View {
+/// struct ExampleView: View {
 ///     @StateObject var appModel = AppModel()
 ///
 ///     var body: some View {
@@ -20190,12 +20363,34 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// `AppModel` is only initialized once per the lifetime of the `View`, `Scene` or `App` that contains the `@StateObject`. This is made possible by the `@autoclosure` annotation, that wraps the instantiation of the app model, `AppModel()`, into a lazy expression at compile time, `{ return AppModel() }`. This allows the `@StateObject` to call it appropriately as needed, which is once per its parent's lifetime.
 ///
+/// ### Creating bindings
+///
+/// Just like `@State`, `@ObservedObject` and `@EnvironmentObject`, `@StateObject` allows you to create a `Binding` from its wrapped value type using the `$` syntax.
+///
+/// For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
+///
+///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a `Toggle` in `ChildView`. `Toggle` requires a `Binding<Bool>` to read and write whether it is on.
+///
 /// ### Comparison with `@ObservedObject`
 ///
 /// Consider the following:
 ///
 /// ```
-/// struct ContentView: View {
+/// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
 ///         init() {
 ///             print("Initialized")
@@ -20224,7 +20419,7 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// `ContentView` creates a vertical stack of a `Toggle`, and a view that describes the toggle, `ToggleDescription`.
+/// `ExampleView` creates a vertical stack of a `Toggle`, and a view that describes the toggle, `ToggleDescription`.
 ///
 /// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
 ///
@@ -20237,7 +20432,7 @@ extension State where Value : ExpressibleByNilLiteral {
 /// Now consider the following:
 ///
 /// ```
-/// struct ContentView: View {
+/// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
 ///         init() {
 ///             print("Initialized")
@@ -20288,7 +20483,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// `@StateObject` provides a great way to initialize global, application-wide models.
 ///
-/// In the following example, a `@StateObject` is instantiated in `MyApp`, and passed down to `ContentView` as an environment object.
+/// In the following example, a `@StateObject` is instantiated in `MyApp`, and passed down to `ExampleView` as an environment object.
 ///
 /// ```
 /// class AppModel: ObservableObject {
@@ -20301,13 +20496,13 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 ///     var body: some Scene {
 ///         WindowGroup {
-///             ContentView()
+///             ExampleView()
 ///                 .environmentObject(appModel)
 ///         }
 ///     }
 /// }
 ///
-/// struct ContentView: View {
+/// struct ExampleView: View {
 ///     @EnvironmentObject var appModel: AppModel
 ///
 ///     var body: some View {
@@ -31036,35 +31231,115 @@ extension WidgetConfiguration {
     var body: Self.Body { get }
 }
 
-/// A scene that presents a group of identically structured windows.
+/// `WindowGroup` is the default `Scene` type in SwiftUI.
 ///
-/// Use a `WindowGroup` as a container for a view hierarchy presented by your
-/// app. The hierarchy that you declare as the group's content serves as a
-/// template for each window that the app creates from that group:
+/// Use a `WindowGroup` to contain the SwiftUI view hierarchy of your app.
 ///
-///     @main
-///     struct Mail: App {
-///         var body: some Scene {
-///             WindowGroup {
-///                 MailViewer() // Declare a view hierarchy here.
+/// ### Usage
+///
+/// ```
+/// @main
+/// struct MyApp: SwiftUI.App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///     }
+/// }
+/// ```
+///
+/// Note:
+///
+/// - The default implementation of a `WindowGroup` allows multiple instances of the window to be created (either using ⌘N , or the "Show Tab Bar" command).
+/// - Each instance of a window created from a window group contains the same SwiftUI hierarchy, but maintains an independent state. That means if the user creates two instances of your app's window, each window will maintain its own separate (independent) state, unaffected by what the user does on another window of your app.
+///
+/// ### Adding a title to a window
+///
+/// On macOS, a window's title is usually displayed in a window's title bar. A window's title bar contains a centered text item to display the window's title.
+///
+/// Use `WindowGroup/init(_:content)` to title a window. For example:
+///
+/// ````
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup("Fruit App") {
+///             Text("Bananas")
+///         }
+///     }
+/// }
+/// ````
+///
+/// Note: The system may use the provided window title as a part of some default window command names. For example, the "New Window" command would become "New Fruit App Window".
+///
+/// ### Adding commands to a window group
+///
+/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a `WindowGroup`, use `Scene/commands(_:)`.
+///
+/// For example:
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///         .commands {
+///             CommandMenu("Some Commands") {
+///                 Text("A Command")
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// SwiftUI takes care of certain platform-specific behaviors. For example,
-/// on platforms that support it, like macOS and iPadOS, users can open more
-/// than one window from the group simultaneously. In macOS, users
-/// can gather open windows together in a tabbed interface. Also in macOS,
-/// window groups automatically provide commands for standard window
-/// management.
+/// ### Disabling creating multiple window instances
 ///
-/// Every window created from the group maintains independent state. For
-/// example, for each new window created from the group the system allocates new
-/// storage for any `State` or `StateObject` variables instantiated by the
-/// scene's view hierarchy.
+/// Currently, SwiftUI offers no canonical way to disable the user from creating multiple instances of a window from a `WindowGroup` scene. This can be done in two ways:
 ///
-/// You typically use a window group for the main interface of an app that isn't
-/// document-based. For document-based apps, use a `DocumentGroup` instead.
+/// - Using the "New Window" (⌘N) command to create a new window instance
+/// - Using the "Show Tab Bar" command, and creating a new tab containing a new window instance
+///
+/// #### Disabling the "New Window" command
+///
+/// The "New Window" (⌘N) command can be disabled by replacing the "New Item" command group with an empty command group.
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///         .commands {
+///             CommandGroup(replacing: .newItem, addition: { })
+///         }
+///     }
+/// }
+/// ```
+///
+/// Caveat: This does not currently work on macCatalyst (as of Big Sur 11.2).
+///
+/// #### Disabling the "Show Tab Bar" command
+///
+/// To disable the "Show Tab Bar" command, use `NSApplication` to iterate over your app's windows at launch and set each window's `tabbingMode` to `.disallowed`.
+///
+/// For example:
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///                 .onAppear {
+///                     NSApplication.shared.windows.forEach({ $0.tabbingMode = .disallowed })
+///                 }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct WindowGroup<Content> : Scene where Content : View {
 
