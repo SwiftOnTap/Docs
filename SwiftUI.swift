@@ -2895,7 +2895,9 @@ public struct ButtonStyleConfiguration {
     /// }
     /// ```
     @inlinable public init(style: RoundedCornerStyle = .circular) { }
-
+    
+    /// Used to describe a Capsule as a path in a `CGRect`.
+    ///
     /// A Capsule can be described as a path within a specific `CGRect` using
     /// the `Capsule/path(in:)` modifier:
     ///
@@ -2924,9 +2926,10 @@ public struct ButtonStyleConfiguration {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Capsule : InsettableShape {
 
-    /// Returns a Capsule insetted by the amount specified. For example, 
-    /// insetting by 10 points returns a Capsule that fills its container, 
-    /// with 10 points inset on all four side.
+    /// Returns a Capsule insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Capsule that fills its 
+    /// container, with 10 points inset on all four side.
     ///
     /// ![Capsule inset example](capsule-example-5.png)
     ///
@@ -2996,6 +2999,8 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
+    /// Used to describe a Circle as a path in a `CGRect`.
+    ///
     /// A Circle can be described as a path within a specific `CGRect` using the
     /// `Circle/path(in:)` modifier:
     ///
@@ -3038,9 +3043,10 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Circle : InsettableShape {
 
-    /// Returns a Circle insetted by the amount specified. For example, 
-    /// insetting by 10 points returns a Circle that fills its container, with
-    /// 10 points inset on all four side.
+    /// Returns a Circle insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Circle that fills its 
+    /// container, with 10 points inset on all four side.
     ///
     /// ![Circle inset example](Circle-example-5.png)
     ///
@@ -7184,6 +7190,8 @@ extension EditMode : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Ellipse : Shape {
 
+    /// Used to describe an Ellipse as a path in a `CGRect`.
+    ///
     /// An Ellipse can be described as a path within a specific `CGRect` using
     /// the `Ellipse/path(in:)` modifier:
     ///
@@ -7226,9 +7234,10 @@ extension EditMode : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Ellipse : InsettableShape {
 
-    /// Returns a Ellipse insetted by the amount specified. For example, 
-    /// insetting by 10 points returns a Ellipse that fills its container, 
-    /// with 10 points inset on all four side.
+    /// Returns a Ellipse insetted by the amount specified. 
+    ///
+    /// For example, insetting by 10 points returns a Ellipse that fills its 
+    /// container, with 10 points inset on all four side.
     ///
     /// ![Ellipse inset example](ellipse-example-5.png)
     ///
@@ -16289,6 +16298,8 @@ extension ProjectionTransform {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Rectangle : Shape {
 
+    /// Used to describe a Rectangle as a path in a `CGRect`.
+    ///
     /// A Rectangle can be described as a path within a specific `CGRect` using
     /// the `Rectangle/path(in:)` modifier:
     ///
@@ -16331,9 +16342,10 @@ extension ProjectionTransform {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Rectangle : InsettableShape {
 
-    /// Returns a Rectangle insetted by the amount specified. For example, 
-    /// insetting by 10 points returns a Rectangle that fills its container, 
-    /// with 10 points inset on all four side.
+    /// Returns a Rectangle insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Rectangle that fills its 
+    /// container, with 10 points inset on all four side.
     ///
     /// ![Rectangle inset example](rectangle-example-5.png)
     ///
@@ -17672,6 +17684,8 @@ extension RoundedCornerStyle : Hashable {
     /// ```
     @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
 
+    /// Used to describe a RoundedRectangle as a path in a `CGRect`.
+    ///
     /// A RoundedRectangle can be described as a path within a specific `CGRect`
     /// using the `RoundedRectangle/path(in:)` modifier:
     ///
@@ -17680,7 +17694,7 @@ extension RoundedCornerStyle : Hashable {
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
-    ///         Capsule()
+    ///         RoundedRectangle()
     ///             .path(in: CGRect(x: 0, y: 0, width: 75, height: 200))
     ///     }
     /// }
