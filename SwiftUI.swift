@@ -17,10 +17,9 @@ import os.signpost
 /// ### Understanding `ObservableObject`
 ///
 /// The `ObservableObject` protocol definition is as follows:
-///
 /// ```
 /// public protocol ObservableObject: AnyObject {
-///     associatedtype ObjectWillChangePublisher
+///     associatedtype ObjectWillChangePublisher: Publisher
 ///
 ///     var objectWillChange: ObjectWillChangePublisher { get }
 /// }
@@ -80,7 +79,7 @@ import os.signpost
 /// }
 /// ```
 ///
-/// This example uses a `PassthroughSubject` for its `objectWillChange` requirement.
+/// This example uses a `Combine/PassthroughSubject` for its `objectWillChange` requirement. A passthrough subject is a publisher that lets you send values manually (i.e. "passes through" any values sent to it).
 ///
 /// **Note:** The `@Published` property wrapper does not work with custom publishers. If you use a custom publisher, you are responsible for updating the object yourself. For example:
 ///
@@ -20201,7 +20200,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// ### Passing a reference to the state
 ///
-/// The previous example demonstrated how a state value could be passed from a view to its child. However, for the child to be able to actually modify the parent's state, the parent must pass a **binding** to its child. a binding is a read/write reference to the `@State` variable, and is represented via `SwiftUI/Binding`.
+/// The previous example demonstrated how a state value could be passed from a view to its child. However, for the child to be able to actually modify the parent's state, the parent must pass a **binding** to its child. A binding is a read/write reference to the `@State` variable, and is represented via `SwiftUI/Binding`.
 ///
 /// To create a binding to a state variable, prefix it with a dollar sign `$`. For example:
 ///
