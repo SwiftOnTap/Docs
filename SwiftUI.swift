@@ -2505,6 +2505,28 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 
 /// A button style that doesn't apply a border.
 ///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("Plain Banana🍌🍌") { tap() }
+///                      .buttonStyle(PlainButtonStyle())
+///
+///                  Button("Borderless Banana🍌🍌") { tap() }
+///                      .buttonStyle(BorderlessButtonStyle())
+///
+///                  Button("Default Banana🍌🍌") { tap() }
+///                      .buttonStyle(DefaultButtonStyle())
+///              }
+///              .font(.title2)
+///          }
+///
+///          func tap() {}
+///      }
+///
+///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// `View/buttonStyle(_:)-66fbx` modifier.
 @available(iOS 13.0, macOS 10.15, *)
@@ -2756,7 +2778,6 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///         }
 ///     }
 /// }
-
 /// ```
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
@@ -2852,25 +2873,87 @@ extension Capsule : InsettableShape {
 ///
 /// The circle's radius equals half the length of the frame rectangle's smallest
 /// edge.
+///
+/// By default, a circle is black, and takes up the space of its container:
+///
+/// ![Circle Example 1](images/Circle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Circle()
+///     }
+/// }
+/// ```
+///
+/// Define a Circle with a specific color and frame with the `Shape/fill()`
+/// and `Circle/frame(width:height:)` modifiers. For example:
+///
+/// ![Circle Example 2](images/Circle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Circle()
+///             .fill(Color.blue)
+///             .frame(width: 200, height: 200)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Circle/stroke(:lineWidth:)` modifier, and use
+/// the `Circle/inset(by:)` modifier to inset the circle by half of the border
+/// width to keep the circle at its original size:
+///
+/// ![Circle Example 3](Circle-example-3.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Circle()
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// A circle can be described as a path within a specific rectangular frame
+    /// using the `Circle/path(in:)` modifier:
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// ![Circle Example 4](Circle-example-4.png)
     ///
-    /// - Returns: A path that describes this shape.
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a new circle `Shape`.
+    /// Creates a circle.
+    ///
+    /// ![Circle Example 1](images/Circle-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -2878,11 +2961,24 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Circle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Circle insetted by the amount specified. For example,
+    /// insetting by 10 points returns a Circle that fills its container, with
+    /// 10 points inset on all four side.
+    ///
+    /// ![Circle Example 5](Circle-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -2915,7 +3011,43 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 
 /// An environment-dependent color.
 ///
-/// A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
+/// `Color` represents an environment-dependent color that conforms to `View`. Colors conformance to `View` means that a color can be used as a view itself.
+///
+/// For example:
+///
+/// ![Color Example One](color-example-one.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Color.yellow
+///         }
+///     }
+///
+/// Color also conforms to `ShapeStyle` which allows it to serve as a fill or stroke on a shape.
+///
+/// For example:
+///
+/// ![Color Example Two](color-example-two.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .fill(Color.yellow)
+///         }
+///     }
+///
+/// And as a stroke:
+///
+/// ![Color Example Three](color-example-three.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .stroke(Color.yellow)
+///         }
+///     }
+///
+/// **Note**: A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Color : Hashable, CustomStringConvertible {
@@ -2973,6 +3105,16 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// The conversion of `p` to a string in the assignment to `s` uses the
     /// `Point` type's `description` property.
+    ///
+    /// To call this property directly, try:
+    ///
+    /// ![Description](color-description.png)
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text(Color.yellow.description)
+    ///        }
+    ///    }
     public var description: String { get }
 
     /// The hash value.
@@ -2999,6 +3141,17 @@ extension Color : View {
 extension Color {
 
     /// Creates a color from an instance of `CGColor`.
+    ///
+    /// ![CGColor Init](color-cgcolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let cgColor = CGColor(red: 1.00, green: 0.60, blue: 0.60, alpha: 1.0)
+    ///
+    ///         var body: some View {
+    ///             Color(cgColor)
+    ///         }
+    ///     }
+    ///
     public init(_ cgColor: CGColor) { }
 }
 
@@ -3055,7 +3208,15 @@ extension Color {
 
     /// Create a `Color` from RGB and opacity values along with an optional colorspace.
     ///
-    /// The colorspace value defaults to sRGB, which is standard for apps. Note
+    /// ![Color RGB](color-rgb-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(red: 1.0, green: 0.6, blue: 0.6, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
     /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
     /// divide them by 255 in order to use this initializer.
@@ -3070,7 +3231,15 @@ extension Color {
 
     /// Create a `Color` from grayscale and opacity.
     ///
-    /// Both the white and the opacity must be specified from 0.0 to 1.0. If
+    /// ![Color White/Opacity](color-white-opacity.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(white: 0.2, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
     /// be divided by their maximum value.
     ///
@@ -3081,6 +3250,16 @@ extension Color {
     public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1) { }
 
     /// Creates a `Color` from hue, saturation, brightness, and opacity values.
+    ///
+    /// ![Hue Color Init](color-hue-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(hue: 0.5, saturation: 0.60, brightness: 0.90)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
     /// - Parameters:
     ///   - hue: The hue of the color.
@@ -3094,6 +3273,13 @@ extension Color {
 extension Color {
 
     /// A color that represents the system or application accent color.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
+    ///                .accentColor(Color.accentColor)
+    ///        }
+    ///    }
     ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
@@ -3111,36 +3297,121 @@ extension Color {
     public static let clear: Color
 
     /// A true black color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.black
+    ///        }
+    ///    }
+    ///
     public static let black: Color
 
     /// A true white color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.white
+    ///        }
+    ///    }
+    ///
     public static let white: Color
 
     /// A gray color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.gray
+    ///        }
+    ///    }
+    ///
     public static let gray: Color
 
     /// A stylized red color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.red
+    ///        }
+    ///    }
+    ///
     public static let red: Color
 
     /// A stylized green color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.green
+    ///        }
+    ///    }
+    ///
     public static let green: Color
 
     /// A stylized blue color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.blue
+    ///        }
+    ///    }
+    ///
     public static let blue: Color
 
     /// An orange color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.orange
+    ///        }
+    ///    }
+    ///
     public static let orange: Color
 
     /// A stylized yellow color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.yellow
+    ///        }
+    ///    }
+    ///
     public static let yellow: Color
 
     /// A pink color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.pink
+    ///        }
+    ///    }
+    ///
     public static let pink: Color
 
     /// A purple color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.purple
+    ///        }
+    ///    }
+    ///
     public static let purple: Color
 
     /// The default color of text, based on the environment.
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
+    ///
+    /// Code:
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text("Bananas 🍌🍌")
+    ///                .accentColor(.primary)
+    ///        }
+    ///    }
     ///
     /// If you are in light mode, this will be black. If, on the other hand, you
     /// are in dark mode, this will be white. It is automatically updated for
@@ -3164,6 +3435,28 @@ extension Color {
 
     /// Creates a named color.
     ///
+    /// To declare a color with a `name` create your color in the `Assets.xcassets` folder.
+    ///
+    /// ![Create Color Name](color-name-showcase.png)
+    ///
+    /// Create a light theme and dark theme color to adjust your view depending on the user's environment.
+    ///
+    /// Next, run your app in both light theme and dark theme. Your color will automatically change.
+    ///
+    /// Light theme:
+    /// ![Color Light Theme](color-name-light.png)
+    ///
+    /// Dark theme:
+    /// ![Color Dark Theme](color-name-dark.png)
+    ///
+    /// Code:
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color("Pink")
+    ///         }
+    ///     }
+    ///
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
     ///   - bundle: the bundle to search for the color resource in.
@@ -3175,6 +3468,17 @@ extension Color {
 extension Color {
 
     /// Creates a color from an instance of `UIColor`.
+    ///
+    /// ![UIColor Init](color-uicolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let uiColor = UIColor.yellow
+    ///
+    ///         var body: some View {
+    ///             Color(uiColor)
+    ///         }
+    ///     }
+    ///
     public init(_ color: UIColor) { }
 }
 
@@ -3183,6 +3487,18 @@ extension Color {
 
 	/// Updates the transparency channel of a `Color`, returning a `Color` back.
 	///
+  ///
+  /// ![Color Opacity](color-opacity.png)
+  ///
+  ///     struct ExampleView: View {
+  ///            var body: some View {
+  ///                ZStack {
+  ///                    Text("Banana 🍌🍌")
+  ///                    Color.pink.opacity(0.80)
+  ///                }
+  ///            }
+  ///        }
+  ///
 	/// This is different from the `View/opacity(_:)` modifier because it
 	/// returns a `Color` object rather than `some View`.
     public func opacity(_ opacity: Double) -> Color { }
@@ -3892,11 +4208,24 @@ extension CommandsBuilder {
 
 }
 
-/// A system style that displays the components in a compact, textual format.
+/// Display a date picker in a compact, textual format.
 ///
-/// This style is useful when space is constrained and users expect to
-/// make specific date and time selections. Some variants may include rich
-/// editing controls in a popup.
+/// > "This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup."
+///
+/// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///
+///          var body: some View {
+///              DatePicker("Date", selection: $date)
+///                  .datePickerStyle(CompactDatePickerStyle())
+///                  .padding()
+///          }
+///      }
+///
+///
 @available(iOS 14.0, macCatalyst 13.4, macOS 10.15.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4195,10 +4524,63 @@ public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : Cu
 extension CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent {
 }
 
-/// A control for selecting an absolute date.
+/// A picker control for selecting dates.
 ///
-/// It can be configured to only display specific components of the date, but
-/// still results in picking a complete `Date` instance.
+/// You create a picker by providing 3 things:
+/// 1. a selection binding
+/// 2. a label
+/// 3. the editable parts of the date
+///
+/// There are four types of pickers, and three types of labels, making 12 total initializers.
+///
+/// Picker types:
+/// 1. Unlimited range
+/// 2. Closed range (maximum and minimum)
+/// 3. From range (minimum only)
+/// 4. Through range (maximum only)
+///
+/// Label types:
+/// 1. String
+/// 2. Localized string key
+/// 3. View
+///
+/// A simple example looks like this:
+///
+/// ```
+/// struct DatePickerView: View {
+///     @State private var date = Date()
+///
+///     var body: some View {
+///         DatePicker("Date", selection: $date)
+///     }
+/// }
+/// ```
+///
+/// ### Styling Date Pickers
+///
+/// You can customize the appearance and interaction of date pickers using one of the
+/// ``DatePickerStyle``s provided by SwiftUI. The full list of styles is:
+/// - ``DefaultDatePickerStyle`` (iOS and macOS)
+/// - ``WheelDatePickerStyle`` (iOS)
+/// - ``FieldDatePickerStyle`` (macOS)
+/// - ``GraphicalDatePickerStyle`` (macOS)
+/// - ``StepperFieldDatePickerStyle`` (macOS)
+///
+/// Currently, you cannot create your own custom ``DatePickerStyle``.
+///
+/// To set a specific style for all picker instances within a view, use the
+/// ``View/datePickerStyle(_:)`` modifier.
+///
+/// ```
+/// struct StyledDatePickerView: View {
+///     @State private var date = Date()
+///
+///     var body: some View {
+///         DatePicker(selection: $date, label: { Text("Date") })
+///             .datePickerStyle(WheelDatePickerStyle())
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4222,49 +4604,104 @@ public struct DatePicker<Label> : View where Label : View {
 @available(watchOS, unavailable)
 extension DatePicker {
 
-    /// Creates an instance that selects a `Date` with an unbounded range.
+    /// Creates a date picker with unlimited range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
-    /// Creates an instance that selects a `Date` in a closed range.
+    /// Creates a date picker with closed range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    in: Date()...Date().advanced(by: 3600 * 90),
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The inclusive range of selectable dates.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The maximum and minimum dates.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
-    /// Creates an instance that selects a `Date` on or after some start date.
+    /// Creates a date picker with "from" range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    in: Date()...,
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range from some selectable start date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a minimum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
 
-    /// Creates an instance that selects a `Date` on or before some end date.
+    /// Creates a date picker with "through" range and a View label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(selection: $date,
+    ///                    in: ...Date(),
+    ///                    displayedComponents: [.hourAndMinute, .date],
+    ///                    label: { HStack { Image(systemName: "calendar"); Image(systemName: "clock") } })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range before some selectable end date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a maximum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
-    ///   - label: A view that describes the use of the date.
+    ///   - label: A closure that returns a label view.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date], @ViewBuilder label: () -> Label) { }
@@ -4275,99 +4712,205 @@ extension DatePicker {
 @available(watchOS, unavailable)
 extension DatePicker where Label == Text {
 
-    /// Creates an instance that selects a `Date` with an unbounded range.
+    /// Creates a date picker with unlimited range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date"),
+    ///                    selection: $date,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` in a closed range.
+    /// Creates a date picker with closed range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date and time"),
+    ///                    selection: $date,
+    ///                    in: Date()...Date().advance(by: 3600 * 90),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The inclusive range of selectable dates.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The maximum and minimum dates.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` on or after some start date.
+    /// Creates a date picker with "from" range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date and time"),
+    ///                    selection: $date,
+    ///                    in: Date()...,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range from some selectable start date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a minimum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` on or before some end date.
+    /// Creates a date picker with "through" range and a localized string key label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker(LocalizedStringKey("Date and time"),
+    ///                    selection: $date,
+    ///                    in: ...Date(),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range before some selectable end date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - titleKey: The date picker label as a localized string key.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a maximum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init(_ titleKey: LocalizedStringKey, selection: Binding<Date>, in range: PartialRangeThrough<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) { }
 
-    /// Creates an instance that selects a `Date` within the given range.
+    /// Creates a date picker with unlimited range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init<S>(_ title: S, selection: Binding<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
-    /// Creates an instance that selects a `Date` in a closed range.
+    /// Creates a date picker with closed range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    in: Date()...Date().advance(by: 3600 * 90),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The inclusive range of selectable dates.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The maximum and minimum dates.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init<S>(_ title: S, selection: Binding<Date>, in range: ClosedRange<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
-    /// Creates an instance that selects a `Date` on or after some start date.
+    /// Creates a date picker with "from" range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    in: Date()...,
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range from some selectable start date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a minimum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public init<S>(_ title: S, selection: Binding<Date>, in range: PartialRangeFrom<Date>, displayedComponents: DatePicker<Label>.Components = [.hourAndMinute, .date]) where S : StringProtocol { }
 
-    /// Creates an instance that selects a `Date` on or before some end date.
+    /// Creates a date picker with "through" range and a string label.
+    ///
+    /// ```
+    /// struct DateView: View {
+    ///     @State private var date = Date()
+    ///
+    ///     var body: some View {
+    ///         Text("\(date)")
+    ///         DatePicker("Date 📆 and time ⏰",
+    ///                    selection: $date,
+    ///                    in: ...Date(),
+    ///                    displayedComponents: [.hourAndMinute, .date])
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - selection: The date value being displayed and selected.
-    ///   - range: The open range before some selectable end date.
-    ///   - displayedComponents: The date components that user is able to
+    ///   - title: The date picker label as a string.
+    ///   - selection: The binding Date value of the date picker.
+    ///   - range: The range of selectable dates, with only a maximum specified.
+    ///   - displayedComponents: The components of the date that user is able to
     ///     view and edit. Defaults to `[.hourAndMinute, .date]`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -4449,9 +4992,29 @@ extension DatePickerStyle {
 
 /// The default button style, based on the button's context.
 ///
-/// If you create a button directly on a blank canvas, the style varies by
-/// platform. iOS uses the borderless button style by default, whereas macOS,
-/// tvOS, and watchOS use the bordered button style.
+/// > "If you create a button directly on a blank canvas, the style varies by platform. iOS uses the borderless button style by default, whereas macOS, tvOS, and watchOS use the bordered button style."
+///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("PlainBanana🍌🍌") { tap() }
+///                     .buttonStyle(PlainButtonStyle())
+///
+///                  Button("BorderlessBanana🍌🍌") { tap() }
+///                     .buttonStyle(BorderlessButtonStyle())
+///
+///                  Button("DefaultBanana🍌🍌") { tap() }
+///                     .buttonStyle(DefaultButtonStyle())
+///              }
+///              .font(.title2)
+///          }
+///
+///          func tap() {}
+///      }
+///
 ///
 /// If you create a button inside a container, like a `List`, the style
 /// resolves to the recommended style for buttons inside that container for that
@@ -4480,6 +5043,21 @@ public struct DefaultButtonStyle : PrimitiveButtonStyle {
 }
 
 /// The default `DatePicker` style.
+///
+/// ![DefaultDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///
+///          var body: some View {
+///              DatePicker("Date", selection: $date)
+///                  .datePickerStyle(DefaultDatePickerStyle())
+///                  .padding()
+///          }
+///      }
+///
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4492,6 +5070,24 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 }
 
 /// The default `GroupBoxStyle`.
+///
+/// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             GroupBox() {
+///                 Label("Bananas 🍌🍌", systemImage: "heart.fill")
+///                     .foregroundColor(.yellow)
+///                     .groupBoxStyle(DefaultGroupBoxStyle())
+///              }, {
+///                 Text("Go Bananas")
+///              }
+///             .padding()
+///         }
+///      }
+///
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4517,6 +5113,18 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 }
 
 /// The default label style in the current context.
+///
+/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+///
+///
+///    struct ExampleView: View {
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///        }
+///    }
+///
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultLabelStyle : LabelStyle {
 
@@ -4538,6 +5146,22 @@ public struct DefaultLabelStyle : LabelStyle {
 
 /// The instance that describes a platform's default behavior and appearance for
 /// a list.
+///
+/// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                Text("Bananas 🍌🍌")
+///                Text("Apples 🍎🍎")
+///                Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(DefaultListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultListStyle : ListStyle {
 
@@ -4609,6 +5233,28 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// whether the picker appears in a container view — when setting the appearance
 /// of a picker.
 ///
+/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑" ]
+///     @State private var selectedFruit = 0
+///
+///     var body: some View {
+///          VStack {
+///              Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                  ForEach(0..<fruits.count) {
+///                      Text(self.fruits[$0])
+///                  }
+///              }
+
+///              Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///          }
+///          .pickerStyle(DefaultPickerStyle())
+///     }
+/// }
+/// ```
+///
 /// You can override a picker’s style. To apply the default style to a picker,
 /// or to a view that contains pickers, use the `View/pickerStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -4667,12 +5313,25 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 
 /// The default toggle style.
 ///
-/// If you create a toggle directly on a blank canvas, the style varies:
+/// > If you create a toggle directly on a blank canvas, the style varies:
+/// > - For the phone, pad, and watch idioms, the default toggle style is a switch.
+/// > - For the Mac idiom, the default toggle style is a checkbox.
+/// > - For the TV idom, the default toggle style is a button.
 ///
-/// - For the phone, pad, and watch idioms, the default toggle style is a
-///   switch.
-/// - For the Mac idiom, the default toggle style is a checkbox.
-/// - For the TV idom, the default toggle style is a button.
+/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State private var status = true
+///     var body: some View {
+///          Toggle(isOn: $status) {
+///              Text("Banana🍌🍌")
+///           }
+///           .toggleStyle(DefaultToggleStyle())
+///           .padding()
+///      }
+///  }
+/// ```
 ///
 /// If you create a toggle inside a container, such as a `List`, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
@@ -5038,57 +5697,644 @@ public struct DragGesture : Gesture {
     public typealias Body = Never
 }
 
-/// An interface that you implement to interact with a drop operation in a view
-/// modified to accept drops.
+/// An interface to easily perform drag & drop operations.
 ///
-/// The `DropDelegate` protocol provides a comprehensive and flexible way to
-/// interact with a drop operation. Specify a drop delegate when you modify a
-/// view to accept drops with the `View/onDrop(of:delegate:)-6lin8` method.
+/// The `DropDelegate` protocol offers functionality to customize drag and drop behaviors. It is preffered over ``View/onDrop(of:isTargeted:perform)`` view modifier when your drop behavior requires non-standard implementations.
 ///
-/// Alternatively, for simple drop cases that don't require the full
-/// functionality of a drop delegate, you can modify a view to accept drops
-/// using the `View/onDrop(of:isTargeted:perform:)-f15m` or the
-/// `View/onDrop(of:isTargeted:perform:)-982eu` method. These methods handle the
-/// drop using a closure you provide as part of the modifier.
+/// ``DropDelegate`` heavily utalizes `NSItemProvider`, which provides information about the dragged data.
+///
+/// ### Setup
+/// `DropDelegate` has one required implementation and four optional implementations.
+///
+/// Required:
+/// - `DropDelegate/performDrop(info:)` specifies the behavior for your drop.
+///
+/// Optional:
+/// - `DropDelegate/validateDrop(info:)-954f7` validates if a drop can be made.
+/// - `DropDelegate/dropEntered(info:)-525fa` provides custom behavior when an object is dragged over the `onDrop` view.
+/// - `DropDelegate/dropExited(info:)-3d540` provides custom behavior when an object is dragged off of the `onDrop` view.
+/// - `DropDelegate/dropUpdated(info:)-72cd3` provides custom behavior when the drop is updated.
+///
+/// ### Creating a simple Drag & Drop
+/// #### Create a draggable ``View``
+/// Make a view draggable with the ``View/.onDrag(_:)`` modifier.
+///
+/// Use `NSItemProvider` to define the specific data dragged from that view.
+///
+/// ```
+/// //  Text to drag
+/// Text(text)
+///     .font(.title)
+///     .onDrag{ return NSItemProvider(object: "🍌🍌" as NSString) }
+/// ```
+///
+/// #### Creating a drop `View`
+/// Use `onDrop` to create a view that accepts "drops" from dragged data. There are three versions of the `onDrop` modifier:
+///
+/// - `View/onDrop(of:isTargeted:perform)-bae65` is the simplest implementation. Specify a closure to execute when content is dropped.
+/// - `View/onDrop(of:isTargeted:perform)-55379` is similar to the former, but the closure also provides information about the drop location.
+/// - `View/onDrop(of:delegate)-a3cfb` requires a `DropDelegate` and is the most versatile.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var text: String = "🍌🍌"
+///
+///     var body: some View {
+///         HStack {
+///             //  Text to drag
+///             Text(text)
+///                 .font(.title)
+///                 .onDrag{ return NSItemProvider(object: self.text as NSItemProviderWriting) }
+///
+///             //  Area to drop
+///             RoundedRectangle(cornerRadius: 10)
+///                 .frame(width: 150, height: 150)
+///                 .onDrop(of: ["text"], isTargeted: nil, perform: { _ in
+///                     self.text = "Dropped My Bananas 🍌🍌!"
+///                     return true
+///                 })
+///         }
+///     }
+/// }
+/// ```
+///
+/// #### Conforming to DropDelegate
+/// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to `DropDelegate`.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var text: String = "🍌🍌"
+///
+///     var body: some View {
+///         HStack {
+///             //  Text to drag
+///             Text(text)
+///                 .font(.title)
+///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+///
+///             //  Area to drop
+///             RoundedRectangle(cornerRadius: 10)
+///                 .frame(width: 150, height: 150)
+///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
+///         }
+///     }
+/// }
+///
+/// struct MyDropDelegate: DropDelegate {
+///     @Binding var text: String
+///
+///     func performDrop(info: DropInfo) -> Bool {
+///         self.text = "Dropped My Bananas 🍌🍌!"
+///         return true
+///     }
+/// }
+/// ```
+///
+/// ### Using `DropInfo` for custom logic
+/// `DropInfo` provides information about the drop and is used to create custom drop behaviors.
+///
+/// For example, say your user drags & drops `NSString` data. Use the `DropInfo/itemproviders(for:)-7f580` to get an array of `NSItemProvider` data (recall all dragged data arrives in this format).
+///
+/// Next, use `NSItemProvider`'s property `loadItem` to extract an `NSSecureCoding` from your dragged data.
+///
+/// Finally, cast your `NSSecureCoding` data to the more Swift-friendly `Data` object. From here your program can decode that data into a string and run any custom behaviors from that string.
+///
+/// The view in the example below is conditionally colored depending on the dragged string.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var backgroundColor: Color = .black
+///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///
+///     var body: some View {
+///         VStack {
+///             HStack {
+///                 ForEach(self.fruits, id: \.self, content: { fruit in
+///                     Text(fruit)
+///                         .font(.title)
+///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+///                 })
+///             }
+///
+///             HStack {
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .fill(backgroundColor)
+///                     .frame(width: 150, height: 150)
+///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+///             }
+///         }
+///
+///     }
+/// }
+///
+/// struct MyDropDelegate: DropDelegate {
+///     @Binding var color: Color
+///
+///     //  This function is executed when the user "drops" their object
+///     func performDrop(info: DropInfo) -> Bool {
+///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+///         if let item = info.itemProviders(for: ["public.text"]).first {
+///             //  Load the item
+///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+///                 //  Cast NSSecureCoding to Ddata
+///                 if let data = text as? Data {
+///                     //  Extract string from data
+///                     let inputStr = String(decoding: data, as: UTF8.self)
+///
+///                     //  Conditionally change color given text string
+///                     if inputStr == "🍌🍌" {
+///                         self.color = .yellow
+///                     } else if inputStr == "🍏🍏" {
+///                         self.color = .green
+///                     } else if inputStr == "🍑🍑" {
+///                         self.color = .pink
+///                     } else {
+///                         self.color = .gray
+///                     }
+///                 }
+///             }
+///         } else {
+///             //  If no text was received in our drop, return false
+///             return false
+///         }
+///
+///         return true
+///     }
+/// }
+/// ```
+///
+/// ### Fully Featured `DropDelegate`
+/// Utalize `DropDelegate`s optional functions to provide additional behavior.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var backgroundColor: Color = .black
+///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///
+///     var body: some View {
+///         VStack {
+///             HStack {
+///                 ForEach(self.fruits, id: \.self, content: { fruit in
+///                     Text(fruit)
+///                         .font(.title)
+///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+///                 })
+///             }
+///
+///             HStack {
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .fill(backgroundColor)
+///                     .frame(width: 150, height: 150)
+///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+///             }
+///         }
+///
+///     }
+/// }
+///
+/// struct MyDropDelegate: DropDelegate {
+///     @Binding var color: Color
+///
+///     //  Drop entered called
+///     func dropEntered(info: DropInfo) {
+///         ///  Change color if color was previously black
+///         self.color = (self.color == .black) ? .gray : self.color
+///     }
+///
+///     //  Drop entered called
+///     func dropExited(info: DropInfo) {
+///         self.color = .init(white: 0.40)
+///     }
+///
+///     //  Drop has been updated
+///     func dropUpdated(info: DropInfo) -> DropProposal? {
+///         ///  Don't allow more items to be dropped if a Banana was dropped
+///         if self.color == .yellow {
+///             return DropProposal(operation: .forbidden)
+///         } else {
+///             return nil
+///         }
+///     }
+///
+///     //  This function is executed when the user "drops" their object
+///     func performDrop(info: DropInfo) -> Bool {
+///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+///         if let item = info.itemProviders(for: ["public.text"]).first {
+///             //  Load the item
+///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+///                 //  Cast NSSecureCoding to Ddata
+///                 if let data = text as? Data {
+///                     //  Extract string from data
+///                     let inputStr = String(decoding: data, as: UTF8.self)
+///
+///                     //  Conditionally change color given text string
+///                     if inputStr == "🍌🍌" {
+///                         self.color = .yellow
+///                     } else if inputStr == "🍏🍏" {
+///                         self.color = .green
+///                     } else if inputStr == "🍑🍑" {
+///                         self.color = .pink
+///                     } else {
+///                         self.color = .gray
+///                     }
+///                 }
+///             }
+///         } else {
+///             //  If no text was received in our drop, return false
+///             return false
+///         }
+///
+///         return true
+///     }
+/// }
+/// ```
+///
+/// This example uses `DropDelegate/dropUpdated(info:)-72cd3` to prevent fruits from being dropped if the background is yellow.
+///
+/// The example uses `DropDelegate/dropEntered(info:)-525fa` to change the color the first time a user drags over the drop zone.
+///
+/// Finally, when a user drags out of the view, `DropDelegate/dropExited(info:)-3d540` changes the background color to a dark gray.
+///
+/// Note: if the user deselects their dragged object while over the drop zone, `DropDelegate/dropExited(info:)-3d540` will **not** be called. `DropDelegate/dropExited(info:)-3d540` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+///
+/// *Bug*: On iOS `DropInfo` provides its location in global coordinates. It should provide location in local coordinates.
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol DropDelegate{ }
 extension DropDelegate {
 
-    /// Tells the delegate that a drop containing items conforming to one of the
-    /// expected types entered a view that accepts drops.
+    /// Validates a drop.
     ///
-    /// Specify the expected types when you apply the drop modifier to the view.
-    /// The default implementation returns `true`.
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Validates the drop
+    ///     func validateDrop(info: DropInfo) -> Bool {
+    ///         //  This function will fail, because the URI is "public.text" not "public.file-url"
+    ///         if info.hasItemsConforming(to: ["public.image"]) {
+    ///             return true
+    ///         } else {
+    ///             self.color = .red
+    ///             return false
+    ///         }
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func validateDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate it can request the item provider data from the given
-    /// information.
+    /// Specifies the behavior of a drop.
     ///
-    /// Incorporate the received data into your app's data model as appropriate.
-    /// - Returns: A Boolean that is `true` if the drop was successful, `false`
-    ///   otherwise.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func performDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate a validated drop has entered the modified view.
+    /// Provide custom behavior when an object is dragged over the `onDrop` view.
     ///
-    /// The default implementation does nothing.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-4.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Drop entered called
+    ///     func dropEntered(info: DropInfo) {
+    ///         //  Change color if color was previously black
+    ///         self.color = (self.color == .black) ? .gray : self.color
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func dropEntered(info: DropInfo) { }
 
-    /// Tells the delegate that a validated drop moved inside the modified view.
+    /// Provide custom behavior when the drop is updated.
     ///
-    /// Use this method to return a drop proposal containing the operation the
-    /// delegate intends to perform at the drop `DropInfo/location`. The
-    /// default implementation of this method returns `nil`, which tells the
-    /// drop to use the last valid returned value or else
-    /// `DropOperation/copy`.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-5.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Drop has been updated
+    ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+    ///         //  Don't allow more items to be dropped if a Banana was dropped
+    ///         if self.color == .yellow {
+    ///             return DropProposal(operation: .forbidden)
+    ///         } else {
+    ///             return nil
+    ///         }
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func dropUpdated(info: DropInfo) -> DropProposal? { }
 
-    /// Tells the delegate a validated drop operation has exited the modified
-    /// view.
+    /// Provide custom behavior when an object is dragged off of the `onDrop` view.
     ///
-    /// The default implementation does nothing.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-6.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     // Drop entered called
+    ///     func dropExited(info: DropInfo) {
+    ///         self.color = .init(white: 0.40)
+    ///     }
+    ///
+    ///     // This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             // Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 // Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     // Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             // If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func dropExited(info: DropInfo) { }
 }
 
@@ -5097,32 +6343,370 @@ extension DropDelegate {
 @available(watchOS, unavailable)
 extension DropDelegate {
 
-    /// Tells the delegate that a drop containing items conforming to one of the
-    /// expected types entered a view that accepts drops.
-    ///
-    /// Specify the expected types when you apply the drop modifier to the view.
-    /// The default implementation returns `true`.
-    public func validateDrop(info: DropInfo) -> Bool { }
+      /// Validates a drop.
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     // Validates the drop
+      ///     func validateDrop(info: DropInfo) -> Bool {
+      ///         // This function will fail, because the URI is "public.text" not "public.file-url"
+      ///         if info.hasItemsConforming(to: ["public.image"]) {
+      ///             return true
+      ///         } else {
+      ///             self.color = .red
+      ///             return false
+      ///         }
+      ///     }
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             // Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 // Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     // Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             // If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func validateDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate a validated drop has entered the modified view.
-    ///
-    /// The default implementation does nothing.
-    public func dropEntered(info: DropInfo) { }
+      /// Specifies the behavior of a drop.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
+      ///
+      /// ```
+      /// struct ExampleView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             // Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 // Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     // Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             // If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func performDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate that a validated drop moved inside the modified view.
-    ///
-    /// Use this method to return a drop proposal containing the operation the
-    /// delegate intends to perform at the drop `DropInfo/location`. The
-    /// default implementation of this method returns `nil`, which tells the
-    /// drop to use the last valid returned value or else
-    /// `DropOperation/copy`.
-    public func dropUpdated(info: DropInfo) -> DropProposal? { }
+      /// Provide custom behavior when an object is dragged over the `onDrop` view.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-4.gif)
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     // Drop entered called
+      ///     func dropEntered(info: DropInfo) {
+      ///         // Change color if color was previously black
+      ///         self.color = (self.color == .black) ? .gray : self.color
+      ///     }
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             // Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 // Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     //  Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             // If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func dropEntered(info: DropInfo) { }
 
-    /// Tells the delegate a validated drop operation has exited the modified
-    /// view.
-    ///
-    /// The default implementation does nothing.
-    public func dropExited(info: DropInfo) { }
+      /// Provide custom behavior when the drop is updated.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-5.gif)
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     //  Drop has been updated
+      ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+      ///         // Don't allow more items to be dropped if a Banana was dropped
+      ///         if self.color == .yellow {
+      ///             return DropProposal(operation: .forbidden)
+      ///         } else {
+      ///             return nil
+      ///         }
+      ///     }
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             //  Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 //  Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     //  Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             //  If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func dropUpdated(info: DropInfo) -> DropProposal? { }
+
+      /// Provide custom behavior when an object is dragged off of the `onDrop` view.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-6.gif)
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     //  Drop entered called
+      ///     func dropExited(info: DropInfo) {
+      ///         self.color = .init(white: 0.40)
+      ///     }
+      ///
+      ///     //  This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             //  Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 //  Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     //  Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     //  Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             //  If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func dropExited(info: DropInfo) { }
 }
 
 /// The current state of a drop.
@@ -6908,42 +8492,415 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
     public typealias Indices = Range<Int>
 }
 
-/// A document model definition used to serialize documents to and from file
-/// contents.
+/// The protocol used to serialize a document to and from a file.
 ///
-/// Conformance to `FileDocument` is expected to have value semantics and be
-/// thread-safe. Serialization and deserialization will be done on a background
-/// thread.
+/// Conform to this protocol to move a document between its file representation and its "swift-usable"
+/// representation.
+///
+/// This protocol is very similar to ``ReferenceFileDocument``, with the difference being whether the data
+/// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
+/// - `struct` --> ``FileDocument``
+/// - `class` --> `ReferenceFileDocument`
+///
+/// Don't worry about thread safety when using `ReferenceFileDocument`, since
+/// deserialization and serialization are done on a background thread.
+///
+/// - Note: If your app will have documents, it very likely will be easiest to begin from Apple's own
+/// Document app template. To do this, go to *File > New > Project*, and then use *Document App*.
+///
+/// ### Example
+///
+/// #### App structure
+///
+/// To begin, update the scene definition to use ``DocumentGroup``.
+///
+///     import SwiftUI
+///
+///     @main
+///     struct ExampleApp: App {
+///         var body: some Scene {
+///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+///                 ContentView(document: file.$document)
+///             }
+///         }
+///     }
+///
+/// #### FileDocument conformance
+///
+/// Next, conform to the `FileDocument` protocol by implementing these properties:
+/// - A: ``FileDocument/readableContentTypes``
+/// - B: ``FileDocument/init(configuration:)``
+/// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     struct ExampleDocument: FileDocument {
+///         var text: String
+///
+///         init(text: String = "This is a brand new document! 📃") {
+///             self.text = text
+///         }
+///
+///         // A
+///         static var readableContentTypes: [UTType] { [.exampleText] }
+///
+///         // B
+///         init(configuration: ReadConfiguration) throws {
+///             guard let data = configuration.file.regularFileContents,
+///                 let string = String(data: data, encoding: .utf8)
+///             else {
+///                 throw CocoaError(.fileReadCorruptFile)
+///             }
+///             text = string
+///         }
+///
+///         // C
+///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///             let data = text.data(using: .utf8)!
+///             return .init(regularFileWithContents: data)
+///         }
+///     }
+///
+/// Note that in this example, we create a custom ``FileDocument/readableContentTypes`` called `UTType.exampleText`.
+///
+/// #### View implementation
+///
+/// Finally, use the ``TextEditor`` view to edit the document file.
+///
+///     import SwiftUI
+///
+///     struct ExampleView: View {
+///         @Binding var document: ExampleDocument
+///
+///         var body: some View {
+///             TextEditor(text: $document.text)
+///         }
+///     }
+///
+/// #### UTType settings
+///
+/// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+/// follow these steps:
+/// 1. Go to the Xcode project settings.
+/// 2. Click on your target to the left.
+/// 3. Expand the "Document Types" tab.
+/// 4. Click *"Click here to add additional document type properties"*
+/// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+/// 6. Ensure the **Type** is *String*.
+/// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+/// 8. Change the **Types** (top right) to *com.example.plain-text*.
+///
+///
+/// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     extension UTType {
+///         static var exampleText: UTType {
+///             UTType(importedAs: "com.example.plain-text")
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol FileDocument{ }
 extension FileDocument {
 
-    /// The types the document is able to open.
+    /// The file types the ``FileDocument`` document is able to open.
+    ///
+    /// The readable types of a document should be specified in its declaration. Often,
+    /// the process of creating a document-based app requires a custom UTType object.
     static var readableContentTypes: [UTType] { get }
 
-    /// The types the document is able to save or export to.
+    /// The file types that a file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ExampleView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     static var writableContentTypes: [UTType] { get }
 
-    /// Initialize self by reading from the contents of a given `ReadConfiguration`.
+    /// Initialize the file document from the contents of a file.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn how to use the configuration parameter.
+    ///
+    /// In the following example, the initializer parses the configuration parameter
+    /// to pull out the simple text `String` from the document.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     init(configuration: Self.ReadConfiguration) throws { }
 
-    /// The configuration for reading document contents.
+    /// A type alias for referring to the configuration for reading document contents.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn everything about what this
+    /// type alias refers to within the ``FileDocument`` protocol.
+    ///
+    /// This type alias is primarily used in the protocol's required initializer,
+    /// ``FileDocument/init(configuration:)``
+    /// as the type of its configuration parameter.
     typealias ReadConfiguration = FileDocumentReadConfiguration
 
-    /// Serialize the document to file contents for a specified `configuration`.
-    /// - Parameter configuration: the configuration for the current document
-    ///   contents.
+    /// Serialize the document with the specified configuration.
     ///
-    /// - Returns: The destination to serialize the document contents to. The
-    ///   value can be a newly created `FileWrapper` or an updated `FileWrapper`
-    ///   of the one provided in `configuration`.
+    /// This is essentially the "saving" function in a file document.
+    ///
+    /// In the following example, the `fileWrapper(snapshot:configuration:)` function
+    /// simply uses the struct's `text` variable to create a new ``FileWrapper`` object.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: The ``FileDocumentWriteConfiguration`` used
+    /// to serialize the document.
+    ///
+    /// - Returns: The destination for the serialized the document. It can be a newly created
+    /// ``FileWrapper` or an updated ``FileWrapper` from the one provided by `configuration`.
     func fileWrapper(configuration: Self.WriteConfiguration) throws -> FileWrapper { }
 
-    /// The configuration for serializing document contents.
+    /// A type alias used for the configuration when writing a file document.
+    ///
+    /// Since this is just a type alias, see ``FileDocumentWriteConfiguration`` for
+    /// full information on what this type does.
     typealias WriteConfiguration = FileDocumentWriteConfiguration
 }
 
@@ -6952,9 +8909,105 @@ extension FileDocument {
 @available(watchOS, unavailable)
 extension FileDocument {
 
-    /// The types the document is able to save or export to.
+    /// The types that a file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.$document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### FileDocument conformance
+    ///
+    /// Next, conform to the `FileDocument` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     struct ExampleDocument: FileDocument {
+    ///         var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = text.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @Binding var document: ExampleDocument
+    ///
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     public static var writableContentTypes: [UTType] { get }
 }
 
@@ -7359,6 +9412,37 @@ extension Font {
     public func monospacedDigit() -> Font { }
 
     /// Sets the weight of the font.
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    ///
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text("ultraLight 🍌")
+    ///                     .fontWeight(Font.Weight.ultraLight)
+    ///                 Text("thin🍌")
+    ///                     .fontWeight(Font.Weight.thin)
+    ///                 Text("light🍌")
+    ///                     .fontWeight(Font.Weight.light)
+    ///                 Text("regular🍌")
+    ///                     .fontWeight(Font.Weight.regular)
+    ///                 Text("medium🍌")
+    ///                     .fontWeight(Font.Weight.medium)
+    ///                 Text("semibold🍌")
+    ///                     .fontWeight(Font.Weight.semibold)
+    ///                 Text("bold🍌")
+    ///                     .fontWeight(Font.Weight.bold)
+    ///                 Text("heavy🍌")
+    ///                     .fontWeight(Font.Weight.heavy)
+    ///                 Text("black🍌")
+    ///                     .fontWeight(Font.Weight.black)
+    ///            }
+    ///            .font(.title)
+    ///         }
+    ///     }
+    ///
+    ///
     public func weight(_ weight: Font.Weight) -> Font { }
 
     /// Adds bold styling to the font.
@@ -8337,11 +10421,24 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     public static func == (a: Gradient, b: Gradient) -> Bool { }
 }
 
-/// A system style of `DatePicker` that displays an interactive calendar or
-/// clock.
+/// An interactive calendar or clock.
 ///
-/// This style is useful when wanting to allow browsing through days in a
-/// calendar, or when the look of a clock face is appropriate.
+/// > "This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate."
+///
+/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///
+///          var body: some View {
+///              DatePicker("Date",selection: $date)
+///                 .datePickerStyle(GraphicalDatePickerStyle())
+///                 .padding()
+///          }
+///      }
+///
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -8615,7 +10712,23 @@ public struct GroupBoxStyleConfiguration {
     public let content: GroupBoxStyleConfiguration.Content
 }
 
-/// The instance that describes the behavior and appearance of a grouped list.
+/// A standard grouped list style.
+///
+/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(GroupedListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -8737,8 +10850,18 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-/// The title of the label is still used for non-visual descriptions, such as
-/// VoiceOver.
+/// ![IconOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-icon-only-example-1.png)
+///
+///
+///    struct ExampleView: View {
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///        }
+///    }
+///
+///
+/// > The title of the label is still used for non-visual descriptions, such as VoiceOver.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct IconOnlyLabelStyle : LabelStyle {
 
@@ -9317,6 +11440,22 @@ public struct InlinePickerStyle : PickerStyle {
 }
 
 /// The instance that describes the behavior and appearance of an inset grouped list.
+///
+/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(InsetGroupedListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -9328,6 +11467,22 @@ public struct InsetGroupedListStyle : ListStyle {
 }
 
 /// The behavior and appearance of an inset list.
+///
+/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                Text("Bananas 🍌🍌")
+///                Text("Apples 🍎🍎")
+///                Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(InsetListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -11340,18 +13495,37 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     public init(_ configuration: MenuStyleConfiguration) { }
 }
 
-/// A picker style that presents the options as a menu when the user presses a
-/// button, or as a submenu when nested within a larger menu.
+/// A menu-formatted picker style.
 ///
-/// Use this style when there are more than five options. Consider using
-/// `InlinePickerStyle` when there are fewer than five options.
+/// > `MenuPickerStyle` is picker style that presents the options as a menu when the user presses a button, or as a submenu when nested within a larger menu.
 ///
-/// The button itself indicates the selected option. You can include additional
-/// controls in the set of options, such as a button to customize the list of
-/// options.
+/// > Use this style when there are more than five options. Consider using `InlinePickerStyle` when there are fewer than five options.
 ///
-/// To apply this style to a picker, or to a view that contains pickers, use the
-/// `View/pickerStyle(_:)` modifier.
+/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
+///     @State private var selectedFruit = 0
+///
+///     var body: some View {
+///           VStack {
+///               Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                   ForEach(0..<fruits.count) {
+///                       Text(self.fruits[$0])
+///                   }
+///               }
+///
+///               Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///           }
+///           .pickerStyle(MenuPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// > The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
+///
+/// > To apply this style to a picker, or to a view that contains pickers, use the `View/pickerStyle(_:)` modifier.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -12855,13 +15029,19 @@ extension Path {
     public func offsetBy(dx: CGFloat, dy: CGFloat) -> Path { }
 }
 
-/// A control for selecting from a set of mutually exclusive values.
+/// A control that lets you select an item.
 ///
-/// You create a picker by providing a selection binding, a label, and the
-/// content for the picker to display. Set the `selection` parameter to a bound
-/// property that provides the value to display as the current selection. Set
-/// the label to a view that visually describes the purpose of selecting content
-/// in the picker, and then provide the content for the picker to display.
+/// You create a picker by providing 3 things:
+/// 1. a selection binding
+/// 2. a label
+/// 3. content for the picker to display.
+///
+/// Set the `selection` parameter to a "current selection" binding.
+///
+/// Set the label to a view that describes the purpose of selecting content
+/// in the picker.
+///
+/// The content is what the picker displays.
 ///
 /// For example, consider the following enumeration of ice cream flavors:
 ///
@@ -12874,18 +15054,24 @@ extension Path {
 ///     }
 ///
 /// You can create a picker to select among these values by providing `Text`
-/// views in the picker initializer's content. You can optionally provide a
-/// string as the first parameter; if you do, the picker creates a `Text`
-/// label using this string:
+/// views in the picker initializer's content:
 ///
+/// ![Picker Ice Cream](/picker-ice-cream.png)
+///
+/// ```
+/// struct IceCreamView: View {
 ///     @State private var selectedFlavor = Flavor.chocolate
 ///
-///     Picker("Flavor", selection: $selectedFlavor) {
-///         Text("Chocolate").tag(Flavor.chocolate)
-///         Text("Vanilla").tag(Flavor.vanilla)
-///         Text("Strawberry").tag(Flavor.strawberry)
+///     var body: some View {
+///         Picker("Flavor", selection: $selectedFlavor) {
+///             Text("Chocolate 🍫").tag(Flavor.chocolate)
+///             Text("Vanilla 🍦").tag(Flavor.vanilla)
+///             Text("Strawberry 🍓").tag(Flavor.strawberry)
+///         }
+///         Text("Selected flavor: \(selectedFlavor.rawValue)")
 ///     }
-///     Text("Selected flavor: \(selectedFlavor.rawValue)")
+/// }
+/// ```
 ///
 /// You append a tag to each text view so that the type of each selection
 /// matches the type of the bound state variable.
@@ -12896,48 +15082,72 @@ extension Path {
 /// each option, you can create the picker with a `ForEach` construct, like
 /// this:
 ///
-///     Picker("Flavor", selection: $selectedFlavor) {
-///         ForEach(Flavor.allCases) { flavor in
-///             Text(flavor.rawValue.capitalized)
-///         }
-///     }
+/// ```
+/// struct IceCreamView: View {
+///     @State private var selectedFlavor = Flavor.chocolate
 ///
-/// In this case, `ForEach` automatically assigns a tag to the selection
-/// views, using each option's `id`, which it can do because `Flavor` conforms
-/// to the <doc://com.apple.documentation/documentation/Swift/Identifiable>
-/// protocol.
-///
-/// On the other hand, if the selection type doesn't match the input to the
-/// `ForEach`, you need to provide an explicit tag. The following example
-/// shows a picker that's bound to a `Topping` type, even though the options
-/// are all `Flavor` instances. Each option uses `View/tag(_:)` to associate
-/// a topping with the flavor it displays.
-///
-///     enum Topping: String, CaseIterable, Identifiable {
-///         case nuts
-///         case cookies
-///         case blueberries
-///
-///         var id: String { self.rawValue }
-///     }
-///     extension Flavor {
-///         var suggestedTopping: Topping {
-///             switch self {
-///             case .chocolate: return .nuts
-///             case .vanilla: return .cookies
-///             case .strawberry: return .blueberries
+///     var body: some View {
+///         Picker("Flavor", selection: $selectedFlavor) {
+///             ForEach(Flavor.allCases) { flavor in
+///                 Text(flavor.rawValue.capitalized)
 ///             }
 ///         }
 ///     }
-///     @State var suggestedTopping: Topping = .cookies
+/// }
+/// ```
 ///
-///     Picker("Suggest a topping for:", selection: $suggestedTopping) {
-///         ForEach(Flavor.allCases) { flavor in
-///             Text(flavor.rawValue.capitalized)
-///                 .tag(flavor.suggestedTopping)
+/// In this case, `ForEach` automatically assigns a tag to the selection
+/// views, using each option's `id`, which it can do because `Flavor` conforms
+/// to the [Identifiable](https://developer.apple.com/documentation/swift/identifiable)
+/// protocol.
+///
+/// However, if the selection type doesn't match the input to the
+/// `ForEach`, you need to provide an explicit tag. The following example
+/// shows a picker that has a binding to a `Topping` type, even though the options
+/// are all `Flavor` instances. Each option uses `View/tag(_:)` to associate
+/// a topping with the flavor it displays.
+///
+/// ![Picker Toppings](/picker-toppings.png)
+///
+/// ```
+/// enum Flavor: String, CaseIterable, Identifiable {
+///     case chocolate
+///     case vanilla
+///     case strawberry
+///
+///     var id: String { self.rawValue }
+///     var suggestedTopping: Topping {
+///         switch self {
+///         case .chocolate:
+///             return .nuts
+///         case .vanilla:
+///             return .cookies
+///         case .strawberry:
+///             return .blueberries
 ///         }
 ///     }
-///     Text("suggestedTopping: \(suggestedTopping.rawValue)")
+/// }
+/// enum Topping: String, CaseIterable, Identifiable {
+///     case nuts
+///     case cookies
+///     case blueberries
+///
+///     var id: String { self.rawValue }
+/// }
+///
+/// struct ContentView: View {
+///     @State private var suggestedTopping: Topping = .cookies
+///     var body: some View {
+///         Picker("Suggest a topping for:", selection: $suggestedTopping) {
+///             ForEach(Flavor.allCases) { flavor in
+///                 Text(flavor.rawValue.capitalized)
+///                     .tag(flavor.suggestedTopping)
+///             }
+///         }
+///         Text("suggestedTopping: \(suggestedTopping.rawValue)")
+///     }
+/// }
+/// ```
 ///
 /// ### Styling Pickers
 ///
@@ -12947,39 +15157,45 @@ extension Path {
 /// or `PopUpButtonPickerStyle`.
 ///
 /// To set a specific style for all picker instances within a view, use the
-/// `View/pickerStyle(_:)` modifier. The following example adds a second binding
-/// type, `Topping`, and applies the `SegmentedPickerStyle` to two pickers:
+/// `View/pickerStyle(_:)` modifier.
 ///
+/// ![Picker Segmented with Ice Cream](picker-segmented-ice-cream.png)
+///
+/// ```
+/// struct ContentView: View {
 ///     @State private var selectedFlavor = Flavor.chocolate
-///     @State private var selectedTopping = Topping.nuts
-///
-///     VStack {
+///     var body: some View {
 ///         Picker("Flavor", selection: $selectedFlavor) {
-///             ForEach(Flavor.allCases) { flavor in
-///                 Text(flavor.rawValue.capitalized)
-///             }
+///             Text("chocolate").tag(Flavor.chocolate)
+///             Text("vanilla").tag(Flavor.vanilla)
 ///         }
-///         Picker("Topping", selection: $selectedTopping) {
-///             ForEach(Topping.allCases) { flavor in
-///                 Text(flavor.rawValue.capitalized)
-///             }
-///         }
-///
-///         Text("Selected flavor: \(selectedFlavor.rawValue)")
-///         Text("Selected toppping: \(selectedTopping.rawValue)")
+///         .pickerStyle(SegmentedPickerStyle())
 ///     }
-///     .pickerStyle(SegmentedPickerStyle())
-///
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Picker<Label, SelectionValue, Content> : View where Label : View, SelectionValue : Hashable, Content : View {
 
-    /// Creates a picker that displays a custom label.
+    /// Creates a picker with a custom label.
+    ///
+    /// ```
+    /// struct PickerView: View {
+    ///     @State private var selection: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Picker(selection: $selection, label: Label("Pick emoji", systemImage: "face.smiling") {
+    ///             Text("🍑").tag(1)
+    ///             Text("🗿").tag(2)
+    ///             Text("🍌").tag(3)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///     - selection: A binding to a property that determines the
-    ///       currently-selected option.
-    ///     - label: A view that describes the purpose of selecting an option.
-    ///     - content: A view that contains the set of options.
+    ///     - selection: A binding to the currently selected option.
+    ///     - label: A view used for the picker's label.
+    ///     - content: A closure that returns the picker's options.
     public init(selection: Binding<SelectionValue>, label: Label, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
@@ -12995,37 +15211,48 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Picker where Label == Text {
 
-    /// Creates a picker that generates its label from a localized string key.
+    /// Creates a picker with a localized string key label.
+    ///
+    /// ```
+    /// struct PickerView: View {
+    ///     @State private var selection: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Picker(LocalizedStringKey("Pick emoji"), selection: $selection) {
+    ///             Text("🍑").tag(1)
+    ///             Text("🗿").tag(2)
+    ///             Text("🍌").tag(3)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///     - titleKey: A localized string key that describes the purpose of
-    ///       selecting an option.
-    ///     - selection: A binding to a property that determines the
-    ///       currently-selected option.
-    ///     - content: A view that contains the set of options.
-    ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// localized key similar to `Text/init(_:tableName:bundle:comment:)`. See
-    /// `Text` for more information about localizing strings.
-    ///
-    /// To initialize a picker with a string variable, use
-    /// `init(_:selection:content:)-5njtq` instead.
+    ///     - titleKey: A localized string key used for the picker's label.
+    ///     - selection: A binding to the currently selected option.
+    ///     - content: A closure that returns the picker's options.
     public init(_ titleKey: LocalizedStringKey, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) { }
 
-    /// Creates a picker that generates its label from a string.
+    /// Creates a picker with a string label.
+    ///
+    /// ```
+    /// struct PickerView: View {
+    ///     @State private var selection: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Picker("Pick emoji 🤑", selection: $selection) {
+    ///             Text("🍑").tag(1)
+    ///             Text("🗿").tag(2)
+    ///             Text("🍌").tag(3)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///     - title: A string that describes the purpose of selecting an option.
-    ///     - selection: A binding to a property that determines the
-    ///       currently-selected option.
-    ///     - content: A view that contains the set of options.
-    ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// title similar to `Text/init(_:)-9d1g4`. See `Text` for more
-    /// information about localizing strings.
-    ///
-    /// To initialize a picker with a localized string key, use
-    /// `init(_:selection:content:)-6lwfn` instead.
+    ///     - title: A string used for the pikcer's label.
+    ///     - selection: A binding to the currently selected option.
+    ///     - content: A closure that returns the picker's options.
     public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 }
 
@@ -13099,12 +15326,31 @@ public struct PinnedScrollableViews : OptionSet {
     public typealias RawValue = UInt32
 }
 
-/// A button style that doesn't style or decorate its content while idle, but
-/// may apply a visual effect to indicate the pressed, focused, or enabled state
-/// of the button.
+/// A button effect that only modifies the label on interaction.
 ///
-/// To apply this style to a button, or to a view that contains buttons, use the
-/// `View/buttonStyle(_:)-66fbx` modifier.
+/// > A button style that doesn't style or decorate its content while idle, but may apply a visual effect to indicate the pressed, focused, or enabled state of the button.
+///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("Plain Banana🍌🍌") { tap() }
+///                       .buttonStyle(PlainButtonStyle())
+///                  Button("Borderless Banana 🍌🍌") { tap() }
+///                       .buttonStyle(BorderlessButtonStyle())
+///                  Button("Default Banana🍌🍌") { tap() }
+///                       .buttonStyle(DefaultButtonStyle())
+///              }
+///              .font(.title2)
+///          }
+///
+///          func tap() {}
+///      }
+///
+///
+/// > To apply this style to a button, or to a view that contains buttons, use the `View/buttonStyle(_:)-66fbx` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
@@ -13125,6 +15371,22 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 }
 
 /// The instance that describes the behavior and appearance of a plain list.
+///
+/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(PlainListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainListStyle : ListStyle {
 
@@ -14136,62 +16398,808 @@ public struct RedactionReasons : OptionSet {
     public typealias RawValue = Int
 }
 
-/// A document model definition used to serialize reference type documents to
-/// and from file contents.
+/// The protocol used to serialize a reference type document to and from a file.
 ///
-/// Conformance to `ReferenceFileDocument` is expected to be thread-safe, and
-/// deserialization and serialization will be done on a background thread.
+/// Conform to this protocol to move a document between its file representation and its "swift-usable"
+/// representation.
+///
+/// This protocol is very similar to ``FileDocument``, with the difference being whether the data
+/// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
+/// - `struct` --> ``FileDocument``
+/// - `class` --> `ReferenceFileDocument`
+///
+/// While the two protocols are similar, `ReferenceFileDocument` has the unique challenge
+/// of the user editing a document while it is being written to a file. For this reason,
+/// ``ReferenceFileDocument/snapshot`` must be used. See the example for more details.
+///
+/// Don't worry about thread safety when using `ReferenceFileDocument`, since
+/// deserialization and serialization are done on a background thread.
+///
+/// - Note: If your app will have documents, it very likely will be easiest to begin from Apple's own
+/// Document app template. To do this, go to *File > New > Project*, and then use *Document App*.
+///
+/// ### Example
+///
+/// #### App structure
+///
+/// To begin, update the scene definition to use ``DocumentGroup``.
+///
+///     import SwiftUI
+///
+///     @main
+///     struct ExampleApp: App {
+///         var body: some Scene {
+///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+///                 ContentView(document: file.document)
+///             }
+///         }
+///     }
+///
+/// #### ReferenceFileDocument conformance
+///
+/// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+/// - A: ``ReferenceFileDocument/readableContentTypes``
+/// - B: ``ReferenceFileDocument/init(configuration:)``
+/// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+/// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     class ExampleDocument: ReferenceFileDocument {
+///         @Published var text: String
+///
+///         init(text: String = "This is a brand new document! 📃") {
+///             self.text = text
+///         }
+///
+///         // A
+///         static var readableContentTypes: [UTType] { [.exampleText] }
+///
+///         // B
+///         required init(configuration: ReadConfiguration) throws {
+///             guard let data = configuration.file.regularFileContents,
+///                 let string = String(data: data, encoding: .utf8)
+///             else {
+///                 throw CocoaError(.fileReadCorruptFile)
+///             }
+///             text = string
+///         }
+///
+///         // C
+///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+///             let data = snapshot.data(using: .utf8)!
+///             return .init(regularFileWithContents: data)
+///         }
+///
+///         // D
+///         func snapshot(contentType: UTType) throws -> String {
+///             return text
+///         }
+///     }
+///
+/// #### View implementation
+///
+/// Finally, use the ``TextEditor`` view to edit the document file.
+///
+///     import SwiftUI
+///
+///     struct ExampleView: View {
+///         @ObservedObject var document: ExampleDocument
+///         var body: some View {
+///             TextEditor(text: $document.text)
+///         }
+///     }
+///
+/// #### UTType settings
+///
+/// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+/// follow these steps:
+/// 1. Go to the Xcode project settings.
+/// 2. Click on your target to the left.
+/// 3. Expand the "Document Types" tab.
+/// 4. Click *"Click here to add additional document type properties"*
+/// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+/// 6. Ensure the **Type** is *String*.
+/// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+/// 8. Change the **Types** (top right) to *com.example.plain-text*.
+///
+///
+/// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+///
+///     import SwiftUI
+///     import UniformTypeIdentifiers
+///
+///     extension UTType {
+///         static var exampleText: UTType {
+///             UTType(importedAs: "com.example.plain-text")
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol ReferenceFileDocument : ObservableObject{ }
 extension ReferenceFileDocument : ObservableObject {
 
-    /// A type of the document snapshot that can be used for serialization
+    /// The type of the the document snapshot used for serialization
     /// in parallel to the main document being editable.
     ///
-    /// - See Also: `snapshot(contentType:)`
+    /// This associated type is resolved when a class conforming to the ``ReferenceFileDocument``
+    /// protocol implements the required
+    /// ``ReferenceFileDocument/snapshot(contentType:)`` method.
+    /// It is the return type of this function.
+    ///
+    /// In the following example, the `snapshot(contentType:)` method returns a `String`,
+    /// so the associated type `Snapshot` would resolve to `String`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     associatedtype Snapshot
 
-    /// The types the document is able to open.
+    /// The types the ``ReferenceFileDocument`` document is able to open.
+    ///
+    /// The readable types of a document should be specified in its declaration. Very often,
+    /// the process of creating a document-based app requires a custom UTType object.
+    ///
+    /// In the following example, we create a custom readable content type called `exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     static var readableContentTypes: [UTType] { get }
 
-    /// The types the document is able to save or export to.
+    /// The types that a reference file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     static var writableContentTypes: [UTType] { get }
 
-    /// Initialize self by reading from the contents of a given `ReadConfiguration`.
+    /// Initialize the reference file document from the contents of a file.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn how to use the configuration parameter.
+    ///
+    /// In the following example, the required initializer parses the configuration parameter
+    /// to pull out the simple text `String` from the document.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: The read-configuration for creating a reference file document.
     init(configuration: Self.ReadConfiguration) throws { }
 
-    /// The configuration for reading document contents.
+    /// A type alias for referring to the configuration for reading document contents.
+    ///
+    /// See ``FileDocumentReadConfiguration`` to learn everything about what this
+    /// type alias refers to within the ``ReferenceFileDocument`` protocol.
+    ///
+    /// This type alias is primarily used in the protocol's required initializer,
+    /// ``ReferenceFileDocument/init(configuration:)``
+    /// as the type of its configuration parameter.
     typealias ReadConfiguration = FileDocumentReadConfiguration
 
-    /// Create a snapshot of the current state of the document, which will be
-    /// used for serialization while `self` becomes editable by the user.
+    /// Creates a snapshot of the current document, which will be
+    /// used for serialization, while `self` becomes editable by the user.
     ///
-    /// When saving a `ReferenceFileDocument`, edits to the document are blocked
-    /// until snapshot with a copy of any mutable references can be created.
+    /// Taking a snapshot of the document is necessary because the data is stored as a reference
+    /// type. This means that if a separate snapshot was not taken, the user could potentially edit
+    /// the data while it's in the process of being serialized.
+    /// See ``ReferenceFileDocument`` for more information on this.
+    ///
+    /// A `ReferenceFileDocument` blocks edits to the document while it's being saved
+    /// until snapshot can be created
     /// Once the snapshot is created, the document becomes editable in parallel
-    /// to the snapshot being serialized using `write(snaphot:to:contentType:)`.
+    /// to the snapshot being serialized.
+    ///
+    /// The following example shows how to use
+    /// ``ReferenceFileDocument/snapshot(contentType:)``
+    /// along with the rest of the required methods to create a document-based app.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
     ///
     /// - Parameter contentType: The content type being written, for which the
     ///   snapshot should be created.
     func snapshot(contentType: UTType) throws -> Self.Snapshot { }
 
-    /// Serialize the snapshot to file contents for a specified `type`.
+    /// Serializes the document from a snapshot with the specified configuration.
+    ///
+    /// This is essentially the "saving" function in a reference file document.
+    ///
+    /// In the following example, the `fileWrapper(snapshot:configuration:)` function
+    /// simply uses the snapshot to save a new ``FileWrapper`` object.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - snapshot: The snapshot of the document containing the state required
-    ///     to be saved.
-    ///   - configuration: The configuration for the current document contents.
+    ///   - snapshot: A snapshot of the document with the data to serialize.
+    ///   - configuration: The ``FileDocumentWriteConfiguration`` used to serialize the document.
     ///
-    /// - Returns: The destination to serialize the document contents to. The
-    ///   value can be a newly created `FileWrapper` or an updated `FileWrapper`
-    ///   of the one provided in `configuration`.
+    /// - Returns: The destination for the serialized the document. It can be a newly created
+    /// ``FileWrapper` or an updated ``FileWrapper` from the one provided by `configuration`.
     func fileWrapper(snapshot: Self.Snapshot, configuration: Self.WriteConfiguration) throws -> FileWrapper { }
 
-    /// The configurations for serializing document contents.
+    /// A type alias used for the configuration when writing a reference file document.
+    ///
+    /// Since this is just a type alias, see ``FileDocumentWriteConfiguration`` for
+    /// full information on what this type does.
     typealias WriteConfiguration = FileDocumentWriteConfiguration
 }
 
@@ -14200,9 +17208,110 @@ extension ReferenceFileDocument : ObservableObject {
 @available(watchOS, unavailable)
 extension ReferenceFileDocument {
 
-    /// The types the document is able to save or export to.
+    /// The types that a reference file document is able to save or export to.
     ///
-    /// Defaults to `readableContentTypes`.
+    /// SwiftUI defaults the value of this to `readableContentTypes`, and it usually doesn't need
+    /// to change. In the following example, `writableContentTypes` defaults to
+    /// `UTType.exampleText`.
+    ///
+    /// ### Example
+    ///
+    /// #### App structure
+    ///
+    /// To begin, update the scene definition to use ``DocumentGroup``.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     @main
+    ///     struct ExampleApp: App {
+    ///         var body: some Scene {
+    ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
+    ///                 ContentView(document: file.document)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// #### ReferenceFileDocument conformance
+    ///
+    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
+    /// - A: ``ReferenceFileDocument/readableContentTypes``
+    /// - B: ``ReferenceFileDocument/init(configuration:)``
+    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
+    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     class ExampleDocument: ReferenceFileDocument {
+    ///         @Published var text: String
+    ///
+    ///         init(text: String = "This is a brand new document! 📃") {
+    ///             self.text = text
+    ///         }
+    ///
+    ///         // A
+    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///         // B
+    ///         required init(configuration: ReadConfiguration) throws {
+    ///             guard let data = configuration.file.regularFileContents,
+    ///                 let string = String(data: data, encoding: .utf8)
+    ///             else {
+    ///                 throw CocoaError(.fileReadCorruptFile)
+    ///             }
+    ///             text = string
+    ///         }
+    ///
+    ///         // C
+    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
+    ///             let data = snapshot.data(using: .utf8)!
+    ///             return .init(regularFileWithContents: data)
+    ///         }
+    ///
+    ///         // D
+    ///         func snapshot(contentType: UTType) throws -> String {
+    ///             return text
+    ///         }
+    ///     }
+    ///
+    /// #### View implementation
+    ///
+    /// Finally, use the ``TextEditor`` view to edit the document file.
+    ///
+    ///     import SwiftUI
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject var document: ExampleDocument
+    ///         var body: some View {
+    ///             TextEditor(text: $document.text)
+    ///         }
+    ///     }
+    ///
+    /// #### UTType settings
+    ///
+    /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
+    /// follow these steps:
+    /// 1. Go to the Xcode project settings.
+    /// 2. Click on your target to the left.
+    /// 3. Expand the "Document Types" tab.
+    /// 4. Click *"Click here to add additional document type properties"*
+    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
+    /// 6. Ensure the **Type** is *String*.
+    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
+    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
+    ///
+    /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+    ///
+    ///     import SwiftUI
+    ///     import UniformTypeIdentifiers
+    ///
+    ///     extension UTType {
+    ///         static var exampleText: UTType {
+    ///             UTType(importedAs: "com.example.plain-text")
+    ///         }
+    ///     }
+    ///
     public static var writableContentTypes: [UTType] { get }
 }
 
@@ -14755,19 +17864,14 @@ extension Scene {
     ///         WindowGroup {
     ///             Text("Press ⌘P to print 🍌")
     ///         }
-    ///         .commands {
-    ///             PrintCommand()
-    ///         }
+    ///         .commands { PrintCommand() }
     ///     }
     ///
     ///     struct PrintCommand: Commands {
     ///         var body: some Commands {
     ///             CommandMenu("Print") {
     ///                 Button("Print", action: { print("🍌") })
-    ///                     .keyboardShortcut(
-    ///                         KeyboardShortcut(
-    ///                             KeyEquivalent("p"),
-    ///                             modifiers: [.command]))
+    ///                     .keyboardShortcut(KeyboardShortcut(KeyEquivalent("p"), modifiers: [.command]))
     ///             }
     ///         }
     ///     }
@@ -15633,46 +18737,112 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
     public init(@ViewBuilder content: () -> Content) { }
 }
 
-/// A control into which the user securely enters private text.
+/// A text field for entering private text, usually a password.
+///
+/// A secure field is just like a ``TextField``, except the entered text is shown as dots instead of
+/// as the actual text.
+///
+/// ```
+/// struct PasswordView: View {
+///     @State private var password = ""
+///     var body: some View {
+///         SecureField("Password", text: $password)
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct SecureField<Label> : View where Label : View {
 
-    /// The content and behavior of the view.
+    /// The body of a secure field, which is the underlying TextField.
+    ///
+    /// ```
+    /// struct PasswordView: View {
+    ///     @State private var password = ""
+    ///     var body: some View {
+    ///         let field = SecureField("Password", text: $password)
+    ///         return field.onAppear { print(field.body) } //"TextField<Text>(..."
+    ///     }
+    /// }
+    /// ```
     public var body: some View { get }
 
     /// The type of view representing the body of this view.
     ///
     /// When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
+    ///
+    /// In this instance, the type evaluates to ``TextField``, since the body of a ``SecureField``
+    /// is a text field.
+    ///
+    /// ```
+    /// struct PasswordView: View {
+    ///     @State private var password = ""
+    ///     var body: some View {
+    ///         SecureField("Password", text: $password, onCommit: {
+    ///             print("Password has been entered ✅")
+    ///         })
+    ///     }
+    /// }
+    /// ```
     public typealias Body = some View
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SecureField where Label == Text {
 
-    /// Creates an instance.
+    /// Creates a text field for entering private text, usually a password, with a LocalizedStringKey placeholder.
+    ///
+    /// ```
+    /// struct PasswordView: View {
+    ///     @State private var password = ""
+    ///     var body: some View {
+    ///         SecureField(LocalizedStringKey("Password"), text: $password, onCommit: {
+    ///             print("Password has been entered ✅")
+    ///         })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of `self`, describing
-    ///     its purpose.
-    ///   - text: The text to be displayed and edited.
-    ///   - onCommit: The action to perform when the user performs an action
-    ///     (usually the return key) while the `SecureField` has focus.
+    ///   - titleKey: The localized string key placeholder, which is visible when the field is empty.
+    ///   - text: A binding variable to the displayed and edited text.
+    ///   - onCommit: The function called when the user hits the return key.
     public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void = {}) { }
 
-    /// Creates an instance.
+    /// Creates a text field for entering private text, usually a password, with a String placeholder.
     ///
     /// - Parameters:
-    ///   - title: The title of `self`, describing its purpose.
-    ///   - text: The text to be displayed and edited.
-    ///   - onCommit: The action to perform when the user performs an action
-    ///     (usually the return key) while the `SecureField` has focus.
+    ///   - title: The string placeholder, which is visible when the field is empty.
+    ///   - text: A binding variable to the displayed and edited text.
+    ///   - onCommit: The function called when the user hits the return key.
     public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 }
 
 /// A picker style that presents the options in a segmented control.
 ///
-/// To apply this style to a picker, or to a view that contains pickers, use the
+/// ![SegmentedPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-segmented-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
+///     @State private var selectedFruit = 0
+///
+///      var body: some View {
+///           VStack {
+///               Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                   ForEach(0..<fruits.count) {
+///                       Text(self.fruits[$0])
+///                   }
+///               }
+///               Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///           }
+///           .pickerStyle(SegmentedPickerStyle())
+///       }
+///  }
+/// ```
+///
+///
+/// > To apply this style to a picker, or to a view that contains pickers, use the
 /// `View/pickerStyle(_:)` modifier.
 ///
 /// > Note: The segmented picker style supports `Text` and `Image` segments only.
@@ -16069,6 +19239,22 @@ public struct SidebarCommands : Commands {
 }
 
 /// The behavior and appearance of a sidebar or source list.
+///
+/// ![SidebarListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-sidebar-example-1.png)
+///
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(SidebarListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -16158,7 +19344,30 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
     public func hash(into hasher: inout Hasher) { }
 }
 
-/// A control for selecting a value from a bounded linear range of values.
+/// A control for selecting a value from a bounded range.
+///
+/// A slider is a circle on a track. The user can move the circle from left to right to pick between
+/// values. The slider takes a binding that the user updates.
+///
+/// The most basic example looks like this:
+///
+/// ```
+/// struct SliderView: View {
+///     @State private var value: Double = 0
+///
+///     var body: some View {
+///         Slider(value: $value)
+///     }
+/// }
+/// ```
+///
+/// In general, a slider has these four options:
+/// 1. Add a label
+/// 2. Change maximum and minimum values
+/// 3. Create a step size
+/// 4. Call a function when slider editing chances.
+///
+/// The slider's different initializers use different combinations of these options.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct Slider<Label, ValueLabel> : View where Label : View, ValueLabel : View {
@@ -16177,42 +19386,61 @@ public struct Slider<Label, ValueLabel> : View where Label : View, ValueLabel : 
 @available(tvOS, unavailable)
 extension Slider {
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label and max/min labels.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                minimumValueLabel: Text("🐢"),
+    ///                maximumValueLabel: Text("🐇"),
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - minimumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - maximumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - minimumValueLabel: A view used as a label on the minimum value side of the slider.
+    ///   - maximumValueLabel: A view used as a label on the maximum value side of the slider.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label, max/min labels, and a step size.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                step: 10,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                minimumValueLabel: Text("🐢"),
+    ///                maximumValueLabel: Text("🐇"),
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - step: The distance between each valid value.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - minimumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - maximumValueLabel: A `View` that describes `bounds.lowerBound`.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - step: The distance between values on the slider. Defaults to 1.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - minimumValueLabel: A view used as a label on the minimum value side of the slider.
+    ///   - maximumValueLabel: A view used as a label on the maximum value side of the slider.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
@@ -16220,38 +19448,53 @@ extension Slider {
 @available(tvOS, unavailable)
 extension Slider where ValueLabel == EmptyView {
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider with a label and a step size.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                step: 10,
+    ///                onEditingChanged: { began in print("began? \(began)") },
+    ///                label: { Text("Speed") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - step: The distance between each valid value.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///   - label: A `View` that describes the purpose of the instance.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - step: The distance between values on the slider. Defaults to 1.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
@@ -16260,51 +19503,143 @@ extension Slider where ValueLabel == EmptyView {
 @available(tvOS, unavailable)
 extension Slider where Label == EmptyView, ValueLabel == EmptyView {
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a slider.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                onEditingChanged: { began in print("began? \(began)") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
-    @available(tvOS, unavailable)
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
-    /// Creates an instance that selects a value from within a range.
+    /// Creates a a slider with a step size.
+    ///
+    /// ```
+    /// struct LabeledSliderView: View {
+    ///     @State private var value: Double = 0
+    ///
+    ///     var body: some View {
+    ///         Slider(value: $value,
+    ///                in: 0...100,
+    ///                step: 10,
+    ///                onEditingChanged: { began in print("began? \(began)") })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - value: The selected value within `bounds`.
-    ///   - bounds: The range of the valid values. Defaults to `0...1`.
-    ///   - step: The distance between each valid value.
-    ///   - onEditingChanged: A callback for when editing begins and ends.
-    ///
-    /// The `value` of the created instance will be equal to the position of
-    /// the given value within `bounds`, mapped into `0...1`.
-    ///
-    /// `onEditingChanged` will be called when editing begins and ends. For
-    /// example, on iOS, a `Slider` is considered to be actively editing while
-    /// the user is touching the knob and sliding it around the track.
+    ///   - value: A binding connected to the slider value.
+    ///   - bounds: A range of possible values. Defaults to `0...1`.
+    ///   - step: The distance between values on the slider. Defaults to 1.
+    ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
+    ///   parameter equal to true when editing begins, and false when it ends.
     @available(tvOS, unavailable)
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
-/// A flexible space that expands along the major axis of its containing stack
-/// layout, or on both axes if not contained in a stack.
+/// A flexible empty view that expands to take up as much space as possible.
+///
+/// Spacers are commonly used inside of stacks, like ``VStack``, ``HStack``, and ``ZStack``.
+/// In a stack, they take up as much space as possible, so push everything else to the side.
+///
+/// In the following ``HStack``, a spacer is used to align the text to the right:
+///
+/// ```
+/// struct SpacerView: View {
+///     var body: some View {
+///         HStack {
+///             Spacer()
+///             Text("Ouch I'm crammed ➡️🤕")
+///         }
+///     }
+/// }
+/// ```
+///
+/// A spacer can also be framed to take a specific amount of space:
+///
+/// ```
+/// struct SpacerView: View {
+///     var body: some View {
+///         VStack {
+///             Spacer()
+///             Text("I'm 15 points off the ground 😇")
+///             Spacer()
+///                 .frame(height: 15)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Spacer {
 
-    /// The minimum length this spacer can be shrunk to, along the axis or axes
-    /// of expansion.
+    /// The minimum length the spacer will take up.
     ///
-    /// If `nil`, the system default spacing between views is used.
+    /// If `nil`, the spacer will take up no space or the whole space, and its layout will be
+    /// the last priority.
+    ///
+    /// This property is usually specified using ``Spacer/init(minLength:)``,
+    /// but it can also be specified directly:
+    ///
+    /// ```
+    /// struct SpacerMinLengthView: View {
+    ///     @State private var spacer = Spacer()
+    ///     var body: some View {
+    ///         HStack {
+    ///             spacer
+    ///             Button("Cram!") { spacer.minLength = 300 }
+    ///             Text("Ouch I'm crammed ➡️🤕")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var minLength: CGFloat?
 
+    /// Creates a spacer view.
+    ///
+    /// A spacer is a flexible empty view that expands to take up as much space as possible.
+    /// Spacers are commonly used inside of stacks, like ``VStack``, ``HStack``, and ``ZStack``.
+    /// In a stack, they take up as much space as possible, so push everything else to the side.
+    ///
+    /// In the following ``HStack``, a spacer is used to align the text to the right:
+    ///
+    /// ```
+    /// struct SpacerView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Spacer()
+    ///             Text("Ouch I'm crammed ➡️🤕")
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Spacers ordinarily take up only as much space is left by other views. However,
+    /// your spacer can also specify a minimum length:
+    ///
+    /// ```
+    /// struct BigSpacerView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Spacer(minLength: 300)
+    ///             Text("I'm REALLY crammed 😵")
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter minLength: The minimum amount of space the spacer will take up.
     @inlinable public init(minLength: CGFloat? = nil) { }
 
     /// The type of view representing the body of this view.
@@ -17158,8 +20493,22 @@ extension StrokeStyle : Animatable {
 
 /// A toggle style that displays a leading label and a trailing switch.
 ///
-/// To apply this style to a toggle, or to a view that contains toggles, use the
-/// `View/toggleStyle(_:)` modifier.
+/// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State private var status = true
+///     var body: some View {
+///          Toggle(isOn: $status) {
+///              Text("Banana🍌🍌")
+///          }
+///          .toggleStyle(SwitchToggleStyle())
+///          .padding()
+///     }
+/// }
+/// ```
+///
+/// > To apply this style to a toggle, or to a view that contains toggles, use the `View/toggleStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct SwitchToggleStyle : ToggleStyle {
@@ -17702,8 +21051,20 @@ extension Text {
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Text {
-
-    /// Concatenates the text in two text views in a new text view.
+    /// Concatenates two text views into one new text view.
+    ///
+    /// ![plus Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-plus-example-1.png)
+    ///
+    /// ```
+    ///struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///             .font(.title)
+    ///         + Text("Apple🍎🍎")
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - lhs: The first text view with text to combine.
@@ -17854,18 +21215,25 @@ extension Text {
     ///
     /// Use this method to change the color of the text rendered by a text view.
     ///
-    /// For example, you can display the names of the colors red, green, and
-    /// blue in their respective colors:
+    /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
     ///
-    ///     HStack {
-    ///         Text("Red").foregroundColor(.red)
-    ///         Text("Green").foregroundColor(.green)
-    ///         Text("Blue").foregroundColor(.blue)
+    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
+    ///
+    ///     struct ExampleView: View {
+    ///        var body: some View {
+    ///            VStack {
+    ///                Text("Banana🍌🍌")
+    ///                    .foregroundColor(.yellow)
+    ///                Text("Apple 🍎🍎")
+    ///                    .foregroundColor(.red)
+    ///                Text("Peach 🍑🍑")
+    ///                    .foregroundColor(.orange)
+    ///            }
+    ///            .font(.largeTitle)
+    ///        }
     ///     }
     ///
-    /// ![Three text views arranged horizontally, each containing
-    ///     the name of a color displayed in that
-    ///     color.](SwiftUI-Text-foregroundColor.png)
+    ///
     ///
     /// - Parameter color: The color to use when displaying this text.
     /// - Returns: A text view that uses the color value you supply.
@@ -17897,8 +21265,38 @@ extension Text {
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
     public func font(_ font: Font?) -> Text { }
-
+    ///
     /// Sets the font weight of the text.
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    ///
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text("ultraLight 🍌")
+    ///                     .fontWeight(Font.Weight.ultraLight)
+    ///                 Text("thin🍌")
+    ///                     .fontWeight(Font.Weight.thin)
+    ///                 Text("light🍌")
+    ///                     .fontWeight(Font.Weight.light)
+    ///                 Text("regular🍌")
+    ///                     .fontWeight(Font.Weight.regular)
+    ///                 Text("medium🍌")
+    ///                     .fontWeight(Font.Weight.medium)
+    ///                 Text("semibold🍌")
+    ///                     .fontWeight(Font.Weight.semibold)
+    ///                 Text("bold🍌")
+    ///                     .fontWeight(Font.Weight.bold)
+    ///                 Text("heavy🍌")
+    ///                     .fontWeight(Font.Weight.heavy)
+    ///                 Text("black🍌")
+    ///                     .fontWeight(Font.Weight.black)
+    ///            }
+    ///            .font(.title)
+    ///         }
+    ///     }
+    ///
     ///
     /// - Parameter weight: One of the available font weights.
     ///
@@ -17907,15 +21305,59 @@ extension Text {
 
     /// Applies a bold font weight to the text.
     ///
+    /// ![Bold Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-bold-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .bold()
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Returns: Bold text.
     public func bold() -> Text { }
 
     /// Applies italics to the text.
     ///
+    /// ![Italic Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-italic-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .italic()
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Returns: Italic text.
     public func italic() -> Text { }
 
     /// Applies a strikethrough to the text.
+    ///
+    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .strikethrough(false)
+   ///              .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌")
+    ///             .strikethrough()
+    ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌")
+    ///             .strikethrough(true, color: .yellow)
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has a
@@ -17927,6 +21369,26 @@ extension Text {
     public func strikethrough(_ active: Bool = true, color: Color? = nil) -> Text { }
 
     /// Applies an underline to the text.
+    ///
+    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline(false)
+   ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline()
+    ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline(true, color: .yellow)
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has an
@@ -18437,6 +21899,18 @@ public struct TextFormattingCommands : Commands {
 }
 
 /// A label style that only displays the title of the label.
+///
+/// ![TitleOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-title-only-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              Label("Banana🍌🍌", systemImage: "heart.fill")
+///                  .labelStyle(TitleOnlyLabelStyle())
+///         }
+///     }
+///
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct TitleOnlyLabelStyle : LabelStyle {
 
@@ -18456,13 +21930,12 @@ public struct TitleOnlyLabelStyle : LabelStyle {
     public typealias Body = some View
 }
 
-/// A control that toggles between on and off states.
+/// An on-off switch.
 ///
-/// You create a toggle by providing an `isOn` binding and a label. Bind `isOn`
-/// to a Boolean property that determines whether the toggle is on or off. Set
-/// the label to a view that visually describes the purpose of switching between
-/// toggle states. For example:
+/// Create a toggle by providing an `isOn` binding and a label.
 ///
+/// ```
+/// struct SwitchView: View {
 ///     @State private var vibrateOnRing = false
 ///
 ///     var body: some View {
@@ -18470,38 +21943,65 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 ///             Text("Vibrate on Ring")
 ///         }
 ///     }
+/// }
+/// ```
 ///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
 /// parameter, instead of a trailing closure:
 ///
+/// ```
+/// struct SwitchView: View {
 ///     @State private var vibrateOnRing = true
 ///
 ///     var body: some View {
 ///         Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
 ///     }
+/// }
+/// ```
 ///
 /// ### Styling Toggles
 ///
-/// You can customize the appearance and interaction of toggles by creating
-/// styles that conform to the `ToggleStyle` protocol. To set a specific style
-/// for all toggle instances within a view, use the `View/toggleStyle(_:)`
-/// modifier:
+/// You can customize the appearance of toggles by using a ``ToggleStyle``, or creating your own
+/// styles that conform to the ``ToggleStyle`` protocol. Available styles include:
+/// - ``DefaultToggleStyle``
+/// - ``SwitchToggleStyle``
+/// - ``CheckboxToggleStyle``
 ///
-///     VStack {
-///         Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
-///         Toggle("Vibrate on Silent", isOn: $vibrateOnSilent)
+/// To set the style, use the ``View/toggleStyle(_:)`` modifier:
+///
+/// ```
+/// struct RingerView: View {
+///     @State private var vibrateOnRing = true
+///     @State private var vibrateOnSilent = true
+///     var body: some View {
+///         VStack {
+///             Toggle("Vibrate on Ring 🔔", isOn: $vibrateOnRing)
+///             Toggle("Vibrate on Silent 🔕", isOn: $vibrateOnSilent)
+///         }
+///         .toggleStyle(SwitchToggleStyle())
 ///     }
-///     .toggleStyle(SwitchToggleStyle())
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Toggle<Label> : View where Label : View {
 
-    /// Creates a toggle that displays a custom label.
+    /// Creates an on-off switch with a custom label.
+    ///
+    /// ```
+    /// struct ToggleView: View {
+    ///     @State private var on = false
+    ///     var body: some View {
+    ///         Toggle(isOn: $on, label: {
+    ///             Text("Airplane Mode ✈️")
+    ///          })
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - isOn: A binding to a property that determines whether the toggle is on
-    ///     or off.
-    ///   - label: A view that describes the purpose of the toggle.
+    ///   - isOn: A boolean binding connected to whether the toggle is on.
+    ///   - label: A closure that returns the toggle label.
     public init(isOn: Binding<Bool>, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
@@ -18517,27 +22017,34 @@ public struct Toggle<Label> : View where Label : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Toggle where Label == ToggleStyleConfiguration.Label {
 
-    /// Creates a toggle based on a toggle style configuration.
+    /// Creates a an on-off switch based on a toggle style configuration.
     ///
-    /// You can use this initializer within the
+    /// Use this initializer **only** within the
     /// `ToggleStyle/makeBody(configuration:)` method of a `ToggleStyle` to
-    /// create an instance of the styled toggle. This is useful for custom
-    /// toggle styles that only modify the current toggle style, as opposed to
+    /// create a toggle for configuring. This is useful for new custom
+    /// toggle styles that only modify the current toggle style, instead of
     /// implementing a brand new style.
     ///
     /// For example, the following style adds a red border around the toggle,
     /// but otherwise preserves the toggle's current style:
     ///
-    ///     struct RedBorderedToggleStyle : ToggleStyle {
+    ///     struct RedBorderedToggleStyle: ToggleStyle {
     ///         typealias Body = Toggle
-    ///
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             Toggle(configuration)
     ///                 .border(Color.red)
     ///         }
     ///     }
     ///
-    /// - Parameter configuration: A toggle style configuration.
+    ///     struct ContentView: View {
+    ///         @State private var on = true
+    ///         var body: some View {
+    ///             Toggle("🍌🍌", isOn: $on)
+    ///                 .toggleStyle(RedBorderedToggleStyle())
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: A toggle style configuration, passed from makeBody(configuration:).
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public init(_ configuration: ToggleStyleConfiguration) { }
 }
@@ -18545,35 +22052,40 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Toggle where Label == Text {
 
-    /// Creates a toggle that generates its label from a localized string key.
+    /// Creates an on-off switch with a localized string key label.
     ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// localized key similar to `Text/init(_:tableName:bundle:comment:)`. See
-    /// `Text` for more information about localizing strings.
+    /// Uses a localized string key to create a toggle.
     ///
-    /// To initialize a toggle with a string variable, use
-    /// `Toggle/init(_:isOn:)-2qurm` instead.
+    /// ```
+    /// struct LocalizedToggleView: View {
+    ///     @State private var on = false
+    ///     var body: some View {
+    ///         Toggle(LocalizedStringKey("Airplane Mode"), isOn: $on)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the toggle's localized title, that describes
-    ///     the purpose of the toggle.
-    ///   - isOn: A binding to a property that indicates whether the toggle is
-    ///    on or off.
+    ///   - titleKey: A localized string label.
+    ///   - isOn: A boolean binding connected to whether the toggle is on.
     public init(_ titleKey: LocalizedStringKey, isOn: Binding<Bool>) { }
 
-    /// Creates a toggle that generates its label from a string.
+    /// Creates an on-off switch with a string label.
     ///
-    /// This initializer creates a `Text` view on your behalf, and treats the
-    /// title similar to `Text/init(_:)-9d1g4`. See `Text` for more
-    /// information about localizing strings.
+    /// Uses a string to create a toggle.
     ///
-    /// To initialize a toggle with a localized string key, use
-    /// `Toggle/init(_:isOn:)-8qx3l` instead.
+    /// ```
+    /// struct SettingsToggleView: View {
+    ///     @State private var on = false
+    ///     var body: some View {
+    ///         Toggle("Airplane Mode ✈️", isOn: $on)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
-    ///   - title: A string that describes the purpose of the toggle.
-    ///   - isOn: A binding to a property that indicates whether the toggle is
-    ///    on or off.
+    ///   - title: A string label.
+    ///   - isOn: A boolean binding connected to whether the toggle is on.
     public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol { }
 }
 
@@ -20541,7 +24053,33 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Sets the style for date pickers within this view.
+    /// A view modifier to change a date picker style.
+    ///
+    /// Use this modifier to change the style of a view hierarchy's date pickers.
+    ///
+    /// There are currently 5 date picker styles:
+    /// - ``DefaultDatePickerStyle`` on iOS and macOS
+    /// - ``WheelDatePickerStyle`` on iOS
+    /// - ``FieldDatePickerStyle`` on macOS
+    /// - ``GraphicalDatePickerStyle`` on macOS
+    /// - ``StepperFieldDatePickerStyle`` on macOS
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var selectedDate = Date()
+    ///
+    ///         var body: some View {
+    ///             DatePicker(selection: $selectedDate) {
+    ///                 Text("Date")
+    ///             }
+    ///             .datePickerStyle(WheelDatePickerStyle())
+    ///         }
+    ///     }
+    ///
+    ///
+    /// - Parameters:
+    ///   - style: The desired date picker style, conforming to ``DatePickerStyle``.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func datePickerStyle<S>(_ style: S) -> some View where S : DatePickerStyle { }
@@ -20551,17 +24089,62 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Presents a sheet using the given item as a data source
-    /// for the sheet's content.
+    /// Present a sheet when a given value is not nil.
+    ///
+    /// Use this modifier to present a sheet over the current view when you need to pass the sheet a value.
+    /// The sheet will be presented only when the binding value you pass it is not nil.
+    ///
+    /// If your sheet doesn't need an `item` parameter, use
+    /// ``View/sheet(isPresented:onDismiss:content)`` instead.
+    ///
+    ///
+    /// For a sheet-like view that takes up the full screen, use
+    /// ``View/fullScreenCover(item:onDismiss:content)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let text: String
+    ///     }
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var item: Item? = nil
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Button("🍌 Sheet") {
+    ///                     item = Item(text: "🍌🍌")
+    ///                 }
+    ///                 Button("🍑 Sheet") {
+    ///                     item = Item(text: "🍑🍑")
+    ///                 }
+    ///             }
+    ///             .sheet(item: $item,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet(item: $0) })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         let item: Item
+    ///         @Environment (\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text(item.text)
+    ///                 Button("Tap to Dismiss") {
+    ///                     presentationMode.wrappedValue.dismiss()
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - item: A binding to an optional source of truth for the sheet.
-    ///     When representing a non-`nil` item, the system uses `content` to
-    ///     create a sheet representation of the item.
-    ///     If the identity changes, the system dismisses a
-    ///     currently-presented sheet and replaces it with a new sheet.
-    ///   - onDismiss: A closure executed when the sheet dismisses.
-    ///   - content: A closure returning the content of the sheet.
+    ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
+    ///   when this value is not `nil`.
+    ///   - onDismiss: A function that runs when the sheet disappears.
+    ///   - content: A view builder closure that takes in the `item` and returns the sheet.
     public func sheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
 
 
@@ -20579,22 +24162,99 @@ extension View {
 @available(macOS, unavailable)
 extension View {
 
-    /// Presents a modal view that covers as much of the screen as
-    /// possible using the given item as a data source for the sheet's content.
+    /// Present a sheet overlaid over the full screen.
+    ///
+    /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
+    /// and exits the screen from the bottom.
+    ///
+    /// If your full screen cover does not need a parameter, use
+    /// ``View/fullScreenCover(isPresented:onDismiss:content:)`` instead.
+    ///
+    /// For a cover view that does not take up the full screen, use
+    /// ``View/sheet(item:onDismiss:content:)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let text: String
+    ///     }
+    ///
+    ///     struct ContentView: View {
+    ///         @State private var item: Item? = nil
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Button("🍌 Sheet") {
+    ///                     item = Item(text: "🍌🍌")
+    ///                 }
+    ///                 Button("🍑 Sheet") {
+    ///                     item = Item(text: "🍑🍑")
+    ///                 }
+    ///            }
+    ///              .fullScreenCover(item: $item,
+    ///                     onDismiss: { print("dismissed!") },
+    ///                     content: { ExampleSheet(item: $0) })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         let item: Item
+    ///         @Environment (\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text(item.text)
+    ///                 Button("Tap to Dismiss") {
+    ///                     presentationMode.wrappedValue.dismiss()
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - item: A binding to an optional source of truth for the cover
-    ///     modal view. When representing a non-nil item, the system uses
-    ///     `content` to create a modal representation of the item.
-    ///     If the identity of `item` changes, the system will dismiss a
-    ///     currently-presented modal view and replace it by a new modal view.
-    ///   - onDismiss: A closure executed when the modal view dismisses.
-    ///   - content: A closure returning the content of the modal view.
+    ///   - item: A binding value passed to `content` to build the full screen cover. The full screen
+    ///   cover will show when the value is not `nil`.
+    ///   - onDismiss: A function that runs when the sheet disappears.
+    ///   - content: A view builder closure that takes in the `item` and returns the full screen cover.
     public func fullScreenCover<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item : Identifiable, Content : View { }
 
 
-    /// Presents a modal view that covers as much of the screen as
-    /// possible when a given condition is true.
+    /// Present a sheet overlaid over the full screen without a custom parameter.
+    ///
+    /// Use this modifier to present a full screen view over the current view. The "full screen cover" enters
+    /// and exits the screen from the bottom.
+    ///
+    /// If your full screen cover needs a custom parameter, use
+    /// ``View/fullScreenCover(item:onDismiss:content:)`` instead.
+    ///
+    /// For a cover view that does not take up the full screen, use
+    /// ``View/sheet(item:onDismiss:content:)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showCover: Bool = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showCover = true
+    ///             }
+    ///             .fullScreenCover(isPresented: $showCover,
+    ///                 onDismiss: { print("dismissed!") },
+    ///                 content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the modal view is presented.
@@ -20607,8 +24267,32 @@ extension View {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 14.0, *)
 extension View {
 
-    /// Adds an action to perform when this view recognizes a long press
-    /// gesture.
+    /// A modifier to call a function after a long press.
+    ///
+    /// Use this modifier to call a function when the user long presses on a view.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var pressed = false
+    ///         @State private var longPressed = false
+    ///
+    ///         var body: some View {
+    ///             Text(longPressed ? "✅" : "Press me")
+    ///                 .font(.title)
+    ///                 .background(pressed ? Color.green : Color.clear)
+    ///                 .onLongPressGesture(minimumDuration: 1.0,
+    ///                     maximumDistance: 5,
+    ///                     pressing: { pressing in pressed = pressing },
+    ///                     perform: { longPressed.toggle() })
+    ///         }
+    ///     }
+    ///
+    /// - Parameters:
+    ///   - minimumDuration: How long it takes to detect a long press.
+    ///   - maximumDistance: How far the user can drag before the long press is canceled.
+    ///   - pressing: A closure takes in whether the view is being pressed.
+    ///   - action: A closure called when the long press happens.
     @available(tvOS, unavailable)
     public func onLongPressGesture(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10, pressing: ((Bool) -> Void)? = nil, perform action: @escaping () -> Void) -> some View { }
 
@@ -20616,24 +24300,34 @@ extension View {
 
 extension View {
 
-    /// Sets whether to disable autocorrection for this view.
+    /// A modifier to disable autocorrection.
     ///
-    /// Use `disableAutocorrection(_:)` when the effect of autocorrection would
-    /// make it more difficult for the user to input information. The entry of
-    /// proper names and street addresses are examples where autocorrection can
-    /// negatively affect the user's ability complete a data entry task.
+    /// Use this modifier when the  autocorrection in a text field would
+    /// make it more difficult for the user to input information. Some examples of where this
+    /// might be the case include:
+    /// - proper names
+    /// - street addresses
     ///
-    /// In the example below configures a `TextField` with the `.default`
-    /// keyboard. Disabling autocorrection allows the user to enter arbitrary
+    /// - Note: If the user has turned *off* autocorrection in their device settings, there is no way
+    /// to use this modifier to force autocorrection to turn *on*.
+    ///
+    /// In the example below, disabling autocorrection allows the user to enter their
     /// text without the autocorrection system offering suggestions or
     /// attempting to override their input.
     ///
-    ///     TextField("1234 Main St.", text: $address)
-    ///         .keyboardType(.default)
-    ///         .disableAutocorrection(true)
+    ///     struct ExampleView: View {
+    ///         @State private var address1 = ""
+    ///         @State private var address2 = ""
     ///
-    /// - Parameter enabled: A Boolean value that indicates whether
-    ///   autocorrection is disabled for this view.
+    ///         var body: some View {
+    ///             TextField("1234 Main St.", text: $address1)
+    ///                 .disableAutocorrection(true)
+    ///             TextField("Label this address", text: $address2)
+    ///                 .disableAutocorrection(false)
+    ///         }
+    ///     }
+    ///
+    /// - Parameter disable: Whether autocorrection is disabled for the view.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
     @available(watchOS, unavailable)
     public func disableAutocorrection(_ disable: Bool?) -> some View { }
@@ -20655,8 +24349,26 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Provides a closure that vends the drag representation to be used for a
-    /// particular data element.
+    /// Sets the item provider used for drag and drop.
+    ///
+    /// Use this modifier to set the item provider when dragging and dropping a view. This is most
+    /// commonly used on larger screen sizes like iPad and Mac.
+    ///
+    /// The example below uses system images in a ``List`` view to drag and drop onto the Photos
+    /// app.
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             List {
+    ///                 Label("Mustache", systemImage: "mustache")
+    ///                     .itemProvider {
+    ///                         NSItemProvider(object:  UIImage(systemName: "mustache")!)
+    ///                     }
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter action: A function that returns an NSItemProvider.
     @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
 
 }
@@ -20664,7 +24376,44 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a condition for whether the view's view hierarchy is deletable.
+    /// Disable a list item's delete action.
+    ///
+    /// Use this modifier to disable a list item's delete action. When a list is editable, swiping left
+    /// on it will expose a red "DELETE" button. To disable this feature on specific items in the list,
+    /// use this modifier.
+    ///
+    /// In the following example, only the first item can be deleted.
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let name: String
+    ///         let undeletable: Bool
+    ///     }
+    ///
+    ///     class Model: ObservableObject {
+    ///         @Published var rows: [Item] = [
+    ///             Item(name: "Swipe ⬅️ to delete me", undeletable: false),
+    ///             Item(name: "Try deleting me, you can't 😊", undeletable: true),
+    ///         ]
+    ///     }
+    ///
+    ///     struct ExampleView: View {
+    ///         @ObservedObject private var model = Model()
+    ///
+    ///         var body: some View {
+    ///             List {
+    ///                 ForEach(model.rows) { item in
+    ///                     Text(item.name)
+    ///                         .deleteDisabled(item.undeletable)
+    ///                 }
+    ///                 .onDelete { offsets in
+    ///                     model.rows.remove(atOffsets: offsets)
+    ///                 }
+    ///             }
+    ///        }
+    ///     }
+    ///
+    /// - Parameter isDisabled: Whether the view's delete functionality is disabled.
     @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { }
 
 }
@@ -20672,7 +24421,48 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a condition for whether the view's view hierarchy is movable.
+    /// Disable a list item's "move" action.
+    ///
+    /// Use this modifier to disable a list item's move action. When enabled, putting a list into edit mode
+    /// will expose 3 lines on the right side. The user will then be able to move the row around in the list.
+    /// To disable this feature on specific items in the list, use this modifier.
+    ///
+    /// In the following example, only the first item can be moved.
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let name: String
+    ///         let unmovable: Bool
+    ///     }
+    ///
+    ///     class Model: ObservableObject {
+    ///         @Published var rows: [Item] = [
+    ///             Item(name: "Move me! ↕️", unmovable: false),
+    ///             Item(name: "I'm fixed as a rock 🗿", unmovable: true)
+    ///         ]
+    ///     }
+    ///
+    ///     struct ContentView: View {
+    ///         @ObservedObject private var model = Model()
+    ///
+    ///         var body: some View {
+    ///             NavigationView {
+    ///                 List {
+    ///                     ForEach(model.rows) { item in
+    ///                         Text(item.name)
+    ///                             .moveDisabled(item.unmovable)
+    ///                     }
+    ///                     .onMove { source, destination in
+    ///                         model.rows.move(fromOffsets: source,
+    ///                                         toOffset: destination)
+    ///                     }
+    ///                 }
+    ///                 .navigationBarItems(trailing: EditButton())
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter isDisabled: Whether the view's move functionality is disabled.
     @inlinable public func moveDisabled(_ isDisabled: Bool) -> some View { }
 
 }
@@ -20682,18 +24472,28 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Activates this view as the source of a drag and drop operation.
+    /// Make a view draggable by providing dragged info.
     ///
-    /// Applying the `onDrag(_:)` modifier adds the appropriate gestures for
-    /// drag and drop to this view. When a drag operation begins, a rendering of
-    /// this view is generated and used as the preview image.
+    /// Use this modifier to add the appropriate gestures for
+    /// drag and drop to a view. When a dragging begins, a rendering of
+    /// the view is generated and used as the preview image.
     ///
-    /// - Parameter data: A closure that returns a single
-    /// <doc://com.apple.documentation/documentation/Foundation/NSItemProvider> that
-    /// represents the draggable data from this view.
+    /// In the following simple example, the image view can be dragged.
     ///
-    /// - Returns: A view that activates this view as the source of a drag and
-    ///   drop operation, beginning with user gesture input.
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Image(systemName: "mustache")
+    ///                 .onDrag {
+    ///                     NSItemProvider(object: UIImage(systemName: "mustache")!)
+    ///                 }
+    ///         }
+    ///     }
+    ///
+    /// - Parameter data: A function that returns an
+    /// [NSItemProvider](https://developer.apple.com/documentation/foundation/nsitemprovider)
+    /// object storing draggable data from a view.
+    ///
+    /// - Returns: A view that can be used as the source of drag and drop.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrag(_ data: @escaping () -> NSItemProvider) -> some View { }
@@ -25208,73 +29008,357 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Defines the destination of a drag-and-drop operation that handles the
-    /// dropped content with a closure that you specify.
+    /// Creates a drop-zone for drag & drop contents.
     ///
-    /// The drop destination is the same size and position as this view.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
     ///
-    /// - Parameters:
-    ///   - supportedContentTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true` when
-    ///     the cursor is inside the area, and `false` when the cursor is outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedContentTypes`. Return `true`
-    ///     if the drop operation was successful; otherwise, return `false`.
+    /// ### Basic Usage
     ///
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider in
+    ///                     // Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             // Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 // Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
 
 
-    /// Defines the destination of a drag and drop operation that handles the
-    /// dropped content with a closure that you specify.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// The drop destination is the same size and position as this view.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure. That closure includes a `CGPoint` of where the dragged contents were dropped.
     ///
-    /// - Parameters:
-    ///   - supportedContentTypes: The uniform type identifiers that describe
-    ///     the types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true` when
-    ///     the cursor is inside the area, and `false` when the cursor is outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The first parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedContentTypes`. The second
-    ///     parameter contains the drop location in this view's coordinate
-    ///     space. Return `true` if the drop operation was successful;
-    ///     otherwise, return `false`.
+    /// ### Basic Usage
     ///
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider, _ in
+    ///                     // Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             // Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 // Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `CGPoint` with `onDrop`
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var topBananas: String = "🍌🍌"
+    ///     @State var bottomBananas: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         GeometryReader { geometry in
+    ///             VStack {
+    ///                 Spacer()
+    ///
+    ///                 HStack {
+    ///                     Text(topBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, location in
+    ///
+    ///                         // If dropped on the bottom half the rectangle, add to bottom.
+    ///                         if location.y > geometry.size.height/2 {
+    ///                             bottomBananas += "🍌"
+    ///                         } else {
+    ///                             // Else, add to top
+    ///                             topBananas += "🍌"
+    ///                         }
+    ///
+    ///                         return true
+    ///                     })
+    ///
+    ///                 HStack {
+    ///                     Text(bottomBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 Spacer()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
 
 
-    /// Defines the destination of a drag and drop operation using behavior
-    /// controlled by the delegate that you provide.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// The drop destination is the same size and position as this view.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the `DropDelegate` protocol.
     ///
-    /// - Parameters:
-    ///   - supportedContentTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - delegate: A type that conforms to the `DropDelegate` protocol. You
-    ///     have comprehensive control over drop behavior when you use a
-    ///     delegate.
+    /// #### Conform to DropDelegate
+    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to `DropDelegate`.
     ///
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             // Text to drag
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             // Area to drop
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var text: String
+    ///
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         self.text = "Dropped My Bananas 🍌🍌!"
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Fully Featured `DropDelegate`
+    /// Utalize `DropDelegate`s optional functions to provide additional behavior.
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     // Drop entered called
+    ///     func dropEntered(info: DropInfo) {
+    ///         // Change color if color was previously black
+    ///         self.color = (self.color == .black) ? .gray : self.color
+    ///     }
+    ///
+    ///     // Drop entered called
+    ///     func dropExited(info: DropInfo) {
+    ///         self.color = .init(white: 0.40)
+    ///     }
+    ///
+    ///     // Drop has been updated
+    ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+    ///         // Don't allow more items to be dropped if a Banana was dropped
+    ///         if self.color == .yellow {
+    ///             return DropProposal(operation: .forbidden)
+    ///         } else {
+    ///             return nil
+    ///         }
+    ///     }
+    ///
+    ///     // This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This example uses `DropDelegate/dropUpdated(info:)-72cd3` to prevent fruits from being dropped if the background is yellow.
+    ///
+    /// The example uses `DropDelegate/dropEntered(info:)-525fa` to change the color the first time a user drags over the drop zone.
+    ///
+    /// Finally, when a user drags out of the view, `DropDelegate/dropExited(info:)-3d540` changes the background color to a dark gray.
+    ///
+    /// Note: if the user deselects their dragged object while over the drop zone, `DropDelegate/dropExited(info:)-3d540` will **not** be called. `DropDelegate/dropExited(info:)-3d540` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - delegate: An object that conforms to  `DropDelegate`.
     public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
 
 }
@@ -25285,73 +29369,361 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Defines the destination for a drag and drop operation, using the same
-    /// size and position as this view, handling dropped content with the given
-    /// closure.
+    /// Creates a drop-zone for drag & drop contents.
     ///
-    /// - Parameters:
-    ///   - supportedTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true`
-    ///     when the cursor is inside the area, and `false` when the cursor is
-    ///     outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedTypes`. Return `true`
-    ///     if the drop operation was successful; otherwise, return `false`.
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
+    ///
+    /// ### Basic Usage
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider in
+    ///                     //  Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             //  Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 //  Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
 
 
-    /// Defines the destination for a drag and drop operation with the same size
-    /// and position as this view, handling dropped content and the drop
-    /// location with the given closure.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// - Parameters:
-    ///   - supportedTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true`
-    ///     when the cursor is inside the area, and `false` when the cursor is
-    ///     outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The first parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedTypes`. The second
-    ///     parameter contains the drop location in this view's coordinate
-    ///     space. Return `true` if the drop operation was successful;
-    ///     otherwise, return `false`.
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure. That closure includes a `CGPoint` of where the dragged contents were dropped.
+    ///
+    /// ### Basic Usage
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider, _ in
+    ///                     //  Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             //  Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 //  Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `CGPoint` with `onDrop`
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var topBananas: String = "🍌🍌"
+    ///     @State var bottomBananas: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         GeometryReader { geometry in
+    ///             VStack {
+    ///                 Spacer()
+    ///
+    ///                 HStack {
+    ///                     Text(topBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, location in
+    ///
+    ///                         //  If dropped on the bottom half the rectangle, add to bottom.
+    ///                         if location.y > geometry.size.height/2 {
+    ///                             bottomBananas += "🍌"
+    ///                         } else {
+    ///                             //  Else, add to top
+    ///                             topBananas += "🍌"
+    ///                         }
+    ///
+    ///                         return true
+    ///                     })
+    ///
+    ///                 HStack {
+    ///                     Text(bottomBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 Spacer()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
 
 
-    /// Defines the destination for a drag and drop operation with the same size
-    /// and position as this view, with behavior controlled by the given
-    /// delegate.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// - Parameters:
-    ///   - supportedTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - delegate: A type that conforms to the `DropDelegate` protocol. You
-    ///     have comprehensive control over drop behavior when you use a
-    ///     delegate.
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the `DropDelegate` protocol.
+    ///
+    /// #### Conform to DropDelegate
+    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to `DropDelegate`.
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             //  Text to drag
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             //  Area to drop
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var text: String
+    ///
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         self.text = "Dropped My Bananas 🍌🍌!"
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Fully Featured `DropDelegate`
+    /// Utalize `DropDelegate`s optional functions to provide additional behavior.
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Drop entered called
+    ///     func dropEntered(info: DropInfo) {
+    ///         //  Change color if color was previously black
+    ///         self.color = (self.color == .black) ? .gray : self.color
+    ///     }
+    ///
+    ///     //  Drop entered called
+    ///     func dropExited(info: DropInfo) {
+    ///         self.color = .init(white: 0.40)
+    ///     }
+    ///
+    ///     //  Drop has been updated
+    ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+    ///         ///  Don't allow more items to be dropped if a Banana was dropped
+    ///         if self.color == .yellow {
+    ///             return DropProposal(operation: .forbidden)
+    ///         } else {
+    ///             return nil
+    ///         }
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This example uses `DropDelegate/dropUpdated(info:)-72cd3` to prevent fruits from being dropped if the background is yellow.
+    ///
+    /// The example uses `DropDelegate/dropEntered(info:)-525fa` to change the color the first time a user drags over the drop zone.
+    ///
+    /// Finally, when a user drags out of the view, `DropDelegate/dropExited(info:)-3d540` changes the background color to a dark gray.
+    ///
+    /// Note: if the user deselects their dragged object while over the drop zone, `DropDelegate/dropExited(info:)-3d540` will **not** be called. `DropDelegate/dropExited(info:)-3d540` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - delegate: An object that conforms to  `DropDelegate`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], delegate: DropDelegate) -> some View { }
@@ -25898,8 +30270,21 @@ extension ViewModifier {
 
 }
 
-/// A system style of date picker that displays each component as columns
-/// in a scrollable wheel.
+/// A date style that displays components as columns in a scrollable wheel.
+///
+/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///          var body: some View {
+///              DatePicker("Date",selection: $date)
+///                  .datePickerStyle(WheelDatePickerStyle())
+///                  .padding()
+///          }
+///      }
+///
+///
 @available(iOS 13.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -25912,6 +30297,27 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 
 /// A picker style that presents the options in a scrollable wheel that shows
 /// the selected option and a few neighboring options.
+///
+/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑"]
+///     @State private var selectedFruit = 0
+///
+///     var body: some View {
+///         VStack {
+///             Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                 ForEach(0..<fruits.count) {
+///                     Text(self.fruits[$0])
+///                 }
+///             }
+///             Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///         }
+///         .pickerStyle(WheelPickerStyle())
+///     }
+/// }
+/// ```
 ///
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
