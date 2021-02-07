@@ -12127,7 +12127,7 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
-///
+/// [navigation-view-style ->]
 /// ### Styling a navigation view
 ///
 /// Use `View/navigationViewStyle(_:)` to style a navigation view.
@@ -12161,7 +12161,7 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
-///
+/// [<-]
 /// ### Handling selection
 ///
 /// `NavigationLink` provides the ability to observe and/or set the active navigation selection via its initializer `NavigationLink/init(destination:tag:selection:label)`.
@@ -23420,6 +23420,8 @@ extension View {
 extension View {
 
     /// Sets the style for navigation views within this view.
+    ///
+    /// [[navigation-view-style]]
     @available(watchOS 7.0, *)
     public func navigationViewStyle<S>(_ style: S) -> some View where S : NavigationViewStyle { }
 
