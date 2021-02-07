@@ -1,6 +1,9 @@
 name: Push to S3 bucket
 
-on: pull_request
+on:
+  push:
+    branches:
+    - develop
 
 jobs:
   deploy:
