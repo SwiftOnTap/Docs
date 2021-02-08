@@ -2826,12 +2826,12 @@ public struct ButtonStyleConfiguration {
 
 /// A pill-style shape.
 ///
-/// A Capsule is a rectangular `Shape` that by default, aligns itself inside of 
-/// the view containing it. It differs from `RoundedRectangle` in that its 
+/// A Capsule is a rectangular `Shape` that by default, aligns itself inside of
+/// the view containing it. It differs from `RoundedRectangle` in that its
 /// corner radius is half the length of the retangle's smallest edge. In effect,
 /// it creates a "pill" shape.
 ///
-/// To define a Capsule with a specific color and frame, use the `Shape/fill()` 
+/// To define a Capsule with a specific color and frame, use the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers:
 ///
 /// ![Capsule fill and frame example](capsule-example-1.png)
@@ -2846,8 +2846,8 @@ public struct ButtonStyleConfiguration {
 /// }
 /// ```
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
-/// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the 
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the
 /// border width to keep the Capsule at its original size:
 ///
 /// ![Capsule inset and stroke example](capsule-example-2.png)
@@ -2872,7 +2872,7 @@ public struct ButtonStyleConfiguration {
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
-    /// Creates an Ellipse that aligns itself inside of the view containing it 
+    /// Creates an Ellipse that aligns itself inside of the view containing it
     /// by default.
     ///
     /// A style may be optionally passed into the initializer, with the options
@@ -2887,7 +2887,7 @@ public struct ButtonStyleConfiguration {
     ///         VStack(spacing: 20) {
     ///             Capsule(style: .circular)
     ///                 .frame(width: 250, height: 100)
-    /// 
+    ///
     ///             Capsule(style: .continuous)
     ///                 .frame(width: 250, height: 100)
     ///         }
@@ -2895,7 +2895,7 @@ public struct ButtonStyleConfiguration {
     /// }
     /// ```
     @inlinable public init(style: RoundedCornerStyle = .circular) { }
-    
+
     /// Used to describe a Capsule as a path in a `CGRect`.
     ///
     /// A Capsule can be described as a path within a specific `CGRect` using
@@ -2928,7 +2928,7 @@ extension Capsule : InsettableShape {
 
     /// Returns a Capsule insetted by the amount specified.
     ///
-    /// For example, insetting by 10 points returns a Capsule that fills its 
+    /// For example, insetting by 10 points returns a Capsule that fills its
     /// container, with 10 points inset on all four side.
     ///
     /// ![Capsule inset example](capsule-example-5.png)
@@ -2950,7 +2950,7 @@ extension Capsule : InsettableShape {
 
 /// A circle shape.
 ///
-/// A Circle is centered on the frame of the view containing it. The circle's 
+/// A Circle is centered on the frame of the view containing it. The circle's
 /// radius equals half the length of the frame rectangle's smallest edge.
 ///
 /// By default, a Circle is black, and takes up the space of its container:
@@ -2965,7 +2965,7 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// Define a Circle with a specific color and frame with the `Shape/fill()` 
+/// Define a Circle with a specific color and frame with the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers. For example:
 ///
 /// ![Circle fill and frame example](Circle-example-2.png)
@@ -2980,8 +2980,8 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
-/// the `Circle/inset(by:)` modifier to inset the circle by half of the border 
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Circle/inset(by:)` modifier to inset the circle by half of the border
 /// width to keep the circle at its original size:
 ///
 /// ![Circle inset and stroke example](Circle-example-3.png)
@@ -3016,7 +3016,7 @@ extension Capsule : InsettableShape {
     /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a Circle that aligns itself inside of the view containing it 
+    /// Creates a Circle that aligns itself inside of the view containing it
     /// by default.
     ///
     /// ![Circle init example](Circle-example-1.png)
@@ -3045,7 +3045,11 @@ extension Circle : InsettableShape {
 
     /// Returns a Circle insetted by the amount specified.
     ///
-    /// For example, insetting by 10 points returns a Circle that fills its 
+    /// Returns a Circle insetted by the amount specified. For example,
+    /// insetting by 10 points returns a Circle that fills its container, with
+    /// 10 points inset on all four side.
+    ///
+    /// For example, insetting by 10 points returns a Circle that fills its
     /// container, with 10 points inset on all four side.
     ///
     /// ![Circle inset example](Circle-example-5.png)
@@ -3094,7 +3098,43 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 
 /// An environment-dependent color.
 ///
-/// A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
+/// `Color` represents an environment-dependent color that conforms to `View`. Colors conformance to `View` means that a color can be used as a view itself.
+///
+/// For example:
+///
+/// ![Color Example One](color-example-one.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Color.yellow
+///         }
+///     }
+///
+/// Color also conforms to `ShapeStyle` which allows it to serve as a fill or stroke on a shape.
+///
+/// For example:
+///
+/// ![Color Example Two](color-example-two.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .fill(Color.yellow)
+///         }
+///     }
+///
+/// And as a stroke:
+///
+/// ![Color Example Three](color-example-three.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .stroke(Color.yellow)
+///         }
+///     }
+///
+/// **Note**: A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Color : Hashable, CustomStringConvertible {
@@ -3152,6 +3192,16 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// The conversion of `p` to a string in the assignment to `s` uses the
     /// `Point` type's `description` property.
+    ///
+    /// To call this property directly, try:
+    ///
+    /// ![Description](color-description.png)
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text(Color.yellow.description)
+    ///        }
+    ///    }
     public var description: String { get }
 
     /// The hash value.
@@ -3178,6 +3228,17 @@ extension Color : View {
 extension Color {
 
     /// Creates a color from an instance of `CGColor`.
+    ///
+    /// ![CGColor Init](color-cgcolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let cgColor = CGColor(red: 1.00, green: 0.60, blue: 0.60, alpha: 1.0)
+    ///
+    ///         var body: some View {
+    ///             Color(cgColor)
+    ///         }
+    ///     }
+    ///
     public init(_ cgColor: CGColor) { }
 }
 
@@ -3234,7 +3295,15 @@ extension Color {
 
     /// Create a `Color` from RGB and opacity values along with an optional colorspace.
     ///
-    /// The colorspace value defaults to sRGB, which is standard for apps. Note
+    /// ![Color RGB](color-rgb-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(red: 1.0, green: 0.6, blue: 0.6, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
     /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
     /// divide them by 255 in order to use this initializer.
@@ -3249,7 +3318,15 @@ extension Color {
 
     /// Create a `Color` from grayscale and opacity.
     ///
-    /// Both the white and the opacity must be specified from 0.0 to 1.0. If
+    /// ![Color White/Opacity](color-white-opacity.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(white: 0.2, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
     /// be divided by their maximum value.
     ///
@@ -3260,6 +3337,16 @@ extension Color {
     public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1) { }
 
     /// Creates a `Color` from hue, saturation, brightness, and opacity values.
+    ///
+    /// ![Hue Color Init](color-hue-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(hue: 0.5, saturation: 0.60, brightness: 0.90)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
     /// - Parameters:
     ///   - hue: The hue of the color.
@@ -3273,6 +3360,13 @@ extension Color {
 extension Color {
 
     /// A color that represents the system or application accent color.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
+    ///                .accentColor(Color.accentColor)
+    ///        }
+    ///    }
     ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
@@ -3290,36 +3384,121 @@ extension Color {
     public static let clear: Color
 
     /// A true black color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.black
+    ///        }
+    ///    }
+    ///
     public static let black: Color
 
     /// A true white color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.white
+    ///        }
+    ///    }
+    ///
     public static let white: Color
 
     /// A gray color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.gray
+    ///        }
+    ///    }
+    ///
     public static let gray: Color
 
     /// A stylized red color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.red
+    ///        }
+    ///    }
+    ///
     public static let red: Color
 
     /// A stylized green color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.green
+    ///        }
+    ///    }
+    ///
     public static let green: Color
 
     /// A stylized blue color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.blue
+    ///        }
+    ///    }
+    ///
     public static let blue: Color
 
     /// An orange color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.orange
+    ///        }
+    ///    }
+    ///
     public static let orange: Color
 
     /// A stylized yellow color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.yellow
+    ///        }
+    ///    }
+    ///
     public static let yellow: Color
 
     /// A pink color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.pink
+    ///        }
+    ///    }
+    ///
     public static let pink: Color
 
     /// A purple color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.purple
+    ///        }
+    ///    }
+    ///
     public static let purple: Color
 
     /// The default color of text, based on the environment.
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
+    ///
+    /// Code:
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text("Bananas 🍌🍌")
+    ///                .accentColor(.primary)
+    ///        }
+    ///    }
     ///
     /// If you are in light mode, this will be black. If, on the other hand, you
     /// are in dark mode, this will be white. It is automatically updated for
@@ -3343,6 +3522,28 @@ extension Color {
 
     /// Creates a named color.
     ///
+    /// To declare a color with a `name` create your color in the `Assets.xcassets` folder.
+    ///
+    /// ![Create Color Name](color-name-showcase.png)
+    ///
+    /// Create a light theme and dark theme color to adjust your view depending on the user's environment.
+    ///
+    /// Next, run your app in both light theme and dark theme. Your color will automatically change.
+    ///
+    /// Light theme:
+    /// ![Color Light Theme](color-name-light.png)
+    ///
+    /// Dark theme:
+    /// ![Color Dark Theme](color-name-dark.png)
+    ///
+    /// Code:
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color("Pink")
+    ///         }
+    ///     }
+    ///
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
     ///   - bundle: the bundle to search for the color resource in.
@@ -3354,6 +3555,17 @@ extension Color {
 extension Color {
 
     /// Creates a color from an instance of `UIColor`.
+    ///
+    /// ![UIColor Init](color-uicolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let uiColor = UIColor.yellow
+    ///
+    ///         var body: some View {
+    ///             Color(uiColor)
+    ///         }
+    ///     }
+    ///
     public init(_ color: UIColor) { }
 }
 
@@ -3362,6 +3574,18 @@ extension Color {
 
 	/// Updates the transparency channel of a `Color`, returning a `Color` back.
 	///
+  ///
+  /// ![Color Opacity](color-opacity.png)
+  ///
+  ///     struct ExampleView: View {
+  ///            var body: some View {
+  ///                ZStack {
+  ///                    Text("Banana 🍌🍌")
+  ///                    Color.pink.opacity(0.80)
+  ///                }
+  ///            }
+  ///        }
+  ///
 	/// This is different from the `View/opacity(_:)` modifier because it
 	/// returns a `Color` object rather than `some View`.
     public func opacity(_ opacity: Double) -> Color { }
@@ -7148,14 +7372,14 @@ extension EditMode : Equatable {
 extension EditMode : Hashable {
 }
 
-/// An ellipse shape, similar to a circle but with potentially different width 
+/// An ellipse shape, similar to a circle but with potentially different width
 /// and height.
 ///
-/// An Ellipse is a circular `Shape` that by default, aligns itself inside of 
-/// the view containing it. It differs from `Circle` in that its width and 
+/// An Ellipse is a circular `Shape` that by default, aligns itself inside of
+/// the view containing it. It differs from `Circle` in that its width and
 /// height are not necessarily equal.
 ///
-/// To define an Ellipse with a specific color and frame, use the `Shape/fill()` 
+/// To define an Ellipse with a specific color and frame, use the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers:
 ///
 /// ![Ellipse fill and frame example](ellipse-example-1.png)
@@ -7170,8 +7394,8 @@ extension EditMode : Hashable {
 /// }
 /// ```
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
-/// the `Ellipse/inset(by:)` modifier to inset the Ellipse by half of the 
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Ellipse/inset(by:)` modifier to inset the Ellipse by half of the
 /// border width to keep the Ellipse at its original size:
 ///
 /// ![Ellipse inset and stroke example](ellipse-example-2.png)
@@ -7207,7 +7431,7 @@ extension EditMode : Hashable {
     /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates an Ellipse that aligns itself inside of the view containing it 
+    /// Creates an Ellipse that aligns itself inside of the view containing it
     /// by default.
     ///
     /// ![Ellipse init example](ellipse-example-4.png)
@@ -7234,9 +7458,9 @@ extension EditMode : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Ellipse : InsettableShape {
 
-    /// Returns a Ellipse insetted by the amount specified. 
+    /// Returns a Ellipse insetted by the amount specified.
     ///
-    /// For example, insetting by 10 points returns a Ellipse that fills its 
+    /// For example, insetting by 10 points returns a Ellipse that fills its
     /// container, with 10 points inset on all four side.
     ///
     /// ![Ellipse inset example](ellipse-example-5.png)
@@ -16262,8 +16486,8 @@ extension ProjectionTransform {
 
 /// A rectangle shape.
 ///
-/// A Rectangle is a rectangular `Shape` that by default, aligns itself inside 
-/// of the view containing it. To define a Rectangle with a specific color and 
+/// A Rectangle is a rectangular `Shape` that by default, aligns itself inside
+/// of the view containing it. To define a Rectangle with a specific color and
 /// frame, use the `Shape/fill()` and `View/frame(width:height:)` modifiers:
 ///
 /// ![Rectangle fill and frame example](rectangle-example-1.png)
@@ -16278,8 +16502,8 @@ extension ProjectionTransform {
 /// }
 /// ```
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
-/// the `Rectangle/inset(by:)` modifier to inset the rectangle by half of the 
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Rectangle/inset(by:)` modifier to inset the rectangle by half of the
 /// border width to keep the rectangle at its original size:
 ///
 /// ![Rectangle inset and stroke example](rectangle-example-2.png)
@@ -16344,7 +16568,7 @@ extension Rectangle : InsettableShape {
 
     /// Returns a Rectangle insetted by the amount specified.
     ///
-    /// For example, insetting by 10 points returns a Rectangle that fills its 
+    /// For example, insetting by 10 points returns a Rectangle that fills its
     /// container, with 10 points inset on all four side.
     ///
     /// ![Rectangle inset example](rectangle-example-5.png)
@@ -17511,11 +17735,11 @@ extension RoundedCornerStyle : Hashable {
 
 /// A rectangle shape with rounded corners.
 ///
-/// A RoundedRectangle is a rectangular `Shape` with rounded corners that by 
+/// A RoundedRectangle is a rectangular `Shape` with rounded corners that by
 /// default, aligns itself inside of the view containing it.
 ///
 /// It must be created with a specific corner radius or size.
-/// The example below creates a RoundedRectangle with a corner radius of 20, 
+/// The example below creates a RoundedRectangle with a corner radius of 20,
 /// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
 /// to set the color to blue and the frame to 250 by 150.
 ///
@@ -17546,7 +17770,7 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
-/// The RoundedRectangle initializer includes an optional parameter for 
+/// The RoundedRectangle initializer includes an optional parameter for
 /// specifying the `style`, a `RoundedCornerStyle` that can either be `circular`
 /// or `continuous`. These styles have subtle but noticeable differences:
 ///
@@ -17558,7 +17782,7 @@ extension RoundedCornerStyle : Hashable {
 ///         VStack(spacing: 20) {
 ///             RoundedRectangle(cornerRadius: 50, style: .circular)
 ///                 .frame(width: 250, height: 150)
-///     
+///
 ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
 ///                 .frame(width: 250, height: 150)
 ///         }
@@ -17566,8 +17790,8 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use 
-/// the `RoundedRectangle/inset(by:)` modifier to inset the RoundedRectangle by 
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `RoundedRectangle/inset(by:)` modifier to inset the RoundedRectangle by
 /// half of the border width to keep the RoundedRectangle at its original size:
 ///
 /// ![RoundedRectangle inset and stroke example](roundedrectangle-example-4.png)
@@ -17601,7 +17825,7 @@ extension RoundedCornerStyle : Hashable {
     ///         VStack(spacing: 20) {
     ///             RoundedRectangle(cornerSize: CGSize(width: 30, height: 20))
     ///                 .frame(width: 250, height: 150)
-    /// 
+    ///
     ///             RoundedRectangle(cornerSize: CGSize(width: 20, height: 40))
     ///                 .frame(width: 250, height: 150)
     ///         }
@@ -17622,7 +17846,7 @@ extension RoundedCornerStyle : Hashable {
     ///         VStack(spacing: 20) {
     ///             RoundedRectangle(cornerRadius: 50, style: .circular)
     ///                 .frame(width: 250, height: 150)
-    ///     
+    ///
     ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
     ///                 .frame(width: 250, height: 150)
     ///         }
@@ -17649,7 +17873,7 @@ extension RoundedCornerStyle : Hashable {
     ///                 cornerSize: CGSize(width: 20, height: 10)
     ///             )
     ///             .frame(width: 250, height: 150)
-    /// 
+    ///
     ///             RoundedRectangle(
     ///                 cornerSize: CGSize(width: 20, height: 10),
     ///                 style: .continuous
@@ -17675,7 +17899,7 @@ extension RoundedCornerStyle : Hashable {
     ///         VStack(spacing: 20) {
     ///             RoundedRectangle(cornerRadius: 50) // Style defaults to circular
     ///                 .frame(width: 250, height: 150)
-    ///     
+    ///
     ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
     ///                 .frame(width: 250, height: 150)
     ///         }
@@ -17717,8 +17941,8 @@ extension RoundedCornerStyle : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension RoundedRectangle : InsettableShape {
 
-    /// Returns a RoundedRectangle insetted by the amount specified. For 
-    /// example, insetting by 10 points returns a Capsule that fills its 
+    /// Returns a RoundedRectangle insetted by the amount specified. For
+    /// example, insetting by 10 points returns a Capsule that fills its
     /// container, with 10 points inset on all four side.
     ///
     /// ![RoundedRectangle inset example](roundedrectangle-example-8.png)
