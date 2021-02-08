@@ -10115,11 +10115,12 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///    Button("Read more") {
 ///      if let url = URL(string: urlString) {
 ///        UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
-///            }
-///          }
-///        } else {
-///         EmptyView()
+///      }
+///    }
+///  } else {
+///      EmptyView()
 ///          .onAppear { assertionFailure("URL was nil") }
+///      }
 ///  }
 ///     ```
 ///
