@@ -14114,6 +14114,72 @@ extension PreviewContextKey {
 ///
 /// Refer to a preview device by its name as shown Xcode's run destination menu,
 /// like "iPhone X", or using a model number, like "iPad8,1".
+///
+/// The full list of device names is here:
+/// - iPhone 4s
+/// - iPhone 5
+/// - iPhone 5s
+/// - iPhone 6 Plus
+/// - iPhone 6
+/// - iPhone 6s
+/// - iPhone 6s Plus
+/// - iPhone SE (1st generation)
+/// - iPhone 7
+/// - iPhone 7 Plus
+/// - iPhone 8
+/// - iPhone 8 Plus
+/// - iPhone X
+/// - iPhone Xs
+/// - iPhone Xs Max
+/// - iPhone Xʀ
+/// - iPhone 11
+/// - iPhone 11 Pro
+/// - iPhone 11 Pro Max
+/// - iPhone SE (2nd generation)
+/// - iPhone 12 mini
+/// - iPhone 12
+/// - iPhone 12 Pro
+/// - iPhone 12 Pro Max
+/// - iPod touch (7th generation)
+/// - iPad 2
+/// - iPad Retina
+/// - iPad Air
+/// - iPad mini 2
+/// - iPad mini 3
+/// - iPad mini 4
+/// - iPad Air 2
+/// - iPad Pro (9.7-inch)
+/// - iPad Pro (12.9-inch) (1st generation)
+/// - iPad (5th generation)
+/// - iPad Pro (12.9-inch) (2nd generation)
+/// - iPad Pro (10.5-inch)
+/// - iPad (6th generation)
+/// - iPad (7th generation)
+/// - iPad Pro (11-inch) (1st generation)
+/// - iPad Pro (12.9-inch) (3rd generation)
+/// - iPad Pro (11-inch) (2nd generation)
+/// - iPad Pro (12.9-inch) (4th generation)
+/// - iPad mini (5th generation)
+/// - iPad Air (3rd generation)
+/// - iPad (8th generation)
+/// - iPad Air (4th generation)
+/// - Apple TV
+/// - Apple TV 4K
+/// - Apple TV 4K (at 1080p)
+/// - Apple Watch - 38mm
+/// - Apple Watch - 42mm
+/// - Apple Watch Series 2 - 38mm
+/// - Apple Watch Series 2 - 42mm
+/// - Apple Watch Series 3 - 38mm
+/// - Apple Watch Series 3 - 42mm
+/// - Apple Watch Series 4 - 40mm
+/// - Apple Watch Series 4 - 44mm
+/// - Apple Watch Series 5 - 40mm
+/// - Apple Watch Series 5 - 44mm
+/// - Apple Watch SE - 40mm
+/// - Apple Watch SE - 44mm
+/// - Apple Watch Series 6 - 40mm
+/// - Apple Watch Series 6 - 44mm
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 
@@ -23254,7 +23320,7 @@ extension View {
     /// - Note: Changing `allowedContentTypes` while the file importer is
     ///   presented will have no immediate effect, however will apply the next
     ///   time it is presented.
-    ///   
+    ///
     /// ```
     /// import SwiftUI
     /// import UniformTypeIdentifiers
@@ -25060,6 +25126,28 @@ extension View {
     /// A view modifier that applies the given animation to this view when the specified value
     /// changes.
     ///
+    /// Use this modifier to when you only want to animate a particular @``State``
+    /// property instead of animating all of them.
+    ///
+    /// To animate all properties associated with a ``View``, use
+    /// ``View/animation(_:)`` instead.
+    ///
+    /// ```
+    /// struct MovementView: View {
+    ///     @State var moveFlag = false
+    ///     @State var transportFlag = false
+    ///
+    ///     var body: some View {
+    ///         Button("Move the banana") { moveFlag.toggle() }
+    ///         Button("Transport the banana") { transportFlag.toggle() }
+    ///         Text("🍌")
+    ///             .offset(x: moveFlag ? 0 : 50)
+    ///             .offset(x: transportFlag ? 0 : 50)
+    ///             .animation(.easeInOut, value: moveFlag)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///   - animation: The animation to apply. If `animation` is `nil`, the view
     ///     doesn't animate.
@@ -25116,27 +25204,30 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the blend mode for compositing this view with overlapping views.
+    /// A view modifier that sets the blend mode for compositing this view with overlapping views.
     ///
     /// Use `blendMode(_:)` to combine overlapping views and use a different
     /// visual effect to produce the result. The `BlendMode` enumeration
     /// defines many possible effects.
     ///
     /// In the example below, the two overlapping rectangles have a
-    /// `BlendMode\colorBurn` effect applied, which effectively removes the
+    /// `BlendMode/colorBurn` effect applied, which effectively removes the
     /// non-overlapping portion of the second image:
     ///
-    ///     HStack {
-    ///         Color.yellow.frame(width: 50, height: 50, alignment: .center)
+    /// ```
+    /// struct BlendModeView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Color.yellow.frame(width: 50, height: 50, alignment: .center)
     ///
-    ///         Color.red.frame(width: 50, height: 50, alignment: .center)
-    ///             .rotationEffect(.degrees(45))
-    ///             .padding(-20)
-    ///             .blendMode(.colorBurn)
+    ///             Color.red.frame(width: 50, height: 50, alignment: .center)
+    ///                 .rotationEffect(.degrees(45))
+    ///                 .padding(-20)
+    ///                 .blendMode(.colorBurn)
+    ///         }
     ///     }
-    ///
-    /// ![Two overlapping rectangles showing the effect of the blend mode view
-    /// modifier applying the colorBurn effect.](SwiftUI-blendMode.png)
+    /// }
+    /// ```
     ///
     /// - Parameter blendMode: The `BlendMode` for compositing this view.
     ///
@@ -25186,7 +25277,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Composites this view's contents into an offscreen image before final
+    /// A view modiier that composites this view's contents into an offscreen image before final
     /// display.
     ///
     /// The `drawingGroup(opaque:colorMode:)` modifier flattens a subtree of
@@ -25195,28 +25286,31 @@ extension View {
     /// In the example below, the contents of the view are composited to a
     /// single bitmap; the bitmap is then displayed in place of the view:
     ///
-    ///     VStack {
-    ///         ZStack {
-    ///             Text("DrawingGroup")
-    ///                 .foregroundColor(.black)
-    ///                 .padding(20)
-    ///                 .background(Color.red)
-    ///             Text("DrawingGroup")
-    ///                 .blur(radius: 2)
+    /// ```
+    /// struct DrawingGroupView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ZStack {
+    ///                 Text("DrawingGroup")
+    ///                     .foregroundColor(.black)
+    ///                     .padding(20)
+    ///                     .background(Color.red)
+    ///                 Text("DrawingGroup")
+    ///                     .blur(radius: 2)
+    ///             }
+    ///             .font(.largeTitle)
+    ///             .compositingGroup()
+    ///             .opacity(1.0)
     ///         }
-    ///         .font(.largeTitle)
-    ///         .compositingGroup()
-    ///         .opacity(1.0)
-    ///     }
-    ///      .background(Color.white)
-    ///      .drawingGroup()
+    ///         .background(Color.white)
+    ///         .drawingGroup()
+    ///      }
+    ///  }
+    ///  ```
     ///
-    /// > Note: Views backed by native platform views may not render into the
+    /// - Note: Views backed by native platform views may not render into the
     ///   image. Instead, they log a warning and display a placeholder image to
     ///   highlight the error.
-    ///
-    /// ![A screenshot showing the effects on several stacks configured as a
-    /// drawing group.](SwiftUI-View-drawingGroup.png)
     ///
     /// - Parameters:
     ///   - opaque: A Boolean value that indicates whether the image is opaque.
@@ -25235,7 +25329,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Wraps this view in a compositing group.
+    /// A view modifier that wraps this view in a compositing group.
     ///
     /// A compositing group makes compositing effects in this view's ancestor
     /// views, such as opacity and the blend mode, take effect before this view
@@ -25250,23 +25344,25 @@ extension View {
     /// views inside the enclosed `ZStack`. This limits the scope of the
     /// opacity change to the outermost view.
     ///
-    ///     VStack {
-    ///         ZStack {
-    ///             Text("CompositingGroup")
-    ///                 .foregroundColor(.black)
-    ///                 .padding(20)
-    ///                 .background(Color.red)
-    ///             Text("CompositingGroup")
-    ///                 .blur(radius: 2)
+    /// ```
+    /// struct CompositingGroup {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ZStack {
+    ///                 Text("CompositingGroup")
+    ///                     .foregroundColor(.black)
+    ///                     .padding(20)
+    ///                     .background(Color.red)
+    ///                 Text("CompositingGroup")
+    ///                     .blur(radius: 2)
+    ///             }
+    ///             .font(.largeTitle)
+    ///             .compositingGroup()
+    ///             .opacity(0.9)
     ///         }
-    ///         .font(.largeTitle)
-    ///         .compositingGroup()
-    ///         .opacity(0.9)
     ///     }
-    ///
-    /// ![A view showing the effect of the compositingGroup modifier in applying
-    /// compositing effects to parent views before child views are
-    /// rendered.](SwiftUI-View-compositingGroup.png)
+    /// }
+    /// ```
     ///
     /// - Returns: A view that wraps this view in a compositing group.
     @inlinable public func compositingGroup() -> some View { }
@@ -25276,7 +25372,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Overrides the device for a preview.
+    /// A view modifier that sets the device for a preview.
     ///
     /// If you set the preview device to `nil`, as it is by default, Xcode
     /// automatically chooses an appropriate device based on your target.
@@ -25291,22 +25387,104 @@ extension View {
     /// development:
     ///  - "Mac"
     ///  - "Mac Catalyst"
+    ///
+    /// See ``PreviewDevice`` for the full list of supported devices.
+    ///
+    /// The following example changes the device preview to iPhone SE
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Preview on iPhone SE 📱")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewDevice(rawValue: "iPhone SE")
+    ///     }
+    /// }
+    /// ```
+    ///
+    ///- Parameter value: The device to display the preview on.
     @inlinable public func previewDevice(_ value: PreviewDevice?) -> some View { }
 
 
-    /// Overrides the size of the container for the preview.
+    /// A view modifier that sets the size for a Xcode preview.
+    ///
+    /// There are 3 different Xcode ``PreviewLayout`` types:
+    /// 1. ``PreviewLayout/device``:  Adds the view to the center of the specified preview device.
+    /// 2. ``PreviewLayout/sizeThatFits``: Fits a container around the previewed view.
+    /// 3.  ``PreviewLayout/fixed(width:height:)``: Adds the view to a fixed size container.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("➡️This box fits me snugly⬅️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    /// }
+    /// ```
     ///
     /// The default value is `PreviewLayout/device`.
     @inlinable public func previewLayout(_ value: PreviewLayout) -> some View { }
 
 
-    /// Provides a user visible name shown in the editor.
+    /// A view modifier that sets a custom name in the Xcode preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("My name is 🍌")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewDisplayName("🍌")
+    ///     }
+    /// }
+    /// ```
     ///
     /// The default value is `nil`.
+    ///
+    /// - Parameter value: The preview name to display.
     @inlinable public func previewDisplayName(_ value: String?) -> some View { }
 
 
-    /// Declares a context for the preview.
+    /// A view modifier that declares a context for the Xcode preview.
+    ///
+    /// There is currently only one type of preview context:
+    /// ``WidgetPreviewContext``. Its initializer takes a ``WidgetFamily``.
+    ///
+    /// There are 3 types of `WidgetFamily` variables:
+    /// 1. `systemSmall`
+    /// 2. `systemMedium`
+    /// 3. `systemLarge`
+    ///
+    /// The example below is pulled from Apple's widget boilerplate.
+    /// To pull this up yourself, go to *File > New > Target* and search
+    /// for "WidgetExtension". This target is named "PreviewContextTest"
+    ///
+    /// ```
+    /// struct PreviewContextTest_Previews: PreviewProvier {
+    ///     static var previews: some View {
+    ///         PreviewContextTestEntryView(entry: SimpleEntry(date: Date()))
+    ///             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// For more on getting started with widgets, check out
+    /// [this tutorial](https://www.raywenderlich.com/11303363-getting-started-with-widgets).
     ///
     /// - Parameter value: The context for the preview; the default is `nil`.
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -25317,7 +25495,53 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-	/// Use this to set the value of a preference for a specified anchor.
+	/// A view modifier that sets the value of a preference for a specified anchor.
+    ///
+    /// Anchor preferences are a type of view preference. Anchor
+    /// preferences primarily pass layout data to the parent view, things
+    /// like bounds and coordinates.
+    ///
+    /// If you are not familiar with view preferences, see
+    /// [this article](https://swiftwithmajid.com/2020/01/15/the-magic-of-view-preferences-in-swiftui/)
+    /// for more.
+    ///
+    /// For more info on anchor preferences specifically, see
+    /// [this article](https://swiftwithmajid.com/2020/03/18/anchor-preferences-in-swiftui/)
+    ///
+    /// ```
+    /// struct BoundsPreferenceKey: PreferenceKey {
+    ///     typealias Value = Anchor<CGRect>?
+    ///
+    ///     static var defaultValue: Value = nil
+    ///
+    ///     static func reduce(value: inout Value, nextValue: () -> Value) {
+    ///         value = nextValue()
+    ///     }
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I have a box 📦 around me")
+    ///             .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds) { $0 }
+    ///         .overlayPreferenceValue(BoundsPreferenceKey.self) { preferences in
+    ///             GeometryReader { geometry in
+    ///                 preferences.map {
+    ///                     Rectangle()
+    ///                         .stroke()
+    ///                         .frame(
+    ///                             width: geometry[$0].width,
+    ///                             height: geometry[$0].height
+    ///                         )
+    ///                         .offset(
+    ///                             x: geometry[$0].minX,
+    ///                             y: geometry[$0].minY
+    ///                         )
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameters:
 	///   - key: The key type of the preference key.
@@ -25331,7 +25555,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets a clipping shape for this view.
+    /// A view modifier that sets a clipping shape for this view.
     ///
     /// Use `clipShape(_:style:)` to clip the view to the provided shape. By
     /// applying a clipping shape to a view, you preserve the parts of the view
@@ -25341,17 +25565,20 @@ extension View {
     /// For example, this code applies a circular clipping shape to a `Text`
     /// view:
     ///
-    ///     Text("Clipped text in a circle")
-    ///         .frame(width: 175, height: 100)
-    ///         .foregroundColor(Color.white)
-    ///         .background(Color.black)
-    ///         .clipShape(Circle())
+    /// ```
+    /// struct ClippedShapeView: View {
+    ///     var body: some View {
+    ///         Text("Clipped text in a circle")
+    ///             .frame(width: 175, height: 100)
+    ///             .foregroundColor(Color.white)
+    ///             .background(Color.black)
+    ///             .clipShape(Circle())
+    ///     }
+    /// }
+    /// ```
     ///
     /// The resulting view shows only the portion of the text that lies within
     /// the bounds of the circle.
-    ///
-    /// ![A screenshot of text clipped to the shape of a
-    /// circle.](SwiftUI-View-clipShape.png)
     ///
     /// - Parameters:
     ///   - shape: The clipping shape to use for this view. The `shape` fills
@@ -25363,7 +25590,7 @@ extension View {
     @inlinable public func clipShape<S>(_ shape: S, style: FillStyle = FillStyle()) -> some View where S : Shape { }
 
 
-    /// Clips this view to its bounding rectangular frame.
+    /// A view modifier that clips this view to its bounding rectangular frame.
     ///
     /// Use the `clipped(antialiased:)` modifier to hide any content that
     /// extends beyond the layout bounds of the shape.
@@ -25371,14 +25598,17 @@ extension View {
     /// By default, a view's bounding frame is used only for layout, so any
     /// content that extends beyond the edges of the frame is still visible.
     ///
-    ///     Text("This long text string is clipped")
-    ///         .fixedSize()
-    ///         .frame(width: 175, height: 100)
-    ///         .clipped()
-    ///         .border(Color.gray)
-    ///
-    /// ![Screenshot showing text clipped to its
-    /// frame.](SwiftUI-View-clipped.png)
+    /// ```
+    /// struct CippedView: View {
+    ///     var body: some View {
+    ///         Text("This long text string is clipped")
+    ///             .fixedSize()
+    ///             .frame(width: 175, height: 100)
+    ///             .clipped()
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -25388,7 +25618,8 @@ extension View {
     @inlinable public func clipped(antialiased: Bool = false) -> some View { }
 
 
-    /// Clips this view to its bounding frame, with the specified corner radius.
+    /// A view modifier that clips this view to its bounding frame,
+    /// with the specified corner radius.
     ///
     /// By default, a view's bounding frame only affects its layout, so any
     /// content that extends beyond the edges of the frame remains visible. Use
@@ -25397,14 +25628,17 @@ extension View {
     ///
     /// The following code applies a corner radius of 25 to a text view:
     ///
-    ///     Text("Rounded Corners")
-    ///         .frame(width: 175, height: 75)
-    ///         .foregroundColor(Color.white)
-    ///         .background(Color.black)
-    ///         .cornerRadius(25)
-    ///
-    /// ![A screenshot of a rectangle with rounded corners bounding a text
-    /// view.](SwiftUI-View-cornerRadius.png)
+    /// ```
+    /// struct CornerRadiusView: View {
+    ///     var body: some View {
+    ///         Text("Rounded Corners")
+    ///             .frame(width: 175, height: 75)
+    ///             .foregroundColor(Color.white)
+    ///             .background(Color.black)
+    ///             .cornerRadius(25)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -25419,7 +25653,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Adds a shadow to this view.
+    /// A view modifier that adds a shadow to this view.
     ///
     /// The example below a series shows of boxes with increasing degrees of
     /// shadow ranging from 0 (no shadow) to 5 points of shadow, offset down and
@@ -25441,9 +25675,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![A series of boxes showing the effect of increasing level of shadow
-    /// applied to each box.](SwiftUI-View-shadow.png)
-    ///
     /// - Parameters:
     ///   - color: The shadow's color.
     ///   - radius: The shadow's size.
@@ -25460,16 +25691,22 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the style for toggles within this view.
+    /// A view modifier that sets the style for toggles within this view.
     ///
     /// To set a specific style for all toggle instances within a view, use the
     /// `View/toggleStyle(_:)` modifier, as follows:
     ///
-    ///     VStack {
-    ///         Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
-    ///         Toggle("Vibrate on Silent", isOn: $vibrateOnSilent)
+    /// ```
+    /// struct StyledToggleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
+    ///             Toggle("Vibrate on Silent", isOn: $vibrateOnSilent)
+    ///         }
+    ///         .toggleStyle(SwitchToggleStyle())
     ///     }
-    ///     .toggleStyle(SwitchToggleStyle())
+    /// }
+    /// ```
     ///
     /// - Parameter style: The style to set.
     public func toggleStyle<S>(_ style: S) -> some View where S : ToggleStyle { }
@@ -25479,12 +25716,10 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets this view's color scheme.
+    /// A view modifier that sets this view's color scheme.
     ///
-    /// Use `colorScheme(_:)` to set the color scheme for the view to which you
-    /// apply it and any subviews. If you want to set the color scheme for all
-    /// views in the presentation, use `View/preferredColorScheme(_:)`
-    /// instead.
+    /// **This has been deprecated. Use ``View/preferredColorScheme(_:)``
+    /// instead.**
     ///
     /// - Parameter colorScheme: The color scheme for this view.
     ///
@@ -25496,34 +25731,37 @@ extension View {
     @inlinable public func colorScheme(_ colorScheme: ColorScheme) -> some View { }
 
 
-    /// Scales images within the view according to one of the relative sizes
+    /// A view modifier that scales images within the view according to one of the relative sizes
     /// available including small, medium, and large images sizes.
     ///
     /// The example below shows the relative scaling effect. The system renders
     /// the image at a relative size based on the available space and
     /// configuration options of the image it is scaling.
     ///
-    ///     VStack {
-    ///         HStack {
-    ///             Image(systemName: "heart.fill")
-    ///                 .imageScale(.small)
-    ///             Text("Small")
-    ///         }
-    ///         HStack {
-    ///             Image(systemName: "heart.fill")
-    ///                 .imageScale(.medium)
-    ///             Text("Medium")
-    ///         }
+    /// ```
+    /// struct ImageScaleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 Image(systemName: "heart.fill")
+    ///                     .imageScale(.small)
+    ///                 Text("Small")
+    ///             }
+    ///             HStack {
+    ///                 Image(systemName: "heart.fill")
+    ///                     .imageScale(.medium)
+    ///                 Text("Medium")
+    ///             }
     ///
-    ///         HStack {
-    ///             Image(systemName: "heart.fill")
-    ///                 .imageScale(.large)
-    ///             Text("Large")
+    ///             HStack {
+    ///                 Image(systemName: "heart.fill")
+    ///                     .imageScale(.large)
+    ///                 Text("Large")
+    ///             }
     ///         }
     ///     }
-    ///
-    /// ![A view showing small, medium, and large hearts rendered at a size
-    /// relative to the available space.](SwiftUI-View-imageScale.png)
+    /// }
+    /// ```
     ///
     /// - Parameter scale: One of the relative sizes provided by the image scale
     ///   enumeration.
@@ -25531,7 +25769,7 @@ extension View {
     @inlinable public func imageScale(_ scale: Image.Scale) -> some View { }
 
 
-    /// Sets the default font for text in this view.
+    /// A view modifier that sets the default font for text in this view.
     ///
     /// Use `font(_:)` to apply a specific font to all of the text in a view.
     ///
@@ -25547,19 +25785,22 @@ extension View {
     /// views contained with it continue to use the 16-point system font set by
     /// their containing view:
     ///
-    ///     VStack {
-    ///         Text("Font applied to a text view.")
-    ///             .font(.largeTitle)
-    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
     ///         VStack {
-    ///             Text("These 2 text views have the same font")
-    ///             Text("applied to their parent hierarchy")
-    ///         }
-    ///     }
-    ///     .font(.system(size: 16, weight: .light, design: .default))
+    ///             Text("Font applied to a text view.")
+    ///                 .font(.largeTitle)
     ///
-    /// ![A screenshot showing the application fonts to an individual text field
-    /// and view hierarchy.](SwiftUI-view-font.png)
+    ///             VStack {
+    ///                 Text("These 2 text views have the same font")
+    ///                 Text("applied to their parent hierarchy")
+    ///             }
+    ///         }
+    ///         .font(.system(size: 16, weight: .light, design: .default))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter font: The default font to use in this view.
     ///
@@ -25571,7 +25812,8 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Positions this view within an invisible frame with the specified size.
+    /// A view modifier that positions this view within an invisible frame
+    /// with the specified size.
     ///
     /// Use this method to specify a fixed size for a view's width, height, or
     /// both. If you only specify one of the dimensions, the resulting view
@@ -25583,34 +25825,37 @@ extension View {
     /// ellipse is laid out in a frame with only a fixed height, so it occupies
     /// that height, and whatever width the layout system offers to its parent.
     ///
-    ///     VStack {
-    ///         Ellipse()
-    ///             .fill(Color.purple)
-    ///             .frame(width: 200, height: 100)
-    ///         Ellipse()
-    ///             .fill(Color.blue)
-    ///             .frame(height: 100)
+    /// ```
+    /// struct EllipseFrameView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Ellipse()
+    ///                 .fill(Color.purple)
+    ///                 .frame(width: 200, height: 100)
+    ///             Ellipse()
+    ///                 .fill(Color.blue)
+    ///                 .frame(height: 100)
+    ///         }
     ///     }
-    ///
-    /// ![A screenshot showing the effect of frame size options: a purple
-    /// ellipse shows the effect of a fixed frame size, while a blue ellipse
-    /// shows the effect of constraining a view in one
-    /// dimension.](SwiftUI-View-frame-1.png)
+    /// }
+    /// ```
     ///
     /// `The alignment` parameter specifies this view's alignment within the
     /// frame.
     ///
-    ///     Text("Hello world!")
-    ///         .frame(width: 200, height: 30, alignment: .topLeading)
-    ///         .border(Color.gray)
+    /// ```
+    /// struct TextFrameView
+    ///     var body: some View {
+    ///         Text("Hello world!")
+    ///             .frame(width: 200, height: 30, alignment: .topLeading)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// In the example above, the text is positioned at the top, leading corner
     /// of the frame. If the text is taller than the frame, its bounds may
     /// extend beyond the bottom of the frame's bounds.
-    ///
-    /// ![A screenshot showing the effect of frame size options on a text view
-    /// showing a fixed frame size with a specified
-    /// alignment.](SwiftUI-View-frame-2.png)
     ///
     /// - Parameters:
     ///   - width: A fixed width for the resulting view. If `width` is `nil`,
@@ -25628,6 +25873,10 @@ extension View {
 
     /// Positions this view within an invisible frame.
     ///
+    /// **This does nothing and was only implemented so people who
+    /// don't know what they're doing don't have their programs
+    /// always breaking.**
+    ///
     /// Use `SwiftUI/View/frame(width:height:alignment:)` or
     /// `SwiftUI/View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)`
     /// instead.
@@ -25639,8 +25888,8 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Positions this view within an invisible frame having the specified size
-    /// constraints.
+    /// A view modifier that positions this view within an invisible frame
+    /// having the specified size constraints.
     ///
     /// Always specify at least one size characteristic when calling this
     /// method. Pass `nil` or leave out a characteristic to indicate that the
@@ -25666,6 +25915,25 @@ extension View {
     ///   proposed size, clamped to that maximum.
     /// - Otherwise, the size of this view.
     ///
+    /// The ideal width and height parameters can be enforced using the
+    /// ``View/fixedSize()`` modifier.
+    ///
+    /// Play with the numbers in the following example to see how then
+    /// child view responds
+    ///
+    /// ```
+    /// struct CustomFrameView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Rectangle()
+    ///                 .frame(minWidth: 50.0, idealWidth: 100.0, maxWidth: 200.0,
+    ///                        minHeight: 50.0, idealHeight: 100.0, maxHeight: 200.0)
+    ///         }
+    ///         .frame(width: 150.0, height: 150.0)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///   - minWidth: The minimum width of the resulting frame.
     ///   - idealWidth: The ideal width of the resulting frame.
@@ -25688,7 +25956,17 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Sets the style for group boxes within this view.
+    /// A view modifier that sets the style for group boxes within this view.
+    ///
+    /// Use this method to change the style of your ``GroupBox``.
+    ///
+    /// There is currently one pre-built style, called
+    /// ``DefaultGroupBoxStyle``, and the protocol
+    /// ``GroupBoxStyle`` lets you creat your own custom styles.
+    ///
+    /// See ``GroupBoxStyle`` for info on creating custom group box styles.
+    ///
+    ///
     ///
     /// - Parameter style: The style to apply to boxes within this view.
     public func groupBoxStyle<S>(_ style: S) -> some View where S : GroupBoxStyle { }
@@ -25698,7 +25976,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 extension View {
 
-    /// Sets the tab bar item associated with this view.
+    /// A view modifier that sets the tab bar item associated with this view.
     ///
     /// Use `tabItem(_:)` to configure a view as a tab bar item in a
     /// `TabView`. The example below adds two views as tabs in a `TabView`:
@@ -25733,9 +26011,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![A screenshot of a two views configured as tab items in a tab
-    /// view.](SwiftUI-View-tabItem.png)
-    ///
     /// - Parameter label: The tab bar item to associate with this view.
     public func tabItem<V>(@ViewBuilder _ label: () -> V) -> some View where V : View { }
 
@@ -25746,8 +26021,56 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Presents a popover using the given item as a data source for the
+    /// A view modifier that presents a popover using the given item as a data source for the
     /// popover's content.
+    ///
+    /// If your popover doesn't require a passed-in parameter, use
+    /// ``View/popover(isPresented:attachmentAnchor:arrowEdge:content:)``
+    /// instead.
+    ///
+    /// On iPhone, this modifier is very similar to
+    /// ``View/sheet(item:onDismiss:content:)``.
+    /// However, on iPad, these two modifiers are different.
+    ///
+    /// ```
+    /// struct Item: Identifiable {
+    ///     let id = UUID()
+    ///     let text: String
+    /// }
+    ///
+    /// struct BaseView: View {
+    ///     @State private var item: Item? = nil
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Button("🍌 Popover") {
+    ///                 item = Item(text: "🍌🍌")
+    ///             }
+    ///             Button("🍑 Popover") {
+    ///                 item = Item(text: "🍑🍑")
+    ///             }
+    ///         }
+    ///         .popover(item: $item,
+    ///                  attachmentAnchor: .rect(.bounds),
+    ///                  arrowEdge: .leading,
+    ///                  content: { ExamplePopover(item: $0) })
+    ///     }
+    /// }
+    ///
+    /// struct ExamplePopover: View {
+    ///     let item: item
+    ///     @Environment(\.presentationMode) var presentationMode
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text(item.text)
+    ///             Button("Tap to dismiss") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the popover.
@@ -25766,6 +26089,30 @@ extension View {
 
 
     /// Presents a popover when a given condition is true.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State private var showPopover = FalseContent
+    ///
+    ///     var body: some View {
+    ///         Button("Open sesame 📬") { showPopover = true }
+    ///             .popover(isPresented: $showPopover,
+    ///                      attachmentAnchor: .rect(.bounds),
+    ///                      arrowEdge: .leading,
+    ///                      content: { ExamplePopover() })
+    ///     }
+    /// }
+    ///
+    /// struct ExamplePopover: View {
+    ///     @Environment(\.presentationMode) var presentationMode
+    ///
+    ///     var body: some View { x
+    ///         Button("CLOSE 📪") {
+    ///             presentationMode.wrappedValue.dismiss()
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the popover is presented.
@@ -25802,11 +26149,24 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Adds an action to perform when the user moves the pointer over or away
+    /// A view modifier that adds an action to perform when the user moves the pointer over or away
     /// from the view's frame.
     ///
     /// Calling this method defines a region for detecting pointer movement with
     /// the size and position of this view.
+    ///
+    /// ```
+    /// struct HoverView: View {
+    ///     @State private var isHovering = false
+    ///
+    ///     var body: some View {
+    ///         Text(isHovering ? "HOVERING 🛸" : "👉 Come here 👈")
+    ///             .onHover { hovering in
+    ///                 isHovering = hovering
+    ///             }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter action: The action to perform whenever the pointer enters or
     ///   exits this view's frame. If the pointer is in the view's frame, the
@@ -25824,9 +26184,11 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Applies a pointer hover effect to the view.
+    /// A view modifier that adds a pointer hover effect to the view.
     ///
-    /// > Note: The system may fall back to a more appropriate effect.
+    /// Use this modifier on iPadOS only.
+    ///
+    /// - Note: The system may fall back to a more appropriate effect.
     @available(iOS 13.4, *)
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
@@ -25838,9 +26200,19 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Hides this view.
+    /// A view modifier that hides this view.
     ///
     /// Hidden views are invisible and can't receive or respond to interactions.
+    ///
+    /// ```
+    /// struct PartiallyHiddenView: View {
+    ///     var body: some View {
+    ///         Text("The invisible man hides below")
+    ///         Text("🧔")
+    ///             .hidden()
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Returns: A hidden view.
     @inlinable public func hidden() -> some View { }
@@ -25849,7 +26221,7 @@ extension View {
 
 extension View {
 
-    /// Sets the keyboard type for this view.
+    /// A view modifier that sets the keyboard type for this view.
     ///
     /// Use `keyboardType(_:)` to specify the keyboard type to use for text
     /// entry. A number of different keyboard types are available to meet
@@ -25860,19 +26232,25 @@ extension View {
     /// Setting the text field's keyboard type to `.emailAddress` ensures the
     /// user can only enter correctly formatted email addresses.
     ///
-    ///     TextField("someone@example.com", text: $emailAddress)
-    ///         .keyboardType(.emailAddress)
+    /// ```
+    /// struct EmailView: View {
+    ///     @State var emailAddress = ""
+    ///
+    ///     var body: some View {
+    ///         TextField("someone@example.com", text: $emailAddress)
+    ///             .keyboardType(.emailAddress)
+    ///     }
+    /// }
+    /// ```
     ///
     /// There are several different kinds of specialized keyboard types
     /// available though the
-    /// <doc://com.apple.documentation/documentation/UIKit/UIKeyboardType> enumeration. To
+    /// [UIKeyboardType](https://developer.apple.com/documentation/uikit/uikeyboardtype)
+    /// enumeration. To
     /// specify the default system keyboard type, use `.default`.
     ///
-    /// ![A screenshot showing the use of a specialized keyboard type with a
-    /// text field.](SwiftUI-View-keyboardType.png)
-    ///
     /// - Parameter type: One of the keyboard types defined in the
-    /// <doc://com.apple.documentation/documentation/UIKit/UIKeyboardType> enumeration.
+    /// `UIKeyboardType` enumeration.
     @available(iOS 13.0, tvOS 13.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
@@ -25882,7 +26260,7 @@ extension View {
 
 extension View {
 
-    /// Sets whether to apply auto-capitalization to this view.
+    /// A view modifier that sets whether to apply auto-capitalization to this view.
     ///
     /// Use `autocapitalization(_:)` when you need to automatically capitalize
     /// words, sentences, or other text like proper nouns.
@@ -25890,16 +26268,24 @@ extension View {
     /// In example below, as the user enters text each word is automatically
     /// capitalized:
     ///
-    ///     TextField("Last, First", text: $fullName)
-    ///         .autocapitalization(UITextAutocapitalizationType.words)
+    /// ```
+    /// struct NameView: View {
+    ///     @State var fullName = ""
     ///
-    /// The <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
+    ///     var body: some View {
+    ///         TextField("Last, First", text: $fullName)
+    ///             .autocapitalization(UITextAutocapitalizationType.words)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// The
+    /// [UITextAutocapitalizationType](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
     /// enumeration defines the available capitalization modes. The default is
-    /// <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType/sentences>.
+    /// [sentences](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype/sentences).
     ///
     /// - Parameter style: One of the autocapitalization modes defined in the
-    /// <doc://com.apple.documentation/documentation/UIKit/UITextAutocapitalizationType>
-    /// enumeration.
+    /// `UITextAutocapitalizationType` enumeration.
     @available(iOS 13.0, tvOS 13.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
@@ -25996,7 +26382,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets whether this view flips its contents horizontally when the layout
+    /// A view modifier that sets whether this view flips its contents horizontally when the layout
     /// direction is right-to-left.
     ///
     /// Use `flipsForRightToLeftLayoutDirection(_:)` when you need the system to
@@ -26006,8 +26392,14 @@ extension View {
     /// In the example below, the text flips horizontally when the layout system
     /// is right-to-left:
     ///
-    ///     Text("שָׁלוֹם")
-    ///        .flipsForRightToLeftLayoutDirection(true)
+    /// ```
+    /// struct HebrewView: View {
+    ///     var body: some View {
+    ///         Text("שָׁלוֹם")
+    ///          .flipsForRightToLeftLayoutDirection(true)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter enabled: A Boolean value that indicates whether this view
     ///   flips its content horizontally when the layout direction is
@@ -26021,17 +26413,28 @@ extension View {
 
 extension View {
 
-    /// Sets the text content type for this view, which the system uses to
+    /// A view modifier that sets the text content type for this view, which the system uses to
     /// offer suggestions while the user enters text on an iOS or tvOS device.
     ///
-    /// Use `textContentType(_:)` to set the content type for this view.
+    /// Use ``View/textContentType(_:)`` to set the content type for this view.
+    ///
+    /// Available content type values can be found in the
+    /// [UITextContentType](https://developer.apple.com/documentation/uikit/uitextcontenttype)
+    /// page.
     ///
     /// This example configures the `TextField` for the entry of email
     /// addresses:
     ///
-    ///     TextField("billjames2@icloud.com", text: $emailAddress)
-    ///         .textContentType(.emailAddress)
+    /// ```
+    /// struct EmailView: View {
+    ///     @State private var emailAddress = ""
+    ///
+    ///     var body: some View {
+    ///         TextField("billjames2@icloud.com", text: $emailAddress)
+    ///             .textContentType(.emailAddress)
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter textContentType: One of the content types available in the
     ///   `UITextContentType` enumeration that identify the semantic meaning
@@ -26047,7 +26450,7 @@ extension View {
 
 extension View {
 
-    /// Hides the labels of any controls contained within this view.
+    /// A view modifier that hides the labels of any controls contained within this view.
     ///
     /// Use `labelsHidden()` when it would not be appropriate to show a
     /// label near controls in the context of your user interface.
@@ -26059,21 +26462,23 @@ extension View {
     ///
     /// In the example below, one of the toggles has its label hidden:
     ///
-    ///     VStack {
-    ///         Toggle(isOn: $toggle1) {
-    ///             Text("Toggle1")
-    ///         }
-    ///         .labelsHidden()
+    /// ```
+    /// struct TogglesView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Toggle(isOn: $toggle1) {
+    ///                 Text("Toggle1")
+    ///             }
+    ///             .labelsHidden()
     ///
-    ///         Toggle(isOn: $toggle2) {
-    ///             Text("Toggle2")
+    ///             Toggle(isOn: $toggle2) {
+    ///                 Text("Toggle2")
+    ///             }
     ///         }
     ///     }
+    /// }
     ///
-    /// ![A screenshot showing a view with two toggle controls where one label
-    ///   is visible and the other label is hidden.](SwiftUI-Vew-labelsHidden.png)
-    ///
-    /// > Note: This modifier does not work for all labels. It applies to
+    /// - Note: This modifier does not work for all labels. It applies to
     ///   labels that are external/separate from the rest of the control's
     ///   interface like `Toggle`, but not to controls like a bordered button
     ///   where the label is inside the button's border.
@@ -26086,7 +26491,7 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Defines a keyboard shortcut and assigns it to the modified control.
+    /// A view modifier that defines a keyboard shortcut and assigns it to the modified control.
     ///
     /// Pressing the control's shortcut while the control is anywhere in the
     /// frontmost window or scene, or anywhere in the macOS main menu, is
@@ -26101,10 +26506,23 @@ extension View {
     ///
     /// If multiple controls are associated with the same shortcut, the first
     /// one found is used.
+    ///
+    /// ```
+    /// struct ShortcutView: View {
+    ///     var body: some View {
+    ///         Button("Click or press command+ctrl+P to print 🍌") { print("🍌") }
+    ///             .keyboardShortcut(KeyEquivalent("P"), modifiers: [.command, .control])
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - key: A key of type `KeyEquivalent`.
+    ///   - modifiers: The modifier or function keys to use for the shortcut.
     public func keyboardShortcut(_ key: KeyEquivalent, modifiers: EventModifiers = .command) -> some View { }
 
 
-    /// Assigns a keyboard shortcut to the modified control.
+    /// A view modifier that assigns a keyboard shortcut to the modified control.
     ///
     /// Pressing the control's shortcut while the control is anywhere in the
     /// frontmost window or scene, or anywhere in the macOS main menu, is
@@ -26119,6 +26537,31 @@ extension View {
     ///
     /// If multiple controls are associated with the same shortcut, the first
     /// one found is used.
+    ///
+    /// ```
+    /// struct ShortcutView: View {
+    ///     var body: some View {
+    ///         Button("Click or press command+ctrl+P to print 🍌") { print("🍌") }
+    ///             .keyboardShortcut(KeyboardShortcut(KeyEquivalent("P"), modifiers: [.command, .control])))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can also use ``KeyboardShortcut`` actions directly:
+    ///
+    /// ```
+    /// struct KeyboardShortcutView: View {
+    ///     var body: some View {
+    ///         Text("Press ENTER to save or ESC to cancel.")
+    ///         HStack {
+    ///             Button("Cancel") { print("cancel") }
+    ///                 .keyboardShortcut(.cancelAction)
+    ///             Button("Save") { print("save") }
+    ///                 .keyboardShortcut(.defaultAction)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func keyboardShortcut(_ shortcut: KeyboardShortcut) -> some View { }
 
 }
@@ -26139,7 +26582,7 @@ extension View {
     public func navigationBarHidden(_ hidden: Bool) -> some View { }
 
 
-    /// Sets the title in the navigation bar for this view.
+    /// A view modifier that sets the title in the navigation bar for this view.
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar.
     /// This modifier only takes effect when this view is inside of and visible
@@ -26161,9 +26604,6 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![A screenshot showing the title of a navigation bar configured using a
-    /// text view.](SwiftUI-navigationBarTitle-Text.png)
-    ///
     /// - Parameter title: A description of this view to display in the
     ///   navigation bar.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "navigationTitle(_:)")
@@ -26173,7 +26613,7 @@ extension View {
     public func navigationBarTitle(_ title: Text) -> some View { }
 
 
-    /// Sets the title of this view's navigation bar with a localized string.
+    /// A view modifier that sets the title of this view's navigation bar with a localized string.
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
     /// using a `LocalizedStringKey` that will be used to search for a
@@ -26210,7 +26650,7 @@ extension View {
     public func navigationBarTitle(_ titleKey: LocalizedStringKey) -> some View { }
 
 
-    /// Sets the title of this view's navigation bar with a string.
+    /// A view modifier that sets the title of this view's navigation bar with a string.
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
     /// using a `String`. This modifier only takes effect when this view is
@@ -26242,7 +26682,7 @@ extension View {
     public func navigationBarTitle<S>(_ title: S) -> some View where S : StringProtocol { }
 
 
-    /// Sets the title and display mode in the navigation bar for this view.
+    /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
@@ -26278,7 +26718,7 @@ extension View {
     public func navigationBarTitle(_ title: Text, displayMode: NavigationBarItem.TitleDisplayMode) -> some View { }
 
 
-    /// Sets the title and display mode in the navigation bar for this view.
+    /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
@@ -26319,7 +26759,7 @@ extension View {
     public func navigationBarTitle(_ titleKey: LocalizedStringKey, displayMode: NavigationBarItem.TitleDisplayMode) -> some View { }
 
 
-    /// Sets the title and display mode in the navigation bar for this view.
+    /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
     /// Use `navigationBarTitle(_:, displayMode)` to set the title of the
     /// navigation bar for this view and specify a display mode for the
@@ -26365,13 +26805,34 @@ extension View {
     public func navigationBarTitle<S>(_ title: S, displayMode: NavigationBarItem.TitleDisplayMode) -> some View where S : StringProtocol { }
 
 
-    /// Hides the navigation bar back button for the view.
+    /// A view modifier that hides the navigation bar back button for the view.
     ///
     /// Use `navigationBarBackButtonHidden(_:)` to hide the back button for this
     /// view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
     /// within a `NavigationView`.
+    ///
+    /// - Note: When applying this modifier, your navigation view will also
+    /// lose the ability to swipe back.
+    ///
+    /// ```
+    /// struct TrapDoorView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             NavigationLink(destination: NoReturnView(),
+    ///                            label { Text("Tap to fall into the trap door 🚪") })
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct NoReturnView: View {
+    ///     var body: some View {
+    ///         Text("Ha! You cannot return.")
+    ///             .navigationBarBackButtonHidden(true)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter hidesBackButton: A Boolean value that indicates whether to
     ///   hide the back button.
@@ -26398,7 +26859,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Sets the alignment of multiline text in this view.
+    /// A view modifier that sets the alignment of multiline text in this view.
     ///
     /// Use `multilineTextAlignment(_:)` to select an alignment for all of the
     /// text in this view or view hierarchy.
@@ -26409,12 +26870,15 @@ extension View {
     /// inside the view, regardless of any internal formatting or inclusion of
     /// interpolated text.
     ///
-    ///     Text("This is a block of text that will show up in a text element as multiple lines.\("\n") Here we have chosen to center this text.")
-    ///         .frame(width: 200, height: 200, alignment: .leading)
-    ///         .multilineTextAlignment(.center)
-    ///
-    /// ![A screenshot showing the effect of text alignment in a
-    /// view.](SwiftUI-view-multilineTextAlignment.png)
+    /// ```
+    /// struct MultilineTextView: View {
+    ///     var body: some View {
+    ///         Text("This is a block of text that will show up in a text element as multiple lines.\("\n") Here we have chosen to center this text.")
+    ///             .frame(width: 200, height: 200, alignment: .leading)
+    ///             .multilineTextAlignment(.center)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter alignment: A value that you use to left-, right-, or
     ///   center-align the text within a view.
@@ -26424,7 +26888,7 @@ extension View {
     @inlinable public func multilineTextAlignment(_ alignment: TextAlignment) -> some View { }
 
 
-    /// Sets the truncation mode for lines of text that are too long to fit in
+    /// A view modifier that sets the truncation mode for lines of text that are too long to fit in
     /// the available space.
     ///
     /// Use the `truncationMode(_:)` modifier to determine whether text in a
@@ -26436,12 +26900,15 @@ extension View {
     /// text that the view displays and the `truncationMode(_:)` specifies from
     /// which direction and where to display the truncation indicator:
     ///
-    ///     Text("This is a block of text that will show up in a text element as multiple lines. The text will fill the available space, and then, eventually, be truncated.")
-    ///         .frame(width: 150, height: 150)
-    ///         .truncationMode(.tail)
-    ///
-    /// ![A screenshot showing the effect of truncation mode on text in a
-    /// view.](SwiftUI-view-truncationMode.png)
+    /// ```
+    /// struct TruncatedTextView: View {
+    ///     var body: some View {
+    ///         Text("This is a block of text that will show up in a text element as multiple lines. The text will fill the available space, and then, eventually, be truncated.")
+    ///             .frame(width: 150, height: 150)
+    ///             .truncationMode(.tail)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter mode: The truncation mode that specifies where to truncate
     ///   the text within the text view, if needed. You can truncate at the
@@ -26452,7 +26919,7 @@ extension View {
     @inlinable public func truncationMode(_ mode: Text.TruncationMode) -> some View { }
 
 
-    /// Sets the amount of space between lines of text in this view.
+    /// A view modifier that sets the amount of space between lines of text in this view.
     ///
     /// Use `lineSpacing(_:)` to set the amount of spacing from the bottom of
     /// one line to the top of the next for text elements in the view.
@@ -26462,19 +26929,22 @@ extension View {
     /// view. Applying `lineSpacing(_:)` to a view hierarchy applies the line
     /// spacing to all text elements contained in the view.
     ///
-    ///     Text("This is a string in a TextField with 10 point spacing applied between the bottom of one line and the top of the next.")
-    ///         .frame(width: 200, height: 200, alignment: .leading)
-    ///         .lineSpacing(10)
-    ///
-    /// ![A screenshot showing the effects of setting line spacing on the text
-    /// in a view.](SwiftUI-view-lineSpacing.png)
+    /// ```
+    /// struct SpacedTextView: View {
+    ///     var body: some View {
+    ///         Text("This is a string in a TextField with 10 point spacing applied between the bottom of one line and the top of the next.")
+    ///             .frame(width: 200, height: 200, alignment: .leading)
+    ///             .lineSpacing(10)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter lineSpacing: The amount of space between the bottom of one
     ///   line and the top of the next line in points.
     @inlinable public func lineSpacing(_ lineSpacing: CGFloat) -> some View { }
 
 
-    /// Sets whether text in this view can compress the space between characters
+    /// A view modifier whether text in this view can compress the space between characters
     /// when necessary to fit text in a line.
     ///
     /// Use `allowsTightening(_:)` to enable the compression of inter-character
@@ -26484,22 +26954,25 @@ extension View {
     /// effects of `allowsTightening(_:)` on the compression of the spacing
     /// between characters:
     ///
-    ///     VStack {
-    ///         Text("This is a wide text element")
-    ///             .font(.body)
-    ///             .frame(width: 200, height: 50, alignment: .leading)
-    ///             .lineLimit(1)
-    ///             .allowsTightening(true)
+    /// ```
+    /// struct TightenedTextView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("This is a wide text element")
+    ///                 .font(.body)
+    ///                 .frame(width: 200, height: 50, alignment: .leading)
+    ///                 .lineLimit(1)
+    ///                 .allowsTightening(true)
     ///
-    ///         Text("This is a wide text element")
-    ///             .font(.body)
-    ///             .frame(width: 200, height: 50, alignment: .leading)
-    ///             .lineLimit(1)
-    ///             .allowsTightening(false)
+    ///             Text("This is a wide text element")
+    ///                 .font(.body)
+    ///                 .frame(width: 200, height: 50, alignment: .leading)
+    ///                 .lineLimit(1)
+    ///                 .allowsTightening(false)
+    ///         }
     ///     }
-    ///
-    /// ![A screenshot showing the effect of enabling text tightening in a
-    /// view.](SwiftUI-view-allowsTightening.png)
+    /// }
+    /// ```
     ///
     /// - Parameter flag: A Boolean value that indicates whether the space
     ///   between characters compresses when necessary.
@@ -26509,7 +26982,7 @@ extension View {
     @inlinable public func allowsTightening(_ flag: Bool) -> some View { }
 
 
-    /// Sets the maximum number of lines that text can occupy in this view.
+    /// A view modifier that sets the maximum number of lines that text can occupy in this view.
     ///
     /// Use `lineLimit(_:)` to cap the number of lines that an individual text
     /// element can display.
@@ -26523,12 +26996,15 @@ extension View {
     /// line in the `Text` element to the 2 lines that fit within the view's
     /// bounds:
     ///
-    ///     Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator.")
-    ///      .frame(width: 200, height: 200, alignment: .leading)
-    ///      .lineLimit(2)
-    ///
-    /// ![A screenshot showing showing the effect of the line limit operator on
-    /// a very long string in a view.](SwiftUI-view-lineLimit.png)
+    /// ```
+    /// struct LimitedTextView: View {
+    ///     var body: some View {
+    ///         Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator.")
+    ///             .frame(width: 200, height: 200, alignment: .leading)
+    ///             .lineLimit(2)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter number: The line limit. If `nil`, no line limit applies.
     ///
@@ -26537,7 +27013,7 @@ extension View {
     @inlinable public func lineLimit(_ number: Int?) -> some View { }
 
 
-    /// Sets the minimum amount that text in this view scales down to fit in the
+    /// A view modifier that sets the minimum amount that text in this view scales down to fit in the
     /// available space.
     ///
     /// Use the `minimumScaleFactor(_:)` modifier if the text you place in a
@@ -26550,15 +27026,18 @@ extension View {
     /// to fit into the available space, the `minimumScaleFactor(_:)` modifier
     /// shrinks the text as needed to fit into the available space.
     ///
-    ///     HStack {
-    ///         Text("This is a long label that will be scaled to fit:")
-    ///             .lineLimit(1)
-    ///             .minimumScaleFactor(0.5)
-    ///         TextField("My Long Text Field", text: $myTextField)
+    /// ```
+    /// struct LimitedScaleTextView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text("This is a long label that will be scaled to fit:")
+    ///                 .lineLimit(1)
+    ///                 .minimumScaleFactor(0.5)
+    ///             TextField("My Long Text Field", text: $myTextField)
+    ///         }
     ///     }
-    ///
-    /// ![A screenshot showing the effect of setting a minimumScaleFactor on
-    /// text in a view.](SwiftUI-View-minimumScaleFactor.png)
+    /// }
+    /// ```
     ///
     /// - Parameter factor: A fraction between 0 and 1 (inclusive) you use to
     ///   specify the minimum amount of text scaling that this view permits.
@@ -26567,11 +27046,20 @@ extension View {
     @inlinable public func minimumScaleFactor(_ factor: CGFloat) -> some View { }
 
 
-    /// Sets a transform for the case of the text contained in this view when
+    /// A view modifier that sets a transform for the case of the text contained in this view when
     /// displayed.
     ///
     /// The default value is `nil`, displaying the text without any case
     /// changes.
+    ///
+    /// ```
+    /// struct CapsView: View {
+    ///     var body: some View {
+    ///         Text("This is all caps text!")
+    ///             .textCase(.uppercase)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter textCase: One of the `Text/Case` enumerations; the
     ///   default is `nil`.
@@ -26585,7 +27073,23 @@ extension View {
 @available(tvOS, unavailable)
 extension View {
 
-    /// Adds an action to perform when this view recognizes a tap gesture.
+    /// A view modifier that adds an action to perform when this view recognizes a tap gesture.
+    ///
+    /// Do not use this modifier in place of ``Button``, ``NavigationLink``,
+    /// or other purpose-built controls for acting on tap gestures. Among
+    /// other benefits, those controls dim slightly when they are tapped,
+    /// while applying this modifier will not add this effect.
+    ///
+    /// ```
+    /// struct TapAndPrintView: View {
+    ///     var body: some View {
+    ///         Text("Tap me once for a 🍌")
+    ///             .onTapGesture { print("🍌") }
+    ///         Text("Tap me twice for a 🍑")
+    ///             .onTapGesture(count: 2) { print("🍑") }
+    ///     }
+    /// }
+    /// ```
     public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View { }
 
 }
@@ -26593,7 +27097,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Applies an inset to the rows in a list.
+    /// A view modifier that applies an inset to the rows in a list.
     ///
     /// Use `listRowInsets(_:)` to change the default padding of the content of
     /// list items.
@@ -27228,12 +27732,15 @@ extension View {
     /// In the example below, the text is rotated 45˚ about the `y` axis,
     /// front-most (the default `zIndex`) and default `perspective` (`1`):
     ///
-    ///     Text("Rotation by passing an angle in degrees")
-    ///         .rotation3DEffect(.degrees(45), axis: (x: 0.0, y: 1.0, z: 0.0))
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing the rotation of text 45 degrees about the
-    /// y-axis.](SwiftUI-View-rotation3DEffect.png)
+    /// ```
+    /// struct RotatedInSpaceView: View {
+    ///     var body: some View {
+    ///         Text("Rotation by passing an angle in degrees")
+    ///             .rotation3DEffect(.degrees(45), axis: (x: 0.0, y: 1.0, z: 0.0))
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
