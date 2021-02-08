@@ -1,16 +1,16 @@
+name: Push to S3 bucket
+
 on:
   push:
-    branches: 
-      - main
-
-name: Push to S3 bucket
+    branches:
+    - develop
 
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      IGNORED_FILES: ".gitignore,.github/workflows/aws.yml,"
+      IGNORED_FILES: ".gitignore,.github/workflows/deploy-prod.yml,"
 
     steps:
     - name: Checkout
@@ -26,13 +26,18 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
 
-    - name: Copy files to the S3 bucket
+    - name: Copy file changes to S3
       run: |
         for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do
           if ! grep -q "$i," <<< $IGNORED_FILES; then
             if test -f $i; then
-              echo "Uploading $i to S3 bucket"
-              aws s3 cp $i s3://blossom-documentation
+              if [[ $i == *.swift ]]; then
+                echo "Uploading $i to S3 docs bucket"
+                aws s3 cp $i s3://blossom-documentation-qa
+              elif [[ $i == images/* ]]; then
+                echo "Uploading $i to S3 asset bucket"
+                aws s3 cp $i s3://bananadocs-documentation-assets-qa
+              fi
             fi
           fi
         done
