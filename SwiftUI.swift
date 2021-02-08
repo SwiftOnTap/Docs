@@ -2824,36 +2824,101 @@ public struct ButtonStyleConfiguration {
     public let isPressed: Bool
 }
 
-/// A capsule shape aligned inside the frame of the view containing it.
+/// A pill-style shape.
 ///
-/// A capsule shape is equivalent to a rounded rectangle where the corner radius
-/// is chosen as half the length of the rectangle's smallest edge.
+/// A Capsule is a rectangular `Shape` that by default, aligns itself inside of
+/// the view containing it. It differs from `RoundedRectangle` in that its
+/// corner radius is half the length of the retangle's smallest edge. In effect,
+/// it creates a "pill" shape.
+///
+/// To define a Capsule with a specific color and frame, use the `Shape/fill()`
+/// and `View/frame(width:height:)` modifiers:
+///
+/// ![Capsule fill and frame example](capsule-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Capsule()
+///             .fill(Color.orange)
+///             .frame(width: 250, height: 100)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the
+/// border width to keep the Capsule at its original size:
+///
+/// ![Capsule inset and stroke example](capsule-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Capsule()
+///             .inset(by: 10)
+///             .stroke(Color.orange, lineWidth: 20)
+///             .frame(width: 250, height: 100)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Capsule : Shape {
 
-	/// The capsule shape's rounded corner style.
+	/// The Capsule's rounded corner style, based on the value passed in its
+    /// initializer.
 	///
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
-    /// Creates a new capsule shape from a rounded corner style.
+    /// Creates an Ellipse that aligns itself inside of the view containing it
+    /// by default.
     ///
-    /// - Parameter style: The rounded corner style of the capsule.
+    /// A style may be optionally passed into the initializer, with the options
+    /// `circular` and `continuous`. These styles have subtle but noticeable
+    /// differences:
+    ///
+    /// ![Ellipse init example](ellipse-example-3.png)
+    ///
+    /// ```
+    /// `struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             Capsule(style: .circular)
+    ///                 .frame(width: 250, height: 100)
+    ///
+    ///             Capsule(style: .continuous)
+    ///                 .frame(width: 250, height: 100)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(style: RoundedCornerStyle = .circular) { }
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe a Capsule as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// A Capsule can be described as a path within a specific `CGRect` using
+    /// the `Capsule/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![Capsule path example](capsule-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 75, height: 200))
+    ///     }
+    /// }
+    /// ```
     public func path(in r: CGRect) -> Path { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -2861,22 +2926,36 @@ public struct ButtonStyleConfiguration {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Capsule : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Capsule insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Capsule that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Capsule inset example](capsule-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
-/// A circle centered on the frame of the view containing it.
+/// A circle shape.
 ///
-/// The circle's radius equals half the length of the frame rectangle's smallest
-/// edge.
+/// A Circle is centered on the frame of the view containing it. The circle's
+/// radius equals half the length of the frame rectangle's smallest edge.
 ///
-/// By default, a circle is black, and takes up the space of its container:
+/// By default, a Circle is black, and takes up the space of its container:
 ///
-/// ![Circle Example 1](images/Circle-example-1.png)
+/// ![Circle init example](Circle-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2887,9 +2966,9 @@ extension Capsule : InsettableShape {
 /// ```
 ///
 /// Define a Circle with a specific color and frame with the `Shape/fill()`
-/// and `Circle/frame(width:height:)` modifiers. For example:
+/// and `View/frame(width:height:)` modifiers. For example:
 ///
-/// ![Circle Example 2](images/Circle-example-2.png)
+/// ![Circle fill and frame example](Circle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2901,11 +2980,11 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// To add a border, use the `Circle/stroke(:lineWidth:)` modifier, and use
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the `Circle/inset(by:)` modifier to inset the circle by half of the border
 /// width to keep the circle at its original size:
 ///
-/// ![Circle Example 3](Circle-example-3.png)
+/// ![Circle inset and stroke example](Circle-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2920,10 +2999,12 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
-    /// A circle can be described as a path within a specific rectangular frame
-    /// using the `Circle/path(in:)` modifier:
+    /// Used to describe a Circle as a path in a `CGRect`.
     ///
-    /// ![Circle Example 4](Circle-example-4.png)
+    /// A Circle can be described as a path within a specific `CGRect` using the
+    /// `Circle/path(in:)` modifier:
+    ///
+    /// ![Circle path example](Circle-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -2935,9 +3016,10 @@ extension Capsule : InsettableShape {
     /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a circle.
+    /// Creates a Circle that aligns itself inside of the view containing it
+    /// by default.
     ///
-    /// ![Circle Example 1](images/Circle-example-1.png)
+    /// ![Circle init example](Circle-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -2961,11 +3043,16 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Circle : InsettableShape {
 
+    /// Returns a Circle insetted by the amount specified.
+    ///
     /// Returns a Circle insetted by the amount specified. For example,
     /// insetting by 10 points returns a Circle that fills its container, with
     /// 10 points inset on all four side.
     ///
-    /// ![Circle Example 5](Circle-example-5.png)
+    /// For example, insetting by 10 points returns a Circle that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Circle inset example](Circle-example-5.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -7285,26 +7372,85 @@ extension EditMode : Equatable {
 extension EditMode : Hashable {
 }
 
-/// An ellipse aligned inside the frame of the view containing it.
+/// An ellipse shape, similar to a circle but with potentially different width
+/// and height.
+///
+/// An Ellipse is a circular `Shape` that by default, aligns itself inside of
+/// the view containing it. It differs from `Circle` in that its width and
+/// height are not necessarily equal.
+///
+/// To define an Ellipse with a specific color and frame, use the `Shape/fill()`
+/// and `View/frame(width:height:)` modifiers:
+///
+/// ![Ellipse fill and frame example](ellipse-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Ellipse()
+///             .fill(Color.purple)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Ellipse/inset(by:)` modifier to inset the Ellipse by half of the
+/// border width to keep the Ellipse at its original size:
+///
+/// ![Ellipse inset and stroke example](ellipse-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Ellipse()
+///             .inset(by: 10)
+///             .stroke(Color.purple, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Ellipse : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe an Ellipse as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// An Ellipse can be described as a path within a specific `CGRect` using
+    /// the `Ellipse/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![Ellipse path example](ellipse-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 150))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates an ellipse shape that stretches to fill its parent view.
+    /// Creates an Ellipse that aligns itself inside of the view containing it
+    /// by default.
+    ///
+    /// ![Ellipse init example](ellipse-example-4.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -7312,11 +7458,25 @@ extension EditMode : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Ellipse : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Ellipse insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Ellipse that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Ellipse inset example](ellipse-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -16324,26 +16484,81 @@ extension ProjectionTransform {
     public typealias Body
 }
 
-/// A rectangular shape aligned inside the frame of the view containing it.
+/// A rectangle shape.
+///
+/// A Rectangle is a rectangular `Shape` that by default, aligns itself inside
+/// of the view containing it. To define a Rectangle with a specific color and
+/// frame, use the `Shape/fill()` and `View/frame(width:height:)` modifiers:
+///
+/// ![Rectangle fill and frame example](rectangle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Rectangle()
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Rectangle/inset(by:)` modifier to inset the rectangle by half of the
+/// border width to keep the rectangle at its original size:
+///
+/// ![Rectangle inset and stroke example](rectangle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Rectangle()
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Rectangle : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe a Rectangle as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// A Rectangle can be described as a path within a specific `CGRect` using
+    /// the `Rectangle/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![Rectangle path example](rectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a new rectangle shape.
+    /// Creates a Rectangle that aligns itself inside of the view containing it
+    /// by default.
+    ///
+    /// ![Rectangle init example](rectangle-example-4.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -16351,11 +16566,25 @@ extension ProjectionTransform {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Rectangle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Rectangle insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Rectangle that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Rectangle inset example](rectangle-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -17504,8 +17733,80 @@ extension RoundedCornerStyle : Equatable {
 extension RoundedCornerStyle : Hashable {
 }
 
-/// A rectangular shape with rounded corners, aligned inside the frame of the
-/// view containing it.
+/// A rectangle shape with rounded corners.
+///
+/// A RoundedRectangle is a rectangular `Shape` with rounded corners that by
+/// default, aligns itself inside of the view containing it.
+///
+/// It must be created with a specific corner radius or size.
+/// The example below creates a RoundedRectangle with a corner radius of 20,
+/// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
+/// to set the color to blue and the frame to 250 by 150.
+///
+/// ![RoundedRectangle corner radius, fill, and frame example](roundedrectangle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 20)
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// The example below uses the same modifiers, but defines a corner size
+/// rather than a corner radius.
+///
+/// ![RoundedRectangle corner size, fill, and frame example](roundedrectangle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerSize: CGSize(width: 30, height: 10))
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// The RoundedRectangle initializer includes an optional parameter for
+/// specifying the `style`, a `RoundedCornerStyle` that can either be `circular`
+/// or `continuous`. These styles have subtle but noticeable differences:
+///
+/// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack(spacing: 20) {
+///             RoundedRectangle(cornerRadius: 50, style: .circular)
+///                 .frame(width: 250, height: 150)
+///
+///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+///                 .frame(width: 250, height: 150)
+///         }
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `RoundedRectangle/inset(by:)` modifier to inset the RoundedRectangle by
+/// half of the border width to keep the RoundedRectangle at its original size:
+///
+/// ![RoundedRectangle inset and stroke example](roundedrectangle-example-4.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 40)
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RoundedRectangle : Shape {
 
@@ -17515,43 +17816,124 @@ extension RoundedCornerStyle : Hashable {
 	/// not to be perfect quarter-circles but instead quarter-ellipses.
 	/// Basically, this allows you to specify different width and heights of
 	/// the corners.
+    ///
+    /// ![RoundedRectangle cornerSize example](roundedrectangle-example-6.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerSize: CGSize(width: 30, height: 20))
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerSize: CGSize(width: 20, height: 40))
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var cornerSize: CGSize
 
     /// The rounded corner style of your rounded rectangle's corners.
     ///
+    /// These styles have subtle but noticeable differences:
+    ///
+    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: .circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// -SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
-    /// Creates a rounded rectangle with specified rounded corner width and height.
+    /// Creates a RoundedRectangle with specified rounded corner width and height.
     ///
     /// - Parameters:
     ///   - cornerSize: The size (width and height) of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
+    ///
+    /// ![RoundedRectangle init with cornerSize example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(
+    ///                 cornerSize: CGSize(width: 20, height: 10)
+    ///             )
+    ///             .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(
+    ///                 cornerSize: CGSize(width: 20, height: 10),
+    ///                 style: .continuous
+    ///             )
+    ///             .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
 
-    /// Creates a rounded rectangle with specified rounded corner radius.
+    /// Creates a RoundedRectangle with specified rounded corner radius.
     ///
     /// - Parameters:
     ///   - cornerRadius: The radius of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
+    ///
+    /// ![RoundedRectangle init with cornerRadius example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50) // Style defaults to circular
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe a RoundedRectangle as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// A RoundedRectangle can be described as a path within a specific `CGRect`
+    /// using the `RoundedRectangle/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![RoundedRectangle path example](roundedrectangle-example-7.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 75, height: 200))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// The data to animate.
+    /// > The data to animate.
     public var animatableData: CGSize.AnimatableData
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = CGSize.AnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -17559,11 +17941,24 @@ extension RoundedCornerStyle : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension RoundedRectangle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a RoundedRectangle insetted by the amount specified. For
+    /// example, insetting by 10 points returns a Capsule that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![RoundedRectangle inset example](roundedrectangle-example-8.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 20)
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
