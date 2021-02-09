@@ -6372,6 +6372,8 @@ extension EnvironmentValues {
 
     /// The current phase of the scene.
     ///
+    /// [[scene-status]]
+    /// 
     /// The system sets this value to provide an indication of the
     /// operational state of a scene or collection of scenes. The exact
     /// meaning depends on where you access the value. For more information,
@@ -9610,7 +9612,7 @@ public struct KeyboardShortcut {
 /// It's also possible to make labels using views to compose the label's icon
 /// programmatically, rather than using a pre-made image.
 ///
-/// For example: 
+/// For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -14729,7 +14731,7 @@ extension RoundedRectangle : InsettableShape {
 /// Just like how `Views` have a bunch of custom modifiers that work right out of the box,
 /// `Scene` provides default implementations of many useful modifiers. These can be used to do things
 /// like adding macOS commands, changing the toolbar, and adding support for app storage.
-///
+/// [scene-status ->]
 /// ### Getting Scene Status
 ///
 /// The `EnvironmentValues/scenePhase` environment value can easily be read in a scene
@@ -14744,6 +14746,7 @@ extension RoundedRectangle : InsettableShape {
 ///             }
 ///         }
 ///     }
+/// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol Scene{ }
 extension Scene {
@@ -18427,7 +18430,7 @@ public struct TextEditor : View {
 ///             .padding()
 ///         }
 ///     }
-///
+/// [textfield-style ->]
 /// `TextField` can be styled with the `View/textFieldStyle(_:)` modifier.
 ///
 /// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
@@ -18444,6 +18447,7 @@ public struct TextEditor : View {
 ///     }
 ///
 /// The `TextFieldStyle` protocol and `View/textFieldStyle(_:)` modifier provide helpful functionality to implement a well styled `TextField`.
+/// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct TextField<Label> : View where Label : View {
 
@@ -24219,7 +24223,7 @@ extension View {
     ///
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
-    ///
+    /// [toolbar-content ->]
     /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
     ///
     /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
@@ -24273,6 +24277,7 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// [<-]
     public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
 
 
@@ -25216,6 +25221,8 @@ extension View {
 extension View {
 
     /// Sets the style for text fields within this view.
+    ///
+    /// [[textfield-style]]
     public func textFieldStyle<S>(_ style: S) -> some View where S : TextFieldStyle { }
 
 }
