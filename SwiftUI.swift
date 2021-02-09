@@ -9150,7 +9150,33 @@ public struct GridItem {
     public init(_ size: GridItem.Size = .flexible(), spacing: CGFloat? = nil, alignment: Alignment? = nil) { }
 }
 
-/// An affordance for grouping view content.
+/// A structure that groups other structure together.
+///
+/// Use this structure to group together structures of different types.
+/// There are five different types of groups. Each groups together
+/// a type of content.
+///
+/// 1. ``ToolbarContent``
+/// 2. ``CustomizableToolbarContent``
+/// 3. ``Scene``
+/// 4. ``View``
+/// 5. ``Commands``
+/// 
+/// There are 2 main reasons to use a `Group`:
+/// - To exceed the 10 struct limitation of a function builder
+/// - To improve code readability.
+///
+/// Here is an example creating a `Group` of `View`s:
+///
+/// 	var body: some View {
+///         Group {
+/// 			Text("1")
+/// 			Text("2")
+/// 			Text("3")
+/// 			Text("4")
+/// 			Text("5")
+/// 		}
+/// 	}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Group<Content> {
 
@@ -9231,7 +9257,7 @@ extension Group : View where Content : View {
 	/// 				Text("8")
 	/// 				Text("9")
 	/// 				Text("10")
-	/// 				Text("11") // No error 😎
+	/// 				Text("11") //No error 😎
 	///				}
 	/// 		}
 	/// 	}
@@ -10540,25 +10566,58 @@ extension LayoutDirection {
 /// a Unicode code point from the "Smileys" group, and the bottom shows its
 /// corresponding emoji.
 ///
+/// ```
+/// struct HorizontalEmojiView: View {
 ///     var rows: [GridItem] =
 ///             Array(repeating: .init(.fixed(20)), count: 2)
-///     ScrollView(.horizontal) {
-///         LazyHGrid(rows: rows, alignment: .top) {
-///             ForEach((0...79), id: \.self) {
-///                 let codepoint = $0 + 0x1f600
-///                 let codepointString = String(format: "%02X", codepoint)
-///                 Text("\(codepointString)")
-///                     .font(.footnote)
-///                 let emoji = String(Character(UnicodeScalar(codepoint)!))
-///                 Text("\(emoji)")
-///                     .font(.largeTitle)
+///
+///     var body: some View {
+///         ScrollView(.horizontal) {
+///             LazyHGrid(rows: rows, alignment: .top) {
+///                 ForEach((0...79), id: \.self) {
+///                     let codepoint = $0 + 0x1f600
+///                     let codepointString = String(format: "%02X", codepoint)
+///                     Text("\(codepointString)")
+///                         .font(.footnote)
+///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+///                     Text("\(emoji)")
+///                      .font(.largeTitle)
+///                 }
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyHGrid<Content> : View where Content : View {
 
     /// Creates a grid that grows horizontally, given the provided properties.
+    ///
+    /// The first parameter, rows, takes an array of ``GridItem``s.
+    /// For more info on the types of grid items, check out that page.
+    ///
+    /// ```
+    /// struct HorizontalEmojiView: View {
+    ///     var rows: [GridItem] =
+    ///             Array(repeating: .init(.fixed(20)), count: 2)
+    ///
+    ///     var body: some View {
+    ///         ScrollView(.horizontal) {
+    ///             LazyHGrid(rows: rows, alignment: .top) {
+    ///                 ForEach((0...79), id: \.self) {
+    ///                     let codepoint = $0 + 0x1f600
+    ///                     let codepointString = String(format: "%02X", codepoint)
+    ///                     Text("\(codepointString)")
+    ///                         .font(.footnote)
+    ///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+    ///                     Text("\(emoji)")
+    ///                      .font(.largeTitle)
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - rows: An array of grid items to size and position each column of
@@ -10587,18 +10646,38 @@ public struct LazyHGrid<Content> : View where Content : View {
 /// consists of a horizontal row of text views. The stack aligns to the top
 /// of the scroll view and uses 10-point spacing between each text view.
 ///
-///     ScrollView(.horizontal) {
-///         LazyHStack(alignment: .top, spacing: 10) {
-///             ForEach(1...100, id: \.self) {
-///                 Text("Column \($0)")
+/// ```
+/// struct ColumnNumberView: View {
+///     var body: some View {
+///         ScrollView(.horizontal) {
+///             LazyHStack(alignment: .top, spacing: 10) {
+///                 ForEach(1...100, id: \.self) {
+///                     Text("Column \($0)")
+///                 }
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyHStack<Content> : View where Content : View {
 
     /// Creates a lazy horizontal stack view with the given spacing,
     /// vertical alignment, pinning behavior, and content.
+    ///
+    /// ```
+    /// struct ColumnNumberView: View {
+    ///     var body: some View {
+    ///         ScrollView(.horizontal) {
+    ///             LazyHStack(alignment: .top, spacing: 10) {
+    ///                 ForEach(1...100, id: \.self) {
+    ///                     Text("Column \($0)")
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - alignment: The guide for aligning the subviews in this stack. All
@@ -10673,18 +10752,38 @@ public struct LazyVGrid<Content> : View where Content : View {
 /// leading edge of the scroll view, and uses default spacing between the
 /// text views.
 ///
-///     ScrollView {
-///         LazyVStack(alignment: .leading) {
-///             ForEach(1...100, id: \.self) {
-///                 Text("Row \($0)")
+/// ```
+/// struct RowNumbersView: View {
+///     var body: some View {
+///         ScrollView {
+///             LazyVStack(alignment: .leading) {
+///                 ForEach(1...100, id: \.self) { number in
+///                     Text("Row \(number)")
+///                 }
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyVStack<Content> : View where Content : View {
 
     /// Creates a lazy vertical stack view with the given spacing,
     /// vertical alignment, pinning behavior, and content.
+    ///
+    /// ```
+    /// struct RowNumbersView: View {
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             LazyVStack(alignment: .leading) {
+    ///                 ForEach(1...100, id: \.self) { number in
+    ///                     Text("Row \(number)")
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - alignment: The guide for aligning the subviews in this stack. All
@@ -29338,11 +29437,40 @@ public struct WindowGroup<Content> : Scene where Content : View {
     public typealias Body = some Scene
 }
 
-/// A view that overlays its children, aligning them in both axes.
+/// A view that arranges children on top of each other.
+///
+/// `ZStack` arranges views "into" and "out of" the screen. The result
+/// is vies stacked on top of each other.
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             ZStack {
+///                 Text("I am obscured by clouds")
+///                 Text("☁️☁️☁️☁️")
+///             }
+///         }
+///     }
+///
+/// Learn more about the properties of each alignment choice via the
+/// `Alignment` struct.
+///
+/// `ZStack` uses a `ViewBuilder` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ZStack<Content> : View where Content : View {
 
-    /// Creates an instance with the given alignment.
+    /// Creates a ZStack with the given alignment.
+    ///
+    /// See the ``Alignment`` struct for the 9 types of standard alignments.
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             ZStack {
+    ///                 Text("I am obscured by clouds and rain")
+    ///                 Text("☁️☁️☁️☁️")
+    ///                 Text("💧💧💧💧")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - alignment: The guide for aligning the subviews in this stack on both
