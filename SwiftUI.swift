@@ -7819,13 +7819,72 @@ public struct FileDocumentWriteConfiguration {
     public let existingFile: FileWrapper?
 }
 
-/// A style for rasterizing vector shapes.
+/// A struct style for rasterizing vector shapes.
+///
+/// FillStyle determines the even-odd fill mode and antialiased mode on the style.
+///
+/// For example, to create a view with a circle shape and fill style:
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Circle()
+///          .fill(Color.pink, style: FillStyle())
+///    }
+///
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct FillStyle : Equatable {
 
     /// A Boolean value that indicates whether to use the even-odd rule when
     /// rendering a shape.
     ///
+    /// The even-odd rule fills a path depending on what is overlapping in the path.
+    /// For example, a path with no overlaps will be fully filled but a path with
+    /// an overlap will not have the overlapping part filled.
+    ///
+    /// ![FillStyle even-odd rule example 1][fillstyle-eof-example.png]
+    ///
+    /// ```
+    /// struct EvenOddRuleView: View {
+    ///
+    ///    var body: some View {
+    ///        VStack(spacing: 100) {
+    ///            VStack {
+    ///                OverlappingRectangles()
+    ///                    .fill(Color.pink, style: FillStyle(eoFill: true))
+    ///                    .frame(width: 150, height: 100)
+    ///
+    ///                Text("isEOFilled: true")
+    ///            }
+    ///
+    ///            VStack {
+    ///                OverlappingRectangles()
+    ///                    .fill(Color.pink, style: FillStyle(eoFill: false))
+    ///                    .frame(width: 150, height: 100)
+    ///
+    ///                Text("isEOFilled: false")
+    ///            }
+    ///        }
+    ///    }
+    ///
+    ///    struct OverlappingRectangles: Shape {
+    ///
+    ///        func path(in rect: CGRect) -> Path {
+    ///            let rectSize = CGSize(width: rect.height, height: rect.height)
+    ///
+    ///            var path = Path()
+    ///
+    ///            path.addRect(CGRect(origin: .zero, size: rectSize))
+    ///            path.addRect(CGRect(origin: CGPoint(x: rect.width-rect.height, y: -50), size: rectSize))
+    ///
+    ///            return path
+    ///        }
+    ///    }
+    /// }
+    /// ```
     /// When `isOEFilled` is `false`, the style uses the non-zero winding number
     /// rule.
     public var isEOFilled: Bool
@@ -7836,12 +7895,27 @@ public struct FileDocumentWriteConfiguration {
 
     /// Creates a new fill style with the specified settings.
     ///
+    /// For example, to create a new fill style:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Circle()
+    ///          .fill(Color.pink, style: FillStyle(eoFill: true, antialiased: true))
+    ///    }
+    ///
+    /// }
+    /// ```
+    ///
     /// - Parameters:
-    ///   - eoFill: A Boolean value that indicates whether to use the even-od
+    ///   - eoFill: A Boolean value that indicates whether to use the even-odd
     ///     rule for rendering a shape. Pass `false` to use the non-zero winding
-    ///     number rule instead.
+    ///     number rule instead. If no value is specified, eoFill defaults to false.
+    ///     For more information on the even-odd rule, see ``isOEFilled``.
     ///   - antialiased: A Boolean value that indicates whether to use
-    ///     antialiasing when rendering the edges of a shape.
+    ///     antialiasing when rendering the edges of a shape. If no value is specified
+    ///     antialiased defaults to true. For more information on the even-odd rule, see ``isAntialiased``.
     public init(eoFill: Bool = false, antialiased: Bool = true) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
