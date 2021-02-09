@@ -3966,6 +3966,9 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 /// A shape that is replaced by an inset version of the current
 /// container shape. If no container shape was defined, is replaced by
 /// a rectangle.
+///
+/// Use this shape primarily with widgets, to generate container-relative
+/// rounded rectangles.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct ContainerRelativeShape : Shape {
 
@@ -13480,16 +13483,70 @@ extension NavigationViewStyle {
 }
 
 /// A shape with a translation offset transform applied to it.
+///
+/// An offset shape has two use cases:
+/// 1. Used directly via its initializer ``RotatedShape/init(shape:offset:)``.
+/// 2. The return value of ``Shape/offset(_:)`` and ``Shape/offset(x:y:)``.
+///
+/// Having an offset shape is helpful because it allows you to translate a shape
+/// and then continue to use its shape properties, instead of turning into ``View``.
+///
+/// A simple example of constructing an `OffsetShape`:
+///
+/// ```
+/// struct OffsetShapeView: View {
+///     var body: some View {
+///         OffsetShape(shape: Circle(),
+///                     offset: CGSize(width: 20, height: 20))
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct OffsetShape<Content> : Shape where Content : Shape {
 
-	/// The original shape that you want to move up, down, or both.
+	/// The original shape that you want to move up, sideways, or both.
+    ///
+    /// ```
+    /// struct OffsetShapeView: View {
+    ///     let offsetShape =  OffsetShape(shape: Circle(),
+    ///                                    offset: CGSize(width: 20, height: 20))
+    ///     var body: some View {
+    ///         ZStack {
+    ///             offsetShape
+    ///             offsetShape.shape
+    ///                 .opacity(0.2)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var shape: Content
 
-    /// The amount you want to move the shape.
+    /// The amount the shape is offset.
+    ///
+    /// ```
+    /// struct OffsetShapeView: View {
+    ///     let offsetShape =  OffsetShape(shape: Circle(),
+    ///                                    offset: CGSize(width: 20, height: 20))
+    ///     var body: some View {
+    ///         offsetShape
+    ///             .onAppear {
+    ///                 print(offsetShape.offset.width) //20
+    ///             }
+    ///     }
+    /// }
+    /// ```
     public var offset: CGSize
 
     /// Use this to take an original shape and move it to a new place on the screen.
+    ///
+    /// ```
+    /// struct OffsetShapeView: View {
+    ///     var body: some View {
+    ///         OffsetShape(shape: Circle(),
+    ///                     offset: CGSize(width: 20, height: 20))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - shape: The original shape that you want to move.
@@ -17282,19 +17339,86 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
 }
 
 /// A shape with a rotation transform applied to it.
+///
+/// A rotated shape has two use cases:
+/// 1. Used directly via its initializer ``RotatedShape/init(shape:angle:anchor:)``.
+/// 2. The return value of ``Shape/rotation(_:anchor:)``.
+///
+/// Having a rotated shape is helpful because it allows you to rotate a shape
+/// and then continue to use its shape properties, instead of turning into ``View``.
+///
+/// A simple example of constructing a `RotatedShape`:
+///
+/// ```
+/// struct RotatedShapeView: View {
+///     var body: some View {
+///         RotatedShape(shape: Rectangle(),
+///                      angle: .degrees(30))
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RotatedShape<Content> : Shape where Content : Shape {
 
 	/// The original shape to be rotated.
+    ///
+    /// ```
+    /// struct RotatedShapeView: View {
+    ///     let rotatedShape = RotatedShape(shape: Rectangle(),
+    ///                                     angle: .degrees(30))
+    ///     var body: some View {
+    ///         ZStack {
+    ///             rotatedShape
+    ///             rotatedShape.shape
+    ///                 .opacity(0.2)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var shape: Content
 
     /// The amount to rotate the original shape.
+    ///
+    /// ```
+    /// struct RotatedShapeView: View {
+    ///     let rotatedShape = RotatedShape(shape: Rectangle(),
+    ///                                     angle: .degrees(30))
+    ///     var body: some View {
+    ///         rotatedShape
+    ///             .onAppear { print("\(rotatedShape.angle.degrees)º")} //29.999999999999996º
+    ///     }
+    /// }
+    /// ```
     public var angle: Angle
 
     /// The anchor point to rotate the shape around.
+    ///
+    /// ```
+    /// struct RotatedShapeView: View {
+    ///     let rotatedShape = RotatedShape(shape: Rectangle(),
+    ///                                     angle: .degrees(30))
+    ///     var body: some View {
+    ///         rotatedShape
+    ///             .onAppear {
+    ///                 print(rotatedShape.anchor.x) //0.5
+    ///                 print(rotatedShape.anchor.y) //0.5
+    ///             }
+    ///     }
+    /// }
+    /// ```
     public var anchor: UnitPoint
 
     /// Creates a rotated shape from an original shape, an angle, and an anchor point.
+    ///
+    /// ```
+    /// struct RotatedShapeView: View {
+    ///     var body: some View {
+    ///         RotatedShape(shape: Rectangle(),
+    ///                      angle: .degrees(30),
+    ///                      anchor: .bottomLeading)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - shape: The original shape to rotate.
@@ -17592,19 +17716,88 @@ extension RoundedRectangle : InsettableShape {
 }
 
 /// A shape with a scale transform applied to it.
+///
+/// A scaled shape has two use cases:
+/// 1. Used directly via its initializer ``ScaledShape/init(shape:scale:anchor:)``.
+/// 2. The return value of the ``Shape/scale(x:y:anchor:)`` and
+/// ``Shape/scale(_:anchor:)``.
+///
+/// Having a scaled shape is helpful because it allows you to scale a shape
+/// and then continue to use its shape properties, instead of turning into ``View``.
+///
+/// A simple example of constructing a `ScaledShape`:
+///
+/// ```
+/// struct HugeShapeView: View {
+///     var body: some View {
+///         ScaledShape(shape: Circle(),
+///                     scale: CGSize(width: 2, height: 2))
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ScaledShape<Content> : Shape where Content : Shape {
 
-	/// The shape to scale.
+	/// The original shape, before the scale.
+    ///
+    /// ```
+    /// struct DiskView: View {
+    ///     let scaledShape = ScaledShape(shape: Circle(),
+    ///                                   size: CGSize(width: 2, height: 2)
+    ///     var body: some View {
+    ///         ZStack {
+    ///             scaledShape
+    ///             scaledShape.shape.fill(Color.red)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var shape: Content
 
     /// The scale factor.
+    ///
+    /// ```
+    /// struct HugeShapeView: View {
+    ///     let scaledShape = ScaledShape(shape: Circle(),
+    ///                                   size: CGSize(width: 2, height: 2)
+    ///     var body: some View {
+    ///         scaledShape
+    ///             .onAppear {
+    ///                 print("↔️ scaled by \(scaledShape.width)")
+    ///                 print("↕️ scaled by \(scaledShape.height)")
+    ///             }
+    ///     }
+    /// }
+    /// ```
     public var scale: CGSize
 
     /// The unit point to scale the view from.
+    ///
+    /// ```
+    /// struct HugeShapeView: View {
+    ///     let scaledShape = ScaledShape(shape: Circle(),
+    ///                                   size: CGSize(width: 2, height: 2)
+    ///     var body: some View {
+    ///         scaledShape
+    ///             .onAppear {
+    ///                 print("Anchored at (\(anchor.x), \(anchor.y))") // "(0.5, 0.5)"
+    ///             }
+    ///     }
+    /// }
+    /// ```
     public var anchor: UnitPoint
 
     /// Creates a scaled shape from an original shape, a scale factor, and an anchor point.
+    ///
+    /// ```
+    /// struct HugeShapeView: View {
+    ///     var body: some View {
+    ///         ScaledShape(shape: Circle(),
+    ///                     scale: CGSize(width: 2, height: 2),
+    ///                     anchor: .center)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - shape: The shape to be scaled.
@@ -22321,18 +22514,70 @@ extension Transaction {
 }
 
 /// A shape with an affine transform applied to it.
+///
+/// A transformed shape has two use cases:
+/// 1. Used directly via its initializer ``TransformedShape/init(shape:transform:)``.
+/// 2. The return value of ``Shape/transform(_:)``.
+///
+/// Having an offset shape is helpful because it allows you to translate a shape
+/// and then continue to use its shape properties, instead of turning into ``View``.
+///
+/// A simple example of constructing a ``TransformedShape``:
+///
+/// ```
+/// struct TransformedShapeView: View {
+///     var body: some View {
+///         TransformedShape(shape: Rectangle(),
+///                          transform: .init(rotationAngle: 6))
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TransformedShape<Content> : Shape where Content : Shape {
 
 	/// The original shape to be affine transformed.
+    ///
+    /// ```
+    /// struct TransformedShapeView: View {
+    ///     let transformedShape = TransformedShape(shape: Rectangle(),
+    ///                                             transform: .init(rotationAngle: 6))
+    ///     var body: some View {
+    ///         ZStack {
+    ///             transformedShape
+    ///             transformedShape.shape
+    ///                 .opacity(0.2)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var shape: Content
 
     /// The affine transformation to apply to the original shape
+    ///
+    /// ```
+    /// struct TransformedShapeView: View {
+    ///     let transformedShape = TransformedShape(shape: Rectangle(),
+    ///                                             transform: .init(rotationAngle: 6))
+    ///     var body: some View {
+    ///         transformedShape
+    ///             .onAppear { print(transformedShape.transform.isIdentity) } //false
+    ///     }
+    /// }
+    /// ```
     public var transform: CGAffineTransform
 
     /// Creates a new shape from an original shape and an affine transform.
     ///
-    /// - Parameter:
+    /// ```
+    /// struct TransformedShapeView: View {
+    ///     var body: some View {
+    ///         TransformedShape(shape: Rectangle(),
+    ///                          transform: .init(rotationAngle: 6))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
     ///   - shape: The original shape to be affine transformed.
     ///   - transform: The affine transform to apply to the original shape.
     @inlinable public init(shape: Content, transform: CGAffineTransform) { }
