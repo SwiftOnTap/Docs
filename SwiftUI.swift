@@ -885,7 +885,7 @@ extension Angle : Animatable {
 /// `Animtable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData`, which represents a view's animatable data.
 ///
 /// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `animatableData`. This is also the reason why `AnimatableData` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
-///
+/// [animatable-modifier ->]
 /// ### Implementations
 ///
 /// #### Using `AnimatableModifier` to implement a shake effect
@@ -941,7 +941,8 @@ extension Angle : Animatable {
 /// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the runtime needs to be able to interpolate fractionally between `0.0` and `10.0` 'shakes' - and it does so by making use of `CGFloat`'s `VectorArithmetic` conformance.
 ///
 /// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of `Animation` is used in `withAnimation`, to animate the change from `0` shakes to `10` shakes.
-///
+/// [<-]
+/// [animation-repeat-forever ->]
 /// #### Using `AnimatableModifier` to continuously animate a view along a circle
 ///
 /// `AnimatableModifier`, used with `Animation/repeatForever(autoreverses:)` can also be used to create a continuous animation.
@@ -992,7 +993,7 @@ extension Angle : Animatable {
 /// `CircleAnimation` is an implementation of an `AnimatableModifier` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
 ///
 /// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using `withAnimation`. The `Animation` used in `withAnimation` is modified using `Animation/repeatForever(autoreverses:)`, in order to create a loop. Note that `autoreverses` is explicitly set as `false` to prevent the animation from being reversed.
-///
+/// [<-]
 /// ### Further notes
 ///
 /// - `Animatable` along with `View` is currently broken on iOS 14, please use `AnimatableModifier`
@@ -1023,6 +1024,8 @@ extension Animatable where Self.AnimatableData == EmptyAnimatableData {
 }
 
 /// A modifier that can create another modifier with animation.
+///
+/// [[animatable-modifier]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol AnimatableModifier : Animatable, ViewModifier{ }
 extension AnimatableModifier : Animatable, ViewModifier {
@@ -1279,6 +1282,8 @@ extension Animation {
     public func repeatCount(_ repeatCount: Int, autoreverses: Bool = true) -> Animation { }
 
     /// Adjusts whether the animation repeats forever.
+    ///
+    /// [[animation-repeat-forever]]
     ///
     /// - Parameter autoreverses: Whether the animation should reverse when repeating.
     public func repeatForever(autoreverses: Bool = true) -> Animation { }
@@ -5298,6 +5303,8 @@ extension DynamicViewContent {
 
     /// Sets the deletion action for the dynamic view.
     ///
+    /// [[list-ondelete]]
+    ///
     /// - Parameter action: The action that you want SwiftUI to perform when
     ///   elements in the view are deleted. SwiftUI passes a set of indices to the
     ///   closure that's relative to the dynamic view's underlying collection of
@@ -5611,6 +5618,8 @@ extension EdgeInsets : Animatable {
 ///     }
 /// }
 /// ```
+///
+/// [[list-edit-button]]
 ///
 /// The title and appearance of an `EditButton` is determined by the system and cannot be overriden.
 @available(iOS 13.0, *)
@@ -9523,30 +9532,60 @@ public struct KeyboardShortcut {
 /// [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/)
 /// collection:
 ///
-///     Label("Lightning", systemImage: "bolt.fill")
+/// ![Simple Label](label-basic.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Label("Lightning", systemImage: "bolt.fill")
+///     }
+/// }
+/// ```
 ///
 /// You can also apply styles to labels in several ways. In the case of dynamic
 /// changes to the view after device rotation or change to a window size you
 /// might want to show only the text portion of the label using the title-only
 /// label style:
 ///
-///     Label("Lightning", systemImage: "bolt.fill")
-///         .labelStyle(TitleOnlyLabelStyle())
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Label("Lightning", systemImage: "bolt.fill")
+///             .labelStyle(TitleOnlyLabelStyle())
+///     }
+/// }
+/// ```
 ///
 /// Conversely, there's also an icon-only label style:
 ///
-///     Label("Lightning", systemImage: "bolt.fill")
-///         .labelStyle(IconOnlyLabelStyle())
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Label("Lightning", systemImage: "bolt.fill")
+///             .labelStyle(IconOnlyLabelStyle())
+///     }
+/// }
+/// ```
 ///
 /// You can also create a customized label style by modifying an existing
 /// style; this example adds a red border to the default label style:
 ///
-///     struct RedBorderedLabelStyle : LabelStyle {
-///         func makeBody(configuration: Configuration) -> some View {{}
-///             Label(configuration)
-///                 .border(Color.red)
-///         }
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Label("Lightning", systemImage: "bolt.fill")
+///             .labelStyle(RedBorderedLabelStyle())
 ///     }
+/// }
+///
+/// struct RedBorderedLabelStyle : LabelStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         Label(configuration)
+///             .padding()
+///             .border(Color.red)
+///     }
+/// }
+/// ```
 ///
 /// For more extensive customization or to create a completely new label style,
 /// you'll need to adopt the `LabelStyle` protocol and implement a
@@ -9555,31 +9594,39 @@ public struct KeyboardShortcut {
 /// To apply a common label style to a group of labels, apply the style
 /// to the view hierarchy that contains the labels:
 ///
-///     VStack {
-///         Label("Rain", systemImage: "cloud.rain")
-///         Label("Snow", systemImage: "snow")
-///         Label("Sun", systemImage: "sun.max")
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Rain", systemImage: "cloud.rain")
+///             Label("Snow", systemImage: "snow")
+///             Label("Sun", systemImage: "sun.max")
+///         }
+///         .labelStyle(IconOnlyLabelStyle())
 ///     }
-///     .labelStyle(IconOnlyLabelStyle())
+/// }
+/// ```
 ///
 /// It's also possible to make labels using views to compose the label's icon
-/// programmatically, rather than using a pre-made image. In this example, the
-/// icon portion of the label uses a filled `Circle` overlaid
-/// with the user's initials:
+/// programmatically, rather than using a pre-made image.
 ///
-///     Label {
-///         Text(person.fullName)
-///             .font(.body)
-///             .foregroundColor(.primary)
-///         Text(person.title)
-///             .font(.subheadline)
-///             .foregroundColor(.secondary)
-///     } icon: {
-///         Circle()
-///             .fill(person.profileColor)
-///             .frame(width: 44, height: 44, alignment: .center)
-///             .overlay(Text(person.initials))
+/// For example: 
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Label {
+///             Text("Banana")
+///                 .font(.system(size: 32, weight: .bold, design: .rounded))
+///                 .foregroundColor(.primary)
+///         } icon: {
+///             Circle()
+///                 .fill(Color.yellow)
+///                 .frame(width: 44, height: 44, alignment: .center)
+///         }
 ///     }
+/// }
+/// ```
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Label<Title, Icon> : View where Title : View, Icon : View {
@@ -10173,7 +10220,7 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
-///
+/// [list-init-variable ->]
 /// ### Creating a `List` with a variable number of elements
 ///
 /// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
@@ -10191,7 +10238,7 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
-///
+/// [<-]
 /// This is different from the previous example, because this initializer accepts a `rowContent` parameter that allows the `List` to generate SwiftUI views for the list's rows on-demand.
 ///
 /// The `id` parameter requires a key-path to the *identifier* for each row of the `List`. This is required so that `List` can efficiently process changes in the data source (in this example, the array `fruits`). These changes to the data source are animated as insertions, removals and reorders - reflecting the changes in the source.
@@ -10223,7 +10270,7 @@ extension Link where Label == Text {
 /// ```
 ///
 /// As seen in the above example, `ForEach` also accepts an `id` parameter along with a `rowContent`.
-///
+/// [list-sections ->]
 /// ### Adding sections to a `List`
 ///
 /// The following example demonstrates the usage of `Section`.
@@ -10251,7 +10298,8 @@ extension Link where Label == Text {
 /// ```
 ///
 /// A `Section` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
-///
+/// [<-]
+/// [list-style ->]
 /// ### Styling a `List`
 ///
 /// A `List` can be styled using the `View/listStyle(_:)` modifier.
@@ -10283,7 +10331,8 @@ extension Link where Label == Text {
 /// - `SidebarListStyle`
 ///
 /// Note: List styles only modify the appearance of a `List`. They do not affect the order or positioning of rows within the `List`.
-///
+/// [<-]
+/// [list-row-background ->]
 /// ### Setting the background view for a list row
 ///
 /// Use `View/listRowBackground(_:)` to set the background view for a given row.
@@ -10328,8 +10377,8 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-///
-///
+/// [<-]
+/// [list-ondelete ->]
 /// ### Making list rows deletable
 ///
 /// Apply the `DynamicViewContent/onDelete(_:)` modifier on a `ForEach` within a `List` to allow the list rows to become deletable.
@@ -10357,9 +10406,9 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
+/// [<-]
 ///
-///
-///
+/// [list-edit-button ->]
 /// ### Editing a `List` using `EditButton`
 ///
 /// An `EditButton` placed in the navigation bar of a `NavigationView` with a `List` in it can be used to provide an edit button for the `List`.
@@ -10387,7 +10436,7 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
-///
+/// [<-]
 /// ### Further notes
 ///
 /// Although `List` is very powerful, it currently has some limitations:
@@ -10627,6 +10676,8 @@ extension List where SelectionValue == Never {
 
     /// Creates a list that identifies its rows based on a key path to the
     /// identifier of the underlying data.
+    ///
+    /// [[list-init-variable]]
     ///
     /// - Parameters:
     ///   - data: The data for populating the list.
@@ -11896,6 +11947,8 @@ extension NavigationBarItem.TitleDisplayMode : Hashable {
 }
 
 /// A view that controls a navigation presentation.
+///
+/// [[navigation-link]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct NavigationLink<Label, Destination> : View where Label : View, Destination : View {
 
@@ -11940,10 +11993,14 @@ extension NavigationLink where Label == Text {
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`, with a `Text` label generated from a title string.
+    ///
+    /// [[navigation-selection-handling]]
     public init<V>(_ titleKey: LocalizedStringKey, destination: Destination, tag: V, selection: Binding<V?>) where V : Hashable { }
 
     /// Creates an instance that presents `destination` when `selection` is set
     /// to `tag`, with a `Text` label generated from a title string.
+    ///
+    /// [[navigation-selection-handling]]
     public init<S, V>(_ title: S, destination: Destination, tag: V, selection: Binding<V?>) where S : StringProtocol, V : Hashable { }
 }
 
@@ -11985,7 +12042,7 @@ extension NavigationLink {
 /// ```
 ///
 /// A navigation bar is added by default. The navigation bar can be hidden via  `View/navigationBarHidden(_:)`.
-///
+/// [navigation-view-title ->]
 /// ### Adding a navigation title
 ///
 /// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your `NavigationView`:
@@ -12004,7 +12061,8 @@ extension NavigationLink {
 /// ```
 ///
 /// `View/navigationTitle(_:)` is only available on iOS 14 and higher. If your application targets iOS 13, please use `View/navigationBarTitle(_:)`.
-///
+/// [<-]
+/// [navigation-title-mode ->]
 /// ### Setting the navigation title display mode
 ///
 /// The display mode of a navigation bar title can be controlled via `View/navigationBarTitleDisplayMode(_:)`. There are two main display modes:
@@ -12029,7 +12087,8 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
-///
+/// [<-]
+/// [navigation-link ->]
 /// ### Navigating to a view
 ///
 /// Use `NavigationLink` to add a button that pushes a new view onto the navigation stack.
@@ -12056,7 +12115,8 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
-///
+/// [<-]
+/// [navigation-hide-bar ->]
 /// ### Hiding the navigation bar
 ///
 /// The navigation bar is on by default within a `NavigationView`. It can be hidden using `View/navigationBarHidden(_:)`.
@@ -12108,7 +12168,8 @@ extension NavigationLink {
 /// ```
 ///
 /// And popping `SecondScreen` (or navigating back) hides it again, as `SecondScreen` is removed from the view hierarchy, leaving `ExampleView` as the deepest view in the hierarchy - which has hidden the navigation bar.
-///
+/// [<-]
+/// [navigation-bar-items ->]
 /// ### Adding navigation bar items
 ///
 /// Use `View/navigationBarItems(leading:trailing:)` to add items to a navigation bar's leading and trailing areas.
@@ -12127,6 +12188,7 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
+/// [<-]
 /// [navigation-view-style ->]
 /// ### Styling a navigation view
 ///
@@ -12162,6 +12224,7 @@ extension NavigationLink {
 /// }
 /// ```
 /// [<-]
+/// [navigation-selection-handling ->]
 /// ### Handling selection
 ///
 /// `NavigationLink` provides the ability to observe and/or set the active navigation selection via its initializer `NavigationLink/init(destination:tag:selection:label)`.
@@ -12213,12 +12276,34 @@ extension NavigationLink {
 /// In the example above, the navigation selection is written to a state variable, `navigatedItem`. `navigatedItem` is an optional, because it is possible for the screen to not be navigated to any particular screen (i.e. be at the root view containing the 3 navigation links).
 ///
 ///  See `ToolbarItem` for more on what can be placed in the navigation bar.
+/// [<-]
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct NavigationView<Content> : View where Content : View {
 
 	/// Creates a navigation view from a view builder of content.
 	///
+  ///
+  /// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
+  ///
+  /// ```
+  /// struct ExampleView: View {
+  ///     struct BananasView: View {
+  ///         var body: some View {
+  ///             Text("Bananas")
+  ///                 .navigationTitle("🍌🍌")
+  ///         }
+  ///     }
+  ///
+  ///     var body: some View {
+  ///         NavigationView {
+  ///             NavigationLink(destination: BananasView()) {
+  ///                 Text("I want bananas!")
+  ///             }
+  ///         }
+  ///     }
+  /// }
+  /// ```
 	/// - Parameter content: The view builder of content displayed on the first view in the navigation stack.
     public init(@ViewBuilder content: () -> Content) { }
 
@@ -13576,7 +13661,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///             }
 ///         }
 ///     }
-///
+/// [progressview-style ->]
 /// ### Styling Progress Views
 ///
 /// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of `ProgressView`. The structure passed to the
@@ -13675,6 +13760,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///              }
 ///          }
 ///     }
+/// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, CurrentValueLabel : View {
 
@@ -13875,6 +13961,8 @@ extension ProgressView {
 
 /// A type that applies standard interaction behavior to all progress views
 /// within a view hierarchy.
+///
+/// [[progressview-style]]
 ///
 /// To configure the current progress view style for a view hiearchy, use the
 /// `View/progressViewStyle(_:)` modifier.
@@ -15314,7 +15402,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// - It is not possible to selectively disable the scrolling of a `ScrollView`, while allowing its content to remain interactive. A `View/disabled(_:)` attached to a `ScrollView` will disable both the scrolling and all the interaction with the content visible.
 /// - A `ScrollView`'s scrollable region is sized to fit the content view passed to the `ScrollView`.
 /// - `ScrollView` fits to occupy as much space as possible. It is important to distinguish between the actual bounds of the scroll view, and the bounds of the *content* of the `ScrollView`.
-///
+/// [scrollview-direction ->]
 /// ### Setting the direction of scrolling
 ///
 /// The default scrolling direction of a `ScrollView` is **vertical**. `ScrollView` supports 3 types of scrolling:
@@ -15362,7 +15450,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// ```
 ///
 /// In this example, `ScrollView` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
-///
+/// [<-]
 /// ### Hiding the scroll view indicator
 ///
 /// By default, a `ScrollView`'s scroll indicator is visible upon user interaction.
@@ -15406,7 +15494,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// ```
 ///
 /// This `ScrollView`  hides its scroll indicator, with a default `.vertical` scroll direction.
-///
+/// [scrollview-scroll-to ->]
 /// ### Scrolling to an item
 ///
 /// To programmatically scroll to a particular item in your `ScrollView`, use `ScrollViewProxy/scrollTo(_:anchor:)`. `ScrollViewProxy` is a type that allows you to control a `ScrollView`, and can be obtained using a `ScrollViewReader`.
@@ -15486,7 +15574,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///      }
 ///  }
 /// ```
-///
+/// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : View where Content : View {
 
@@ -15495,18 +15583,20 @@ public struct ScrollView<Content> : View where Content : View {
 
     /// The scrollable axes of the scroll view.
     ///
+    /// Use to set scrollview direction.
+    ///
     /// The default value is `Axis/vertical`.
     public var axes: Axis.Set
 
-    /// A value that indicates whether the scroll view displays the scrollable
-    /// component of the content offset, in a way that's suitable for the
-    /// platform.
+    /// Boolean to display scroll indicators.
     ///
     /// The default is `true`.
     public var showsIndicators: Bool
 
     /// Creates a new instance that's scrollable in the direction of the given
     /// axis and can show indicators while scrolling.
+    ///
+    /// [[scrollview-direction]]
     ///
     /// - Parameters:
     ///   - axes: The scroll view's scrollable axis. The default axis is the
@@ -15530,12 +15620,18 @@ public struct ScrollView<Content> : View where Content : View {
 
 /// A proxy value allowing the scrollable views within a view hierarchy
 /// to be scrolled programmatically.
+///
+/// [[scrollview-scroll-to]]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ScrollViewProxy {
 
+    /// Scrolls to first child view with specified `id`.
+    ///
     /// Scans all scroll views contained by the proxy for the first
     /// with a child view with identifier `id`, and then scrolls to
     /// that view.
+    ///
+    /// [[scrollview-scroll-to]]
     ///
     /// If `anchor` is nil the container of the identified view will be
     /// scrolled the minimum amount to make the identified view wholly
@@ -15546,7 +15642,6 @@ public struct ScrollViewProxy {
     /// aligns the top of the identified view to the top of the scroll
     /// view, `.bottom` aligns the bottom of the identified view to the
     /// bottom of the scroll view, and so on.
-    ///
     public func scrollTo<ID>(_ id: ID, anchor: UnitPoint? = nil) where ID : Hashable { }
 }
 
@@ -15577,6 +15672,8 @@ public struct ScrollViewProxy {
 /// A container that groups views.
 ///
 /// Often used in Lists and Forms to set Parent, Content, and Footer information.
+///
+/// [[list-sections]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Section<Parent, Content, Footer> {
 }
@@ -17189,7 +17286,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// A parent view for tab-style navigation.
 ///
 /// `TabView` is a container view that provides tab-style navigation for its child views.
-///
+/// [tabview-tab-item ->]
 /// ### Tab-bar based navigation
 ///
 /// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
@@ -17220,7 +17317,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///     }
 /// }
 /// ```
-///
+/// [<-]
+/// [tabview-tab-style ->]
 /// ### Page-style navigation
 ///
 /// Place child views in a `TabView` with a `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
@@ -17286,7 +17384,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///     }
 /// }
 /// ```
-///
+/// [<-]
+/// [tabview-tag ->]
 /// ### Handling tab-selection
 ///
 /// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
@@ -17357,12 +17456,16 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         }
 ///     }
 /// }
-///
+/// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
     /// Creates an instance that selects from content associated with
     /// `Selection` values.
+    ///
+    /// Use this initializer to allow TabView selections.
+    ///
+    /// [[tabview-tag]]
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
@@ -17378,12 +17481,27 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 extension TabView where SelectionValue == Int {
 
-	/// Creates a tab view from a view builder. The tab view maintains its own selection.
-	///
-	/// This is useful if you don't want to have to pass in your own binding
-	/// selection index, and just want the view to default at the first page.
-	/// You will still be able to move tabs, but you won't be able to programmatically
-	/// change tabs from outside the view.
+  	/// Creates a tab view from a view builder. The tab view maintains its own selection.
+  	///
+  	/// This is useful if you don't want to have to pass in your own binding
+  	/// selection index, and just want the view to default at the first page.
+  	/// You will still be able to move tabs, but you won't be able to programmatically
+  	/// change tabs from outside the view.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///             Text("Apples 🍏🍏")
+    ///             Text("Peaches 🍑🍑")
+    ///         }
+    ///         .foregroundColor(Color.white)
+    ///         .background(Color.yellow)
+    ///         .tabViewStyle(PageTabViewStyle())
+    ///     }
+    /// }
+    /// ```
     public init(@ViewBuilder content: () -> Content) { }
 }
 
@@ -20725,6 +20843,8 @@ extension View {
 
     /// Sets the style for the tab view within the the current environment.
     ///
+    /// [[tabview-tab-style]]
+    ///
     /// - Parameter style: The style to apply to this tab view.
     public func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle { }
 
@@ -22524,6 +22644,8 @@ extension View {
 
     /// Sets the unique tag value of this view.
     ///
+    /// [[tabview-tag]]
+    ///
     /// Use `tag(_:)` to differentiate between a number of views for the purpose
     /// of selecting controls like pickers and lists. Tag values can be of any
     /// type that conforms to the <doc://com.apple.documentation/documentation/Swift/Hashable>
@@ -22622,6 +22744,8 @@ extension View {
     ///             .listRowBackground(Image(systemName: "sparkles"))
     ///         }
     ///     }
+    ///
+    /// [[list-row-background]]
     ///
     /// - Parameter view: The `View` to use as the background behind the list
     ///   row view.
@@ -23431,6 +23555,8 @@ extension View {
 extension View {
 
     /// Sets the style for lists within this view.
+    ///
+    /// [[list-style]]
     public func listStyle<S>(_ style: S) -> some View where S : ListStyle { }
 
 }
@@ -23578,6 +23704,8 @@ extension View {
 extension View {
 
     /// Hides the navigation bar for this view.
+    ///
+    /// [[navigation-hide-bar]]
     ///
     /// Use `navigationBarHidden(_:)` to hide the navigation bar. This modifier
     /// only takes effect when this view is inside of and visible within a
@@ -24535,7 +24663,9 @@ extension View {
 
     /// Sets the style for progress views in this view.
     ///
-    /// For example, the following code creates a progress view that uses the
+    /// [[progressview-style]]
+    ///
+    /// Another example, the following code creates a progress view that uses the
     /// "circular" style:
     ///
     ///     ProgressView()
@@ -25117,7 +25247,9 @@ extension View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension View {
 
-    /// Configures the view's title for purposes of navigation.
+    /// Configures the view's navigation title.
+    ///
+    /// [[navigation-view-title]]
     ///
     /// A view's navigation title is used to visually display
     /// the current navigation state of an interface.
@@ -25174,6 +25306,8 @@ extension View {
 extension View {
 
     /// Configures the title display mode for this view.
+    ///
+    /// [[navigation-title-mode]]
     ///
     /// - Parameter displayMode: The style to use for displaying the title.
     public func navigationBarTitleDisplayMode(_ displayMode: NavigationBarItem.TitleDisplayMode) -> some View { }
@@ -25497,6 +25631,8 @@ extension View {
 extension View {
 
     /// Sets the navigation bar items for this view.
+    ///
+    /// [[navigation-bar-items]]
     ///
     /// Use `navigationBarItems(leading:trailing:)` to add navigation bar items
     /// to the leading and trailing edges of the navigation bar for this view.
