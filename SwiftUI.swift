@@ -8587,7 +8587,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 ///
 /// For example, to create a square view with a ForegroundStyle:
 ///
-/// ![ForegroundStyle Example 1][foreground-style-example.png] 
+/// ![ForegroundStyle Example 1][foreground-style-example.png]
 ///
 /// ```
 /// struct ForegroundStyleRectangle: View {
@@ -8679,22 +8679,36 @@ extension GeometryEffect {
     @inlinable public func ignoredByLayout() -> _IgnoredByLayoutEffect<Self> { }
 }
 
-/// A proxy for access to the size and coordinate space (for anchor resolution)
-/// of the container view.
+/// A proxy that encapsulates the container's frame and safe area insets, for use by ``GeometryReader``.
+///
+/// For example, to create a new GeometryProxy for use in a GeometryReader:
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         GeometryReader { (proxy: GeometryProxy) in
+///             Color.green
+///                 .frame(
+///                     width: proxy.size.width / 2,
+///                     height: proxy.size.height / 2
+///                 )
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct GeometryProxy {
 
     /// The size of the container view.
     public var size: CGSize { get }
 
-    /// Resolves the value of `anchor` to the container view.
+    /// Converts the anchor to a value in the coordinate space of the target view.
     public subscript<T>(anchor: Anchor<T>) -> T { get }
 
     /// The safe area inset of the container view.
     public var safeAreaInsets: EdgeInsets { get }
 
-    /// Returns the container view's bounds rectangle, converted to a defined
-    /// coordinate space.
+    /// Returns the parent ``GeometryReader``'s frame, converted to a defined
+    /// ``CoordinateSpace``.
     public func frame(in coordinateSpace: CoordinateSpace) -> CGRect { }
 }
 
