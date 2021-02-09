@@ -8579,12 +8579,46 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     public init(_ data: Range<Int>, @ViewBuilder content: @escaping (Int) -> Content) { }
 }
 
-/// A style that shows the correct fill for the foreground based on the current
+/// A ``ShapeStyle`` that shows the correct fill for the foreground based on the current
 /// context.
+///
+/// Note:
+/// - ForegroundStyle is typically the default ShapeStyle, so it is rare to need it.
+///
+/// For example, to create a square view with a ForegroundStyle:
+///
+/// ![ForegroundStyle Example 1][foreground-style-example.png] 
+///
+/// ```
+/// struct ForegroundStyleRectangle: View {
+///
+///    var body: some View {
+///        Rectangle()
+///            .fill(ForegroundStyle())
+///            .frame(width: 150, height: 150)
+///            .foregroundColor(Color.pink)
+///    }
+///
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ForegroundStyle {
 
 	/// Creates a foreground style.
+  ///
+  /// For example, to create a square view with a ForegroundStyle:
+  ///
+  /// ```
+  /// struct ForegroundStyleRectangle: View {
+  ///
+  ///    var body: some View {
+  ///        Rectangle()
+  ///            .fill(ForegroundStyle())
+  ///            .frame(width: 150, height: 150)
+  ///            .foregroundColor(Color.pink)
+  ///    }
+  ///
+  /// }
     @inlinable public init() { }
 }
 
