@@ -1650,8 +1650,32 @@ extension App {
     public static func main() { }
 }
 
-/// A property wrapper type that reflects a value from `UserDefaults` and
-/// invalidates a view on a change in value in that user default.
+/// A property wrapper type that reads from and writes to the device's storage.
+///
+/// Use this property wrapper to read to and write from permanent storage
+/// on the user's device, also known as "UserDefaults".
+///
+/// Check out ``Scene/defaultAppStorage()`` for ``Scene``s and
+/// ``View/defaultAppStorage()`` for ``View``s to learn more about
+/// setting the default app storage location for a view.
+///
+/// There are 6 possible app storage types, and 6 corresponding initializers:
+/// 1. `Bool`
+/// 2. `Int`
+/// 3. `Double`
+/// 4. `String`
+/// 5. `URL`
+/// 6. `Data`
+///
+/// Below shows a simple example using a `String`.
+///
+///     struct ContentView: View {
+/// 		@AppStorage("name") var name: String = "Javier"
+///
+/// 		var body: some View {
+/// 			TextField(name, text: $name)
+/// 		}
+/// 	}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
 
@@ -1687,6 +1711,14 @@ extension AppStorage {
 
     /// Creates a property that can read and write to a boolean user default.
     ///
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("airplane-mode") var on: Bool = false
+    ///
+    /// 		var body: some View {
+    /// 			Toggle("Airplane Mode", isOn: $on)
+    /// 		}
+    /// 	}
+    ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a boolean value is not specified
     ///     for the given key.
@@ -1697,6 +1729,14 @@ extension AppStorage {
     public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == Bool { }
 
     /// Creates a property that can read and write to an integer user default.
+    ///
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("donuts") var count: Int = 0
+    ///
+    /// 		var body: some View {
+    /// 			Stepper("🍩 count: \(count)", value: $count)
+    /// 		}
+    /// 	}
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value is not specified
@@ -1709,6 +1749,15 @@ extension AppStorage {
 
     /// Creates a property that can read and write to a double user default.
     ///
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("brightness") var level: Double = 0
+    ///
+    /// 		var body: some View {
+    /// 			Text("🔆 \(level)")
+    ///             Slider(value: $level)
+    /// 		}
+    /// 	}
+    ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a double value is not specified
     ///     for the given key.
@@ -1720,6 +1769,14 @@ extension AppStorage {
 
     /// Creates a property that can read and write to a string user default.
     ///
+    ///     struct ContentView: View {
+    /// 		@AppStorage("name") var name: String = "Javier"
+    ///
+    /// 		var body: some View {
+    /// 			TextField(name, text: $name)
+    /// 		}
+    /// 	}
+    ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value is not specified
     ///     for the given key.
@@ -1730,6 +1787,14 @@ extension AppStorage {
     public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) where Value == String { }
 
     /// Creates a property that can read and write to a url user default.
+    ///
+    ///     struct ContentView: View {
+    /// 		@AppStorage("site") var url = URL(string: "bananadocs.org")!
+    ///
+    /// 		var body: some View {
+    /// 			Text("Check out \(url)")
+    /// 		}
+    /// 	}
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a url value is not specified for
@@ -1746,6 +1811,25 @@ extension AppStorage {
     /// as it can negatively affect performance of your app. On tvOS, a
     /// `NSUserDefaultsSizeLimitExceededNotification` notification is posted
     /// if the total user default size reaches 512kB.
+    ///
+    ///     struct Human: Codable {
+    ///         var name: String
+    ///         var age: Int
+    ///     }
+    ///
+    //      struct ContentView: View {
+    ///         @AppStorage("goat") var person = Data()
+    ///
+    ///         var body: some View {
+    ///             Button("Make Aaron the 🐐") {
+    ///                 let aaron = Human(name: "Aaron", age: 21)
+    ///                 let aaronData = try! JSONEncoder().encode(aaron)
+    ///
+    ///                 person = aaronData
+    ///                 print("success.")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a data value is not specified for
@@ -1768,7 +1852,14 @@ extension AppStorage {
     ///    }
     ///    struct MyView: View {
     ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View { ... }
+    ///
+    ///        var body: some View {
+    ///             Picker("Choose!", selection: $value) {
+    ///                 Text("a").tag(MyEnum.a)
+    ///                 Text("b").tag(MyEnum.b)
+    ///                 Text("c").tag(MyEnum.c)
+    ///             }
+    ///         }
     ///    }
     ///
     /// - Parameters:
@@ -1792,7 +1883,13 @@ extension AppStorage {
     ///    }
     ///    struct MyView: View {
     ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View { ... }
+    ///        var body: some View {
+    ///             Picker("Choose!", selection: $value) {
+    ///                 Text("a").tag(MyEnum.a)
+    ///                 Text("b").tag(MyEnum.b)
+    ///                 Text("c").tag(MyEnum.c)
+    ///             }
+    ///         }
     ///    }
     ///
     /// - Parameters:
@@ -1813,6 +1910,15 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("airplane-mode") var on: Bool?
+    ///
+    /// 		var body: some View {
+    /// 			Button("on") { on = true }
+    ///             Button("off") { on = false }
+    /// 		}
+    /// 	}
+    ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
     ///     store.
@@ -1824,6 +1930,15 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// default.
     ///
     /// Defaults to nil if there is no restored value.
+    ///
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("donuts") var count: Int?
+    ///
+    /// 		var body: some View {
+    /// 			Button("none ☹️") { count = 0 }
+    ///             Button("LOTS 🍩") { count = 100 }
+    /// 		}
+    /// 	}
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -1837,6 +1952,15 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("brightness") var level: Double?
+    ///
+    /// 		var body: some View {
+    /// 			Button("MAX 🔆") { level = 1.0 }
+    ///             Button("min 🔅") { level = 0.0 }
+    /// 		}
+    /// 	}
+    ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
     ///     store.
@@ -1846,6 +1970,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 
     /// Creates a property that can read and write an Optional string user
     /// default.
+    ///
+    ///     struct ContentView: View {
+    /// 		@AppStorage("name") var name: String?
+    ///
+    /// 		var body: some View {
+    /// 			Button("Save 🐐") { name = "Javier" }
+    /// 		}
+    /// 	}
     ///
     /// Defaults to nil if there is no restored value.
     ///
@@ -1861,6 +1993,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
+    ///     struct ContentView: View {
+    /// 		@AppStorage("site") var url: URL?
+    ///
+    /// 		var body: some View {
+    /// 			Text("Save the 🍌") { url = URL(string: "bananadocs.org" }
+    /// 		}
+    /// 	}
+    ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
     ///     store.
@@ -1872,6 +2012,25 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// default.
     ///
     /// Defaults to nil if there is no restored value.
+    ///
+    ///     struct Human: Codable {
+    ///         var name: String
+    ///         var age: Int
+    ///     }
+    ///
+    //      struct ContentView: View {
+    ///         @AppStorage("goat") var person: Data?
+    ///
+    ///         var body: some View {
+    ///             Button("Make Aaron the 🐐") {
+    ///                 let aaron = Human(name: "Aaron", age: 21)
+    ///                 let aaronData = try! JSONEncoder().encode(aaron)
+    ///
+    ///                 person = aaronData
+    ///                 print("success.")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -2044,12 +2203,46 @@ extension Axis : Hashable {
 extension Axis : RawRepresentable {
 }
 
-/// A style that shows the correct fill for the background based on the current
-/// context.
+/// A style that looks solid white in light mode and solid black in dark mode.
+///
+/// Use this ``ShapeStyle`` to intelligently stroke and fill shapes based
+/// on what color will look good against the current background.
+///
+/// In light mode, this will fill as solid white. In dark mode, it will fill
+/// as solid black.
+///
+/// In the following example, the top circle is always invisible, since
+/// it is filled the same color as the background.
+///
+/// ```
+/// struct CircleOnButtomView: View {
+///     var body: some View {
+///         Circle()
+///             .fill(BackgroundStyle())
+///         Circle()
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct BackgroundStyle {
 
 	/// Creates a new background style.
+    ///
+    /// Use this to fill or stroke a shape. It will appear as solid white
+    /// in light mode and solid black in dark mode.
+    ///
+    /// In the following example, the top circle is always invisible, since
+    /// it is filled the same color as the background.
+    ///
+    /// ```
+    /// struct CircleOnButtomView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .fill(BackgroundStyle())
+    ///         Circle()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 }
 
@@ -4386,6 +4579,23 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 ///
 /// Use this shape primarily with widgets, to generate container-relative
 /// rounded rectangles.
+///
+/// ```
+/// struct TimeEntryView: View {
+///     var entry: Provider.Entry
+///
+///     var body: some View {
+///         VStack {
+///             ContainerRelativeShape()
+///                 .fill(Color.pink)
+///                 .overlay(Text("time"))
+///             ContainerRelativeShape()
+///                 .fill(Color.blue)
+///                 .overlay(Text(entry.date, style: .time)))
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct ContainerRelativeShape : Shape {
 
@@ -4397,6 +4607,26 @@ public struct CompactDatePickerStyle : DatePickerStyle {
     public func path(in rect: CGRect) -> Path { }
 
     /// Creates a relative container shape.
+    ///
+    /// Use this shape primarily with widgets, to generate container-relative
+    /// rounded rectangles.
+    ///
+    /// ```
+    /// struct TimeEntryView: View {
+    ///     var entry: Provider.Entry
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             ContainerRelativeShape()
+    ///                 .fill(Color.pink)
+    ///                 .overlay(Text("time"))
+    ///             ContainerRelativeShape()
+    ///                 .fill(Color.blue)
+    ///                 .overlay(Text(entry.date, style: .time)))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
     /// The type defining the data to animate.
@@ -11927,22 +12157,95 @@ extension Image.ResizingMode : Hashable {
 }
 
 /// A shape style that fills a shape by repeating a region of an image.
+///
+/// Use this shape style to tile images as strokes or fills.
+///
+/// See ``ShapeStyle`` for more info on how and where to use shape styles.
+///
+/// ```
+/// struct DogsEverywhereView: View {
+///     var body: some View {
+///         Rectangle()
+///             .fill(ImagePaint(image: Image("dog")))
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ImagePaint : ShapeStyle {
 
     /// The image to be drawn.
+    ///
+    /// This image property must be declared when the ``ImagePaint`` structure
+    /// is initialized, but it can be read or written to later.
+    ///
+    /// ```
+    /// struct DogsEverywhereView: View {
+    ///     var body: some View {
+    ///         var imagePaint = ImagePaint(image: Image("placeholder"))
+    ///         imagePaint.image = Image("dog")
+    ///
+    ///         return Rectangle()
+    ///             .fill(imagePaint)
+    ///     }
+    /// }
+    /// ```
     public var image: Image
 
     /// A unit-space rectangle defining how much of the source image to draw.
     ///
+    /// This of this as the 1-by-1 rectangle from the original image that you
+    /// want to be tiled over the entirety of the space.
+    ///
     /// The results are undefined if this rectangle selects areas outside the
     /// `[0, 1]` range in either axis.
+    ///
+    /// This image property can be declared when the ``ImagePaint`` structure
+    /// is initialized, or written to or read later.
+    ///
+    /// ```
+    /// struct TrippyDogsEverywhereView: View {
+    ///     var body: some View {
+    ///         var imagePaint = ImagePaint(image: Image("dog"))
+    ///         imagePaint.sourceRect = CGRect(x: 0.0, y: 0.0, width: 0.34, height: 1.0)
+    ///
+    ///         return Rectangle()
+    ///             .fill(imagePaint)
+    ///     }
+    /// }
+    /// ```
     public var sourceRect: CGRect
 
     /// A scale factor applied to the image while being drawn.
+    ///
+    /// This image property can be declared when the ``ImagePaint`` structure
+    /// is initialized, or written to or read later.
+    ///
+    /// ```
+    /// struct BigDogsEverywhereView: View {
+    ///     var body: some View {
+    ///         var imagePaint = ImagePaint(image: Image("dog"))
+    ///         imagePaint.scale = 3
+    ///
+    ///         return Rectangle()
+    ///             .fill(imagePaint)
+    ///     }
+    /// }
+    /// ```
     public var scale: CGFloat
 
-    /// Creates a shape-filling shape style.
+    /// Creates a shape-filling shape style from a source image.
+    ///
+    /// ```
+    /// struct DogsEverywhereView: View {
+    ///     let imagePaint = ImagePaint(image: Image("dog"),
+    ///                                 sourceRect: CGRect(x: 0.0, y: 0.0, width: 0.34, height: 1.0),
+    ///                                 scale: 4)
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .fill(imagePaint)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - image: The image to be drawn.
@@ -17972,61 +18275,355 @@ public struct ProgressViewStyleConfiguration {
 
 /// A projection transform is a type of spacial transformation of an object
 /// that can be represented as a 3x3 matrix.
+///
+/// Use this structure to apply a 3D transformation to a view.
+///
+/// Conceptually, this structure represents a 3D transformation matrix.
+/// Each column of the matrix represents where the unit vector
+/// of the original view lands in the transformed view. The **x** unit
+/// vector is represented by the left column, the **y** unit vector
+/// is represented by the middle column, and the **z** unit vector
+/// is represented by the right column.
+///
+/// - Note: In the majority of circumstances, it is not necessary to use
+/// a `ProjectionTransform` or the ``View/projectionEffect(_:)``
+/// modifier. This is only necessary when maximum control is required.
+/// For most normal use cases, use the following modifiers instead:
+///
+/// - **Rotation**: ``View/rotationEffect(_:)``
+/// - **Scaling**: ``View/scaleEffect(_:anchor:)``
+/// - **Translation**: ``View/offset(_:)``
+///
+/// ### Making a `ProjectionTransform`
+///
+/// Constructing a `ProjectionTransform` is most commonly done in
+/// one of three ways:
+/// - Using a [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
+/// - Using a [CATransform3D](https://developer.apple.com/documentation/quartzcore/catransform3d)
+/// - Using ``GeometryEfect/effectValue(size:)``
+///
+/// See below for an example.
+///
+/// ### Using a `ProjectionTransform`
+///
+/// The primary way to use a `ProjectionTransform` is by using the
+/// ``View/projectionEffect(_:)`` modifier.
+///
+/// ```
+/// struct UpsideDownTrashCanView: View {
+///     var body: some View {
+///         Text("🗑")
+///             .font(.title)
+///             .projectionEffect(
+///                 ProjectionTransform(
+///                     CGAffineTransform(rotationAngle: .pi)))
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ProjectionTransform {
 
 	/// The top left value in the projection transform matrix.
+    ///
+    /// This property can be written to or read directly, but it's usually
+    /// calculated using one of the initializers instead.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m11 = 4
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m11: CGFloat
 
     /// The top middle value in the projection transform matrix.
+    ///
+    /// This property can be written to or read directly, but it's usually
+    /// calculated using one of the initializers instead.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m12 = 1
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m12: CGFloat
 
     /// The top right value in the projection transform matrix.
+    ///
+    /// This property can be written to or read directly, but it's usually
+    /// calculated using one of the initializers instead.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m13 = 0.01
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m13: CGFloat
 
     /// The center left value in the projection transform matrix.
+    ///
+    /// This property can be written to or read directly, but it's usually
+    /// calculated using one of the initializers instead.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m21 = 1
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m21: CGFloat
 
     /// The center value in the projection transform matrix.
+    ///
+    /// This property can be written to or read directly, but it's usually
+    /// calculated using one of the initializers instead.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m11 = 4
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m22: CGFloat
 
     /// The center right value in the projection transform matrix.
+    ///
+    /// This property can be written to or read directly, but it's usually
+    /// calculated using one of the initializers instead.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m23 = 0.01
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m23: CGFloat
 
     /// The bottom left value in the projection transform matrix.
+    ///
+    /// This property can be written to or read directly, but it's usually
+    /// calculated using one of the initializers instead.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m31 = 100
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m31: CGFloat
 
     /// The bottom center value in the projection transform matrix.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m32 = 100
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m32: CGFloat
 
     /// The bottom right value in the projection transform matrix.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m33 = 0.1
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     public var m33: CGFloat
 
     /// Creates a projection transform equal to the identity matrix.
+    ///
+    /// Use this initilizer to create a matrix that does nothing so that
+    /// you can modify it afterwards.
+    ///
+    /// ```
+    /// struct WarpedTrashCanView: View {
+    ///     var body: some View {
+    ///         var effect = ProjectionTransform()
+    ///         effect.m11 = 4
+    ///
+    ///         return Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
     /// Creates a projection transform from a `CGAffineTransform`.
+    ///
+    /// See [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
+    /// for more info on how to create an affine transform.
+    ///
+    /// ```
+    /// struct UpsideDownTrashCanView: View {
+    ///     var body: some View {
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(
+    ///                 ProjectionTransform(
+    ///                     CGAffineTransform(rotationAngle: .pi)))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter m: The Core Graphics affine transform matrix.
     @inlinable public init(_ m: CGAffineTransform) { }
 
     /// Creates a projection transform from a `CATransform3D`.
     ///
+    /// See [CATransform3D](https://developer.apple.com/documentation/quartzcore/catransform3d)
+    /// for more info on how to create a 3D transform.
+    ///
+    /// ```
+    /// struct UpsideDownTrashCanView: View {
+    ///     var body: some View {
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(
+    ///                 ProjectionTransform(
+    ///                     CGAffineTransform(rotationAngle: .pi)))
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter m: The Core Animation 3D transform matrix.
     @inlinable public init(_ m: CATransform3D) { }
 
     /// Whether the projection transform matrix is an identity matrix.
+    ///
+    /// ```
+    /// struct JustATrashCanView: View {
+    ///     let effect = ProjectionTransform()
+    ///     var body: some View {
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///             .onAppear { print(effect.isIdentity) } //true
+    ///     }
+    /// }
+    /// ```
     @inlinable public var isIdentity: Bool { get }
 
     /// Whether the projection transform matrix is an affine transform.
+    ///
+    /// An affine transformation is one that preserves lines and parallelism
+    /// (but not necessarily distances and angles).
+    ///
+    /// See this [Wikipedia](https://en.wikipedia.org/wiki/Affine_transformation)
+    /// article for more info.
+    ///
+    /// ```
+    /// struct AffineTransformedTrashCanView: View {
+    ///     let effect = ProjectionTransform(CGAffineTransform(rotationAngle: .pi))
+    ///     var body: some View {
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///             .onAppear { print(effect.isAffine) } //true
+    ///     }
+    /// }
+    /// ```
     @inlinable public var isAffine: Bool { get }
 
     /// Inverts the projection transform matrix if it's invertible.
+    ///
+    /// Use this function to mutate the effect to its inverse.
+    /// If instead you would like to return a new inverted matrix,
+    /// use ``ProjectionTransform/inverted()`` instead.
+    ///
+    /// ```
+    /// struct RotatedTrashCanView: View {
+    ///     var effect = ProjectionTransform(CGAffineTransform(rotationAngle: 2))
+    ///     effect.invert() //rotates the other way!
+    ///     var body: some View {
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Returns: A Boolean of whether the matrix was successfully inverted.
     public mutating func invert() -> Bool { }
 
     /// Modifies the projection transform to its inverse if invertable.
+    ///
+    /// Use this function to return a new inverted matrix. If instead
+    /// you would like to mutate the projection transform itself,
+    /// use the ``ProjectionTransform/invert()`` method instead.
+    ///
+    /// ```
+    /// struct MirroredTrashCanView: View {
+    ///     let clockwise = ProjectionTransform(CGAffineTransform(rotationAngle: 2))
+    ///     let counterclockwise = clockwise.inverted()
+    ///     var body: some View {
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(clockwise)
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(counterclockwise)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Returns: An inverted projection transform matrix.
     public func inverted() -> ProjectionTransform { }
@@ -18050,6 +18647,23 @@ extension ProjectionTransform : Equatable {
 extension ProjectionTransform {
 
 	/// Concatenates two projection transform matrices together to make a new one.
+    ///
+    /// Projection matrix concatenation is mathematically equivalent to
+    /// multiplication. Matrix multiplicaiton is *not* commutative.
+    ///
+    /// ```
+    /// struct RotatedTrashCanView: View {
+    ///     let effect1 = ProjectionTransform(CGAffineTransform(rotationAngle: 2))
+    ///     let effect2 = ProjectionTransform(CGAffineTransform(rotationAngle: 1))
+    ///     let effect = effect1.concatenating(effect2) //rotates 3 radians!
+    ///
+    ///     var body: some View {
+    ///         Text("🗑")
+    ///             .font(.title)
+    ///             .projectionEffect(effect)
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameter rhs: The projection transform matrix to concatenate.
 	/// - Returns: A new concatenated projection transform matrix.
@@ -22441,35 +23055,188 @@ extension Stepper where Label == Text {
     public init<S, V>(_ title: S, value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where S : StringProtocol, V : Strideable { }
 }
 
-/// A structure holding the data needed to stroke a `Shape` in a particular style.
+/// A structure describing how to stroke a `Shape` in a particular style.
+///
+/// Use this structure to stroke (add a border to) a ``Shape`` in a customized way.
+///
+/// - Note: You cannot use a `StrokeStyle` when applying a
+/// ``View/border(_:)`` to a ``View``. Instead, use ``ShapeStyle``.
+///
+/// ### Creating a `StrokeStyle`
+///
+/// Create a `StrokeStyle` using its initilizer,
+/// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+/// A simple example is below.
+///
+/// ```
+/// struct StrokedCircle: View {
+///     var body: some View {
+///         Circle()
+///             .stroke(StrokeStyle())
+///     }
+/// }
+/// ```
+///
+/// ### Using a `StrokeStyle`
+///
+/// Use the ``Shape/stroke(_:style:)``
+/// or ``Shape/stroke(style:)`` methods to add a custom stroke
+/// to a ``Shape``.
+///
+/// In addition, two special kinds of ``Shape``s have their own methods
+/// for adding strokes with custom styles:
+/// 1. ``InsettableShape``: An insettable shape allows you to inset the shape
+/// by half the stroke width, then apply the stroke, so that the final
+/// result remains inside the original frame. To achieve this effect,
+/// use one of these methods:
+///     1. ``InsettableShape/strokeBorder(_:style:antialiased:)``
+///     2. ``InsettableShape/strokeBorder(style:antialiased:)``
+/// 2. ``Path``: A path is a special kind of customizable shape. Use path's
+/// special stroking method, ``Path/strokedPath(_:)``, to return another path,
+/// rather than a generic shape.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct StrokeStyle : Equatable {
 
 	/// The width of the stroke, specified in points.
+    ///
+    /// This property can be written to or read directly, but it
+    /// can also be specified in the initilizer,
+    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineWidth = 16
+    ///
+    ///         return Circle()
+    ///             .stroke(style)
+    ///     }
+    /// }
+    /// ```
     public var lineWidth: CGFloat
 
     /// The style for rendering the endpoint of the stroke line.
+    ///
+    /// This property can be written to or read directly, but it
+    /// can also be specified in the initilizer,
+    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineCap = .butt
+    ///
+    ///         return Circle()
+    ///             .stroke(style)
+    ///     }
+    /// }
+    /// ```
     public var lineCap: CGLineCap
 
     /// The style for rendering the joining point of stroked lines
+    ///
+    /// This property can be written to or read directly, but it
+    /// can also be specified in the initilizer,
+    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineJoin = .bevel
+    ///
+    ///         return Circle()
+    ///             .stroke(style)
+    ///     }
+    /// }
+    /// ```
     public var lineJoin: CGLineJoin
 
     /// The limit on the ratio of the miter length to stroke width.
+    ///
+    /// This property can be written to or read directly, but it
+    /// can also be specified in the initilizer,
+    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.miterLimit = 24.0
+    ///
+    ///         return Circle()
+    ///             .stroke(style)
+    ///     }
+    /// }
+    /// ```
     public var miterLimit: CGFloat
 
     /// The dash array for allowing the stroke to show discontinuities.
+    ///
+    /// This property can be written to or read directly, but it
+    /// can also be specified in the initilizer,
+    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.dash = [25.0, 25.0, 0.0, 25.0]
+    ///
+    ///         return Circle()
+    ///             .stroke(style)
+    ///     }
+    /// }
+    /// ```
     public var dash: [CGFloat]
 
     /// The dash phase for moving the dashes forward or backward along the stroke.
+    ///
+    /// This property can be written to or read directly, but it
+    /// can also be specified in the initilizer,
+    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.dashPhase = 3.0
+    ///
+    ///         return Circle()
+    ///             .stroke(style)
+    ///     }
+    /// }
+    /// ```
     public var dashPhase: CGFloat
 
-   	/// Creates a stroke style from its parameters.
+   	/// Creates a custom stroke style.
    	///
+    /// See ``StrokeStyle`` for info on how to use a stroke style once it
+    /// is created.
+    ///
+    /// Play with the parameters in the example below to see how to customize
+    /// your own shape style.
+    ///
+    /// struct WeirdStrokedCircleView: View {
+    ///     let style = StrokeStyle(lineWidth: 15.0,
+    ///                             lineCap: .butt,
+    ///                             lineJoin: .bevel,
+    ///                             miterLimit: 24.0,
+    ///                             dash: [25.0, 25.0, 0.0, 25.0],
+    ///                             dashPhase: 3.0)
+    ///     var body: some View {
+    ///         Cirlce()
+    ///             .stroke(style: style)
+    ///     }
+    /// }
+    ///
    	/// - Parameters:
    	///   - lineWidth: The stroke line width.
    	///   - lineCap: The stroke line cap style.
    	///   - lineJoin: The stroke line join style.
-   	///   - miterLimet: The stroke miter limit.
+   	///   - miterLimit: The stroke miter limit.
    	///   - dash: The stroke dash array.
    	///   - dashPhase: The stroke dash phase.
     public init(lineWidth: CGFloat = 1, lineCap: CGLineCap = .butt, lineJoin: CGLineJoin = .miter, miterLimit: CGFloat = 10, dash: [CGFloat] = [CGFloat](), dashPhase: CGFloat = 0) { }
