@@ -30799,25 +30799,59 @@ extension View {
 
     /// A view modifier that adds a shadow to this view.
     ///
-    /// The example below a series shows of boxes with increasing degrees of
-    /// shadow ranging from 0 (no shadow) to 5 points of shadow, offset down and
-    /// to the right of the views:
+    /// Shadow has four possible arguments.
     ///
-    ///     struct Shadow: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .overlay(Text("\($0)"),
-    ///                                  alignment: .bottom)
-    ///                         .shadow(color: Color.gray,
-    ///                                 radius: 1.0,
-    ///                                 x: CGFloat($0),
-    ///                                 y: CGFloat($0))
-    ///                 }
-    ///             }
-    ///         }
+    /// Create a shadow with just a radius:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(radius: 10)
+    ///             .padding()
     ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the color:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the x offset:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10, x: 20)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the x & y offset:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10, x: 20, y: 20)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - color: The shadow's color.
