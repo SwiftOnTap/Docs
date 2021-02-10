@@ -15539,10 +15539,89 @@ public enum PopoverAttachmentAnchor {
     case point(UnitPoint)
 }
 
-/// A named value produced by a view.
+/// The ``PreferenceKey`` protocol enables a way to send data _up_ the ``View`` hierarchy.
 ///
-/// A view with multiple children automatically combines its values for a given
-/// preference into a single value visible to its ancestors.
+/// ``PreferenceKey`` allow for a child view to communicate with a parent, similar to how an
+/// ``Environment`` allows for data to be sent down the view hierarchy. An excellent
+/// example of view preferences in action is Apple's ``NavigationView`` and ``navigationTitle(_:)``.
+/// The ``navigationTitle(_:)`` does not modify the navigation view directly, but rather it
+/// uses view preferences and the navigation view has a closure that is called when the title is updated.
+///
+/// While it is possible to achieve basic communication up the view hierarchy using a ``@Binding``,
+/// this can produce unintended effects as a result of modifying state during a view update. In
+/// these scenarios, it may be better to use view preferences.
+///
+/// For example, to set a preference key from a view and use it to change a state:
+///
+/// ```
+/// struct ExampleView: View {
+///    @State private var customPreferenceKey: String = ""
+///
+///    var body: some View {
+///        VStack {
+///            Text("View that sets a preference key when loaded")
+///                .preference(key: CustomPreferenceKey.self, value: "New value! 🤓")
+///        }
+///        .onPreferenceChange(CustomPreferenceKey.self) { (value: CustomPreferenceKey.Value) in
+///            customPreferenceKey = value
+///            print(customPreferenceKey) // Prints: "New value! 🤓"
+///        }
+///    }
+/// }
+///
+/// struct CustomPreferenceKey: PreferenceKey {
+///    static var defaultValue: String = ""
+///
+///    static func reduce(value: inout String, nextValue: () -> String) {
+///        value = nextValue()
+///    }
+/// }
+/// ```
+///
+/// It is also possible to use more complicated data structures as a preference key
+/// by changing the type of the defaultValue. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///    @State private var customPreferenceKey: CustomPreferenceKeyData? = nil
+///
+///    var body: some View {
+///        VStack {
+///            Text("View that sets a preference key when loaded")
+///                .preference(key: CustomPreferenceKey.self, value: CustomPreferenceKeyData(bananaBunch: "🍌🍌🍌", numberOfBananas: 3))
+///        }
+///        .onPreferenceChange(CustomPreferenceKey.self) { (value: CustomPreferenceKey.Value) in
+///            customPreferenceKey = value
+///            print(customPreferenceKey!) // Prints: "CustomPreferenceKeyData(bananaBunch: "🍌🍌🍌", numberOfBananas: 3)"
+///        }
+///    }
+/// }
+///
+/// struct CustomPreferenceKey: PreferenceKey {
+///    static var defaultValue: CustomPreferenceKeyData? = nil
+///
+///    static func reduce(value: inout CustomPreferenceKeyData?, nextValue: () -> CustomPreferenceKeyData?) {
+///        value = nextValue()
+///    }
+/// }
+///
+/// struct CustomPreferenceKeyData: Equatable {
+///    let bananaBunch: String
+///    let numberOfBananas: Int
+/// }
+/// ```
+///
+/// For a detailed explanation of how view preferences work, check out this article:
+/// ![Detailed article on view preferences by Mark Wijnen][https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d]
+///
+/// Note:
+///  - A view with multiple children automatically combines its values for a given
+/// preference into a single value visible to its ancestors. This functionality
+/// can be changed with the `reduce(value: &x, nextValue:{defaultValue})` function.
+///  - When using view preferences, keep in mind that it can be easy to create
+/// an infinite loop by having the preference value dependent on the state that it is changing.
+/// A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
+///  - In order to pass information _down_ the View hierarchy, see ``Environment``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreferenceKey{ }
 extension PreferenceKey {
@@ -15550,7 +15629,7 @@ extension PreferenceKey {
     /// The type of value produced by this preference.
     associatedtype Value
 
-    /// The default value of the preference.
+    /// The default value of the preference if none is explicitly set.
     ///
     /// Views that have no explicit value for the key produce this default
     /// value. Combining child views may remove an implicit value produced by
@@ -15561,9 +15640,42 @@ extension PreferenceKey {
     /// Combines a sequence of values by modifying the previously-accumulated
     /// value with the result of a closure that provides the next value.
     ///
-    /// This method receives its values in view-tree order. Conceptually, this
-    /// combines the preference value from one tree with that of its next
-    /// sibling.
+    /// If multiple values are outputted by multiple different views, using the same
+    /// ```PreferenceKey```, this function allows for logic to reduce all those
+    /// preferences to a single value.
+    ///
+    /// For example, if there are two views at the same level that both output a preference:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var customPreferenceKey: String = ""
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("First view that sets a preference")
+    ///                .preference(key: CustomPreferenceKey.self, value: "The first preference value")
+    ///
+    ///            Text("Second view that sets a preference")
+    ///                .preference(key: CustomPreferenceKey.self, value: "The second preference value")
+    ///        }
+    ///        .onPreferenceChange(CustomPreferenceKey.self) { (value: CustomPreferenceKey.Value) in
+    ///            customPreferenceKey = value
+    ///            print(customPreferenceKey) // Prints: "The first preference value & The second preference value"
+    ///        }
+    ///    }
+    /// }
+    ///
+    /// struct CustomPreferenceKey: PreferenceKey {
+    ///    static var defaultValue: String = ""
+    ///
+    ///    static func reduce(value: inout String, nextValue: () -> String) {
+    ///        value = "\(value) & \(nextValue())"
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// For additional details on how the reduce function works, see:
+    /// ![Detailed article on view preferences reduce by Mark Wijnen][https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b]
     ///
     /// - Parameters:
     ///   - value: The value accumulated through previous calls to this method.
