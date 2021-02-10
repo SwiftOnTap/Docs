@@ -5786,6 +5786,60 @@ public struct Divider : View {
 }
 
 /// A scene that enables support for opening, creating, and saving documents.
+///
+/// `DocumentGroup` provides a default scene for basic file management.
+///
+/// ![Document Group](document-group.gif)
+///
+/// ```
+/// import UniformTypeIdentifiers
+///
+/// @main
+/// struct ExampleApp: App {
+///     var body: some Scene {
+///         DocumentGroup(newDocument: TextFile()) { file in
+///             ExampleView(document: file.$document)
+///         }
+///     }
+/// }
+///
+/// struct ExampleView: View {
+///     @Binding var document: TextFile
+///
+///     var body: some View {
+///         TextEditor(text: $document.text)
+///     }
+/// }
+///
+/// struct TextFile: FileDocument {
+///     //  Support only plain text
+///     static var readableContentTypes = [UTType.plainText]
+///
+///     // Create an empty document
+///     var text = ""
+///
+///     //  Create a document
+///     init(initialText: String = "") {
+///         text = initialText
+///     }
+///
+///     // Loads data has been saved previously. See the ReadConfiguration documentation for more
+///     init(configuration: ReadConfiguration) throws {
+///         guard let data = configuration.file.regularFileContents,
+///             let string = String(data: data, encoding: .utf8)
+///         else {
+///             throw CocoaError(.fileReadCorruptFile)
+///         }
+///         text = string
+///     }
+///
+///     // The saving function
+///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///         let data = text.data(using: .utf8)!
+///         return .init(regularFileWithContents: data)
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
