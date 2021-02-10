@@ -34289,25 +34289,38 @@ public struct WheelPickerStyle : PickerStyle {
 ///
 /// There are three key components to a widget:
 ///
-/// * A configuration that determines whether the widget is configurable,
+/// * A configuration. This configuration determines whether the widget is configurable,
 ///   identifies the widget, and defines the SwiftUI views that show the
 ///   widget's content.
 /// * A timeline provider that drives the process of updating the widget's view
 ///   over time.
 /// * SwiftUI views used by WidgetKit to display the widget.
 ///
-/// For information about adding a widget extension to your app, and keeping
-/// your widget up to date, see
-/// <doc://com.apple.documentation/documentation/WidgetKit/Creating-a-Widget-Extension>
-/// and
-/// <doc://com.apple.documentation/documentation/WidgetKit/Keeping-a-Widget-Up-To-Date>,
-/// respectively.
+/// To add a widget to your app go to: `File -> New -> Target`. Name your widget "Banana Widget" to use code from this tutorial.
 ///
-/// By adding a custom SiriKit intent definition, you can let users customize
-/// their widgets to show the information that's most relevant to them. If
-/// you've already added support for Siri or Shortcuts, you're well on your way
-/// to supporting customizable widgets. For more information, see
-/// <doc://com.apple.documentation/documentation/WidgetKit/Making-a-Configurable-Widget>.
+/// Next, from the options, select "Widget"
+///
+/// ![All options](widget-1.png)
+///
+/// Select "Widget".
+///
+/// ![Widget](widget-2.png)
+///
+/// Your widget can now be styled similar to a standard SwiftUI view. For example, modify `Banana_WidgetEntryView` to create:
+///
+/// ![Widget](widget-3.png)
+///
+/// ```
+/// struct Banana_WidgetEntryView : View {
+///     var entry: Provider.Entry
+///
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(Color.yellow)
+///             .overlay(Text("🍌🍌"))
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
