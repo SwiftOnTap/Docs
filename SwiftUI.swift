@@ -12,6 +12,124 @@ import os.log
 import os
 import os.signpost
 
+/// An object that publishes its changes.
+///
+/// ### Understanding `ObservableObject`
+///
+/// The `ObservableObject` protocol definition is as follows:
+/// ```
+/// public protocol ObservableObject: AnyObject {
+///     associatedtype ObjectWillChangePublisher: Publisher
+///
+///     var objectWillChange: ObjectWillChangePublisher { get }
+/// }
+/// ```
+///
+/// `ObservableObject` has one simple requirement - the `objectWillChange` publisher. The `objectWillChange` publisher is responsible for emitting just before the object changes.
+///
+/// This requirement is fundamental to how the SwiftUI runtime interacts with your object-based data models. It allows the runtime to react to changes in your data, and queue view updates for the UI's next render cycle.
+///
+/// ### Using `ObservableObject`
+///
+/// To conform to `ObservableObject`, simply add it to the class definition.
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
+/// ```
+///
+/// `ObservableObject` provides a default implementation for `objectWillChange` using `Combine/ObservableObjectPublisher`.
+///
+/// To trigger `objectWillChange` events when your data changes, annotate your properties with the `@Published` property wrapper. Adding `@Published` to a variable causes the object to emit an `objectWillChange` event any time that variable is modified.
+///
+/// Note: This only works if you are using the default `ObservableObject` implementation, or if `objectWillChange` is an instance of `ObservableObjectPublisher`. If you use a custom `Publisher` type, you are responsible for triggering updates yourself.
+///
+/// ### Manually triggering `objectWillChange`
+///
+/// You can also manually trigger updates by calling `ObservableObjectPublisher/send()`.
+///
+/// This is useful for cases where `@Published` does not suffice. For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     class ChildModel {
+///         var foo: String = "Apple"
+///     }
+///
+///     var childModel = ChildModel()
+///
+///     func updateChildModel() {
+///         childModel.foo = "Banana"
+///
+///         objectWillChange.send()
+///     }
+/// }
+/// ```
+///
+/// In this example, `AppModel` holds a reference to a child model, `ChildModel`. Adding a `@Published` to the `childModel` variable would have no effect because `ChildModel` is a class and not a value type. Therefore, to emit a change event, you must manually call `objectWillChange.send()` when updating the child model.
+///
+/// ### Using a custom publisher
+///
+/// In some cases, you may want to use a custom `Publisher` type for `objectWillChange`. For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     public let objectWillChange = PassthroughSubject<Void, Never>()
+/// }
+/// ```
+///
+/// This example uses a `Combine/PassthroughSubject` for its `objectWillChange` requirement. A passthrough subject is a publisher that lets you send values manually (i.e. "passes through" any values sent to it).
+///
+/// **Note:** The `@Published` property wrapper does not work with custom publishers. If you use a custom publisher, you are responsible for updating the object yourself. For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     public let objectWillChange = PassthroughSubject<Void, Never>()
+///
+///     var foo: Bool = false {
+///         willSet {
+///             objectWillChange.send()
+///         }
+///     }
+/// }
+/// ```
+///
+/// Here `objectWillChange.send()` is manually called everytime `foo` is about to update, using the `willSet` observer.
+///
+/// ### Using `ObservableObject` with SwiftUI
+///
+/// An observable object can be used to drive changes in a `View`, via three property wrapper types:
+///
+/// - `@ObservedObject`
+/// - `@EnvironmentObject`
+/// - `@StateObject`
+///
+/// #### Usage with `@StateObject`
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         Toggle("Foo", isOn: $appModel.foo)
+///     }
+/// }
+/// ```
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+public protocol ObservableObject : AnyObject {
+    
+    /// The type of publisher that emits before the object has changed.
+    associatedtype ObjectWillChangePublisher : Publisher = ObservableObjectPublisher where Self.ObjectWillChangePublisher.Failure == Never
+    
+    /// A publisher that emits before the object has changed.
+    var objectWillChange: Self.ObjectWillChangePublisher { get }
+}
+
 /// AccessibilityActionKind denotes the type of action for an Accessibility Action to support.
 ///
 /// This struct is almost always found as an input to the `View/accessibilityAction(_:_:)` View modifier.
@@ -8169,13 +8287,193 @@ extension EnvironmentKey {
     static var defaultValue: Self.Value { get }
 }
 
-/// A property wrapper type for an observable object supplied by a parent or
-/// ancestor view.
+/// A property wrapper type for an observable object passed down the view hierarchy by a parent view.
 ///
-/// An environment object invalidates the current view whenever the observable
-/// object changes. If you declare a property as an environment object, be sure
-/// to set a corresponding model object on an ancestor view by calling its
-/// `View/environmentObject(_:)` modifier.
+/// `@EnvironmentObject` is similar to `@ObservedObject` in that they both invalidate the view using them whenever the observed object changes.
+///
+/// `@EnvironmentObject` differs from `@ObservedObject` in that it receives the object to observe at runtime, from the view's environment, whereas `@ObservedObject` receives it directly either by the immediate parent view or by an initial value while declaring it.
+///
+/// ### The use of environment objects
+///
+/// Consider the following example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     let text: String = "some text"
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         ChildView()
+///             .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Text(appModel.text)
+///     }
+/// }
+/// ```
+///
+/// - An app model, `AppModel` is initialized in a `@StateObject` in the `ContentView`.
+/// - `ContentView` initializes `ChildView`, and then passes the app model initialized via `View/environmentObject(_:)`.
+/// - `ChildView` uses `AppModel` to display a piece of text declared by the app model.
+///
+/// Now consider a slightly different version of this example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     let text: String = "some text"
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         IntermediateView()
+///             .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct IntermediateView: View {
+///     var body: some View {
+///         ChildView()
+///             .padding()
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Text(appModel.text)
+///     }
+/// }
+///
+/// ```
+///
+/// In this example, `ChildView` is initialized by an `IntermediateView`, which in turn is initialized by `ContentView`. This example is different only in that there is an additional level of nesting, via `IntermediateView` (a view that adds padding to `ChildView`).
+///
+/// Note that `ChildView` did not need to be changed at all. `@EnvironmentObject` is neither used nor declared in `IntermediateView`, yet it is still available in the same way at one level deeper.
+///
+/// This is also the primary way in which `@EnvironmentObject` and `@ObservedObject` differ. Had `ChildView` been using `@ObservedObject`, the app model would need to be passed explicitly through `IntermediateView`, which would also need to declare `var appModel: AppModel` and then pass it to `ChildView`'s initializer.
+///
+/// ### Creating bindings
+///
+/// Here is another example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         ChildView()
+///             .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
+///
+///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a `Toggle` in `ChildView`. `Toggle` requires a `Binding<Bool>` to read and write whether it is on.
+///
+/// Just like `@State`, `@ObservedObject` and `@StateObject`, `@EnvironmentObject` allows you to create a `Binding` from its wrapped value type using the `$` syntax.
+///
+/// `$appModel.flag` creates a binding to `flag`, which is then passed to the toggle. This is also a good example of how **mutable** data can be passed down from a parent view to a child view (at any level deep) at runtime.
+///
+/// ### Dependency injection
+///
+/// Because `@EnvironmentObject` receives the object from the environment, the object can be passed down any number of levels. This makes it especially useful for problems such as dependency injection.
+///
+/// There are many use cases of `@EnvironmentObject` that don't necessarily involve passing the app's main model down. For example:
+///
+/// - Providing a "theme" object, allowing child views to adapt as per the theme passed down.
+/// - Providing a cache, that allows complex network-based views to be broken down into reusable components, while still using a cache provided by the parent.
+/// - Passing a global navigation manager - a navigator object that contains the current navigation selection.
+///
+/// ### Caveats
+///
+/// There are some limitations to `@EnvironmentObject`, especially on older versions of iOS.
+///
+/// On iOS 13, environment objects do not automatically pass to sheets or navigation destinations. The following code would crash on iOS 13, for example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     @State var isPresented: Bool = false
+///
+///     var body: some View {
+///         Button("Present") {
+///             isPresented = true
+///         }
+///         .sheet(isPresented: $isPresented ){
+///             ChildView()
+///         }
+///         .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
+///
+/// To fix it, the `View/environmentObject(_:)` modifier would need to be added directly to the sheet's content, like this:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     @State var isPresented: Bool = false
+///
+///     var body: some View {
+///         Button("Present") {
+///             isPresented = true
+///         }
+///         .sheet(isPresented: $isPresented ){
+///             ChildView()
+///                 .environmentObject(appModel)
+///         }
+///         .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct EnvironmentObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -10444,7 +10742,7 @@ public struct GeometryProxy {
 ///                 .frame(width: 500, height: 500)
 ///                 .background(
 ///                     GeometryReader { (proxy: GeometryProxy) -> EmptyView in
-///                         if globalFrame != proxy.frame(in: .global) {
+///                         if someFrame != proxy.frame(in: .global) {
 ///                             DispatchQueue.main.async {
 ///                                 someFrame = proxy.frame(in: .global)
 ///                             }
@@ -15388,8 +15686,182 @@ public protocol NavigationViewStyle{ }
 extension NavigationViewStyle {
 }
 
-/// A property wrapper type that subscribes to an observable object and
-/// invalidates a view whenever the observable object changes.
+/// A SwiftUI property wrapper that subscribes to an observable object.
+///
+/// - Like `@StateObject`, this type subscribes to the observable object and invalidates a view whenever the observable object changes.
+/// - Unlike `@StateObject,` `@ObservedObject` does not persist the object in state. Objects are only *assigned* to `@ObservedObject`, they should be initialized and persistent by an ancestor view.
+///
+/// ### Usage
+///
+/// In the following example, an observable object is assigned to an `@ObservedObject` variable:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
+/// struct ExampleView: View {
+///     @ObservedObject var appModel = AppModel.shared
+///
+///     var body: some View {
+///         VStack {
+///             Text(appModel.fruitName)
+///
+///             Button("Change Text") {
+///                 appModel.fruitName = "Banana"
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In the example above, `ExampleView` will update its displayed text to "Banana" when the button labeled "Change Text" is pressed. This is because `ExampleView` has subscribed to `AppModel.shared` via the `@ObservedObject` `appModel` variable.
+///
+/// Whenever the object referenced by `appModel` (which is `AppModel.shared` in this case) emits a change, `ExampleView` will be invalidated and redrawn.
+///
+/// ### Creating bindings
+///
+/// Just like `@State`, `@EnvironmentObject` and `@StateObject`, `@ObservedObject` allows you to create a `Binding` to an object using the `$` prefix syntax.
+///
+/// For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
+/// struct ExampleView: View {
+///     @ObservedObject var appModel = AppModel.shared
+///
+///     var body: some View {
+///         TextField("Enter fruit name", text: $appModel.fruitName)
+///     }
+/// }
+/// ```
+///
+/// In this example, a two-way connection is established between `appModel.fruitName` and `TextField`, by using the `$` prefix to create a `Binding<String>`. This allows `TextField` to update the `fruitName` variable when the user enters text, and also to update its own displayed text if `fruitName` is changed programmatically.
+///
+/// ### Passing an observable object to a child view using `@ObservedObject`
+///
+/// Pass an observable object like you would pass any other variable down to a child view. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     struct ChildView: View {
+///         @ObservedObject var appModel: AppModel
+///
+///         var body: some View {
+///             TextField("Enter fruit name", text: $appModel.fruitName)
+///         }
+///     }
+///
+///     var body: some View {
+///         ChildView(appModel: appModel)
+///     }
+/// }
+/// ```
+///
+/// It is a common pattern for a parent view to create a `@StateObject` to hold an observable object, and then to pass it down to a child using an `@ObservedObject`. `@StateObject` **owns** the object, `@ObservedObject` simply holds a reference to the object.
+///
+/// ### Comparison with `@StateObject`
+///
+/// Consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @StateObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// `ExampleView` creates a vertical stack of a `Toggle`, and a view that describes the toggle, `ToggleDescription`.
+///
+/// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Flip the toggle twice. Note that even though `ToggleDescription` is refreshed, nothing is printed further.
+///
+/// Now consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @ObservedObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// This example is identical to the previous example **except** for the fact that `@StateObject` has been replaced with `@ObservedObject`. Run this code now, and observe the following print again:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Now flip the toggle twice. The console will print the following:
+///
+/// ```
+/// Initialized
+/// Initialized
+/// ```
+///
+/// This highlights the fundamental difference between `@StateObject` and `@ObservedObject`.
+///
+/// -  `@StateObject` instantiates and holds the object in state.
+/// -  `@ObservedObject` is *assigned* an object, and **does not** hold it in state
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @propertyWrapper @frozen public struct ObservedObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -22405,39 +22877,118 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     public init() { }
 }
 
-/// A property wrapper type that can read and write a value managed by SwiftUI.
+/// A SwiftUI property wrapper that holds a state value.
 ///
-/// SwiftUI manages the storage of any property you declare as a state. When the
-/// state value changes, the view invalidates its appearance and recomputes the
-/// body. Use the state as the single source of truth for a given view.
+/// ### Usage
 ///
-/// A `State` instance isn't the value itself; it's a means of reading and
-/// writing the value. To access a state's underlying value, use its variable
-/// name, which returns the `State/wrappedValue` property value.
+/// Modifying a `@State` variable causes the `body` of the view to be recomputed. For example:
 ///
-/// You should only access a state property from inside the view's body, or from
-/// methods called by it. For this reason, declare your state properties as
-/// private, to prevent clients of your view from accessing them. It is safe to
-/// mutate state properties from any thread.
+/// ```
+/// struct ExampleView: View {
+///     @State var foo: String = "Apple"
 ///
-/// To pass a state property to another view in the view hierarchy, use the
-/// variable name with the `$` prefix operator. This retrieves a binding of the
-/// state property from its `State/projectedValue` property. For example, in
-/// the following code example `PlayerView` passes its state property
-/// `isPlaying` to `PlayButton` using `$isPlaying`:
+///     var body: some View {
+///         VStack {
+///             Text(foo)
 ///
-///     struct PlayerView: View {
-///         var episode: Episode
-///         @State private var isPlaying: Bool = false
-///
-///         var body: some View {
-///             VStack {
-///                 Text(episode.title)
-///                 Text(episode.showTitle)
-///                 PlayButton(isPlaying: $isPlaying)
+///             Button("Change Text") {
+///                 foo = "Banana"
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
+///
+/// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This  new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
+///
+/// Note:
+///
+/// - Recomputing the `body` is also frequently referred to as "invalidating the view".
+/// - While all SwiftUI views are value types, the `@State` property wrapper creates a reference based storage managed by the SwiftUI runtime. This is why mutating a state variable does not require a mutating function.
+///
+/// ### Passing state down to a child view
+///
+/// Pass a state variable just as you would pass any other variable to a struct. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     struct ChildView: View {
+///         let text: String
+///
+///         var body: some View {
+///             Text(text)
+///         }
+///     }
+///
+///     @State var foo: String = "Apple"
+///
+///     var body: some View {
+///         VStack {
+///             ChildView(text: foo)
+///
+///             Button("Change Text") {
+///                 foo = "Banana"
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, `foo` is passed to `ChildView` by initializer.
+///
+/// And exactly as in the previous example, when `foo` updates, so will the `body` of `ExampleView`. When the `body` of `ExampleView` is recomputed, a new instance of `ChildView` is created with the latest value of `foo` (which is now "Banana"). `ChildView` in turn computes its own `body`, which creates a `Text("Banana")`.
+///
+/// Everytime a `View` is invalidated, its `body` is recomputed. Everytime the body is recomputed, all the view's childrens' bodies are also recursively recomputed. Since SwiftUI views are value types, creating and destroying them repeatedly (even hundreds of times a second) does not impact the app's performance.
+///
+/// ### Passing a reference to the state
+///
+/// The previous example demonstrated how a state value could be passed from a view to its child. However, for the child to be able to actually modify the parent's state, the parent must pass a **binding** to its child. A binding is a read/write reference to the `@State` variable, and is represented via `SwiftUI/Binding`.
+///
+/// To create a binding to a state variable, prefix it with a dollar sign `$`. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var text: String = "🍌🍌"
+///
+///     var body: some View {
+///         Text(text)
+///         TextField("Placeholder", text: $text)
+///     }
+/// }
+/// ```
+///
+/// In this example, `TextField` requires a binding in order to read and write to a given value. The `text` state variable is converted to a `Binding<String>` using the dollar sign prefix (`$text`), and then passed to `Textfield` via its initializer.
+///
+/// Note: The `Binding` type can also be used to create references to `@ObservedObject`, `@EnvironmentObject` and `@StateObject`. It is not unique to `@State`, but rather a general structure that represents a reference to some source of truth.
+///
+/// ### Modifying a state variable outside of `body`
+///
+/// It's possible to modify a state variable outside of a view's `body`. For example:
+///
+/// ```
+/// struct ContentView: View {
+///     @State var foo: String = "Apple"
+///
+///     var body: some View {
+///         VStack {
+///             Text(foo)
+///
+///             Button("Change Text", action: changeText)
+///         }
+///     }
+///
+///     func changeText() {
+///         foo = "Banana"
+///     }
+/// }
+/// ```
+///
+/// In this example, the button labeled "Change text" calls the function `changeText`, which modifies `foo`.
+///
+/// Note:
+///
+/// - `changeText` is not a `mutating ` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
+/// - All modifications to a state variable **must** happen on the main thread. Modifying a state variable on a background thread may lead to undefined behavior.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct State<Value> : DynamicProperty {
 
@@ -22509,44 +23060,197 @@ extension State where Value : ExpressibleByNilLiteral {
     @inlinable public init() { }
 }
 
-/// A property wrapper type that instantiates an observable object.
+/// A SwiftUI property wrapper that instantiates and stores an observable object in state.
 ///
-/// Create a state object in a `SwiftUI/View`, `SwiftUI/App`, or
-/// `SwiftUI/Scene` by applying the `@StateObject` attribute to a property
-/// declaration and providing an initial value that conforms to the
-/// <doc://com.apple.documentation/documentation/Combine/ObservableObject>
-/// protocol:
+/// - Think of `@StateObject` as a combination of `@State` and `@ObservedObject`.
+/// - Like `@ObservedObject`, this type subscribes to the observable object and invalidates a view whenever the observable object changes.
+/// - Unlike `@ObservedObject`, `@StateObject` holds on to its value even when the view is invalidated and redrawn.
 ///
-///     @StateObject var model = DataModel()
+/// ### Usage
 ///
-/// SwiftUI creates a new instance of the object only once for each instance of
-/// the structure that declares the object. When published properties of the
-/// observable object change, SwiftUI updates the parts of any view that depend
-/// on those properties:
+/// In the following example, an observable object class `AppModel` is instantiated and stored in a `@StateObject`:
 ///
-///     Text(model.title) // Updates the view any time `title` changes.
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
 ///
-/// You can pass the state object into a property that has the
-/// `SwiftUI/ObservedObject` attribute. You can alternatively add the object
-/// to the environment of a view hierarchy by applying the
-/// `SwiftUI/View/environmentObject(_:)` modifier:
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
 ///
-///     ContentView()
-///         .environmentObject(model)
+///     var body: some View {
+///         Text("Hello World")
+///     }
+/// }
+/// ```
 ///
-/// If you create an environment object as shown in the code above, you can
-/// read the object inside `ContentView` or any of its descendants
-/// using the `SwiftUI/EnvironmentObject` attribute:
+/// ### How it works
 ///
-///     @EnvironmentObject var model: DataModel
+/// The following is the basic structure of a `@StateObject`:
 ///
-/// Get a `SwiftUI/Binding` to one of the state object's properties using the
-/// `$` operator. Use a binding when you want to create a two-way connection to
-/// one of the object's properties. For example, you can let a
-/// `SwiftUI/Toggle` control a Boolean value called `isEnabled` stored in the
-/// model:
+/// ```
+/// struct StateObject<ObjectType: ObservableObject>: DynamicProperty {
+///     var wrappedValue: ObjectType { get }
 ///
-///     Toggle("Enabled", isOn: $model.isEnabled)
+///     init(wrappedValue thunk: @autoclosure @escaping () -> ObjectType)
+/// }
+/// ```
+///
+/// It's important to note that the initializer takes an `@autoclosure` expression. This means that the following code is evaluated lazily:
+///
+/// ```
+///     @StateObject var appModel = AppModel()
+/// ```
+///
+/// `AppModel` is only initialized once per the lifetime of the `View`, `Scene` or `App` that contains the `@StateObject`. This is made possible by the `@autoclosure` annotation, that wraps the instantiation of the app model, `AppModel()`, into a lazy expression at compile time, `{ return AppModel() }`. This allows the `@StateObject` to call it appropriately as needed, which is once per its parent's lifetime.
+///
+/// ### Creating bindings
+///
+/// Just like `@State`, `@ObservedObject` and `@EnvironmentObject`, `@StateObject` allows you to create a `Binding` from its wrapped value type using the `$` syntax.
+///
+/// For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
+///
+///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a `Toggle` in `ChildView`. `Toggle` requires a `Binding<Bool>` to read and write whether it is on.
+///
+/// ### Comparison with `@ObservedObject`
+///
+/// Consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @StateObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// `ExampleView` creates a vertical stack of a `Toggle`, and a view that describes the toggle, `ToggleDescription`.
+///
+/// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Flip the toggle twice. Note that even though `ToggleDescription` is refreshed, nothing is printed further.
+///
+/// Now consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @ObservedObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// This example is identical to the previous example **except** for the fact that `@StateObject` has been replaced with `@ObservedObject`. Run this code now, and observe the following print again:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Now flip the toggle twice. The console will print the following:
+///
+/// ```
+/// Initialized
+/// Initialized
+/// ```
+///
+/// This highlights the fundamental difference between `@StateObject` and `@ObservedObject`.
+///
+/// -  `@StateObject` instantiates and holds the object in state
+/// -  `@ObservedObject` is *assigned* an object, and **does not** hold it in state
+///
+/// ### Usage with `App`
+///
+/// `@StateObject` provides a great way to initialize global, application-wide models.
+///
+/// In the following example, a `@StateObject` is instantiated in `MyApp`, and passed down to `ExampleView` as an environment object.
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
+///
+/// @main
+/// struct MyApp: App {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some Scene {
+///         WindowGroup {
+///             ExampleView()
+///                 .environmentObject(appModel)
+///         }
+///     }
+/// }
+///
+/// struct ExampleView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Text("Hello World")
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct StateObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -34317,35 +35021,115 @@ extension WidgetConfiguration {
     var body: Self.Body { get }
 }
 
-/// A scene that presents a group of identically structured windows.
+/// `WindowGroup` is the default `Scene` type in SwiftUI.
 ///
-/// Use a `WindowGroup` as a container for a view hierarchy presented by your
-/// app. The hierarchy that you declare as the group's content serves as a
-/// template for each window that the app creates from that group:
+/// Use a `WindowGroup` to contain the SwiftUI view hierarchy of your app.
 ///
-///     @main
-///     struct Mail: App {
-///         var body: some Scene {
-///             WindowGroup {
-///                 MailViewer() // Declare a view hierarchy here.
+/// ### Usage
+///
+/// ```
+/// @main
+/// struct MyApp: SwiftUI.App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///     }
+/// }
+/// ```
+///
+/// Note:
+///
+/// - The default implementation of a `WindowGroup` allows multiple instances of the window to be created (either using ⌘N , or the "Show Tab Bar" command).
+/// - Each instance of a window created from a window group contains the same SwiftUI hierarchy, but maintains an independent state. That means if the user creates two instances of your app's window, each window will maintain its own separate (independent) state, unaffected by what the user does on another window of your app.
+///
+/// ### Adding a title to a window
+///
+/// On macOS, a window's title is usually displayed in a window's title bar. A window's title bar contains a centered text item to display the window's title.
+///
+/// Use `WindowGroup/init(_:content)` to title a window. For example:
+///
+/// ````
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup("Fruit App") {
+///             Text("Bananas")
+///         }
+///     }
+/// }
+/// ````
+///
+/// Note: The system may use the provided window title as a part of some default window command names. For example, the "New Window" command would become "New Fruit App Window".
+///
+/// ### Adding commands to a window group
+///
+/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a `WindowGroup`, use `Scene/commands(_:)`.
+///
+/// For example:
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///         .commands {
+///             CommandMenu("Some Commands") {
+///                 Text("A Command")
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// SwiftUI takes care of certain platform-specific behaviors. For example,
-/// on platforms that support it, like macOS and iPadOS, users can open more
-/// than one window from the group simultaneously. In macOS, users
-/// can gather open windows together in a tabbed interface. Also in macOS,
-/// window groups automatically provide commands for standard window
-/// management.
+/// ### Disabling creating multiple window instances
 ///
-/// Every window created from the group maintains independent state. For
-/// example, for each new window created from the group the system allocates new
-/// storage for any `State` or `StateObject` variables instantiated by the
-/// scene's view hierarchy.
+/// Currently, SwiftUI offers no canonical way to disable the user from creating multiple instances of a window from a `WindowGroup` scene. This can be done in two ways:
 ///
-/// You typically use a window group for the main interface of an app that isn't
-/// document-based. For document-based apps, use a `DocumentGroup` instead.
+/// - Using the "New Window" (⌘N) command to create a new window instance
+/// - Using the "Show Tab Bar" command, and creating a new tab containing a new window instance
+///
+/// #### Disabling the "New Window" command
+///
+/// The "New Window" (⌘N) command can be disabled by replacing the "New Item" command group with an empty command group.
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///         .commands {
+///             CommandGroup(replacing: .newItem, addition: { })
+///         }
+///     }
+/// }
+/// ```
+///
+/// Caveat: This does not currently work on macCatalyst (as of Big Sur 11.2).
+///
+/// #### Disabling the "Show Tab Bar" command
+///
+/// To disable the "Show Tab Bar" command, use `NSApplication` to iterate over your app's windows at launch and set each window's `tabbingMode` to `.disallowed`.
+///
+/// For example:
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///                 .onAppear {
+///                     NSApplication.shared.windows.forEach({ $0.tabbingMode = .disallowed })
+///                 }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct WindowGroup<Content> : Scene where Content : View {
 
