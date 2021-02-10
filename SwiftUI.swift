@@ -16237,10 +16237,33 @@ extension PreviewPlatform : Equatable {
 extension PreviewPlatform : Hashable {
 }
 
-/// A type that produces view previews in Xcode.
+/// A protocol that generates previews on the right-hand side of Xcode.
 ///
 /// Xcode statically discovers types that conform to the `PreviewProvider`
 /// protocol in your app, and generates previews for each provider it discovers.
+///
+/// For example, to have Xcode render a preview of a simple view:
+///
+/// ![Preview provider example 1][previewprovider-example-1.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Circle().fill(Color.green)
+///    }
+/// }
+///
+/// struct ExampleViewPreview: PreviewProvider {
+///    static var previews: some View {
+///        ExampleView()
+///    }
+///
+///    static var platform: PreviewPlatform? {
+///        .iOS
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreviewProvider : _PreviewProvider{ }
 extension PreviewProvider : _PreviewProvider {
