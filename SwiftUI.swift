@@ -13823,7 +13823,13 @@ public struct NavigationView<Content> : View where Content : View {
     public typealias Body = Never
 }
 
-/// A specification for the appearance and interaction of a `NavigationView`.
+/// Structures conforming to ``NavigationViewStyle`` can be used to style a ``NavigationView`` via
+/// ``View/navigationViewStyle(_:)``.
+///
+/// There are only 3 styles that conform to the navigation view style protocol:
+/// - ``DefaultNavigationViewStyle``
+/// - ``DoubleColumnNavigationViewStyle``
+/// - ``StackNavigationViewStyle``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public protocol NavigationViewStyle{ }
 extension NavigationViewStyle {
