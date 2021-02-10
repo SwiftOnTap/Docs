@@ -5643,6 +5643,36 @@ extension DynamicViewContent {
 }
 
 /// An enumeration to indicate one edge of a rectangle.
+///
+/// ``Edge`` is most frequently used to specify padding, but can also be returned
+/// from instance methods. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        VStack {
+///            Text("Example view where Edge is returned as a value")
+///                .accessibilityScrollAction { edge in
+///                    switch edge {
+///                    case Edge.top:
+///                        print("Swiped down from top edge")
+///                    case Edge.leading:
+///                        print("Swiped left from leading edge")
+///                    case Edge.trailing:
+///                        print("Swiped right from trailing edge")
+///                    case Edge.bottom:
+///                        print("Swiped up from bottom edge")
+///                    }
+///                }
+///        }
+///    }
+/// }
+/// ```
+///
+/// Note that for illustrative purposes, the enum values were expanded in this example.
+/// It would also be valid to use the shorthand, just specifying the values:
+/// `.top`, `.leading`, `.trailing`, and `.bottom`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Edge : Int8, CaseIterable {
 
@@ -5659,6 +5689,28 @@ extension DynamicViewContent {
     case trailing
 
     /// An efficient set of `Edge`s.
+    ///
+    /// Used when multiple edges need to be specified. For example, when setting padding
+    /// on a view:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Text padded on the top and bottom edge.")
+    ///                .padding([Edge.Set.top, Edge.Set.bottom])
+    ///                .border(Color.gray)
+    ///            Text("Unpadded text")
+    ///                .border(Color.yellow)
+    ///        }
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// Note that for illustrative purposes, the enum values were expanded in this example.
+    /// It would also be valid to use the shorthand, just specifying the values:
+    /// `.padding([.top, .bottom])`
     @frozen public struct Set : OptionSet {
 
         /// The element type of the option set.
