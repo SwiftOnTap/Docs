@@ -29737,7 +29737,7 @@ extension View {
     ///     @State var showBanana = false
     ///
     ///     var body: some View {
-    ///         Button("Toggle") { show.toggle() }
+    ///         Button("Toggle") { showBanana.toggle() }
     ///         if showBanana {
     ///             Text("🍌")
     ///                 .animation(.easeInOut)
@@ -29748,6 +29748,8 @@ extension View {
     /// ```
     ///
     /// ### Using withAnimation(_:_:)
+    ///
+    /// ![Slide transition](with-animation-2.gif)
     ///
     /// ```
     /// struct ExplicitTransitionView: View {
@@ -34361,6 +34363,7 @@ extension Widget {
 ///        }
 ///     }
 ///
+/// Learn more about how to create a widget via the `Widget` documentation.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -34770,11 +34773,97 @@ public struct WindowGroup<Content> : Scene where Content : View {
     public typealias Body = Never
 }
 
-/// Returns the result of recomputing the view's body with the provided
-/// animation.
+/// Creates a view animation.
 ///
 /// This function sets the given `Animation` as the `Transaction/animation`
 /// property of the thread's current `Transaction`.
+///
+/// `withAnimation(_:_:)` executes the code in it's closure, and displays the results of that execution according to the provided animation.
+///
+/// For example, use `withAnimation(_:_:)` to animate a toggle. Here, the action on the view is the `showBanana.toggle()`. Now, by using `withAnimation(_:_:)` the results of that action will be animated according to `.easeInOut`.
+///
+/// ![Toggle Animation](with-animation-2.gif)
+///
+/// ```
+/// struct ExplicitTransitionView: View {
+///     @State var showBanana = false
+///
+///     var body: some View {
+///         Button("Toggle") {
+///             withAnimation(.easeInOut) { showBanana.toggle() }
+///         }
+///         if showBanana {
+///             Text("🍌")
+///                 .transition(.slide)
+///         }
+///     }
+/// }
+/// ```
+///
+/// Or use `withAnimation(_:_)` for a shake effect, like so:
+///
+/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var numberOfShakes: CGFloat = 0
+///
+///     var body: some View {
+///         VStack {
+///             Text("Banana🍌🍌")
+///                 .font(.largeTitle)
+///                 .modifier(ShakeEffect(shakeNumber: numberOfShakes))
+///                 .onAppear {
+///                     withAnimation(.easeIn(duration: 2.0)) {
+///                         numberOfShakes = 10
+///                     }
+///                 }
+///         }
+///     }
+/// }
+///
+/// struct ShakeEffect: AnimatableModifier {
+///     var shakeNumber: CGFloat = 0
+///
+///     var animatableData: CGFloat {
+///         get {
+///             shakeNumber
+///         } set {
+///             shakeNumber = newValue
+///         }
+///     }
+///
+///     func body(content: Content) -> some View {
+///         content
+///             .offset(x: sin(shakeNumber * .pi * 2) * 10)
+///     }
+/// }
+/// ```
+///
+/// Alter the duration of your animation as follows:
+///
+/// ![Animation Basic](with-animation-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State private var opacity = 0.0
+///
+///     var body: some View {
+///         Button("Cloud the Banana") {
+///             withAnimation(.easeIn(duration: 4.0)) {
+///                 opacity += 1.0
+///             }
+///         }
+///         .padding()
+///
+///         ZStack {
+///             Text("🍌🍌")
+///             Text("☁️☁️☁️☁️")
+///                 .opacity(opacity)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { }
 
