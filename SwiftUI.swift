@@ -29008,16 +29008,19 @@ extension View {
     /// edges of the view. For example, you can add padding of specific amounts
     /// to specified edges of a view:
     ///
-    ///     VStack {
-    ///         Text("20 point padding on the left and bottom edges.")
-    ///             .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 0))
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("20 point padding on the left and bottom edges.")
+    ///                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 0))
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing padding added to leading/bottom edge
-    /// insets.](SwiftUI-View-padding-insets.png)
+    /// }
+    /// ```
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// `View/padding(_:_:)`. To pad all outside edges of a view with an
@@ -29038,16 +29041,19 @@ extension View {
     /// an `OptionSet` describing which edges should be padded. For example you
     /// can add padding to the bottom of a text view:
     ///
-    ///     VStack {
-    ///         Text("Text padded on the bottom edge.")
-    ///             .padding(.bottom)
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text padded on the bottom edge.")
+    ///                 .padding(.bottom)
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing padding added to the view's bottom
-    /// edge.](SwiftUI-View-padding-2.png)
+    /// }
+    /// ```
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
     /// the edges of the view, see `View/padding(_:)-6pgqq`. To pad all
@@ -29070,16 +29076,19 @@ extension View {
     /// Use `padding(_:)` to add a specific amount of padding around all edges
     /// of the view.
     ///
-    ///     VStack {
-    ///         Text("Text padded by 10 points on each edge.")
-    ///             .padding(10.0)
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text padded by 10 points on each edge.")
+    ///                 .padding(10.0)
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing 10 points of padding to all
-    /// edges.](SwiftUI-View-padding-1.png)
+    /// }
+    /// ```
     ///
     /// - Parameter length: The amount to pad this view on each edge.
     ///
