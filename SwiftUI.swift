@@ -122,10 +122,10 @@ import os.signpost
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ObservableObject : AnyObject {
-    
+
     /// The type of publisher that emits before the object has changed.
     associatedtype ObjectWillChangePublisher : Publisher = ObservableObjectPublisher where Self.ObjectWillChangePublisher.Failure == Never
-    
+
     /// A publisher that emits before the object has changed.
     var objectWillChange: Self.ObjectWillChangePublisher { get }
 }
@@ -1777,13 +1777,6 @@ extension App {
 /// ``View/defaultAppStorage()`` for ``View``s to learn more about
 /// setting the default app storage location for a view.
 ///
-/// There are 6 possible app storage types, and 6 corresponding initializers:
-/// 1. `Bool`
-/// 2. `Int`
-/// 3. `Double`
-/// 4. `String`
-/// 5. `URL`
-/// 6. `Data`
 ///
 /// Below shows a simple example using a `String`.
 ///
@@ -7336,8 +7329,41 @@ public struct DropProposal {
 /// An interface for a stored variable that updates an external property of a
 /// view.
 ///
+/// This protocol is the one that all the data property wrappers implement:
+/// - ``State``
+/// - ``Binding``
+/// - ``ObservedObject``
+/// - ``EnvironmentObject``
+/// - ``Environment``
+/// - ``FetchRequest``
+/// - ``GestureState``
+///
 /// The view gives values to these properties prior to recomputing the view's
 /// `View/body-swift.property`.
+///
+/// You will rarely implement this protocol yourself. However, if you do,
+/// It would look something like this:
+///
+///     var globalLoadCount = 0
+///
+///     struct CustomProperty: DynamicProperty {
+///         var localLoadCount = 0
+///         mutating func update() {
+///             globalLoadCount += 1
+///             localLoadCount = globalLoadCount
+///         }
+///     }
+///
+///     struct ContentView: View {
+///         @State private var reloadSwitch = false
+///         var customProperty = CustomProperty()
+///
+///         var body: some View {
+///             Text("Load count: \(customProperty.localLoadCount)")
+///                 .font(reloadSwitch ? .title : .body)
+///             Button("RELOAD ❗️") { reloadSwitch.toggle() }
+///         }
+///     }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol DynamicProperty{ }
 extension DynamicProperty {
@@ -7347,6 +7373,30 @@ extension DynamicProperty {
     /// SwiftUI calls this function before rending a view's
     /// `View/body-swift.property` to ensure the view has the most recent
     /// value.
+    ///
+    /// You will rarely implement this protocol yourself. However, if you do,
+    /// It would look something like this:
+    ///
+    ///     var globalLoadCount = 0
+    ///
+    ///     struct CustomProperty: DynamicProperty {
+    ///         var localLoadCount = 0
+    ///         mutating func update() {
+    ///             globalLoadCount += 1
+    ///             localLoadCount = globalLoadCount
+    ///         }
+    ///     }
+    ///
+    ///     struct ContentView: View {
+    ///         @State private var reloadSwitch = false
+    ///         var customProperty = CustomProperty()
+    ///
+    ///         var body: some View {
+    ///             Text("Load count: \(customProperty.localLoadCount)")
+    ///                 .font(reloadSwitch ? .title : .body)
+    ///             Button("RELOAD ❗️") { reloadSwitch.toggle() }
+    ///         }
+    ///     }
     mutating func update() { }
 }
 
@@ -7358,6 +7408,30 @@ extension DynamicProperty {
     /// SwiftUI calls this function before rending a view's
     /// `View/body-swift.property` to ensure the view has the most recent
     /// value.
+    ///
+    /// You will rarely implement this protocol yourself. However, if you do,
+    /// It would look something like this:
+    ///
+    ///     var globalLoadCount = 0
+    ///
+    ///     struct CustomProperty: DynamicProperty {
+    ///         var localLoadCount = 0
+    ///         mutating func update() {
+    ///             globalLoadCount += 1
+    ///             localLoadCount = globalLoadCount
+    ///         }
+    ///     }
+    ///
+    ///     struct ContentView: View {
+    ///         @State private var reloadSwitch = false
+    ///         var customProperty = CustomProperty()
+    ///
+    ///         var body: some View {
+    ///             Text("Load count: \(customProperty.localLoadCount)")
+    ///                 .font(reloadSwitch ? .title : .body)
+    ///             Button("RELOAD ❗️") { reloadSwitch.toggle() }
+    ///         }
+    ///     }
     public mutating func update() { }
 }
 
@@ -21446,6 +21520,27 @@ extension ScenePhase : Hashable {
 /// If the `Scene` is explictly destroyed (e.g. the switcher snapshot is
 /// destroyed on iPadOS or the window is closed on macOS), the data is also
 /// destroyed. Do not use `SceneStorage` with sensitive data.
+///
+/// If you would like your data to be stored permanently in the device,
+/// use ``AppStorage`` instead.
+///
+/// There are 6 possible scene storage types, and 6 corresponding initializers:
+/// 1. `Bool`
+/// 2. `Int`
+/// 3. `Double`
+/// 4. `String`
+/// 5. `URL`
+/// 6. `Data`
+///
+/// Here is a simple example using the common property wrapper syntax:
+///
+///     struct ContentView: View {
+/// 		@Scenestorage("name") private var name = "Javier"
+///
+/// 		var body: some View {
+/// 			TextField(name, text: $name)
+/// 		}
+/// 	}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct SceneStorage<Value> : DynamicProperty {
 
@@ -21453,12 +21548,32 @@ extension ScenePhase : Hashable {
     ///
     /// This works identically to `State.wrappedValue`.
     ///
+    /// This is rarely used directly. Instead, you normally use the property wrapper syntax:
+	///
+	///     struct ContentView: View {
+    /// 		@SceneStorage("name") var name: String = "Javier"
+    ///
+    /// 		var body: some View {
+    /// 			TextField(name, text: $name)
+    /// 		}
+    /// 	}
+    ///
     /// - SeeAlso: State.wrappedValue
     public var wrappedValue: Value { get nonmutating set }
 
     /// A binding to the state value.
     ///
     /// This works identically to `State.projectedValue`.
+    ///
+    /// You can access this using the $ prefix:
+    ///
+    /// 	struct ContentView: View {
+    /// 		@SceneStorage("name") var name: String = "Javier"
+    ///
+    /// 		var body: some View {
+    /// 			TextField(name, text: $name)
+    /// 		}
+    /// 	}
     ///
     /// - SeeAlso: State.projectedValue
     public var projectedValue: Binding<Value> { get }
@@ -21469,12 +21584,28 @@ extension SceneStorage {
 
     /// Creates a property that can save and restore a boolean.
     ///
+    /// 	struct ContentView: View {
+    /// 		@SceneStorage("airplane-mode") var on: Bool = false
+    ///
+    /// 		var body: some View {
+    /// 			Toggle("Airplane Mode", isOn: $on)
+    /// 		}
+    /// 	}
+    ///
     /// - Parameter wrappedValue: The default value if a boolean is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
     public init(wrappedValue: Value, _ key: String) where Value == Bool { }
 
     /// Creates a property that can save and restore an integer.
+    ///
+    /// 	struct ContentView: View {
+    /// 		@SceneStorage("donuts") var count: Int = 0
+    ///
+    /// 		var body: some View {
+    /// 			Stepper("🍩 count: \(count)", value: $count)
+    /// 		}
+    /// 	}
     ///
     /// - Parameter wrappedValue: The default value if an integer is not
     ///   available for the given key.
@@ -21483,12 +21614,29 @@ extension SceneStorage {
 
     /// Creates a property that can save and restore a double.
     ///
+    /// 	struct ContentView: View {
+    /// 		@AppStorage("brightness") var level: Double = 0
+    ///
+    /// 		var body: some View {
+    /// 			Text("🔆 \(level)")
+    ///             Slider(value: $level)
+    /// 		}
+    /// 	}
+    ///
     /// - Parameter wrappedValue: The default value if a double is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
     public init(wrappedValue: Value, _ key: String) where Value == Double { }
 
     /// Creates a property that can save and restore a string.
+    ///
+    ///     struct ContentView: View {
+    /// 		@SceneStorage("name") var name: String = "Javier"
+    ///
+    /// 		var body: some View {
+    /// 			TextField(name, text: $name)
+    /// 		}
+    /// 	}
     ///
     /// - Parameter wrappedValue: The default value if a string is not available
     ///   for the given key.
@@ -21497,12 +21645,39 @@ extension SceneStorage {
 
     /// Creates a property that can save and restore a URL.
     ///
+    ///     struct ContentView: View {
+    /// 		@SceneStorage("site") var url = URL(string: "bananadocs.org")!
+    ///
+    /// 		var body: some View {
+    /// 			Text("Check out \(url)")
+    /// 		}
+    /// 	}
+    ///
     /// - Parameter wrappedValue: The default value if a URL is not available
     ///   for the given key.
     /// - Parameter key: a key used to save and restore the value.
     public init(wrappedValue: Value, _ key: String) where Value == URL { }
 
     /// Creates a property that can save and restore data.
+    ///
+    ///     struct Human: Codable {
+    ///         var name: String
+    ///         var age: Int
+    ///     }
+    ///
+    //      struct ContentView: View {
+    ///         @SceneStorage("goat") var person = Data()
+    ///
+    ///         var body: some View {
+    ///             Button("Make Aaron the 🐐") {
+    ///                 let aaron = Human(name: "Aaron", age: 21)
+    ///                 let aaronData = try! JSONEncoder().encode(aaron)
+    ///
+    ///                 person = aaronData
+    ///                 print("success.")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// Avoid storing large data blobs, such as image data, as it can negatively
     /// affect performance of your app.
@@ -21524,7 +21699,14 @@ extension SceneStorage {
     ///    }
     ///    struct MyView: View {
     ///        @SceneStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View { ... }
+    ///
+    ///        var body: some View {
+    ///             Picker("Choose!", selection: $value) {
+    ///                 Text("a").tag(MyEnum.a)
+    ///                 Text("b").tag(MyEnum.b)
+    ///                 Text("c").tag(MyEnum.c)
+    ///             }
+    ///         }
     ///    }
     ///
     /// - Parameter wrappedValue: The default value if an integer value is not
@@ -21543,8 +21725,15 @@ extension SceneStorage {
     ///        case c
     ///    }
     ///    struct MyView: View {
-    ///        @SceneStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View { ... }
+    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
+    ///
+    ///        var body: some View {
+    ///             Picker("Choose!", selection: $value) {
+    ///                 Text("a").tag(MyEnum.a)
+    ///                 Text("b").tag(MyEnum.b)
+    ///                 Text("c").tag(MyEnum.c)
+    ///             }
+    ///         }
     ///    }
     ///
     /// - Parameter wrappedValue: The default value if a String value is not
@@ -21560,12 +21749,30 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value
     ///
+    /// 	struct ContentView: View {
+    /// 		@SceneStorage("airplane-mode") var on: Bool?
+    ///
+    /// 		var body: some View {
+    /// 			Button("on") { on = true }
+    ///             Button("off") { on = false }
+    /// 		}
+    /// 	}
+    ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Bool? { }
 
     /// Creates a property that can save and restore an Optional integer.
     ///
     /// Defaults to nil if there is no restored value
+    ///
+    /// 	struct ContentView: View {
+    /// 		@SceneStorage("donuts") var count: Int?
+    ///
+    /// 		var body: some View {
+    /// 			Button("none ☹️") { count = 0 }
+    ///             Button("LOTS 🍩") { count = 100 }
+    /// 		}
+    /// 	}
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Int? { }
@@ -21574,12 +21781,29 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value
     ///
+    /// 	struct ContentView: View {
+    /// 		@SceneStorage("brightness") var level: Double?
+    ///
+    /// 		var body: some View {
+    /// 			Button("MAX 🔆") { level = 1.0 }
+    ///             Button("min 🔅") { level = 0.0 }
+    /// 		}
+    /// 	}
+    ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Double? { }
 
     /// Creates a property that can save and restore an Optional string.
     ///
     /// Defaults to nil if there is no restored value
+    ///
+    ///     struct ContentView: View {
+    /// 		@SceneStorage("name") var name: String?
+    ///
+    /// 		var body: some View {
+    /// 			Button("Save 🐐") { name = "Javier" }
+    /// 		}
+    /// 	}
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == String? { }
@@ -21588,12 +21812,39 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value
     ///
+    ///     struct ContentView: View {
+    /// 		@SceneStorage("site") var url: URL?
+    ///
+    /// 		var body: some View {
+    /// 			Text("Save the 🍌") { url = URL(string: "bananadocs.org" }
+    /// 		}
+    /// 	}
+    ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == URL? { }
 
     /// Creates a property that can save and restore an Optional data.
     ///
     /// Defaults to nil if there is no restored value
+    ///
+    ///     struct Human: Codable {
+    ///         var name: String
+    ///         var age: Int
+    ///     }
+    ///
+    //      struct ContentView: View {
+    ///         @SceneStorage("goat") var person: Data?
+    ///
+    ///         var body: some View {
+    ///             Button("Make Aaron the 🐐") {
+    ///                 let aaron = Human(name: "Aaron", age: 21)
+    ///                 let aaronData = try! JSONEncoder().encode(aaron)
+    ///
+    ///                 person = aaronData
+    ///                 print("success.")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Data? { }
@@ -22120,17 +22371,90 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 
 /// A 2D shape that you can use when drawing a view.
 ///
-/// Shapes without an explicit fill or stroke get a default fill based on the
-/// foreground color.
+/// This procol inherits from the ``View`` protocol, so all shapes can be
+/// used just like any other view. However, there are many default methods
+/// that shapes have which views do not.
 ///
-/// You can define shapes in relation to an implicit frame of reference, such as
-/// the natural size of the view that contains it. Alternatively, you can define
-/// shapes in terms of absolute coordinates.
+/// ### Creating your own shape
+///
+/// The only requirement of conforming to the shape protocol is implementing
+/// the ``Shape/path(in:)`` method. This method passes in the shape's
+/// bounding rectangle, and expects a ``Path`` object in return.
+///
+/// The most simple example of creating your own shape is a rectangle
+/// that looks like this:
+///
+/// ```
+/// struct SimplestShapeView: View {
+///     var body: some View {
+///         RectangleShape()
+///     }
+/// }
+///
+/// struct RectangleShape: Shape {
+///     func path(in rect: CGRect) -> Path {
+///         return Path(rect)
+///     }
+/// }
+/// ```
+///
+/// For more info on how to create a path from a bounding rectangle,
+/// check out the ``Path`` structure.
+///
+/// ### Using a pre-defined shape
+///
+/// In addition to the ability to create your own shape, there are also
+/// many pre-defined shapes for you to use:
+/// 1. ``Capsule``
+/// 2. ``Circle``
+/// 3. ``ContainerRelativeShape``
+/// 4. ``Ellipse``
+/// 5. ``OffsetShape``
+/// 6. ``Path``
+/// 7. ``Rectangle``
+/// 8. ``RoundedRectangle``
+///
+/// Example usage would look like this:
+///
+/// ```
+/// struct PillView: View {
+///     var body: some View {
+///         Capsule()
+///     }
+/// }
+/// ```
+///
+/// Check out these shapes directly for more info on how to use them.
+///
+/// In general, while view modifiers can be applied to shapes, note that
+/// applying a view modifier will return a ``View`` rather than a shape.
+/// Whenever possible, try to use shape modifiers instead of
+/// view modifiers to accomplish the same tasks with your shapes.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol Shape : Animatable, View{ }
+public protocol Shape : Animatable, View { }
 extension Shape : Animatable, View {
 
     /// Describes this shape as a path within a rectangular frame of reference.
+    ///
+    /// This is the only requirement of conforming to the ``Shape`` protocol.
+    /// Implement this method to create your own shapes.
+    ///
+    /// Check out ``Path`` more more info on how to create a path from
+    /// the rectangle parameter.
+    ///
+    /// ```
+    /// struct SimplestShapeView: View {
+    ///     var body: some View {
+    ///         RectangleShape()
+    ///     }
+    /// }
+    ///
+    /// struct RectangleShape: Shape {
+    ///     func path(in rect: CGRect) -> Path {
+    ///         return Path(rect)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
@@ -22156,21 +22480,27 @@ extension Shape {
     /// only three quarters of the full shape. That is, of the two lobes of the
     /// symbol, one lobe is complete and the other is half complete.
     ///
-    ///     Path { path in
-    ///         path.addLines([
-    ///             .init(x: 2, y: 1),
-    ///             .init(x: 1, y: 0),
-    ///             .init(x: 0, y: 1),
-    ///             .init(x: 1, y: 2),
-    ///             .init(x: 3, y: 0),
-    ///             .init(x: 4, y: 1),
-    ///             .init(x: 3, y: 2),
-    ///             .init(x: 2, y: 1)
-    ///         ])
+    /// ```
+    /// struct TrimmedPathView: View {
+    ///     var body: some View {
+    ///         Path { path in
+    ///             path.addLines([
+    ///                 .init(x: 2, y: 1),
+    ///                 .init(x: 1, y: 0),
+    ///                 .init(x: 0, y: 1),
+    ///                 .init(x: 1, y: 2),
+    ///                 .init(x: 3, y: 0),
+    ///                 .init(x: 4, y: 1),
+    ///                 .init(x: 3, y: 2),
+    ///                 .init(x: 2, y: 1)
+    ///             ])
+    ///         }
+    ///         .trim(from: 0.25, to: 1.0)
+    ///         .scale(50, anchor: .topLeading)
+    ///         .stroke(Color.black, lineWidth: 3)
     ///     }
-    ///     .trim(from: 0.25, to: 1.0)
-    ///     .scale(50, anchor: .topLeading)
-    ///     .stroke(Color.black, lineWidth: 3)
+    /// }
+    /// ```
     ///
     /// Changing the parameters of `trim(from:to:)` to
     /// `.trim(from: 0, to: 1)` draws the full infinity symbol, while
@@ -22196,12 +22526,16 @@ extension Shape {
     /// positioned on top of the first circle and offset by 100 points to the
     /// left and 50 points below.
     ///
-    ///     Circle()
-    ///     .overlay(
+    /// ```
+    /// struct OffsetCircleView: View {
+    ///     var body: some View {
     ///         Circle()
-    ///         .offset(CGSize(width: -100, height: 50))
-    ///         .stroke()
-    ///     )
+    ///             .overlay(Circle()
+    ///                 .offset(CGSize(width: -100, height: 50))
+    ///                 .stroke())
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -22217,12 +22551,16 @@ extension Shape {
     /// positioned on top of the first circle and offset by 100 points to the
     /// left and 50 points below.
     ///
-    ///     Circle()
-    ///     .overlay(
+    /// ```
+    /// struct OffsetCircleView: View {
+    ///     var body: some View {
     ///         Circle()
-    ///         .offset(CGPoint(x: -100, y: 50))
-    ///         .stroke()
-    ///     )
+    ///             .overlay(Circle()
+    ///                 .offset(CGPoint(x: -100, y: 50))
+    ///                 .stroke())
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -22238,12 +22576,16 @@ extension Shape {
     /// positioned on top of the first circle and offset by 100 points to the
     /// left and 50 points below.
     ///
-    ///     Circle()
-    ///     .overlay(
+    /// ```
+    /// struct OffsetCircleView: View {
+    ///     var body: some View {
     ///         Circle()
-    ///         .offset(x: -100, y: 50)
-    ///         .stroke()
-    ///     )
+    ///             .overlay(Circle()
+    ///                 .offset(x: -100, y: 50)
+    ///                 .stroke())
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - x: The horizontal amount, in points, by which you offset the shape.
@@ -22261,6 +22603,18 @@ extension Shape {
     /// dimension's size when set to `0.5`, maintain their existing size when
     /// set to `1`, double their size when set to `2`, and so forth.
     ///
+    /// ```
+    /// struct ScaledCircleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Circle()
+    ///             Circle()
+    //                  .scale(x: 1.3, y: 1.2, anchor: .center)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///   - x: The multiplication factor used to resize this shape along its
     ///     x-axis.
@@ -22271,6 +22625,18 @@ extension Shape {
     @inlinable public func scale(x: CGFloat = 1, y: CGFloat = 1, anchor: UnitPoint = .center) -> ScaledShape<Self> { }
 
     /// Scales this shape without changing its bounding frame.
+    ///
+    /// ```
+    /// struct ScaledCircleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Circle()
+    ///             Circle()
+    //                  .scale(1.2, anchor: .center)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter scale: The multiplication factor used to resize this shape.
     ///   A value of `0` scales the shape to have no size, `0.5` scales to half
@@ -22285,9 +22651,15 @@ extension Shape {
     /// The following example rotates a square by 45 degrees to the right to
     /// create a diamond shape:
     ///
-    ///     RoundedRectangle(cornerRadius: 10)
-    ///     .rotation(Angle(degrees: 45))
-    ///     .aspectRatio(1.0, contentMode: .fit)
+    /// ```
+    /// struct RotatedRectView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .rotation(Angle(degrees: 45))
+    ///             .aspectRatio(1.0, contentMode: .fit)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - angle: The angle of rotation to apply. Positive angles rotate
@@ -22302,6 +22674,20 @@ extension Shape {
     /// Affine transforms present a mathematical approach to applying
     /// combinations of rotation, scaling, translation, and skew to shapes.
     ///
+    /// Check out Apple's [docs](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
+    /// on `CGAffineTransform` to learn more about
+    /// the parameter.
+    ///
+    /// ```
+    /// struct TransformedRectView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .transform(CGAffineTransform(a: 1, b: 0, c: 0.5, d: 1, tx: 0, ty: 0))
+    ///             .frarme(width: 100, height: 100)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter transform: The affine transformation matrix to apply to this
     ///   shape.
     ///
@@ -22312,17 +22698,51 @@ extension Shape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Shape {
 
-    /// Returns a new version of self representing the same shape, but
-    /// that will ask it to create its path from a rect of `size`. This
-    /// does not affect the layout properties of any views created from
-    /// the shape (e.g. by filling it).
+    /// Changes the shape's size from a CGSize.
+    ///
+    /// This method will pass the required
+    /// ``Shape/path(in:)`` function an updated rectangle.
+    /// If you would prefer not to change the passed in rectangle,
+    /// use ``Shape/scale(x:y:anchor:)`` function instead.
+    ///
+    /// This is similar the ``View/frame(width:height:)`` modifier
+    /// from ``View``, except this returns a ``Shape``.
+    ///
+    /// ```
+    /// struct SquareView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .size(CGSize(width: 100, height: 100))
+    ///     }
+    /// }
+    // ```
+    ///
+    /// - Parameter size: The new rectangle size.
     @inlinable public func size(_ size: CGSize) -> some Shape { }
 
 
-    /// Returns a new version of self representing the same shape, but
-    /// that will ask it to create its path from a rect of size
-    /// `(width, height)`. This does not affect the layout properties
-    /// of any views created from the shape (e.g. by filling it).
+    /// Changes the shape's size from a width and height.
+    ///
+    /// This method will pass the required
+    /// ``Shape/path(in:)`` function an updated rectangle.
+    /// If you would prefer not to change the passed in rectangle,
+    /// use ``Shape/scale(x:y:anchor:)`` function instead.
+    ///
+    /// This is similar the ``View/frame(width:height:)`` modifier
+    /// from ``View``, except this returns a ``Shape``.
+    ///
+    /// ```
+    /// struct SquareView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .size(width: 100, height: 100)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - width: The shape's new bounding rectangle width.
+    ///   - height: The shape's new bounding rectangle height.
     @inlinable public func size(width: CGFloat, height: CGFloat) -> some Shape { }
 
 }
@@ -22332,14 +22752,45 @@ extension Shape {
 
     /// Fills this shape with a color or gradient.
     ///
+    /// Use this method to fill a shape with any ``ShapeStyle``.
+    ///
+    /// See ``FillStyle`` for more info on the `style` parameter of this
+    /// method.
+    ///
+    /// ```
+    /// struct TwoCirclesView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .fill(Color.pink, style: FillStyle(eoFill: true, antialiased: true))
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///   - content: The color or gradient to use when filling this shape.
     ///   - style: The style options that determine how the fill renders.
+    ///
     /// - Returns: A shape filled with the color or gradient you supply.
     @inlinable public func fill<S>(_ content: S, style: FillStyle = FillStyle()) -> some View where S : ShapeStyle { }
 
 
     /// Fills this shape with the foreground color.
+    ///
+    /// Use this method to fill a shape with the foreground color
+    /// of the view.
+    ///
+    /// See ``FillStyle for more info on the `style` parameter of this
+    /// method.
+    ///
+    /// ```
+    /// struct TwoCirclesView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .fill(style: FillStyle(eoFill: true, antialiased: true))
+    ///             .foregroundColor(.pink)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter style: The style options that determine how the fill
     ///   renders.
@@ -22349,39 +22800,61 @@ extension Shape {
 
     /// Traces the outline of this shape with a color or gradient.
     ///
+    /// Use this method to add a border to a shape.
+    ///
+    /// See ``ShapeStyle`` for more info on the stroke content parameter.
+    ///
+    /// See ``StrokeStyle`` for more info on how to customize the stroke.
+    ///
     /// The following example adds a dashed purple stroke to a `Capsule`:
     ///
-    ///     Capsule()
-    ///     .stroke(
-    ///         Color.purple,
-    ///         style: StrokeStyle(
-    ///             lineWidth: 5,
-    ///             lineCap: .round,
-    ///             lineJoin: .miter,
-    ///             miterLimit: 0,
-    ///             dash: [5, 10],
-    ///             dashPhase: 0
-    ///         )
-    ///     )
+    /// ```
+    /// struct StrokedCapsuleView: View {
+    ///     let style = StrokeStyle(lineWidth: 5,
+    ///                             lineCap: .round,
+    ///                             lineJoine: .miter,
+    ///                             miterLimit: 0,
+    ///                             dash: [5, 10],
+    ///                             dashPhase: 0)
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .stroke(Color.purple, style: style)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - content: The color or gradient with which to stroke this shape.
     ///   - style: The stroke characteristics --- such as the line's width and
     ///     whether the stroke is dashed --- that determine how to render this
     ///     shape.
+    ///
     /// - Returns: A stroked shape.
     @inlinable public func stroke<S>(_ content: S, style: StrokeStyle) -> some View where S : ShapeStyle { }
 
 
     /// Traces the outline of this shape with a color or gradient.
     ///
+    /// See ``ShapeStyle`` for more info on the stroke content parameter.
+    ///
+    /// To customize the stroke style, use
+    /// ``Shape/stroke(_:style:)`` instead.
+    ///
     /// The following example draws a circle with a purple stroke:
     ///
-    ///     Circle().stroke(Color.purple, lineWidth: 5)
+    /// ```
+    /// struct StrokedCircleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .stroke(Color.purple, lineWidth: 5)
+    ///     }
+    /// }
+    /// ```
     ///
-    /// - Parameters:
-    ///   - content: The color or gradient with which to stroke this shape.
-    ///   - lineWidth: The width of the stroke that outlines this shape.
+    /// - Parameters style: The stroke characteristics --- such as the line's width and
+    /// whether the stroke is dashed --- that determine how to render this
+    /// shape.
+    ///
     /// - Returns: A stroked shape.
     @inlinable public func stroke<S>(_ content: S, lineWidth: CGFloat = 1) -> some View where S : ShapeStyle { }
 
@@ -22399,14 +22872,56 @@ extension Shape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Shape {
 
-    /// Returns a new shape that is a stroked copy of `self`, using the
-    /// contents of `style` to define the stroke characteristics.
+    /// Traces the outline of this shape with the view's foreground color.
+    ///
+    /// Use this method to stroke a shape with the foreground color specified
+    /// in the view.
+    ///
+    /// To customize the stroke style, use
+    /// ``Shape/stroke(_:style:)`` instead.
+    ///
+    /// The following example draws a circle with a purple stroke:
+    ///
+    /// ```
+    /// struct StrokedCapsuleView: View {
+    ///     let style = StrokeStyle(lineWidth: 5,
+    ///                             lineCap: .round,
+    ///                             lineJoine: .miter,
+    ///                             miterLimit: 0,
+    ///                             dash: [5, 10],
+    ///                             dashPhase: 0)
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .stroke(style: style)
+    ///             .foregroundColor(.purple)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - content: The color or gradient with which to stroke this shape.
+    ///   - lineWidth: The width of the stroke that outlines this shape.
+    ///
+    /// - Returns: A stroked shape.
     @inlinable public func stroke(style: StrokeStyle) -> some Shape { }
 
 
-    /// Returns a new shape that is a stroked copy of `self` with
-    /// line-width defined by `lineWidth` and all other properties of
-    /// `StrokeStyle` having their default values.
+    /// Traces the outline of this shape with the view's foreground color.
+    ///
+    /// Use this method to stroke a shape with the foreground color specified
+    /// in the view.
+    ///
+    /// The following example draws a circle with a purple stroke:
+    ///
+    /// ```
+    /// struct StrokedCapsuleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .stroke(lineWidth: 5)
+    ///             .foregroundColor(.purple)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func stroke(lineWidth: CGFloat = 1) -> some Shape { }
 
 }
