@@ -13298,6 +13298,21 @@ extension LegibilityWeight {
 
 /// A linear gradient.
 ///
+/// ![Rectangle Example](rounded-rectangle.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(LinearGradient(
+///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+///                     startPoint: .leading,
+///                     endPoint: .trailing))
+///             .padding()
+///     }
+/// }
+/// ```
+///
 /// The gradient applies the color function along an axis, as defined by its
 /// start and end points. The gradient maps the unit-space points into the
 /// bounding rectangle of each shape filled with the gradient.
@@ -32837,20 +32852,50 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Masks this view using the alpha channel of the given view.
+    /// Mask one view on top of another.
     ///
-    /// Use `mask(_:)` when you want to apply the alpha (opacity) value of
-    /// another view to the current view.
+    /// Applying the `mask(_:)` modifier will make the modified view fully transparent, except for those pixels which overlap with the masked view.
     ///
-    /// This example shows an image masked by rectangle with a 10% opacity:
+    /// For example, without a mask, the following view renders as a normal rectangle:
     ///
-    ///     Image(systemName: "envelope.badge.fill")
-    ///         .foregroundColor(Color.blue)
-    ///         .font(.system(size: 128, weight: .regular))
-    ///         .mask(Rectangle().opacity(0.1))
+    /// ![Rectangle Example](rounded-rectangle.png)
     ///
-    /// ![A screenshot of a view masked by a rectangle with 10%
-    /// opacity.](SwiftUI-View-mask.png)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Now if we apply a mask on a text view, we get the following result:
+    ///
+    /// ![Mask Example](mask-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .mask(TextView())
+    ///             .padding()
+    ///     }
+    /// }
+    ///
+    /// struct TextView: View {
+    ///     var body: some View {
+    ///         Text("Bananas are our favorite fruit.").font(.title).fontWeight(.bold)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter mask: The view whose alpha the rendering system applies to
     ///   the specified view.
