@@ -122,10 +122,10 @@ import os.signpost
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ObservableObject : AnyObject {
-    
+
     /// The type of publisher that emits before the object has changed.
     associatedtype ObjectWillChangePublisher : Publisher = ObservableObjectPublisher where Self.ObjectWillChangePublisher.Failure == Never
-    
+
     /// A publisher that emits before the object has changed.
     var objectWillChange: Self.ObjectWillChangePublisher { get }
 }
@@ -10282,8 +10282,22 @@ extension Font.Leading : Equatable {
 extension Font.Leading : Hashable {
 }
 
-/// A structure that computes views on demand from an underlying collection of
-/// of identified data.
+/// Creates views from a collection of identified data.
+///
+/// ForEach supports three identifiers:
+/// * `ForEach/init(_:content:)-ed9f4`, for iterating over a range
+/// * `ForEach/init(_:content:)-72c77`, for iterating over data that conforms to identifiable
+/// * `ForEach/init(_:id:content:)` for iterating over that can be identified, but does not conform to identifiable
+///
+/// ### Iterating over a range
+/// [[foreach-fixed-range]]
+///
+/// ### Iterating over `Identifiable` data
+/// [[foreach-identifiable-content]]
+///
+/// ### Explicitly identifying data
+/// [[foreach-dynamic-content]]
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ForEach<Data, ID, Content> where Data : RandomAccessCollection, ID : Hashable {
 
@@ -10313,10 +10327,43 @@ extension ForEach : View where Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Identifiable {
 
-    /// Creates an instance that uniquely identifies and creates views across
-    /// updates based on the identity of the underlying data.
+    /// Creates a view from data that conforms to `Identifiable`.
+    /// [foreach-identifiable-content ->]
+    /// If your data does not conform to identifiable, use `ForEach/init(_:id:content)`.
     ///
-    /// It's important that the `id` of a data element doesn't change unless you
+    /// Note: if your data does not conform to identifiable you will receive the following error:
+    ///
+    /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform to 'Identifiable`
+    ///
+    /// An array of primitive types, such as strings & ints, will throw this error. Identify these items with `id: \.self` – because they themselves can be used as the identifiable object. See more in `ForEach/init(_:id:content)`.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [Fruit] = [
+    ///         Fruit(emoji: "🍌🍌", name: "Banana"),
+    ///         Fruit(emoji: "🍑🍑", name: "Peach"),
+    ///         Fruit(emoji: "🍎🍎", name: "Apple")
+    ///     ]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits) { fruit in
+    ///             HStack {
+    ///                 Text(fruit.name + fruit.emoji)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct Fruit: Identifiable {
+    ///     var emoji: String
+    ///     var name: String
+    ///     //  Create a unique ID for our object
+    ///     //  This idea allows Fruit to conform to Identifiable
+    ///     let id = UUID()
+    /// }
+    /// ```
+    /// [<-]
+    /// Note:  It's important that the `id` of a data element doesn't change unless you
     /// replace the data element with a new data element that has a new
     /// identity. If the `id` of a data element changes, the content view
     /// generated from that data element loses any current state and animations.
@@ -10331,11 +10378,82 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where Content : View {
 
-    /// Creates an instance that uniquely identifies and creates views across
-    /// updates based on the provided key path to the underlying data's
-    /// identifier.
+    /// Creates an instance that uniquely identifies and computes views.
+    /// [foreach-dynamic-content ->]
+    /// For data that does not conform to `Identifiable`, use this initializer.
     ///
-    /// It's important that the `id` of a data element doesn't change, unless
+    /// A very common use case for this initialier is iterating over primitive data, such as strings or ints. In the following example, the fruit string is used as the identifiable unit.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits, id:/\.self) { fruit in
+    ///             HStack {
+    ///                 Text(fruit)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This initializer can also be used with objects that don't conform to `Identifiable`, but have identifiable properties. For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [Fruit] = [
+    ///         Fruit(emoji: "🍌🍌", name: "Banana"),
+    ///         Fruit(emoji: "🍑🍑", name: "Peach"),
+    ///         Fruit(emoji: "🍎🍎", name: "Apple")
+    ///     ]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits, id:/\.emoji) { fruit in
+    ///             HStack {
+    ///                 Text(fruit.name + fruit.emoji)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct Fruit {
+    ///     var emoji: String
+    ///     var name: String
+    /// }
+    /// ```
+    ///
+    /// Notice, this initializer can be used for data that can change. For example:
+    ///
+    /// ![Changing List](foreach.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         Button("New Fruit") {
+    ///             newFruit()
+    ///         }
+    ///
+    ///         ForEach(myFruits, id:\.self) { fruit in
+    ///             HStack {
+    ///                 Text(fruit)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     func newFruit() {
+    ///         let allFruit: [String] = ["🍏🍏", "🍒🍒", "🍓🍓", "🥝🥝", "🥭🥭", "🍊🍊", "🍍🍍"]
+    ///
+    ///         myFruits.append(allFruit.randomElement()!)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// **Note:** This initializer works well for externally loaded data. It enables your app's frontend to automatically reflect data as it arrives.
+    /// [<-]
+    /// **Note:** It's important that the `id` of a data element doesn't change, unless
     /// SwiftUI considers the data element to have been replaced with a new data
     /// element that has a new identity. If the `id` of a data element changes,
     /// then the content view generated from that data element will lose any
@@ -10352,12 +10470,56 @@ extension ForEach where Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 
-    /// Creates an instance that computes views on demand over a given constant
-    /// range.
+    /// Computes views over a given constant range.
+    /// [foreach-fixed-range ->]
+    /// This initializer is ForEach's most trivial. It is analogous to a common for loop.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         ForEach(0..<myFruits.count) { index in
+    ///             HStack {
+    ///                 Text(myFruits[index])
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Notice however, that this view is only rendered once. Therefore, if `myFruits.count` changes, the view will **not update**. For example, clicking `New Fruit` in the following code returns the error:
+    ///
+    /// `ForEach(_:content:) should only be used for *constant* data.`
+    ///
+    /// ```
+    /// struct ErrorView: View {
+    ///     @State var myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         Button("New Fruit") {
+    ///             newFruit()
+    ///         }
+    ///
+    ///         ForEach(0..<myFruits.count) { index in
+    ///             HStack {
+    ///                 Text(myFruits[index])
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     func newFruit() {
+    ///         let allFruit: [String] = ["🍏🍏", "🍒🍒", "🍓🍓", "🥝🥝", "🥭🥭", "🍊🍊", "🍍🍍"]
+    ///
+    ///         myFruits.append(allFruit.randomElement()!)
+    ///     }
+    /// }
+    /// ```
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
     /// demand over a dynamic range, use `ForEach/init(_:id:content:)`.
+    /// [<-]
     ///
     /// - Parameters:
     ///   - data: A constant range.
