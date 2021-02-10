@@ -2417,15 +2417,76 @@ extension Binding : DynamicProperty {
 }
 
 /// Modes for compositing a view with overlapping content.
+///
+/// There are 21 different types of blend modes. To use the following example, drag in the following two photos and label them "ocean" and "space".
+///
+/// ![Ocean](ocean.jpg)
+///
+/// ![Space](space.jpg)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ZStack {
+///             Image("ocean")
+///                 .resizable()
+///                 .scaledToFit()
+///
+///             Image("space")
+///                 .resizable()
+///                 .scaledToFit()
+///                 .blendMode(.softLight)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
 	/// Regular overlapping, with opacity taken into account.
+  ///
+  /// ![Blend Mode](blendmode-normal.png)
+  ///
+  /// ```
+  /// struct ExampleView: View {
+  ///     var body: some View {
+  ///         ZStack {
+  ///             Image("ocean")
+  ///                 .resizable()
+  ///                 .scaledToFit()
+  ///
+  ///             Image("space")
+  ///                 .resizable()
+  ///                 .scaledToFit()
+  ///                 .blendMode(.normal)
+  ///         }
+  ///     }
+  /// }
+  /// ```
     case normal
 
     /// Multiplies the RGB channel numbers (0.0 - 1.0) of each pixel.
     ///
     /// The result is always a darker picture.
+    /// ![Blend Mode](blendmode-multiply.png)
+    ///
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.multiply)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case multiply
 
     /// Each RGB pixel value is inverted (subtracted from 1), multiplied together,
@@ -2440,6 +2501,25 @@ public enum BlendMode {
     ///     func screen(a: Double, b: Double) {{}
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-screen.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.screen)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case screen
 
     /// The parts were the bottom layer is light become lighter, and dark becomes darker.
@@ -2453,9 +2533,47 @@ public enum BlendMode {
     ///     		return 1 - 2 * (1 - a) * (1 - b)
     ///     	}
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.overlay)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case overlay
 
     /// Takes the darker of the top and bottom picture pixels.
+    ///
+    /// ![Blend Mode](blendmode-darken.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.overlay)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case darken
 
     /// Takes the lighter of the top and bottom picture pixels.
@@ -2471,6 +2589,25 @@ public enum BlendMode {
     /// color with black will result in an unchanged pixel.
     ///
     /// This operation is not invertible.
+    ///
+    /// ![Blend Mode](blendmode-colorDodge.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.colorDodge)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case colorDodge
 
     /// Divides the inverted bottom layer by the top layer, then inverts the result.
@@ -2480,6 +2617,25 @@ public enum BlendMode {
     /// Blending any pixel by white results in no change.
     ///
     /// This operation is not invertible.
+    ///
+    /// ![Blend Mode](blendmode-colorBurn.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.colorBurn)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case colorBurn
 
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
@@ -2493,57 +2649,304 @@ public enum BlendMode {
     ///         	return 2*a*(1 - b) + sqrt(a)*(2*b - 1)
     ///         }
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.softLight)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case softLight
 
     /// A combination of multiply and screen are applied.
     ///
     /// Hard light affects the bottom layer the way that overlay affects the top
     /// layer, and vice-versa.
+    ///
+    /// ![Blend Mode](blendmode-hardLight.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.hardLight)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case hardLight
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
     ///
     /// If either layer is black, nothing changes. Blending with white inverts
     /// the picture.
+    ///
+    /// ![Blend Mode](blendmode-difference.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.difference)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case difference
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
     ///
     /// The difference between difference and exclusion is that blending with
     /// 50% gray will produce 50% gray.
+    ///
+    /// ![Blend Mode](blendmode-exclusion.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.exclusion)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case exclusion
 
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-hu.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.hu)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case hue
 
     /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-saturation.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.saturation)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case saturation
 
     /// Keeps the brightness of the bottom layer, while taking the hue and saturation of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-color.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case color
 
     /// Keeps the hue and saturation of the bottom layer, while taking the brightness of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-luminosity.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.luminosity)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case luminosity
 
     /// Shows the bottom layer fully, with the top layer drawn only where it
     /// intersect the bottom.
+    ///
+    /// ![Blend Mode](blendmode-sourceAtop.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.sourceAtop)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case sourceAtop
 
     /// The bottom is drawn over the top, and the top is only visible where the
     /// bottom is transparent.
+    ///
+    /// ![Blend Mode](blendmode-destinationOver.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.destinationOver)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case destinationOver
 
     /// Displays only the bottom layer, and only where the top is transparent.
+    ///
+    /// ![Blend Mode](blendmode-destinationOut.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.destinationOut)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case destinationOut
 
     /// Adds the top layer pixels to the bottom layer.
     ///
     /// Displays white where the addition is greater than 1.0.
+    ///
+    /// ![Blend Mode](blendmode-plusDarker.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.plusDarker)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case plusDarker
 
     /// Adds the top layer pixels to the bottom layer, than subtracts the result from 1.
     ///
     /// Displays black where the result is less than 0.0.
+    ///
+    /// ![Blend Mode](blendmode-plusLighter.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.plusLighter)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case plusLighter
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -18336,8 +18739,8 @@ public struct PrimitiveButtonStyleConfiguration {
 ///            .accentColor(Color(red: 0.894, green: 0.894, blue: 0.902))
 ///         }
 ///     }
-///
-///To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
+/// [rotation-effect ->]
+/// To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
 ///
 ///      struct ExampleView: View {
 ///         var body: some View {
@@ -18355,7 +18758,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///             }
 ///         }
 ///     }
-///
+/// [<-]
 ///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of `GeometryReader` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
 ///
 ///      struct ExampleView: View {
@@ -27709,7 +28112,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that performs an action when the view appears.
+    /// Perform an action when a view appears.
     ///
     /// This is an extremely useful modifier for setting up any actions needed
     /// when the page first is loaded.
@@ -27719,6 +28122,30 @@ extension View {
     ///     var body: some View {
     ///         Text("If you're reading this 🍌 was printed")
     ///             .onAppear { print("🍌") }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Whenever a view is rendered, even a previously rendered child view, `onAppear` will run. For example:
+    ///
+    /// ![On Appear Again](on-appear.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var bananaCount: Int = 0
+    ///     @State var showBanana: Bool = true
+    ///
+    ///     var body: some View {
+    ///         Text("We've created: \(bananaCount) bananas")
+    ///
+    ///         Toggle("Banana Toggle", isOn: $showBanana)
+    ///
+    ///         if showBanana {
+    ///             Text("🍌🍌")
+    ///                 .onAppear {
+    ///                     bananaCount += 1
+    ///                 }
+    ///         }
     ///     }
     /// }
     /// ```
@@ -29193,6 +29620,23 @@ extension View {
     /// }
     /// ```
     ///
+    /// Apply colors in lightmode & darkmode with `accentcolor`.
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
+    ///
+    /// Code:
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text("Bananas 🍌🍌")
+    ///                .accentColor(.primary)
+    ///        }
+    ///    }
+    ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
     @available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
@@ -29375,25 +29819,25 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that brightens this view by the specified amount.
+    /// Brightenen the view by the specified amount.
     ///
     /// Use `brightness(_:)` to brighten the intensity of the colors in a view.
     /// The example below shows a series of red squares, with their brightness
     /// increasing from 0 (fully red) to 100% (white) in 20% increments.
     ///
-    ///     struct BrightnessView: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .brightness(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .brightness(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
@@ -29558,23 +30002,19 @@ extension View {
     ///
     /// A grayscale effect reduces the intensity of colors in this view.
     ///
-    /// The example below shows a series of red squares with their grayscale
-    /// effect increasing from 0 (reddest) to 99% (fully desaturated) in
-    /// approximate 20% increments:
-    ///
-    ///     struct Saturation: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .grayscale(Double($0) * 0.1999)
-    ///                         .overlay(Text("\(Double($0) * 0.1999 * 100, specifier: "%.4f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .greyscale(Double(idx)*0.2 - 0.01)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -29588,29 +30028,24 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modiffier that applies a hue rotation effect to this view.
+    /// Applies a hue rotation effect.
     ///
     /// Use hue rotation effect to shift all of the colors in a view according
     /// to the angle you specify.
     ///
-    /// The example below shows a series of squares filled with a linear
-    /// gradient. Each square shows the effect of a 36˚ hueRotation (a total of
-    /// 180˚ across the 5 squares) on the gradient:
-    ///
-    ///     struct HueRotation: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Rectangle()
-    ///                         .fill(LinearGradient(gradient:
-    ///                             Gradient(colors: [.blue, .red, .green]),
-    ///                                              startPoint: .top, endPoint: .bottom))
-    ///                         .hueRotation((.degrees(Double($0 * 36))))
-    ///                         .frame(width: 60, height: 60, alignment: .center)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .hueRotation(Angle(degrees: Double(idx)*360/12))
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
@@ -29700,27 +30135,24 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that adjusts the color saturation of this view.
+    /// A view modifier that adjusts the color saturation of the view.
     ///
     /// Use color saturation to increase or decrease the intensity of colors in
     /// a view.
     ///
-    /// The example below shows a series of red squares with their saturation
-    /// increasing from 0 (gray) to 100% (fully-red) in 20% increments:
-    ///
-    ///     struct SaturationView: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .saturation(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .saturation(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - SeeAlso: `View/contrast(_:)`
     /// - Parameter amount: The amount of saturation to apply to this view.
@@ -29788,7 +30220,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modivier that sets the transparency of this view.
+    /// Sets the transparency of a view.
     ///
     /// Apply opacity to reveal views that are behind another view or to
     /// de-emphasize a view.
@@ -29797,22 +30229,19 @@ extension View {
     /// its opacity transformed, the modifier multiplies the effect of the
     /// underlying opacity transformation.
     ///
-    /// The example below shows yellow and red rectangles configured to overlap.
-    /// The top yellow rectangle has its opacity set to 50%, allowing the
-    /// occluded portion of the bottom rectangle to be visible:
-    ///
-    ///     struct OpacityView: View {
-    ///         var body: some View {
-    ///             VStack {
-    ///                 Color.yellow.frame(width: 100, height: 100, alignment: .center)
-    ///                     .zIndex(1)
-    ///                     .opacity(0.5)
-    ///
-    ///                 Color.red.frame(width: 100, height: 100, alignment: .center)
-    ///                     .padding(-40)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .opacity(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
@@ -29912,20 +30341,24 @@ extension View {
     /// visual effect to produce the result. The `BlendMode` enumeration
     /// defines many possible effects.
     ///
-    /// In the example below, the two overlapping rectangles have a
-    /// `BlendMode/colorBurn` effect applied, which effectively removes the
-    /// non-overlapping portion of the second image:
+    /// Test `blendMode(_:)` with images. To use the following example, drag in the following two photos and label them "ocean" and "space".
+    ///
+    /// ![New York](ocean.jpg)
+    ///
+    /// ![Space](space.jpg)
     ///
     /// ```
-    /// struct BlendModeView: View {
+    /// struct ExampleView: View {
     ///     var body: some View {
-    ///         HStack {
-    ///             Color.yellow.frame(width: 50, height: 50, alignment: .center)
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
     ///
-    ///             Color.red.frame(width: 50, height: 50, alignment: .center)
-    ///                 .rotationEffect(.degrees(45))
-    ///                 .padding(-20)
-    ///                 .blendMode(.colorBurn)
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.softLight)
     ///         }
     ///     }
     /// }
@@ -32443,6 +32876,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// [[rotation-effect]]
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
