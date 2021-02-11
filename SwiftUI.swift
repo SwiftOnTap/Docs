@@ -31117,6 +31117,9 @@ extension ViewBuilder {
 }
 
 /// A view's size and its alignment guides in its own coordinate space.
+///
+/// Most frequently used when working with alignment guides. See ``View/alignmentGuide(_:computeValue:)`` for more
+/// on how to use ViewDimensions with these.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ViewDimensions {
 
@@ -31127,17 +31130,81 @@ public struct ViewDimensions {
     public var height: CGFloat { get }
 
     /// Gets the value of the given horizontal guide.
+    ///
+    /// It will return the position of the horizontal alignment value you pass
+    /// as a parameter. See ``HorizontalAlignment`` for all the potential input values.
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[HorizontalAlignment.leading]
+    ///            })
+    ///    }
+    /// }
+    /// ```
     public subscript(guide: HorizontalAlignment) -> CGFloat { get }
 
     /// Gets the value of the given vertical guide.
+    ///
+    /// It will return the position of the vertical alignment value you pass
+    /// as a parameter. See ``VerticalAlignment`` for all the potential input values.
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(VerticalAlignment.center, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[VerticalAlignment.center]
+    ///            })
+    ///    }
+    /// }
+    /// ```
     public subscript(guide: VerticalAlignment) -> CGFloat { get }
 
     /// Gets the explicit value of the given alignment guide in this view, or
     /// `nil` if no such value exists.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[HorizontalAlignment.leading]
+    ///            })
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// See ``HorizontalAlignment`` for all the potential input values.
     public subscript(explicit guide: HorizontalAlignment) -> CGFloat? { get }
 
     /// Gets the explicit value of the given alignment guide in this view, or
     /// `nil` if no such value exists.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(VerticalAlignment.leading, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[VerticalAlignment.leading]
+    ///            })
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// See ``VerticalAlignment`` for all the potential input values.
     public subscript(explicit guide: VerticalAlignment) -> CGFloat? { get }
 }
 
