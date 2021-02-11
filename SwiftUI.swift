@@ -352,6 +352,21 @@ extension AccessibilityLabeledPairRole : Hashable {
 /// A struct used to define the characteristics of a view when accessed for accessibility.
 ///
 /// `AccessibilityTraits` are almost always used in conjunction with the `View/accessibilityAddTraits(_:)` view modifier.
+/// They are used to tell an assistive accessibility application (such as VoiceOver)
+/// how an element should be treated.
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Button("I'm a button! 😏") {
+///            // Do something on button click
+///        }.accessibilityAddTraits(.isButton)
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityTraits : SetAlgebra {
 
@@ -668,35 +683,209 @@ public struct ActionSheet {
 }
 
 /// A representation for an alert presentation.
+///
+/// An ``Alert`` is a modal-like presentation which contains a title, message, and
+/// between one and two action buttons. Alerts often convey important information
+/// about the state of the app and typically request feedback from the user. While the
+/// styling of alerts is semi-fixed, there are three available styles for the buttons to choose from:
+/// `.default`, `.destructive`, and `.cancel`. To actually present an alert, see
+/// ``View/alert(ispresented:content:)``.
+///
+/// An alert can be created with one of two initializers, depending on if one button
+/// or two is required. For example, to create an Alert with one button:
+///
+/// ![Example alert 1][alert-example-1.gif]
+///
+/// ```
+/// struct ExampleAlertView: View {
+///    @State private var showAlert = false
+///
+///    var body: some View {
+///        Button("Tap to view alert") {
+///            showAlert = true
+///        }
+///        .alert(isPresented: $showAlert) {
+///            Alert(
+///                title: Text("An important title!"),
+///                message: Text("A message that adds additional context on the alert.")
+///            )
+///        }
+///    }
+/// }
+/// ```
+///
+/// If the `dismissButton` value is left unspecified (as it was in this example),
+/// it will default to a dismiss button with the text "Ok".
+///
+/// In order to customize the type of button (or to create an alert with two buttons),
+/// create a new ``Alert.Button`` instance and pass it in as a part of the initializer.
+/// For example, to make an alert with a cancel and destructive button:
+///
+/// ![Example alert 2][alert-example-2.gif]
+///
+/// ```
+/// struct ExampleAlertView: View {
+///    @State private var showAlert = false
+///
+///    var body: some View {
+///        Button("Tap to view alert") {
+///            showAlert = true
+///        }
+///        .alert(isPresented: $showAlert) {
+///            Alert(
+///                title: Text("Are you sure?"),
+///                message: Text("The following action will delete everything. Please confirm."),
+///                primaryButton: Alert.Button.destructive(Text("Delete")),
+///                secondaryButton: Alert.Button.cancel(Text("No, take me back!"))
+///            )
+///        }
+///    }
+/// }
+/// ```
+///
+/// For illustrative purposes, the alert button values used the expanded syntax in this example.
+/// It is also valid to use the shorthand syntax when declaring alert buttons: `.default(_:action:)`,
+/// `.cancel(_:)`, or `.destructive(_:action:)`
+///
+/// Notes:
+///  - Stylistically, `.default` and `.cancel` alert button styles are nearly identical with
+///  the exception that `.cancel` has a bolded font weight.
+///  - Alert is the equivalent to UIKit's UIAlertView.
+///  - For information on the human interface guidelines for alerts, see:
+///  [https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/](https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Alert {
 
     /// Creates an alert with one button.
+    ///
+    /// If `dismissButton` is left unspecified, it will default to a button with the text "Ok".
+    ///
+    /// For example, to create a new Alert with this initializer and present it:
+    ///
+    /// ![Example alert 3][alert-example-3.gif]
+    ///
+    /// ```
+    /// struct ExampleAlertView: View {
+    ///    @State private var showAlert = false
+    ///
+    ///    var body: some View {
+    ///        Button("Tap to view alert") {
+    ///            showAlert = true
+    ///        }
+    ///        .alert(isPresented: $showAlert) {
+    ///            Alert(
+    ///                title: Text("An important title!"),
+    ///                message: Text("A message that adds additional context on the alert."),
+    ///                dismissButton: .default(Text("I understand."))
+    ///            )
+    ///        }
+    ///    }
+    /// }
+    /// ```
     public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { }
 
     /// Creates an alert with two buttons.
     ///
-    /// The system determines the visual ordering of the buttons.
+    /// When the screen is too small to display both buttons horizontally, they will
+    /// switch to being vertically stacked. The system determines the visual ordering of the buttons based on their type and
+    /// if they are a primary or secondary button.
+    ///
+    /// For example, to create a new Alert with this initializer and present it:
+    ///
+    /// ![Example alert 4][alert-example-2.gif]
+    ///
+    /// ```
+    /// struct ExampleAlertView: View {
+    ///    @State private var showAlert = false
+    ///
+    ///    var body: some View {
+    ///        Button("Tap to view alert") {
+    ///            showAlert = true
+    ///        }
+    ///        .alert(isPresented: $showAlert) {
+    ///            Alert(
+    ///                title: Text("Are you sure?"),
+    ///                message: Text("The following action will delete everything. Please confirm."),
+    ///                primaryButton: .destructive(Text("Delete")),
+    ///                secondaryButton: .cancel(Text("No, take me back!"))
+    ///            )
+    ///        }
+    ///    }
+    /// }
+    /// ```
     public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) { }
 
-    /// A button representing an operation of an alert presentation.
+    /// A button representing an ``Alert`` button action.
     public struct Button {
 
-        /// Creates an `Alert.Button` with the default style.
+        /// Creates an `Alert.Button` with the default style. The `.default` alert
+        /// button is styled nearly identically with `.cancel` except that `.cancel`
+        /// has a bolded font weight.
+        ///
+        /// For example, to create a new alert button with the default style:
+        ///
+        /// ```
+        /// Alert(
+        ///    title: Text("An important title!"),
+        ///    message: Text("A message that adds additional context on the alert."),
+        ///    dismissButton: .default(Text("A default button"), action: {
+        ///        print("Default button pressed, do something.")
+        ///    })
+        /// )
+        /// ```
         public static func `default`(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
 
         /// Creates an `Alert.Button` that indicates cancellation of some
-        /// operation.
+        /// operation. The `.cancel` alert button is styled nearly identically with
+        /// `.default` except that `.cancel` has a bolded font weight.
+        ///
+        /// For example, to create a new alert button with the cancel style:
+        ///
+        /// ```
+        /// Alert(
+        ///    title: Text("An important title!"),
+        ///    message: Text("A message that adds additional context on the alert."),
+        ///    dismissButton: .cancel(Text("A cancel button"), action: {
+        ///        print("Cancel button pressed, do something.")
+        ///    })
+        /// )
+        /// ```
         public static func cancel(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
 
-        /// An alert button that indicates cancellation.
+        /// Creates an `Alert.Button` that indicates cancellation of some
+        /// operation. The `.cancel` alert button is styled nearly identically with
+        /// `.default` except that `.cancel` has a bolded font weight.
         ///
-        /// The system automatically chooses the label of the button for the
-        /// appropriate locale.
+        /// The system automatically chooses the label of the button for the appropriate locale.
+        /// For the English locale, this defaults to "Cancel"
+        ///
+        /// For example, to create a new alert button with the cancel style:
+        ///
+        /// ```
+        /// Alert(
+        ///    title: Text("An important title!"),
+        ///    message: Text("A message that adds additional context on the alert."),
+        ///    dismissButton: .cancel(Text("A cancel button"), action: {
+        ///        print("Cancel button pressed, do something.")
+        ///    })
+        /// )
+        /// ```
         public static func cancel(_ action: (() -> Void)? = {}) -> Alert.Button { }
 
         /// Creates an `Alert.Button` with a style indicating destruction of
         /// some data.
+        ///
+        /// For example, to create a new alert button with the destructive style:
+        ///
+        /// ```
+        /// Alert(
+        ///    title: Text("An important title!"),
+        ///    message: Text("A message that adds additional context on the alert."),
+        ///    dismissButton: .destructive(Text("A destructive button"), action: {
+        ///        print("Destructive button pressed, do something.")
+        ///    })
+        /// )
+        /// ```
         public static func destructive(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
     }
 }
@@ -1239,7 +1428,7 @@ extension Angle : Animatable {
 ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
 ///
 ///     var body: some View {
-///         Rectangle()          
+///         Rectangle()
 ///            .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
 ///            .frame(width:200, height:200)
 ///     }
@@ -1259,7 +1448,7 @@ extension Angle : Animatable {
 ///
 ///     var body: some View {
 ///         VStack{
-///             Rectangle()          
+///             Rectangle()
 ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
 ///                .frame(width:200, height:200)
 ///             Rectangle()
@@ -1284,7 +1473,7 @@ extension Angle : Animatable {
 ///
 ///     var body: some View {
 ///         VStack{
-///             Rectangle()          
+///             Rectangle()
 ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
 ///                .frame(width:200, height:200)
 ///             Rectangle()
@@ -1300,9 +1489,9 @@ extension Angle : Animatable {
 
 	/// Creates an angular gradient from a starting and ending angle.
 	///
-    /// Gradient behavior acts differently according to whether the end angle - start angle is greater than, less than or equal to 2π. 
-    /// See ``AngularGradient`` for more information. 
-    /// An example, 
+    /// Gradient behavior acts differently according to whether the end angle - start angle is greater than, less than or equal to 2π.
+    /// See ``AngularGradient`` for more information.
+    /// An example,
     ///
     /// ![AngularGradient Example 3](angular-gradient-example-3.png)
     ///
@@ -1312,7 +1501,7 @@ extension Angle : Animatable {
     ///
     ///     var body: some View {
     ///         VStack{
-    ///             Rectangle()          
+    ///             Rectangle()
     ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
     ///                .frame(width:200, height:200)
     ///             Rectangle()
@@ -1321,8 +1510,8 @@ extension Angle : Animatable {
     ///         }
     ///     }
     /// }
-    /// ``` 
-    /// 
+    /// ```
+    ///
 	/// - Parameters:
 	///   - gradient: The gradient with the colors to use.
 	///   - center: The unit point that is center of the angular gradient.
@@ -1332,8 +1521,8 @@ extension Angle : Animatable {
 
     /// Creates an angular gradient starting at and angle and going all the way around in a circle.
     ///
-    /// For example, 
-    ///  
+    /// For example,
+    ///
     /// ![AngularGradient Example 1](angular-gradient-example-1.png)
     ///
     /// ```
@@ -1341,7 +1530,7 @@ extension Angle : Animatable {
     ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
     ///
     ///     var body: some View {
-    ///         Rectangle()          
+    ///         Rectangle()
     ///            .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
     ///            .frame(width:200, height:200)
     ///     }
@@ -1610,29 +1799,29 @@ extension AnimatableModifier : Animatable, ViewModifier {
 
 /// Specifies the timing curve of a changing on-screen value, such as spring or linear.
 ///
-/// Functions such as ``view/animation(_:)`` and ``binding/animation(_:)`` take in the Animation structure. 
+/// Functions such as ``view/animation(_:)`` and ``binding/animation(_:)`` take in the Animation structure.
 ///
 ///
-/// SwiftUI includes basic animations with predefined or custom easing, as well as spring and fluid animations. 
+/// SwiftUI includes basic animations with predefined or custom easing, as well as spring and fluid animations.
 /// You can adjust an animation’s speed, set a delay before an animation starts, or specify that an animation repeats.
-/// 
-/// For example, 
+///
+/// For example,
 ///
 /// ![Animation Example 1](animation-example.gif)
 ///
 /// ```
 /// struct AnimateView: View {
 ///     @State private var flag = true
-///    
+///
 ///     var body: some View {
-///       
+///
 ///         VStack {
 ///             Rectangle()
 ///                 .foregroundColor(flag ? Color.yellow : Color.red)
 ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
 ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
 ///                 .animation(.easeInOut)
-///            
+///
 ///             Button("Animate") {
 ///                 self.flag.toggle()
 ///             }
@@ -1701,16 +1890,16 @@ extension Animation {
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.easeInOut(duration: 3.0))
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1718,7 +1907,7 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
 	/// - Parameter duration: How long the effect should last.
     public static func easeInOut(duration: Double) -> Animation { }
 
@@ -1732,16 +1921,16 @@ extension Animation {
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.easeInOut)
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1749,28 +1938,28 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
     public static var easeInOut: Animation { get }
 
     /// An animation where the effect starts out slower and then ends more quickly.
     ///
-    /// For example, 
+    /// For example,
     ///
     /// ![Animation Example 3](animation-example-3.gif)
     ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.easeIn(duration: 3.0))
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1778,7 +1967,7 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func easeIn(duration: Double) -> Animation { }
 
@@ -1793,16 +1982,16 @@ extension Animation {
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.easeIn)
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1810,28 +1999,28 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
     public static var easeIn: Animation { get }
 
     /// An animation where the effect starts out more quickly and then slows down.
     ///
-    /// For example, 
+    /// For example,
     ///
     /// ![Animation Example 5](animation-example-5.gif)
     ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.easeOut(duration: 3.0))
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1839,7 +2028,7 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func easeOut(duration: Double) -> Animation { }
 
@@ -1854,16 +2043,16 @@ extension Animation {
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.easeOut)
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1871,7 +2060,7 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
     public static var easeOut: Animation { get }
 
     /// An animation where the effect happens at a constant speed throughout.
@@ -1883,16 +2072,16 @@ extension Animation {
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.linear(duration: 3.0))
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1900,7 +2089,7 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func linear(duration: Double) -> Animation { }
 
@@ -1915,16 +2104,16 @@ extension Animation {
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
-    ///    
+    ///
     ///     var body: some View {
-    ///       
+    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
     ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
     ///                 .animation(.linear)
-    ///            
+    ///
     ///             Button("Animate") {
     ///                 self.flag.toggle()
     ///             }
@@ -1932,7 +2121,7 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// 
+    ///
     public static var linear: Animation { get }
 
     /// An animation with a fully customized timing curve.
@@ -5907,6 +6096,15 @@ public struct CommandMenu<Content> : Commands where Content : View {
 
 /// Conforming types represent a group of related commands that can be exposed
 /// to the user via the main menu on macOS and key commands on iOS.
+///
+/// The available Command types are:
+/// - ``CommandGroup``
+/// - ``CommandMenu``
+/// - ``EmptyCommands``
+/// - ``SidebarCommands``
+/// - ``TextEditingCommands``
+/// - ``TextFormattingCommands``
+/// - ``ToolbarCommands``
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -6312,14 +6510,62 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
     public init(@ViewBuilder menuItems: () -> MenuItems) { }
 }
 
-/// A list of spaces for converting between different frames of reference on a screen.
+/// Represents the context (or space) of a set of coordinates relative to the screen.
+///
+/// ``CoordinateSpace`` allows a set of X, Y coordinates to have context on if they
+/// are relative to the frame's parent, or absolute to the device screen. It is also possible
+/// to define a custom coordinate space on a view with `View/coordinateSpace(name:)`. This custom
+/// coordinate space can be checked with the `.named(AnyHashable)` case.
+///
+/// For example:
+///
+/// ![Coordinate space example 1][coordinate-space-example.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        HStack {
+///            Rectangle()
+///                .fill(Color.red)
+///
+///            GeometryReader { geometryProxy in
+///                Button(action: {
+///                    let globalFrame = geometryProxy.frame(in: CoordinateSpace.global)
+///                    let localFrame = geometryProxy.frame(in: CoordinateSpace.local)
+///                    print("Global center: \(globalFrame.midX) x \(globalFrame.midY)") // Prints: "Global center: 160.0 x 294.0"
+///                    print("Local center: \(localFrame.midX) x \(localFrame.midY)") // Prints: "50.67 x 274.0"
+///                }, label: {
+///                    Text("Button with coordinate spaces")
+///                })
+///                .background(Color.orange)
+///            }
+///
+///            Rectangle()
+///                .fill(Color.red)
+///        }
+///    }
+/// }
+/// ```
+///
+/// In this example, the center of the Button coordinates is retrieved. The global center
+/// means that the middle of the button is 160 pixels from the left of the screen, and 294 pixels
+/// from the top of the screen. The local center means that the middle of the button is
+/// ~50 pixels from the left edge of it's container (which is the ``GeometryReader``)
+/// and the middle of the button is 274 pixels from the top of it's container.
+///
+/// There are two additional important things to note about this example:
+///   - For illustrative purposes, the enum values were expanded in this example.
+///   It would also be valid to use the shorthand, just specifying the values: `.global` or `.local`.
+///   - The exact output of coordinates will differ depending on screen size, but
+///   the local midX coordinate will always be smaller than the global midX since it's relative.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum CoordinateSpace {
 
-	/// The coordinate space representing the entire screen.
+    /// The absolute coordinate space representing the entire screen.
     case global
 
-    /// The coordinate space representing the current view.
+    /// The relative coordinate space representing the current view.
     case local
 
     /// A coordinate space chosen by the `Hashable` parameter.
@@ -7572,20 +7818,20 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 ///   struct DragGestureView: View {
 ///     @State private var location: CGPoint = CGPoint(x: 50, y: 50);
 ///     @State var isDragging = false
-///   
+///
 ///     var simpleDrag: some Gesture {
 ///         DragGesture()
 ///             .onChanged { value in
 ///                 self.location = value.location
 ///                self.isDragging = true
-///                
+///
 ///             }
 ///             .onEnded{_ in self.isDragging = false}
 ///     }
-///    
+///
 ///     var body: some View {
 ///         Circle()
-///             .fill(self.isDragging ? Color.red : Color.yellow)            
+///             .fill(self.isDragging ? Color.red : Color.yellow)
 ///             .frame(width: 100, height: 100)
 ///             .position(location)
 ///             .gesture(simpleDrag)
@@ -8991,6 +9237,36 @@ extension DynamicViewContent {
 }
 
 /// An enumeration to indicate one edge of a rectangle.
+///
+/// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)``,
+/// but it can also be returned from instance methods. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        VStack {
+///            Text("Example view where Edge is returned as a value")
+///                .accessibilityScrollAction { edge in
+///                    switch edge {
+///                    case Edge.top:
+///                        print("Swiped down from top edge")
+///                    case Edge.leading:
+///                        print("Swiped left from leading edge")
+///                    case Edge.trailing:
+///                        print("Swiped right from trailing edge")
+///                    case Edge.bottom:
+///                        print("Swiped up from bottom edge")
+///                    }
+///                }
+///        }
+///    }
+/// }
+/// ```
+///
+/// Note that for illustrative purposes, the enum values were expanded in this example.
+/// It would also be valid to use the shorthand, just specifying the values:
+/// `.top`, `.leading`, `.trailing`, and `.bottom`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Edge : Int8, CaseIterable {
 
@@ -9007,6 +9283,28 @@ extension DynamicViewContent {
     case trailing
 
     /// An efficient set of `Edge`s.
+    ///
+    /// Used when multiple edges need to be specified. For example, when setting padding
+    /// on a view with ``View/padding(_:)``:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Text padded on the top and bottom edge.")
+    ///                .padding([Edge.Set.top, Edge.Set.bottom])
+    ///                .border(Color.gray)
+    ///            Text("Unpadded text")
+    ///                .border(Color.yellow)
+    ///        }
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// Note that for illustrative purposes, the enum values were expanded in this example.
+    /// It would also be valid to use the shorthand, just specifying the values:
+    /// `.padding([.top, .bottom])`
     @frozen public struct Set : OptionSet {
 
         /// The element type of the option set.
@@ -10776,7 +11074,7 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 ///
 /// The `ExclusiveGesture` gives precedence to its first gesture.
 ///
-/// /// See ``Gesture/exclusively(before:)`` for more of an explanation and an example 
+/// /// See ``Gesture/exclusively(before:)`` for more of an explanation and an example
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ExclusiveGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
@@ -11537,12 +11835,80 @@ public struct FileDocumentWriteConfiguration {
     public let existingFile: FileWrapper?
 }
 
-/// A style for rasterizing vector shapes.
+/// A struct style for rasterizing vector shapes.
+///
+/// FillStyle determines the even-odd fill mode and antialiased mode on the style.
+/// When initializing a new FillStyle, eoFill is set to false by default and
+/// antialiased is set to true by default.
+///
+/// The even-odd rule fills a path depending on what is overlapping in the path.
+/// For example, a path with no overlaps will be fully filled but a path with
+/// an overlap will not have the overlapping part filled. See ``FillStyle/isEOFilled`` for an example.
+/// Anti-aliased smooths pixels on jagged edges by averages the colors of the pixels
+/// at the boundary.
+///
+/// For example, to create a view with a circle shape and fill style:
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Circle()
+///          .fill(Color.pink, style: FillStyle(eoFill: true))
+///    }
+///
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct FillStyle : Equatable {
 
     /// A Boolean value that indicates whether to use the even-odd rule when
     /// rendering a shape.
+    ///
+    /// The even-odd rule fills a path depending on what is overlapping in the path.
+    /// For example, a path with no overlaps will be fully filled but a path with
+    /// an overlap will not have the overlapping part filled.
+    ///
+    /// ![FillStyle even-odd rule example 1][fillstyle-eof-example.png]
+    ///
+    /// ```
+    /// struct EvenOddRuleView: View {
+    ///
+    ///    var body: some View {
+    ///        VStack(spacing: 100) {
+    ///            VStack {
+    ///                OverlappingRectangles()
+    ///                    .fill(Color.pink, style: FillStyle(eoFill: true))
+    ///                    .frame(width: 150, height: 100)
+    ///
+    ///                Text("isEOFilled: true")
+    ///            }
+    ///
+    ///            VStack {
+    ///                OverlappingRectangles()
+    ///                    .fill(Color.pink, style: FillStyle(eoFill: false))
+    ///                    .frame(width: 150, height: 100)
+    ///
+    ///                Text("isEOFilled: false")
+    ///            }
+    ///        }
+    ///    }
+    /// }
+    ///
+    /// struct OverlappingRectangles: Shape {
+    ///
+    ///    func path(in rect: CGRect) -> Path {
+    ///        let rectSize = CGSize(width: rect.height, height: rect.height)
+    ///
+    ///        var path = Path()
+    ///
+    ///        path.addRect(CGRect(origin: .zero, size: rectSize))
+    ///        path.addRect(CGRect(origin: CGPoint(x: rect.width-rect.height, y: -50), size: rectSize))
+    ///
+    ///        return path
+    ///    }
+    /// }
+    /// ```
     ///
     /// When `isOEFilled` is `false`, the style uses the non-zero winding number
     /// rule.
@@ -11554,12 +11920,26 @@ public struct FileDocumentWriteConfiguration {
 
     /// Creates a new fill style with the specified settings.
     ///
+    /// For example, to create a new fill style:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Circle()
+    ///          .fill(Color.pink, style: FillStyle(eoFill: true, antialiased: true))
+    ///    }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
-    ///   - eoFill: A Boolean value that indicates whether to use the even-od
+    ///   - eoFill: A Boolean value that indicates whether to use the even-odd
     ///     rule for rendering a shape. Pass `false` to use the non-zero winding
-    ///     number rule instead.
+    ///     number rule instead. If no value is specified, eoFill defaults to false.
+    ///     For more information on the even-odd rule, see ``FillStyle/isOEFilled``.
     ///   - antialiased: A Boolean value that indicates whether to use
-    ///     antialiasing when rendering the edges of a shape.
+    ///     antialiasing when rendering the edges of a shape. If no value is specified
+    ///     antialiased defaults to true.
     public init(eoFill: Bool = false, antialiased: Bool = true) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -11901,6 +12281,32 @@ extension Font {
     public func uppercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to use monospace digits.
+    ///
+    /// For example, to adjust a ``Text`` to use monospaced digits:
+    ///
+    /// ![monospacedDigit example 1][monospaced-digit-example-1.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleStatus: Bool = false
+    ///
+    ///    var body: some View {
+    ///        Text("Some monospaced digits: 0123456789")
+    ///            .font(Font.system(size: 15).monospacedDigit())
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// Note that this does not actually update the font to use the `.monospace` design.
+    /// Rather, it updates digits to have a "fixed" width. For an example of the difference
+    /// between a normal proportional font and a monospaced font on digits see:
+    ///
+    /// Proportional font:
+    /// ![Proportional font example][monospaced-digit-proportional-font.png]
+    ///
+    /// Monospaced font:
+    /// ![Monospaced font example][monospaced-digit-mono-font.png]
+    /// [Image credits to Lior Azi](https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0)
     public func monospacedDigit() -> Font { }
 
     /// Sets the weight of the font.
@@ -12456,12 +12862,47 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     public init(_ data: Range<Int>, @ViewBuilder content: @escaping (Int) -> Content) { }
 }
 
-/// A style that shows the correct fill for the foreground based on the current
+/// A ``ShapeStyle`` that shows the correct fill for the foreground based on the current
 /// context.
+///
+/// For example, to create a square view with a ForegroundStyle:
+///
+/// ![ForegroundStyle Example 1][foreground-style-example.png]
+///
+/// ```
+/// struct ForegroundStyleRectangle: View {
+///
+///    var body: some View {
+///        Rectangle()
+///            .fill(ForegroundStyle())
+///            .frame(width: 150, height: 150)
+///            .foregroundColor(Color.pink)
+///    }
+///
+/// }
+/// ```
+///
+/// Note:
+/// - ForegroundStyle is typically the default ShapeStyle, so it is rare to explicitly need it.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ForegroundStyle {
 
-	/// Creates a foreground style.
+    /// Creates a foreground style.
+    ///
+    /// For example, to create a square view with a ForegroundStyle:
+    ///
+    /// ```
+    /// struct ForegroundStyleRectangle: View {
+    ///
+    ///    var body: some View {
+    ///        Rectangle()
+    ///            .fill(ForegroundStyle())
+    ///            .frame(width: 150, height: 150)
+    ///            .foregroundColor(Color.pink)
+    ///    }
+    ///
+    /// }
+    /// ```
     @inlinable public init() { }
 }
 
@@ -12475,9 +12916,9 @@ extension ForegroundStyle : ShapeStyle {
 /// SwiftUI renders forms in a manner appropriate for the platform. For example,
 /// on iOS, forms appear as grouped lists. Use ``Section`` to group different
 /// parts of a form's content.
-/// 
 ///
-/// For example, 
+///
+/// For example,
 ///
 /// ![Form Example 1](form-example-1.png)
 ///
@@ -12485,7 +12926,7 @@ extension ForegroundStyle : ShapeStyle {
 ///  struct ExampleView: View {
 ///    let gradient = Gradient(colors: [.red,.yellow])
 ///    @State private var myFruit = ""
-///    
+///
 ///    var body: some View {
 ///       Form {
 ///            TextField("Banana 🍌", text: $myFruit)
@@ -12501,9 +12942,9 @@ public struct Form<Content> : View where Content : View {
 
 	/// Creates a container from a view builder that groups controls intended for data entry
 	///
-    /// 
+    ///
 	/// The form view knows how to arrange standard controls inside it such as pickers, textfields and toggles.
-    /// However, when using a custom control results are undefined. 
+    /// However, when using a custom control results are undefined.
     ///
     /// Controls can be grouped using the ``Section`` view as seen in the example below.
     ///
@@ -12518,7 +12959,7 @@ public struct Form<Content> : View where Content : View {
     ///     @State private var not = true
     ///     @State private var dark = true
     ///
-    ///    
+    ///
     ///     var body: some View {
     ///         Form {
     ///             Section(header: Text("Contact Information")) {
@@ -12538,8 +12979,8 @@ public struct Form<Content> : View where Content : View {
     ///     }
     ///  }
     /// ```
-    /// 
-    /// 
+    ///
+    ///
     ///
 	/// - Parameter content: A closure that returns the view to the `Form`.
 	///
@@ -12581,22 +13022,36 @@ extension GeometryEffect {
     @inlinable public func ignoredByLayout() -> _IgnoredByLayoutEffect<Self> { }
 }
 
-/// A proxy for access to the size and coordinate space (for anchor resolution)
-/// of the container view.
+/// A proxy that encapsulates the container's frame and safe area insets, used by ``GeometryReader``.
+///
+/// For example, to create a new GeometryProxy for use in a GeometryReader:
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         GeometryReader { (proxy: GeometryProxy) in
+///             Color.green
+///                 .frame(
+///                     width: proxy.size.width / 2,
+///                     height: proxy.size.height / 2
+///                 )
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct GeometryProxy {
 
     /// The size of the container view.
     public var size: CGSize { get }
 
-    /// Resolves the value of `anchor` to the container view.
+    /// Converts the anchor to a value in the coordinate space of the target view.
     public subscript<T>(anchor: Anchor<T>) -> T { get }
 
     /// The safe area inset of the container view.
     public var safeAreaInsets: EdgeInsets { get }
 
-    /// Returns the container view's bounds rectangle, converted to a defined
-    /// coordinate space.
+    /// Returns the parent ``GeometryReader``'s frame, converted to a defined
+    /// ``CoordinateSpace``.
     public func frame(in coordinateSpace: CoordinateSpace) -> CGRect { }
 }
 
@@ -13250,7 +13705,7 @@ public struct GridItem {
     /// The size in the minor axis of one or more rows or columns in a grid
     /// layout.
     ///
-    /// There are three types of sizes: 
+    /// There are three types of sizes:
     /// 1. ``griditem/size/fixed``
     /// 2. ``griditem/size/flexible`
     /// 3. ``griditem/size/adaptive``
@@ -15703,13 +16158,61 @@ extension LegibilityWeight {
 }
 
 /// A progress view that visually indicates its progress using a horizontal bar.
+///
+/// When initializing a ProgressView with ``ProgressView/init(value:,total:)``, the
+/// ``DefaultProgressViewStyle`` will typically display a linear progress view style.
+///
+/// For example, to create a new ``ProgressView`` with this style:
+///
+/// ![Linear progress view example 1][linearprogressview-example-1.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        ProgressView()
+///            .progressViewStyle(LinearProgressViewStyle())
+///            .padding(20)
+///    }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LinearProgressViewStyle : ProgressViewStyle {
 
     /// Creates a linear progress view style.
+    ///
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Linear progress view example 1][linearprogressview-example-1.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(LinearProgressViewStyle())
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init() { }
 
     /// Creates a linear progress view style with a tint color.
+    ///
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Linear progress view example 2][linearprogressview-example-2.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        ProgressView(value: 5, total: 10)
+    ///            .progressViewStyle(LinearProgressViewStyle(tint: Color.red))
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
@@ -16808,7 +17311,7 @@ public struct LongPressGesture : Gesture {
 ///         }
 ///     }
 /// ```
-/// 
+///
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
 @available(watchOS, unavailable)
@@ -18050,7 +18553,13 @@ public struct NavigationView<Content> : View where Content : View {
     public typealias Body = Never
 }
 
-/// A specification for the appearance and interaction of a `NavigationView`.
+/// Structures conforming to ``NavigationViewStyle`` can be used to style a ``NavigationView`` via
+/// ``View/navigationViewStyle(_:)``.
+///
+/// There are only 3 styles that conform to the navigation view style protocol:
+/// - ``DefaultNavigationViewStyle``
+/// - ``DoubleColumnNavigationViewStyle``
+/// - ``StackNavigationViewStyle``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public protocol NavigationViewStyle{ }
 extension NavigationViewStyle {
@@ -20289,10 +20798,89 @@ public enum PopoverAttachmentAnchor {
     case point(UnitPoint)
 }
 
-/// A named value produced by a view.
+/// The ``PreferenceKey`` protocol enables a way to send data _up_ the ``View`` hierarchy.
 ///
-/// A view with multiple children automatically combines its values for a given
-/// preference into a single value visible to its ancestors.
+/// ``PreferenceKey`` allow for a child view to communicate with a parent, similar to how an
+/// ``Environment`` allows for data to be sent down the view hierarchy. An excellent
+/// example of view preferences in action is Apple's ``NavigationView`` and ``navigationTitle(_:)``.
+/// The ``navigationTitle(_:)`` does not modify the navigation view directly, but rather it
+/// uses view preferences and the navigation view has a closure that is called when the title is updated.
+///
+/// While it is possible to achieve basic communication up the view hierarchy using a ``@Binding``,
+/// this can produce unintended effects as a result of modifying state during a view update. In
+/// these scenarios, it may be better to use view preferences.
+///
+/// For example, to set a preference key from a view and use it to change a state:
+///
+/// ```
+/// struct ExampleView: View {
+///    @State private var customPreferenceKey: String = ""
+///
+///    var body: some View {
+///        VStack {
+///            Text("View that sets a preference key when loaded")
+///                .preference(key: CustomPreferenceKey.self, value: "New value! 🤓")
+///        }
+///        .onPreferenceChange(CustomPreferenceKey.self) { (value: CustomPreferenceKey.Value) in
+///            customPreferenceKey = value
+///            print(customPreferenceKey) // Prints: "New value! 🤓"
+///        }
+///    }
+/// }
+///
+/// struct CustomPreferenceKey: PreferenceKey {
+///    static var defaultValue: String = ""
+///
+///    static func reduce(value: inout String, nextValue: () -> String) {
+///        value = nextValue()
+///    }
+/// }
+/// ```
+///
+/// It is also possible to use more complicated data structures as a preference key
+/// by changing the type of the defaultValue. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///    @State private var customPreferenceKey: CustomPreferenceKeyData? = nil
+///
+///    var body: some View {
+///        VStack {
+///            Text("View that sets a preference key when loaded")
+///                .preference(key: CustomPreferenceKey.self, value: CustomPreferenceKeyData(bananaBunch: "🍌🍌🍌", numberOfBananas: 3))
+///        }
+///        .onPreferenceChange(CustomPreferenceKey.self) { (value: CustomPreferenceKey.Value) in
+///            customPreferenceKey = value
+///            print(customPreferenceKey!) // Prints: "CustomPreferenceKeyData(bananaBunch: "🍌🍌🍌", numberOfBananas: 3)"
+///        }
+///    }
+/// }
+///
+/// struct CustomPreferenceKey: PreferenceKey {
+///    static var defaultValue: CustomPreferenceKeyData? = nil
+///
+///    static func reduce(value: inout CustomPreferenceKeyData?, nextValue: () -> CustomPreferenceKeyData?) {
+///        value = nextValue()
+///    }
+/// }
+///
+/// struct CustomPreferenceKeyData: Equatable {
+///    let bananaBunch: String
+///    let numberOfBananas: Int
+/// }
+/// ```
+///
+/// For a detailed explanation of how view preferences work, check out this article:
+/// [https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d](https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d)
+///
+/// Note:
+///  - A view with multiple children automatically combines its values for a given
+/// preference into a single value visible to its ancestors. This functionality
+/// can be changed with the `PreferenceKey/reduce(value: &x, nextValue:{defaultValue})` function.
+///  - When using view preferences, keep in mind that it can be easy to create
+/// an infinite loop by having the preference value dependent on the state that it is changing.
+/// A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
+///  - In order to pass information _down_ the View hierarchy, see ``Environment``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreferenceKey{ }
 extension PreferenceKey {
@@ -20300,7 +20888,7 @@ extension PreferenceKey {
     /// The type of value produced by this preference.
     associatedtype Value
 
-    /// The default value of the preference.
+    /// The default value of the preference if none is explicitly set.
     ///
     /// Views that have no explicit value for the key produce this default
     /// value. Combining child views may remove an implicit value produced by
@@ -20311,9 +20899,42 @@ extension PreferenceKey {
     /// Combines a sequence of values by modifying the previously-accumulated
     /// value with the result of a closure that provides the next value.
     ///
-    /// This method receives its values in view-tree order. Conceptually, this
-    /// combines the preference value from one tree with that of its next
-    /// sibling.
+    /// If multiple values are outputted by multiple different views, all using the same
+    /// ``PreferenceKey``, this function allows for logic to reduce all those
+    /// preferences to a single value.
+    ///
+    /// For example, if there are two views at the same level that both output a preference:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var customPreferenceKey: String = ""
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("First view that sets a preference")
+    ///                .preference(key: CustomPreferenceKey.self, value: "The first preference value")
+    ///
+    ///            Text("Second view that sets a preference")
+    ///                .preference(key: CustomPreferenceKey.self, value: "The second preference value")
+    ///        }
+    ///        .onPreferenceChange(CustomPreferenceKey.self) { (value: CustomPreferenceKey.Value) in
+    ///            customPreferenceKey = value
+    ///            print(customPreferenceKey) // Prints: "The first preference value & The second preference value"
+    ///        }
+    ///    }
+    /// }
+    ///
+    /// struct CustomPreferenceKey: PreferenceKey {
+    ///    static var defaultValue: String = ""
+    ///
+    ///    static func reduce(value: inout String, nextValue: () -> String) {
+    ///        value = "\(value) & \(nextValue())"
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// For additional details on how the reduce function works, see:
+    /// [https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b](https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b)
     ///
     /// - Parameters:
     ///   - value: The value accumulated through previous calls to this method.
@@ -20601,10 +21222,33 @@ extension PreviewPlatform : Equatable {
 extension PreviewPlatform : Hashable {
 }
 
-/// A type that produces view previews in Xcode.
+/// A protocol that generates previews on the right-hand side of Xcode.
 ///
 /// Xcode statically discovers types that conform to the `PreviewProvider`
 /// protocol in your app, and generates previews for each provider it discovers.
+///
+/// For example, to have Xcode render a preview of a simple view:
+///
+/// ![Preview provider example 1][previewprovider-example-1.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Circle().fill(Color.green)
+///    }
+/// }
+///
+/// struct ExampleViewPreview: PreviewProvider {
+///    static var previews: some View {
+///        ExampleView()
+///    }
+///
+///    static var platform: PreviewPlatform? {
+///        .iOS
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreviewProvider : _PreviewProvider{ }
 extension PreviewProvider : _PreviewProvider {
@@ -21555,20 +22199,20 @@ extension ProjectionTransform {
 /// A radial gradient that applies the color function as the distance from a center point,
 /// scaled to fit within the defined start and end radii..
 ///
-/// A Radial Gradient is very similar to a ``LinearGradient``, but instead of defining starting and ending points, 
-/// it is necessary to define a start radius, an end radius and the center of the gradeint. 
+/// A Radial Gradient is very similar to a ``LinearGradient``, but instead of defining starting and ending points,
+/// it is necessary to define a start radius, an end radius and the center of the gradeint.
 ///
-/// The gradient is drawn as circular around the center, moving outwards to the end radius. 
-/// ``RadialGradient`` accepts a ``Unitpoint`` for the center of the gradeint and ``CGFloat`` for radius in points. 
+/// The gradient is drawn as circular around the center, moving outwards to the end radius.
+/// ``RadialGradient`` accepts a ``Unitpoint`` for the center of the gradeint and ``CGFloat`` for radius in points.
 ///
-/// For example, 
+/// For example,
 ///
 /// ![RadialGradient Example 1](radial-gradient-example.png)
 ///
 /// ```
 /// struct RadialView: View {
 ///    let gradient = Gradient(colors: [.red,.yellow])
-///        
+///
 ///    var body: some View {
 ///        Rectangle()
 ///            .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
@@ -21587,7 +22231,7 @@ extension ProjectionTransform {
     /// ```
     /// struct RadialView: View {
     ///    let gradient = Gradient(colors: [.red,.yellow])
-    ///        
+    ///
     ///    var body: some View {
     ///        Rectangle()
     ///            .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
@@ -22825,7 +23469,7 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 /// Add a rotation gesture to a `Rectangle` and apply a rotation effect:
 ///
 /// ![RotationGesture Example 1](rotation-gesture-example.gif)
-/// 
+///
 /// ```
 ///     struct RotationGestureView: View {
 ///         @State var angle = Angle(degrees: 0.0)
@@ -22865,7 +23509,7 @@ public struct RotationGesture : Gesture {
     /// start.
     ///
     /// ![RotationGesture Example 2](rotation-gesture-example-2.gif)
-    /// 
+    ///
     /// ```
     ///     struct RotationGestureView: View {
     ///         @State var angle = Angle(degrees: 0.0)
@@ -22914,7 +23558,7 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 /// Defines the shape of a rounded rectangle's corners.
 
 /// Thiis style has two options:
-/// 1. `roundedcornerstyle/circular` 
+/// 1. `roundedcornerstyle/circular`
 /// 2. `roundedcornerstyle/circular`
 ///
 /// These styles have subtle but noticeable differences:
@@ -25579,7 +26223,7 @@ public struct SidebarListStyle : ListStyle {
 ///
 /// ![SimultaneousGesture Example 1](simultaneous-gesture-example.gif)
 ///
-/// See ``Gesture/simultaneously(with:)`` for more of an explanation and an example 
+/// See ``Gesture/simultaneously(with:)`` for more of an explanation and an example
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SimultaneousGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
@@ -28444,24 +29088,83 @@ extension Text.Case : Equatable {
 extension Text.Case : Hashable {
 }
 
-/// Aligns the child view within its bounds given anchor types
+/// An enum indicating available alignments for text that spans multiple-lines.
 ///
-/// Child sizing: Respects the child's preferred size on the aligned axes. The child fills the context bounds on unaligned axes.
+/// This is used in conjuction with `View/multilineTextAlignment(_:)`, for example:
 ///
-/// Preferred size: Child's preferred size
-/// An alignment position for text along the horizontal axis.
+/// ![Text alignment center][textalignment-center.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+///            .padding(20)
+///            .font(.system(size: 10))
+///            .multilineTextAlignment(TextAlignment.center)
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum TextAlignment : Hashable, CaseIterable {
 
-	/// Aligns each line of the text to the leading edge, left in left-to-right languages,
-	/// and right in right-to-left languages.
+  	/// Aligns each line of the text to the leading edge, left in left-to-right languages,
+  	/// and right in right-to-left languages.
+    ///
+    /// For example:
+    ///
+    /// ![Text alignment leading][textalignment-leading.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///            .padding(20)
+    ///            .font(.system(size: 10))
+    ///            .multilineTextAlignment(TextAlignment.leading)
+    ///    }
+    /// }
+    /// ```
     case leading
 
     /// Aligns each line of the text with the center of the view.
+    ///
+    /// For example:
+    ///
+    /// ![Text alignment center][textalignment-center.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///            .padding(20)
+    ///            .font(.system(size: 10))
+    ///            .multilineTextAlignment(TextAlignment.center)
+    ///    }
+    /// }
+    /// ```
     case center
 
     /// Aligns each line of the text to the trailing edge, right in left-to-right languages,
     /// and left in right-to-left languages.
+    ///
+    /// For example:
+    ///
+    /// ![Text alignment trailing][textalignment-trailing.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///            .padding(20)
+    ///            .font(.system(size: 10))
+    ///            .multilineTextAlignment(TextAlignment.trailing)
+    ///    }
+    /// }
+    /// ```
     case trailing
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -28502,6 +29205,9 @@ extension Text.Case : Hashable {
     public typealias AllCases = [TextAlignment]
 
     /// A collection of all values of this type.
+    ///
+    /// This will return an array of all available TextAlignment values:
+    /// `.leading`, `.center`, and `.trailing`
     public static var allCases: [TextAlignment] { get }
 }
 
@@ -28987,11 +29693,56 @@ extension Toggle where Label == Text {
     public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol { }
 }
 
-/// A type that specifies the appearance and interaction of all toggles within a
-/// view hierarchy.
+/// Structs conforming to the this protocol can customize the styles for ``Toggle`` views.
+///
+/// ToggleStyle allows for easy customization of a toggle view. In order to customize the style,
+/// simply create a new type conforming to this protocol that returns the custom view
+/// in the `ToggleStyle/makeBody(_:)` function. Note that while conforming to the ToggleStyle
+/// protocol takes care of most the implementation, the conforming type must still
+/// toggle the isOn property.
 ///
 /// To configure the current toggle style for a view hiearchy, use the
 /// `View/toggleStyle(_:)` modifier.
+///
+/// For example, to make a custom toggle style which conforms to this protocol:
+///
+/// ![Toggle style example 1][togglestyle-example-1.gif]
+///
+/// ```
+/// struct ExampleView: View {
+///    @State private var toggleStatus: Bool = false
+///
+///    var body: some View {
+///        Toggle(isOn: $toggleStatus, label: {
+///            Text("Active")
+///        })
+///        .padding(50)
+///        .toggleStyle(CustomRectangleToggleStyle())
+///    }
+/// }
+///
+/// struct CustomRectangleToggleStyle: ToggleStyle {
+///
+///    func makeBody(configuration: Configuration) -> some View {
+///        HStack {
+///            configuration.label
+///            Rectangle()
+///                .frame(width: 75, height: 30)
+///                .overlay(
+///                    Circle()
+///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
+///                        .padding(.all, 3)
+///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
+///                        .animation(Animation.linear(duration: 0.1))
+///                )
+///                .onTapGesture {
+///                    configuration.isOn.toggle()
+///
+///                }
+///        }
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ToggleStyle{ }
 extension ToggleStyle {
@@ -29004,11 +29755,53 @@ extension ToggleStyle {
     /// The system calls this method for each `Toggle` instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
+    /// For example, to make a custom toggle style which returns a HStack from makeBody:
+    ///
+    /// ![Toggle style example 1][togglestyle-example-1.gif]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleStatus: Bool = false
+    ///
+    ///    var body: some View {
+    ///        Toggle(isOn: $toggleStatus, label: {
+    ///            Text("Active")
+    ///        })
+    ///        .padding(50)
+    ///        .toggleStyle(CustomRectangleToggleStyle())
+    ///    }
+    /// }
+    ///
+    /// struct CustomRectangleToggleStyle: ToggleStyle {
+    ///
+    ///    func makeBody(configuration: Configuration) -> some View {
+    ///        HStack {
+    ///            configuration.label
+    ///            Rectangle()
+    ///                .frame(width: 75, height: 30)
+    ///                .overlay(
+    ///                    Circle()
+    ///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
+    ///                        .padding(.all, 3)
+    ///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
+    ///                        .animation(Animation.linear(duration: 0.1))
+    ///                )
+    ///                .onTapGesture {
+    ///                    configuration.isOn.toggle()
+    ///
+    ///                }
+    ///        }
+    ///    }
+    /// }
+    /// ```
+    ///
     /// - Parameter configuration: The properties of the toggle, such as its
     ///   label and its “on” state.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a toggle instance.
+    ///
+    /// See ``ToggleStyleConfiguration`` for more details.
     typealias Configuration = ToggleStyleConfiguration
 }
 
@@ -29358,6 +30151,25 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
 /// - Positional placements, such as `.navigationBarLeading`,
 ///   which denote a precise placement for the item,
 ///   usually for a particular platform.
+///
+/// Toolbar placements are used with the ``ToolbarItem`` when defining a toolbar.
+/// For example:
+///
+/// ![Toolbar item placement example 1][toolbar-placement-example-1.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Text("🍌🍌")
+///        .toolbar {
+///            ToolbarItem(placement: .bottomBar) {
+///                Button("Bottom bar button") {}
+///            }
+///        }
+///    }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItemPlacement {
 
@@ -30631,8 +31443,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
 /// A dynamic data structure for representing a point in a view.
 ///
-/// A unitpoint takes in x and y coordinates measured in points. 
-/// 
+/// A unitpoint takes in x and y coordinates measured in points.
+///
 /// You can customizde the x and y coordinates or you can use a constant.
 /// SwiftUI has 10 UnitPoint constants:
 /// 1. ``UnitPoint/zero``
@@ -30646,9 +31458,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// 9. ``UnitPoint/bottomleading``
 /// 10. ``UnitPoint/bottomtrailing``
 ///
-/// UnitPoints are used commonly in shapes and gradients.  
+/// UnitPoints are used commonly in shapes and gradients.
 ///
-/// For example, a ``LinearGradient`` accepts a `UnitPoint` for the startPoint and endPoint parameters. 
+/// For example, a ``LinearGradient`` accepts a `UnitPoint` for the startPoint and endPoint parameters.
 /// This example uses the constants ``UnitPoint/top`` and ``UnitPoint/bottom``.
 ///
 /// ![LinearGradient Example 1](linear-gradient-example.png)
@@ -30665,7 +31477,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///            .frame(width:100, height:100)
 ///    }
 /// }
-/// ``` 
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
 
@@ -34412,7 +35224,7 @@ extension View {
     /// for "WidgetExtension". This target is named "PreviewContextTest"
     ///
     /// ```
-    /// struct PreviewContextTest_Previews: PreviewProvier {
+    /// struct PreviewContextTest_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         PreviewContextTestEntryView(entry: SimpleEntry(date: Date()))
     ///             .previewContext(WidgetPreviewContext(family: .systemSmall))
@@ -36504,8 +37316,40 @@ extension View {
     @inlinable public func overlayPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
 
 
-    /// Uses the specified preference value from the view to produce another
-    /// view as a background to the first view.
+    /// Places a new view in the background of the first view, using the values from
+    /// the preferences.
+    ///
+    /// This creates a new view, placed in the background, using the view preferences from the parent.
+    /// This will not affect the layout of other views. Using backgroundPreferenceValue
+    /// is one of 3 ways for responding to view preferences. For information on
+    /// the other ways, see:
+    /// - ``View/overlayPreferenceValue(_:,transform:)``
+    /// - ``View/onPreferenceChange(_:,transform:)``
+    ///
+    /// For example:
+    ///
+    /// ![Background preference value example 1][backgroundpreference-example-1.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("Bullseye")
+    ///            .preference(key: CustomPreferenceKey.self, value: Color.red)
+    ///            .backgroundPreferenceValue(CustomPreferenceKey.self) { PreferenceKey in
+    ///                Circle().fill(PreferenceKey)
+    ///        }
+    ///    }
+    /// }
+    ///
+    /// struct CustomPreferenceKey: PreferenceKey {
+    ///    static var defaultValue: Color = Color.clear
+    ///
+    ///    static func reduce(value: inout Color, nextValue: () -> Color) {
+    ///        value = nextValue()
+    ///    }
+    /// }
+    /// ```
     @inlinable public func backgroundPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
 
 }
@@ -36803,7 +37647,47 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Defines the content shape for hit testing.
+    /// Changes the tappable area of a content shape for hit testing.
+    ///
+    /// When using a container view, such as ``ZStack`` or ``VStack``, tap gestures
+    /// are only applied to elements in the container which have content. For example,
+    /// a tap gesture on a ``VStack`` with a ``Spacer`` will not be triggered
+    /// when clicking on the spacer. However, setting the content shape allows
+    /// everything in the container view to be clickable.
+    ///
+    /// For example, to make an entire VStack container clickable:
+    ///
+    /// ![Content shape example 1][contentshape-example-1.gif]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleColor: Bool = false
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Top text").border(Color.black)
+    ///            Spacer().frame(height: 50)
+    ///
+    ///            Rectangle()
+    ///                .fill(toggleColor ? Color.red : Color.blue)
+    ///                .frame(width: 150, height: 150)
+    ///
+    ///            Spacer().frame(height: 50)
+    ///            Text("Bottom text").border(Color.black)
+    ///        }
+    ///        .contentShape(Rectangle())
+    ///        .onTapGesture {
+    ///            self.toggleColor.toggle()
+    ///        }
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// For further clarification on how this works, see this animation of the
+    /// same example from above _without_ any defined contentShape. Notice how
+    /// the rectangle color does not toggle when clicking on the spacers.
+    ///
+    /// ![Content shape example 2][contentshape-example-2.gif]
     ///
     /// - Parameters:
     ///   - shape: The hit testing shape for the view.
@@ -37081,18 +37965,25 @@ extension View {
     /// priority encourages the higher priority view to shrink later when the
     /// group is shrunk and stretch sooner when the group is stretched.
     ///
-    ///     HStack {
-    ///         Text("This is a moderately long string.")
-    ///             .font(.largeTitle)
-    ///             .border(Color.gray)
+    /// ```
+    /// struct ExampleView: View {
     ///
-    ///         Spacer()
+    ///    var body: some View {
+    ///        HStack {
+    ///            Text("This is a moderately long string.")
+    ///                .font(.largeTitle)
+    ///                .border(Color.gray)
     ///
-    ///         Text("This is a higher priority string.")
-    ///             .font(.largeTitle)
-    ///             .layoutPriority(1)
-    ///             .border(Color.gray)
-    ///     }
+    ///            Spacer()
+    ///
+    ///            Text("This is a higher priority string.")
+    ///                .font(.largeTitle)
+    ///                .layoutPriority(1)
+    ///                .border(Color.gray)
+    ///        }
+    ///    }
+    /// }
+    /// ```
     ///
     /// In the example above, the first `Text` element has the default
     /// priority `0` which causes its view to shrink dramatically due to the
@@ -38400,6 +39291,9 @@ extension ViewBuilder {
 }
 
 /// A view's size and its alignment guides in its own coordinate space.
+///
+/// Most frequently used when working with alignment guides. See ``View/alignmentGuide(_:computeValue:)`` for more
+/// on how to use ViewDimensions with these.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ViewDimensions {
 
@@ -38410,17 +39304,81 @@ public struct ViewDimensions {
     public var height: CGFloat { get }
 
     /// Gets the value of the given horizontal guide.
+    ///
+    /// It will return the position of the horizontal alignment value you pass
+    /// as a parameter. See ``HorizontalAlignment`` for all the potential input values.
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[HorizontalAlignment.leading]
+    ///            })
+    ///    }
+    /// }
+    /// ```
     public subscript(guide: HorizontalAlignment) -> CGFloat { get }
 
     /// Gets the value of the given vertical guide.
+    ///
+    /// It will return the position of the vertical alignment value you pass
+    /// as a parameter. See ``VerticalAlignment`` for all the potential input values.
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(VerticalAlignment.center, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[VerticalAlignment.center]
+    ///            })
+    ///    }
+    /// }
+    /// ```
     public subscript(guide: VerticalAlignment) -> CGFloat { get }
 
     /// Gets the explicit value of the given alignment guide in this view, or
     /// `nil` if no such value exists.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[HorizontalAlignment.leading]
+    ///            })
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// See ``HorizontalAlignment`` for all the potential input values.
     public subscript(explicit guide: HorizontalAlignment) -> CGFloat? { get }
 
     /// Gets the explicit value of the given alignment guide in this view, or
     /// `nil` if no such value exists.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("🍌🍌")
+    ///            .alignmentGuide(VerticalAlignment.leading, computeValue: { ViewDimensions in
+    ///                return ViewDimensions[VerticalAlignment.leading]
+    ///            })
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// See ``VerticalAlignment`` for all the potential input values.
     public subscript(explicit guide: VerticalAlignment) -> CGFloat? { get }
 }
 
@@ -38439,25 +39397,40 @@ extension ViewDimensions : Equatable {
 }
 
 /// A modifier that you apply to a view or another view modifier, producing a
-/// different version of the original value.
+/// new view.
 ///
 /// Adopt the `ViewModifier` protocol when you want to create a reusable
 /// modifier that you can apply to any view. The example below combines several
 /// modifiers to create a new modifier that you can use to create blue caption
 /// text surrounded by a rounded rectangle:
 ///
-///     struct BorderedCaption: ViewModifier {
-///         func body(content: Content) -> some View {
-///             content
-///                 .font(.caption2)
-///                 .padding(10)
-///                 .overlay(
-///                     RoundedRectangle(cornerRadius: 15)
-///                         .stroke(lineWidth: 1)
-///                 )
-///                 .foregroundColor(Color.blue)
-///         }
-///     }
+/// ![View modifier example 1][view-modifier-example-1.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        VStack {
+///            Text("Text without blue border")
+///            Text("Text with blue border")
+///                .modifier(BorderedCaption())
+///        }
+///    }
+/// }
+///
+/// struct BorderedCaption: ViewModifier {
+///    func body(content: Content) -> some View {
+///        content
+///            .font(.caption2)
+///            .padding(10)
+///            .overlay(
+///                RoundedRectangle(cornerRadius: 15)
+///                    .stroke(lineWidth: 1)
+///            )
+///            .foregroundColor(Color.blue)
+///    }
+/// }
+/// ```
 ///
 /// You can apply `modifier(_:)` directly to a view, but a more common and
 /// idiomatic approach uses `modifier(_:)` to define an extension to
@@ -38481,6 +39454,13 @@ extension ViewDimensions : Equatable {
 ///         }
 ///     }
 ///
+/// ![A screenshot showing the image of a bus with a caption reading
+/// Downtown Bus. A view extension, using custom a modifier, renders the
+///  caption in blue text surrounded by a rounded
+///  rectangle.](SwiftUI-View-ViewModifier.png)
+///
+/// Note: The ``View/modifier(_:)`` only accepts a single modifier as a parameter.
+/// In order to use multiple modifiers on a single view, see ``ViewModifier/concat(_:)``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ViewModifier { }
 extension ViewModifier {
@@ -38491,7 +39471,23 @@ extension ViewModifier {
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
-    /// represented by `Self` applied to it.
+    /// represented by `Self` applied to it. In simpler terms, `content` is the
+    /// view that is being transformed. For example:
+    ///
+    /// ```
+    /// struct BorderedCaption: ViewModifier {
+    ///    func body(content: Content) -> some View {
+    ///        content
+    ///            .font(.caption2)
+    ///            .padding(10)
+    ///            .overlay(
+    ///                RoundedRectangle(cornerRadius: 15)
+    ///                    .stroke(lineWidth: 1)
+    ///            )
+    ///            .foregroundColor(Color.blue)
+    ///    }
+    /// }
+    /// ```
     func body(content: Self.Content) -> Self.Body { }
 
     /// The content view type passed to `body()`.
@@ -38504,7 +39500,23 @@ extension ViewModifier where Self.Body == Never {
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
-    /// represented by `Self` applied to it.
+    /// represented by `Self` applied to it. In simpler terms, `content` is the
+    /// view that is being transformed. For example:
+    ///
+    /// ```
+    /// struct BorderedCaption: ViewModifier {
+    ///    func body(content: Content) -> some View {
+    ///        content
+    ///            .font(.caption2)
+    ///            .padding(10)
+    ///            .overlay(
+    ///                RoundedRectangle(cornerRadius: 15)
+    ///                    .stroke(lineWidth: 1)
+    ///            )
+    ///            .foregroundColor(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public func body(content: Self.Content) -> Self.Body { }
 }
 
@@ -38513,6 +39525,46 @@ extension ViewModifier {
 
     /// Returns a new modifier that is the result of concatenating
     /// `self` with `modifier`.
+    ///
+    /// This allows you to chain multiple custom modifiers on a view.
+    /// The ``View/modifier(_:)`` only accepts a single modifier as a parameter, which
+    /// is why concat is needed. For example:
+    ///
+    /// ![View modifier concat example 1][view-modifier-concat-example-1.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Text without blue border and padded shadow")
+    ///            Text("Text with blue border and padded shadow")
+    ///                .modifier(BorderedCaption().concat(PaddedShadow()))
+    ///        }
+    ///    }
+    /// }
+    ///
+    /// struct BorderedCaption: ViewModifier {
+    ///    func body(content: Content) -> some View {
+    ///        content
+    ///            .font(.caption2)
+    ///            .padding(10)
+    ///            .overlay(
+    ///                RoundedRectangle(cornerRadius: 15)
+    ///                    .stroke(lineWidth: 1)
+    ///            )
+    ///            .foregroundColor(Color.blue)
+    ///    }
+    /// }
+    ///
+    /// struct PaddedShadow: ViewModifier {
+    ///    func body(content: Content) -> some View {
+    ///        content
+    ///            .padding(50)
+    ///            .shadow(color: .blue, radius: 10)
+    ///    }
+    /// }
+    /// ```
     @inlinable public func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
 }
 
