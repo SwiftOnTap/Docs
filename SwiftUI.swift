@@ -27753,7 +27753,7 @@ extension View {
     /// for "WidgetExtension". This target is named "PreviewContextTest"
     ///
     /// ```
-    /// struct PreviewContextTest_Previews: PreviewProvier {
+    /// struct PreviewContextTest_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         PreviewContextTestEntryView(entry: SimpleEntry(date: Date()))
     ///             .previewContext(WidgetPreviewContext(family: .systemSmall))
