@@ -14316,13 +14316,61 @@ extension LegibilityWeight {
 }
 
 /// A progress view that visually indicates its progress using a horizontal bar.
+///
+/// When initializing a ProgressView with ``ProgressView/init(value:,total:)``, the
+/// ``DefaultProgressViewStyle`` will typically display a linear progress view style.
+///
+/// For example, to create a new ``ProgressView`` with this style:
+///
+/// ![Linear progress view example 1][linearprogressview-example-1.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        ProgressView()
+///            .progressViewStyle(LinearProgressViewStyle())
+///            .padding(20)
+///    }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LinearProgressViewStyle : ProgressViewStyle {
 
     /// Creates a linear progress view style.
+    ///
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Linear progress view example 1][linearprogressview-example-1.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(LinearProgressViewStyle())
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init() { }
 
     /// Creates a linear progress view style with a tint color.
+    ///
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Linear progress view example 2][linearprogressview-example-2.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        ProgressView(value: 5, total: 10)
+    ///            .progressViewStyle(LinearProgressViewStyle(tint: Color.red))
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
