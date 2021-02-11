@@ -34549,34 +34549,35 @@ extension View {
     /// The example below adds buttons to the leading and trailing edges of
     /// the button area of the navigation view:
     ///
-    ///     struct FlavorView: View {
-    ///         var body: some View {
-    ///             NavigationView {
-    ///                 List {
-    ///                     Text("Chocolate")
-    ///                     Text("Vanilla")
-    ///                     Text("Strawberry")
-    ///                 }
-    ///                 .navigationBarTitle(Text("Today‘s Flavors"))
-    ///                 .navigationBarItems(leading:
-    ///                     HStack {
-    ///                         Button("Hours") {
-    ///                             print("Hours tapped!")
-    ///                         }
-    ///                     }, trailing:
-    ///                     HStack {
-    ///                         Button("Favorites") {
-    ///                             print("Favorites tapped!")
-    ///                         }
-    ///
-    ///                         Button("Specials") {
-    ///                             print("Specials tapped!")
-    ///                         }
-    ///                     }
-    ///                 )
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             List {
+    ///                 Text("Banana 🍌🍌")
+    ///                 Text("Apple 🍎🍎")
+    ///                 Text("Peach 🍑🍑")
     ///             }
+    ///             .navigationBarTitle(Text("Today‘s Fruits"))
+    ///             .navigationBarItems(leading:
+    ///                 HStack {
+    ///                     Button("Hours") {
+    ///                         print("Hours tapped!")
+    ///                     }
+    ///                 }, trailing:
+    ///                 HStack {
+    ///                     Button("Favorites") {
+    ///                         print("Favorites tapped!")
+    ///                     }
+    ///                     Button("Specials") {
+    ///                         print("Specials tapped!")
+    ///                     }
+    ///                 }
+    ///             )
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - leading: A view that appears on the leading edge of the title.
