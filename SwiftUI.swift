@@ -21932,17 +21932,24 @@ extension Text {
     /// or down relative to its baseline. The bounds of the view expand to
     /// contain the moved text.
     ///
-    ///     HStack(alignment: .top) {
-    ///         Text("Hello")
-    ///             .baselineOffset(-10)
-    ///             .border(Color.red)
-    ///         Text("Hello")
-    ///             .border(Color.green)
-    ///         Text("Hello")
-    ///             .baselineOffset(10)
-    ///             .border(Color.blue)
-    ///     }
-    ///     .background(Color(white: 0.9))
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        HStack(alignment: .top) {
+    ///            Text("Hello")
+    ///                .baselineOffset(-10)
+    ///                .border(Color.red)
+    ///            Text("Hello")
+    ///                .border(Color.green)
+    ///            Text("Hello")
+    ///                .baselineOffset(10)
+    ///                .border(Color.blue)
+    ///        }
+    ///        .background(Color(white: 0.9))
+    ///    }
+    /// }
+    ///```
     ///
     /// By drawing a border around each text view, you can see how the text
     /// moves, and how that affects the view.
