@@ -15927,7 +15927,7 @@ public enum PopoverAttachmentAnchor {
 /// ```
 ///
 /// For a detailed explanation of how view preferences work, check out this article:
-/// ![Detailed article on view preferences by Mark Wijnen][https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d]
+/// https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d
 ///
 /// Note:
 ///  - A view with multiple children automatically combines its values for a given
@@ -15990,7 +15990,7 @@ extension PreferenceKey {
     /// ```
     ///
     /// For additional details on how the reduce function works, see:
-    /// ![Detailed article on view preferences reduce by Mark Wijnen][https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b]
+    /// https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b
     ///
     /// - Parameters:
     ///   - value: The value accumulated through previous calls to this method.
