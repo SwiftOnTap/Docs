@@ -14473,26 +14473,44 @@ public struct KeyboardShortcut {
 /// [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/)
 /// collection:
 ///
-///     Label("Lightning", systemImage: "bolt.fill")
+/// ```
+/// struct BoltView: View {
+///     var body: some View {
+///         Label("Lightning", systemImage: "bolt.fill")
+///     }
+/// }
+/// ```
 ///
 /// You can also apply styles to labels in several ways. In the case of dynamic
 /// changes to the view after device rotation or change to a window size you
 /// might want to show only the text portion of the label using the title-only
 /// label style:
 ///
-///     Label("Lightning", systemImage: "bolt.fill")
-///         .labelStyle(TitleOnlyLabelStyle())
+/// ```
+/// struct StyledBoltView: View {
+///     var body: some View {
+///         Label("Lightning", systemImage: "bolt.fill")
+///             .labelStyle(TitleOnlyLabelStyle())
+///     }
+/// }
+/// ```
 ///
 /// Conversely, there's also an icon-only label style:
 ///
+/// ```
+/// struct IconOnlyBoltView: View {
+///     var body: some View {
 ///     Label("Lightning", systemImage: "bolt.fill")
 ///         .labelStyle(IconOnlyLabelStyle())
+///     }
+/// }
+/// ```
 ///
 /// You can also create a customized label style by modifying an existing
 /// style; this example adds a red border to the default label style:
 ///
 ///     struct RedBorderedLabelStyle : LabelStyle {
-///         func makeBody(configuration: Configuration) -> some View {{}
+///         func makeBody(configuration: Configuration) -> some View {
 ///             Label(configuration)
 ///                 .border(Color.red)
 ///         }
