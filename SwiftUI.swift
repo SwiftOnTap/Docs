@@ -31313,6 +31313,9 @@ extension ViewDimensions : Equatable {
 /// Downtown Bus. A view extension, using custom a modifier, renders the
 ///  caption in blue text surrounded by a rounded
 ///  rectangle.](SwiftUI-View-ViewModifier.png)
+///
+/// Note: The ``View/modifier(_:)`` only accepts a single modifier as a parameter.
+/// In order to use multiple modifiers on a single view, see ``ViewModifier/concat(_:)``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ViewModifier{ }
 extension ViewModifier {
@@ -31352,7 +31355,23 @@ extension ViewModifier where Self.Body == Never {
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
-    /// represented by `Self` applied to it.
+    /// represented by `Self` applied to it. In simpler terms, `content` is the
+    /// view that is being transformed. For example:
+    ///
+    /// ```
+    /// struct BorderedCaption: ViewModifier {
+    ///    func body(content: Content) -> some View {
+    ///        content
+    ///            .font(.caption2)
+    ///            .padding(10)
+    ///            .overlay(
+    ///                RoundedRectangle(cornerRadius: 15)
+    ///                    .stroke(lineWidth: 1)
+    ///            )
+    ///            .foregroundColor(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public func body(content: Self.Content) -> Self.Body { }
 }
 
@@ -31361,6 +31380,46 @@ extension ViewModifier {
 
     /// Returns a new modifier that is the result of concatenating
     /// `self` with `modifier`.
+    ///
+    /// This allows you to chain multiple custom modifiers on a view.
+    /// The ``View/modifier(_:)`` only accepts a single modifier as a parameter, which
+    /// is why concat is needed. For example:
+    ///
+    /// ![View modifier concat example 1][view-modifier-concat-example-1.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Text without blue border and padded shadow")
+    ///            Text("Text with blue border and padded shadow")
+    ///                .modifier(BorderedCaption().concat(PaddedShadow()))
+    ///        }
+    ///    }
+    /// }
+    ///
+    /// struct BorderedCaption: ViewModifier {
+    ///    func body(content: Content) -> some View {
+    ///        content
+    ///            .font(.caption2)
+    ///            .padding(10)
+    ///            .overlay(
+    ///                RoundedRectangle(cornerRadius: 15)
+    ///                    .stroke(lineWidth: 1)
+    ///            )
+    ///            .foregroundColor(Color.blue)
+    ///    }
+    /// }
+    ///
+    /// struct PaddedShadow: ViewModifier {
+    ///    func body(content: Content) -> some View {
+    ///        content
+    ///            .padding(50)
+    ///            .shadow(color: .blue, radius: 10)
+    ///    }
+    /// }
+    /// ```
     @inlinable public func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
 }
 
