@@ -5385,7 +5385,7 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum CoordinateSpace {
 
-	  /// The absolute coordinate space representing the entire screen.
+    /// The absolute coordinate space representing the entire screen.
     case global
 
     /// The relative coordinate space representing the current view.
@@ -10523,6 +10523,7 @@ public struct FileDocumentWriteConfiguration {
     ///    }
     /// }
     /// ```
+    ///
     /// When `isOEFilled` is `false`, the style uses the non-zero winding number
     /// rule.
     public var isEOFilled: Bool
@@ -11500,7 +11501,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ForegroundStyle {
 
-  	/// Creates a foreground style.
+    /// Creates a foreground style.
     ///
     /// For example, to create a square view with a ForegroundStyle:
     ///
@@ -11515,6 +11516,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///    }
     ///
     /// }
+    /// ```
     @inlinable public init() { }
 }
 
