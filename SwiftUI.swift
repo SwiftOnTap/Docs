@@ -22554,12 +22554,12 @@ extension Toggle where Label == Text {
 /// Structs conforming to the this protocol can customize the styles for ``Toggle`` views.
 ///
 /// ToggleStyle allows for easy customization of a toggle view. In order to customize the style,
-/// simply create a new type conforming to this protocol that returns the custom view
-/// in the `ToggleStyle/makeBody(_:)` function. Note that while conforming to the ToggleStyle
-/// protocol takes care of most the implementation, the conforming type must still
+/// simply create a new type conforming to this protocol that returns a custom view
+/// in the `ToggleStyle/makeBody(_:)` function. Conforming to the ToggleStyle
+/// protocol takes care of most the implementation for the toggle, but the conforming type must still
 /// toggle the isOn property.
 ///
-/// To configure the current toggle style for a view hiearchy, use the
+/// To configure the current toggle style for a view hierarchy, use the
 /// `View/toggleStyle(_:)` modifier.
 ///
 /// For example, to make a custom toggle style which conforms to this protocol:
