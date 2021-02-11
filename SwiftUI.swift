@@ -25815,24 +25815,83 @@ extension Text.Case : Equatable {
 extension Text.Case : Hashable {
 }
 
-/// Aligns the child view within its bounds given anchor types
+/// An enum indicating available alignments for text that spans multiple-lines.
 ///
-/// Child sizing: Respects the child's preferred size on the aligned axes. The child fills the context bounds on unaligned axes.
+/// This is used in conjuction with `View/multilineTextAlignment(_:)`, for example:
 ///
-/// Preferred size: Child's preferred size
-/// An alignment position for text along the horizontal axis.
+/// ![Text alignment center][textalignment-center.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+///            .padding(20)
+///            .font(.system(size: 10))
+///            .multilineTextAlignment(TextAlignment.center)
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum TextAlignment : Hashable, CaseIterable {
 
-	/// Aligns each line of the text to the leading edge, left in left-to-right languages,
-	/// and right in right-to-left languages.
+  	/// Aligns each line of the text to the leading edge, left in left-to-right languages,
+  	/// and right in right-to-left languages.
+    ///
+    /// For example:
+    ///
+    /// ![Text alignment leading][textalignment-leading.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///            .padding(20)
+    ///            .font(.system(size: 10))
+    ///            .multilineTextAlignment(TextAlignment.leading)
+    ///    }
+    /// }
+    /// ```
     case leading
 
     /// Aligns each line of the text with the center of the view.
+    ///
+    /// For example:
+    ///
+    /// ![Text alignment center][textalignment-center.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///            .padding(20)
+    ///            .font(.system(size: 10))
+    ///            .multilineTextAlignment(TextAlignment.center)
+    ///    }
+    /// }
+    /// ```
     case center
 
     /// Aligns each line of the text to the trailing edge, right in left-to-right languages,
     /// and left in right-to-left languages.
+    ///
+    /// For example:
+    ///
+    /// ![Text alignment trailing][textalignment-trailing.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///    var body: some View {
+    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///            .padding(20)
+    ///            .font(.system(size: 10))
+    ///            .multilineTextAlignment(TextAlignment.trailing)
+    ///    }
+    /// }
+    /// ```
     case trailing
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -25873,6 +25932,9 @@ extension Text.Case : Hashable {
     public typealias AllCases = [TextAlignment]
 
     /// A collection of all values of this type.
+    ///
+    /// This will return an array of all available TextAlignment values:
+    /// `.leading`, `.center`, and `.trailing`
     public static var allCases: [TextAlignment] { get }
 }
 
