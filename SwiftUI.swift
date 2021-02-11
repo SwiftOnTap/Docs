@@ -18022,6 +18022,21 @@ public struct PageIndexViewStyle : IndexViewStyle {
 }
 
 /// A `TabViewStyle` that implements a paged scrolling `TabView`.
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///             Text("Apples 🍏🍏")
+///             Text("Peaches 🍑🍑")
+///         }
+///         .foregroundColor(Color.white)
+///         .background(Color.yellow)
+///         .tabViewStyle(PageTabViewStyle())
+///     }
+/// }
+/// ```
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct PageTabViewStyle : TabViewStyle {
