@@ -31323,7 +31323,9 @@ extension ViewModifier {
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
-    /// represented by `Self` applied to it. For example:
+    /// represented by `Self` applied to it. In simpler terms, `content` is the
+    /// view that is being transformed. For example:
+    ///
     /// ```
     /// struct BorderedCaption: ViewModifier {
     ///    func body(content: Content) -> some View {
