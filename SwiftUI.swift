@@ -22496,11 +22496,56 @@ extension Toggle where Label == Text {
     public init<S>(_ title: S, isOn: Binding<Bool>) where S : StringProtocol { }
 }
 
-/// A type that specifies the appearance and interaction of all toggles within a
-/// view hierarchy.
+/// Structs conforming to the this protocol can customize the styles for ``Toggle`` views.
+///
+/// ToggleStyle allows for easy customization of a toggle view. In order to customize the style,
+/// simply create a new type conforming to this protocol that returns the custom view
+/// in the `ToggleStyle/makeBody(_:)` function. Note that while conforming to the ToggleStyle
+/// protocol takes care of most the implementation, the conforming type must still
+/// toggle the isOn property.
 ///
 /// To configure the current toggle style for a view hiearchy, use the
 /// `View/toggleStyle(_:)` modifier.
+///
+/// For example, to make a custom toggle style which conforms to this protocol:
+///
+/// ![Toggle style example 1][togglestyle-example-1.gif]
+///
+/// ```
+/// struct ExampleView: View {
+///    @State private var toggleStatus: Bool = false
+///
+///    var body: some View {
+///        Toggle(isOn: $toggleStatus, label: {
+///            Text("Active")
+///        })
+///        .padding(50)
+///        .toggleStyle(CustomRectangleToggleStyle())
+///    }
+/// }
+///
+/// struct CustomRectangleToggleStyle: ToggleStyle {
+///
+///    func makeBody(configuration: Configuration) -> some View {
+///        HStack {
+///            configuration.label
+///            Rectangle()
+///                .frame(width: 75, height: 30)
+///                .overlay(
+///                    Circle()
+///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
+///                        .padding(.all, 3)
+///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
+///                        .animation(Animation.linear(duration: 0.1))
+///                )
+///                .onTapGesture {
+///                    configuration.isOn.toggle()
+///
+///                }
+///        }
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ToggleStyle{ }
 extension ToggleStyle {
@@ -22513,11 +22558,53 @@ extension ToggleStyle {
     /// The system calls this method for each `Toggle` instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
+    /// For example, to make a custom toggle style which returns a HStack from makeBody:
+    ///
+    /// ![Toggle style example 1][togglestyle-example-1.gif]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleStatus: Bool = false
+    ///
+    ///    var body: some View {
+    ///        Toggle(isOn: $toggleStatus, label: {
+    ///            Text("Active")
+    ///        })
+    ///        .padding(50)
+    ///        .toggleStyle(CustomRectangleToggleStyle())
+    ///    }
+    /// }
+    ///
+    /// struct CustomRectangleToggleStyle: ToggleStyle {
+    ///
+    ///    func makeBody(configuration: Configuration) -> some View {
+    ///        HStack {
+    ///            configuration.label
+    ///            Rectangle()
+    ///                .frame(width: 75, height: 30)
+    ///                .overlay(
+    ///                    Circle()
+    ///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
+    ///                        .padding(.all, 3)
+    ///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
+    ///                        .animation(Animation.linear(duration: 0.1))
+    ///                )
+    ///                .onTapGesture {
+    ///                    configuration.isOn.toggle()
+    ///
+    ///                }
+    ///        }
+    ///    }
+    /// }
+    /// ```
+    ///
     /// - Parameter configuration: The properties of the toggle, such as its
     ///   label and its “on” state.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a toggle instance.
+    ///
+    /// See ``ToggleStyleConfiguration`` for more details.
     typealias Configuration = ToggleStyleConfiguration
 }
 
