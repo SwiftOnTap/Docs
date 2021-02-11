@@ -1213,21 +1213,116 @@ extension Angle : Animatable {
     public typealias AnimatableData = Double
 }
 
-/// An angular gradient.
+/// An angular gradient that applies the color function as the angle changes, relative to a center point
+/// and defined start and end angles.
 ///
-/// An angular gradient is also known as a "conic" gradient. This gradient
-/// applies the color function as the angle changes, relative to a center point
-/// and defined start and end angles. If `endAngle - startAngle > 2π`, the
-/// gradient only draws the last complete turn. If `endAngle - startAngle < 2π`,
-/// the gradient fills the missing area with the colors defined by gradient
-/// locations one and zero, transitioning between the two halfway across the
-/// missing area. The gradient maps the unit-space center point into the
+/// The gradient maps the unit-space center point into the
 /// bounding rectangle of each shape filled with the gradient.
+///
+///
+/// There are 3 main cases where AngularGradient can change:
+/// 1. `endAngle - startAngle = 2π`
+/// 2. `endAngle - startAngle > 2π`
+/// 3. `endAngle - startAngle < 2π`
+///
+/// Note: Angles default to a clockwise rotation, but angles can be a negative value which will rotate the color counter-clockwise.
+///
+/// ## End Angle - Start Angle = 2π
+///
+/// This is the normal case where the start and end angles make a complete circle.
+/// Every color will evenly distribute.
+///
+/// ![AngularGradient Example 1](angular-gradient-example-1.png)
+///
+/// ```
+///  struct AngularGradientView: View {
+///     let colors: [Color] = [.yellow, .red,.blue, .purple]
+///
+///     var body: some View {
+///         Rectangle()          
+///            .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+///            .frame(width:200, height:200)
+///     }
+/// }
+/// ```
+///
+/// ## End Angle - Start Angle > 2π
+///
+/// This is the case where the total angle is greater than a circle.
+/// The gradient will only draw the last complete turn which effectively writes over the first circle portion
+///
+/// ![AngularGradient Example 2](angular-gradient-example-2.png)
+///
+/// ```
+///  struct AngularGradientView: View {
+///     let colors: [Color] = [.yellow, .red,.blue, .purple]
+///
+///     var body: some View {
+///         VStack{
+///             Rectangle()          
+///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+///                .frame(width:200, height:200)
+///             Rectangle()
+///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center,startAngle: .degrees(0), endAngle: .degrees(360 + 45)))
+///                 .frame(width:200, height:200)
+///         }
+///     }
+/// }
+/// ```
+///
+/// ## End Angle - Start Angle < 2π
+///
+/// This is the case where the total angle is less than a circle.
+/// The gradient will not make a complete circle, but the missing area between the start and end will be evenly colored with the
+/// first and last color of the gradient.
+///
+/// ![AngularGradient Example 3](angular-gradient-example-3.png)
+///
+/// ```
+///  struct AngularGradientView: View {
+///     let colors: [Color] = [.yellow, .red,.blue, .purple]
+///
+///     var body: some View {
+///         VStack{
+///             Rectangle()          
+///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+///                .frame(width:200, height:200)
+///             Rectangle()
+///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center,startAngle: .degrees(0), endAngle: .degrees(180)))
+///                 .frame(width:200, height:200)
+///         }
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AngularGradient : ShapeStyle, View {
 
 	/// Creates an angular gradient from a starting and ending angle.
 	///
+    /// Gradient behavior acts differently according to whether the end angle - start angle is greater than, less than or equal to 2π. 
+    /// See ``AngularGradient`` for more information. 
+    /// An example, 
+    ///
+    /// ![AngularGradient Example 3](angular-gradient-example-3.png)
+    ///
+    /// ```
+    ///  struct AngularGradientView: View {
+    ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
+    ///
+    ///     var body: some View {
+    ///         VStack{
+    ///             Rectangle()          
+    ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+    ///                .frame(width:200, height:200)
+    ///             Rectangle()
+    ///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center,startAngle: .degrees(0), endAngle: .degrees(180)))
+    ///                 .frame(width:200, height:200)
+    ///         }
+    ///     }
+    /// }
+    /// ``` 
+    /// 
 	/// - Parameters:
 	///   - gradient: The gradient with the colors to use.
 	///   - center: The unit point that is center of the angular gradient.
@@ -1236,6 +1331,22 @@ extension Angle : Animatable {
     public init(gradient: Gradient, center: UnitPoint, startAngle: Angle = .zero, endAngle: Angle = .zero) { }
 
     /// Creates an angular gradient starting at and angle and going all the way around in a circle.
+    ///
+    /// For example, 
+    ///  
+    /// ![AngularGradient Example 1](angular-gradient-example-1.png)
+    ///
+    /// ```
+    ///  struct ExampleView: View {
+    ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
+    ///
+    ///     var body: some View {
+    ///         Rectangle()          
+    ///            .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+    ///            .frame(width:200, height:200)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - gradient: The gradient with the colors to use.
@@ -1498,6 +1609,38 @@ extension AnimatableModifier : Animatable, ViewModifier {
 }
 
 /// Specifies the timing curve of a changing on-screen value, such as spring or linear.
+///
+/// Functions such as ``view/animation(_:)`` and ``binding/animation(_:)`` take in the Animation structure. 
+///
+///
+/// SwiftUI includes basic animations with predefined or custom easing, as well as spring and fluid animations. 
+/// You can adjust an animation’s speed, set a delay before an animation starts, or specify that an animation repeats.
+/// 
+/// For example, 
+///
+/// ![Animation Example 1](animation-example.gif)
+///
+/// ```
+/// struct AnimateView: View {
+///     @State private var flag = true
+///    
+///     var body: some View {
+///       
+///         VStack {
+///             Rectangle()
+///                 .foregroundColor(flag ? Color.yellow : Color.red)
+///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+///                 .animation(.easeInOut)
+///            
+///             Button("Animate") {
+///                 self.flag.toggle()
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Animation : Equatable {
 
@@ -1553,6 +1696,29 @@ extension Animation {
 	/// An animation where the effect starts out slower and ends slower, while
 	/// moving most quickly in the middle.
 	///
+    /// ![Animation Example 2](animation-example-2.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeInOut(duration: 3.0))
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
 	/// - Parameter duration: How long the effect should last.
     public static func easeInOut(duration: Double) -> Animation { }
 
@@ -1560,36 +1726,213 @@ extension Animation {
 	/// moving most quickly in the middle.
 	///
 	/// Uses the default timing of 1 second.
+    ///
+    /// ![Animation Example 1](animation-example.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeInOut)
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
     public static var easeInOut: Animation { get }
 
     /// An animation where the effect starts out slower and then ends more quickly.
     ///
+    /// For example, 
+    ///
+    /// ![Animation Example 3](animation-example-3.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeIn(duration: 3.0))
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
     /// - Parameter duration: How long the effect should last.
     public static func easeIn(duration: Double) -> Animation { }
 
     /// An animation where the effect starts out slower and then ends more quickly.
     ///
     /// Uses the default timing of 1 second.
+    ///
+    /// For example,
+    ///
+    /// ![Animation Example 4](animation-example-4.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeIn)
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
     public static var easeIn: Animation { get }
 
     /// An animation where the effect starts out more quickly and then slows down.
     ///
+    /// For example, 
+    ///
+    /// ![Animation Example 5](animation-example-5.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeOut(duration: 3.0))
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
     /// - Parameter duration: How long the effect should last.
     public static func easeOut(duration: Double) -> Animation { }
 
     /// An animation where the effect starts out more quickly and then slows down.
     ///
     /// Uses the default timing of 1 second.
+    ///
+    /// For example,
+    ///
+    /// ![Animation Example 6](animation-example-6.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeOut)
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
     public static var easeOut: Animation { get }
 
     /// An animation where the effect happens at a constant speed throughout.
     ///
+    /// For example,
+    ///
+    /// ![Animation Example 7](animation-example-7.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.linear(duration: 3.0))
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
     /// - Parameter duration: How long the effect should last.
     public static func linear(duration: Double) -> Animation { }
 
     /// An animation where the effect happens at a constant speed throughout.
     ///
     /// Uses the default timing of 1 second.
+    ///
+    /// For example,
+    ///
+    /// ![Animation Example 8](animation-example-8.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///    
+    ///     var body: some View {
+    ///       
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.linear)
+    ///            
+    ///             Button("Animate") {
+    ///                 self.flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// 
     public static var linear: Animation { get }
 
     /// An animation with a fully customized timing curve.
@@ -4196,6 +4539,8 @@ public struct ButtonStyleConfiguration {
 	/// The Capsule's rounded corner style, based on the value passed in its
     /// initializer.
 	///
+    /// Look at ``RoundedCornerStyle`` for more information
+    ///
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
@@ -7221,22 +7566,33 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 /// Add a drag gesture to a `Circle` and change its color while the user
 /// performs the drag gesture:
 ///
-///     struct DragGestureView: View {
-///         @State var isDragging = false
+/// ![DragGesture Example 1](drag-gesture-example.gif)
 ///
-///         var drag: some Gesture {
-///             DragGesture()
-///                 .onChanged { _ in self.isDragging = true }
-///                 .onEnded { _ in self.isDragging = false }
-///         }
-///
-///         var body: some View {
-///             Circle()
-///                 .fill(self.isDragging ? Color.red : Color.blue)
-///                 .frame(width: 100, height: 100, alignment: .center)
-///                 .gesture(drag)
-///         }
+///  ```
+///   struct DragGestureView: View {
+///     @State private var location: CGPoint = CGPoint(x: 50, y: 50);
+///     @State var isDragging = false
+///   
+///     var simpleDrag: some Gesture {
+///         DragGesture()
+///             .onChanged { value in
+///                 self.location = value.location
+///                self.isDragging = true
+///                
+///             }
+///             .onEnded{_ in self.isDragging = false}
 ///     }
+///    
+///     var body: some View {
+///         Circle()
+///             .fill(self.isDragging ? Color.red : Color.yellow)            
+///             .frame(width: 100, height: 100)
+///             .position(location)
+///             .gesture(simpleDrag)
+///     }
+///   }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct DragGesture : Gesture {
@@ -10419,6 +10775,9 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 /// A gesture that consists of two gestures where only one of them can succeed.
 ///
 /// The `ExclusiveGesture` gives precedence to its first gesture.
+///
+/// /// See ``Gesture/exclusively(before:)`` for more of an explanation and an example 
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ExclusiveGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
 
@@ -12114,15 +12473,74 @@ extension ForegroundStyle : ShapeStyle {
 /// or inspectors.
 ///
 /// SwiftUI renders forms in a manner appropriate for the platform. For example,
-/// on iOS, forms appear as grouped lists. Use `Section` to group different
+/// on iOS, forms appear as grouped lists. Use ``Section`` to group different
 /// parts of a form's content.
+/// 
+///
+/// For example, 
+///
+/// ![Form Example 1](form-example-1.png)
+///
+/// ```
+///  struct ExampleView: View {
+///    let gradient = Gradient(colors: [.red,.yellow])
+///    @State private var myFruit = ""
+///    
+///    var body: some View {
+///       Form {
+///            TextField("Banana 🍌", text: $myFruit)
+///            TextField("Banana 🍌", text: $myFruit)
+///            TextField("Banana 🍌", text: $myFruit)
+///            }
+///    }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Form<Content> : View where Content : View {
 
-	/// Creates a form from a view builder containing child views.
+	/// Creates a container from a view builder that groups controls intended for data entry
 	///
-	/// The content of a form is almost always different `Section`s.
-	///
+    /// 
+	/// The form view knows how to arrange standard controls inside it such as pickers, textfields and toggles.
+    /// However, when using a custom control results are undefined. 
+    ///
+    /// Controls can be grouped using the ``Section`` view as seen in the example below.
+    ///
+    /// ![Form Example 2](form-example-2.png)
+    ///
+    /// ```
+    ///     struct ExampleView: View {
+    ///     let gradient = Gradient(colors: [.red,.yellow])
+    ///     @State private var email = ""
+    ///     @State private var first = ""
+    ///     @State private var last = ""
+    ///     @State private var not = true
+    ///     @State private var dark = true
+    ///
+    ///    
+    ///     var body: some View {
+    ///         Form {
+    ///             Section(header: Text("Contact Information")) {
+    ///             TextField("First Name", text: $first)
+    ///             TextField("Last Name ", text: $last)
+    ///             TextField("Email", text: $email)
+    ///             }
+    ///             Section(header: Text("Preferences")) {
+    ///                 Toggle(isOn: $not) {
+    ///                     Text("Notifications ")
+    ///                 }
+    ///                 Toggle(isOn: self.$dark) {
+    ///                         Text("Dark Mode ")
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    ///  }
+    /// ```
+    /// 
+    /// 
+    ///
 	/// - Parameter content: A closure that returns the view to the `Form`.
 	///
 	/// - SeeAlso: Section
@@ -12683,11 +13101,32 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 }
 
 /// A color gradient represented as an array of color stops, each having a
-/// parametric location value.
+/// location value between 0 and 1.
+///
+/// There are three different types of gradeints:
+/// 1. ``LinearGradient``
+/// 2. ``AngularGradient``
+/// 3. ``RadialGradient``
+///
+/// Each gradient can be initialized with an array of colors or an array of stops.
+/// See ``Gradient/stop`` to learn more about the color stop structure that is expected.
+/// Note that when using an array of colors in a gradient, the location of each color is evenly spaced.
+///
+/// For example,
+/// Gradient(colors: [.yellow, .orange])
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Gradient : Equatable {
 
     /// One color stop in the gradient.
+    ///
+    /// There are two important attributes to every ``Gradient/stop``.
+    /// 1. The color
+    /// 2. The location where the color starts
+    ///
+    ///  Gradient(stops:[Gradient.Stop(color: .yellow, location: 0.0),
+    ///           Gradient.Stop(color: .orange, location: 0.5)])
+    ///
     @frozen public struct Stop : Equatable {
 
         /// The color for the stop.
@@ -12699,6 +13138,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         public var location: CGFloat
 
         /// Creates a color stop with a color and location.
+        ///
+        /// An example of one color stop:
+        /// `Gradient.Stop(color: .yellow, location: 0.0)`
+        ///
         public init(color: Color, location: CGFloat) { }
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -12716,12 +13159,20 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     public var stops: [Gradient.Stop]
 
     /// Creates a gradient from an array of color stops.
+    ///
+    /// `Gradient(stops:[Gradient.Stop(color: .yellow, location: 0.0),
+    ///           Gradient.Stop(color: .orange, location: 0.5)])`
+    ///
+    /// See ``Gradient/Stop`` for more information on what is expected.
+    ///
     public init(stops: [Gradient.Stop]) { }
 
     /// Creates a gradient from an array of colors.
     ///
-    /// The gradient synthesizes its location values to evenly space the colors
-    /// along the gradient.
+    /// The gradient evenly spaces the colors.
+    ///
+    /// `Gradient(colors: [.yellow, .orange])`
+    ///
     public init(colors: [Color]) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -12768,11 +13219,42 @@ public struct GraphicalDatePickerStyle : DatePickerStyle {
 /// `LazyHGrid` and `LazyVGrid` views. Each grid item specifies layout
 /// properties like spacing and alignment, which the grid view uses to size and
 /// position all items in a given column or row.
+///
+/// ```
+/// struct VerticalEmojiView: View {
+///     var columns: [GridItem] =
+///             Array(repeating: .init(.fixed(20)), count: 2)
+///
+///     var body: some View {
+///         ScrollView(.horizontal) {
+///             LazyHGrid(rows: rows, alignment: .top) {
+///                 ForEach((0...79), id: \.self) {
+///                     let codepoint = $0 + 0x1f600
+///                     let codepointString = String(format: "%02X", codepoint)
+///                     Text("\(codepointString)")
+///                         .font(.footnote)
+///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+///                     Text("\(emoji)")
+///                      .font(.largeTitle)
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct GridItem {
 
     /// The size in the minor axis of one or more rows or columns in a grid
     /// layout.
+    ///
+    /// There are three types of sizes: 
+    /// 1. ``griditem/size/fixed``
+    /// 2. ``griditem/size/flexible`
+    /// 3. ``griditem/size/adaptive``
+    ///
     public enum Size {
 
         /// A single item with the specified fixed size.
@@ -12788,7 +13270,7 @@ public struct GridItem {
         /// Multiple items in the space of a single flexible item.
         ///
         /// This size case places one or more items into the space assigned to
-        /// a single `flexible` item, using the provided bounds and
+        /// a single ``griditem/size/flexible``` item, using the provided bounds and
         /// spacing to decide exactly how many items fit. This approach prefers
         /// to insert as many items of the `minimum` size as possible
         /// but lets them increase to the `maximum` size.
@@ -13173,18 +13655,63 @@ extension Group : Commands where Content : Commands {
     @inlinable public init(@CommandsBuilder content: () -> Content) { }
 }
 
-/// A stylized view with an optional label that is associated with a logical
-/// grouping of content.
+/// A view that provides style for a logical grouping of content with an optional label.
+///
+/// Use this structure to style and group together content. Default styling on iOS is a simple card with a title and content.
+/// ``GroupBox`` can be used in 3 different ways
+///
+/// 1. With a Label
+/// 2. With a Configuration
+/// 3. Without a Label
+///
+///
+/// Here is an example creating a ``GroupBox`` with a label.
+///
+/// ```
+///   var body: some View {
+///     GroupBox(
+///       label: Text("Types of Boxes 📦")){
+///         Text("Present 🎁")
+///         Text("JuiceBox 🧃")
+///       }
+///     }
+///   }
+/// ```
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct GroupBox<Label, Content> : View where Label : View, Content : View {
 
 	/// Creates a group box from a label and a view builder of content.
-	///
+    ///
+    /// For example,
+    ///
+    /// ```
+	///  struct ExampleView: View {
+    ///     @State private var username: String = ""
+    ///     @State private var password: String = ""
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///           GroupBox(label: Text("Account Login")) {
+    ///              Form {
+    ///                  Text("Username")
+    ///                  TextField("", text: $username)
+    ///
+    ///                  Text("Password")
+    ///                  SecureField("", text: $password)
+    ///              }
+    ///          }
+    ///      }
+    ///  }
+    /// }
+    /// ```
+    ///
 	/// - Parameters:
 	///   - label: The label to associate with the grouped content.
 	///   - content: The grouped content to appear with the label.
+    ///
     public init(label: Label, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
@@ -14908,24 +15435,58 @@ public struct LazyHStack<Content> : View where Content : View {
 /// `LazyVGrid` consisting of a two-column grid of `Text` views, showing
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
-///      var columns: [GridItem] =
-///              Array(repeating: .init(.flexible()), count: 2)
-///      ScrollView {
-///          LazyVGrid(columns: columns) {
-///              ForEach((0...79), id: \.self) {
-///                  let codepoint = $0 + 0x1f600
-///                  let codepointString = String(format: "%02X", codepoint)
-///                  Text("\(codepointString)")
-///                  let emoji = String(Character(UnicodeScalar(codepoint)!))
-///                  Text("\(emoji)")
-///              }
-///          }.font(.largeTitle)
-///      }
+/// ```
+/// struct VerticalEmojiView: View {
+///     var columns: [GridItem] =
+///             Array(repeating: .init(.fixed(20)), count: 2)
+///
+///     var body: some View {
+///         ScrollView(.horizontal) {
+///             LazyVGrid(rows: rows, alignment: .top) {
+///                 ForEach((0...79), id: \.self) {
+///                     let codepoint = $0 + 0x1f600
+///                     let codepointString = String(format: "%02X", codepoint)
+///                     Text("\(codepointString)")
+///                         .font(.footnote)
+///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+///                     Text("\(emoji)")
+///                      .font(.largeTitle)
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyVGrid<Content> : View where Content : View {
 
     /// Creates a grid that grows vertically, given the provided properties.
     ///
+    /// The first parameter, rows, takes an array of ``GridItem``s.
+    /// For more info on the types of grid items, check out that page.
+    ///
+    /// ```
+    /// struct VerticalEmojiView: View {
+    ///     var columns: [GridItem] =
+    ///             Array(repeating: .init(.fixed(20)), count: 2)
+    ///
+    ///     var body: some View {
+    ///         ScrollView(.horizontal) {
+    ///             LazyHGrid(rows: rows, alignment: .top) {
+    ///                 ForEach((0...79), id: \.self) {
+    ///                     let codepoint = $0 + 0x1f600
+    ///                     let codepointString = String(format: "%02X", codepoint)
+    ///                     Text("\(codepointString)")
+    ///                         .font(.footnote)
+    ///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+    ///                     Text("\(emoji)")
+    ///                      .font(.largeTitle)
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     /// - Parameters:
     ///   - columns: An array of grid items to size and position each row of
     ///    the grid.
@@ -15060,7 +15621,34 @@ extension LegibilityWeight {
     public init?(_ uiLegibilityWeight: UILegibilityWeight) { }
 }
 
-/// A linear gradient.
+/// A linear gradient that applies the color function along an axis, as defined by its
+/// start and end points.
+///
+/// Use ``LinearGradient`` to create a gradient along the x,y coordinate space (range from 0 to 1).
+/// In order to define the start and end points of the gradient use a ``UnitPoint``.
+/// ``LinearGradient`` accepts a ``Gradient`` structure that defines the colors used in the gradient.
+/// A gradient stop will be rendered along the path based on each stops's location.
+///
+/// For example,
+///
+/// ![LinearGradient Example 1](linear-gradient-example.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    let colors: [Color] = [.yellow, .orange]
+///
+///    var body: some View {
+///        Rectangle()
+///            .fill(LinearGradient(gradient: Gradient(colors: colors),
+///                                 startPoint: .top,
+///                                 endPoint: .bottom))
+///            .frame(width:100, height:100)
+///    }
+/// }
+/// ```
+///
+/// Note: See ``UnitPoint`` for  list of predefined points you can use such as ``UnitPoint/top`` and ``UnitPoint/bottom``.
+/// However, you can always create a custom ``UnitPoint`` if needed using `x` and `y` points.
 ///
 /// ![Rectangle Example](rounded-rectangle.png)
 ///
@@ -15085,6 +15673,22 @@ extension LegibilityWeight {
 
 	/// Creates a new linear gradient from the Gradient colors, the start, and the end.
 	///
+    /// For example,
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    let colors: [Color] = [.yellow, .orange]
+    ///
+    ///    var body: some View {
+    ///        Rectangle()
+    ///            .fill(LinearGradient(gradient: Gradient(colors: colors),
+    ///                                 startPoint: .top,
+    ///                                 endPoint: .bottom))
+    ///            .frame(width:100, height:100)
+    ///    }
+    /// }
+    /// ```
+    ///
 	/// - Parameters:
 	///   - gradient: The gradient containing the ordered colors to be used.
 	///   - startPoint: The unit point where the gradient starts.
@@ -16107,9 +16711,12 @@ extension LocalizedStringKey.StringInterpolation {
 /// gesture, then add it to the view using the `View/gesture(_:including:)`
 /// modifier.
 ///
-/// Add a long-press gesture to a `Circle` to animate its color from blue to
-/// red, and then change it to green when the gesture ends:
+/// Add a long-press gesture to a `Circle` to animate its color from yellow to
+/// red, and then change it to black when the gesture ends:
 ///
+/// ![LongPressGesture Example 1](long-press-gesture-example.gif)
+///
+/// ```
 ///     struct LongPressGestureView: View {
 ///         @GestureState var isDetectingLongPress = false
 ///         @State var completedLongPress = false
@@ -16130,11 +16737,12 @@ extension LocalizedStringKey.StringInterpolation {
 ///             Circle()
 ///                 .fill(self.isDetectingLongPress ?
 ///                     Color.red :
-///                     (self.completedLongPress ? Color.green : Color.blue))
+///                     (self.completedLongPress ? Color.black : Color.yellow))
 ///                 .frame(width: 100, height: 100, alignment: .center)
 ///                 .gesture(longPress)
 ///         }
 ///     }
+/// ```
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 14.0, *)
 public struct LongPressGesture : Gesture {
 
@@ -16176,6 +16784,9 @@ public struct LongPressGesture : Gesture {
 /// Add a magnification gesture to a `Circle` that changes its size while the
 /// user performs the gesture:
 ///
+/// ![MagnificationGesture Example 1](magnification-gesture-example.gif)
+///
+/// ```
 ///     struct MagnificationGestureView: View {
 ///
 ///         @GestureState var magnifyBy = CGFloat(1.0)
@@ -16189,13 +16800,15 @@ public struct LongPressGesture : Gesture {
 ///
 ///         var body: some View {
 ///             Circle()
+///                 .fill(Color.yellow)
 ///                 .frame(width: 100 * magnifyBy,
 ///                        height: 100 * magnifyBy,
 ///                        alignment: .center)
 ///                 .gesture(magnification)
 ///         }
 ///     }
-///
+/// ```
+/// 
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
 @available(watchOS, unavailable)
@@ -16203,10 +16816,38 @@ public struct LongPressGesture : Gesture {
 public struct MagnificationGesture : Gesture {
 
     /// The minimum required delta before the gesture starts.
+    ///
+    /// This defaults to 0.01 in the ``MagnificationGesture``` initialilzer but can be changed
+    ///
     public var minimumScaleDelta: CGFloat
 
     /// Creates a magnification gesture with a given minimum delta for the
     /// gesture to start.
+    ///
+    /// ![MagnificationGesture Example 2](magnification-gesture-example-2.gif)
+    ///
+    /// ```
+    ///     struct MagnificationGestureView: View {
+    ///
+    ///         @GestureState var magnifyBy = CGFloat(1.0)
+    ///
+    ///         var magnification: some Gesture {
+    ///             MagnificationGesture(minimumScaleDelta: 2.0)
+    ///                 .updating($magnifyBy) { currentState, gestureState, transaction in
+    ///                     gestureState = currentState
+    ///                 }
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             Circle()
+    ///                 .fill(Color.yellow)
+    ///                 .frame(width: 100 * magnifyBy,
+    ///                        height: 100 * magnifyBy,
+    ///                        alignment: .center)
+    ///                 .gesture(magnification)
+    ///         }
+    ///     }
+    /// ```
     ///
     /// - Parameter minimumScaleDelta: The minimum scale delta required before
     ///   the gesture starts.
@@ -20911,22 +21552,55 @@ extension ProjectionTransform {
     @inlinable public func concatenating(_ rhs: ProjectionTransform) -> ProjectionTransform { }
 }
 
-/// A radial gradient.
+/// A radial gradient that applies the color function as the distance from a center point,
+/// scaled to fit within the defined start and end radii..
 ///
-/// The gradient applies the color function as the distance from a center point,
-/// scaled to fit within the defined start and end radii. The gradient maps the
-/// unit-space center point into the bounding rectangle of each shape filled
-/// with the gradient.
+/// A Radial Gradient is very similar to a ``LinearGradient``, but instead of defining starting and ending points, 
+/// it is necessary to define a start radius, an end radius and the center of the gradeint. 
+///
+/// The gradient is drawn as circular around the center, moving outwards to the end radius. 
+/// ``RadialGradient`` accepts a ``Unitpoint`` for the center of the gradeint and ``CGFloat`` for radius in points. 
+///
+/// For example, 
+///
+/// ![RadialGradient Example 1](radial-gradient-example.png)
+///
+/// ```
+/// struct RadialView: View {
+///    let gradient = Gradient(colors: [.red,.yellow])
+///        
+///    var body: some View {
+///        Rectangle()
+///            .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
+///            .frame(width: 200, height: 200)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RadialGradient : ShapeStyle, View {
 
 	/// Creates a new radial gradient from a start and end point.
 	///
+    /// ![RadialGradient Example 1](radial-gradient-example.png)
+    ///
+    /// ```
+    /// struct RadialView: View {
+    ///    let gradient = Gradient(colors: [.red,.yellow])
+    ///        
+    ///    var body: some View {
+    ///        Rectangle()
+    ///            .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
+    ///            .frame(width: 200, height: 200)
+    ///     }
+    /// }
+    /// ```
+    ///
 	/// - Parameters:
 	///   - gradient: The gradient containing the colors to transition through.
 	///   - center: The center of the radial gradient.
 	///   - startRadius: How far from the center to start the gradient.
-	///   - endRadius:
+	///   - endRadius: How Far from the center to end the gradeint.
     public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat) { }
 
     /// The type of view representing the body of this view.
@@ -22150,6 +22824,9 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 ///
 /// Add a rotation gesture to a `Rectangle` and apply a rotation effect:
 ///
+/// ![RotationGesture Example 1](rotation-gesture-example.gif)
+/// 
+/// ```
 ///     struct RotationGestureView: View {
 ///         @State var angle = Angle(degrees: 0.0)
 ///
@@ -22161,22 +22838,57 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 ///         }
 ///
 ///         var body: some View {
-///             Rectangle()
-///                 .frame(width: 200, height: 200, alignment: .center)
-///                 .rotationEffect(self.angle)
-///                 .gesture(rotation)
+///             ZStack {
+///                 Rectangle()
+///                     .fill(Color.yellow)
+///                     .frame(width: 200, height: 200, alignment: .center)
+///                     .rotationEffect(self.angle)
+///                     .gesture(rotation)
+///                 Text("Rotate Me")
+///            }
 ///         }
 ///     }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct RotationGesture : Gesture {
 
     /// The minimum delta required before the gesture succeeds.
+    ///
+    /// The deefauly value in the ``RotationGesture`` initializer is a one-degree angle
+    ///
     public var minimumAngleDelta: Angle
 
     /// Creates a rotation gesture with a minimum delta for the gesture to
     /// start.
+    ///
+    /// ![RotationGesture Example 2](rotation-gesture-example-2.gif)
+    /// 
+    /// ```
+    ///     struct RotationGestureView: View {
+    ///         @State var angle = Angle(degrees: 0.0)
+    ///
+    ///         var rotation: some Gesture {
+    ///             RotationGesture(minimumAngleDelta: .degrees(45))
+    ///                 .onChanged { angle in
+    ///                     self.angle = angle
+    ///                 }
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             ZStack {
+    ///                 Rectangle()
+    ///                     .fill(Color.yellow)
+    ///                     .frame(width: 200, height: 200, alignment: .center)
+    ///                     .rotationEffect(self.angle)
+    ///                     .gesture(rotation)
+    ///                 Text("Rotate Me")
+    ///            }
+    ///         }
+    ///     }
+    /// ```
     ///
     /// - Parameter minimumAngleDelta: The minimum delta required before the
     ///   gesture starts. The default value is a one-degree angle.
@@ -22200,13 +22912,67 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 }
 
 /// Defines the shape of a rounded rectangle's corners.
+
+/// Thiis style has two options:
+/// 1. `roundedcornerstyle/circular` 
+/// 2. `roundedcornerstyle/circular`
+///
+/// These styles have subtle but noticeable differences:
+///
+/// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack(spacing: 20) {
+///             RoundedRectangle(cornerRadius: 50, style: .circular)
+///                 .frame(width: 250, height: 150)
+///
+///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+///                 .frame(width: 250, height: 150)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum RoundedCornerStyle {
 
     /// Quarter-circle rounded rect corners.
+    ///
+    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: .circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case circular
 
     /// Continuous curvature rounded rect corners.
+    ///
+    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: .circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case continuous
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -24054,8 +24820,87 @@ public struct SegmentedPickerStyle : PickerStyle {
 
 /// A gesture that's a sequence of two gestures.
 ///
-/// Read <doc:Composing-SwiftUI-Gestures> to learn how you can create a sequence
+/// ![SequenceGesture Example 1](sequence-gesture-example.gif)
+///
+/// ```
+/// struct SequenceView: View {
+///
+///    enum DragState {
+///        case inactive
+///        case pressing
+///        case dragging(translation: CGSize)
+///
+///        var translation: CGSize {
+///            switch self {
+///            case .inactive, .pressing:
+///                return .zero
+///            case .dragging(let translation):
+///                return translation
+///            }
+///        }
+///
+///        var isActive: Bool {
+///            switch self {
+///            case .inactive:
+///                return false
+///            case .pressing, .dragging:
+///                return true
+///            }
+///        }
+///
+///        var isDragging: Bool {
+///            switch self {
+///            case .inactive, .pressing:
+///                return false
+///            case .dragging:
+///                return true
+///            }
+///        }
+///    }
+///
+///    @GestureState var dragState = DragState.inactive
+///    @State var viewState = CGSize.zero
+///    var body: some View {
+///            let minimumLongPressDuration = 0.5
+///            let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
+///                .sequenced(before: DragGesture())
+///                .updating($dragState) { value, state, transaction in
+///                    switch value {
+///                    // Long press begins.
+///                    case .first(true):
+///                        state = .pressing
+///                    // Long press confirmed, dragging may begin.
+///                    case .second(true, let drag):
+///                        state = .dragging(translation: drag?.translation ?? .zero)
+///                    // Dragging ended or the long press cancelled.
+///                    default:
+///                        state = .inactive
+///                    }
+///                }
+///                .onEnded { value in
+///                    guard case .second(true, let drag?) = value else { return }
+///                    self.viewState.width += drag.translation.width
+///                    self.viewState.height += drag.translation.height
+///                }
+///        return Circle()
+///                   .fill(Color.blue)
+///                   .overlay(dragState.isDragging ? Circle().stroke(Color.white, lineWidth: 2) : nil)
+///                   .frame(width: 100, height: 100, alignment: .center)
+///                   .offset(
+///                       x: viewState.width + dragState.translation.width,
+///                       y: viewState.height + dragState.translation.height
+///                   )
+///                   .animation(nil)
+///                   .shadow(radius: dragState.isActive ? 8 : 0)
+///                   .animation(.linear(duration: minimumLongPressDuration))
+///                   .gesture(longPressDrag)
+///           }
+///       }
+/// ```
+/// For more information, you can visit `https://developer.apple.com/documentation/swiftui/composing-swiftui-gestures` to learn how you can create a sequence
 /// of two gestures.
+///
+
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SequenceGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
 
@@ -24731,6 +25576,11 @@ public struct SidebarListStyle : ListStyle {
 /// A simultaneous gesture is a container-event handler that evaluates its two
 /// child gestures at the same time. Its value is a struct with two optional
 /// values, each representing the phases of one of the two gestures.
+///
+/// ![SimultaneousGesture Example 1](simultaneous-gesture-example.gif)
+///
+/// See ``Gesture/simultaneously(with:)`` for more of an explanation and an example 
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SimultaneousGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
 
@@ -26499,21 +27349,29 @@ extension TabViewStyle {
 /// The following code adds a tap gesture to a `Circle` that toggles the color
 /// of the circle.
 ///
-///     struct TapGestureView: View {
-///         @State var tapped = false
+/// ![TapGesture Example 1](tap-gesture-example.gif)
 ///
-///         var tap: some Gesture {
-///             TapGesture(count: 1)
-///                 .onEnded { _ in self.tapped = !self.tapped }
-///         }
+/// ```
+/// struct ExampleView: View {
+///     @State var tapped = false
 ///
-///         var body: some View {
+///     var tap: some Gesture {
+///         TapGesture(count: 1)
+///             .onEnded { _ in self.tapped = !self.tapped }
+///     }
+///
+///     var body: some View {
+///         ZStack{
 ///             Circle()
-///                 .fill(self.tapped ? Color.blue : Color.red)
+///                 .fill(self.tapped ? Color.yellow : Color.red)
 ///                 .frame(width: 100, height: 100, alignment: .center)
 ///                 .gesture(tap)
+///             Text("Tap Me")
 ///         }
 ///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct TapGesture : Gesture {
@@ -29772,6 +30630,42 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 }
 
 /// A dynamic data structure for representing a point in a view.
+///
+/// A unitpoint takes in x and y coordinates measured in points. 
+/// 
+/// You can customizde the x and y coordinates or you can use a constant.
+/// SwiftUI has 10 UnitPoint constants:
+/// 1. ``UnitPoint/zero``
+/// 2. ``UnitPoint/center``
+/// 3. ``UnitPoint/leading``
+/// 4. ``UnitPoint/trailing``
+/// 5. ``UnitPoint/top``
+/// 6. ``UnitPoint/bottom``
+/// 7. ``UnitPoint/topleading``
+/// 8. ``UnitPoint/toptrailing``
+/// 9. ``UnitPoint/bottomleading``
+/// 10. ``UnitPoint/bottomtrailing``
+///
+/// UnitPoints are used commonly in shapes and gradients.  
+///
+/// For example, a ``LinearGradient`` accepts a `UnitPoint` for the startPoint and endPoint parameters. 
+/// This example uses the constants ``UnitPoint/top`` and ``UnitPoint/bottom``.
+///
+/// ![LinearGradient Example 1](linear-gradient-example.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    let colors: [Color] = [.yellow, .orange]
+///
+///    var body: some View {
+///        Rectangle()
+///            .fill(LinearGradient(gradient: Gradient(colors: colors),
+///                                 startPoint: .top,
+///                                 endPoint: .bottom))
+///            .frame(width:100, height:100)
+///    }
+/// }
+/// ``` 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
 
@@ -29785,6 +30679,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     @inlinable public init() { }
 
     /// Creates a unit point from x and y values.
+    ///
+    /// `UnitPoint(x: 1, y: 0)`
     ///
     /// - Parameters:
     ///   x: The x coordinate of the unit point.
