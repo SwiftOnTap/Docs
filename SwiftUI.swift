@@ -22987,6 +22987,25 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
 /// - Positional placements, such as `.navigationBarLeading`,
 ///   which denote a precise placement for the item,
 ///   usually for a particular platform.
+///
+/// Toolbar placements are used with the ``ToolbarItem`` when defining a toolbar.
+/// For example:
+///
+/// ![Toolbar item placement example 1][toolbar-placement-example-1.png]
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Text("🍌🍌")
+///        .toolbar {
+///            ToolbarItem(placement: .bottomBar) {
+///                Button("Bottom bar button") {}
+///            }
+///        }
+///    }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItemPlacement {
 
