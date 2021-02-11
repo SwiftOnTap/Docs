@@ -233,6 +233,19 @@ extension AccessibilityLabeledPairRole : Hashable {
 /// A struct used to define the characteristics of a view when accessed for accessibility.
 ///
 /// `AccessibilityTraits` are almost always used in conjunction with the `View/accessibilityAddTraits(_:)` view modifier.
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///
+///    var body: some View {
+///        Button("I'm a button! 😏") {
+///            // Do something on button click
+///        }.accessibilityAddTraits(.isButton)
+///    }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityTraits : SetAlgebra {
 
