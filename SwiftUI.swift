@@ -861,37 +861,88 @@ extension Anchor.Source {
     public init<T>(_ anchor: Anchor<T>.Source?) where Value == T? { }
 }
 
-/// A geometric angle whose value you access in either radians or degrees.
+/// A geometric angle whose value is accessible in radians or degrees.
+///
+/// An Angle can be created using either radians or degrees, and its value can
+/// be accessed in either radians or degrees. An angle can be passed into the 
+/// `Shape/rotation(:anchor:)` modifier to rotate a Shape:
+///
+/// ![Angle rotation basic example](angle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Rectangle()
+///             .rotation(Angle(degrees: 45))
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 75)
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Angle {
 
-	/// The size of the angle, measured in radians.
+	/// The size of the angle, as measured in radians.
+    ///
+    /// ```
+    /// let angle1 = Angle(degrees: 45)
+    /// print(angle1.radians) // 0.7853981633974483
+    /// 
+    /// let angle2 = Angle(radians: 1)
+    /// print(angle2.radians) // 1.0
+    /// ```
     public var radians: Double
 
-    /// The size of the angle, measured in degrees.
+    /// The size of the angle, as measured in degrees.
+    ///
+    /// ```
+    /// let angle1 = Angle(degrees: 45)
+    /// print(angle1.degrees) // 45.0
+    /// 
+    /// let angle2 = Angle(radians: 1)
+    /// print(angle2.degrees) // 57.29577951308232
+    /// ```
     @inlinable public var degrees: Double
 
-    /// Creates an angle of 0 degrees or 0 radians.
+    /// Creates an angle with a value of 0 degrees/0.
+    ///
+    /// ```
+    /// let angle = Angle()
+    /// print(angle.degrees) // 0.0
+    /// print(angle.radians) // 0.0
+    /// ```
     @inlinable public init() { }
 
-    /// Creates an angle from a specified number of radians.
+    /// Creates an angle with a specified number of radians.
     ///
-    /// - Parameter radians: The number of radians in the angle.
+    /// - Parameter radians: The number of radians for the new angle.
+    ///
+    /// ```
+    /// let angle = Angle(radians: 1)
+    /// print(angle.degrees) // 57.29577951308232
+    /// print(angle.radians) // 1.0
+    /// ```
     @inlinable public init(radians: Double) { }
 
-    /// Creates an angle from a specified number of degrees.
+    /// Creates an angle with a specified number of degrees.
     ///
-    /// - Parameter degrees: The number of degrees in the angle.
+    /// - Parameter degrees: The number of degrees for the new angle.
+    ///
+    /// ```
+    /// let angle = Angle(degrees: 45)
+    /// print(angle.degrees) // 45.0
+    /// print(angle.radians) // 0.7853981633974483
+    /// ```
     @inlinable public init(degrees: Double) { }
 
-    /// Changes the size of an angle to a specified number of radians.
+    /// > Changes the size of an angle to a specified number of radians.
     ///
     /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle { }
 
-    /// Changes the size of an angle to a specified number of degrees.
+    /// > Changes the size of an angle to a specified number of degrees.
     ///
-    /// - Paramter degrees: The number of degrees the new angle should be.
+    /// - Parameter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle { }
 }
 
@@ -901,59 +952,72 @@ extension Angle : Hashable, Comparable {
     /// Returns a Boolean value indicating whether the value of the first
     /// argument is less than that of the second argument.
     ///
-    /// This function is the only requirement of the `Comparable` protocol. The
-    /// remainder of the relational operator functions are implemented by the
-    /// standard library for any type that conforms to `Comparable`.
-    ///
     /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
+    ///   - lhs: An Angle to compare.
+    ///   - rhs: Another Angle to compare.
+    ///
+    /// ```
+    /// let angle1 = Angle(degrees: 45)
+    /// let angle2 = Angle(degrees: 45)
+    /// let angle3 = Angle(degrees: 90)
+    /// print(angle1 < angle2) // false
+    /// print(angle1 < angle3) // true
+    /// ```
     @inlinable public static func < (lhs: Angle, rhs: Angle) -> Bool { }
 
     /// Returns a Boolean value indicating whether two values are equal.
     ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
     /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
+    ///   - lhs: An Angle to compare.
+    ///   - rhs: Another Angle to compare.
+    ///
+    /// ```
+    /// let angle1 = Angle(degrees: 45)
+    /// let angle2 = Angle(degrees: 45)
+    /// let angle3 = Angle(degrees: 90)
+    /// print(angle1 == angle2) // true
+    /// print(angle1 == angle3) // false
+    /// ```
     public static func == (a: Angle, b: Angle) -> Bool { }
 
-    /// The hash value.
+    /// The hash value of the Angle.
     ///
-    /// Hash values are not guaranteed to be equal across different executions of
-    /// your program. Do not save hash values to use during a future execution.
+    /// Hash values are not guaranteed to be equal across different executions 
+    /// of your program. Do not save hash values to use during a future 
+    /// execution.
     ///
     /// - Important: `hashValue` is deprecated as a `Hashable` requirement. To
     ///   conform to `Hashable`, implement the `hash(into:)` requirement instead.
+    ///
+    /// ```
+    /// let angle = Angle(degrees: 45)
+    /// print(angle.hashValue) // -6958825055113283289
+    /// ```
     public var hashValue: Int { get }
 
-    /// Hashes the essential components of this value by feeding them into the
+    /// Hashes the essential components of the Angle by feeding them into the
     /// given hasher.
     ///
-    /// Implement this method to conform to the `Hashable` protocol. The
-    /// components used for hashing must be the same as the components compared
-    /// in your type's `==` operator implementation. Call `hasher.combine(_:)`
-    /// with each of these components.
-    ///
-    /// - Important: Never call `finalize()` on `hasher`. Doing so may become a
-    ///   compile-time error in the future.
-    ///
     /// - Parameter hasher: The hasher to use when combining the components
-    ///   of this instance.
+    ///   of this Angle.
+    ///
+    /// ```
+    /// let angle = Angle(degrees: 45)
+    /// var hasher = Hasher()
+    /// angle.hash(into: &hasher)
+    /// ```
     public func hash(into hasher: inout Hasher) { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Angle : Animatable {
 
-    /// The data to animate.
+    /// > The data to animate.
     public var animatableData: Double
 
     @inlinable public static var zero: Angle { get }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = Double
 }
 
