@@ -233,6 +233,8 @@ extension AccessibilityLabeledPairRole : Hashable {
 /// A struct used to define the characteristics of a view when accessed for accessibility.
 ///
 /// `AccessibilityTraits` are almost always used in conjunction with the `View/accessibilityAddTraits(_:)` view modifier.
+/// They are used to tell an assistive accessibility application (such as VoiceOver)
+/// how an element should be treated.
 ///
 /// For example:
 ///
@@ -566,9 +568,9 @@ public struct ActionSheet {
 /// An ``Alert`` is a modal-like presentation which contains a title, message, and
 /// between one and two action buttons. Alerts often convey important information
 /// about the state of the app and typically request feedback from the user. While the
-/// styling of alerts is semi-fixed, there are three available styles to choose from:
+/// styling of alerts is semi-fixed, there are three available styles for the buttons to choose from:
 /// `.default`, `.destructive`, and `.cancel`. To actually present an alert, see
-/// ``view/alert(ispresented:content:)``.
+/// ``View/alert(ispresented:content:)``.
 ///
 /// An alert can be created with one of two initializers, depending on if one button
 /// or two is required. For example, to create an Alert with one button:
@@ -593,12 +595,12 @@ public struct ActionSheet {
 /// }
 /// ```
 ///
-/// If the `dismissButton` value is left unspecified, it will default to a dismiss button
-/// with the text "Ok".
+/// If the `dismissButton` value is left unspecified (as it was in this example),
+/// it will default to a dismiss button with the text "Ok".
 ///
-/// In order to customize the type of button, create a new ``Alert.Button`` instance and
-/// pass it in as a part of the initializer. For example, to make an alert with a cancel
-/// and destructive button:
+/// In order to customize the type of button (or to create an alert with two buttons),
+/// create a new ``Alert.Button`` instance and pass it in as a part of the initializer.
+/// For example, to make an alert with a cancel and destructive button:
 ///
 /// ![Example alert 2][alert-example-2.gif]
 ///
@@ -631,7 +633,7 @@ public struct ActionSheet {
 ///  the exception that `.cancel` has a bolded font weight.
 ///  - Alert is the equivalent to UIKit's UIAlertView.
 ///  - For information on the human interface guidelines for alerts, see:
-///  ![Human interface guidelines for alerts][https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/]
+///  [https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/](https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Alert {
 
@@ -5888,8 +5890,8 @@ extension DynamicViewContent {
 
 /// An enumeration to indicate one edge of a rectangle.
 ///
-/// ``Edge`` is most frequently used to specify padding, but can also be returned
-/// from instance methods. For example:
+/// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)``,
+/// but it can also be returned from instance methods. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5935,7 +5937,7 @@ extension DynamicViewContent {
     /// An efficient set of `Edge`s.
     ///
     /// Used when multiple edges need to be specified. For example, when setting padding
-    /// on a view:
+    /// on a view with ``View/padding(_:)``:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -8564,7 +8566,7 @@ extension Font {
     ///
     /// Monospaced font:
     /// ![Monospaced font example][monospaced-digit-mono-font.png]
-    /// Image credits to Lior Azi: https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0
+    /// [Image credits to Lior Azi](https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0)
     public func monospacedDigit() -> Font { }
 
     /// Sets the weight of the font.
@@ -8911,9 +8913,6 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 /// A ``ShapeStyle`` that shows the correct fill for the foreground based on the current
 /// context.
 ///
-/// Note:
-/// - ForegroundStyle is typically the default ShapeStyle, so it is rare to need it.
-///
 /// For example, to create a square view with a ForegroundStyle:
 ///
 /// ![ForegroundStyle Example 1][foreground-style-example.png]
@@ -8930,24 +8929,27 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 ///
 /// }
 /// ```
+///
+/// Note:
+/// - ForegroundStyle is typically the default ShapeStyle, so it is rare to explicitly need it.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ForegroundStyle {
 
-	/// Creates a foreground style.
-  ///
-  /// For example, to create a square view with a ForegroundStyle:
-  ///
-  /// ```
-  /// struct ForegroundStyleRectangle: View {
-  ///
-  ///    var body: some View {
-  ///        Rectangle()
-  ///            .fill(ForegroundStyle())
-  ///            .frame(width: 150, height: 150)
-  ///            .foregroundColor(Color.pink)
-  ///    }
-  ///
-  /// }
+  	/// Creates a foreground style.
+    ///
+    /// For example, to create a square view with a ForegroundStyle:
+    ///
+    /// ```
+    /// struct ForegroundStyleRectangle: View {
+    ///
+    ///    var body: some View {
+    ///        Rectangle()
+    ///            .fill(ForegroundStyle())
+    ///            .frame(width: 150, height: 150)
+    ///            .foregroundColor(Color.pink)
+    ///    }
+    ///
+    /// }
     @inlinable public init() { }
 }
 
@@ -9008,7 +9010,7 @@ extension GeometryEffect {
     @inlinable public func ignoredByLayout() -> _IgnoredByLayoutEffect<Self> { }
 }
 
-/// A proxy that encapsulates the container's frame and safe area insets, for use by ``GeometryReader``.
+/// A proxy that encapsulates the container's frame and safe area insets, used by ``GeometryReader``.
 ///
 /// For example, to create a new GeometryProxy for use in a GeometryReader:
 /// ```
@@ -15947,12 +15949,12 @@ public enum PopoverAttachmentAnchor {
 /// ```
 ///
 /// For a detailed explanation of how view preferences work, check out this article:
-/// https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d
+/// [https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d](https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d)
 ///
 /// Note:
 ///  - A view with multiple children automatically combines its values for a given
 /// preference into a single value visible to its ancestors. This functionality
-/// can be changed with the `reduce(value: &x, nextValue:{defaultValue})` function.
+/// can be changed with the `PreferenceKey/reduce(value: &x, nextValue:{defaultValue})` function.
 ///  - When using view preferences, keep in mind that it can be easy to create
 /// an infinite loop by having the preference value dependent on the state that it is changing.
 /// A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
@@ -15975,8 +15977,8 @@ extension PreferenceKey {
     /// Combines a sequence of values by modifying the previously-accumulated
     /// value with the result of a closure that provides the next value.
     ///
-    /// If multiple values are outputted by multiple different views, using the same
-    /// ```PreferenceKey```, this function allows for logic to reduce all those
+    /// If multiple values are outputted by multiple different views, all using the same
+    /// ``PreferenceKey``, this function allows for logic to reduce all those
     /// preferences to a single value.
     ///
     /// For example, if there are two views at the same level that both output a preference:
@@ -16010,7 +16012,7 @@ extension PreferenceKey {
     /// ```
     ///
     /// For additional details on how the reduce function works, see:
-    /// https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b
+    /// [https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b](https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b)
     ///
     /// - Parameters:
     ///   - value: The value accumulated through previous calls to this method.
@@ -21969,7 +21971,7 @@ extension Text {
     ///        .background(Color(white: 0.9))
     ///    }
     /// }
-    ///```
+    /// ```
     ///
     /// By drawing a border around each text view, you can see how the text
     /// moves, and how that affects the view.
