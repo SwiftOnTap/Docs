@@ -120,6 +120,7 @@ import os.signpost
 ///     }
 /// }
 /// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ObservableObject : AnyObject {
 
@@ -2312,6 +2313,16 @@ extension BackgroundStyle : ShapeStyle {
     ///
     ///     // Example of binding to an immutable value.
     ///     PlayButton(isPlaying: Binding.constant(true))
+    ///
+    /// Another use case is for prototyping. For example:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Toggle("Banana On", isOn: .constant(true))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter value: An immutable value.
     public static func constant(_ value: Value) -> Binding<Value> { }
@@ -5923,7 +5934,42 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///     }
 /// }
 /// ```
+/// [pickerstyle-default ->]
+/// Your app can also use explicit tags to identify picker content.
 ///
+/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(DefaultPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 /// You can override a picker’s style. To apply the default style to a picker,
 /// or to a view that contains pickers, use the `View/pickerStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -12884,6 +12930,43 @@ extension IndexViewStyle {
 
 /// A `PickerStyle` where each option is displayed inline with
 /// other views in the current container.
+///
+/// [pickerstyle-inline ->]
+/// Your app can use explicit tags to identify picker content.
+///
+/// ![Inline Example](/picker-style-2.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(InlinePickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct InlinePickerStyle : PickerStyle {
 
@@ -15130,6 +15213,43 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///     }
 /// }
 /// ```
+///
+/// [pickerstyle-menu ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Menu Picker Style Example](/picker-style-3.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(MenuPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 ///
 /// > The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
 ///
@@ -18053,8 +18173,33 @@ extension Picker where Label == Text {
     public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 }
 
-/// A type that specifies the appearance and interaction of all pickers within
-/// a view hierarchy.
+/// Specifies the appearance and interaction of all pickers within a view hierarchy.
+///
+/// `PickerStyle` does not have a public interface - and therefore your app is limited to their default styles.
+///
+/// There are 7 different styles:
+/// * `DefaultPickerStyle`
+/// * `InlinePickerStyle`
+/// * `MenuPickerStyle`
+/// * `PopUpButtonPickerStyle` (not availible on iOS)
+/// * `RadioGroupPickerStyle` (not availible on iOS)
+/// * `SegmentedPickerStyle`
+/// * `WheelPickerStyle`
+///
+/// ### `DefaultPickerStyle`
+/// [[pickerstyle-default]]
+///
+/// ### `InlinePickerStyle`
+/// [[pickerstyle-inline]]
+///
+/// ### `MenuPickerStyle`
+/// [[pickerstyle-menu]]
+///
+/// ### `SegmentedPickerStyle`
+/// [[pickerstyle-segmented]]
+///
+/// ### `WheelPickerStyle`
+/// [[pickerstyle-wheel]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PickerStyle{ }
 extension PickerStyle {
@@ -22074,6 +22219,43 @@ extension SecureField where Label == Text {
 ///       }
 ///  }
 /// ```
+///
+/// [pickerstyle-segmented ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Segmented Example 1](/picker-style-6.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(SegmentedPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 ///
 ///
 /// > To apply this style to a picker, or to a view that contains pickers, use the
@@ -29656,14 +29838,31 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that adds a condition that controls whether users can interact with this
-    /// view.
+    /// Prevent view interaction.
+    ///
+    /// Disable interaction on a view.
+    ///
+    /// ![Disabled Example](disabled-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var isDisabled = false
+    ///     var body: some View {
+    ///         Toggle("Disable The Banana", isOn: $isDisabled)
+    ///
+    ///         Button("Banana 🍌🍌") { }
+    ///             .disabled(isDisabled)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Another example:
     ///
     /// ```
     /// struct CantTouchThisView: View {
     ///     var body: some View {
     ///         Button(Text("Can't touch this 🎶")) { }
-    ///             .disabled(false)
+    ///             .disabled(true)
     ///     }
     /// }
     /// ```
@@ -34788,6 +34987,43 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 ///
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
+///
+/// [pickerstyle-wheel ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Wheel Example 1](/picker-style-7.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(WheelPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 ///
 /// To apply this style to a picker, or to a view that contains pickers, use the
 /// `View/pickerStyle(_:)` modifier.
