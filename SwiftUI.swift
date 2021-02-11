@@ -4386,7 +4386,7 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 ///
 /// ``CoordinateSpace`` allows a set of X, Y coordinates to have context on if they
 /// are relative to the frame's parent, or absolute to the device screen. It is also possible
-/// to define a custom coordinate space on a view with `coordinateSpace(name:)`. This custom
+/// to define a custom coordinate space on a view with `View/coordinateSpace(name:)`. This custom
 /// coordinate space can be checked with the `.named(AnyHashable)` case.
 ///
 /// For example:
@@ -8118,6 +8118,14 @@ public struct FileDocumentWriteConfiguration {
 /// A struct style for rasterizing vector shapes.
 ///
 /// FillStyle determines the even-odd fill mode and antialiased mode on the style.
+/// When initializing a new FillStyle, eoFill is set to false by default and
+/// antialiased is set to true by default.
+///
+/// The even-odd rule fills a path depending on what is overlapping in the path.
+/// For example, a path with no overlaps will be fully filled but a path with
+/// an overlap will not have the overlapping part filled. See ``FillStyle/isEOFilled`` for an example.
+/// Anti-aliased smooths pixels on jagged edges by averages the colors of the pixels
+/// at the boundary.
 ///
 /// For example, to create a view with a circle shape and fill style:
 ///
@@ -8126,7 +8134,7 @@ public struct FileDocumentWriteConfiguration {
 ///
 ///    var body: some View {
 ///        Circle()
-///          .fill(Color.pink, style: FillStyle())
+///          .fill(Color.pink, style: FillStyle(eoFill: true))
 ///    }
 ///
 /// }
@@ -8165,19 +8173,19 @@ public struct FileDocumentWriteConfiguration {
     ///            }
     ///        }
     ///    }
+    /// }
     ///
-    ///    struct OverlappingRectangles: Shape {
+    /// struct OverlappingRectangles: Shape {
     ///
-    ///        func path(in rect: CGRect) -> Path {
-    ///            let rectSize = CGSize(width: rect.height, height: rect.height)
+    ///    func path(in rect: CGRect) -> Path {
+    ///        let rectSize = CGSize(width: rect.height, height: rect.height)
     ///
-    ///            var path = Path()
+    ///        var path = Path()
     ///
-    ///            path.addRect(CGRect(origin: .zero, size: rectSize))
-    ///            path.addRect(CGRect(origin: CGPoint(x: rect.width-rect.height, y: -50), size: rectSize))
+    ///        path.addRect(CGRect(origin: .zero, size: rectSize))
+    ///        path.addRect(CGRect(origin: CGPoint(x: rect.width-rect.height, y: -50), size: rectSize))
     ///
-    ///            return path
-    ///        }
+    ///        return path
     ///    }
     /// }
     /// ```
@@ -8200,7 +8208,6 @@ public struct FileDocumentWriteConfiguration {
     ///        Circle()
     ///          .fill(Color.pink, style: FillStyle(eoFill: true, antialiased: true))
     ///    }
-    ///
     /// }
     /// ```
     ///
@@ -8208,10 +8215,10 @@ public struct FileDocumentWriteConfiguration {
     ///   - eoFill: A Boolean value that indicates whether to use the even-odd
     ///     rule for rendering a shape. Pass `false` to use the non-zero winding
     ///     number rule instead. If no value is specified, eoFill defaults to false.
-    ///     For more information on the even-odd rule, see ``isOEFilled``.
+    ///     For more information on the even-odd rule, see ``FillStyle/isOEFilled``.
     ///   - antialiased: A Boolean value that indicates whether to use
     ///     antialiasing when rendering the edges of a shape. If no value is specified
-    ///     antialiased defaults to true. For more information on the even-odd rule, see ``isAntialiased``.
+    ///     antialiased defaults to true.
     public init(eoFill: Bool = false, antialiased: Bool = true) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
