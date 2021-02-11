@@ -12,6 +12,125 @@ import os.log
 import os
 import os.signpost
 
+/// An object that publishes its changes.
+///
+/// ### Understanding `ObservableObject`
+///
+/// The `ObservableObject` protocol definition is as follows:
+/// ```
+/// public protocol ObservableObject: AnyObject {
+///     associatedtype ObjectWillChangePublisher: Publisher
+///
+///     var objectWillChange: ObjectWillChangePublisher { get }
+/// }
+/// ```
+///
+/// `ObservableObject` has one simple requirement - the `objectWillChange` publisher. The `objectWillChange` publisher is responsible for emitting just before the object changes.
+///
+/// This requirement is fundamental to how the SwiftUI runtime interacts with your object-based data models. It allows the runtime to react to changes in your data, and queue view updates for the UI's next render cycle.
+///
+/// ### Using `ObservableObject`
+///
+/// To conform to `ObservableObject`, simply add it to the class definition.
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
+/// ```
+///
+/// `ObservableObject` provides a default implementation for `objectWillChange` using `Combine/ObservableObjectPublisher`.
+///
+/// To trigger `objectWillChange` events when your data changes, annotate your properties with the `@Published` property wrapper. Adding `@Published` to a variable causes the object to emit an `objectWillChange` event any time that variable is modified.
+///
+/// Note: This only works if you are using the default `ObservableObject` implementation, or if `objectWillChange` is an instance of `ObservableObjectPublisher`. If you use a custom `Publisher` type, you are responsible for triggering updates yourself.
+///
+/// ### Manually triggering `objectWillChange`
+///
+/// You can also manually trigger updates by calling `ObservableObjectPublisher/send()`.
+///
+/// This is useful for cases where `@Published` does not suffice. For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     class ChildModel {
+///         var foo: String = "Apple"
+///     }
+///
+///     var childModel = ChildModel()
+///
+///     func updateChildModel() {
+///         childModel.foo = "Banana"
+///
+///         objectWillChange.send()
+///     }
+/// }
+/// ```
+///
+/// In this example, `AppModel` holds a reference to a child model, `ChildModel`. Adding a `@Published` to the `childModel` variable would have no effect because `ChildModel` is a class and not a value type. Therefore, to emit a change event, you must manually call `objectWillChange.send()` when updating the child model.
+///
+/// ### Using a custom publisher
+///
+/// In some cases, you may want to use a custom `Publisher` type for `objectWillChange`. For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     public let objectWillChange = PassthroughSubject<Void, Never>()
+/// }
+/// ```
+///
+/// This example uses a `Combine/PassthroughSubject` for its `objectWillChange` requirement. A passthrough subject is a publisher that lets you send values manually (i.e. "passes through" any values sent to it).
+///
+/// **Note:** The `@Published` property wrapper does not work with custom publishers. If you use a custom publisher, you are responsible for updating the object yourself. For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     public let objectWillChange = PassthroughSubject<Void, Never>()
+///
+///     var foo: Bool = false {
+///         willSet {
+///             objectWillChange.send()
+///         }
+///     }
+/// }
+/// ```
+///
+/// Here `objectWillChange.send()` is manually called everytime `foo` is about to update, using the `willSet` observer.
+///
+/// ### Using `ObservableObject` with SwiftUI
+///
+/// An observable object can be used to drive changes in a `View`, via three property wrapper types:
+///
+/// - `@ObservedObject`
+/// - `@EnvironmentObject`
+/// - `@StateObject`
+///
+/// #### Usage with `@StateObject`
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         Toggle("Foo", isOn: $appModel.foo)
+///     }
+/// }
+/// ```
+///
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+public protocol ObservableObject : AnyObject {
+
+    /// The type of publisher that emits before the object has changed.
+    associatedtype ObjectWillChangePublisher : Publisher = ObservableObjectPublisher where Self.ObjectWillChangePublisher.Failure == Never
+
+    /// A publisher that emits before the object has changed.
+    var objectWillChange: Self.ObjectWillChangePublisher { get }
+}
+
 /// AccessibilityActionKind denotes the type of action for an Accessibility Action to support.
 ///
 /// This struct is almost always found as an input to the `View/accessibilityAction(_:_:)` View modifier.
@@ -2384,6 +2503,16 @@ extension BackgroundStyle : ShapeStyle {
     ///     // Example of binding to an immutable value.
     ///     PlayButton(isPlaying: Binding.constant(true))
     ///
+    /// Another use case is for prototyping. For example:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Toggle("Banana On", isOn: .constant(true))
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter value: An immutable value.
     public static func constant(_ value: Value) -> Binding<Value> { }
 
@@ -2488,15 +2617,76 @@ extension Binding : DynamicProperty {
 }
 
 /// Modes for compositing a view with overlapping content.
+///
+/// There are 21 different types of blend modes. To use the following example, drag in the following two photos and label them "ocean" and "space".
+///
+/// ![Ocean](ocean.jpg)
+///
+/// ![Space](space.jpg)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ZStack {
+///             Image("ocean")
+///                 .resizable()
+///                 .scaledToFit()
+///
+///             Image("space")
+///                 .resizable()
+///                 .scaledToFit()
+///                 .blendMode(.softLight)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
 	/// Regular overlapping, with opacity taken into account.
+  ///
+  /// ![Blend Mode](blendmode-normal.png)
+  ///
+  /// ```
+  /// struct ExampleView: View {
+  ///     var body: some View {
+  ///         ZStack {
+  ///             Image("ocean")
+  ///                 .resizable()
+  ///                 .scaledToFit()
+  ///
+  ///             Image("space")
+  ///                 .resizable()
+  ///                 .scaledToFit()
+  ///                 .blendMode(.normal)
+  ///         }
+  ///     }
+  /// }
+  /// ```
     case normal
 
     /// Multiplies the RGB channel numbers (0.0 - 1.0) of each pixel.
     ///
     /// The result is always a darker picture.
+    /// ![Blend Mode](blendmode-multiply.png)
+    ///
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.multiply)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case multiply
 
     /// Each RGB pixel value is inverted (subtracted from 1), multiplied together,
@@ -2511,6 +2701,25 @@ public enum BlendMode {
     ///     func screen(a: Double, b: Double) {{}
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-screen.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.screen)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case screen
 
     /// The parts were the bottom layer is light become lighter, and dark becomes darker.
@@ -2524,9 +2733,47 @@ public enum BlendMode {
     ///     		return 1 - 2 * (1 - a) * (1 - b)
     ///     	}
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.overlay)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case overlay
 
     /// Takes the darker of the top and bottom picture pixels.
+    ///
+    /// ![Blend Mode](blendmode-darken.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.overlay)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case darken
 
     /// Takes the lighter of the top and bottom picture pixels.
@@ -2542,6 +2789,25 @@ public enum BlendMode {
     /// color with black will result in an unchanged pixel.
     ///
     /// This operation is not invertible.
+    ///
+    /// ![Blend Mode](blendmode-colorDodge.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.colorDodge)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case colorDodge
 
     /// Divides the inverted bottom layer by the top layer, then inverts the result.
@@ -2551,6 +2817,25 @@ public enum BlendMode {
     /// Blending any pixel by white results in no change.
     ///
     /// This operation is not invertible.
+    ///
+    /// ![Blend Mode](blendmode-colorBurn.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.colorBurn)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case colorBurn
 
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
@@ -2564,57 +2849,304 @@ public enum BlendMode {
     ///         	return 2*a*(1 - b) + sqrt(a)*(2*b - 1)
     ///         }
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.softLight)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case softLight
 
     /// A combination of multiply and screen are applied.
     ///
     /// Hard light affects the bottom layer the way that overlay affects the top
     /// layer, and vice-versa.
+    ///
+    /// ![Blend Mode](blendmode-hardLight.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.hardLight)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case hardLight
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
     ///
     /// If either layer is black, nothing changes. Blending with white inverts
     /// the picture.
+    ///
+    /// ![Blend Mode](blendmode-difference.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.difference)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case difference
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
     ///
     /// The difference between difference and exclusion is that blending with
     /// 50% gray will produce 50% gray.
+    ///
+    /// ![Blend Mode](blendmode-exclusion.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.exclusion)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case exclusion
 
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-hu.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.hu)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case hue
 
     /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-saturation.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.saturation)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case saturation
 
     /// Keeps the brightness of the bottom layer, while taking the hue and saturation of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-color.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case color
 
     /// Keeps the hue and saturation of the bottom layer, while taking the brightness of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-luminosity.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.luminosity)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case luminosity
 
     /// Shows the bottom layer fully, with the top layer drawn only where it
     /// intersect the bottom.
+    ///
+    /// ![Blend Mode](blendmode-sourceAtop.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.sourceAtop)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case sourceAtop
 
     /// The bottom is drawn over the top, and the top is only visible where the
     /// bottom is transparent.
+    ///
+    /// ![Blend Mode](blendmode-destinationOver.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.destinationOver)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case destinationOver
 
     /// Displays only the bottom layer, and only where the top is transparent.
+    ///
+    /// ![Blend Mode](blendmode-destinationOut.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.destinationOut)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case destinationOut
 
     /// Adds the top layer pixels to the bottom layer.
     ///
     /// Displays white where the addition is greater than 1.0.
+    ///
+    /// ![Blend Mode](blendmode-plusDarker.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.plusDarker)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case plusDarker
 
     /// Adds the top layer pixels to the bottom layer, than subtracts the result from 1.
     ///
     /// Displays black where the result is less than 0.0.
+    ///
+    /// ![Blend Mode](blendmode-plusLighter.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.plusLighter)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case plusLighter
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -2693,6 +3225,28 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 }
 
 /// A button style that doesn't apply a border.
+///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("Plain Banana🍌🍌") { tap() }
+///                      .buttonStyle(PlainButtonStyle())
+///
+///                  Button("Borderless Banana🍌🍌") { tap() }
+///                      .buttonStyle(BorderlessButtonStyle())
+///
+///                  Button("Default Banana🍌🍌") { tap() }
+///                      .buttonStyle(DefaultButtonStyle())
+///              }
+///              .font(.title2)
+///          }
+///
+///          func tap() {}
+///      }
+///
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// `View/buttonStyle(_:)-66fbx` modifier.
@@ -2991,36 +3545,101 @@ public struct ButtonStyleConfiguration {
     public let isPressed: Bool
 }
 
-/// A capsule shape aligned inside the frame of the view containing it.
+/// A pill-style shape.
 ///
-/// A capsule shape is equivalent to a rounded rectangle where the corner radius
-/// is chosen as half the length of the rectangle's smallest edge.
+/// A Capsule is a rectangular `Shape` that by default, aligns itself inside of
+/// the view containing it. It differs from `RoundedRectangle` in that its
+/// corner radius is half the length of the retangle's smallest edge. In effect,
+/// it creates a "pill" shape.
+///
+/// To define a Capsule with a specific color and frame, use the `Shape/fill()`
+/// and `View/frame(width:height:)` modifiers:
+///
+/// ![Capsule fill and frame example](capsule-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Capsule()
+///             .fill(Color.orange)
+///             .frame(width: 250, height: 100)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the
+/// border width to keep the Capsule at its original size:
+///
+/// ![Capsule inset and stroke example](capsule-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Capsule()
+///             .inset(by: 10)
+///             .stroke(Color.orange, lineWidth: 20)
+///             .frame(width: 250, height: 100)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Capsule : Shape {
 
-	/// The capsule shape's rounded corner style.
+	/// The Capsule's rounded corner style, based on the value passed in its
+    /// initializer.
 	///
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
-    /// Creates a new capsule shape from a rounded corner style.
+    /// Creates an Ellipse that aligns itself inside of the view containing it
+    /// by default.
     ///
-    /// - Parameter style: The rounded corner style of the capsule.
+    /// A style may be optionally passed into the initializer, with the options
+    /// `circular` and `continuous`. These styles have subtle but noticeable
+    /// differences:
+    ///
+    /// ![Ellipse init example](ellipse-example-3.png)
+    ///
+    /// ```
+    /// `struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             Capsule(style: .circular)
+    ///                 .frame(width: 250, height: 100)
+    ///
+    ///             Capsule(style: .continuous)
+    ///                 .frame(width: 250, height: 100)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(style: RoundedCornerStyle = .circular) { }
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe a Capsule as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// A Capsule can be described as a path within a specific `CGRect` using
+    /// the `Capsule/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![Capsule path example](capsule-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 75, height: 200))
+    ///     }
+    /// }
+    /// ```
     public func path(in r: CGRect) -> Path { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -3028,37 +3647,116 @@ public struct ButtonStyleConfiguration {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Capsule : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Capsule insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Capsule that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Capsule inset example](capsule-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Capsule()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
-/// A circle centered on the frame of the view containing it.
+/// A circle shape.
 ///
-/// The circle's radius equals half the length of the frame rectangle's smallest
-/// edge.
+/// A Circle is centered on the frame of the view containing it. The circle's
+/// radius equals half the length of the frame rectangle's smallest edge.
+///
+/// By default, a Circle is black, and takes up the space of its container:
+///
+/// ![Circle init example](Circle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Circle()
+///     }
+/// }
+/// ```
+///
+/// Define a Circle with a specific color and frame with the `Shape/fill()`
+/// and `View/frame(width:height:)` modifiers. For example:
+///
+/// ![Circle fill and frame example](Circle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Circle()
+///             .fill(Color.blue)
+///             .frame(width: 200, height: 200)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Circle/inset(by:)` modifier to inset the circle by half of the border
+/// width to keep the circle at its original size:
+///
+/// ![Circle inset and stroke example](Circle-example-3.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Circle()
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe a Circle as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// A Circle can be described as a path within a specific `CGRect` using the
+    /// `Circle/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![Circle path example](Circle-example-4.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a new circle `Shape`.
+    /// Creates a Circle that aligns itself inside of the view containing it
+    /// by default.
+    ///
+    /// ![Circle init example](Circle-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -3066,11 +3764,29 @@ extension Capsule : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Circle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Circle insetted by the amount specified.
+    ///
+    /// Returns a Circle insetted by the amount specified. For example,
+    /// insetting by 10 points returns a Circle that fills its container, with
+    /// 10 points inset on all four side.
+    ///
+    /// For example, insetting by 10 points returns a Circle that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Circle inset example](Circle-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Circle()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -3103,7 +3819,43 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 
 /// An environment-dependent color.
 ///
-/// A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
+/// `Color` represents an environment-dependent color that conforms to `View`. Colors conformance to `View` means that a color can be used as a view itself.
+///
+/// For example:
+///
+/// ![Color Example One](color-example-one.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Color.yellow
+///         }
+///     }
+///
+/// Color also conforms to `ShapeStyle` which allows it to serve as a fill or stroke on a shape.
+///
+/// For example:
+///
+/// ![Color Example Two](color-example-two.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .fill(Color.yellow)
+///         }
+///     }
+///
+/// And as a stroke:
+///
+/// ![Color Example Three](color-example-three.png)
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             Circle()
+///                 .stroke(Color.yellow)
+///         }
+///     }
+///
+/// **Note**: A `Color` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Color : Hashable, CustomStringConvertible {
@@ -3161,6 +3913,16 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// The conversion of `p` to a string in the assignment to `s` uses the
     /// `Point` type's `description` property.
+    ///
+    /// To call this property directly, try:
+    ///
+    /// ![Description](color-description.png)
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text(Color.yellow.description)
+    ///        }
+    ///    }
     public var description: String { get }
 
     /// The hash value.
@@ -3187,6 +3949,17 @@ extension Color : View {
 extension Color {
 
     /// Creates a color from an instance of `CGColor`.
+    ///
+    /// ![CGColor Init](color-cgcolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let cgColor = CGColor(red: 1.00, green: 0.60, blue: 0.60, alpha: 1.0)
+    ///
+    ///         var body: some View {
+    ///             Color(cgColor)
+    ///         }
+    ///     }
+    ///
     public init(_ cgColor: CGColor) { }
 }
 
@@ -3243,7 +4016,15 @@ extension Color {
 
     /// Create a `Color` from RGB and opacity values along with an optional colorspace.
     ///
-    /// The colorspace value defaults to sRGB, which is standard for apps. Note
+    /// ![Color RGB](color-rgb-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(red: 1.0, green: 0.6, blue: 0.6, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
     /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
     /// divide them by 255 in order to use this initializer.
@@ -3258,7 +4039,15 @@ extension Color {
 
     /// Create a `Color` from grayscale and opacity.
     ///
-    /// Both the white and the opacity must be specified from 0.0 to 1.0. If
+    /// ![Color White/Opacity](color-white-opacity.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(white: 0.2, opacity: 0.5)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
     /// be divided by their maximum value.
     ///
@@ -3269,6 +4058,16 @@ extension Color {
     public init(_ colorSpace: Color.RGBColorSpace = .sRGB, white: Double, opacity: Double = 1) { }
 
     /// Creates a `Color` from hue, saturation, brightness, and opacity values.
+    ///
+    /// ![Hue Color Init](color-hue-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color(hue: 0.5, saturation: 0.60, brightness: 0.90)
+    ///         }
+    ///     }
+    ///
+    /// **Note**: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
     /// - Parameters:
     ///   - hue: The hue of the color.
@@ -3282,6 +4081,13 @@ extension Color {
 extension Color {
 
     /// A color that represents the system or application accent color.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
+    ///                .accentColor(Color.accentColor)
+    ///        }
+    ///    }
     ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
@@ -3299,36 +4105,121 @@ extension Color {
     public static let clear: Color
 
     /// A true black color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.black
+    ///        }
+    ///    }
+    ///
     public static let black: Color
 
     /// A true white color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.white
+    ///        }
+    ///    }
+    ///
     public static let white: Color
 
     /// A gray color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.gray
+    ///        }
+    ///    }
+    ///
     public static let gray: Color
 
     /// A stylized red color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.red
+    ///        }
+    ///    }
+    ///
     public static let red: Color
 
     /// A stylized green color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.green
+    ///        }
+    ///    }
+    ///
     public static let green: Color
 
     /// A stylized blue color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.blue
+    ///        }
+    ///    }
+    ///
     public static let blue: Color
 
     /// An orange color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.orange
+    ///        }
+    ///    }
+    ///
     public static let orange: Color
 
     /// A stylized yellow color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.yellow
+    ///        }
+    ///    }
+    ///
     public static let yellow: Color
 
     /// A pink color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.pink
+    ///        }
+    ///    }
+    ///
     public static let pink: Color
 
     /// A purple color `View`.
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Color.purple
+    ///        }
+    ///    }
+    ///
     public static let purple: Color
 
     /// The default color of text, based on the environment.
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
+    ///
+    /// Code:
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text("Bananas 🍌🍌")
+    ///                .accentColor(.primary)
+    ///        }
+    ///    }
     ///
     /// If you are in light mode, this will be black. If, on the other hand, you
     /// are in dark mode, this will be white. It is automatically updated for
@@ -3352,6 +4243,28 @@ extension Color {
 
     /// Creates a named color.
     ///
+    /// To declare a color with a `name` create your color in the `Assets.xcassets` folder.
+    ///
+    /// ![Create Color Name](color-name-showcase.png)
+    ///
+    /// Create a light theme and dark theme color to adjust your view depending on the user's environment.
+    ///
+    /// Next, run your app in both light theme and dark theme. Your color will automatically change.
+    ///
+    /// Light theme:
+    /// ![Color Light Theme](color-name-light.png)
+    ///
+    /// Dark theme:
+    /// ![Color Dark Theme](color-name-dark.png)
+    ///
+    /// Code:
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color("Pink")
+    ///         }
+    ///     }
+    ///
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
     ///   - bundle: the bundle to search for the color resource in.
@@ -3363,6 +4276,17 @@ extension Color {
 extension Color {
 
     /// Creates a color from an instance of `UIColor`.
+    ///
+    /// ![UIColor Init](color-uicolor-init.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         let uiColor = UIColor.yellow
+    ///
+    ///         var body: some View {
+    ///             Color(uiColor)
+    ///         }
+    ///     }
+    ///
     public init(_ color: UIColor) { }
 }
 
@@ -3371,6 +4295,18 @@ extension Color {
 
 	/// Updates the transparency channel of a `Color`, returning a `Color` back.
 	///
+  ///
+  /// ![Color Opacity](color-opacity.png)
+  ///
+  ///     struct ExampleView: View {
+  ///            var body: some View {
+  ///                ZStack {
+  ///                    Text("Banana 🍌🍌")
+  ///                    Color.pink.opacity(0.80)
+  ///                }
+  ///            }
+  ///        }
+  ///
 	/// This is different from the `View/opacity(_:)` modifier because it
 	/// returns a `Color` object rather than `some View`.
     public func opacity(_ opacity: Double) -> Color { }
@@ -4147,11 +5083,24 @@ extension CommandsBuilder {
 
 }
 
-/// A system style that displays the components in a compact, textual format.
+/// Display a date picker in a compact, textual format.
 ///
-/// This style is useful when space is constrained and users expect to
-/// make specific date and time selections. Some variants may include rich
-/// editing controls in a popup.
+/// > "This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup."
+///
+/// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///
+///          var body: some View {
+///              DatePicker("Date", selection: $date)
+///                  .datePickerStyle(CompactDatePickerStyle())
+///                  .padding()
+///          }
+///      }
+///
+///
 @available(iOS 14.0, macCatalyst 13.4, macOS 10.15.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4969,9 +5918,29 @@ extension DatePickerStyle {
 
 /// The default button style, based on the button's context.
 ///
-/// If you create a button directly on a blank canvas, the style varies by
-/// platform. iOS uses the borderless button style by default, whereas macOS,
-/// tvOS, and watchOS use the bordered button style.
+/// > "If you create a button directly on a blank canvas, the style varies by platform. iOS uses the borderless button style by default, whereas macOS, tvOS, and watchOS use the bordered button style."
+///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("PlainBanana🍌🍌") { tap() }
+///                     .buttonStyle(PlainButtonStyle())
+///
+///                  Button("BorderlessBanana🍌🍌") { tap() }
+///                     .buttonStyle(BorderlessButtonStyle())
+///
+///                  Button("DefaultBanana🍌🍌") { tap() }
+///                     .buttonStyle(DefaultButtonStyle())
+///              }
+///              .font(.title2)
+///          }
+///
+///          func tap() {}
+///      }
+///
 ///
 /// If you create a button inside a container, like a `List`, the style
 /// resolves to the recommended style for buttons inside that container for that
@@ -5000,6 +5969,21 @@ public struct DefaultButtonStyle : PrimitiveButtonStyle {
 }
 
 /// The default `DatePicker` style.
+///
+/// ![DefaultDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///
+///          var body: some View {
+///              DatePicker("Date", selection: $date)
+///                  .datePickerStyle(DefaultDatePickerStyle())
+///                  .padding()
+///          }
+///      }
+///
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5012,6 +5996,24 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 }
 
 /// The default `GroupBoxStyle`.
+///
+/// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///             GroupBox() {
+///                 Label("Bananas 🍌🍌", systemImage: "heart.fill")
+///                     .foregroundColor(.yellow)
+///                     .groupBoxStyle(DefaultGroupBoxStyle())
+///              }, {
+///                 Text("Go Bananas")
+///              }
+///             .padding()
+///         }
+///      }
+///
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5037,6 +6039,18 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 }
 
 /// The default label style in the current context.
+///
+/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+///
+///
+///    struct ExampleView: View {
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///        }
+///    }
+///
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultLabelStyle : LabelStyle {
 
@@ -5058,6 +6072,22 @@ public struct DefaultLabelStyle : LabelStyle {
 
 /// The instance that describes a platform's default behavior and appearance for
 /// a list.
+///
+/// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                Text("Bananas 🍌🍌")
+///                Text("Apples 🍎🍎")
+///                Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(DefaultListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultListStyle : ListStyle {
 
@@ -5129,6 +6159,63 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// whether the picker appears in a container view — when setting the appearance
 /// of a picker.
 ///
+/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑" ]
+///     @State private var selectedFruit = 0
+///
+///     var body: some View {
+///          VStack {
+///              Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                  ForEach(0..<fruits.count) {
+///                      Text(self.fruits[$0])
+///                  }
+///              }
+
+///              Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///          }
+///          .pickerStyle(DefaultPickerStyle())
+///     }
+/// }
+/// ```
+/// [pickerstyle-default ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(DefaultPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 /// You can override a picker’s style. To apply the default style to a picker,
 /// or to a view that contains pickers, use the `View/pickerStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5187,12 +6274,25 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 
 /// The default toggle style.
 ///
-/// If you create a toggle directly on a blank canvas, the style varies:
+/// > If you create a toggle directly on a blank canvas, the style varies:
+/// > - For the phone, pad, and watch idioms, the default toggle style is a switch.
+/// > - For the Mac idiom, the default toggle style is a checkbox.
+/// > - For the TV idom, the default toggle style is a button.
 ///
-/// - For the phone, pad, and watch idioms, the default toggle style is a
-///   switch.
-/// - For the Mac idiom, the default toggle style is a checkbox.
-/// - For the TV idom, the default toggle style is a button.
+/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State private var status = true
+///     var body: some View {
+///          Toggle(isOn: $status) {
+///              Text("Banana🍌🍌")
+///           }
+///           .toggleStyle(DefaultToggleStyle())
+///           .padding()
+///      }
+///  }
+/// ```
 ///
 /// If you create a toggle inside a container, such as a `List`, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
@@ -5381,6 +6481,60 @@ public struct Divider : View {
 }
 
 /// A scene that enables support for opening, creating, and saving documents.
+///
+/// `DocumentGroup` provides a default scene for basic file management.
+///
+/// ![Document Group](document-group.gif)
+///
+/// ```
+/// import UniformTypeIdentifiers
+///
+/// @main
+/// struct ExampleApp: App {
+///     var body: some Scene {
+///         DocumentGroup(newDocument: TextFile()) { file in
+///             ExampleView(document: file.$document)
+///         }
+///     }
+/// }
+///
+/// struct ExampleView: View {
+///     @Binding var document: TextFile
+///
+///     var body: some View {
+///         TextEditor(text: $document.text)
+///     }
+/// }
+///
+/// struct TextFile: FileDocument {
+///     //  Support only plain text
+///     static var readableContentTypes = [UTType.plainText]
+///
+///     // Create an empty document
+///     var text = ""
+///
+///     //  Create a document
+///     init(initialText: String = "") {
+///         text = initialText
+///     }
+///
+///     // Loads data has been saved previously. See the ReadConfiguration documentation for more
+///     init(configuration: ReadConfiguration) throws {
+///         guard let data = configuration.file.regularFileContents,
+///             let string = String(data: data, encoding: .utf8)
+///         else {
+///             throw CocoaError(.fileReadCorruptFile)
+///         }
+///         text = string
+///     }
+///
+///     // The saving function
+///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///         let data = text.data(using: .utf8)!
+///         return .init(regularFileWithContents: data)
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5558,57 +6712,644 @@ public struct DragGesture : Gesture {
     public typealias Body = Never
 }
 
-/// An interface that you implement to interact with a drop operation in a view
-/// modified to accept drops.
+/// An interface to easily perform drag & drop operations.
 ///
-/// The `DropDelegate` protocol provides a comprehensive and flexible way to
-/// interact with a drop operation. Specify a drop delegate when you modify a
-/// view to accept drops with the `View/onDrop(of:delegate:)-6lin8` method.
+/// The `DropDelegate` protocol offers functionality to customize drag and drop behaviors. It is preffered over ``View/onDrop(of:isTargeted:perform)`` view modifier when your drop behavior requires non-standard implementations.
 ///
-/// Alternatively, for simple drop cases that don't require the full
-/// functionality of a drop delegate, you can modify a view to accept drops
-/// using the `View/onDrop(of:isTargeted:perform:)-f15m` or the
-/// `View/onDrop(of:isTargeted:perform:)-982eu` method. These methods handle the
-/// drop using a closure you provide as part of the modifier.
+/// ``DropDelegate`` heavily utalizes `NSItemProvider`, which provides information about the dragged data.
+///
+/// ### Setup
+/// `DropDelegate` has one required implementation and four optional implementations.
+///
+/// Required:
+/// - `DropDelegate/performDrop(info:)` specifies the behavior for your drop.
+///
+/// Optional:
+/// - `DropDelegate/validateDrop(info:)-954f7` validates if a drop can be made.
+/// - `DropDelegate/dropEntered(info:)-525fa` provides custom behavior when an object is dragged over the `onDrop` view.
+/// - `DropDelegate/dropExited(info:)-3d540` provides custom behavior when an object is dragged off of the `onDrop` view.
+/// - `DropDelegate/dropUpdated(info:)-72cd3` provides custom behavior when the drop is updated.
+///
+/// ### Creating a simple Drag & Drop
+/// #### Create a draggable ``View``
+/// Make a view draggable with the ``View/.onDrag(_:)`` modifier.
+///
+/// Use `NSItemProvider` to define the specific data dragged from that view.
+///
+/// ```
+/// //  Text to drag
+/// Text(text)
+///     .font(.title)
+///     .onDrag{ return NSItemProvider(object: "🍌🍌" as NSString) }
+/// ```
+///
+/// #### Creating a drop `View`
+/// Use `onDrop` to create a view that accepts "drops" from dragged data. There are three versions of the `onDrop` modifier:
+///
+/// - `View/onDrop(of:isTargeted:perform)-bae65` is the simplest implementation. Specify a closure to execute when content is dropped.
+/// - `View/onDrop(of:isTargeted:perform)-55379` is similar to the former, but the closure also provides information about the drop location.
+/// - `View/onDrop(of:delegate)-a3cfb` requires a `DropDelegate` and is the most versatile.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var text: String = "🍌🍌"
+///
+///     var body: some View {
+///         HStack {
+///             //  Text to drag
+///             Text(text)
+///                 .font(.title)
+///                 .onDrag{ return NSItemProvider(object: self.text as NSItemProviderWriting) }
+///
+///             //  Area to drop
+///             RoundedRectangle(cornerRadius: 10)
+///                 .frame(width: 150, height: 150)
+///                 .onDrop(of: ["text"], isTargeted: nil, perform: { _ in
+///                     self.text = "Dropped My Bananas 🍌🍌!"
+///                     return true
+///                 })
+///         }
+///     }
+/// }
+/// ```
+///
+/// #### Conforming to DropDelegate
+/// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to `DropDelegate`.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var text: String = "🍌🍌"
+///
+///     var body: some View {
+///         HStack {
+///             //  Text to drag
+///             Text(text)
+///                 .font(.title)
+///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+///
+///             //  Area to drop
+///             RoundedRectangle(cornerRadius: 10)
+///                 .frame(width: 150, height: 150)
+///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
+///         }
+///     }
+/// }
+///
+/// struct MyDropDelegate: DropDelegate {
+///     @Binding var text: String
+///
+///     func performDrop(info: DropInfo) -> Bool {
+///         self.text = "Dropped My Bananas 🍌🍌!"
+///         return true
+///     }
+/// }
+/// ```
+///
+/// ### Using `DropInfo` for custom logic
+/// `DropInfo` provides information about the drop and is used to create custom drop behaviors.
+///
+/// For example, say your user drags & drops `NSString` data. Use the `DropInfo/itemproviders(for:)-7f580` to get an array of `NSItemProvider` data (recall all dragged data arrives in this format).
+///
+/// Next, use `NSItemProvider`'s property `loadItem` to extract an `NSSecureCoding` from your dragged data.
+///
+/// Finally, cast your `NSSecureCoding` data to the more Swift-friendly `Data` object. From here your program can decode that data into a string and run any custom behaviors from that string.
+///
+/// The view in the example below is conditionally colored depending on the dragged string.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var backgroundColor: Color = .black
+///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///
+///     var body: some View {
+///         VStack {
+///             HStack {
+///                 ForEach(self.fruits, id: \.self, content: { fruit in
+///                     Text(fruit)
+///                         .font(.title)
+///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+///                 })
+///             }
+///
+///             HStack {
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .fill(backgroundColor)
+///                     .frame(width: 150, height: 150)
+///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+///             }
+///         }
+///
+///     }
+/// }
+///
+/// struct MyDropDelegate: DropDelegate {
+///     @Binding var color: Color
+///
+///     //  This function is executed when the user "drops" their object
+///     func performDrop(info: DropInfo) -> Bool {
+///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+///         if let item = info.itemProviders(for: ["public.text"]).first {
+///             //  Load the item
+///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+///                 //  Cast NSSecureCoding to Ddata
+///                 if let data = text as? Data {
+///                     //  Extract string from data
+///                     let inputStr = String(decoding: data, as: UTF8.self)
+///
+///                     //  Conditionally change color given text string
+///                     if inputStr == "🍌🍌" {
+///                         self.color = .yellow
+///                     } else if inputStr == "🍏🍏" {
+///                         self.color = .green
+///                     } else if inputStr == "🍑🍑" {
+///                         self.color = .pink
+///                     } else {
+///                         self.color = .gray
+///                     }
+///                 }
+///             }
+///         } else {
+///             //  If no text was received in our drop, return false
+///             return false
+///         }
+///
+///         return true
+///     }
+/// }
+/// ```
+///
+/// ### Fully Featured `DropDelegate`
+/// Utalize `DropDelegate`s optional functions to provide additional behavior.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var backgroundColor: Color = .black
+///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+///
+///     var body: some View {
+///         VStack {
+///             HStack {
+///                 ForEach(self.fruits, id: \.self, content: { fruit in
+///                     Text(fruit)
+///                         .font(.title)
+///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+///                 })
+///             }
+///
+///             HStack {
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .fill(backgroundColor)
+///                     .frame(width: 150, height: 150)
+///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+///             }
+///         }
+///
+///     }
+/// }
+///
+/// struct MyDropDelegate: DropDelegate {
+///     @Binding var color: Color
+///
+///     //  Drop entered called
+///     func dropEntered(info: DropInfo) {
+///         ///  Change color if color was previously black
+///         self.color = (self.color == .black) ? .gray : self.color
+///     }
+///
+///     //  Drop entered called
+///     func dropExited(info: DropInfo) {
+///         self.color = .init(white: 0.40)
+///     }
+///
+///     //  Drop has been updated
+///     func dropUpdated(info: DropInfo) -> DropProposal? {
+///         ///  Don't allow more items to be dropped if a Banana was dropped
+///         if self.color == .yellow {
+///             return DropProposal(operation: .forbidden)
+///         } else {
+///             return nil
+///         }
+///     }
+///
+///     //  This function is executed when the user "drops" their object
+///     func performDrop(info: DropInfo) -> Bool {
+///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+///         if let item = info.itemProviders(for: ["public.text"]).first {
+///             //  Load the item
+///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+///                 //  Cast NSSecureCoding to Ddata
+///                 if let data = text as? Data {
+///                     //  Extract string from data
+///                     let inputStr = String(decoding: data, as: UTF8.self)
+///
+///                     //  Conditionally change color given text string
+///                     if inputStr == "🍌🍌" {
+///                         self.color = .yellow
+///                     } else if inputStr == "🍏🍏" {
+///                         self.color = .green
+///                     } else if inputStr == "🍑🍑" {
+///                         self.color = .pink
+///                     } else {
+///                         self.color = .gray
+///                     }
+///                 }
+///             }
+///         } else {
+///             //  If no text was received in our drop, return false
+///             return false
+///         }
+///
+///         return true
+///     }
+/// }
+/// ```
+///
+/// This example uses `DropDelegate/dropUpdated(info:)-72cd3` to prevent fruits from being dropped if the background is yellow.
+///
+/// The example uses `DropDelegate/dropEntered(info:)-525fa` to change the color the first time a user drags over the drop zone.
+///
+/// Finally, when a user drags out of the view, `DropDelegate/dropExited(info:)-3d540` changes the background color to a dark gray.
+///
+/// Note: if the user deselects their dragged object while over the drop zone, `DropDelegate/dropExited(info:)-3d540` will **not** be called. `DropDelegate/dropExited(info:)-3d540` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+///
+/// *Bug*: On iOS `DropInfo` provides its location in global coordinates. It should provide location in local coordinates.
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol DropDelegate{ }
 extension DropDelegate {
 
-    /// Tells the delegate that a drop containing items conforming to one of the
-    /// expected types entered a view that accepts drops.
+    /// Validates a drop.
     ///
-    /// Specify the expected types when you apply the drop modifier to the view.
-    /// The default implementation returns `true`.
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Validates the drop
+    ///     func validateDrop(info: DropInfo) -> Bool {
+    ///         //  This function will fail, because the URI is "public.text" not "public.file-url"
+    ///         if info.hasItemsConforming(to: ["public.image"]) {
+    ///             return true
+    ///         } else {
+    ///             self.color = .red
+    ///             return false
+    ///         }
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func validateDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate it can request the item provider data from the given
-    /// information.
+    /// Specifies the behavior of a drop.
     ///
-    /// Incorporate the received data into your app's data model as appropriate.
-    /// - Returns: A Boolean that is `true` if the drop was successful, `false`
-    ///   otherwise.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func performDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate a validated drop has entered the modified view.
+    /// Provide custom behavior when an object is dragged over the `onDrop` view.
     ///
-    /// The default implementation does nothing.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-4.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Drop entered called
+    ///     func dropEntered(info: DropInfo) {
+    ///         //  Change color if color was previously black
+    ///         self.color = (self.color == .black) ? .gray : self.color
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func dropEntered(info: DropInfo) { }
 
-    /// Tells the delegate that a validated drop moved inside the modified view.
+    /// Provide custom behavior when the drop is updated.
     ///
-    /// Use this method to return a drop proposal containing the operation the
-    /// delegate intends to perform at the drop `DropInfo/location`. The
-    /// default implementation of this method returns `nil`, which tells the
-    /// drop to use the last valid returned value or else
-    /// `DropOperation/copy`.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-5.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Drop has been updated
+    ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+    ///         //  Don't allow more items to be dropped if a Banana was dropped
+    ///         if self.color == .yellow {
+    ///             return DropProposal(operation: .forbidden)
+    ///         } else {
+    ///             return nil
+    ///         }
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func dropUpdated(info: DropInfo) -> DropProposal? { }
 
-    /// Tells the delegate a validated drop operation has exited the modified
-    /// view.
+    /// Provide custom behavior when an object is dragged off of the `onDrop` view.
     ///
-    /// The default implementation does nothing.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-6.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     // Drop entered called
+    ///     func dropExited(info: DropInfo) {
+    ///         self.color = .init(white: 0.40)
+    ///     }
+    ///
+    ///     // This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             // Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 // Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     // Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             // If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
     func dropExited(info: DropInfo) { }
 }
 
@@ -5617,32 +7358,370 @@ extension DropDelegate {
 @available(watchOS, unavailable)
 extension DropDelegate {
 
-    /// Tells the delegate that a drop containing items conforming to one of the
-    /// expected types entered a view that accepts drops.
-    ///
-    /// Specify the expected types when you apply the drop modifier to the view.
-    /// The default implementation returns `true`.
-    public func validateDrop(info: DropInfo) -> Bool { }
+      /// Validates a drop.
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     // Validates the drop
+      ///     func validateDrop(info: DropInfo) -> Bool {
+      ///         // This function will fail, because the URI is "public.text" not "public.file-url"
+      ///         if info.hasItemsConforming(to: ["public.image"]) {
+      ///             return true
+      ///         } else {
+      ///             self.color = .red
+      ///             return false
+      ///         }
+      ///     }
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             // Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 // Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     // Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             // If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func validateDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate a validated drop has entered the modified view.
-    ///
-    /// The default implementation does nothing.
-    public func dropEntered(info: DropInfo) { }
+      /// Specifies the behavior of a drop.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
+      ///
+      /// ```
+      /// struct ExampleView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             // Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 // Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     // Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             // If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func performDrop(info: DropInfo) -> Bool { }
 
-    /// Tells the delegate that a validated drop moved inside the modified view.
-    ///
-    /// Use this method to return a drop proposal containing the operation the
-    /// delegate intends to perform at the drop `DropInfo/location`. The
-    /// default implementation of this method returns `nil`, which tells the
-    /// drop to use the last valid returned value or else
-    /// `DropOperation/copy`.
-    public func dropUpdated(info: DropInfo) -> DropProposal? { }
+      /// Provide custom behavior when an object is dragged over the `onDrop` view.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-4.gif)
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     // Drop entered called
+      ///     func dropEntered(info: DropInfo) {
+      ///         // Change color if color was previously black
+      ///         self.color = (self.color == .black) ? .gray : self.color
+      ///     }
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             // Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 // Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     //  Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             // If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func dropEntered(info: DropInfo) { }
 
-    /// Tells the delegate a validated drop operation has exited the modified
-    /// view.
-    ///
-    /// The default implementation does nothing.
-    public func dropExited(info: DropInfo) { }
+      /// Provide custom behavior when the drop is updated.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-5.gif)
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     //  Drop has been updated
+      ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+      ///         // Don't allow more items to be dropped if a Banana was dropped
+      ///         if self.color == .yellow {
+      ///             return DropProposal(operation: .forbidden)
+      ///         } else {
+      ///             return nil
+      ///         }
+      ///     }
+      ///
+      ///     // This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             //  Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 //  Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     //  Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     // Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             //  If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func dropUpdated(info: DropInfo) -> DropProposal? { }
+
+      /// Provide custom behavior when an object is dragged off of the `onDrop` view.
+      ///
+      /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-6.gif)
+      ///
+      /// ```
+      /// struct ContentView: View {
+      ///     @State var backgroundColor: Color = .black
+      ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+      ///
+      ///     var body: some View {
+      ///         VStack {
+      ///             HStack {
+      ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+      ///                     Text(fruit)
+      ///                         .font(.title)
+      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                 })
+      ///             }
+      ///
+      ///             HStack {
+      ///                 RoundedRectangle(cornerRadius: 10)
+      ///                     .fill(backgroundColor)
+      ///                     .frame(width: 150, height: 150)
+      ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+      ///             }
+      ///         }
+      ///
+      ///     }
+      /// }
+      ///
+      /// struct MyDropDelegate: DropDelegate {
+      ///     @Binding var color: Color
+      ///
+      ///     //  Drop entered called
+      ///     func dropExited(info: DropInfo) {
+      ///         self.color = .init(white: 0.40)
+      ///     }
+      ///
+      ///     //  This function is executed when the user "drops" their object
+      ///     func performDrop(info: DropInfo) -> Bool {
+      ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+      ///         if let item = info.itemProviders(for: ["public.text"]).first {
+      ///             //  Load the item
+      ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+      ///                 //  Cast NSSecureCoding to Ddata
+      ///                 if let data = text as? Data {
+      ///                     //  Extract string from data
+      ///                     let inputStr = String(decoding: data, as: UTF8.self)
+      ///
+      ///                     //  Conditionally change color given text string
+      ///                     if inputStr == "🍌🍌" {
+      ///                         self.color = .yellow
+      ///                     } else if inputStr == "🍏🍏" {
+      ///                         self.color = .green
+      ///                     } else if inputStr == "🍑🍑" {
+      ///                         self.color = .pink
+      ///                     } else {
+      ///                         self.color = .gray
+      ///                     }
+      ///                 }
+      ///             }
+      ///         } else {
+      ///             //  If no text was received in our drop, return false
+      ///             return false
+      ///         }
+      ///
+      ///         return true
+      ///     }
+      /// }
+      /// ```
+      public func dropExited(info: DropInfo) { }
 }
 
 /// The current state of a drop.
@@ -6273,26 +8352,85 @@ extension EditMode : Equatable {
 extension EditMode : Hashable {
 }
 
-/// An ellipse aligned inside the frame of the view containing it.
+/// An ellipse shape, similar to a circle but with potentially different width
+/// and height.
+///
+/// An Ellipse is a circular `Shape` that by default, aligns itself inside of
+/// the view containing it. It differs from `Circle` in that its width and
+/// height are not necessarily equal.
+///
+/// To define an Ellipse with a specific color and frame, use the `Shape/fill()`
+/// and `View/frame(width:height:)` modifiers:
+///
+/// ![Ellipse fill and frame example](ellipse-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Ellipse()
+///             .fill(Color.purple)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Ellipse/inset(by:)` modifier to inset the Ellipse by half of the
+/// border width to keep the Ellipse at its original size:
+///
+/// ![Ellipse inset and stroke example](ellipse-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Ellipse()
+///             .inset(by: 10)
+///             .stroke(Color.purple, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Ellipse : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe an Ellipse as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// An Ellipse can be described as a path within a specific `CGRect` using
+    /// the `Ellipse/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![Ellipse path example](ellipse-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 150))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates an ellipse shape that stretches to fill its parent view.
+    /// Creates an Ellipse that aligns itself inside of the view containing it
+    /// by default.
+    ///
+    /// ![Ellipse init example](ellipse-example-4.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -6300,11 +8438,25 @@ extension EditMode : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Ellipse : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Ellipse insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Ellipse that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Ellipse inset example](ellipse-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -6706,13 +8858,193 @@ extension EnvironmentKey {
     static var defaultValue: Self.Value { get }
 }
 
-/// A property wrapper type for an observable object supplied by a parent or
-/// ancestor view.
+/// A property wrapper type for an observable object passed down the view hierarchy by a parent view.
 ///
-/// An environment object invalidates the current view whenever the observable
-/// object changes. If you declare a property as an environment object, be sure
-/// to set a corresponding model object on an ancestor view by calling its
-/// `View/environmentObject(_:)` modifier.
+/// `@EnvironmentObject` is similar to `@ObservedObject` in that they both invalidate the view using them whenever the observed object changes.
+///
+/// `@EnvironmentObject` differs from `@ObservedObject` in that it receives the object to observe at runtime, from the view's environment, whereas `@ObservedObject` receives it directly either by the immediate parent view or by an initial value while declaring it.
+///
+/// ### The use of environment objects
+///
+/// Consider the following example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     let text: String = "some text"
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         ChildView()
+///             .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Text(appModel.text)
+///     }
+/// }
+/// ```
+///
+/// - An app model, `AppModel` is initialized in a `@StateObject` in the `ContentView`.
+/// - `ContentView` initializes `ChildView`, and then passes the app model initialized via `View/environmentObject(_:)`.
+/// - `ChildView` uses `AppModel` to display a piece of text declared by the app model.
+///
+/// Now consider a slightly different version of this example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     let text: String = "some text"
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         IntermediateView()
+///             .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct IntermediateView: View {
+///     var body: some View {
+///         ChildView()
+///             .padding()
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Text(appModel.text)
+///     }
+/// }
+///
+/// ```
+///
+/// In this example, `ChildView` is initialized by an `IntermediateView`, which in turn is initialized by `ContentView`. This example is different only in that there is an additional level of nesting, via `IntermediateView` (a view that adds padding to `ChildView`).
+///
+/// Note that `ChildView` did not need to be changed at all. `@EnvironmentObject` is neither used nor declared in `IntermediateView`, yet it is still available in the same way at one level deeper.
+///
+/// This is also the primary way in which `@EnvironmentObject` and `@ObservedObject` differ. Had `ChildView` been using `@ObservedObject`, the app model would need to be passed explicitly through `IntermediateView`, which would also need to declare `var appModel: AppModel` and then pass it to `ChildView`'s initializer.
+///
+/// ### Creating bindings
+///
+/// Here is another example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         ChildView()
+///             .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
+///
+///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a `Toggle` in `ChildView`. `Toggle` requires a `Binding<Bool>` to read and write whether it is on.
+///
+/// Just like `@State`, `@ObservedObject` and `@StateObject`, `@EnvironmentObject` allows you to create a `Binding` from its wrapped value type using the `$` syntax.
+///
+/// `$appModel.flag` creates a binding to `flag`, which is then passed to the toggle. This is also a good example of how **mutable** data can be passed down from a parent view to a child view (at any level deep) at runtime.
+///
+/// ### Dependency injection
+///
+/// Because `@EnvironmentObject` receives the object from the environment, the object can be passed down any number of levels. This makes it especially useful for problems such as dependency injection.
+///
+/// There are many use cases of `@EnvironmentObject` that don't necessarily involve passing the app's main model down. For example:
+///
+/// - Providing a "theme" object, allowing child views to adapt as per the theme passed down.
+/// - Providing a cache, that allows complex network-based views to be broken down into reusable components, while still using a cache provided by the parent.
+/// - Passing a global navigation manager - a navigator object that contains the current navigation selection.
+///
+/// ### Caveats
+///
+/// There are some limitations to `@EnvironmentObject`, especially on older versions of iOS.
+///
+/// On iOS 13, environment objects do not automatically pass to sheets or navigation destinations. The following code would crash on iOS 13, for example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     @State var isPresented: Bool = false
+///
+///     var body: some View {
+///         Button("Present") {
+///             isPresented = true
+///         }
+///         .sheet(isPresented: $isPresented ){
+///             ChildView()
+///         }
+///         .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
+///
+/// To fix it, the `View/environmentObject(_:)` modifier would need to be added directly to the sheet's content, like this:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ContentView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     @State var isPresented: Bool = false
+///
+///     var body: some View {
+///         Button("Present") {
+///             isPresented = true
+///         }
+///         .sheet(isPresented: $isPresented ){
+///             ChildView()
+///                 .environmentObject(appModel)
+///         }
+///         .environmentObject(appModel)
+///     }
+/// }
+///
+/// struct ChildView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct EnvironmentObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -8429,6 +10761,27 @@ extension Font {
     public static let caption2: Font
 
     /// Gets a system font with the given style and design.
+    ///
+    /// Font's `system(_:design:)` is an easy way to modify standard fonts.
+    ///
+    /// For example, basic usage would be:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(Font.system(.title))
+    ///             }
+    ///         }
+    ///
+    /// Your app can easily modify the system font by providing an alternate `desigin`. For example:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(Font.system(.title, design: .monospaced))
+    ///             }
+    ///         }
+    ///
     public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
 
     /// A dynamic text style to use for fonts.
@@ -8570,6 +10923,37 @@ extension Font {
     public func monospacedDigit() -> Font { }
 
     /// Sets the weight of the font.
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    ///
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text("ultraLight 🍌")
+    ///                     .fontWeight(Font.Weight.ultraLight)
+    ///                 Text("thin🍌")
+    ///                     .fontWeight(Font.Weight.thin)
+    ///                 Text("light🍌")
+    ///                     .fontWeight(Font.Weight.light)
+    ///                 Text("regular🍌")
+    ///                     .fontWeight(Font.Weight.regular)
+    ///                 Text("medium🍌")
+    ///                     .fontWeight(Font.Weight.medium)
+    ///                 Text("semibold🍌")
+    ///                     .fontWeight(Font.Weight.semibold)
+    ///                 Text("bold🍌")
+    ///                     .fontWeight(Font.Weight.bold)
+    ///                 Text("heavy🍌")
+    ///                     .fontWeight(Font.Weight.heavy)
+    ///                 Text("black🍌")
+    ///                     .fontWeight(Font.Weight.black)
+    ///            }
+    ///            .font(.title)
+    ///         }
+    ///     }
+    ///
+    ///
     public func weight(_ weight: Font.Weight) -> Font { }
 
     /// Adds bold styling to the font.
@@ -8722,6 +11106,25 @@ extension Font {
     /// `Font/Weight/regular`, and uses a `Font/Design/rounded` system font:
     ///
     ///     Text("Hello").font(.system(size: 17, design: .rounded))
+    ///
+    /// Other examples of system font include:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(.system(size: 32, weight: .light, design: .monospaced))
+    ///             }
+    ///         }
+    ///
+    /// And:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(.system(size: 32, weight: .heavy, design: .rounded))
+    ///             }
+    ///         }
+    ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
     /// A design to use for fonts.
@@ -8827,8 +11230,22 @@ extension Font.Leading : Equatable {
 extension Font.Leading : Hashable {
 }
 
-/// A structure that computes views on demand from an underlying collection of
-/// of identified data.
+/// Creates views from a collection of identified data.
+///
+/// ForEach supports three identifiers:
+/// * `ForEach/init(_:content:)-ed9f4`, for iterating over a range
+/// * `ForEach/init(_:content:)-72c77`, for iterating over data that conforms to identifiable
+/// * `ForEach/init(_:id:content:)` for iterating over that can be identified, but does not conform to identifiable
+///
+/// ### Iterating over a range
+/// [[foreach-fixed-range]]
+///
+/// ### Iterating over `Identifiable` data
+/// [[foreach-identifiable-content]]
+///
+/// ### Explicitly identifying data
+/// [[foreach-dynamic-content]]
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ForEach<Data, ID, Content> where Data : RandomAccessCollection, ID : Hashable {
 
@@ -8858,10 +11275,43 @@ extension ForEach : View where Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Identifiable {
 
-    /// Creates an instance that uniquely identifies and creates views across
-    /// updates based on the identity of the underlying data.
+    /// Creates a view from data that conforms to `Identifiable`.
+    /// [foreach-identifiable-content ->]
+    /// If your data does not conform to identifiable, use `ForEach/init(_:id:content)`.
     ///
-    /// It's important that the `id` of a data element doesn't change unless you
+    /// Note: if your data does not conform to identifiable you will receive the following error:
+    ///
+    /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform to 'Identifiable`
+    ///
+    /// An array of primitive types, such as strings & ints, will throw this error. Identify these items with `id: \.self` – because they themselves can be used as the identifiable object. See more in `ForEach/init(_:id:content)`.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [Fruit] = [
+    ///         Fruit(emoji: "🍌🍌", name: "Banana"),
+    ///         Fruit(emoji: "🍑🍑", name: "Peach"),
+    ///         Fruit(emoji: "🍎🍎", name: "Apple")
+    ///     ]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits) { fruit in
+    ///             HStack {
+    ///                 Text(fruit.name + fruit.emoji)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct Fruit: Identifiable {
+    ///     var emoji: String
+    ///     var name: String
+    ///     //  Create a unique ID for our object
+    ///     //  This idea allows Fruit to conform to Identifiable
+    ///     let id = UUID()
+    /// }
+    /// ```
+    /// [<-]
+    /// Note:  It's important that the `id` of a data element doesn't change unless you
     /// replace the data element with a new data element that has a new
     /// identity. If the `id` of a data element changes, the content view
     /// generated from that data element loses any current state and animations.
@@ -8876,11 +11326,82 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where Content : View {
 
-    /// Creates an instance that uniquely identifies and creates views across
-    /// updates based on the provided key path to the underlying data's
-    /// identifier.
+    /// Creates an instance that uniquely identifies and computes views.
+    /// [foreach-dynamic-content ->]
+    /// For data that does not conform to `Identifiable`, use this initializer.
     ///
-    /// It's important that the `id` of a data element doesn't change, unless
+    /// A very common use case for this initialier is iterating over primitive data, such as strings or ints. In the following example, the fruit string is used as the identifiable unit.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits, id:/\.self) { fruit in
+    ///             HStack {
+    ///                 Text(fruit)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This initializer can also be used with objects that don't conform to `Identifiable`, but have identifiable properties. For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [Fruit] = [
+    ///         Fruit(emoji: "🍌🍌", name: "Banana"),
+    ///         Fruit(emoji: "🍑🍑", name: "Peach"),
+    ///         Fruit(emoji: "🍎🍎", name: "Apple")
+    ///     ]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits, id:/\.emoji) { fruit in
+    ///             HStack {
+    ///                 Text(fruit.name + fruit.emoji)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct Fruit {
+    ///     var emoji: String
+    ///     var name: String
+    /// }
+    /// ```
+    ///
+    /// Notice, this initializer can be used for data that can change. For example:
+    ///
+    /// ![Changing List](foreach.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         Button("New Fruit") {
+    ///             newFruit()
+    ///         }
+    ///
+    ///         ForEach(myFruits, id:\.self) { fruit in
+    ///             HStack {
+    ///                 Text(fruit)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     func newFruit() {
+    ///         let allFruit: [String] = ["🍏🍏", "🍒🍒", "🍓🍓", "🥝🥝", "🥭🥭", "🍊🍊", "🍍🍍"]
+    ///
+    ///         myFruits.append(allFruit.randomElement()!)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// **Note:** This initializer works well for externally loaded data. It enables your app's frontend to automatically reflect data as it arrives.
+    /// [<-]
+    /// **Note:** It's important that the `id` of a data element doesn't change, unless
     /// SwiftUI considers the data element to have been replaced with a new data
     /// element that has a new identity. If the `id` of a data element changes,
     /// then the content view generated from that data element will lose any
@@ -8897,12 +11418,56 @@ extension ForEach where Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 
-    /// Creates an instance that computes views on demand over a given constant
-    /// range.
+    /// Computes views over a given constant range.
+    /// [foreach-fixed-range ->]
+    /// This initializer is ForEach's most trivial. It is analogous to a common for loop.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         ForEach(0..<myFruits.count) { index in
+    ///             HStack {
+    ///                 Text(myFruits[index])
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Notice however, that this view is only rendered once. Therefore, if `myFruits.count` changes, the view will **not update**. For example, clicking `New Fruit` in the following code returns the error:
+    ///
+    /// `ForEach(_:content:) should only be used for *constant* data.`
+    ///
+    /// ```
+    /// struct ErrorView: View {
+    ///     @State var myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         Button("New Fruit") {
+    ///             newFruit()
+    ///         }
+    ///
+    ///         ForEach(0..<myFruits.count) { index in
+    ///             HStack {
+    ///                 Text(myFruits[index])
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     func newFruit() {
+    ///         let allFruit: [String] = ["🍏🍏", "🍒🍒", "🍓🍓", "🥝🥝", "🥭🥭", "🍊🍊", "🍍🍍"]
+    ///
+    ///         myFruits.append(allFruit.randomElement()!)
+    ///     }
+    /// }
+    /// ```
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
     /// demand over a dynamic range, use `ForEach/init(_:id:content:)`.
+    /// [<-]
     ///
     /// - Parameters:
     ///   - data: A constant range.
@@ -9105,7 +11670,7 @@ public struct GeometryProxy {
 ///                 .frame(width: 500, height: 500)
 ///                 .background(
 ///                     GeometryReader { (proxy: GeometryProxy) -> EmptyView in
-///                         if globalFrame != proxy.frame(in: .global) {
+///                         if someFrame != proxy.frame(in: .global) {
 ///                             DispatchQueue.main.async {
 ///                                 someFrame = proxy.frame(in: .global)
 ///                             }
@@ -9596,11 +12161,24 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     public static func == (a: Gradient, b: Gradient) -> Bool { }
 }
 
-/// A system style of `DatePicker` that displays an interactive calendar or
-/// clock.
+/// An interactive calendar or clock.
 ///
-/// This style is useful when wanting to allow browsing through days in a
-/// calendar, or when the look of a clock face is appropriate.
+/// > "This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate."
+///
+/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///
+///          var body: some View {
+///              DatePicker("Date",selection: $date)
+///                 .datePickerStyle(GraphicalDatePickerStyle())
+///                 .padding()
+///          }
+///      }
+///
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -10125,7 +12703,23 @@ public struct GroupBoxStyleConfiguration {
     public let content: GroupBoxStyleConfiguration.Content
 }
 
-/// The instance that describes the behavior and appearance of a grouped list.
+/// A standard grouped list style.
+///
+/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///              Text("Bananas 🍌🍌")
+///              Text("Apples 🍎🍎")
+///              Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(GroupedListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -10247,8 +12841,18 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-/// The title of the label is still used for non-visual descriptions, such as
-/// VoiceOver.
+/// ![IconOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-icon-only-example-1.png)
+///
+///
+///    struct ExampleView: View {
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///        }
+///    }
+///
+///
+/// > The title of the label is still used for non-visual descriptions, such as VoiceOver.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct IconOnlyLabelStyle : LabelStyle {
 
@@ -10819,6 +13423,43 @@ extension IndexViewStyle {
 
 /// A `PickerStyle` where each option is displayed inline with
 /// other views in the current container.
+///
+/// [pickerstyle-inline ->]
+/// Your app can use explicit tags to identify picker content.
+///
+/// ![Inline Example](/picker-style-2.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(InlinePickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct InlinePickerStyle : PickerStyle {
 
@@ -10827,6 +13468,22 @@ public struct InlinePickerStyle : PickerStyle {
 }
 
 /// The instance that describes the behavior and appearance of an inset grouped list.
+///
+/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(InsetGroupedListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -10838,6 +13495,22 @@ public struct InsetGroupedListStyle : ListStyle {
 }
 
 /// The behavior and appearance of an inset list.
+///
+/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                Text("Bananas 🍌🍌")
+///                Text("Apples 🍎🍎")
+///                Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(InsetListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -11603,6 +14276,21 @@ extension LegibilityWeight {
 }
 
 /// A linear gradient.
+///
+/// ![Rectangle Example](rounded-rectangle.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(LinearGradient(
+///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+///                     startPoint: .leading,
+///                     endPoint: .trailing))
+///             .padding()
+///     }
+/// }
+/// ```
 ///
 /// The gradient applies the color function along an axis, as defined by its
 /// start and end points. The gradient maps the unit-space points into the
@@ -12991,18 +15679,74 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     public init(_ configuration: MenuStyleConfiguration) { }
 }
 
-/// A picker style that presents the options as a menu when the user presses a
-/// button, or as a submenu when nested within a larger menu.
+/// A menu-formatted picker style.
 ///
-/// Use this style when there are more than five options. Consider using
-/// `InlinePickerStyle` when there are fewer than five options.
+/// > `MenuPickerStyle` is picker style that presents the options as a menu when the user presses a button, or as a submenu when nested within a larger menu.
 ///
-/// The button itself indicates the selected option. You can include additional
-/// controls in the set of options, such as a button to customize the list of
-/// options.
+/// > Use this style when there are more than five options. Consider using `InlinePickerStyle` when there are fewer than five options.
 ///
-/// To apply this style to a picker, or to a view that contains pickers, use the
-/// `View/pickerStyle(_:)` modifier.
+/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
+///     @State private var selectedFruit = 0
+///
+///     var body: some View {
+///           VStack {
+///               Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                   ForEach(0..<fruits.count) {
+///                       Text(self.fruits[$0])
+///                   }
+///               }
+///
+///               Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///           }
+///           .pickerStyle(MenuPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [pickerstyle-menu ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Menu Picker Style Example](/picker-style-3.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(MenuPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
+///
+/// > The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
+///
+/// > To apply this style to a picker, or to a view that contains pickers, use the `View/pickerStyle(_:)` modifier.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -13892,8 +16636,182 @@ public protocol NavigationViewStyle{ }
 extension NavigationViewStyle {
 }
 
-/// A property wrapper type that subscribes to an observable object and
-/// invalidates a view whenever the observable object changes.
+/// A SwiftUI property wrapper that subscribes to an observable object.
+///
+/// - Like `@StateObject`, this type subscribes to the observable object and invalidates a view whenever the observable object changes.
+/// - Unlike `@StateObject,` `@ObservedObject` does not persist the object in state. Objects are only *assigned* to `@ObservedObject`, they should be initialized and persistent by an ancestor view.
+///
+/// ### Usage
+///
+/// In the following example, an observable object is assigned to an `@ObservedObject` variable:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
+/// struct ExampleView: View {
+///     @ObservedObject var appModel = AppModel.shared
+///
+///     var body: some View {
+///         VStack {
+///             Text(appModel.fruitName)
+///
+///             Button("Change Text") {
+///                 appModel.fruitName = "Banana"
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In the example above, `ExampleView` will update its displayed text to "Banana" when the button labeled "Change Text" is pressed. This is because `ExampleView` has subscribed to `AppModel.shared` via the `@ObservedObject` `appModel` variable.
+///
+/// Whenever the object referenced by `appModel` (which is `AppModel.shared` in this case) emits a change, `ExampleView` will be invalidated and redrawn.
+///
+/// ### Creating bindings
+///
+/// Just like `@State`, `@EnvironmentObject` and `@StateObject`, `@ObservedObject` allows you to create a `Binding` to an object using the `$` prefix syntax.
+///
+/// For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
+/// struct ExampleView: View {
+///     @ObservedObject var appModel = AppModel.shared
+///
+///     var body: some View {
+///         TextField("Enter fruit name", text: $appModel.fruitName)
+///     }
+/// }
+/// ```
+///
+/// In this example, a two-way connection is established between `appModel.fruitName` and `TextField`, by using the `$` prefix to create a `Binding<String>`. This allows `TextField` to update the `fruitName` variable when the user enters text, and also to update its own displayed text if `fruitName` is changed programmatically.
+///
+/// ### Passing an observable object to a child view using `@ObservedObject`
+///
+/// Pass an observable object like you would pass any other variable down to a child view. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     struct ChildView: View {
+///         @ObservedObject var appModel: AppModel
+///
+///         var body: some View {
+///             TextField("Enter fruit name", text: $appModel.fruitName)
+///         }
+///     }
+///
+///     var body: some View {
+///         ChildView(appModel: appModel)
+///     }
+/// }
+/// ```
+///
+/// It is a common pattern for a parent view to create a `@StateObject` to hold an observable object, and then to pass it down to a child using an `@ObservedObject`. `@StateObject` **owns** the object, `@ObservedObject` simply holds a reference to the object.
+///
+/// ### Comparison with `@StateObject`
+///
+/// Consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @StateObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// `ExampleView` creates a vertical stack of a `Toggle`, and a view that describes the toggle, `ToggleDescription`.
+///
+/// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Flip the toggle twice. Note that even though `ToggleDescription` is refreshed, nothing is printed further.
+///
+/// Now consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @ObservedObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// This example is identical to the previous example **except** for the fact that `@StateObject` has been replaced with `@ObservedObject`. Run this code now, and observe the following print again:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Now flip the toggle twice. The console will print the following:
+///
+/// ```
+/// Initialized
+/// Initialized
+/// ```
+///
+/// This highlights the fundamental difference between `@StateObject` and `@ObservedObject`.
+///
+/// -  `@StateObject` instantiates and holds the object in state.
+/// -  `@ObservedObject` is *assigned* an object, and **does not** hold it in state
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @propertyWrapper @frozen public struct ObservedObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -15754,8 +18672,33 @@ extension Picker where Label == Text {
     public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 }
 
-/// A type that specifies the appearance and interaction of all pickers within
-/// a view hierarchy.
+/// Specifies the appearance and interaction of all pickers within a view hierarchy.
+///
+/// `PickerStyle` does not have a public interface - and therefore your app is limited to their default styles.
+///
+/// There are 7 different styles:
+/// * `DefaultPickerStyle`
+/// * `InlinePickerStyle`
+/// * `MenuPickerStyle`
+/// * `PopUpButtonPickerStyle` (not availible on iOS)
+/// * `RadioGroupPickerStyle` (not availible on iOS)
+/// * `SegmentedPickerStyle`
+/// * `WheelPickerStyle`
+///
+/// ### `DefaultPickerStyle`
+/// [[pickerstyle-default]]
+///
+/// ### `InlinePickerStyle`
+/// [[pickerstyle-inline]]
+///
+/// ### `MenuPickerStyle`
+/// [[pickerstyle-menu]]
+///
+/// ### `SegmentedPickerStyle`
+/// [[pickerstyle-segmented]]
+///
+/// ### `WheelPickerStyle`
+/// [[pickerstyle-wheel]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PickerStyle{ }
 extension PickerStyle {
@@ -15824,12 +18767,31 @@ public struct PinnedScrollableViews : OptionSet {
     public typealias RawValue = UInt32
 }
 
-/// A button style that doesn't style or decorate its content while idle, but
-/// may apply a visual effect to indicate the pressed, focused, or enabled state
-/// of the button.
+/// A button effect that only modifies the label on interaction.
 ///
-/// To apply this style to a button, or to a view that contains buttons, use the
-/// `View/buttonStyle(_:)-66fbx` modifier.
+/// > A button style that doesn't style or decorate its content while idle, but may apply a visual effect to indicate the pressed, focused, or enabled state of the button.
+///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              VStack {
+///                  Button("Plain Banana🍌🍌") { tap() }
+///                       .buttonStyle(PlainButtonStyle())
+///                  Button("Borderless Banana 🍌🍌") { tap() }
+///                       .buttonStyle(BorderlessButtonStyle())
+///                  Button("Default Banana🍌🍌") { tap() }
+///                       .buttonStyle(DefaultButtonStyle())
+///              }
+///              .font(.title2)
+///          }
+///
+///          func tap() {}
+///      }
+///
+///
+/// > To apply this style to a button, or to a view that contains buttons, use the `View/buttonStyle(_:)-66fbx` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
@@ -15850,6 +18812,22 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 }
 
 /// The instance that describes the behavior and appearance of a plain list.
+///
+/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
+///
+///
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(PlainListStyle())
+///          }
+///      }
+///
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainListStyle : ListStyle {
 
@@ -16470,64 +19448,137 @@ public struct PrimitiveButtonStyleConfiguration {
     public func trigger() { }
 }
 
-/// A view that shows the progress towards completion of a task.
+/// An animated loading bar or "spinner" shown when an ongoing task has started but is not yet complete
 ///
-/// Use a progress view to show that a task is making progress towards
-/// completion. A progress view can show both determinate (percentage complete)
-/// and indeterminate (progressing or not) types of progress.
+/// A progress view is a combination of `UIProgressView` and `UIActivityIndicatorView` from UIKit. When initialized without arguments, it resembles `UIActivityIndicatorView`, an indeterminate progress indicator or “spinner”.
 ///
-/// Create a determinate progress view by initializing a `ProgressView` with
-/// a binding to a numeric value that indicates the progress, and a `total`
-/// value that represents completion of the task. By default, the progress is
-/// `0.0` and the total is `1.0`.
-///
-/// The example below uses the state property `progress` to show progress in
-/// a determinate `ProgressView`. The progress view uses its default total of
-/// `1.0`, and because `progress` starts with an initial value of `0.5`,
-/// the progress view begins half-complete. A "More" button below the progress
-/// view allows the user to increment the progress in 5% increments:
-///
-///     @State private var progress = 0.5
-///
-///     VStack {
-///         ProgressView(value: progress)
-///         Button("More", action: { progress += 0.05 })
+///     struct IndeterminateProgressViews: View {
+///         var body: some View {
+///            VStack {
+///               ProgressView()
+///               ProgressView(value: Double?(nil))
+///               ProgressView(value: -1)
+///            }
+///         }
 ///     }
 ///
-/// To create an indeterminate progress view, use an initializer that doesn't
-/// take a progress value:
+/// When initialized with a value `ProgressView` looks like `UIProgressView`, a loading bar that fills up from left to right. There are notable exceptions featured in the example above. For example, a value of nil or less than 0.0 shows an indeterminate progress indicator or “spinner”."
+/// The value can be any generic type that conforms to the `BinaryFloatingPoint` protocol, which includes     `CGFloat`, `Double`, `Float`, `Float16` and `Float80`.
 ///
-///     var body: some View {
-///         ProgressView()
+///     struct DeteriminateProgressViews: View {
+///         @State var value = Double()
+///         var body: some View {
+///             VStack {
+///                 Slider(value: $value, in: 0...1)
+///                 ProgressView(value: value)
+///                 ProgressView(value: value, total: 1)
+///                 ProgressView(value: value, total: 2)
+///                 ProgressView(value: value) {
+///                     Text("Label")
+///                 }
+///                 ProgressView("Title", value: value)
+///             }
+///         }
 ///     }
 ///
 /// ### Styling Progress Views
 ///
-/// You can customize the appearance and interaction of progress views by
-/// creating styles that conform to the `ProgressViewStyle` protocol. To set a
-/// specific style for all progress view instances within a view, use the
-/// `View/progressViewStyle(_:)` modifier. In the following example, a custom
-/// style adds a dark blue shadow to all progress views within the enclosing
-/// `VStack`:
+/// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of `ProgressView`. The structure passed to the
+/// `progressViewStyle(_:)` modifier applies to all `ProgressView` instances in the children of that `View`.
 ///
-///     struct ShadowedProgressViews: View {
+/// In this example, the same style is applied to two `ProgressView` instances that are children of a `VStack`:
+///
+///     struct DefaultProgressViews: View {
 ///         var body: some View {
 ///             VStack {
 ///                 ProgressView(value: 0.25)
+///                   .accentColor(.red)
 ///                 ProgressView(value: 0.75)
+///                   .background(.black)
 ///             }
-///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
+///             .progressViewStyle(DefaultProgressViewStyle())
 ///         }
 ///     }
 ///
-///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
-///         func makeBody(configuration: Configuration) -> some View {{}
+/// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the `DefaultProgressViewStyle`. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the `ProgressView` will be visible in the unfilled portion of the loading bar.
+///
+/// To swap the colors, you can approximate how `Color.gray.opacity(0.1)` would look on a given background. Swapping the default colors will cause the blue background to show through the translucent gray, so it won't look right.
+///
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(InvertedColorProgressViewStyle())
+///         }
+///      }
+///
+///     struct InvertedColorProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///           ProgressView(configuration)
+///            .background(Color.blue)
+///            .accentColor(Color(red: 0.894, green: 0.894, blue: 0.902))
+///         }
+///     }
+/// [rotation-effect ->]
+/// To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
+///
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(InvertedDirectionProgressViewStyle())
+///         }
+///      }
+///
+///     struct InvertedDirectionProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///             GeometryReader { geometry in
+///                 ProgressView(configuration)
+///                     .frame(height: geometry.size.height)
+///                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+///             }
+///         }
+///     }
+/// [<-]
+///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of `GeometryReader` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
+///
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(VerticalProgressViewStyle())
+///         }
+///      }
+///
+///     struct VerticalProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///           GeometryReader { geometry in
 ///             ProgressView(configuration)
-///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
-///                         radius: 4.0, x: 1.0, y: 2.0)
+///                 .frame(width: geometry.size.height)
+///                 .offset(x: geometry.size.height / 2, y: geometry.size.height / 2)
+///                 .rotationEffect(.degrees(90))
+///             }
 ///         }
-///     }
+///      }
 ///
+///  To invert the direction of progress in the vertical style, merely apply the `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
+///
+///
+///      struct ExampleView: View {
+///         var body: some View {
+///             ProgressView()
+///                 .progressViewStyle(InvertedVerticalProgressViewStyle())
+///         }
+///      }
+///
+///     struct InvertedVerticalProgressViewStyle: ProgressViewStyle {
+///          func makeBody(configuration: Configuration) -> some View {
+///              GeometryReader { geometry in
+///                  ProgressView(configuration)
+///                     .frame(width: geometry.size.height)
+///                     .rotationEffect(.degrees(90))
+///                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
+///                     .offset(x: -(geometry.size.height / 2), y: geometry.size.height / 2)
+///              }
+///          }
+///     }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, CurrentValueLabel : View {
 
@@ -16915,26 +19966,81 @@ extension ProjectionTransform {
     public typealias Body
 }
 
-/// A rectangular shape aligned inside the frame of the view containing it.
+/// A rectangle shape.
+///
+/// A Rectangle is a rectangular `Shape` that by default, aligns itself inside
+/// of the view containing it. To define a Rectangle with a specific color and
+/// frame, use the `Shape/fill()` and `View/frame(width:height:)` modifiers:
+///
+/// ![Rectangle fill and frame example](rectangle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Rectangle()
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `Rectangle/inset(by:)` modifier to inset the rectangle by half of the
+/// border width to keep the rectangle at its original size:
+///
+/// ![Rectangle inset and stroke example](rectangle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Rectangle()
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Rectangle : Shape {
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe a Rectangle as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// A Rectangle can be described as a path within a specific `CGRect` using
+    /// the `Rectangle/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![Rectangle path example](rectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// Creates a new rectangle shape.
+    /// Creates a Rectangle that aligns itself inside of the view containing it
+    /// by default.
+    ///
+    /// ![Rectangle init example](rectangle-example-4.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -16942,11 +20048,25 @@ extension ProjectionTransform {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Rectangle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a Rectangle insetted by the amount specified.
+    ///
+    /// For example, insetting by 10 points returns a Rectangle that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![Rectangle inset example](rectangle-example-5.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -18162,8 +21282,80 @@ extension RoundedCornerStyle : Equatable {
 extension RoundedCornerStyle : Hashable {
 }
 
-/// A rectangular shape with rounded corners, aligned inside the frame of the
-/// view containing it.
+/// A rectangle shape with rounded corners.
+///
+/// A RoundedRectangle is a rectangular `Shape` with rounded corners that by
+/// default, aligns itself inside of the view containing it.
+///
+/// It must be created with a specific corner radius or size.
+/// The example below creates a RoundedRectangle with a corner radius of 20,
+/// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
+/// to set the color to blue and the frame to 250 by 150.
+///
+/// ![RoundedRectangle corner radius, fill, and frame example](roundedrectangle-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 20)
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// The example below uses the same modifiers, but defines a corner size
+/// rather than a corner radius.
+///
+/// ![RoundedRectangle corner size, fill, and frame example](roundedrectangle-example-2.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerSize: CGSize(width: 30, height: 10))
+///             .fill(Color.blue)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
+/// The RoundedRectangle initializer includes an optional parameter for
+/// specifying the `style`, a `RoundedCornerStyle` that can either be `circular`
+/// or `continuous`. These styles have subtle but noticeable differences:
+///
+/// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack(spacing: 20) {
+///             RoundedRectangle(cornerRadius: 50, style: .circular)
+///                 .frame(width: 250, height: 150)
+///
+///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+///                 .frame(width: 250, height: 150)
+///         }
+///     }
+/// }
+/// ```
+///
+/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// the `RoundedRectangle/inset(by:)` modifier to inset the RoundedRectangle by
+/// half of the border width to keep the RoundedRectangle at its original size:
+///
+/// ![RoundedRectangle inset and stroke example](roundedrectangle-example-4.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 40)
+///             .inset(by: 10)
+///             .stroke(Color.blue, lineWidth: 20)
+///             .frame(width: 250, height: 150)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RoundedRectangle : Shape {
 
@@ -18173,43 +21365,124 @@ extension RoundedCornerStyle : Hashable {
 	/// not to be perfect quarter-circles but instead quarter-ellipses.
 	/// Basically, this allows you to specify different width and heights of
 	/// the corners.
+    ///
+    /// ![RoundedRectangle cornerSize example](roundedrectangle-example-6.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerSize: CGSize(width: 30, height: 20))
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerSize: CGSize(width: 20, height: 40))
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var cornerSize: CGSize
 
     /// The rounded corner style of your rounded rectangle's corners.
     ///
+    /// These styles have subtle but noticeable differences:
+    ///
+    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: .circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// -SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
-    /// Creates a rounded rectangle with specified rounded corner width and height.
+    /// Creates a RoundedRectangle with specified rounded corner width and height.
     ///
     /// - Parameters:
     ///   - cornerSize: The size (width and height) of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
+    ///
+    /// ![RoundedRectangle init with cornerSize example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(
+    ///                 cornerSize: CGSize(width: 20, height: 10)
+    ///             )
+    ///             .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(
+    ///                 cornerSize: CGSize(width: 20, height: 10),
+    ///                 style: .continuous
+    ///             )
+    ///             .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
 
-    /// Creates a rounded rectangle with specified rounded corner radius.
+    /// Creates a RoundedRectangle with specified rounded corner radius.
     ///
     /// - Parameters:
     ///   - cornerRadius: The radius of the rectangle's corners.
     ///   - style: The type of rounded corners. Defaults to circular.
+    ///
+    /// ![RoundedRectangle init with cornerRadius example](roundedrectangle-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50) // Style defaults to circular
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
 
-    /// Describes this shape as a path within a rectangular frame of reference.
+    /// Used to describe a RoundedRectangle as a path in a `CGRect`.
     ///
-    /// - Parameter rect: The frame of reference for describing this shape.
+    /// A RoundedRectangle can be described as a path within a specific `CGRect`
+    /// using the `RoundedRectangle/path(in:)` modifier:
     ///
-    /// - Returns: A path that describes this shape.
+    /// ![RoundedRectangle path example](roundedrectangle-example-7.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle()
+    ///             .path(in: CGRect(x: 0, y: 0, width: 75, height: 200))
+    ///     }
+    /// }
+    /// ```
     public func path(in rect: CGRect) -> Path { }
 
-    /// The data to animate.
+    /// > The data to animate.
     public var animatableData: CGSize.AnimatableData
 
-    /// The type defining the data to animate.
+    /// > The type defining the data to animate.
     public typealias AnimatableData = CGSize.AnimatableData
 
-    /// The type of view representing the body of this view.
+    /// > The type of view representing the body of this view.
     ///
-    /// When you create a custom view, Swift infers this type from your
+    /// > When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -18217,11 +21490,24 @@ extension RoundedCornerStyle : Hashable {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension RoundedRectangle : InsettableShape {
 
-    /// Returns `self` inset by `amount`.
+    /// Returns a RoundedRectangle insetted by the amount specified. For
+    /// example, insetting by 10 points returns a Capsule that fills its
+    /// container, with 10 points inset on all four side.
+    ///
+    /// ![RoundedRectangle inset example](roundedrectangle-example-8.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 20)
+    ///             .inset(by: 10)
+    ///     }
+    /// }
+    /// ```
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// The type of the inset shape.
+    /// > The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -19547,7 +22833,66 @@ extension SecureField where Label == Text {
 
 /// A picker style that presents the options in a segmented control.
 ///
-/// To apply this style to a picker, or to a view that contains pickers, use the
+/// ![SegmentedPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-segmented-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
+///     @State private var selectedFruit = 0
+///
+///      var body: some View {
+///           VStack {
+///               Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                   ForEach(0..<fruits.count) {
+///                       Text(self.fruits[$0])
+///                   }
+///               }
+///               Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///           }
+///           .pickerStyle(SegmentedPickerStyle())
+///       }
+///  }
+/// ```
+///
+/// [pickerstyle-segmented ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Segmented Example 1](/picker-style-6.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(SegmentedPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
+///
+///
+/// > To apply this style to a picker, or to a view that contains pickers, use the
 /// `View/pickerStyle(_:)` modifier.
 ///
 /// > Note: The segmented picker style supports `Text` and `Image` segments only.
@@ -19944,6 +23289,22 @@ public struct SidebarCommands : Commands {
 }
 
 /// The behavior and appearance of a sidebar or source list.
+///
+/// ![SidebarListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-sidebar-example-1.png)
+///
+/// ```
+///      struct ExampleView: View {
+///          var body: some View {
+///             List {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
+///             }
+///             .listStyle(SidebarListStyle())
+///          }
+///      }
+/// ```
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -20352,39 +23713,118 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     public init() { }
 }
 
-/// A property wrapper type that can read and write a value managed by SwiftUI.
+/// A SwiftUI property wrapper that holds a state value.
 ///
-/// SwiftUI manages the storage of any property you declare as a state. When the
-/// state value changes, the view invalidates its appearance and recomputes the
-/// body. Use the state as the single source of truth for a given view.
+/// ### Usage
 ///
-/// A `State` instance isn't the value itself; it's a means of reading and
-/// writing the value. To access a state's underlying value, use its variable
-/// name, which returns the `State/wrappedValue` property value.
+/// Modifying a `@State` variable causes the `body` of the view to be recomputed. For example:
 ///
-/// You should only access a state property from inside the view's body, or from
-/// methods called by it. For this reason, declare your state properties as
-/// private, to prevent clients of your view from accessing them. It is safe to
-/// mutate state properties from any thread.
+/// ```
+/// struct ExampleView: View {
+///     @State var foo: String = "Apple"
 ///
-/// To pass a state property to another view in the view hierarchy, use the
-/// variable name with the `$` prefix operator. This retrieves a binding of the
-/// state property from its `State/projectedValue` property. For example, in
-/// the following code example `PlayerView` passes its state property
-/// `isPlaying` to `PlayButton` using `$isPlaying`:
+///     var body: some View {
+///         VStack {
+///             Text(foo)
 ///
-///     struct PlayerView: View {
-///         var episode: Episode
-///         @State private var isPlaying: Bool = false
-///
-///         var body: some View {
-///             VStack {
-///                 Text(episode.title)
-///                 Text(episode.showTitle)
-///                 PlayButton(isPlaying: $isPlaying)
+///             Button("Change Text") {
+///                 foo = "Banana"
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
+///
+/// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This  new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
+///
+/// Note:
+///
+/// - Recomputing the `body` is also frequently referred to as "invalidating the view".
+/// - While all SwiftUI views are value types, the `@State` property wrapper creates a reference based storage managed by the SwiftUI runtime. This is why mutating a state variable does not require a mutating function.
+///
+/// ### Passing state down to a child view
+///
+/// Pass a state variable just as you would pass any other variable to a struct. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     struct ChildView: View {
+///         let text: String
+///
+///         var body: some View {
+///             Text(text)
+///         }
+///     }
+///
+///     @State var foo: String = "Apple"
+///
+///     var body: some View {
+///         VStack {
+///             ChildView(text: foo)
+///
+///             Button("Change Text") {
+///                 foo = "Banana"
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// In this example, `foo` is passed to `ChildView` by initializer.
+///
+/// And exactly as in the previous example, when `foo` updates, so will the `body` of `ExampleView`. When the `body` of `ExampleView` is recomputed, a new instance of `ChildView` is created with the latest value of `foo` (which is now "Banana"). `ChildView` in turn computes its own `body`, which creates a `Text("Banana")`.
+///
+/// Everytime a `View` is invalidated, its `body` is recomputed. Everytime the body is recomputed, all the view's childrens' bodies are also recursively recomputed. Since SwiftUI views are value types, creating and destroying them repeatedly (even hundreds of times a second) does not impact the app's performance.
+///
+/// ### Passing a reference to the state
+///
+/// The previous example demonstrated how a state value could be passed from a view to its child. However, for the child to be able to actually modify the parent's state, the parent must pass a **binding** to its child. A binding is a read/write reference to the `@State` variable, and is represented via `SwiftUI/Binding`.
+///
+/// To create a binding to a state variable, prefix it with a dollar sign `$`. For example:
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var text: String = "🍌🍌"
+///
+///     var body: some View {
+///         Text(text)
+///         TextField("Placeholder", text: $text)
+///     }
+/// }
+/// ```
+///
+/// In this example, `TextField` requires a binding in order to read and write to a given value. The `text` state variable is converted to a `Binding<String>` using the dollar sign prefix (`$text`), and then passed to `Textfield` via its initializer.
+///
+/// Note: The `Binding` type can also be used to create references to `@ObservedObject`, `@EnvironmentObject` and `@StateObject`. It is not unique to `@State`, but rather a general structure that represents a reference to some source of truth.
+///
+/// ### Modifying a state variable outside of `body`
+///
+/// It's possible to modify a state variable outside of a view's `body`. For example:
+///
+/// ```
+/// struct ContentView: View {
+///     @State var foo: String = "Apple"
+///
+///     var body: some View {
+///         VStack {
+///             Text(foo)
+///
+///             Button("Change Text", action: changeText)
+///         }
+///     }
+///
+///     func changeText() {
+///         foo = "Banana"
+///     }
+/// }
+/// ```
+///
+/// In this example, the button labeled "Change text" calls the function `changeText`, which modifies `foo`.
+///
+/// Note:
+///
+/// - `changeText` is not a `mutating ` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
+/// - All modifications to a state variable **must** happen on the main thread. Modifying a state variable on a background thread may lead to undefined behavior.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct State<Value> : DynamicProperty {
 
@@ -20456,44 +23896,197 @@ extension State where Value : ExpressibleByNilLiteral {
     @inlinable public init() { }
 }
 
-/// A property wrapper type that instantiates an observable object.
+/// A SwiftUI property wrapper that instantiates and stores an observable object in state.
 ///
-/// Create a state object in a `SwiftUI/View`, `SwiftUI/App`, or
-/// `SwiftUI/Scene` by applying the `@StateObject` attribute to a property
-/// declaration and providing an initial value that conforms to the
-/// <doc://com.apple.documentation/documentation/Combine/ObservableObject>
-/// protocol:
+/// - Think of `@StateObject` as a combination of `@State` and `@ObservedObject`.
+/// - Like `@ObservedObject`, this type subscribes to the observable object and invalidates a view whenever the observable object changes.
+/// - Unlike `@ObservedObject`, `@StateObject` holds on to its value even when the view is invalidated and redrawn.
 ///
-///     @StateObject var model = DataModel()
+/// ### Usage
 ///
-/// SwiftUI creates a new instance of the object only once for each instance of
-/// the structure that declares the object. When published properties of the
-/// observable object change, SwiftUI updates the parts of any view that depend
-/// on those properties:
+/// In the following example, an observable object class `AppModel` is instantiated and stored in a `@StateObject`:
 ///
-///     Text(model.title) // Updates the view any time `title` changes.
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
 ///
-/// You can pass the state object into a property that has the
-/// `SwiftUI/ObservedObject` attribute. You can alternatively add the object
-/// to the environment of a view hierarchy by applying the
-/// `SwiftUI/View/environmentObject(_:)` modifier:
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
 ///
-///     ContentView()
-///         .environmentObject(model)
+///     var body: some View {
+///         Text("Hello World")
+///     }
+/// }
+/// ```
 ///
-/// If you create an environment object as shown in the code above, you can
-/// read the object inside `ContentView` or any of its descendants
-/// using the `SwiftUI/EnvironmentObject` attribute:
+/// ### How it works
 ///
-///     @EnvironmentObject var model: DataModel
+/// The following is the basic structure of a `@StateObject`:
 ///
-/// Get a `SwiftUI/Binding` to one of the state object's properties using the
-/// `$` operator. Use a binding when you want to create a two-way connection to
-/// one of the object's properties. For example, you can let a
-/// `SwiftUI/Toggle` control a Boolean value called `isEnabled` stored in the
-/// model:
+/// ```
+/// struct StateObject<ObjectType: ObservableObject>: DynamicProperty {
+///     var wrappedValue: ObjectType { get }
 ///
-///     Toggle("Enabled", isOn: $model.isEnabled)
+///     init(wrappedValue thunk: @autoclosure @escaping () -> ObjectType)
+/// }
+/// ```
+///
+/// It's important to note that the initializer takes an `@autoclosure` expression. This means that the following code is evaluated lazily:
+///
+/// ```
+///     @StateObject var appModel = AppModel()
+/// ```
+///
+/// `AppModel` is only initialized once per the lifetime of the `View`, `Scene` or `App` that contains the `@StateObject`. This is made possible by the `@autoclosure` annotation, that wraps the instantiation of the app model, `AppModel()`, into a lazy expression at compile time, `{ return AppModel() }`. This allows the `@StateObject` to call it appropriately as needed, which is once per its parent's lifetime.
+///
+/// ### Creating bindings
+///
+/// Just like `@State`, `@ObservedObject` and `@EnvironmentObject`, `@StateObject` allows you to create a `Binding` from its wrapped value type using the `$` syntax.
+///
+/// For example:
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var flag: Bool = false
+/// }
+///
+/// struct ExampleView: View {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some View {
+///         Toggle("Flag", isOn: $appModel.flag)
+///     }
+/// }
+/// ```
+///
+///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a `Toggle` in `ChildView`. `Toggle` requires a `Binding<Bool>` to read and write whether it is on.
+///
+/// ### Comparison with `@ObservedObject`
+///
+/// Consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @StateObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// `ExampleView` creates a vertical stack of a `Toggle`, and a view that describes the toggle, `ToggleDescription`.
+///
+/// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Flip the toggle twice. Note that even though `ToggleDescription` is refreshed, nothing is printed further.
+///
+/// Now consider the following:
+///
+/// ```
+/// struct ExampleView: View {
+///     class ViewModel: ObservableObject {
+///         init() {
+///             print("Initialized")
+///         }
+///     }
+///
+///     struct ToggleDescription: View {
+///         let value: Bool
+///
+///         @ObservedObject var viewModel = ViewModel()
+///
+///         var body: some View {
+///             Text("The value is: \(String(describing: value))")
+///         }
+///     }
+///
+///     @State var foo = false
+///
+///     var body: some View {
+///         VStack {
+///             ToggleDescription(value: foo)
+///
+///             Toggle("Refresh", isOn: $foo)
+///         }
+///     }
+/// }
+/// ```
+///
+/// This example is identical to the previous example **except** for the fact that `@StateObject` has been replaced with `@ObservedObject`. Run this code now, and observe the following print again:
+///
+/// ```
+/// Initialized
+/// ```
+///
+/// Now flip the toggle twice. The console will print the following:
+///
+/// ```
+/// Initialized
+/// Initialized
+/// ```
+///
+/// This highlights the fundamental difference between `@StateObject` and `@ObservedObject`.
+///
+/// -  `@StateObject` instantiates and holds the object in state
+/// -  `@ObservedObject` is *assigned* an object, and **does not** hold it in state
+///
+/// ### Usage with `App`
+///
+/// `@StateObject` provides a great way to initialize global, application-wide models.
+///
+/// In the following example, a `@StateObject` is instantiated in `MyApp`, and passed down to `ExampleView` as an environment object.
+///
+/// ```
+/// class AppModel: ObservableObject {
+///     @Published var foo: Bool = false
+/// }
+///
+/// @main
+/// struct MyApp: App {
+///     @StateObject var appModel = AppModel()
+///
+///     var body: some Scene {
+///         WindowGroup {
+///             ExampleView()
+///                 .environmentObject(appModel)
+///         }
+///     }
+/// }
+///
+/// struct ExampleView: View {
+///     @EnvironmentObject var appModel: AppModel
+///
+///     var body: some View {
+///         Text("Hello World")
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct StateObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -21086,8 +24679,22 @@ extension StrokeStyle : Animatable {
 
 /// A toggle style that displays a leading label and a trailing switch.
 ///
-/// To apply this style to a toggle, or to a view that contains toggles, use the
-/// `View/toggleStyle(_:)` modifier.
+/// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State private var status = true
+///     var body: some View {
+///          Toggle(isOn: $status) {
+///              Text("Banana🍌🍌")
+///          }
+///          .toggleStyle(SwitchToggleStyle())
+///          .padding()
+///     }
+/// }
+/// ```
+///
+/// > To apply this style to a toggle, or to a view that contains toggles, use the `View/toggleStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct SwitchToggleStyle : ToggleStyle {
@@ -21630,8 +25237,20 @@ extension Text {
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Text {
-
-    /// Concatenates the text in two text views in a new text view.
+    /// Concatenates two text views into one new text view.
+    ///
+    /// ![plus Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-plus-example-1.png)
+    ///
+    /// ```
+    ///struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///             .font(.title)
+    ///         + Text("Apple🍎🍎")
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - lhs: The first text view with text to combine.
@@ -21782,18 +25401,25 @@ extension Text {
     ///
     /// Use this method to change the color of the text rendered by a text view.
     ///
-    /// For example, you can display the names of the colors red, green, and
-    /// blue in their respective colors:
+    /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
     ///
-    ///     HStack {
-    ///         Text("Red").foregroundColor(.red)
-    ///         Text("Green").foregroundColor(.green)
-    ///         Text("Blue").foregroundColor(.blue)
+    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
+    ///
+    ///     struct ExampleView: View {
+    ///        var body: some View {
+    ///            VStack {
+    ///                Text("Banana🍌🍌")
+    ///                    .foregroundColor(.yellow)
+    ///                Text("Apple 🍎🍎")
+    ///                    .foregroundColor(.red)
+    ///                Text("Peach 🍑🍑")
+    ///                    .foregroundColor(.orange)
+    ///            }
+    ///            .font(.largeTitle)
+    ///        }
     ///     }
     ///
-    /// ![Three text views arranged horizontally, each containing
-    ///     the name of a color displayed in that
-    ///     color.](SwiftUI-Text-foregroundColor.png)
+    ///
     ///
     /// - Parameter color: The color to use when displaying this text.
     /// - Returns: A text view that uses the color value you supply.
@@ -21825,8 +25451,38 @@ extension Text {
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
     public func font(_ font: Font?) -> Text { }
-
+    ///
     /// Sets the font weight of the text.
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    ///
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text("ultraLight 🍌")
+    ///                     .fontWeight(Font.Weight.ultraLight)
+    ///                 Text("thin🍌")
+    ///                     .fontWeight(Font.Weight.thin)
+    ///                 Text("light🍌")
+    ///                     .fontWeight(Font.Weight.light)
+    ///                 Text("regular🍌")
+    ///                     .fontWeight(Font.Weight.regular)
+    ///                 Text("medium🍌")
+    ///                     .fontWeight(Font.Weight.medium)
+    ///                 Text("semibold🍌")
+    ///                     .fontWeight(Font.Weight.semibold)
+    ///                 Text("bold🍌")
+    ///                     .fontWeight(Font.Weight.bold)
+    ///                 Text("heavy🍌")
+    ///                     .fontWeight(Font.Weight.heavy)
+    ///                 Text("black🍌")
+    ///                     .fontWeight(Font.Weight.black)
+    ///            }
+    ///            .font(.title)
+    ///         }
+    ///     }
+    ///
     ///
     /// - Parameter weight: One of the available font weights.
     ///
@@ -21835,15 +25491,59 @@ extension Text {
 
     /// Applies a bold font weight to the text.
     ///
+    /// ![Bold Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-bold-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .bold()
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Returns: Bold text.
     public func bold() -> Text { }
 
     /// Applies italics to the text.
     ///
+    /// ![Italic Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-italic-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .italic()
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Returns: Italic text.
     public func italic() -> Text { }
 
     /// Applies a strikethrough to the text.
+    ///
+    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌")
+    ///             .strikethrough(false)
+   ///              .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌")
+    ///             .strikethrough()
+    ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌")
+    ///             .strikethrough(true, color: .yellow)
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has a
@@ -21855,6 +25555,26 @@ extension Text {
     public func strikethrough(_ active: Bool = true, color: Color? = nil) -> Text { }
 
     /// Applies an underline to the text.
+    ///
+    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline(false)
+   ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline()
+    ///             .font(.title)
+    ///
+    ///         Text("Banana 🍌🍌 ")
+    ///             .underline(true, color: .yellow)
+    ///             .font(.title)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has an
@@ -22373,6 +26093,18 @@ public struct TextFormattingCommands : Commands {
 }
 
 /// A label style that only displays the title of the label.
+///
+/// ![TitleOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-title-only-example-1.png)
+///
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              Label("Banana🍌🍌", systemImage: "heart.fill")
+///                  .labelStyle(TitleOnlyLabelStyle())
+///         }
+///     }
+///
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct TitleOnlyLabelStyle : LabelStyle {
 
@@ -25309,7 +29041,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that performs an action when the view appears.
+    /// Perform an action when a view appears.
     ///
     /// This is an extremely useful modifier for setting up any actions needed
     /// when the page first is loaded.
@@ -25319,6 +29051,30 @@ extension View {
     ///     var body: some View {
     ///         Text("If you're reading this 🍌 was printed")
     ///             .onAppear { print("🍌") }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Whenever a view is rendered, even a previously rendered child view, `onAppear` will run. For example:
+    ///
+    /// ![On Appear Again](on-appear.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var bananaCount: Int = 0
+    ///     @State var showBanana: Bool = true
+    ///
+    ///     var body: some View {
+    ///         Text("We've created: \(bananaCount) bananas")
+    ///
+    ///         Toggle("Banana Toggle", isOn: $showBanana)
+    ///
+    ///         if showBanana {
+    ///             Text("🍌🍌")
+    ///                 .onAppear {
+    ///                     bananaCount += 1
+    ///                 }
+    ///         }
     ///     }
     /// }
     /// ```
@@ -26181,16 +29937,19 @@ extension View {
     /// edges of the view. For example, you can add padding of specific amounts
     /// to specified edges of a view:
     ///
-    ///     VStack {
-    ///         Text("20 point padding on the left and bottom edges.")
-    ///             .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 0))
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("20 point padding on the left and bottom edges.")
+    ///                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 0))
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing padding added to leading/bottom edge
-    /// insets.](SwiftUI-View-padding-insets.png)
+    /// }
+    /// ```
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// `View/padding(_:_:)`. To pad all outside edges of a view with an
@@ -26211,16 +29970,19 @@ extension View {
     /// an `OptionSet` describing which edges should be padded. For example you
     /// can add padding to the bottom of a text view:
     ///
-    ///     VStack {
-    ///         Text("Text padded on the bottom edge.")
-    ///             .padding(.bottom)
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text padded on the bottom edge.")
+    ///                 .padding(.bottom)
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing padding added to the view's bottom
-    /// edge.](SwiftUI-View-padding-2.png)
+    /// }
+    /// ```
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
     /// the edges of the view, see `View/padding(_:)-6pgqq`. To pad all
@@ -26243,16 +30005,19 @@ extension View {
     /// Use `padding(_:)` to add a specific amount of padding around all edges
     /// of the view.
     ///
-    ///     VStack {
-    ///         Text("Text padded by 10 points on each edge.")
-    ///             .padding(10.0)
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text padded by 10 points on each edge.")
+    ///                 .padding(10.0)
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing 10 points of padding to all
-    /// edges.](SwiftUI-View-padding-1.png)
+    /// }
+    /// ```
     ///
     /// - Parameter length: The amount to pad this view on each edge.
     ///
@@ -26793,6 +30558,23 @@ extension View {
     /// }
     /// ```
     ///
+    /// Apply colors in lightmode & darkmode with `accentcolor`.
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
+    ///
+    /// Code:
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text("Bananas 🍌🍌")
+    ///                .accentColor(.primary)
+    ///        }
+    ///    }
+    ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
     @available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
@@ -26803,14 +30585,31 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that adds a condition that controls whether users can interact with this
-    /// view.
+    /// Prevent view interaction.
+    ///
+    /// Disable interaction on a view.
+    ///
+    /// ![Disabled Example](disabled-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var isDisabled = false
+    ///     var body: some View {
+    ///         Toggle("Disable The Banana", isOn: $isDisabled)
+    ///
+    ///         Button("Banana 🍌🍌") { }
+    ///             .disabled(isDisabled)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Another example:
     ///
     /// ```
     /// struct CantTouchThisView: View {
     ///     var body: some View {
     ///         Button(Text("Can't touch this 🎶")) { }
-    ///             .disabled(false)
+    ///             .disabled(true)
     ///     }
     /// }
     /// ```
@@ -26975,25 +30774,25 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that brightens this view by the specified amount.
+    /// Brightenen the view by the specified amount.
     ///
     /// Use `brightness(_:)` to brighten the intensity of the colors in a view.
     /// The example below shows a series of red squares, with their brightness
     /// increasing from 0 (fully red) to 100% (white) in 20% increments.
     ///
-    ///     struct BrightnessView: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .brightness(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .brightness(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
@@ -27158,23 +30957,19 @@ extension View {
     ///
     /// A grayscale effect reduces the intensity of colors in this view.
     ///
-    /// The example below shows a series of red squares with their grayscale
-    /// effect increasing from 0 (reddest) to 99% (fully desaturated) in
-    /// approximate 20% increments:
-    ///
-    ///     struct Saturation: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .grayscale(Double($0) * 0.1999)
-    ///                         .overlay(Text("\(Double($0) * 0.1999 * 100, specifier: "%.4f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .greyscale(Double(idx)*0.2 - 0.01)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -27188,29 +30983,24 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modiffier that applies a hue rotation effect to this view.
+    /// Applies a hue rotation effect.
     ///
     /// Use hue rotation effect to shift all of the colors in a view according
     /// to the angle you specify.
     ///
-    /// The example below shows a series of squares filled with a linear
-    /// gradient. Each square shows the effect of a 36˚ hueRotation (a total of
-    /// 180˚ across the 5 squares) on the gradient:
-    ///
-    ///     struct HueRotation: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Rectangle()
-    ///                         .fill(LinearGradient(gradient:
-    ///                             Gradient(colors: [.blue, .red, .green]),
-    ///                                              startPoint: .top, endPoint: .bottom))
-    ///                         .hueRotation((.degrees(Double($0 * 36))))
-    ///                         .frame(width: 60, height: 60, alignment: .center)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .hueRotation(Angle(degrees: Double(idx)*360/12))
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
@@ -27300,27 +31090,24 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that adjusts the color saturation of this view.
+    /// A view modifier that adjusts the color saturation of the view.
     ///
     /// Use color saturation to increase or decrease the intensity of colors in
     /// a view.
     ///
-    /// The example below shows a series of red squares with their saturation
-    /// increasing from 0 (gray) to 100% (fully-red) in 20% increments:
-    ///
-    ///     struct SaturationView: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .saturation(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .saturation(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - SeeAlso: `View/contrast(_:)`
     /// - Parameter amount: The amount of saturation to apply to this view.
@@ -27352,7 +31139,7 @@ extension View {
     ///     @State var showBanana = false
     ///
     ///     var body: some View {
-    ///         Button("Toggle") { show.toggle() }
+    ///         Button("Toggle") { showBanana.toggle() }
     ///         if showBanana {
     ///             Text("🍌")
     ///                 .animation(.easeInOut)
@@ -27363,6 +31150,8 @@ extension View {
     /// ```
     ///
     /// ### Using withAnimation(_:_:)
+    ///
+    /// ![Slide transition](with-animation-2.gif)
     ///
     /// ```
     /// struct ExplicitTransitionView: View {
@@ -27386,7 +31175,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modivier that sets the transparency of this view.
+    /// Sets the transparency of a view.
     ///
     /// Apply opacity to reveal views that are behind another view or to
     /// de-emphasize a view.
@@ -27395,22 +31184,19 @@ extension View {
     /// its opacity transformed, the modifier multiplies the effect of the
     /// underlying opacity transformation.
     ///
-    /// The example below shows yellow and red rectangles configured to overlap.
-    /// The top yellow rectangle has its opacity set to 50%, allowing the
-    /// occluded portion of the bottom rectangle to be visible:
-    ///
-    ///     struct OpacityView: View {
-    ///         var body: some View {
-    ///             VStack {
-    ///                 Color.yellow.frame(width: 100, height: 100, alignment: .center)
-    ///                     .zIndex(1)
-    ///                     .opacity(0.5)
-    ///
-    ///                 Color.red.frame(width: 100, height: 100, alignment: .center)
-    ///                     .padding(-40)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .opacity(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
@@ -27510,20 +31296,24 @@ extension View {
     /// visual effect to produce the result. The `BlendMode` enumeration
     /// defines many possible effects.
     ///
-    /// In the example below, the two overlapping rectangles have a
-    /// `BlendMode/colorBurn` effect applied, which effectively removes the
-    /// non-overlapping portion of the second image:
+    /// Test `blendMode(_:)` with images. To use the following example, drag in the following two photos and label them "ocean" and "space".
+    ///
+    /// ![New York](ocean.jpg)
+    ///
+    /// ![Space](space.jpg)
     ///
     /// ```
-    /// struct BlendModeView: View {
+    /// struct ExampleView: View {
     ///     var body: some View {
-    ///         HStack {
-    ///             Color.yellow.frame(width: 50, height: 50, alignment: .center)
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
     ///
-    ///             Color.red.frame(width: 50, height: 50, alignment: .center)
-    ///                 .rotationEffect(.degrees(45))
-    ///                 .padding(-20)
-    ///                 .blendMode(.colorBurn)
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.softLight)
     ///         }
     ///     }
     /// }
@@ -27955,25 +31745,59 @@ extension View {
 
     /// A view modifier that adds a shadow to this view.
     ///
-    /// The example below a series shows of boxes with increasing degrees of
-    /// shadow ranging from 0 (no shadow) to 5 points of shadow, offset down and
-    /// to the right of the views:
+    /// Shadow has four possible arguments.
     ///
-    ///     struct Shadow: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .overlay(Text("\($0)"),
-    ///                                  alignment: .bottom)
-    ///                         .shadow(color: Color.gray,
-    ///                                 radius: 1.0,
-    ///                                 x: CGFloat($0),
-    ///                                 y: CGFloat($0))
-    ///                 }
-    ///             }
-    ///         }
+    /// Create a shadow with just a radius:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(radius: 10)
+    ///             .padding()
     ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the color:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the x offset:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10, x: 20)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the x & y offset:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10, x: 20, y: 20)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - color: The shadow's color.
@@ -30074,6 +33898,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// [[rotation-effect]]
+    ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
     ///   - axis: The `x`, `y` and `z` elements that specify the axis of
@@ -30203,7 +34029,6 @@ extension View {
     /// the rectangle color does not toggle when clicking on the spacers.
     ///
     /// ![Content shape example 2][contentshape-example-2.gif]
-    ///
     ///
     /// - Parameters:
     ///   - shape: The hit testing shape for the view.
@@ -30530,20 +34355,50 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Masks this view using the alpha channel of the given view.
+    /// Mask one view on top of another.
     ///
-    /// Use `mask(_:)` when you want to apply the alpha (opacity) value of
-    /// another view to the current view.
+    /// Applying the `mask(_:)` modifier will make the modified view fully transparent, except for those pixels which overlap with the masked view.
     ///
-    /// This example shows an image masked by rectangle with a 10% opacity:
+    /// For example, without a mask, the following view renders as a normal rectangle:
     ///
-    ///     Image(systemName: "envelope.badge.fill")
-    ///         .foregroundColor(Color.blue)
-    ///         .font(.system(size: 128, weight: .regular))
-    ///         .mask(Rectangle().opacity(0.1))
+    /// ![Rectangle Example](rounded-rectangle.png)
     ///
-    /// ![A screenshot of a view masked by a rectangle with 10%
-    /// opacity.](SwiftUI-View-mask.png)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Now if we apply a mask on a text view, we get the following result:
+    ///
+    /// ![Mask Example](mask-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .mask(TextView())
+    ///             .padding()
+    ///     }
+    /// }
+    ///
+    /// struct TextView: View {
+    ///     var body: some View {
+    ///         Text("Bananas are our favorite fruit.").font(.title).fontWeight(.bold)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter mask: The view whose alpha the rendering system applies to
     ///   the specified view.
@@ -30645,73 +34500,357 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Defines the destination of a drag-and-drop operation that handles the
-    /// dropped content with a closure that you specify.
+    /// Creates a drop-zone for drag & drop contents.
     ///
-    /// The drop destination is the same size and position as this view.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
     ///
-    /// - Parameters:
-    ///   - supportedContentTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true` when
-    ///     the cursor is inside the area, and `false` when the cursor is outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedContentTypes`. Return `true`
-    ///     if the drop operation was successful; otherwise, return `false`.
+    /// ### Basic Usage
     ///
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider in
+    ///                     // Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             // Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 // Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
 
 
-    /// Defines the destination of a drag and drop operation that handles the
-    /// dropped content with a closure that you specify.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// The drop destination is the same size and position as this view.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure. That closure includes a `CGPoint` of where the dragged contents were dropped.
     ///
-    /// - Parameters:
-    ///   - supportedContentTypes: The uniform type identifiers that describe
-    ///     the types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true` when
-    ///     the cursor is inside the area, and `false` when the cursor is outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The first parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedContentTypes`. The second
-    ///     parameter contains the drop location in this view's coordinate
-    ///     space. Return `true` if the drop operation was successful;
-    ///     otherwise, return `false`.
+    /// ### Basic Usage
     ///
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider, _ in
+    ///                     // Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             // Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 // Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `CGPoint` with `onDrop`
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var topBananas: String = "🍌🍌"
+    ///     @State var bottomBananas: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         GeometryReader { geometry in
+    ///             VStack {
+    ///                 Spacer()
+    ///
+    ///                 HStack {
+    ///                     Text(topBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, location in
+    ///
+    ///                         // If dropped on the bottom half the rectangle, add to bottom.
+    ///                         if location.y > geometry.size.height/2 {
+    ///                             bottomBananas += "🍌"
+    ///                         } else {
+    ///                             // Else, add to top
+    ///                             topBananas += "🍌"
+    ///                         }
+    ///
+    ///                         return true
+    ///                     })
+    ///
+    ///                 HStack {
+    ///                     Text(bottomBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 Spacer()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
 
 
-    /// Defines the destination of a drag and drop operation using behavior
-    /// controlled by the delegate that you provide.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// The drop destination is the same size and position as this view.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the `DropDelegate` protocol.
     ///
-    /// - Parameters:
-    ///   - supportedContentTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - delegate: A type that conforms to the `DropDelegate` protocol. You
-    ///     have comprehensive control over drop behavior when you use a
-    ///     delegate.
+    /// #### Conform to DropDelegate
+    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to `DropDelegate`.
     ///
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             // Text to drag
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             // Area to drop
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var text: String
+    ///
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         self.text = "Dropped My Bananas 🍌🍌!"
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Fully Featured `DropDelegate`
+    /// Utalize `DropDelegate`s optional functions to provide additional behavior.
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     // Drop entered called
+    ///     func dropEntered(info: DropInfo) {
+    ///         // Change color if color was previously black
+    ///         self.color = (self.color == .black) ? .gray : self.color
+    ///     }
+    ///
+    ///     // Drop entered called
+    ///     func dropExited(info: DropInfo) {
+    ///         self.color = .init(white: 0.40)
+    ///     }
+    ///
+    ///     // Drop has been updated
+    ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+    ///         // Don't allow more items to be dropped if a Banana was dropped
+    ///         if self.color == .yellow {
+    ///             return DropProposal(operation: .forbidden)
+    ///         } else {
+    ///             return nil
+    ///         }
+    ///     }
+    ///
+    ///     // This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         // Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This example uses `DropDelegate/dropUpdated(info:)-72cd3` to prevent fruits from being dropped if the background is yellow.
+    ///
+    /// The example uses `DropDelegate/dropEntered(info:)-525fa` to change the color the first time a user drags over the drop zone.
+    ///
+    /// Finally, when a user drags out of the view, `DropDelegate/dropExited(info:)-3d540` changes the background color to a dark gray.
+    ///
+    /// Note: if the user deselects their dragged object while over the drop zone, `DropDelegate/dropExited(info:)-3d540` will **not** be called. `DropDelegate/dropExited(info:)-3d540` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - delegate: An object that conforms to  `DropDelegate`.
     public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
 
 }
@@ -30722,73 +34861,361 @@ extension View {
 @available(watchOS, unavailable)
 extension View {
 
-    /// Defines the destination for a drag and drop operation, using the same
-    /// size and position as this view, handling dropped content with the given
-    /// closure.
+    /// Creates a drop-zone for drag & drop contents.
     ///
-    /// - Parameters:
-    ///   - supportedTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true`
-    ///     when the cursor is inside the area, and `false` when the cursor is
-    ///     outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedTypes`. Return `true`
-    ///     if the drop operation was successful; otherwise, return `false`.
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
+    ///
+    /// ### Basic Usage
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider in
+    ///                     //  Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             //  Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 //  Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
 
 
-    /// Defines the destination for a drag and drop operation with the same size
-    /// and position as this view, handling dropped content and the drop
-    /// location with the given closure.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// - Parameters:
-    ///   - supportedTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - isTargeted: A binding that updates when a drag and drop operation
-    ///     enters or exits the drop target area. The binding's value is `true`
-    ///     when the cursor is inside the area, and `false` when the cursor is
-    ///     outside.
-    ///   - action: A closure that takes the dropped content and responds
-    ///     appropriately. The first parameter to `action` contains the dropped
-    ///     items, with types specified by `supportedTypes`. The second
-    ///     parameter contains the drop location in this view's coordinate
-    ///     space. Return `true` if the drop operation was successful;
-    ///     otherwise, return `false`.
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure. That closure includes a `CGPoint` of where the dragged contents were dropped.
+    ///
+    /// ### Basic Usage
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, _ in
+    ///                     self.text = "Dropped My Bananas 🍌🍌!"
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `NSItemProvider` with `onDrop`
+    /// `NSItemProvider` is a class that holds data on the dragged contents.
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var bananas: String = "🍌🍌"
+    ///     @State var apples: String = "🍏🍏"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text(bananas)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///
+    ///             Text(apples)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["public.text"], isTargeted: nil, perform: { itemProvider, _ in
+    ///                     //  Load the first item in the NSItemProvider array
+    ///                     if let item = itemProvider.first {
+    ///                         item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                             //  Cast NSSecureCoding to Ddata
+    ///                             if let data = text as? Data {
+    ///                                 //  Extract string from data
+    ///                                 let droppedString = String(decoding: data, as: UTF8.self)
+    ///
+    ///                                 if droppedString == bananas {
+    ///                                     bananas += "🍌"
+    ///                                 } else if droppedString == apples {
+    ///                                     apples += "🍏"
+    ///                                 }
+    ///                             }
+    ///                         }
+    ///                     }
+    ///                     return true
+    ///                 })
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Using `CGPoint` with `onDrop`
+    ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var topBananas: String = "🍌🍌"
+    ///     @State var bottomBananas: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         GeometryReader { geometry in
+    ///             VStack {
+    ///                 Spacer()
+    ///
+    ///                 HStack {
+    ///                     Text(topBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], isTargeted: nil, perform: { _, location in
+    ///
+    ///                         //  If dropped on the bottom half the rectangle, add to bottom.
+    ///                         if location.y > geometry.size.height/2 {
+    ///                             bottomBananas += "🍌"
+    ///                         } else {
+    ///                             //  Else, add to top
+    ///                             topBananas += "🍌"
+    ///                         }
+    ///
+    ///                         return true
+    ///                     })
+    ///
+    ///                 HStack {
+    ///                     Text(bottomBananas)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider() }
+    ///                 }
+    ///
+    ///                 Spacer()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
 
 
-    /// Defines the destination for a drag and drop operation with the same size
-    /// and position as this view, with behavior controlled by the given
-    /// delegate.
+    /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// - Parameters:
-    ///   - supportedTypes: The uniform type identifiers that describe the
-    ///     types of content this view can accept through drag and drop.
-    ///     If the drag and drop operation doesn't contain any of the supported
-    ///     types, then this drop destination doesn't activate and `isTargeted`
-    ///     doesn't update.
-    ///   - delegate: A type that conforms to the `DropDelegate` protocol. You
-    ///     have comprehensive control over drop behavior when you use a
-    ///     delegate.
-    /// - Returns: A view that provides a drop destination for a drag
-    ///   operation of the specified types.
+    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the `DropDelegate` protocol.
+    ///
+    /// #### Conform to DropDelegate
+    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to `DropDelegate`.
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var text: String = "🍌🍌"
+    ///
+    ///     var body: some View {
+    ///         HStack {
+    ///             //  Text to drag
+    ///             Text(text)
+    ///                 .font(.title)
+    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///
+    ///             //  Area to drop
+    ///             RoundedRectangle(cornerRadius: 10)
+    ///                 .frame(width: 150, height: 150)
+    ///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var text: String
+    ///
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         self.text = "Dropped My Bananas 🍌🍌!"
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ### Fully Featured `DropDelegate`
+    /// Utalize `DropDelegate`s optional functions to provide additional behavior.
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var backgroundColor: Color = .black
+    ///     let fruits: [String] = ["🍌🍌", "🍏🍏", "🍑🍑"]
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 ForEach(self.fruits, id: \.self, content: { fruit in
+    ///                     Text(fruit)
+    ///                         .font(.title)
+    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                 })
+    ///             }
+    ///
+    ///             HStack {
+    ///                 RoundedRectangle(cornerRadius: 10)
+    ///                     .fill(backgroundColor)
+    ///                     .frame(width: 150, height: 150)
+    ///                     .onDrop(of: ["public.text"], delegate: MyDropDelegate(color: $backgroundColor))
+    ///             }
+    ///         }
+    ///
+    ///     }
+    /// }
+    ///
+    /// struct MyDropDelegate: DropDelegate {
+    ///     @Binding var color: Color
+    ///
+    ///     //  Drop entered called
+    ///     func dropEntered(info: DropInfo) {
+    ///         //  Change color if color was previously black
+    ///         self.color = (self.color == .black) ? .gray : self.color
+    ///     }
+    ///
+    ///     //  Drop entered called
+    ///     func dropExited(info: DropInfo) {
+    ///         self.color = .init(white: 0.40)
+    ///     }
+    ///
+    ///     //  Drop has been updated
+    ///     func dropUpdated(info: DropInfo) -> DropProposal? {
+    ///         ///  Don't allow more items to be dropped if a Banana was dropped
+    ///         if self.color == .yellow {
+    ///             return DropProposal(operation: .forbidden)
+    ///         } else {
+    ///             return nil
+    ///         }
+    ///     }
+    ///
+    ///     //  This function is executed when the user "drops" their object
+    ///     func performDrop(info: DropInfo) -> Bool {
+    ///         //  Check if there's an array of items with the URI "public.text" in the DropInfo
+    ///         if let item = info.itemProviders(for: ["public.text"]).first {
+    ///             //  Load the item
+    ///             item.loadItem(forTypeIdentifier: "public.text", options: nil) { (text, err) in
+    ///                 //  Cast NSSecureCoding to Ddata
+    ///                 if let data = text as? Data {
+    ///                     //  Extract string from data
+    ///                     let inputStr = String(decoding: data, as: UTF8.self)
+    ///
+    ///                     //  Conditionally change color given text string
+    ///                     if inputStr == "🍌🍌" {
+    ///                         self.color = .yellow
+    ///                     } else if inputStr == "🍏🍏" {
+    ///                         self.color = .green
+    ///                     } else if inputStr == "🍑🍑" {
+    ///                         self.color = .pink
+    ///                     } else {
+    ///                         self.color = .gray
+    ///                     }
+    ///                 }
+    ///             }
+    ///         } else {
+    ///             //  If no text was received in our drop, return false
+    ///             return false
+    ///         }
+    ///
+    ///         return true
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This example uses `DropDelegate/dropUpdated(info:)-72cd3` to prevent fruits from being dropped if the background is yellow.
+    ///
+    /// The example uses `DropDelegate/dropEntered(info:)-525fa` to change the color the first time a user drags over the drop zone.
+    ///
+    /// Finally, when a user drags out of the view, `DropDelegate/dropExited(info:)-3d540` changes the background color to a dark gray.
+    ///
+    /// Note: if the user deselects their dragged object while over the drop zone, `DropDelegate/dropExited(info:)-3d540` will **not** be called. `DropDelegate/dropExited(info:)-3d540` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+    ///
+    ///
+    /// - Paremeters:
+    ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - delegate: An object that conforms to  `DropDelegate`.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], delegate: DropDelegate) -> some View { }
@@ -30948,34 +35375,35 @@ extension View {
     /// The example below adds buttons to the leading and trailing edges of
     /// the button area of the navigation view:
     ///
-    ///     struct FlavorView: View {
-    ///         var body: some View {
-    ///             NavigationView {
-    ///                 List {
-    ///                     Text("Chocolate")
-    ///                     Text("Vanilla")
-    ///                     Text("Strawberry")
-    ///                 }
-    ///                 .navigationBarTitle(Text("Today‘s Flavors"))
-    ///                 .navigationBarItems(leading:
-    ///                     HStack {
-    ///                         Button("Hours") {
-    ///                             print("Hours tapped!")
-    ///                         }
-    ///                     }, trailing:
-    ///                     HStack {
-    ///                         Button("Favorites") {
-    ///                             print("Favorites tapped!")
-    ///                         }
-    ///
-    ///                         Button("Specials") {
-    ///                             print("Specials tapped!")
-    ///                         }
-    ///                     }
-    ///                 )
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             List {
+    ///                 Text("Banana 🍌🍌")
+    ///                 Text("Apple 🍎🍎")
+    ///                 Text("Peach 🍑🍑")
     ///             }
+    ///             .navigationBarTitle(Text("Today‘s Fruits"))
+    ///             .navigationBarItems(leading:
+    ///                 HStack {
+    ///                     Button("Hours") {
+    ///                         print("Hours tapped!")
+    ///                     }
+    ///                 }, trailing:
+    ///                 HStack {
+    ///                     Button("Favorites") {
+    ///                         print("Favorites tapped!")
+    ///                     }
+    ///                     Button("Specials") {
+    ///                         print("Specials tapped!")
+    ///                     }
+    ///                 }
+    ///             )
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - leading: A view that appears on the leading edge of the title.
@@ -31492,8 +35920,21 @@ extension ViewModifier {
 
 }
 
-/// A system style of date picker that displays each component as columns
-/// in a scrollable wheel.
+/// A date style that displays components as columns in a scrollable wheel.
+///
+/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
+///
+///
+///      struct ExampleView: View {
+///          @State var date: Date = Date()
+///          var body: some View {
+///              DatePicker("Date",selection: $date)
+///                  .datePickerStyle(WheelDatePickerStyle())
+///                  .padding()
+///          }
+///      }
+///
+///
 @available(iOS 13.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -31507,8 +35948,66 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// A picker style that presents the options in a scrollable wheel that shows
 /// the selected option and a few neighboring options.
 ///
+/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑"]
+///     @State private var selectedFruit = 0
+///
+///     var body: some View {
+///         VStack {
+///             Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                 ForEach(0..<fruits.count) {
+///                     Text(self.fruits[$0])
+///                 }
+///             }
+///             Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///         }
+///         .pickerStyle(WheelPickerStyle())
+///     }
+/// }
+/// ```
+///
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
+///
+/// [pickerstyle-wheel ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Wheel Example 1](/picker-style-7.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(WheelPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 ///
 /// To apply this style to a picker, or to a view that contains pickers, use the
 /// `View/pickerStyle(_:)` modifier.
@@ -31535,25 +36034,38 @@ public struct WheelPickerStyle : PickerStyle {
 ///
 /// There are three key components to a widget:
 ///
-/// * A configuration that determines whether the widget is configurable,
+/// * A configuration. This configuration determines whether the widget is configurable,
 ///   identifies the widget, and defines the SwiftUI views that show the
 ///   widget's content.
 /// * A timeline provider that drives the process of updating the widget's view
 ///   over time.
 /// * SwiftUI views used by WidgetKit to display the widget.
 ///
-/// For information about adding a widget extension to your app, and keeping
-/// your widget up to date, see
-/// <doc://com.apple.documentation/documentation/WidgetKit/Creating-a-Widget-Extension>
-/// and
-/// <doc://com.apple.documentation/documentation/WidgetKit/Keeping-a-Widget-Up-To-Date>,
-/// respectively.
+/// To add a widget to your app go to: `File -> New -> Target`. Name your widget "Banana Widget" to use code from this tutorial.
 ///
-/// By adding a custom SiriKit intent definition, you can let users customize
-/// their widgets to show the information that's most relevant to them. If
-/// you've already added support for Siri or Shortcuts, you're well on your way
-/// to supporting customizable widgets. For more information, see
-/// <doc://com.apple.documentation/documentation/WidgetKit/Making-a-Configurable-Widget>.
+/// Next, from the options, select "Widget"
+///
+/// ![All options](widget-1.png)
+///
+/// Select "Widget".
+///
+/// ![Widget](widget-2.png)
+///
+/// Your widget can now be styled similar to a standard SwiftUI view. For example, modify `Banana_WidgetEntryView` to create:
+///
+/// ![Widget](widget-3.png)
+///
+/// ```
+/// struct Banana_WidgetEntryView : View {
+///     var entry: Provider.Entry
+///
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(Color.yellow)
+///             .overlay(Text("🍌🍌"))
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -31594,6 +36106,7 @@ extension Widget {
 ///        }
 ///     }
 ///
+/// Learn more about how to create a widget via the `Widget` documentation.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -31716,35 +36229,115 @@ extension WidgetConfiguration {
     var body: Self.Body { get }
 }
 
-/// A scene that presents a group of identically structured windows.
+/// `WindowGroup` is the default `Scene` type in SwiftUI.
 ///
-/// Use a `WindowGroup` as a container for a view hierarchy presented by your
-/// app. The hierarchy that you declare as the group's content serves as a
-/// template for each window that the app creates from that group:
+/// Use a `WindowGroup` to contain the SwiftUI view hierarchy of your app.
 ///
-///     @main
-///     struct Mail: App {
-///         var body: some Scene {
-///             WindowGroup {
-///                 MailViewer() // Declare a view hierarchy here.
+/// ### Usage
+///
+/// ```
+/// @main
+/// struct MyApp: SwiftUI.App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///     }
+/// }
+/// ```
+///
+/// Note:
+///
+/// - The default implementation of a `WindowGroup` allows multiple instances of the window to be created (either using ⌘N , or the "Show Tab Bar" command).
+/// - Each instance of a window created from a window group contains the same SwiftUI hierarchy, but maintains an independent state. That means if the user creates two instances of your app's window, each window will maintain its own separate (independent) state, unaffected by what the user does on another window of your app.
+///
+/// ### Adding a title to a window
+///
+/// On macOS, a window's title is usually displayed in a window's title bar. A window's title bar contains a centered text item to display the window's title.
+///
+/// Use `WindowGroup/init(_:content)` to title a window. For example:
+///
+/// ````
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup("Fruit App") {
+///             Text("Bananas")
+///         }
+///     }
+/// }
+/// ````
+///
+/// Note: The system may use the provided window title as a part of some default window command names. For example, the "New Window" command would become "New Fruit App Window".
+///
+/// ### Adding commands to a window group
+///
+/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a `WindowGroup`, use `Scene/commands(_:)`.
+///
+/// For example:
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///         .commands {
+///             CommandMenu("Some Commands") {
+///                 Text("A Command")
 ///             }
 ///         }
 ///     }
+/// }
+/// ```
 ///
-/// SwiftUI takes care of certain platform-specific behaviors. For example,
-/// on platforms that support it, like macOS and iPadOS, users can open more
-/// than one window from the group simultaneously. In macOS, users
-/// can gather open windows together in a tabbed interface. Also in macOS,
-/// window groups automatically provide commands for standard window
-/// management.
+/// ### Disabling creating multiple window instances
 ///
-/// Every window created from the group maintains independent state. For
-/// example, for each new window created from the group the system allocates new
-/// storage for any `State` or `StateObject` variables instantiated by the
-/// scene's view hierarchy.
+/// Currently, SwiftUI offers no canonical way to disable the user from creating multiple instances of a window from a `WindowGroup` scene. This can be done in two ways:
 ///
-/// You typically use a window group for the main interface of an app that isn't
-/// document-based. For document-based apps, use a `DocumentGroup` instead.
+/// - Using the "New Window" (⌘N) command to create a new window instance
+/// - Using the "Show Tab Bar" command, and creating a new tab containing a new window instance
+///
+/// #### Disabling the "New Window" command
+///
+/// The "New Window" (⌘N) command can be disabled by replacing the "New Item" command group with an empty command group.
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///         }
+///         .commands {
+///             CommandGroup(replacing: .newItem, addition: { })
+///         }
+///     }
+/// }
+/// ```
+///
+/// Caveat: This does not currently work on macCatalyst (as of Big Sur 11.2).
+///
+/// #### Disabling the "Show Tab Bar" command
+///
+/// To disable the "Show Tab Bar" command, use `NSApplication` to iterate over your app's windows at launch and set each window's `tabbingMode` to `.disallowed`.
+///
+/// For example:
+///
+/// ```
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             Text("Bananas")
+///                 .onAppear {
+///                     NSApplication.shared.windows.forEach({ $0.tabbingMode = .disallowed })
+///                 }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct WindowGroup<Content> : Scene where Content : View {
 
@@ -31923,11 +36516,97 @@ public struct WindowGroup<Content> : Scene where Content : View {
     public typealias Body = Never
 }
 
-/// Returns the result of recomputing the view's body with the provided
-/// animation.
+/// Creates a view animation.
 ///
 /// This function sets the given `Animation` as the `Transaction/animation`
 /// property of the thread's current `Transaction`.
+///
+/// `withAnimation(_:_:)` executes the code in it's closure, and displays the results of that execution according to the provided animation.
+///
+/// For example, use `withAnimation(_:_:)` to animate a toggle. Here, the action on the view is the `showBanana.toggle()`. Now, by using `withAnimation(_:_:)` the results of that action will be animated according to `.easeInOut`.
+///
+/// ![Toggle Animation](with-animation-2.gif)
+///
+/// ```
+/// struct ExplicitTransitionView: View {
+///     @State var showBanana = false
+///
+///     var body: some View {
+///         Button("Toggle") {
+///             withAnimation(.easeInOut) { showBanana.toggle() }
+///         }
+///         if showBanana {
+///             Text("🍌")
+///                 .transition(.slide)
+///         }
+///     }
+/// }
+/// ```
+///
+/// Or use `withAnimation(_:_)` for a shake effect, like so:
+///
+/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var numberOfShakes: CGFloat = 0
+///
+///     var body: some View {
+///         VStack {
+///             Text("Banana🍌🍌")
+///                 .font(.largeTitle)
+///                 .modifier(ShakeEffect(shakeNumber: numberOfShakes))
+///                 .onAppear {
+///                     withAnimation(.easeIn(duration: 2.0)) {
+///                         numberOfShakes = 10
+///                     }
+///                 }
+///         }
+///     }
+/// }
+///
+/// struct ShakeEffect: AnimatableModifier {
+///     var shakeNumber: CGFloat = 0
+///
+///     var animatableData: CGFloat {
+///         get {
+///             shakeNumber
+///         } set {
+///             shakeNumber = newValue
+///         }
+///     }
+///
+///     func body(content: Content) -> some View {
+///         content
+///             .offset(x: sin(shakeNumber * .pi * 2) * 10)
+///     }
+/// }
+/// ```
+///
+/// Alter the duration of your animation as follows:
+///
+/// ![Animation Basic](with-animation-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State private var opacity = 0.0
+///
+///     var body: some View {
+///         Button("Cloud the Banana") {
+///             withAnimation(.easeIn(duration: 4.0)) {
+///                 opacity += 1.0
+///             }
+///         }
+///         .padding()
+///
+///         ZStack {
+///             Text("🍌🍌")
+///             Text("☁️☁️☁️☁️")
+///                 .opacity(opacity)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { }
 
