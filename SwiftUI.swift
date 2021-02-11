@@ -8519,6 +8519,32 @@ extension Font {
     public func uppercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to use monospace digits.
+    ///
+    /// For example, to adjust a ``Text`` to use monospaced digits:
+    ///
+    /// ![monospacedDigit example 1][monospaced-digit-example-1.png]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleStatus: Bool = false
+    ///
+    ///    var body: some View {
+    ///        Text("Some monospaced digits: 0123456789")
+    ///            .font(Font.system(size: 15).monospacedDigit())
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// Note that this does not actually update the font to use the `.monospace` design.
+    /// Rather, it updates digits to have a "fixed" width. For an example of the difference
+    /// between a normal proportional font and a monospaced font on digits see:
+    ///
+    /// Proportional font:
+    /// ![Proportional font example][monospaced-digit-proportional-font.png]
+    ///
+    /// Monospaced font:
+    /// ![Monospaced font example][monospaced-digit-mono-font.png]
+    /// Image credits to Lior Azi: https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0
     public func monospacedDigit() -> Font { }
 
     /// Sets the weight of the font.
