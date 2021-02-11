@@ -29960,7 +29960,48 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Defines the content shape for hit testing.
+    /// Changes the tappable area of a content shape for hit testing.
+    ///
+    /// When using a container view, such as ``ZStack`` or ``VStack``, tap gestures
+    /// are only applied to elements in the container which have content. For example,
+    /// a tap gesture on a ``VStack`` with a ``Spacer`` will not be triggered
+    /// when clicking on the spacer. However, setting the content shape allows
+    /// everything in the container view to be clickable.
+    ///
+    /// For example, to make an entire VStack container clickable:
+    ///
+    /// ![Content shape example 1][contentshape-example-1.gif]
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleColor: Bool = false
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Top text").border(Color.black)
+    ///            Spacer().frame(height: 50)
+    ///
+    ///            Rectangle()
+    ///                .fill(toggleColor ? Color.red : Color.blue)
+    ///                .frame(width: 150, height: 150)
+    ///
+    ///            Spacer().frame(height: 50)
+    ///            Text("Bottom text").border(Color.black)
+    ///        }
+    ///        .contentShape(Rectangle())
+    ///        .onTapGesture {
+    ///            self.toggleColor.toggle()
+    ///        }
+    ///    }
+    /// }
+    /// ```
+    ///
+    /// For further clarification on how this works, see this animation of the
+    /// same example from above _without_ any defined contentShape. Notice how
+    /// the rectangle color does not toggle when clicking on the spacers.
+    ///
+    /// ![Content shape example 2][contentshape-example-2.gif]
+    ///
     ///
     /// - Parameters:
     ///   - shape: The hit testing shape for the view.
