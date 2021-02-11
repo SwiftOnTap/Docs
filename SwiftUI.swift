@@ -10382,6 +10382,27 @@ extension Font {
     public static let caption2: Font
 
     /// Gets a system font with the given style and design.
+    ///
+    /// Font's `system(_:design:)` is an easy way to modify standard fonts.
+    ///
+    /// For example, basic usage would be:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(Font.system(.title))
+    ///             }
+    ///         }
+    ///
+    /// Your app can easily modify the system font by providing an alternate `desigin`. For example:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(Font.system(.title, design: .monospaced))
+    ///             }
+    ///         }
+    ///
     public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
 
     /// A dynamic text style to use for fonts.
@@ -10680,6 +10701,25 @@ extension Font {
     /// `Font/Weight/regular`, and uses a `Font/Design/rounded` system font:
     ///
     ///     Text("Hello").font(.system(size: 17, design: .rounded))
+    ///
+    /// Other examples of system font include:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(.system(size: 32, weight: .light, design: .monospaced))
+    ///             }
+    ///         }
+    ///
+    /// And:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(.system(size: 32, weight: .heavy, design: .rounded))
+    ///             }
+    ///         }
+    ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
     /// A design to use for fonts.
