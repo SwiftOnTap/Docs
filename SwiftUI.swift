@@ -30401,18 +30401,25 @@ extension View {
     /// priority encourages the higher priority view to shrink later when the
     /// group is shrunk and stretch sooner when the group is stretched.
     ///
-    ///     HStack {
-    ///         Text("This is a moderately long string.")
-    ///             .font(.largeTitle)
-    ///             .border(Color.gray)
+    /// ```
+    /// struct ExampleView: View {
     ///
-    ///         Spacer()
+    ///    var body: some View {
+    ///        HStack {
+    ///            Text("This is a moderately long string.")
+    ///                .font(.largeTitle)
+    ///                .border(Color.gray)
     ///
-    ///         Text("This is a higher priority string.")
-    ///             .font(.largeTitle)
-    ///             .layoutPriority(1)
-    ///             .border(Color.gray)
-    ///     }
+    ///            Spacer()
+    ///
+    ///            Text("This is a higher priority string.")
+    ///                .font(.largeTitle)
+    ///                .layoutPriority(1)
+    ///                .border(Color.gray)
+    ///        }
+    ///    }
+    /// }
+    /// ```
     ///
     /// In the example above, the first `Text` element has the default
     /// priority `0` which causes its view to shrink dramatically due to the
