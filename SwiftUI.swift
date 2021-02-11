@@ -120,12 +120,13 @@ import os.signpost
 ///     }
 /// }
 /// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ObservableObject : AnyObject {
-    
+
     /// The type of publisher that emits before the object has changed.
     associatedtype ObjectWillChangePublisher : Publisher = ObservableObjectPublisher where Self.ObjectWillChangePublisher.Failure == Never
-    
+
     /// A publisher that emits before the object has changed.
     var objectWillChange: Self.ObjectWillChangePublisher { get }
 }
@@ -2313,6 +2314,16 @@ extension BackgroundStyle : ShapeStyle {
     ///     // Example of binding to an immutable value.
     ///     PlayButton(isPlaying: Binding.constant(true))
     ///
+    /// Another use case is for prototyping. For example:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Toggle("Banana On", isOn: .constant(true))
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter value: An immutable value.
     public static func constant(_ value: Value) -> Binding<Value> { }
 
@@ -2417,15 +2428,76 @@ extension Binding : DynamicProperty {
 }
 
 /// Modes for compositing a view with overlapping content.
+///
+/// There are 21 different types of blend modes. To use the following example, drag in the following two photos and label them "ocean" and "space".
+///
+/// ![Ocean](ocean.jpg)
+///
+/// ![Space](space.jpg)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ZStack {
+///             Image("ocean")
+///                 .resizable()
+///                 .scaledToFit()
+///
+///             Image("space")
+///                 .resizable()
+///                 .scaledToFit()
+///                 .blendMode(.softLight)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
 	/// Regular overlapping, with opacity taken into account.
+  ///
+  /// ![Blend Mode](blendmode-normal.png)
+  ///
+  /// ```
+  /// struct ExampleView: View {
+  ///     var body: some View {
+  ///         ZStack {
+  ///             Image("ocean")
+  ///                 .resizable()
+  ///                 .scaledToFit()
+  ///
+  ///             Image("space")
+  ///                 .resizable()
+  ///                 .scaledToFit()
+  ///                 .blendMode(.normal)
+  ///         }
+  ///     }
+  /// }
+  /// ```
     case normal
 
     /// Multiplies the RGB channel numbers (0.0 - 1.0) of each pixel.
     ///
     /// The result is always a darker picture.
+    /// ![Blend Mode](blendmode-multiply.png)
+    ///
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.multiply)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case multiply
 
     /// Each RGB pixel value is inverted (subtracted from 1), multiplied together,
@@ -2440,6 +2512,25 @@ public enum BlendMode {
     ///     func screen(a: Double, b: Double) {{}
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-screen.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.screen)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case screen
 
     /// The parts were the bottom layer is light become lighter, and dark becomes darker.
@@ -2453,9 +2544,47 @@ public enum BlendMode {
     ///     		return 1 - 2 * (1 - a) * (1 - b)
     ///     	}
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.overlay)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case overlay
 
     /// Takes the darker of the top and bottom picture pixels.
+    ///
+    /// ![Blend Mode](blendmode-darken.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.overlay)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case darken
 
     /// Takes the lighter of the top and bottom picture pixels.
@@ -2471,6 +2600,25 @@ public enum BlendMode {
     /// color with black will result in an unchanged pixel.
     ///
     /// This operation is not invertible.
+    ///
+    /// ![Blend Mode](blendmode-colorDodge.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.colorDodge)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case colorDodge
 
     /// Divides the inverted bottom layer by the top layer, then inverts the result.
@@ -2480,6 +2628,25 @@ public enum BlendMode {
     /// Blending any pixel by white results in no change.
     ///
     /// This operation is not invertible.
+    ///
+    /// ![Blend Mode](blendmode-colorBurn.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.colorBurn)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case colorBurn
 
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
@@ -2493,57 +2660,304 @@ public enum BlendMode {
     ///         	return 2*a*(1 - b) + sqrt(a)*(2*b - 1)
     ///         }
     ///     }
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.softLight)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case softLight
 
     /// A combination of multiply and screen are applied.
     ///
     /// Hard light affects the bottom layer the way that overlay affects the top
     /// layer, and vice-versa.
+    ///
+    /// ![Blend Mode](blendmode-hardLight.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.hardLight)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case hardLight
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
     ///
     /// If either layer is black, nothing changes. Blending with white inverts
     /// the picture.
+    ///
+    /// ![Blend Mode](blendmode-difference.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.difference)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case difference
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
     ///
     /// The difference between difference and exclusion is that blending with
     /// 50% gray will produce 50% gray.
+    ///
+    /// ![Blend Mode](blendmode-exclusion.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.exclusion)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case exclusion
 
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-hu.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.hu)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case hue
 
     /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-saturation.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.saturation)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case saturation
 
     /// Keeps the brightness of the bottom layer, while taking the hue and saturation of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-color.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case color
 
     /// Keeps the hue and saturation of the bottom layer, while taking the brightness of the top layer.
+    ///
+    /// ![Blend Mode](blendmode-luminosity.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.luminosity)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case luminosity
 
     /// Shows the bottom layer fully, with the top layer drawn only where it
     /// intersect the bottom.
+    ///
+    /// ![Blend Mode](blendmode-sourceAtop.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.sourceAtop)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case sourceAtop
 
     /// The bottom is drawn over the top, and the top is only visible where the
     /// bottom is transparent.
+    ///
+    /// ![Blend Mode](blendmode-destinationOver.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.destinationOver)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case destinationOver
 
     /// Displays only the bottom layer, and only where the top is transparent.
+    ///
+    /// ![Blend Mode](blendmode-destinationOut.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.destinationOut)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case destinationOut
 
     /// Adds the top layer pixels to the bottom layer.
     ///
     /// Displays white where the addition is greater than 1.0.
+    ///
+    /// ![Blend Mode](blendmode-plusDarker.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.plusDarker)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case plusDarker
 
     /// Adds the top layer pixels to the bottom layer, than subtracts the result from 1.
     ///
     /// Displays black where the result is less than 0.0.
+    ///
+    /// ![Blend Mode](blendmode-plusLighter.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.plusLighter)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case plusLighter
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -5520,7 +5934,42 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///     }
 /// }
 /// ```
+/// [pickerstyle-default ->]
+/// Your app can also use explicit tags to identify picker content.
 ///
+/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(DefaultPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 /// You can override a picker’s style. To apply the default style to a picker,
 /// or to a view that contains pickers, use the `View/pickerStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5786,6 +6235,60 @@ public struct Divider : View {
 }
 
 /// A scene that enables support for opening, creating, and saving documents.
+///
+/// `DocumentGroup` provides a default scene for basic file management.
+///
+/// ![Document Group](document-group.gif)
+///
+/// ```
+/// import UniformTypeIdentifiers
+///
+/// @main
+/// struct ExampleApp: App {
+///     var body: some Scene {
+///         DocumentGroup(newDocument: TextFile()) { file in
+///             ExampleView(document: file.$document)
+///         }
+///     }
+/// }
+///
+/// struct ExampleView: View {
+///     @Binding var document: TextFile
+///
+///     var body: some View {
+///         TextEditor(text: $document.text)
+///     }
+/// }
+///
+/// struct TextFile: FileDocument {
+///     //  Support only plain text
+///     static var readableContentTypes = [UTType.plainText]
+///
+///     // Create an empty document
+///     var text = ""
+///
+///     //  Create a document
+///     init(initialText: String = "") {
+///         text = initialText
+///     }
+///
+///     // Loads data has been saved previously. See the ReadConfiguration documentation for more
+///     init(configuration: ReadConfiguration) throws {
+///         guard let data = configuration.file.regularFileContents,
+///             let string = String(data: data, encoding: .utf8)
+///         else {
+///             throw CocoaError(.fileReadCorruptFile)
+///         }
+///         text = string
+///     }
+///
+///     // The saving function
+///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///         let data = text.data(using: .utf8)!
+///         return .init(regularFileWithContents: data)
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -9879,6 +10382,27 @@ extension Font {
     public static let caption2: Font
 
     /// Gets a system font with the given style and design.
+    ///
+    /// Font's `system(_:design:)` is an easy way to modify standard fonts.
+    ///
+    /// For example, basic usage would be:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(Font.system(.title))
+    ///             }
+    ///         }
+    ///
+    /// Your app can easily modify the system font by providing an alternate `desigin`. For example:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(Font.system(.title, design: .monospaced))
+    ///             }
+    ///         }
+    ///
     public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
 
     /// A dynamic text style to use for fonts.
@@ -10177,6 +10701,25 @@ extension Font {
     /// `Font/Weight/regular`, and uses a `Font/Design/rounded` system font:
     ///
     ///     Text("Hello").font(.system(size: 17, design: .rounded))
+    ///
+    /// Other examples of system font include:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(.system(size: 32, weight: .light, design: .monospaced))
+    ///             }
+    ///         }
+    ///
+    /// And:
+    ///
+    ///         struct ExampleView: View {
+    ///             var body: some View {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .font(.system(size: 32, weight: .heavy, design: .rounded))
+    ///             }
+    ///         }
+    ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
     /// A design to use for fonts.
@@ -10282,8 +10825,22 @@ extension Font.Leading : Equatable {
 extension Font.Leading : Hashable {
 }
 
-/// A structure that computes views on demand from an underlying collection of
-/// of identified data.
+/// Creates views from a collection of identified data.
+///
+/// ForEach supports three identifiers:
+/// * `ForEach/init(_:content:)-ed9f4`, for iterating over a range
+/// * `ForEach/init(_:content:)-72c77`, for iterating over data that conforms to identifiable
+/// * `ForEach/init(_:id:content:)` for iterating over that can be identified, but does not conform to identifiable
+///
+/// ### Iterating over a range
+/// [[foreach-fixed-range]]
+///
+/// ### Iterating over `Identifiable` data
+/// [[foreach-identifiable-content]]
+///
+/// ### Explicitly identifying data
+/// [[foreach-dynamic-content]]
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ForEach<Data, ID, Content> where Data : RandomAccessCollection, ID : Hashable {
 
@@ -10313,10 +10870,43 @@ extension ForEach : View where Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Identifiable {
 
-    /// Creates an instance that uniquely identifies and creates views across
-    /// updates based on the identity of the underlying data.
+    /// Creates a view from data that conforms to `Identifiable`.
+    /// [foreach-identifiable-content ->]
+    /// If your data does not conform to identifiable, use `ForEach/init(_:id:content)`.
     ///
-    /// It's important that the `id` of a data element doesn't change unless you
+    /// Note: if your data does not conform to identifiable you will receive the following error:
+    ///
+    /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform to 'Identifiable`
+    ///
+    /// An array of primitive types, such as strings & ints, will throw this error. Identify these items with `id: \.self` – because they themselves can be used as the identifiable object. See more in `ForEach/init(_:id:content)`.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [Fruit] = [
+    ///         Fruit(emoji: "🍌🍌", name: "Banana"),
+    ///         Fruit(emoji: "🍑🍑", name: "Peach"),
+    ///         Fruit(emoji: "🍎🍎", name: "Apple")
+    ///     ]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits) { fruit in
+    ///             HStack {
+    ///                 Text(fruit.name + fruit.emoji)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct Fruit: Identifiable {
+    ///     var emoji: String
+    ///     var name: String
+    ///     //  Create a unique ID for our object
+    ///     //  This idea allows Fruit to conform to Identifiable
+    ///     let id = UUID()
+    /// }
+    /// ```
+    /// [<-]
+    /// Note:  It's important that the `id` of a data element doesn't change unless you
     /// replace the data element with a new data element that has a new
     /// identity. If the `id` of a data element changes, the content view
     /// generated from that data element loses any current state and animations.
@@ -10331,11 +10921,82 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where Content : View {
 
-    /// Creates an instance that uniquely identifies and creates views across
-    /// updates based on the provided key path to the underlying data's
-    /// identifier.
+    /// Creates an instance that uniquely identifies and computes views.
+    /// [foreach-dynamic-content ->]
+    /// For data that does not conform to `Identifiable`, use this initializer.
     ///
-    /// It's important that the `id` of a data element doesn't change, unless
+    /// A very common use case for this initialier is iterating over primitive data, such as strings or ints. In the following example, the fruit string is used as the identifiable unit.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits, id:/\.self) { fruit in
+    ///             HStack {
+    ///                 Text(fruit)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This initializer can also be used with objects that don't conform to `Identifiable`, but have identifiable properties. For example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [Fruit] = [
+    ///         Fruit(emoji: "🍌🍌", name: "Banana"),
+    ///         Fruit(emoji: "🍑🍑", name: "Peach"),
+    ///         Fruit(emoji: "🍎🍎", name: "Apple")
+    ///     ]
+    ///
+    ///     var body: some View {
+    ///         ForEach(myFruits, id:/\.emoji) { fruit in
+    ///             HStack {
+    ///                 Text(fruit.name + fruit.emoji)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct Fruit {
+    ///     var emoji: String
+    ///     var name: String
+    /// }
+    /// ```
+    ///
+    /// Notice, this initializer can be used for data that can change. For example:
+    ///
+    /// ![Changing List](foreach.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         Button("New Fruit") {
+    ///             newFruit()
+    ///         }
+    ///
+    ///         ForEach(myFruits, id:\.self) { fruit in
+    ///             HStack {
+    ///                 Text(fruit)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     func newFruit() {
+    ///         let allFruit: [String] = ["🍏🍏", "🍒🍒", "🍓🍓", "🥝🥝", "🥭🥭", "🍊🍊", "🍍🍍"]
+    ///
+    ///         myFruits.append(allFruit.randomElement()!)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// **Note:** This initializer works well for externally loaded data. It enables your app's frontend to automatically reflect data as it arrives.
+    /// [<-]
+    /// **Note:** It's important that the `id` of a data element doesn't change, unless
     /// SwiftUI considers the data element to have been replaced with a new data
     /// element that has a new identity. If the `id` of a data element changes,
     /// then the content view generated from that data element will lose any
@@ -10352,12 +11013,56 @@ extension ForEach where Content : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 
-    /// Creates an instance that computes views on demand over a given constant
-    /// range.
+    /// Computes views over a given constant range.
+    /// [foreach-fixed-range ->]
+    /// This initializer is ForEach's most trivial. It is analogous to a common for loop.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         ForEach(0..<myFruits.count) { index in
+    ///             HStack {
+    ///                 Text(myFruits[index])
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Notice however, that this view is only rendered once. Therefore, if `myFruits.count` changes, the view will **not update**. For example, clicking `New Fruit` in the following code returns the error:
+    ///
+    /// `ForEach(_:content:) should only be used for *constant* data.`
+    ///
+    /// ```
+    /// struct ErrorView: View {
+    ///     @State var myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
+    ///
+    ///     var body: some View {
+    ///         Button("New Fruit") {
+    ///             newFruit()
+    ///         }
+    ///
+    ///         ForEach(0..<myFruits.count) { index in
+    ///             HStack {
+    ///                 Text(myFruits[index])
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     func newFruit() {
+    ///         let allFruit: [String] = ["🍏🍏", "🍒🍒", "🍓🍓", "🥝🥝", "🥭🥭", "🍊🍊", "🍍🍍"]
+    ///
+    ///         myFruits.append(allFruit.randomElement()!)
+    ///     }
+    /// }
+    /// ```
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
     /// demand over a dynamic range, use `ForEach/init(_:id:content:)`.
+    /// [<-]
     ///
     /// - Parameters:
     ///   - data: A constant range.
@@ -12265,6 +12970,43 @@ extension IndexViewStyle {
 
 /// A `PickerStyle` where each option is displayed inline with
 /// other views in the current container.
+///
+/// [pickerstyle-inline ->]
+/// Your app can use explicit tags to identify picker content.
+///
+/// ![Inline Example](/picker-style-2.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(InlinePickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct InlinePickerStyle : PickerStyle {
 
@@ -13081,6 +13823,21 @@ extension LegibilityWeight {
 }
 
 /// A linear gradient.
+///
+/// ![Rectangle Example](rounded-rectangle.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(LinearGradient(
+///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+///                     startPoint: .leading,
+///                     endPoint: .trailing))
+///             .padding()
+///     }
+/// }
+/// ```
 ///
 /// The gradient applies the color function along an axis, as defined by its
 /// start and end points. The gradient maps the unit-space points into the
@@ -14496,6 +15253,43 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///     }
 /// }
 /// ```
+///
+/// [pickerstyle-menu ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Menu Picker Style Example](/picker-style-3.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(MenuPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 ///
 /// > The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
 ///
@@ -17419,8 +18213,33 @@ extension Picker where Label == Text {
     public init<S>(_ title: S, selection: Binding<SelectionValue>, @ViewBuilder content: () -> Content) where S : StringProtocol { }
 }
 
-/// A type that specifies the appearance and interaction of all pickers within
-/// a view hierarchy.
+/// Specifies the appearance and interaction of all pickers within a view hierarchy.
+///
+/// `PickerStyle` does not have a public interface - and therefore your app is limited to their default styles.
+///
+/// There are 7 different styles:
+/// * `DefaultPickerStyle`
+/// * `InlinePickerStyle`
+/// * `MenuPickerStyle`
+/// * `PopUpButtonPickerStyle` (not availible on iOS)
+/// * `RadioGroupPickerStyle` (not availible on iOS)
+/// * `SegmentedPickerStyle`
+/// * `WheelPickerStyle`
+///
+/// ### `DefaultPickerStyle`
+/// [[pickerstyle-default]]
+///
+/// ### `InlinePickerStyle`
+/// [[pickerstyle-inline]]
+///
+/// ### `MenuPickerStyle`
+/// [[pickerstyle-menu]]
+///
+/// ### `SegmentedPickerStyle`
+/// [[pickerstyle-segmented]]
+///
+/// ### `WheelPickerStyle`
+/// [[pickerstyle-wheel]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PickerStyle{ }
 extension PickerStyle {
@@ -18105,8 +18924,8 @@ public struct PrimitiveButtonStyleConfiguration {
 ///            .accentColor(Color(red: 0.894, green: 0.894, blue: 0.902))
 ///         }
 ///     }
-///
-///To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
+/// [rotation-effect ->]
+/// To create a `ProgressViewStyle` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
 ///
 ///      struct ExampleView: View {
 ///         var body: some View {
@@ -18124,7 +18943,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///             }
 ///         }
 ///     }
-///
+/// [<-]
 ///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of `GeometryReader` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
 ///
 ///      struct ExampleView: View {
@@ -21440,6 +22259,43 @@ extension SecureField where Label == Text {
 ///       }
 ///  }
 /// ```
+///
+/// [pickerstyle-segmented ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Segmented Example 1](/picker-style-6.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(SegmentedPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
 ///
 ///
 /// > To apply this style to a picker, or to a view that contains pickers, use the
@@ -27478,7 +28334,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that performs an action when the view appears.
+    /// Perform an action when a view appears.
     ///
     /// This is an extremely useful modifier for setting up any actions needed
     /// when the page first is loaded.
@@ -27488,6 +28344,30 @@ extension View {
     ///     var body: some View {
     ///         Text("If you're reading this 🍌 was printed")
     ///             .onAppear { print("🍌") }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Whenever a view is rendered, even a previously rendered child view, `onAppear` will run. For example:
+    ///
+    /// ![On Appear Again](on-appear.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var bananaCount: Int = 0
+    ///     @State var showBanana: Bool = true
+    ///
+    ///     var body: some View {
+    ///         Text("We've created: \(bananaCount) bananas")
+    ///
+    ///         Toggle("Banana Toggle", isOn: $showBanana)
+    ///
+    ///         if showBanana {
+    ///             Text("🍌🍌")
+    ///                 .onAppear {
+    ///                     bananaCount += 1
+    ///                 }
+    ///         }
     ///     }
     /// }
     /// ```
@@ -28350,16 +29230,19 @@ extension View {
     /// edges of the view. For example, you can add padding of specific amounts
     /// to specified edges of a view:
     ///
-    ///     VStack {
-    ///         Text("20 point padding on the left and bottom edges.")
-    ///             .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 0))
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("20 point padding on the left and bottom edges.")
+    ///                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 0))
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing padding added to leading/bottom edge
-    /// insets.](SwiftUI-View-padding-insets.png)
+    /// }
+    /// ```
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// `View/padding(_:_:)`. To pad all outside edges of a view with an
@@ -28380,16 +29263,19 @@ extension View {
     /// an `OptionSet` describing which edges should be padded. For example you
     /// can add padding to the bottom of a text view:
     ///
-    ///     VStack {
-    ///         Text("Text padded on the bottom edge.")
-    ///             .padding(.bottom)
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text padded on the bottom edge.")
+    ///                 .padding(.bottom)
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing padding added to the view's bottom
-    /// edge.](SwiftUI-View-padding-2.png)
+    /// }
+    /// ```
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
     /// the edges of the view, see `View/padding(_:)-6pgqq`. To pad all
@@ -28412,16 +29298,19 @@ extension View {
     /// Use `padding(_:)` to add a specific amount of padding around all edges
     /// of the view.
     ///
-    ///     VStack {
-    ///         Text("Text padded by 10 points on each edge.")
-    ///             .padding(10.0)
-    ///             .border(Color.gray)
-    ///         Text("Unpadded text")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text padded by 10 points on each edge.")
+    ///                 .padding(10.0)
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
     ///     }
-    ///
-    /// ![A view showing 10 points of padding to all
-    /// edges.](SwiftUI-View-padding-1.png)
+    /// }
+    /// ```
     ///
     /// - Parameter length: The amount to pad this view on each edge.
     ///
@@ -28962,6 +29851,23 @@ extension View {
     /// }
     /// ```
     ///
+    /// Apply colors in lightmode & darkmode with `accentcolor`.
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
+    ///
+    /// Code:
+    ///
+    ///    struct ExampleView: View {
+    ///        var body: some View {
+    ///            Text("Bananas 🍌🍌")
+    ///                .accentColor(.primary)
+    ///        }
+    ///    }
+    ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
     @available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
@@ -28972,14 +29878,31 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that adds a condition that controls whether users can interact with this
-    /// view.
+    /// Prevent view interaction.
+    ///
+    /// Disable interaction on a view.
+    ///
+    /// ![Disabled Example](disabled-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var isDisabled = false
+    ///     var body: some View {
+    ///         Toggle("Disable The Banana", isOn: $isDisabled)
+    ///
+    ///         Button("Banana 🍌🍌") { }
+    ///             .disabled(isDisabled)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Another example:
     ///
     /// ```
     /// struct CantTouchThisView: View {
     ///     var body: some View {
     ///         Button(Text("Can't touch this 🎶")) { }
-    ///             .disabled(false)
+    ///             .disabled(true)
     ///     }
     /// }
     /// ```
@@ -29144,25 +30067,25 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that brightens this view by the specified amount.
+    /// Brightenen the view by the specified amount.
     ///
     /// Use `brightness(_:)` to brighten the intensity of the colors in a view.
     /// The example below shows a series of red squares, with their brightness
     /// increasing from 0 (fully red) to 100% (white) in 20% increments.
     ///
-    ///     struct BrightnessView: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .brightness(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .brightness(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
@@ -29327,23 +30250,19 @@ extension View {
     ///
     /// A grayscale effect reduces the intensity of colors in this view.
     ///
-    /// The example below shows a series of red squares with their grayscale
-    /// effect increasing from 0 (reddest) to 99% (fully desaturated) in
-    /// approximate 20% increments:
-    ///
-    ///     struct Saturation: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .grayscale(Double($0) * 0.1999)
-    ///                         .overlay(Text("\(Double($0) * 0.1999 * 100, specifier: "%.4f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .greyscale(Double(idx)*0.2 - 0.01)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -29357,29 +30276,24 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modiffier that applies a hue rotation effect to this view.
+    /// Applies a hue rotation effect.
     ///
     /// Use hue rotation effect to shift all of the colors in a view according
     /// to the angle you specify.
     ///
-    /// The example below shows a series of squares filled with a linear
-    /// gradient. Each square shows the effect of a 36˚ hueRotation (a total of
-    /// 180˚ across the 5 squares) on the gradient:
-    ///
-    ///     struct HueRotation: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Rectangle()
-    ///                         .fill(LinearGradient(gradient:
-    ///                             Gradient(colors: [.blue, .red, .green]),
-    ///                                              startPoint: .top, endPoint: .bottom))
-    ///                         .hueRotation((.degrees(Double($0 * 36))))
-    ///                         .frame(width: 60, height: 60, alignment: .center)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .hueRotation(Angle(degrees: Double(idx)*360/12))
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
@@ -29469,27 +30383,24 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that adjusts the color saturation of this view.
+    /// A view modifier that adjusts the color saturation of the view.
     ///
     /// Use color saturation to increase or decrease the intensity of colors in
     /// a view.
     ///
-    /// The example below shows a series of red squares with their saturation
-    /// increasing from 0 (gray) to 100% (fully-red) in 20% increments:
-    ///
-    ///     struct SaturationView: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .saturation(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%"),
-    ///                                  alignment: .bottom)
-    ///                         .border(Color.gray)
-    ///                 }
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .saturation(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - SeeAlso: `View/contrast(_:)`
     /// - Parameter amount: The amount of saturation to apply to this view.
@@ -29521,7 +30432,7 @@ extension View {
     ///     @State var showBanana = false
     ///
     ///     var body: some View {
-    ///         Button("Toggle") { show.toggle() }
+    ///         Button("Toggle") { showBanana.toggle() }
     ///         if showBanana {
     ///             Text("🍌")
     ///                 .animation(.easeInOut)
@@ -29532,6 +30443,8 @@ extension View {
     /// ```
     ///
     /// ### Using withAnimation(_:_:)
+    ///
+    /// ![Slide transition](with-animation-2.gif)
     ///
     /// ```
     /// struct ExplicitTransitionView: View {
@@ -29555,7 +30468,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modivier that sets the transparency of this view.
+    /// Sets the transparency of a view.
     ///
     /// Apply opacity to reveal views that are behind another view or to
     /// de-emphasize a view.
@@ -29564,22 +30477,19 @@ extension View {
     /// its opacity transformed, the modifier multiplies the effect of the
     /// underlying opacity transformation.
     ///
-    /// The example below shows yellow and red rectangles configured to overlap.
-    /// The top yellow rectangle has its opacity set to 50%, allowing the
-    /// occluded portion of the bottom rectangle to be visible:
-    ///
-    ///     struct OpacityView: View {
-    ///         var body: some View {
-    ///             VStack {
-    ///                 Color.yellow.frame(width: 100, height: 100, alignment: .center)
-    ///                     .zIndex(1)
-    ///                     .opacity(0.5)
-    ///
-    ///                 Color.red.frame(width: 100, height: 100, alignment: .center)
-    ///                     .padding(-40)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             ForEach(0..<6) { idx in
+    ///                 RoundedRectangle(cornerRadius: 10.0)
+    ///                     .fill(Color.yellow)
+    ///                     .opacity(Double(idx)*0.2)
     ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
@@ -29679,20 +30589,24 @@ extension View {
     /// visual effect to produce the result. The `BlendMode` enumeration
     /// defines many possible effects.
     ///
-    /// In the example below, the two overlapping rectangles have a
-    /// `BlendMode/colorBurn` effect applied, which effectively removes the
-    /// non-overlapping portion of the second image:
+    /// Test `blendMode(_:)` with images. To use the following example, drag in the following two photos and label them "ocean" and "space".
+    ///
+    /// ![New York](ocean.jpg)
+    ///
+    /// ![Space](space.jpg)
     ///
     /// ```
-    /// struct BlendModeView: View {
+    /// struct ExampleView: View {
     ///     var body: some View {
-    ///         HStack {
-    ///             Color.yellow.frame(width: 50, height: 50, alignment: .center)
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
     ///
-    ///             Color.red.frame(width: 50, height: 50, alignment: .center)
-    ///                 .rotationEffect(.degrees(45))
-    ///                 .padding(-20)
-    ///                 .blendMode(.colorBurn)
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.softLight)
     ///         }
     ///     }
     /// }
@@ -30124,25 +31038,59 @@ extension View {
 
     /// A view modifier that adds a shadow to this view.
     ///
-    /// The example below a series shows of boxes with increasing degrees of
-    /// shadow ranging from 0 (no shadow) to 5 points of shadow, offset down and
-    /// to the right of the views:
+    /// Shadow has four possible arguments.
     ///
-    ///     struct Shadow: View {
-    ///         var body: some View {
-    ///             HStack {
-    ///                 ForEach(0..<6) {
-    ///                     Color.red.frame(width: 60, height: 60, alignment: .center)
-    ///                         .overlay(Text("\($0)"),
-    ///                                  alignment: .bottom)
-    ///                         .shadow(color: Color.gray,
-    ///                                 radius: 1.0,
-    ///                                 x: CGFloat($0),
-    ///                                 y: CGFloat($0))
-    ///                 }
-    ///             }
-    ///         }
+    /// Create a shadow with just a radius:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(radius: 10)
+    ///             .padding()
     ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the color:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the x offset:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10, x: 20)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Modify the x & y offset:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(Color.yellow)
+    ///             .shadow(color: .red, radius: 10, x: 20, y: 20)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - color: The shadow's color.
@@ -32211,6 +33159,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// [[rotation-effect]]
+    ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
     ///   - axis: The `x`, `y` and `z` elements that specify the axis of
@@ -32619,20 +33569,50 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Masks this view using the alpha channel of the given view.
+    /// Mask one view on top of another.
     ///
-    /// Use `mask(_:)` when you want to apply the alpha (opacity) value of
-    /// another view to the current view.
+    /// Applying the `mask(_:)` modifier will make the modified view fully transparent, except for those pixels which overlap with the masked view.
     ///
-    /// This example shows an image masked by rectangle with a 10% opacity:
+    /// For example, without a mask, the following view renders as a normal rectangle:
     ///
-    ///     Image(systemName: "envelope.badge.fill")
-    ///         .foregroundColor(Color.blue)
-    ///         .font(.system(size: 128, weight: .regular))
-    ///         .mask(Rectangle().opacity(0.1))
+    /// ![Rectangle Example](rounded-rectangle.png)
     ///
-    /// ![A screenshot of a view masked by a rectangle with 10%
-    /// opacity.](SwiftUI-View-mask.png)
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Now if we apply a mask on a text view, we get the following result:
+    ///
+    /// ![Mask Example](mask-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .mask(TextView())
+    ///             .padding()
+    ///     }
+    /// }
+    ///
+    /// struct TextView: View {
+    ///     var body: some View {
+    ///         Text("Bananas are our favorite fruit.").font(.title).fontWeight(.bold)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter mask: The view whose alpha the rendering system applies to
     ///   the specified view.
@@ -33609,34 +34589,35 @@ extension View {
     /// The example below adds buttons to the leading and trailing edges of
     /// the button area of the navigation view:
     ///
-    ///     struct FlavorView: View {
-    ///         var body: some View {
-    ///             NavigationView {
-    ///                 List {
-    ///                     Text("Chocolate")
-    ///                     Text("Vanilla")
-    ///                     Text("Strawberry")
-    ///                 }
-    ///                 .navigationBarTitle(Text("Today‘s Flavors"))
-    ///                 .navigationBarItems(leading:
-    ///                     HStack {
-    ///                         Button("Hours") {
-    ///                             print("Hours tapped!")
-    ///                         }
-    ///                     }, trailing:
-    ///                     HStack {
-    ///                         Button("Favorites") {
-    ///                             print("Favorites tapped!")
-    ///                         }
-    ///
-    ///                         Button("Specials") {
-    ///                             print("Specials tapped!")
-    ///                         }
-    ///                     }
-    ///                 )
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             List {
+    ///                 Text("Banana 🍌🍌")
+    ///                 Text("Apple 🍎🍎")
+    ///                 Text("Peach 🍑🍑")
     ///             }
+    ///             .navigationBarTitle(Text("Today‘s Fruits"))
+    ///             .navigationBarItems(leading:
+    ///                 HStack {
+    ///                     Button("Hours") {
+    ///                         print("Hours tapped!")
+    ///                     }
+    ///                 }, trailing:
+    ///                 HStack {
+    ///                     Button("Favorites") {
+    ///                         print("Favorites tapped!")
+    ///                     }
+    ///                     Button("Specials") {
+    ///                         print("Specials tapped!")
+    ///                     }
+    ///                 }
+    ///             )
     ///         }
     ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - leading: A view that appears on the leading edge of the title.
@@ -34048,6 +35029,43 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
 ///
+/// [pickerstyle-wheel ->]
+/// Your app can also use explicit tags to identify picker content.
+///
+/// ![Wheel Example 1](/picker-style-7.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///
+///     var fruitName: String {
+///         switch favoriteFruit{
+///         case .apple:
+///             return "Apple 🍎🍎"
+///         case .banana:
+///             return "Banana 🍌🍌"
+///         case .peach:
+///             return "Peach 🍑🍑"
+///         }
+///     }
+///
+///     var body: some View {
+///         Text("My Favorite Fruit: \(fruitName)")
+///
+///         Picker("My Picker", selection: $favoriteFruit) {
+///             Text("Banana 🍌🍌")
+///                 .tag(MyFruit.banana)
+///             Text("Apple 🍎🍎")
+///                 .tag(MyFruit.apple)
+///             Text("Peach 🍑🍑")
+///                 .tag(MyFruit.peach)
+///         }.pickerStyle(WheelPickerStyle())
+///     }
+/// }
+/// ```
+///
+/// [<-]
+///
 /// To apply this style to a picker, or to a view that contains pickers, use the
 /// `View/pickerStyle(_:)` modifier.
 @available(iOS 13.0, watchOS 6.0, *)
@@ -34073,25 +35091,38 @@ public struct WheelPickerStyle : PickerStyle {
 ///
 /// There are three key components to a widget:
 ///
-/// * A configuration that determines whether the widget is configurable,
+/// * A configuration. This configuration determines whether the widget is configurable,
 ///   identifies the widget, and defines the SwiftUI views that show the
 ///   widget's content.
 /// * A timeline provider that drives the process of updating the widget's view
 ///   over time.
 /// * SwiftUI views used by WidgetKit to display the widget.
 ///
-/// For information about adding a widget extension to your app, and keeping
-/// your widget up to date, see
-/// <doc://com.apple.documentation/documentation/WidgetKit/Creating-a-Widget-Extension>
-/// and
-/// <doc://com.apple.documentation/documentation/WidgetKit/Keeping-a-Widget-Up-To-Date>,
-/// respectively.
+/// To add a widget to your app go to: `File -> New -> Target`. Name your widget "Banana Widget" to use code from this tutorial.
 ///
-/// By adding a custom SiriKit intent definition, you can let users customize
-/// their widgets to show the information that's most relevant to them. If
-/// you've already added support for Siri or Shortcuts, you're well on your way
-/// to supporting customizable widgets. For more information, see
-/// <doc://com.apple.documentation/documentation/WidgetKit/Making-a-Configurable-Widget>.
+/// Next, from the options, select "Widget"
+///
+/// ![All options](widget-1.png)
+///
+/// Select "Widget".
+///
+/// ![Widget](widget-2.png)
+///
+/// Your widget can now be styled similar to a standard SwiftUI view. For example, modify `Banana_WidgetEntryView` to create:
+///
+/// ![Widget](widget-3.png)
+///
+/// ```
+/// struct Banana_WidgetEntryView : View {
+///     var entry: Provider.Entry
+///
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(Color.yellow)
+///             .overlay(Text("🍌🍌"))
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -34132,6 +35163,7 @@ extension Widget {
 ///        }
 ///     }
 ///
+/// Learn more about how to create a widget via the `Widget` documentation.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -34541,11 +35573,97 @@ public struct WindowGroup<Content> : Scene where Content : View {
     public typealias Body = Never
 }
 
-/// Returns the result of recomputing the view's body with the provided
-/// animation.
+/// Creates a view animation.
 ///
 /// This function sets the given `Animation` as the `Transaction/animation`
 /// property of the thread's current `Transaction`.
+///
+/// `withAnimation(_:_:)` executes the code in it's closure, and displays the results of that execution according to the provided animation.
+///
+/// For example, use `withAnimation(_:_:)` to animate a toggle. Here, the action on the view is the `showBanana.toggle()`. Now, by using `withAnimation(_:_:)` the results of that action will be animated according to `.easeInOut`.
+///
+/// ![Toggle Animation](with-animation-2.gif)
+///
+/// ```
+/// struct ExplicitTransitionView: View {
+///     @State var showBanana = false
+///
+///     var body: some View {
+///         Button("Toggle") {
+///             withAnimation(.easeInOut) { showBanana.toggle() }
+///         }
+///         if showBanana {
+///             Text("🍌")
+///                 .transition(.slide)
+///         }
+///     }
+/// }
+/// ```
+///
+/// Or use `withAnimation(_:_)` for a shake effect, like so:
+///
+/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var numberOfShakes: CGFloat = 0
+///
+///     var body: some View {
+///         VStack {
+///             Text("Banana🍌🍌")
+///                 .font(.largeTitle)
+///                 .modifier(ShakeEffect(shakeNumber: numberOfShakes))
+///                 .onAppear {
+///                     withAnimation(.easeIn(duration: 2.0)) {
+///                         numberOfShakes = 10
+///                     }
+///                 }
+///         }
+///     }
+/// }
+///
+/// struct ShakeEffect: AnimatableModifier {
+///     var shakeNumber: CGFloat = 0
+///
+///     var animatableData: CGFloat {
+///         get {
+///             shakeNumber
+///         } set {
+///             shakeNumber = newValue
+///         }
+///     }
+///
+///     func body(content: Content) -> some View {
+///         content
+///             .offset(x: sin(shakeNumber * .pi * 2) * 10)
+///     }
+/// }
+/// ```
+///
+/// Alter the duration of your animation as follows:
+///
+/// ![Animation Basic](with-animation-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State private var opacity = 0.0
+///
+///     var body: some View {
+///         Button("Cloud the Banana") {
+///             withAnimation(.easeIn(duration: 4.0)) {
+///                 opacity += 1.0
+///             }
+///         }
+///         .padding()
+///
+///         ZStack {
+///             Text("🍌🍌")
+///             Text("☁️☁️☁️☁️")
+///                 .opacity(opacity)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { }
 
