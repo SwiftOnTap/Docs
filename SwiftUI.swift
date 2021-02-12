@@ -15193,11 +15193,30 @@ extension Image.ResizingMode : Hashable {
     public init(image: Image, sourceRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1), scale: CGFloat = 1) { }
 }
 
-/// Defines the implementation of all `IndexView` instances within a view
-/// hierarchy.
+/// Types conforming to this protocol are used to style page index ``TabView``'s.
 ///
+/// Currently the IndexViewStyle protocol is not public, so it cannot be implemented for
+/// a custom view. The only type conforming to this protocol is ``PageIndexViewStyle``.
 /// To configure the current `IndexViewStyle` for a view hierarchy, use the
 /// `.indexViewStyle()` modifier.
+///
+/// For example:
+///
+/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        TabView {
+///            Text("Tab 1")
+///            Text("Tab 2")
+///            Text("Tab 3")
+///        }
+///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///    }
+/// }
+/// ```
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
