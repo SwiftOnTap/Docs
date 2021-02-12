@@ -4930,13 +4930,59 @@ extension Circle : InsettableShape {
 }
 
 /// A progress view that visually indicates its progress using a circular gauge.
+///
+/// When initializing a ProgressView with ``ProgressView/init(_:_:)``, the
+/// ``DefaultProgressViewStyle`` will typically display a circular progress view on
+/// watchOS.
+///
+/// For example, to create a new ``ProgressView`` with this style:
+///
+/// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        ProgressView()
+///            .progressViewStyle(CircularProgressViewStyle())
+///            .padding(20)
+///    }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
 
     /// Creates a circular progress view style.
+    ///
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(CircularProgressViewStyle())
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init() { }
 
     /// Creates a circular progress view style with a tint color.
+
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Circular progress view example 2](circularprogressviewstyle-example-2.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(CircularProgressViewStyle(tint: Color.red))
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
