@@ -19217,7 +19217,8 @@ public struct OutlineSubgroupChildren : View {
 ///
 /// Currently the PageIndexViewStyle is the only type that allows for customization
 /// over a page index view. To configure the current `IndexViewStyle` for a view hierarchy, use the
-/// `.indexViewStyle()` modifier.
+/// `.indexViewStyle()` modifier. When creating a new PageIndexViewStyle, it will
+/// default to the .automatic backgroundDisplayMode if none is specified.
 ///
 /// For example:
 ///
@@ -19370,6 +19371,25 @@ public struct PageIndexViewStyle : IndexViewStyle {
     }
 
     /// Creates a page index view style.
+    ///
+    /// When creating a new PageIndexViewStyle, it will default to the .automatic
+    /// backgroundDisplayMode if none is specified. For example:
+    ///
+    /// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        TabView {
+    ///            Text("Tab 1")
+    ///            Text("Tab 2")
+    ///            Text("Tab 3")
+    ///        }
+    ///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    ///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+    ///    }
+    /// }
+    /// ```
     ///
     /// - Parameter backgroundDisplayMode: The display mode of the background of any
     /// page index views receiving this style
