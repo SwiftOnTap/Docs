@@ -22469,10 +22469,8 @@ extension ProjectionTransform {
     @inlinable public func concatenating(_ rhs: ProjectionTransform) -> ProjectionTransform { }
 }
 
-/// A radial gradient.
-
 /// A radial gradient that applies the color function as the distance from a center point,
-/// scaled to fit within the defined start and end radii..
+/// scaled to fit within the defined start and end radii.
 ///
 /// A Radial Gradient is very similar to a ``LinearGradient``, but instead of defining starting and ending points,
 /// it is necessary to define a start radius, an end radius and the center of the gradeint.
