@@ -11188,6 +11188,50 @@ extension EnvironmentValues {
 
     /// A binding to the current presentation mode of the view associated with
     /// this environment.
+    ///
+    /// Use this environment value to programmatically interact with the
+    /// view currently presented.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// See ``Environment`` for more on environment values and how to use
+    /// the property wrapper.
+    ///
+    /// While this is a ``Binding`` environment value, most often
+    /// the wrapped value will be accessed. The wrapped value
+    /// is of type ``PresentatinMode``. See that structure for more info
+    /// on its properties.
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
+    ///
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public var presentationMode: Binding<PresentationMode> { get }
 }
@@ -18227,15 +18271,94 @@ extension ListStyle {
 
 /// The key used to look up a string in a strings file or strings dictionary
 /// file.
+///
+/// To make the text in your app appear as many different languages
+/// depending on the user's preference, use this structure in place
+/// of ``String``.
+///
+/// Essentially the way localization works is that rather than using
+/// strings directly throughout your app, you use this structure instead.
+/// This lets you look up string keys which are translated to all
+/// the app's supported languages in a .strings file.
+///
+/// To learn about creating this file and the process of setting up
+/// your project for localization, check out these sources:
+/// - [Swift with Majid](https://swiftwithmajid.com/2019/10/16/localization-in-swiftui/)
+/// - [StackOverflow](https://stackoverflow.com/questions/58578341/how-to-implement-localization-in-swift-ui)
+///
+/// ### Creating a localized string key
+///
+/// The most straightforward way to create a localized string key is
+/// using its initializer:
+///
+///     let hello = LocalizedStringKey("Hello")
+///
+/// You can also create a localized string key from a string literal,
+/// but you must specify the type explicitly or else it will be
+/// interpreted as a ``String:
+///
+///     let hello1 = "Hello" //Type String
+///     let hello2: LocalizedStringKey = "Hello" //Type LocalizedStringKey
+///
+/// ### Using a localized string key
+///
+/// Many views in SwiftUI, like ``Button`` and ``Text``
+/// accept localized string keys directly through their initializers by default.
+///
+///     struct UsingLocalizationView: View {
+///         let text: LocalizedStringKey = "Hello"
+///         var body: some View {
+///             Button(text) { }
+///             Text(text)
+///         }
+///
+/// Also, since SwiftUI is localization-first, if you pass a string literal
+/// to these initializers, they will be interpreted as localized string keys!
+///
+///     struct WithStringLiteralView: View {
+///         var body: some View {
+///             Text("This gets localized!")
+///         }
+///     }
+///
+/// However, if your variable is already a string, the intializer will
+/// not localize the string:
+///
+///     struct RightAndWrongView: View {
+///         let s = "Hello"
+///         var body: some View {
+///             Text(s) //Not localized
+///             Text("Hello") //Localized!
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
 
 	/// Creates a localized string key from a `String` value.
+    ///
+    /// See ``LocalizedStringKey`` for more on how to use localization.
+    ///
+    ///     struct UsingLocalizationView: View {
+    ///         let text = LocalizedStringKey("Hello")
+    ///         var body: some View {
+    ///             Text(text)
+    ///         }
+    ///     }
 	///
 	/// - Parameter value: The value for keying a string.
     public init(_ value: String) { }
 
     /// Creates an instance initialized to the given string value.
+    ///
+    /// Use this intializer when you would not like localization.
+    ///
+    ///     struct SameInEveryLanguageView: View {
+    ///         let text = LocalizedStringKey(stringLiteral: "Aloha")
+    ///         var body: some View {
+    ///             Text(text) //"Aloha"
+    ///         }
+    ///     }
     ///
     /// - Parameter value: The value of the new instance.
     public init(stringLiteral value: String) { }
@@ -18246,6 +18369,17 @@ extension ListStyle {
     /// literals and interpolations appended to them in one or more properties.
     /// `init(stringInterpolation:)` should use these properties to initialize
     /// the instance.
+    ///
+    ///     struct UsingLocalizationView: View {
+    ///         let name = "Majid"
+    ///         var body: some View {
+    ///             Text("myNameIs \(name)") //My name is Majid"
+    ///         }
+    ///     }
+    ///
+    /// And in the localization file, we will have:
+    ///
+    ///     "myNameIs %@" = "My name is %@.";
     ///
     /// - Parameter stringInterpolation: An instance of `StringInterpolation`
     ///             which has had each segment of the string literal appended
@@ -22429,21 +22563,139 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 }
 
 /// An indication whether a view is currently presented by another view.
+///
+/// This is the type of the environment value used to programmatically
+/// interact with the view currently presented.
+///
+/// This is useful for 4 types of views:
+/// 1. ``NavigationView``
+/// 2. ``View/sheet(isPresented:onDismiss:)``
+/// 3. ``View/popover(isPresented:onDismiss:)``
+/// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+///
+/// See ``Environment`` for more on environment values and how to use
+/// the property wrapper.
+///
+/// While this is a ``Binding`` environment value, most often
+/// the wrapped value will be accessed. The wrapped value
+/// is of type ``PresentatinMode``. See that structure for more info
+/// on its properties.
+///
+/// Below is a simple example of programmatically dismissing a
+/// sheet using this environment value.
+///
+///     struct ExampleView: View {
+///         @State private var showSheet = false
+///
+///         var body: some View {
+///             Button("Open sesame 📬") {
+///                 showSheet = true
+///             }
+///             .sheet(isPresented: $showCover,
+///                    onDismiss: { print("dismissed!") },
+///                    content: { ExampleSheet() })
+///         }
+///     }
+///
+///     struct ExampleSheet: View {
+///         @Environment(\.presentationMode) var presentationMode
+///
+///         var body: some View {
+///             Button("CLOSE 📪") {
+///                 presentationMode.wrappedValue.dismiss()
+///             }
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PresentationMode {
 
     /// Indicates whether a view is currently presented.
+    ///
+    /// Use this property of the presentation mode environment value to
+    /// programmatically read the presentation status of the current view.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// See ``Environment`` for more on environment values and how to use
+    /// the property wrapper.
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Text("hello!")
+    ///                 .onAppear {
+    ///                     print(presentationMode.wrappedValue.isPresented) //true
+    ///                 }
+    ///         }
+    ///     }
+    ///
     public var isPresented: Bool { get }
 
     /// Dismisses the view if it is currently presented.
     ///
-    /// If `isPresented` is false, `dismiss()` is a no-op.
+    /// Use this function on the presentation mode environment value to
+    /// programmatically dismiss the view currently presented.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
+    ///
     public mutating func dismiss() { }
 }
 
 /// A specification for the context of a `PreviewContext`
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol PreviewContext{ }
+public protocol PreviewContext { }
 extension PreviewContext {
 
     /// Returns the context's value of `Key`, or `Key.defaultValue`
@@ -23819,6 +24071,24 @@ extension Rectangle : InsettableShape {
 }
 
 /// The reasons to apply a redaction to data displayed on screen.
+///
+/// Use this type with the ``View/redacted(reason:)`` view modifier to
+/// "redact" a view's contents. For now, that simply means to reaplace
+/// the view with a placeholder.
+///
+/// In the future, this type may get more optionality, but as of now,
+/// the only redaction reason is ``RedactionReasons/placeholder``
+///
+/// See the following example for adding redaction to a view.
+///
+/// ```
+/// struct RedactedView: View {
+///     var body: some View {
+///         Label("Taylor Swift", systemImage: "person.fill")
+///         Label("Kanye West", systemImage: "person.fill")
+///             .redacted(reason: .placeholder)
+///     }
+/// }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct RedactionReasons : OptionSet {
 
@@ -23826,6 +24096,10 @@ public struct RedactionReasons : OptionSet {
     public let rawValue: Int
 
     /// Creates a new set from a raw value.
+    ///
+    /// Do not use this initializer directly. Rather, use one of the
+    /// static constants of the strucutre:
+    /// - ``RedactionReasons/placeholder``
     ///
     /// - Parameter rawValue: The raw value with which to create the
     ///   reasons for redaction.
@@ -23837,6 +24111,18 @@ public struct RedactionReasons : OptionSet {
     /// generic placeholders, though maintaining their original size and shape.
     /// Use this to create a placeholder UI without directly exposing
     /// placeholder data to users.
+    ///
+    /// In the future, this type may get more optionality, but as of now,
+    /// this is the only property in ``RedactionReasons``.
+    ///
+    /// ```
+    /// struct RedactedView: View {
+    ///     var body: some View {
+    ///         Label("Taylor Swift", systemImage: "person.fill")
+    ///         Label("Kanye West", systemImage: "person.fill")
+    ///             .redacted(reason: .placeholder)
+    ///     }
+    /// }
     public static let placeholder: RedactionReasons
 
     /// The element type of the option set.
@@ -25324,10 +25610,37 @@ extension RoundedRectangle : InsettableShape {
 }
 
 /// A set of symbolic safe area regions.
+///
+/// Use this option set with the ``View/ignoresSafeArea(_:edges:)``
+/// view modifier to specify which edges of a view
+/// should ignore which safe areas.
+///
+/// Safe area options:
+/// - ``SafeAreaRegions/container``: The top and bottom safe portions of the
+/// screen, like the status bar.
+/// - ``SafeAreaRegions/keyboard``: The portion of the screen covered by
+/// a software keyboard
+///
+/// ```
+/// struct SafeAreaIgnoringView: View {
+///     var body: some View {
+///         ZStack {
+///             Color.pink
+///             Text("I am everywhere (except the software keyboard)")
+///         }
+///         .ignoresSafeArea(SafeAreaRegions.container, edges: [.top, .bottom])
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct SafeAreaRegions : OptionSet {
 
     /// The corresponding value of the raw type.
+    ///
+    /// Don't use this directly. Rather, use the static constants of this type,
+    /// ``SafeAreaRegions/keyboard``,
+    /// ``SafeAreaRegions/container``,
+    /// ``SafeAreaRegions/all``.
     ///
     /// A new instance initialized with `rawValue` will be equivalent to this
     /// instance. For example:
@@ -25364,13 +25677,49 @@ extension RoundedRectangle : InsettableShape {
 
     /// The safe area defined by the device and containers within the
     /// user interface, including elements such as top and bottom bars.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere (except the software keyboard)")
+    ///         }
+    ///         .ignoresSafeArea(.container, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let container: SafeAreaRegions
 
     /// The safe area matching the current extent of any software
     /// keyboard displayed over the view content.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am over the keyboard!")
+    ///         }
+    ///         .ignoresSafeArea(.keyboard, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let keyboard: SafeAreaRegions
 
     /// All safe area regions.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere 🤠")
+    ///         }
+    ///         .ignoresSafeArea(.all, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let all: SafeAreaRegions
 
     /// The element type of the option set.
@@ -31834,13 +32183,117 @@ extension Transaction {
 ///
 /// `TupleView` is mainly used with `ViewBuilder`, and so you don't really
 /// need to worry about it unless you're making your own view builders.
+///
+/// In the example below, we use this type to create a new kind of `VStack`
+/// that only displays the first 2 views. All other views are ignored.
+/// Kind of useless? Yes. Instructive? You tell me.
+///
+///     struct StackedView: View {
+///         var body: some View {
+///             First2VStack {
+///                 Text("I am first 🥇")
+///                 Text("Second is the best 2️⃣")
+///                 Text("Hey stop ignoring me ☹️")
+///             }
+///         }
+///     }
+///
+///     struct First2VStack<First: View, Second: View>: View {
+///         let first: First
+///         let second: Second
+///
+///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+///             let views = content().value
+///             first = views.0
+///             second = views.1
+///         }
+///
+///         var body: some View {
+///             HStack {
+///                 first
+///                 second
+///             }
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TupleView<T> : View {
 
 	/// The tuple of views in the `TupleView`.
+    ///
+    /// A ``TupleView`` stores a real life tuple of views in this property.
+    /// Its type is a generic, `T`, which can have a tuple type.
+    ///
+    /// See how in the example below, we extract the value parameter from
+    /// the tuple view returned by the view builder. This allows us to
+    /// take the first and second elements of the type from the tuple view.
+    ///
+    ///     struct StackedView: View {
+    ///         var body: some View {
+    ///             First2VStack {
+    ///                 Text("I am first 🥇")
+    ///                 Text("Second is the best 2️⃣")
+    ///                 Text("Hey stop ignoring me ☹️")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct First2VStack<First: View, Second: View>: View {
+    ///         let first: First
+    ///         let second: Second
+    ///
+    ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+    ///             let views = content().value
+    ///             first = views.0
+    ///             second = views.1
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             HStack {
+    ///                 first
+    ///                 second
+    ///             }
+    ///         }
+    ///     }
+    ///
     public var value: T
 
     /// Creates a tuple view.
+    ///
+    /// You usually won't use this intializer directly. Instead, if you are
+    /// working with ``TupleView``s, the tuple view will usually be
+    /// constructed behind the scenes using the ``ViewBuilder`` property
+    /// wrapper. See that page for more info.
+    ///
+    /// See below for how to extract a tuple view from a view builder.
+    ///
+    ///     struct StackedView: View {
+    ///         var body: some View {
+    ///             First2VStack {
+    ///                 Text("I am first 🥇")
+    ///                 Text("Second is the best 2️⃣")
+    ///                 Text("Hey stop ignoring me ☹️")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct First2VStack<First: View, Second: View>: View {
+    ///         let first: First
+    ///         let second: Second
+    ///
+    ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+    ///             let views = content().value
+    ///             first = views.0
+    ///             second = views.1
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             HStack {
+    ///                 first
+    ///                 second
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameter value: A tuple of any number of views.
     @inlinable public init(_ value: T) { }
@@ -33538,6 +33991,29 @@ extension View {
 
 
     /// A view modifier that presents a sheet when a given condition is true.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
