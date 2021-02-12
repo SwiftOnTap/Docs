@@ -11072,12 +11072,9 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 /// A gesture that consists of two gestures where only one of them can succeed.
 ///
 /// The `ExclusiveGesture` gives precedence to its first gesture.
-<<<<<<< HEAD
-=======
 ///
-/// /// See ``Gesture/exclusively(before:)`` for more of an explanation and an example
+/// See ``Gesture/exclusively(before:)`` for more of an explanation and an example.
 ///
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ExclusiveGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
 
@@ -12918,30 +12915,26 @@ extension ForegroundStyle : ShapeStyle {
 /// SwiftUI renders forms in a manner appropriate for the platform. For example,
 /// on iOS, forms appear as grouped lists. Use `Section` to group different
 /// parts of a form's content.
-<<<<<<< HEAD
-=======
-///
 ///
 /// For example,
 ///
 /// ![Form Example 1](form-example-1.png)
 ///
 /// ```
-///  struct ExampleView: View {
-///    let gradient = Gradient(colors: [.red,.yellow])
-///    @State private var myFruit = ""
+/// struct ExampleView: View {
+///     let gradient = Gradient(colors: [.red,.yellow])
+///     @State private var myFruit = ""
 ///
-///    var body: some View {
-///       Form {
-///            TextField("Banana 🍌", text: $myFruit)
-///            TextField("Banana 🍌", text: $myFruit)
-///            TextField("Banana 🍌", text: $myFruit)
-///            }
-///    }
+///     var body: some View {
+///         Form {
+///             TextField("Banana 🍌", text: $myFruit)
+///             TextField("Banana 🍌", text: $myFruit)
+///             TextField("Banana 🍌", text: $myFruit)
+///         }
+///     }
 /// }
 /// ```
 ///
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Form<Content> : View where Content : View {
 
@@ -12949,8 +12942,6 @@ public struct Form<Content> : View where Content : View {
 	///
 	/// The content of a form is almost always different `Section`s.
 	///
-<<<<<<< HEAD
-=======
     ///
 	/// The form view knows how to arrange standard controls inside it such as pickers, textfields and toggles.
     /// However, when using a custom control results are undefined.
@@ -12960,7 +12951,7 @@ public struct Form<Content> : View where Content : View {
     /// ![Form Example 2](form-example-2.png)
     ///
     /// ```
-    ///     struct ExampleView: View {
+    /// struct ExampleView: View {
     ///     let gradient = Gradient(colors: [.red,.yellow])
     ///     @State private var email = ""
     ///     @State private var first = ""
@@ -12972,9 +12963,9 @@ public struct Form<Content> : View where Content : View {
     ///     var body: some View {
     ///         Form {
     ///             Section(header: Text("Contact Information")) {
-    ///             TextField("First Name", text: $first)
-    ///             TextField("Last Name ", text: $last)
-    ///             TextField("Email", text: $email)
+    ///                 TextField("First Name", text: $first)
+    ///                 TextField("Last Name ", text: $last)
+    ///                 TextField("Email", text: $email)
     ///             }
     ///             Section(header: Text("Preferences")) {
     ///                 Toggle(isOn: $not) {
@@ -12986,12 +12977,11 @@ public struct Form<Content> : View where Content : View {
     ///             }
     ///         }
     ///     }
-    ///  }
+    /// }
     /// ```
     ///
     ///
     ///
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 	/// - Parameter content: A closure that returns the view to the `Form`.
 	///
 	/// - SeeAlso: Section
@@ -13656,15 +13646,12 @@ public struct GridItem {
 
     /// The size in the minor axis of one or more rows or columns in a grid
     /// layout.
-<<<<<<< HEAD
-=======
     ///
     /// There are three types of sizes:
     /// 1. ``griditem/size/fixed``
     /// 2. ``griditem/size/flexible`
     /// 3. ``griditem/size/adaptive``
     ///
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
     public enum Size {
 
         /// A single item with the specified fixed size.
@@ -17625,10 +17612,6 @@ public struct LongPressGesture : Gesture {
 ///                 .gesture(magnification)
 ///         }
 ///     }
-<<<<<<< HEAD
-=======
-/// ```
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 ///
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
@@ -22486,9 +22469,8 @@ extension ProjectionTransform {
     @inlinable public func concatenating(_ rhs: ProjectionTransform) -> ProjectionTransform { }
 }
 
-<<<<<<< HEAD
 /// A radial gradient.
-=======
+
 /// A radial gradient that applies the color function as the distance from a center point,
 /// scaled to fit within the defined start and end radii..
 ///
@@ -22504,16 +22486,15 @@ extension ProjectionTransform {
 ///
 /// ```
 /// struct RadialView: View {
-///    let gradient = Gradient(colors: [.red,.yellow])
+///     let gradient = Gradient(colors: [.red,.yellow])
 ///
-///    var body: some View {
-///        Rectangle()
-///            .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
-///            .frame(width: 200, height: 200)
+///     var body: some View {
+///         Rectangle()
+///             .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
+///             .frame(width: 200, height: 200)
 ///     }
 /// }
 /// ```
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 ///
 /// The gradient applies the color function as the distance from a center point,
 /// scaled to fit within the defined start and end radii. The gradient maps the
@@ -22524,8 +22505,6 @@ extension ProjectionTransform {
 
 	/// Creates a new radial gradient from a start and end point.
 	///
-<<<<<<< HEAD
-=======
     /// ![RadialGradient Example 1](radial-gradient-example.png)
     ///
     /// ```
@@ -22540,7 +22519,6 @@ extension ProjectionTransform {
     /// }
     /// ```
     ///
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 	/// - Parameters:
 	///   - gradient: The gradient containing the colors to transition through.
 	///   - center: The center of the radial gradient.
@@ -23769,12 +23747,8 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 ///
 /// Add a rotation gesture to a `Rectangle` and apply a rotation effect:
 ///
-<<<<<<< HEAD
-=======
 /// ![RotationGesture Example 1](rotation-gesture-example.gif)
 ///
-/// ```
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 ///     struct RotationGestureView: View {
 ///         @State var angle = Angle(degrees: 0.0)
 ///
@@ -23792,6 +23766,7 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 ///                 .gesture(rotation)
 ///         }
 ///     }
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -23803,11 +23778,8 @@ public struct RotationGesture : Gesture {
     /// Creates a rotation gesture with a minimum delta for the gesture to
     /// start.
     ///
-<<<<<<< HEAD
-=======
     /// ![RotationGesture Example 2](rotation-gesture-example-2.gif)
     ///
-    /// ```
     ///     struct RotationGestureView: View {
     ///         @State var angle = Angle(degrees: 0.0)
     ///
@@ -23826,12 +23798,10 @@ public struct RotationGesture : Gesture {
     ///                     .rotationEffect(self.angle)
     ///                     .gesture(rotation)
     ///                 Text("Rotate Me")
-    ///            }
+    ///             }
     ///         }
     ///     }
-    /// ```
     ///
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
     /// - Parameter minimumAngleDelta: The minimum delta required before the
     ///   gesture starts. The default value is a one-degree angle.
     public init(minimumAngleDelta: Angle = .degrees(1)) { }
@@ -23854,10 +23824,8 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 }
 
 /// Defines the shape of a rounded rectangle's corners.
-<<<<<<< HEAD
-=======
 
-/// Thiis style has two options:
+/// This style has two options:
 /// 1. `roundedcornerstyle/circular`
 /// 2. `roundedcornerstyle/circular`
 ///
@@ -23878,7 +23846,6 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 ///     }
 /// }
 /// ```
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum RoundedCornerStyle {
 
@@ -26410,14 +26377,11 @@ public struct SidebarListStyle : ListStyle {
 /// A simultaneous gesture is a container-event handler that evaluates its two
 /// child gestures at the same time. Its value is a struct with two optional
 /// values, each representing the phases of one of the two gestures.
-<<<<<<< HEAD
-=======
 ///
 /// ![SimultaneousGesture Example 1](simultaneous-gesture-example.gif)
 ///
-/// See ``Gesture/simultaneously(with:)`` for more of an explanation and an example
+/// See ``Gesture/simultaneously(with:)`` for more of an explanation and an example.
 ///
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SimultaneousGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
 
@@ -31627,8 +31591,6 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 }
 
 /// A dynamic data structure for representing a point in a view.
-<<<<<<< HEAD
-=======
 ///
 /// A unitpoint takes in x and y coordinates measured in points.
 ///
@@ -31654,18 +31616,17 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///
 /// ```
 /// struct ExampleView: View {
-///    let colors: [Color] = [.yellow, .orange]
+///     let colors: [Color] = [.yellow, .orange]
 ///
-///    var body: some View {
-///        Rectangle()
-///            .fill(LinearGradient(gradient: Gradient(colors: colors),
-///                                 startPoint: .top,
-///                                 endPoint: .bottom))
-///            .frame(width:100, height:100)
-///    }
+///     var body: some View {
+///         Rectangle()
+///             .fill(LinearGradient(gradient: Gradient(colors: colors),
+///                                  startPoint: .top,
+///                                  endPoint: .bottom))
+///             .frame(width:100, height:100)
+///     }
 /// }
 /// ```
->>>>>>> d9dbe9bffeee9743cbc05655157486417cd57220
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
 
