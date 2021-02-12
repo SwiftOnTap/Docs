@@ -359,7 +359,6 @@ extension AccessibilityLabeledPairRole : Hashable {
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        Button("I'm a button! 😏") {
 ///            // Do something on button click
@@ -689,12 +688,12 @@ public struct ActionSheet {
 /// about the state of the app and typically request feedback from the user. While the
 /// styling of alerts is semi-fixed, there are three available styles for the buttons to choose from:
 /// `.default`, `.destructive`, and `.cancel`. To actually present an alert, see
-/// ``View/alert(ispresented:content:)``.
+/// ``View/alert(_:_:)``.
 ///
 /// An alert can be created with one of two initializers, depending on if one button
 /// or two is required. For example, to create an Alert with one button:
 ///
-/// ![Example alert 1][alert-example-1.gif]
+/// ![Example alert 1](alert-example-1.gif)
 ///
 /// ```
 /// struct ExampleAlertView: View {
@@ -718,10 +717,10 @@ public struct ActionSheet {
 /// it will default to a dismiss button with the text "Ok".
 ///
 /// In order to customize the type of button (or to create an alert with two buttons),
-/// create a new ``Alert.Button`` instance and pass it in as a part of the initializer.
+/// create a new ``Alert/Button`` instance and pass it in as a part of the initializer.
 /// For example, to make an alert with a cancel and destructive button:
 ///
-/// ![Example alert 2][alert-example-2.gif]
+/// ![Example alert 2](alert-example-2.gif)
 ///
 /// ```
 /// struct ExampleAlertView: View {
@@ -758,11 +757,11 @@ public struct Alert {
 
     /// Creates an alert with one button.
     ///
-    /// If `dismissButton` is left unspecified, it will default to a button with the text "Ok".
+    /// If the `dismissButton` parameter is left unspecified, it will default to a button with the text "Ok".
     ///
     /// For example, to create a new Alert with this initializer and present it:
     ///
-    /// ![Example alert 3][alert-example-3.gif]
+    /// ![Example alert 3](alert-example-3.gif)
     ///
     /// ```
     /// struct ExampleAlertView: View {
@@ -792,7 +791,7 @@ public struct Alert {
     ///
     /// For example, to create a new Alert with this initializer and present it:
     ///
-    /// ![Example alert 4][alert-example-2.gif]
+    /// ![Example alert 4](alert-example-2.gif)
     ///
     /// ```
     /// struct ExampleAlertView: View {
@@ -818,7 +817,7 @@ public struct Alert {
     /// A button representing an ``Alert`` button action.
     public struct Button {
 
-        /// Creates an `Alert.Button` with the default style. The `.default` alert
+        /// Creates an ``Alert/Button`` with the default style. The `.default` alert
         /// button is styled nearly identically with `.cancel` except that `.cancel`
         /// has a bolded font weight.
         ///
@@ -835,7 +834,7 @@ public struct Alert {
         /// ```
         public static func `default`(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
 
-        /// Creates an `Alert.Button` that indicates cancellation of some
+        /// Creates an ``Alert/Button`` that indicates cancellation of some
         /// operation. The `.cancel` alert button is styled nearly identically with
         /// `.default` except that `.cancel` has a bolded font weight.
         ///
@@ -852,7 +851,7 @@ public struct Alert {
         /// ```
         public static func cancel(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
 
-        /// Creates an `Alert.Button` that indicates cancellation of some
+        /// Creates an ``Alert/Button`` that indicates cancellation of some
         /// operation. The `.cancel` alert button is styled nearly identically with
         /// `.default` except that `.cancel` has a bolded font weight.
         ///
@@ -865,14 +864,14 @@ public struct Alert {
         /// Alert(
         ///    title: Text("An important title!"),
         ///    message: Text("A message that adds additional context on the alert."),
-        ///    dismissButton: .cancel(Text("A cancel button"), action: {
+        ///    dismissButton: .cancel(action: {
         ///        print("Cancel button pressed, do something.")
         ///    })
         /// )
         /// ```
         public static func cancel(_ action: (() -> Void)? = {}) -> Alert.Button { }
 
-        /// Creates an `Alert.Button` with a style indicating destruction of
+        /// Creates an ``Alert/Button`` with a style indicating destruction of
         /// some data.
         ///
         /// For example, to create a new alert button with the destructive style:
@@ -6521,11 +6520,10 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 ///
 /// For example:
 ///
-/// ![Coordinate space example 1][coordinate-space-example.png]
+/// ![Coordinate space example 1](coordinate-space-example.png)
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        HStack {
 ///            Rectangle()
@@ -9237,12 +9235,11 @@ extension DynamicViewContent {
 
 /// An enumeration to indicate one edge of a rectangle.
 ///
-/// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)``,
+/// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)-9f6b7``,
 /// but it can also be returned from instance methods. For example:
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        VStack {
 ///            Text("Example view where Edge is returned as a value")
@@ -9284,11 +9281,10 @@ extension DynamicViewContent {
     /// An efficient set of `Edge`s.
     ///
     /// Used when multiple edges need to be specified. For example, when setting padding
-    /// on a view with ``View/padding(_:)``:
+    /// on a view with ``View/padding(_:)-9f6b7``:
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        VStack {
     ///            Text("Text padded on the top and bottom edge.")
@@ -11843,19 +11839,17 @@ public struct FileDocumentWriteConfiguration {
 /// The even-odd rule fills a path depending on what is overlapping in the path.
 /// For example, a path with no overlaps will be fully filled but a path with
 /// an overlap will not have the overlapping part filled. See ``FillStyle/isEOFilled`` for an example.
-/// Anti-aliased smooths pixels on jagged edges by averages the colors of the pixels
+/// Anti-aliased smooths pixels on jagged edges by averaging the colors of the pixels
 /// at the boundary.
 ///
 /// For example, to create a view with a circle shape and fill style:
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        Circle()
 ///          .fill(Color.pink, style: FillStyle(eoFill: true))
 ///    }
-///
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -11868,11 +11862,10 @@ public struct FileDocumentWriteConfiguration {
     /// For example, a path with no overlaps will be fully filled but a path with
     /// an overlap will not have the overlapping part filled.
     ///
-    /// ![FillStyle even-odd rule example 1][fillstyle-eof-example.png]
+    /// ![FillStyle even-odd rule example 1](fillstyle-eof-example.png)
     ///
     /// ```
     /// struct EvenOddRuleView: View {
-    ///
     ///    var body: some View {
     ///        VStack(spacing: 100) {
     ///            VStack {
@@ -11895,7 +11888,6 @@ public struct FileDocumentWriteConfiguration {
     /// }
     ///
     /// struct OverlappingRectangles: Shape {
-    ///
     ///    func path(in rect: CGRect) -> Path {
     ///        let rectSize = CGSize(width: rect.height, height: rect.height)
     ///
@@ -12283,7 +12275,7 @@ extension Font {
     ///
     /// For example, to adjust a ``Text`` to use monospaced digits:
     ///
-    /// ![monospacedDigit example 1][monospaced-digit-example-1.png]
+    /// ![monospacedDigit example 1](monospaced-digit-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -12301,10 +12293,10 @@ extension Font {
     /// between a normal proportional font and a monospaced font on digits see:
     ///
     /// Proportional font:
-    /// ![Proportional font example][monospaced-digit-proportional-font.png]
+    /// ![Proportional font example](monospaced-digit-proportional-font.png)
     ///
     /// Monospaced font:
-    /// ![Monospaced font example][monospaced-digit-mono-font.png]
+    /// ![Monospaced font example](monospaced-digit-mono-font.png)
     /// [Image credits to Lior Azi](https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0)
     public func monospacedDigit() -> Font { }
 
@@ -12861,16 +12853,15 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     public init(_ data: Range<Int>, @ViewBuilder content: @escaping (Int) -> Content) { }
 }
 
-/// A ``ShapeStyle`` that shows the correct fill for the foreground based on the current
+/// A ShapeStyle that shows the correct fill for the foreground based on the current
 /// context.
 ///
 /// For example, to create a square view with a ForegroundStyle:
 ///
-/// ![ForegroundStyle Example 1][foreground-style-example.png]
+/// ![ForegroundStyle Example 1](foreground-style-example.png)
 ///
 /// ```
 /// struct ForegroundStyleRectangle: View {
-///
 ///    var body: some View {
 ///        Rectangle()
 ///            .fill(ForegroundStyle())
@@ -12892,14 +12883,12 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///
     /// ```
     /// struct ForegroundStyleRectangle: View {
-    ///
     ///    var body: some View {
     ///        Rectangle()
     ///            .fill(ForegroundStyle())
     ///            .frame(width: 150, height: 150)
     ///            .foregroundColor(Color.pink)
     ///    }
-    ///
     /// }
     /// ```
     @inlinable public init() { }
@@ -16474,11 +16463,10 @@ extension LegibilityWeight {
 ///
 /// For example, to create a new ``ProgressView`` with this style:
 ///
-/// ![Linear progress view example 1][linearprogressview-example-1.png]
+/// ![Linear progress view example 1](linearprogressview-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        ProgressView()
 ///            .progressViewStyle(LinearProgressViewStyle())
@@ -16493,7 +16481,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     ///
     /// For example, to create a new ``ProgressView`` with this style:
     ///
-    /// ![Linear progress view example 1][linearprogressview-example-1.png]
+    /// ![Linear progress view example 1](linearprogressview-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -16511,7 +16499,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     ///
     /// For example, to create a new ``ProgressView`` with this style:
     ///
-    /// ![Linear progress view example 2][linearprogressview-example-2.png]
+    /// ![Linear progress view example 2](linearprogressview-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -21071,12 +21059,12 @@ public enum PopoverAttachmentAnchor {
     case point(UnitPoint)
 }
 
-/// The ``PreferenceKey`` protocol enables a way to send data _up_ the ``View`` hierarchy.
+/// The ``PreferenceKey`` protocol enables a way to send data _up_ the view hierarchy.
 ///
-/// ``PreferenceKey`` allow for a child view to communicate with a parent, similar to how an
+/// ``PreferenceKey`` allows for a child view to communicate with a parent, similar to how an
 /// ``Environment`` allows for data to be sent down the view hierarchy. An excellent
-/// example of view preferences in action is Apple's ``NavigationView`` and ``navigationTitle(_:)``.
-/// The ``navigationTitle(_:)`` does not modify the navigation view directly, but rather it
+/// example of view preferences in action is Apple's ``NavigationView`` and ``View/navigationTitle(_:)``.
+/// The ``View/navigationTitle(_:)`` does not modify the navigation view directly, but rather it
 /// uses view preferences and the navigation view has a closure that is called when the title is updated.
 ///
 /// While it is possible to achieve basic communication up the view hierarchy using a ``@Binding``,
@@ -21148,11 +21136,11 @@ public enum PopoverAttachmentAnchor {
 ///
 /// Note:
 ///  - A view with multiple children automatically combines its values for a given
-/// preference into a single value visible to its ancestors. This functionality
-/// can be changed with the `PreferenceKey/reduce(value: &x, nextValue:{defaultValue})` function.
+///  preference into a single value visible to its ancestors. This functionality
+/// can be changed with the ``PreferenceKey/reduce(_:_:)`` function.
 ///  - When using view preferences, keep in mind that it can be easy to create
-/// an infinite loop by having the preference value dependent on the state that it is changing.
-/// A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
+///  an infinite loop by having the preference value dependent on the state that it is changing.
+///  A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
 ///  - In order to pass information _down_ the View hierarchy, see ``Environment``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreferenceKey{ }
@@ -21502,11 +21490,10 @@ extension PreviewPlatform : Hashable {
 ///
 /// For example, to have Xcode render a preview of a simple view:
 ///
-/// ![Preview provider example 1][previewprovider-example-1.png]
+/// ![Preview provider example 1](previewprovider-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        Circle().fill(Color.green)
 ///    }
@@ -29239,11 +29226,10 @@ extension Text.Case : Hashable {
 ///
 /// This is used in conjuction with `View/multilineTextAlignment(_:)`, for example:
 ///
-/// ![Text alignment center][textalignment-center.png]
+/// ![Text alignment center](textalignment-center.png)
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
 ///            .padding(20)
@@ -29260,7 +29246,7 @@ extension Text.Case : Hashable {
     ///
     /// For example:
     ///
-    /// ![Text alignment leading][textalignment-leading.png]
+    /// ![Text alignment leading](textalignment-leading.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -29279,7 +29265,7 @@ extension Text.Case : Hashable {
     ///
     /// For example:
     ///
-    /// ![Text alignment center][textalignment-center.png]
+    /// ![Text alignment center](textalignment-center.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -29299,7 +29285,7 @@ extension Text.Case : Hashable {
     ///
     /// For example:
     ///
-    /// ![Text alignment trailing][textalignment-trailing.png]
+    /// ![Text alignment trailing](textalignment-trailing.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -29844,16 +29830,16 @@ extension Toggle where Label == Text {
 ///
 /// ToggleStyle allows for easy customization of a toggle view. In order to customize the style,
 /// simply create a new type conforming to this protocol that returns the custom view
-/// in the `ToggleStyle/makeBody(_:)` function. Note that while conforming to the ToggleStyle
+/// in the ``ToggleStyle/makeBody(_:)`` function. Note that while theToggleStyle
 /// protocol takes care of most the implementation, the conforming type must still
 /// toggle the isOn property.
 ///
-/// To configure the current toggle style for a view hiearchy, use the
-/// `View/toggleStyle(_:)` modifier.
+/// To configure the current toggle style for a view hierarchy, use the
+/// ``View/toggleStyle(_:)`` modifier.
 ///
 /// For example, to make a custom toggle style which conforms to this protocol:
 ///
-/// ![Toggle style example 1][togglestyle-example-1.gif]
+/// ![Toggle style example 1](togglestyle-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -29902,9 +29888,9 @@ extension ToggleStyle {
     /// The system calls this method for each `Toggle` instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
-    /// For example, to make a custom toggle style which returns a HStack from makeBody:
+    /// For example, to make a custom toggle style which returns a ``HStack`` from makeBody:
     ///
-    /// ![Toggle style example 1][togglestyle-example-1.gif]
+    /// ![Toggle style example 1](togglestyle-example-1.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -30292,21 +30278,20 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
 ///
 /// There are two types of placements:
 /// - Semantic placements, such as `.principal` and `.navigation`,
-///   which denote the intent of the item being added.
-///   SwiftUI will determine the appropriate placement for the item
-///   based on this intent, as well as the current platform.
+/// which denote the intent of the item being added.
+/// SwiftUI will determine the appropriate placement for the item
+/// based on this intent, as well as the current platform.
 /// - Positional placements, such as `.navigationBarLeading`,
-///   which denote a precise placement for the item,
-///   usually for a particular platform.
+/// which denote a precise placement for the item,
+/// usually for a particular platform.
 ///
 /// Toolbar placements are used with the ``ToolbarItem`` when defining a toolbar.
 /// For example:
 ///
-/// ![Toolbar item placement example 1][toolbar-placement-example-1.png]
+/// ![Toolbar item placement example 1](toolbar-placement-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        Text("🍌🍌")
 ///        .toolbar {
@@ -30344,7 +30329,7 @@ public struct ToolbarItemPlacement {
     /// center of the toolbar.
     ///
     /// On iOS, iPadOS, and tvOS, the principal item will be placed in
-    /// the center of the navigation bar. This item will take precendent over
+    /// the center of the navigation bar. This item will take precedent over
     /// a title specified through `.navigationTitle()`.
     @available(watchOS, unavailable)
     public static let principal: ToolbarItemPlacement
@@ -37468,16 +37453,15 @@ extension View {
     /// This will not affect the layout of other views. Using backgroundPreferenceValue
     /// is one of 3 ways for responding to view preferences. For information on
     /// the other ways, see:
-    /// - ``View/overlayPreferenceValue(_:,transform:)``
-    /// - ``View/onPreferenceChange(_:,transform:)``
+    /// - ``View/overlayPreferenceValue(_:_:)``
+    /// - ``View/onPreferenceChange(_:_:)``
     ///
     /// For example:
     ///
-    /// ![Background preference value example 1][backgroundpreference-example-1.png]
+    /// ![Background preference value example 1](backgroundpreference-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        Text("Bullseye")
     ///            .preference(key: CustomPreferenceKey.self, value: Color.red)
@@ -37802,7 +37786,7 @@ extension View {
     ///
     /// For example, to make an entire VStack container clickable:
     ///
-    /// ![Content shape example 1][contentshape-example-1.gif]
+    /// ![Content shape example 1](contentshape-example-1.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -37832,7 +37816,7 @@ extension View {
     /// same example from above _without_ any defined contentShape. Notice how
     /// the rectangle color does not toggle when clicking on the spacers.
     ///
-    /// ![Content shape example 2][contentshape-example-2.gif]
+    /// ![Content shape example 2](contentshape-example-2.gif)
     ///
     /// - Parameters:
     ///   - shape: The hit testing shape for the view.
@@ -38112,7 +38096,6 @@ extension View {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        HStack {
     ///            Text("This is a moderately long string.")
@@ -39437,8 +39420,8 @@ extension ViewBuilder {
 
 /// A view's size and its alignment guides in its own coordinate space.
 ///
-/// Most frequently used when working with alignment guides. See ``View/alignmentGuide(_:computeValue:)`` for more
-/// on how to use ViewDimensions with these.
+/// Most frequently used when working with alignment guides. See ``View/alignmentGuide(_:_:)`` for more
+/// on how to apply ViewDimensions.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ViewDimensions {
 
@@ -39456,7 +39439,6 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        Text("🍌🍌")
     ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
@@ -39475,7 +39457,6 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        Text("🍌🍌")
     ///            .alignmentGuide(VerticalAlignment.center, computeValue: { ViewDimensions in
@@ -39493,7 +39474,6 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        Text("🍌🍌")
     ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
@@ -39513,7 +39493,6 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        Text("🍌🍌")
     ///            .alignmentGuide(VerticalAlignment.leading, computeValue: { ViewDimensions in
@@ -39549,11 +39528,10 @@ extension ViewDimensions : Equatable {
 /// modifiers to create a new modifier that you can use to create blue caption
 /// text surrounded by a rounded rectangle:
 ///
-/// ![View modifier example 1][view-modifier-example-1.png]
+/// ![View modifier example 1](view-modifier-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
-///
 ///    var body: some View {
 ///        VStack {
 ///            Text("Text without blue border")
@@ -39577,8 +39555,8 @@ extension ViewDimensions : Equatable {
 /// }
 /// ```
 ///
-/// You can apply `modifier(_:)` directly to a view, but a more common and
-/// idiomatic approach uses `modifier(_:)` to define an extension to
+/// You can apply `View/modifier(_:)` directly to a view, but a more common and
+/// idiomatic approach uses `View/modifier(_:)` to define an extension to
 /// `View` itself that incorporates the view modifier:
 ///
 ///     extension View {
@@ -39615,7 +39593,7 @@ extension ViewModifier {
 
     /// Gets the current body of the caller.
     ///
-    /// `content` is a proxy for the view that will have the modifier
+    /// The `content` parameter is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it. In simpler terms, `content` is the
     /// view that is being transformed. For example:
     ///
@@ -39644,7 +39622,7 @@ extension ViewModifier where Self.Body == Never {
 
     /// Gets the current body of the caller.
     ///
-    /// `content` is a proxy for the view that will have the modifier
+    /// The `content` parameter is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it. In simpler terms, `content` is the
     /// view that is being transformed. For example:
     ///
@@ -39675,11 +39653,10 @@ extension ViewModifier {
     /// The ``View/modifier(_:)`` only accepts a single modifier as a parameter, which
     /// is why concat is needed. For example:
     ///
-    /// ![View modifier concat example 1][view-modifier-concat-example-1.png]
+    /// ![View modifier concat example 1](view-modifier-concat-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
-    ///
     ///    var body: some View {
     ///        VStack {
     ///            Text("Text without blue border and padded shadow")
