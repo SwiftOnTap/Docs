@@ -19214,24 +19214,158 @@ public struct OutlineSubgroupChildren : View {
 }
 
 /// An index view style that places a page index view over its content.
+///
+/// Currently the PageIndexViewStyle is the only type that allows for customization
+/// over a page index view. To configure the current `IndexViewStyle` for a view hierarchy, use the
+/// `.indexViewStyle()` modifier.
+///
+/// For example:
+///
+/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        TabView {
+///            Text("Tab 1")
+///            Text("Tab 2")
+///            Text("Tab 3")
+///        }
+///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///    }
+/// }
+/// ```
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 public struct PageIndexViewStyle : IndexViewStyle {
 
     /// The background style for the page index view.
+    ///
+    /// There are 4 background style options:
+    /// - automatic: uses the default background for the platform
+    /// - interactive: shows a background when the index is interacted with
+    /// - always: the background is always shown
+    /// - never: the background is never shown
+    ///
+    /// See the individual style pages for visualizations of each option.
     public struct BackgroundDisplayMode {
 
         /// Background will use the default for the platform.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle automatic background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let automatic: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is only shown while the index view is interacted with.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle interactive background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let interactive: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is always displayed behind the page index view.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle always background display mode](indexviewstyle-protocol-example-1.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let always: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is never displayed behind the page index view.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle never background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let never: PageIndexViewStyle.BackgroundDisplayMode
     }
 
