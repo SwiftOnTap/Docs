@@ -30994,13 +30994,117 @@ extension Transaction {
 ///
 /// `TupleView` is mainly used with `ViewBuilder`, and so you don't really
 /// need to worry about it unless you're making your own view builders.
+///
+/// In the example below, we use this type to create a new kind of `VStack`
+/// that only displays the first 2 views. All other views are ignored.
+/// Kind of useless? Yes. Instructive? You tell me.
+///
+///     struct StackedView: View {
+///         var body: some View {
+///             First2VStack {
+///                 Text("I am first 🥇")
+///                 Text("Second is the best 2️⃣")
+///                 Text("Hey stop ignoring me ☹️")
+///             }
+///         }
+///     }
+///
+///     struct First2VStack<First: View, Second: View>: View {
+///         let first: First
+///         let second: Second
+///
+///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+///             let views = content().value
+///             first = views.0
+///             second = views.1
+///         }
+///
+///         var body: some View {
+///             HStack {
+///                 first
+///                 second
+///             }
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TupleView<T> : View {
 
 	/// The tuple of views in the `TupleView`.
+    ///
+    /// A ``TupleView`` stores a real life tuple of views in this property.
+    /// Its type is a generic, `T`, which can have a tuple type.
+    ///
+    /// See how in the example below, we extract the value parameter from
+    /// the tuple view returned by the view builder. This allows us to
+    /// take the first and second elements of the type from the tuple view.
+    ///
+    ///     struct StackedView: View {
+    ///         var body: some View {
+    ///             First2VStack {
+    ///                 Text("I am first 🥇")
+    ///                 Text("Second is the best 2️⃣")
+    ///                 Text("Hey stop ignoring me ☹️")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct First2VStack<First: View, Second: View>: View {
+    ///         let first: First
+    ///         let second: Second
+    ///
+    ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+    ///             let views = content().value
+    ///             first = views.0
+    ///             second = views.1
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             HStack {
+    ///                 first
+    ///                 second
+    ///             }
+    ///         }
+    ///     }
+    ///
     public var value: T
 
     /// Creates a tuple view.
+    ///
+    /// You usually won't use this intializer directly. Instead, if you are
+    /// working with ``TupleView``s, the tuple view will usually be
+    /// constructed behind the scenes using the ``ViewBuilder`` property
+    /// wrapper. See that page for more info.
+    ///
+    /// See below for how to extract a tuple view from a view builder.
+    ///
+    ///     struct StackedView: View {
+    ///         var body: some View {
+    ///             First2VStack {
+    ///                 Text("I am first 🥇")
+    ///                 Text("Second is the best 2️⃣")
+    ///                 Text("Hey stop ignoring me ☹️")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct First2VStack<First: View, Second: View>: View {
+    ///         let first: First
+    ///         let second: Second
+    ///
+    ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+    ///             let views = content().value
+    ///             first = views.0
+    ///             second = views.1
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             HStack {
+    ///                 first
+    ///                 second
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameter value: A tuple of any number of views.
     @inlinable public init(_ value: T) { }
