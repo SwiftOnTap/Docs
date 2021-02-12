@@ -22933,6 +22933,24 @@ extension Rectangle : InsettableShape {
 }
 
 /// The reasons to apply a redaction to data displayed on screen.
+///
+/// Use this type with the ``View/redacted(reason:)`` view modifier to
+/// "redact" a view's contents. For now, that simply means to reaplace
+/// the view with a placeholder.
+///
+/// In the future, this type may get more optionality, but as of now,
+/// the only redaction reason is ``RedactionReasons/placeholder``
+///
+/// See the following example for adding redaction to a view.
+///
+/// ```
+/// struct RedactedView: View {
+///     var body: some View {
+///         Label("Taylor Swift", systemImage: "person.fill")
+///         Label("Kanye West", systemImage: "person.fill")
+///             .redacted(reason: .placeholder)
+///     }
+/// }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct RedactionReasons : OptionSet {
 
@@ -22940,6 +22958,10 @@ public struct RedactionReasons : OptionSet {
     public let rawValue: Int
 
     /// Creates a new set from a raw value.
+    ///
+    /// Do not use this initializer directly. Rather, use one of the
+    /// static constants of the strucutre:
+    /// - ``RedactionReasons/placeholder``
     ///
     /// - Parameter rawValue: The raw value with which to create the
     ///   reasons for redaction.
@@ -22951,6 +22973,18 @@ public struct RedactionReasons : OptionSet {
     /// generic placeholders, though maintaining their original size and shape.
     /// Use this to create a placeholder UI without directly exposing
     /// placeholder data to users.
+    ///
+    /// In the future, this type may get more optionality, but as of now,
+    /// this is the only property in ``RedactionReasons``.
+    ///
+    /// ```
+    /// struct RedactedView: View {
+    ///     var body: some View {
+    ///         Label("Taylor Swift", systemImage: "person.fill")
+    ///         Label("Kanye West", systemImage: "person.fill")
+    ///             .redacted(reason: .placeholder)
+    ///     }
+    /// }
     public static let placeholder: RedactionReasons
 
     /// The element type of the option set.
@@ -24423,10 +24457,37 @@ extension RoundedRectangle : InsettableShape {
 }
 
 /// A set of symbolic safe area regions.
+///
+/// Use this option set with the ``View/ignoresSafeArea(_:edges:)``
+/// view modifier to specify which edges of a view
+/// should ignore which safe areas.
+///
+/// Safe area options:
+/// - ``SafeAreaRegions/container``: The top and bottom safe portions of the
+/// screen, like the status bar.
+/// - ``SafeAreaRegions/keyboard``: The portion of the screen covered by
+/// a software keyboard
+///
+/// ```
+/// struct SafeAreaIgnoringView: View {
+///     var body: some View {
+///         ZStack {
+///             Color.pink
+///             Text("I am everywhere (except the software keyboard)")
+///         }
+///         .ignoresSafeArea(SafeAreaRegions.container, edges: [.top, .bottom])
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct SafeAreaRegions : OptionSet {
 
     /// The corresponding value of the raw type.
+    ///
+    /// Don't use this directly. Rather, use the static constants of this type,
+    /// ``SafeAreaRegions/keyboard``,
+    /// ``SafeAreaRegions/container``,
+    /// ``SafeAreaRegions/all``.
     ///
     /// A new instance initialized with `rawValue` will be equivalent to this
     /// instance. For example:
@@ -24463,13 +24524,49 @@ extension RoundedRectangle : InsettableShape {
 
     /// The safe area defined by the device and containers within the
     /// user interface, including elements such as top and bottom bars.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere (except the software keyboard)")
+    ///         }
+    ///         .ignoresSafeArea(.container, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let container: SafeAreaRegions
 
     /// The safe area matching the current extent of any software
     /// keyboard displayed over the view content.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am over the keyboard!")
+    ///         }
+    ///         .ignoresSafeArea(.keyboard, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let keyboard: SafeAreaRegions
 
     /// All safe area regions.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere 🤠")
+    ///         }
+    ///         .ignoresSafeArea(.all, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let all: SafeAreaRegions
 
     /// The element type of the option set.
