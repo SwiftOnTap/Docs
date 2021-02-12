@@ -4932,13 +4932,59 @@ extension Circle : InsettableShape {
 }
 
 /// A progress view that visually indicates its progress using a circular gauge.
+///
+/// When initializing a ProgressView with ``ProgressView/init(_:_:)``, the
+/// ``DefaultProgressViewStyle`` will typically display a circular progress view on
+/// watchOS.
+///
+/// For example, to create a new ``ProgressView`` with this style:
+///
+/// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        ProgressView()
+///            .progressViewStyle(CircularProgressViewStyle())
+///            .padding(20)
+///    }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
 
     /// Creates a circular progress view style.
+    ///
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(CircularProgressViewStyle())
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init() { }
 
     /// Creates a circular progress view style with a tint color.
+
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Circular progress view example 2](circularprogressviewstyle-example-2.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(CircularProgressViewStyle(tint: Color.red))
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
@@ -9975,10 +10021,12 @@ public struct EmptyCommands : Commands {
 ///         }
 ///     }
 ///
+/// In order to stack multiple modifiers, including the EmptyModifier, see
+/// ``ViewModifier/concat(_:)``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyModifier : ViewModifier {
 
-	/// A view modifier that leave the view unchanged.
+	  /// A view modifier that leave the view unchanged.
     public static let identity: EmptyModifier
 
     /// The type of view representing the body.
@@ -9990,7 +10038,9 @@ public struct EmptyCommands : Commands {
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
-    /// represented by `Self` applied to it.
+    /// represented by `Self` applied to it. In simpler terms, content is the
+    /// view that is being transformed and this function will return the view
+    /// absent of any modifier transformations.
     public func body(content: EmptyModifier.Content) -> EmptyModifier.Body { }
 }
 
@@ -14394,22 +14444,97 @@ extension HorizontalAlignment {
 }
 
 /// An effect applied when the pointer hovers over a view.
+///
+/// HoverEffects are only used on iPadOS when a user is interacting with a pointer.
+/// See ``View/hoverEffect(_:)`` for how to apply the different HoverEffects.
+/// The available options are:
+/// - automatic: the default effect for the platform
+/// - highlight: morphs the pointer into a platter behind the view and shows a light source
+/// - lift: slides the pointer under the view and scaled up the view with a shadow
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        VStack {
+///            Rectangle()
+///                .fill(Color.red)
+///                .frame(width: 100, height: 100)
+///                .hoverEffect(.automatic)
+///        }.padding(75).background(Color.blue)
+///    }
+/// }
+/// ```
+///
+/// See the individual HoverEffect value pages for a visualization of each effect.
 @available(iOS 13.4, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct HoverEffect {
 
-    /// An effect  that attempts to determine the effect automatically.
+    /// An effect that attempts to determine the effect automatically.
     /// This is the default effect.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect automatic example](hovereffect-automatic-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.automatic)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let automatic: HoverEffect
 
-    /// An effect  that morphs the pointer into a platter behind the view
+    /// An effect that morphs the pointer into a platter behind the view
     /// and shows a light source indicating position.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect highlight example](hovereffect-highlight-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.highlight)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let highlight: HoverEffect
 
     /// An effect that slides the pointer under the view and disappears as the
     /// view scales up and gains a shadow.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect lift example](hovereffect-lift-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.lift)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let lift: HoverEffect
 }
 
@@ -15091,11 +15216,30 @@ extension Image.ResizingMode : Hashable {
     public init(image: Image, sourceRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1), scale: CGFloat = 1) { }
 }
 
-/// Defines the implementation of all `IndexView` instances within a view
-/// hierarchy.
+/// Types conforming to this protocol are used to style page index ``TabView``'s.
 ///
+/// Currently the IndexViewStyle protocol is not public, so it cannot be implemented for
+/// a custom view. The only type conforming to this protocol is ``PageIndexViewStyle``.
 /// To configure the current `IndexViewStyle` for a view hierarchy, use the
 /// `.indexViewStyle()` modifier.
+///
+/// For example:
+///
+/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        TabView {
+///            Text("Tab 1")
+///            Text("Tab 2")
+///            Text("Tab 3")
+///        }
+///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///    }
+/// }
+/// ```
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -19480,28 +19624,182 @@ public struct OutlineSubgroupChildren : View {
 }
 
 /// An index view style that places a page index view over its content.
+///
+/// Currently the PageIndexViewStyle is the only type that allows for customization
+/// over a page index view. To configure the current `IndexViewStyle` for a view hierarchy, use the
+/// `.indexViewStyle()` modifier. When creating a new PageIndexViewStyle, it will
+/// default to the .automatic backgroundDisplayMode if none is specified.
+///
+/// For example:
+///
+/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        TabView {
+///            Text("Tab 1")
+///            Text("Tab 2")
+///            Text("Tab 3")
+///        }
+///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///    }
+/// }
+/// ```
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 public struct PageIndexViewStyle : IndexViewStyle {
 
     /// The background style for the page index view.
+    ///
+    /// There are 4 background style options:
+    /// - automatic: uses the default background for the platform
+    /// - interactive: shows a background when the index is interacted with
+    /// - always: the background is always shown
+    /// - never: the background is never shown
+    ///
+    /// See the individual style pages for visualizations of each option.
     public struct BackgroundDisplayMode {
 
         /// Background will use the default for the platform.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle automatic background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let automatic: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is only shown while the index view is interacted with.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle interactive background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let interactive: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is always displayed behind the page index view.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle always background display mode](indexviewstyle-protocol-example-1.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let always: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is never displayed behind the page index view.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle never background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let never: PageIndexViewStyle.BackgroundDisplayMode
     }
 
     /// Creates a page index view style.
+    ///
+    /// When creating a new PageIndexViewStyle, it will default to the .automatic
+    /// backgroundDisplayMode if none is specified. For example:
+    ///
+    /// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        TabView {
+    ///            Text("Tab 1")
+    ///            Text("Tab 2")
+    ///            Text("Tab 3")
+    ///        }
+    ///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    ///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+    ///    }
+    /// }
+    /// ```
     ///
     /// - Parameter backgroundDisplayMode: The display mode of the background of any
     /// page index views receiving this style
