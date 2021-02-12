@@ -1401,12 +1401,16 @@ extension Angle : Animatable {
     public typealias AnimatableData = Double
 }
 
-/// An angular gradient that applies the color function as the angle changes, relative to a center point
-/// and defined start and end angles.
+/// An angular gradient.
 ///
-/// The gradient maps the unit-space center point into the
+/// An angular gradient is also known as a "conic" gradient. This gradient
+/// applies the color function as the angle changes, relative to a center point
+/// and defined start and end angles. If `endAngle - startAngle > 2π`, the
+/// gradient only draws the last complete turn. If `endAngle - startAngle < 2π`,
+/// the gradient fills the missing area with the colors defined by gradient
+/// locations one and zero, transitioning between the two halfway across the
+/// missing area. The gradient maps the unit-space center point into the
 /// bounding rectangle of each shape filled with the gradient.
-///
 ///
 /// There are 3 main cases where AngularGradient can change:
 /// 1. `endAngle - startAngle = 2π`
@@ -4727,8 +4731,6 @@ public struct ButtonStyleConfiguration {
 	/// The Capsule's rounded corner style, based on the value passed in its
     /// initializer.
 	///
-    /// Look at ``RoundedCornerStyle`` for more information
-    ///
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
@@ -7810,10 +7812,8 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 /// Add a drag gesture to a `Circle` and change its color while the user
 /// performs the drag gesture:
 ///
-/// ![DragGesture Example 1](drag-gesture-example.gif)
-///
-///  ```
-///   struct DragGestureView: View {
+/// ```
+/// struct DragGestureView: View {
 ///     @State private var location: CGPoint = CGPoint(x: 50, y: 50);
 ///     @State var isDragging = false
 ///
@@ -7834,9 +7834,8 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 ///             .position(location)
 ///             .gesture(simpleDrag)
 ///     }
-///   }
+/// }
 /// ```
-///
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct DragGesture : Gesture {
@@ -11070,7 +11069,7 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 ///
 /// The `ExclusiveGesture` gives precedence to its first gesture.
 ///
-/// /// See ``Gesture/exclusively(before:)`` for more of an explanation and an example
+/// See ``Gesture/exclusively(before:)`` for more of an explanation and an example.
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ExclusiveGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
@@ -12903,33 +12902,34 @@ extension ForegroundStyle : ShapeStyle {
 /// or inspectors.
 ///
 /// SwiftUI renders forms in a manner appropriate for the platform. For example,
-/// on iOS, forms appear as grouped lists. Use ``Section`` to group different
+/// on iOS, forms appear as grouped lists. Use `Section` to group different
 /// parts of a form's content.
-///
 ///
 /// For example,
 ///
 /// ![Form Example 1](form-example-1.png)
 ///
 /// ```
-///  struct ExampleView: View {
-///    let gradient = Gradient(colors: [.red,.yellow])
-///    @State private var myFruit = ""
+/// struct ExampleView: View {
+///     let gradient = Gradient(colors: [.red,.yellow])
+///     @State private var myFruit = ""
 ///
-///    var body: some View {
-///       Form {
-///            TextField("Banana 🍌", text: $myFruit)
-///            TextField("Banana 🍌", text: $myFruit)
-///            TextField("Banana 🍌", text: $myFruit)
-///            }
-///    }
+///     var body: some View {
+///         Form {
+///             TextField("Banana 🍌", text: $myFruit)
+///             TextField("Banana 🍌", text: $myFruit)
+///             TextField("Banana 🍌", text: $myFruit)
+///         }
+///     }
 /// }
 /// ```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Form<Content> : View where Content : View {
 
-	/// Creates a container from a view builder that groups controls intended for data entry
+	/// Creates a form from a view builder containing child views.
+	///
+	/// The content of a form is almost always different `Section`s.
 	///
     ///
 	/// The form view knows how to arrange standard controls inside it such as pickers, textfields and toggles.
@@ -12940,7 +12940,7 @@ public struct Form<Content> : View where Content : View {
     /// ![Form Example 2](form-example-2.png)
     ///
     /// ```
-    ///     struct ExampleView: View {
+    /// struct ExampleView: View {
     ///     let gradient = Gradient(colors: [.red,.yellow])
     ///     @State private var email = ""
     ///     @State private var first = ""
@@ -12952,9 +12952,9 @@ public struct Form<Content> : View where Content : View {
     ///     var body: some View {
     ///         Form {
     ///             Section(header: Text("Contact Information")) {
-    ///             TextField("First Name", text: $first)
-    ///             TextField("Last Name ", text: $last)
-    ///             TextField("Email", text: $email)
+    ///                 TextField("First Name", text: $first)
+    ///                 TextField("Last Name ", text: $last)
+    ///                 TextField("Email", text: $email)
     ///             }
     ///             Section(header: Text("Preferences")) {
     ///                 Toggle(isOn: $not) {
@@ -12966,7 +12966,7 @@ public struct Form<Content> : View where Content : View {
     ///             }
     ///         }
     ///     }
-    ///  }
+    /// }
     /// ```
     ///
     ///
@@ -13545,32 +13545,11 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 }
 
 /// A color gradient represented as an array of color stops, each having a
-/// location value between 0 and 1.
-///
-/// There are three different types of gradeints:
-/// 1. ``LinearGradient``
-/// 2. ``AngularGradient``
-/// 3. ``RadialGradient``
-///
-/// Each gradient can be initialized with an array of colors or an array of stops.
-/// See ``Gradient/stop`` to learn more about the color stop structure that is expected.
-/// Note that when using an array of colors in a gradient, the location of each color is evenly spaced.
-///
-/// For example,
-/// Gradient(colors: [.yellow, .orange])
-///
+/// parametric location value.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Gradient : Equatable {
 
     /// One color stop in the gradient.
-    ///
-    /// There are two important attributes to every ``Gradient/stop``.
-    /// 1. The color
-    /// 2. The location where the color starts
-    ///
-    ///  Gradient(stops:[Gradient.Stop(color: .yellow, location: 0.0),
-    ///           Gradient.Stop(color: .orange, location: 0.5)])
-    ///
     @frozen public struct Stop : Equatable {
 
         /// The color for the stop.
@@ -13582,10 +13561,6 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         public var location: CGFloat
 
         /// Creates a color stop with a color and location.
-        ///
-        /// An example of one color stop:
-        /// `Gradient.Stop(color: .yellow, location: 0.0)`
-        ///
         public init(color: Color, location: CGFloat) { }
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -13603,20 +13578,12 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     public var stops: [Gradient.Stop]
 
     /// Creates a gradient from an array of color stops.
-    ///
-    /// `Gradient(stops:[Gradient.Stop(color: .yellow, location: 0.0),
-    ///           Gradient.Stop(color: .orange, location: 0.5)])`
-    ///
-    /// See ``Gradient/Stop`` for more information on what is expected.
-    ///
     public init(stops: [Gradient.Stop]) { }
 
     /// Creates a gradient from an array of colors.
     ///
-    /// The gradient evenly spaces the colors.
-    ///
-    /// `Gradient(colors: [.yellow, .orange])`
-    ///
+    /// The gradient synthesizes its location values to evenly space the colors
+    /// along the gradient.
     public init(colors: [Color]) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -13663,31 +13630,6 @@ public struct GraphicalDatePickerStyle : DatePickerStyle {
 /// `LazyHGrid` and `LazyVGrid` views. Each grid item specifies layout
 /// properties like spacing and alignment, which the grid view uses to size and
 /// position all items in a given column or row.
-///
-/// ```
-/// struct VerticalEmojiView: View {
-///     var columns: [GridItem] =
-///             Array(repeating: .init(.fixed(20)), count: 2)
-///
-///     var body: some View {
-///         ScrollView(.horizontal) {
-///             LazyHGrid(rows: rows, alignment: .top) {
-///                 ForEach((0...79), id: \.self) {
-///                     let codepoint = $0 + 0x1f600
-///                     let codepointString = String(format: "%02X", codepoint)
-///                     Text("\(codepointString)")
-///                         .font(.footnote)
-///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
-///                     Text("\(emoji)")
-///                      .font(.largeTitle)
-///                 }
-///             }
-///         }
-///     }
-/// }
-/// ```
-///
-
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct GridItem {
 
@@ -13714,7 +13656,7 @@ public struct GridItem {
         /// Multiple items in the space of a single flexible item.
         ///
         /// This size case places one or more items into the space assigned to
-        /// a single ``griditem/size/flexible``` item, using the provided bounds and
+        /// a single `flexible` item, using the provided bounds and
         /// spacing to decide exactly how many items fit. This approach prefers
         /// to insert as many items of the `minimum` size as possible
         /// but lets them increase to the `maximum` size.
@@ -14099,63 +14041,18 @@ extension Group : Commands where Content : Commands {
     @inlinable public init(@CommandsBuilder content: () -> Content) { }
 }
 
-/// A view that provides style for a logical grouping of content with an optional label.
-///
-/// Use this structure to style and group together content. Default styling on iOS is a simple card with a title and content.
-/// ``GroupBox`` can be used in 3 different ways
-///
-/// 1. With a Label
-/// 2. With a Configuration
-/// 3. Without a Label
-///
-///
-/// Here is an example creating a ``GroupBox`` with a label.
-///
-/// ```
-///   var body: some View {
-///     GroupBox(
-///       label: Text("Types of Boxes 📦")){
-///         Text("Present 🎁")
-///         Text("JuiceBox 🧃")
-///       }
-///     }
-///   }
-/// ```
-///
+/// A stylized view with an optional label that is associated with a logical
+/// grouping of content.
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct GroupBox<Label, Content> : View where Label : View, Content : View {
 
 	/// Creates a group box from a label and a view builder of content.
-    ///
-    /// For example,
-    ///
-    /// ```
-	///  struct ExampleView: View {
-    ///     @State private var username: String = ""
-    ///     @State private var password: String = ""
-    ///
-    ///     var body: some View {
-    ///         VStack {
-    ///           GroupBox(label: Text("Account Login")) {
-    ///              Form {
-    ///                  Text("Username")
-    ///                  TextField("", text: $username)
-    ///
-    ///                  Text("Password")
-    ///                  SecureField("", text: $password)
-    ///              }
-    ///          }
-    ///      }
-    ///  }
-    /// }
-    /// ```
-    ///
+	///
 	/// - Parameters:
 	///   - label: The label to associate with the grouped content.
 	///   - content: The grouped content to appear with the label.
-    ///
     public init(label: Label, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
@@ -14311,6 +14208,18 @@ public struct GroupedListStyle : ListStyle {
 @frozen public struct HStack<Content> : View where Content : View {
 
     /// Creates an instance with the given spacing and vertical alignment.
+    ///
+    ///  ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             HStack(alignment: .top, spacing: 32) {
+    ///                 Text("🍌🍌")
+    ///                 Text("🍏🍏")
+    ///                 Text("🍑🍑")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - alignment: The guide for aligning the subviews in this stack. It has
@@ -15318,60 +15227,375 @@ extension InsettableShape {
 /// equivalent to Command-Shift-] on ANSI keyboards, but would produce a
 /// different shortcut for keyboard layouts where punctuation characters are in
 /// different locations.
+///
+/// Use this structure with the ``View/keyboardShortcut(_:modifiers:)``
+/// view modifier to add keyboard shortcuts to a view.
+///
+/// Key equivalents are also used in constructing ``KeyboardShortcut``
+/// objects, which are used extensively in ``Commands``.
+///
+/// ```
+/// struct ShortcutEnabledView: View {
+///     var body: some View {
+///         Button("Press command-P to print the 🍌") {
+///             print("🍌")
+///         }
+///         .keyboaredShortcut(KeyEquivalent("p"), modifiers: [.command])
+///     }
+/// }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct KeyEquivalent {
 
-    /// Up Arrow (U+F700)
+    /// Up Arrow (U+F700) key equivalent.
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-up to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.upArrow, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let upArrow: KeyEquivalent
 
-    /// Down Arrow (U+F701)
+    /// Down Arrow (U+F701) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-down to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.downArrow, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let downArrow: KeyEquivalent
 
-    /// Left Arrow (U+F702)
+    /// Left Arrow (U+F702) key equivalent.
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-left to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.leftArrow, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let leftArrow: KeyEquivalent
 
-    /// Right Arrow (U+F703)
+    /// Right Arrow (U+F703) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-right to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.rightArrow, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let rightArrow: KeyEquivalent
 
-    /// Escape (U+001B)
+    /// Escape (U+001B) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-ctrl-esacpe to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.escape, modifiers: [.command, .control])
+    ///     }
+    /// }
+    /// ```
     public static let escape: KeyEquivalent
 
-    /// Delete (U+0008)
+    /// Delete (U+0008) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-delete to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.delete, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let delete: KeyEquivalent
 
-    /// Delete Forward (U+F728)
+    /// Delete Forward (U+F728) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// - Note: Many keyboards don't have this key.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-delete forward to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.deleteForward, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let deleteForward: KeyEquivalent
 
-    /// Home (U+F729)
+    /// Home (U+F729) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// - Note: Many keyboards don't have this key. If yours doesn't, press
+    /// fn+left arrow instead.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-home to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.home, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let home: KeyEquivalent
 
     /// End (U+F72B)
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// - Note: Many keyboards don't have this key. If yours doesn't, press
+    /// fn+right arrow instead.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-end to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.end, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let end: KeyEquivalent
 
-    /// Page Up (U+F72C)
+    /// Page Up (U+F72C) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-page up to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.pageUp, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let pageUp: KeyEquivalent
 
-    /// Page Down (U+F72D)
+    /// Page Down (U+F72D) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-page down to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.pageDown, modifiers: [.command])
+    ///     }
+    /// }
+    /// ```
     public static let pageDown: KeyEquivalent
 
-    /// Clear (U+F739)
+    /// Clear (U+F739) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-control-clear to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.clear, modifiers: [.command, .control])
+    ///     }
+    /// }
+    /// ```
     public static let clear: KeyEquivalent
 
-    /// Tab (U+0009)
+    /// Tab (U+0009) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-control-tab to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.tab, modifiers: [.command, .control])
+    ///     }
+    /// }
+    /// ```
     public static let tab: KeyEquivalent
 
-    /// Space (U+0020)
+    /// Space (U+0020) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-control-option-sace to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.space, modifiers: [.command, .control, .option])
+    ///     }
+    /// }
+    /// ```
     public static let space: KeyEquivalent
 
-    /// Return (U+000D)
+    /// Return (U+000D) key equivalent
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-control-return to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboaredShortcut(.return, modifiers: [.command, .control])
+    ///     }
+    /// }
+    /// ```
     public static let `return`: KeyEquivalent
 
     /// The character value that the key equivalent represents.
+    ///
+    /// In the following example, command-control-P prints "P", and they are
+    /// both constructed from the same ``Character`` object!
+    ///
+    /// ```
+    /// struct PPrinterView: View {
+    ///     let p = Character("p")
+    ///     var body: some View {
+    ///         Button("Print p!") {
+    ///             print(p)
+    ///         }
+    ///         .keyboardShortcut(KeyEquivalent(p), modifiers: [.command, .control])
+    ///     }
+    /// }
+    /// ```
     public var character: Character
 
     /// Creates a new key equivalent from the given character value.
+    ///
+    /// A character is just like a string, but it's only 1 letter long.
+    /// See [Character](https://developer.apple.com/documentation/swift/character)
+    /// for more on characters and how to create them.
+    ///
+    /// Note that characters are case sensitive, and passing a capital key
+    /// equivalent to ``View/keyboardShortcut(_:modifiers)``
+    /// means [modifiers]+SHIFT+letter.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         Button("Press command-p to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboardShortcut(KeyEquivalent(Character("p")), modifiers: [.command, .control])
+    ///     }
+    /// }
+    /// ```
     public init(_ character: Character) { }
 }
 
@@ -15411,23 +15635,110 @@ public struct KeyboardShortcut {
     /// On macOS, the default button is designated with special coloration. If
     /// more than one control is assigned this shortcut, only the first one is
     /// emphasized.
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ```
+    /// struct KeyboardShortcutView: View {
+    ///     var body: some View {
+    ///         Text("Press ENTER to save or ESC to cancel.")
+    ///         HStack {
+    ///             Button("Cancel") { print("cancel") }
+    ///                 .keyboardShortcut(.cancelAction)
+    ///             Button("Save") { print("save") }
+    ///                 .keyboardShortcut(.defaultAction)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static let defaultAction: KeyboardShortcut
 
     /// The standard keyboard shortcut for cancelling the in-progress action
     /// or dismissing a prompt, consisting of the Escape (⎋) key and no
     /// modifiers.
+    ///
+    /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
+    /// view modifier to add keyboard shortcuts to a view.
+    ///
+    /// ```
+    /// struct KeyboardShortcutView: View {
+    ///     var body: some View {
+    ///         Text("Press ENTER to save or ESC to cancel.")
+    ///         HStack {
+    ///             Button("Cancel") { print("cancel") }
+    ///                 .keyboardShortcut(.cancelAction)
+    ///             Button("Save") { print("save") }
+    ///                 .keyboardShortcut(.defaultAction)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static let cancelAction: KeyboardShortcut
 
     /// The key equivalent that the user presses in conjunction with any
     /// specified modifier keys to activate the shortcut.
+    ///
+    /// This property is usually specified from the
+    /// ``KeyboardShortcut``'s initializer, but can also be written to
+    /// or read directly.
+    ///
+    /// See ``KeyEquivalent`` for more on key equivalents.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         var shortcut = KeyboardShortcut(.esc, modifiers: [.command, .control])
+    ///         shortcut.key = .return
+    ///
+    ///         return Button("Press command-control-return to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboardShortcut(shortcut)
+    ///     }
+    /// }
+    /// ```
     public var key: KeyEquivalent
 
     /// The modifier keys that the user presses in conjunction with a key
     /// equivalent to activate the shortcut.
+    ///
+    /// This property is usually specified from the
+    /// ``KeyboardShortcut``'s initializer, but can also be written to
+    /// or read directly.
+    ///
+    /// See ``EventModifiers`` for more on event modifiers.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         var shortcut = KeyboardShortcut(.return)
+    ///         shortcut.modifiers = [.command, .control]
+    ///
+    ///         return Button("Press command-control-return to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboardShortcut(shortcut)
+    ///     }
+    /// }
+    /// ```
     public var modifiers: EventModifiers
 
     /// Creates a new keyboard shortcut with the given key equivalent and set of
     /// modifier keys.
+    ///
+    /// ```
+    /// struct ShortcutEnabledView: View {
+    ///     var body: some View {
+    ///         var shortcut = KeyboardShortcut(.return, modifiers = [.command, .control])
+    ///
+    ///         return Button("Press command-control-return to print the 🍌") {
+    ///             print("🍌")
+    ///         }
+    ///         .keyboardShortcut(shortcut)
+    ///     }
+    /// }
+    /// ```
     public init(_ key: KeyEquivalent, modifiers: EventModifiers = .command) { }
 }
 
@@ -15458,7 +15769,7 @@ public struct KeyboardShortcut {
 /// label style:
 ///
 /// ```
-/// struct StyledBoltView: View {
+/// struct TitleOnlyBoltView: View {
 ///     var body: some View {
 ///         Label("Lightning", systemImage: "bolt.fill")
 ///             .labelStyle(TitleOnlyLabelStyle())
@@ -15480,12 +15791,21 @@ public struct KeyboardShortcut {
 /// You can also create a customized label style by modifying an existing
 /// style; this example adds a red border to the default label style:
 ///
-///     struct RedBorderedLabelStyle : LabelStyle {
-///         func makeBody(configuration: Configuration) -> some View {
-///             Label(configuration)
-///                 .border(Color.red)
-///         }
+/// ```
+/// struct RedBorderedLabelStyle: LabelStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         Label(configuration)
+///             .border(Color.red)
 ///     }
+/// }
+///
+/// struct RedBorderedBoltView: View {
+///     var body: some View {
+///         Label("Lightning", systemImage: "bolt.fill")
+///             .labelStyle(RedBorderedLabelStyle())
+///     }
+/// }
+/// ```
 ///
 /// For more extensive customization or to create a completely new label style,
 /// you'll need to adopt the `LabelStyle` protocol and implement a
@@ -15494,36 +15814,63 @@ public struct KeyboardShortcut {
 /// To apply a common label style to a group of labels, apply the style
 /// to the view hierarchy that contains the labels:
 ///
-///     VStack {
-///         Label("Rain", systemImage: "cloud.rain")
-///         Label("Snow", systemImage: "snow")
-///         Label("Sun", systemImage: "sun.max")
+/// ```
+/// struct WeatherView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Rain", systemImage: "cloud.rain")
+///             Label("Snow", systemImage: "snow")
+///             Label("Sun", systemImage: "sun.max")
+///         }
+///         .labelStyle(IconOnlyLabelStyle())
 ///     }
-///     .labelStyle(IconOnlyLabelStyle())
+/// }
+/// ```
 ///
 /// It's also possible to make labels using views to compose the label's icon
 /// programmatically, rather than using a pre-made image. In this example, the
 /// icon portion of the label uses a filled `Circle` overlaid
 /// with the user's initials:
 ///
-///     Label {
-///         Text(person.fullName)
-///             .font(.body)
-///             .foregroundColor(.primary)
-///         Text(person.title)
-///             .font(.subheadline)
-///             .foregroundColor(.secondary)
-///     } icon: {
-///         Circle()
-///             .fill(person.profileColor)
-///             .frame(width: 44, height: 44, alignment: .center)
-///             .overlay(Text(person.initials))
+/// ```
+/// struct CustomPersonView: View {
+///     var body: some View {
+///         Label {
+///             Text("Aaron")
+///                 .font(.body)
+///                 .foregroundColor(.primary)
+///             Text("GOAT")
+///                 .font(.subheadline)
+///                 .foregroundColor(.secondary)
+///         } icon: {
+///             Circle()
+///                 .fill(Color.purple)
+///                 .frame(width: 44, height: 44, alignment: .center)
+///                 .overlay(Text("AG"))
+///         }
 ///     }
+/// }
+/// ```
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Label<Title, Icon> : View where Title : View, Icon : View {
 
-    /// Creates a label with a custom title and icon.
+    /// Creates a label with a with a view title and a view icon.
+    ///
+    /// ```
+    /// struct EverythingView: View {
+    ///     var body: some View {
+    ///         Label {
+    ///             Text("Meaning of life")
+    ///                 .border(Color.green)
+    ///         } icon: {
+    ///             Image(systemName: "42.circle")
+    ///                 .foregroundColor(.green)
+    ///         }
+    ///
+    /// - Parameters:
+    ///   - title: A view builder for the label's title view.
+    ///   - icon: A view builder for the label's icon view.
     public init(@ViewBuilder title: () -> Title, @ViewBuilder icon: () -> Icon) { }
 
     /// The content and behavior of the view.
@@ -15539,31 +15886,62 @@ public struct Label<Title, Icon> : View where Title : View, Icon : View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Label where Title == Text, Icon == Image {
 
-    /// Creates a label with an icon image and a title generated from a
-    /// localized string.
+    /// Creates a label with a localized string title and image name icon.
+    ///
+    /// ```
+    /// struct EverythingView: View {
+    ///     var body: some View {
+    ///         Label(LocalizedStringKey("Meaning of life"),
+    ///               image: "earth")
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///    - titleKey: A title generated from a localized string.
     ///    - image: The name of the image resource to lookup.
     public init(_ titleKey: LocalizedStringKey, image name: String) { }
 
-    /// Creates a label with a system icon image and a title generated from a
-    /// localized string.
+    /// Creates a label with a localized string title and system image name icon.
+    ///
+    /// ```
+    /// struct EverythingView: View {
+    ///     var body: some View {
+    ///         Label(LocalizedStringKey("Meaning of life"),
+    ///               systemImage: "42.circle")
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///    - titleKey: A title generated from a localized string.
     ///    - systemImage: The name of the image resource to lookup.
     public init(_ titleKey: LocalizedStringKey, systemImage name: String) { }
 
-    /// Creates a label with an icon image and a title generated from a string.
+    /// Creates a label with a string title and image name icon.
+    ///
+    /// ```
+    /// struct EverythingView: View {
+    ///     var body: some View {
+    ///         Label("Meaning of life", image: "earth")
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///    - title: A string to used as the label's title.
     ///    - image: The name of the image resource to lookup.
     public init<S>(_ title: S, image name: String) where S : StringProtocol { }
 
-    /// Creates a label with a system icon image and a title generated from a
-    /// string.
+    /// Creates a label with a string title and system image name icon.
+    ///
+    /// ```
+    /// struct EverythingView: View {
+    ///     var body: some View {
+    ///         Label("Meaning of life", systemImage: "42.circle")
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///    - title: A string to used as the label's title.
@@ -15585,12 +15963,21 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     /// For example, the following style adds a red border around the label,
     /// but otherwise preserves the current style:
     ///
-    ///     struct RedBorderedLabelStyle : LabelStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {{}
-    ///             Label(configuration)
-    ///                 .border(Color.red)
-    ///         }
+    /// ```
+    /// struct RedBorderedLabelStyle: LabelStyle {
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         Label(configuration)
+    ///             .border(Color.red)
     ///     }
+    /// }
+    ///
+    /// struct RedBorderedBoltView: View {
+    ///     var body: some View {
+    ///         Label("Lightning", systemImage: "bolt.fill")
+    ///             .labelStyle(RedBorderedLabelStyle())
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter configuration: The label style to use.
     public init(_ configuration: LabelStyleConfiguration) { }
@@ -15601,7 +15988,7 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// To configure the current label style for a view hierarchy, use the
 /// `View/labelStyle(_:)` modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol LabelStyle{ }
+public protocol LabelStyle { }
 extension LabelStyle {
 
     /// A view that represents the body of a label.
@@ -15879,58 +16266,24 @@ public struct LazyHStack<Content> : View where Content : View {
 /// `LazyVGrid` consisting of a two-column grid of `Text` views, showing
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
-/// ```
-/// struct VerticalEmojiView: View {
-///     var columns: [GridItem] =
-///             Array(repeating: .init(.fixed(20)), count: 2)
-///
-///     var body: some View {
-///         ScrollView(.horizontal) {
-///             LazyVGrid(rows: rows, alignment: .top) {
-///                 ForEach((0...79), id: \.self) {
-///                     let codepoint = $0 + 0x1f600
-///                     let codepointString = String(format: "%02X", codepoint)
-///                     Text("\(codepointString)")
-///                         .font(.footnote)
-///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
-///                     Text("\(emoji)")
-///                      .font(.largeTitle)
-///                 }
-///             }
-///         }
-///     }
-/// }
-/// ```
+///      var columns: [GridItem] =
+///              Array(repeating: .init(.flexible()), count: 2)
+///      ScrollView {
+///          LazyVGrid(columns: columns) {
+///              ForEach((0...79), id: \.self) {
+///                  let codepoint = $0 + 0x1f600
+///                  let codepointString = String(format: "%02X", codepoint)
+///                  Text("\(codepointString)")
+///                  let emoji = String(Character(UnicodeScalar(codepoint)!))
+///                  Text("\(emoji)")
+///              }
+///          }.font(.largeTitle)
+///      }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyVGrid<Content> : View where Content : View {
 
     /// Creates a grid that grows vertically, given the provided properties.
     ///
-    /// The first parameter, rows, takes an array of ``GridItem``s.
-    /// For more info on the types of grid items, check out that page.
-    ///
-    /// ```
-    /// struct VerticalEmojiView: View {
-    ///     var columns: [GridItem] =
-    ///             Array(repeating: .init(.fixed(20)), count: 2)
-    ///
-    ///     var body: some View {
-    ///         ScrollView(.horizontal) {
-    ///             LazyHGrid(rows: rows, alignment: .top) {
-    ///                 ForEach((0...79), id: \.self) {
-    ///                     let codepoint = $0 + 0x1f600
-    ///                     let codepointString = String(format: "%02X", codepoint)
-    ///                     Text("\(codepointString)")
-    ///                         .font(.footnote)
-    ///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
-    ///                     Text("\(emoji)")
-    ///                      .font(.largeTitle)
-    ///                 }
-    ///             }
-    ///         }
-    ///     }
-    /// }
-    /// ```
     /// - Parameters:
     ///   - columns: An array of grid items to size and position each row of
     ///    the grid.
@@ -16065,34 +16418,7 @@ extension LegibilityWeight {
     public init?(_ uiLegibilityWeight: UILegibilityWeight) { }
 }
 
-/// A linear gradient that applies the color function along an axis, as defined by its
-/// start and end points.
-///
-/// Use ``LinearGradient`` to create a gradient along the x,y coordinate space (range from 0 to 1).
-/// In order to define the start and end points of the gradient use a ``UnitPoint``.
-/// ``LinearGradient`` accepts a ``Gradient`` structure that defines the colors used in the gradient.
-/// A gradient stop will be rendered along the path based on each stops's location.
-///
-/// For example,
-///
-/// ![LinearGradient Example 1](linear-gradient-example.png)
-///
-/// ```
-/// struct ExampleView: View {
-///    let colors: [Color] = [.yellow, .orange]
-///
-///    var body: some View {
-///        Rectangle()
-///            .fill(LinearGradient(gradient: Gradient(colors: colors),
-///                                 startPoint: .top,
-///                                 endPoint: .bottom))
-///            .frame(width:100, height:100)
-///    }
-/// }
-/// ```
-///
-/// Note: See ``UnitPoint`` for  list of predefined points you can use such as ``UnitPoint/top`` and ``UnitPoint/bottom``.
-/// However, you can always create a custom ``UnitPoint`` if needed using `x` and `y` points.
+/// A linear gradient.
 ///
 /// ![Rectangle Example](rounded-rectangle.png)
 ///
@@ -16117,22 +16443,6 @@ extension LegibilityWeight {
 
 	/// Creates a new linear gradient from the Gradient colors, the start, and the end.
 	///
-    /// For example,
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///    let colors: [Color] = [.yellow, .orange]
-    ///
-    ///    var body: some View {
-    ///        Rectangle()
-    ///            .fill(LinearGradient(gradient: Gradient(colors: colors),
-    ///                                 startPoint: .top,
-    ///                                 endPoint: .bottom))
-    ///            .frame(width:100, height:100)
-    ///    }
-    /// }
-    /// ```
-    ///
 	/// - Parameters:
 	///   - gradient: The gradient containing the ordered colors to be used.
 	///   - startPoint: The unit point where the gradient starts.
@@ -17202,12 +17512,9 @@ extension LocalizedStringKey.StringInterpolation {
 /// gesture, then add it to the view using the `View/gesture(_:including:)`
 /// modifier.
 ///
-/// Add a long-press gesture to a `Circle` to animate its color from yellow to
-/// red, and then change it to black when the gesture ends:
+/// Add a long-press gesture to a `Circle` to animate its color from blue to
+/// red, and then change it to green when the gesture ends:
 ///
-/// ![LongPressGesture Example 1](long-press-gesture-example.gif)
-///
-/// ```
 ///     struct LongPressGestureView: View {
 ///         @GestureState var isDetectingLongPress = false
 ///         @State var completedLongPress = false
@@ -17228,12 +17535,11 @@ extension LocalizedStringKey.StringInterpolation {
 ///             Circle()
 ///                 .fill(self.isDetectingLongPress ?
 ///                     Color.red :
-///                     (self.completedLongPress ? Color.black : Color.yellow))
+///                     (self.completedLongPress ? Color.green : Color.blue))
 ///                 .frame(width: 100, height: 100, alignment: .center)
 ///                 .gesture(longPress)
 ///         }
 ///     }
-/// ```
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 14.0, *)
 public struct LongPressGesture : Gesture {
 
@@ -17275,9 +17581,6 @@ public struct LongPressGesture : Gesture {
 /// Add a magnification gesture to a `Circle` that changes its size while the
 /// user performs the gesture:
 ///
-/// ![MagnificationGesture Example 1](magnification-gesture-example.gif)
-///
-/// ```
 ///     struct MagnificationGestureView: View {
 ///
 ///         @GestureState var magnifyBy = CGFloat(1.0)
@@ -17291,14 +17594,12 @@ public struct LongPressGesture : Gesture {
 ///
 ///         var body: some View {
 ///             Circle()
-///                 .fill(Color.yellow)
 ///                 .frame(width: 100 * magnifyBy,
 ///                        height: 100 * magnifyBy,
 ///                        alignment: .center)
 ///                 .gesture(magnification)
 ///         }
 ///     }
-/// ```
 ///
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
@@ -17307,38 +17608,10 @@ public struct LongPressGesture : Gesture {
 public struct MagnificationGesture : Gesture {
 
     /// The minimum required delta before the gesture starts.
-    ///
-    /// This defaults to 0.01 in the ``MagnificationGesture``` initialilzer but can be changed
-    ///
     public var minimumScaleDelta: CGFloat
 
     /// Creates a magnification gesture with a given minimum delta for the
     /// gesture to start.
-    ///
-    /// ![MagnificationGesture Example 2](magnification-gesture-example-2.gif)
-    ///
-    /// ```
-    ///     struct MagnificationGestureView: View {
-    ///
-    ///         @GestureState var magnifyBy = CGFloat(1.0)
-    ///
-    ///         var magnification: some Gesture {
-    ///             MagnificationGesture(minimumScaleDelta: 2.0)
-    ///                 .updating($magnifyBy) { currentState, gestureState, transaction in
-    ///                     gestureState = currentState
-    ///                 }
-    ///         }
-    ///
-    ///         var body: some View {
-    ///             Circle()
-    ///                 .fill(Color.yellow)
-    ///                 .frame(width: 100 * magnifyBy,
-    ///                        height: 100 * magnifyBy,
-    ///                        alignment: .center)
-    ///                 .gesture(magnification)
-    ///         }
-    ///     }
-    /// ```
     ///
     /// - Parameter minimumScaleDelta: The minimum scale delta required before
     ///   the gesture starts.
@@ -22184,7 +22457,7 @@ extension ProjectionTransform {
 }
 
 /// A radial gradient that applies the color function as the distance from a center point,
-/// scaled to fit within the defined start and end radii..
+/// scaled to fit within the defined start and end radii.
 ///
 /// A Radial Gradient is very similar to a ``LinearGradient``, but instead of defining starting and ending points,
 /// it is necessary to define a start radius, an end radius and the center of the gradeint.
@@ -22198,16 +22471,20 @@ extension ProjectionTransform {
 ///
 /// ```
 /// struct RadialView: View {
-///    let gradient = Gradient(colors: [.red,.yellow])
+///     let gradient = Gradient(colors: [.red,.yellow])
 ///
-///    var body: some View {
-///        Rectangle()
-///            .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
-///            .frame(width: 200, height: 200)
+///     var body: some View {
+///         Rectangle()
+///             .fill( RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
+///             .frame(width: 200, height: 200)
 ///     }
 /// }
 /// ```
 ///
+/// The gradient applies the color function as the distance from a center point,
+/// scaled to fit within the defined start and end radii. The gradient maps the
+/// unit-space center point into the bounding rectangle of each shape filled
+/// with the gradient.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RadialGradient : ShapeStyle, View {
 
@@ -22231,7 +22508,7 @@ extension ProjectionTransform {
 	///   - gradient: The gradient containing the colors to transition through.
 	///   - center: The center of the radial gradient.
 	///   - startRadius: How far from the center to start the gradient.
-	///   - endRadius: How Far from the center to end the gradeint.
+	///   - endRadius:
     public init(gradient: Gradient, center: UnitPoint, startRadius: CGFloat, endRadius: CGFloat) { }
 
     /// The type of view representing the body of this view.
@@ -23457,7 +23734,6 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 ///
 /// ![RotationGesture Example 1](rotation-gesture-example.gif)
 ///
-/// ```
 ///     struct RotationGestureView: View {
 ///         @State var angle = Angle(degrees: 0.0)
 ///
@@ -23469,17 +23745,12 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 ///         }
 ///
 ///         var body: some View {
-///             ZStack {
-///                 Rectangle()
-///                     .fill(Color.yellow)
-///                     .frame(width: 200, height: 200, alignment: .center)
-///                     .rotationEffect(self.angle)
-///                     .gesture(rotation)
-///                 Text("Rotate Me")
-///            }
+///             Rectangle()
+///                 .frame(width: 200, height: 200, alignment: .center)
+///                 .rotationEffect(self.angle)
+///                 .gesture(rotation)
 ///         }
 ///     }
-/// ```
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -23487,9 +23758,6 @@ extension RotatedShape : InsettableShape where Content : InsettableShape {
 public struct RotationGesture : Gesture {
 
     /// The minimum delta required before the gesture succeeds.
-    ///
-    /// The deefauly value in the ``RotationGesture`` initializer is a one-degree angle
-    ///
     public var minimumAngleDelta: Angle
 
     /// Creates a rotation gesture with a minimum delta for the gesture to
@@ -23497,7 +23765,6 @@ public struct RotationGesture : Gesture {
     ///
     /// ![RotationGesture Example 2](rotation-gesture-example-2.gif)
     ///
-    /// ```
     ///     struct RotationGestureView: View {
     ///         @State var angle = Angle(degrees: 0.0)
     ///
@@ -23516,10 +23783,9 @@ public struct RotationGesture : Gesture {
     ///                     .rotationEffect(self.angle)
     ///                     .gesture(rotation)
     ///                 Text("Rotate Me")
-    ///            }
+    ///             }
     ///         }
     ///     }
-    /// ```
     ///
     /// - Parameter minimumAngleDelta: The minimum delta required before the
     ///   gesture starts. The default value is a one-degree angle.
@@ -23544,7 +23810,7 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 
 /// Defines the shape of a rounded rectangle's corners.
 
-/// Thiis style has two options:
+/// This style has two options:
 /// 1. `roundedcornerstyle/circular`
 /// 2. `roundedcornerstyle/circular`
 ///
@@ -23569,41 +23835,9 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 public enum RoundedCornerStyle {
 
     /// Quarter-circle rounded rect corners.
-    ///
-    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         VStack(spacing: 20) {
-    ///             RoundedRectangle(cornerRadius: 50, style: .circular)
-    ///                 .frame(width: 250, height: 150)
-    ///
-    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
-    ///                 .frame(width: 250, height: 150)
-    ///         }
-    ///     }
-    /// }
-    /// ```
     case circular
 
     /// Continuous curvature rounded rect corners.
-    ///
-    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         VStack(spacing: 20) {
-    ///             RoundedRectangle(cornerRadius: 50, style: .circular)
-    ///                 .frame(width: 250, height: 150)
-    ///
-    ///             RoundedRectangle(cornerRadius: 50, style: .continuous)
-    ///                 .frame(width: 250, height: 150)
-    ///         }
-    ///     }
-    /// }
-    /// ```
     case continuous
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -25451,87 +25685,8 @@ public struct SegmentedPickerStyle : PickerStyle {
 
 /// A gesture that's a sequence of two gestures.
 ///
-/// ![SequenceGesture Example 1](sequence-gesture-example.gif)
-///
-/// ```
-/// struct SequenceView: View {
-///
-///    enum DragState {
-///        case inactive
-///        case pressing
-///        case dragging(translation: CGSize)
-///
-///        var translation: CGSize {
-///            switch self {
-///            case .inactive, .pressing:
-///                return .zero
-///            case .dragging(let translation):
-///                return translation
-///            }
-///        }
-///
-///        var isActive: Bool {
-///            switch self {
-///            case .inactive:
-///                return false
-///            case .pressing, .dragging:
-///                return true
-///            }
-///        }
-///
-///        var isDragging: Bool {
-///            switch self {
-///            case .inactive, .pressing:
-///                return false
-///            case .dragging:
-///                return true
-///            }
-///        }
-///    }
-///
-///    @GestureState var dragState = DragState.inactive
-///    @State var viewState = CGSize.zero
-///    var body: some View {
-///            let minimumLongPressDuration = 0.5
-///            let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
-///                .sequenced(before: DragGesture())
-///                .updating($dragState) { value, state, transaction in
-///                    switch value {
-///                    // Long press begins.
-///                    case .first(true):
-///                        state = .pressing
-///                    // Long press confirmed, dragging may begin.
-///                    case .second(true, let drag):
-///                        state = .dragging(translation: drag?.translation ?? .zero)
-///                    // Dragging ended or the long press cancelled.
-///                    default:
-///                        state = .inactive
-///                    }
-///                }
-///                .onEnded { value in
-///                    guard case .second(true, let drag?) = value else { return }
-///                    self.viewState.width += drag.translation.width
-///                    self.viewState.height += drag.translation.height
-///                }
-///        return Circle()
-///                   .fill(Color.blue)
-///                   .overlay(dragState.isDragging ? Circle().stroke(Color.white, lineWidth: 2) : nil)
-///                   .frame(width: 100, height: 100, alignment: .center)
-///                   .offset(
-///                       x: viewState.width + dragState.translation.width,
-///                       y: viewState.height + dragState.translation.height
-///                   )
-///                   .animation(nil)
-///                   .shadow(radius: dragState.isActive ? 8 : 0)
-///                   .animation(.linear(duration: minimumLongPressDuration))
-///                   .gesture(longPressDrag)
-///           }
-///       }
-/// ```
-/// For more information, you can visit `https://developer.apple.com/documentation/swiftui/composing-swiftui-gestures` to learn how you can create a sequence
+/// Read <doc:Composing-SwiftUI-Gestures> to learn how you can create a sequence
 /// of two gestures.
-///
-
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SequenceGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
 
@@ -26210,7 +26365,7 @@ public struct SidebarListStyle : ListStyle {
 ///
 /// ![SimultaneousGesture Example 1](simultaneous-gesture-example.gif)
 ///
-/// See ``Gesture/simultaneously(with:)`` for more of an explanation and an example
+/// See ``Gesture/simultaneously(with:)`` for more of an explanation and an example.
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SimultaneousGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
@@ -27980,29 +28135,21 @@ extension TabViewStyle {
 /// The following code adds a tap gesture to a `Circle` that toggles the color
 /// of the circle.
 ///
-/// ![TapGesture Example 1](tap-gesture-example.gif)
+///     struct TapGestureView: View {
+///         @State var tapped = false
 ///
-/// ```
-/// struct ExampleView: View {
-///     @State var tapped = false
+///         var tap: some Gesture {
+///             TapGesture(count: 1)
+///                 .onEnded { _ in self.tapped = !self.tapped }
+///         }
 ///
-///     var tap: some Gesture {
-///         TapGesture(count: 1)
-///             .onEnded { _ in self.tapped = !self.tapped }
-///     }
-///
-///     var body: some View {
-///         ZStack{
+///         var body: some View {
 ///             Circle()
-///                 .fill(self.tapped ? Color.yellow : Color.red)
+///                 .fill(self.tapped ? Color.blue : Color.red)
 ///                 .frame(width: 100, height: 100, alignment: .center)
 ///                 .gesture(tap)
-///             Text("Tap Me")
 ///         }
 ///     }
-/// }
-/// ```
-///
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct TapGesture : Gesture {
@@ -31452,15 +31599,15 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///
 /// ```
 /// struct ExampleView: View {
-///    let colors: [Color] = [.yellow, .orange]
+///     let colors: [Color] = [.yellow, .orange]
 ///
-///    var body: some View {
-///        Rectangle()
-///            .fill(LinearGradient(gradient: Gradient(colors: colors),
-///                                 startPoint: .top,
-///                                 endPoint: .bottom))
-///            .frame(width:100, height:100)
-///    }
+///     var body: some View {
+///         Rectangle()
+///             .fill(LinearGradient(gradient: Gradient(colors: colors),
+///                                  startPoint: .top,
+///                                  endPoint: .bottom))
+///             .frame(width:100, height:100)
+///     }
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -31476,8 +31623,6 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     @inlinable public init() { }
 
     /// Creates a unit point from x and y values.
-    ///
-    /// `UnitPoint(x: 1, y: 0)`
     ///
     /// - Parameters:
     ///   x: The x coordinate of the unit point.
