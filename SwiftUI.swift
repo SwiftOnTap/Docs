@@ -1413,6 +1413,7 @@ extension Angle : Animatable {
 /// bounding rectangle of each shape filled with the gradient.
 ///
 /// There are 3 main cases where AngularGradient can change:
+///
 /// 1. `endAngle - startAngle = 2π`
 /// 2. `endAngle - startAngle > 2π`
 /// 3. `endAngle - startAngle < 2π`
@@ -4386,6 +4387,23 @@ extension BlendMode : Hashable {
 ///
 /// Pressing and then dragging into the contents triggers the chosen action on
 /// release.
+///
+/// For example,
+///
+/// ![DefaultMenu Example 1](default-menu-example.gif)
+///
+/// ```
+/// struct BorderlessButtonMenuView: View {
+///     var body: some View {
+///         Menu("PDF") {
+///             Button("Open in Preview", action: { })
+///             Button("Save as PDF", action: { })
+///         }
+///         .menuStyle(BorderlessButtonMenuStyle())
+///     }
+/// }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -4395,6 +4413,22 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     ///
     /// By default, the borderless style displays a visual indicator that it
     /// represents a menu.
+    ///
+    /// For example,
+    ///
+    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    ///
+    /// ```
+    /// struct BorderlessButtonMenuView: View {
+    ///     var body: some View {
+    ///         Menu("PDF") {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         }
+    ///         .menuStyle(BorderlessButtonMenuStyle())
+    ///     }
+    /// }
+    /// ```
     public init() { }
 
     /// Creates a view that represents the body of a menu.
@@ -4748,7 +4782,8 @@ extension ButtonStyle {
 
 /// The properties of a button.
 ///
-/// This property represents the view state of the `Button` that `ButtonStyle` modifies. `ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
+/// This property represents the view state of the `Button` that `ButtonStyle` modifies.
+//`ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -4815,6 +4850,8 @@ public struct ButtonStyleConfiguration {
 	/// The Capsule's rounded corner style, based on the value passed in its
     /// initializer.
 	///
+    /// Look at ``RoundedCornerStyle`` for more information.
+    ///
 	/// - SeeAlso: RoundedCornerStyle
     public var style: RoundedCornerStyle
 
@@ -5016,13 +5053,59 @@ extension Circle : InsettableShape {
 }
 
 /// A progress view that visually indicates its progress using a circular gauge.
+///
+/// When initializing a ProgressView with ``ProgressView/init(_:_:)``, the
+/// ``DefaultProgressViewStyle`` will typically display a circular progress view on
+/// watchOS.
+///
+/// For example, to create a new ``ProgressView`` with this style:
+///
+/// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        ProgressView()
+///            .progressViewStyle(CircularProgressViewStyle())
+///            .padding(20)
+///    }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
 
     /// Creates a circular progress view style.
+    ///
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(CircularProgressViewStyle())
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init() { }
 
     /// Creates a circular progress view style with a tint color.
+
+    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// ![Circular progress view example 2](circularprogressviewstyle-example-2.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(CircularProgressViewStyle(tint: Color.red))
+    ///            .padding(20)
+    ///    }
+    /// }
+    /// ```
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
@@ -7302,6 +7385,22 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 
 	/// Creates a default group box style.
 	///
+    /// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
+    ///
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             GroupBox() {
+    ///                 Label("Bananas 🍌🍌", systemImage: "heart.fill")
+    ///                     .foregroundColor(.yellow)
+    ///                     .groupBoxStyle(DefaultGroupBoxStyle())
+    ///              }, {
+    ///                 Text("Go Bananas")
+    ///              }
+    ///             .padding()
+    ///         }
+    ///      }
+    ///
 	/// - SeeAlso: GroupBoxStyle
     public init() { }
 
@@ -7395,12 +7494,44 @@ public struct DefaultListStyle : ListStyle {
 ///
 /// You can override a menu's style. To apply the default style to a menu, or to
 /// a view that contains a menu, use the `View/menuStyle(_:)` modifier.
+///
+/// For example,
+///
+/// ![DefaultMenu Example 1](default-menu-example.gif)
+///
+/// ```
+/// struct DefaultMenuView: View {
+///     var body: some View {
+///         Menu("PDF") {
+///             Button("Open in Preview", action: { })
+///             Button("Save as PDF", action: { })
+///         }
+///         .menuStyle(DefaultMenuStyle())
+///     }
+/// }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct DefaultMenuStyle : MenuStyle {
 
     /// Creates a default menu style.
+    ///
+    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    ///
+    /// ```
+    /// struct DefaultMenuView: View {
+    ///     var body: some View {
+    ///         Menu("PDF") {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         }
+    ///         .menuStyle(DefaultMenuStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
     public init() { }
 
     /// Creates a view that represents the body of a menu.
@@ -7417,11 +7548,66 @@ public struct DefaultMenuStyle : MenuStyle {
 }
 
 /// The default navigation view style.
+///
+/// ![DefaultNavigationView Example](default-navigation-view-example.gif)
+///
+/// ```
+///  struct ExampleView: View {
+///      struct SecondScreen: View {
+///          var body: some View {
+///              Text("Bananas🍌🍌")
+///                  .navigationTitle("Second Screen")
+///                  .navigationBarHidden(false)
+///          }
+///      }
+///
+///      var body: some View {
+///          NavigationView {
+///              VStack {
+///                  Text("Hello Bananas🍌🍌")
+///                  NavigationLink(destination: SecondScreen()) {
+///                     Text("Take me to the second screen!")
+///                 }
+///              }
+///              .navigationBarHidden(true)
+///          }
+///     .navigationViewStyle(DefaultNavigationViewStyle())
+///      }
+///  }
+///
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a default navigation view style.
 	///
+    /// ![DefaultNavigationView Example](default-navigation-view-example.gif)
+    ///
+    /// ```
+    ///  struct ExampleView: View {
+    ///      struct SecondScreen: View {
+    ///          var body: some View {
+    ///              Text("Bananas🍌🍌")
+    ///                  .navigationTitle("Second Screen")
+    ///                  .navigationBarHidden(false)
+    ///          }
+    ///      }
+    ///
+    ///      var body: some View {
+    ///          NavigationView {
+    ///              VStack {
+    ///                  Text("Hello Bananas🍌🍌")
+    ///                  NavigationLink(destination: SecondScreen()) {
+    ///                     Text("Take me to the second screen!")
+    ///                 }
+    ///              }
+    ///              .navigationBarHidden(true)
+    ///          }
+    ///     .navigationViewStyle(DefaultNavigationViewStyle())
+    ///      }
+    ///  }
+    ///
+    /// ```
 	/// - SeeAlso: NavigationView
     public init() { }
 }
@@ -7546,20 +7732,111 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 }
 
 /// The default `TabView` style.
+///
+/// On iOS the default TabView looks as follows:
+/// If you don't specify, a ``view/tabviewstyle(_:)``, this is what it defaults to.
+///
+/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///                 .tabItem {
+///                     Image(systemName: "1.circle.fill")
+///                     Text("🍌🍌")
+///                 }
+///             Text("Apples 🍏🍏")
+///                 .tabItem {
+///                     Image(systemName: "2.square.fill")
+///                     Text("🍏🍏")
+///                 }
+///             Text("Peaches 🍑🍑")
+///                 .tabItem {
+///                     Image(systemName: "3.square.fill")
+///                     Text("🍑🍑")
+///                 }
+///         }
+///         .font(.headline)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultTabViewStyle : TabViewStyle {
 
 	/// Creates a default tab view style.
 	///
 	/// - SeeAlso: TabView
+    ///
+    /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///                 .tabItem {
+///                     Image(systemName: "1.circle.fill")
+///                     Text("🍌🍌")
+///                 }
+///             Text("Apples 🍏🍏")
+///                 .tabItem {
+///                     Image(systemName: "2.square.fill")
+///                     Text("🍏🍏")
+///                 }
+///             Text("Peaches 🍑🍑")
+///                 .tabItem {
+///                     Image(systemName: "3.square.fill")
+///                     Text("🍑🍑")
+///                 }
+///         }
+///         .tabViewStyle(DefaultTabViewStyle())
+///         .font(.headline)
+///     }
+/// }
+/// ```
+///
     public init() { }
 }
 
 /// The default text field style.
+///
+///
+/// `TextField` can be styled with the `View/textFieldStyle(_:)` modifier.
+///
+/// The Default TextField Style is Plain on iOS.
+///
+/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             Text(myFruit)
+///             TextField("Fruit", text: $myFruit)
+///                 .textFieldStyle(DefaultTextFieldStyle())
+///                 .padding()
+///         }
+///     }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultTextFieldStyle : TextFieldStyle {
 
 	/// Creates a default text field style.
+    ///
+    /// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+    ///
+    ///     struct ExampleView: View {
+    ///         @State var myFruit: String = ""
+    ///
+    ///         var body: some View {
+    ///             Text(myFruit)
+    ///             TextField("Fruit", text: $myFruit)
+    ///                 .textFieldStyle(DefaultTextFieldStyle())
+    ///                 .padding()
+    ///         }
+    ///     }
     public init() { }
 }
 
@@ -10190,10 +10467,12 @@ public struct EmptyCommands : Commands {
 ///         }
 ///     }
 ///
+/// In order to stack multiple modifiers, including the EmptyModifier, see
+/// ``ViewModifier/concat(_:)``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyModifier : ViewModifier {
 
-	/// A view modifier that leave the view unchanged.
+	  /// A view modifier that leave the view unchanged.
     public static let identity: EmptyModifier
 
     /// The type of view representing the body.
@@ -10205,7 +10484,9 @@ public struct EmptyCommands : Commands {
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
-    /// represented by `Self` applied to it.
+    /// represented by `Self` applied to it. In simpler terms, content is the
+    /// view that is being transformed and this function will return the view
+    /// absent of any modifier transformations.
     public func body(content: EmptyModifier.Content) -> EmptyModifier.Body { }
 }
 
@@ -11122,6 +11403,50 @@ extension EnvironmentValues {
 
     /// A binding to the current presentation mode of the view associated with
     /// this environment.
+    ///
+    /// Use this environment value to programmatically interact with the
+    /// view currently presented.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// See ``Environment`` for more on environment values and how to use
+    /// the property wrapper.
+    ///
+    /// While this is a ``Binding`` environment value, most often
+    /// the wrapped value will be accessed. The wrapped value
+    /// is of type ``PresentatinMode``. See that structure for more info
+    /// on its properties.
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
+    ///
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public var presentationMode: Binding<PresentationMode> { get }
 }
@@ -12747,41 +13072,478 @@ extension Font {
     public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
 
     /// A dynamic text style to use for fonts.
+    ///
+    /// There are 11 font styles that SwiftUI provides
+    ///
+    /// - ``font/textstyle/largetitle``
+    /// - ``font/textstyle/title``
+    /// -  ``font/textstyle/title2``
+    /// - ``font/textstyle/title3``
+    /// - ``font/textstyle/headline``
+    /// - ``font/textstyle/subheadline``
+    /// - ``font/textstyle/body``
+    /// - ``font/textstyle/callout``
+    /// - ``font/textstyle/footnote`
+    /// - ``font/textstyle/caption`
+    /// - ``font/textstyle/caption2`
+    ///
+    /// ![TextStyle Example 1](text-style-example.png)
+    ///
+    /// ```
+    /// struct TextStyleView: View {
+    ///     var body: some View {
+    ///         Group{
+    ///             Text("Large Title")
+    ///                 .font(.largeTitle)
+    ///             Text("Title")
+    ///                 .font(.title)
+    ///             Text("Title 2")
+    ///                 .font(.title2)
+    ///             Text("Title 3")
+    ///                 .font(.title3)
+    ///             Text("Headline")
+    ///                 .font(.headline)
+    ///             Text("SubHeadline")
+    ///                .font(.subheadline)
+    ///         }
+    ///         Group {
+    ///             Text("Body")
+    ///                 .font(.body)
+    ///             Text("Callout")
+    ///                 .font(.callout)
+    ///            Text("Footnote")
+    ///                 .font(.footnote)
+    ///             Text("Caption")
+    ///                 .font(.caption)
+    ///              Text("Caption2")
+    ///                .font(.caption2)
+    ///      }
+    ///       }
+    ///  }
+    /// ```
+
     public enum TextStyle : CaseIterable {
 
         /// The font style for large titles.
+        ///
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
+        ///
         case largeTitle
 
         /// The font used for first level hierarchical headings.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         case title
 
         /// The font used for second level hierarchical headings.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title2
 
         /// The font used for third level hierarchical headings.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title3
 
         /// The font used for headings.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         case headline
 
         /// The font used for subheadings.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         case subheadline
 
         /// The font used for body text.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         case body
 
         /// The font used for callouts.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         case callout
 
         /// The font used in footnotes.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         case footnote
 
         /// The font used for standard captions.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         case caption
 
         /// The font used for alternate captions.
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
+        /// ```
+        /// struct TextStyleView: View {
+        ///     var body: some View {
+        ///         Group{
+        ///             Text("Large Title")
+        ///                 .font(.largeTitle)
+        ///             Text("Title")
+        ///                 .font(.title)
+        ///             Text("Title 2")
+        ///                 .font(.title2)
+        ///             Text("Title 3")
+        ///                 .font(.title3)
+        ///             Text("Headline")
+        ///                 .font(.headline)
+        ///             Text("SubHeadline")
+        ///                .font(.subheadline)
+        ///         }
+        ///         Group {
+        ///             Text("Body")
+        ///                 .font(.body)
+        ///             Text("Callout")
+        ///                 .font(.callout)
+        ///            Text("Footnote")
+        ///                 .font(.footnote)
+        ///             Text("Caption")
+        ///                 .font(.caption)
+        ///              Text("Caption2")
+        ///                .font(.caption2)
+        ///      }
+        ///       }
+        ///  }
+        /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case caption2
 
@@ -14948,11 +15710,12 @@ extension GroupBox where Label == EmptyView {
     public init(@ViewBuilder content: () -> Content) { }
 }
 
-/// Defines the implementation of all `GroupBox` instances within a view
-/// hierarchy.
+/// This protocol is used to create a style for a GroupBox
 ///
-/// To configure the current `GroupBoxStyle` for a view hiearchy, use the
+/// By using GroupBoxStyle, the style can be used for a ``GroupBox`` across your application.
+/// To configure the current `GroupBoxStyle` for a view hiearchy, you only need to use the
 /// `.groupBoxStyle()` modifier.
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -14964,6 +15727,48 @@ extension GroupBoxStyle {
 
     /// Creates a `View` representing the body of a `GroupBox`.
     ///
+    /// Implement this method to create the view for a `GroupBox` that uses this style.
+    /// The configuration contains:
+    /// - label
+    /// - content
+    ///
+    /// For example,
+    ///     struct ExampleView: View {
+    ///     @State private var username: String = ""
+    ///     @State private var password: String = ""
+    ///
+    ///     var body: some View {
+    ///         GroupBox(label: Text("Account Login")) {
+    ///             Form {
+    ///                 Text("Username")
+    ///                 TextField("", text: $username)
+    ///
+    ///                 Text("Password")
+    ///                 SecureField("", text: $password)
+    ///
+    ///             }.padding(10)
+    ///         }
+    ///         .groupBoxStyle(MyStyle())
+    ///         .frame(width: 300)
+    ///     }
+    ///
+    //     struct MyStyle: GroupBoxStyle {
+    //         func makeBody(configuration: Configuration) -> some View {
+    //             VStack {
+    //                 HStack {
+    //                     Rectangle().fill(Color.red).frame(width: 30, height: 3)
+
+    //                     configuration.label
+
+    //                     Rectangle().fill(Color.red).frame(width: 30, height: 3)
+    //                 }
+
+    //                 configuration.content
+    //             }
+    //         }
+    //     }
+    // }
+
     /// - Parameter configuration: The properties of the group box instance being
     ///   created.
     ///
@@ -15257,22 +16062,97 @@ extension HorizontalAlignment {
 }
 
 /// An effect applied when the pointer hovers over a view.
+///
+/// HoverEffects are only used on iPadOS when a user is interacting with a pointer.
+/// See ``View/hoverEffect(_:)`` for how to apply the different HoverEffects.
+/// The available options are:
+/// - automatic: the default effect for the platform
+/// - highlight: morphs the pointer into a platter behind the view and shows a light source
+/// - lift: slides the pointer under the view and scaled up the view with a shadow
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        VStack {
+///            Rectangle()
+///                .fill(Color.red)
+///                .frame(width: 100, height: 100)
+///                .hoverEffect(.automatic)
+///        }.padding(75).background(Color.blue)
+///    }
+/// }
+/// ```
+///
+/// See the individual HoverEffect value pages for a visualization of each effect.
 @available(iOS 13.4, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct HoverEffect {
 
-    /// An effect  that attempts to determine the effect automatically.
+    /// An effect that attempts to determine the effect automatically.
     /// This is the default effect.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect automatic example](hovereffect-automatic-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.automatic)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let automatic: HoverEffect
 
-    /// An effect  that morphs the pointer into a platter behind the view
+    /// An effect that morphs the pointer into a platter behind the view
     /// and shows a light source indicating position.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect highlight example](hovereffect-highlight-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.highlight)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let highlight: HoverEffect
 
     /// An effect that slides the pointer under the view and disappears as the
     /// view scales up and gains a shadow.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect lift example](hovereffect-lift-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.lift)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let lift: HoverEffect
 }
 
@@ -15954,11 +16834,30 @@ extension Image.ResizingMode : Hashable {
     public init(image: Image, sourceRect: CGRect = CGRect(x: 0, y: 0, width: 1, height: 1), scale: CGFloat = 1) { }
 }
 
-/// Defines the implementation of all `IndexView` instances within a view
-/// hierarchy.
+/// Types conforming to this protocol are used to style page index ``TabView``'s.
 ///
+/// Currently the IndexViewStyle protocol is not public, so it cannot be implemented for
+/// a custom view. The only type conforming to this protocol is ``PageIndexViewStyle``.
 /// To configure the current `IndexViewStyle` for a view hierarchy, use the
 /// `.indexViewStyle()` modifier.
+///
+/// For example:
+///
+/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        TabView {
+///            Text("Tab 1")
+///            Text("Tab 2")
+///            Text("Tab 3")
+///        }
+///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///    }
+/// }
+/// ```
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -16009,6 +16908,39 @@ extension IndexViewStyle {
 public struct InlinePickerStyle : PickerStyle {
 
     /// Creates an inline picker style.
+    ///
+    /// ![Inline Example](/picker-style-2.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var favoriteFruit: MyFruit = MyFruit.banana
+    ///
+    ///     var fruitName: String {
+    ///         switch favoriteFruit{
+    ///         case .apple:
+    ///             return "Apple 🍎🍎"
+    ///         case .banana:
+    ///             return "Banana 🍌🍌"
+    ///         case .peach:
+    ///             return "Peach 🍑🍑"
+    ///         }
+    ///     }
+    ///
+    ///     var body: some View {
+    ///         Text("My Favorite Fruit: \(fruitName)")
+    ///
+    ///         Picker("My Picker", selection: $favoriteFruit) {
+    ///             Text("Banana 🍌🍌")
+    ///                 .tag(MyFruit.banana)
+    ///             Text("Apple 🍎🍎")
+    ///                 .tag(MyFruit.apple)
+    ///             Text("Peach 🍑🍑")
+    ///                 .tag(MyFruit.peach)
+    ///         }.pickerStyle(InlinePickerStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
     public init() { }
 }
 
@@ -16881,10 +17813,39 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     public init(_ configuration: LabelStyleConfiguration) { }
 }
 
-/// A type that applies a custom appearance to all labels within a view.
+/// This protocol is used to create styles for Label views
 ///
-/// To configure the current label style for a view hierarchy, use the
+///
+/// Implement this protocol to create a labelstyle that can easily be reused.
+///
+/// To configure the current label style for a view hierarchy, you only need to use the
 /// `View/labelStyle(_:)` modifier.
+///
+/// ![LabelStyle Example 1](label-style-example.png)
+///
+///```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack{
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color:.yellow))
+///             Label("Apple", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color:.red))
+///         }
+///  }
+///     struct MyLabelStyle:LabelStyle{
+///         let color:Color
+///         func makeBody(configuration: Configuration) -> some View {
+///             VStack{
+///                 configuration.title
+///
+///                 configuration.icon.foregroundColor(color)
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol LabelStyle { }
 extension LabelStyle {
@@ -16897,6 +17858,30 @@ extension LabelStyle {
     /// The system calls this method for each `Label` instance in a view
     /// hierarchy where this style is the current label style.
     ///
+    /// ![LabelStyle Example 1](label-style-example.png)
+    ///
+    ///```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack{
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color:.yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color:.red))
+    ///         }
+    ///  }
+    ///     struct MyLabelStyle:LabelStyle{
+    ///         let color:Color
+    ///         func makeBody(configuration: Configuration) -> some View {
+    ///             VStack{
+    ///                 configuration.title
+    ///
+    ///                 configuration.icon.foregroundColor(color)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     /// - Parameter configuration: The properties of the label.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
@@ -16905,6 +17890,22 @@ extension LabelStyle {
 }
 
 /// The properties of a label.
+///
+/// There are 2 properties of a label:
+/// 1. Title
+/// 2. Icon
+///
+/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+///
+///
+///    struct ExampleView: View {
+///        var body: some View {
+///             Label("Banana🍌", systemImage: "heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///        }
+///    }
+///
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LabelStyleConfiguration {
 
@@ -18095,8 +19096,8 @@ public struct ListItemTint {
 /// ```
 ///
 /// Two list styles are included specifically for rendering grouped lists:
-/// - `View/Styles/GroupedListStyle`
-/// - `View/Styles/InsetGroupedListStyle`
+/// - `GroupedListStyle`
+/// - `InsetGroupedListStyle`
 ///
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
@@ -18135,15 +19136,94 @@ extension ListStyle {
 
 /// The key used to look up a string in a strings file or strings dictionary
 /// file.
+///
+/// To make the text in your app appear as many different languages
+/// depending on the user's preference, use this structure in place
+/// of ``String``.
+///
+/// Essentially the way localization works is that rather than using
+/// strings directly throughout your app, you use this structure instead.
+/// This lets you look up string keys which are translated to all
+/// the app's supported languages in a .strings file.
+///
+/// To learn about creating this file and the process of setting up
+/// your project for localization, check out these sources:
+/// - [Swift with Majid](https://swiftwithmajid.com/2019/10/16/localization-in-swiftui/)
+/// - [StackOverflow](https://stackoverflow.com/questions/58578341/how-to-implement-localization-in-swift-ui)
+///
+/// ### Creating a localized string key
+///
+/// The most straightforward way to create a localized string key is
+/// using its initializer:
+///
+///     let hello = LocalizedStringKey("Hello")
+///
+/// You can also create a localized string key from a string literal,
+/// but you must specify the type explicitly or else it will be
+/// interpreted as a ``String:
+///
+///     let hello1 = "Hello" //Type String
+///     let hello2: LocalizedStringKey = "Hello" //Type LocalizedStringKey
+///
+/// ### Using a localized string key
+///
+/// Many views in SwiftUI, like ``Button`` and ``Text``
+/// accept localized string keys directly through their initializers by default.
+///
+///     struct UsingLocalizationView: View {
+///         let text: LocalizedStringKey = "Hello"
+///         var body: some View {
+///             Button(text) { }
+///             Text(text)
+///         }
+///
+/// Also, since SwiftUI is localization-first, if you pass a string literal
+/// to these initializers, they will be interpreted as localized string keys!
+///
+///     struct WithStringLiteralView: View {
+///         var body: some View {
+///             Text("This gets localized!")
+///         }
+///     }
+///
+/// However, if your variable is already a string, the intializer will
+/// not localize the string:
+///
+///     struct RightAndWrongView: View {
+///         let s = "Hello"
+///         var body: some View {
+///             Text(s) //Not localized
+///             Text("Hello") //Localized!
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
 
 	/// Creates a localized string key from a `String` value.
+    ///
+    /// See ``LocalizedStringKey`` for more on how to use localization.
+    ///
+    ///     struct UsingLocalizationView: View {
+    ///         let text = LocalizedStringKey("Hello")
+    ///         var body: some View {
+    ///             Text(text)
+    ///         }
+    ///     }
 	///
 	/// - Parameter value: The value for keying a string.
     public init(_ value: String) { }
 
     /// Creates an instance initialized to the given string value.
+    ///
+    /// Use this intializer when you would not like localization.
+    ///
+    ///     struct SameInEveryLanguageView: View {
+    ///         let text = LocalizedStringKey(stringLiteral: "Aloha")
+    ///         var body: some View {
+    ///             Text(text) //"Aloha"
+    ///         }
+    ///     }
     ///
     /// - Parameter value: The value of the new instance.
     public init(stringLiteral value: String) { }
@@ -18154,6 +19234,17 @@ extension ListStyle {
     /// literals and interpolations appended to them in one or more properties.
     /// `init(stringInterpolation:)` should use these properties to initialize
     /// the instance.
+    ///
+    ///     struct UsingLocalizationView: View {
+    ///         let name = "Majid"
+    ///         var body: some View {
+    ///             Text("myNameIs \(name)") //My name is Majid"
+    ///         }
+    ///     }
+    ///
+    /// And in the localization file, we will have:
+    ///
+    ///     "myNameIs %@" = "My name is %@.";
     ///
     /// - Parameter stringInterpolation: An instance of `StringInterpolation`
     ///             which has had each segment of the string literal appended
@@ -20370,6 +21461,27 @@ public struct OutlineSubgroupChildren : View {
 ///         .tabViewStyle(PageTabViewStyle())
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 ///     }
+///
+/// Currently the PageIndexViewStyle is the only type that allows for customization
+/// over a page index view. To configure the current `IndexViewStyle` for a view hierarchy, use the
+/// `.indexViewStyle()` modifier. When creating a new PageIndexViewStyle, it will
+/// default to the .automatic backgroundDisplayMode if none is specified.
+///
+/// For example:
+///
+/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        TabView {
+///            Text("Tab 1")
+///            Text("Tab 2")
+///            Text("Tab 3")
+///        }
+///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///    }
 /// }
 /// ```
 @available(iOS 14.0, tvOS 14.0, *)
@@ -20378,22 +21490,153 @@ public struct OutlineSubgroupChildren : View {
 public struct PageIndexViewStyle : IndexViewStyle {
 
     /// The background style for the page index view.
+    ///
+    /// There are 4 background style options:
+    /// - automatic: uses the default background for the platform
+    /// - interactive: shows a background when the index is interacted with
+    /// - always: the background is always shown
+    /// - never: the background is never shown
+    ///
+    /// See the individual style pages for visualizations of each option.
     public struct BackgroundDisplayMode {
 
         /// Background will use the default for the platform.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle automatic background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let automatic: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is only shown while the index view is interacted with.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle interactive background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let interactive: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is always displayed behind the page index view.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle always background display mode](indexviewstyle-protocol-example-1.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let always: PageIndexViewStyle.BackgroundDisplayMode
 
         /// Background is never displayed behind the page index view.
+        ///
+        /// For example:
+        ///
+        /// ![PageIndexViewStyle never background display mode](pageindexviewstyle-automatic-example.png)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///    var body: some View {
+        ///        ZStack {
+        ///            Color.blue
+        ///                .ignoresSafeArea()
+        ///
+        ///            TabView {
+        ///                Text("Tab 1")
+        ///                Text("Tab 2")
+        ///                Text("Tab 3")
+        ///            }
+        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+        ///        }
+        ///    }
+        /// }
+        /// ```
+        ///
+        /// Note that the ``ZStack`` was used to apply a background color to the screen so that
+        /// the background styles on the page index view were more clear.
         public static let never: PageIndexViewStyle.BackgroundDisplayMode
     }
 
     /// Creates a page index view style.
+    ///
+    /// When creating a new PageIndexViewStyle, it will default to the .automatic
+    /// backgroundDisplayMode if none is specified. For example:
+    ///
+    /// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        TabView {
+    ///            Text("Tab 1")
+    ///            Text("Tab 2")
+    ///            Text("Tab 3")
+    ///        }
+    ///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    ///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+    ///    }
+    /// }
+    /// ```
     ///
     /// - Parameter backgroundDisplayMode: The display mode of the background of any
     /// page index views receiving this style
@@ -21937,7 +23180,7 @@ public struct PinnedScrollableViews : OptionSet {
 ///                  Button("Borderless Banana 🍌🍌") { tap() }
 ///                       .buttonStyle(BorderlessButtonStyle())
 ///                  Button("Default Banana🍌🍌") { tap() }
-///                       .buttonStyle(DefaultButtonStyle())
+///                       .buttonStyle(PlainButtonStyle())
 ///              }
 ///              .font(.title2)
 ///          }
@@ -21991,10 +23234,37 @@ public struct PlainListStyle : ListStyle {
 }
 
 /// A text field style with no decoration.
+///
+/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+///
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             Text(myFruit)
+///             TextField("Fruit", text: $myFruit)
+///                 .textFieldStyle(PlainTextFieldStyle())
+///                 .padding()
+///         }
+///     }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainTextFieldStyle : TextFieldStyle {
 
 	/// Creates a plain text field style.
+    ///
+    /// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+    ///
+    ///     struct ExampleView: View {
+    ///         @State var myFruit: String = ""
+    ///
+    ///         var body: some View {
+    ///             Text(myFruit)
+    ///             TextField("Fruit", text: $myFruit)
+    ///                 .textFieldStyle(PlainTextFieldStyle())
+    ///                 .padding()
+    ///         }
+    ///     }
     public init() { }
 }
 
@@ -22183,21 +23453,139 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 }
 
 /// An indication whether a view is currently presented by another view.
+///
+/// This is the type of the environment value used to programmatically
+/// interact with the view currently presented.
+///
+/// This is useful for 4 types of views:
+/// 1. ``NavigationView``
+/// 2. ``View/sheet(isPresented:onDismiss:)``
+/// 3. ``View/popover(isPresented:onDismiss:)``
+/// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+///
+/// See ``Environment`` for more on environment values and how to use
+/// the property wrapper.
+///
+/// While this is a ``Binding`` environment value, most often
+/// the wrapped value will be accessed. The wrapped value
+/// is of type ``PresentatinMode``. See that structure for more info
+/// on its properties.
+///
+/// Below is a simple example of programmatically dismissing a
+/// sheet using this environment value.
+///
+///     struct ExampleView: View {
+///         @State private var showSheet = false
+///
+///         var body: some View {
+///             Button("Open sesame 📬") {
+///                 showSheet = true
+///             }
+///             .sheet(isPresented: $showCover,
+///                    onDismiss: { print("dismissed!") },
+///                    content: { ExampleSheet() })
+///         }
+///     }
+///
+///     struct ExampleSheet: View {
+///         @Environment(\.presentationMode) var presentationMode
+///
+///         var body: some View {
+///             Button("CLOSE 📪") {
+///                 presentationMode.wrappedValue.dismiss()
+///             }
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PresentationMode {
 
     /// Indicates whether a view is currently presented.
+    ///
+    /// Use this property of the presentation mode environment value to
+    /// programmatically read the presentation status of the current view.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// See ``Environment`` for more on environment values and how to use
+    /// the property wrapper.
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Text("hello!")
+    ///                 .onAppear {
+    ///                     print(presentationMode.wrappedValue.isPresented) //true
+    ///                 }
+    ///         }
+    ///     }
+    ///
     public var isPresented: Bool { get }
 
     /// Dismisses the view if it is currently presented.
     ///
-    /// If `isPresented` is false, `dismiss()` is a no-op.
+    /// Use this function on the presentation mode environment value to
+    /// programmatically dismiss the view currently presented.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
+    ///
     public mutating func dismiss() { }
 }
 
 /// A specification for the context of a `PreviewContext`
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol PreviewContext{ }
+public protocol PreviewContext { }
 extension PreviewContext {
 
     /// Returns the context's value of `Key`, or `Key.defaultValue`
@@ -23607,6 +24995,24 @@ extension Rectangle : InsettableShape {
 }
 
 /// The reasons to apply a redaction to data displayed on screen.
+///
+/// Use this type with the ``View/redacted(reason:)`` view modifier to
+/// "redact" a view's contents. For now, that simply means to reaplace
+/// the view with a placeholder.
+///
+/// In the future, this type may get more optionality, but as of now,
+/// the only redaction reason is ``RedactionReasons/placeholder``
+///
+/// See the following example for adding redaction to a view.
+///
+/// ```
+/// struct RedactedView: View {
+///     var body: some View {
+///         Label("Taylor Swift", systemImage: "person.fill")
+///         Label("Kanye West", systemImage: "person.fill")
+///             .redacted(reason: .placeholder)
+///     }
+/// }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct RedactionReasons : OptionSet {
 
@@ -23614,6 +25020,10 @@ public struct RedactionReasons : OptionSet {
     public let rawValue: Int
 
     /// Creates a new set from a raw value.
+    ///
+    /// Do not use this initializer directly. Rather, use one of the
+    /// static constants of the strucutre:
+    /// - ``RedactionReasons/placeholder``
     ///
     /// - Parameter rawValue: The raw value with which to create the
     ///   reasons for redaction.
@@ -23625,6 +25035,18 @@ public struct RedactionReasons : OptionSet {
     /// generic placeholders, though maintaining their original size and shape.
     /// Use this to create a placeholder UI without directly exposing
     /// placeholder data to users.
+    ///
+    /// In the future, this type may get more optionality, but as of now,
+    /// this is the only property in ``RedactionReasons``.
+    ///
+    /// ```
+    /// struct RedactedView: View {
+    ///     var body: some View {
+    ///         Label("Taylor Swift", systemImage: "person.fill")
+    ///         Label("Kanye West", systemImage: "person.fill")
+    ///             .redacted(reason: .placeholder)
+    ///     }
+    /// }
     public static let placeholder: RedactionReasons
 
     /// The element type of the option set.
@@ -24783,6 +26205,21 @@ public struct RotationGesture : Gesture {
 }
 
 /// A text field style with a system-defined rounded border.
+///
+/// `TextField` can be styled with the `View/textFieldStyle(_:)` modifier.
+///
+/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+///
+///     struct ExampleView: View {
+///         @State var myFruit: String = ""
+///
+///         var body: some View {
+///             Text(myFruit)
+///             TextField("Fruit", text: $myFruit)
+///                 .textFieldStyle(RoundedBorderTextFieldStyle())
+///                 .padding()
+///         }
+///     }
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -25097,10 +26534,37 @@ extension RoundedRectangle : InsettableShape {
 }
 
 /// A set of symbolic safe area regions.
+///
+/// Use this option set with the ``View/ignoresSafeArea(_:edges:)``
+/// view modifier to specify which edges of a view
+/// should ignore which safe areas.
+///
+/// Safe area options:
+/// - ``SafeAreaRegions/container``: The top and bottom safe portions of the
+/// screen, like the status bar.
+/// - ``SafeAreaRegions/keyboard``: The portion of the screen covered by
+/// a software keyboard
+///
+/// ```
+/// struct SafeAreaIgnoringView: View {
+///     var body: some View {
+///         ZStack {
+///             Color.pink
+///             Text("I am everywhere (except the software keyboard)")
+///         }
+///         .ignoresSafeArea(SafeAreaRegions.container, edges: [.top, .bottom])
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct SafeAreaRegions : OptionSet {
 
     /// The corresponding value of the raw type.
+    ///
+    /// Don't use this directly. Rather, use the static constants of this type,
+    /// ``SafeAreaRegions/keyboard``,
+    /// ``SafeAreaRegions/container``,
+    /// ``SafeAreaRegions/all``.
     ///
     /// A new instance initialized with `rawValue` will be equivalent to this
     /// instance. For example:
@@ -25137,13 +26601,49 @@ extension RoundedRectangle : InsettableShape {
 
     /// The safe area defined by the device and containers within the
     /// user interface, including elements such as top and bottom bars.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere (except the software keyboard)")
+    ///         }
+    ///         .ignoresSafeArea(.container, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let container: SafeAreaRegions
 
     /// The safe area matching the current extent of any software
     /// keyboard displayed over the view content.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am over the keyboard!")
+    ///         }
+    ///         .ignoresSafeArea(.keyboard, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let keyboard: SafeAreaRegions
 
     /// All safe area regions.
+    ///
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere 🤠")
+    ///         }
+    ///         .ignoresSafeArea(.all, edges: [.top, .bottom])
+    ///     }
+    /// }
+    /// ```
     public static let all: SafeAreaRegions
 
     /// The element type of the option set.
@@ -28922,6 +30422,21 @@ extension StrokeStyle : Animatable {
 public struct SwitchToggleStyle : ToggleStyle {
 
     /// Creates a switch toggle style.
+    ///
+    /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State private var status = true
+    ///     var body: some View {
+    ///          Toggle(isOn: $status) {
+    ///              Text("Banana🍌🍌")
+    ///          }
+    ///          .toggleStyle(SwitchToggleStyle())
+    ///          .padding()
+    ///     }
+    /// }
+    /// ```
     public init() { }
 
     /// Creates a switch style with a tint color.
@@ -29148,7 +30663,15 @@ extension TabView where SelectionValue == Int {
     public init(@ViewBuilder content: () -> Content) { }
 }
 
-/// A specification for the appearance and interaction of a `TabView`.
+/// This protocol is used to change the appearance and interaction of a `TabView`.
+///
+/// This protocol does not make its interface public and cannot be customized. The only
+/// types available are the ones included in the framework and are platform dependent:
+/// - ``DefaultTabViewStyle`` (all platforms)
+/// - ``PageTabViewStyle`` (NO macOS)
+/// - CarouselTabViewStyle (watchOS only)
+///
+/// To learn more about each style, visit their pages.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol TabViewStyle{ }
 extension TabViewStyle {
@@ -31614,13 +33137,117 @@ extension Transaction {
 ///
 /// `TupleView` is mainly used with `ViewBuilder`, and so you don't really
 /// need to worry about it unless you're making your own view builders.
+///
+/// In the example below, we use this type to create a new kind of `VStack`
+/// that only displays the first 2 views. All other views are ignored.
+/// Kind of useless? Yes. Instructive? You tell me.
+///
+///     struct StackedView: View {
+///         var body: some View {
+///             First2VStack {
+///                 Text("I am first 🥇")
+///                 Text("Second is the best 2️⃣")
+///                 Text("Hey stop ignoring me ☹️")
+///             }
+///         }
+///     }
+///
+///     struct First2VStack<First: View, Second: View>: View {
+///         let first: First
+///         let second: Second
+///
+///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+///             let views = content().value
+///             first = views.0
+///             second = views.1
+///         }
+///
+///         var body: some View {
+///             HStack {
+///                 first
+///                 second
+///             }
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TupleView<T> : View {
 
 	/// The tuple of views in the `TupleView`.
+    ///
+    /// A ``TupleView`` stores a real life tuple of views in this property.
+    /// Its type is a generic, `T`, which can have a tuple type.
+    ///
+    /// See how in the example below, we extract the value parameter from
+    /// the tuple view returned by the view builder. This allows us to
+    /// take the first and second elements of the type from the tuple view.
+    ///
+    ///     struct StackedView: View {
+    ///         var body: some View {
+    ///             First2VStack {
+    ///                 Text("I am first 🥇")
+    ///                 Text("Second is the best 2️⃣")
+    ///                 Text("Hey stop ignoring me ☹️")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct First2VStack<First: View, Second: View>: View {
+    ///         let first: First
+    ///         let second: Second
+    ///
+    ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+    ///             let views = content().value
+    ///             first = views.0
+    ///             second = views.1
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             HStack {
+    ///                 first
+    ///                 second
+    ///             }
+    ///         }
+    ///     }
+    ///
     public var value: T
 
     /// Creates a tuple view.
+    ///
+    /// You usually won't use this intializer directly. Instead, if you are
+    /// working with ``TupleView``s, the tuple view will usually be
+    /// constructed behind the scenes using the ``ViewBuilder`` property
+    /// wrapper. See that page for more info.
+    ///
+    /// See below for how to extract a tuple view from a view builder.
+    ///
+    ///     struct StackedView: View {
+    ///         var body: some View {
+    ///             First2VStack {
+    ///                 Text("I am first 🥇")
+    ///                 Text("Second is the best 2️⃣")
+    ///                 Text("Hey stop ignoring me ☹️")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct First2VStack<First: View, Second: View>: View {
+    ///         let first: First
+    ///         let second: Second
+    ///
+    ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
+    ///             let views = content().value
+    ///             first = views.0
+    ///             second = views.1
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             HStack {
+    ///                 first
+    ///                 second
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameter value: A tuple of any number of views.
     @inlinable public init(_ value: T) { }
@@ -33320,6 +34947,29 @@ extension View {
 
 
     /// A view modifier that presents a sheet when a given condition is true.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
