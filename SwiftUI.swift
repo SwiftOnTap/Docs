@@ -8089,6 +8089,8 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 /// Add a drag gesture to a `Circle` and change its color while the user
 /// performs the drag gesture:
 ///
+/// ![DragGesture Example 1](drag-gesture-example.gif)
+///
 /// ```
 /// struct DragGestureView: View {
 ///     @State private var location: CGPoint = CGPoint(x: 50, y: 50);
