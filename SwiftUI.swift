@@ -10022,10 +10022,12 @@ public struct EmptyCommands : Commands {
 ///         }
 ///     }
 ///
+/// In order to stack multiple modifiers, including the EmptyModifier, see
+/// ``ViewModifier/concat(_:)``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EmptyModifier : ViewModifier {
 
-	/// A view modifier that leave the view unchanged.
+	  /// A view modifier that leave the view unchanged.
     public static let identity: EmptyModifier
 
     /// The type of view representing the body.
@@ -10037,7 +10039,9 @@ public struct EmptyCommands : Commands {
     /// Gets the current body of the caller.
     ///
     /// `content` is a proxy for the view that will have the modifier
-    /// represented by `Self` applied to it.
+    /// represented by `Self` applied to it. In simpler terms, content is the
+    /// view that is being transformed and this function will return the view
+    /// absent of any modifier transformations.
     public func body(content: EmptyModifier.Content) -> EmptyModifier.Body { }
 }
 
