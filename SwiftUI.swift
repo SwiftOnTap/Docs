@@ -5782,14 +5782,89 @@ extension ColorRenderingMode : Hashable {
 ///
 /// The color scheme enumerates the user setting options for Light or Dark Mode.
 /// It also provides the light or dark options for any particular view when the
-/// app wants to override the user setting.
+/// app wants to override the user setting. In order to apply a color scheme,
+/// see ``View/preferredColorScheme(_:)``
+///
+/// For example, to apply a dark color scheme:
+///
+/// ![Color scheme dark mode example](colorscheme-dark-example.png)
+///
+/// ```
+/// struct ExampleView: View {
+///    @State var sliderValue: Double = 0
+///
+///    var body: some View {
+///        VStack {
+///            Button(action: { }) {
+///                Text(" Button")
+///            }
+///            HStack {
+///                Text("Slider").accentColor(Color.green)
+///                Slider(value: $sliderValue, in: -100...100, step: 0.1)
+///            }
+///        }
+///        .padding(30)
+///        .preferredColorScheme(.dark)
+///    }
+/// }
+/// ```
+///
+/// See the individual ColorScheme enums for visualizations of each one.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum ColorScheme : CaseIterable {
 
-	/// The color scheme referring to light mode in a device.
+	  /// The color scheme referring to light mode in a device.
+    ///
+    /// For example, to apply a light color scheme:
+    ///
+    /// ![Color scheme light mode example](colorscheme-light-example.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State var sliderValue: Double = 0
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Button(action: { }) {
+    ///                Text(" Button")
+    ///            }
+    ///            HStack {
+    ///                Text("Slider").accentColor(Color.green)
+    ///                Slider(value: $sliderValue, in: -100...100, step: 0.1)
+    ///            }
+    ///        }
+    ///        .padding(30)
+    ///        .preferredColorScheme(.light)
+    ///    }
+    /// }
+    /// ```
     case light
 
     /// The color scheme referring to dark mode in a device.
+    ///
+    /// For example, to apply a dark color scheme:
+    ///
+    /// ![Color scheme dark mode example](colorscheme-dark-example.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State var sliderValue: Double = 0
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Button(action: { }) {
+    ///                Text(" Button")
+    ///            }
+    ///            HStack {
+    ///                Text("Slider").accentColor(Color.green)
+    ///                Slider(value: $sliderValue, in: -100...100, step: 0.1)
+    ///            }
+    ///        }
+    ///        .padding(30)
+    ///        .preferredColorScheme(.dark)
+    ///    }
+    /// }
+    /// ```
     case dark
 
     /// Returns a Boolean value indicating whether two values are equal.
