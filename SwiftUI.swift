@@ -17212,15 +17212,94 @@ extension ListStyle {
 
 /// The key used to look up a string in a strings file or strings dictionary
 /// file.
+///
+/// To make the text in your app appear as many different languages
+/// depending on the user's preference, use this structure in place
+/// of ``String``.
+///
+/// Essentially the way localization works is that rather than using
+/// strings directly throughout your app, you use this structure instead.
+/// This lets you look up string keys which are translated to all
+/// the app's supported languages in a .strings file.
+///
+/// To learn about creating this file and the process of setting up
+/// your project for localization, check out these sources:
+/// - [Swift with Majid](https://swiftwithmajid.com/2019/10/16/localization-in-swiftui/)
+/// - [StackOverflow](https://stackoverflow.com/questions/58578341/how-to-implement-localization-in-swift-ui)
+///
+/// ### Creating a localized string key
+///
+/// The most straightforward way to create a localized string key is
+/// using its initializer:
+///
+///     let hello = LocalizedStringKey("Hello")
+///
+/// You can also create a localized string key from a string literal,
+/// but you must specify the type explicitly or else it will be
+/// interpreted as a ``String:
+///
+///     let hello1 = "Hello" //Type String
+///     let hello2: LocalizedStringKey = "Hello" //Type LocalizedStringKey
+///
+/// ### Using a localized string key
+///
+/// Many views in SwiftUI, like ``Button`` and ``Text``
+/// accept localized string keys directly through their initializers by default.
+///
+///     struct UsingLocalizationView: View {
+///         let text: LocalizedStringKey = "Hello"
+///         var body: some View {
+///             Button(text) { }
+///             Text(text)
+///         }
+///
+/// Also, since SwiftUI is localization-first, if you pass a string literal
+/// to these initializers, they will be interpreted as localized string keys!
+///
+///     struct WithStringLiteralView: View {
+///         var body: some View {
+///             Text("This gets localized!")
+///         }
+///     }
+///
+/// However, if your variable is already a string, the intializer will
+/// not localize the string:
+///
+///     struct RightAndWrongView: View {
+///         let s = "Hello"
+///         var body: some View {
+///             Text(s) //Not localized
+///             Text("Hello") //Localized!
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
 
 	/// Creates a localized string key from a `String` value.
+    ///
+    /// See ``LocalizedStringKey`` for more on how to use localization.
+    ///
+    ///     struct UsingLocalizationView: View {
+    ///         let text = LocalizedStringKey("Hello")
+    ///         var body: some View {
+    ///             Text(text)
+    ///         }
+    ///     }
 	///
 	/// - Parameter value: The value for keying a string.
     public init(_ value: String) { }
 
     /// Creates an instance initialized to the given string value.
+    ///
+    /// Use this intializer when you would not like localization.
+    ///
+    ///     struct SameInEveryLanguageView: View {
+    ///         let text = LocalizedStringKey(stringLiteral: "Aloha")
+    ///         var body: some View {
+    ///             Text(text) //"Aloha"
+    ///         }
+    ///     }
     ///
     /// - Parameter value: The value of the new instance.
     public init(stringLiteral value: String) { }
@@ -17231,6 +17310,17 @@ extension ListStyle {
     /// literals and interpolations appended to them in one or more properties.
     /// `init(stringInterpolation:)` should use these properties to initialize
     /// the instance.
+    ///
+    ///     struct UsingLocalizationView: View {
+    ///         let name = "Majid"
+    ///         var body: some View {
+    ///             Text("myNameIs \(name)") //My name is Majid"
+    ///         }
+    ///     }
+    ///
+    /// And in the localization file, we will have:
+    ///
+    ///     "myNameIs %@" = "My name is %@.";
     ///
     /// - Parameter stringInterpolation: An instance of `StringInterpolation`
     ///             which has had each segment of the string literal appended
