@@ -10907,6 +10907,50 @@ extension EnvironmentValues {
 
     /// A binding to the current presentation mode of the view associated with
     /// this environment.
+    ///
+    /// Use this environment value to programmatically interact with the
+    /// view currently presented.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// See ``Environment`` for more on environment values and how to use
+    /// the property wrapper.
+    ///
+    /// While this is a ``Binding`` environment value, most often
+    /// the wrapped value will be accessed. The wrapped value
+    /// is of type ``PresentatinMode``. See that structure for more info
+    /// on its properties.
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
+    ///
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public var presentationMode: Binding<PresentationMode> { get }
 }
@@ -21381,21 +21425,139 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 }
 
 /// An indication whether a view is currently presented by another view.
+///
+/// This is the type of the environment value used to programmatically
+/// interact with the view currently presented.
+///
+/// This is useful for 4 types of views:
+/// 1. ``NavigationView``
+/// 2. ``View/sheet(isPresented:onDismiss:)``
+/// 3. ``View/popover(isPresented:onDismiss:)``
+/// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+///
+/// See ``Environment`` for more on environment values and how to use
+/// the property wrapper.
+///
+/// While this is a ``Binding`` environment value, most often
+/// the wrapped value will be accessed. The wrapped value
+/// is of type ``PresentatinMode``. See that structure for more info
+/// on its properties.
+///
+/// Below is a simple example of programmatically dismissing a
+/// sheet using this environment value.
+///
+///     struct ExampleView: View {
+///         @State private var showSheet = false
+///
+///         var body: some View {
+///             Button("Open sesame 📬") {
+///                 showSheet = true
+///             }
+///             .sheet(isPresented: $showCover,
+///                    onDismiss: { print("dismissed!") },
+///                    content: { ExampleSheet() })
+///         }
+///     }
+///
+///     struct ExampleSheet: View {
+///         @Environment(\.presentationMode) var presentationMode
+///
+///         var body: some View {
+///             Button("CLOSE 📪") {
+///                 presentationMode.wrappedValue.dismiss()
+///             }
+///         }
+///     }
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PresentationMode {
 
     /// Indicates whether a view is currently presented.
+    ///
+    /// Use this property of the presentation mode environment value to
+    /// programmatically read the presentation status of the current view.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// See ``Environment`` for more on environment values and how to use
+    /// the property wrapper.
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Text("hello!")
+    ///                 .onAppear {
+    ///                     print(presentationMode.wrappedValue.isPresented) //true
+    ///                 }
+    ///         }
+    ///     }
+    ///
     public var isPresented: Bool { get }
 
     /// Dismisses the view if it is currently presented.
     ///
-    /// If `isPresented` is false, `dismiss()` is a no-op.
+    /// Use this function on the presentation mode environment value to
+    /// programmatically dismiss the view currently presented.
+    ///
+    /// This is useful for 4 types of views:
+    /// 1. ``NavigationView``
+    /// 2. ``View/sheet(isPresented:onDismiss:)``
+    /// 3. ``View/popover(isPresented:onDismiss:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    /// Below is a simple example of programmatically dismissing a
+    /// sheet using this environment value.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
+    ///
     public mutating func dismiss() { }
 }
 
 /// A specification for the context of a `PreviewContext`
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol PreviewContext{ }
+public protocol PreviewContext { }
 extension PreviewContext {
 
     /// Returns the context's value of `Key`, or `Key.defaultValue`
@@ -32439,6 +32601,29 @@ extension View {
 
 
     /// A view modifier that presents a sheet when a given condition is true.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showSheet = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 📬") {
+    ///                 showSheet = true
+    ///             }
+    ///             .sheet(isPresented: $showCover,
+    ///                    onDismiss: { print("dismissed!") },
+    ///                    content: { ExampleSheet() })
+    ///         }
+    ///     }
+    ///
+    ///     struct ExampleSheet: View {
+    ///         @Environment(\.presentationMode) var presentationMode
+    ///
+    ///         var body: some View {
+    ///             Button("CLOSE 📪") {
+    ///                 presentationMode.wrappedValue.dismiss()
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
