@@ -14535,22 +14535,97 @@ extension HorizontalAlignment {
 }
 
 /// An effect applied when the pointer hovers over a view.
+///
+/// HoverEffects are only used on iPadOS when a user is interacting with a pointer.
+/// See ``View/hoverEffect(_:)`` for how to apply the different HoverEffects.
+/// The available options are:
+/// - automatic: the default effect for the platform
+/// - highlight: morphs the pointer into a platter behind the view and shows a light source
+/// - lift: slides the pointer under the view and scaled up the view with a shadow
+///
+/// For example:
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        VStack {
+///            Rectangle()
+///                .fill(Color.red)
+///                .frame(width: 100, height: 100)
+///                .hoverEffect(.automatic)
+///        }.padding(75).background(Color.blue)
+///    }
+/// }
+/// ```
+///
+/// See the individual HoverEffect value pages for a visualization of each effect.
 @available(iOS 13.4, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct HoverEffect {
 
-    /// An effect  that attempts to determine the effect automatically.
+    /// An effect that attempts to determine the effect automatically.
     /// This is the default effect.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect automatic example](hovereffect-automatic-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.automatic)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let automatic: HoverEffect
 
-    /// An effect  that morphs the pointer into a platter behind the view
+    /// An effect that morphs the pointer into a platter behind the view
     /// and shows a light source indicating position.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect highlight example](hovereffect-highlight-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.highlight)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let highlight: HoverEffect
 
     /// An effect that slides the pointer under the view and disappears as the
     /// view scales up and gains a shadow.
+    ///
+    /// For example:
+    ///
+    /// ![Hover effect lift example](hovereffect-lift-example.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    var body: some View {
+    ///        VStack {
+    ///            Rectangle()
+    ///                .fill(Color.red)
+    ///                .frame(width: 100, height: 100)
+    ///                .hoverEffect(.lift)
+    ///        }.padding(75).background(Color.blue)
+    ///    }
+    /// }
+    /// ```
     public static let lift: HoverEffect
 }
 
