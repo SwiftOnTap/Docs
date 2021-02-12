@@ -4697,8 +4697,47 @@ extension ButtonStyle {
 
     /// Creates a view that represents the body of a button.
     ///
+    /// This is the only required property of `ButtonStyle`. See ``ButtonStyle`` for more.
+    ///
     /// The system calls this method for each `Button` instance in a view
     /// hierarchy where this style is the current button style.
+    ///
+    ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Button("🍌🍌", action: { tap() })
+    ///             Button("🍎🍎", action: { tap() })
+    ///             Button("🍑🍑", action: { tap() })
+    ///         }
+    ///         .buttonStyle(BananaButtonStyle(color: .yellow))
+    ///     }
+    ///
+    ///     func tap() {}
+    /// }
+    ///
+    /// struct BananaButtonStyle: ButtonStyle {
+    ///     var color: Color
+    ///     func makeBody(configuration: Self.Configuration) -> some View {
+    ///         BananaButton(configuration: configuration, color: color)
+    ///     }
+    ///
+    ///     struct BananaButton: View {
+    ///         let configuration: BananaButtonStyle.Configuration
+    ///         let color: Color
+    ///
+    ///         var body: some View {
+    ///             return configuration.label
+    ///                 .padding()
+    ///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
+    ///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
+    ///                 .animation(.spring())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -7131,6 +7170,26 @@ public struct DatePickerComponents : OptionSet {
 }
 
 /// A specification for the appearance and interaction of a `DatePicker`.
+///
+/// There is no public interface for `DatePickerStyle`.
+///
+/// There are currently 5 date picker styles:
+/// - ``DefaultDatePickerStyle`` on iOS and macOS
+/// - ``WheelDatePickerStyle`` on iOS
+/// - ``FieldDatePickerStyle`` on macOS
+/// - ``GraphicalDatePickerStyle`` on macOS
+/// - ``StepperFieldDatePickerStyle`` on macOS
+///
+/// ```
+/// struct StyledDatePickerView: View {
+///     @State private var date = Date()
+///
+///     var body: some View {
+///         DatePicker(selection: $date, label: { Text("Date") })
+///             .datePickerStyle(WheelDatePickerStyle())
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -7449,6 +7508,16 @@ public struct DefaultPickerStyle : PickerStyle {
 
 /// The default progress view style in the current context of the view being
 /// styled.
+///
+/// ```
+/// struct ExampleView: View {
+///    var body: some View {
+///        ProgressView()
+///            .progressViewStyle(LinearProgressViewStyle())
+///            .padding(20)
+///    }
+/// }
+/// ```
 ///
 /// The default style represents the recommended style based on the original
 /// initialization parameters of the progress view, and the progress view's
@@ -8981,6 +9050,37 @@ extension DropDelegate {
 }
 
 /// The current state of a drop.
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var text: String = "🍌🍌"
+///
+///     var body: some View {
+///         HStack {
+///             // Text to drag
+///             Text(text)
+///                 .font(.title)
+///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+///
+///             // Area to drop
+///             RoundedRectangle(cornerRadius: 10)
+///                 .frame(width: 150, height: 150)
+///                 .onDrop(of: ["text"], delegate: MyDropDelegate(text: $text))
+///         }
+///     }
+/// }
+///
+/// struct MyDropDelegate: DropDelegate {
+///     @Binding var text: String
+///
+///     func performDrop(info: DropInfo) -> Bool {
+///         self.text = "Dropped My Bananas 🍌🍌!"
+///         return true
+///     }
+/// }
+/// ```
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -9737,6 +9837,26 @@ public struct EditButton : View {
 }
 
 /// The mode of a view indicating whether the user can edit its content.
+///
+/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var fruits = ["🍌", "🍏", "🍑"]
+///
+///     var body: some View {
+///         List {
+///             ForEach(fruits, id: \.self) { fruit in
+///                 Text(fruit)
+///             }
+///             .onDelete { offets in
+///                 fruits.remove(atOffsets: offets)
+///             }
+///         }
+///         .environment(\.editMode, .constant(.active))
+///     }
+/// }
+/// ```
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -9753,6 +9873,26 @@ public enum EditMode {
     case transient
 
     /// The view content can be edited.
+    ///
+    /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var fruits = ["🍌", "🍏", "🍑"]
+    ///
+    ///     var body: some View {
+    ///         List {
+    ///             ForEach(fruits, id: \.self) { fruit in
+    ///                 Text(fruit)
+    ///             }
+    ///             .onDelete { offets in
+    ///                 fruits.remove(atOffsets: offets)
+    ///             }
+    ///         }
+    ///         .environment(\.editMode, .constant(.active))
+    ///     }
+    /// }
+    /// ```
     case active
 
     /// Indicates whether a view is being edited.
@@ -12795,30 +12935,309 @@ extension Font {
     @frozen public struct Weight : Hashable {
 
     	/// A font weight of ultra light.
+      ///
+      /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+      ///
+      ///
+      ///     struct ExampleView: View {
+      ///         var body: some View {
+      ///             VStack {
+      ///                 Text("ultraLight 🍌")
+      ///                     .fontWeight(Font.Weight.ultraLight)
+      ///                 Text("thin🍌")
+      ///                     .fontWeight(Font.Weight.thin)
+      ///                 Text("light🍌")
+      ///                     .fontWeight(Font.Weight.light)
+      ///                 Text("regular🍌")
+      ///                     .fontWeight(Font.Weight.regular)
+      ///                 Text("medium🍌")
+      ///                     .fontWeight(Font.Weight.medium)
+      ///                 Text("semibold🍌")
+      ///                     .fontWeight(Font.Weight.semibold)
+      ///                 Text("bold🍌")
+      ///                     .fontWeight(Font.Weight.bold)
+      ///                 Text("heavy🍌")
+      ///                     .fontWeight(Font.Weight.heavy)
+      ///                 Text("black🍌")
+      ///                     .fontWeight(Font.Weight.black)
+      ///            }
+      ///            .font(.title)
+      ///         }
+      ///     }
+      ///
+      ///
         public static let ultraLight: Font.Weight
 
         /// A font weight of thin.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let thin: Font.Weight
 
         /// A font weight of light.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let light: Font.Weight
 
         /// A font weight of regular.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let regular: Font.Weight
 
         /// A font weight of medium.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let medium: Font.Weight
 
         /// A font weight of semibold.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let semibold: Font.Weight
 
         /// A font weight of bold.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let bold: Font.Weight
 
         /// A font weight of heavy.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let heavy: Font.Weight
 
         /// A font weight of black.
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///            }
+        ///            .font(.title)
+        ///         }
+        ///     }
+        ///
+        ///
         public static let black: Font.Weight
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -18920,6 +19339,8 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
 /// A configuration for a navigation bar that represents a view at the top of a
 /// navigation stack.
+///
+/// [[navigation-bar-items]]
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 public struct NavigationBarItem {
@@ -19933,6 +20354,24 @@ public struct OutlineSubgroupChildren : View {
 }
 
 /// An index view style that places a page index view over its content.
+///
+/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
+///
+///     var body: some View {
+///         TabView {
+///             ForEach(items, id: /\.self) {
+///                 Text($0)
+///             }
+///         }
+///         .tabViewStyle(PageTabViewStyle())
+///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+///     }
+/// }
+/// ```
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -22134,6 +22573,34 @@ extension PrimitiveButtonStyle {
     ///
     /// The system calls this method for each `Button` instance in a view
     /// hierarchy where this style is the current button style.
+    ///
+    /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
+    ///
+    /// ```
+    ///  struct BananaView: View {
+    ///      var body: some View {
+    ///          VStack {
+    ///              Button("Banana 🍌🍌", action: { tap() })
+    ///              Button("Apple 🍏🍏", action: { tap() })
+    ///              Button("Peach 🍑🍑", action: { tap() })
+    ///          }
+    ///          .buttonStyle(BananaButtonStyle(color: .yellow))
+    ///      }
+    ///
+    ///      func tap() {}
+    ///  }
+    ///
+    ///  struct BananaButtonStyle: PrimitiveButtonStyle {
+    ///    let color: Color
+    ///
+    ///    func makeBody(configuration: Configuration) -> some View {
+    ///        configuration.label
+    ///            .padding()
+    ///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
+    ///            .onTapGesture { configuration.trigger() }
+    ///    }
+    ///  }
+    /// ```
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -27294,6 +27761,19 @@ extension Spacer : View {
 
 /// A navigation view style represented by a view stack that only shows a
 /// single top view at a time.
+///
+/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello Bananas🍌🍌")
+///         }
+///         .navigationViewStyle(StackNavigationViewStyle())
+///     }
+/// }
+/// ```
 @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct StackNavigationViewStyle : NavigationViewStyle {
@@ -31740,7 +32220,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// ```
 ///
 /// In this example, the `ActivityIndicator` from before is used and can be toggled by passing a boolean to `ActivityIndicator/init(isAnimated:)`.
-///
+/// [uiviewrepresentable-context ->]
 /// ### Context-aware `UIViewRepresentable`s
 ///
 /// SwiftUI heavily relies on the environment, by way of environment objects (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`). The latter – environment values – are useful for creating intelligent and context-aware UIKit ports.
@@ -31769,7 +32249,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 /// }
 /// ```
-///
+/// [<-]
 /// In this example, `context` is used to access the view's current `environment` (via `context.environment`), giving you access to the latest `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get rid of the `isAnimated` parameter in favor of reading it from the context. This has the added advantage of being passed from any level at the top, because environment values propagate down the view hierarchy.
 ///
 /// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
@@ -32102,6 +32582,8 @@ extension UIViewRepresentable {
 /// in this structure to configure your view. For example, use the provided
 /// environment values to configure the appearance of your view. Don't create
 /// this structure yourself.
+///
+/// [[uiviewrepresentable-context]]
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -33249,14 +33731,26 @@ extension View {
     /// Sets the style for buttons within this view to a button style with a
     /// custom appearance and custom interaction behavior.
     ///
-    /// To set a specific style for all button instances within a view, use the
-    /// `View/buttonStyle(_:)-66fbx` modifier:
+    /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
     ///
-    ///     HStack {
-    ///         Button("Sign In", action: signIn)
-    ///         Button("Register", action: register)
-    ///     }
-    ///     .buttonStyle(BorderedButtonStyle())
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///              VStack {
+    ///                  Button("Plain Banana🍌🍌") { tap() }
+    ///                      .buttonStyle(PlainButtonStyle())
+    ///
+    ///                  Button("Borderless Banana🍌🍌") { tap() }
+    ///                      .buttonStyle(BorderlessButtonStyle())
+    ///
+    ///                  Button("Default Banana🍌🍌") { tap() }
+    ///                      .buttonStyle(DefaultButtonStyle())
+    ///              }
+    ///              .font(.title2)
+    ///          }
+    ///
+    ///          func tap() {}
+    ///      }
     public func buttonStyle<S>(_ style: S) -> some View where S : PrimitiveButtonStyle { }
 
 }
@@ -33831,14 +34325,26 @@ extension View {
     /// Sets the style for buttons within this view to a button style with a
     /// custom appearance and standard interaction behavior.
     ///
-    /// To set a specific style for all button instances within a view, use the
-    /// `View/buttonStyle(_:)-66fbx` modifier:
+    /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
     ///
-    ///     HStack {
-    ///         Button("Sign In", action: signIn)
-    ///         Button("Register", action: register)
-    ///     }
-    ///     .buttonStyle(BorderedButtonStyle())
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///              VStack {
+    ///                  Button("Plain Banana🍌🍌") { tap() }
+    ///                      .buttonStyle(PlainButtonStyle())
+    ///
+    ///                  Button("Borderless Banana🍌🍌") { tap() }
+    ///                      .buttonStyle(BorderlessButtonStyle())
+    ///
+    ///                  Button("Default Banana🍌🍌") { tap() }
+    ///                      .buttonStyle(DefaultButtonStyle())
+    ///              }
+    ///              .font(.title2)
+    ///          }
+    ///
+    ///          func tap() {}
+    ///      }
     public func buttonStyle<S>(_ style: S) -> some View where S : ButtonStyle { }
 
 }
@@ -34245,15 +34751,32 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that sets the color of the foreground elements displayed by this view.
-    ///
-    /// - Parameter color: The foreground color to use when displaying this
-    ///   view. Pass `nil` to remove any custom foreground color and to allow
-    ///   the system or the container to provide its own foreground color.
-    ///   If a container-specific override doesn't exist, the system uses
-    ///   the primary color.
-    ///
-    /// - Returns: A view that uses the foreground color you supply.
+  /// Sets the color of the text displayed by this view.
+  ///
+  /// Use this method to change the color of the text rendered by a text view.
+  ///
+  /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
+  ///
+  /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
+  ///
+  ///     struct ExampleView: View {
+  ///        var body: some View {
+  ///            VStack {
+  ///                Text("Banana🍌🍌")
+  ///                    .foregroundColor(.yellow)
+  ///                Text("Apple 🍎🍎")
+  ///                    .foregroundColor(.red)
+  ///                Text("Peach 🍑🍑")
+  ///                    .foregroundColor(.orange)
+  ///            }
+  ///            .font(.largeTitle)
+  ///        }
+  ///     }
+  ///
+  ///
+  ///
+  /// - Parameter color: The color to use when displaying this text.
+  /// - Returns: A text view that uses the color value you supply.
     @inlinable public func foregroundColor(_ color: Color?) -> some View { }
 
 }
@@ -37162,6 +37685,8 @@ extension View {
     /// modifier only takes effect when this view is inside of and visible
     /// within a `NavigationView`.
     ///
+    /// [[navigation-title-display-mode]]
+    ///
     /// In the example below, text for the navigation bar title is provided
     /// using a `Text` view. The navigation bar title's
     /// `NavigationBarItem/TitleDisplayMode` is set to `.inline` which places
@@ -37197,6 +37722,8 @@ extension View {
     /// from one of the `NavigationBarItem/TitleDisplayMode` styles. This
     /// modifier only takes effect when this view is inside of and visible
     /// within a `NavigationView`.
+    ///
+    /// [[navigation-title-display-mode]]
     ///
     /// In the example below, text for the navigation bar title is provided
     /// using a string. The navigation bar title's
