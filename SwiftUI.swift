@@ -18365,6 +18365,27 @@ public struct LazyVGrid<Content> : View where Content : View {
 
     /// Creates a grid that grows vertically, given the provided properties.
     ///
+    /// ```
+    /// struct EmojiGridView: View {
+    ///     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+    ///
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
+    ///                 ForEach((0...79), id: \.self) {
+    ///                     let codepoint = $0 + 0x1f600
+    ///                     let codepointString = String(format: "%02X", codepoint)
+    ///                     Text("\(codepointString)")
+    ///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+    ///                     Text("\(emoji)")
+    ///                 }
+    ///             }
+    ///             .font(.largeTitle)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///   - columns: An array of grid items to size and position each row of
     ///    the grid.
