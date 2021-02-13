@@ -904,7 +904,7 @@ public struct Alert {
 ///
 /// There are 9 out-of-the-box alignments:
 /// 1. ``Alignment/topLeading``
-/// 2. ``Alignment/topCenter``
+/// 2. ``Alignment/top``
 /// 3. ``Alignment/topTrailing``
 /// 4. ``Alignment/leading``
 /// 5. ``Alignment/center``
@@ -4343,7 +4343,7 @@ extension BlendMode : Hashable {
 /// Pressing and then dragging into the contents triggers the chosen action on
 /// release.
 ///
-/// For example, 
+/// For example,
 ///
 /// ![DefaultMenu Example 1](default-menu-example.gif)
 ///
@@ -4369,7 +4369,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     /// By default, the borderless style displays a visual indicator that it
     /// represents a menu.
     ///
-    /// For example, 
+    /// For example,
     ///
     /// ![DefaultMenu Example 1](default-menu-example.gif)
     ///
@@ -4453,15 +4453,23 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// the button. The label is a view that describes the button's action, for
 /// example, by showing text such as Cancel or an icon such as a back arrow.
 ///
-///     Button(action: signIn) {
-///         Text("Sign In")
+///     struct SignInView: View {
+///         var body: some View {
+///             Button(action: { /*sign the user in*/ }) {
+///                 Text("Sign In")
+///             }
+///         }
 ///     }
 ///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
 /// parameter, instead of a trailing closure:
 ///
-///     Button("Sign In", action: signIn)
+///     struct EasySignInView: View {
+///         var body: some View {
+///             Button("Sign In", action: { /*sign the user in*/ })
+///         }
+///     }
 ///
 /// The method of triggering the button varies by platform:
 /// - In iOS and watchOS, the user triggers a standard button by tapping on it.
@@ -4477,22 +4485,37 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// list cell that triggers an action when selected by the user, add a button to
 /// the list's content. For example:
 ///
-///     // A list of items, where the last row, when triggered,
-///     // opens a UI for adding a new item.
-///     List {
-///         ForEach(items) { item in
-///             Text(item.title)
+///     struct Item: Identifiable {
+///         let id = UUID()
+///         let title: String
+///     }
+///
+///     struct ListView: View {
+///         let items = [Item(title: "🍌"), Item(title: "🍑")]
+///         var body: some View {
+///             // A list of items, where the last row, when triggered,
+///             // opens a UI for adding a new item.
+///             List {
+///                 ForEach(items) { item in
+///                     Text(item.title)
+///                 }
+///                 Button("Add Item", action: { /*add item*/ } )
+///             }
 ///         }
-///         Button("Add Item", action: addItem)
 ///     }
 ///
 /// Similarly, to create a context menu item that triggers an action, add a
 /// button to the menu's content:
 ///
-///     .contextMenu {
-///         Button("Cut", action: cut)
-///         Button("Copy", action: copy)
-///         Button("Paste", action: paste)
+///     struct ContextMenuView: View {
+///         var body: some View {
+///             Text("Press and hold for copy-paste options")
+///                 .contextMenu {
+///                     Button("Cut", action: { /*cut*/ } )
+///                     Button("Copy", action: { /*copy*/ } )
+///                     Button("Paste", action: { /*paste*/ } )
+///                 }
+///         }
 ///     }
 ///
 /// This pattern extends to most other container views in SwiftUI that have
@@ -4507,15 +4530,41 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// `PrimitiveButtonStyle` protocol. To set a specific style for all button
 /// instances within a view, use the `View/buttonStyle(_:)-66fbx` modifier:
 ///
-///     HStack {
-///         Button("Sign In", action: signIn)
-///         Button("Register", action: register)
+///     struct ButtonView: View {
+///         var body: some View {
+///             HStack {
+///                 Button("Sign In", action: { /*sign in*/ } )
+///                 Button("Register", action: { /*register*/ } )
+///             }
+///             .buttonStyle(BorderedButtonStyle())
+///         }
 ///     }
-///     .buttonStyle(BorderedButtonStyle())
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Button<Label> : View where Label : View {
 
     /// Creates a button that displays a custom label.
+    ///
+    ///     struct SignInView: View {
+    ///         var body: some View {
+    ///             Button(action: { /*sign the user in*/ }) {
+    ///                 Text("Sign In")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// You can also use multiple trailing closure syntax to accomplish
+    /// the same task:
+    ///
+    ///     struct SignInView: View {
+    ///         var body: some View {
+    ///             Button {
+    ///                 /*sign the user in*/
+    ///             } label: {
+    ///                 Text("Sign In")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
@@ -4544,6 +4593,13 @@ extension Button where Label == Text {
     /// To initialize a button with a string variable, use
     /// `Button/init(_:action:)-lpm7` instead.
     ///
+    ///     struct EasySignInView: View {
+    ///         let titleText = LocalizedStringKey("Sign In")
+    ///         var body: some View {
+    ///             Button(titleTiext, action: { /*sign the user in*/ })
+    ///         }
+    ///     }
+    ///
     /// - Parameters:
     ///   - titleKey: The key for the button's localized title, that describes
     ///     the purpose of the button's `action`.
@@ -4558,6 +4614,13 @@ extension Button where Label == Text {
     ///
     /// To initialize a button with a localized string key, use
     /// `Button/init(_:action:)-1asy` instead.
+    ///
+    ///     struct EasySignInView: View {
+    ///         let titleText = "Sign In"
+    ///         var body: some View {
+    ///             Button(titleTiext, action: { /*sign the user in*/ } )
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - title: A string that describes the purpose of the button's `action`.
@@ -4580,8 +4643,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     /// For example, the following style adds a red border around the button,
     /// but otherwise preserves the button's current style:
     ///
-    ///     struct RedBorderedButtonStyle : PrimitiveButtonStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///     struct RedBorderedButtonStyle: PrimitiveButtonStyle {
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             Button(configuration)
     ///                 .border(Color.red)
     ///         }
@@ -4678,7 +4741,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ButtonStyle{ }
+public protocol ButtonStyle { }
 extension ButtonStyle {
 
     /// A view that represents the body of a button.
@@ -4698,7 +4761,7 @@ extension ButtonStyle {
 
 /// The properties of a button.
 ///
-/// This property represents the view state of the `Button` that `ButtonStyle` modifies. 
+/// This property represents the view state of the `Button` that `ButtonStyle` modifies.
 //`ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
@@ -7391,7 +7454,7 @@ public struct DefaultListStyle : ListStyle {
 /// You can override a menu's style. To apply the default style to a menu, or to
 /// a view that contains a menu, use the `View/menuStyle(_:)` modifier.
 ///
-/// For example, 
+/// For example,
 ///
 /// ![DefaultMenu Example 1](default-menu-example.gif)
 ///
@@ -7619,8 +7682,8 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 
 /// The default `TabView` style.
 ///
-/// On iOS the default TabView looks as follows: 
-/// If you don't specify, a ``view/tabviewstyle(_:)``, this is what it defaults to. 
+/// On iOS the default TabView looks as follows:
+/// If you don't specify, a ``view/tabviewstyle(_:)``, this is what it defaults to.
 ///
 /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
@@ -7892,15 +7955,15 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ```
 /// struct ExampleView: View {
-///   var body: some View {
-///     VStack {
-///       Text("My Awesome Book")
+///     var body: some View {
+///         VStack {
+///             Text("My Awesome Book")
 ///
-///       Divider()
+///             Divider()
 ///
-///       Text("My Name")
+///             Text("My Name")
+///         }
 ///     }
-///   }
 /// }
 /// ```
 ///
@@ -7910,21 +7973,37 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ```
 /// struct ExampleView: View {
-///   var body: some View {
-///     HStack {
-///       Text("This is a line of text")
+///     var body: some View {
+///         HStack {
+///             Text("This is a line of text")
 ///
-///       Divider()
+///             Divider()
 ///
-///       Text("This is an unrelated line of text")
+///             Text("This is an unrelated line of text")
+///         }
 ///     }
-///   }
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
 	/// Creates a new `Divider`.
+    ///
+    /// See ``Divider`` for more on what a divider is and how to use it.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text("This is a line of text")
+    ///
+    ///             Divider()
+    ///
+    ///             Text("This is an unrelated line of text")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public init() { }
 
     /// The type of view representing the body of this view.
@@ -10327,8 +10406,10 @@ public struct EmptyCommands : Commands {
 ///     }
 /// }
 /// ```
+///
 /// Account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
+///
 /// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
 ///     let label: Label
@@ -10347,6 +10428,24 @@ public struct EmptyCommands : Commands {
 @frozen public struct EmptyView : View {
 
 	/// Creates a new `EmptyView`.
+    ///
+    /// See ``EmptyView`` for more on empty views and how to use them.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Hello")
+    ///
+    ///             EmptyView()
+    ///                 .frame(width: 1000, height: 1000)
+    ///                 .background(Color.red)
+    ///
+    ///             Text("World")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
     /// The type of view representing the body of this view.
@@ -10419,7 +10518,13 @@ public struct EmptyCommands : Commands {
     ///     struct MyView: View {
     ///         @Environment(\.colorScheme) var colorScheme: ColorScheme
     ///
-    ///         // ...
+    ///         var body: some View {
+    ///             if colorScheme == .dark {
+    ///                 Text("This is ⬛️ content")
+    ///             } else {
+    ///                 Text("This is ⬜️ content")
+    ///             }
+    ///         }
     ///     }
     ///
     /// SwiftUI automatically updates any parts of `MyView` that depend on
@@ -10437,13 +10542,15 @@ public struct EmptyCommands : Commands {
     /// However, you don't access `wrappedValue` directly. Instead, you read the
     /// property variable created with the `Environment` property wrapper:
     ///
-    ///     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    ///     struct MyView: View {
+    ///         @Environment(\.colorScheme) var colorScheme: ColorScheme
     ///
-    ///     var body: some View {
-    ///         if colorScheme == .dark {
-    ///             DarkContent()
-    ///         } else {
-    ///             LightContent()
+    ///         var body: some View {
+    ///             if colorScheme == .dark {
+    ///                 Text("This is ⬛️ content")
+    ///             } else {
+    ///                 Text("This is ⬜️ content")
+    ///             }
     ///         }
     ///     }
     ///
@@ -10738,6 +10845,44 @@ extension EnvironmentKey {
     public var projectedValue: EnvironmentObject<ObjectType>.Wrapper { get }
 
     /// Creates an environment object.
+    ///
+    /// This initializer is rarely used directly. Instead, use the
+    /// `@EnvironmentObject` property wrapper to
+    /// read the enviornment object from the environment.
+    ///
+    /// Inject the object into the environment using the
+    /// ``View/environmentObject(_:)`` modifier.
+    ///
+    /// ```
+    /// class AppModel: ObservableObject {
+    ///     let text: String = "some text"
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     @StateObject var appModel = AppModel()
+    ///
+    ///     var body: some View {
+    ///         IntermediateView()
+    ///             .environmentObject(appModel)
+    ///     }
+    /// }
+    ///
+    /// struct IntermediateView: View {
+    ///     var body: some View {
+    ///         ChildView()
+    ///             .padding()
+    ///     }
+    /// }
+    ///
+    /// struct ChildView: View {
+    ///     @EnvironmentObject var appModel: AppModel
+    ///
+    ///     var body: some View {
+    ///         Text(appModel.text)
+    ///     }
+    /// }
+    ///
+    /// ```
     public init() { }
 }
 
@@ -12502,7 +12647,7 @@ extension Font {
     /// - ``font/textstyle/footnote`
     /// - ``font/textstyle/caption`
     /// - ``font/textstyle/caption2`
-    /// 
+    ///
     /// ![TextStyle Example 1](text-style-example.png)
     ///
     /// ```
@@ -12537,7 +12682,7 @@ extension Font {
     ///       }
     ///  }
     /// ```
-    
+
     public enum TextStyle : CaseIterable {
 
         /// The font style for large titles.
@@ -13391,10 +13536,16 @@ public struct ForEach<Data, ID, Content> where Data : RandomAccessCollection, ID
 
     /// The collection of underlying identified data that SwiftUI uses to create
     /// views dynamically.
+    ///
+    /// Reading from or writing too this property directly is rarely done.
+    /// See ``ForEach`` for more on using this view.
     public var data: Data
 
     /// A function you can use to create content on demand using the underlying
-    /// data.
+    /// data
+    ///
+    /// Reading from or writing too this property directly is rarely done.
+    /// See ``ForEach`` for more on using this view.
     public var content: (Data.Element) -> Content
 }
 
@@ -13966,6 +14117,29 @@ public struct GeometryProxy {
     public var content: (GeometryProxy) -> Content
 
     /// Creates a `GeometryReader` parent view using the parent's geometry.
+    ///
+    /// Use this initializer to read the geometry properties of a view
+    /// in laying out child views.
+    ///
+    /// See ``GeometryReader`` for a much more in-depth discusson
+    /// of the geometry reader and how to use it.
+    ///
+    /// See ``GeometryProxy`` for more details on the parameter passed
+    /// to the function parameter in this initializer.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         GeometryReader { proxy in
+    ///             Color.green
+    ///                 .frame(
+    ///                     width: proxy.size.width / 2,
+    ///                     height: proxy.size.height / 2
+    ///                 )
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter content: A closure that takes the geometry of the parent view and returns a content view.
     @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content) { }
@@ -14864,12 +15038,12 @@ extension GroupBoxStyle {
 
     /// Creates a `View` representing the body of a `GroupBox`.
     ///
-    /// Implement this method to create the view for a `GroupBox` that uses this style. 
+    /// Implement this method to create the view for a `GroupBox` that uses this style.
     /// The configuration contains:
     /// - label
     /// - content
     ///
-    /// For example, 
+    /// For example,
     ///     struct ExampleView: View {
     ///     @State private var username: String = ""
     ///     @State private var password: String = ""
@@ -14879,27 +15053,27 @@ extension GroupBoxStyle {
     ///             Form {
     ///                 Text("Username")
     ///                 TextField("", text: $username)
-    ///                
+    ///
     ///                 Text("Password")
     ///                 SecureField("", text: $password)
-    ///                
+    ///
     ///             }.padding(10)
     ///         }
     ///         .groupBoxStyle(MyStyle())
     ///         .frame(width: 300)
     ///     }
-    ///    
+    ///
     //     struct MyStyle: GroupBoxStyle {
     //         func makeBody(configuration: Configuration) -> some View {
     //             VStack {
     //                 HStack {
     //                     Rectangle().fill(Color.red).frame(width: 30, height: 3)
-                        
+
     //                     configuration.label
-                        
+
     //                     Rectangle().fill(Color.red).frame(width: 30, height: 3)
     //                 }
-                    
+
     //                 configuration.content
     //             }
     //         }
@@ -16952,8 +17126,8 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 
 /// This protocol is used to create styles for Label views
 ///
-/// 
-/// Implement this protocol to create a labelstyle that can easily be reused. 
+///
+/// Implement this protocol to create a labelstyle that can easily be reused.
 ///
 /// To configure the current label style for a view hierarchy, you only need to use the
 /// `View/labelStyle(_:)` modifier.
@@ -17028,10 +17202,10 @@ extension LabelStyle {
 
 /// The properties of a label.
 ///
-/// There are 2 properties of a label: 
-/// 1. Title 
-/// 2. Icon 
-/// 
+/// There are 2 properties of a label:
+/// 1. Title
+/// 2. Icon
+///
 /// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
 ///
 ///
@@ -17302,19 +17476,25 @@ public struct LazyHStack<Content> : View where Content : View {
 /// `LazyVGrid` consisting of a two-column grid of `Text` views, showing
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
-///      var columns: [GridItem] =
-///              Array(repeating: .init(.flexible()), count: 2)
-///      ScrollView {
-///          LazyVGrid(columns: columns) {
-///              ForEach((0...79), id: \.self) {
-///                  let codepoint = $0 + 0x1f600
-///                  let codepointString = String(format: "%02X", codepoint)
-///                  Text("\(codepointString)")
-///                  let emoji = String(Character(UnicodeScalar(codepoint)!))
-///                  Text("\(emoji)")
-///              }
-///          }.font(.largeTitle)
-///      }
+/// ```
+/// struct EmojiGridVie: View {
+///     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+///
+///     var body: some View {
+///         ScrollView {
+///             LazyVGrid(columns: columns) {
+///                 ForEach((0...79), id: \.self) {
+///                     let codepoint = $0 + 0x1f600
+///                     let codepointString = String(format: "%02X", codepoint)
+///                     Text("\(codepointString)")
+///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+///                     Text("\(emoji)")
+///                 }
+///             }.font(.largeTitle)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyVGrid<Content> : View where Content : View {
 
@@ -29712,13 +29892,13 @@ extension TabView where SelectionValue == Int {
 
 /// This protocol is used to change the appearance and interaction of a `TabView`.
 ///
-/// This protocol does not make its interface public and cannot be customized. The only 
+/// This protocol does not make its interface public and cannot be customized. The only
 /// types available are the ones included in the framework and are platform dependent:
 /// - ``DefaultTabViewStyle`` (all platforms)
 /// - ``PageTabViewStyle`` (NO macOS)
 /// - CarouselTabViewStyle (watchOS only)
 ///
-/// To learn more about each style, visit their pages. 
+/// To learn more about each style, visit their pages.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol TabViewStyle{ }
 extension TabViewStyle {
