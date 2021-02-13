@@ -18342,7 +18342,7 @@ public struct LazyHStack<Content> : View where Content : View {
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
 /// ```
-/// struct EmojiGridVie: View {
+/// struct EmojiGridView: View {
 ///     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
 ///
 ///     var body: some View {
