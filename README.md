@@ -10,7 +10,7 @@ Bring better documentation to SwiftUI developers – and do so through the powe
 ## How It Works
 
 ### 1. Edit code & submit PR 
-### 2. Your PR will be merged & wesbite auto updated 
+### 2. Your PR will be merged & website auto updated 
 ### 3. Your Work is live! 
 
 
