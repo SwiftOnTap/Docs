@@ -29395,7 +29395,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// Note:
 ///
 /// - `changeText` is not a `mutating ` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
-/// - All modifications to a state variable **must** happen on the main thread. Modifying a state variable on a background thread may lead to undefined behavior.
+/// - Accessing a state property is only valid when done form inside the view's body property or code called from the view's body property.
+/// - Because state properties should only be accessed from the body it's good practice to declare them as private.
+/// - Although you should only access the state from inside the body, you can mutate it elsewhere including from any thread.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct State<Value> : DynamicProperty {
 
