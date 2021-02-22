@@ -14979,6 +14979,29 @@ public struct GeometryProxy {
 	/// Unlike traditional view builders, the content builder is generated from
 	/// a parameter of type `GeometryProxy`, giving you access to the geometric
 	/// properties of the parent view.
+    ///
+    /// This property is usually specified directly using the
+    /// ``GeometryReader/init(content:)``
+    /// initializer. Technically this property can also be specified
+    /// directly, but since a geometry reader's ``Content`` **generic
+    /// type** can't change after initialization, it's rarely done in
+    /// practice.
+    ///
+    /// In the following example, this property is the trailing closure:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         GeometryReader { proxy in
+    ///             Color.green
+    ///                 .frame(
+    ///                     width: proxy.size.width / 2,
+    ///                     height: proxy.size.height / 2
+    ///                 )
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var content: (GeometryProxy) -> Content
 
     /// Creates a `GeometryReader` parent view using the parent's geometry.
