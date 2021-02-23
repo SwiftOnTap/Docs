@@ -2939,9 +2939,13 @@ extension App {
     /// Creates an instance of the app using the body that you define for its
     /// content.
     ///
+    /// **Don't use this function directly**.
     /// Swift synthesizes a default initializer for structures that don't
     /// provide one. You typically rely on the default initializer for
     /// your app.
+    ///
+    /// See ``App`` for details
+    /// and examples of how to use this protocol.
     init() { }
 }
 
@@ -2949,6 +2953,9 @@ extension App {
 extension App {
 
     /// Initializes and runs the app.
+    ///
+    /// **Don't use this function directly.** See ``App`` for details
+    /// and examples of how to use this protocol.
     ///
     /// If you precede your `SwiftUI/App` conformer's declaration with the
     /// [@main](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
@@ -3343,16 +3350,116 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 }
 
 /// The horizontal or vertical dimension in a 2D coordinate system.
+///
+/// Use this enumeration with ``ScrollView`` to specify whether the
+/// view can be scrolled vertically, horizontally, or both.
+///
+/// There are two possible axes:
+///
+/// 1. ``Axis/horizontal``
+/// 2. ``Axis/vertical``
+///
+/// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+/// on using this enumeration in the initializer.
+///
+///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(Axis.horizontal, showsIndicators: false) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Axis : Int8, CaseIterable {
 
     /// The horizontal dimension.
+    ///
+    /// Use this enumeration case with ``ScrollView`` to specify a
+    /// scrollable view in the horizontal direction.
+    ///
+    /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+    /// on using this enumeration in the initializer.
+    ///
+    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ScrollView(.horizontal, showsIndicators: false) {
+    ///             VStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case horizontal
 
     /// The vertical dimension.
+    ///
+    /// Use this enumeration case with ``ScrollView`` to specify a
+    /// scrollable view in the horizontal direction.
+    ///
+    /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+    /// on using this enumeration in the initializer.
+    ///
+    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ScrollView(.vertical) {
+    ///             VStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case vertical
 
     /// An efficient set of axes.
+    ///
+    /// Use this option set with ``ScrollView`` to specify whether the
+    /// view can be scrolled vertically, horizontally, or both.
+    ///
+    /// This `OptionSet` allows you to easily just pass one option - `.horizontal` -
+    /// or an array of options - `[.horizontal, .vertical]` - into the
+    /// same parameter without worrying about the type. See
+    /// the Apple docs on [OptionSet](https://developer.apple.com/documentation/swift/optionset)
+    /// for more on the protocol.
+    ///
+    /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+    /// on using this option set in the initializer.
+    ///
+    /// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ScrollView([.horizontal, .vertical]) {
+    ///             VStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     @frozen public struct Set : OptionSet {
 
         /// The element type of the option set.
@@ -3397,9 +3504,53 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         public init(rawValue: Int8) { }
 
         /// The option set corresponding to the horizontal axis.
+        ///
+        /// Use this property with ``ScrollView`` to specify a
+        /// scrollable view in the horizontal direction.
+        ///
+        /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+        /// on using this in the initializer.
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///     var body: some View {
+        ///         ScrollView(.horizontal, showsIndicators: false) {
+        ///             VStack {
+        ///                 Text("Bananas 🍌🍌")
+        ///                 Text("Apples 🍏🍏")
+        ///                 Text("Peaches 🍑🍑")
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         public static let horizontal: Axis.Set
 
         /// The option set corresponding to the vertical axis.
+        ///
+        /// Use this property with ``ScrollView`` to specify a
+        /// scrollable view in the horizontal direction.
+        ///
+        /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+        /// on using this in the initializer.
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///     var body: some View {
+        ///         ScrollView(.vertical) {
+        ///             VStack {
+        ///                 Text("Bananas 🍌🍌")
+        ///                 Text("Apples 🍏🍏")
+        ///                 Text("Peaches 🍑🍑")
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         public static let vertical: Axis.Set
 
         /// The type of the elements of an array literal.
@@ -6559,15 +6710,78 @@ extension ContainerRelativeShape : InsettableShape {
 }
 
 /// Constants that define how a view's content fills the available space.
+///
+/// Use this enumeration along with the
+/// ``View/aspectRatio(_:contentMode:)-27509`` and
+/// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+/// to specify how to change the aspect ratio of a view.
+///
+/// This enum has 2 options:
+///
+/// 1. ``ContentMode/fit``: Scale the content so that it can be fully seen
+/// in the available space.
+/// 2. ``ContentMode/fill``: Scale the content so that it fully fills
+/// the available space.
+///
+/// In the following example, we scale the ellipse down so that it fits
+/// perfectly in the space.
+///
+/// ```
+/// struct EllipseView: View {
+///     var body: some View {
+///         Ellipse()
+///             .fill(Color.purple)
+///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
+///             .frame(width: 200, height: 200)
+///             .border(Color(white: 0.75))
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
 
 	/// Fill mode that scales down view so that it can be fully seen in the
 	/// available space, even it it leaves whitespace.
+    ///
+    /// Use this enumeration case along with the
+    /// ``View/aspectRatio(_:contentMode:)-27509`` and
+    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// to specify how to change the aspect ratio of a view.
+    ///
+    /// ```
+    /// struct EllipseView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .fill(Color.purple)
+    ///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// }
+    /// ```
     case fit
 
     /// Fill mode that scales the view so that it fills the available space
     /// entirely, even if not all of the view can be seen.
+    ///
+    /// Use this enumeration along with the
+    /// ``View/aspectRatio(_:contentMode:)-27509`` and
+    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// to specify how to change the aspect ratio of a view.
+    ///
+    /// ```
+    /// struct EllipseView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .fill(Color.purple)
+    ///             .aspectRatio(0.75, contentMode: .fill) // 3:4 aspect ratio -> 3/4 = 0.75
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// }
+    /// ```
+    ///
     case fill
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -17403,6 +17617,9 @@ public struct InsetGroupedListStyle : ListStyle {
 
 /// The behavior and appearance of an inset list.
 ///
+/// Use the ``View/listStyle(_:)`` modifier
+/// to apply this list style to a ``List``.
+///
 /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
 ///
 ///
@@ -17424,18 +17641,125 @@ public struct InsetGroupedListStyle : ListStyle {
 public struct InsetListStyle : ListStyle {
 
     /// Creates an inset list style.
+    ///
+    /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+    ///
+    ///
+    ///      struct ExampleView: View {
+    ///          var body: some View {
+    ///             List {
+    ///                Text("Bananas 🍌🍌")
+    ///                Text("Apples 🍎🍎")
+    ///                Text("Peaches 🍑🍑")
+    ///             }
+    ///             .listStyle(InsetListStyle())
+    ///          }
+    ///      }
+    ///
     public init() { }
 }
 
 /// A shape type that is able to inset itself to produce another shape.
+///
+/// This is the protocol that allows you to inset and stroke shapes.
+///
+/// Types conforming to this protocol include:
+/// - ``Capsule``
+/// - ``Circle``
+/// - ``Ellipse``
+/// - ``Rectangle``
+/// - ``RoundedRectangle``
+///
+/// Any type conforming to this protocol automatically gets implementations
+/// of the ``InsettableShape/strokeBorder(_:style:antialiased)``
+/// modifier. This allows you to add a border to a shape without increasing
+/// its total size at all.
+///
+/// To conform to this protocol, there is only one requirement:
+/// the ``InsettableShape/inset(by:)`` function.
+/// Implement this function to describe how to inset a custom shape.
+///
+/// The following example shows how to conform a custom shape to this
+/// protocol, and then use it to stroke the border. (See
+/// ``Shape`` and ``Shape/path(in:)`` for more on creating cutom shapes.)
+///
+/// ```
+/// struct ArcView: View {
+///     var body: some View {
+///         Arc(endAngle: Angle(.degrees(270)))
+///             .strokeBorder(Color.green)
+///     }
+/// }
+///
+/// struct Arc: InsettableShape {
+///     var endAngle: Angle
+///     var insetAmount: CGFloat = 0
+///
+///     func path(in rect: CGRect) -> Path {
+///         Path { p in
+///             p.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+///                      radius: rect.width / 2 - insetAmount,
+///                      startAngle: .zero,
+///                      endAngle: endAngle,
+///                      clockwise: false)
+///         }
+///     }
+///
+///     func inset(by amount: CGFloat) -> some InsettableShape {
+///         var arc = self
+///         arc.insetAmount += amount
+///         return arc
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol InsettableShape : Shape{ }
+public protocol InsettableShape : Shape { }
 extension InsettableShape : Shape {
 
     /// The type of the inset shape.
     associatedtype InsetShape : InsettableShape
 
     /// Returns `self` inset by `amount`.
+    ///
+    /// This is the one required method for conforming to the
+    /// ``InsettableShape`` protocol. Shapes that already conform to
+    /// the protocol implement this function. To create your own custom
+    /// insettable shape, you must implement this function yourself.
+    ///
+    /// The following example shows a custom shape, called an `Arc`,
+    /// which implements this function to become insettable.
+    ///
+    /// ```
+    /// struct ArcView: View {
+    ///     var body: some View {
+    ///         Arc(endAngle: Angle(.degrees(270)))
+    ///             .strokeBorder(Color.green)
+    ///     }
+    /// }
+    ///
+    /// struct Arc: InsettableShape {
+    ///     var endAngle: Angle
+    ///     var insetAmount: CGFloat = 0
+    ///
+    ///     func path(in rect: CGRect) -> Path {
+    ///         Path { p in
+    ///             p.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+    ///                      radius: rect.width / 2 - insetAmount,
+    ///                      startAngle: .zero,
+    ///                      endAngle: endAngle,
+    ///                      clockwise: false)
+    ///         }
+    ///     }
+    ///
+    ///     func inset(by amount: CGFloat) -> some InsettableShape {
+    ///         var arc = self
+    ///         arc.insetAmount += amount
+    ///         return arc
+    ///     }
+    /// }
+    /// ```
+    ///
     func inset(by amount: CGFloat) -> Self.InsetShape { }
 }
 
@@ -17445,12 +17769,65 @@ extension InsettableShape {
     /// Returns a view that is the result of insetting `self` by
     /// `style.lineWidth / 2`, stroking the resulting shape with
     /// `style`, and then filling with `content`.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         let gradient = Gradient(colors: [.green, .blue])
+    ///         let linearGradient = LinearGradient(gradient: gradient,
+    ///                                             startPoint: .leading,
+    ///                                             endPoint: .trailing)
+    ///         let style = StrokeStyle(lineWidth: 15,
+    ///                                 lineCap: .butt,
+    ///                                 lineJoin: .round,
+    ///                                 miterLimit: 1,
+    ///                                 dash: [],
+    ///                                 dashPhase: 0)
+    ///
+    ///         return Cirlce()
+    ///             .strokeBorder(linearGradient, style: style)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - content: The ``ShapeStyle`` to fill the border with.
+    ///   - style: The ``StrokeStyle`` for filling the border.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder<S>(_ content: S, style: StrokeStyle, antialiased: Bool = true) -> some View where S : ShapeStyle { }
 
 
     /// Returns a view that is the result of insetting `self` by
     /// `style.lineWidth / 2`, stroking the resulting shape with
     /// `style`, and then filling with the foreground color.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         let style = StrokeStyle(lineWidth: 15,
+    ///                                 lineCap: .butt,
+    ///                                 lineJoin: .round,
+    ///                                 miterLimit: 1,
+    ///                                 dash: [],
+    ///                                 dashPhase: 0)
+    ///
+    ///         return Cirlce()
+    ///             .strokeBorder(style: style)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - style: The ``StrokeStyle`` for filling the border.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder(style: StrokeStyle, antialiased: Bool = true) -> some View { }
 
 
@@ -17458,6 +17835,29 @@ extension InsettableShape {
     /// border (aka inner stroke) of `self` with `content`. This is
     /// equivalent to insetting `self` by `width / 2` and stroking the
     /// resulting shape with `width` as the line-width.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         let gradient = Gradient(colors: [.green, .blue])
+    ///         let linearGradient = LinearGradient(gradient: gradient,
+    ///                                             startPoint: .leading,
+    ///                                             endPoint: .trailing)
+    ///
+    ///         return Cirlce()
+    ///             .strokeBorder(linearGradient, lineWidth: 15)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - content: The ``ShapeStyle`` to fill the border with.
+    ///   - lineWidth: The border width.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder<S>(_ content: S, lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View where S : ShapeStyle { }
 
 
@@ -17465,6 +17865,23 @@ extension InsettableShape {
     /// border (aka inner stroke) of `self` with the foreground color.
     /// This is equivalent to insetting `self` by `width / 2` and
     /// stroking the resulting shape with `width` as the line-width.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         Cirlce()
+    ///             .strokeBorder(lineWidth: 15)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - lineWidth: The border width.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder(lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View { }
 
 }
@@ -18376,8 +18793,32 @@ extension LabelStyleConfiguration.Icon : View {
 
 /// The different text directions used in different languages.
 ///
+/// Use this enumeration with the ``layoutDirection``
+/// environment property. See
+/// ``EnvironmentValues/layoutDirection`` for more on accessing
+/// and changing this property.
+///
+/// There are two possible layout directions:
+///
+/// 1. ``LayoutDirection/leftToRight``
+/// 2. ``LayoutDirection/rightToLeft``
+///
 /// Examples of left-to-right layout directions are English and Russian.
 /// Examples of right-to-left layout directions are Arabic and Hebrew.
+///
+/// In the example below, the left to right arrow is printed since we're
+/// in the English locale.
+///
+/// ```
+/// struct LayoutView: View {
+///     @Environment(\.layoutDirection) var direction
+///
+///     var body: some View {
+///         Text(direction == LayoutDirection.leftToRight ? "➡️" : "⬅️")
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum LayoutDirection : Hashable, CaseIterable {
 
@@ -18385,12 +18826,56 @@ public enum LayoutDirection : Hashable, CaseIterable {
 	///
 	/// In this layout direction, the leading edge would be on the left side,
 	/// and the trailing edge would be on the right side.
+    ///
+    /// Use this enumeration case with the ``layoutDirection``
+    /// environment property. See
+    /// ``EnvironmentValues/layoutDirection`` for more on accessing
+    /// and changing this property.
+    ///
+    /// Examples of left-to-right layout directions are English and Russian.
+    ///
+    /// In the example below, the left to right arrow is printed since we're
+    /// in the English locale.
+    ///
+    /// ```
+    /// struct LayoutView: View {
+    ///     @Environment(\.layoutDirection) var direction
+    ///
+    ///     var body: some View {
+    ///         Text(direction == .leftToRight ? "➡️" : "⬅️")
+    ///     }
+    /// }
+    /// ```
+    ///
     case leftToRight
 
     /// The text is read and written from left to right.
     ///
     /// In this layout direction, the leading edge would be on the right side,
     /// and the trailing edge would be on the left side.
+    ///
+    /// Use this enumeration case with the ``layoutDirection``
+    /// environment property. See
+    /// ``EnvironmentValues/layoutDirection`` for more on accessing
+    /// and changing this property.
+    ///
+    /// There are two possible layout directions:
+    ///
+    /// Examples of right-to-left layout directions are Arabic and Hebrew.
+    ///
+    /// In the example below, the left to right arrow is printed since we're
+    /// in the English locale.
+    ///
+    /// ```
+    /// struct LayoutView: View {
+    ///     @Environment(\.layoutDirection) var direction
+    ///
+    ///     var body: some View {
+    ///         Text(direction == .rightToLeft ? "⬅️" : "➡️")
+    ///     }
+    /// }
+    /// ```
+    ///
     case rightToLeft
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -18437,6 +18922,30 @@ public enum LayoutDirection : Hashable, CaseIterable {
 extension LayoutDirection {
 
     /// Create a direction from its UITraitEnvironmentLayoutDirection equivalent.
+    ///
+    /// This initializer is rarely used in SwiftUI. See
+    /// [these docs](https://developer.apple.com/documentation/uikit/uitraitenvironmentlayoutdirection)
+    /// for more info on layout direction in UIKit.
+    ///
+    /// Note that this is a failable initializer, so it must be unwrapped for
+    /// many use cases.
+    ///
+    /// See below for a simple example of how to use this.
+    ///
+    /// ```
+    /// import SwiftUI
+    /// import UIKit
+    ///
+    /// struct LayoutView: View {
+    ///     @Environment(\.layoutDirection) var direction
+    ///     let leftToRight = UITraitEnvironmentLayoutDirection.leftToRight
+    ///
+    ///     var body: some View {
+    ///         Text(direction == LayoutDirection(leftToRight) ? "➡️" : "⬅️")
+    ///     }
+    /// }
+    /// ```
+    ///
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
@@ -24204,35 +24713,251 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 }
 
 /// The size constraint for a preview.
+///
+/// Use this enumeration along with the
+/// ``View/previewLayout(_:)``
+/// view modifier to change the way a view is displayed in a preview.
+///
+/// This enumeration has 3 different cases:
+/// 1. ``PreviewLayout/device``: Center the preview in the specified device.
+/// 2. ``PreviewLayout/sizeThatFits``: Fix the preview to the view size.
+/// 3. ``PreviewLayout/fixed(width:height:)``: Center the preview in a fixed
+/// size container.
+///
+/// In the following example, we fit a preview box to the text view.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("➡️This box fits me snugly⬅️")
+///     }
+/// }
+///
+/// struct ContentView_Previews: PreviewProvider {
+///     static var previews: some View {
+///         ContentView()
+///             .previewLayout(.sizeThatFits)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewLayout {
 
     /// Center the preview in a container the size of the device on which the
     /// preview is running.
+    ///
+    /// Use this case alog with the
+    /// ``View/previewLayout(_:)``
+    /// view odifier to change the way a view is displayed in a preview.
+    ///
+    /// This is the default if no preview layout is specified.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a device! 📲")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.device)
+    ///     }
+    /// }
+    /// ```
+    ///
     case device
 
     /// Fit the container to the size of the preview when offered the size of
     /// the device on which the preview is running.
+    ///
+    /// Use this case alog with the
+    /// ``View/previewLayout(_:)``
+    /// view odifier to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("➡️This box fits me snugly⬅️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    /// }
+    /// ```
+    ///
     case sizeThatFits
 
     /// Center the preview in a fixed size container.
+    ///
+    /// Use this case alog with the
+    /// ``View/previewLayout(_:)``
+    /// view odifier to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a 💯 by 💯 box")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.fixed(width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
+    ///
     case fixed(width: CGFloat, height: CGFloat)
 }
 
 /// The operating system on which to run the preview.
+///
+/// By default, Xcode can infer the platform for a preview based on the
+/// target of the current file. However, you can also use this enumeration
+/// along with the
+/// ``PreviewProvider/platform``
+/// property to change the way a view is displayed in a preview.
+///
+/// This enumeration has 4 different cases:
+/// 1. ``PreviewPlatform/iOS``
+/// 2. ``PreviewPlatform/macOS``
+/// 3. ``PreviewPlatform/tvOS``
+/// 4. ``PreviewPlatform/watchOS``
+///
+/// In the following example, we change the preview platform to macOS.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("I am in a Mac 🖥")
+///     }
+/// }
+///
+/// struct ContentView_Previews: PreviewProvider {
+///     static var previews: some View {
+///         ContentView()
+///             .previewLayout(.sizeThatFits)
+///     }
+///
+///     static var platform: PreviewPlatform? { .macOS }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewPlatform {
 
 	/// The iOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a phone 📲")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .macOS }
+    /// }
+    /// ```
+    ///
     case iOS
 
     /// The macOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a Mac 🖥")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .macOS }
+    /// }
+    /// ```
+    ///
     case macOS
 
     /// The tvOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a TV 📺")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .tvOS }
+    /// }
+    /// ```
     case tvOS
 
     /// The watchOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a watch! ⌚️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .watchOS }
+    /// }
+    /// ```
     case watchOS
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -24330,6 +25055,23 @@ extension PreviewProvider : _PreviewProvider {
     /// the platform based on the file in which the `PreviewProvider` is
     /// defined. Return `nil` only when the file is in a target that supports
     /// multiple platforms.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a watch! ⌚️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .watchOS }
+    /// }
+    /// ```
     static var platform: PreviewPlatform? { get }
 }
 
@@ -24342,6 +25084,23 @@ extension PreviewProvider {
     /// the platform based on the file in which the `PreviewProvider` is
     /// defined. Return `nil` only when the file is in a target that supports
     /// multiple platforms.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a watch! ⌚️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .watchOS }
+    /// }
+    /// ```
     public static var platform: PreviewPlatform? { get }
 }
 
@@ -36673,6 +37432,7 @@ extension View {
     ///             .frame(width: 200, height: 200)
     ///             .border(Color(white: 0.75))
     ///     }
+    /// }
     /// ```
     ///
     /// - Parameters:
