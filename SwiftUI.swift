@@ -903,6 +903,8 @@ public struct Alert {
 /// See those pages for more on how to use them.
 ///
 /// There are 9 out-of-the-box alignments:
+///
+///
 /// 1. ``Alignment/topLeading``
 /// 2. ``Alignment/topCenter``
 /// 3. ``Alignment/topTrailing``
@@ -912,6 +914,7 @@ public struct Alert {
 /// 7. ``Alignment/bottomLeading``
 /// 8. ``Alignment/bottom``
 /// 9. ``Alignment/bottomTrailing``
+///
 ///
 /// In addition, you can also create your own alignments from the
 /// ``Alignment/init(horizontal:vertical)`` initializer.
@@ -1414,9 +1417,11 @@ extension Angle : Animatable {
 ///
 /// There are 3 main cases where AngularGradient can change:
 ///
+///
 /// 1. `endAngle - startAngle = 2π`
 /// 2. `endAngle - startAngle > 2π`
 /// 3. `endAngle - startAngle < 2π`
+///
 ///
 /// Note: Angles default to a clockwise rotation, but angles can be a negative value which will rotate the color counter-clockwise.
 ///
@@ -5643,13 +5648,19 @@ extension Color.RGBColorSpace : Hashable {
 /// In general, there are 3 types of color picker titles, and 2 binding types, for 6 initializers total.
 ///
 /// Title types:
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
 ///
+///
 /// Binding types:
+///
+///
 /// 1. ``CGColor``
 /// 2. ``Color``
+///
 ///
 /// You use `ColorPicker` by embedding it inside a view hierarchy and
 /// initializing it with a title string and a `Binding` to a `Color`:
@@ -6797,22 +6808,31 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// A picker control for selecting dates.
 ///
 /// You create a picker by providing 3 things:
+///
+///
 /// 1. a selection binding
 /// 2. a label
 /// 3. the editable parts of the date
 ///
+///
 /// There are four types of pickers, and three types of labels, making 12 total initializers.
 ///
 /// Picker types:
+///
+///
 /// 1. Unlimited range
 /// 2. Closed range (maximum and minimum)
 /// 3. From range (minimum only)
 /// 4. Through range (maximum only)
 ///
+///
 /// Label types:
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
+///
 ///
 /// A simple example looks like this:
 ///
@@ -9896,9 +9916,12 @@ extension Edge : RawRepresentable {
 /// The inset distances for the sides of a rectangle.
 ///
 /// Use this structure for 3 different modifiers:
+///
+///
 /// 1. ``View/listRowInsets(_:)``
 /// 2. ``View/padding(_:)``
 /// 3. ``Image/resizable(capInsets:resizingMode:)``
+///
 ///
 /// This structure represents a point value in all 4 rectangular directions,
 /// top, leading, bottom, trailing.
@@ -11410,10 +11433,13 @@ extension EnvironmentValues {
     /// view currently presented.
     ///
     /// This is useful for 4 types of views:
+    ///
+    ///
     /// 1. ``NavigationView``
     /// 2. ``View/sheet(isPresented:onDismiss:)``
     /// 3. ``View/popover(isPresented:onDismiss:)``
     /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
     ///
     /// See ``Environment`` for more on environment values and how to use
     /// the property wrapper.
@@ -11888,6 +11914,8 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 ///
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
+///
+///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
 /// 3. Expand the "Document Types" tab.
@@ -12063,6 +12091,8 @@ extension FileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -12175,6 +12205,8 @@ extension FileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -12293,6 +12325,8 @@ extension FileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -15264,9 +15298,12 @@ public struct GridItem {
     /// layout.
     ///
     /// There are three types of sizes:
+    ///
+    ///
     /// 1. ``griditem/size/fixed``
     /// 2. ``griditem/size/flexible`
     /// 3. ``griditem/size/adaptive``
+    ///
     ///
     public enum Size {
 
@@ -15322,11 +15359,13 @@ public struct GridItem {
 /// There are five different types of groups. Each groups together
 /// a type of content.
 ///
+///
 /// 1. ``ToolbarContent``
 /// 2. ``CustomizableToolbarContent``
 /// 3. ``Scene``
 /// 4. ``View``
 /// 5. ``Commands``
+///
 ///
 /// There are 2 main reasons to use a `Group`:
 /// - To exceed the 10 struct limitation of a function builder
@@ -15921,9 +15960,12 @@ public struct GroupedListStyle : ListStyle {
 /// guides to views.
 ///
 /// There are just 3 possible horizontal alignments:
+///
+///
 /// 1. ``HorizontalAlignment/leading``
 /// 2. ``HorizontalAlignment/center``
 /// 3. ``HorizontalAlignment/trailing``
+///
 ///
 /// See the example below for all three.
 ///
@@ -17894,8 +17936,11 @@ extension LabelStyle {
 /// The properties of a label.
 ///
 /// There are 2 properties of a label:
+///
+///
 /// 1. Title
 /// 2. Icon
+///
 ///
 /// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
 ///
@@ -19716,9 +19761,12 @@ public struct MagnificationGesture : Gesture {
 /// ``Link``, ``Label``, ``Divider``, and ``Image``.
 ///
 /// There are 3 different initializers, one for each of the different label types:
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
+///
 ///
 /// The following example presents a menu of three buttons and a submenu, which
 /// contains three buttons of its own.
@@ -21077,8 +21125,11 @@ extension NavigationViewStyle {
 /// A shape with a translation offset transform applied to it.
 ///
 /// An offset shape has two use cases:
+///
+///
 /// 1. Used directly via its initializer ``RotatedShape/init(shape:offset:)``.
 /// 2. The return value of ``Shape/offset(_:)`` and ``Shape/offset(x:y:)``.
+///
 ///
 /// Having an offset shape is helpful because it allows you to translate a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -21691,6 +21742,8 @@ public struct PageTabViewStyle : TabViewStyle {
 /// ### Creating a path
 ///
 /// There are 8 different ways to create a path:
+///
+///
 /// 1. Empty path: ``Path/init()``
 /// 2. Path from closure
 /// 3. Path from `CGMutablePath`
@@ -21702,6 +21755,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// 8. Path from ``RoundedRectangle``:
 /// ``Path/init(roundedRect:cornerSize:style:)`` or
 /// ``Path/init(roundedRect:cornerRadius:style:)``
+///
 ///
 /// ### Modifying and mutating a path
 ///
@@ -22848,9 +22902,12 @@ extension Path {
 /// A control that lets you select an item.
 ///
 /// You create a picker by providing 3 things:
+///
+///
 /// 1. a selection binding
 /// 2. a label
 /// 3. content for the picker to display.
+///
 ///
 /// Set the `selection` parameter to a "current selection" binding.
 ///
@@ -23460,10 +23517,13 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 /// interact with the view currently presented.
 ///
 /// This is useful for 4 types of views:
+///
+///
 /// 1. ``NavigationView``
 /// 2. ``View/sheet(isPresented:onDismiss:)``
 /// 3. ``View/popover(isPresented:onDismiss:)``
 /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+///
 ///
 /// See ``Environment`` for more on environment values and how to use
 /// the property wrapper.
@@ -23508,10 +23568,13 @@ public struct PresentationMode {
     /// programmatically read the presentation status of the current view.
     ///
     /// This is useful for 4 types of views:
+    ///
+    ///
     /// 1. ``NavigationView``
     /// 2. ``View/sheet(isPresented:onDismiss:)``
     /// 3. ``View/popover(isPresented:onDismiss:)``
     /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
     ///
     /// See ``Environment`` for more on environment values and how to use
     /// the property wrapper.
@@ -23551,10 +23614,13 @@ public struct PresentationMode {
     /// programmatically dismiss the view currently presented.
     ///
     /// This is useful for 4 types of views:
+    ///
+    ///
     /// 1. ``NavigationView``
     /// 2. ``View/sheet(isPresented:onDismiss:)``
     /// 3. ``View/popover(isPresented:onDismiss:)``
     /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
     ///
     /// Below is a simple example of programmatically dismissing a
     /// sheet using this environment value.
@@ -25166,6 +25232,8 @@ public struct RedactionReasons : OptionSet {
 ///
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
+///
+///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
 /// 3. Expand the "Document Types" tab.
@@ -25281,6 +25349,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -25388,6 +25458,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -25494,6 +25566,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -25601,6 +25675,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -25729,6 +25805,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -25838,6 +25916,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -25962,6 +26042,8 @@ extension ReferenceFileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -26015,8 +26097,10 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
 /// A shape with a rotation transform applied to it.
 ///
 /// A rotated shape has two use cases:
+///
 /// 1. Used directly via its initializer ``RotatedShape/init(shape:angle:anchor:)``.
 /// 2. The return value of ``Shape/rotation(_:anchor:)``.
+///
 ///
 /// Having a rotated shape is helpful because it allows you to rotate a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -26234,8 +26318,11 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 /// Defines the shape of a rounded rectangle's corners.
 
 /// This style has two options:
+///
+///
 /// 1. `roundedcornerstyle/circular`
 /// 2. `roundedcornerstyle/circular`
+///
 ///
 /// These styles have subtle but noticeable differences:
 ///
@@ -26685,9 +26772,12 @@ extension RoundedRectangle : InsettableShape {
 /// A shape with a scale transform applied to it.
 ///
 /// A scaled shape has two use cases:
+///
+///
 /// 1. Used directly via its initializer ``ScaledShape/init(shape:scale:anchor:)``.
 /// 2. The return value of the ``Shape/scale(x:y:anchor:)`` and
 /// ``Shape/scale(_:anchor:)``.
+///
 ///
 /// Having a scaled shape is helpful because it allows you to scale a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -27345,12 +27435,15 @@ extension ScenePhase : Hashable {
 /// use ``AppStorage`` instead.
 ///
 /// There are 6 possible scene storage types, and 6 corresponding initializers:
+///
+///
 /// 1. `Bool`
 /// 2. `Int`
 /// 3. `Double`
 /// 4. `String`
 /// 5. `URL`
 /// 6. `Data`
+///
 ///
 /// Here is a simple example using the common property wrapper syntax:
 ///
@@ -28279,6 +28372,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 ///
 /// In addition to the ability to create your own shape, there are also
 /// many pre-defined shapes for you to use:
+///
+///
 /// 1. ``Capsule``
 /// 2. ``Circle``
 /// 3. ``ContainerRelativeShape``
@@ -28287,6 +28382,7 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// 6. ``Path``
 /// 7. ``Rectangle``
 /// 8. ``RoundedRectangle``
+///
 ///
 /// Example usage would look like this:
 ///
@@ -28970,10 +29066,13 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
 /// ```
 ///
 /// In general, a slider has these four options:
+///
+///
 /// 1. Add a label
 /// 2. Change maximum and minimum values
 /// 3. Create a step size
 /// 4. Call a function when slider editing chances.
+///
 ///
 /// The slider's different initializers use different combinations of these options.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
@@ -29730,14 +29829,20 @@ extension State where Value : ExpressibleByNilLiteral {
 /// types, for a total of 9 different initializers.
 ///
 /// Label types:
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
 ///
+///
 /// Increment/decrement types:
+///
+///
 /// 1. Increment and decrement actions
 /// 2. Closed range binding
 /// 3. Unlimited range binding
+///
 ///
 /// Here is a very simple example:
 ///
@@ -30198,15 +30303,23 @@ extension Stepper where Label == Text {
 ///
 /// In addition, two special kinds of ``Shape``s have their own methods
 /// for adding strokes with custom styles:
+///
+///
 /// 1. ``InsettableShape``: An insettable shape allows you to inset the shape
 /// by half the stroke width, then apply the stroke, so that the final
 /// result remains inside the original frame. To achieve this effect,
 /// use one of these methods:
+///
+///
 ///     1. ``InsettableShape/strokeBorder(_:style:antialiased:)``
 ///     2. ``InsettableShape/strokeBorder(style:antialiased:)``
+///
+///
 /// 2. ``Path``: A path is a special kind of customizable shape. Use path's
 /// special stroking method, ``Path/strokedPath(_:)``, to return another path,
 /// rather than a generic shape.
+///
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct StrokeStyle : Equatable {
 
@@ -33051,8 +33164,11 @@ extension Transaction {
 /// A shape with an affine transform applied to it.
 ///
 /// A transformed shape has two use cases:
+///
+///
 /// 1. Used directly via its initializer ``TransformedShape/init(shape:transform:)``.
 /// 2. The return value of ``Shape/transform(_:)``.
+///
 ///
 /// Having an offset shape is helpful because it allows you to translate a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -34239,6 +34355,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///
 /// You can customizde the x and y coordinates or you can use a constant.
 /// SwiftUI has 10 UnitPoint constants:
+///
+///
 /// 1. ``UnitPoint/zero``
 /// 2. ``UnitPoint/center``
 /// 3. ``UnitPoint/leading``
@@ -34249,6 +34367,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// 8. ``UnitPoint/toptrailing``
 /// 9. ``UnitPoint/bottomleading``
 /// 10. ``UnitPoint/bottomtrailing``
+///
 ///
 /// UnitPoints are used commonly in shapes and gradients.
 ///
@@ -34521,11 +34640,14 @@ extension VectorArithmetic : AdditiveArithmetic {
 /// guides to views.
 ///
 /// There are 5 possible vertical alignments:
+///
+///
 /// 1. ``VerticalAlignment/top``
 /// 2. ``VerticalAlignment/center``
 /// 3. ``VerticalAlignment/bottom``
 /// 4. ``VerticalAlignment/firstTextBaseline``
 /// 5. ``VerticalAlignment/lastTextBaseline``
+///
 ///
 /// See the example below.
 ///
@@ -37642,8 +37764,11 @@ extension View {
     ///
     /// The transition is only one part of the equation - a timer curve (animation)
     /// must also be specified. There are two ways to specify the associated animation:
+    ///
+    ///
     /// 1. With ``View/animation(_:)``.
     /// 2. Explicitly, using ``withAnimation(_:_:)``.
+    ///
     ///
     /// See ``AnyTransition`` for more on how to create a transition.
     ///
@@ -38023,9 +38148,12 @@ extension View {
     /// A view modifier that sets the size for a Xcode preview.
     ///
     /// There are 3 different Xcode ``PreviewLayout`` types:
+    ///
+    ///
     /// 1. ``PreviewLayout/device``:  Adds the view to the center of the specified preview device.
     /// 2. ``PreviewLayout/sizeThatFits``: Fits a container around the previewed view.
     /// 3.  ``PreviewLayout/fixed(width:height:)``: Adds the view to a fixed size container.
+    ///
     ///
     /// ```
     /// struct ContentView: View {
@@ -38075,9 +38203,12 @@ extension View {
     /// ``WidgetPreviewContext``. Its initializer takes a ``WidgetFamily``.
     ///
     /// There are 3 types of `WidgetFamily` variables:
+    ///
+    ///
     /// 1. `systemSmall`
     /// 2. `systemMedium`
     /// 3. `systemLarge`
+    ///
     ///
     /// The example below is pulled from Apple's widget boilerplate.
     /// To pull this up yourself, go to *File > New > Target* and search
