@@ -3973,6 +3973,26 @@ public enum BlendMode {
     case darken
 
     /// Takes the lighter of the top and bottom picture pixels.
+    ///
+    /// ![Blend Mode](blendmode-lighten.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.lighten)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     case lighten
 
     /// Divides the bottom layer by the inversion of the top layer.
@@ -4143,7 +4163,7 @@ public enum BlendMode {
 
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
     ///
-    /// ![Blend Mode](blendmode-hu.png)
+    /// ![Blend Mode](blendmode-hue.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -4161,6 +4181,7 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
     case hue
 
     /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
@@ -18513,7 +18534,37 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 
 ///  A button that opens a URL
 ///
-///  Before Link was added to SwiftUI, there was no way equivalent of a hyperlink outside of a WKWebView. It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time.
+/// A `Link` opens a URL when the user clicks. There are three initializers:
+///
+/// - A `String`
+/// - A `LocalizedStringKey`
+/// - A `View`
+///
+/// For example:
+///
+/// ![Link](/link.gif)
+///
+///
+///     struct ExampleView: View {
+///
+///         let urlString = "https://swiftontap.com"
+///
+///         var body: some View {
+///             Group {
+///                 if let url = URL(string: urlString) {
+///                 // The new way to create a Link
+///                 Link("View SwiftOnTap", destination: url)
+///                 }
+///             }
+///         }
+///     }
+///
+///
+/// ### Background on `Link` in SwiftUI
+///
+///  Before Link was added to SwiftUI, there was no way equivalent of a hyperlink outside of a WKWebView.
+///
+/// It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time. For example:
 ///
 ///  ```
 ///  if URL(string: urlString) != nil {
@@ -18530,29 +18581,31 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///  }
 ///     ```
 ///
-///  In iOS 14 there is the option of Link, which does the action part of the Button above for us. Apple’s documentation unsafely unwraps a URL using the ‘!’ operator, but this is an extremely bad practice. You may know that this particular URL is created successfully because it links to example.com/TOS.html, a site owned by the Internet Assigned Numbers Authority (IANA) that convert URLs to IP addresses. But it's a mistake to assume that a URL string is valid and force unwrap the optional.
-
+///  In iOS 14 there is the option of Link, which does the action part of the Button above for us. Apple’s documentation unsafely unwraps a URL using the ‘!’ operator, but this is bad practice. You may know that this particular URL is created successfully because it links to example.com/TOS.html, a site owned by the Internet Assigned Numbers Authority (IANA) that convert URLs to IP addresses. But it's a mistake to assume that a URL string is valid and force unwrap the optional.
+///
 ///  This example is held back by the lack of optional binding (if let or guard let) in the first version of SwiftUI, as it is instead restricted to comparing the URL to nil to ensure it exists. When this comparison confirms that the URL is not nil, this still doesn’t mean I can use it in the Button without unwrapping it first. This is why there is a slightly confusing additional step in the Button action, which optionally binds the URL to ensure that it is not nil.
-
+///
 ///  The assertionFailure could have been in an else statement after the if let in the Button action, but the EmptyView has been added for consistency with the above Link example. An else statement containing EmptyView is not required, as any if statement around the only occupant of a ViewBuilder closure will return EmptyView when the if condition is false. If the URL was nil the user would see nothing, but an assertion would be triggered for the developer in debug mode.
-
+///
 ///  This would allow us to be aware that the URL was nil, but without causing a crash for the end-user.
-///  ```
-///  struct ExampleView: View {
-///    let urlString = "bananadocs.org"
-///    var body: some View {
-///      Group {
-///        if let url = URL(string: urlString) {
-///          //The new way to create a Link
-///          Link("Read more", destination: url)
-///         } else {
-///           EmptyView()
-///             .onAppear { assertionFailure("URL was nil") }
+///
+/// With updates to SwiftUI, the old code would roughly translate to the code below:
+///
+/// ![Link](/link.gif)
+///
+///     struct ExampleView: View {
+///
+///         let urlString = "https://swiftontap.com"
+///
+///         var body: some View {
+///             Group {
+///                 if let url = URL(string: urlString) {
+///                 // The new way to create a Link
+///                 Link("View SwiftOnTap", destination: url)
+///                 }
+///             }
 ///         }
-///      }
-///    }
-///  }
-///  ```
+///     }
 ///
 ///  Now that SwiftUI supports if let, it is possible to directly create properties like the URL and create Views that use that data. Just as before, the link is only shown when the URL can be created, but it is not necessary to do multiple checks just to make sure that this is the case.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -41158,6 +41211,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// This page was inspired by work from @philipcdavis on Github.
     ///
     /// - Parameter mask: The view whose alpha the rendering system applies to
     ///   the specified view.
