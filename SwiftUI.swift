@@ -18544,7 +18544,6 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///
 /// ![Link](/link.gif)
 ///
-///
 ///     struct ExampleView: View {
 ///
 ///         let urlString = "https://swiftontap.com"
@@ -18552,13 +18551,15 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         var body: some View {
 ///             Group {
 ///                 if let url = URL(string: urlString) {
-///                 // The new way to create a Link
-///                 Link("View SwiftOnTap", destination: url)
+///                     // Creates a Link
+///                     Link("View SwiftOnTap", destination: url)
 ///                 }
 ///             }
 ///         }
 ///     }
 ///
+/// ### Creating a `Link` with a View
+/// [[link-view]]
 ///
 /// ### Background on `Link` in SwiftUI
 ///
@@ -18600,8 +18601,8 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         var body: some View {
 ///             Group {
 ///                 if let url = URL(string: urlString) {
-///                 // The new way to create a Link
-///                 Link("View SwiftOnTap", destination: url)
+///                     // The new way to create a Link
+///                     Link("View SwiftOnTap", destination: url)
 ///                 }
 ///             }
 ///         }
@@ -18611,8 +18612,30 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Link<Label> : View where Label : View {
 
-    /// Creates a control, consisting of a URL and a label, used to navigate
-    /// to the given URL.
+    /// A `Link` initializer that opens a link when a view is clicked.
+    ///
+    /// [link-view ->]
+    /// ![Link View](/link-view.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///     let url: String = "https://swiftontap.com"
+    ///
+    ///     var body: some View {
+    ///         Group {
+    ///             if let url = URL(string: url) {
+    ///                 Link(destination: url) {
+    ///                     RoundedRectangle(cornerRadius: 10)
+    ///                         .fill(Color.pink)
+    ///                         .padding()
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// [<-]
     ///
     /// - Parameters:
     ///     - destination: The URL for the link.
@@ -18632,16 +18655,26 @@ public struct Link<Label> : View where Label : View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Link where Label == Text {
 
-    /// Creates a control, consisting of a URL and a title key, used to
-    /// navigate to a URL.
+    /// A `Link` initializer that opens a link when text is clicked.
     ///
-    /// Use `Link` to create a control that your app uses to navigate to a
-    /// URL that you provide. The example below creates a link to
-    /// `example.com` and uses `Visit Example Co` as the title key to
-    /// generate a link-styled view in your app:
+    /// The example below creates a link to `swiftontap.com` and uses `View SwiftOnTap` as the title key to generate a link-styled view in your app:
     ///
-    ///     Link("Visit Example Co",
-    ///           destination: URL(string: "https://www.example.com/")!)
+    /// ![Link](/link.gif)
+    ///
+    ///     struct ExampleView: View {
+    ///
+    ///         let urlString = "https://swiftontap.com"
+    ///
+    ///         var body: some View {
+    ///             Group {
+    ///                 if let url = URL(string: urlString) {
+    ///                     // Creates a Link
+    ///                     Link("View SwiftOnTap", destination: url)
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    ///
     ///
     /// - Parameters:
     ///     - titleKey: The key for the localized title that describes the
@@ -18649,10 +18682,9 @@ extension Link where Label == Text {
     ///     - destination: The URL for the link.
     public init(_ titleKey: LocalizedStringKey, destination: URL) { }
 
-    /// Creates a control, consisting of a URL and a title string, used to
-    /// navigate to a URL.
+    /// A `Link` initializer that opens a link when a title conforming to `StringProtocol` is clicked.
     ///
-    /// Use `Link` to create a control that your app uses to navigate to a
+    /// Per Apple's documentation: Use `Link` to create a control that your app uses to navigate to a
     /// URL that you provide. The example below creates a link to
     /// `example.com` and displays the title string you provide as a
     /// link-styled view in your app:
