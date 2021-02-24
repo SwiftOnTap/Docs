@@ -16265,45 +16265,76 @@ public struct IconOnlyLabelStyle : LabelStyle {
     public typealias Body = some View
 }
 
-/// A view that displays a drawable resource
+/// A view that displays an image.
 ///
-/// Images in SwiftUI are much easier than in UIKit. Instead of needing to create a UIImage(named: “Your file name”) and assigning it to yourUIImageView.image, Image is about as easy to create as Text.
+/// ### Get Started
 ///
-/// Just pass it a String and it’ll set it to a file with that name. If you launch your app and it doesn’t have a file with that name, you’ll get a useful console message saying:
+/// **First**, create an image in your Assets folder.
+///
+/// ![Image in assets folder](image-assets.png)
+///
+/// To follow along, save the following image as `"ocean"` in your project.
+///
+/// ![Ocean Image](ocean.jpg)
+///
+/// **Second**, reference the image by name in your code.
+///
+/// ![Simple Image](image-basic.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Image("ocean")
+///     }
+/// }
+/// ```
+///
+/// **Third**, remember to add the `Image/resizable(capInsets:resizingMode:)` modifier to make your image resizable.
+///
+/// Add some modifiers to style your image!
+///
+/// ![Resiable Images](image-resizable.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Image("ocean")
+///             .resizable()
+///             .scaledToFit()
+///             .cornerRadius(10)
+///             .padding()
+///     }
+/// }
+/// ```
+///
+/// ### Resizing Images
+///
+/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier must come first on an Image before making changes to its size in subsequent modifiers.
+///
+/// The ``View/scaledToFit()`` modifier will lock the aspect ratio of the image and scale it to the maximum size it can be without being too large for the screen.
+///
+/// The ``View/scaledToFill()`` modifier also scales the image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink the image to fit the available space.
+///
+/// ### SF Symbols
+///
+/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black.
+///
+/// To use these in custom images, simply label the String is passed into an Image as systemName.
+//
+/// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the symbol names easier to find. SF Symbols helps to maintain a consistent look with the iOS ecosystem.
+///
+/// Xcode 12 brought support for use in Mac apps. Attempting to use `Image(systemNamed:)`` to use an SF Symbol in Xcode 11 causes the error:
+///
+/// `Extraneous argument label ‘systemNamed:’ in call`
+///
+/// This error means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
+///
+/// ### Common Errors
+/// If your app doesn’t have a file with the image name, you’ll get a useful console message saying:
 ///
 ///  `No image named ‘Your file name’ found in asset catalog for main bundle.`
 ///
 /// If you find images not turning up in your app, you may want to search for this in the console.
-///
-/// ```
-/// struct ExampleView: View {
-///   var body: some View {
-///     List {
-///       Image("Your file name")
-///       Image("Your file name", bundle: Bundle.main)
-///         .resizable()
-///         .frame(width: 100)
-///       Image("Your file name", label: Text("My image label"))
-///         .resizable()
-///         .scaledToFit()
-///       Image(decorative: "Your file name")
-///         .resizable()
-///         .scaledToFill()
-///       Image(systemName: "gamecontroller")
-///       Image(uiImage: UIImage(named: "Your file name")!)
-///       Image(decorative: UIImage(named: "Your file name")!.cgImage!, scale: 0.5, orientation: .rightMirrored)
-///     }
-///   }
-/// }```
-/// ### Image is not resizable by default
-///
-/// The `.resizable()` modifier must come first on an Image before making changes to its size in subsequent modifiers. The `scaledToFit` modifier will lock the aspect ratio of the image and scale it to the maximum size it can be without being too large for the screen. The `scaledToFill` modifier also scales the image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink the image to fit the available space.
-///
-/// ### SF Symbols
-///
-/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black. To use these in custom images, simply label the String is passed into an Image as systemName. It’s probably worth downloading the SF Symbols Mac app to make the symbol names easier to find. Using SF Symbols gives your app a consistent look that will probably be taking over the iOS ecosystem in the coming years due to the flexibility and accessibility of these free symbols.
-///
-/// Xcode 12 brought support for use in Mac apps. Attempting to use Image(systemNamed:) to use an SF Symbol in Xcode 11 causes the error “Extraneous argument label ‘systemNamed:’ in call”. This means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Image : Equatable {
 
