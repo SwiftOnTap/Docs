@@ -5261,6 +5261,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///            Text(Color.yellow.description)
     ///        }
     ///    }
+    ///
+    ///
     public var description: String { get }
 
     /// The hash value.
@@ -5420,12 +5422,14 @@ extension Color {
 
     /// A color that represents the system or application accent color.
     ///
+    ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
     ///                .accentColor(Color.accentColor)
     ///        }
     ///    }
+    ///
     ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
@@ -5444,15 +5448,18 @@ extension Color {
 
     /// A true black color `View`.
     ///
+    ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Color.black
     ///        }
     ///    }
     ///
+    ///
     public static let black: Color
 
     /// A true white color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5460,9 +5467,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let white: Color
 
     /// A gray color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5470,9 +5479,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let gray: Color
 
     /// A stylized red color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5480,9 +5491,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let red: Color
 
     /// A stylized green color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5490,9 +5503,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let green: Color
 
     /// A stylized blue color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5500,9 +5515,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let blue: Color
 
     /// An orange color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5514,15 +5531,18 @@ extension Color {
 
     /// A stylized yellow color `View`.
     ///
+    ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Color.yellow
     ///        }
     ///    }
     ///
+    ///
     public static let yellow: Color
 
     /// A pink color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5530,15 +5550,18 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let pink: Color
 
     /// A purple color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Color.purple
     ///        }
     ///    }
+    ///
     ///
     public static let purple: Color
 
@@ -13725,7 +13748,10 @@ extension Font {
     /// ![Proportional font example](monospaced-digit-proportional-font.png)
     ///
     /// Monospaced font:
+    ///
     /// ![Monospaced font example](monospaced-digit-mono-font.png)
+    ///
+    ///
     /// [Image credits to Lior Azi](https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0)
     public func monospacedDigit() -> Font { }
 
