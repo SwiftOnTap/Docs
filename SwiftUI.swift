@@ -13556,6 +13556,9 @@ extension Font {
     ///         }
     ///     }
     ///
+    /// - Parameters:
+    ///   - style: The ``Font/TextStyle`` of the font.
+    ///   - design: The ``Font/Design`` of the font.
     public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
 
     /// A dynamic text style to use for fonts.
@@ -14243,11 +14246,25 @@ extension Font {
 
     /// Create a version of `self` that uses leading (line spacing) adjustment.
     ///
-    /// The availability of leading adjustments depends on font.
+    /// Use this modifier to change the spacing between lines in a ``Text``
+    /// view. See ``Font.Leading`` for the options.
     ///
-    /// For example, `Font.body.tightLeading()` will return a `Font` in `body`
-    /// text style with tight line spacing. This modifier may return the
-    /// original `Font` unchanged for some fonts.
+    /// ![Font Leading](font-leading.png)
+    ///
+    /// ```
+    /// struct LeadingView: View {
+    ///     var body: some View {
+    ///         HStack(alignment: .top) {
+    ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.loose))
+    ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.standard))
+    ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.tight))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public func leading(_ leading: Font.Leading) -> Font { }
 
@@ -14624,16 +14641,98 @@ extension Font {
     }
 
     /// The different types of line spacing.
+    ///
+    /// Use this enumeration with the ``Font/leading(_:)`` modifier to
+    /// change the spacing between lines in a ``Text`` view.
+    ///
+    /// ![Font Leading](font-leading.png)
+    ///
+    /// ```
+    /// struct LeadingView: View {
+    ///     var body: some View {
+    ///         HStack(alignment: .top) {
+    ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.loose))
+    ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.standard))
+    ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.tight))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public enum Leading {
 
     	/// Normal, medium line spacing.
+        ///
+        /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
+        /// specify normal spacing between lines in a ``Text`` view.
+        ///
+        /// This is the default line spacing.
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
+        /// ```
+        /// struct LeadingView: View {
+        ///     var body: some View {
+        ///         HStack(alignment: .top) {
+        ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.loose))
+        ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.standard))
+        ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.tight))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case standard
 
         /// Tight, small line spacing.
+        ///
+        /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
+        /// specify tight spacing between lines in a ``Text`` view.
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
+        /// ```
+        /// struct LeadingView: View {
+        ///     var body: some View {
+        ///         HStack(alignment: .top) {
+        ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.loose))
+        ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.standard))
+        ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.tight))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case tight
 
         /// Loose, large line spacing.
+        ///
+        /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
+        /// specify tight spacing between lines in a ``Text`` view.
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
+        /// ```
+        /// struct LeadingView: View {
+        ///     var body: some View {
+        ///         HStack(alignment: .top) {
+        ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.loose))
+        ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.standard))
+        ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.tight))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case loose
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -14682,54 +14781,181 @@ extension Font {
     /// weight, and a type design together. The following styles the system font
     /// as 17 point, `Font/Weight/semibold` text:
     ///
-    ///     Text("Hello").font(.system(size: 17, weight: .semibold))
+    /// ![Font System Semibold](font-system-semibold.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Hello")
+    ///             .font(.system(size: 17, weight: .semibold))
+    ///     }
+    /// }
+    /// ```
     ///
     /// While the following styles the text as 17 point `Font/Weight/bold`,
     /// and applies a `serif` `Font/Design` to the system font:
     ///
-    ///     Text("Hello").font(.system(size: 17, weight: .bold, design: .serif))
+    /// ![Font System Serif](font-system-serif.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Hello")
+    ///             .font(.system(size: 17, weight: .bold, design: .serif))
+    ///     }
+    /// }
+    /// ```
     ///
     /// If you want to use the default `Font/Weight`
     /// (`Font/Weight/regular`), you don't need to specify the `weight` in the
     /// method. The following example styles the text as 17 point
     /// `Font/Weight/regular`, and uses a `Font/Design/rounded` system font:
     ///
-    ///     Text("Hello").font(.system(size: 17, design: .rounded))
+    /// ![Font System Rounded](font-system-rounded.png)
     ///
-    /// Other examples of system font include:
-    ///
-    ///     struct ExampleView: View {
-    ///         var body: some View {
-    ///             Text("Bananas 🍌🍌")
-    ///                 .font(.system(size: 32, weight: .light, design: .monospaced))
-    ///         }
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Hello")
+    ///             .font(.system(size: 17, design: .rounded))
     ///     }
-    ///
-    /// And:
-    ///
-    ///     struct ExampleView: View {
-    ///         var body: some View {
-    ///             Text("Bananas 🍌🍌")
-    ///                 .font(.system(size: 32, weight: .heavy, design: .rounded))
-    ///         }
-    ///     }
+    /// }
+    /// ```
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
     /// A design to use for fonts.
+    ///
+    /// Use this enumeration with the ``Font/system(size:weight:design:)``
+    /// static function of ``Font`` to change a font design while remaining
+    /// within the system fonts.
+    ///
+    /// There are 4 different font designs:
+    ///
+    /// 1. ``Font/Design/default``
+    /// 2. ``Font/Design/serif``
+    /// 3. ``Font/Design/rounded``
+    /// 4. ``Font/Design/monospaced``
+    ///
+    /// ![Font Design](font-design.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("default")
+    ///                 .font(.system(size: 48, design: .default))
+    ///             Text("serif")
+    ///                 .font(.system(size: 48, design: .serif))
+    ///             Text("rounded")
+    ///                 .font(.system(size: 48, design: .rounded))
+    ///             Text("monospaced")
+    ///                 .font(.system(size: 48, design: .monospaced))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum Design : Hashable {
 
     	/// The standard sans-serif font design.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the sans serif system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case `default`
 
         /// A font design with serifs, or small strokes attached to the end of letters.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the serif system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         @available(watchOS 7.0, *)
         case serif
 
         /// A rounded font design.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the rounded system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case rounded
 
         /// A monospaced font design.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the monospaced system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         @available(watchOS 7.0, *)
         case monospaced
 
@@ -14774,32 +15000,94 @@ extension Font {
 
     /// Create a custom font with the given `name` and `size` that scales with
     /// the body text style.
+    ///
+    /// Use this static function to create a non-system font.
+    ///
+    /// Note that this font will scale based on the body text size. If
+    /// you instead wanted a fixed size, see
+    /// ``Font/custom(_:fixedSize:)``. If you want your custom font
+    /// to scale based on a different style, see
+    /// ``Font/custom(_:size:relativeTo:)``.
+    ///
+    /// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///            .font(.custom("American Typewriter", size: 32.0))
+    ///     }
+    /// }
+    /// ```
     public static func custom(_ name: String, size: CGFloat) -> Font { }
 
     /// Create a custom font with the given `name` and `size` that scales
     /// relative to the given `textStyle`.
+    ///
+    /// Use this static function to create a non-system font.
+    ///
+    /// Note that this font will scale based on the `relativeTo` parameter text style. If
+    /// you instead wanted a fixed size, see
+    /// ``Font/custom(_:fixedSize:)``. If you want your custom font
+    /// to scale based on the body style, see
+    /// ``Font/custom(_:size:)``.
+    ///
+    /// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///            .font(.custom("American Typewriter", size: 32.0, relativeTo: .title))
+    ///     }
+    /// }
+    /// ```
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static func custom(_ name: String, size: CGFloat, relativeTo textStyle: Font.TextStyle) -> Font { }
 
     /// Create a custom font with the given `name` and a fixed `size` that does
     /// not scale with Dynamic Type.
+    ///
+    /// Use this static function to create a non-system font.
+    ///
+    /// Note that this font will be a fixed size. If
+    /// you instead wanted your font to scale based on the body size, see
+    /// ``Font/custom(_:size:)``. If you want your custom font
+    /// to scale based on a different style, see
+    /// ``Font/custom(_:size:relativeTo:)``.
+    ///
+    /// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///            .font(.custom("American Typewriter", fixedSize: 32.0))
+    ///     }
+    /// }
+    /// ```
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static func custom(_ name: String, fixedSize: CGFloat) -> Font { }
 
     /// Creates a custom font from a platform font instance.
     ///
     /// Initializing `Font` with platform font instance
-    /// (<doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>) can bridge SwiftUI
-    /// `Font` with <doc://com.apple.documentation/documentation/AppKit/NSFont> or
-    /// <doc://com.apple.documentation/documentation/UIKit/UIFont>, both of which are
+    /// ([CTFont](https://developer.apple.com/documentation/coretext/ctfont-q6r)) can bridge SwiftUI
+    /// `Font` with [NSFont](https://developer.apple.com/documentation/appkit/nsfont) or
+    /// [UIFont](https://developer.apple.com/documentation/uikit/uifont), both of which are
     /// toll-free bridged to
-    /// <doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>. For example:
+    /// [CTFont](https://developer.apple.com/documentation/coretext/ctfont-q6r). For example:
     ///
+    /// ```
+    /// struct ContentView: View {
     ///     // Use native Core Text API to create desired ctFont.
     ///     let ctFont = CTFontCreateUIFontForLanguage(.system, 12, nil)!
     ///
-    ///     // Create SwiftUI Text with the CTFont instance.
-    ///     let text = Text("Hello").font(Font(ctFont))
+    ///     var body: some View {
+    ///         Text("Hello").font(Font(ctFont))
+    ///     }
+    /// }
+    /// ```
     public init(_ font: CTFont) { }
 }
 
