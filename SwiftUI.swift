@@ -4180,7 +4180,7 @@ public enum BlendMode {
     ///
     /// The actual formula for the operation is this:
     ///
-    ///     func softLight(a: Double, b: Double) -> Double {{}
+    ///     func softLight(a: Double, b: Double) -> Double {
     ///         if b < 0.5 {
     ///             return 2*a*b + a*a*(1 - 2*b)
     ///         } else {
@@ -13035,7 +13035,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -13074,7 +13073,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -13113,7 +13111,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -13153,7 +13150,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -13193,7 +13189,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -13202,11 +13197,38 @@ extension Font {
 
     /// A font with the subheadline text style.
     ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
-    ///         Text("Banana🍌🍌")
-    ///            .font(.title)
+    ///         Group {
+    ///             Text("LargeTitle 🍌🍌")
+    ///                 .font(.largeTitle)
+    ///             Text("Title 🍌🍌")
+    ///                 .font(.title)
+    ///             Text("Title2 🍌🍌")
+    ///                 .font(.title2)
+    ///             Text("Title3 🍌🍌")
+    ///                 .font(.title3)
+    ///             Text("Headline 🍌🍌")
+    ///                 .font(.headline)
+    ///             Text("Subheadline 🍌🍌")
+    ///                 .font(.subheadline)
+    ///         }
+    ///         Group {
+    ///             Text("Body 🍌🍌")
+    ///                 .font(.body)
+    ///             Text("Callout 🍌🍌")
+    ///                 .font(.callout)
+    ///             Text("Caption 🍌🍌")
+    ///                 .font(.caption)
+    ///             Text("Caption2 🍌🍌")
+    ///                 .font(.caption2)
+    ///             Text("Footnote 🍌🍌")
+    ///                 .font(.footnote)
+    ///
+    ///         }
     ///     }
     /// }
     /// ```
@@ -13414,21 +13436,21 @@ extension Font {
     ///
     /// For example, basic usage would be:
     ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(Font.system(.title))
-    ///             }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .font(Font.system(.title))
     ///         }
+    ///     }
     ///
     /// Your app can easily modify the system font by providing an alternate `desigin`. For example:
     ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(Font.system(.title, design: .monospaced))
-    ///             }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .font(Font.system(.title, design: .monospaced))
     ///         }
+    ///     }
     ///
     public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
 
@@ -13444,16 +13466,16 @@ extension Font {
     /// - ``font/textstyle/subheadline``
     /// - ``font/textstyle/body``
     /// - ``font/textstyle/callout``
-    /// - ``font/textstyle/footnote`
-    /// - ``font/textstyle/caption`
-    /// - ``font/textstyle/caption2`
+    /// - ``font/textstyle/footnote``
+    /// - ``font/textstyle/caption``
+    /// - ``font/textstyle/caption2``
     ///
     /// ![TextStyle Example 1](text-style-example.png)
     ///
     /// ```
     /// struct TextStyleView: View {
     ///     var body: some View {
-    ///         Group{
+    ///         Group {
     ///             Text("Large Title")
     ///                 .font(.largeTitle)
     ///             Text("Title")
@@ -13478,11 +13500,10 @@ extension Font {
     ///                 .font(.caption)
     ///              Text("Caption2")
     ///                .font(.caption2)
-    ///      }
-    ///       }
-    ///  }
+    ///         }
+    ///     }
+    /// }
     /// ```
-
     public enum TextStyle : CaseIterable {
 
         /// The font style for large titles.
@@ -13493,7 +13514,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13518,9 +13539,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         ///
         case largeTitle
@@ -13532,7 +13553,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13557,9 +13578,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case title
 
@@ -13570,7 +13591,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13595,9 +13616,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title2
@@ -13609,7 +13630,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13634,9 +13655,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title3
@@ -13648,7 +13669,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13673,9 +13694,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case headline
 
@@ -13686,7 +13707,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13711,9 +13732,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case subheadline
 
@@ -13724,7 +13745,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13749,9 +13770,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case body
 
@@ -13762,7 +13783,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13787,9 +13808,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case callout
 
@@ -13800,7 +13821,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13825,9 +13846,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case footnote
 
@@ -13838,7 +13859,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13863,9 +13884,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case caption
 
@@ -13876,7 +13897,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13901,9 +13922,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case caption2
@@ -13954,12 +13975,44 @@ extension Font {
 extension Font {
 
     /// Adds italics to the font.
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 16).italic())
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 16).bold())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func italic() -> Font { }
 
     /// Adjusts the font to enable all small capitals.
     ///
     /// See `Font/lowercaseSmallCaps()` and `Font/uppercaseSmallCaps()` for
     /// more details.
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("My Text Is Small Caps")
+    ///                 .font(Font.system(size: 20).smallCaps())
+    ///             Text("Mine's Lowercase Small Caps")
+    ///                 .font(Font.system(size: 20).lowercaseSmallCaps())
+    ///             Text("And Mine's Uppercase Small Caps")
+    ///                 .font(Font.system(size: 20).uppercaseSmallCaps())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func smallCaps() -> Font { }
 
     /// Adjusts the font to enable lowercase small capitals.
@@ -13968,6 +14021,23 @@ extension Font {
     /// font. It is generally used for display lines set in large and small
     /// caps, such as titles. It may include forms related to small capitals,
     /// such as old-style figures.
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("My Text Is Small Caps")
+    ///                 .font(Font.system(size: 20).smallCaps())
+    ///             Text("Mine's Lowercase Small Caps")
+    ///                 .font(Font.system(size: 20).lowercaseSmallCaps())
+    ///             Text("And Mine's Uppercase Small Caps")
+    ///                 .font(Font.system(size: 20).uppercaseSmallCaps())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func lowercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to enable uppercase small capitals.
@@ -13976,6 +14046,23 @@ extension Font {
     /// generally used for words which would otherwise be set in all caps, such
     /// as acronyms, but which are desired in small-cap form to avoid disrupting
     /// the flow of text.
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("My Text Is Small Caps")
+    ///                 .font(Font.system(size: 20).smallCaps())
+    ///             Text("Mine's Lowercase Small Caps")
+    ///                 .font(Font.system(size: 20).lowercaseSmallCaps())
+    ///             Text("And Mine's Uppercase Small Caps")
+    ///                 .font(Font.system(size: 20).uppercaseSmallCaps())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func uppercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to use monospace digits.
@@ -14009,8 +14096,70 @@ extension Font {
 
     /// Sets the weight of the font.
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// Use this function to change the weight of a ``Font`` object.
     ///
+    /// Alternatively, you can change the weight of a ``Text`` view
+    /// directly by using the
+    /// ``Text/fontWeight(_:)``
+    ///
+    /// See ``Font/Weight`` for the different possible of weights.
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("This is black text")
+    ///                 .font(Font.system(size: 20).weight(.blck))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    public func weight(_ weight: Font.Weight) -> Font { }
+
+    /// Adds bold styling to the font.
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 16).italic())
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 16).bold())
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    public func bold() -> Font { }
+
+    /// Create a version of `self` that uses leading (line spacing) adjustment.
+    ///
+    /// The availability of leading adjustments depends on font.
+    ///
+    /// For example, `Font.body.tightLeading()` will return a `Font` in `body`
+    /// text style with tight line spacing. This modifier may return the
+    /// original `Font` unchanged for some fonts.
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    public func leading(_ leading: Font.Leading) -> Font { }
+
+    /// A weight to use for fonts.
+    ///
+    /// Use this structure to change the font weight of some onscreen
+    /// text. It has 9 static members:
+    ///
+    /// 1. ``Weight/ultraLight``
+    /// 2. ``Weight/thin``
+    /// 3. ``Weight/light``
+    /// 4. ``Weight/regular``
+    /// 5. ``Weight/medium``
+    /// 6. ``Weight/semibold``
+    /// 7. ``Weight/bold``
+    /// 8. ``Weight/heavy``
+    /// 9. ``Weight/black``
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
@@ -14033,68 +14182,47 @@ extension Font {
     ///                     .fontWeight(Font.Weight.heavy)
     ///                 Text("black🍌")
     ///                     .fontWeight(Font.Weight.black)
-    ///            }
-    ///            .font(.title)
+    ///             }
+    ///             .font(.title)
     ///         }
     ///     }
-    ///
-    ///
-    public func weight(_ weight: Font.Weight) -> Font { }
-
-    /// Adds bold styling to the font.
-    public func bold() -> Font { }
-
-    /// Create a version of `self` that uses leading (line spacing) adjustment.
-    ///
-    /// The availability of leading adjustments depends on font.
-    ///
-    /// For example, `Font.body.tightLeading()` will return a `Font` in `body`
-    /// text style with tight line spacing. This modifier may return the
-    /// original `Font` unchanged for some fonts.
-    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public func leading(_ leading: Font.Leading) -> Font { }
-
-    /// A weight to use for fonts.
     @frozen public struct Weight : Hashable {
 
     	/// A font weight of ultra light.
-      ///
-      /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-      ///
-      ///
-      ///     struct ExampleView: View {
-      ///         var body: some View {
-      ///             VStack {
-      ///                 Text("ultraLight 🍌")
-      ///                     .fontWeight(Font.Weight.ultraLight)
-      ///                 Text("thin🍌")
-      ///                     .fontWeight(Font.Weight.thin)
-      ///                 Text("light🍌")
-      ///                     .fontWeight(Font.Weight.light)
-      ///                 Text("regular🍌")
-      ///                     .fontWeight(Font.Weight.regular)
-      ///                 Text("medium🍌")
-      ///                     .fontWeight(Font.Weight.medium)
-      ///                 Text("semibold🍌")
-      ///                     .fontWeight(Font.Weight.semibold)
-      ///                 Text("bold🍌")
-      ///                     .fontWeight(Font.Weight.bold)
-      ///                 Text("heavy🍌")
-      ///                     .fontWeight(Font.Weight.heavy)
-      ///                 Text("black🍌")
-      ///                     .fontWeight(Font.Weight.black)
-      ///            }
-      ///            .font(.title)
-      ///         }
-      ///     }
-      ///
-      ///
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///             }
+        ///             .font(.title)
+        ///         }
+        ///     }
+        ///
         public static let ultraLight: Font.Weight
 
         /// A font weight of thin.
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///
         ///     struct ExampleView: View {
         ///         var body: some View {
@@ -14129,7 +14257,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14162,7 +14289,6 @@ extension Font {
         /// A font weight of regular.
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///
         ///     struct ExampleView: View {
         ///         var body: some View {
@@ -14197,7 +14323,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14230,7 +14355,6 @@ extension Font {
         /// A font weight of semibold.
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///
         ///     struct ExampleView: View {
         ///         var body: some View {
@@ -14265,7 +14389,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14291,7 +14414,6 @@ extension Font {
         ///            .font(.title)
         ///         }
         ///     }
-        ///
         ///
         public static let bold: Font.Weight
 
@@ -14299,7 +14421,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14325,7 +14446,6 @@ extension Font {
         ///            .font(.title)
         ///         }
         ///     }
-        ///
         ///
         public static let heavy: Font.Weight
 
@@ -14333,7 +14453,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14359,7 +14478,6 @@ extension Font {
         ///            .font(.title)
         ///         }
         ///     }
-        ///
         ///
         public static let black: Font.Weight
 
@@ -14473,21 +14591,21 @@ extension Font {
     ///
     /// Other examples of system font include:
     ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(.system(size: 32, weight: .light, design: .monospaced))
-    ///             }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .font(.system(size: 32, weight: .light, design: .monospaced))
     ///         }
+    ///     }
     ///
     /// And:
     ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(.system(size: 32, weight: .heavy, design: .rounded))
-    ///             }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .font(.system(size: 32, weight: .heavy, design: .rounded))
     ///         }
+    ///     }
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
@@ -19489,7 +19607,7 @@ extension Link where Label == Text {
     /// `example.com` and displays the title string you provide as a
     /// link-styled view in your app:
     ///
-    ///     func marketingLink(_ callToAction: String) -> Link {{}
+    ///     func marketingLink(_ callToAction: String) -> Link {
     ///         Link(callToAction,
     ///             destination: URL(string: "https://www.example.com/")!)
     ///     }
@@ -20020,7 +20138,31 @@ extension List where SelectionValue == Never {
 
 /// The configuration of a tint effect applied to content within a List.
 ///
-/// - See Also: `View.listItemTint(_:)`
+/// Use this structure with the ``View/listItemTint(_:)-a71e4`` view
+/// modifier to change the tint of an item in a list.
+///
+/// This structure has 3 options:
+///
+/// 1. ``ListItemTint/fixed(_:)``: A tint ``Color`` that cannot be
+/// overriden by the system.
+/// 2. ``ListItemTint/preferred(_:)``: A tint ``Color`` that can be
+/// overriden by the system.
+/// 3. ``ListItemTint/monochrome``: The standard gray tint effect.
+///
+/// See each of those pages for more details on the options.
+///
+/// Below is a simple example.
+///
+/// ```
+/// struct SettingsView: View {
+///     var body: some View {
+///         List {
+///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+///                 .listItemTint(ListItemTint.fixed(Color.orange))
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ListItemTint {
 
@@ -20028,6 +20170,20 @@ public struct ListItemTint {
     ///
     /// This tint effect is fixed and not overridable by other
     /// system effects.
+    ///
+    /// Use this property with the ``View/listItemTint(_:)-a71e4`` view
+    /// modifier to change the tint of an item in a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.fixed(Color.orange))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func fixed(_ tint: Color) -> ListItemTint { }
 
     /// An explicit tint color that is overridable.
@@ -20035,11 +20191,37 @@ public struct ListItemTint {
     /// This tint effect is overridable by system effects, for
     /// example when the system has a custom user accent
     /// color on macOS.
+    ///
+    /// Use this property with the ``View/listItemTint(_:)-a71e4`` view
+    /// modifier to change the tint of an item in a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.preferred(Color.orange))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func preferred(_ tint: Color) -> ListItemTint { }
 
     /// A standard grayscale tint effect.
     ///
     /// Monochrome tints are not overridable.
+    ///
+    /// Use this property with the ``View/listItemTint(_:)-a71e4`` view
+    /// modifier to change the tint of an item in a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         Label("General", systemImage: "gearshape.fill")
+    ///             listItemTint(.monochrome)
+    ///     }
+    /// }
+    /// ```
     public static let monochrome: ListItemTint
 }
 
@@ -25152,7 +25334,7 @@ extension PreviewProvider {
 ///          .buttonStyle(BananaButtonStyle(color: .yellow))
 ///      }
 ///
-///      func tap() {}
+///      func tap() { }
 ///  }
 ///
 ///  struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -25167,7 +25349,7 @@ extension PreviewProvider {
 ///  }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PrimitiveButtonStyle{ }
+public protocol PrimitiveButtonStyle { }
 extension PrimitiveButtonStyle {
 
     /// A view that represents the body of a button.
@@ -25191,7 +25373,7 @@ extension PrimitiveButtonStyle {
     ///          .buttonStyle(BananaButtonStyle(color: .yellow))
     ///      }
     ///
-    ///      func tap() {}
+    ///      func tap() { }
     ///  }
     ///
     ///  struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -25387,20 +25569,35 @@ public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ProgressView where CurrentValueLabel == EmptyView {
 
-    /// Creates a progress view for showing indeterminate progress, without a
-    /// label.
+    /// Creates a progress spinner.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView()
+    ///     }
+    /// }
+    /// ```
     public init() where Label == EmptyView { }
 
-    /// Creates a progress view for showing indeterminate progress that displays
-    /// a custom label.
+    /// Creates a progress spinner froma custom label.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView {
+    ///             Text("We're working on it 🏃‍♀️")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
     ///       in progress.
     public init(@ViewBuilder label: () -> Label) { }
 
-    /// Creates a progress view for showing indeterminate progress that
-    /// generates its label from a localized string.
+    /// Creates a progress spinner from a localized string key title.
     ///
     /// This initializer creates a `Text` view on your behalf, and treats the
     /// localized key similar to `Text/init(_:tableName:bundle:comment:)`. See
@@ -25408,13 +25605,22 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// indeterminate progress view with a string variable, use
     /// the corresponding initializer that takes a `StringProtocol` instance.
     ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let title = LocalizedStringKey("We're working on it 🏃‍♀️")
+    ///
+    ///     var body: some View {
+    ///         ProgressView(title)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
     ///       describes the task in progress.
     public init(_ titleKey: LocalizedStringKey) where Label == Text { }
 
-    /// Creates a progress view for showing indeterminate progress that
-    /// generates its label from a string.
+    /// Creates a progress spinner from a string title.
     ///
     /// - Parameters:
     ///     - title: A string that describes the task in progress.
@@ -25424,18 +25630,36 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// information about localizing strings. To initialize a progress view with
     /// a localized string key, use the corresponding initializer that takes a
     /// `LocalizedStringKey` instance.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let title = "We're working on it 🏃‍♀️"
+    ///
+    ///     var body: some View {
+    ///         ProgressView(title)
+    ///     }
+    /// }
+    /// ```
     public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ProgressView {
 
-    /// Creates a progress view for showing determinate progress.
+    /// Creates a progress bar from a value and a total.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 1.0, total: 2.0)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -25445,13 +25669,22 @@ extension ProgressView {
     ///       default value is `1.0`.
     public init<V>(value: V?, total: V = 1.0) where Label == EmptyView, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress, with a
-    /// custom label.
+    /// Creates a progress bar from a value, a total, and a custom label.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 1.0, total: 2.0) {
+    ///             Text("We are halfway done 🌗")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -25463,13 +25696,27 @@ extension ProgressView {
     ///       in progress.
     public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label) where CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress, with a
-    /// custom label.
+    /// Creates a progress bar from a value, a total, a custom label, and
+    /// a custom label for the current value.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 1.0, total: 2.0) {
+    ///             Text("We are halfway done 🌗")
+    ///                 .font(.title2)
+    ///         } currentValueLabel: {
+    ///             Text("150 of 200 tasks")
+    ///                 .font(.title2)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -25483,8 +25730,8 @@ extension ProgressView {
     ///       describes the level of completed progress of the task.
     public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label, @ViewBuilder currentValueLabel: () -> CurrentValueLabel) where V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress that generates
-    /// its label from a localized string.
+    /// Creates a progress bar from a value, a total, and a localized string
+    /// key.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
@@ -25497,6 +25744,15 @@ extension ProgressView {
     ///  determinate progress view with a string variable, use
     ///  the corresponding initializer that takes a `StringProtocol` instance.
     ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(LocalizedStringKey("We are halfway done 🌗",
+    ///                      value: 1.0, total: 2.0)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
     ///       describes the task in progress.
@@ -25508,8 +25764,7 @@ extension ProgressView {
     ///       default value is `1.0`.
     public init<V>(_ titleKey: LocalizedStringKey, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress that generates
-    /// its label from a string.
+    /// Creates a progress bar from a value, a total, and a title string.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
@@ -25521,6 +25776,16 @@ extension ProgressView {
     /// information about localizing strings. To initialize a determinate
     /// progress view with a localized string key, use the corresponding
     /// initializer that takes a `LocalizedStringKey` instance.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let title = "We are halfway done 🌗"
+    ///
+    ///     var body: some View {
+    ///         ProgressView(title, value: 1.0, total: 2.0)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - title: The string that describes the task in progress.
@@ -25536,10 +25801,27 @@ extension ProgressView {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ProgressView {
 
-    /// Creates a progress view for visualizing the given progress instance.
+    /// Creates a progress bar from a Progress object.
     ///
     /// The progress view synthesizes a default label using the
     /// `localizedDescription` of the given progress instance.
+    ///
+    /// The parameter of this initializer is type
+    /// [Progress](https://developer.apple.com/documentation/foundation/progress).
+    /// See the Apple developer docs for more on how to create and modify
+    /// one of these objects.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let progress = Progress(totalUnitCount: 4)
+    ///
+    ///     var body: some View {
+    ///         ProgressView(progress)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter progress: The `Progress` object for displaying the bar.
     public init(_ progress: Progress) where Label == EmptyView, CurrentValueLabel == EmptyView { }
 }
 
@@ -25559,7 +25841,7 @@ extension ProgressView {
     /// view, but otherwise preserves the progress view's current style:
     ///
     ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             ProgressView(configuration)
     ///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
     ///                         radius: 4.0, x: 1.0, y: 2.0)
@@ -30478,6 +30760,9 @@ extension Spacer : View {
 /// A navigation view style represented by a view stack that only shows a
 /// single top view at a time.
 ///
+/// Use this with the ``View/navigationViewStyle(_:)``
+/// view modifier to change a ``NavigationView``'s style.
+///
 /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
 /// ```
@@ -30495,6 +30780,22 @@ extension Spacer : View {
 public struct StackNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a stack navigation view style.
+    ///
+    /// Use this with the ``View/navigationViewStyle(_:)``
+    /// view modifier to change a ``NavigationView``'s style.
+    ///
+    /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("Hello Bananas🍌🍌")
+    ///         }
+    ///         .navigationViewStyle(StackNavigationViewStyle())
+    ///     }
+    /// }
+    /// ```
     public init() { }
 }
 
@@ -30618,13 +30919,50 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// Creates the state with an initial wrapped value.
     ///
     /// You don't call this initializer directly. Instead, declare a property
-    /// with the `@State` attribute, and provide an initial value; for example,
-    /// `@State private var isPlaying: Bool = false`.
+    /// with the `@State` attribute, and provide an initial value; for example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var foo: String = "Apple"
+    ///
+    ///     var body: some View {
+    ///         Text(foo)
+    ///         Button("Change Text") { foo = "Banana" }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter wrappedValue: An initial wrappedValue for a state.
     public init(wrappedValue value: Value) { }
 
     /// Creates the state with an initial value.
+    ///
+    /// For most cases of ``State``, you will initialize the object using
+    /// the `@State` syntax, described in detail in the ``State`` page.
+    /// However, this initializer does have an especially good use
+    /// case of allowing you to initialize a structure's
+    /// ``State`` property in the structure's initializer!
+    /// See below.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     struct NameView: View {
+    ///         @State var name: String
+    ///
+    ///         init(startingName: String) {
+    ///             _name = State(initialValue: startingName) //Note the "_"!
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             TextField("Type your name ✍️", text: $name)
+    ///         }
+    ///     }
+    ///
+    ///     var body: some View {
+    ///         NameView(startingName: "Ron Wayne")
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter value: An initial value of the state.
     public init(initialValue value: Value) { }
@@ -30637,14 +30975,15 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// following code example the button's actions toggles the value of
     /// `showingProfile`, which toggles `wrappedValue`:
     ///
-    ///     @State private var showingProfile = false
+    ///     struct ContentView: View {
+    ///         @State private var showingProfile = false
     ///
-    ///     var profileButton: some View {
-    ///         Button(action: { self.showingProfile.toggle() }) {
-    ///             Image(systemName: "person.crop.circle")
-    ///                 .imageScale(.large)
-    ///                 .accessibilityLabel(Text("User Profile"))
-    ///                 .padding()
+    ///         var profileButton: some View {
+    ///             Button(action: { showingProfile.toggle() }) {
+    ///                 Image(systemName: "person.crop.circle")
+    ///                     .imageScale(.large)
+    ///                     .padding()
+    ///             }
     ///         }
     ///     }
     ///
@@ -30658,19 +30997,14 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// Use the projected value to pass a binding value down a view hierarchy.
     /// To get the `projectedValue`, prefix the property variable with `$`. For
     /// example, in the following code example `PlayerView` projects a binding
-    /// of the state property `isPlaying` to the `PlayButton` view using
-    /// `$isPlaying`.
+    /// of the state property `title` to the `TextField` view using
+    /// `$title`.
     ///
     ///     struct PlayerView: View {
-    ///         var episode: Episode
-    ///         @State private var isPlaying: Bool = false
+    ///         @State private var title = "The Wedding, pt. 2"
     ///
     ///         var body: some View {
-    ///             VStack {
-    ///                 Text(episode.title)
-    ///                 Text(episode.showTitle)
-    ///                 PlayButton(isPlaying: $isPlaying)
-    ///             }
+    ///             TextField("Show title", text: $title)
     ///         }
     ///     }
     public var projectedValue: Binding<Value> { get }
@@ -41555,6 +41889,19 @@ extension View {
     /// iOS and macOS apply the tint color to their `Label` icons, which
     /// otherwise use the accent color by default.
     ///
+    /// See ``ListItemTint`` for more on the 3 options for tinting a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.fixed(Color.orange))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter tint: The tint effect to use, or nil to not override the
     ///   inherited tint.
     @inlinable public func listItemTint(_ tint: ListItemTint?) -> some View { }
@@ -41569,6 +41916,17 @@ extension View {
     /// uses the tint color for its background platter appearance. Sidebars on
     /// iOS and macOS apply the tint color to their `Label` icons, which
     /// otherwise use the accent color by default.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.orange)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter color: The color to use to tint the content, or nil to not
     ///   override the inherited tint.
@@ -43014,10 +43372,16 @@ extension View {
     /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
-    ///     Button(action: composeMessage) {
-    ///         Image(systemName: "square.and.pencil")
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Button(action:  { /*Compose a message*/ }) {
+    ///             Image(systemName: "square.and.pencil")
+    ///         }
+    ///         .help("Compose a new message")
     ///     }
-    ///     .help("Compose a new message")
+    /// }
+    /// ```
     ///
     /// - Parameter textKey: The key for the localized text to use as help.
     public func help(_ textKey: LocalizedStringKey) -> some View { }
@@ -43032,8 +43396,16 @@ extension View {
     /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
-    ///     Slider("Opacity", value: $selectedShape.opacity)
-    ///         .help(Text("Adjust the opacity of the selected \(selectedShape.name)"))
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var opacity = 0.0
+    ///
+    ///     var body: some View {
+    ///         Slider("Opacity", value: $opacity)
+    ///             .help(Text("Adjust the opacity"))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter text: The Text view to use as help.
     public func help(_ text: Text) -> some View { }
@@ -43048,9 +43420,17 @@ extension View {
     /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
-    ///     Image(systemName: "pin.circle")
-    ///         .foregroundColor(pointOfInterest.tintColor)
-    ///         .help(pointOfInterest.name)
+    /// ```
+    /// struct ContentView: View {
+    ///     let helpText = "I am orange 🟧"
+    ///
+    ///     var body: some View {
+    ///         Image(systemName: "pin.circle")
+    ///             .foregroundColor(.orane)
+    ///             .help(helpText)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter text: The text to use as help.
     public func help<S>(_ text: S) -> some View where S : StringProtocol { }
@@ -43065,6 +43445,33 @@ extension View {
     /// Sets the visibility of the status bar.
     ///
     /// Use `statusBar(hidden:)` to show or hide the status bar.
+    ///
+    /// ```
+    /// struct NoStatusBarView: View {
+    ///     var body: some View {
+    ///         Text("I have no status bar ⏰")
+    ///             .statusBar(hidden: true)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can also show or hide the status bar with an animation by
+    /// attaching the modifier to a ``State`` property and using
+    /// ``withAnimation(_:_:)``:
+    ///
+    /// ```
+    /// struct ToggleMyStatusBarView: View {
+    ///     @State private var showBar = true
+    ///
+    ///     var body: some View {
+    ///         Button("Toggle the status bar! 🎚") {
+    ///             withAnimation {
+    ///                 showBar.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   status bar.
@@ -43093,23 +43500,86 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Presents an alert to the user.
+    /// A view modifier that presents an alert when a given value is not nil.
+    ///
+    /// Use this modifier to present an alert over the current view when you need to pass the alert a value.
+    /// The alert will be presented only when the binding value you pass it is not nil.
+    ///
+    /// If your alert doesn't need an `item` parameter, use
+    /// ``View/alert(isPresented:content)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let text: String
+    ///     }
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var item: Item? = nil
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Button("🍌 Alert") {
+    ///                     item = Item(text: "🍌🍌")
+    ///                 }
+    ///                 Button("🍑 Alert") {
+    ///                     item = Item(text: "🍑🍑")
+    ///                 }
+    ///             }
+    ///             .alert(item: $item, content: alertBuilder)
+    ///         }
+    ///
+    ///         func alertBuilder(item: Item) -> Alert {
+    ///             let confirm = Alert.Button.default(Text("Confirm \(item.text)")) { print(item.text) }
+    ///             let cancel = Alert.Button.cancel(Text("Cancel")) { /*do nothing*/ }
+    ///
+    ///             return Alert(title: Text("Confirm fruit"),
+    ///                         message: Text("Please confirm your fruit"),
+    ///                         primaryButton: confirm,
+    ///                         secondaryButton: cancel)
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - item: A binding to an optional source of truth for the alert.
-    ///     When representing a non-`nil` item, the system uses `content` to
-    ///     create an alert representation of the item.
-    ///     If the identity changes, the system dismisses a
-    ///     currently-presented alert and replace it by a new alert.
-    ///   - content: A closure returning the alert to present.
+    ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
+    ///   when this value is not `nil`.
+    ///   - content: A view builder closure that takes in the `item` and returns the alert.
     public func alert<Item>(item: Binding<Item?>, content: (Item) -> Alert) -> some View where Item : Identifiable { }
 
 
-    /// Presents an alert to the user.
+    /// A view modifier that presents an alert when a given condition is true.
+    ///
+    /// Use this modifier to present an alert over the current view.
+    /// The alert will be presented only when the binding value you pass it is true.
+    ///
+    /// If your alert needs an `item` parameter, use
+    /// ``View/alert(item:content)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showAlert = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 🚨") {
+    ///                 showAlert = true
+    ///             }
+    ///             .alert(isPresented: $showAlert) {
+    ///                 let confirm = Alert.Button.default(Text("Confirm 🚨")) { print("Confirmed.") }
+    ///                 let cancel = Alert.Button.cancel(Text("Cancel")) { /*do nothing*/ }
+    ///
+    ///                 return Alert(title: Text("Confirm alert"),
+    ///                             message: Text("Please confirm your alert!"),
+    ///                             primaryButton: confirm,
+    ///                             secondaryButton: cancel)
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - isPresented: A binding to whether the alert should be shown.
-    ///   - content: A closure returning the alert to present.
+    ///   - isPresented: A binding to whether the alert is presented.
+    ///   - content: A closure returning the `Alert`.
     public func alert(isPresented: Binding<Bool>, content: () -> Alert) -> some View { }
 
 }
