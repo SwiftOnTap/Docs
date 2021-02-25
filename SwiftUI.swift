@@ -903,6 +903,9 @@ public struct Alert {
 /// See those pages for more on how to use them.
 ///
 /// There are 9 out-of-the-box alignments:
+///
+///
+///
 /// 1. ``Alignment/topLeading``
 /// 2. ``Alignment/top``
 /// 3. ``Alignment/topTrailing``
@@ -912,6 +915,8 @@ public struct Alert {
 /// 7. ``Alignment/bottomLeading``
 /// 8. ``Alignment/bottom``
 /// 9. ``Alignment/bottomTrailing``
+///
+///
 ///
 /// In addition, you can also create your own alignments from the
 /// ``Alignment/init(horizontal:vertical)`` initializer.
@@ -1414,9 +1419,13 @@ extension Angle : Animatable {
 ///
 /// There are 3 main cases where AngularGradient can change:
 ///
+///
+///
 /// 1. `endAngle - startAngle = 2π`
 /// 2. `endAngle - startAngle > 2π`
 /// 3. `endAngle - startAngle < 2π`
+///
+///
 ///
 /// Note: Angles default to a clockwise rotation, but angles can be a negative value which will rotate the color counter-clockwise.
 ///
@@ -4115,6 +4124,26 @@ public enum BlendMode {
     case darken
 
     /// Takes the lighter of the top and bottom picture pixels.
+    ///
+    /// ![Blend Mode](blendmode-lighten.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.lighten)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     case lighten
 
     /// Divides the bottom layer by the inversion of the top layer.
@@ -4285,7 +4314,7 @@ public enum BlendMode {
 
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
     ///
-    /// ![Blend Mode](blendmode-hu.png)
+    /// ![Blend Mode](blendmode-hue.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -4303,6 +4332,7 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
     case hue
 
     /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
@@ -5445,6 +5475,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///            Text(Color.yellow.description)
     ///        }
     ///    }
+    ///
+    ///
     public var description: String { get }
 
     /// The hash value.
@@ -5604,12 +5636,14 @@ extension Color {
 
     /// A color that represents the system or application accent color.
     ///
+    ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
     ///                .accentColor(Color.accentColor)
     ///        }
     ///    }
+    ///
     ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
@@ -5628,15 +5662,18 @@ extension Color {
 
     /// A true black color `View`.
     ///
+    ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Color.black
     ///        }
     ///    }
     ///
+    ///
     public static let black: Color
 
     /// A true white color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5644,9 +5681,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let white: Color
 
     /// A gray color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5654,9 +5693,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let gray: Color
 
     /// A stylized red color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5664,9 +5705,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let red: Color
 
     /// A stylized green color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5674,9 +5717,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let green: Color
 
     /// A stylized blue color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5684,9 +5729,11 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let blue: Color
 
     /// An orange color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5698,15 +5745,18 @@ extension Color {
 
     /// A stylized yellow color `View`.
     ///
+    ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Color.yellow
     ///        }
     ///    }
     ///
+    ///
     public static let yellow: Color
 
     /// A pink color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
@@ -5714,15 +5764,18 @@ extension Color {
     ///        }
     ///    }
     ///
+    ///
     public static let pink: Color
 
     /// A purple color `View`.
+    ///
     ///
     ///    struct ExampleView: View {
     ///        var body: some View {
     ///            Color.purple
     ///        }
     ///    }
+    ///
     ///
     public static let purple: Color
 
@@ -5857,13 +5910,23 @@ extension Color.RGBColorSpace : Hashable {
 /// In general, there are 3 types of color picker titles, and 2 binding types, for 6 initializers total.
 ///
 /// Title types:
+///
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
 ///
+///
+///
 /// Binding types:
+///
+///
+///
 /// 1. ``CGColor``
 /// 2. ``Color``
+///
+///
 ///
 /// You use `ColorPicker` by embedding it inside a view hierarchy and
 /// initializing it with a title string and a `Binding` to a `Color`:
@@ -7074,22 +7137,37 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// A picker control for selecting dates.
 ///
 /// You create a picker by providing 3 things:
+///
+///
+///
 /// 1. a selection binding
 /// 2. a label
 /// 3. the editable parts of the date
 ///
+///
+///
 /// There are four types of pickers, and three types of labels, making 12 total initializers.
 ///
 /// Picker types:
+///
+///
+///
 /// 1. Unlimited range
 /// 2. Closed range (maximum and minimum)
 /// 3. From range (minimum only)
 /// 4. Through range (maximum only)
 ///
+///
+///
 /// Label types:
+///
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
+///
+///
 ///
 /// A simple example looks like this:
 ///
@@ -10189,9 +10267,14 @@ extension Edge : RawRepresentable {
 /// The inset distances for the sides of a rectangle.
 ///
 /// Use this structure for 3 different modifiers:
+///
+///
+///
 /// 1. ``View/listRowInsets(_:)``
 /// 2. ``View/padding(_:)``
 /// 3. ``Image/resizable(capInsets:resizingMode:)``
+///
+///
 ///
 /// This structure represents a point value in all 4 rectangular directions,
 /// top, leading, bottom, trailing.
@@ -11769,10 +11852,15 @@ extension EnvironmentValues {
     /// view currently presented.
     ///
     /// This is useful for 4 types of views:
+    ///
+    ///
+    ///
     /// 1. ``NavigationView``
     /// 2. ``View/sheet(isPresented:onDismiss:)``
     /// 3. ``View/popover(isPresented:onDismiss:)``
     /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    ///
     ///
     /// See ``Environment`` for more on environment values and how to use
     /// the property wrapper.
@@ -12247,6 +12335,9 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 ///
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
+///
+///
+///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
 /// 3. Expand the "Document Types" tab.
@@ -12255,6 +12346,7 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 /// 6. Ensure the **Type** is *String*.
 /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
 /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+///
 ///
 ///
 /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -12422,6 +12514,9 @@ extension FileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -12430,6 +12525,7 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -12534,6 +12630,9 @@ extension FileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -12542,6 +12641,7 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -12652,6 +12752,9 @@ extension FileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -12660,6 +12763,7 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -14090,7 +14194,10 @@ extension Font {
     /// ![Proportional font example](monospaced-digit-proportional-font.png)
     ///
     /// Monospaced font:
+    ///
     /// ![Monospaced font example](monospaced-digit-mono-font.png)
+    ///
+    ///
     /// [Image credits to Lior Azi](https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0)
     public func monospacedDigit() -> Font { }
 
@@ -16024,9 +16131,14 @@ public struct GridItem {
     /// layout.
     ///
     /// There are three types of sizes:
+    ///
+    ///
+    ///
     /// 1. ``griditem/size/fixed``
     /// 2. ``griditem/size/flexible`
     /// 3. ``griditem/size/adaptive``
+    ///
+    ///
     ///
     public enum Size {
 
@@ -16082,11 +16194,15 @@ public struct GridItem {
 /// There are five different types of groups. Each groups together
 /// a type of content.
 ///
+///
+///
 /// 1. ``ToolbarContent``
 /// 2. ``CustomizableToolbarContent``
 /// 3. ``Scene``
 /// 4. ``View``
 /// 5. ``Commands``
+///
+///
 ///
 /// There are 2 main reasons to use a `Group`:
 /// - To exceed the 10 struct limitation of a function builder
@@ -16681,9 +16797,14 @@ public struct GroupedListStyle : ListStyle {
 /// guides to views.
 ///
 /// There are just 3 possible horizontal alignments:
+///
+///
+///
 /// 1. ``HorizontalAlignment/leading``
 /// 2. ``HorizontalAlignment/center``
 /// 3. ``HorizontalAlignment/trailing``
+///
+///
 ///
 /// See the example below for all three.
 ///
@@ -16951,45 +17072,76 @@ public struct IconOnlyLabelStyle : LabelStyle {
     public typealias Body = some View
 }
 
-/// A view that displays a drawable resource
+/// A view that displays an image.
 ///
-/// Images in SwiftUI are much easier than in UIKit. Instead of needing to create a UIImage(named: “Your file name”) and assigning it to yourUIImageView.image, Image is about as easy to create as Text.
+/// ### Get Started
 ///
-/// Just pass it a String and it’ll set it to a file with that name. If you launch your app and it doesn’t have a file with that name, you’ll get a useful console message saying:
+/// **First**, create an image in your Assets folder.
+///
+/// ![Image in assets folder](image-assets.png)
+///
+/// To follow along, save the following image as `"ocean"` in your project.
+///
+/// ![Ocean Image](ocean.jpg)
+///
+/// **Second**, reference the image by name in your code.
+///
+/// ![Simple Image](image-basic.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Image("ocean")
+///     }
+/// }
+/// ```
+///
+/// **Third**, remember to add the `Image/resizable(capInsets:resizingMode:)` modifier to make your image resizable.
+///
+/// Add some modifiers to style your image!
+///
+/// ![Resiable Images](image-resizable.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Image("ocean")
+///             .resizable()
+///             .scaledToFit()
+///             .cornerRadius(10)
+///             .padding()
+///     }
+/// }
+/// ```
+///
+/// ### Resizing Images
+///
+/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier must come first on an Image before making changes to its size in subsequent modifiers.
+///
+/// The ``View/scaledToFit()`` modifier will lock the aspect ratio of the image and scale it to the maximum size it can be without being too large for the screen.
+///
+/// The ``View/scaledToFill()`` modifier also scales the image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink the image to fit the available space.
+///
+/// ### SF Symbols
+///
+/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black.
+///
+/// To use these in custom images, simply label the String is passed into an Image as systemName.
+//
+/// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the symbol names easier to find. SF Symbols helps to maintain a consistent look with the iOS ecosystem.
+///
+/// Xcode 12 brought support for use in Mac apps. Attempting to use `Image(systemNamed:)`` to use an SF Symbol in Xcode 11 causes the error:
+///
+/// `Extraneous argument label ‘systemNamed:’ in call`
+///
+/// This error means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
+///
+/// ### Common Errors
+/// If your app doesn’t have a file with the image name, you’ll get a useful console message saying:
 ///
 ///  `No image named ‘Your file name’ found in asset catalog for main bundle.`
 ///
 /// If you find images not turning up in your app, you may want to search for this in the console.
-///
-/// ```
-/// struct ExampleView: View {
-///   var body: some View {
-///     List {
-///       Image("Your file name")
-///       Image("Your file name", bundle: Bundle.main)
-///         .resizable()
-///         .frame(width: 100)
-///       Image("Your file name", label: Text("My image label"))
-///         .resizable()
-///         .scaledToFit()
-///       Image(decorative: "Your file name")
-///         .resizable()
-///         .scaledToFill()
-///       Image(systemName: "gamecontroller")
-///       Image(uiImage: UIImage(named: "Your file name")!)
-///       Image(decorative: UIImage(named: "Your file name")!.cgImage!, scale: 0.5, orientation: .rightMirrored)
-///     }
-///   }
-/// }```
-/// ### Image is not resizable by default
-///
-/// The `.resizable()` modifier must come first on an Image before making changes to its size in subsequent modifiers. The `scaledToFit` modifier will lock the aspect ratio of the image and scale it to the maximum size it can be without being too large for the screen. The `scaledToFill` modifier also scales the image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink the image to fit the available space.
-///
-/// ### SF Symbols
-///
-/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black. To use these in custom images, simply label the String is passed into an Image as systemName. It’s probably worth downloading the SF Symbols Mac app to make the symbol names easier to find. Using SF Symbols gives your app a consistent look that will probably be taking over the iOS ecosystem in the coming years due to the flexibility and accessibility of these free symbols.
-///
-/// Xcode 12 brought support for use in Mac apps. Attempting to use Image(systemNamed:) to use an SF Symbol in Xcode 11 causes the error “Extraneous argument label ‘systemNamed:’ in call”. This means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Image : Equatable {
 
@@ -18857,8 +19009,13 @@ extension LabelStyle {
 /// The properties of a label.
 ///
 /// There are 2 properties of a label:
+///
+///
+///
 /// 1. Title
 /// 2. Icon
+///
+///
 ///
 /// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
 ///
@@ -19516,7 +19673,38 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 
 ///  A button that opens a URL
 ///
-///  Before Link was added to SwiftUI, there was no way equivalent of a hyperlink outside of a WKWebView. It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time.
+/// A `Link` opens a URL when the user clicks. There are three initializers:
+///
+/// - A `String`
+/// - A `LocalizedStringKey`
+/// - A `View`
+///
+/// For example:
+///
+/// ![Link](/link.gif)
+///
+///     struct ExampleView: View {
+///
+///         let urlString = "https://swiftontap.com"
+///
+///         var body: some View {
+///             Group {
+///                 if let url = URL(string: urlString) {
+///                     // Creates a Link
+///                     Link("View SwiftOnTap", destination: url)
+///                 }
+///             }
+///         }
+///     }
+///
+/// ### Creating a `Link` with a View
+/// [[link-view]]
+///
+/// ### Background on `Link` in SwiftUI
+///
+///  Before Link was added to SwiftUI, there was no way equivalent of a hyperlink outside of a WKWebView.
+///
+/// It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time. For example:
 ///
 ///  ```
 ///  if URL(string: urlString) != nil {
@@ -19533,36 +19721,60 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///  }
 ///     ```
 ///
-///  In iOS 14 there is the option of Link, which does the action part of the Button above for us. Apple’s documentation unsafely unwraps a URL using the ‘!’ operator, but this is an extremely bad practice. You may know that this particular URL is created successfully because it links to example.com/TOS.html, a site owned by the Internet Assigned Numbers Authority (IANA) that convert URLs to IP addresses. But it's a mistake to assume that a URL string is valid and force unwrap the optional.
-
+///  In iOS 14 there is the option of Link, which does the action part of the Button above for us. Apple’s documentation unsafely unwraps a URL using the ‘!’ operator, but this is bad practice. You may know that this particular URL is created successfully because it links to example.com/TOS.html, a site owned by the Internet Assigned Numbers Authority (IANA) that convert URLs to IP addresses. But it's a mistake to assume that a URL string is valid and force unwrap the optional.
+///
 ///  This example is held back by the lack of optional binding (if let or guard let) in the first version of SwiftUI, as it is instead restricted to comparing the URL to nil to ensure it exists. When this comparison confirms that the URL is not nil, this still doesn’t mean I can use it in the Button without unwrapping it first. This is why there is a slightly confusing additional step in the Button action, which optionally binds the URL to ensure that it is not nil.
-
+///
 ///  The assertionFailure could have been in an else statement after the if let in the Button action, but the EmptyView has been added for consistency with the above Link example. An else statement containing EmptyView is not required, as any if statement around the only occupant of a ViewBuilder closure will return EmptyView when the if condition is false. If the URL was nil the user would see nothing, but an assertion would be triggered for the developer in debug mode.
-
+///
 ///  This would allow us to be aware that the URL was nil, but without causing a crash for the end-user.
-///  ```
-///  struct ExampleView: View {
-///    let urlString = "bananadocs.org"
-///    var body: some View {
-///      Group {
-///        if let url = URL(string: urlString) {
-///          //The new way to create a Link
-///          Link("Read more", destination: url)
-///         } else {
-///           EmptyView()
-///             .onAppear { assertionFailure("URL was nil") }
+///
+/// With updates to SwiftUI, the old code would roughly translate to the code below:
+///
+/// ![Link](/link.gif)
+///
+///     struct ExampleView: View {
+///
+///         let urlString = "https://swiftontap.com"
+///
+///         var body: some View {
+///             Group {
+///                 if let url = URL(string: urlString) {
+///                     // The new way to create a Link
+///                     Link("View SwiftOnTap", destination: url)
+///                 }
+///             }
 ///         }
-///      }
-///    }
-///  }
-///  ```
+///     }
 ///
 ///  Now that SwiftUI supports if let, it is possible to directly create properties like the URL and create Views that use that data. Just as before, the link is only shown when the URL can be created, but it is not necessary to do multiple checks just to make sure that this is the case.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Link<Label> : View where Label : View {
 
-    /// Creates a control, consisting of a URL and a label, used to navigate
-    /// to the given URL.
+    /// A `Link` initializer that opens a link when a view is clicked.
+    ///
+    /// [link-view ->]
+    /// ![Link View](/link-view.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///
+    ///     let url: String = "https://swiftontap.com"
+    ///
+    ///     var body: some View {
+    ///         Group {
+    ///             if let url = URL(string: url) {
+    ///                 Link(destination: url) {
+    ///                     RoundedRectangle(cornerRadius: 10)
+    ///                         .fill(Color.pink)
+    ///                         .padding()
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// [<-]
     ///
     /// - Parameters:
     ///     - destination: The URL for the link.
@@ -19582,16 +19794,26 @@ public struct Link<Label> : View where Label : View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Link where Label == Text {
 
-    /// Creates a control, consisting of a URL and a title key, used to
-    /// navigate to a URL.
+    /// A `Link` initializer that opens a link when text is clicked.
     ///
-    /// Use `Link` to create a control that your app uses to navigate to a
-    /// URL that you provide. The example below creates a link to
-    /// `example.com` and uses `Visit Example Co` as the title key to
-    /// generate a link-styled view in your app:
+    /// The example below creates a link to `swiftontap.com` and uses `View SwiftOnTap` as the title key to generate a link-styled view in your app:
     ///
-    ///     Link("Visit Example Co",
-    ///           destination: URL(string: "https://www.example.com/")!)
+    /// ![Link](/link.gif)
+    ///
+    ///     struct ExampleView: View {
+    ///
+    ///         let urlString = "https://swiftontap.com"
+    ///
+    ///         var body: some View {
+    ///             Group {
+    ///                 if let url = URL(string: urlString) {
+    ///                     // Creates a Link
+    ///                     Link("View SwiftOnTap", destination: url)
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    ///
     ///
     /// - Parameters:
     ///     - titleKey: The key for the localized title that describes the
@@ -19599,10 +19821,9 @@ extension Link where Label == Text {
     ///     - destination: The URL for the link.
     public init(_ titleKey: LocalizedStringKey, destination: URL) { }
 
-    /// Creates a control, consisting of a URL and a title string, used to
-    /// navigate to a URL.
+    /// A `Link` initializer that opens a link when a title conforming to `StringProtocol` is clicked.
     ///
-    /// Use `Link` to create a control that your app uses to navigate to a
+    /// Per Apple's documentation: Use `Link` to create a control that your app uses to navigate to a
     /// URL that you provide. The example below creates a link to
     /// `example.com` and displays the title string you provide as a
     /// link-styled view in your app:
@@ -20862,9 +21083,14 @@ public struct MagnificationGesture : Gesture {
 /// ``Link``, ``Label``, ``Divider``, and ``Image``.
 ///
 /// There are 3 different initializers, one for each of the different label types:
+///
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
+///
+///
 ///
 /// The following example presents a menu of three buttons and a submenu, which
 /// contains three buttons of its own.
@@ -22223,8 +22449,13 @@ extension NavigationViewStyle {
 /// A shape with a translation offset transform applied to it.
 ///
 /// An offset shape has two use cases:
+///
+///
+///
 /// 1. Used directly via its initializer ``RotatedShape/init(shape:offset:)``.
 /// 2. The return value of ``Shape/offset(_:)`` and ``Shape/offset(x:y:)``.
+///
+///
 ///
 /// Having an offset shape is helpful because it allows you to translate a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -22837,6 +23068,9 @@ public struct PageTabViewStyle : TabViewStyle {
 /// ### Creating a path
 ///
 /// There are 8 different ways to create a path:
+///
+///
+///
 /// 1. Empty path: ``Path/init()``
 /// 2. Path from closure
 /// 3. Path from `CGMutablePath`
@@ -22848,6 +23082,8 @@ public struct PageTabViewStyle : TabViewStyle {
 /// 8. Path from ``RoundedRectangle``:
 /// ``Path/init(roundedRect:cornerSize:style:)`` or
 /// ``Path/init(roundedRect:cornerRadius:style:)``
+///
+///
 ///
 /// ### Modifying and mutating a path
 ///
@@ -23994,9 +24230,14 @@ extension Path {
 /// A control that lets you select an item.
 ///
 /// You create a picker by providing 3 things:
+///
+///
+///
 /// 1. a selection binding
 /// 2. a label
 /// 3. content for the picker to display.
+///
+///
 ///
 /// Set the `selection` parameter to a "current selection" binding.
 ///
@@ -24606,10 +24847,15 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 /// interact with the view currently presented.
 ///
 /// This is useful for 4 types of views:
+///
+///
+///
 /// 1. ``NavigationView``
 /// 2. ``View/sheet(isPresented:onDismiss:)``
 /// 3. ``View/popover(isPresented:onDismiss:)``
 /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+///
+///
 ///
 /// See ``Environment`` for more on environment values and how to use
 /// the property wrapper.
@@ -24654,10 +24900,15 @@ public struct PresentationMode {
     /// programmatically read the presentation status of the current view.
     ///
     /// This is useful for 4 types of views:
+    ///
+    ///
+    ///
     /// 1. ``NavigationView``
     /// 2. ``View/sheet(isPresented:onDismiss:)``
     /// 3. ``View/popover(isPresented:onDismiss:)``
     /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    ///
     ///
     /// See ``Environment`` for more on environment values and how to use
     /// the property wrapper.
@@ -24697,10 +24948,15 @@ public struct PresentationMode {
     /// programmatically dismiss the view currently presented.
     ///
     /// This is useful for 4 types of views:
+    ///
+    ///
+    ///
     /// 1. ``NavigationView``
     /// 2. ``View/sheet(isPresented:onDismiss:)``
     /// 3. ``View/popover(isPresented:onDismiss:)``
     /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
+    ///
+    ///
     ///
     /// Below is a simple example of programmatically dismissing a
     /// sheet using this environment value.
@@ -26662,6 +26918,9 @@ public struct RedactionReasons : OptionSet {
 ///
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
+///
+///
+///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
 /// 3. Expand the "Document Types" tab.
@@ -26670,6 +26929,7 @@ public struct RedactionReasons : OptionSet {
 /// 6. Ensure the **Type** is *String*.
 /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
 /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+///
 ///
 ///
 /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -26777,6 +27037,9 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -26785,6 +27048,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -26884,6 +27148,9 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -26892,6 +27159,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -26990,6 +27258,9 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -26998,6 +27269,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -27097,6 +27369,9 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -27105,6 +27380,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -27225,6 +27501,9 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -27233,6 +27512,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -27334,6 +27614,9 @@ extension ReferenceFileDocument : ObservableObject {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -27342,6 +27625,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -27458,6 +27742,9 @@ extension ReferenceFileDocument {
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
+    ///
+    ///
+    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -27466,6 +27753,7 @@ extension ReferenceFileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    ///
     ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
@@ -27511,8 +27799,13 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
 /// A shape with a rotation transform applied to it.
 ///
 /// A rotated shape has two use cases:
+///
+///
+///
 /// 1. Used directly via its initializer ``RotatedShape/init(shape:angle:anchor:)``.
 /// 2. The return value of ``Shape/rotation(_:anchor:)``.
+///
+///
 ///
 /// Having a rotated shape is helpful because it allows you to rotate a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -27730,8 +28023,13 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 /// Defines the shape of a rounded rectangle's corners.
 
 /// This style has two options:
+///
+///
+///
 /// 1. `roundedcornerstyle/circular`
 /// 2. `roundedcornerstyle/circular`
+///
+///
 ///
 /// These styles have subtle but noticeable differences:
 ///
@@ -28181,9 +28479,14 @@ extension RoundedRectangle : InsettableShape {
 /// A shape with a scale transform applied to it.
 ///
 /// A scaled shape has two use cases:
+///
+///
+///
 /// 1. Used directly via its initializer ``ScaledShape/init(shape:scale:anchor:)``.
 /// 2. The return value of the ``Shape/scale(x:y:anchor:)`` and
 /// ``Shape/scale(_:anchor:)``.
+///
+///
 ///
 /// Having a scaled shape is helpful because it allows you to scale a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -28841,12 +29144,17 @@ extension ScenePhase : Hashable {
 /// use ``AppStorage`` instead.
 ///
 /// There are 6 possible scene storage types, and 6 corresponding initializers:
+///
+///
+///
 /// 1. `Bool`
 /// 2. `Int`
 /// 3. `Double`
 /// 4. `String`
 /// 5. `URL`
 /// 6. `Data`
+///
+///
 ///
 /// Here is a simple example using the common property wrapper syntax:
 ///
@@ -29775,6 +30083,9 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 ///
 /// In addition to the ability to create your own shape, there are also
 /// many pre-defined shapes for you to use:
+///
+///
+///
 /// 1. ``Capsule``
 /// 2. ``Circle``
 /// 3. ``ContainerRelativeShape``
@@ -29783,6 +30094,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// 6. ``Path``
 /// 7. ``Rectangle``
 /// 8. ``RoundedRectangle``
+///
+///
 ///
 /// Example usage would look like this:
 ///
@@ -30466,10 +30779,15 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
 /// ```
 ///
 /// In general, a slider has these four options:
+///
+///
+///
 /// 1. Add a label
 /// 2. Change maximum and minimum values
 /// 3. Create a step size
 /// 4. Call a function when slider editing chances.
+///
+///
 ///
 /// The slider's different initializers use different combinations of these options.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
@@ -31278,14 +31596,24 @@ extension State where Value : ExpressibleByNilLiteral {
 /// types, for a total of 9 different initializers.
 ///
 /// Label types:
+///
+///
+///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
 ///
+///
+///
 /// Increment/decrement types:
+///
+///
+///
 /// 1. Increment and decrement actions
 /// 2. Closed range binding
 /// 3. Unlimited range binding
+///
+///
 ///
 /// Here is a very simple example:
 ///
@@ -31746,15 +32074,27 @@ extension Stepper where Label == Text {
 ///
 /// In addition, two special kinds of ``Shape``s have their own methods
 /// for adding strokes with custom styles:
+///
+///
+///
 /// 1. ``InsettableShape``: An insettable shape allows you to inset the shape
 /// by half the stroke width, then apply the stroke, so that the final
 /// result remains inside the original frame. To achieve this effect,
 /// use one of these methods:
+///
+///
+///
 ///     1. ``InsettableShape/strokeBorder(_:style:antialiased:)``
 ///     2. ``InsettableShape/strokeBorder(style:antialiased:)``
+///
+///
+///
 /// 2. ``Path``: A path is a special kind of customizable shape. Use path's
 /// special stroking method, ``Path/strokedPath(_:)``, to return another path,
 /// rather than a generic shape.
+///
+///
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct StrokeStyle : Equatable {
 
@@ -34599,8 +34939,13 @@ extension Transaction {
 /// A shape with an affine transform applied to it.
 ///
 /// A transformed shape has two use cases:
+///
+///
+///
 /// 1. Used directly via its initializer ``TransformedShape/init(shape:transform:)``.
 /// 2. The return value of ``Shape/transform(_:)``.
+///
+///
 ///
 /// Having an offset shape is helpful because it allows you to translate a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
@@ -35787,6 +36132,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///
 /// You can customizde the x and y coordinates or you can use a constant.
 /// SwiftUI has 10 UnitPoint constants:
+///
+///
+///
 /// 1. ``UnitPoint/zero``
 /// 2. ``UnitPoint/center``
 /// 3. ``UnitPoint/leading``
@@ -35797,6 +36145,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// 8. ``UnitPoint/toptrailing``
 /// 9. ``UnitPoint/bottomleading``
 /// 10. ``UnitPoint/bottomtrailing``
+///
+///
 ///
 /// UnitPoints are used commonly in shapes and gradients.
 ///
@@ -36069,11 +36419,16 @@ extension VectorArithmetic : AdditiveArithmetic {
 /// guides to views.
 ///
 /// There are 5 possible vertical alignments:
+///
+///
+///
 /// 1. ``VerticalAlignment/top``
 /// 2. ``VerticalAlignment/center``
 /// 3. ``VerticalAlignment/bottom``
 /// 4. ``VerticalAlignment/firstTextBaseline``
 /// 5. ``VerticalAlignment/lastTextBaseline``
+///
+///
 ///
 /// See the example below.
 ///
@@ -39191,8 +39546,13 @@ extension View {
     ///
     /// The transition is only one part of the equation - a timer curve (animation)
     /// must also be specified. There are two ways to specify the associated animation:
+    ///
+    ///
+    ///
     /// 1. With ``View/animation(_:)``.
     /// 2. Explicitly, using ``withAnimation(_:_:)``.
+    ///
+    ///
     ///
     /// See ``AnyTransition`` for more on how to create a transition.
     ///
@@ -39572,9 +39932,14 @@ extension View {
     /// A view modifier that sets the size for a Xcode preview.
     ///
     /// There are 3 different Xcode ``PreviewLayout`` types:
+    ///
+    ///
+    ///
     /// 1. ``PreviewLayout/device``:  Adds the view to the center of the specified preview device.
     /// 2. ``PreviewLayout/sizeThatFits``: Fits a container around the previewed view.
     /// 3.  ``PreviewLayout/fixed(width:height:)``: Adds the view to a fixed size container.
+    ///
+    ///
     ///
     /// ```
     /// struct ContentView: View {
@@ -39624,9 +39989,14 @@ extension View {
     /// ``WidgetPreviewContext``. Its initializer takes a ``WidgetFamily``.
     ///
     /// There are 3 types of `WidgetFamily` variables:
+    ///
+    ///
+    ///
     /// 1. `systemSmall`
     /// 2. `systemMedium`
     /// 3. `systemLarge`
+    ///
+    ///
     ///
     /// The example below is pulled from Apple's widget boilerplate.
     /// To pull this up yourself, go to *File > New > Target* and search
@@ -42503,6 +42873,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// This page was inspired by work from @philipcdavis on Github.
     ///
     /// - Parameter mask: The view whose alpha the rendering system applies to
     ///   the specified view.
