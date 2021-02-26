@@ -15220,7 +15220,7 @@ extension ForEach where Content : View {
     ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
     ///
     ///     var body: some View {
-    ///         ForEach(myFruits, id:/\.self) { fruit in
+    ///         ForEach(myFruits, id:\.self) { fruit in
     ///             HStack {
     ///                 Text(fruit)
     ///             }
@@ -17362,6 +17362,8 @@ public struct IconOnlyLabelStyle : LabelStyle {
 
 /// A view that displays an image.
 ///
+/// Use this view to display an image on screen.
+///
 /// ### Get Started
 ///
 /// **First**, create an image in your Assets folder.
@@ -17404,32 +17406,48 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// ### Resizing Images
 ///
-/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier must come first on an Image before making changes to its size in subsequent modifiers.
+/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier
+/// must come first on an Image before making changes to its size in subsequent
+/// modifiers.
 ///
-/// The ``View/scaledToFit()`` modifier will lock the aspect ratio of the image and scale it to the maximum size it can be without being too large for the screen.
+/// The ``View/scaledToFit()`` modifier will lock the aspect ratio of the image
+/// and scale it to the maximum size it can be without being too large for the
+/// screen.
 ///
-/// The ``View/scaledToFill()`` modifier also scales the image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink the image to fit the available space.
+/// The ``View/scaledToFill()`` modifier also scales the image, but it does not
+/// lock the aspect ratio and, subsequently, is likely to stretch or shrink the
+/// image to fit the available space.
 ///
-/// ### SF Symbols
+/// ### Using system icon images
 ///
-/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black.
+/// SF Symbols is a library of over 1500 symbols that Apple provides in nine
+/// weights from ultralight to black. To use these in custom images, simply
+/// use the ``Image/init(systemName:)`` initializer.
 ///
-/// To use these in custom images, simply label the String is passed into an Image as systemName.
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Image(systemName: "photo")
+///             .resizable()
+///             .scaledToFit()
+///             .padding()
+///     }
+/// }
+/// ```
 //
-/// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the symbol names easier to find. SF Symbols helps to maintain a consistent look with the iOS ecosystem.
-///
-/// Xcode 12 brought support for use in Mac apps. Attempting to use `Image(systemNamed:)`` to use an SF Symbol in Xcode 11 causes the error:
-///
-/// `Extraneous argument label ‘systemNamed:’ in call`
-///
-/// This error means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
+/// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
+/// symbol names easier to find. SF Symbols helps to maintain a consistent
+/// look with the Apple ecosystem.
 ///
 /// ### Common Errors
-/// If your app doesn’t have a file with the image name, you’ll get a useful console message saying:
+///
+/// If your app doesn’t have a file with the image name, you’ll get a useful
+/// console message saying:
 ///
 ///  `No image named ‘Your file name’ found in asset catalog for main bundle.`
 ///
-/// If you find images not turning up in your app, you may want to search for this in the console.
+/// If you find images not turning up in your app, you may want to search for
+/// this in the console.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Image : Equatable {
 
@@ -17447,7 +17465,38 @@ public struct IconOnlyLabelStyle : LabelStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
-    /// Creates a labeled image that you can use as content for controls.
+    /// Creates an image from an asset name and a Bundle.
+    ///
+    /// Use this initializer to display an image on screen.
+    ///
+    /// **First**, create an image in your Assets folder.
+    ///
+    /// ![Image in assets folder](image-assets.png)
+    ///
+    /// To follow along, save the following image as `"ocean"` in your project.
+    ///
+    /// ![Ocean Image](ocean.jpg)
+    ///
+    /// **Second**, reference the image by name in your code.
+    ///
+    /// ![Simple Image](image-basic.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image("ocean")
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Note that the asset name of your image will also be used for
+    /// accessiblity purposes. To make these names different, see the
+    /// ``Image/init(_:bundle:label:)`` initializer.
+    /// To use no accessiblity name, use the
+    /// ``Image/init(decorative:bundle:)`` initializer.
+    ///
+    /// For more on the `bundle` parameter, see [this Apple doc](https://developer.apple.com/documentation/foundation/bundle)
+    /// on how to find and use resources using `Bundle` objects.
     ///
     /// - Parameters:
     ///   - name: the name of the image resource to lookup, as well as the
@@ -17456,8 +17505,41 @@ extension Image {
     ///     content. If `nil`, uses the main `Bundle`. Defaults to `nil`.
     public init(_ name: String, bundle: Bundle? = nil) { }
 
-    /// Creates a labeled image that you can use as content for controls, with
-    /// the specified label.
+    /// Creates an image from an asset name, a Bundle, and an accessibility
+    /// Text label.
+    ///
+    /// Use this initializer to display an image on screen, while providing
+    /// a ``Text`` label for accessibility purposes.
+    ///
+    /// **First**, create an image in your Assets folder.
+    ///
+    /// ![Image in assets folder](image-assets.png)
+    ///
+    /// To follow along, save the following image as `"ocean"` in your project.
+    ///
+    /// ![Ocean Image](ocean.jpg)
+    ///
+    /// **Second**, reference the image by name in your code. Include a
+    /// ``Text`` label for accessibility.
+    ///
+    /// ![Simple Image](image-basic.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image("ocean", label: Text("The beautiful 🌊"))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Note that the `label` parameter is required for
+    /// accessiblity purposes. To use a the asset name for accessibility, see the
+    /// ``Image/init(_:bundle:)`` initializer.
+    /// To use no accessiblity name, use the
+    /// ``Image/init(decorative:bundle:)`` initializer.
+    ///
+    /// For more on the `bundle` parameter, see [this Apple doc](https://developer.apple.com/documentation/foundation/bundle)
+    /// on how to find and use resources using `Bundle` objects.
     ///
     /// - Parameters:
     ///   - name: the name of the image resource to lookup
@@ -17467,9 +17549,40 @@ extension Image {
     ///     things like accessibility.
     public init(_ name: String, bundle: Bundle? = nil, label: Text) { }
 
-    /// Creates an unlabeled, decorative image.
+    /// Creates an image from an asset name and a Bundle, but the name
+    /// won't be used for accessiblity.
     ///
-    /// This image is ignored for accessibility purposes.
+    /// Use this initializer to display an image on screen while including no
+    /// alternative text for accessibility purposes.
+    ///
+    /// **First**, create an image in your Assets folder.
+    ///
+    /// ![Image in assets folder](image-assets.png)
+    ///
+    /// To follow along, save the following image as `"ocean"` in your project.
+    ///
+    /// ![Ocean Image](ocean.jpg)
+    ///
+    /// **Second**, reference the image by name in your code.
+    ///
+    /// ![Simple Image](image-basic.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image(decorative: "ocean")
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Note that your image will name no alternative for accessibility.
+    /// To use the asset name of your image for
+    /// accessiblity purposes, see the
+    /// ``Image/init(_:bundle:)``. To make these names different, see the
+    /// ``Image/init(_:bundle:label:)`` initializer.
+    ///
+    /// For more on the `bundle` parameter, see [this Apple doc](https://developer.apple.com/documentation/foundation/bundle)
+    /// on how to find and use resources using `Bundle` objects.
     ///
     /// - Parameters:
     ///   - name: the name of the image resource to lookup
@@ -17481,7 +17594,23 @@ extension Image {
     ///
     /// This initializer creates an image using a system-provided symbol. To
     /// create a custom symbol image from your app's asset catalog, use
-    /// `init(_:)` instead.
+    /// ``Image/init(_:)`` instead.
+    ///
+    /// This initializer pulls from the SF Symbols library.
+    /// SF Symbols contains over 1500 icons that Apple provides in nine
+    /// weights from ultralight to black.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image(systemName: "photo")
+    ///     }
+    /// }
+    /// ```
+    //
+    /// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
+    /// symbol names easier to find. SF Symbols helps to maintain a consistent
+    /// look with the Apple ecosystem.
     ///
     /// - Parameters:
     ///   - systemName: The name of the system symbol image.
@@ -17506,20 +17635,39 @@ extension Image {
 	/// Modifies the image rendering mode as either regular or template.
 	///
 	/// There are two types of rendering modes:
-	/// - Original
-	/// - Template
+	/// - ``Image/TemplateRenderingmode/original``
+	/// - ``Image/TemplateRenderingMode/template``
 	///
 	/// Original mode will draw the image normally, as-is. Template mode will
 	/// turn all the parts of the image that are not transparent to one color
 	/// that you can set yourself. By default, the color is black.
 	///
 	/// A common use case for this modifier would be like this:
-	///
-	/// 	Image("Bird")
-	/// 		.renderingMode(.template)
-	/// 		.resizable()
-	/// 		.frame(width: 50, height: 50)
-	/// 		.foregroundColor(.blue)
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird Image Rendering Mode](image-renderingmode.png)
+    ///
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird")
+    ///                 .renderingMode(.template)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///             Image("bird")
+    ///                 .renderingMode(.original)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///         }
+    ///     }
+    /// }
+    /// ```
 	///
 	/// The modifier does nothing if renderingMode is `nil`.
 	///
@@ -17533,37 +17681,516 @@ extension Image {
 extension Image {
 
     /// Constants that specify the intended display orientation for an image.
+    ///
+    /// Use this enumeration with the ``Image(_:scale:orientation:label:)``
+    /// initializer to create an ``Image`` view that can
+    /// be displayed in one of several different orientation
+    /// options.
+    ///
+    /// In order to use this initializer, you must create your
+    /// ``Image`` using a
+    /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+    /// See that documentation page to learn more about `CGImage`
+    /// objects.
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// In the following example, we define a helper function called
+    /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+    ///
+    /// ![Bird Orientation](image-orientation.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     func image(_ orientation: Image.Orientation) -> some View {
+    ///         Image(UIImage(named: "bird")!.cgImage!,
+    ///               scale: 1.0,
+    ///               orientation: orientation,
+    ///               label: Text("Bird"))
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 image(.up) //This leave the image unchanged
+    ///                 image(.upMirrored)
+    ///             }
+    ///             HStack {
+    ///                 image(.down)
+    ///                 image(.downMirrored)
+    ///             }
+    ///             HStack {
+    ///                 image(.left)
+    ///                 image(.leftMirrored)
+    ///             }
+    ///             HStack {
+    ///                 image(.right)
+    ///                 image(.rightMirrored)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @frozen public enum Orientation : UInt8, CaseIterable, Hashable {
 
     	/// The original pixel data matches the intended display orientation.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that can
+        /// be displayed in one of several different orientation
+        /// options.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case up
 
         /// The image has been horizontally flipped from the orientation of its
         /// original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that can
+        /// be displayed a mirrored orientation.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case upMirrored
 
         /// The image has been rotated 180° from the orientation of its original
         /// pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that can
+        /// be displayed in a downwards-rotated orientation.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case down
 
         /// The image has been vertically flipped from the orientation of its
         /// original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been
+        /// flipped along the horizontal axis.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case downMirrored
 
         /// The image has been rotated 90° counterclockwise from the orientation
         /// of its original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been rotated
+        /// 90° counterclockwise.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case left
 
         /// The image has been rotated 90° clockwise and flipped horizontally
         /// from the orientation of its original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been rotated
+        /// 90° counterclockwise and flipped horizontally.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case leftMirrored
 
         /// The image has been rotated 90° clockwise from the orientation of its
         /// original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been rotated
+        /// 90° clockwise.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case right
 
         /// The image has been rotated 90° counterclockwise and flipped
         /// horizontally from the orientation of its original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been flipped
+        /// horizontally and roated 90° counterclockwise.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case rightMirrored
 
         /// The raw type that can be used to represent all values of the conforming
@@ -17621,15 +18248,117 @@ extension Image {
 extension Image {
 
 	/// Options for rendering the image normally, or with only 1 color.
+    ///
+    /// Use this enumeration with the
+    /// ``Image/renderingMode(_:)`` image modifier to render in image
+    /// either normally or with only one color.
+    ///
+    /// This enumeration has 2 cases:
+    ///
+    /// 1. ``Image/TemplateRenderingMode/template``: turns all the parts of the
+    /// image that are not transparent to one color
+    /// 2. ``Image/TemplateRenderingMode/original``: draws the image normally,
+    /// as-is.
+	///
+	/// A common use case for this enumeration would be like this:
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird Image Rendering Mode](image-renderingmode.png)
+    ///
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird")
+    ///                 .renderingMode(TemplateRenderingMode.template)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///             Image("bird")
+    ///                 .renderingMode(TemplateRenderingMode.original)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum TemplateRenderingMode {
 
     	/// Render the image as all black except where opacity is 0.
     	///
     	/// This is often used if the image is going to be a mask or otherwise
     	/// used only for its outline.
+        ///
+        /// Use this enumeration case with the
+        /// ``Image/renderingMode(_:)`` image modifier to render in image
+        /// with only one color.
+        ///
+    	/// A common use case for this enumeration case would be like this:
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        ///
+        /// ```
+        /// struct ContentView {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird")
+        ///                 .renderingMode(.template)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///             Image("bird")
+        ///                 .renderingMode(.original)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case template
 
         /// Render the image as usual.
+        ///
+        /// Use this enumeration case with the
+        /// ``Image/renderingMode(_:)`` image modifier to render in image
+        /// normally. This is in contrast to
+        /// ``Image/TemplateRenderingMode/template`` which renders
+        /// an image with only one color.
+        ///
+    	/// A common use case for this enumeration case would be like this:
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        ///
+        /// ```
+        /// struct ContentView {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird")
+        ///                 .renderingMode(.template)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///             Image("bird")
+        ///                 .renderingMode(.original)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case original
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -17668,22 +18397,116 @@ extension Image {
     }
 
     /// The scale to apply to vector images relative to text.
+    ///
+    /// Use this enumeration with the ``Image/imageScale(_:)``
+    /// view modifier to scale an image up or down.
+    ///
+    /// This is most often used with system images, which can be both
+    /// scaled alongside the text using ``View/font(_:)`` view modifier
+    /// and also using
+    /// the ``Image/imageScale(_:)`` image modifier.
+    ///
+    /// There are 3 types of ``Image/Scale``s:
+    ///
+    /// 1. ``Image/Scale/small``
+    /// 2. ``Image/Scale/medium``
+    /// 3. ``Image/Scale/large``
+    ///
+    /// See below for a comparison.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image(systemName: "die.face.5.fill")
+    ///                 .imageScale(.small)
+    ///             Image(systemName: "die.face.5.fill")
+    ///                 .imageScale(.medium)
+    ///             Image(systemName: "die.face.5.fill")
+    ///                 .imageScale(.large)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @available(macOS 11.0, *)
     public enum Scale {
 
     	/// The small image scale size.
     	///
-    	/// - SeeAlso: Image.imageScale(_:)
+        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// view modifier to scale an image down.
+        ///
+        /// This is most often used with system images, which can be both
+        /// scaled alongside the text using ``View/font(_:)`` view modifier
+        /// and also using
+        /// the ``Image/imageScale(_:)`` image modifier.
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.small)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.medium)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.large)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case small
 
         /// The medium image scale size.
         ///
-        /// - SeeAlso: Image.imageScale(_:)
+        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// view modifier to scale an image.
+        ///
+        /// This is most often used with system images, which can be both
+        /// scaled alongside the text using ``View/font(_:)`` view modifier
+        /// and also using
+        /// the ``Image/imageScale(_:)`` image modifier.
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.small)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.medium)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.large)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case medium
 
         /// The large image scale size.
         ///
-        /// - SeeAlso: Image.imageSclae(_:)
+        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// view modifier to scale an image up.
+        ///
+        /// This is most often used with system images, which can be both
+        /// scaled alongside the text using ``View/font(_:)`` view modifier
+        /// and also using
+        /// the ``Image/imageScale(_:)`` image modifier.
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.small)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.medium)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.large)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case large
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -17726,6 +18549,10 @@ extension Image {
 extension Image {
 
 	/// The different amounts of interpolation that can be applied to an image.
+    ///
+    /// Use this enumeration with the ``Image/interpolation(_:)``
+    /// image modifier to specify what kind of interpolation to us
+    /// on an image.
 	///
 	/// Image interpolation is a digital process that occurs when an image is
 	/// either scaled up or scaled down, or when rotating an image.
@@ -17735,18 +18562,228 @@ extension Image {
 	///
 	/// Interpolation can make scaled up images retain some of their clarity,
 	/// and can make scaled down images look better.
+    ///
+    /// There are 4 cases of image interpolation:
+    ///
+    /// 1. ``Interpolation/none``
+    /// 2. ``Interpolation/low``
+    /// 3. ``Interpolation/medium``
+    /// 4. ``Interpolation/hight``
+    ///
+    /// See them compared below.
+    ///
+    /// To follow along, save the following image as `"bird-small"` in your project.
+    ///
+    /// ![Bird Small Image](bird-small.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.none)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.low)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.medium)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.high)
+    ///                 .frame(width: 50, height: 50)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum Interpolation {
 
     	/// Apply no interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using no interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case none
 
         /// Apply a low amount of interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using low interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case low
 
         /// Apply a medium amount of interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using medium interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case medium
 
         /// Apply a high amount of interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using high interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case high
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -17789,16 +18826,81 @@ extension Image {
 extension Image {
 
 	/// Adjusts the interpolation property of an image.
+    ///
+    /// Use this image modifier case with the ``Image/Interpolation``
+    /// enumeration to specify what kind of interpolation to use on an image.
+    ///
+    /// Image interpolation is a digital process that occurs when an image is
+    /// either scaled up or scaled down, or when rotating an image.
+    ///
+    /// Interpolation uses what is known in the image to estimate unknown
+    /// values.
+    ///
+    /// Interpolation can make scaled up images retain some of their clarity,
+    /// and can make scaled down images look better.
+    ///
+    /// To follow along, save the following image as `"bird-small"` in your project.
+    ///
+    /// ![Bird Small Image](bird-small.png)
+    ///
+    /// ![Bird Image Interpolation](image-interpolation.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.none)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.low)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.medium)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.high)
+    ///                 .frame(width: 50, height: 50)
+    ///         }
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameter interpolation: The image's interpolation property.
-	///
-	/// - SeeAlso: Image.Interpolation
     public func interpolation(_ interpolation: Image.Interpolation) -> Image { }
 
     /// Adjusts the antialiasing properties of an image.
     ///
     /// If an image is antialiased, then it resists being distorted when it is
     /// shrunk to a lower resolution.
+    ///
+    /// As far as I can tell, this isn't doing anything right now.
+    /// But you can check it out for yourself:
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird")
+    ///                 .resizable()
+    ///                 .antialiased(true)
+    ///                 .frame(width: 100, height: 100)
+    ///             Image("bird")
+    ///                 .resizable()
+    ///                 .antialiased(false)
+    ///                 .frame(width: 100, height: 100)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Paramter isAntialiased: Whether the image is antialiased.
     public func antialiased(_ isAntialiased: Bool) -> Image { }
@@ -17807,8 +18909,8 @@ extension Image {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
-    /// Creates a labeled image based on a `CGImage`, usable as content for
-    /// controls.
+    /// Creates an image from a `CGImage` with a custom Text label used for
+    /// accessibility.
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -17819,7 +18921,7 @@ extension Image {
     ///     things like accessibility.
     public init(_ cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up, label: Text) { }
 
-    /// Creates an unlabeled, decorative image based on a `CGImage`.
+    /// Creates an image from a `CGImage` with no accessiblity label.
     ///
     /// This image is ignored for accessibility purposes.
     ///
@@ -17835,7 +18937,7 @@ extension Image {
 @available(macOS, unavailable)
 extension Image {
 
-	/// Creates a new `Image` from a specified `UIImage`.
+	/// Creates an image from a `UIImage`.
     public init(uiImage: UIImage) { }
 }
 
@@ -17843,6 +18945,7 @@ extension Image {
 extension Image {
 
 	/// The different ways of resizing an image to fill a view.
+    ///
     public enum ResizingMode {
 
     	/// The resizing method of maintaining image properties, positioning
@@ -19557,6 +20660,9 @@ public struct LazyHGrid<Content> : View where Content : View {
     /// The first parameter, rows, takes an array of ``GridItem``s.
     /// For more info on the types of grid items, check out that page.
     ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
+    ///
     /// ```
     /// struct HorizontalEmojiView: View {
     ///     var rows: [GridItem] =
@@ -19626,6 +20732,9 @@ public struct LazyHStack<Content> : View where Content : View {
     /// Creates a lazy horizontal stack view with the given spacing,
     /// vertical alignment, pinning behavior, and content.
     ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
+    ///
     /// ```
     /// struct ColumnNumberView: View {
     ///     var body: some View {
@@ -19690,6 +20799,9 @@ public struct LazyHStack<Content> : View where Content : View {
 public struct LazyVGrid<Content> : View where Content : View {
 
     /// Creates a grid that grows vertically, given the provided properties.
+    ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
     ///
     /// ```
     /// struct EmojiGridView: View {
@@ -19758,6 +20870,9 @@ public struct LazyVStack<Content> : View where Content : View {
 
     /// Creates a lazy vertical stack view with the given spacing,
     /// vertical alignment, pinning behavior, and content.
+    ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
     ///
     /// ```
     /// struct RowNumbersView: View {
@@ -20161,7 +21276,7 @@ extension Link where Label == Text {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
-///         List.init(fruits, id: /\.self) { (fruit: String) in
+///         List.init(fruits, id: \.self) { (fruit: String) in
 ///             Text(fruit)
 ///         }
 ///     }
@@ -20190,7 +21305,7 @@ extension Link where Label == Text {
 ///         List {
 ///             Text("Hello, World!")
 ///
-///             ForEach(fruits, id: /\.self) { (fruit: String) in
+///             ForEach(fruits, id: \.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///         }
@@ -20217,7 +21332,7 @@ extension Link where Label == Text {
 ///             }
 ///
 ///             Section(header: Text("Fruit")) {
-///                 ForEach(fruits, id: /\.self) { (fruit: String) in
+///                 ForEach(fruits, id: \.self) { (fruit: String) in
 ///                     Text(fruit)
 ///                 }
 ///             }
@@ -20297,7 +21412,7 @@ extension Link where Label == Text {
 ///
 ///     var body: some View {
 ///         List {
-///             ForEach(fruits, id: /\.self) { (fruit: String) in
+///             ForEach(fruits, id: \.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///             .listRowBackground(Color.yellow)
@@ -20321,7 +21436,7 @@ extension Link where Label == Text {
 ///     var body: some View {
 ///         NavigationView {
 ///             List {
-///                 ForEach(fruits, id: /\.self) { fruit in
+///                 ForEach(fruits, id: \.self) { fruit in
 ///                     Text(fruit)
 ///                 }
 ///                 .onDelete { offsets in
@@ -20351,7 +21466,7 @@ extension Link where Label == Text {
 ///     var body: some View {
 ///         NavigationView {
 ///             List {
-///                 ForEach(fruits, id: /\.self) { fruit in
+///                 ForEach(fruits, id: \.self) { fruit in
 ///                     Text(fruit)
 ///                 }
 ///                 .onDelete { offets in
@@ -23121,7 +24236,7 @@ public struct OutlineSubgroupChildren : View {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: /\.self) {
+///             ForEach(items, id: \.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -24780,6 +25895,40 @@ extension PickerStyle {
 }
 
 /// A set of view types that may be pinned to the bounds of a scroll view.
+///
+/// Use this option set with the initializer of one of the 4 lazy grid/stacks
+/// and the ``Section`` structure to pin
+/// a view to the top or bottom of the screen while scrolling:
+///
+/// 1. ``LazyVStack``
+/// 2. ``LazyHStack``
+/// 3. ``LazyVGrid``
+/// 4. ``LazyHGrid``
+///
+/// This structure has 2 static properties: ``PinnedScrollableViews/sectionHeaders``
+/// and ``PinnedScrollableViews/sectionFooters``. You can specify either one
+/// of them, or both.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ScrollView {
+///             LazyVStack(pinnedViews: .sectionHeaders) {
+///                 Section(header: Text("**Top half**")) {
+///                     ForEach(1...50, id: \.self) { number in
+///                         Text("Row \(number)")
+///                     }
+///                 }
+///                 Section(header: Text("**Bottom half**")) {
+///                     ForEach(51...100, id: \.self) { number in
+///                         Text("Row \(number)")
+///                     }
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct PinnedScrollableViews : OptionSet {
 
@@ -24819,9 +25968,69 @@ public struct PinnedScrollableViews : OptionSet {
     public init(rawValue: UInt32) { }
 
     /// The header view of each `Section` will be pinned.
+    ///
+    /// Use this option with the initializer of one of the 4 lazy grid/stacks
+    /// and the ``Section`` structure to pin
+    /// a view to the top of the screen while scrolling:
+    ///
+    /// 1. ``LazyVStack``
+    /// 2. ``LazyHStack``
+    /// 3. ``LazyVGrid``
+    /// 4. ``LazyHGrid``
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             LazyVStack(pinnedViews: .sectionHeaders) {
+    ///                 Section(header: Text("**Top half**")) {
+    ///                     ForEach(1...50, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///                 Section(header: Text("**Bottom half**")) {
+    ///                     ForEach(51...100, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static let sectionHeaders: PinnedScrollableViews
 
     /// The footer view of each `Section` will be pinned.
+    ///
+    /// Use this option with the initializer of one of the 4 lazy grid/stacks
+    /// and the ``Section`` structure to pin
+    /// a view to the top of the screen while scrolling:
+    ///
+    /// 1. ``LazyVStack``
+    /// 2. ``LazyHStack``
+    /// 3. ``LazyVGrid``
+    /// 4. ``LazyHGrid``
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             LazyVStack(pinnedViews: .sectionFooters) {
+    ///                 Section(footer: Text("**Top half**")) {
+    ///                     ForEach(1...50, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///                 Section(footer: Text("**Bottom half**")) {
+    ///                     ForEach(51...100, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static let sectionFooters: PinnedScrollableViews
 
     /// The element type of the option set.
@@ -24862,7 +26071,7 @@ public struct PinnedScrollableViews : OptionSet {
 ///              .font(.title2)
 ///          }
 ///
-///          func tap() {}
+///          func tap() { }
 ///      }
 ///
 ///
@@ -31620,6 +32829,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 extension State where Value : ExpressibleByNilLiteral {
 
     /// Creates a state without an initial value.
+    ///
+    /// **Don't use this initializer directly. Instead, see ``State`` for
+    /// info on how to use state as a property wrapper.**
     @inlinable public init() { }
 }
 
@@ -32552,19 +33764,134 @@ extension StrokeStyle : Animatable {
 }
 
 /// A view that subscribes to a publisher with an action.
+///
+/// This view produces basically the same thing as another
+/// view with the ``View/onReceive(_:)`` modifier applied to it.
+/// Whenver possible, use ``View/onReceive(_:)``, as it results
+/// in cleaner code.
+///
+/// The following example shows `SubscriptionView` used to exactly reproduct
+/// a view with ``View/onReceive(_:)``.
+///
+/// ```
+/// struct TimerView: View {
+///     @State private var time1 = ""
+///     @State private var time2 = ""
+///
+///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+///
+///     var body: some View {
+///         VStack {
+///             SubscriptionView(content: Text(time1), publisher: timer) { t in
+///                 time1 = String(describing: t)
+///             }
+///             Text(time2).onReceive(timer) { t in
+///                 time2 = String(describing: t)
+///             }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SubscriptionView<PublisherType, Content> : View where PublisherType : Publisher, Content : View, PublisherType.Failure == Never {
 
     /// The content view.
+    ///
+    /// This is the content property component of a ``SubscriptionView``.
+    ///
+    /// In the following example, the ``SubscriptionView``'s content
+    /// is a ``Text`` view:
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var content: Content
 
     /// The `Publisher` that is being subscribed.
+    ///
+    /// This is the publisher instance that your ``SubscriptionView``
+    /// listens to for executing its action parameter. You can declare
+    /// a ``State`` variable in your view so that your
+    /// ``SubscriptionView/content`` view can get updated when this publisher
+    /// sends a change.
+    ///
+    /// See [Publisher](https://developer.apple.com/documentation/combine/publisher)
+    /// for the Apple docs on what a publisher is and how to use it. Note
+    /// that for a ``SubscriptionView``, the publisher's
+    /// [Failure](https://developer.apple.com/documentation/combine/publisher/failure)
+    /// type must be
+    /// [Never](https://developer.apple.com/documentation/swift/never),
+    /// meaning the publisher can never fail.
+    ///
+    /// If you're really interested in asynchronous event processing,
+    /// check out Apple's documentation on their
+    /// [Combine](https://developer.apple.com/documentation/combine)
+    /// framework.
+    ///
+    /// In the example below, the publisher is a
+    /// [Timer](https://developer.apple.com/documentation/foundation/timer).
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var publisher: PublisherType
 
     /// The `Action` executed when `publisher` emits an event.
+    ///
+    /// This function is called whenever the ``SubscriptionView``
+    /// receives an event from the ``SubscriptionView/publisher``
+    /// property. It takes in a parameter of the publisher's output,
+    /// so you can read it and even update the view accordingly.
+    ///
+    /// In the example below, we update the time ``Text`` with the time
+    /// string received from the publisher.
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var action: (PublisherType.Output) -> Void
 
     /// Create a view with content the subscribes to a publisher with an action.
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - content: The content that you want displayed in the view.
@@ -32708,7 +34035,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: /\.self) {
+///             ForEach(items, id: \.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -32731,7 +34058,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: /\.self) {
+///             ForEach(items, id: \.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -43254,15 +44581,42 @@ extension View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension View {
 
-    /// The default store used by `AppStorage` contained within the view.
+    /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
+    ///
+    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// `UserDefaults.standard`. Override this default location for all of your
+    /// scene's views by using this modifier.
     ///
     /// If unspecified, the default store for a view hierarchy is
     /// `UserDefaults.standard`, but can be set a to a custom one. For example,
     /// sharing defaults between an app and an extension can override the
     /// default store to one created with `UserDefaults.init(suiteName:_)`.
     ///
-    /// - Parameter store: The user defaults to use as the default
-    ///   store for `AppStorage`.
+    /// There is a similar method for `Scene` called `Scene/defaultAppStorage(_:)`
+    ///
+    /// Check out `UserDefaults` and `AppStorage` for more info on how in-app storage
+    /// works.
+    ///
+    ///     @main
+    ///     struct StorageExampleApp: App {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 StorageExampleView()
+    ///                     .defaultAppStorage(UserDefaults(suiteName: "com.yoursite.your-suite")!)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct StorageExampleView: View {
+    ///         //Looks for "key" in "com.yoursite.your-suite"
+    ///         @AppStorage("key") var name = "Kanye West"
+    ///
+    ///         var body: some View {
+    ///             TextField("Enter your name", text: $name)
+    ///         }
+    ///     }
+    ///
+    /// - Parameter store: The default user defaults storage site for `@AppStorage`.
     public func defaultAppStorage(_ store: UserDefaults) -> some View { }
 
 }
@@ -44004,16 +45358,18 @@ extension View {
     /// The example below rotates the text 30˚ around the `z` axis, which is the
     /// axis pointing out of the screen:
     ///
+    /// ```
+    /// struct ContentView: View {
     ///     // This transform represents a 30˚ rotation around the z axis.
-    ///     let transform = CATransform3DMakeRotation(
-    ///         -30 * (.pi / 180), 0.0, 0.0, 1.0)
+    ///     let transform = CATransform3DMakeRotation(-30 * (.pi / 180), 0.0, 0.0, 1.0)
     ///
-    ///     Text("Projection effects using transforms")
-    ///         .projectionEffect(.init(transform))
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing text rotated 30 degrees around the axis pointing
-    /// out of the screen.](SwiftUI-View-projectionEffect.png)
+    ///     var body: some View {
+    ///         Text("Projection effects using transforms")
+    ///             .projectionEffect(.init(transform))
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter transform: A `ProjectionTransform` to apply to the view.
     @inlinable public func projectionEffect(_ transform: ProjectionTransform) -> some View { }
