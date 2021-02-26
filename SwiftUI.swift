@@ -18912,6 +18912,46 @@ extension Image {
     /// Creates an image from a `CGImage` with a custom Text label used for
     /// accessibility.
     ///
+    /// Use this initializer to create an ``Image`` view from a
+    /// core graphics image. See the Apple documentation on how to
+    /// use this class [here](https://developer.apple.com/documentation/coregraphics/cgimage).
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0, label: Text("Bird"))
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// The main benefit of using this initializer is that it gives you
+    /// the option to scale and re-orient your image. See
+    /// ``Image/Orientation`` for all of the orientation options.
+    ///
+    /// ![Bird left mirrored](image-leftmirrored.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0, orientation: .leftMirrored, label: Text("Bird"))
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
     ///   - scale: the scale factor the image is intended for
@@ -18923,7 +18963,49 @@ extension Image {
 
     /// Creates an image from a `CGImage` with no accessiblity label.
     ///
-    /// This image is ignored for accessibility purposes.
+    /// This image has no alternative label for accessibility purposes.
+    /// Use ``Image/init(_:scale:orientation:label:)`` for details on how
+    /// to add a label to the image.
+    ///
+    /// Use this initializer to create an ``Image`` view from a
+    /// core graphics image. See the Apple documentation on how to
+    /// use this class [here](https://developer.apple.com/documentation/coregraphics/cgimage).
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0)
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// The main benefit of using this initializer is that it gives you
+    /// the option to scale and re-orient your image. See
+    /// ``Image/Orientation`` for all of the orientation options.
+    ///
+    /// ![Bird left mirrored](image-leftmirrored.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0, orientation: .leftMirrored)
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -18938,6 +19020,28 @@ extension Image {
 extension Image {
 
 	/// Creates an image from a `UIImage`.
+    ///
+    /// `UIImage` is asn image class from Apple's `UIKit` framework.
+    /// See [this page](https://developer.apple.com/documentation/uikit/uiimage)
+    /// from Apple's `UIKit` docs for more info on creating a `UIImage`
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let uiImage = UIImage(named: "bird")!
+    ///
+    ///     var body: some View {
+    ///         Image(uiImage: uiImage)
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
     public init(uiImage: UIImage) { }
 }
 
@@ -18946,14 +19050,103 @@ extension Image {
 
 	/// The different ways of resizing an image to fill a view.
     ///
+    /// Use this enumeration with the ``Image/resizable(_:)``
+    /// image modifier to determine how the image gets resized.
+    /// The two options are ``ResizingMode/stretch``, the familiar method
+    /// of resizing an image by squishing and stretching it, and
+    /// ``ResizingMode/tile``, which keeps the image as-is, but tiles or
+    /// crops it to fit the available space.
+    ///
+    /// See the two options compared below.
+    ///
+    /// To follow along, save the following image as `"bird-small"` in your project.
+    ///
+    /// ![Bird Small Image](bird-small.png)
+    ///
+    /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Image("bird-small")
+    ///                 .resizable(resizingMode: ResizingMode.stretch)
+    ///                 .frame(width: 200, height: 100)
+    ///             Image("bird-small")
+    ///                 .resizable(resizingMode: ResizingMode.tile)
+    ///                 .frame(width: 200, height: 100)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum ResizingMode {
 
     	/// The resizing method of maintaining image properties, positioning
     	/// several in a grid to fill the space if necessary.
+        ///
+        /// Use this enumeration case with the ``Image/resizable(_:)``
+        /// image modifier to determine how the image gets resized.
+        /// The two options are ``ResizingMode/stretch``, the familiar method
+        /// of resizing an image by squishing and stretching it, and
+        /// ``ResizingMode/tile``, which keeps the image as-is, but tiles or
+        /// crops it to fit the available space.
+        ///
+        /// See the two options compared below.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .stretch)
+        ///                 .frame(width: 200, height: 100)
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .tile)
+        ///                 .frame(width: 200, height: 100)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case tile
 
         /// The resizing method of stretching the image, distorting the properties
         /// if necessary.
+        ///
+        /// Use this enumeration with the ``Image/resizable(_:)``
+        /// image modifier to determine how the image gets resized.
+        /// The two options are ``ResizingMode/stretch``, the familiar method
+        /// of resizing an image by squishing and stretching it, and
+        /// ``ResizingMode/tile``, which keeps the image as-is, but tiles or
+        /// crops it to fit the available space.
+        ///
+        /// See the two options compared below.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .stretch)
+        ///                 .frame(width: 200, height: 100)
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .tile)
+        ///                 .frame(width: 200, height: 100)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case stretch
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -18996,6 +19189,33 @@ extension Image {
     /// Applying this modifier before reframing an image or in other ways
     /// distorting it is necessary otherwise the images view will change, but
     /// the image itself will not be resized.
+    ///
+    /// **Important:** This modifier
+    /// must come first on an ``Image`` before making changes to its size in subsequent
+    /// modifiers.
+    ///
+    /// See the ``Image/ResizingMode`` enumeration for details on how to use
+    /// the `resizingMode` parameter.
+    ///
+    /// The `capInsets` parameter is rarely used. It specifies distance
+    /// from the edges of the image where the image does *not*
+    /// get resized.
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Image("bird")
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - capInsets: The values to use for the cap insets.
