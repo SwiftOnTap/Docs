@@ -907,7 +907,7 @@ public struct Alert {
 ///
 ///
 /// 1. ``Alignment/topLeading``
-/// 2. ``Alignment/topCenter``
+/// 2. ``Alignment/top``
 /// 3. ``Alignment/topTrailing``
 /// 4. ``Alignment/leading``
 /// 5. ``Alignment/center``
@@ -2948,9 +2948,13 @@ extension App {
     /// Creates an instance of the app using the body that you define for its
     /// content.
     ///
+    /// **Don't use this function directly**.
     /// Swift synthesizes a default initializer for structures that don't
     /// provide one. You typically rely on the default initializer for
     /// your app.
+    ///
+    /// See ``App`` for details
+    /// and examples of how to use this protocol.
     init() { }
 }
 
@@ -2958,6 +2962,9 @@ extension App {
 extension App {
 
     /// Initializes and runs the app.
+    ///
+    /// **Don't use this function directly.** See ``App`` for details
+    /// and examples of how to use this protocol.
     ///
     /// If you precede your `SwiftUI/App` conformer's declaration with the
     /// [@main](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
@@ -3352,16 +3359,116 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 }
 
 /// The horizontal or vertical dimension in a 2D coordinate system.
+///
+/// Use this enumeration with ``ScrollView`` to specify whether the
+/// view can be scrolled vertically, horizontally, or both.
+///
+/// There are two possible axes:
+///
+/// 1. ``Axis/horizontal``
+/// 2. ``Axis/vertical``
+///
+/// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+/// on using this enumeration in the initializer.
+///
+///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView(Axis.horizontal, showsIndicators: false) {
+///             VStack {
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍏🍏")
+///                 Text("Peaches 🍑🍑")
+///             }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Axis : Int8, CaseIterable {
 
     /// The horizontal dimension.
+    ///
+    /// Use this enumeration case with ``ScrollView`` to specify a
+    /// scrollable view in the horizontal direction.
+    ///
+    /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+    /// on using this enumeration in the initializer.
+    ///
+    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ScrollView(.horizontal, showsIndicators: false) {
+    ///             VStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case horizontal
 
     /// The vertical dimension.
+    ///
+    /// Use this enumeration case with ``ScrollView`` to specify a
+    /// scrollable view in the horizontal direction.
+    ///
+    /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+    /// on using this enumeration in the initializer.
+    ///
+    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ScrollView(.vertical) {
+    ///             VStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     case vertical
 
     /// An efficient set of axes.
+    ///
+    /// Use this option set with ``ScrollView`` to specify whether the
+    /// view can be scrolled vertically, horizontally, or both.
+    ///
+    /// This `OptionSet` allows you to easily just pass one option - `.horizontal` -
+    /// or an array of options - `[.horizontal, .vertical]` - into the
+    /// same parameter without worrying about the type. See
+    /// the Apple docs on [OptionSet](https://developer.apple.com/documentation/swift/optionset)
+    /// for more on the protocol.
+    ///
+    /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+    /// on using this option set in the initializer.
+    ///
+    /// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         ScrollView([.horizontal, .vertical]) {
+    ///             VStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     @frozen public struct Set : OptionSet {
 
         /// The element type of the option set.
@@ -3406,9 +3513,53 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         public init(rawValue: Int8) { }
 
         /// The option set corresponding to the horizontal axis.
+        ///
+        /// Use this property with ``ScrollView`` to specify a
+        /// scrollable view in the horizontal direction.
+        ///
+        /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+        /// on using this in the initializer.
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///     var body: some View {
+        ///         ScrollView(.horizontal, showsIndicators: false) {
+        ///             VStack {
+        ///                 Text("Bananas 🍌🍌")
+        ///                 Text("Apples 🍏🍏")
+        ///                 Text("Peaches 🍑🍑")
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         public static let horizontal: Axis.Set
 
         /// The option set corresponding to the vertical axis.
+        ///
+        /// Use this property with ``ScrollView`` to specify a
+        /// scrollable view in the horizontal direction.
+        ///
+        /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
+        /// on using this in the initializer.
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///     var body: some View {
+        ///         ScrollView(.vertical) {
+        ///             VStack {
+        ///                 Text("Bananas 🍌🍌")
+        ///                 Text("Apples 🍏🍏")
+        ///                 Text("Peaches 🍑🍑")
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         public static let vertical: Axis.Set
 
         /// The type of the elements of an array literal.
@@ -4058,7 +4209,7 @@ public enum BlendMode {
     ///
     /// The actual formula for the operation is this:
     ///
-    ///     func softLight(a: Double, b: Double) -> Double {{}
+    ///     func softLight(a: Double, b: Double) -> Double {
     ///         if b < 0.5 {
     ///             return 2*a*b + a*a*(1 - 2*b)
     ///         } else {
@@ -4528,15 +4679,23 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// the button. The label is a view that describes the button's action, for
 /// example, by showing text such as Cancel or an icon such as a back arrow.
 ///
-///     Button(action: signIn) {
-///         Text("Sign In")
+///     struct SignInView: View {
+///         var body: some View {
+///             Button(action: { /*sign the user in*/ }) {
+///                 Text("Sign In")
+///             }
+///         }
 ///     }
 ///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
 /// parameter, instead of a trailing closure:
 ///
-///     Button("Sign In", action: signIn)
+///     struct EasySignInView: View {
+///         var body: some View {
+///             Button("Sign In", action: { /*sign the user in*/ })
+///         }
+///     }
 ///
 /// The method of triggering the button varies by platform:
 /// - In iOS and watchOS, the user triggers a standard button by tapping on it.
@@ -4552,22 +4711,37 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// list cell that triggers an action when selected by the user, add a button to
 /// the list's content. For example:
 ///
-///     // A list of items, where the last row, when triggered,
-///     // opens a UI for adding a new item.
-///     List {
-///         ForEach(items) { item in
-///             Text(item.title)
+///     struct Item: Identifiable {
+///         let id = UUID()
+///         let title: String
+///     }
+///
+///     struct ListView: View {
+///         let items = [Item(title: "🍌"), Item(title: "🍑")]
+///         var body: some View {
+///             // A list of items, where the last row, when triggered,
+///             // opens a UI for adding a new item.
+///             List {
+///                 ForEach(items) { item in
+///                     Text(item.title)
+///                 }
+///                 Button("Add Item", action: { /*add item*/ } )
+///             }
 ///         }
-///         Button("Add Item", action: addItem)
 ///     }
 ///
 /// Similarly, to create a context menu item that triggers an action, add a
 /// button to the menu's content:
 ///
-///     .contextMenu {
-///         Button("Cut", action: cut)
-///         Button("Copy", action: copy)
-///         Button("Paste", action: paste)
+///     struct ContextMenuView: View {
+///         var body: some View {
+///             Text("Press and hold for copy-paste options")
+///                 .contextMenu {
+///                     Button("Cut", action: { /*cut*/ } )
+///                     Button("Copy", action: { /*copy*/ } )
+///                     Button("Paste", action: { /*paste*/ } )
+///                 }
+///         }
 ///     }
 ///
 /// This pattern extends to most other container views in SwiftUI that have
@@ -4582,15 +4756,41 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// `PrimitiveButtonStyle` protocol. To set a specific style for all button
 /// instances within a view, use the `View/buttonStyle(_:)-66fbx` modifier:
 ///
-///     HStack {
-///         Button("Sign In", action: signIn)
-///         Button("Register", action: register)
+///     struct ButtonView: View {
+///         var body: some View {
+///             HStack {
+///                 Button("Sign In", action: { /*sign in*/ } )
+///                 Button("Register", action: { /*register*/ } )
+///             }
+///             .buttonStyle(BorderedButtonStyle())
+///         }
 ///     }
-///     .buttonStyle(BorderedButtonStyle())
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Button<Label> : View where Label : View {
 
     /// Creates a button that displays a custom label.
+    ///
+    ///     struct SignInView: View {
+    ///         var body: some View {
+    ///             Button(action: { /*sign the user in*/ }) {
+    ///                 Text("Sign In")
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// You can also use multiple trailing closure syntax to accomplish
+    /// the same task:
+    ///
+    ///     struct SignInView: View {
+    ///         var body: some View {
+    ///             Button {
+    ///                 /*sign the user in*/
+    ///             } label: {
+    ///                 Text("Sign In")
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
@@ -4619,6 +4819,13 @@ extension Button where Label == Text {
     /// To initialize a button with a string variable, use
     /// `Button/init(_:action:)-lpm7` instead.
     ///
+    ///     struct EasySignInView: View {
+    ///         let titleText = LocalizedStringKey("Sign In")
+    ///         var body: some View {
+    ///             Button(titleTiext, action: { /*sign the user in*/ })
+    ///         }
+    ///     }
+    ///
     /// - Parameters:
     ///   - titleKey: The key for the button's localized title, that describes
     ///     the purpose of the button's `action`.
@@ -4633,6 +4840,13 @@ extension Button where Label == Text {
     ///
     /// To initialize a button with a localized string key, use
     /// `Button/init(_:action:)-1asy` instead.
+    ///
+    ///     struct EasySignInView: View {
+    ///         let titleText = "Sign In"
+    ///         var body: some View {
+    ///             Button(titleTiext, action: { /*sign the user in*/ } )
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - title: A string that describes the purpose of the button's `action`.
@@ -4655,8 +4869,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     /// For example, the following style adds a red border around the button,
     /// but otherwise preserves the button's current style:
     ///
-    ///     struct RedBorderedButtonStyle : PrimitiveButtonStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///     struct RedBorderedButtonStyle: PrimitiveButtonStyle {
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             Button(configuration)
     ///                 .border(Color.red)
     ///         }
@@ -4753,7 +4967,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ButtonStyle{ }
+public protocol ButtonStyle { }
 extension ButtonStyle {
 
     /// A view that represents the body of a button.
@@ -6559,15 +6773,78 @@ extension ContainerRelativeShape : InsettableShape {
 }
 
 /// Constants that define how a view's content fills the available space.
+///
+/// Use this enumeration along with the
+/// ``View/aspectRatio(_:contentMode:)-27509`` and
+/// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+/// to specify how to change the aspect ratio of a view.
+///
+/// This enum has 2 options:
+///
+/// 1. ``ContentMode/fit``: Scale the content so that it can be fully seen
+/// in the available space.
+/// 2. ``ContentMode/fill``: Scale the content so that it fully fills
+/// the available space.
+///
+/// In the following example, we scale the ellipse down so that it fits
+/// perfectly in the space.
+///
+/// ```
+/// struct EllipseView: View {
+///     var body: some View {
+///         Ellipse()
+///             .fill(Color.purple)
+///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
+///             .frame(width: 200, height: 200)
+///             .border(Color(white: 0.75))
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
 
 	/// Fill mode that scales down view so that it can be fully seen in the
 	/// available space, even it it leaves whitespace.
+    ///
+    /// Use this enumeration case along with the
+    /// ``View/aspectRatio(_:contentMode:)-27509`` and
+    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// to specify how to change the aspect ratio of a view.
+    ///
+    /// ```
+    /// struct EllipseView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .fill(Color.purple)
+    ///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// }
+    /// ```
     case fit
 
     /// Fill mode that scales the view so that it fills the available space
     /// entirely, even if not all of the view can be seen.
+    ///
+    /// Use this enumeration along with the
+    /// ``View/aspectRatio(_:contentMode:)-27509`` and
+    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// to specify how to change the aspect ratio of a view.
+    ///
+    /// ```
+    /// struct EllipseView: View {
+    ///     var body: some View {
+    ///         Ellipse()
+    ///             .fill(Color.purple)
+    ///             .aspectRatio(0.75, contentMode: .fill) // 3:4 aspect ratio -> 3/4 = 0.75
+    ///             .frame(width: 200, height: 200)
+    ///             .border(Color(white: 0.75))
+    ///     }
+    /// }
+    /// ```
+    ///
     case fill
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -8084,15 +8361,15 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ```
 /// struct ExampleView: View {
-///   var body: some View {
-///     VStack {
-///       Text("My Awesome Book")
+///     var body: some View {
+///         VStack {
+///             Text("My Awesome Book")
 ///
-///       Divider()
+///             Divider()
 ///
-///       Text("My Name")
+///             Text("My Name")
+///         }
 ///     }
-///   }
 /// }
 /// ```
 ///
@@ -8102,21 +8379,37 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ```
 /// struct ExampleView: View {
-///   var body: some View {
-///     HStack {
-///       Text("This is a line of text")
+///     var body: some View {
+///         HStack {
+///             Text("This is a line of text")
 ///
-///       Divider()
+///             Divider()
 ///
-///       Text("This is an unrelated line of text")
+///             Text("This is an unrelated line of text")
+///         }
 ///     }
-///   }
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
 	/// Creates a new `Divider`.
+    ///
+    /// See ``Divider`` for more on what a divider is and how to use it.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text("This is a line of text")
+    ///
+    ///             Divider()
+    ///
+    ///             Text("This is an unrelated line of text")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public init() { }
 
     /// The type of view representing the body of this view.
@@ -10627,8 +10920,10 @@ public struct EmptyCommands : Commands {
 ///     }
 /// }
 /// ```
+///
 /// Account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
+///
 /// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
 ///     let label: Label
@@ -10647,6 +10942,24 @@ public struct EmptyCommands : Commands {
 @frozen public struct EmptyView : View {
 
 	/// Creates a new `EmptyView`.
+    ///
+    /// See ``EmptyView`` for more on empty views and how to use them.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Hello")
+    ///
+    ///             EmptyView()
+    ///                 .frame(width: 1000, height: 1000)
+    ///                 .background(Color.red)
+    ///
+    ///             Text("World")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
     /// The type of view representing the body of this view.
@@ -10719,7 +11032,13 @@ public struct EmptyCommands : Commands {
     ///     struct MyView: View {
     ///         @Environment(\.colorScheme) var colorScheme: ColorScheme
     ///
-    ///         // ...
+    ///         var body: some View {
+    ///             if colorScheme == .dark {
+    ///                 Text("This is ⬛️ content")
+    ///             } else {
+    ///                 Text("This is ⬜️ content")
+    ///             }
+    ///         }
     ///     }
     ///
     /// SwiftUI automatically updates any parts of `MyView` that depend on
@@ -10737,13 +11056,15 @@ public struct EmptyCommands : Commands {
     /// However, you don't access `wrappedValue` directly. Instead, you read the
     /// property variable created with the `Environment` property wrapper:
     ///
-    ///     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    ///     struct MyView: View {
+    ///         @Environment(\.colorScheme) var colorScheme: ColorScheme
     ///
-    ///     var body: some View {
-    ///         if colorScheme == .dark {
-    ///             DarkContent()
-    ///         } else {
-    ///             LightContent()
+    ///         var body: some View {
+    ///             if colorScheme == .dark {
+    ///                 Text("This is ⬛️ content")
+    ///             } else {
+    ///                 Text("This is ⬜️ content")
+    ///             }
     ///         }
     ///     }
     ///
@@ -11038,6 +11359,44 @@ extension EnvironmentKey {
     public var projectedValue: EnvironmentObject<ObjectType>.Wrapper { get }
 
     /// Creates an environment object.
+    ///
+    /// This initializer is rarely used directly. Instead, use the
+    /// `@EnvironmentObject` property wrapper to
+    /// read the enviornment object from the environment.
+    ///
+    /// Inject the object into the environment using the
+    /// ``View/environmentObject(_:)`` modifier.
+    ///
+    /// ```
+    /// class AppModel: ObservableObject {
+    ///     let text: String = "some text"
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     @StateObject var appModel = AppModel()
+    ///
+    ///     var body: some View {
+    ///         IntermediateView()
+    ///             .environmentObject(appModel)
+    ///     }
+    /// }
+    ///
+    /// struct IntermediateView: View {
+    ///     var body: some View {
+    ///         ChildView()
+    ///             .padding()
+    ///     }
+    /// }
+    ///
+    /// struct ChildView: View {
+    ///     @EnvironmentObject var appModel: AppModel
+    ///
+    ///     var body: some View {
+    ///         Text(appModel.text)
+    ///     }
+    /// }
+    ///
+    /// ```
     public init() { }
 }
 
@@ -12780,7 +13139,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -12819,7 +13177,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -12858,7 +13215,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -12898,7 +13254,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -12938,7 +13293,6 @@ extension Font {
     ///                 .font(.caption2)
     ///             Text("Footnote 🍌🍌")
     ///                 .font(.footnote)
-    ///
     ///         }
     ///     }
     /// }
@@ -12947,11 +13301,38 @@ extension Font {
 
     /// A font with the subheadline text style.
     ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
-    ///         Text("Banana🍌🍌")
-    ///            .font(.title)
+    ///         Group {
+    ///             Text("LargeTitle 🍌🍌")
+    ///                 .font(.largeTitle)
+    ///             Text("Title 🍌🍌")
+    ///                 .font(.title)
+    ///             Text("Title2 🍌🍌")
+    ///                 .font(.title2)
+    ///             Text("Title3 🍌🍌")
+    ///                 .font(.title3)
+    ///             Text("Headline 🍌🍌")
+    ///                 .font(.headline)
+    ///             Text("Subheadline 🍌🍌")
+    ///                 .font(.subheadline)
+    ///         }
+    ///         Group {
+    ///             Text("Body 🍌🍌")
+    ///                 .font(.body)
+    ///             Text("Callout 🍌🍌")
+    ///                 .font(.callout)
+    ///             Text("Caption 🍌🍌")
+    ///                 .font(.caption)
+    ///             Text("Caption2 🍌🍌")
+    ///                 .font(.caption2)
+    ///             Text("Footnote 🍌🍌")
+    ///                 .font(.footnote)
+    ///
+    ///         }
     ///     }
     /// }
     /// ```
@@ -13159,22 +13540,25 @@ extension Font {
     ///
     /// For example, basic usage would be:
     ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(Font.system(.title))
-    ///             }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .font(Font.system(.title))
     ///         }
+    ///     }
     ///
     /// Your app can easily modify the system font by providing an alternate `desigin`. For example:
     ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(Font.system(.title, design: .monospaced))
-    ///             }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .font(Font.system(.title, design: .monospaced))
     ///         }
+    ///     }
     ///
+    /// - Parameters:
+    ///   - style: The ``Font/TextStyle`` of the font.
+    ///   - design: The ``Font/Design`` of the font.
     public static func system(_ style: Font.TextStyle, design: Font.Design = .default) -> Font { }
 
     /// A dynamic text style to use for fonts.
@@ -13189,16 +13573,16 @@ extension Font {
     /// - ``font/textstyle/subheadline``
     /// - ``font/textstyle/body``
     /// - ``font/textstyle/callout``
-    /// - ``font/textstyle/footnote`
-    /// - ``font/textstyle/caption`
-    /// - ``font/textstyle/caption2`
+    /// - ``font/textstyle/footnote``
+    /// - ``font/textstyle/caption``
+    /// - ``font/textstyle/caption2``
     ///
     /// ![TextStyle Example 1](text-style-example.png)
     ///
     /// ```
     /// struct TextStyleView: View {
     ///     var body: some View {
-    ///         Group{
+    ///         Group {
     ///             Text("Large Title")
     ///                 .font(.largeTitle)
     ///             Text("Title")
@@ -13223,11 +13607,10 @@ extension Font {
     ///                 .font(.caption)
     ///              Text("Caption2")
     ///                .font(.caption2)
-    ///      }
-    ///       }
-    ///  }
+    ///         }
+    ///     }
+    /// }
     /// ```
-
     public enum TextStyle : CaseIterable {
 
         /// The font style for large titles.
@@ -13238,7 +13621,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13263,9 +13646,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         ///
         case largeTitle
@@ -13277,7 +13660,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13302,9 +13685,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case title
 
@@ -13315,7 +13698,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13340,9 +13723,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title2
@@ -13354,7 +13737,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13379,9 +13762,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title3
@@ -13393,7 +13776,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13418,9 +13801,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case headline
 
@@ -13431,7 +13814,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13456,9 +13839,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case subheadline
 
@@ -13469,7 +13852,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13494,9 +13877,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case body
 
@@ -13507,7 +13890,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13532,9 +13915,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case callout
 
@@ -13545,7 +13928,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13570,9 +13953,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case footnote
 
@@ -13583,7 +13966,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13608,9 +13991,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         case caption
 
@@ -13621,7 +14004,7 @@ extension Font {
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
-        ///         Group{
+        ///         Group {
         ///             Text("Large Title")
         ///                 .font(.largeTitle)
         ///             Text("Title")
@@ -13646,9 +14029,9 @@ extension Font {
         ///                 .font(.caption)
         ///              Text("Caption2")
         ///                .font(.caption2)
-        ///      }
-        ///       }
-        ///  }
+        ///         }
+        ///     }
+        /// }
         /// ```
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case caption2
@@ -13699,12 +14082,44 @@ extension Font {
 extension Font {
 
     /// Adds italics to the font.
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 16).italic())
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 16).bold())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func italic() -> Font { }
 
     /// Adjusts the font to enable all small capitals.
     ///
     /// See `Font/lowercaseSmallCaps()` and `Font/uppercaseSmallCaps()` for
     /// more details.
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("My Text Is Small Caps")
+    ///                 .font(Font.system(size: 20).smallCaps())
+    ///             Text("Mine's Lowercase Small Caps")
+    ///                 .font(Font.system(size: 20).lowercaseSmallCaps())
+    ///             Text("And Mine's Uppercase Small Caps")
+    ///                 .font(Font.system(size: 20).uppercaseSmallCaps())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func smallCaps() -> Font { }
 
     /// Adjusts the font to enable lowercase small capitals.
@@ -13713,6 +14128,23 @@ extension Font {
     /// font. It is generally used for display lines set in large and small
     /// caps, such as titles. It may include forms related to small capitals,
     /// such as old-style figures.
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("My Text Is Small Caps")
+    ///                 .font(Font.system(size: 20).smallCaps())
+    ///             Text("Mine's Lowercase Small Caps")
+    ///                 .font(Font.system(size: 20).lowercaseSmallCaps())
+    ///             Text("And Mine's Uppercase Small Caps")
+    ///                 .font(Font.system(size: 20).uppercaseSmallCaps())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func lowercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to enable uppercase small capitals.
@@ -13721,6 +14153,23 @@ extension Font {
     /// generally used for words which would otherwise be set in all caps, such
     /// as acronyms, but which are desired in small-cap form to avoid disrupting
     /// the flow of text.
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("My Text Is Small Caps")
+    ///                 .font(Font.system(size: 20).smallCaps())
+    ///             Text("Mine's Lowercase Small Caps")
+    ///                 .font(Font.system(size: 20).lowercaseSmallCaps())
+    ///             Text("And Mine's Uppercase Small Caps")
+    ///                 .font(Font.system(size: 20).uppercaseSmallCaps())
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func uppercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to use monospace digits.
@@ -13757,8 +14206,84 @@ extension Font {
 
     /// Sets the weight of the font.
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// Use this function to change the weight of a ``Font`` object.
     ///
+    /// Alternatively, you can change the weight of a ``Text`` view
+    /// directly by using the
+    /// ``Text/fontWeight(_:)``
+    ///
+    /// See ``Font/Weight`` for the different possible of weights.
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("This is black text")
+    ///                 .font(Font.system(size: 20).weight(.blck))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    public func weight(_ weight: Font.Weight) -> Font { }
+
+    /// Adds bold styling to the font.
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// ```
+    /// struct FontView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 16).italic())
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 16).bold())
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    public func bold() -> Font { }
+
+    /// Create a version of `self` that uses leading (line spacing) adjustment.
+    ///
+    /// Use this modifier to change the spacing between lines in a ``Text``
+    /// view. See ``Font.Leading`` for the options.
+    ///
+    /// ![Font Leading](font-leading.png)
+    ///
+    /// ```
+    /// struct LeadingView: View {
+    ///     var body: some View {
+    ///         HStack(alignment: .top) {
+    ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.loose))
+    ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.standard))
+    ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.tight))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+    public func leading(_ leading: Font.Leading) -> Font { }
+
+    /// A weight to use for fonts.
+    ///
+    /// Use this structure to change the font weight of some onscreen
+    /// text. It has 9 static members:
+    ///
+    /// 1. ``Weight/ultraLight``
+    /// 2. ``Weight/thin``
+    /// 3. ``Weight/light``
+    /// 4. ``Weight/regular``
+    /// 5. ``Weight/medium``
+    /// 6. ``Weight/semibold``
+    /// 7. ``Weight/bold``
+    /// 8. ``Weight/heavy``
+    /// 9. ``Weight/black``
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
@@ -13781,68 +14306,47 @@ extension Font {
     ///                     .fontWeight(Font.Weight.heavy)
     ///                 Text("black🍌")
     ///                     .fontWeight(Font.Weight.black)
-    ///            }
-    ///            .font(.title)
+    ///             }
+    ///             .font(.title)
     ///         }
     ///     }
-    ///
-    ///
-    public func weight(_ weight: Font.Weight) -> Font { }
-
-    /// Adds bold styling to the font.
-    public func bold() -> Font { }
-
-    /// Create a version of `self` that uses leading (line spacing) adjustment.
-    ///
-    /// The availability of leading adjustments depends on font.
-    ///
-    /// For example, `Font.body.tightLeading()` will return a `Font` in `body`
-    /// text style with tight line spacing. This modifier may return the
-    /// original `Font` unchanged for some fonts.
-    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    public func leading(_ leading: Font.Leading) -> Font { }
-
-    /// A weight to use for fonts.
     @frozen public struct Weight : Hashable {
 
     	/// A font weight of ultra light.
-      ///
-      /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-      ///
-      ///
-      ///     struct ExampleView: View {
-      ///         var body: some View {
-      ///             VStack {
-      ///                 Text("ultraLight 🍌")
-      ///                     .fontWeight(Font.Weight.ultraLight)
-      ///                 Text("thin🍌")
-      ///                     .fontWeight(Font.Weight.thin)
-      ///                 Text("light🍌")
-      ///                     .fontWeight(Font.Weight.light)
-      ///                 Text("regular🍌")
-      ///                     .fontWeight(Font.Weight.regular)
-      ///                 Text("medium🍌")
-      ///                     .fontWeight(Font.Weight.medium)
-      ///                 Text("semibold🍌")
-      ///                     .fontWeight(Font.Weight.semibold)
-      ///                 Text("bold🍌")
-      ///                     .fontWeight(Font.Weight.bold)
-      ///                 Text("heavy🍌")
-      ///                     .fontWeight(Font.Weight.heavy)
-      ///                 Text("black🍌")
-      ///                     .fontWeight(Font.Weight.black)
-      ///            }
-      ///            .font(.title)
-      ///         }
-      ///     }
-      ///
-      ///
+        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
+        ///     struct ExampleView: View {
+        ///         var body: some View {
+        ///             VStack {
+        ///                 Text("ultraLight 🍌")
+        ///                     .fontWeight(Font.Weight.ultraLight)
+        ///                 Text("thin🍌")
+        ///                     .fontWeight(Font.Weight.thin)
+        ///                 Text("light🍌")
+        ///                     .fontWeight(Font.Weight.light)
+        ///                 Text("regular🍌")
+        ///                     .fontWeight(Font.Weight.regular)
+        ///                 Text("medium🍌")
+        ///                     .fontWeight(Font.Weight.medium)
+        ///                 Text("semibold🍌")
+        ///                     .fontWeight(Font.Weight.semibold)
+        ///                 Text("bold🍌")
+        ///                     .fontWeight(Font.Weight.bold)
+        ///                 Text("heavy🍌")
+        ///                     .fontWeight(Font.Weight.heavy)
+        ///                 Text("black🍌")
+        ///                     .fontWeight(Font.Weight.black)
+        ///             }
+        ///             .font(.title)
+        ///         }
+        ///     }
+        ///
         public static let ultraLight: Font.Weight
 
         /// A font weight of thin.
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///
         ///     struct ExampleView: View {
         ///         var body: some View {
@@ -13877,7 +14381,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -13910,7 +14413,6 @@ extension Font {
         /// A font weight of regular.
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///
         ///     struct ExampleView: View {
         ///         var body: some View {
@@ -13945,7 +14447,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -13978,7 +14479,6 @@ extension Font {
         /// A font weight of semibold.
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///
         ///     struct ExampleView: View {
         ///         var body: some View {
@@ -14013,7 +14513,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14039,7 +14538,6 @@ extension Font {
         ///            .font(.title)
         ///         }
         ///     }
-        ///
         ///
         public static let bold: Font.Weight
 
@@ -14047,7 +14545,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14073,7 +14570,6 @@ extension Font {
         ///            .font(.title)
         ///         }
         ///     }
-        ///
         ///
         public static let heavy: Font.Weight
 
@@ -14081,7 +14577,6 @@ extension Font {
         ///
         /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -14107,7 +14602,6 @@ extension Font {
         ///            .font(.title)
         ///         }
         ///     }
-        ///
         ///
         public static let black: Font.Weight
 
@@ -14147,16 +14641,98 @@ extension Font {
     }
 
     /// The different types of line spacing.
+    ///
+    /// Use this enumeration with the ``Font/leading(_:)`` modifier to
+    /// change the spacing between lines in a ``Text`` view.
+    ///
+    /// ![Font Leading](font-leading.png)
+    ///
+    /// ```
+    /// struct LeadingView: View {
+    ///     var body: some View {
+    ///         HStack(alignment: .top) {
+    ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.loose))
+    ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.standard))
+    ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+    ///                 .font(Font.body.leading(.tight))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public enum Leading {
 
     	/// Normal, medium line spacing.
+        ///
+        /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
+        /// specify normal spacing between lines in a ``Text`` view.
+        ///
+        /// This is the default line spacing.
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
+        /// ```
+        /// struct LeadingView: View {
+        ///     var body: some View {
+        ///         HStack(alignment: .top) {
+        ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.loose))
+        ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.standard))
+        ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.tight))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case standard
 
         /// Tight, small line spacing.
+        ///
+        /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
+        /// specify tight spacing between lines in a ``Text`` view.
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
+        /// ```
+        /// struct LeadingView: View {
+        ///     var body: some View {
+        ///         HStack(alignment: .top) {
+        ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.loose))
+        ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.standard))
+        ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.tight))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case tight
 
         /// Loose, large line spacing.
+        ///
+        /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
+        /// specify tight spacing between lines in a ``Text`` view.
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
+        /// ```
+        /// struct LeadingView: View {
+        ///     var body: some View {
+        ///         HStack(alignment: .top) {
+        ///             Text("This is loose text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.loose))
+        ///             Text("This is standard text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.standard))
+        ///             Text("This is tight text that keeps going onto many lines to illustrate leading.")
+        ///                 .font(Font.body.leading(.tight))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case loose
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -14205,54 +14781,181 @@ extension Font {
     /// weight, and a type design together. The following styles the system font
     /// as 17 point, `Font/Weight/semibold` text:
     ///
-    ///     Text("Hello").font(.system(size: 17, weight: .semibold))
+    /// ![Font System Semibold](font-system-semibold.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Hello")
+    ///             .font(.system(size: 17, weight: .semibold))
+    ///     }
+    /// }
+    /// ```
     ///
     /// While the following styles the text as 17 point `Font/Weight/bold`,
     /// and applies a `serif` `Font/Design` to the system font:
     ///
-    ///     Text("Hello").font(.system(size: 17, weight: .bold, design: .serif))
+    /// ![Font System Serif](font-system-serif.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Hello")
+    ///             .font(.system(size: 17, weight: .bold, design: .serif))
+    ///     }
+    /// }
+    /// ```
     ///
     /// If you want to use the default `Font/Weight`
     /// (`Font/Weight/regular`), you don't need to specify the `weight` in the
     /// method. The following example styles the text as 17 point
     /// `Font/Weight/regular`, and uses a `Font/Design/rounded` system font:
     ///
-    ///     Text("Hello").font(.system(size: 17, design: .rounded))
+    /// ![Font System Rounded](font-system-rounded.png)
     ///
-    /// Other examples of system font include:
-    ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(.system(size: 32, weight: .light, design: .monospaced))
-    ///             }
-    ///         }
-    ///
-    /// And:
-    ///
-    ///         struct ExampleView: View {
-    ///             var body: some View {
-    ///                 Text("Bananas 🍌🍌")
-    ///                     .font(.system(size: 32, weight: .heavy, design: .rounded))
-    ///             }
-    ///         }
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Hello")
+    ///             .font(.system(size: 17, design: .rounded))
+    ///     }
+    /// }
+    /// ```
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
     /// A design to use for fonts.
+    ///
+    /// Use this enumeration with the ``Font/system(size:weight:design:)``
+    /// static function of ``Font`` to change a font design while remaining
+    /// within the system fonts.
+    ///
+    /// There are 4 different font designs:
+    ///
+    /// 1. ``Font/Design/default``
+    /// 2. ``Font/Design/serif``
+    /// 3. ``Font/Design/rounded``
+    /// 4. ``Font/Design/monospaced``
+    ///
+    /// ![Font Design](font-design.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("default")
+    ///                 .font(.system(size: 48, design: .default))
+    ///             Text("serif")
+    ///                 .font(.system(size: 48, design: .serif))
+    ///             Text("rounded")
+    ///                 .font(.system(size: 48, design: .rounded))
+    ///             Text("monospaced")
+    ///                 .font(.system(size: 48, design: .monospaced))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum Design : Hashable {
 
     	/// The standard sans-serif font design.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the sans serif system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case `default`
 
         /// A font design with serifs, or small strokes attached to the end of letters.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the serif system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         @available(watchOS 7.0, *)
         case serif
 
         /// A rounded font design.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the rounded system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case rounded
 
         /// A monospaced font design.
+        ///
+        /// Use this enumeration case with the ``Font/system(size:weight:design:)``
+        /// static function of ``Font`` to specify the monospaced system font.
+        ///
+        /// ![Font Design](font-design.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Text("default")
+        ///                 .font(.system(size: 48, design: .default))
+        ///             Text("serif")
+        ///                 .font(.system(size: 48, design: .serif))
+        ///             Text("rounded")
+        ///                 .font(.system(size: 48, design: .rounded))
+        ///             Text("monospaced")
+        ///                 .font(.system(size: 48, design: .monospaced))
+        ///         }
+        ///     }
+        /// }
+        /// ```
         @available(watchOS 7.0, *)
         case monospaced
 
@@ -14297,32 +15000,94 @@ extension Font {
 
     /// Create a custom font with the given `name` and `size` that scales with
     /// the body text style.
+    ///
+    /// Use this static function to create a non-system font.
+    ///
+    /// Note that this font will scale based on the body text size. If
+    /// you instead wanted a fixed size, see
+    /// ``Font/custom(_:fixedSize:)``. If you want your custom font
+    /// to scale based on a different style, see
+    /// ``Font/custom(_:size:relativeTo:)``.
+    ///
+    /// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///            .font(.custom("American Typewriter", size: 32.0))
+    ///     }
+    /// }
+    /// ```
     public static func custom(_ name: String, size: CGFloat) -> Font { }
 
     /// Create a custom font with the given `name` and `size` that scales
     /// relative to the given `textStyle`.
+    ///
+    /// Use this static function to create a non-system font.
+    ///
+    /// Note that this font will scale based on the `relativeTo` parameter text style. If
+    /// you instead wanted a fixed size, see
+    /// ``Font/custom(_:fixedSize:)``. If you want your custom font
+    /// to scale based on the body style, see
+    /// ``Font/custom(_:size:)``.
+    ///
+    /// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///            .font(.custom("American Typewriter", size: 32.0, relativeTo: .title))
+    ///     }
+    /// }
+    /// ```
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static func custom(_ name: String, size: CGFloat, relativeTo textStyle: Font.TextStyle) -> Font { }
 
     /// Create a custom font with the given `name` and a fixed `size` that does
     /// not scale with Dynamic Type.
+    ///
+    /// Use this static function to create a non-system font.
+    ///
+    /// Note that this font will be a fixed size. If
+    /// you instead wanted your font to scale based on the body size, see
+    /// ``Font/custom(_:size:)``. If you want your custom font
+    /// to scale based on a different style, see
+    /// ``Font/custom(_:size:relativeTo:)``.
+    ///
+    /// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Text("Banana🍌🍌")
+    ///            .font(.custom("American Typewriter", fixedSize: 32.0))
+    ///     }
+    /// }
+    /// ```
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static func custom(_ name: String, fixedSize: CGFloat) -> Font { }
 
     /// Creates a custom font from a platform font instance.
     ///
     /// Initializing `Font` with platform font instance
-    /// (<doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>) can bridge SwiftUI
-    /// `Font` with <doc://com.apple.documentation/documentation/AppKit/NSFont> or
-    /// <doc://com.apple.documentation/documentation/UIKit/UIFont>, both of which are
+    /// ([CTFont](https://developer.apple.com/documentation/coretext/ctfont-q6r)) can bridge SwiftUI
+    /// `Font` with [NSFont](https://developer.apple.com/documentation/appkit/nsfont) or
+    /// [UIFont](https://developer.apple.com/documentation/uikit/uifont), both of which are
     /// toll-free bridged to
-    /// <doc://com.apple.documentation/documentation/CoreText/CTFont-q6r>. For example:
+    /// [CTFont](https://developer.apple.com/documentation/coretext/ctfont-q6r). For example:
     ///
+    /// ```
+    /// struct ContentView: View {
     ///     // Use native Core Text API to create desired ctFont.
     ///     let ctFont = CTFontCreateUIFontForLanguage(.system, 12, nil)!
     ///
-    ///     // Create SwiftUI Text with the CTFont instance.
-    ///     let text = Text("Hello").font(Font(ctFont))
+    ///     var body: some View {
+    ///         Text("Hello").font(Font(ctFont))
+    ///     }
+    /// }
+    /// ```
     public init(_ font: CTFont) { }
 }
 
@@ -14363,10 +15128,16 @@ public struct ForEach<Data, ID, Content> where Data : RandomAccessCollection, ID
 
     /// The collection of underlying identified data that SwiftUI uses to create
     /// views dynamically.
+    ///
+    /// Reading from or writing too this property directly is rarely done.
+    /// See ``ForEach`` for more on using this view.
     public var data: Data
 
     /// A function you can use to create content on demand using the underlying
-    /// data.
+    /// data
+    ///
+    /// Reading from or writing too this property directly is rarely done.
+    /// See ``ForEach`` for more on using this view.
     public var content: (Data.Element) -> Content
 }
 
@@ -14449,7 +15220,7 @@ extension ForEach where Content : View {
     ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
     ///
     ///     var body: some View {
-    ///         ForEach(myFruits, id:/\.self) { fruit in
+    ///         ForEach(myFruits, id:\.self) { fruit in
     ///             HStack {
     ///                 Text(fruit)
     ///             }
@@ -14935,9 +15706,55 @@ public struct GeometryProxy {
 	/// Unlike traditional view builders, the content builder is generated from
 	/// a parameter of type `GeometryProxy`, giving you access to the geometric
 	/// properties of the parent view.
+    ///
+    /// This property is usually specified directly using the
+    /// ``GeometryReader/init(content:)``
+    /// initializer. Technically this property can also be specified
+    /// directly, but since a geometry reader's ``Content`` **generic
+    /// type** can't change after initialization, it's rarely done in
+    /// practice.
+    ///
+    /// In the following example, this property is the trailing closure:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         GeometryReader { proxy in
+    ///             Color.green
+    ///                 .frame(
+    ///                     width: proxy.size.width / 2,
+    ///                     height: proxy.size.height / 2
+    ///                 )
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var content: (GeometryProxy) -> Content
 
     /// Creates a `GeometryReader` parent view using the parent's geometry.
+    ///
+    /// Use this initializer to read the geometry properties of a view
+    /// in laying out child views.
+    ///
+    /// See ``GeometryReader`` for a much more in-depth discusson
+    /// of the geometry reader and how to use it.
+    ///
+    /// See ``GeometryProxy`` for more details on the parameter passed
+    /// to the function parameter in this initializer.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         GeometryReader { proxy in
+    ///             Color.green
+    ///                 .frame(
+    ///                     width: proxy.size.width / 2,
+    ///                     height: proxy.size.height / 2
+    ///                 )
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter content: A closure that takes the geometry of the parent view and returns a content view.
     @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content) { }
@@ -15280,21 +16097,179 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 
 /// A color gradient represented as an array of color stops, each having a
 /// parametric location value.
+///
+/// Use this structure along with one of the gradient views
+/// to display a visual gradient. There are 3 types of gradients:
+/// - ``AngularGradient``
+/// - ``LinearGradient``
+/// - ``RadialGradient``
+///
+/// Those gradients are actual ``View``s. This structure, on the other
+/// hand, is just the list of colors and spacings associated with a gradient.
+///
+/// See the example below for a simple gradient being passed to a
+/// ``LinearGradient`` view.
+///
+/// ![Rectangle Example](rounded-rectangle.png)
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(LinearGradient(
+///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+///                     startPoint: .leading,
+///                     endPoint: .trailing))
+///             .padding()
+///     }
+/// }
+/// ```
+///
+/// A gradient is made up of a list of ``Gradient/Stop``s
+/// A stop contains a color along with the a value from 0 to 1 indicating
+/// where the color should be spaced.
+///
+/// Use the ``Gradient/init(stops:)`` initializer to specify the array
+/// of ``Gradient/Stop``s.
+///
+/// To quickly create a gradient with evenly spaced colors, use
+/// ``Gradient/init(colors:)``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Gradient : Equatable {
 
     /// One color stop in the gradient.
+    ///
+    /// Create a list of stops to make a ``Gradient``.
+    /// Use your ``Gradient`` to create visual gradient displays by
+    /// passing it to one of the 3 gradient views:
+    /// - ``AngularGradient``
+    /// - ``LinearGradient``
+    /// - ``RadialGradient``
+    ///
+    /// A stop consists of 2 things:
+    /// 1. A ``Color``
+    /// 2. A location from 0 to 1 specifying where the along the gradient
+    /// the color should be located.
+    ///
+    /// See the example below for how to create a stop, then use that
+    /// stop to create a gradient, then use that gradient to create
+    /// a linear gradient.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
+    ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+    ///
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(stops: [stop1, stop2]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
     @frozen public struct Stop : Equatable {
 
         /// The color for the stop.
+        ///
+        /// Use this property to specify the color of a gradient stop.
+        /// See ``Gradient`` for more on what a gradient is.
+        /// See ``Gradient/Stop`` for more on how to create the
+        /// stops that make up a gradient.
+        ///
+        /// This property is usually specified directly via the
+        /// ``Gradient/Stop/init(color:location)``
+        /// initializer.
+        ///
+        /// In the following example, we create two stops, the first one
+        /// has a ``Color/blue`` color, and the second one has a
+        /// ``Color/purple`` color.
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
+        ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+        ///
+        ///     var body: some View {
+        ///         RoundedRectangle(cornerRadius: 10)
+        ///             .fill(LinearGradient(
+        ///                     gradient: Gradient(stops: [stop1, stop2]),
+        ///                     startPoint: .leading,
+        ///                     endPoint: .trailing))
+        ///             .padding()
+        ///     }
+        /// }
+        /// ```
         public var color: Color
 
         /// The parametric location of the stop.
         ///
+        /// Use this property to sepcify the location of a gradient stop.
+        /// See ``Gradient`` for more on what a gradient is.
+        /// See ``Gradient/Stop`` for more on how to create the
+        /// stops that make up a gradient.
+        ///
+        /// This property is usually specified directly via the
+        /// ``Gradient/Stop/init(color:location)``
+        /// initializer.
+        ///
         /// This value must be in the range `[0, 1]`.
+        ///
+        /// In the following example, we create two stops, the first one
+        /// is located 80% along the gradient, and the second is located
+        /// all the way at the end.
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
+        ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+        ///
+        ///     var body: some View {
+        ///         RoundedRectangle(cornerRadius: 10)
+        ///             .fill(LinearGradient(
+        ///                     gradient: Gradient(stops: [stop1, stop2]),
+        ///                     startPoint: .leading,
+        ///                     endPoint: .trailing))
+        ///             .padding()
+        ///     }
+        /// }
+        /// ```
         public var location: CGFloat
 
         /// Creates a color stop with a color and location.
+        ///
+        /// Use this property to sepcify the location and color of a gradient stop.
+        /// See ``Gradient`` for more on what a gradient is.
+        /// See ``Gradient/Stop`` for more on how to create the
+        /// stops that make up a gradient.
+        ///
+        /// In the following example, we create two stops, the first one
+        /// is blue and
+        /// located 80% along the gradient, and the second is
+        /// purple and located
+        /// all the way at the end.
+        ///
+        /// ```
+        /// struct ExampleView: View {
+        ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
+        ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+        ///
+        ///     var body: some View {
+        ///         RoundedRectangle(cornerRadius: 10)
+        ///             .fill(LinearGradient(
+        ///                     gradient: Gradient(stops: [stop1, stop2]),
+        ///                     startPoint: .leading,
+        ///                     endPoint: .trailing))
+        ///             .padding()
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// - Parameters:
+        ///   - color: The color for the stop.
+        ///   - location: The parametric location of the stop.
         public init(color: Color, location: CGFloat) { }
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -15309,15 +16284,88 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     }
 
     /// The array of color stops.
+    ///
+    /// Use this property to specify the colors and their locations in a
+    /// gradient. Essentially, this property is all a ``Gradient``
+    /// structure is.
+    ///
+    /// This property is usually specified directly via the
+    /// ``Gradient/init(stops:)`` initializer, but it can also be
+    /// specified directly:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         var gradient = Gradient(stops: [])
+    ///
+    ///         let stop1 = Gradient.Stop(color: .blue, location: 0.8)
+    ///         let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+    ///
+    ///         gradient.stops.append(stop1)
+    ///         gradient.stops.append(stop2)
+    ///
+    ///         return RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: gradient,
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
     public var stops: [Gradient.Stop]
 
     /// Creates a gradient from an array of color stops.
+    ///
+    /// Use this initializer to create a gradient directly from an array
+    /// of its colors and where they are located.
+    ///
+    /// See the page on ``Gradient/Stop`` for more info on how to create
+    /// a gradient stop.
+    ///
+    /// While using this initializer has the benefit of being able to specify
+    /// where the colors are located, you can also use the
+    /// ``Gradient/init(colors:)`` initializer
+    /// to easily specify an evenly spaced gradient from a list of colors.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
+    ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+    ///
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(stops: [stop1, stop2]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter stops: The list of gradient stops.
     public init(stops: [Gradient.Stop]) { }
 
     /// Creates a gradient from an array of colors.
     ///
     /// The gradient synthesizes its location values to evenly space the colors
     /// along the gradient.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                     startPoint: .leading,
+    ///                     endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter colors: The list of colors to evenly space in the gradient.
     public init(colors: [Color]) { }
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -16314,6 +17362,8 @@ public struct IconOnlyLabelStyle : LabelStyle {
 
 /// A view that displays an image.
 ///
+/// Use this view to display an image on screen.
+///
 /// ### Get Started
 ///
 /// **First**, create an image in your Assets folder.
@@ -16356,32 +17406,48 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// ### Resizing Images
 ///
-/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier must come first on an Image before making changes to its size in subsequent modifiers.
+/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier
+/// must come first on an Image before making changes to its size in subsequent
+/// modifiers.
 ///
-/// The ``View/scaledToFit()`` modifier will lock the aspect ratio of the image and scale it to the maximum size it can be without being too large for the screen.
+/// The ``View/scaledToFit()`` modifier will lock the aspect ratio of the image
+/// and scale it to the maximum size it can be without being too large for the
+/// screen.
 ///
-/// The ``View/scaledToFill()`` modifier also scales the image, but it does not lock the aspect ratio and, subsequently, is likely to stretch or shrink the image to fit the available space.
+/// The ``View/scaledToFill()`` modifier also scales the image, but it does not
+/// lock the aspect ratio and, subsequently, is likely to stretch or shrink the
+/// image to fit the available space.
 ///
-/// ### SF Symbols
+/// ### Using system icon images
 ///
-/// SF Symbols is a library of over 1500 symbols that Apple provides in nine weights from ultralight to black.
+/// SF Symbols is a library of over 1500 symbols that Apple provides in nine
+/// weights from ultralight to black. To use these in custom images, simply
+/// use the ``Image/init(systemName:)`` initializer.
 ///
-/// To use these in custom images, simply label the String is passed into an Image as systemName.
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Image(systemName: "photo")
+///             .resizable()
+///             .scaledToFit()
+///             .padding()
+///     }
+/// }
+/// ```
 //
-/// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the symbol names easier to find. SF Symbols helps to maintain a consistent look with the iOS ecosystem.
-///
-/// Xcode 12 brought support for use in Mac apps. Attempting to use `Image(systemNamed:)`` to use an SF Symbol in Xcode 11 causes the error:
-///
-/// `Extraneous argument label ‘systemNamed:’ in call`
-///
-/// This error means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
+/// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
+/// symbol names easier to find. SF Symbols helps to maintain a consistent
+/// look with the Apple ecosystem.
 ///
 /// ### Common Errors
-/// If your app doesn’t have a file with the image name, you’ll get a useful console message saying:
+///
+/// If your app doesn’t have a file with the image name, you’ll get a useful
+/// console message saying:
 ///
 ///  `No image named ‘Your file name’ found in asset catalog for main bundle.`
 ///
-/// If you find images not turning up in your app, you may want to search for this in the console.
+/// If you find images not turning up in your app, you may want to search for
+/// this in the console.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Image : Equatable {
 
@@ -16399,7 +17465,38 @@ public struct IconOnlyLabelStyle : LabelStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
-    /// Creates a labeled image that you can use as content for controls.
+    /// Creates an image from an asset name and a Bundle.
+    ///
+    /// Use this initializer to display an image on screen.
+    ///
+    /// **First**, create an image in your Assets folder.
+    ///
+    /// ![Image in assets folder](image-assets.png)
+    ///
+    /// To follow along, save the following image as `"ocean"` in your project.
+    ///
+    /// ![Ocean Image](ocean.jpg)
+    ///
+    /// **Second**, reference the image by name in your code.
+    ///
+    /// ![Simple Image](image-basic.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image("ocean")
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Note that the asset name of your image will also be used for
+    /// accessiblity purposes. To make these names different, see the
+    /// ``Image/init(_:bundle:label:)`` initializer.
+    /// To use no accessiblity name, use the
+    /// ``Image/init(decorative:bundle:)`` initializer.
+    ///
+    /// For more on the `bundle` parameter, see [this Apple doc](https://developer.apple.com/documentation/foundation/bundle)
+    /// on how to find and use resources using `Bundle` objects.
     ///
     /// - Parameters:
     ///   - name: the name of the image resource to lookup, as well as the
@@ -16408,8 +17505,41 @@ extension Image {
     ///     content. If `nil`, uses the main `Bundle`. Defaults to `nil`.
     public init(_ name: String, bundle: Bundle? = nil) { }
 
-    /// Creates a labeled image that you can use as content for controls, with
-    /// the specified label.
+    /// Creates an image from an asset name, a Bundle, and an accessibility
+    /// Text label.
+    ///
+    /// Use this initializer to display an image on screen, while providing
+    /// a ``Text`` label for accessibility purposes.
+    ///
+    /// **First**, create an image in your Assets folder.
+    ///
+    /// ![Image in assets folder](image-assets.png)
+    ///
+    /// To follow along, save the following image as `"ocean"` in your project.
+    ///
+    /// ![Ocean Image](ocean.jpg)
+    ///
+    /// **Second**, reference the image by name in your code. Include a
+    /// ``Text`` label for accessibility.
+    ///
+    /// ![Simple Image](image-basic.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image("ocean", label: Text("The beautiful 🌊"))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Note that the `label` parameter is required for
+    /// accessiblity purposes. To use a the asset name for accessibility, see the
+    /// ``Image/init(_:bundle:)`` initializer.
+    /// To use no accessiblity name, use the
+    /// ``Image/init(decorative:bundle:)`` initializer.
+    ///
+    /// For more on the `bundle` parameter, see [this Apple doc](https://developer.apple.com/documentation/foundation/bundle)
+    /// on how to find and use resources using `Bundle` objects.
     ///
     /// - Parameters:
     ///   - name: the name of the image resource to lookup
@@ -16419,9 +17549,40 @@ extension Image {
     ///     things like accessibility.
     public init(_ name: String, bundle: Bundle? = nil, label: Text) { }
 
-    /// Creates an unlabeled, decorative image.
+    /// Creates an image from an asset name and a Bundle, but the name
+    /// won't be used for accessiblity.
     ///
-    /// This image is ignored for accessibility purposes.
+    /// Use this initializer to display an image on screen while including no
+    /// alternative text for accessibility purposes.
+    ///
+    /// **First**, create an image in your Assets folder.
+    ///
+    /// ![Image in assets folder](image-assets.png)
+    ///
+    /// To follow along, save the following image as `"ocean"` in your project.
+    ///
+    /// ![Ocean Image](ocean.jpg)
+    ///
+    /// **Second**, reference the image by name in your code.
+    ///
+    /// ![Simple Image](image-basic.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image(decorative: "ocean")
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Note that your image will name no alternative for accessibility.
+    /// To use the asset name of your image for
+    /// accessiblity purposes, see the
+    /// ``Image/init(_:bundle:)``. To make these names different, see the
+    /// ``Image/init(_:bundle:label:)`` initializer.
+    ///
+    /// For more on the `bundle` parameter, see [this Apple doc](https://developer.apple.com/documentation/foundation/bundle)
+    /// on how to find and use resources using `Bundle` objects.
     ///
     /// - Parameters:
     ///   - name: the name of the image resource to lookup
@@ -16433,7 +17594,23 @@ extension Image {
     ///
     /// This initializer creates an image using a system-provided symbol. To
     /// create a custom symbol image from your app's asset catalog, use
-    /// `init(_:)` instead.
+    /// ``Image/init(_:)`` instead.
+    ///
+    /// This initializer pulls from the SF Symbols library.
+    /// SF Symbols contains over 1500 icons that Apple provides in nine
+    /// weights from ultralight to black.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         Image(systemName: "photo")
+    ///     }
+    /// }
+    /// ```
+    //
+    /// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
+    /// symbol names easier to find. SF Symbols helps to maintain a consistent
+    /// look with the Apple ecosystem.
     ///
     /// - Parameters:
     ///   - systemName: The name of the system symbol image.
@@ -16458,20 +17635,39 @@ extension Image {
 	/// Modifies the image rendering mode as either regular or template.
 	///
 	/// There are two types of rendering modes:
-	/// - Original
-	/// - Template
+	/// - ``Image/TemplateRenderingmode/original``
+	/// - ``Image/TemplateRenderingMode/template``
 	///
 	/// Original mode will draw the image normally, as-is. Template mode will
 	/// turn all the parts of the image that are not transparent to one color
 	/// that you can set yourself. By default, the color is black.
 	///
 	/// A common use case for this modifier would be like this:
-	///
-	/// 	Image("Bird")
-	/// 		.renderingMode(.template)
-	/// 		.resizable()
-	/// 		.frame(width: 50, height: 50)
-	/// 		.foregroundColor(.blue)
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird Image Rendering Mode](image-renderingmode.png)
+    ///
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird")
+    ///                 .renderingMode(.template)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///             Image("bird")
+    ///                 .renderingMode(.original)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///         }
+    ///     }
+    /// }
+    /// ```
 	///
 	/// The modifier does nothing if renderingMode is `nil`.
 	///
@@ -16485,37 +17681,516 @@ extension Image {
 extension Image {
 
     /// Constants that specify the intended display orientation for an image.
+    ///
+    /// Use this enumeration with the ``Image(_:scale:orientation:label:)``
+    /// initializer to create an ``Image`` view that can
+    /// be displayed in one of several different orientation
+    /// options.
+    ///
+    /// In order to use this initializer, you must create your
+    /// ``Image`` using a
+    /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+    /// See that documentation page to learn more about `CGImage`
+    /// objects.
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// In the following example, we define a helper function called
+    /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+    ///
+    /// ![Bird Orientation](image-orientation.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     func image(_ orientation: Image.Orientation) -> some View {
+    ///         Image(UIImage(named: "bird")!.cgImage!,
+    ///               scale: 1.0,
+    ///               orientation: orientation,
+    ///               label: Text("Bird"))
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 image(.up) //This leave the image unchanged
+    ///                 image(.upMirrored)
+    ///             }
+    ///             HStack {
+    ///                 image(.down)
+    ///                 image(.downMirrored)
+    ///             }
+    ///             HStack {
+    ///                 image(.left)
+    ///                 image(.leftMirrored)
+    ///             }
+    ///             HStack {
+    ///                 image(.right)
+    ///                 image(.rightMirrored)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @frozen public enum Orientation : UInt8, CaseIterable, Hashable {
 
     	/// The original pixel data matches the intended display orientation.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that can
+        /// be displayed in one of several different orientation
+        /// options.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case up
 
         /// The image has been horizontally flipped from the orientation of its
         /// original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that can
+        /// be displayed a mirrored orientation.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case upMirrored
 
         /// The image has been rotated 180° from the orientation of its original
         /// pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that can
+        /// be displayed in a downwards-rotated orientation.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case down
 
         /// The image has been vertically flipped from the orientation of its
         /// original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been
+        /// flipped along the horizontal axis.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case downMirrored
 
         /// The image has been rotated 90° counterclockwise from the orientation
         /// of its original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been rotated
+        /// 90° counterclockwise.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case left
 
         /// The image has been rotated 90° clockwise and flipped horizontally
         /// from the orientation of its original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been rotated
+        /// 90° counterclockwise and flipped horizontally.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case leftMirrored
 
         /// The image has been rotated 90° clockwise from the orientation of its
         /// original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been rotated
+        /// 90° clockwise.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case right
 
         /// The image has been rotated 90° counterclockwise and flipped
         /// horizontally from the orientation of its original pixel data.
+        ///
+        /// Use this enumeration case with the ``Image(_:scale:orientation:label:)``
+        /// initializer to create an ``Image`` view that has been flipped
+        /// horizontally and roated 90° counterclockwise.
+        ///
+        /// In order to use this initializer, you must create your
+        /// ``Image`` using a
+        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// See that documentation page to learn more about `CGImage`
+        /// objects.
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// In the following example, we define a helper function called
+        /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     func image(_ orientation: Image.Orientation) -> some View {
+        ///         Image(UIImage(named: "bird")!.cgImage!,
+        ///               scale: 1.0,
+        ///               orientation: orientation,
+        ///               label: Text("Bird"))
+        ///             .resizable()
+        ///             .frame(width: 50, height: 50)
+        ///     }
+        ///
+        ///     var body: some View {
+        ///         VStack {
+        ///             HStack {
+        ///                 image(.up) //This leave the image unchanged
+        ///                 image(.upMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.down)
+        ///                 image(.downMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.left)
+        ///                 image(.leftMirrored)
+        ///             }
+        ///             HStack {
+        ///                 image(.right)
+        ///                 image(.rightMirrored)
+        ///             }
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case rightMirrored
 
         /// The raw type that can be used to represent all values of the conforming
@@ -16573,15 +18248,117 @@ extension Image {
 extension Image {
 
 	/// Options for rendering the image normally, or with only 1 color.
+    ///
+    /// Use this enumeration with the
+    /// ``Image/renderingMode(_:)`` image modifier to render in image
+    /// either normally or with only one color.
+    ///
+    /// This enumeration has 2 cases:
+    ///
+    /// 1. ``Image/TemplateRenderingMode/template``: turns all the parts of the
+    /// image that are not transparent to one color
+    /// 2. ``Image/TemplateRenderingMode/original``: draws the image normally,
+    /// as-is.
+	///
+	/// A common use case for this enumeration would be like this:
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird Image Rendering Mode](image-renderingmode.png)
+    ///
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird")
+    ///                 .renderingMode(TemplateRenderingMode.template)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///             Image("bird")
+    ///                 .renderingMode(TemplateRenderingMode.original)
+    ///                 .resizable()
+    ///                 .frame(width: 50, height: 50)
+    ///                 .foregroundColor(.red)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum TemplateRenderingMode {
 
     	/// Render the image as all black except where opacity is 0.
     	///
     	/// This is often used if the image is going to be a mask or otherwise
     	/// used only for its outline.
+        ///
+        /// Use this enumeration case with the
+        /// ``Image/renderingMode(_:)`` image modifier to render in image
+        /// with only one color.
+        ///
+    	/// A common use case for this enumeration case would be like this:
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        ///
+        /// ```
+        /// struct ContentView {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird")
+        ///                 .renderingMode(.template)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///             Image("bird")
+        ///                 .renderingMode(.original)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case template
 
         /// Render the image as usual.
+        ///
+        /// Use this enumeration case with the
+        /// ``Image/renderingMode(_:)`` image modifier to render in image
+        /// normally. This is in contrast to
+        /// ``Image/TemplateRenderingMode/template`` which renders
+        /// an image with only one color.
+        ///
+    	/// A common use case for this enumeration case would be like this:
+        ///
+        /// To follow along, save the following image as `"bird"` in your project.
+        ///
+        /// ![Bird Image](bird.png)
+        ///
+        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        ///
+        /// ```
+        /// struct ContentView {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird")
+        ///                 .renderingMode(.template)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///             Image("bird")
+        ///                 .renderingMode(.original)
+        ///                 .resizable()
+        ///                 .frame(width: 50, height: 50)
+        ///                 .foregroundColor(.red)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case original
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -16620,22 +18397,116 @@ extension Image {
     }
 
     /// The scale to apply to vector images relative to text.
+    ///
+    /// Use this enumeration with the ``Image/imageScale(_:)``
+    /// view modifier to scale an image up or down.
+    ///
+    /// This is most often used with system images, which can be both
+    /// scaled alongside the text using ``View/font(_:)`` view modifier
+    /// and also using
+    /// the ``Image/imageScale(_:)`` image modifier.
+    ///
+    /// There are 3 types of ``Image/Scale``s:
+    ///
+    /// 1. ``Image/Scale/small``
+    /// 2. ``Image/Scale/medium``
+    /// 3. ``Image/Scale/large``
+    ///
+    /// See below for a comparison.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image(systemName: "die.face.5.fill")
+    ///                 .imageScale(.small)
+    ///             Image(systemName: "die.face.5.fill")
+    ///                 .imageScale(.medium)
+    ///             Image(systemName: "die.face.5.fill")
+    ///                 .imageScale(.large)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     @available(macOS 11.0, *)
     public enum Scale {
 
     	/// The small image scale size.
     	///
-    	/// - SeeAlso: Image.imageScale(_:)
+        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// view modifier to scale an image down.
+        ///
+        /// This is most often used with system images, which can be both
+        /// scaled alongside the text using ``View/font(_:)`` view modifier
+        /// and also using
+        /// the ``Image/imageScale(_:)`` image modifier.
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.small)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.medium)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.large)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case small
 
         /// The medium image scale size.
         ///
-        /// - SeeAlso: Image.imageScale(_:)
+        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// view modifier to scale an image.
+        ///
+        /// This is most often used with system images, which can be both
+        /// scaled alongside the text using ``View/font(_:)`` view modifier
+        /// and also using
+        /// the ``Image/imageScale(_:)`` image modifier.
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.small)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.medium)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.large)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case medium
 
         /// The large image scale size.
         ///
-        /// - SeeAlso: Image.imageSclae(_:)
+        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// view modifier to scale an image up.
+        ///
+        /// This is most often used with system images, which can be both
+        /// scaled alongside the text using ``View/font(_:)`` view modifier
+        /// and also using
+        /// the ``Image/imageScale(_:)`` image modifier.
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.small)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.medium)
+        ///             Image(systemName: "die.face.5.fill")
+        ///                 .imageScale(.large)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case large
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -16678,6 +18549,10 @@ extension Image {
 extension Image {
 
 	/// The different amounts of interpolation that can be applied to an image.
+    ///
+    /// Use this enumeration with the ``Image/interpolation(_:)``
+    /// image modifier to specify what kind of interpolation to us
+    /// on an image.
 	///
 	/// Image interpolation is a digital process that occurs when an image is
 	/// either scaled up or scaled down, or when rotating an image.
@@ -16687,18 +18562,228 @@ extension Image {
 	///
 	/// Interpolation can make scaled up images retain some of their clarity,
 	/// and can make scaled down images look better.
+    ///
+    /// There are 4 cases of image interpolation:
+    ///
+    /// 1. ``Interpolation/none``
+    /// 2. ``Interpolation/low``
+    /// 3. ``Interpolation/medium``
+    /// 4. ``Interpolation/hight``
+    ///
+    /// See them compared below.
+    ///
+    /// To follow along, save the following image as `"bird-small"` in your project.
+    ///
+    /// ![Bird Small Image](bird-small.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.none)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.low)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.medium)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.high)
+    ///                 .frame(width: 50, height: 50)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum Interpolation {
 
     	/// Apply no interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using no interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case none
 
         /// Apply a low amount of interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using low interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case low
 
         /// Apply a medium amount of interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using medium interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case medium
 
         /// Apply a high amount of interpolation to the image when remapping.
+        ///
+        /// Use this enumeration case with the ``Image/interpolation(_:)``
+        /// image modifier to specify using high interpolation on an image.
+    	///
+    	/// Image interpolation is a digital process that occurs when an image is
+    	/// either scaled up or scaled down, or when rotating an image.
+    	///
+    	/// Interpolation uses what is known in the image to estimate unknown
+    	/// values.
+    	///
+    	/// Interpolation can make scaled up images retain some of their clarity,
+    	/// and can make scaled down images look better.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         HStack {
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.none)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.low)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.medium)
+        ///                 .frame(width: 50, height: 50)
+        ///             Image("bird-small")
+        ///                 .resizable()
+        ///                 .interpolation(.high)
+        ///                 .frame(width: 50, height: 50)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case high
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -16741,16 +18826,81 @@ extension Image {
 extension Image {
 
 	/// Adjusts the interpolation property of an image.
+    ///
+    /// Use this image modifier case with the ``Image/Interpolation``
+    /// enumeration to specify what kind of interpolation to use on an image.
+    ///
+    /// Image interpolation is a digital process that occurs when an image is
+    /// either scaled up or scaled down, or when rotating an image.
+    ///
+    /// Interpolation uses what is known in the image to estimate unknown
+    /// values.
+    ///
+    /// Interpolation can make scaled up images retain some of their clarity,
+    /// and can make scaled down images look better.
+    ///
+    /// To follow along, save the following image as `"bird-small"` in your project.
+    ///
+    /// ![Bird Small Image](bird-small.png)
+    ///
+    /// ![Bird Image Interpolation](image-interpolation.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.none)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.low)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.medium)
+    ///                 .frame(width: 50, height: 50)
+    ///             Image("bird-small")
+    ///                 .resizable()
+    ///                 .interpolation(.high)
+    ///                 .frame(width: 50, height: 50)
+    ///         }
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameter interpolation: The image's interpolation property.
-	///
-	/// - SeeAlso: Image.Interpolation
     public func interpolation(_ interpolation: Image.Interpolation) -> Image { }
 
     /// Adjusts the antialiasing properties of an image.
     ///
     /// If an image is antialiased, then it resists being distorted when it is
     /// shrunk to a lower resolution.
+    ///
+    /// As far as I can tell, this isn't doing anything right now.
+    /// But you can check it out for yourself:
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         HStack {
+    ///             Image("bird")
+    ///                 .resizable()
+    ///                 .antialiased(true)
+    ///                 .frame(width: 100, height: 100)
+    ///             Image("bird")
+    ///                 .resizable()
+    ///                 .antialiased(false)
+    ///                 .frame(width: 100, height: 100)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Paramter isAntialiased: Whether the image is antialiased.
     public func antialiased(_ isAntialiased: Bool) -> Image { }
@@ -16759,8 +18909,48 @@ extension Image {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Image {
 
-    /// Creates a labeled image based on a `CGImage`, usable as content for
-    /// controls.
+    /// Creates an image from a `CGImage` with a custom Text label used for
+    /// accessibility.
+    ///
+    /// Use this initializer to create an ``Image`` view from a
+    /// core graphics image. See the Apple documentation on how to
+    /// use this class [here](https://developer.apple.com/documentation/coregraphics/cgimage).
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0, label: Text("Bird"))
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// The main benefit of using this initializer is that it gives you
+    /// the option to scale and re-orient your image. See
+    /// ``Image/Orientation`` for all of the orientation options.
+    ///
+    /// ![Bird left mirrored](image-leftmirrored.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0, orientation: .leftMirrored, label: Text("Bird"))
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -16771,9 +18961,51 @@ extension Image {
     ///     things like accessibility.
     public init(_ cgImage: CGImage, scale: CGFloat, orientation: Image.Orientation = .up, label: Text) { }
 
-    /// Creates an unlabeled, decorative image based on a `CGImage`.
+    /// Creates an image from a `CGImage` with no accessiblity label.
     ///
-    /// This image is ignored for accessibility purposes.
+    /// This image has no alternative label for accessibility purposes.
+    /// Use ``Image/init(_:scale:orientation:label:)`` for details on how
+    /// to add a label to the image.
+    ///
+    /// Use this initializer to create an ``Image`` view from a
+    /// core graphics image. See the Apple documentation on how to
+    /// use this class [here](https://developer.apple.com/documentation/coregraphics/cgimage).
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0)
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// The main benefit of using this initializer is that it gives you
+    /// the option to scale and re-orient your image. See
+    /// ``Image/Orientation`` for all of the orientation options.
+    ///
+    /// ![Bird left mirrored](image-leftmirrored.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let cgImage = UIImage(named: "bird")!.cgImage!
+    ///
+    ///     var body: some View {
+    ///         Image(cgImage, scale: 1.0, orientation: .leftMirrored)
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -16787,7 +19019,29 @@ extension Image {
 @available(macOS, unavailable)
 extension Image {
 
-	/// Creates a new `Image` from a specified `UIImage`.
+	/// Creates an image from a `UIImage`.
+    ///
+    /// `UIImage` is asn image class from Apple's `UIKit` framework.
+    /// See [this page](https://developer.apple.com/documentation/uikit/uiimage)
+    /// from Apple's `UIKit` docs for more info on creating a `UIImage`
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let uiImage = UIImage(named: "bird")!
+    ///
+    ///     var body: some View {
+    ///         Image(uiImage: uiImage)
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
     public init(uiImage: UIImage) { }
 }
 
@@ -16795,14 +19049,104 @@ extension Image {
 extension Image {
 
 	/// The different ways of resizing an image to fill a view.
+    ///
+    /// Use this enumeration with the ``Image/resizable(_:)``
+    /// image modifier to determine how the image gets resized.
+    /// The two options are ``ResizingMode/stretch``, the familiar method
+    /// of resizing an image by squishing and stretching it, and
+    /// ``ResizingMode/tile``, which keeps the image as-is, but tiles or
+    /// crops it to fit the available space.
+    ///
+    /// See the two options compared below.
+    ///
+    /// To follow along, save the following image as `"bird-small"` in your project.
+    ///
+    /// ![Bird Small Image](bird-small.png)
+    ///
+    /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Image("bird-small")
+    ///                 .resizable(resizingMode: ResizingMode.stretch)
+    ///                 .frame(width: 200, height: 100)
+    ///             Image("bird-small")
+    ///                 .resizable(resizingMode: ResizingMode.tile)
+    ///                 .frame(width: 200, height: 100)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public enum ResizingMode {
 
     	/// The resizing method of maintaining image properties, positioning
     	/// several in a grid to fill the space if necessary.
+        ///
+        /// Use this enumeration case with the ``Image/resizable(_:)``
+        /// image modifier to determine how the image gets resized.
+        /// The two options are ``ResizingMode/stretch``, the familiar method
+        /// of resizing an image by squishing and stretching it, and
+        /// ``ResizingMode/tile``, which keeps the image as-is, but tiles or
+        /// crops it to fit the available space.
+        ///
+        /// See the two options compared below.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .stretch)
+        ///                 .frame(width: 200, height: 100)
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .tile)
+        ///                 .frame(width: 200, height: 100)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case tile
 
         /// The resizing method of stretching the image, distorting the properties
         /// if necessary.
+        ///
+        /// Use this enumeration with the ``Image/resizable(_:)``
+        /// image modifier to determine how the image gets resized.
+        /// The two options are ``ResizingMode/stretch``, the familiar method
+        /// of resizing an image by squishing and stretching it, and
+        /// ``ResizingMode/tile``, which keeps the image as-is, but tiles or
+        /// crops it to fit the available space.
+        ///
+        /// See the two options compared below.
+        ///
+        /// To follow along, save the following image as `"bird-small"` in your project.
+        ///
+        /// ![Bird Small Image](bird-small.png)
+        ///
+        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         VStack {
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .stretch)
+        ///                 .frame(width: 200, height: 100)
+        ///             Image("bird-small")
+        ///                 .resizable(resizingMode: .tile)
+        ///                 .frame(width: 200, height: 100)
+        ///         }
+        ///     }
+        /// }
+        /// ```
         case stretch
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -16845,6 +19189,33 @@ extension Image {
     /// Applying this modifier before reframing an image or in other ways
     /// distorting it is necessary otherwise the images view will change, but
     /// the image itself will not be resized.
+    ///
+    /// **Important:** This modifier
+    /// must come first on an ``Image`` before making changes to its size in subsequent
+    /// modifiers.
+    ///
+    /// See the ``Image/ResizingMode`` enumeration for details on how to use
+    /// the `resizingMode` parameter.
+    ///
+    /// The `capInsets` parameter is rarely used. It specifies distance
+    /// from the edges of the image where the image does *not*
+    /// get resized.
+    ///
+    /// To follow along, save the following image as `"bird"` in your project.
+    ///
+    /// ![Bird Image](bird.png)
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Image("bird")
+    ///             .resizable()
+    ///             .frame(width: 50, height: 50)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - capInsets: The values to use for the cap insets.
@@ -17127,6 +19498,9 @@ public struct InsetGroupedListStyle : ListStyle {
 
 /// The behavior and appearance of an inset list.
 ///
+/// Use the ``View/listStyle(_:)`` modifier
+/// to apply this list style to a ``List``.
+///
 /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
 ///
 ///
@@ -17148,18 +19522,125 @@ public struct InsetGroupedListStyle : ListStyle {
 public struct InsetListStyle : ListStyle {
 
     /// Creates an inset list style.
+    ///
+    /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+    ///
+    ///
+    ///      struct ExampleView: View {
+    ///          var body: some View {
+    ///             List {
+    ///                Text("Bananas 🍌🍌")
+    ///                Text("Apples 🍎🍎")
+    ///                Text("Peaches 🍑🍑")
+    ///             }
+    ///             .listStyle(InsetListStyle())
+    ///          }
+    ///      }
+    ///
     public init() { }
 }
 
 /// A shape type that is able to inset itself to produce another shape.
+///
+/// This is the protocol that allows you to inset and stroke shapes.
+///
+/// Types conforming to this protocol include:
+/// - ``Capsule``
+/// - ``Circle``
+/// - ``Ellipse``
+/// - ``Rectangle``
+/// - ``RoundedRectangle``
+///
+/// Any type conforming to this protocol automatically gets implementations
+/// of the ``InsettableShape/strokeBorder(_:style:antialiased)``
+/// modifier. This allows you to add a border to a shape without increasing
+/// its total size at all.
+///
+/// To conform to this protocol, there is only one requirement:
+/// the ``InsettableShape/inset(by:)`` function.
+/// Implement this function to describe how to inset a custom shape.
+///
+/// The following example shows how to conform a custom shape to this
+/// protocol, and then use it to stroke the border. (See
+/// ``Shape`` and ``Shape/path(in:)`` for more on creating cutom shapes.)
+///
+/// ```
+/// struct ArcView: View {
+///     var body: some View {
+///         Arc(endAngle: Angle(.degrees(270)))
+///             .strokeBorder(Color.green)
+///     }
+/// }
+///
+/// struct Arc: InsettableShape {
+///     var endAngle: Angle
+///     var insetAmount: CGFloat = 0
+///
+///     func path(in rect: CGRect) -> Path {
+///         Path { p in
+///             p.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+///                      radius: rect.width / 2 - insetAmount,
+///                      startAngle: .zero,
+///                      endAngle: endAngle,
+///                      clockwise: false)
+///         }
+///     }
+///
+///     func inset(by amount: CGFloat) -> some InsettableShape {
+///         var arc = self
+///         arc.insetAmount += amount
+///         return arc
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol InsettableShape : Shape{ }
+public protocol InsettableShape : Shape { }
 extension InsettableShape : Shape {
 
     /// The type of the inset shape.
     associatedtype InsetShape : InsettableShape
 
     /// Returns `self` inset by `amount`.
+    ///
+    /// This is the one required method for conforming to the
+    /// ``InsettableShape`` protocol. Shapes that already conform to
+    /// the protocol implement this function. To create your own custom
+    /// insettable shape, you must implement this function yourself.
+    ///
+    /// The following example shows a custom shape, called an `Arc`,
+    /// which implements this function to become insettable.
+    ///
+    /// ```
+    /// struct ArcView: View {
+    ///     var body: some View {
+    ///         Arc(endAngle: Angle(.degrees(270)))
+    ///             .strokeBorder(Color.green)
+    ///     }
+    /// }
+    ///
+    /// struct Arc: InsettableShape {
+    ///     var endAngle: Angle
+    ///     var insetAmount: CGFloat = 0
+    ///
+    ///     func path(in rect: CGRect) -> Path {
+    ///         Path { p in
+    ///             p.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+    ///                      radius: rect.width / 2 - insetAmount,
+    ///                      startAngle: .zero,
+    ///                      endAngle: endAngle,
+    ///                      clockwise: false)
+    ///         }
+    ///     }
+    ///
+    ///     func inset(by amount: CGFloat) -> some InsettableShape {
+    ///         var arc = self
+    ///         arc.insetAmount += amount
+    ///         return arc
+    ///     }
+    /// }
+    /// ```
+    ///
     func inset(by amount: CGFloat) -> Self.InsetShape { }
 }
 
@@ -17169,12 +19650,65 @@ extension InsettableShape {
     /// Returns a view that is the result of insetting `self` by
     /// `style.lineWidth / 2`, stroking the resulting shape with
     /// `style`, and then filling with `content`.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         let gradient = Gradient(colors: [.green, .blue])
+    ///         let linearGradient = LinearGradient(gradient: gradient,
+    ///                                             startPoint: .leading,
+    ///                                             endPoint: .trailing)
+    ///         let style = StrokeStyle(lineWidth: 15,
+    ///                                 lineCap: .butt,
+    ///                                 lineJoin: .round,
+    ///                                 miterLimit: 1,
+    ///                                 dash: [],
+    ///                                 dashPhase: 0)
+    ///
+    ///         return Cirlce()
+    ///             .strokeBorder(linearGradient, style: style)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - content: The ``ShapeStyle`` to fill the border with.
+    ///   - style: The ``StrokeStyle`` for filling the border.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder<S>(_ content: S, style: StrokeStyle, antialiased: Bool = true) -> some View where S : ShapeStyle { }
 
 
     /// Returns a view that is the result of insetting `self` by
     /// `style.lineWidth / 2`, stroking the resulting shape with
     /// `style`, and then filling with the foreground color.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         let style = StrokeStyle(lineWidth: 15,
+    ///                                 lineCap: .butt,
+    ///                                 lineJoin: .round,
+    ///                                 miterLimit: 1,
+    ///                                 dash: [],
+    ///                                 dashPhase: 0)
+    ///
+    ///         return Cirlce()
+    ///             .strokeBorder(style: style)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - style: The ``StrokeStyle`` for filling the border.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder(style: StrokeStyle, antialiased: Bool = true) -> some View { }
 
 
@@ -17182,6 +19716,29 @@ extension InsettableShape {
     /// border (aka inner stroke) of `self` with `content`. This is
     /// equivalent to insetting `self` by `width / 2` and stroking the
     /// resulting shape with `width` as the line-width.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         let gradient = Gradient(colors: [.green, .blue])
+    ///         let linearGradient = LinearGradient(gradient: gradient,
+    ///                                             startPoint: .leading,
+    ///                                             endPoint: .trailing)
+    ///
+    ///         return Cirlce()
+    ///             .strokeBorder(linearGradient, lineWidth: 15)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - content: The ``ShapeStyle`` to fill the border with.
+    ///   - lineWidth: The border width.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder<S>(_ content: S, lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View where S : ShapeStyle { }
 
 
@@ -17189,6 +19746,23 @@ extension InsettableShape {
     /// border (aka inner stroke) of `self` with the foreground color.
     /// This is equivalent to insetting `self` by `width / 2` and
     /// stroking the resulting shape with `width` as the line-width.
+    ///
+    /// This modifier is available for ``InsettableShape``. To learn more
+    /// about the requirements of an insettable shape, see ``InsettableShape``.
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         Cirlce()
+    ///             .strokeBorder(lineWidth: 15)
+    ///             .border(Color.primary)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - lineWidth: The border width.
+    ///   - antialiased: Whether the border is antialiased.
     @inlinable public func strokeBorder(lineWidth: CGFloat = 1, antialiased: Bool = true) -> some View { }
 
 }
@@ -18105,8 +20679,32 @@ extension LabelStyleConfiguration.Icon : View {
 
 /// The different text directions used in different languages.
 ///
+/// Use this enumeration with the ``layoutDirection``
+/// environment property. See
+/// ``EnvironmentValues/layoutDirection`` for more on accessing
+/// and changing this property.
+///
+/// There are two possible layout directions:
+///
+/// 1. ``LayoutDirection/leftToRight``
+/// 2. ``LayoutDirection/rightToLeft``
+///
 /// Examples of left-to-right layout directions are English and Russian.
 /// Examples of right-to-left layout directions are Arabic and Hebrew.
+///
+/// In the example below, the left to right arrow is printed since we're
+/// in the English locale.
+///
+/// ```
+/// struct LayoutView: View {
+///     @Environment(\.layoutDirection) var direction
+///
+///     var body: some View {
+///         Text(direction == LayoutDirection.leftToRight ? "➡️" : "⬅️")
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum LayoutDirection : Hashable, CaseIterable {
 
@@ -18114,12 +20712,56 @@ public enum LayoutDirection : Hashable, CaseIterable {
 	///
 	/// In this layout direction, the leading edge would be on the left side,
 	/// and the trailing edge would be on the right side.
+    ///
+    /// Use this enumeration case with the ``layoutDirection``
+    /// environment property. See
+    /// ``EnvironmentValues/layoutDirection`` for more on accessing
+    /// and changing this property.
+    ///
+    /// Examples of left-to-right layout directions are English and Russian.
+    ///
+    /// In the example below, the left to right arrow is printed since we're
+    /// in the English locale.
+    ///
+    /// ```
+    /// struct LayoutView: View {
+    ///     @Environment(\.layoutDirection) var direction
+    ///
+    ///     var body: some View {
+    ///         Text(direction == .leftToRight ? "➡️" : "⬅️")
+    ///     }
+    /// }
+    /// ```
+    ///
     case leftToRight
 
     /// The text is read and written from left to right.
     ///
     /// In this layout direction, the leading edge would be on the right side,
     /// and the trailing edge would be on the left side.
+    ///
+    /// Use this enumeration case with the ``layoutDirection``
+    /// environment property. See
+    /// ``EnvironmentValues/layoutDirection`` for more on accessing
+    /// and changing this property.
+    ///
+    /// There are two possible layout directions:
+    ///
+    /// Examples of right-to-left layout directions are Arabic and Hebrew.
+    ///
+    /// In the example below, the left to right arrow is printed since we're
+    /// in the English locale.
+    ///
+    /// ```
+    /// struct LayoutView: View {
+    ///     @Environment(\.layoutDirection) var direction
+    ///
+    ///     var body: some View {
+    ///         Text(direction == .rightToLeft ? "⬅️" : "➡️")
+    ///     }
+    /// }
+    /// ```
+    ///
     case rightToLeft
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -18166,6 +20808,30 @@ public enum LayoutDirection : Hashable, CaseIterable {
 extension LayoutDirection {
 
     /// Create a direction from its UITraitEnvironmentLayoutDirection equivalent.
+    ///
+    /// This initializer is rarely used in SwiftUI. See
+    /// [these docs](https://developer.apple.com/documentation/uikit/uitraitenvironmentlayoutdirection)
+    /// for more info on layout direction in UIKit.
+    ///
+    /// Note that this is a failable initializer, so it must be unwrapped for
+    /// many use cases.
+    ///
+    /// See below for a simple example of how to use this.
+    ///
+    /// ```
+    /// import SwiftUI
+    /// import UIKit
+    ///
+    /// struct LayoutView: View {
+    ///     @Environment(\.layoutDirection) var direction
+    ///     let leftToRight = UITraitEnvironmentLayoutDirection.leftToRight
+    ///
+    ///     var body: some View {
+    ///         Text(direction == LayoutDirection(leftToRight) ? "➡️" : "⬅️")
+    ///     }
+    /// }
+    /// ```
+    ///
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
@@ -18213,6 +20879,9 @@ public struct LazyHGrid<Content> : View where Content : View {
     ///
     /// The first parameter, rows, takes an array of ``GridItem``s.
     /// For more info on the types of grid items, check out that page.
+    ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
     ///
     /// ```
     /// struct HorizontalEmojiView: View {
@@ -18283,6 +20952,9 @@ public struct LazyHStack<Content> : View where Content : View {
     /// Creates a lazy horizontal stack view with the given spacing,
     /// vertical alignment, pinning behavior, and content.
     ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
+    ///
     /// ```
     /// struct ColumnNumberView: View {
     ///     var body: some View {
@@ -18324,23 +20996,53 @@ public struct LazyHStack<Content> : View where Content : View {
 /// `LazyVGrid` consisting of a two-column grid of `Text` views, showing
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
-///      var columns: [GridItem] =
-///              Array(repeating: .init(.flexible()), count: 2)
-///      ScrollView {
-///          LazyVGrid(columns: columns) {
-///              ForEach((0...79), id: \.self) {
-///                  let codepoint = $0 + 0x1f600
-///                  let codepointString = String(format: "%02X", codepoint)
-///                  Text("\(codepointString)")
-///                  let emoji = String(Character(UnicodeScalar(codepoint)!))
-///                  Text("\(emoji)")
-///              }
-///          }.font(.largeTitle)
-///      }
+/// ```
+/// struct EmojiGridView: View {
+///     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+///
+///     var body: some View {
+///         ScrollView {
+///             LazyVGrid(columns: columns) {
+///                 ForEach((0...79), id: \.self) {
+///                     let codepoint = $0 + 0x1f600
+///                     let codepointString = String(format: "%02X", codepoint)
+///                     Text("\(codepointString)")
+///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+///                     Text("\(emoji)")
+///                 }
+///             }.font(.largeTitle)
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyVGrid<Content> : View where Content : View {
 
     /// Creates a grid that grows vertically, given the provided properties.
+    ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
+    ///
+    /// ```
+    /// struct EmojiGridView: View {
+    ///     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+    ///
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
+    ///                 ForEach((0...79), id: \.self) {
+    ///                     let codepoint = $0 + 0x1f600
+    ///                     let codepointString = String(format: "%02X", codepoint)
+    ///                     Text("\(codepointString)")
+    ///                     let emoji = String(Character(UnicodeScalar(codepoint)!))
+    ///                     Text("\(emoji)")
+    ///                 }
+    ///             }
+    ///             .font(.largeTitle)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - columns: An array of grid items to size and position each row of
@@ -18388,6 +21090,9 @@ public struct LazyVStack<Content> : View where Content : View {
 
     /// Creates a lazy vertical stack view with the given spacing,
     /// vertical alignment, pinning behavior, and content.
+    ///
+    /// See ``PinnedScrollableViews`` for more on how to pin views in a lazy
+    /// stack or grid.
     ///
     /// ```
     /// struct RowNumbersView: View {
@@ -18746,7 +21451,7 @@ extension Link where Label == Text {
     /// `example.com` and displays the title string you provide as a
     /// link-styled view in your app:
     ///
-    ///     func marketingLink(_ callToAction: String) -> Link {{}
+    ///     func marketingLink(_ callToAction: String) -> Link {
     ///         Link(callToAction,
     ///             destination: URL(string: "https://www.example.com/")!)
     ///     }
@@ -18791,7 +21496,7 @@ extension Link where Label == Text {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
-///         List.init(fruits, id: /\.self) { (fruit: String) in
+///         List.init(fruits, id: \.self) { (fruit: String) in
 ///             Text(fruit)
 ///         }
 ///     }
@@ -18820,7 +21525,7 @@ extension Link where Label == Text {
 ///         List {
 ///             Text("Hello, World!")
 ///
-///             ForEach(fruits, id: /\.self) { (fruit: String) in
+///             ForEach(fruits, id: \.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///         }
@@ -18847,7 +21552,7 @@ extension Link where Label == Text {
 ///             }
 ///
 ///             Section(header: Text("Fruit")) {
-///                 ForEach(fruits, id: /\.self) { (fruit: String) in
+///                 ForEach(fruits, id: \.self) { (fruit: String) in
 ///                     Text(fruit)
 ///                 }
 ///             }
@@ -18927,7 +21632,7 @@ extension Link where Label == Text {
 ///
 ///     var body: some View {
 ///         List {
-///             ForEach(fruits, id: /\.self) { (fruit: String) in
+///             ForEach(fruits, id: \.self) { (fruit: String) in
 ///                 Text(fruit)
 ///             }
 ///             .listRowBackground(Color.yellow)
@@ -18951,7 +21656,7 @@ extension Link where Label == Text {
 ///     var body: some View {
 ///         NavigationView {
 ///             List {
-///                 ForEach(fruits, id: /\.self) { fruit in
+///                 ForEach(fruits, id: \.self) { fruit in
 ///                     Text(fruit)
 ///                 }
 ///                 .onDelete { offsets in
@@ -18981,7 +21686,7 @@ extension Link where Label == Text {
 ///     var body: some View {
 ///         NavigationView {
 ///             List {
-///                 ForEach(fruits, id: /\.self) { fruit in
+///                 ForEach(fruits, id: \.self) { fruit in
 ///                     Text(fruit)
 ///                 }
 ///                 .onDelete { offets in
@@ -19277,7 +21982,31 @@ extension List where SelectionValue == Never {
 
 /// The configuration of a tint effect applied to content within a List.
 ///
-/// - See Also: `View.listItemTint(_:)`
+/// Use this structure with the ``View/listItemTint(_:)-a71e4`` view
+/// modifier to change the tint of an item in a list.
+///
+/// This structure has 3 options:
+///
+/// 1. ``ListItemTint/fixed(_:)``: A tint ``Color`` that cannot be
+/// overriden by the system.
+/// 2. ``ListItemTint/preferred(_:)``: A tint ``Color`` that can be
+/// overriden by the system.
+/// 3. ``ListItemTint/monochrome``: The standard gray tint effect.
+///
+/// See each of those pages for more details on the options.
+///
+/// Below is a simple example.
+///
+/// ```
+/// struct SettingsView: View {
+///     var body: some View {
+///         List {
+///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+///                 .listItemTint(ListItemTint.fixed(Color.orange))
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ListItemTint {
 
@@ -19285,6 +22014,20 @@ public struct ListItemTint {
     ///
     /// This tint effect is fixed and not overridable by other
     /// system effects.
+    ///
+    /// Use this property with the ``View/listItemTint(_:)-a71e4`` view
+    /// modifier to change the tint of an item in a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.fixed(Color.orange))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func fixed(_ tint: Color) -> ListItemTint { }
 
     /// An explicit tint color that is overridable.
@@ -19292,11 +22035,37 @@ public struct ListItemTint {
     /// This tint effect is overridable by system effects, for
     /// example when the system has a custom user accent
     /// color on macOS.
+    ///
+    /// Use this property with the ``View/listItemTint(_:)-a71e4`` view
+    /// modifier to change the tint of an item in a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.preferred(Color.orange))
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func preferred(_ tint: Color) -> ListItemTint { }
 
     /// A standard grayscale tint effect.
     ///
     /// Monochrome tints are not overridable.
+    ///
+    /// Use this property with the ``View/listItemTint(_:)-a71e4`` view
+    /// modifier to change the tint of an item in a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         Label("General", systemImage: "gearshape.fill")
+    ///             listItemTint(.monochrome)
+    ///     }
+    /// }
+    /// ```
     public static let monochrome: ListItemTint
 }
 
@@ -21687,7 +24456,7 @@ public struct OutlineSubgroupChildren : View {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: /\.self) {
+///             ForEach(items, id: \.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -23346,6 +26115,40 @@ extension PickerStyle {
 }
 
 /// A set of view types that may be pinned to the bounds of a scroll view.
+///
+/// Use this option set with the initializer of one of the 4 lazy grid/stacks
+/// and the ``Section`` structure to pin
+/// a view to the top or bottom of the screen while scrolling:
+///
+/// 1. ``LazyVStack``
+/// 2. ``LazyHStack``
+/// 3. ``LazyVGrid``
+/// 4. ``LazyHGrid``
+///
+/// This structure has 2 static properties: ``PinnedScrollableViews/sectionHeaders``
+/// and ``PinnedScrollableViews/sectionFooters``. You can specify either one
+/// of them, or both.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ScrollView {
+///             LazyVStack(pinnedViews: .sectionHeaders) {
+///                 Section(header: Text("**Top half**")) {
+///                     ForEach(1...50, id: \.self) { number in
+///                         Text("Row \(number)")
+///                     }
+///                 }
+///                 Section(header: Text("**Bottom half**")) {
+///                     ForEach(51...100, id: \.self) { number in
+///                         Text("Row \(number)")
+///                     }
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct PinnedScrollableViews : OptionSet {
 
@@ -23385,9 +26188,69 @@ public struct PinnedScrollableViews : OptionSet {
     public init(rawValue: UInt32) { }
 
     /// The header view of each `Section` will be pinned.
+    ///
+    /// Use this option with the initializer of one of the 4 lazy grid/stacks
+    /// and the ``Section`` structure to pin
+    /// a view to the top of the screen while scrolling:
+    ///
+    /// 1. ``LazyVStack``
+    /// 2. ``LazyHStack``
+    /// 3. ``LazyVGrid``
+    /// 4. ``LazyHGrid``
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             LazyVStack(pinnedViews: .sectionHeaders) {
+    ///                 Section(header: Text("**Top half**")) {
+    ///                     ForEach(1...50, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///                 Section(header: Text("**Bottom half**")) {
+    ///                     ForEach(51...100, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static let sectionHeaders: PinnedScrollableViews
 
     /// The footer view of each `Section` will be pinned.
+    ///
+    /// Use this option with the initializer of one of the 4 lazy grid/stacks
+    /// and the ``Section`` structure to pin
+    /// a view to the top of the screen while scrolling:
+    ///
+    /// 1. ``LazyVStack``
+    /// 2. ``LazyHStack``
+    /// 3. ``LazyVGrid``
+    /// 4. ``LazyHGrid``
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             LazyVStack(pinnedViews: .sectionFooters) {
+    ///                 Section(footer: Text("**Top half**")) {
+    ///                     ForEach(1...50, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///                 Section(footer: Text("**Bottom half**")) {
+    ///                     ForEach(51...100, id: \.self) { number in
+    ///                         Text("Row \(number)")
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static let sectionFooters: PinnedScrollableViews
 
     /// The element type of the option set.
@@ -23428,7 +26291,7 @@ public struct PinnedScrollableViews : OptionSet {
 ///              .font(.title2)
 ///          }
 ///
-///          func tap() {}
+///          func tap() { }
 ///      }
 ///
 ///
@@ -24005,35 +26868,251 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 }
 
 /// The size constraint for a preview.
+///
+/// Use this enumeration along with the
+/// ``View/previewLayout(_:)``
+/// view modifier to change the way a view is displayed in a preview.
+///
+/// This enumeration has 3 different cases:
+/// 1. ``PreviewLayout/device``: Center the preview in the specified device.
+/// 2. ``PreviewLayout/sizeThatFits``: Fix the preview to the view size.
+/// 3. ``PreviewLayout/fixed(width:height:)``: Center the preview in a fixed
+/// size container.
+///
+/// In the following example, we fit a preview box to the text view.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("➡️This box fits me snugly⬅️")
+///     }
+/// }
+///
+/// struct ContentView_Previews: PreviewProvider {
+///     static var previews: some View {
+///         ContentView()
+///             .previewLayout(.sizeThatFits)
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewLayout {
 
     /// Center the preview in a container the size of the device on which the
     /// preview is running.
+    ///
+    /// Use this case alog with the
+    /// ``View/previewLayout(_:)``
+    /// view odifier to change the way a view is displayed in a preview.
+    ///
+    /// This is the default if no preview layout is specified.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a device! 📲")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.device)
+    ///     }
+    /// }
+    /// ```
+    ///
     case device
 
     /// Fit the container to the size of the preview when offered the size of
     /// the device on which the preview is running.
+    ///
+    /// Use this case alog with the
+    /// ``View/previewLayout(_:)``
+    /// view odifier to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("➡️This box fits me snugly⬅️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    /// }
+    /// ```
+    ///
     case sizeThatFits
 
     /// Center the preview in a fixed size container.
+    ///
+    /// Use this case alog with the
+    /// ``View/previewLayout(_:)``
+    /// view odifier to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a 💯 by 💯 box")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.fixed(width: 100, height: 100))
+    ///     }
+    /// }
+    /// ```
+    ///
     case fixed(width: CGFloat, height: CGFloat)
 }
 
 /// The operating system on which to run the preview.
+///
+/// By default, Xcode can infer the platform for a preview based on the
+/// target of the current file. However, you can also use this enumeration
+/// along with the
+/// ``PreviewProvider/platform``
+/// property to change the way a view is displayed in a preview.
+///
+/// This enumeration has 4 different cases:
+/// 1. ``PreviewPlatform/iOS``
+/// 2. ``PreviewPlatform/macOS``
+/// 3. ``PreviewPlatform/tvOS``
+/// 4. ``PreviewPlatform/watchOS``
+///
+/// In the following example, we change the preview platform to macOS.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("I am in a Mac 🖥")
+///     }
+/// }
+///
+/// struct ContentView_Previews: PreviewProvider {
+///     static var previews: some View {
+///         ContentView()
+///             .previewLayout(.sizeThatFits)
+///     }
+///
+///     static var platform: PreviewPlatform? { .macOS }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewPlatform {
 
 	/// The iOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a phone 📲")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .macOS }
+    /// }
+    /// ```
+    ///
     case iOS
 
     /// The macOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a Mac 🖥")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .macOS }
+    /// }
+    /// ```
+    ///
     case macOS
 
     /// The tvOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a TV 📺")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .tvOS }
+    /// }
+    /// ```
     case tvOS
 
     /// The watchOS preview platform.
+    ///
+    /// By default, Xcode can infer the platform for a preview based on the
+    /// target of the current file. However, you can also use this enumeration
+    /// along with the
+    /// ``PreviewProvider/platform``
+    /// property to change the way a view is displayed in a preview.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a watch! ⌚️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .watchOS }
+    /// }
+    /// ```
     case watchOS
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -24131,6 +27210,23 @@ extension PreviewProvider : _PreviewProvider {
     /// the platform based on the file in which the `PreviewProvider` is
     /// defined. Return `nil` only when the file is in a target that supports
     /// multiple platforms.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a watch! ⌚️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .watchOS }
+    /// }
+    /// ```
     static var platform: PreviewPlatform? { get }
 }
 
@@ -24143,6 +27239,23 @@ extension PreviewProvider {
     /// the platform based on the file in which the `PreviewProvider` is
     /// defined. Return `nil` only when the file is in a target that supports
     /// multiple platforms.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("I am in a watch! ⌚️")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///             .previewLayout(.sizeThatFits)
+    ///     }
+    ///
+    ///     static var platform: PreviewPlatform? { .watchOS }
+    /// }
+    /// ```
     public static var platform: PreviewPlatform? { get }
 }
 
@@ -24194,7 +27307,7 @@ extension PreviewProvider {
 ///          .buttonStyle(BananaButtonStyle(color: .yellow))
 ///      }
 ///
-///      func tap() {}
+///      func tap() { }
 ///  }
 ///
 ///  struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -24209,7 +27322,7 @@ extension PreviewProvider {
 ///  }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PrimitiveButtonStyle{ }
+public protocol PrimitiveButtonStyle { }
 extension PrimitiveButtonStyle {
 
     /// A view that represents the body of a button.
@@ -24233,7 +27346,7 @@ extension PrimitiveButtonStyle {
     ///          .buttonStyle(BananaButtonStyle(color: .yellow))
     ///      }
     ///
-    ///      func tap() {}
+    ///      func tap() { }
     ///  }
     ///
     ///  struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -24429,20 +27542,35 @@ public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ProgressView where CurrentValueLabel == EmptyView {
 
-    /// Creates a progress view for showing indeterminate progress, without a
-    /// label.
+    /// Creates a progress spinner.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView()
+    ///     }
+    /// }
+    /// ```
     public init() where Label == EmptyView { }
 
-    /// Creates a progress view for showing indeterminate progress that displays
-    /// a custom label.
+    /// Creates a progress spinner froma custom label.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView {
+    ///             Text("We're working on it 🏃‍♀️")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
     ///       in progress.
     public init(@ViewBuilder label: () -> Label) { }
 
-    /// Creates a progress view for showing indeterminate progress that
-    /// generates its label from a localized string.
+    /// Creates a progress spinner from a localized string key title.
     ///
     /// This initializer creates a `Text` view on your behalf, and treats the
     /// localized key similar to `Text/init(_:tableName:bundle:comment:)`. See
@@ -24450,13 +27578,22 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// indeterminate progress view with a string variable, use
     /// the corresponding initializer that takes a `StringProtocol` instance.
     ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let title = LocalizedStringKey("We're working on it 🏃‍♀️")
+    ///
+    ///     var body: some View {
+    ///         ProgressView(title)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
     ///       describes the task in progress.
     public init(_ titleKey: LocalizedStringKey) where Label == Text { }
 
-    /// Creates a progress view for showing indeterminate progress that
-    /// generates its label from a string.
+    /// Creates a progress spinner from a string title.
     ///
     /// - Parameters:
     ///     - title: A string that describes the task in progress.
@@ -24466,18 +27603,36 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// information about localizing strings. To initialize a progress view with
     /// a localized string key, use the corresponding initializer that takes a
     /// `LocalizedStringKey` instance.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let title = "We're working on it 🏃‍♀️"
+    ///
+    ///     var body: some View {
+    ///         ProgressView(title)
+    ///     }
+    /// }
+    /// ```
     public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ProgressView {
 
-    /// Creates a progress view for showing determinate progress.
+    /// Creates a progress bar from a value and a total.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 1.0, total: 2.0)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -24487,13 +27642,22 @@ extension ProgressView {
     ///       default value is `1.0`.
     public init<V>(value: V?, total: V = 1.0) where Label == EmptyView, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress, with a
-    /// custom label.
+    /// Creates a progress bar from a value, a total, and a custom label.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 1.0, total: 2.0) {
+    ///             Text("We are halfway done 🌗")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -24505,13 +27669,27 @@ extension ProgressView {
     ///       in progress.
     public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label) where CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress, with a
-    /// custom label.
+    /// Creates a progress bar from a value, a total, a custom label, and
+    /// a custom label for the current value.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
     /// the nearest possible bound. A value of `nil` represents indeterminate
     /// progress, in which case the progress view ignores `total`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 1.0, total: 2.0) {
+    ///             Text("We are halfway done 🌗")
+    ///                 .font(.title2)
+    ///         } currentValueLabel: {
+    ///             Text("150 of 200 tasks")
+    ///                 .font(.title2)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -24525,8 +27703,8 @@ extension ProgressView {
     ///       describes the level of completed progress of the task.
     public init<V>(value: V?, total: V = 1.0, @ViewBuilder label: () -> Label, @ViewBuilder currentValueLabel: () -> CurrentValueLabel) where V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress that generates
-    /// its label from a localized string.
+    /// Creates a progress bar from a value, a total, and a localized string
+    /// key.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
@@ -24539,6 +27717,15 @@ extension ProgressView {
     ///  determinate progress view with a string variable, use
     ///  the corresponding initializer that takes a `StringProtocol` instance.
     ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(LocalizedStringKey("We are halfway done 🌗",
+    ///                      value: 1.0, total: 2.0)
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
     ///       describes the task in progress.
@@ -24550,8 +27737,7 @@ extension ProgressView {
     ///       default value is `1.0`.
     public init<V>(_ titleKey: LocalizedStringKey, value: V?, total: V = 1.0) where Label == Text, CurrentValueLabel == EmptyView, V : BinaryFloatingPoint { }
 
-    /// Creates a progress view for showing determinate progress that generates
-    /// its label from a string.
+    /// Creates a progress bar from a value, a total, and a title string.
     ///
     /// If the value is non-`nil`, but outside the range of `0.0` through
     /// `total`, the progress view pins the value to those limits, rounding to
@@ -24563,6 +27749,16 @@ extension ProgressView {
     /// information about localizing strings. To initialize a determinate
     /// progress view with a localized string key, use the corresponding
     /// initializer that takes a `LocalizedStringKey` instance.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let title = "We are halfway done 🌗"
+    ///
+    ///     var body: some View {
+    ///         ProgressView(title, value: 1.0, total: 2.0)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///     - title: The string that describes the task in progress.
@@ -24578,10 +27774,27 @@ extension ProgressView {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ProgressView {
 
-    /// Creates a progress view for visualizing the given progress instance.
+    /// Creates a progress bar from a Progress object.
     ///
     /// The progress view synthesizes a default label using the
     /// `localizedDescription` of the given progress instance.
+    ///
+    /// The parameter of this initializer is type
+    /// [Progress](https://developer.apple.com/documentation/foundation/progress).
+    /// See the Apple developer docs for more on how to create and modify
+    /// one of these objects.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let progress = Progress(totalUnitCount: 4)
+    ///
+    ///     var body: some View {
+    ///         ProgressView(progress)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter progress: The `Progress` object for displaying the bar.
     public init(_ progress: Progress) where Label == EmptyView, CurrentValueLabel == EmptyView { }
 }
 
@@ -24601,7 +27814,7 @@ extension ProgressView {
     /// view, but otherwise preserves the progress view's current style:
     ///
     ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             ProgressView(configuration)
     ///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
     ///                         radius: 4.0, x: 1.0, y: 2.0)
@@ -29582,6 +32795,9 @@ extension Spacer : View {
 /// A navigation view style represented by a view stack that only shows a
 /// single top view at a time.
 ///
+/// Use this with the ``View/navigationViewStyle(_:)``
+/// view modifier to change a ``NavigationView``'s style.
+///
 /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
 /// ```
@@ -29599,6 +32815,22 @@ extension Spacer : View {
 public struct StackNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a stack navigation view style.
+    ///
+    /// Use this with the ``View/navigationViewStyle(_:)``
+    /// view modifier to change a ``NavigationView``'s style.
+    ///
+    /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("Hello Bananas🍌🍌")
+    ///         }
+    ///         .navigationViewStyle(StackNavigationViewStyle())
+    ///     }
+    /// }
+    /// ```
     public init() { }
 }
 
@@ -29722,13 +32954,50 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// Creates the state with an initial wrapped value.
     ///
     /// You don't call this initializer directly. Instead, declare a property
-    /// with the `@State` attribute, and provide an initial value; for example,
-    /// `@State private var isPlaying: Bool = false`.
+    /// with the `@State` attribute, and provide an initial value; for example:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     @State var foo: String = "Apple"
+    ///
+    ///     var body: some View {
+    ///         Text(foo)
+    ///         Button("Change Text") { foo = "Banana" }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter wrappedValue: An initial wrappedValue for a state.
     public init(wrappedValue value: Value) { }
 
     /// Creates the state with an initial value.
+    ///
+    /// For most cases of ``State``, you will initialize the object using
+    /// the `@State` syntax, described in detail in the ``State`` page.
+    /// However, this initializer does have an especially good use
+    /// case of allowing you to initialize a structure's
+    /// ``State`` property in the structure's initializer!
+    /// See below.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     struct NameView: View {
+    ///         @State var name: String
+    ///
+    ///         init(startingName: String) {
+    ///             _name = State(initialValue: startingName) //Note the "_"!
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             TextField("Type your name ✍️", text: $name)
+    ///         }
+    ///     }
+    ///
+    ///     var body: some View {
+    ///         NameView(startingName: "Ron Wayne")
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter value: An initial value of the state.
     public init(initialValue value: Value) { }
@@ -29741,14 +33010,15 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// following code example the button's actions toggles the value of
     /// `showingProfile`, which toggles `wrappedValue`:
     ///
-    ///     @State private var showingProfile = false
+    ///     struct ContentView: View {
+    ///         @State private var showingProfile = false
     ///
-    ///     var profileButton: some View {
-    ///         Button(action: { self.showingProfile.toggle() }) {
-    ///             Image(systemName: "person.crop.circle")
-    ///                 .imageScale(.large)
-    ///                 .accessibilityLabel(Text("User Profile"))
-    ///                 .padding()
+    ///         var profileButton: some View {
+    ///             Button(action: { showingProfile.toggle() }) {
+    ///                 Image(systemName: "person.crop.circle")
+    ///                     .imageScale(.large)
+    ///                     .padding()
+    ///             }
     ///         }
     ///     }
     ///
@@ -29762,19 +33032,14 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// Use the projected value to pass a binding value down a view hierarchy.
     /// To get the `projectedValue`, prefix the property variable with `$`. For
     /// example, in the following code example `PlayerView` projects a binding
-    /// of the state property `isPlaying` to the `PlayButton` view using
-    /// `$isPlaying`.
+    /// of the state property `title` to the `TextField` view using
+    /// `$title`.
     ///
     ///     struct PlayerView: View {
-    ///         var episode: Episode
-    ///         @State private var isPlaying: Bool = false
+    ///         @State private var title = "The Wedding, pt. 2"
     ///
     ///         var body: some View {
-    ///             VStack {
-    ///                 Text(episode.title)
-    ///                 Text(episode.showTitle)
-    ///                 PlayButton(isPlaying: $isPlaying)
-    ///             }
+    ///             TextField("Show title", text: $title)
     ///         }
     ///     }
     public var projectedValue: Binding<Value> { get }
@@ -29784,6 +33049,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 extension State where Value : ExpressibleByNilLiteral {
 
     /// Creates a state without an initial value.
+    ///
+    /// **Don't use this initializer directly. Instead, see ``State`` for
+    /// info on how to use state as a property wrapper.**
     @inlinable public init() { }
 }
 
@@ -30716,19 +33984,134 @@ extension StrokeStyle : Animatable {
 }
 
 /// A view that subscribes to a publisher with an action.
+///
+/// This view produces basically the same thing as another
+/// view with the ``View/onReceive(_:)`` modifier applied to it.
+/// Whenver possible, use ``View/onReceive(_:)``, as it results
+/// in cleaner code.
+///
+/// The following example shows `SubscriptionView` used to exactly reproduct
+/// a view with ``View/onReceive(_:)``.
+///
+/// ```
+/// struct TimerView: View {
+///     @State private var time1 = ""
+///     @State private var time2 = ""
+///
+///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+///
+///     var body: some View {
+///         VStack {
+///             SubscriptionView(content: Text(time1), publisher: timer) { t in
+///                 time1 = String(describing: t)
+///             }
+///             Text(time2).onReceive(timer) { t in
+///                 time2 = String(describing: t)
+///             }
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SubscriptionView<PublisherType, Content> : View where PublisherType : Publisher, Content : View, PublisherType.Failure == Never {
 
     /// The content view.
+    ///
+    /// This is the content property component of a ``SubscriptionView``.
+    ///
+    /// In the following example, the ``SubscriptionView``'s content
+    /// is a ``Text`` view:
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var content: Content
 
     /// The `Publisher` that is being subscribed.
+    ///
+    /// This is the publisher instance that your ``SubscriptionView``
+    /// listens to for executing its action parameter. You can declare
+    /// a ``State`` variable in your view so that your
+    /// ``SubscriptionView/content`` view can get updated when this publisher
+    /// sends a change.
+    ///
+    /// See [Publisher](https://developer.apple.com/documentation/combine/publisher)
+    /// for the Apple docs on what a publisher is and how to use it. Note
+    /// that for a ``SubscriptionView``, the publisher's
+    /// [Failure](https://developer.apple.com/documentation/combine/publisher/failure)
+    /// type must be
+    /// [Never](https://developer.apple.com/documentation/swift/never),
+    /// meaning the publisher can never fail.
+    ///
+    /// If you're really interested in asynchronous event processing,
+    /// check out Apple's documentation on their
+    /// [Combine](https://developer.apple.com/documentation/combine)
+    /// framework.
+    ///
+    /// In the example below, the publisher is a
+    /// [Timer](https://developer.apple.com/documentation/foundation/timer).
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var publisher: PublisherType
 
     /// The `Action` executed when `publisher` emits an event.
+    ///
+    /// This function is called whenever the ``SubscriptionView``
+    /// receives an event from the ``SubscriptionView/publisher``
+    /// property. It takes in a parameter of the publisher's output,
+    /// so you can read it and even update the view accordingly.
+    ///
+    /// In the example below, we update the time ``Text`` with the time
+    /// string received from the publisher.
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var action: (PublisherType.Output) -> Void
 
     /// Create a view with content the subscribes to a publisher with an action.
+    ///
+    /// ```
+    /// struct TimerView: View {
+    ///     @State private var time = ""
+    ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    ///
+    ///     var body: some View {
+    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///             time = String(describing: t)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - content: The content that you want displayed in the view.
@@ -30872,7 +34255,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: /\.self) {
+///             ForEach(items, id: \.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -30895,7 +34278,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: /\.self) {
+///             ForEach(items, id: \.self) {
 ///                 Text($0)
 ///             }
 ///         }
@@ -36573,6 +39956,7 @@ extension View {
     ///             .frame(width: 200, height: 200)
     ///             .border(Color(white: 0.75))
     ///     }
+    /// }
     /// ```
     ///
     /// - Parameters:
@@ -40710,6 +44094,19 @@ extension View {
     /// iOS and macOS apply the tint color to their `Label` icons, which
     /// otherwise use the accent color by default.
     ///
+    /// See ``ListItemTint`` for more on the 3 options for tinting a list.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.fixed(Color.orange))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter tint: The tint effect to use, or nil to not override the
     ///   inherited tint.
     @inlinable public func listItemTint(_ tint: ListItemTint?) -> some View { }
@@ -40724,6 +44121,17 @@ extension View {
     /// uses the tint color for its background platter appearance. Sidebars on
     /// iOS and macOS apply the tint color to their `Label` icons, which
     /// otherwise use the accent color by default.
+    ///
+    /// ```
+    /// struct SettingsView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
+    ///                 .listItemTint(.orange)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter color: The color to use to tint the content, or nil to not
     ///   override the inherited tint.
@@ -41393,15 +44801,42 @@ extension View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension View {
 
-    /// The default store used by `AppStorage` contained within the view.
+    /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
+    ///
+    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// `UserDefaults.standard`. Override this default location for all of your
+    /// scene's views by using this modifier.
     ///
     /// If unspecified, the default store for a view hierarchy is
     /// `UserDefaults.standard`, but can be set a to a custom one. For example,
     /// sharing defaults between an app and an extension can override the
     /// default store to one created with `UserDefaults.init(suiteName:_)`.
     ///
-    /// - Parameter store: The user defaults to use as the default
-    ///   store for `AppStorage`.
+    /// There is a similar method for `Scene` called `Scene/defaultAppStorage(_:)`
+    ///
+    /// Check out `UserDefaults` and `AppStorage` for more info on how in-app storage
+    /// works.
+    ///
+    ///     @main
+    ///     struct StorageExampleApp: App {
+    ///         var body: some Scene {
+    ///             WindowGroup {
+    ///                 StorageExampleView()
+    ///                     .defaultAppStorage(UserDefaults(suiteName: "com.yoursite.your-suite")!)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct StorageExampleView: View {
+    ///         //Looks for "key" in "com.yoursite.your-suite"
+    ///         @AppStorage("key") var name = "Kanye West"
+    ///
+    ///         var body: some View {
+    ///             TextField("Enter your name", text: $name)
+    ///         }
+    ///     }
+    ///
+    /// - Parameter store: The default user defaults storage site for `@AppStorage`.
     public func defaultAppStorage(_ store: UserDefaults) -> some View { }
 
 }
@@ -42143,16 +45578,18 @@ extension View {
     /// The example below rotates the text 30˚ around the `z` axis, which is the
     /// axis pointing out of the screen:
     ///
+    /// ```
+    /// struct ContentView: View {
     ///     // This transform represents a 30˚ rotation around the z axis.
-    ///     let transform = CATransform3DMakeRotation(
-    ///         -30 * (.pi / 180), 0.0, 0.0, 1.0)
+    ///     let transform = CATransform3DMakeRotation(-30 * (.pi / 180), 0.0, 0.0, 1.0)
     ///
-    ///     Text("Projection effects using transforms")
-    ///         .projectionEffect(.init(transform))
-    ///         .border(Color.gray)
-    ///
-    /// ![A screenshot showing text rotated 30 degrees around the axis pointing
-    /// out of the screen.](SwiftUI-View-projectionEffect.png)
+    ///     var body: some View {
+    ///         Text("Projection effects using transforms")
+    ///             .projectionEffect(.init(transform))
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter transform: A `ProjectionTransform` to apply to the view.
     @inlinable public func projectionEffect(_ transform: ProjectionTransform) -> some View { }
@@ -42171,10 +45608,16 @@ extension View {
     /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
-    ///     Button(action: composeMessage) {
-    ///         Image(systemName: "square.and.pencil")
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Button(action:  { /*Compose a message*/ }) {
+    ///             Image(systemName: "square.and.pencil")
+    ///         }
+    ///         .help("Compose a new message")
     ///     }
-    ///     .help("Compose a new message")
+    /// }
+    /// ```
     ///
     /// - Parameter textKey: The key for the localized text to use as help.
     public func help(_ textKey: LocalizedStringKey) -> some View { }
@@ -42189,8 +45632,16 @@ extension View {
     /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
-    ///     Slider("Opacity", value: $selectedShape.opacity)
-    ///         .help(Text("Adjust the opacity of the selected \(selectedShape.name)"))
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var opacity = 0.0
+    ///
+    ///     var body: some View {
+    ///         Slider("Opacity", value: $opacity)
+    ///             .help(Text("Adjust the opacity"))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter text: The Text view to use as help.
     public func help(_ text: Text) -> some View { }
@@ -42205,9 +45656,17 @@ extension View {
     /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
-    ///     Image(systemName: "pin.circle")
-    ///         .foregroundColor(pointOfInterest.tintColor)
-    ///         .help(pointOfInterest.name)
+    /// ```
+    /// struct ContentView: View {
+    ///     let helpText = "I am orange 🟧"
+    ///
+    ///     var body: some View {
+    ///         Image(systemName: "pin.circle")
+    ///             .foregroundColor(.orane)
+    ///             .help(helpText)
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter text: The text to use as help.
     public func help<S>(_ text: S) -> some View where S : StringProtocol { }
@@ -42222,6 +45681,33 @@ extension View {
     /// Sets the visibility of the status bar.
     ///
     /// Use `statusBar(hidden:)` to show or hide the status bar.
+    ///
+    /// ```
+    /// struct NoStatusBarView: View {
+    ///     var body: some View {
+    ///         Text("I have no status bar ⏰")
+    ///             .statusBar(hidden: true)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can also show or hide the status bar with an animation by
+    /// attaching the modifier to a ``State`` property and using
+    /// ``withAnimation(_:_:)``:
+    ///
+    /// ```
+    /// struct ToggleMyStatusBarView: View {
+    ///     @State private var showBar = true
+    ///
+    ///     var body: some View {
+    ///         Button("Toggle the status bar! 🎚") {
+    ///             withAnimation {
+    ///                 showBar.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   status bar.
@@ -42250,23 +45736,86 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Presents an alert to the user.
+    /// A view modifier that presents an alert when a given value is not nil.
+    ///
+    /// Use this modifier to present an alert over the current view when you need to pass the alert a value.
+    /// The alert will be presented only when the binding value you pass it is not nil.
+    ///
+    /// If your alert doesn't need an `item` parameter, use
+    /// ``View/alert(isPresented:content)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct Item: Identifiable {
+    ///         let id = UUID()
+    ///         let text: String
+    ///     }
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var item: Item? = nil
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Button("🍌 Alert") {
+    ///                     item = Item(text: "🍌🍌")
+    ///                 }
+    ///                 Button("🍑 Alert") {
+    ///                     item = Item(text: "🍑🍑")
+    ///                 }
+    ///             }
+    ///             .alert(item: $item, content: alertBuilder)
+    ///         }
+    ///
+    ///         func alertBuilder(item: Item) -> Alert {
+    ///             let confirm = Alert.Button.default(Text("Confirm \(item.text)")) { print(item.text) }
+    ///             let cancel = Alert.Button.cancel(Text("Cancel")) { /*do nothing*/ }
+    ///
+    ///             return Alert(title: Text("Confirm fruit"),
+    ///                         message: Text("Please confirm your fruit"),
+    ///                         primaryButton: confirm,
+    ///                         secondaryButton: cancel)
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - item: A binding to an optional source of truth for the alert.
-    ///     When representing a non-`nil` item, the system uses `content` to
-    ///     create an alert representation of the item.
-    ///     If the identity changes, the system dismisses a
-    ///     currently-presented alert and replace it by a new alert.
-    ///   - content: A closure returning the alert to present.
+    ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
+    ///   when this value is not `nil`.
+    ///   - content: A view builder closure that takes in the `item` and returns the alert.
     public func alert<Item>(item: Binding<Item?>, content: (Item) -> Alert) -> some View where Item : Identifiable { }
 
 
-    /// Presents an alert to the user.
+    /// A view modifier that presents an alert when a given condition is true.
+    ///
+    /// Use this modifier to present an alert over the current view.
+    /// The alert will be presented only when the binding value you pass it is true.
+    ///
+    /// If your alert needs an `item` parameter, use
+    /// ``View/alert(item:content)`` instead.
+    ///
+    /// Use the modifier like this:
+    ///
+    ///     struct ExampleView: View {
+    ///         @State private var showAlert = false
+    ///
+    ///         var body: some View {
+    ///             Button("Open sesame 🚨") {
+    ///                 showAlert = true
+    ///             }
+    ///             .alert(isPresented: $showAlert) {
+    ///                 let confirm = Alert.Button.default(Text("Confirm 🚨")) { print("Confirmed.") }
+    ///                 let cancel = Alert.Button.cancel(Text("Cancel")) { /*do nothing*/ }
+    ///
+    ///                 return Alert(title: Text("Confirm alert"),
+    ///                             message: Text("Please confirm your alert!"),
+    ///                             primaryButton: confirm,
+    ///                             secondaryButton: cancel)
+    ///             }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
-    ///   - isPresented: A binding to whether the alert should be shown.
-    ///   - content: A closure returning the alert to present.
+    ///   - isPresented: A binding to whether the alert is presented.
+    ///   - content: A closure returning the `Alert`.
     public func alert(isPresented: Binding<Bool>, content: () -> Alert) -> some View { }
 
 }
