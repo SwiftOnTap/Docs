@@ -24968,14 +24968,14 @@ public struct PageTabViewStyle : TabViewStyle {
 
     /// Creates a path from a string.
     ///
-    /// Use this initializer to creat a path from the result of a previous call to
+    /// Use this initializer to create a path from the result of a previous call to
     /// `Path.stringRepresentation`. Fails if the `string` does not
     /// describe a valid path.
     ///
     /// ```
     /// struct PathFromStringView: View {
     ///     var pathString: String {
-    ///         return Path { path in
+    ///         Path { path in
     ///             path.move(to: .zero)
     ///             path.addLine(to: CGPoint(x: 100, y: 100))
     ///         }
@@ -25068,6 +25068,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         Path { path in
     ///             path.addEllipse(in: rect)
     ///             path.addRect(path.boundingRect)
+    ///         }
     ///      }
     /// }
     /// ```
@@ -25116,6 +25117,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct LoudPrintingOval: Shape {
     ///     func path(in rect: CGRect) -> Path {
     ///         let ovalPath = Path(ellipseIn: rect)
+    ///
     ///         ovalPath.forEach { element in
     ///             switch element {
     ///             case .move(let point):
@@ -25130,6 +25132,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///                 print("I am finished being loud.")
     ///             }
     ///         }
+    ///
     ///         return ovalPath
     ///     }
     /// }
@@ -25272,6 +25275,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct LoudPrintingOval: Shape {
     ///     func path(in rect: CGRect) -> Path {
     ///         let ovalPath = Path(ellipseIn: rect)
+    ///
     ///         ovalPath.forEach { element in
     ///             switch element {
     ///             case .move(let point):
@@ -25286,6 +25290,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///                 print("I am finished being loud.")
     ///             }
     ///         }
+    ///
     ///         return ovalPath
     ///     }
     /// }
@@ -25811,7 +25816,7 @@ extension Path {
     /// struct SlightlyDistortedShapeView: View {
     ///     var body: some View {
     ///         NormalShape()
-    ///             .applying(.init(scaleX: 0.9, scaleY: 1.1))
+    ///             .applying(CGAffineTransform(scaleX: 0.9, scaleY: 1.1))
     ///             .stroke()
     ///     }
     /// }
@@ -45974,28 +45979,97 @@ extension View {
 
 }
 
-/// A custom parameter attribute that constructs views from closures.
+/// A property wrapper that lets you build views declaratively.
 ///
-/// You typically use `ViewBuilder` as a parameter attribute for child
-/// view-producing closure parameters, allowing those closures to provide
-/// multiple child views. For example, the following `contextMenu` function
-/// accepts a closure that produces one or more views via the view builder.
+/// `ViewBuilder` is used extensively in SwiftUI to let you create new
+/// on-screen views by just listing them out in a trailing closure.
+/// It's a **property wrapper** applied to function parameter.
+/// Usually, it's just working behind the scenes, so you don't have to
+/// worry about it. But, you can also define your own functions
+/// that are view builders, and also include them in your own custom views.
 ///
-///     func contextMenu<MenuItems : View>({}
-///         @ViewBuilder menuItems: () -> MenuItems
-///     ) -> some View
+/// ### Using a `ViewBuilder` as a trailing closure
 ///
-/// Clients of this function can use multiple-statement closures to provide
-/// several child views, as shown in the following example:
+/// `ViewBuilder` works behind the scenes of many common SwiftUI
+/// views - like ``VStack`` and ``HStack``. For example, here
+/// is the declaration of `Group`'s initializer:
 ///
-///     myView.contextMenu {
-///         Text("Cut")
-///         Text("Copy")
-///         Text("Paste")
-///         if isSymbol {
-///             Text("Jump to Definition")
+/// ```
+/// public init(@ViewBuilder content: () -> Content) {
+///     // Implementation here
+/// }
+/// ```
+///
+/// Since that last parameter is a `ViewBuilder`, you can easily create
+/// a `Group` by passing it a trailing closure stacking views:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Group {
+///             Text("I'm in the group 😁")
+///             Text("Me too 🥂")
 ///         }
 ///     }
+/// }
+/// ```
+///
+/// ### Using a `ViewBuilder` as a function
+///
+/// You can also use `ViewBuilder` as a function. Just tag your
+/// function with `@ViewBuilder`, and use it just like you would with a
+/// trailing closure:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Group(content: contentBuilder)
+///     }
+///
+///     @ViewBuilder
+///     func contentBuilder() -> some View {
+///         Text("This is another way to create a Group 👥")
+///         Text("Just stack the views 🥞")
+///     }
+/// }
+/// ```
+///
+/// ### Using a `ViewBuilder` in your own `View`s
+///
+/// Exactly like `Group`, you can also use `ViewBuilder`s in your own custom
+/// views. Just tag the parameter of your `View`'s initializer with
+/// `@ViewBuilder`, and anyone using your view will be able to easily
+/// pass you views just by listing them.
+///
+/// In the example below, we use this technique to create a special
+/// type of ``Group`` that makes everything green. Note that `ViewBuilder`s
+/// are actually functions, so in order to get the content they contain,
+/// you have to call the function. Below, this is done with `content()`.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         GreenGroup {
+///             Text("I am green 🤑")
+///             Text("Hey same 🐲")
+///         }
+///     }
+/// }
+///
+/// struct GreenGroup<Content>: View where Content: View {
+///     var views: Content
+///
+///     init(@ViewBuilder content: () -> Content) {
+///         self.views = content()
+///     }
+///     
+///     var body: some View {
+///         Group {
+///             views.foregroundColor(.green)
+///         }
+///     }
+/// }
+/// ```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_functionBuilder public struct ViewBuilder {
