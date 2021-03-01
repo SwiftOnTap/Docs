@@ -1,6 +1,9 @@
 name: Push to QA S3 bucket
 
-on: pull_request
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
