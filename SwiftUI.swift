@@ -1311,34 +1311,183 @@ extension Anchor.Source {
 }
 
 /// A geometric angle whose value you access in either radians or degrees.
+///
+/// `Angle`s are used all over SwiftUI to specify a geometric angle.
+/// Common uses include **rotation** and **drawing**.
+///
+/// ### Creating an `Angle`
+///
+/// You can create an `Angle` by using either **radians** or **degrees**.
+/// Each has an initializer as well as a static method:
+///
+/// - Radians:
+///     - ``Angle/init(radians:)``
+///     - ``Angle/radians(_:)``
+/// - Degrees:
+///     - ``Angle/init(degrees:)``
+///     - ``Angle/degrees(_:)``
+///
+/// See usage examples below.
+///
+/// ### Using an `Angle` with rotation
+///
+/// `Angles` are commonly used with the `View/rotationEffect(_:anchor:)`
+/// and similar modifiers:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Rectangle()
+///                 .rotationEffect(Angle(degrees: 15))
+///             Rectangle()
+///                 .rotationEffect(.degrees(15))
+///         }
+///     }
+/// }
+/// ```
+///
+/// ### Using an `Angle` with drawing
+///
+/// `Angle`s can also be used with drawing. Below, we define a custom
+/// ``Shape`` called `Arc`, and make its parameter type `Angle`:
+///
+/// ```
+/// struct ArcView: View {
+///     var body: some View {
+///         Arc(endAngle: Angle.degrees(270))
+///             .stroke(Color.green)
+///     }
+/// }
+///
+/// struct Arc: Shape {
+///     var endAngle: Angle
+///
+///     func path(in rect: CGRect) -> Path {
+///         Path { p in
+///             p.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+///                      radius: rect.width / 2 ,
+///                      startAngle: Angle.zero,
+///                      endAngle: endAngle,
+///                      clockwise: false)
+///         }
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Angle {
 
 	/// The size of the angle, measured in radians.
+    ///
+    /// Usually, this property is specified using the
+    /// ``Angle/init(radians:)`` initializer, or the
+    /// ``Angle/radians(_:)`` static function, but
+    /// it can also be specified directly!
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var angle = Angle()
+    ///         angle.radians = Double.pi / 6
+    ///
+    ///         return Rectangle()
+    ///             .rotationEffect(angle)
+    ///     }
+    /// }
+    /// ```
     public var radians: Double
 
     /// The size of the angle, measured in degrees.
+    ///
+    /// Usually, this property is specified using the
+    /// ``Angle/init(degrees:)`` initializer, or the
+    /// ``Angle/degrees(_:)`` static function, but
+    /// it can also be specified directly!
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var angle = Angle()
+    ///         angle.degrees = 15
+    ///
+    ///         return Rectangle()
+    ///             .rotationEffect(angle)
+    ///     }
+    /// }
+    /// ```
     @inlinable public var degrees: Double
 
     /// Creates an angle of 0 degrees or 0 radians.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .rotationEffect(Angle()) // Does nothing
+    ///     }
+    /// }
+    /// ```
     @inlinable public init() { }
 
     /// Creates an angle from a specified number of radians.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .rotationEffect(Angle(radians: Double.pi / 6))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter radians: The number of radians in the angle.
     @inlinable public init(radians: Double) { }
 
     /// Creates an angle from a specified number of degrees.
     ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .rotationEffect(Angle(degrees: 15))
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter degrees: The number of degrees in the angle.
     @inlinable public init(degrees: Double) { }
 
     /// Changes the size of an angle to a specified number of radians.
     ///
+    /// This can be a convenient shorthand for the ``Angle/init(radians:)``
+    /// initializer, especially when the type can be inferred.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .rotationEffect(.radians(Double.pi / 6))
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle { }
 
     /// Changes the size of an angle to a specified number of degrees.
+    ///
+    /// This can be a convenient shorthand for the ``Angle/init(degrees:)``
+    /// initializer, especially when the type can be inferred.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .rotationEffect(.degrees(15))
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Paramter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle { }
@@ -1400,6 +1549,20 @@ extension Angle : Animatable {
     /// The data to animate.
     public var animatableData: Double
 
+    /// Creates an angle of 0 degrees or 0 radians.
+    ///
+    /// This static property can be a convenient shorthand for
+    /// the ``Angle/init()`` initializer, especially when the
+    /// type can be inferred:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .rotationEffect(.zero) // Does nothing
+    ///     }
+    /// }
+    /// ```
     @inlinable public static var zero: Angle { get }
 
     /// The type defining the data to animate.
@@ -1814,15 +1977,77 @@ extension AnimatableModifier : Animatable, ViewModifier {
     public static func == (a: AnimatablePair<First, Second>, b: AnimatablePair<First, Second>) -> Bool { }
 }
 
-/// Specifies the timing curve of a changing on-screen value, such as spring or linear.
+/// Specifies the timing curve of a changing on-screen value.
 ///
-/// Functions such as ``view/animation(_:)`` and ``binding/animation(_:)`` take in the Animation structure.
+/// ### An `Animation` is just a timing curve
 ///
+/// Every animation has 3 parts:
 ///
-/// SwiftUI includes basic animations with predefined or custom easing, as well as spring and fluid animations.
-/// You can adjust an animation’s speed, set a delay before an animation starts, or specify that an animation repeats.
+/// 1. The numerical value in memory that changes over time --- usually
+/// a `@``State property
+/// 2. How the `View` depends on this numerical value --- often using
+/// a view modifier
+/// 3. The timing curve describing how this change happens --- this is the
+/// ``Animation``
 ///
-/// For example,
+/// For example, say I want the screen to be **green** sometimes, but **red**
+/// at other times. The current color of the screen would be stored as a
+/// `@``State property. Then, the screen might use the
+/// ``View/foregroundColor(_:)`` modifier to actually make the screen this
+/// color. And finally, when I change the screen color, I can specify a
+/// *timing curve*, or ``Animation``, to describe how it will happen.
+///
+/// ### Types of timing curves
+///
+/// There are many different types of timing curves, or ``Animations``.
+/// For example, how long does the animation last (**duration**)? Does it move
+/// at the same speed the whole time (**linear**), or does it **ease in and out**?
+/// Or maybe it goes so fast at the beginning that it actually overshoots
+/// the target and has to go back. This is called a **spring** animation.
+///
+/// #### Main types
+///
+/// There are a few main types of timing curves:
+/// - ``Animation/linear``: The value changes at the same speed the whole time.
+/// - ``Animation/easeIn``: The value begins by changing slowly, then speeds
+/// up towards the end.
+/// - ``Animation/easeOut``: The value begins quickly, and slows down towards
+/// the end.
+/// - ``Animation/easeInOut``: THe value begins by changing slowly, goes quickly
+/// in the middle, and ends slowly.
+/// - ``Animation/spring(response:dampingFraction:blendDuration:)``: The value begins very quickly, then overshoots
+/// the target and springs back.
+///
+/// #### Modifiers
+///
+/// There are also a few modifiers that can be applied to timing curves:
+/// - ``Animation/delay(_:)``: Waits a period of time before doing the
+/// animation.
+/// - ``Animation/speed(_:)``: Speeds up or slows down the animation.
+/// - ``Animation/repeatCount(_:autoreverses:)``: Repeats the animation a number of
+/// times.
+/// - ``Animation/repeatForever(autoreverses:)``: Repeats the animation
+/// forever
+///
+/// ### Using an animation
+///
+/// Once you have an animation, there are 3 main ways to use it:
+///
+/// 1. By applying it to a view using ``View/animation(_:)``,
+/// so any animatable properties of the view change with that
+/// timing curve.
+/// 2. Directly when changing a `@``State` property, using the
+/// ``withAnimation(_:_:)`` global function.
+/// 3. By attaching the timing curve directly to a `@``Binding` property,
+/// using ``Binding/animation(_:)``, so any changes to the binding happen
+/// with a certain animation.
+///
+/// See each of those respective pages for specifics of how to use each.
+///
+/// ### Putting it all together
+///
+/// Putting all of the sections above together into one example, here
+/// is what it looks like:
 ///
 /// ![Animation Example 1](animation-example.gif)
 ///
@@ -1831,7 +2056,6 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///     @State private var flag = true
 ///
 ///     var body: some View {
-///
 ///         VStack {
 ///             Rectangle()
 ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -1864,11 +2088,37 @@ extension AnimatableModifier : Animatable, ViewModifier {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
-    /// A persistent spring animation. When mixed with other `spring()`
-    /// or `interactiveSpring()` animations on the same property, each
+    /// A persistent spring animation.
+    ///
+    /// This is a timing curve where the animation happens very quickly
+    /// in the beginning, then overshoots the target, and returns back
+    /// with a spring effect.
+    ///
+    /// > When mixed with other `Animation/spring()`
+    /// or `Animation/interactiveSpring()` animations on the same property, each
     /// animation will be replaced by their successor, preserving
     /// velocity from one animation to the next. Optionally blends the
     /// response values between springs over a time period.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.spring(response: 0.55, dampingFraction: 0.825, blendDuration: 0))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - response: The stiffness of the spring, defined as an
@@ -1885,14 +2135,59 @@ extension Animation {
 
     /// A convenience for a `spring()` animation with a lower
     /// `response` value, intended for driving interactive animations.
+    ///
+    /// This is a timing curve where the animation happens very quickly
+    /// in the beginning, then overshoots the target, and returns back
+    /// with a spring effect.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.interactiveSpring())
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
-	/// An identity animation, meaning the object appears and disappears without
-	/// any motion or opacity changes.
+	/// An identity animation that happens immediately.
+    ///
+    /// Use this property to turn off animation on a view.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.default)
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static let `default`: Animation
 }
 
@@ -1909,7 +2204,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -1918,7 +2212,7 @@ extension Animation {
     ///                 .animation(.easeInOut(duration: 3.0))
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -1940,7 +2234,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -1949,7 +2242,7 @@ extension Animation {
     ///                 .animation(.easeInOut)
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -1969,7 +2262,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -1978,7 +2270,7 @@ extension Animation {
     ///                 .animation(.easeIn(duration: 3.0))
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -2001,7 +2293,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -2010,7 +2301,7 @@ extension Animation {
     ///                 .animation(.easeIn)
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -2030,7 +2321,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -2039,7 +2329,7 @@ extension Animation {
     ///                 .animation(.easeOut(duration: 3.0))
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -2062,7 +2352,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -2071,7 +2360,7 @@ extension Animation {
     ///                 .animation(.easeOut)
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -2091,7 +2380,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -2100,7 +2388,7 @@ extension Animation {
     ///                 .animation(.linear(duration: 3.0))
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -2123,7 +2411,6 @@ extension Animation {
     ///     @State private var flag = true
     ///
     ///     var body: some View {
-    ///
     ///         VStack {
     ///             Rectangle()
     ///                 .foregroundColor(flag ? Color.yellow : Color.red)
@@ -2132,7 +2419,7 @@ extension Animation {
     ///                 .animation(.linear)
     ///
     ///             Button("Animate") {
-    ///                 self.flag.toggle()
+    ///                 flag.toggle()
     ///             }
     ///         }
     ///     }
@@ -2143,11 +2430,41 @@ extension Animation {
 
     /// An animation with a fully customized timing curve.
     ///
+    /// Use this animation to fully specify a cubic bezier curve for how
+    /// the animation moves over a specified duration. In the model,
+    /// the x-axis is time, specified as a 0-through-1 fraction.
+    /// of the total duration. The y-axis is the 0-through-1 fraction
+    /// that the animated property has progressed from beginning to end.
+    ///
+    /// See [this website](https://cubic-bezier.com/)
+    /// for an interactive chart of how the two control points influence
+    /// the animation curve.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.timingCurve(0.42, 0, 0.58, 1, duration: 1.0))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     /// - Parameters:
-    ///   - c0x: The first x coefficient.
-    ///   - c0y: The first y coefficient.
-    ///   - c1x: The second x coefficient.
-    ///   - c1y: The second y coefficient.
+    ///   - c0x: The x-coordinate of the first control point.
+    ///   - c0y: The y-coordinate of the first control point.
+    ///   - c1x: The x-coordinate of the second control point.
+    ///   - c1y: The y-coordinate of the second control point.
     ///   - duration: How long the effect should last.
     public static func timingCurve(_ c0x: Double, _ c0y: Double, _ c1x: Double, _ c1y: Double, duration: Double = 0.35) -> Animation { }
 }
@@ -2155,11 +2472,33 @@ extension Animation {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
+    /// A persistent spring animation, specified using a physics spring model.
+    ///
     /// An interpolating spring animation that uses a damped spring
     /// model to produce values in the range [0, 1] that are then used
     /// to interpolate within the [from, to] range of the animated
     /// property. Preserves velocity across overlapping animations by
     /// adding the effects of each animation.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.interpolatingSpring(mass: 1, stiffness: 1, damping: 0.5, initialVelocity: 10))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - mass: The mass of the object attached to the spring.
@@ -2176,6 +2515,26 @@ extension Animation {
 extension Animation {
 
 	/// Adds delay to your animation that runs before it starts.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeInOut.delay(1))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameter delay: How long the animation will wait before starting, in seconds.
     public func delay(_ delay: Double) -> Animation { }
@@ -2184,10 +2543,32 @@ extension Animation {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Animation {
 
+    /// Changes the speed of an animation.
+    ///
     /// Returns an animation that has its speed multiplied by `speed`. For
     /// example, if you had `oneSecondAnimation.speed(0.25)`, it would be at 25%
     /// of its normal speed, so you would have an animation that would last 4
     /// seconds.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeInOut.speed(2))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public func speed(_ speed: Double) -> Animation { }
 }
 
@@ -2195,6 +2576,26 @@ extension Animation {
 extension Animation {
 
 	/// Adjusts the number of times the animation should repeat itself.
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
+    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .animation(.easeInOut.repeatCount(2, autoreverses: false))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
 	///
 	/// - Parameters:
 	///   - repeatCount: The number of times the animation should repeat.
@@ -2841,9 +3242,33 @@ extension AnyTransition {
 @frozen public struct AnyView : View {
 
     /// Create an instance that type-erases `view`.
+    ///
+    /// See ``AnyView`` for the uses and dangers of using this structure.
+    ///
+    ///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         AnyView(Text("Hello, world!"))
+    ///     }
+    /// }
+    /// ```
     public init<V>(_ view: V) where V : View { }
 
     /// Creates an instance that type-erases the parameter.
+    ///
+    /// See ``AnyView`` for the uses and dangers of using this structure.
+    ///
+    ///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         AnyView(erasing: Text("Hello, world!"))
+    ///     }
+    /// }
+    /// ```
     public init<V>(erasing view: V) where V : View { }
 
     /// The type of view representing the body of this view.
@@ -2856,7 +3281,7 @@ extension AnyTransition {
 /// A type that represents the structure and behavior of an app.
 ///
 /// Create an app by declaring a structure that conforms to the `App` protocol.
-/// Implement the required `SwiftUI/App/body-swift.property` computed property
+/// Implement the required `App/body-swift.property` computed property
 /// to define the app's content:
 ///
 ///     @main
@@ -2872,7 +3297,7 @@ extension AnyTransition {
 /// [@main](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
 /// attribute to indicate that your custom `App` protocol conformer provides the
 /// entry point into your app. The protocol provides a default implementation of
-/// the `SwiftUI/App/main()` method that the system calls to launch your app.
+/// the `App/main()` method that the system calls to launch your app.
 /// You can have exactly one entry point among all of your app's files.
 ///
 /// Compose the app's body from instances that conform to the `SwiftUI/Scene`
@@ -2893,11 +3318,15 @@ extension AnyTransition {
 ///         }
 ///     }
 ///
+///     struct MailViewer: View {
+///         var body: some View { /* implement here*/ }
+///     }
+///
 /// You can declare state in your app to share across all of its scenes. For
-/// example, you can use the `SwiftUI/StateObject` attribute to initialize a
+/// example, you can use the `StateObject` attribute to initialize a
 /// data model, and then provide that model on a view input as an
-/// `SwiftUI/ObservedObject` or through the environment as an
-/// `SwiftUI/EnvironmentObject` to scenes in the app:
+/// `ObservedObject` or through the environment as an
+/// `EnvironmentObject` to scenes in the app:
 ///
 ///     @main
 ///     struct Mail: App {
@@ -2906,13 +3335,25 @@ extension AnyTransition {
 ///         var body: some Scene {
 ///             WindowGroup {
 ///                 MailViewer()
-///                     .environmentObject(model) // Passed through the environment.
+///                     .environmentObject(model) //Passed through the environment.
 ///             }
 ///             Settings {
-///                 SettingsView(model: model) // Passed as an observed object.
+///                 SettingsView(model: model) //Passed as an observed object.
 ///             }
 ///         }
 ///     }
+///
+///     struct MailViewer: View {
+///         @EnvironmentObject var model: MailModel
+///         var body: some View { /* implement here*/ }
+///     }
+///
+///     struct SettingsView: View {
+///         @ObservedObject var mdoel: MailModel
+///         var body: some View { /* implement here*/ }
+///     }
+///
+///     class MailModel: ObservableObject { /* implement here*/ }
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol App { }
@@ -2921,7 +3362,7 @@ extension App {
     /// The type of scene representing the content of the app.
     ///
     /// When you create a custom app, Swift infers this type from your
-    /// implementation of the required `SwiftUI/App/body-swift.property`
+    /// implementation of the required `App/body-swift.property`
     /// property.
     associatedtype Body : Scene
 
@@ -2941,7 +3382,7 @@ extension App {
     ///         }
     ///     }
     ///
-    /// Swift infers the app's `SwiftUI/App/Body-swift.associatedtype`
+    /// Swift infers the app's `App/Body-swift.associatedtype`
     /// associated type based on the scene provided by the `body` property.
     @SceneBuilder var body: Self.Body { get }
 
@@ -5109,7 +5550,7 @@ public struct ButtonStyleConfiguration {
     /// ![Ellipse init example](ellipse-example-3.png)
     ///
     /// ```
-    /// `struct ExampleView: View {
+    /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack(spacing: 20) {
     ///             Capsule(style: .circular)
@@ -5140,12 +5581,12 @@ public struct ButtonStyleConfiguration {
     /// ```
     public func path(in r: CGRect) -> Path { }
 
-    /// > The type defining the data to animate.
+    /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// > The type of view representing the body of this view.
+    /// The type of view representing the body of this view.
     ///
-    /// > When you create a custom view, Swift infers this type from your
+    /// When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -5171,7 +5612,7 @@ extension Capsule : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// > The type of the inset shape.
+    /// The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -5504,8 +5945,6 @@ extension Color {
 
     /// Creates a color from an instance of `CGColor`.
     ///
-    /// ![CGColor Init](color-cgcolor-init.png)
-    ///
     ///     struct ExampleView: View {
     ///         let cgColor = CGColor(red: 1.00, green: 0.60, blue: 0.60, alpha: 1.0)
     ///
@@ -5637,12 +6076,12 @@ extension Color {
     /// A color that represents the system or application accent color.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
-    ///                .accentColor(Color.accentColor)
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
+    ///                 .accentColor(Color.accentColor)
+    ///         }
+    ///     }
     ///
     ///
     /// The accent color reflects the broad theme color that can be applied to
@@ -5663,11 +6102,11 @@ extension Color {
     /// A true black color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.black
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.black
+    ///         }
+    ///     }
     ///
     ///
     public static let black: Color
@@ -5675,11 +6114,11 @@ extension Color {
     /// A true white color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.white
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.white
+    ///         }
+    ///     }
     ///
     ///
     public static let white: Color
@@ -5687,11 +6126,11 @@ extension Color {
     /// A gray color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.gray
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.gray
+    ///         }
+    ///     }
     ///
     ///
     public static let gray: Color
@@ -5699,11 +6138,11 @@ extension Color {
     /// A stylized red color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.red
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.red
+    ///         }
+    ///     }
     ///
     ///
     public static let red: Color
@@ -5711,11 +6150,11 @@ extension Color {
     /// A stylized green color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.green
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.green
+    ///         }
+    ///     }
     ///
     ///
     public static let green: Color
@@ -5723,11 +6162,11 @@ extension Color {
     /// A stylized blue color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.blue
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.blue
+    ///         }
+    ///     }
     ///
     ///
     public static let blue: Color
@@ -5735,22 +6174,22 @@ extension Color {
     /// An orange color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.orange
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.orange
+    ///         }
+    ///     }
     ///
     public static let orange: Color
 
     /// A stylized yellow color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.yellow
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.yellow
+    ///         }
+    ///     }
     ///
     ///
     public static let yellow: Color
@@ -5758,11 +6197,11 @@ extension Color {
     /// A pink color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.pink
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.pink
+    ///         }
+    ///     }
     ///
     ///
     public static let pink: Color
@@ -5770,11 +6209,11 @@ extension Color {
     /// A purple color `View`.
     ///
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Color.purple
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Color.purple
+    ///         }
+    ///     }
     ///
     ///
     public static let purple: Color
@@ -5789,12 +6228,12 @@ extension Color {
     ///
     /// Code:
     ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Text("Bananas 🍌🍌")
-    ///                .accentColor(.primary)
-    ///        }
-    ///    }
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .accentColor(.primary)
+    ///         }
+    ///     }
     ///
     /// If you are in light mode, this will be black. If, on the other hand, you
     /// are in dark mode, this will be white. It is automatically updated for
@@ -5870,18 +6309,18 @@ extension Color {
 
 	/// Updates the transparency channel of a `Color`, returning a `Color` back.
 	///
-  ///
-  /// ![Color Opacity](color-opacity.png)
-  ///
-  ///     struct ExampleView: View {
-  ///            var body: some View {
-  ///                ZStack {
-  ///                    Text("Banana 🍌🍌")
-  ///                    Color.pink.opacity(0.80)
-  ///                }
-  ///            }
-  ///        }
-  ///
+    ///
+    /// ![Color Opacity](color-opacity.png)
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             ZStack {
+    ///                 Text("Banana 🍌🍌")
+    ///                 Color.pink.opacity(0.80)
+    ///             }
+    ///         }
+    ///     }
+    ///
 	/// This is different from the `View/opacity(_:)` modifier because it
 	/// returns a `Color` object rather than `some View`.
     public func opacity(_ opacity: Double) -> Color { }
@@ -5911,22 +6350,14 @@ extension Color.RGBColorSpace : Hashable {
 ///
 /// Title types:
 ///
-///
-///
-/// 1. String
-/// 2. Localized string key
-/// 3. View
-///
-///
+/// 1. `String`
+/// 2. ``LocalizedStringKey``
+/// 3. ``View``
 ///
 /// Binding types:
 ///
-///
-///
 /// 1. ``CGColor``
 /// 2. ``Color``
-///
-///
 ///
 /// You use `ColorPicker` by embedding it inside a view hierarchy and
 /// initializing it with a title string and a `Binding` to a `Color`:
@@ -10271,7 +10702,7 @@ extension Edge : RawRepresentable {
 ///
 ///
 /// 1. ``View/listRowInsets(_:)``
-/// 2. ``View/padding(_:)``
+/// 2. ``View/padding(_:)-9f6b7``
 /// 3. ``Image/resizable(capInsets:resizingMode:)``
 ///
 ///
@@ -22152,7 +22583,7 @@ extension ListStyle {
 ///
 /// You can also create a localized string key from a string literal,
 /// but you must specify the type explicitly or else it will be
-/// interpreted as a ``String:
+/// interpreted as a ``String``:
 ///
 ///     let hello1 = "Hello" //Type String
 ///     let hello2: LocalizedStringKey = "Hello" //Type LocalizedStringKey
@@ -22168,6 +22599,7 @@ extension ListStyle {
 ///             Button(text) { }
 ///             Text(text)
 ///         }
+///     }
 ///
 /// Also, since SwiftUI is localization-first, if you pass a string literal
 /// to these initializers, they will be interpreted as localized string keys!
@@ -22882,9 +23314,9 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 
 /// A menu-formatted picker style.
 ///
-/// > `MenuPickerStyle` is picker style that presents the options as a menu when the user presses a button, or as a submenu when nested within a larger menu.
+/// `MenuPickerStyle` is picker style that presents the options as a menu when the user presses a button, or as a submenu when nested within a larger menu.
 ///
-/// > Use this style when there are more than five options. Consider using `InlinePickerStyle` when there are fewer than five options.
+/// Use this style when there are more than five options. Consider using `InlinePickerStyle` when there are fewer than five options.
 ///
 /// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
 ///
@@ -22918,7 +23350,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
-///         switch favoriteFruit{
+///         switch favoriteFruit {
 ///         case .apple:
 ///             return "Apple 🍎🍎"
 ///         case .banana:
@@ -22938,7 +23370,8 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///                 .tag(MyFruit.apple)
 ///             Text("Peach 🍑🍑")
 ///                 .tag(MyFruit.peach)
-///         }.pickerStyle(MenuPickerStyle())
+///         }
+///         .pickerStyle(MenuPickerStyle())
 ///     }
 /// }
 /// ```
@@ -29743,15 +30176,11 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 }
 
 /// Defines the shape of a rounded rectangle's corners.
-
-/// This style has two options:
 ///
+/// This rectanular corner style has two options:
 ///
-///
-/// 1. `roundedcornerstyle/circular`
-/// 2. `roundedcornerstyle/circular`
-///
-///
+/// 1. `roundedcornerstyle/circular`: The corners are quarter circles or ovals
+/// 2. `roundedcornerstyle/circular`: The corners are smooth
 ///
 /// These styles have subtle but noticeable differences:
 ///
@@ -30572,7 +31001,7 @@ extension Scene {
     /// If no modifier is set, the Scene will be used if all
     /// other WindowGroups with a modifier evaluate to false.
     ///
-    /// On platforms that only allow a single Window/Scene, this method is
+    /// On platforms that only allow a single `Window`/`Scene`, this method is
     /// ignored.
     ///
     ///     @main
@@ -30581,7 +31010,7 @@ extension Scene {
     ///             WindowGroup {
     ///                 SelectionView()
     ///             }
-    ///             .handlesExternalEvents(matching: ["selection"]
+    ///             .handlesExternalEvents(matching: ["selection"])
     ///         }
     ///     }
     ///
@@ -30592,19 +31021,181 @@ extension Scene {
 
 }
 
-/// A function builder for composing a collection of scenes into a single
-/// composite scene.
+/// A property wrapper that lets you build scenes declaratively.
+///
+/// `SceneBuilder` is used primary in the ``App`` structure in SwiftUI to let you create
+/// your app's scenes by just listing them out in a trailing closure.
+/// It's a **property wrapper** applied to function parameter.
+/// Usually, it's just working behind the scenes, so you don't have to
+/// worry about it.
+///
+/// (A scene builder is just specific type of
+/// [result builder](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html#ID630)
+/// that you can use with `Scene`s. Check out that link to learn
+/// more about using these to write clean code.)
+///
+/// ### Using a `SceneBuilder` as a trailing closure
+///
+/// `SceneBuilder` works behind the scenes of many common SwiftUI
+/// scenes - like ``WindowGroup`` and ``Settings``. For example, here
+/// is the declaration of `Group`'s initializer:
+///
+/// ```
+/// public init(@SceneBuilder content: () -> Content) {
+///     // Implementation here
+/// }
+/// ```
+///
+/// Since that parameter is a `SceneBuilder`, you can easily create
+/// a `Group` by passing it a [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
+/// stacking views:
+///
+/// ```
+/// @main
+/// struct SampleApp: App {
+///     var body: some Scene {
+///         Group {
+///             WindowGroup(id: "a") {
+///                 Text("I'm in the group 😁")
+///             }
+///             WindowGroup(id: "b") {
+///                 Text("Me too 🥂")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ### Using a `SceneBuilder` as a function
+///
+/// You can also use `SceneBuilder` as a function. Just tag your
+/// function with `@SceneBuilder`, and use it just like you would with a
+/// trailing closure:
+///
+/// ```
+/// @main
+/// struct SampleApp: App {
+///     var body: some Scene {
+///         Group(content: contentBuilder)
+///     }
+///
+///     @SceneBuilder
+///     func contentBuilder() -> some Scene {
+///         WindowGroup(id: "a") {
+///             Text("I'm in the group 😁")
+///         }
+///         WindowGroup(id: "b") {
+///             Text("Me too 🥂")
+///         }
+///     }
+/// }
+/// ```
+///
+/// ### Using a `SceneBuilder` in your own `Scene`s
+///
+/// Exactly like `Group`, you can also use `ScebeBuilder`s in your own custom
+/// scenes. Just tag the parameter of your `Scene`'s initializer with
+/// `@SceneBuilder`, and anyone using your scene will be able to easily
+/// pass you views just by listing them.
+///
+/// In the example below, we use this technique to create a special
+/// type of ``Group`` that adds command-P to print bananas to everything.
+/// Note that `SceneBuilder`s
+/// are actually functions, so in order to get the content they contain,
+/// you have to call the function. Below, this is done with `content()`.
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         BananaPrintingGroup {
+///             WindowGroup(id: "a") {
+///                 Text("I print 🍌")
+///             }
+///             WindowGroup(id: "b") {
+///                 Text("Hey same 🍌🍌🍌")
+///             }
+///         }
+///     }
+/// }
+///
+/// struct BananaPrintingGroup<Content>: Scene where Content: Scene {
+///     var scenes: Content
+///
+///     init(@ViewBuilder content: () -> Content) {
+///         self.scenes = content()
+///     }
+///
+///     var body: some View {
+///         Group {
+///             views.commands { PrintCommand() }
+///         }
+///     }
+/// }
+///
+/// struct PrintCommand: Commands {
+///     var body: some Commands {
+///         CommandMenu("Print") {
+///             Button("Print", action: { print("🍌") })
+///                 .keyboardShortcut(KeyboardShortcut(KeyEquivalent("p"), modifiers: [.command]))
+///         }
+///     }
+/// }
+/// ```
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_functionBuilder public struct SceneBuilder {
 
     /// Passes a single scene written as a child scene through unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass one
+    /// scene to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into a format that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get just the one
+    /// scene.
+    ///
+    /// ```
+    /// @main
+    /// struct SampleApp: App {
+    ///     var body: some Scene {
+    ///         Group {
+    ///             WindowGroup {
+    ///                 Text("I am all alone 🙋‍♀️")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<Content>(_ content: Content) -> Content where Content : Scene { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes two scenes written as children scenes through unmodified.
+    /// Passes 2 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass two
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get two
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> some Scene where C0 : Scene, C1 : Scene { }
 
 }
@@ -30612,7 +31203,33 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes three scenes written as children scenes through unmodified.
+    /// Passes 3 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass three
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get three
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene { }
 
 }
@@ -30620,7 +31237,36 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes four scenes written as children scenes through unmodified.
+    /// Passes 4 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass four
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get four
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///             WindowGroup(id: "d") {
+    ///                 Text("Lets go!! 🥳")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene { }
 
 }
@@ -30628,7 +31274,39 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes five scenes written as children scenes through unmodified.
+    /// Passes 5 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass five
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get five
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///             WindowGroup(id: "d") {
+    ///                 Text("Lets go!! 🥳")
+    ///             }
+    ///             WindowGroup(id: "e") {
+    ///                 Text("Where's the food? 🍱")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene { }
 
 }
@@ -30636,7 +31314,42 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes six scenes written as children scenes through unmodified.
+    /// Passes 6 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass six
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get six
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///             WindowGroup(id: "d") {
+    ///                 Text("Lets go!! 🥳")
+    ///             }
+    ///             WindowGroup(id: "e") {
+    ///                 Text("Where's the food? 🍱")
+    ///             }
+    ///             WindowGroup(id: "f") {
+    ///                 Text("I am #6 6️⃣")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene { }
 
 }
@@ -30644,7 +31357,45 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes seven scenes written as children scenes through unmodified.
+    /// Passes 7 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass seven
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get seven
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///             WindowGroup(id: "d") {
+    ///                 Text("Lets go!! 🥳")
+    ///             }
+    ///             WindowGroup(id: "e") {
+    ///                 Text("Where's the food? 🍱")
+    ///             }
+    ///             WindowGroup(id: "f") {
+    ///                 Text("I am #6 6️⃣")
+    ///             }
+    ///             WindowGroup(id: "g") {
+    ///                 Text("This is getting crowded 🕺")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene { }
 
 }
@@ -30652,7 +31403,48 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes eight scenes written as children scenes through unmodified.
+    /// Passes 8 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass eight
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get eight
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///             WindowGroup(id: "d") {
+    ///                 Text("Lets go!! 🥳")
+    ///             }
+    ///             WindowGroup(id: "e") {
+    ///                 Text("Where's the food? 🍱")
+    ///             }
+    ///             WindowGroup(id: "f") {
+    ///                 Text("I am #6 6️⃣")
+    ///             }
+    ///             WindowGroup(id: "g") {
+    ///                 Text("This is getting crowded 🕺")
+    ///             }
+    ///             WindowGroup(id: "h") {
+    ///                 Text("Nearing capacity! 🎊")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene { }
 
 }
@@ -30660,7 +31452,51 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes nine scenes written as children scenes through unmodified.
+    /// Passes 9 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass nine
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get nine
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///             WindowGroup(id: "d") {
+    ///                 Text("Lets go!! 🥳")
+    ///             }
+    ///             WindowGroup(id: "e") {
+    ///                 Text("Where's the food? 🍱")
+    ///             }
+    ///             WindowGroup(id: "f") {
+    ///                 Text("I am #6 6️⃣")
+    ///             }
+    ///             WindowGroup(id: "g") {
+    ///                 Text("This is getting crowded 🕺")
+    ///             }
+    ///             WindowGroup(id: "h") {
+    ///                 Text("Nearing capacity! 🎊")
+    ///             }
+    ///             WindowGroup(id: "i") {
+    ///                 Text("Is this COVID safe? 😷")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene { }
 
 }
@@ -30668,7 +31504,57 @@ extension SceneBuilder {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SceneBuilder {
 
-    /// Passes ten scenes written as children scenes through unmodified.
+    /// Passes 10 scenes unmodified.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass ten
+    /// views to a ``SceneBuilder``. SwiftUI will automatically build
+    /// this into `some Scene` that can be handled by the initializer.
+    ///
+    /// This is the maximum number of scenes that can be passed in a scene
+    /// builder.
+    ///
+    /// For example, in the following piece of code, we get ten
+    /// scenes.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             WindowGroup(id: "a") {
+    ///                 Text("I am on screen 🙋‍♀️")
+    ///             }
+    ///             WindowGroup(id: "b") {
+    ///                 Text("Me too 🥂")
+    ///             }
+    ///             WindowGroup(id: "c") {
+    ///                 Text("What a party 🎉")
+    ///             }
+    ///             WindowGroup(id: "d") {
+    ///                 Text("Lets go!! 🥳")
+    ///             }
+    ///             WindowGroup(id: "e") {
+    ///                 Text("Where's the food? 🍱")
+    ///             }
+    ///             WindowGroup(id: "f") {
+    ///                 Text("I am #6 6️⃣")
+    ///             }
+    ///             WindowGroup(id: "g") {
+    ///                 Text("This is getting crowded 🕺")
+    ///             }
+    ///             WindowGroup(id: "h") {
+    ///                 Text("Nearing capacity! 🎊")
+    ///             }
+    ///             WindowGroup(id: "i") {
+    ///                 Text("Is this COVID safe? 😷")
+    ///             }
+    ///             WindowGroup(id: "j") {
+    ///                 Text("No more scenes!! 🙅")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> some Scene where C0 : Scene, C1 : Scene, C2 : Scene, C3 : Scene, C4 : Scene, C5 : Scene, C6 : Scene, C7 : Scene, C8 : Scene, C9 : Scene { }
 
 }
@@ -30881,7 +31767,7 @@ extension ScenePhase : Hashable {
 /// Here is a simple example using the common property wrapper syntax:
 ///
 ///     struct ContentView: View {
-/// 		@Scenestorage("name") private var name = "Javier"
+/// 		@SceneStorage("name") private var name = "Javier"
 ///
 /// 		var body: some View {
 /// 			TextField(name, text: $name)
@@ -33774,7 +34660,7 @@ extension Stepper where Label == Text {
 /// Use this structure to stroke (add a border to) a ``Shape`` in a customized way.
 ///
 /// - Note: You cannot use a `StrokeStyle` when applying a
-/// ``View/border(_:)`` to a ``View``. Instead, use ``ShapeStyle``.
+/// ``View/border(_:width:)`` to a ``View``. Instead, use ``ShapeStyle``.
 ///
 /// ### Creating a `StrokeStyle`
 ///
@@ -36734,8 +37620,8 @@ public struct ToolbarItemPlacement {
 /// Use a transaction to pass an animation between views in a view hierarchy.
 ///
 /// The root transaction for a state change comes from the binding that changed,
-/// plus any global values set by calling `withTransaction(_:_:)` or
-/// `withAnimation(_:_:)`.
+/// plus any global values set by calling ``withTransaction(_:_:)`` or
+/// ``withAnimation(_:_:)``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Transaction {
 
@@ -36872,38 +37758,32 @@ extension Transaction {
 
 /// A View created from a swift tuple of View values.
 ///
-/// `TupleView` is mainly used with `ViewBuilder`, and so you don't really
+/// `TupleView` is mainly used with `ViewBuilder`, so you don't really
 /// need to worry about it unless you're making your own view builders.
 ///
-/// In the example below, we use this type to create a new kind of `VStack`
-/// that only displays the first 2 views. All other views are ignored.
+/// In the example below, we use this type to create a new kind of `View`
+/// that only displays the first view it is passed. The second view is ignored.
 /// Kind of useless? Yes. Instructive? You tell me.
 ///
-///     struct StackedView: View {
+///     struct ContentView: View {
 ///         var body: some View {
-///             First2VStack {
+///             FirstView {
 ///                 Text("I am first 🥇")
-///                 Text("Second is the best 2️⃣")
 ///                 Text("Hey stop ignoring me ☹️")
 ///             }
 ///         }
 ///     }
 ///
-///     struct First2VStack<First: View, Second: View>: View {
+///     struct FirstView<First: View, Second: View>: View {
 ///         let first: First
-///         let second: Second
 ///
 ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
 ///             let views = content().value
 ///             first = views.0
-///             second = views.1
 ///         }
 ///
 ///         var body: some View {
-///             HStack {
-///                 first
-///                 second
-///             }
+///             first
 ///         }
 ///     }
 ///
@@ -36917,33 +37797,27 @@ extension Transaction {
     ///
     /// See how in the example below, we extract the value parameter from
     /// the tuple view returned by the view builder. This allows us to
-    /// take the first and second elements of the type from the tuple view.
+    /// take the first element of the type from the tuple view.
     ///
-    ///     struct StackedView: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
-    ///             First2VStack {
+    ///             FirstView {
     ///                 Text("I am first 🥇")
-    ///                 Text("Second is the best 2️⃣")
     ///                 Text("Hey stop ignoring me ☹️")
     ///             }
     ///         }
     ///     }
     ///
-    ///     struct First2VStack<First: View, Second: View>: View {
+    ///     struct FirstView<First: View, Second: View>: View {
     ///         let first: First
-    ///         let second: Second
     ///
     ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
     ///             let views = content().value
     ///             first = views.0
-    ///             second = views.1
     ///         }
     ///
     ///         var body: some View {
-    ///             HStack {
-    ///                 first
-    ///                 second
-    ///             }
+    ///             first
     ///         }
     ///     }
     ///
@@ -36958,31 +37832,25 @@ extension Transaction {
     ///
     /// See below for how to extract a tuple view from a view builder.
     ///
-    ///     struct StackedView: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
-    ///             First2VStack {
+    ///             FirstView {
     ///                 Text("I am first 🥇")
-    ///                 Text("Second is the best 2️⃣")
     ///                 Text("Hey stop ignoring me ☹️")
     ///             }
     ///         }
     ///     }
     ///
-    ///     struct First2VStack<First: View, Second: View>: View {
+    ///     struct FirstView<First: View, Second: View>: View {
     ///         let first: First
-    ///         let second: Second
     ///
     ///         init(@ViewBuilder content: () -> TupleView<(First, Second)>) {
     ///             let views = content().value
     ///             first = views.0
-    ///             second = views.1
     ///         }
     ///
     ///         var body: some View {
-    ///             HStack {
-    ///                 first
-    ///                 second
-    ///             }
+    ///             first
     ///         }
     ///     }
     ///
@@ -37336,7 +38204,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public protocol UIViewControllerRepresentable : View where Self.Body == Never{ }
+public protocol UIViewControllerRepresentable : View where Self.Body == Never { }
 extension UIViewControllerRepresentable : View where Self.Body == Never {
 
     /// The type of view controller to present.
@@ -43487,9 +44355,12 @@ extension View {
 
     /// A view modifier that adds an action to perform when this view recognizes a tap gesture.
     ///
-    /// Do not use this modifier in place of ``Button``, ``NavigationLink``,
+    /// Use this modifier as a shorthand for performing an function
+    /// when a ``TapGesture`` is sensed on a ``View.
+    ///
+    /// **Do not use** this modifier in place of ``Button``, ``NavigationLink``,
     /// or other purpose-built controls for acting on tap gestures. Among
-    /// other benefits, those controls dim slightly when they are tapped,
+    /// other benefits, those controls *dim slightly* when they are tapped,
     /// while applying this modifier will not add this effect.
     ///
     /// ```
@@ -45988,6 +46859,11 @@ extension View {
 /// worry about it. But, you can also define your own functions
 /// that are view builders, and also include them in your own custom views.
 ///
+/// (A view builder is just specific type of
+/// [result builder](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html#ID630)
+/// that you can use with `View`s. Check out that link to learn
+/// more about using these to write clean code.)
+///
 /// ### Using a `ViewBuilder` as a trailing closure
 ///
 /// `ViewBuilder` works behind the scenes of many common SwiftUI
@@ -46001,7 +46877,8 @@ extension View {
 /// ```
 ///
 /// Since that last parameter is a `ViewBuilder`, you can easily create
-/// a `Group` by passing it a trailing closure stacking views:
+/// a `Group` by passing it a [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
+/// stacking views:
 ///
 /// ```
 /// struct ContentView: View {
@@ -46062,7 +46939,7 @@ extension View {
 ///     init(@ViewBuilder content: () -> Content) {
 ///         self.views = content()
 ///     }
-///     
+///
 ///     var body: some View {
 ///         Group {
 ///             views.foregroundColor(.green)
@@ -46075,12 +46952,44 @@ extension View {
 @_functionBuilder public struct ViewBuilder {
 
     /// Builds an empty view from a block containing no statements.
+    ///
+    /// Don't call this function directly
+    /// This works behind the scenes whenever you pass no
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// an ``EmptyView`` when you pass no parameters.
+    ///
+    /// For example, in the following piece of code, we get nothing
+    /// on screen. It still builds and runs though, since it interprets no
+    /// views as an ``EmptyView``.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group { }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock() -> EmptyView { }
 
     /// Passes a single view written as a child view through unmodified.
     ///
-    /// An example of a single view written as a child view is
-    /// `{ Text("Hello") }`.
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass one
+    /// view to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a format that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get just the one
+    /// view on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am all alone 🙋‍♀️")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<Content>(_ content: Content) -> Content where Content : View { }
 }
 
@@ -46090,14 +46999,85 @@ extension ViewBuilder {
     /// Provides support for “if” statements in multi-statement closures,
     /// producing an optional view that is visible only when the condition
     /// evaluates to `true`.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass an if statement
+    /// to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a format that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get the one
+    /// view on screen whenever `showView` is `true`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var showView = true
+    ///
+    ///     var body: some View {
+    ///         Group {
+    ///             if showView {
+    ///                 Text("Show me! 🙋‍♀️")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildIf<Content>(_ content: Content?) -> Content? where Content : View { }
 
     /// Provides support for "if" statements in multi-statement closures,
     /// producing conditional content for the "then" branch.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass an if-else statement
+    /// to a ``ViewBuilder``, and the condition is `true`.
+    /// SwiftUI will automatically build
+    /// this into a format that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get the one
+    /// view on screen whenever `showView` is `true`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var showView = true
+    ///
+    ///     var body: some View {
+    ///         Group {
+    ///             if showView {
+    ///                 Text("I am on screen! 🙋‍♀️")
+    ///             } else {
+    ///                 Text("Hey why aren't you showing me ☁️")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
 
     /// Provides support for "if-else" statements in multi-statement closures,
     /// producing conditional content for the "else" branch.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass an if-else statement
+    /// to a ``ViewBuilder``, and the condition is `false`.
+    /// SwiftUI will automatically build
+    /// this into a format that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get the one
+    /// view on screen whenever `showView` is `false`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var showView = false
+    ///
+    ///     var body: some View {
+    ///         Group {
+    ///             if showView {
+    ///                 Text("Hey why aren't you showing me ☁️")
+    ///             } else {
+    ///                 Text("I am on screen! 🙋‍♀️")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
 }
 
@@ -46107,6 +47087,29 @@ extension ViewBuilder {
     /// Provides support for "if" statements with `#available()` clauses in
     /// multi-statement closures, producing conditional content for the "then"
     /// branch, i.e. the conditionally-available branch.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass a `#if` statement
+    /// to a ``ViewBuilder``, and the condition is `true`.
+    /// SwiftUI will automatically build
+    /// this into a format that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get the one
+    /// view on screen whenever we are running iOS.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var showView = false
+    ///
+    ///     var body: some View {
+    ///         Group {
+    ///             #if os(iOS)
+    ///                 Text("I am on screen! 🙋‍♀️")
+    ///             #endif
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildLimitedAvailability<Content>(_ content: Content) -> AnyView where Content : View { }
 }
 
@@ -46114,6 +47117,25 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 2 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass two
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get two
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> TupleView<(C0, C1)> where C0 : View, C1 : View { }
 }
 
@@ -46121,6 +47143,26 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 3 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass three
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get three
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleView<(C0, C1, C2)> where C0 : View, C1 : View, C2 : View { }
 }
 
@@ -46128,6 +47170,27 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 4 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass four
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get four
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///             Text("Lets go!! 🥳")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleView<(C0, C1, C2, C3)> where C0 : View, C1 : View, C2 : View, C3 : View { }
 }
 
@@ -46135,6 +47198,28 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 5 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass five
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get five
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///             Text("Lets go!! 🥳")
+    ///             Text("Where's the food? 🍱")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleView<(C0, C1, C2, C3, C4)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View { }
 }
 
@@ -46142,6 +47227,29 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 6 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass six
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get six
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///             Text("Lets go!! 🥳")
+    ///             Text("Where's the food? 🍱")
+    ///             Text("I am #6 6️⃣")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleView<(C0, C1, C2, C3, C4, C5)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View { }
 }
 
@@ -46149,6 +47257,30 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 7 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass seven
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get seven
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///             Text("Lets go!! 🥳")
+    ///             Text("Where's the food? 🍱")
+    ///             Text("I am #6 6️⃣")
+    ///             Text("This is getting crowded 🕺")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleView<(C0, C1, C2, C3, C4, C5, C6)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View { }
 }
 
@@ -46156,6 +47288,31 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 8 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass eight
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get eight
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///             Text("Lets go!! 🥳")
+    ///             Text("Where's the food? 🍱")
+    ///             Text("I am #6 6️⃣")
+    ///             Text("This is getting crowded 🕺")
+    ///             Text("Nearing capacity! 🎊")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View { }
 }
 
@@ -46163,6 +47320,32 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 9 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass nine
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// For example, in the following piece of code, we get nine
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///             Text("Lets go!! 🥳")
+    ///             Text("Where's the food? 🍱")
+    ///             Text("I am #6 6️⃣")
+    ///             Text("This is getting crowded 🕺")
+    ///             Text("Nearing capacity! 🎊")
+    ///             Text("Is this COVID safe? 😷")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View { }
 }
 
@@ -46170,6 +47353,36 @@ extension ViewBuilder {
 extension ViewBuilder {
 
 	/// Builds a tuple view for display from 10 views in a view builder.
+    ///
+    /// Don't call this function directly.
+    /// This works behind the scenes whenever you pass ten
+    /// views to a ``ViewBuilder``. SwiftUI will automatically build
+    /// this into a ``TupleView`` that can be handled by the initializer.
+    ///
+    /// This is the maximum number of views that can be passed in a view
+    /// builder.
+    ///
+    /// For example, in the following piece of code, we get ten
+    /// views on screen.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Group {
+    ///             Text("I am on screen 🙋‍♀️")
+    ///             Text("Me too 🥂")
+    ///             Text("What a party 🎉")
+    ///             Text("Lets go!! 🥳")
+    ///             Text("Where's the food? 🍱")
+    ///             Text("I am #6 6️⃣")
+    ///             Text("This is getting crowded 🕺")
+    ///             Text("Nearing capacity! 🎊")
+    ///             Text("Is this COVID safe? 😷")
+    ///             Text("No more views!! 🙅")
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View, C9 : View { }
 }
 
