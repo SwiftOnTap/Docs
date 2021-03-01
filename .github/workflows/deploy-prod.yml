@@ -1,4 +1,4 @@
-name: Push to S3 bucket
+name: Push to prod S3 bucket
 
 on:
   push:
@@ -7,37 +7,21 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy QA
     runs-on: ubuntu-latest
-    env:
-      IGNORED_FILES: ".gitignore,.github/workflows/deploy-prod.yml,"
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} | tr '\n' ',' | sed 's/\(.*\),/\1 /')" >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
 
-    - name: Copy file changes to S3
-      run: |
-        for i in $(echo $CHANGED_FILES | sed "s/,/ /g"); do
-          if ! grep -q "$i," <<< $IGNORED_FILES; then
-            if test -f $i; then
-              if [[ $i == *.swift ]]; then
-                echo "Uploading $i to S3 docs bucket"
-                aws s3 cp $i s3://blossom-documentation
-              elif [[ $i == images/* ]]; then
-                echo "Uploading $i to S3 asset bucket"
-                aws s3 cp $i s3://bananadocs-documentation-assets
-              fi
-            fi
-          fi
-        done
+      - name: Copy files to S3 bucket
+        run: |
+          aws s3 cp SwiftUI.swift s3://blossom-documentation
+          aws s3 cp --recursive images s3://bananadocs-documentation-assets
