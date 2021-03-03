@@ -5697,30 +5697,28 @@ extension Color.RGBColorSpace : Hashable {
 ///
 /// Title types:
 ///
-///
-///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
 ///
-///
-///
 /// Binding types:
-///
-///
 ///
 /// 1. ``CGColor``
 /// 2. ``Color``
 ///
-///
-///
 /// You use `ColorPicker` by embedding it inside a view hierarchy and
 /// initializing it with a title string and a `Binding` to a `Color`:
+///
+/// ![Color Picker](color-picker-vid.gif)
 ///
 ///     struct ColorView: View {
 ///         @State private var color = Color.red
 ///
 ///         var body: some View {
+///             RoundedRectangle(cornerRadius: 10)
+///                 .fill(color)
+///                 .frame(width: 100, height: 100)
+///
 ///             ColorPicker("Choose a color! 🎨", selection: $color)
 ///         }
 ///     }
