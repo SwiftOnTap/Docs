@@ -2370,6 +2370,7 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
 ///
 /// The following example applies the ``AnyTransition/slide`` transition:
 ///
+/// ![imageName](3CDC6987-2030-452C-B46C-FA4D8C883420.png)
 /// ```
 /// struct TransitioningBananaView: View {
 ///     @State var showBanana = true
@@ -3525,6 +3526,7 @@ extension Axis : RawRepresentable {
 /// In the following example, the top circle is always invisible, since
 /// it is filled the same color as the background.
 ///
+/// ![imageName](29971B4E-9955-4E6D-85A1-50450365AA68.png)
 /// ```
 /// struct CircleOnButtomView: View {
 ///     var body: some View {
@@ -6443,6 +6445,7 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 ///
 /// Use this shape primarily with widgets, to generate container-relative
 /// rounded rectangles.
+///
 ///
 /// ```
 /// struct TimeEntryView: View {
@@ -16323,18 +16326,20 @@ public struct IconOnlyLabelStyle : LabelStyle {
 //
 /// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the symbol names easier to find. SF Symbols helps to maintain a consistent look with the iOS ecosystem.
 ///
-/// Xcode 12 brought support for use in Mac apps. Attempting to use `Image(systemNamed:)`` to use an SF Symbol in Xcode 11 causes the error:
-///
-/// `Extraneous argument label ‘systemNamed:’ in call`
-///
-/// This error means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
-///
 /// ### Common Errors
+/// #### Resizing
 /// If your app doesn’t have a file with the image name, you’ll get a useful console message saying:
 ///
 ///  `No image named ‘Your file name’ found in asset catalog for main bundle.`
 ///
 /// If you find images not turning up in your app, you may want to search for this in the console.
+///
+/// #### Xcode 11 Compatability
+/// Xcode 12 brought support for use in Mac apps. Attempting to use `Image(systemNamed:)`` to use an SF Symbol in Xcode 11 causes the error:
+///
+/// `Extraneous argument label ‘systemNamed:’ in call`
+///
+/// This error means that you could not use SF Symbols in any native Mac app or even a Catalyst app, as macOS had no way of displaying them. As of Xcode 12 and macOS 11 Big Sur, you will not get those warnings and can use Image(systemNamed:) in native macOS and Mac Catalyst apps.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Image : Equatable {
 
@@ -26853,7 +26858,213 @@ extension RoundedRectangle : InsettableShape {
     public typealias RawValue = UInt
 }
 
-/// A dynamic property that scales a numeric value.
+/// Scale a float given the system font size.
+///
+/// `ScaledMetric` is a property wrapper that scales a number conforming to the `BinaryFloatingPoint` protocol in accordance with the user's `Dynamic Type` setting.
+///
+/// The purpose of `ScaledMetric` is to allow your app views – not just your fonts – to scale given the user's `Dynamic Type` settings.
+///
+/// `Scaled Metric` can be declared in two ways:
+///
+/// 1. From a `CGFloat`. For example, `@ScaledMetric var scaledHeight: CGFloat = 32`
+/// 2. From a `Font.TextStyle`. For example, `@ScaledMetric(relativeTo: .title) var scaledHeight: CGFloat = 32`
+///
+/// ### Declaring `ScaledMetric` from a float
+/// This code scaled a ``RoundedRectangle`` view given the user's font size. Notice that both `scaledHeight` and `defaultHeight` are `CGFloat`s set to 32.
+///
+/// Given default font settings, this code renders as expected.
+///
+/// ![Scaled Metric](scaledmetric-example-6.png)
+///
+///     struct ExampleView: View {
+///         @ScaledMetric var scaledHeight: CGFloat = 32
+///         var defaultHeight: CGFloat = 32
+///
+///         var body: some View {
+///             VStack {
+///                 Text("Scaled Metric Height \(scaledHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: scaledHeight)
+///
+///                 Text("Default Height \(defaultHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: defaultHeight)
+///             }
+///             .font(.caption)
+///             .foregroundColor(.pink)
+///             .padding()
+///         }
+///     }
+///
+/// However, when the user adjusts the font size:
+///
+/// ![Large Font](scaledmetric-large.png)
+///
+/// The rectangle view changes accordingly while the code stays constant:
+///
+/// ![Large View](scaledmetric-example-5.png)
+///
+///     struct ExampleView: View {
+///         @ScaledMetric var scaledHeight: CGFloat = 32
+///         var defaultHeight: CGFloat = 32
+///
+///         var body: some View {
+///             VStack {
+///                 Text("Scaled Metric Height \(scaledHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: scaledHeight)
+///
+///                 Text("Default Height \(defaultHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: defaultHeight)
+///             }
+///             .font(.caption)
+///             .foregroundColor(.pink)
+///             .padding()
+///         }
+///     }
+///
+/// Similarly, when the user adjusts to a smaller font size:
+///
+/// ![Small Font](scaledmetric-small.png)
+///
+/// The ``RoundedRectangle`` shrinks while the code still has note changed:
+///
+/// ![Small View](scaledmetric-example-4.png)
+///
+///     struct ExampleView: View {
+///         @ScaledMetric var scaledHeight: CGFloat = 32
+///         var defaultHeight: CGFloat = 32
+///
+///         var body: some View {
+///             VStack {
+///                 Text("Scaled Metric Height \(scaledHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: scaledHeight)
+///
+///                 Text("Default Height \(defaultHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: defaultHeight)
+///             }
+///             .font(.caption)
+///             .foregroundColor(.pink)
+///             .padding()
+///         }
+///     }
+///
+///
+/// ### Declaring a `ScaledMetric` from a font
+/// Font sizes do not adjust as a continuous function given the `Dynamic Type` setting. Instead, explicit integer font sizes are declared given the different `Dynamic Type` options. Find these font sizes [here](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/).
+///
+/// Now, assume an element in your view is meant to correspond to an exact text size regardless of a user's `Dynamic Type` settings. This behavior can be achieved by initializing `ScaledMetric` relative to a ``Font/TextStyle``.
+///
+/// Given default font settings, this code renders as expected.
+///
+/// ![Scaled Metric](scaledmetric-example-1.png)
+///
+///     struct ExampleView: View {
+///         @ScaledMetric(relativeTo: .title) var scaledHeight: CGFloat = 32
+///         var defaultHeight: CGFloat = 32
+///
+///         var body: some View {
+///             HStack {
+///                 Text("My Title")
+///                     .font(.title)
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: scaledHeight)
+///                     .foregroundColor(.pink)
+///             }
+///
+///             Text("\(scaledHeight)")
+///         }
+///     }
+///
+/// However, when the user adjusts the font size:
+///
+/// ![Large Font](scaledmetric-large.png)
+///
+/// The view changes accordingly while the code stays constant.
+///
+/// *Note*: The scaled float generated from this font initialier is `36.00`, whereas the scaled float generated from the `CGFloat` was `42.00`.
+///
+/// ![Large View](scaledmetric-example-3.png)
+///
+///     struct ExampleView: View {
+///         @ScaledMetric var scaledHeight: CGFloat = 32
+///         var defaultHeight: CGFloat = 32
+///
+///         var body: some View {
+///             VStack {
+///                 Text("Scaled Metric Height \(scaledHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: scaledHeight)
+///
+///                 Text("Default Height \(defaultHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: defaultHeight)
+///             }
+///             .font(.caption)
+///             .foregroundColor(.pink)
+///             .padding()
+///         }
+///     }
+///
+/// Similarly, when the user adjusts to a smaller font size:
+///
+/// ![Small Font](scaledmetric-small.png)
+///
+/// The ``RoundedRectangle`` shrinks while the code still has note changed.
+///
+/// *Note*: The scaled float generated from this font initialier is `31.00`, whereas the scaled float generated from the `CGFloat` was `27.50`.
+///
+/// ![Small View](scaledmetric-example-2.png)
+///
+///     struct ExampleView: View {
+///         @ScaledMetric var scaledHeight: CGFloat = 32
+///         var defaultHeight: CGFloat = 32
+///
+///         var body: some View {
+///             VStack {
+///                 Text("Scaled Metric Height \(scaledHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: scaledHeight)
+///
+///                 Text("Default Height \(defaultHeight)")
+///                 RoundedRectangle(cornerRadius: 10)
+///                     .frame(height: defaultHeight)
+///             }
+///             .font(.caption)
+///             .foregroundColor(.pink)
+///             .padding()
+///         }
+///     }
+///
+/// ### More
+/// By default, font sizes scale with `Dynamic Types`. However, if your app declares a custom font size, it will not scale by default.
+///
+/// For example, the follow view will not scale when the user's font is set to large:
+///
+///     struct ContentView: View {
+///         var body: some View {
+///             Text("Banana 🍌")
+///                 .font(.system(size: 34, weight: .bold, design: .rounded))
+///         }
+///     }
+///
+/// However, by setting a font size to a scaled value, the text will scale accordingly:
+///
+/// ![Font Example](scaledmetric-example-7.png)
+///
+///     struct ContentView: View {
+///         @ScaledMetric(relativeTo: .largeTitle) var dynamicFontSize: CGFloat = 34
+///
+///         var body: some View {
+///             Text("Banana 🍌")
+///                 .font(.system(size: dynamicFontSize, weight: .bold, design: .rounded))
+///         }
+///     }
+///
+/// Learn more about `Dynamic Type` on Apple's ["Human Interface Guidlines" typography page](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/).
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @propertyWrapper public struct ScaledMetric<Value> : DynamicProperty where Value : BinaryFloatingPoint {
 
