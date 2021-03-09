@@ -1038,7 +1038,7 @@ public struct Alert {
     /// component.
     ///
     /// This is usually specified indirectly using one of the pre-defined
-    /// alignments or through the ``Alignment/init(horizontal:vertical)``
+    /// alignments or through the ``Alignment/init(horizontal:vertical:)``
     /// initializer. However, you can also specify it directly:
     ///
     /// ```
@@ -15663,13 +15663,19 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
 
     /// Creates a view from data that conforms to `Identifiable`.
     /// [foreach-identifiable-content ->]
-    /// If your data does not conform to identifiable, use `ForEach/init(_:id:content)`.
+    /// If your data does not conform to identifiable, use
+    /// `ForEach/init(_:id:content:)`.
     ///
-    /// Note: if your data does not conform to identifiable you will receive the following error:
+    /// Note: if your data does not conform to identifiable you will receive
+    /// the following error:
     ///
-    /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform to 'Identifiable`
+    /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform
+    /// to 'Identifiable`
     ///
-    /// An array of primitive types, such as strings & ints, will throw this error. Identify these items with `id: \.self` – because they themselves can be used as the identifiable object. See more in `ForEach/init(_:id:content)`.
+    /// An array of primitive types, such as strings & ints, will throw this
+    /// error. Identify these items with `id: \.self` – because they themselves
+    /// can be used as the identifiable object. See more in
+    /// `ForEach/init(_:id:content:)`.
     ///
     /// ```
     /// struct ExampleView: View {
@@ -15743,7 +15749,7 @@ extension ForEach where Content : View {
     ///     ]
     ///
     ///     var body: some View {
-    ///         ForEach(myFruits, id:/\.emoji) { fruit in
+    ///         ForEach(myFruits, id: \.emoji) { fruit in
     ///             HStack {
     ///                 Text(fruit.name + fruit.emoji)
     ///             }
@@ -15770,7 +15776,7 @@ extension ForEach where Content : View {
     ///             newFruit()
     ///         }
     ///
-    ///         ForEach(myFruits, id:\.self) { fruit in
+    ///         ForEach(myFruits, id: \.self) { fruit in
     ///             HStack {
     ///                 Text(fruit)
     ///             }
@@ -26402,9 +26408,12 @@ extension Path {
 ///
 ///     var body: some View {
 ///         Picker("Flavor", selection: $selectedFlavor) {
-///             Text("Chocolate 🍫").tag(Flavor.chocolate)
-///             Text("Vanilla 🍦").tag(Flavor.vanilla)
-///             Text("Strawberry 🍓").tag(Flavor.strawberry)
+///             Text("Chocolate 🍫")
+///                 .tag(Flavor.chocolate)
+///             Text("Vanilla 🍦")
+///                 .tag(Flavor.vanilla)
+///             Text("Strawberry 🍓")
+///                 .tag(Flavor.strawberry)
 ///         }
 ///         Text("Selected flavor: \(selectedFlavor.rawValue)")
 ///     }
@@ -26504,8 +26513,10 @@ extension Path {
 ///     @State private var selectedFlavor = Flavor.chocolate
 ///     var body: some View {
 ///         Picker("Flavor", selection: $selectedFlavor) {
-///             Text("chocolate").tag(Flavor.chocolate)
-///             Text("vanilla").tag(Flavor.vanilla)
+///             Text("chocolate")
+///                 .tag(Flavor.chocolate)
+///             Text("vanilla")
+///                 .tag(Flavor.vanilla)
 ///         }
 ///         .pickerStyle(SegmentedPickerStyle())
 ///     }
@@ -28015,7 +28026,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///      }
 ///
-///  To invert the direction of progress in the vertical style, merely apply the `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
+///  To invert the direction of progress in the vertical style, merely apply the `View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
 ///
 ///
 ///      struct ExampleView: View {
@@ -32242,7 +32253,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// By default, a `ScrollView`'s scroll indicator is visible upon user interaction.
 ///
-/// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content)` to hide the scroll indicator(s). For example:
+/// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content:)` to hide the scroll indicator(s). For example:
 ///
 ///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
 ///
@@ -39196,7 +39207,7 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///
 /// See those pages for more on how to construct them.
 ///
-/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-babaf``
 /// view modifier. See that page for more on adding alignment
 /// guides to views.
 ///
