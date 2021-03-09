@@ -296,7 +296,7 @@ extension AccessibilityChildBehavior {
 
 /// Pair related views such that one view serves as the view content, and one view serves as the view label.
 ///
-/// `AccessibilityLabeledPairRole` is almost always used in conjunction with the `View/accessibilityLabeledPair(role:id:in:)` modifier.
+/// ``AccessibilityLabeledPairRole`` is almost always used in conjunction with the ``View/accessibilityLabeledPair(role:id:in:)`` modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public enum AccessibilityLabeledPairRole {
 
@@ -670,6 +670,78 @@ public struct AccessibilityTraits : SetAlgebra {
 }
 
 /// A storage type for an action sheet presentation.
+///
+/// Use this structure with the `View/Actionsheet(item:content:)` and
+/// `View/actionsheet(ispresented:content:)` view modifiers to present
+/// the user with an **action sheet**.
+///
+/// ### What is an action sheet?
+///
+/// An `ActionSheet` is a modal alert that appears towards the bottom
+/// of a user's screen. It provides **two or more** options
+/// to the user based on the app context.
+///
+/// An `ActionSheet` is similar to an `Alert`, but it appears at the bottom
+/// of the screen instead of in the middle. To let the user respond
+/// to the **state** of the app, use an `Alert` instead.
+///
+/// See Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/)
+/// for more about when to use action sheets.
+///
+/// ### Creating an action sheet
+///
+/// Creating an action sheet involves 3 components:
+/// 1. A **title**, which is in bold font at the top of the sheet
+/// 2. A **message**, which is optional, and appears under the title
+/// 3. An **array of buttons**, which determine what the user can do from the
+/// action sheet.
+///
+/// The buttons can take 3 styles: `Alert/Button/cancel(_:action:)`
+/// `Alert/Button/default(_:action:)`, and
+/// `Alert/Button/destructive(_:action:)`.
+/// Check out `Alert/Button` for the full overview of action sheet buttons,
+/// the available styles, and how to create them.
+///
+/// ### Using an action sheet
+///
+/// Once you have an action sheet, it is simple to use. Just pass
+/// it as a trailing closure to the `View/actionsheet(ispresented:content:)`
+/// view modifier. The action sheet will be presented whenever
+/// the `isPresented` **binding** parameter is `true`.
+///
+/// The following example passes an `ActionSheet` to this view modifier,
+/// and illustrates the 3 different types of
+/// action sheet buttons.
+///
+/// ```
+/// struct ContentView: View {
+///     @State private var showActionSheet = false
+///
+///     var body: some View {
+///         Button("Eat 🍌") {
+///             showActionSheet = true
+///         }
+///         .actionSheet(isPresented: $showActionSheet) {
+///             ActionSheet(
+///                 title: Text("Food alert!"),
+///                 message: Text("You have made a selection"),
+///                 buttons: [
+///                     .cancel(),
+///                     .destructive(Text("Change to 🍑") { /* override */ },
+///                     .default(Text("Confirm")) { /* confirm */ }
+///                 ]
+///             )
+///         }
+///     }
+/// }
+/// ```
+///
+/// Notes:
+/// - The system can override your button order. In the example above,
+/// the cancel button is displayed last, because that is customary.
+/// - If your action sheet requires a parameter, you can pass one in by
+/// using the `View/actionSheet(item:content:)` view modifier instead.
+///
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 public struct ActionSheet {
@@ -687,7 +759,7 @@ public struct ActionSheet {
 /// between one and two action buttons. Alerts often convey important information
 /// about the state of the app and typically request feedback from the user. While the
 /// styling of alerts is semi-fixed, there are three available styles for the buttons to choose from:
-/// `.default`, `.destructive`, and `.cancel`. To actually present an alert, see
+/// ``Alert/Button/default(_:action:)``, ``Alert/Button/destructive(_:action:)``, and ``Alert/Button/cancel(_:action:)``. To actually present an alert, see
 /// ``View/alert(_:_:)``.
 ///
 /// An alert can be created with one of two initializers, depending on if one button
@@ -919,7 +991,7 @@ public struct Alert {
 ///
 ///
 /// In addition, you can also create your own alignments from the
-/// ``Alignment/init(horizontal:vertical)`` initializer.
+/// ``Alignment/init(horizontal:vertical:)`` initializer.
 ///
 /// See the example below.
 ///
@@ -3421,8 +3493,8 @@ extension App {
 /// Use this property wrapper to read to and write from permanent storage
 /// on the user's device, also known as "UserDefaults".
 ///
-/// Check out ``Scene/defaultAppStorage()`` for ``Scene``s and
-/// ``View/defaultAppStorage()`` for ``View``s to learn more about
+/// Check out ``Scene/defaultAppStorage(_:)`` for ``Scene``s and
+/// ``View/defaultAppStorage(_:)`` for ``View``s to learn more about
 /// setting the default app storage location for a view.
 ///
 ///
@@ -5166,7 +5238,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///                 ForEach(items) { item in
 ///                     Text(item.title)
 ///                 }
-///                 Button("Add Item", action: { /*add item*/ } )
+///                 Button("Add Item", action: { /* add item */ } )
 ///             }
 ///         }
 ///     }
@@ -5178,9 +5250,9 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         var body: some View {
 ///             Text("Press and hold for copy-paste options")
 ///                 .contextMenu {
-///                     Button("Cut", action: { /*cut*/ } )
-///                     Button("Copy", action: { /*copy*/ } )
-///                     Button("Paste", action: { /*paste*/ } )
+///                     Button("Cut", action: { /* cut */ } )
+///                     Button("Copy", action: { /* copy */ } )
+///                     Button("Paste", action: { /* paste */ } )
 ///                 }
 ///         }
 ///     }
@@ -5195,13 +5267,13 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// conforms to the `ButtonStyle` protocol. To customize both appearance and
 /// interaction behavior, create a style that conforms to the
 /// `PrimitiveButtonStyle` protocol. To set a specific style for all button
-/// instances within a view, use the `View/buttonStyle(_:)-66fbx` modifier:
+/// instances within a view, use the `View/buttonStyle(_:)-3c92f` modifier:
 ///
 ///     struct ButtonView: View {
 ///         var body: some View {
 ///             HStack {
-///                 Button("Sign In", action: { /*sign in*/ } )
-///                 Button("Register", action: { /*register*/ } )
+///                 Button("Sign In", action: { /* sign in */ } )
+///                 Button("Register", action: { /* register */ } )
 ///             }
 ///             .buttonStyle(BorderedButtonStyle())
 ///         }
@@ -5214,7 +5286,7 @@ public struct Button<Label> : View where Label : View {
     ///
     ///     struct SignInView: View {
     ///         var body: some View {
-    ///             Button(action: { /*sign the user in*/ }) {
+    ///             Button(action: { /* sign the user in */ }) {
     ///                 Text("Sign In")
     ///             }
     ///         }
@@ -5226,7 +5298,7 @@ public struct Button<Label> : View where Label : View {
     ///     struct SignInView: View {
     ///         var body: some View {
     ///             Button {
-    ///                 /*sign the user in*/
+    ///                 /* sign the user in */
     ///             } label: {
     ///                 Text("Sign In")
     ///             }
@@ -5497,8 +5569,8 @@ public struct ButtonStyleConfiguration {
 /// corner radius is half the length of the retangle's smallest edge. In effect,
 /// it creates a "pill" shape.
 ///
-/// To define a Capsule with a specific color and frame, use the `Shape/fill()`
-/// and `View/frame(width:height:)` modifiers:
+/// To define a Capsule with a specific color and frame, use the ``Shape/fill(style:)``
+/// and ``View/frame(width:height:alignment:)`` modifiers:
 ///
 /// ![Capsule fill and frame example](capsule-example-1.png)
 ///
@@ -5512,7 +5584,7 @@ public struct ButtonStyleConfiguration {
 /// }
 /// ```
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// To add a border, use the `Shape/stroke(_:lineWidth:)` modifier, and use
 /// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the
 /// border width to keep the Capsule at its original size:
 ///
@@ -12678,25 +12750,25 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 
 /// The protocol used to serialize a document to and from a file.
 ///
-/// Conform to this protocol to move a document between its file representation and its "swift-usable"
-/// representation.
+/// Conform to this protocol to move a document between its **file representation** and its **"swift-usable"
+/// representation**.
 ///
-/// This protocol is very similar to ``ReferenceFileDocument``, with the difference being whether the data
+/// This protocol is very similar to `ReferenceFileDocument, with the difference being whether the data
 /// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
-/// - `struct` --> ``FileDocument``
+/// - `struct` --> `FileDocument`
 /// - `class` --> `ReferenceFileDocument`
 ///
 /// Don't worry about thread safety when using `ReferenceFileDocument`, since
 /// deserialization and serialization are done on a background thread.
 ///
 /// - Note: If your app will have documents, it very likely will be easiest to begin from Apple's own
-/// Document app template. To do this, go to *File > New > Project*, and then use *Document App*.
+/// Document app template. To do this, go to `File > New > Project`, and then use `Document App`.
 ///
 /// ### Example
 ///
 /// #### App structure
 ///
-/// To begin, update the scene definition to use ``DocumentGroup``.
+/// To begin, update the scene definition to use `DocumentGroup`.
 ///
 ///     import SwiftUI
 ///
@@ -12712,9 +12784,9 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 /// #### FileDocument conformance
 ///
 /// Next, conform to the `FileDocument` protocol by implementing these properties:
-/// - A: ``FileDocument/readableContentTypes``
-/// - B: ``FileDocument/init(configuration:)``
-/// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+/// - A: `FileDocument/readableContentTypes`
+/// - B: `FileDocument/init(configuration:)`
+/// - C: `FileDocument/fileWrapper(snapshot:configuration:)`
 ///
 ///     import SwiftUI
 ///     import UniformTypeIdentifiers
@@ -12746,28 +12818,28 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 ///         }
 ///     }
 ///
-/// Note that in this example, we create a custom ``FileDocument/readableContentTypes`` called `UTType.exampleText`.
+/// Note that in this example, we create a custom `FileDocument/readableContentTypes` called `UTType.exampleText`.
 ///
 /// #### View implementation
 ///
-/// Finally, use the ``TextEditor`` view to edit the document file.
+/// Finally, use the `TextEditor` view to edit the document file.
 ///
-///     import SwiftUI
+/// ```
+/// import SwiftUI
 ///
-///     struct ExampleView: View {
-///         @Binding var document: ExampleDocument
+/// struct ExampleView: View {
+///     @Binding var document: ExampleDocument
 ///
-///         var body: some View {
-///             TextEditor(text: $document.text)
-///         }
+///     var body: some View {
+///         TextEditor(text: $document.text)
 ///     }
+/// }
+/// ```
 ///
 /// #### UTType settings
 ///
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
-///
-///
 ///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
@@ -12778,18 +12850,18 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
 /// 8. Change the **Types** (top right) to *com.example.plain-text*.
 ///
+/// Lastly, in your **ExampleDocument.swift** file, extend `UTType`:
 ///
+/// ```
+/// import SwiftUI
+/// import UniformTypeIdentifiers
 ///
-/// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
-///
-///     import SwiftUI
-///     import UniformTypeIdentifiers
-///
-///     extension UTType {
-///         static var exampleText: UTType {
-///             UTType(importedAs: "com.example.plain-text")
-///         }
+/// extension UTType {
+///     static var exampleText: UTType {
+///         UTType(importedAs: "com.example.plain-text")
 ///     }
+/// }
+/// ```
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -18829,13 +18901,13 @@ extension Image {
 
     /// The scale to apply to vector images relative to text.
     ///
-    /// Use this enumeration with the ``Image/imageScale(_:)``
+    /// Use this enumeration with the ``View/imageScale(_:)``
     /// view modifier to scale an image up or down.
     ///
     /// This is most often used with system images, which can be both
     /// scaled alongside the text using ``View/font(_:)`` view modifier
     /// and also using
-    /// the ``Image/imageScale(_:)`` image modifier.
+    /// the ``View/imageScale(_:)`` image modifier.
     ///
     /// There are 3 types of ``Image/Scale``s:
     ///
@@ -18864,13 +18936,13 @@ extension Image {
 
     	/// The small image scale size.
     	///
-        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// Use this enumeration case with the ``View/imageScale(_:)``
         /// view modifier to scale an image down.
         ///
         /// This is most often used with system images, which can be both
         /// scaled alongside the text using ``View/font(_:)`` view modifier
         /// and also using
-        /// the ``Image/imageScale(_:)`` image modifier.
+        /// the ``View/imageScale(_:)`` image modifier.
         ///
         /// ```
         /// struct ContentView: View {
@@ -18890,13 +18962,13 @@ extension Image {
 
         /// The medium image scale size.
         ///
-        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// Use this enumeration case with the ``View/imageScale(_:)``
         /// view modifier to scale an image.
         ///
         /// This is most often used with system images, which can be both
         /// scaled alongside the text using ``View/font(_:)`` view modifier
         /// and also using
-        /// the ``Image/imageScale(_:)`` image modifier.
+        /// the ``View/imageScale(_:)`` image modifier.
         ///
         /// ```
         /// struct ContentView: View {
@@ -18916,13 +18988,13 @@ extension Image {
 
         /// The large image scale size.
         ///
-        /// Use this enumeration case with the ``Image/imageScale(_:)``
+        /// Use this enumeration case with the ``View/imageScale(_:)``
         /// view modifier to scale an image up.
         ///
         /// This is most often used with system images, which can be both
         /// scaled alongside the text using ``View/font(_:)`` view modifier
         /// and also using
-        /// the ``Image/imageScale(_:)`` image modifier.
+        /// the ``View/imageScale(_:)`` image modifier.
         ///
         /// ```
         /// struct ContentView: View {
@@ -18996,16 +19068,18 @@ extension Image {
     ///
     /// There are 4 cases of image interpolation:
     ///
-    /// 1. ``Interpolation/none``
-    /// 2. ``Interpolation/low``
-    /// 3. ``Interpolation/medium``
-    /// 4. ``Interpolation/hight``
+    /// 1. ``Image/Interpolation/none``
+    /// 2. ``Image/Interpolation/low``
+    /// 3. ``Image/Interpolation/medium``
+    /// 4. ``Image/Interpolation/hight``
     ///
     /// See them compared below.
     ///
     /// To follow along, save the following image as `"bird-small"` in your project.
     ///
     /// ![Bird Small Image](bird-small.png)
+    ///
+    /// ![Bird Image Interpolation](image-interpolation.png)
     ///
     /// ```
     /// struct ContentView: View {
@@ -19983,7 +20057,7 @@ public struct InsetListStyle : ListStyle {
 /// - ``RoundedRectangle``
 ///
 /// Any type conforming to this protocol automatically gets implementations
-/// of the ``InsettableShape/strokeBorder(_:style:antialiased)``
+/// of the ``InsettableShape/strokeBorder(_:style:antialiased:)``
 /// modifier. This allows you to add a border to a shape without increasing
 /// its total size at all.
 ///
@@ -27314,7 +27388,7 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 /// This enumeration has 3 different cases:
 /// 1. ``PreviewLayout/device``: Center the preview in the specified device.
 /// 2. ``PreviewLayout/sizeThatFits``: Fix the preview to the view size.
-/// 3. ``PreviewLayout/fixed(width:height:)``: Center the preview in a fixed
+/// 3. ``PreviewLayout/fixed``: Center the preview in a fixed
 /// size container.
 ///
 /// In the following example, we fit a preview box to the text view.
@@ -27342,7 +27416,7 @@ public enum PreviewLayout {
     ///
     /// Use this case alog with the
     /// ``View/previewLayout(_:)``
-    /// view odifier to change the way a view is displayed in a preview.
+    /// view modifier to change the way a view is displayed in a preview.
     ///
     /// This is the default if no preview layout is specified.
     ///
@@ -41584,9 +41658,9 @@ extension View {
     ///             Button("Eat 🍑") { selection = Emoji(name: "🍑") }
     ///         }
     ///         .actionSheet(item: $selection) { selection in
-    ///             let confirm = ActionSheet.Button.default(Text("Confirm \(selection.name)") { /*action here*/ }
-    ///             let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /*action here*/ }
-    ///             let buttons = [save, cancel]
+    ///             let confirm = ActionSheet.Button.default(Text("Confirm \(selection.name)") { /* action here */ }
+    ///             let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /* action here */ }
+    ///             let buttons = [confirm, cancel]
     ///
     ///             return ActionSheet(title: Text("Food alert!"),
     ///                                message: Text("You have made a selection"),
@@ -41620,7 +41694,7 @@ extension View {
     ///     var body: some View {
     ///         Button("Eat 🍌") { showActionSheet = true }
     ///             .actionSheet(isPresented: $showActionSheet) {
-    ///                 let confirm = ActionSheet.Button.default(Text("Confirm") { /*action here*/ }
+    ///                 let confirm = ActionSheet.Button.default(Text("Confirm")) { /*action here*/ }
     ///                 let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /*action here*/ }
     ///                 let buttons = [save, cancel]
     ///
@@ -48236,7 +48310,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
 ///     }
 ///
 /// Learn more about the properties of each alignment choice via the
-/// `Alignment` struct.
+/// ``Alignment`` struct.
 ///
 /// `ZStack` uses a `ViewBuilder` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
