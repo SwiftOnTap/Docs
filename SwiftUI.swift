@@ -1406,13 +1406,18 @@ extension Anchor.Source {
 /// `Angles` are commonly used with the `View/rotationEffect(_:anchor:)`
 /// and similar modifiers:
 ///
+/// ![Rectangle with rotation by angle](angle-rotation.png)
+///
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
-///         VStack {
+///         VStack(spacing: 50) {
 ///             Rectangle()
+///                 .frame(width: 200, height: 100)
 ///                 .rotationEffect(Angle(degrees: 15))
+///                 .border(Color.orange)
 ///             Rectangle()
+///                 .frame(width: 200, height: 100)
 ///                 .rotationEffect(.degrees(15))
 ///         }
 ///     }
