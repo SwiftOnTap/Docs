@@ -5192,6 +5192,8 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// the button. The label is a view that describes the button's action, for
 /// example, by showing text such as Cancel or an icon such as a back arrow.
 ///
+/// ![Button with sign in text](button-signin.png)
+///
 ///     struct SignInView: View {
 ///         var body: some View {
 ///             Button(action: { /*sign the user in*/ }) {
