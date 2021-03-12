@@ -30343,7 +30343,7 @@ extension RoundedCornerStyle : Hashable {
 ///
 /// It must be created with a specific corner radius or size.
 /// The example below creates a RoundedRectangle with a corner radius of 20,
-/// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
+/// and uses the `Shape/fill(_:style:)` and `View/frame(width:height:alignment:)` modifiers
 /// to set the color to blue and the frame to 250 by 150.
 ///
 /// ![RoundedRectangle corner radius, fill, and frame example](roundedrectangle-example-1.png)
@@ -34005,7 +34005,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 
     /// A binding to the state value.
     ///
-    /// Use the projected value to pass a binding value down a view hierarchy.
+    /// Use the projected value to pass a `Binding` value down a view hierarchy.
     /// To get the `projectedValue`, prefix the property variable with `$`. For
     /// example, in the following code example `PlayerView` projects a binding
     /// of the state property `title` to the `TextField` view using
@@ -43212,6 +43212,10 @@ extension View {
     /// of the frame. If the text is taller than the frame, its bounds may
     /// extend beyond the bottom of the frame's bounds.
     ///
+    /// - Note: If a `View`'s `frame` is already tight around the contents,
+    /// specifying an `Alignment` won't change anything. This is not a bug!
+    /// It's just because the frame is already tight.
+    ///
     /// - Parameters:
     ///   - width: A fixed width for the resulting view. If `width` is `nil`,
     ///     the resulting view assumes this view's sizing behavior.
@@ -43232,9 +43236,18 @@ extension View {
     /// don't know what they're doing don't have their programs
     /// always breaking.**
     ///
-    /// Use `SwiftUI/View/frame(width:height:alignment:)` or
-    /// `SwiftUI/View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)`
+    /// Use `View/frame(width:height:alignment:)` or
+    /// `View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)`
     /// instead.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("My frame is unaffected 🤷‍")
+    ///             .frame() //does nothing
+    ///     }
+    /// }
+    /// ```
     @available(*, deprecated, message: "Please pass one or more parameters.")
     @inlinable public func frame() -> some View { }
 
