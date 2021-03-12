@@ -38466,106 +38466,133 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 }
 
 /// A view that represents a UIKit view controller.
-///
-/// Use a `UIViewControllerRepresentable` instance to create and manage a
-/// <doc://com.apple.documentation/documentation/UIKit/UIViewController> object in your
-/// SwiftUI interface. Adopt this protocol in one of your app's custom
-/// instances, and use its methods to create, update, and tear down your view
-/// controller. The creation and update processes parallel the behavior of
-/// SwiftUI views, and you use them to configure your view controller with your
-/// app's current state information. Use the teardown process to remove your
-/// view controller cleanly from your SwiftUI. For example, you might use the
-/// teardown process to notify other objects that the view controller is
-/// disappearing.
-///
-/// To add your view controller into your SwiftUI interface, create your
-/// `UIViewControllerRepresentable` instance and add it to your SwiftUI
-/// interface. The system calls the methods of your custom instance at
-/// appropriate times.
-///
-/// The system doesn't automatically communicate changes occurring within your
-/// view controller to other parts of your SwiftUI interface. When you want your
-/// view controller to coordinate with other SwiftUI views, you must provide a
-/// `NSViewControllerRepresentable/Coordinator` instance to facilitate those
-/// interactions. For example, you use a coordinator to forward target-action
-/// and delegate messages from your view controller to any SwiftUI views.
+  ///
+  /// Most of the time when SwiftUI and UIKit are used together,
+  /// `UIViewRepresentable` is used. This allows you to reuse a `UIView`, which is
+  /// especially useful when SwiftUI doesn’t include the same controls as UIKit. But it’s
+  /// possible to use an entire view controller, which means that SwiftUI can act as the
+  /// host for any number of UIKit-based animations and interfaces, as well as the logic
+  ///  that makes them work.
+  ///
+  /// Just as with `UIViewRepresentable` you can use a coordinator to forward target-action
+  /// and delegate messages from your view controller to any SwiftUI views. View controllers
+  /// can inherit from delegate types too, so you don't necessarily need to use a coordinator
+  /// in as many situations for `UIViewControllerRepresentable` as you would with `UIViewRepresentable`.
+  ///
+  /// /// ### Setup
+  ///
+  /// To implement a `UIViewRepresentable`, you must implement the two main lifecycle functions:
+  ///
+  /// - `UIViewControllerRepresentable/makeUIView(context:)`
+  /// - `UIViewControllerRepresentable/updateUIView(_:context:)`
+  ///
+  /// The following functions are optional:
+  /// - `UIViewControllerRepresentable/makeCoordinator()`
+  /// - `UIViewControllerRepresentable/dismantleUIView(context:)` (this is optional, a default implementation is provided if left unimplemented)
+  ///
+  /// The SwiftUI runtime:
+  ///
+  /// - Creates a `Coordinator` using `makeCoordinator()` if necessary.
+  /// - Calls `UIViewControllerRepresentable/makeUIView(context:) to create an instance of your` `UIViewControllerType`.
+  /// - `UIViewControllerRepresentable/updateUIView(_:context:)` is immediately called *once* after the call to `UIViewControllerRepresentable/makeUIView(context:)` .
+  /// - Upon any state changes, calls  `UIViewControllerRepresentable/updateUIView(_:context:)`
+  /// - Upon destruction of the parent container, calls `UIViewControllerRepresentable/dismantleUIView(context:)`
+  ///
+  /// # Sharing Data Between SwiftUI and the UIViewController
+  /// Start by creating a simple `UIViewController` subclass that adds a `UILabel` and constrains it to the middle of the screen.
+  /// ```
+  /// import UIKit
+  /// class ViewController: UIViewController {
+  ///   var labelText = UILabel(frame: .zero)
+  ///   override func viewDidLoad() {
+  ///    super.viewDidLoad()
+  ///    view.addSubview(labelText)
+  ///    labelText.translatesAutoresizingMaskIntoConstraints = false
+  ///    NSLayoutConstraint.activate([
+  ///      labelText.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+  ///      labelText.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+  ///    ])
+  ///  }
+  ///}
+  /// ```
+  /// Now the `UIViewControllerRepresentable` structure can be added. The `makeUIViewController` and `updateUIViewController` functions are much the same as they would be in `UIViewRepresentable`. The first is called only once to create the view controller, then the other is called whenever the SwiftUI is updated so that it can pass data. The difference here is that a view controller probably has a lot more internal logic than the typical UIView would have.
+  ///
+  /// ```
+  /// import SwiftUI
+  ///
+  /// struct ExampleView : View {
+  ///   @State var text = ""
+  ///   var body: some View {
+  ///     VStack {
+  ///       TextField("Add text here", text: $text)
+  ///       UIKitVC(text: $text)
+  ///     }
+  ///     .padding()
+  ///   }
+  /// }
+  ///
+  /// struct UIKitVC: UIViewControllerRepresentable {
+  ///   @Binding var text: String
+  ///
+  ///   func makeUIViewController(context: Context) -> ViewController {
+  ///     ViewController()
+  ///   }
+  ///
+  ///   func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+  ///     uiViewController.labelText.text = text
+  ///   }
+  /// }
+  /// ```
+
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public protocol UIViewControllerRepresentable : View where Self.Body == Never { }
+public protocol UIViewControllerRepresentable : View where Self.Body == Never{ }
 extension UIViewControllerRepresentable : View where Self.Body == Never {
 
-    /// The type of view controller to present.
+    /// The generic type that must inherit from `UIViewController`
     associatedtype UIViewControllerType : UIViewController
 
-    /// Creates the view controller object and configures its initial state.
+    /// Creates a view controller of type `UIViewControllerType` that will be displayed.
     ///
-    /// You must implement this method and use it to create your view controller
-    /// object. Create the view controller using your app's current data and
-    /// contents of the `context` parameter. The system calls this method only
-    /// once, when it creates your view controller for the first time. For all
-    /// subsequent updates, the system calls the
-    /// `UIViewControllerRepresentable/updateUIViewController(_:context:)`
+    /// An implementation of this method is required, as it must return an instance of the associated type `UIViewControllerType`. The `context` parameter can provide data related to the app's current state,
+    /// but it may not be needed in many situations. Remember that this method is only called once, so any
+    /// future updates can only be made in the `UIViewControllerRepresentable/updateUIViewController(_:context:)`
     /// method.
     ///
-    /// - Parameter context: A context structure containing information about
-    ///   the current state of the system.
+    /// - Parameter context: The current app state.
     ///
-    /// - Returns: Your UIKit view controller configured with the provided
-    ///   information.
+    /// - Returns: An instance of the associated type `UIViewControllerType`
     func makeUIViewController(context: Self.Context) -> Self.UIViewControllerType { }
 
-    /// Updates the state of the specified view controller with new information
-    /// from SwiftUI.
+    /// Keeps the `UIViewController` subclass up to date with changes made in SwiftUI.
     ///
-    /// When the state of your app changes, SwiftUI updates the portions of your
-    /// interface affected by those changes. SwiftUI calls this method for any
-    /// changes affecting the corresponding AppKit view controller. Use this
-    /// method to update the configuration of your view controller to match the
-    /// new state information provided in the `context` parameter.
+    /// This method is called when a SwiftUI View is updated, for instance in response to a @State, @Binding or @Published property being changed. While not all events are necessarily relevant, this method provides a chance to pass data to the `UIViewController` subclass where necessary.
     ///
     /// - Parameters:
-    ///   - uiViewController: Your custom view controller object.
-    ///   - context: A context structure containing information about the current
-    ///     state of the system.
+    ///   - uiViewController: The current instance of the associated type `UIViewControllerType`
+    ///   - context: The current app state.
     func updateUIViewController(_ uiViewController: Self.UIViewControllerType, context: Self.Context) { }
 
-    /// Cleans up the presented view controller (and coordinator) in
-    /// anticipation of their removal.
+    /// React to the event that your `UIViewController` subclass will be dismantled
     ///
-    /// Use this method to perform additional clean-up work related to your
-    /// custom view controller. For example, you might use this method to remove
-    /// observers or update other parts of your SwiftUI interface.
+    /// You can use this method to prevent memory leaks by removing observers.
     ///
     /// - Parameters:
-    ///   - uiViewController: Your custom view controller object.
-    ///   - coordinator: The custom coordinator instance you use to communicate
-    ///     changes back to SwiftUI. If you do not use a custom coordinator, the
-    ///     system provides a default instance.
+    ///   - uiViewController: The current instance of the associated type `UIViewControllerType`
+    ///   - coordinator: The coordinator for passing data between UIKit and SwirtUI.
     static func dismantleUIViewController(_ uiViewController: Self.UIViewControllerType, coordinator: Self.Coordinator) { }
 
     /// A type to coordinate with the view controller.
     associatedtype Coordinator = Void
 
-    /// Creates the custom instance that you use to communicate changes from
-    /// your view controller to other parts of your SwiftUI interface.
+    /// Creates an instance of the `Coordinator` type that allows changes in the view controller to affect the surrounding SwiftUI views.
     ///
-    /// Implement this method if changes to your view controller might affect
-    /// other parts of your app. In your implementation, create a custom Swift
-    /// instance that can communicate with other parts of your interface. For
-    /// example, you might provide an instance that binds its variables to
-    /// SwiftUI properties, causing the two to remain synchronized. If your view
-    /// controller doesn't interact with other parts of your app, providing a
-    /// coordinator is unnecessary.
-    ///
-    /// SwiftUI calls this method before calling the
-    /// `UIViewControllerRepresentable/makeUIViewController(context:)` method.
-    /// The system provides your coordinator either directly or as part of a
-    /// context structure when calling the other methods of your representable
-    /// instance.
+    /// The `Coordinator` instance is created before the
+    /// `UIViewControllerRepresentable/makeUIViewController(context:)`, and is provided as a parameter in the other methods as part of the `context` structure
     func makeCoordinator() -> Self.Coordinator { }
 
-    /// A type alias for the representable's context.
+    /// A structure that contains information about the app's state
     ///
     /// - SeeAlso: UIViewControllerRepresentableContext
     typealias Context = UIViewControllerRepresentableContext<Self>
@@ -38635,16 +38662,12 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
     /// The view's associated coordinator.
     public let coordinator: Representable.Coordinator
 
-    /// The current transaction.
+    /// Allows animations to be passed between views, such as when a Binding is changed or any global values set by calling ``withTransaction(_:_:)`` or ``withAnimation(_:_:)``.
     public var transaction: Transaction { get }
 
-    /// Environment values that describe the current state of the system.
-    ///
-    /// Use the environment values to configure the state of your UIKit view
-    /// controller when creating or updating it.
+    /// A structure of system and custom values that describe the current environment. Most values can be set with an existing View modifier, but there is a generic version for setting custom values. Individual values can be accessed using the ``@Environment(\.keyName)`` property wrapper.
     public var environment: EnvironmentValues { get }
 }
-
 /// A view to import a UIKit view into SwiftUI.
 ///
 /// ### Setup
