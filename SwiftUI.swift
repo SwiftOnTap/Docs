@@ -1406,8 +1406,6 @@ extension Anchor.Source {
 /// `Angles` are commonly used with the `View/rotationEffect(_:anchor:)`
 /// and similar modifiers:
 ///
-/// ![Rectangle with rotation by angle](angle-rotation.png)
-///
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -1423,20 +1421,16 @@ extension Anchor.Source {
 ///     }
 /// }
 /// ```
+/// ![Rectangle with rotation by angle](angle-rotation.png)
 ///
 /// ### Using an `Angle` with drawing
 ///
 /// `Angle`s can also be used with drawing. Below, we define a custom
-/// ``Shape`` called `Arc`, and make its parameter type `Angle`:
+/// ``Shape`` called `Arc`, and make its parameter type `Angle`. In our
+/// ``View``, we pass 270 as the degrees parameter to specify the size of
+/// the `Arc` to be displayed:
 ///
 /// ```
-/// struct ArcView: View {
-///     var body: some View {
-///         Arc(endAngle: Angle.degrees(270))
-///             .stroke(Color.green)
-///     }
-/// }
-///
 /// struct Arc: Shape {
 ///     var endAngle: Angle
 ///
@@ -1450,7 +1444,15 @@ extension Anchor.Source {
 ///         }
 ///     }
 /// }
+///
+/// struct ArcView: View {
+///     var body: some View {
+///         Arc(endAngle: Angle.degrees(270))
+///             .stroke(Color.orange)
+///     }
+/// }
 /// ```
+/// ![Angle example with drawing](angle-drawing.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Angle {
