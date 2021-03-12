@@ -1406,8 +1406,6 @@ extension Anchor.Source {
 /// `Angles` are commonly used with the `View/rotationEffect(_:anchor:)`
 /// and similar modifiers:
 ///
-/// ![Rectangle with rotation by angle](angle-rotation.png)
-///
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -1424,19 +1422,16 @@ extension Anchor.Source {
 /// }
 /// ```
 ///
+/// ![Rectangle with rotation by angle](angle-rotation.png)
+///
 /// ### Using an `Angle` with drawing
 ///
 /// `Angle`s can also be used with drawing. Below, we define a custom
-/// ``Shape`` called `Arc`, and make its parameter type `Angle`:
+/// ``Shape`` called `Arc`, and make its parameter type `Angle`. In our
+/// ``View``, we pass 270 as the degrees parameter to specify the size of
+/// the `Arc` to be displayed:
 ///
 /// ```
-/// struct ArcView: View {
-///     var body: some View {
-///         Arc(endAngle: Angle.degrees(270))
-///             .stroke(Color.green)
-///     }
-/// }
-///
 /// struct Arc: Shape {
 ///     var endAngle: Angle
 ///
@@ -1450,7 +1445,16 @@ extension Anchor.Source {
 ///         }
 ///     }
 /// }
+///
+/// struct ArcView: View {
+///     var body: some View {
+///         Arc(endAngle: Angle.degrees(270))
+///             .stroke(Color.orange)
+///     }
+/// }
 /// ```
+///
+/// ![Angle example with drawing](angle-drawing.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Angle {
@@ -5579,8 +5583,6 @@ public struct ButtonStyleConfiguration {
 /// To define a Capsule with a specific color and frame, use the ``Shape/fill(style:)``
 /// and ``View/frame(width:height:alignment:)`` modifiers:
 ///
-/// ![Capsule fill and frame example](capsule-example-1.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5591,11 +5593,11 @@ public struct ButtonStyleConfiguration {
 /// }
 /// ```
 ///
+/// ![Capsule fill and frame example](capsule-example-1.png)
+///
 /// To add a border, use the `Shape/stroke(_:lineWidth:)` modifier, and use
 /// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the
 /// border width to keep the Capsule at its original size:
-///
-/// ![Capsule inset and stroke example](capsule-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5607,6 +5609,8 @@ public struct ButtonStyleConfiguration {
 ///     }
 /// }
 /// ```
+///
+/// ![Capsule inset and stroke example](capsule-example-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Capsule : Shape {
@@ -5702,8 +5706,6 @@ extension Capsule : InsettableShape {
 ///
 /// By default, a Circle is black, and takes up the space of its container:
 ///
-/// ![Circle init example](Circle-example-1.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5712,10 +5714,10 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
+/// ![Circle init example](Circle-example-1.png)
+///
 /// Define a Circle with a specific color and frame with the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers. For example:
-///
-/// ![Circle fill and frame example](Circle-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5727,11 +5729,11 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
+/// ![Circle fill and frame example](Circle-example-2.png)
+///
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the `Circle/inset(by:)` modifier to inset the circle by half of the border
 /// width to keep the circle at its original size:
-///
-/// ![Circle inset and stroke example](Circle-example-3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5742,6 +5744,8 @@ extension Capsule : InsettableShape {
 ///     }
 /// }
 /// ```
+///
+/// ![Circle inset and stroke example](Circle-example-3.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
@@ -6441,8 +6445,6 @@ extension Color.RGBColorSpace : Hashable {
 /// You use `ColorPicker` by embedding it inside a view hierarchy and
 /// initializing it with a title string and a `Binding` to a `Color`:
 ///
-/// ![Color Picker](color-picker-vid.gif)
-///
 ///     struct ColorView: View {
 ///         @State private var color = Color.red
 ///
@@ -6454,6 +6456,8 @@ extension Color.RGBColorSpace : Hashable {
 ///             ColorPicker("Choose a color! 🎨", selection: $color)
 ///         }
 ///     }
+///
+/// ![Color Picker](color-picker-vid.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -10961,8 +10965,6 @@ extension EdgeInsets : Animatable {
 /// An `EditButton` toggles the `EditMode` (passed via `EnvironmentValues/editMode`) for content within a container that supports `EditMode.active`.
 /// For example, an `EditButton` placed inside the toolbar of a `NavigationView` enables the editing of a `List`:
 ///
-/// ![EditButton Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/EditButton-example-1.gif)
-///
 ///```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
@@ -10984,6 +10986,8 @@ extension EdgeInsets : Animatable {
 ///     }
 /// }
 /// ```
+///
+/// ![EditButton Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/EditButton-example-1.gif)
 ///
 /// [[list-edit-button]]
 ///
@@ -11126,8 +11130,6 @@ extension EditMode : Hashable {
 /// To define an Ellipse with a specific color and frame, use the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers:
 ///
-/// ![Ellipse fill and frame example](ellipse-example-1.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11138,11 +11140,11 @@ extension EditMode : Hashable {
 /// }
 /// ```
 ///
+/// ![Ellipse fill and frame example](ellipse-example-1.png)
+///
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the `Ellipse/inset(by:)` modifier to inset the Ellipse by half of the
 /// border width to keep the Ellipse at its original size:
-///
-/// ![Ellipse inset and stroke example](ellipse-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11154,6 +11156,8 @@ extension EditMode : Hashable {
 ///     }
 /// }
 /// ```
+///
+/// ![Ellipse inset and stroke example](ellipse-example-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Ellipse : Shape {
@@ -11391,8 +11395,6 @@ public struct EmptyCommands : Commands {
 ///
 /// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
 ///
-/// ![EmptyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-1.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11409,6 +11411,8 @@ public struct EmptyCommands : Commands {
 /// }
 /// ```
 ///
+/// ![EmptyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-1.png)
+///
 /// `EmptyView` has many uses. For example, it can be used to instruct SwiftUI that your UI control does not want a label:
 ///
 /// ```
@@ -11416,8 +11420,6 @@ public struct EmptyCommands : Commands {
 /// ```
 ///
 /// `EmptyView` can also be used in conjunction with `GeometryReader`:
-///
-///  ![EmptyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11436,6 +11438,8 @@ public struct EmptyCommands : Commands {
 ///     }
 /// }
 /// ```
+///
+///  ![EmptyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-2.png)
 ///
 /// Account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of `EmptyView`:
@@ -22195,8 +22199,6 @@ extension Link where Label == Text {
 ///
 /// An `EditButton` placed in the navigation bar of a `NavigationView` with a `List` in it can be used to provide an edit button for the `List`.
 ///
-/// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-9.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
@@ -22218,6 +22220,8 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
+///
+/// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-9.gif)
 /// [<-]
 /// ### Further notes
 ///
@@ -35378,8 +35382,6 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
 ///
-/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -35404,6 +35406,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 /// [<-]
 /// [tabview-style ->]
 /// ### Page-style navigation
@@ -35411,8 +35415,6 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// Place child views in a `TabView` with a `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
 ///
 /// The following example creates a paginated view with the three `Text` child views as individual pages.
-///
-/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35429,9 +35431,9 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
+/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
-/// ![TabView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-3.gif)
+/// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35448,13 +35450,13 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
+/// ![TabView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-3.gif)
+///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
 /// A page-styled `TabView` will add a row of page indicator(s) at the bottom of the container by default. If `View/tabItem(_:)` is used, these indicators each take the form of the corresponding tab item's primary image. If not - these page indicators resort to system defaults.
 ///
 /// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
-///
-/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35471,6 +35473,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
 /// [<-]
 /// [tabview-tag ->]
 /// ### Handling tab-selection
@@ -35478,8 +35482,6 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
 ///
 /// Here is an example that writes tab selection to a state variable:
-///
-/// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35518,13 +35520,13 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
+/// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
+///
 /// In this example, each tab item is assigned a unique tag using the user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to the tab selection, `$selectedItem`, and updates it whenever a new tab is selected. `$selectedItem` in turn can also be used to programmatically control tab-selection, as bindings work bidirectionally.
 ///
 /// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in the previous example, but it could've just as easily been a `String` or an `Int`.
 ///
 /// For example, the following uses a traditional 0-based tab indexing:
-///
-/// ![TabView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35544,6 +35546,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![TabView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
