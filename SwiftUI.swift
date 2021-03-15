@@ -13,7 +13,7 @@ import os
 import os.signpost
 
 /// An object that publishes its changes.
-///.
+///
 /// ### Understanding `ObservableObject`
 ///
 /// The `ObservableObject` protocol definition is as follows:
