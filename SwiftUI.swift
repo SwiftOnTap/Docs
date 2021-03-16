@@ -130,6 +130,7 @@ import os.signpost
 ///
 /// #### Usage with `@StateObject`
 ///
+/// ![7EA88B2E-3B0C-4306-AF48-2D2D14818823](7EA88B2E-3B0C-4306-AF48-2D2D14818823.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var foo: Bool = false
@@ -225,7 +226,7 @@ public enum AccessibilityAdjustmentDirection {
     /// The hash value.
     ///
     /// Hash values are not guaranteed to be equal across different executions of
-    /// your program. Do not save hash values to use during a future execution.
+    /// your program; do not save hash values to use during a future execution.
     ///
     /// - Important: `hashValue` is deprecated as a `Hashable` requirement. To
     ///   conform to `Hashable`, implement the `hash(into:)` requirement instead.
@@ -385,6 +386,7 @@ extension AccessibilityLabeledPairRole : Hashable {
 ///
 /// For example:
 ///
+/// ![6014639F-AD04-4B82-9FD7-EECD9109F555](6014639F-AD04-4B82-9FD7-EECD9109F555.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -1476,6 +1478,7 @@ extension Anchor.Source {
 /// `Angles` are commonly used with the `View/rotationEffect(_:anchor:)`
 /// and similar modifiers:
 ///
+/// ![0BCBA417-65FD-41CE-B2F7-ACF481731304](0BCBA417-65FD-41CE-B2F7-ACF481731304.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -1501,6 +1504,7 @@ extension Anchor.Source {
 /// ``View``, we pass 270 as the degrees parameter to specify the size of
 /// the `Arc` to be displayed:
 ///
+/// ![D09EC09B-F599-4E73-B582-0454AE11039F](D09EC09B-F599-4E73-B582-0454AE11039F.png)
 /// ```
 /// struct Arc: Shape {
 ///     var endAngle: Angle
@@ -1748,7 +1752,7 @@ extension Angle : Animatable {
 /// This is the normal case where the start and end angles make a complete circle.
 /// Every color will evenly distribute.
 ///
-/// ![AngularGradient Example 1](angular-gradient-example-1.png)
+/// ![AngularGradient Example 1](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1767,7 +1771,7 @@ extension Angle : Animatable {
 /// This is the case where the total angle is greater than a circle.
 /// The gradient will only draw the last complete turn which effectively writes over the first circle portion
 ///
-/// ![AngularGradient Example 2](angular-gradient-example-2.png)
+/// ![AngularGradient Example 2](89BED914-29DA-4009-9EA1-96E1849E55F0.png)
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1792,7 +1796,7 @@ extension Angle : Animatable {
 /// The gradient will not make a complete circle, but the missing area between the start and end will be evenly colored with the
 /// first and last color of the gradient.
 ///
-/// ![AngularGradient Example 3](angular-gradient-example-3.png)
+/// ![AngularGradient Example 3](94015C67-FC57-44CC-9EA4-F982A47AEB7D.png)
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -2922,6 +2926,7 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
 ///
 /// The following example applies the ``AnyTransition/slide`` transition:
 ///
+/// ![211933DE-9819-4921-A945-9E4B30BB8453](211933DE-9819-4921-A945-9E4B30BB8453.png)
 /// ```
 /// struct TransitioningBananaView: View {
 ///     @State var showBanana = true
@@ -3333,7 +3338,7 @@ extension AnyTransition {
 ///
 /// To type-erase your view, pass it to `AnyView/init(_:)` like this:
 ///
-///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
+///  ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -3345,7 +3350,7 @@ extension AnyTransition {
 ///
 /// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
 ///
-///  ![AnyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-2.png)
+///  ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4268,6 +4273,7 @@ extension Axis : RawRepresentable {
 /// In the following example, the top circle is always invisible, since
 /// it is filled the same color as the background.
 ///
+/// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
 /// ```
 /// struct CircleOnButtomView: View {
 ///     var body: some View {
@@ -4563,6 +4569,7 @@ extension Binding : DynamicProperty {
 ///
 /// ![Space](space.jpg)
 ///
+/// ![Blended Image](DF45080C-D4E5-44D2-A2C0-4D6E911F47C9.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5653,6 +5660,8 @@ public struct ButtonStyleConfiguration {
 /// To define a Capsule with a specific color and frame, use the ``Shape/fill(style:)``
 /// and ``View/frame(width:height:alignment:)`` modifiers:
 ///
+/// ![Capsule fill and frame example](E4167696-3528-4ADA-91DF-2D7E13C207B4.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5668,6 +5677,8 @@ public struct ButtonStyleConfiguration {
 /// To add a border, use the `Shape/stroke(_:lineWidth:)` modifier, and use
 /// the `Capsule/inset(by:)` modifier to inset the Capsule by half of the
 /// border width to keep the Capsule at its original size:
+///
+/// ![Capsule inset and stroke example](3E5132C6-76CC-47F9-96BF-8EBA0ADA3387.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5776,6 +5787,8 @@ extension Capsule : InsettableShape {
 ///
 /// By default, a Circle is black, and takes up the space of its container:
 ///
+/// ![Circle init example](C12942E0-CB68-4630-B35B-957456816E95.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5788,6 +5801,8 @@ extension Capsule : InsettableShape {
 ///
 /// Define a Circle with a specific color and frame with the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers. For example:
+///
+/// ![Circle fill and frame example](E6C8F731-967D-4F07-83AF-4BF0520A25B0.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5804,6 +5819,8 @@ extension Capsule : InsettableShape {
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the `Circle/inset(by:)` modifier to inset the circle by half of the border
 /// width to keep the circle at its original size:
+///
+/// ![Circle inset and stroke example](17858E49-2896-4225-8CB4-943BD3C7CC74.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7379,6 +7396,7 @@ extension ContainerRelativeShape : InsettableShape {
 /// In the following example, we scale the ellipse down so that it fits
 /// perfectly in the space.
 ///
+/// ![8B69B8F4-E3D2-4C62-A9F7-EE7E7F58C602](8B69B8F4-E3D2-4C62-A9F7-EE7E7F58C602.png)
 /// ```
 /// struct EllipseView: View {
 ///     var body: some View {
@@ -7617,7 +7635,7 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 ///
 /// For example:
 ///
-/// ![Coordinate space example 1](coordinate-space-example.png)
+/// ![Coordinate space example 1](E708E01A-7F5B-4779-ABC8-2CD7CDA525AC.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -7761,6 +7779,7 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 ///
 /// A simple example looks like this:
 ///
+/// ![71B19AF9-BDDE-4145-A04E-C0120FFC2029](71B19AF9-BDDE-4145-A04E-C0120FFC2029.png)
 /// ```
 /// struct DatePickerView: View {
 ///     @State private var date = Date()
@@ -7786,6 +7805,7 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// To set a specific style for all picker instances within a view, use the
 /// ``View/datePickerStyle(_:)`` modifier.
 ///
+/// ![E5997C10-E4E0-4BE9-8364-E099CDA31862](E5997C10-E4E0-4BE9-8364-E099CDA31862.png)
 /// ```
 /// struct StyledDatePickerView: View {
 ///     @State private var date = Date()
@@ -8208,6 +8228,7 @@ public struct DatePickerComponents : OptionSet {
 /// - ``GraphicalDatePickerStyle`` on macOS
 /// - ``StepperFieldDatePickerStyle`` on macOS
 ///
+/// ![0AD88967-F661-4DCF-876D-952C992543D1](0AD88967-F661-4DCF-876D-952C992543D1.png)
 /// ```
 /// struct StyledDatePickerView: View {
 ///     @State private var date = Date()
@@ -8640,6 +8661,7 @@ public struct DefaultPickerStyle : PickerStyle {
 /// The default progress view style in the current context of the view being
 /// styled.
 ///
+/// ![FA3176B9-AF8E-4DE6-9493-3D6271A2670C](FA3176B9-AF8E-4DE6-9493-3D6271A2670C.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -8965,7 +8987,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
 ///
-/// ![Divider Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-2.png)
+/// ![Divider Example 2](BB31E0D0-1271-43CD-A1AD-AC9CD1E047E1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10651,6 +10673,7 @@ extension DynamicViewContent {
 /// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)-9f6b7``,
 /// but it can also be returned from instance methods. For example:
 ///
+/// ![F7952934-0389-4525-97DD-80CD08BD51B8](F7952934-0389-4525-97DD-80CD08BD51B8.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -11200,6 +11223,8 @@ extension EditMode : Hashable {
 /// To define an Ellipse with a specific color and frame, use the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers:
 ///
+/// ![Ellipse fill and frame example](EC260839-77DE-4EB8-9CE0-2F408060E379.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11215,6 +11240,8 @@ extension EditMode : Hashable {
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the `Ellipse/inset(by:)` modifier to inset the Ellipse by half of the
 /// border width to keep the Ellipse at its original size:
+///
+/// ![Ellipse inset and stroke example](D07FB0C8-EAC7-4129-B72B-6CC14FB89700.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11465,6 +11492,8 @@ public struct EmptyCommands : Commands {
 ///
 /// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
 ///
+/// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -11490,6 +11519,8 @@ public struct EmptyCommands : Commands {
 /// ```
 ///
 /// `EmptyView` can also be used in conjunction with `GeometryReader`:
+///
+///  ![EmptyView Example 2](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11738,6 +11769,7 @@ extension EnvironmentKey {
 ///
 /// Consider the following example:
 ///
+/// ![2B8CB1C2-A204-47A8-AF0D-95C69028ECAC](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     let text: String = "some text"
@@ -11767,6 +11799,7 @@ extension EnvironmentKey {
 /// [<-]
 /// Now consider a slightly different version of this example:
 ///
+/// ![6181BC35-A419-499C-B394-64E170CECAD1](6181BC35-A419-499C-B394-64E170CECAD1.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     let text: String = "some text"
@@ -11808,6 +11841,7 @@ extension EnvironmentKey {
 ///
 /// Here is another example:
 ///
+/// ![5BADAB08-D42D-4FF2-9174-06C29CB15738](5BADAB08-D42D-4FF2-9174-06C29CB15738.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -11853,6 +11887,7 @@ extension EnvironmentKey {
 ///
 /// On iOS 13, environment objects do not automatically pass to sheets or navigation destinations. The following code would crash on iOS 13, for example:
 ///
+/// ![CA7BCD70-C1A2-49F4-A005-36055F937FFF](CA7BCD70-C1A2-49F4-A005-36055F937FFF.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -11885,6 +11920,7 @@ extension EnvironmentKey {
 ///
 /// To fix it, the `View/environmentObject(_:)` modifier would need to be added directly to the sheet's content, like this:
 ///
+/// ![47F26343-D59C-4824-B43C-34B068EF0A5A](47F26343-D59C-4824-B43C-34B068EF0A5A.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -12512,6 +12548,7 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 /// - [Swift with Majid](https://swiftwithmajid.com/2020/01/22/optimizing-views-in-swiftui-using-equatableview/)
 /// - [The SwiftUI Lab](https://swiftui-lab.com/equatableview/)
 ///
+/// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
 /// ```
 /// struct ContentView: View {
 ///     @State private var bodyDoesntDependOnMe = false
@@ -13439,6 +13476,7 @@ public struct FileDocumentWriteConfiguration {
 ///
 /// For example, to create a view with a circle shape and fill style:
 ///
+/// ![3D0FC026-AFA8-4995-8F6B-D48485049731](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -13620,7 +13658,7 @@ public struct FocusedValues {
 ///
 /// Fonts can be applied to your view with the `View/font(_:)` modifier.
 ///
-/// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-1.png)
+/// ![Font Example 1](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13633,7 +13671,7 @@ public struct FocusedValues {
 ///
 /// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the `Font/system(size:weight:design:)` modifier.
 ///
-/// ![Font Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-2.png)
+/// ![Font Example 2](0C3CED07-2FD4-40E5-904D-8D1CD833E1F6.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13646,7 +13684,7 @@ public struct FocusedValues {
 ///
 /// Non system-fonts can be applied using `Font/custom(_:size:)`
 ///
-/// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
+/// ![Font Example 3](E683BBEB-8DE2-412D-9A3F-BB3C7E658764.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -15959,7 +15997,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 ///
 /// For example, to create a square view with a ForegroundStyle:
 ///
-/// ![ForegroundStyle Example 1](foreground-style-example.png)
+/// ![ForegroundStyle Example 1](92E0E472-F416-4E15-A196-D4B90EFDF978.png)
 ///
 /// ```
 /// struct ForegroundStyleRectangle: View {
@@ -16008,7 +16046,7 @@ extension ForegroundStyle : ShapeStyle {
 ///
 /// For example,
 ///
-/// ![Form Example 1](form-example-1.png)
+/// ![Form Example 1](76F9D0FD-559A-46B7-AAFD-B6251C7A2AED.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16115,6 +16153,7 @@ extension GeometryEffect {
 /// A proxy that encapsulates the container's frame and safe area insets, used by ``GeometryReader``.
 ///
 /// For example, to create a new GeometryProxy for use in a GeometryReader:
+/// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -16167,7 +16206,7 @@ public struct GeometryProxy {
 ///
 /// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
 ///
-/// ![GeometryReader Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-1.png)
+/// ![GeometryReader Example 1](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16189,6 +16228,7 @@ public struct GeometryProxy {
 ///
 /// `GeometryReader` can also be used with`View/background(_:)`, to acquire the geometry of a target view. Consider `SomeView` in the following example:
 ///
+/// ![6DEDD064-9A38-4714-9732-9C8D6F6D5715](6DEDD064-9A38-4714-9732-9C8D6F6D5715.png)
 /// ```
 /// struct ExampleView: View {
 ///     struct SomeView: View {
@@ -16250,7 +16290,7 @@ public struct GeometryProxy {
 ///
 /// The modifier above can be used in the following manner:
 ///
-/// ![GeometryReader Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-3.png)
+/// ![GeometryReader Example 3](7933D23D-6833-4FE6-8BDE-21C08211172C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16706,7 +16746,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 /// See the example below for a simple gradient being passed to a
 /// ``LinearGradient`` view.
 ///
-/// ![Rectangle Example](rounded-rectangle.png)
+/// ![Rectangle Example](B1E517B3-0F3F-49F7-ABEC-F4C609FC166C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -17839,6 +17879,7 @@ extension HorizontalAlignment {
 ///
 /// For example:
 ///
+/// ![10D7AAEA-D933-499B-A64B-143CEF3D8E0E](10D7AAEA-D933-499B-A64B-143CEF3D8E0E.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -17964,7 +18005,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// **First**, create an image in your Assets folder.
 ///
-/// ![Image in assets folder](image-assets.png)
+/// ![Image in assets folder](image-assets.pngpng)
 ///
 /// To follow along, save the following image as `"ocean"` in your project.
 ///
@@ -17986,7 +18027,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// Add some modifiers to style your image!
 ///
-/// ![Resiable Images](image-resizable.png)
+/// ![Resiable Images](6422F09D-0D92-41F3-8067-0E7499A7F66C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -18020,6 +18061,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// weights from ultralight to black. To use these in custom images, simply
 /// use the ``Image/init(systemName:)`` initializer.
 ///
+/// ![1285236D-2F00-4099-8A5A-3CC5E76A5000](1285236D-2F00-4099-8A5A-3CC5E76A5000.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -19863,6 +19905,7 @@ extension Image.ResizingMode : Hashable {
 ///
 /// See ``ShapeStyle`` for more info on how and where to use shape styles.
 ///
+/// ![FDA4F2F3-84D2-49C4-A894-ED78FAE07A34](FDA4F2F3-84D2-49C4-A894-ED78FAE07A34.png)
 /// ```
 /// struct DogsEverywhereView: View {
 ///     var body: some View {
@@ -19966,7 +20009,7 @@ extension Image.ResizingMode : Hashable {
 ///
 /// For example:
 ///
-/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+/// ![Index view style protocol example 1](A68AC8DE-29C1-44C6-880C-2CEB9ED93988.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -20910,6 +20953,7 @@ public struct KeyboardShortcut {
 /// [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/)
 /// collection:
 ///
+/// ![AAF70423-43CB-4A9F-8640-C9485C5EF390](AAF70423-43CB-4A9F-8640-C9485C5EF390.png)
 /// ```
 /// struct BoltView: View {
 ///     var body: some View {
@@ -20923,6 +20967,7 @@ public struct KeyboardShortcut {
 /// might want to show only the text portion of the label using the title-only
 /// label style:
 ///
+/// ![922B50FC-5FEC-4F61-A07E-AB579F1B726E](922B50FC-5FEC-4F61-A07E-AB579F1B726E.png)
 /// ```
 /// struct TitleOnlyBoltView: View {
 ///     var body: some View {
@@ -20934,6 +20979,7 @@ public struct KeyboardShortcut {
 ///
 /// Conversely, there's also an icon-only label style:
 ///
+/// ![D12AC27C-00DC-4F00-A4F1-B72735084CA4](D12AC27C-00DC-4F00-A4F1-B72735084CA4.png)
 /// ```
 /// struct IconOnlyBoltView: View {
 ///     var body: some View {
@@ -20946,6 +20992,7 @@ public struct KeyboardShortcut {
 /// You can also create a customized label style by modifying an existing
 /// style; this example adds a red border to the default label style:
 ///
+/// ![491B486D-0E3C-450A-9FD3-74BB847D19FE](491B486D-0E3C-450A-9FD3-74BB847D19FE.png)
 /// ```
 /// struct RedBorderedLabelStyle: LabelStyle {
 ///     func makeBody(configuration: Configuration) -> some View {
@@ -20970,6 +21017,7 @@ public struct KeyboardShortcut {
 /// To apply a common label style to a group of labels, apply the style
 /// to the view hierarchy that contains the labels:
 ///
+/// ![9F864CBF-1FA1-4989-9F8B-8ED0515E1C56](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
 /// ```
 /// struct WeatherView: View {
 ///     var body: some View {
@@ -20988,6 +21036,7 @@ public struct KeyboardShortcut {
 /// icon portion of the label uses a filled `Circle` overlaid
 /// with the user's initials:
 ///
+/// ![BFE30CE7-C088-4B03-A564-0A1B8D272BCF](BFE30CE7-C088-4B03-A564-0A1B8D272BCF.png)
 /// ```
 /// struct CustomPersonView: View {
 ///     var body: some View {
@@ -21293,6 +21342,7 @@ extension LabelStyleConfiguration.Icon : View {
 /// In the example below, the left to right arrow is printed since we're
 /// in the English locale.
 ///
+/// ![66C3C5E5-8C26-43DD-9B2B-E29C621F48E9](66C3C5E5-8C26-43DD-9B2B-E29C621F48E9.png)
 /// ```
 /// struct LayoutView: View {
 ///     @Environment(\.layoutDirection) var direction
@@ -21448,6 +21498,7 @@ extension LayoutDirection {
 /// a Unicode code point from the "Smileys" group, and the bottom shows its
 /// corresponding emoji.
 ///
+/// ![50E77E82-CB96-4841-B769-8B9D59F9DBE8](50E77E82-CB96-4841-B769-8B9D59F9DBE8.png)
 /// ```
 /// struct HorizontalEmojiView: View {
 ///     var rows: [GridItem] =
@@ -21531,6 +21582,7 @@ public struct LazyHGrid<Content> : View where Content : View {
 /// consists of a horizontal row of text views. The stack aligns to the top
 /// of the scroll view and uses 10-point spacing between each text view.
 ///
+/// ![8CA08532-A8DD-452D-9A37-B62ACD2EECFE](8CA08532-A8DD-452D-9A37-B62ACD2EECFE.png)
 /// ```
 /// struct ColumnNumberView: View {
 ///     var body: some View {
@@ -21594,6 +21646,7 @@ public struct LazyHStack<Content> : View where Content : View {
 /// `LazyVGrid` consisting of a two-column grid of `Text` views, showing
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
+/// ![D3F809F0-9891-47DC-8E95-99160DC1B7F5](D3F809F0-9891-47DC-8E95-99160DC1B7F5.png)
 /// ```
 /// struct EmojiGridView: View {
 ///     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
@@ -21670,6 +21723,7 @@ public struct LazyVGrid<Content> : View where Content : View {
 /// leading edge of the scroll view, and uses default spacing between the
 /// text views.
 ///
+/// ![0DBD3AFE-572F-4451-92F1-10BFB3126933](0DBD3AFE-572F-4451-92F1-10BFB3126933.png)
 /// ```
 /// struct RowNumbersView: View {
 ///     var body: some View {
@@ -21781,7 +21835,7 @@ extension LegibilityWeight {
 
 /// A linear gradient.
 ///
-/// ![Rectangle Example](rounded-rectangle.png)
+/// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -21824,7 +21878,7 @@ extension LegibilityWeight {
 ///
 /// For example, to create a new ``ProgressView`` with this style:
 ///
-/// ![Linear progress view example 1](linearprogressview-example-1.png)
+/// ![Linear progress view example 1](04B8FA7C-F4B6-4661-ADA4-16EA1E340EBD.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22069,7 +22123,7 @@ extension Link where Label == Text {
 ///
 /// The following creates a `List` with three rows of text:
 ///
-/// ![List Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-1.png)
+/// ![List Example 1](7EF39BE9-B27B-4BA3-A4AD-CA3FCD274F9F.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22087,7 +22141,7 @@ extension Link where Label == Text {
 ///
 /// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
 ///
-/// ![List Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-2.png)
+/// ![List Example 2](5A921B5A-4B90-457C-A65F-8AE616E0E932.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22113,7 +22167,7 @@ extension Link where Label == Text {
 ///
 /// The following example displays a `List` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
 ///
-/// ![List Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-3.png)
+/// ![List Example 3](2D10DFE0-3A9D-4AD6-B7C3-A350EC37D0C4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22137,7 +22191,7 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates the usage of `Section`.
 ///
-/// ![List Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-4.png)
+/// ![List Example 4](0CAA80FC-BDA9-405A-8AB1-5ED8B0ECF92C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22168,7 +22222,7 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how to style a `List` to use a grouped-inset style:
 ///
-/// ![List Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-5.png)
+/// ![List Example 5](7FC84606-BB3F-41C2-BEC1-40346A413676.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22201,7 +22255,7 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how `View/listRowBackground(_:)` can be used to provide specific background colors for a list's rows:
 ///
-/// ![List Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-6.png)
+/// ![List Example 6](A6394785-F064-497F-A48B-7ED9DAA55452.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22222,7 +22276,7 @@ extension Link where Label == Text {
 ///
 /// In the following example, all the rows of the `List` have the background view `Color.yellow`.
 ///
-/// ![List Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-7.png)
+/// ![List Example 7](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22595,6 +22649,7 @@ extension List where SelectionValue == Never {
 ///
 /// Below is a simple example.
 ///
+/// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
 /// ```
 /// struct SettingsView: View {
 ///     var body: some View {
@@ -22671,7 +22726,7 @@ public struct ListItemTint {
 ///
 /// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a `List` with the `View/listStyle(_:)` modifier.
 ///
-/// ![ListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-1.png)
+/// ![ListStyle Example 1](BF5B130F-5A57-4FC5-8A40-723D8F924A06.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22691,7 +22746,7 @@ public struct ListItemTint {
 ///
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
-/// ![ListStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-2.png)
+/// ![ListStyle Example 2](8BDD107D-5866-4017-8B13-08DCF8F17495.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23317,6 +23372,7 @@ public struct MagnificationGesture : Gesture {
 /// The following example presents a menu of three buttons and a submenu, which
 /// contains three buttons of its own.
 ///
+/// ![350D6845-194E-4242-88D0-B6F71AAE45D7](350D6845-194E-4242-88D0-B6F71AAE45D7.png)
 /// ```
 /// struct MenuView: View {
 ///     var body: some View {
@@ -23336,6 +23392,7 @@ public struct MagnificationGesture : Gesture {
 /// the previous example, or with a view builder that creates multiple views,
 /// such as an image and a text view:
 ///
+/// ![E2186A15-54CC-45D6-A957-438146F92907](E2186A15-54CC-45D6-A957-438146F92907.png)
 /// ```
 /// struct MenuView: View {
 ///     var body: some View {
@@ -24172,7 +24229,7 @@ extension NavigationLink {
 ///
 /// A navigation stack is set up simply by wrapping your view in a `NavigationView`
 ///
-/// ![NavigationView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-1.png)
+/// ![NavigationView Example 1](CB034D71-ECFF-46DF-93B0-DE24A88C5721.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24190,7 +24247,7 @@ extension NavigationLink {
 ///
 /// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your `NavigationView`:
 ///
-/// ![NavigationView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-2.png)
+/// ![NavigationView Example 2](382BE2AE-E26A-4214-9F32-8F1786543B14.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24217,7 +24274,7 @@ extension NavigationLink {
 ///
 /// The following example forces a large navigation title:
 ///
-/// ![NavigationView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-3.png)
+/// ![NavigationView Example 3](538F7154-7B14-41AD-B913-2391A4D850CB.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24266,7 +24323,7 @@ extension NavigationLink {
 ///
 /// For example:
 ///
-/// ![NavigationView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-5.png)
+/// ![NavigationView Example 5](83BA32E9-ABB0-401F-B66D-CC695D71AD54.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24455,6 +24512,7 @@ extension NavigationViewStyle {
 ///
 /// In the following example, an observable object is assigned to an `@ObservedObject` variable:
 ///
+/// ![FC1A678A-0513-408B-950E-5BE85697F297](FC1A678A-0513-408B-950E-5BE85697F297.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     static let shared = AppModel()
@@ -24487,6 +24545,7 @@ extension NavigationViewStyle {
 ///
 /// For example:
 ///
+/// ![596F2956-1B74-4E8C-B60D-43550414B9F0](596F2956-1B74-4E8C-B60D-43550414B9F0.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     static let shared = AppModel()
@@ -24533,6 +24592,7 @@ extension NavigationViewStyle {
 ///
 /// Consider the following:
 ///
+/// ![A725E911-9792-4A7E-985C-260E54522F35](A725E911-9792-4A7E-985C-260E54522F35.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -24575,6 +24635,7 @@ extension NavigationViewStyle {
 ///
 /// Now consider the following:
 ///
+/// ![0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE](0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -24685,6 +24746,7 @@ extension NavigationViewStyle {
 ///
 /// A simple example of constructing an `OffsetShape`:
 ///
+/// ![20B2CBEC-08BB-4349-B451-C6DE14BD68A3](20B2CBEC-08BB-4349-B451-C6DE14BD68A3.png)
 /// ```
 /// struct OffsetShapeView: View {
 ///     var body: some View {
@@ -25247,6 +25309,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
 
 /// A `TabViewStyle` that implements a paged scrolling `TabView`.
 ///
+/// ![7418DAC9-D144-4F7D-BB54-AC5E0A88F324](7418DAC9-D144-4F7D-BB54-AC5E0A88F324.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -25320,6 +25383,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// In the following example, `move(to:)` and `addLine(to:)` are
 /// mutating methods, while `stroke()` is a non-mutating method.
 ///
+/// ![75F56224-5C30-4AE3-B526-336907676D1E](75F56224-5C30-4AE3-B526-336907676D1E.png)
 /// ```
 /// struct PathView: View {
 ///     var body: some View {
@@ -25339,6 +25403,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// and return it to this function in order to create
 /// a custom shape:
 ///
+/// ![CE1CCD64-157A-4908-B57D-96FC577A693D](CE1CCD64-157A-4908-B57D-96FC577A693D.png)
 /// ```
 /// struct CustomShapeView: View {
 ///     var body: some View {
@@ -26541,7 +26606,7 @@ extension Path {
 /// are all `Flavor` instances. Each option uses `View/tag(_:)` to associate
 /// a topping with the flavor it displays.
 ///
-/// ![Picker Toppings](/picker-toppings.png)
+/// ![Picker Toppings](CD09FF20-8779-4064-ADB9-7335DD85C4E9.png)
 ///
 /// ```
 /// enum Flavor: String, CaseIterable, Identifiable {
@@ -26739,6 +26804,7 @@ extension PickerStyle {
 /// and ``PinnedScrollableViews/sectionFooters``. You can specify either one
 /// of them, or both.
 ///
+/// ![59135FCD-BC97-4FF1-BF6C-23A1489ABA4F](59135FCD-BC97-4FF1-BF6C-23A1489ABA4F.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -27009,6 +27075,7 @@ public enum PopoverAttachmentAnchor {
 ///
 /// For example, to set a preference key from a view and use it to change a state:
 ///
+/// ![48FAD8ED-F1A7-4BC2-B801-A5EB9C765728](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
 /// ```
 /// struct ExampleView: View {
 ///    @State private var customPreferenceKey: String = ""
@@ -27037,6 +27104,7 @@ public enum PopoverAttachmentAnchor {
 /// It is also possible to use more complicated data structures as a preference key
 /// by changing the type of the defaultValue. For example:
 ///
+/// ![1EDB1FAE-72D3-4B34-AD1F-F848987DF57B](1EDB1FAE-72D3-4B34-AD1F-F848987DF57B.png)
 /// ```
 /// struct ExampleView: View {
 ///    @State private var customPreferenceKey: CustomPreferenceKeyData? = nil
@@ -27881,7 +27949,7 @@ extension PreviewProvider {
 ///
 /// Use `View/buttonStyle(_:)` to apply a primitive button style.
 ///
-/// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
+/// ![PrimitiveButtonStyle Example 1](214C0942-2ADB-482B-AC8F-77CFA9EA6FFE.png)
 ///
 /// ```
 ///  struct ExampleView: View {
@@ -27904,7 +27972,7 @@ extension PreviewProvider {
 ///
 /// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
 ///
-/// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
+/// ![PrimitiveButtonStyle Example 2](F8DF5AE9-2B00-480B-8A2F-2C96A1D33BC2.png)
 ///
 /// ```
 ///  struct BananaView: View {
@@ -28548,6 +28616,7 @@ public struct ProgressViewStyleConfiguration {
 /// The primary way to use a `ProjectionTransform` is by using the
 /// ``View/projectionEffect(_:)`` modifier.
 ///
+/// ![471A4641-6C43-4407-A9E5-9DD446D77365](471A4641-6C43-4407-A9E5-9DD446D77365.png)
 /// ```
 /// struct UpsideDownTrashCanView: View {
 ///     var body: some View {
@@ -28920,7 +28989,7 @@ extension ProjectionTransform {
 ///
 /// For example,
 ///
-/// ![RadialGradient Example 1](radial-gradient-example.png)
+/// ![RadialGradient Example 1](3CAA9064-F9B5-4B66-92F4-D1402CCB1CC2.png)
 ///
 /// ```
 /// struct RadialView: View {
@@ -28977,7 +29046,7 @@ extension ProjectionTransform {
 /// of the view containing it. To define a Rectangle with a specific color and
 /// frame, use the `Shape/fill()` and `View/frame(width:height:)` modifiers:
 ///
-/// ![Rectangle fill and frame example](rectangle-example-1.png)
+/// ![Rectangle fill and frame example](1663CD41-6656-4213-8758-CDBA336DFD50.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -28993,7 +29062,7 @@ extension ProjectionTransform {
 /// the `Rectangle/inset(by:)` modifier to inset the rectangle by half of the
 /// border width to keep the rectangle at its original size:
 ///
-/// ![Rectangle inset and stroke example](rectangle-example-2.png)
+/// ![Rectangle inset and stroke example](F421C7B6-8DF5-4A8C-8DA0-2DD4799C9759.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30139,6 +30208,7 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
 ///
 /// A simple example of constructing a `RotatedShape`:
 ///
+/// ![E6618570-868A-45D3-8108-775125F64D1C](E6618570-868A-45D3-8108-775125F64D1C.png)
 /// ```
 /// struct RotatedShapeView: View {
 ///     var body: some View {
@@ -30356,7 +30426,7 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 ///
 /// These styles have subtle but noticeable differences:
 ///
-/// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+/// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30433,7 +30503,7 @@ extension RoundedCornerStyle : Hashable {
 /// and uses the `Shape/fill(_:style:)` and `View/frame(width:height:alignment:)` modifiers
 /// to set the color to blue and the frame to 250 by 150.
 ///
-/// ![RoundedRectangle corner radius, fill, and frame example](roundedrectangle-example-1.png)
+/// ![RoundedRectangle corner radius, fill, and frame example](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30448,7 +30518,7 @@ extension RoundedCornerStyle : Hashable {
 /// The example below uses the same modifiers, but defines a corner size
 /// rather than a corner radius.
 ///
-/// ![RoundedRectangle corner size, fill, and frame example](roundedrectangle-example-2.png)
+/// ![RoundedRectangle corner size, fill, and frame example](4E1D6264-F9BA-4558-804A-72643AFD2A3B.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30464,7 +30534,7 @@ extension RoundedCornerStyle : Hashable {
 /// specifying the `style`, a `RoundedCornerStyle` that can either be `circular`
 /// or `continuous`. These styles have subtle but noticeable differences:
 ///
-/// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+/// ![RoundedRectangle init example](F25C23E2-86B8-42F5-8EB9-19E8D02A5177.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30484,7 +30554,7 @@ extension RoundedCornerStyle : Hashable {
 /// the `RoundedRectangle/inset(by:)` modifier to inset the RoundedRectangle by
 /// half of the border width to keep the RoundedRectangle at its original size:
 ///
-/// ![RoundedRectangle inset and stroke example](roundedrectangle-example-4.png)
+/// ![RoundedRectangle inset and stroke example](97611155-5069-4DFB-808C-7BBA7DD5DBAA.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30664,6 +30734,7 @@ extension RoundedRectangle : InsettableShape {
 /// - ``SafeAreaRegions/keyboard``: The portion of the screen covered by
 /// a software keyboard
 ///
+/// ![0689E6DD-9B1A-43A0-84F2-CBA2EC6EEF13](0689E6DD-9B1A-43A0-84F2-CBA2EC6EEF13.png)
 /// ```
 /// struct SafeAreaIgnoringView: View {
 ///     var body: some View {
@@ -31022,6 +31093,7 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// A simple example of constructing a `ScaledShape`:
 ///
+/// ![36B0A321-5470-4636-9A6D-32FE4AFAD8C7](36B0A321-5470-4636-9A6D-32FE4AFAD8C7.png)
 /// ```
 /// struct HugeShapeView: View {
 ///     var body: some View {
@@ -32834,6 +32906,7 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// A secure field is just like a ``TextField``, except the entered text is shown as dots instead of
 /// as the actual text.
 ///
+/// ![34BEFDFE-DA85-421E-8958-6D0B5D6F124A](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
 /// ```
 /// struct PasswordView: View {
 ///     @State private var password = ""
@@ -33048,6 +33121,7 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// The most simple example of creating your own shape is a rectangle
 /// that looks like this:
 ///
+/// ![09FB69B8-A5EF-4E46-9B27-4B59DF735287](09FB69B8-A5EF-4E46-9B27-4B59DF735287.png)
 /// ```
 /// struct SimplestShapeView: View {
 ///     var body: some View {
@@ -33085,6 +33159,7 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 ///
 /// Example usage would look like this:
 ///
+/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
 /// ```
 /// struct PillView: View {
 ///     var body: some View {
@@ -33638,7 +33713,7 @@ public struct SidebarCommands : Commands {
 
 /// The behavior and appearance of a sidebar or source list.
 ///
-/// ![SidebarListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-sidebar-example-1.png)
+/// ![SidebarListStyle Example 1](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
 ///
 /// ```
 ///      struct ExampleView: View {
@@ -33754,6 +33829,7 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
 ///
 /// The most basic example looks like this:
 ///
+/// ![81619922-BF1E-403F-BFB7-B578677D5EAE](81619922-BF1E-403F-BFB7-B578677D5EAE.png)
 /// ```
 /// struct SliderView: View {
 ///     @State private var value: Double = 0
@@ -33964,6 +34040,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
 ///
 /// In the following ``HStack``, a spacer is used to align the text to the right:
 ///
+/// ![90EBB832-008C-455C-A969-28C1363B874C](90EBB832-008C-455C-A969-28C1363B874C.png)
 /// ```
 /// struct SpacerView: View {
 ///     var body: some View {
@@ -33977,6 +34054,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
 ///
 /// A spacer can also be framed to take a specific amount of space:
 ///
+/// ![C543EFB6-447B-452F-8928-102A3554A7FC](C543EFB6-447B-452F-8928-102A3554A7FC.png)
 /// ```
 /// struct SpacerView: View {
 ///     var body: some View {
@@ -34109,6 +34187,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// Modifying a `@State` variable causes the `body` of the view to be recomputed. For example:
 ///
+/// ![AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7](AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7.png)
 /// ```
 /// struct ExampleView: View {
 ///     @State var foo: String = "Apple"
@@ -34136,6 +34215,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// Pass a state variable just as you would pass any other variable to a struct. For example:
 ///
+/// ![C8500709-199E-43A7-A416-B97CF82F1151](C8500709-199E-43A7-A416-B97CF82F1151.png)
 /// ```
 /// struct ExampleView: View {
 ///     struct ChildView: View {
@@ -34172,6 +34252,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// To create a binding to a state variable, prefix it with a dollar sign `$`. For example:
 ///
+/// ![67E06F60-E76B-42A8-9A18-0503382F1533](67E06F60-E76B-42A8-9A18-0503382F1533.png)
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
@@ -34191,6 +34272,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// It's possible to modify a state variable outside of a view's `body`. For example:
 ///
+/// ![8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C](8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C.png)
 /// ```
 /// struct ContentView: View {
 ///     @State var foo: String = "Apple"
@@ -34334,6 +34416,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// In the following example, an observable object class `AppModel` is instantiated and stored in a `@StateObject`:
 ///
+/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var foo: Bool = false
@@ -34374,6 +34457,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// For example:
 ///
+/// ![FACF7A60-5C80-42FE-B933-9A62D2A53DC5](FACF7A60-5C80-42FE-B933-9A62D2A53DC5.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -34394,6 +34478,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// Consider the following:
 ///
+/// ![D465C0A4-0042-47C8-9840-4E58837FD18F](D465C0A4-0042-47C8-9840-4E58837FD18F.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -34436,6 +34521,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// Now consider the following:
 ///
+/// ![E74A3E6E-9A49-41AC-AEDB-38849CAB5A4D](E74A3E6E-9A49-41AC-AEDB-38849CAB5A4D.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -34606,6 +34692,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// Here is a very simple example:
 ///
+/// ![9A1C8C27-56AC-446C-B6DD-77FB8814FED5](9A1C8C27-56AC-446C-B6DD-77FB8814FED5.png)
 /// ```
 /// struct StepperView: View {
 ///     @State private var value = 0
@@ -35262,6 +35349,7 @@ extension StrokeStyle : Animatable {
 /// The following example shows `SubscriptionView` used to exactly reproduct
 /// a view with ``View/onReceive(_:)``.
 ///
+/// ![3DA56538-402A-40C8-ABC7-96D202774582](3DA56538-402A-40C8-ABC7-96D202774582.png)
 /// ```
 /// struct TimerView: View {
 ///     @State private var time1 = ""
@@ -35720,7 +35808,7 @@ public struct TapGesture : Gesture {
 ///
 /// `Text` draws a string in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
 ///
-/// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
+/// ![Text Example 1](812D1AB1-2586-4AFB-8AC7-93CBEA17A17C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35734,7 +35822,7 @@ public struct TapGesture : Gesture {
 ///
 /// For example, use `Text/init(_:style:)` to display a date in a `Text` view.
 ///
-///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
+///  ![Text Example 2](6EE9A053-9AB7-48EC-AD3B-CAA74991229C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35746,7 +35834,7 @@ public struct TapGesture : Gesture {
 ///
 /// `Text` also accepts 12 unique modifiers to customize your string.
 ///
-///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
+///  ![Text Example 3](EB9EAFB7-6644-42E4-9711-E4284B8203BE.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35760,7 +35848,7 @@ public struct TapGesture : Gesture {
 ///
 /// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some View`, such as `View/foregroundColor(_:)`, are compatible with `Text`.
 ///
-///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
+///  ![Text Example 4](2574726A-FCCA-458A-8FC4-245901FD3292.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -36771,7 +36859,7 @@ extension Text.Case : Hashable {
 ///
 /// This is used in conjuction with `View/multilineTextAlignment(_:)`, for example:
 ///
-/// ![Text alignment center](textalignment-center.png)
+/// ![Text alignment center](B81ADC86-835C-4FED-BC53-B7E0F647CA60.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -37146,6 +37234,7 @@ extension TextField where Label == Text {
 /// The best way to create a custom text field is by placing
 /// your ``TextField`` in a ``ZStack``, and styling the elements around it.
 ///
+/// ![0EF3C7CA-FE46-4A14-A775-A736E13BE3AE](0EF3C7CA-FE46-4A14-A775-A736E13BE3AE.png)
 /// ```
 /// struct TextFieldView: View {
 ///     @State private var input = ""
@@ -37217,6 +37306,7 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 ///
 /// Create a toggle by providing an `isOn` binding and a label.
 ///
+/// ![BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C](BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C.png)
 /// ```
 /// struct SwitchView: View {
 ///     @State private var vibrateOnRing = false
@@ -37233,6 +37323,7 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 /// initializer that takes a title string (or localized string key) as its first
 /// parameter, instead of a trailing closure:
 ///
+/// ![75A3C8E1-A542-4D7D-8370-91C70DE6C502](75A3C8E1-A542-4D7D-8370-91C70DE6C502.png)
 /// ```
 /// struct SwitchView: View {
 ///     @State private var vibrateOnRing = true
@@ -37253,6 +37344,7 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 ///
 /// To set the style, use the ``View/toggleStyle(_:)`` modifier:
 ///
+/// ![3BE5966E-7786-4581-AF97-A7A2B18CEEA6](3BE5966E-7786-4581-AF97-A7A2B18CEEA6.png)
 /// ```
 /// struct RingerView: View {
 ///     @State private var vibrateOnRing = true
@@ -37718,6 +37810,7 @@ extension ToolbarContentBuilder {
 ///
 /// ### Adding toolbar items
 ///
+/// ![198635BF-F1C9-4F43-9434-B86269EBF1CD](198635BF-F1C9-4F43-9434-B86269EBF1CD.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -37745,6 +37838,7 @@ extension ToolbarContentBuilder {
 ///
 /// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`. For example:
 ///
+/// ![130803BF-A58D-4BBB-B916-9AB446907185](130803BF-A58D-4BBB-B916-9AB446907185.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -37834,7 +37928,7 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
 /// Toolbar placements are used with the ``ToolbarItem`` when defining a toolbar.
 /// For example:
 ///
-/// ![Toolbar item placement example 1](toolbar-placement-example-1.png)
+/// ![Toolbar item placement example 1](9B900A7C-AA39-4C5B-9022-EFFF9308F236.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -38056,6 +38150,7 @@ extension Transaction {
 ///
 /// A simple example of constructing a ``TransformedShape``:
 ///
+/// ![D08FFE9B-43D6-4BC7-9B64-DD36AE1044EE](D08FFE9B-43D6-4BC7-9B64-DD36AE1044EE.png)
 /// ```
 /// struct TransformedShapeView: View {
 ///     var body: some View {
@@ -39197,7 +39292,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// For example, a ``LinearGradient`` accepts a `UnitPoint` for the startPoint and endPoint parameters.
 /// This example uses the constants ``UnitPoint/top`` and ``UnitPoint/bottom``.
 ///
-/// ![LinearGradient Example 1](linear-gradient-example.png)
+/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -39476,6 +39571,7 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///
 /// See the example below.
 ///
+/// ![68519915-B4B5-4531-9D49-B9DF5172967B](68519915-B4B5-4531-9D49-B9DF5172967B.png)
 /// ```
 /// struct VerticallyAlignedView: View {
 ///     var body: some View {
@@ -47229,6 +47325,7 @@ extension View {
 /// a `Group` by passing it a [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
 /// stacking views:
 ///
+/// ![1F38B3B4-1BCC-426D-BEB1-D365A09E5C30](1F38B3B4-1BCC-426D-BEB1-D365A09E5C30.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47246,6 +47343,7 @@ extension View {
 /// function with `@ViewBuilder`, and use it just like you would with a
 /// trailing closure:
 ///
+/// ![5464434F-469F-4385-BFBE-C9B38C911F56](5464434F-469F-4385-BFBE-C9B38C911F56.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47272,6 +47370,7 @@ extension View {
 /// are actually functions, so in order to get the content they contain,
 /// you have to call the function. Below, this is done with `content()`.
 ///
+/// ![79B81C88-83A4-47C2-B3E7-68BAFFB230E4](79B81C88-83A4-47C2-B3E7-68BAFFB230E4.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47845,7 +47944,7 @@ extension ViewDimensions : Equatable {
 /// modifiers to create a new modifier that you can use to create blue caption
 /// text surrounded by a rounded rectangle:
 ///
-/// ![View modifier example 1](view-modifier-example-1.png)
+/// ![View modifier example 1](8786B2B4-A365-445D-96AB-DE5D5BD9F897.png)
 ///
 /// ```
 /// struct ExampleView: View {
