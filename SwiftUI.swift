@@ -22586,11 +22586,6 @@ public struct ListItemTint {
 ///
 /// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a `List` with the `View/listStyle(_:)` modifier.
 ///
-<<<<<<< Updated upstream
-/// ![ListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-1.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
