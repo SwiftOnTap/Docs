@@ -3263,13 +3263,8 @@ extension AnyTransition {
 ///
 /// To type-erase your view, pass it to `AnyView/init(_:)` like this:
 ///
-<<<<<<< Updated upstream
-///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
 ///
 /// ```
-=======
-///```
->>>>>>> Stashed changes
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         AnyView(Text("Hello, world!"))
@@ -3277,14 +3272,9 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-///  ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
+/// ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
 ///
-///
-<<<<<<< Updated upstream
-///  ![AnyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-2.png)
-=======
 /// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and `Color` is created when `foo` is set to `false`:
->>>>>>> Stashed changes
 ///
 /// ```
 /// struct ExampleView: View {
@@ -8910,11 +8900,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
-<<<<<<< Updated upstream
-/// ![Divider Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-2.png)
-=======
 /// Or use a `Divider` in a `HStack` to create a vertical line between horizontally laid out elements:
->>>>>>> Stashed changes
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11390,11 +11376,7 @@ public struct EmptyCommands : Commands {
 /// `EmptyView` is a special view that displays nothing and occupies no space.
 /// Modifying an `EmptyView` does nothing.
 ///
-<<<<<<< Updated upstream
-/// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
-=======
 /// For example, the following stack ignores the `EmptyView` between the two `Text` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist:
->>>>>>> Stashed changes
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13551,11 +13533,6 @@ public struct FocusedValues {
 ///
 /// Fonts can be applied to your view with the `View/font(_:)` modifier.
 ///
-<<<<<<< Updated upstream
-/// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-1.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -13567,11 +13544,7 @@ public struct FocusedValues {
 ///
 /// ![Font Example 1](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
 ///
-<<<<<<< Updated upstream
-/// ![Font Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-2.png)
-=======
 /// In addition to standard system font types like `font/textstyle/largeTitle` and `font/body`, you can customize the size, weight and design of your `Font` with the `Font/system(size:weight:design:)` modifier.
->>>>>>> Stashed changes
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13584,11 +13557,7 @@ public struct FocusedValues {
 ///
 /// ![Font Example 2](0C3CED07-2FD4-40E5-904D-8D1CD833E1F6.png)
 ///
-<<<<<<< Updated upstream
-/// ![Font Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Font-example-3.png)
-=======
 /// Non system-fonts can be applied using `Font/custom(_:size:)`
->>>>>>> Stashed changes
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16106,11 +16075,6 @@ public struct GeometryProxy {
 ///
 /// In this example, `GeometryReader` is used to create a view scaled down to exactly half of its parent container:
 ///
-<<<<<<< Updated upstream
-/// ![GeometryReader Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-1.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -22017,11 +21981,6 @@ extension Link where Label == Text {
 ///
 /// The following creates a `List` with three rows of text:
 ///
-<<<<<<< Updated upstream
-/// ![List Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-1.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -22040,11 +21999,6 @@ extension Link where Label == Text {
 ///
 /// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a `List` over an array of strings, `fruits`.
 ///
-<<<<<<< Updated upstream
-/// ![List Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-2.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -22071,11 +22025,6 @@ extension Link where Label == Text {
 ///
 /// The following example displays a `List` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
 ///
-<<<<<<< Updated upstream
-/// ![List Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-3.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -22100,11 +22049,6 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates the usage of `Section`.
 ///
-<<<<<<< Updated upstream
-/// ![List Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-4.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -22134,13 +22078,7 @@ extension Link where Label == Text {
 ///
 /// A `List` can be styled using the `View/listStyle(_:)` modifier.
 ///
-<<<<<<< Updated upstream
-/// The following example demonstrates how to style a `List` to use a grouped-inset style:
-///
-/// ![List Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-5.png)
-=======
 /// The following example demonstrates how to style a `List` using the grouped-inset style:
->>>>>>> Stashed changes
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22175,11 +22113,6 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how `View/listRowBackground(_:)` can be used to provide specific background colors for a list's rows:
 ///
-<<<<<<< Updated upstream
-/// ![List Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-6.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -22201,11 +22134,6 @@ extension Link where Label == Text {
 ///
 /// In the following example, all the rows of the `List` have the background view `Color.yellow`.
 ///
-<<<<<<< Updated upstream
-/// ![List Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-7.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits: [String] = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -22220,6 +22148,7 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
+///
 /// ![List Example 7](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
 ///
 /// [<-]
@@ -22682,11 +22611,6 @@ public struct ListItemTint {
 ///
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
 ///
-<<<<<<< Updated upstream
-/// ![ListStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ListStyle-example-2.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -24166,13 +24090,7 @@ extension NavigationLink {
 ///
 /// ### Setting up a navigation stack
 ///
-<<<<<<< Updated upstream
-/// A navigation stack is set up simply by wrapping your view in a `NavigationView`
-///
-/// ![NavigationView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-1.png)
-=======
 /// A navigation stack is set up simply by wrapping your view in a `NavigationView`:
->>>>>>> Stashed changes
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24219,11 +24137,6 @@ extension NavigationLink {
 ///
 /// The following example forces a large navigation title:
 ///
-<<<<<<< Updated upstream
-/// ![NavigationView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-3.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -24275,11 +24188,6 @@ extension NavigationLink {
 ///
 /// For example:
 ///
-<<<<<<< Updated upstream
-/// ![NavigationView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-5.png)
-///
-=======
->>>>>>> Stashed changes
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
