@@ -4574,7 +4574,7 @@ public enum BlendMode {
     ///
     /// The formula for screen is this:
     ///
-    ///     func screen(a: Double, b: Double) {{}
+    ///     func screen(a: Double, b: Double) {
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
     ///
@@ -4602,7 +4602,7 @@ public enum BlendMode {
     ///
     /// Overlay is a combo of multiply and screen. The formula is this:
     ///
-    ///     func overlay(a: Double, b: Double) -> Double {{}
+    ///     func overlay(a: Double, b: Double) -> Double {
     ///     	if a > 0.5 {
     ///     		return 2 * a * b
     ///     	} else {
@@ -11370,7 +11370,7 @@ public struct EmptyCommands : Commands {
 /// appearance.
 ///
 ///     struct EmphasizedLayout: ViewModifier {
-///         func body(content: Content) -> some View {{}
+///         func body(content: Content) -> some View {
 ///             content
 ///                 .background(Color.yellow)
 ///                 .border(Color.red)
@@ -11656,7 +11656,7 @@ public struct EmptyCommands : Commands {
 /// apply this environment value:
 ///
 ///     extension View {
-///         func myCustomValue(_ myCustomValue: String) -> some View {{}
+///         func myCustomValue(_ myCustomValue: String) -> some View {
 ///             environment(\.myCustomValue, myCustomValue)
 ///         }
 ///     }
@@ -12021,7 +12021,7 @@ extension EnvironmentKey {
 ///     }
 ///
 ///     extension View {
-///         func myCustomValue(_ myCustomValue: String) -> some View {{}
+///         func myCustomValue(_ myCustomValue: String) -> some View {
 ///             environment(\.myCustomValue, myCustomValue)
 ///         }
 ///     }
@@ -12067,7 +12067,7 @@ public struct EnvironmentValues : CustomStringConvertible {
     /// setting the value:
     ///
     ///     extension View {
-    ///         func myCustomValue(_ myCustomValue: String) -> some View {{}
+    ///         func myCustomValue(_ myCustomValue: String) -> some View {
     ///             environment(\.myCustomValue, myCustomValue)
     ///         }
     ///     }
@@ -23451,7 +23451,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     /// red border around the current menu style:
     ///
     ///     struct RedBorderMenuStyle: MenuStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             Menu(configuration)
     ///                 .border(Color.red)
     ///         }
@@ -23574,7 +23574,7 @@ extension MenuStyle {
 /// border to the current menu style:
 ///
 ///     struct RedBorderMenuStyle : MenuStyle {
-///         func makeBody(configuration: Configuration) -> some View {{}
+///         func makeBody(configuration: Configuration) -> some View {
 ///             Menu(configuration)
 ///                 .border(Color.red)
 ///         }
@@ -24779,7 +24779,7 @@ extension OffsetShape : InsettableShape where Content : InsettableShape {
 ///             }
 ///         }
 ///
-///         func contactSupport() {{}
+///         func contactSupport() {
 ///             guard let url = URL(string: "https://www.example.com") else {
 ///                 return
 ///             }
@@ -40456,7 +40456,7 @@ extension View {
     /// a new kind of caption with blue text surrounded by a rounded rectangle:
     ///
     ///     struct BorderedCaption: ViewModifier {
-    ///         func body(content: Content) -> some View {{}
+    ///         func body(content: Content) -> some View {
     ///             content
     ///                 .font(.caption2)
     ///                 .padding(10)
@@ -40472,7 +40472,7 @@ extension View {
     /// for applying the `BorderedCaption` defined above:
     ///
     ///     extension View {
-    ///         func borderedCaption() -> some View {{}
+    ///         func borderedCaption() -> some View {
     ///             modifier(BorderedCaption())
     ///         }
     ///     }
