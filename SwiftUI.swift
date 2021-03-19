@@ -1817,7 +1817,7 @@ extension Angle : Animatable {
 ///
 /// Use `Animatable` when you are unable to achieve the animation you want with `View/animation(_:)` or `withAnimation(_:_:)`.
 ///
-/// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `Animatable/animatableData-c6d9d`: `Animatable/animatableData', which represents a view's animatable data.
+/// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData', which represents a view's animatable data.
 ///
 /// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `Animatable/animatableData-c6d9d. This is also the reason why `Animatable/animatableData` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 /// [animatable-modifier ->]
@@ -4275,14 +4275,20 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
-/// In the example above, the source of truth is a `@``State` variable, named
+/// In the example above, the source of truth is a `@State` variable, named
 /// `text`. `text`  represents a `String`, whereas `$text` represents a
-/// `Binding``<String>`. `TextField`'s initializer accepts a placeholder
-/// `String` and a `Binding``<String>`. In this example, `TextField` requires a
+/// `Binding<String>`. `TextField`'s initializer accepts a placeholder
+/// `String` and a `Binding<String>`. In this example, `TextField` requires a
 /// `Binding` to the source of truth as `TextField` must be able to *write back*
-///  to the `@``State` variable (a **mutable** source of truth).
+///  to the `@State` variable (a **mutable** source of truth).
 ///
-/// Recall, a `Binding` is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
+/// Recall, a `Binding` is a **two-way connection** to a source of truth.
+/// It is used to both read the latest value, as well as to set a new value.
+/// In the previous example, the view's initial render will display an editable
+/// text of "🍌🍌" on the screen - `TextField` reads the current value of the
+/// source of truth `text` via the  `Binding` `$text`. When the user starts
+/// editing, `TextField` *writes back* new values to the source of truth `text`
+/// via the `Binding` `$text` once again.
 ///
 /// ### Creating a `Binding` from an `ObservableObject`
 ///
@@ -13582,7 +13588,7 @@ public struct FocusedValues {
 
 /// A font.
 ///
-/// This structure defines a `Font` in SwiftUI. `Font` offers shorthands for varying styles of the system font via static properties, such as ``Font``.``Font/body`` or `Font``.title`.  `Font` also includes many modifiers, including ways to compare & modify fonts.
+/// This structure defines a `Font` in SwiftUI. `Font` offers shorthands for varying styles of the system font via static properties, such as ``Font``.``Font/body`` or ``Font``.``Font/title``.  `Font` also includes many modifiers, including ways to compare & modify fonts.
 ///
 /// Fonts can be applied to your view with the `View/font(_:)` modifier.
 ///
@@ -16145,7 +16151,7 @@ public struct GeometryProxy {
 ///
 /// ![GeometryReader Example 1](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
 ///
-/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is `alignment/.topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
+/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is `Alignment/topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
 ///
 /// ### `GeometryReader` to get a view's frame
 ///
@@ -26929,8 +26935,6 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 
 /// The instance that describes the behavior and appearance of a plain list.
 ///
-/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
-///
 ///
 ///      struct ExampleView: View {
 ///          var body: some View {
@@ -26943,6 +26947,7 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 ///          }
 ///      }
 ///
+/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainListStyle : ListStyle {
@@ -31157,8 +31162,8 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// #### Using custom Scenes
 ///
-/// Just like how custom `View`s are made out of a `var` `widget/body-swift.variable` of smaller `View`s,
-/// custom `Scene`s are made out of a `var` `Widget/body-swift.variable` of smaller `Scene`s.
+/// Just like how custom `View`s are made out of a `var body` of smaller `View`s,
+/// custom `Scene`s are made out of a `var body` of smaller `Scene`s.
 ///
 ///     @main
 ///     struct MacCompatibleApp: App {
@@ -32555,7 +32560,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// By default, a `ScrollView`'s scroll indicator is visible upon user interaction.
 ///
-/// Pass `false` to `scrollview/showsindicators` in `ScrollView/init(_:showsIndicators:content:)` to hide the scroll indicator(s). For example:
+/// Pass `false` to `ScrollView/showsIndicators` in `ScrollView/init(_:showsIndicators:content:)` to hide the scroll indicator(s). For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -32923,8 +32928,6 @@ extension SecureField where Label == Text {
 
 /// A picker style that presents the options in a segmented control.
 ///
-/// ![SegmentedPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-segmented-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
@@ -32943,6 +32946,8 @@ extension SecureField where Label == Text {
 ///       }
 ///  }
 /// ```
+///
+/// ![SegmentedPickerStyle Example 1](segmented-picker-ex1.gif)
 ///
 /// [pickerstyle-segmented ->]
 /// Your app can also use explicit tags to identify picker content.
@@ -33655,8 +33660,6 @@ public struct SidebarCommands : Commands {
 
 /// The behavior and appearance of a sidebar or source list.
 ///
-/// ![SidebarListStyle Example 1](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
-///
 /// ```
 ///      struct ExampleView: View {
 ///          var body: some View {
@@ -33669,6 +33672,8 @@ public struct SidebarCommands : Commands {
 ///          }
 ///      }
 /// ```
+///
+/// ![SidebarListStyle Example 1](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
 ///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -35442,7 +35447,7 @@ extension StrokeStyle : Animatable {
 /// }
 /// ```
 ///
-/// > To apply this style to a toggle, or to a view that contains toggles, use the `View/toggleStyle(_:)` modifier.
+/// > To apply this style to a toggle, or a view that contains toggles, use the `View/toggleStyle(_:)` modifier.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct SwitchToggleStyle : ToggleStyle {
@@ -35790,7 +35795,7 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
-/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some` ```View``, such as `View/foregroundColor(_:)`, are compatible with `Text`.
+/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some` ``View``, such as `View/foregroundColor(_:)`, are compatible with `Text`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -37775,7 +37780,7 @@ extension ToolbarContentBuilder {
 ///
 /// ### Placing a toolbar item on the navigation bar
 ///
-/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement`.`ToolbarItemPlacement/navigationBarLeading` or `ToolbarItemPlacement`.`ToolbarItemPlacement/navigationBarTrailing`. For example:
+/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement/navigationBarLeading` or `ToolbarItemPlacement/navigationBarTrailing`. For example:
 ///
 /// ![130803BF-A58D-4BBB-B916-9AB446907185](130803BF-A58D-4BBB-B916-9AB446907185.png)
 /// ```
