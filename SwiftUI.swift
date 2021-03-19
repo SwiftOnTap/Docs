@@ -7207,7 +7207,7 @@ extension CommandsBuilder {
 
 /// Display a date picker in a compact, textual format.
 ///
-/// > "This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup."
+/// > This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup.
 ///
 /// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
 ///
@@ -8258,11 +8258,12 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
-///             GroupBox() {
-///                 Label("Bananas 🍌🍌", systemImage: "heart.fill")
+///             GroupBox(
+///                 label: Label("Bananas 🍌🍌", systemImage: "heart.fill")
 ///                     .foregroundColor(.yellow)
 ///                     .groupBoxStyle(DefaultGroupBoxStyle())
-///              }, {
+///              )
+///              {
 ///                 Text("Go Bananas")
 ///              }
 ///             .padding()
@@ -8312,16 +8313,16 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 
 /// The default label style in the current context.
 ///
-/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
-///
-///
+///```
 ///    struct ExampleView: View {
 ///        var body: some View {
 ///             Label("Banana🍌", systemImage: "heart.fill")
 ///                 .labelStyle(DefaultLabelStyle())
 ///        }
 ///    }
+///```
 ///
+/// ![DefaultLabelStyle Example 1](DefaultLabelStyle.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultLabelStyle : LabelStyle {
@@ -8347,7 +8348,7 @@ public struct DefaultLabelStyle : LabelStyle {
 ///
 /// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
 ///
-///
+///```
 ///      struct ExampleView: View {
 ///          var body: some View {
 ///             List {
@@ -8358,7 +8359,7 @@ public struct DefaultLabelStyle : LabelStyle {
 ///             .listStyle(DefaultListStyle())
 ///          }
 ///      }
-///
+///```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultListStyle : ListStyle {
@@ -8510,15 +8511,13 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// platform and the view type in which it appears. For example, in a standard
 /// view, the default picker styles by platform are:
 ///
-/// * On iOS and watchOS the default is a wheel.
-/// * On macOS, the default is a pop-up button.
-/// * On tvOS, the default is a segmented control.
+/// * A wheel on iOS and watchOS
+/// * A pop-up button on macOS
+/// * A segmented control on tvOS
 ///
 /// The default picker style may also take into account other factors — like
 /// whether the picker appears in a container view — when setting the appearance
 /// of a picker.
-///
-/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -8539,17 +8538,22 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
 /// [pickerstyle-default ->]
 /// Your app can also use explicit tags to identify picker content.
 ///
-/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
-///
 /// ```
+/// enum MyFruit {
+///     case apple, banana, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
-///         switch favoriteFruit{
+///         switch favoriteFruit {
 ///         case .apple:
 ///             return "Apple 🍎🍎"
 ///         case .banana:
@@ -8569,10 +8573,13 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///                 .tag(MyFruit.apple)
 ///             Text("Peach 🍑🍑")
 ///                 .tag(MyFruit.peach)
-///         }.pickerStyle(DefaultPickerStyle())
+///         }
+///         .pickerStyle(DefaultPickerStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
 ///
 /// [<-]
 /// You can override a picker’s style. To apply the default style to a picker,
@@ -8734,12 +8741,10 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 
 /// The default toggle style.
 ///
-/// > If you create a toggle directly on a blank canvas, the style varies:
-/// > - For the phone, pad, and watch idioms, the default toggle style is a switch.
-/// > - For the Mac idiom, the default toggle style is a checkbox.
-/// > - For the TV idom, the default toggle style is a button.
-///
-/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+/// If you create a toggle directly on a blank canvas, the style varies:
+/// - For the phone, pad, and watch idioms, the default toggle style is a switch.
+/// - For the Mac idiom, the default toggle style is a checkbox.
+/// - For the TV idom, the default toggle style is a button.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -8754,11 +8759,13 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 ///  }
 /// ```
 ///
+/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+///
 /// If you create a toggle inside a container, such as a `List`, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
 /// style to a toggle, or to a view that contains toggles, use the
 /// `View/toggleStyle(_:)` modifier. To revert a custom-styled toggle to the
-///  default, use `toggleStyle(DefaultToggleStyle())`.
+///  default, use `.toggleStyle(DefaultToggleStyle())`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultToggleStyle : ToggleStyle {
 
@@ -16923,11 +16930,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 
 /// An interactive calendar or clock.
 ///
-/// > "This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate."
+/// This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate.
 ///
-/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
-///
-///
+///```
 ///      struct ExampleView: View {
 ///          @State var date: Date = Date()
 ///
@@ -16937,7 +16942,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///                 .padding()
 ///          }
 ///      }
+///```
 ///
+/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
 ///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -17873,16 +17880,16 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-/// ![IconOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-icon-only-example-1.png)
-///
-///
+///```
 ///    struct ExampleView: View {
 ///        var body: some View {
 ///             Label("Banana🍌", systemImage: "heart.fill")
 ///                 .labelStyle(IconOnlyLabelStyle())
 ///        }
 ///    }
+///```
 ///
+/// ![IconOnlyLabelStyle Example 1](icon-only.png)
 ///
 /// > The title of the label is still used for non-visual descriptions, such as VoiceOver.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -19945,6 +19952,10 @@ extension IndexViewStyle {
 /// ![Inline Example](/picker-style-2.gif)
 ///
 /// ```
+/// enum MyFruit {
+///     case apple, banana, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
@@ -19983,6 +19994,10 @@ public struct InlinePickerStyle : PickerStyle {
     /// ![Inline Example](/picker-style-2.gif)
     ///
     /// ```
+    /// enum MyFruit {
+    ///     case apple, banana, peach
+    /// }
+    ///
     /// struct ExampleView: View {
     ///     @State var favoriteFruit: MyFruit = MyFruit.banana
     ///
@@ -20017,9 +20032,9 @@ public struct InlinePickerStyle : PickerStyle {
 
 /// The instance that describes the behavior and appearance of an inset grouped list.
 ///
-/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
+/// This style creates a gap between the borders of the list and the edge of the screen:
 ///
-///
+///```
 ///      struct ExampleView: View {
 ///          var body: some View {
 ///             List {
@@ -20030,7 +20045,9 @@ public struct InlinePickerStyle : PickerStyle {
 ///             .listStyle(InsetGroupedListStyle())
 ///          }
 ///      }
+///```
 ///
+/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
 ///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
@@ -23481,8 +23498,6 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///
 /// Use this style when there are more than five options. Consider using `InlinePickerStyle` when there are fewer than five options.
 ///
-/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
@@ -23503,12 +23518,16 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 /// }
 /// ```
 ///
+/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
+///
 /// [pickerstyle-menu ->]
 /// Your app can also use explicit tags to identify picker content.
 ///
-/// ![Menu Picker Style Example](/picker-style-3.gif)
-///
 /// ```
+/// enum MyFruit {
+///     case apple, banana, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
@@ -23538,6 +23557,8 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///     }
 /// }
 /// ```
+///
+/// ![Menu Picker Style Example](/picker-style-3.gif)
 ///
 /// [<-]
 ///
@@ -26896,8 +26917,6 @@ public struct PinnedScrollableViews : OptionSet {
 ///
 /// > A button style that doesn't style or decorate its content while idle, but may apply a visual effect to indicate the pressed, focused, or enabled state of the button.
 ///
-/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
-///
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -26915,8 +26934,9 @@ public struct PinnedScrollableViews : OptionSet {
 ///          func tap() { }
 ///      }
 ///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
-/// > To apply this style to a button, or to a view that contains buttons, use the `View/buttonStyle(_:)-66fbx` modifier.
+/// > To apply this style to a button, or to a view that contains buttons, use the `View/buttonStyle(_:)-3c92f` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
@@ -27882,17 +27902,15 @@ extension PreviewProvider {
 
 /// This protocol is used to define custom button styles.
 ///
-/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and `PlainButtonStyle`.
+/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including `BorderlessButtonStyle` and `PlainButtonStyle`.
 ///
-/// Your structure only needs to implement one method: `makeBody(configuration:)`. The desired button view is output by this method.
+/// Your structure only needs to implement one method: `PlainButtonStyle/makeBody(configuration:)`. The desired button view is output by this method.
 ///
 /// To build a custom `PrimitiveButtonStyle`, create a struct that conforms to the protocol.
 ///
-/// `makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which passes the original label to display the button view and a `trigger()` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
+/// `PlainButtonStyle/makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which passes the original label to display the button view and a `PrimitiveButtonStyle/trigger()` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
 ///
-/// Use `View/buttonStyle(_:)` to apply a primitive button style.
-///
-/// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
+/// Use `View/buttonStyle(_:)-1fa87` to apply a primitive button style.
 ///
 /// ```
 ///  struct ExampleView: View {
@@ -27913,9 +27931,9 @@ extension PreviewProvider {
 ///  }
 /// ```
 ///
-/// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
+/// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
 ///
-/// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
+/// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
 ///
 /// ```
 ///  struct BananaView: View {
@@ -27942,6 +27960,9 @@ extension PreviewProvider {
 ///    }
 ///  }
 /// ```
+///
+/// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PrimitiveButtonStyle { }
 extension PrimitiveButtonStyle {
@@ -31146,8 +31167,6 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// Primitive scenes like `WindowGroup` can go directly in the body of your `App`.
 ///
-/// ![Scene Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
-///
 ///     @main
 ///     struct SuperSimpleApp: App {
 ///         var body: some Scene {
@@ -31157,12 +31176,12 @@ extension RoundedRectangle : InsettableShape {
 ///         }
 ///     }
 ///
+/// ![Scene Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
+///
 /// #### Using custom Scenes
 ///
-/// Just like how custom `View`s are made out of a `var body` of smaller  `View`s,
-/// custom `Scene`s are made out of a `var body` of smaller `Scene`s.
-///
-/// ![Scene Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
+/// Just like how custom `View`s are made out of a `var` `widget/body-swift.variable` of smaller `View`s,
+/// custom `Scene`s are made out of a `var` `widget/body-swift.variable` of smaller `Scene`s.
 ///
 ///     @main
 ///     struct MacCompatibleApp: App {
@@ -31184,9 +31203,11 @@ extension RoundedRectangle : InsettableShape {
 ///         }
 ///     }
 ///
+/// ![Scene Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
+///
 /// ### Modifiers
 ///
-/// Just like how `Views` have a bunch of custom modifiers that work right out of the box,
+/// Just like how `View`s have a bunch of custom modifiers that work right out of the box,
 /// `Scene` provides default implementations of many useful modifiers. These can be used to do things
 /// like adding macOS commands, changing the toolbar, and adding support for app storage.
 /// [scene-phase ->]
@@ -32951,6 +32972,10 @@ extension SecureField where Label == Text {
 /// ![Segmented Example 1](/picker-style-6.gif)
 ///
 /// ```
+/// enum MyFruit {
+///     case apple, banana, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
@@ -35501,11 +35526,12 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ```
 ///
 /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+///
 /// [<-]
 /// [tabview-style ->]
 /// ### Page-style navigation
 ///
-/// Place child views in a `TabView` with a `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
+/// Place child views in a `TabView` with a `.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
 ///
 /// The following example creates a paginated view with the three `Text` child views as individual pages.
 ///
@@ -35543,11 +35569,11 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-3.gif)
+/// ![TabView Example 3](tabview-dynamic.gif)
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
-/// A page-styled `TabView` will add a row of page indicator(s) at the bottom of the container by default. If `View/tabItem(_:)` is used, these indicators each take the form of the corresponding tab item's primary image. If not - these page indicators resort to system defaults.
+/// A page-styled `TabView` will add a row of page indicator(s) at the bottom of the container by default. If `View/tabItem(_:)` is used, these indicators each take the form of the corresponding tab item's primary image. If not, the page indicators resort to system defaults.
 ///
 /// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
 ///
@@ -35570,9 +35596,10 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
 /// [<-]
 /// [tabview-tag ->]
+///
 /// ### Handling tab-selection
 ///
-/// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
+/// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content:)`, and the modifier `View/tag(_:)`.
 ///
 /// Here is an example that writes tab selection to a state variable:
 ///
@@ -35730,9 +35757,7 @@ public struct TapGesture : Gesture {
 
 /// A view that displays read-only text.
 ///
-/// `Text` draws a string in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
-///
-/// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
+/// `Text` draws a `String` in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35742,11 +35767,11 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// `Text` is most commonly initialized with a string, however, it has 9 different initializers.
+/// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
+///
+/// `Text` is most commonly initialized with a `String`, however, it has 9 different initializers.
 ///
 /// For example, use `Text/init(_:style:)` to display a date in a `Text` view.
-///
-///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35756,9 +35781,9 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// `Text` also accepts 12 unique modifiers to customize your string.
+///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
-///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
+/// `Text` also accepts 12 unique modifiers to customize your string.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35770,9 +35795,9 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some View`, such as `View/foregroundColor(_:)`, are compatible with `Text`.
+///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
-///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
+/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some``View`, such as `View/foregroundColor(_:)`, are compatible with `Text`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35784,7 +35809,9 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
+///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
+///
+/// **Remember**, any modifier that returns `some``View` must be used after modifiers that return `Text`.
 ///
 /// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
 ///
@@ -37740,23 +37767,17 @@ extension ToolbarContentBuilder {
 ///                     ToolbarItem(id: "bananas") {
 ///                         Text("🍌🍌")
 ///                     }
-///
-///                     ToolbarItem(id: "apples") {
-///                         Text("🍏🍏")
-///                     }
-///
-///                     ToolbarItem(id: "peaches") {
-///                         Text("🍑🍑")
-///                     }
 ///                 }
 ///         }
 ///     }
 /// }
 /// ```
 ///
+/// ![ToolBarItem Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+///
 /// ### Placing a toolbar item on the navigation bar
 ///
-/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`. For example:
+/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement`.`ToolbarItemPlacement/navigationBarLeading` or `ToolbarItemPlacement`.`ToolbarItemPlacement/navigationBarTrailing`. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -37764,7 +37785,8 @@ extension ToolbarContentBuilder {
 ///         NavigationView {
 ///             Text("Hello, World!")
 ///                 .toolbar {
-///                     ToolbarItem(placement: .navigationBarLeading) {
+///                     ToolbarItem(id: "bananas", placement: .navigationBarLeading) {
+///                         Text("🍌🍌")
 ///                         Spacer()
 ///                     }
 ///                 }
@@ -37772,6 +37794,8 @@ extension ToolbarContentBuilder {
 ///     }
 /// }
 /// ```
+///
+/// ![ToolBarItem Example 2](toolbar-leading.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItem<ID, Content> : ToolbarContent where Content : View {
@@ -44820,9 +44844,7 @@ extension View {
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
-    /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
-    ///
-    /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+    /// `view/.toolbar(content:)-f4928` populates the toolbar or navigation bar. For example:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -44847,13 +44869,13 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+    ///
     /// ### Aligning a toolbar item
     ///
     /// Think of a toolbar in terms of spacers and items.
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
-    ///
-    /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -44873,6 +44895,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
+    ///
     public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
 
 
@@ -44884,57 +44908,23 @@ extension View {
     ///
     /// For example:
     ///
-    /// ![toolbar Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-3.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         NavigationView {
     ///             Text("Hello, World!")
-    ///                 .toolbar {
+    ///                 .toolbar(id: "fruitItems") {
     ///                     ToolbarItem(id: "bananas") {
     ///                         Text("🍌🍌")
     ///                     }
-    ///
-    ///                     ToolbarItem(id: "apples") {
-    ///                         Text("🍏🍏")
-    ///                     }
-    ///
-    ///                     ToolbarItem(id: "peaches") {
-    ///                         Text("🍑🍑")
-    ///                     }
     ///                 }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ### Aligning a toolbar item
+    /// ![toolbar Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-3.png)
     ///
-    /// Think of a toolbar in terms of spacers and items.
-    ///
-    /// For example, this is how a single toolbar item is aligned to the right:
-    ///
-    /// ![toolbar Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-4.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         NavigationView {
-    ///             Text("Hello, World!")
-    ///                 .toolbar {
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Spacer()
-    ///                     }
-    ///
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Text("🍌🍌")
-    ///                     }
-    ///                 }
-    ///         }
-    ///     }
-    /// }
-    /// ```
     public func toolbar<Content>(id: String, @ToolbarContentBuilder content: () -> Content) -> some View where Content : CustomizableToolbarContent { }
 
 }
@@ -48122,6 +48112,10 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// ![Wheel Example 1](/picker-style-7.gif)
 ///
 /// ```
+/// enum MyFruit {
+///     case apple, banana, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
