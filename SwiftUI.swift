@@ -1817,9 +1817,9 @@ extension Angle : Animatable {
 ///
 /// Use `Animatable` when you are unable to achieve the animation you want with `View/animation(_:)` or `withAnimation(_:_:)`.
 ///
-/// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatable/animatabledata-c6d9d`: `animatable/animatabledata', which represents a view's animatable data.
+/// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `Animatable/animatableData-c6d9d`: `Animatable/animatableData', which represents a view's animatable data.
 ///
-/// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `animatable/animatabledata-c6d9d. This is also the reason why `animatable/animatabledata` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
+/// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `Animatable/animatableData-c6d9d. This is also the reason why `Animatable/animatableData` must conform to `VectorArithmetic`, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 /// [animatable-modifier ->]
 /// ### Implementations
 ///
@@ -1871,7 +1871,7 @@ extension Angle : Animatable {
 ///
 /// Note:
 ///
-/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through `animatable/animatabledata-c6d9d, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
+/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through `Animatable/animatableData-c6d9d, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
 ///
 /// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the runtime needs to be able to interpolate fractionally between `0.0` and `10.0` 'shakes' - and it does so by making use of `CGFloat`'s `VectorArithmetic` conformance.
 ///
@@ -4275,7 +4275,12 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
-/// In the example above, the source of truth is a `@``State` variable, named `text`. `text`  represents a `String`, whereas `$text` represents a `Binding``<String>`. `TextField`'s initializer accepts a placeholder `String` and a `Binding``<String>`. In this example, `TextField` requires a `Binding` to the source of truth as `TextField` must be able to *write back* to the `@``State` variable (a **mutable** source of truth).
+/// In the example above, the source of truth is a `@``State` variable, named
+/// `text`. `text`  represents a `String`, whereas `$text` represents a
+/// `Binding``<String>`. `TextField`'s initializer accepts a placeholder
+/// `String` and a `Binding``<String>`. In this example, `TextField` requires a
+/// `Binding` to the source of truth as `TextField` must be able to *write back*
+///  to the `@``State` variable (a **mutable** source of truth).
 ///
 /// Recall, a `Binding` is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth `text` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth `text` via the `Binding`  `$text` once again.
 ///
@@ -4317,7 +4322,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// At times, you may want to pass a fixed value as a `Binding`. This is possible via `Binding/constant(_:)`, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
 ///
-/// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to `EditMode``.active`.
+/// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to  ``EditMode``.``EditMode/active``.
 ///
 /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
@@ -7214,7 +7219,7 @@ extension CommandsBuilder {
 
 /// Display a date picker in a compact, textual format.
 ///
-/// > This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup.
+/// This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup.
 ///
 /// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
 ///
@@ -8269,17 +8274,20 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
-///             GroupBox(
-///                 label: Label("Bananas 🍌🍌", systemImage: "heart.fill")
-///                     .foregroundColor(.yellow)
-///                     .groupBoxStyle(DefaultGroupBoxStyle())
-///              )
-///              {
+///             GroupBox(label: BananaLabel()) {
 ///                 Text("Go Bananas")
-///              }
+///             }
 ///             .padding()
 ///         }
-///      }
+///     }
+///
+///     struct BananaLabel: View {
+///         var body: some View {
+///             Label("Bananas 🍌🍌", systemImage: "heart.fill")
+///                 .foregroundColor(.yellow)
+///                 .groupBoxStyle(DefaultGroupBoxStyle())
+///         }
+///     }
 ///
 ///
 @available(iOS 14.0, macOS 11.0, *)
@@ -8324,14 +8332,14 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 
 /// The default label style in the current context.
 ///
-///```
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
-///                 .labelStyle(DefaultLabelStyle())
-///        }
-///    }
-///```
+///
+///     struct ExampleView: View {
+///         var body: some View {
+///              Label("Banana🍌", systemImage: "heart.fill")
+///                  .labelStyle(DefaultLabelStyle())
+///         }
+///     }
+///
 ///
 /// ![DefaultLabelStyle Example 1](DefaultLabelStyle.png)
 ///
@@ -8359,7 +8367,7 @@ public struct DefaultLabelStyle : LabelStyle {
 ///
 /// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
 ///
-///```
+///
 ///      struct ExampleView: View {
 ///          var body: some View {
 ///             List {
@@ -8370,7 +8378,7 @@ public struct DefaultLabelStyle : LabelStyle {
 ///             .listStyle(DefaultListStyle())
 ///          }
 ///      }
-///```
+///
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultListStyle : ListStyle {
@@ -8557,7 +8565,7 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///
 /// ```
 /// enum MyFruit {
-///     case apple, banana, peach
+///     case banana, apple, peach
 /// }
 ///
 /// struct ExampleView: View {
@@ -8565,10 +8573,10 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit {
-///         case .apple:
-///             return "Apple 🍎🍎"
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -11000,7 +11008,7 @@ extension EdgeInsets : Animatable {
 
 /// A button that toggles the edit mode for the current edit scope.
 ///
-/// An `EditButton` toggles the `EditMode` (passed via `EnvironmentValues/editMode`) for content within a container that supports `EditMode``.active`.
+/// An `EditButton` toggles the `EditMode` (passed via `EnvironmentValues/editMode`) for content within a container that supports ``EditMode``.``EditMode/active``.
 ///
 /// [[list-edit-button]]
 ///
@@ -13574,7 +13582,7 @@ public struct FocusedValues {
 
 /// A font.
 ///
-/// This structure defines a `Font` in SwiftUI. `Font` offers shorthands for varying styles of the system font via static properties, such as `Font``.body` or `Font``.title`.  `Font` also includes many modifiers, including ways to compare & modify fonts.
+/// This structure defines a `Font` in SwiftUI. `Font` offers shorthands for varying styles of the system font via static properties, such as ``Font``.``Font/body`` or `Font``.title`.  `Font` also includes many modifiers, including ways to compare & modify fonts.
 ///
 /// Fonts can be applied to your view with the `View/font(_:)` modifier.
 ///
@@ -13589,7 +13597,7 @@ public struct FocusedValues {
 ///
 /// ![Font Example 1](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
 ///
-/// In addition to standard system font types like `font/textstyle/largeTitle` and `font/body`, you can customize the size, weight and design of your `Font` with the `Font/system(size:weight:design:)` modifier.
+/// In addition to standard system font types like `Font/TextStyle/largeTitle` and `Font/body`, you can customize the size, weight and design of your `Font` with the `Font/system(size:weight:design:)` modifier.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16936,7 +16944,6 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///
 /// This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate.
 ///
-///```
 ///      struct ExampleView: View {
 ///          @State var date: Date = Date()
 ///
@@ -16946,7 +16953,6 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///                 .padding()
 ///          }
 ///      }
-///```
 ///
 /// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
 ///
@@ -17885,14 +17891,12 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-///```
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
-///                 .labelStyle(IconOnlyLabelStyle())
-///        }
-///    }
-///```
+///     struct ExampleView: View {
+///         var body: some View {
+///              Label("Banana🍌", systemImage: "heart.fill")
+///                  .labelStyle(IconOnlyLabelStyle())
+///         }
+///     }
 ///
 /// ![IconOnlyLabelStyle Example 1](icon-only.png)
 ///
@@ -19960,7 +19964,7 @@ extension IndexViewStyle {
 ///
 /// ```
 /// enum MyFruit {
-///     case apple, banana, peach
+///     case banana, apple, peach
 /// }
 ///
 /// struct ExampleView: View {
@@ -19968,10 +19972,10 @@ extension IndexViewStyle {
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit{
-///         case .apple:
-///             return "Apple 🍎🍎"
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -20002,7 +20006,7 @@ public struct InlinePickerStyle : PickerStyle {
     ///
     /// ```
     /// enum MyFruit {
-    ///     case apple, banana, peach
+    ///     case banana, apple, peach
     /// }
     ///
     /// struct ExampleView: View {
@@ -20010,10 +20014,10 @@ public struct InlinePickerStyle : PickerStyle {
     ///
     ///     var fruitName: String {
     ///         switch favoriteFruit{
-    ///         case .apple:
-    ///             return "Apple 🍎🍎"
     ///         case .banana:
     ///             return "Banana 🍌🍌"
+    ///         case .apple:
+    ///             return "Apple 🍎🍎"
     ///         case .peach:
     ///             return "Peach 🍑🍑"
     ///         }
@@ -20041,7 +20045,6 @@ public struct InlinePickerStyle : PickerStyle {
 ///
 /// This style creates a gap between the borders of the list and the edge of the screen:
 ///
-///```
 ///      struct ExampleView: View {
 ///          var body: some View {
 ///             List {
@@ -20052,7 +20055,6 @@ public struct InlinePickerStyle : PickerStyle {
 ///             .listStyle(InsetGroupedListStyle())
 ///          }
 ///      }
-///```
 ///
 /// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
 ///
@@ -23501,7 +23503,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///
 /// ```
 /// enum MyFruit {
-///     case apple, banana, peach
+///     case banana, apple, peach
 /// }
 ///
 /// struct ExampleView: View {
@@ -23509,10 +23511,10 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit {
-///         case .apple:
-///             return "Apple 🍎🍎"
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -24206,7 +24208,7 @@ extension NavigationLink {
 /// - `NavigationBarItem.TitleDisplayMode.inline`
 /// - `NavigationBarItem.TitleDisplayMode.large`
 ///
-/// An `navigationbaritem/titledisplaymode/automatic` mode is also present, and represents the system default.
+/// An `NavigationBarItem/TitleDisplayMode/automatic` mode is also present, and represents the system default.
 ///
 /// The following example forces a large navigation title:
 ///
@@ -31156,7 +31158,7 @@ extension RoundedRectangle : InsettableShape {
 /// #### Using custom Scenes
 ///
 /// Just like how custom `View`s are made out of a `var` `widget/body-swift.variable` of smaller `View`s,
-/// custom `Scene`s are made out of a `var` `widget/body-swift.variable` of smaller `Scene`s.
+/// custom `Scene`s are made out of a `var` `Widget/body-swift.variable` of smaller `Scene`s.
 ///
 ///     @main
 ///     struct MacCompatibleApp: App {
@@ -32573,7 +32575,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// This `ScrollView` will never show a scroll indicator.
 ///
-/// You do not need to specify an axis to use `scrollview/showsindicators`. For example:
+/// You do not need to specify an axis to use `ScrollView/showsIndicators`. For example:
 ///
 ///  ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
 ///
@@ -32949,7 +32951,7 @@ extension SecureField where Label == Text {
 ///
 /// ```
 /// enum MyFruit {
-///     case apple, banana, peach
+///     case banana, apple, peach
 /// }
 ///
 /// struct ExampleView: View {
@@ -32957,10 +32959,10 @@ extension SecureField where Label == Text {
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit{
-///         case .apple:
-///             return "Apple 🍎🍎"
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -35788,7 +35790,7 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
-/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some``View`, such as `View/foregroundColor(_:)`, are compatible with `Text`.
+/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some` ```View``, such as `View/foregroundColor(_:)`, are compatible with `Text`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35802,7 +35804,7 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
 ///
-/// **Remember**, any modifier that returns `some``View` must be used after modifiers that return `Text`.
+/// **Remember**, any modifier that returns `some` ``View`` must be used after modifiers that return `Text`.
 ///
 /// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
 ///
@@ -44843,7 +44845,7 @@ extension View {
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
-    /// `view/.toolbar(content:)-f4928` populates the toolbar or navigation bar. For example:
+    /// `View/toolbar(content:)-f4928` populates the toolbar or navigation bar. For example:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -48115,18 +48117,18 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 ///
 /// ```
 /// enum MyFruit {
-///     case apple, banana, peach
+///     case banana, apple, peach
 /// }
 ///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
-///         switch favoriteFruit{
-///         case .apple:
-///             return "Apple 🍎🍎"
+///         switch favoriteFruit {
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -48142,7 +48144,8 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 ///                 .tag(MyFruit.apple)
 ///             Text("Peach 🍑🍑")
 ///                 .tag(MyFruit.peach)
-///         }.pickerStyle(WheelPickerStyle())
+///         }
+///         .pickerStyle(WheelPickerStyle())
 ///     }
 /// }
 /// ```
