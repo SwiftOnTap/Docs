@@ -33346,7 +33346,7 @@ extension Shape {
     ///     var body: some View {
     ///         Rectangle()
     ///             .transform(CGAffineTransform(a: 1, b: 0, c: 0.5, d: 1, tx: 0, ty: 0))
-    ///             .frarme(width: 100, height: 100)
+    ///             .frame(width: 100, height: 100)
     ///     }
     /// }
     /// ```
