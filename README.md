@@ -28,7 +28,7 @@ We get it, docs are overwhelming at first. To start, we recommend these resource
 
 1. Apple's Swift [book](https://docs.swift.org/swift-book/index.html) (if you're new to the language)
 2. Apple's SwiftUI [tutorials](https://developer.apple.com/tutorials/swiftui), which are quite good!
-3. [SwiftOnTap](https://docs.swift.org/swift-book/index.html) (these docs) once you get moving 🚴
+3. [SwiftOnTap](https://swiftontap.com) (these docs) once you get moving 🚴
 
 <br/>
 
