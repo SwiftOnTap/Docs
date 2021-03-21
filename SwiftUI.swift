@@ -1478,7 +1478,6 @@ extension Anchor.Source {
 /// `Angles` are commonly used with the `View/rotationEffect(_:anchor:)`
 /// and similar modifiers:
 ///
-/// ![0BCBA417-65FD-41CE-B2F7-ACF481731304](0BCBA417-65FD-41CE-B2F7-ACF481731304.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -1504,7 +1503,6 @@ extension Anchor.Source {
 /// ``View``, we pass 270 as the degrees parameter to specify the size of
 /// the `Arc` to be displayed:
 ///
-/// ![D09EC09B-F599-4E73-B582-0454AE11039F](D09EC09B-F599-4E73-B582-0454AE11039F.png)
 /// ```
 /// struct Arc: Shape {
 ///     var endAngle: Angle
@@ -35488,7 +35486,7 @@ extension StrokeStyle : Animatable {
 /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State private var status = true
 ///     var body: some View {
 ///          Toggle(isOn: $status) {
@@ -35510,7 +35508,7 @@ public struct SwitchToggleStyle : ToggleStyle {
     /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     @State private var status = true
     ///     var body: some View {
     ///          Toggle(isOn: $status) {
@@ -35544,15 +35542,17 @@ public struct SwitchToggleStyle : ToggleStyle {
 
 /// A parent view for tab-style navigation.
 ///
-/// `TabView` is a container view that provides tab-style navigation for its child views.
+/// `TabView` is a container view that provides tab-style navigation for its
+/// child views.
 ///
 /// [tabview-tabitem ->]
 /// ### Tab-bar based navigation
 ///
-/// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
+/// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child
+/// for tab-bar style navigation.
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         TabView {
 ///             Text("Bananas 🍌🍌")
@@ -35581,12 +35581,15 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// [tabview-style ->]
 /// ### Page-style navigation
 ///
-/// Place child views in a `TabView` with a `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
+/// Place child views in a `TabView` with a
+/// `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView`
+/// for a page-style style navigation.
 ///
-/// The following example creates a paginated view with the three `Text` child views as individual pages.
+/// The following example creates a paginated view with the three `Text` child
+/// views as individual pages.
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         TabView {
 ///             Text("Bananas 🍌🍌")
@@ -35602,10 +35605,11 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
-/// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
+/// `TabView` also supports dynamically loading pages. The example above can be
+/// re-expressed as the following:
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
@@ -35623,18 +35627,22 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
-/// A page-styled `TabView` will add a row of page indicator(s) at the bottom of the container by default. If `View/tabItem(_:)` is used, these indicators each take the form of the corresponding tab item's primary image. If not - these page indicators resort to system defaults.
+/// A page-styled `TabView` will add a row of page indicator(s) at the bottom
+/// of the container by default. If `View/tabItem(_:)` is used, these indicators
+/// each take the form of the corresponding tab item's primary image. If not -
+/// these page indicators resort to system defaults.
 ///
-/// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
+/// To disable page indicators altogether, apply a `PageIndexViewStyle` using
+/// `View/indexViewStyle(_:)`, like so:
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: \.self) {
-///                 Text($0)
+///             ForEach(items, id: \.self) { item in
+///                 Text(item)
 ///             }
 ///         }
 ///         .tabViewStyle(PageTabViewStyle())
@@ -35648,19 +35656,18 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// [tabview-tag ->]
 /// ### Handling tab-selection
 ///
-/// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
+/// `TabView` provides the ability to observe and/or set the active tab
+/// selection via its initializer `TabView/init(selection:content:)`, and the
+/// modifier `View/tag(_:)`.
 ///
 /// Here is an example that writes tab selection to a state variable:
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     enum TabItem {
-///         case bananas
-///         case apples
-///         case peaches
+///         case bananas, apples, peaches
 ///     }
-///
-///     @State var selectedItem: TabItem = .bananas
+///     @State var selectedItem = TabItem.bananas
 ///
 ///     var body: some View {
 ///         TabView(selection: $selectedItem) {
@@ -35691,15 +35698,21 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
-/// In this example, each tab item is assigned a unique tag using the user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to the tab selection, `$selectedItem`, and updates it whenever a new tab is selected. `$selectedItem` in turn can also be used to programmatically control tab-selection, as bindings work bidirectionally.
+/// In this example, each tab item is assigned a unique tag using the
+/// user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to
+/// the tab selection, `$selectedItem`, and updates it whenever a new tab is
+/// selected. `$selectedItem` in turn can also be used to programmatically
+/// control tab-selection, as bindings work bidirectionally.
 ///
-/// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in the previous example, but it could've just as easily been a `String` or an `Int`.
+/// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in
+/// the previous example, but it could've just as easily been a `String` or an
+/// `Int`.
 ///
 /// For example, the following uses a traditional 0-based tab indexing:
 ///
 /// ```
-/// struct ExampleView: View {
-///     @State var selectedItem: Int = 0
+/// struct ContentView: View {
+///     @State var selectedItem = 0
 ///
 ///     var body: some View {
 ///         TabView(selection: $selectedItem) {
@@ -35721,8 +35734,75 @@ public struct SwitchToggleStyle : ToggleStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
-    /// Creates an instance that selects from content associated with
-    /// `Selection` values.
+    /// Creates a TabView from a selection and a view builder of pages.
+    ///
+    /// Use this initialzer to create a ``TabView`` when you need programmatic
+    /// access to the ``Binding`` value representing the currently selected
+    /// page. If you don't need access to this ``Binding``, use
+    /// ``TabView/init(content:)`` instead.
+    ///
+    /// The following example writes the tab selection to a `@```State``
+    /// variable:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     enum TabItem {
+    ///         case bananas, apples, peaches
+    ///     }
+    ///     @State var selectedItem = TabItem.bananas
+    ///
+    ///     var body: some View {
+    ///         TabView(selection: $selectedItem) {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .tabItem { Text("🍌") }
+    ///                 .tag(TabItem.bananas)
+    ///
+    ///             Text("Apples 🍏🍏")
+    ///                 .tabItem { Text("🍏") }
+    ///                 .tag(TabItem.apples)
+    ///
+    ///             Text("Peaches 🍑🍑")
+    ///                 .tabItem { Text("🍑") }
+    ///                 .tag(TabItem.peaches)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// In this example, each tab item is assigned a unique tag using the
+    /// user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to
+    /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
+    /// selected. `$selectedItem` in turn can also be used to programmatically
+    /// control tab-selection, as bindings work bidirectionally.
+    ///
+    /// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in
+    /// the previous example, but it could've just as easily been a `String` or an
+    /// `Int`.
+    ///
+    /// For example, the following uses a traditional 0-based tab indexing:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var selectedItem = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             TabView(selection: $selectedItem) {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .tag(0)
+    ///
+    ///                 Text("Apples 🍏🍏")
+    ///                     .tag(1)
+    ///
+    ///                 Text("Peaches 🍑🍑")
+    ///                     .tag(2)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
@@ -35738,12 +35818,32 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 extension TabView where SelectionValue == Int {
 
-	/// Creates a tab view from a view builder. The tab view maintains its own selection.
+	/// Creates a TabView from only a view builder of pages.
 	///
 	/// This is useful if you don't want to have to pass in your own binding
 	/// selection index, and just want the view to default at the first page.
 	/// You will still be able to move tabs, but you won't be able to programmatically
 	/// change tabs from outside the view.
+    ///
+    /// To create a tab-bar based navigation page, simply stack child
+    /// views into a ``TabView``, and apply ``View/tabItem(_:)``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .tabItem { Text("🍌") }
+    ///             Text("Apples 🍏🍏")
+    ///                 .tabItem { Text("🍏") }
+    ///             Text("Peaches 🍑🍑")
+    ///                 .tabItem { Text("🍑") }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// For more ways to use tab-style views, see ``TabView``.
     public init(@ViewBuilder content: () -> Content) { }
 }
 
