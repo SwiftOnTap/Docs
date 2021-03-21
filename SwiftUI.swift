@@ -4642,7 +4642,7 @@ public enum BlendMode {
     ///
     /// The formula for screen is this:
     ///
-    ///     func screen(a: Double, b: Double) {{}
+    ///     func screen(a: Double, b: Double) {
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
     ///
@@ -4670,7 +4670,7 @@ public enum BlendMode {
     ///
     /// Overlay is a combo of multiply and screen. The formula is this:
     ///
-    ///     func overlay(a: Double, b: Double) -> Double {{}
+    ///     func overlay(a: Double, b: Double) -> Double {
     ///     	if a > 0.5 {
     ///     		return 2 * a * b
     ///     	} else {
@@ -10635,9 +10635,8 @@ extension DynamicViewContent {
     ///   - action: A closure that SwiftUI invokes when elements are added to
     ///     the view. The closure takes two arguments: The first argument is the
     ///     offset relative to the dynamic view's underlying collection of data.
-    ///     The second argument is an array of
-    ///     <doc://com.apple.documentation/documentation/Foundation/NSItemProvider> items that
-    ///     represents the data that you want to insert.
+    ///     The second argument is an array of [NSItemProvider](https://developer.apple.com/documentation/foundation/nsitemprovider)
+    ///     items that represents the data that you want to insert.
     ///
     /// - Returns: A view that calls `action` when elements are inserted into
     ///   the original view.
@@ -11438,7 +11437,7 @@ public struct EmptyCommands : Commands {
 /// appearance.
 ///
 ///     struct EmphasizedLayout: ViewModifier {
-///         func body(content: Content) -> some View {{}
+///         func body(content: Content) -> some View {
 ///             content
 ///                 .background(Color.yellow)
 ///                 .border(Color.red)
@@ -11724,7 +11723,7 @@ public struct EmptyCommands : Commands {
 /// apply this environment value:
 ///
 ///     extension View {
-///         func myCustomValue(_ myCustomValue: String) -> some View {{}
+///         func myCustomValue(_ myCustomValue: String) -> some View {
 ///             environment(\.myCustomValue, myCustomValue)
 ///         }
 ///     }
@@ -12089,7 +12088,7 @@ extension EnvironmentKey {
 ///     }
 ///
 ///     extension View {
-///         func myCustomValue(_ myCustomValue: String) -> some View {{}
+///         func myCustomValue(_ myCustomValue: String) -> some View {
 ///             environment(\.myCustomValue, myCustomValue)
 ///         }
 ///     }
@@ -12135,7 +12134,7 @@ public struct EnvironmentValues : CustomStringConvertible {
     /// setting the value:
     ///
     ///     extension View {
-    ///         func myCustomValue(_ myCustomValue: String) -> some View {{}
+    ///         func myCustomValue(_ myCustomValue: String) -> some View {
     ///             environment(\.myCustomValue, myCustomValue)
     ///         }
     ///     }
@@ -23525,7 +23524,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     /// red border around the current menu style:
     ///
     ///     struct RedBorderMenuStyle: MenuStyle {
-    ///         func makeBody(configuration: Configuration) -> some View {{}
+    ///         func makeBody(configuration: Configuration) -> some View {
     ///             Menu(configuration)
     ///                 .border(Color.red)
     ///         }
@@ -23648,7 +23647,7 @@ extension MenuStyle {
 /// border to the current menu style:
 ///
 ///     struct RedBorderMenuStyle : MenuStyle {
-///         func makeBody(configuration: Configuration) -> some View {{}
+///         func makeBody(configuration: Configuration) -> some View {
 ///             Menu(configuration)
 ///                 .border(Color.red)
 ///         }
@@ -24853,7 +24852,7 @@ extension OffsetShape : InsettableShape where Content : InsettableShape {
 ///             }
 ///         }
 ///
-///         func contactSupport() {{}
+///         func contactSupport() {
 ///             guard let url = URL(string: "https://www.example.com") else {
 ///                 return
 ///             }
@@ -38753,7 +38752,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 /// A view that represents a UIKit view controller.
 ///
 /// Use a `UIViewControllerRepresentable` instance to create and manage a
-/// <doc://com.apple.documentation/documentation/UIKit/UIViewController> object in your
+/// [UIViewController](https://developer.apple.com/documentation/uikit/uiviewcontroller) object in your
 /// SwiftUI interface. Adopt this protocol in one of your app's custom
 /// instances, and use its methods to create, update, and tear down your view
 /// controller. The creation and update processes parallel the behavior of
@@ -40595,7 +40594,7 @@ extension View {
     /// a new kind of caption with blue text surrounded by a rounded rectangle:
     ///
     ///     struct BorderedCaption: ViewModifier {
-    ///         func body(content: Content) -> some View {{}
+    ///         func body(content: Content) -> some View {
     ///             content
     ///                 .font(.caption2)
     ///                 .padding(10)
@@ -40611,7 +40610,7 @@ extension View {
     /// for applying the `BorderedCaption` defined above:
     ///
     ///     extension View {
-    ///         func borderedCaption() -> some View {{}
+    ///         func borderedCaption() -> some View {
     ///             modifier(BorderedCaption())
     ///         }
     ///     }
@@ -42916,7 +42915,7 @@ extension View {
     ///
     /// Use `tag(_:)` to differentiate between a number of views for the purpose
     /// of selecting controls like pickers and lists. Tag values can be of any
-    /// type that conforms to the <doc://com.apple.documentation/documentation/Swift/Hashable>
+    /// type that conforms to the [Hashable](https://developer.apple.com/documentation/swift/hashable)
     /// protocol.
     ///
     /// [[tabview-tag]]
@@ -42926,7 +42925,7 @@ extension View {
     /// value of each enumeration element for use as the row item label and uses
     /// the enumeration item itself as input to the `tag(_:)` modifier.
     /// The tag identifier can be any value that conforms to the
-    /// <doc://com.apple.documentation/documentation/Swift/Hashable> protocol:
+    /// [Hashable](https://developer.apple.com/documentation/swift/hashable) protocol:
     ///
     ///     struct FlavorPicker: View {
     ///         enum Flavor: String, CaseIterable, Identifiable {
@@ -42945,7 +42944,7 @@ extension View {
     ///     }
     ///
     /// - SeeAlso: `List`, `Picker`, `Hashable`
-    /// - Parameter tag: A <doc://com.apple.documentation/documentation/Swift/Hashable> value
+    /// - Parameter tag: A [Hashable](https://developer.apple.com/documentation/swift/hashable) value
     ///   to use as the view's tag.
     ///
     /// - Returns: A view with the specified tag set.
@@ -45862,7 +45861,7 @@ extension View {
     /// - Parameters:
     ///   - activityType: The type of activity to handle.
     ///   - action: A function to call that takes a
-    ///     <doc://com.apple.documentation/documentation/Foundation/NSUserActivity>
+    ///     [NSUserActivity](https://developer.apple.com/documentation/foundation/nsuseractivity)
     ///     object as its parameter
     ///     when delivering the activity to the scene or window the view is in.
     public func onContinueUserActivity(_ activityType: String, perform action: @escaping (NSUserActivity) -> ()) -> some View { }
@@ -45873,10 +45872,10 @@ extension View {
     ///
     /// > Note: This method handles the reception of Universal Links,
     ///   rather than a
-    ///   <doc://com.apple.documentation/documentation/Foundation/NSUserActivity>.
+    ///   [NSUserActivity](https://developer.apple.com/documentation/foundation/nsuseractivity).
     ///
     /// - Parameter action: A function that takes a
-    ///  <doc://com.apple.documentation/documentation/Foundation/URL>
+    ///  [URL](https://developer.apple.com/documentation/foundation/url)
     ///  object as its parameter when delivering the URL to the scene or window
     ///  the view is in.
     public func onOpenURL(perform action: @escaping (URL) -> ()) -> some View { }
