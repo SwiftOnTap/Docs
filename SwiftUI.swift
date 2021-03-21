@@ -25,9 +25,13 @@ import os.signpost
 /// }
 /// ```
 ///
-/// `ObservableObject` has one simple requirement - the `objectWillChange` publisher. The `objectWillChange` publisher is responsible for emitting just before the object changes.
+/// `ObservableObject` has one simple requirement - the `objectWillChange`
+/// publisher. The `objectWillChange` publisher is responsible for emitting just
+/// before the object changes.
 ///
-/// This requirement is fundamental to how the SwiftUI runtime interacts with your object-based data models. It allows the runtime to react to changes in your data, and queue view updates for the UI's next render cycle.
+/// This requirement is fundamental to how the SwiftUI runtime interacts with
+/// your object-based data models. It allows the runtime to react to changes
+/// in your data, and queue view updates for the UI's next render cycle.
 ///
 /// ### Using `ObservableObject`
 ///
@@ -39,15 +43,23 @@ import os.signpost
 /// }
 /// ```
 ///
-/// `ObservableObject` provides a default implementation for `objectWillChange` using `Combine/ObservableObjectPublisher`.
+/// `ObservableObject` provides a default implementation for `objectWillChange`
+/// using `Combine/ObservableObjectPublisher`.
 ///
-/// To trigger `objectWillChange` events when your data changes, annotate your properties with the `@Published` property wrapper. Adding `@Published` to a variable causes the object to emit an `objectWillChange` event any time that variable is modified.
+/// To trigger `objectWillChange` events when your data changes, annotate your
+/// properties with the `@Published` property wrapper. Adding `@Published` to a
+/// variable causes the object to emit an `objectWillChange` event any time that
+/// variable is modified.
 ///
-/// Note: This only works if you are using the default `ObservableObject` implementation, or if `objectWillChange` is an instance of `ObservableObjectPublisher`. If you use a custom `Publisher` type, you are responsible for triggering updates yourself.
+/// Note: This only works if you are using the default `ObservableObject`
+/// implementation, or if `objectWillChange` is an instance of
+/// `ObservableObjectPublisher`. If you use a custom `Publisher` type, you are
+/// responsible for triggering updates yourself.
 ///
 /// ### Manually triggering `objectWillChange`
 ///
-/// You can also manually trigger updates by calling `ObservableObjectPublisher/send()`.
+/// You can also manually trigger updates by calling
+/// `ObservableObjectPublisher/send()`.
 ///
 /// This is useful for cases where `@Published` does not suffice. For example:
 ///
@@ -67,11 +79,16 @@ import os.signpost
 /// }
 /// ```
 ///
-/// In this example, `AppModel` holds a reference to a child model, `ChildModel`. Adding a `@Published` to the `childModel` variable would have no effect because `ChildModel` is a class and not a value type. Therefore, to emit a change event, you must manually call `objectWillChange.send()` when updating the child model.
+/// In this example, `AppModel` holds a reference to a child model,
+/// `ChildModel`. Adding a `@Published` to the `childModel` variable would
+/// have no effect because `ChildModel` is a class and not a value type.
+/// Therefore, to emit a change event, you must manually call
+/// `objectWillChange.send()` when updating the child model.
 ///
 /// ### Using a custom publisher
 ///
-/// In some cases, you may want to use a custom `Publisher` type for `objectWillChange`. For example:
+/// In some cases, you may want to use a custom `Publisher` type for
+/// `objectWillChange`. For example:
 ///
 /// ```
 /// class AppModel: ObservableObject {
@@ -79,9 +96,13 @@ import os.signpost
 /// }
 /// ```
 ///
-/// This example uses a `Combine/PassthroughSubject` for its `objectWillChange` requirement. A passthrough subject is a publisher that lets you send values manually (i.e. "passes through" any values sent to it).
+/// This example uses a `Combine/PassthroughSubject` for its `objectWillChange`
+/// requirement. A passthrough subject is a publisher that lets you send values
+/// manually (i.e. "passes through" any values sent to it).
 ///
-/// **Note:** The `@Published` property wrapper does not work with custom publishers. If you use a custom publisher, you are responsible for updating the object yourself. For example:
+/// **Note:** The `@Published` property wrapper does not work with custom
+/// publishers. If you use a custom publisher, you are responsible for updating
+/// the object yourself. For example:
 ///
 /// ```
 /// class AppModel: ObservableObject {
@@ -95,11 +116,13 @@ import os.signpost
 /// }
 /// ```
 ///
-/// Here `objectWillChange.send()` is manually called everytime `foo` is about to update, using the `willSet` observer.
+/// Here `objectWillChange.send()` is manually called everytime `foo` is about
+/// to update, using the `willSet` observer.
 ///
 /// ### Using `ObservableObject` with SwiftUI
 ///
-/// An observable object can be used to drive changes in a `View`, via three property wrapper types:
+/// An observable object can be used to drive changes in a `View`, via three
+/// property wrapper types:
 ///
 /// - `@ObservedObject`
 /// - `@EnvironmentObject`
@@ -134,8 +157,13 @@ public protocol ObservableObject : AnyObject {
 
 /// AccessibilityActionKind denotes the type of action for an Accessibility Action to support.
 ///
-/// This struct is almost always found as an input to the `View/accessibilityAction(_:_:)` View modifier.
-/// To learn more about delivering exceptional accessibility experiences, see [Delivering an Exceptional Accessibility Experience](https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience) or [iOS Accessibility Tutorial](https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible).
+/// This struct is almost always found as an input to the
+/// `View/accessibilityAction(_:_:)` View modifier.
+/// To learn more about delivering exceptional accessibility experiences,
+/// see
+/// [Delivering an Exceptional Accessibility Experience](https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/delivering_an_exceptional_accessibility_experience)
+/// or
+/// [iOS Accessibility Tutorial](https://www.raywenderlich.com/4720178-ios-accessibility-tutorial-making-custom-controls-accessible).
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityActionKind : Equatable {
 
@@ -673,8 +701,8 @@ public struct AccessibilityTraits : SetAlgebra {
 
 /// A storage type for an action sheet presentation.
 ///
-/// Use this structure with the `View/Actionsheet(item:content:)` and
-/// `View/actionsheet(ispresented:content:)` view modifiers to present
+/// Use this structure with the `View/actionSheet(item:content:)` and
+/// `View/actionSheet(ispresented:content:)` view modifiers to present
 /// the user with an **action sheet**.
 ///
 /// ### What is an action sheet?
@@ -687,7 +715,8 @@ public struct AccessibilityTraits : SetAlgebra {
 /// of the screen instead of in the middle. To let the user respond
 /// to the **state** of the app, use an `Alert` instead.
 ///
-/// See Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/)
+/// - Note: See Apple's
+/// [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/)
 /// for more about when to use action sheets.
 ///
 /// ### Creating an action sheet
@@ -707,9 +736,9 @@ public struct AccessibilityTraits : SetAlgebra {
 /// ### Using an action sheet
 ///
 /// Once you have an action sheet, it is simple to use. Just pass
-/// it as a trailing closure to the `View/actionsheet(ispresented:content:)`
+/// it as a trailing closure to the `View/actionSheet(ispresented:content:)`
 /// view modifier. The action sheet will be presented whenever
-/// the `isPresented` **binding** parameter is `true`.
+/// the `isPresented` binding parameter is `true`.
 ///
 /// The following example passes an `ActionSheet` to this view modifier,
 /// and illustrates the 3 different types of
@@ -762,7 +791,7 @@ public struct ActionSheet {
 /// about the state of the app and typically request feedback from the user. While the
 /// styling of alerts is semi-fixed, there are three available styles for the buttons to choose from:
 /// ``Alert/Button/default(_:action:)``, ``Alert/Button/destructive(_:action:)``, and ``Alert/Button/cancel(_:action:)``. To actually present an alert, see
-/// ``View/alert(_:_:)``.
+/// ``View/alert(isPresented:content:)``.
 ///
 /// An alert can be created with one of two initializers, depending on if one button
 /// or two is required. For example, to create an Alert with one button:
@@ -823,7 +852,7 @@ public struct ActionSheet {
 /// Notes:
 ///  - Stylistically, `.default` and `.cancel` alert button styles are nearly identical with
 ///  the exception that `.cancel` has a bolded font weight.
-///  - Alert is the equivalent to UIKit's UIAlertView.
+///  - Alert is the equivalent to UIKit's `UIAlertView`.
 ///  - For information on the human interface guidelines for alerts, see:
 ///  [https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/](https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -968,44 +997,85 @@ public struct Alert {
 /// Use this structure to align a view when it has both a vertical and
 /// horizontal degree of freedom.
 ///
-/// It is used in 4 places:
-/// - ``ZStack``, in the initializer
-/// - ``View/overlay(_:alignment:)``, in the view modifier
-/// - ``View/background(_:alignment:)``, in the view modifier
-/// - ``View/frame(width:height:alignment:)``, in the view modifier
+/// ### What is an `Alignment`?
 ///
-/// See those pages for more on how to use them.
+/// An alignment is made up of 2 properties:
+/// 1. The ``Alignment/vertical`` alignment, of type ``VerticalAlignment``
+/// 2. The ``Alignment/horizontal`` alignment, of type ``HorizontalAlignment``
 ///
-/// There are 9 out-of-the-box alignments:
+/// Each of those axes have their own options and initializers. To
+/// create an `Alignment`, you can set both properties directly
+/// using the initializer,
+/// or choose one of `Alignment`'s static properties.
 ///
+/// #### The `Alignment` initializer
 ///
-///
-/// 1. ``Alignment/topLeading``
-/// 2. ``Alignment/top``
-/// 3. ``Alignment/topTrailing``
-/// 4. ``Alignment/leading``
-/// 5. ``Alignment/center``
-/// 6. ``Alignment/trailing``
-/// 7. ``Alignment/bottomLeading``
-/// 8. ``Alignment/bottom``
-/// 9. ``Alignment/bottomTrailing``
-///
-///
-///
-/// In addition, you can also create your own alignments from the
-/// ``Alignment/init(horizontal:vertical:)`` initializer.
-///
-/// See the example below.
+/// You can also create your own alignments from the
+/// ``Alignment/init(horizontal:vertical:)`` initializer (*Note: the
+/// clear color is added to expand the view to the entire screen,
+/// so that the alignment movement can be seen*):
 ///
 /// ```
-/// struct AlignmentView: View {
+/// struct ContentView: View {
+///     let alignment = Alignment(horizontal: .center, vertical: .top)
+///
 ///     var body: some View {
-///         ZStack(alignment: Alignment.top) { //Try changing this!
+///         ZStack(alignment: alignment) {
 ///             Text("Move me around 🤠")
 ///             Color.clear
 ///     }
 /// }
 /// ```
+///
+/// ![Alignment on top](alignment-initalizer.png)
+///
+/// #### The `Alignment` static properties
+///
+/// There are 9 out-of-the-box alignments:
+/// 1. .``Alignment/topLeading``
+/// 2. .``Alignment/top``
+/// 3. .``Alignment/topTrailing``
+/// 4. .``Alignment/leading``
+/// 5. .``Alignment/center``
+/// 6. .``Alignment/trailing``
+/// 7. .``Alignment/bottomLeading``
+/// 8. .``Alignment/bottom``
+/// 9. .``Alignment/bottomTrailing``
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ZStack(alignment: Alignment.bottomLeading) { //Try changing this!
+///             Text("Move me around 🤠")
+///             Color.clear
+///     }
+/// }
+/// ```
+///
+/// ![Alignment bottom leading](alignment-bottom-leading.png)
+///
+/// ### Using an `Alignment`
+///
+/// This structure is used in 4 places:
+/// - ``ZStack``, in the initializer
+/// - ``View/overlay(_:alignment:)``, in the view modifier
+/// - ``View/background(_:alignment:)``, in the view modifier
+/// - ``View/frame(width:height:alignment:)``, in the view modifier
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Color.clear
+///             .background(
+///                 Text("Move me around 🤠"),
+///                 alignment: .leading
+///             )
+///     }
+/// }
+/// ```
+///
+/// ![Alignment leading](alignment-leading.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Alignment : Equatable {
 
@@ -1040,7 +1110,7 @@ public struct Alert {
     /// component.
     ///
     /// This is usually specified indirectly using one of the pre-defined
-    /// alignments or through the ``Alignment/init(horizontal:vertical)``
+    /// alignments or through the ``Alignment/init(horizontal:vertical:)``
     /// initializer. However, you can also specify it directly:
     ///
     /// ```
@@ -1408,7 +1478,6 @@ extension Anchor.Source {
 /// `Angles` are commonly used with the `View/rotationEffect(_:anchor:)`
 /// and similar modifiers:
 ///
-/// ![0BCBA417-65FD-41CE-B2F7-ACF481731304](0BCBA417-65FD-41CE-B2F7-ACF481731304.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -1434,7 +1503,6 @@ extension Anchor.Source {
 /// ``View``, we pass 270 as the degrees parameter to specify the size of
 /// the `Arc` to be displayed:
 ///
-/// ![D09EC09B-F599-4E73-B582-0454AE11039F](D09EC09B-F599-4E73-B582-0454AE11039F.png)
 /// ```
 /// struct Arc: Shape {
 ///     var endAngle: Angle
@@ -15717,13 +15785,19 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
 
     /// Creates a view from data that conforms to `Identifiable`.
     /// [foreach-identifiable-content ->]
-    /// If your data does not conform to identifiable, use `ForEach/init(_:id:content)`.
+    /// If your data does not conform to identifiable, use
+    /// `ForEach/init(_:id:content:)`.
     ///
-    /// Note: if your data does not conform to identifiable you will receive the following error:
+    /// Note: if your data does not conform to identifiable you will receive
+    /// the following error:
     ///
-    /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform to 'Identifiable`
+    /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform
+    /// to 'Identifiable`
     ///
-    /// An array of primitive types, such as strings & ints, will throw this error. Identify these items with `id: \.self` – because they themselves can be used as the identifiable object. See more in `ForEach/init(_:id:content)`.
+    /// An array of primitive types, such as strings & ints, will throw this
+    /// error. Identify these items with `id: \.self` – because they themselves
+    /// can be used as the identifiable object. See more in
+    /// `ForEach/init(_:id:content:)`.
     ///
     /// ```
     /// struct ExampleView: View {
@@ -15797,7 +15871,7 @@ extension ForEach where Content : View {
     ///     ]
     ///
     ///     var body: some View {
-    ///         ForEach(myFruits, id:/\.emoji) { fruit in
+    ///         ForEach(myFruits, id: \.emoji) { fruit in
     ///             HStack {
     ///                 Text(fruit.name + fruit.emoji)
     ///             }
@@ -15824,7 +15898,7 @@ extension ForEach where Content : View {
     ///             newFruit()
     ///         }
     ///
-    ///         ForEach(myFruits, id:\.self) { fruit in
+    ///         ForEach(myFruits, id: \.self) { fruit in
     ///             HStack {
     ///                 Text(fruit)
     ///             }
@@ -26483,9 +26557,12 @@ extension Path {
 ///
 ///     var body: some View {
 ///         Picker("Flavor", selection: $selectedFlavor) {
-///             Text("Chocolate 🍫").tag(Flavor.chocolate)
-///             Text("Vanilla 🍦").tag(Flavor.vanilla)
-///             Text("Strawberry 🍓").tag(Flavor.strawberry)
+///             Text("Chocolate 🍫")
+///                 .tag(Flavor.chocolate)
+///             Text("Vanilla 🍦")
+///                 .tag(Flavor.vanilla)
+///             Text("Strawberry 🍓")
+///                 .tag(Flavor.strawberry)
 ///         }
 ///         Text("Selected flavor: \(selectedFlavor.rawValue)")
 ///     }
@@ -26585,8 +26662,10 @@ extension Path {
 ///     @State private var selectedFlavor = Flavor.chocolate
 ///     var body: some View {
 ///         Picker("Flavor", selection: $selectedFlavor) {
-///             Text("chocolate").tag(Flavor.chocolate)
-///             Text("vanilla").tag(Flavor.vanilla)
+///             Text("chocolate")
+///                 .tag(Flavor.chocolate)
+///             Text("vanilla")
+///                 .tag(Flavor.vanilla)
 ///         }
 ///         .pickerStyle(SegmentedPickerStyle())
 ///     }
@@ -28099,7 +28178,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///      }
 ///
-///  To invert the direction of progress in the vertical style, merely apply the `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
+///  To invert the direction of progress in the vertical style, merely apply the `View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier as before.
 ///
 ///
 ///      struct ExampleView: View {
@@ -30418,7 +30497,7 @@ extension RoundedCornerStyle : Hashable {
 ///
 /// It must be created with a specific corner radius or size.
 /// The example below creates a RoundedRectangle with a corner radius of 20,
-/// and uses the `Shape/fill()` and `View/frame(width:height:)` modifiers
+/// and uses the `Shape/fill(_:style:)` and `View/frame(width:height:alignment:)` modifiers
 /// to set the color to blue and the frame to 250 by 150.
 ///
 /// ![RoundedRectangle corner radius, fill, and frame example](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
@@ -32536,7 +32615,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// By default, a `ScrollView`'s scroll indicator is visible upon user interaction.
 ///
-/// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content)` to hide the scroll indicator(s). For example:
+/// Pass `false` to `showsIndicators` in `ScrollView/init(_:showsIndicators:content:)` to hide the scroll indicator(s). For example:
 ///
 ///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
 ///
@@ -34298,7 +34377,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 
     /// A binding to the state value.
     ///
-    /// Use the projected value to pass a binding value down a view hierarchy.
+    /// Use the projected value to pass a `Binding` value down a view hierarchy.
     /// To get the `projectedValue`, prefix the property variable with `$`. For
     /// example, in the following code example `PlayerView` projects a binding
     /// of the state property `title` to the `TextField` view using
@@ -35406,7 +35485,7 @@ extension StrokeStyle : Animatable {
 /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State private var status = true
 ///     var body: some View {
 ///          Toggle(isOn: $status) {
@@ -35428,7 +35507,7 @@ public struct SwitchToggleStyle : ToggleStyle {
     /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     @State private var status = true
     ///     var body: some View {
     ///          Toggle(isOn: $status) {
@@ -35462,15 +35541,17 @@ public struct SwitchToggleStyle : ToggleStyle {
 
 /// A parent view for tab-style navigation.
 ///
-/// `TabView` is a container view that provides tab-style navigation for its child views.
+/// `TabView` is a container view that provides tab-style navigation for its
+/// child views.
 ///
 /// [tabview-tabitem ->]
 /// ### Tab-bar based navigation
 ///
-/// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child for tab-bar style navigation.
+/// Place child views in a `TabView` and apply `View/tabItem(_:)` to each child
+/// for tab-bar style navigation.
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         TabView {
 ///             Text("Bananas 🍌🍌")
@@ -35499,12 +35580,15 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// [tabview-style ->]
 /// ### Page-style navigation
 ///
-/// Place child views in a `TabView` with a `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView` for a page-style style navigation.
+/// Place child views in a `TabView` with a
+/// `View.tabViewStyle(PageTabViewStyle())` attached to the `TabView`
+/// for a page-style style navigation.
 ///
-/// The following example creates a paginated view with the three `Text` child views as individual pages.
+/// The following example creates a paginated view with the three `Text` child
+/// views as individual pages.
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         TabView {
 ///             Text("Bananas 🍌🍌")
@@ -35520,10 +35604,11 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
-/// `TabView` also supports dynamically loading pages. The example above can be re-expressed as the following:
+/// `TabView` also supports dynamically loading pages. The example above can be
+/// re-expressed as the following:
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
@@ -35541,18 +35626,22 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
-/// A page-styled `TabView` will add a row of page indicator(s) at the bottom of the container by default. If `View/tabItem(_:)` is used, these indicators each take the form of the corresponding tab item's primary image. If not - these page indicators resort to system defaults.
+/// A page-styled `TabView` will add a row of page indicator(s) at the bottom
+/// of the container by default. If `View/tabItem(_:)` is used, these indicators
+/// each take the form of the corresponding tab item's primary image. If not -
+/// these page indicators resort to system defaults.
 ///
-/// To disable page indicators altogether, apply a `PageIndexViewStyle` using `View/indexViewStyle(_:)`, like so:
+/// To disable page indicators altogether, apply a `PageIndexViewStyle` using
+/// `View/indexViewStyle(_:)`, like so:
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
 ///
 ///     var body: some View {
 ///         TabView {
-///             ForEach(items, id: \.self) {
-///                 Text($0)
+///             ForEach(items, id: \.self) { item in
+///                 Text(item)
 ///             }
 ///         }
 ///         .tabViewStyle(PageTabViewStyle())
@@ -35566,19 +35655,18 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// [tabview-tag ->]
 /// ### Handling tab-selection
 ///
-/// `TabView` provides the ability to observe and/or set the active tab selection via its initializer `TabView/init(selection:content)`, and the modifier `View/tag(_:)`.
+/// `TabView` provides the ability to observe and/or set the active tab
+/// selection via its initializer `TabView/init(selection:content:)`, and the
+/// modifier `View/tag(_:)`.
 ///
 /// Here is an example that writes tab selection to a state variable:
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     enum TabItem {
-///         case bananas
-///         case apples
-///         case peaches
+///         case bananas, apples, peaches
 ///     }
-///
-///     @State var selectedItem: TabItem = .bananas
+///     @State var selectedItem = TabItem.bananas
 ///
 ///     var body: some View {
 ///         TabView(selection: $selectedItem) {
@@ -35609,15 +35697,21 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///
 /// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
-/// In this example, each tab item is assigned a unique tag using the user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to the tab selection, `$selectedItem`, and updates it whenever a new tab is selected. `$selectedItem` in turn can also be used to programmatically control tab-selection, as bindings work bidirectionally.
+/// In this example, each tab item is assigned a unique tag using the
+/// user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to
+/// the tab selection, `$selectedItem`, and updates it whenever a new tab is
+/// selected. `$selectedItem` in turn can also be used to programmatically
+/// control tab-selection, as bindings work bidirectionally.
 ///
-/// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in the previous example, but it could've just as easily been a `String` or an `Int`.
+/// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in
+/// the previous example, but it could've just as easily been a `String` or an
+/// `Int`.
 ///
 /// For example, the following uses a traditional 0-based tab indexing:
 ///
 /// ```
-/// struct ExampleView: View {
-///     @State var selectedItem: Int = 0
+/// struct ContentView: View {
+///     @State var selectedItem = 0
 ///
 ///     var body: some View {
 ///         TabView(selection: $selectedItem) {
@@ -35639,8 +35733,75 @@ public struct SwitchToggleStyle : ToggleStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
 
-    /// Creates an instance that selects from content associated with
-    /// `Selection` values.
+    /// Creates a TabView from a selection and a view builder of pages.
+    ///
+    /// Use this initialzer to create a ``TabView`` when you need programmatic
+    /// access to the ``Binding`` value representing the currently selected
+    /// page. If you don't need access to this ``Binding``, use
+    /// ``TabView/init(content:)`` instead.
+    ///
+    /// The following example writes the tab selection to a `@```State``
+    /// variable:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     enum TabItem {
+    ///         case bananas, apples, peaches
+    ///     }
+    ///     @State var selectedItem = TabItem.bananas
+    ///
+    ///     var body: some View {
+    ///         TabView(selection: $selectedItem) {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .tabItem { Text("🍌") }
+    ///                 .tag(TabItem.bananas)
+    ///
+    ///             Text("Apples 🍏🍏")
+    ///                 .tabItem { Text("🍏") }
+    ///                 .tag(TabItem.apples)
+    ///
+    ///             Text("Peaches 🍑🍑")
+    ///                 .tabItem { Text("🍑") }
+    ///                 .tag(TabItem.peaches)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// In this example, each tab item is assigned a unique tag using the
+    /// user-defined, hashable enum `TabItem`. `TabView` in turn takes a binding to
+    /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
+    /// selected. `$selectedItem` in turn can also be used to programmatically
+    /// control tab-selection, as bindings work bidirectionally.
+    ///
+    /// Note that `View/tag(_:)` accepts any `Hashable` value. An enum was used in
+    /// the previous example, but it could've just as easily been a `String` or an
+    /// `Int`.
+    ///
+    /// For example, the following uses a traditional 0-based tab indexing:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var selectedItem = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             TabView(selection: $selectedItem) {
+    ///                 Text("Bananas 🍌🍌")
+    ///                     .tag(0)
+    ///
+    ///                 Text("Apples 🍏🍏")
+    ///                     .tag(1)
+    ///
+    ///                 Text("Peaches 🍑🍑")
+    ///                     .tag(2)
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.
@@ -35656,12 +35817,32 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 extension TabView where SelectionValue == Int {
 
-	/// Creates a tab view from a view builder. The tab view maintains its own selection.
+	/// Creates a TabView from only a view builder of pages.
 	///
 	/// This is useful if you don't want to have to pass in your own binding
 	/// selection index, and just want the view to default at the first page.
 	/// You will still be able to move tabs, but you won't be able to programmatically
 	/// change tabs from outside the view.
+    ///
+    /// To create a tab-bar based navigation page, simply stack child
+    /// views into a ``TabView``, and apply ``View/tabItem(_:)``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .tabItem { Text("🍌") }
+    ///             Text("Apples 🍏🍏")
+    ///                 .tabItem { Text("🍏") }
+    ///             Text("Peaches 🍑🍑")
+    ///                 .tabItem { Text("🍑") }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// For more ways to use tab-style views, see ``TabView``.
     public init(@ViewBuilder content: () -> Content) { }
 }
 
@@ -38750,26 +38931,33 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 
 /// A view to import a UIKit view into SwiftUI.
 ///
+/// Use this protocol to port a
+/// [UIView](https://developer.apple.com/documentation/uikit/uiview)
+/// from [UIKit](https://developer.apple.com/documentation/uikit)
+/// into SwiftUI.
+///
 /// ### Setup
 ///
-/// To implement a `UIViewRepresentable`, you must implement four main lifecycle functions:
-///
-/// - `UIViewRepresentable/makeCoordinator()`
-/// - `UIViewRepresentable/makeUIView(context:)`
-/// - `UIViewRepresentable/updateUIView(_:context:)`
-/// - `UIViewRepresentable/dismantleUIView(context:)` (this is optional, a default implementation is provided if left unimplemented)
-///
-/// The SwiftUI runtime:
-///
-/// - Creates a `Coordinator` using `makeCoordinator()` if necessary.
-/// - Calls `UIViewRepresentable/makeUIView(context:) to create an instance of your` `UIViewType`.
-/// - `UIViewRepresentable/updateUIView(_:context:)` is immediately called *once* after the call to `UIViewRepresentable/makeUIView(context:)` .
-/// - Upon any state changes, calls  `UIViewRepresentable/updateUIView(_:context:)`
-/// - Upon destruction of the parent container, calls `UIViewRepresentable/dismantleUIView(context:)`
+/// To conform to `UIViewRepresentable`, you must implement four main lifecycle
+/// functions:
+/// 1. `UIViewRepresentable/makeUIView(context:)`: Create and return an
+/// instance of your
+/// `UIViewRepresentable/UIViewType` here.
+/// 2. `UIViewRepresentable/updateUIView(_:context:)`: This is immediately
+/// called *once*
+/// after the call to `UIViewRepresentable/makeUIView(context:)`, then called
+/// whenever any state changes.
+/// 3. `UIViewRepresentable/dismantleUIView(context:)-78ab4`: Upon
+/// destruction of the parent container, this gets called.
+/// (This is **optional**. A default implementation is provided.)
+/// 4. `UIViewRepresentable/makeCoordinator()-138cc`: This creates a
+/// `UIViewRepresentable/Coordinator` for the view.
+/// (This is also **optional**.)
 ///
 /// ### Port a simple `UIView`
 ///
-/// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the following setup:
+/// To port a simple UIKit view, `UIActivityIndicatorView`, you could use the
+/// following setup:
 ///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
@@ -38797,58 +38985,43 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// ```
 ///
 /// Note:
-///
-/// - In `updateUIView(_:context:)`, you must handle `isAnimated` being either `true` or `false`.
-/// - No redundant calls are made to `startAnimating` and `stopAnimating`. Redundant calls are guarded against by checking whether `uiView.isAnimating` is true or not. This is a general principle for optimizing the performance of your `UIViewRepresentable`.
+/// - In `UIViewRepresentable/updateUIView(_:context:)`, you must handle
+/// `isAnimated` being either `true` or `false`.
+/// - No redundant calls are made to `startAnimating` and `stopAnimating`.
+/// Redundant calls are guarded against by checking whether
+/// `uiView.isAnimating` is true or not. This is a general principle for
+/// optimizing the performance of your `UIViewRepresentable`.
 ///
 /// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
 ///
 /// ![UIViewRepresentable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var isAnimating: Bool = false
 ///
 ///     var body: some View {
 ///         VStack {
 ///             Toggle("Animating", isOn: $isAnimating)
-///
 ///             ActivityIndicator(isAnimated: isAnimating)
 ///         }
 ///     }
 /// }
-///
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     let isAnimated: Bool
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
-///     }
-///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if isAnimated is true, and if the view is inactive.
-///         if isAnimated && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if isAnimated is false, and if the view is active.
-///         if !isAnimated && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
-///         }
-///     }
-/// }
 /// ```
 ///
-/// In this example, the `ActivityIndicator` from before is used and can be toggled by passing a boolean to `ActivityIndicator/init(isAnimated:)`.
+/// In this example, the `ActivityIndicator` from before is used and can be
+/// toggled by passing a boolean to `ActivityIndicator.init(isAnimated:)`.
 /// [uiviewrepresentable-context ->]
 /// ### Context-aware `UIViewRepresentable`s
 ///
-/// SwiftUI heavily relies on the environment, by way of environment objects (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`). The latter – environment values – are useful for creating intelligent and context-aware UIKit ports.
+/// SwiftUI heavily relies on the environment, by way of environment objects
+/// (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`).
+/// Environment values are useful for creating intelligent
+/// and context-aware UIKit ports.
 ///
-/// For example, we can remove the `isAnimated` parameter from `ActivityIndicator`, and use `isEnabled` from the environment instead  via `EnvironmentValues/isEnabled`:
+/// For example, we can remove the `isAnimated` parameter from
+/// `ActivityIndicator`, and use `isEnabled` from the environment instead
+/// via `EnvironmentValues`'s `EnvironmentValues/isEnabled`:
 ///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
@@ -38856,31 +39029,35 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     typealias UIViewType = UIActivityIndicatorView
 ///
 ///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
+///         UIActivityIndicatorView(style: .medium)
 ///     }
 ///
 ///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
 ///         if context.environment.isEnabled && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
+///             uiView.startAnimating()
 ///         }
-///
-///         // Check if the environment specifies that the view should be disabled, and if the view is active.
 ///         if !context.environment.isEnabled && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
+///             uiView.stopAnimating()
 ///         }
 ///     }
 /// }
 /// ```
 /// [<-]
-/// In this example, `context` is used to access the view's current `environment` (via `context.environment`), giving you access to the latest `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get rid of the `isAnimated` parameter in favor of reading it from the context. This has the added advantage of being passed from any level at the top, because environment values propagate down the view hierarchy.
+/// In this example, `context` is used to access the view's current
+/// `environment` (via `context.environment`), giving you access to the latest
+/// `EnvironmentValues`. By reading `EnvironmentValues/isEnabled`, we can get
+/// rid of the `isAnimated` parameter in favor of reading it from the context.
+/// This has the added advantage of being passed from any level at the top,
+/// because environment values propagate down the view hierarchy.
 ///
-/// The `View/disabled(_:)` modifier is responsible for modifying `EnvironmentValues/isEnabled`. The example usage must be updated to use `View/disabled(_:)` instead of `isAnimated`:
+/// The `View/disabled(_:)` modifier is responsible for modifying
+/// `EnvironmentValues/isEnabled`. The example usage must be updated to use
+/// `View/disabled(_:)` instead of `isAnimated`:
 ///
 /// ![UIViewRepresentable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var isAnimating: Bool = false
 ///
 ///     var body: some View {
@@ -38889,27 +39066,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 ///             ActivityIndicator()
 ///                 .disabled(!isAnimating)
-///         }
-///     }
-/// }
-///
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
-///     }
-///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
-///         if context.environment.isEnabled && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if the environment specifies that the view should be disabled, and if the view is active.
-///         if !context.environment.isEnabled && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
 ///         }
 ///     }
 /// }
@@ -38922,13 +39078,12 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// ![UIViewRepresentable Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var isAnimating: Bool = false
 ///
 ///     var body: some View {
 ///         VStack {
 ///             Toggle("Animating", isOn: $isAnimating)
-///
 ///             VStack {
 ///                 ActivityIndicator()
 ///                 ActivityIndicator()
@@ -38938,57 +39093,34 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///         }
 ///     }
 /// }
-///
-/// struct ActivityIndicator: UIViewRepresentable {
-///     typealias Context = UIViewRepresentableContext<Self>
-///     typealias UIViewType = UIActivityIndicatorView
-///
-///     public func makeUIView(context: Context) -> UIViewType {
-///         UIActivityIndicatorView(style: .medium) // create the instance of the view
-///     }
-///
-///     public func updateUIView(_ uiView: UIViewType, context: Context) {
-///         // Check if the environment specifies that the view should be enabled, and if the view is inactive.
-///         if context.environment.isEnabled && !uiView.isAnimating {
-///             uiView.startAnimating() // Animate
-///         }
-///
-///         // Check if the environment specifies that the view should be disabled, and if the view is active.
-///         if !context.environment.isEnabled && uiView.isAnimating {
-///             uiView.stopAnimating() // Stop animating
-///         }
-///     }
-/// }
 /// ```
 ///
-/// A single `View/disabled(_:)` modifier on the `VStack` can now become responsible for enabling/disabling the activity indicators inside the stack. This also allows parent views, that aren't aware of `ExampleView`'s implementation, to control whether views within it are enabled or disabled.
+/// A single `View/disabled(_:)` modifier on the `VStack` can now become
+/// responsible for enabling/disabling the activity indicators inside the stack.
+/// This also allows parent views, that aren't aware of `ContentView`'s
+/// implementation, to control whether views within it are enabled or disabled.
 ///
 /// ### Implementing UIKit delegates for a `UIViewRepresentable`
 ///
-/// UIKit views often require delegates to communicate events and pass data back and forth with their view controllers. Since SwiftUI is all about modularity and componentization, there is no concept of a "view controller". View representables use the concept of a 'coordinator' to port views reliant on the delegate pattern.
+/// UIKit views often require **delegates** to communicate events and pass data
+/// back and forth with their view controllers. Since SwiftUI is all about
+/// modularity and componentization, there is no concept of a
+/// *view controller*. `UIViewRepresentable` uses the concept of a *coordinator*
+/// to port views reliant on the delegate pattern.
+///
+/// Learn more about **delegation** in Swift
+/// [here](https://www.swiftbysundell.com/articles/delegation-in-swift/).
 ///
 /// For example, here is an example port of `UISearchBar`:
 ///
 /// ```
 /// struct SearchBar: UIViewRepresentable {
-///     class Coordinator: NSObject, UISearchBarDelegate {
-///         @Binding var text: String
-///
-///         init(text: Binding<String>) {
-///             _text = text
-///         }
-///
-///         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-///             self.text = searchText // set the binding's value to the latest search bar text
-///         }
-///     }
-///
 ///     let placeholder: String
-///
 ///     @Binding var text: String
 ///
 ///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of Coordinator
+///         // Create an instance of Coordinator
+///         Coordinator(self)
 ///     }
 ///
 ///     func makeUIView(context: Context) -> UISearchBar {
@@ -39001,81 +39133,88 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 ///
 ///     func updateUIView(_ uiView: UISearchBar, context: Context) {
-///         uiView.text = text // set the search bar's text to the value of the binding
+///         // Set the search bar's text to the value of the binding
+///         uiView.text = text
+///     }
+///
+///
+///     class Coordinator: NSObject, UISearchBarDelegate {
+///         var parent: SearchBar
+///
+///         init(_ searchBar: SearchBar) {
+///             parent = searchBar
+///         }
+///
+///         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+///             // Set the binding's value to the latest search bar text
+///             parent.text = searchText
+///         }
 ///     }
 /// }
 /// ```
 ///
-/// A search bar is a good example of a complex UIKit view. It is a control responsible for text input with multiple lifecycle events, and it uses the delegate pattern to inform the observer whenever these events occur. In SwiftUI, data is passed using bindings, and there is no concept of a delegate.
+/// A search bar is a good example of a complex UIKit view. It is a control
+/// responsible for text input with multiple lifecycle events, and it uses
+/// the delegate pattern to inform the observer whenever these events occur.
+/// In SwiftUI, data is passed using bindings, and there is no concept of a
+/// delegate.
 ///
-/// The `Coordinator` is the glue between a SwiftUI-style binding-pattern and a UIKit-style delegate-pattern. A `Coordinator` is a state object created and maintained for the lifetime of a `UIViewRepresentable`, that typically implements the primary delegate for the UIKit view being ported. In this case, the `UIViewType` is `UISearchBar` and its primary delegate type is `UISearchBarDelegate`.
+/// The `UIViewRepresentable/Coordinator` is the glue between a
+/// SwiftUI-style binding-pattern and a UIKit-style delegate-pattern.
+/// A `UIViewRepresentable/Coordinator` is a state object created and maintained
+/// for the lifetime of a `UIViewRepresentable`, that typically implements the
+/// primary delegate for the UIKit view being ported. In this case, the
+/// `UIViewType` is `UISearchBar` and its primary delegate type is
+/// `UISearchBarDelegate`.
 ///
-/// Text input controls in SwiftUI often take a `Binding<String>` in their initializer, and use it to get/set the latest text entered by the user via control. It's extremely important to note that bindings are bidirectional, because SwiftUI ports of UIKit views must also **get** the latest input from the `Binding`. UIKit patterns typically only require notifying the observer and thus setting the values, but in SwiftUI it is imperative to handle both to be a good SwiftUI citizen.
+/// Text input controls in SwiftUI often take a `String` `Binding` in their
+/// initializer, and use it to get/set the latest text entered by the user
+/// via control. It's extremely important to note that bindings are
+/// bidirectional, because SwiftUI ports of UIKit views must also **get** the
+/// latest input from the `Binding`. UIKit patterns typically only require
+/// notifying the observer and thus setting the values, but in SwiftUI it is
+/// imperative to handle both to be a good SwiftUI citizen.
 ///
 /// Here is example of using the search part port:
 ///
 /// ![UIViewRepresentable Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @State var searchText: String = ""
 ///
 ///     var body: some View {
 ///         VStack {
 ///             SearchBar(placeholder: "Enter something here", text: $searchText)
-///
-///             Text("Entered text: /\(searchText)")
+///             Text("Entered text: \(searchText)")
 ///         }
-///     }
-/// }
-///
-/// struct SearchBar: UIViewRepresentable {
-///     class Coordinator: NSObject, UISearchBarDelegate {
-///         @Binding var text: String
-///
-///         init(text: Binding<String>) {
-///             &#x5f;text = text
-///         }
-///
-///         func searchBar(&#x5f; searchBar: UISearchBar, textDidChange searchText: String) {
-///             self.text = searchText // set the binding's value to the latest search bar text
-///         }
-///     }
-///
-///     let placeholder: String
-///
-///     @Binding var text: String
-///
-///     func makeCoordinator() -> Coordinator {
-///         Coordinator(text: self.$text) // create an instance of Coordinator
-///     }
-///
-///     func makeUIView(context: Context) -> UISearchBar {
-///         let searchBar = UISearchBar(frame: .zero)
-///
-///         searchBar.placeholder = placeholder
-///         searchBar.delegate = context.coordinator
-///
-///         return searchBar
-///     }
-///
-///     func updateUIView(_ uiView: UISearchBar, context: Context) {
-///         uiView.text = text // set the search bar's text to the value of the binding
 ///     }
 /// }
 /// ```
 ///
-/// In this example, `SearchBar` is bound to a state variable, `searchText`. To confirm that values are being written as they are input, a `Text` reflects the latest value of the state variable. *Note* that if `searchText`'s initial value is used to set the initial text of the `UISearchBar` represented by `SearchBar`. This means if the initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar` would have an initial search text of `"Bananas 🍌🍌"` already loaded.
+/// In this example, `SearchBar` is bound to a state variable, `searchText`.
+/// To confirm that values are being written as they are input, a `Text`
+/// reflects the latest value of the state variable.
+///
+/// **Note** that if `searchText`'s initial value is used to set the initial
+/// text of the` UISearchBar` represented by `SearchBar`. This means if the
+/// initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar`'
+/// would have an initial search text of `"Bananas 🍌🍌"` already loaded.
 ///
 /// ### Further notes
 ///
-/// - Creating UIKit views are expensive. That is why they are done once per lifetime of a `UIViewRepresentable`.
-/// - Because the *same* `UIViewType` instance is reused as much as possible, `UIViewRepresentable/updateUIView(_:context:)` is responsible for making sure that the parameters passed via the initializer, and the SwiftUI environment, are always in sync with the UIKit view being managed by the representable.
+/// - Creating UIKit views are expensive. That is why they are done once per
+/// lifetime of a `UIViewRepresentable`.
+/// - Because the *same* `UIViewType` instance is reused as much as possible,
+/// `UIViewRepresentable/updateUIView(_:context:)` is responsible for making
+/// sure that the parameters passed via the initializer, and the SwiftUI
+/// environment, are always in sync with the UIKit view being managed by the
+/// representable.
 ///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public protocol UIViewRepresentable : View where Self.Body == Never{ }
+public protocol UIViewRepresentable : View where Self.Body == Never { }
 extension UIViewRepresentable : View where Self.Body == Never {
 
     /// The type of view to present.
@@ -39513,7 +39652,7 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///
 /// See those pages for more on how to construct them.
 ///
-/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-babaf``
 /// view modifier. See that page for more on adding alignment
 /// guides to views.
 ///
@@ -43519,6 +43658,10 @@ extension View {
     /// of the frame. If the text is taller than the frame, its bounds may
     /// extend beyond the bottom of the frame's bounds.
     ///
+    /// - Note: If a `View`'s `frame` is already tight around the contents,
+    /// specifying an `Alignment` won't change anything. This is not a bug!
+    /// It's just because the frame is already tight.
+    ///
     /// - Parameters:
     ///   - width: A fixed width for the resulting view. If `width` is `nil`,
     ///     the resulting view assumes this view's sizing behavior.
@@ -43539,9 +43682,18 @@ extension View {
     /// don't know what they're doing don't have their programs
     /// always breaking.**
     ///
-    /// Use `SwiftUI/View/frame(width:height:alignment:)` or
-    /// `SwiftUI/View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)`
+    /// Use `View/frame(width:height:alignment:)` or
+    /// `View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)`
     /// instead.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("My frame is unaffected 🤷‍")
+    ///             .frame() //does nothing
+    ///     }
+    /// }
+    /// ```
     @available(*, deprecated, message: "Please pass one or more parameters.")
     @inlinable public func frame() -> some View { }
 
