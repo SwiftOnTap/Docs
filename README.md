@@ -36,13 +36,13 @@ We get it, docs are overwhelming at first. To start, we recommend these resource
 
 **Who wrote all these docs?**
 
-We've been hard at work filling Apple's documentation hole 🕳. You can also [edit these docs](#add-docs)!
+A bunch of us SwiftUI developers have been hard at work filling Apple's documentation hole 🕳. You can also [edit these docs](#add-docs)!
 
 
 
 **Where do the docs live?**
 
-All the docs live in one file called [*SwiftUI.swift*](https://github.com/SwiftOnTap/Docs/blob/main/SwiftUI.swift). It's just a regular `.swift` file with **lots** of documentation comments 🧑‍💻. Whenever anyone edits this file on [GitHub](https://github.com/SwiftOnTap/Docs), we automatically scan for the **code tree** and **comments**. Then it goes live to [swiftontap.com](https://swiftontap.com)!
+All the docs live in one file called [*SwiftUI.swift*](https://github.com/SwiftOnTap/Docs/blob/main/SwiftUI.swift). It's just a regular `.swift` file with **lots** of documentation comments 🧑‍💻. Whenever anyone edits this file on [GitHub](https://github.com/SwiftOnTap/Docs), we automatically scan for the **comments**. Then it goes live to [swiftontap.com](https://swiftontap.com)!
 
 
 
