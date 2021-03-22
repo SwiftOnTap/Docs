@@ -1893,7 +1893,7 @@ extension Angle : Animatable {
 ///
 /// #### Using ``AnimatableModifier`` to implement a shake effect
 ///
-/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines `Animatable` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
+/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable`` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
 ///
 /// For example:
 ///
@@ -1935,7 +1935,10 @@ extension Angle : Animatable {
 ///![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
 ///
-/// This example demonstrates a horizontal "shake effect", applied on a ``Text``. When run, the text animates by shaking 10 times. This is achieved by triggering an animation using ``withAnimation(_:_:)``, and modifying the `shakeNumber` to go from `0` to `10`.
+/// This example demonstrates a horizontal "shake effect", applied on a
+/// ``Text``. When run, the text animates by shaking 10 times. This is achieved
+/// by triggering an animation using ``withAnimation(_:_:)``, and modifying the
+/// `shakeNumber` to go from `0` to `10`.
 ///
 /// Note:
 ///
@@ -1994,7 +1997,7 @@ extension Angle : Animatable {
 ///
 /// `CircleAnimation` is an implementation of an ``AnimatableModifier`` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
 ///
-/// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using ``withAnimation(_:_:)``. The ``Animation`` used in ``withAnimation(_:_:)`` is modified using ``Animation/repeatForever(autoreverses:)``, in order to create a loop. Note that `autoreverses` is explicitly set as `false` to prevent the animation from being reversed.
+/// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using ``withAnimation(_:_:)``. The ``Animation`` used in ``withAnimation(_:_:)`` is modified using ``Animation/repeatForever(autoreverses:)``, in order to create a loop. Note that ``Animation/repeatForever(autoreverses:)`` is explicitly set as `false` to prevent the animation from being reversed.
 /// [<-]
 /// ### Further notes
 ///
@@ -2027,7 +2030,7 @@ extension Animatable where Self.AnimatableData == EmptyAnimatableData {
 
 /// A modifier that can create another modifier with animation.
 ///
-/// `AnimatableModifier` is closely coupled with ``Animatable``.
+/// ``AnimatableModifier`` is closely coupled with ``Animatable``.
 ///
 /// [[animatable-modifier]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2757,8 +2760,6 @@ extension Animation {
 
     /// Adjusts whether the animation repeats forever.
     ///
-    /// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     @State var progress: CGFloat = 0
@@ -2797,6 +2798,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
     ///
     /// - Parameter autoreverses: Whether the animation should reverse when repeating.
     public func repeatForever(autoreverses: Bool = true) -> Animation { }
@@ -8244,7 +8247,6 @@ public struct DatePickerComponents : OptionSet {
 /// - ``GraphicalDatePickerStyle`` on macOS
 /// - ``StepperFieldDatePickerStyle`` on macOS
 ///
-/// ![0AD88967-F661-4DCF-876D-952C992543D1](0AD88967-F661-4DCF-876D-952C992543D1.png)
 /// ```
 /// struct StyledDatePickerView: View {
 ///     @State private var date = Date()
@@ -8255,6 +8257,9 @@ public struct DatePickerComponents : OptionSet {
 ///     }
 /// }
 /// ```
+///
+/// ![0AD88967-F661-4DCF-876D-952C992543D1](0AD88967-F661-4DCF-876D-952C992543D1.png)
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -14738,8 +14743,6 @@ extension Font {
 
     /// Adds italics to the font.
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
-    ///
     /// ```
     /// struct FontView: View {
     ///     var body: some View {
@@ -14752,6 +14755,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
     public func italic() -> Font { }
 
     /// Adjusts the font to enable all small capitals.
@@ -14883,20 +14889,21 @@ extension Font {
 
     /// Adds bold styling to the font.
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
-    ///
     /// ```
     /// struct FontView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             Text("I'm italicized text")
-    ///                 .font(Font.system(size: 16).italic())
-    ///             Text("And I'm bold")
+    ///             Text("I'm bolded text")
     ///                 .font(Font.system(size: 16).bold())
+    ///             Text("And I'm italic")
+    ///                 .font(Font.system(size: 16).italic())
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
     public func bold() -> Font { }
 
     /// Create a version of `self` that uses leading (line spacing) adjustment.
@@ -20174,11 +20181,9 @@ public struct InsetGroupedListStyle : ListStyle {
 
 /// The behavior and appearance of an inset list.
 ///
-/// Use the ``View/listStyle(_:)`` modifier
-/// to apply this list style to a ``List``.
-///
-/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
-///
+/// Use the ``View/listStyle(_:)`` modifier to apply this list style to a
+/// ``List``. This style creates a gap between the borders of the list and the
+/// edge of the screen:
 ///
 ///      struct ExampleView: View {
 ///          var body: some View {
@@ -20190,6 +20195,9 @@ public struct InsetGroupedListStyle : ListStyle {
 ///             .listStyle(InsetListStyle())
 ///          }
 ///      }
+///
+///
+/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
 ///
 ///
 @available(iOS 14.0, macOS 11.0, *)
@@ -25353,9 +25361,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
     public init(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = .automatic) { }
 }
 
-/// A `TabViewStyle` that implements a paged scrolling ``TabView``.
+/// A ``TabViewStyle`` that implements a paged scrolling ``TabView``.
 ///
-/// ![7418DAC9-D144-4F7D-BB54-AC5E0A88F324](7418DAC9-D144-4F7D-BB54-AC5E0A88F324.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -25370,6 +25377,9 @@ public struct PageIndexViewStyle : IndexViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![7418DAC9-D144-4F7D-BB54-AC5E0A88F324](7418DAC9-D144-4F7D-BB54-AC5E0A88F324.png)
+///
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct PageTabViewStyle : TabViewStyle {
@@ -32754,14 +32764,14 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-///  ![ScrollView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-7.gif)
+///  ![ScrollView Example 7](scrollviewproxy-ex7.gif)
 ///
 /// In this example, the `ScrollView` still scrolls to "Item #32", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
 ///
 /// [<-]
 /// [scrollview-scrollto ->]
 ///
-///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with `View/withAnimation(_:_:)`.  For example:
+///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with ``View/withAnimation(_:_:)``.  For example:
 ///
 ///  ```
 ///  struct ExampleView: View {
@@ -32783,7 +32793,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///      }
 ///  }
 ///
-///  ![ScrollView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-8.gif)
+///  ![ScrollView Example 8](scrollviewproxy-ex7.gif)
 ///
 /// ```
 /// [<-]
@@ -32843,8 +32853,8 @@ public struct ScrollViewProxy {
 
     /// Scroll to a section given a specific identifier.
     ///
-    /// Scans all scroll views contained by the proxy for the first
-    /// with a child view with identifier `id`, and then scrolls to
+    /// Scans all scroll views within the proxy for the first
+    /// that has a child view with identifier `id`, and then scrolls to
     /// that view.
     ///
     /// [[scrollview-scrollto]]
@@ -35795,8 +35805,7 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// page. If you don't need access to this ``Binding``, use
     /// ``TabView/init(content:)`` instead.
     ///
-    /// The following example writes the tab selection to a `@```State``
-    /// variable:
+    /// The following example writes the tab selection to a `@State` variable:
     ///
     /// ```
     /// struct ContentView: View {
@@ -35823,8 +35832,10 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
+    ///[Selection Content Example 1](init-selection-content-ex1.png)
+    ///
     /// In this example, each tab item is assigned a unique tag using the
-    /// user-defined, hashable enum `TabItem`. ``TabView`` in turn takes a binding to
+    /// user-defined, hashable enum ``View/tabItem(_:)`. ``TabView`` in turn takes a binding to
     /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
     /// selected. `$selectedItem` in turn can also be used to programmatically
     /// control tab-selection, as bindings work bidirectionally.
@@ -35855,6 +35866,9 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     ///     }
     /// }
     /// ```
+    ///
+    ///
+    /// [Selection Content Example 2](init-selection-content-ex2.png)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -36654,9 +36668,7 @@ extension Text {
     ///
     /// Use this method to change the color of the text rendered by a text view.
     ///
-    /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
-    ///
-    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
+    /// For example, you can change the colors of Banana🍌🍌 to yellow, Apple🍎🍎 to red, and Peach🍑🍑 to orange.
     ///
     ///     struct ExampleView: View {
     ///        var body: some View {
@@ -36672,7 +36684,7 @@ extension Text {
     ///        }
     ///     }
     ///
-    ///
+    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
     ///
     /// - Parameter color: The color to use when displaying this text.
     /// - Returns: A text view that uses the color value you supply.
@@ -36707,9 +36719,6 @@ extension Text {
     ///
     /// Sets the font weight of the text.
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-    ///
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             VStack {
@@ -36735,6 +36744,8 @@ extension Text {
     ///            .font(.title)
     ///         }
     ///     }
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
     ///
     ///
     /// - Parameter weight: One of the available font weights.
@@ -36778,8 +36789,6 @@ extension Text {
 
     /// Applies a strikethrough to the text.
     ///
-    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -36797,6 +36806,8 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has a
@@ -37428,8 +37439,6 @@ public struct TextFormattingCommands : Commands {
 
 /// A label style that only displays the title of the label.
 ///
-/// ![TitleOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-title-only-example-1.png)
-///
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -37437,6 +37446,8 @@ public struct TextFormattingCommands : Commands {
 ///                  .labelStyle(TitleOnlyLabelStyle())
 ///         }
 ///     }
+///
+/// ![TitleOnlyLabelStyle Example 1](title-only-label-style.png)
 ///
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -48242,9 +48253,6 @@ extension ViewModifier {
 
 /// A date style that displays components as columns in a scrollable wheel.
 ///
-/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
-///
-///
 ///      struct ExampleView: View {
 ///          @State var date: Date = Date()
 ///          var body: some View {
@@ -48253,6 +48261,8 @@ extension ViewModifier {
 ///                  .padding()
 ///          }
 ///      }
+///
+/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
 ///
 ///
 @available(iOS 13.0, *)
@@ -48267,8 +48277,6 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 
 /// A picker style that presents the options in a scrollable wheel that shows
 /// the selected option and a few neighboring options.
-///
-/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -48289,13 +48297,13 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// }
 /// ```
 ///
+/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
 ///
 /// [pickerstyle-wheel ->]
 /// Your app can also use explicit tags to identify picker content.
-///
-/// ![Wheel Example 1](/picker-style-7.gif)
 ///
 /// ```
 /// enum MyFruit {
@@ -48331,6 +48339,8 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![Wheel Example 2](/picker-style-7.gif)
 ///
 /// [<-]
 ///
