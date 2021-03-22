@@ -1745,7 +1745,7 @@ extension Angle : Animatable {
 ///
 /// Note: Angles default to a clockwise rotation, but angles can be a negative value which will rotate the color counter-clockwise.
 ///
-/// ## End Angle - Start Angle = 2π
+/// #### End Angle - Start Angle = 2π
 ///
 /// This is the normal case where the start and end angles make a complete circle.
 /// Every color will evenly distribute.
@@ -1764,7 +1764,7 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ## End Angle - Start Angle > 2π
+/// #### End Angle - Start Angle > 2π
 ///
 /// This is the case where the total angle is greater than a circle.
 /// The gradient will only draw the last complete turn which effectively writes over the first circle portion
@@ -1788,7 +1788,7 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ## End Angle - Start Angle < 2π
+/// #### End Angle - Start Angle < 2π
 ///
 /// This is the case where the total angle is less than a circle.
 /// The gradient will not make a complete circle, but the missing area between the start and end will be evenly colored with the
