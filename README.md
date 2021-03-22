@@ -1,6 +1,6 @@
 <h1 align="center">🍻 SwiftOnTap</h1>
 
-<h3 align="center"> A better alternative to Apple's SwiftUI docs. 📃 </h3>
+<h3 align="center"> Better SwiftUI Docs with Examples. </h3>
 
 <p align="center">
   <strong><a href="#get-started">Get Started</a></strong> |
@@ -8,7 +8,7 @@
   <strong><a href="#add-docs">Add Docs</a></strong>
 </p>
 
-
+<br/>
 
 ## Get Started 
 
@@ -20,7 +20,7 @@ To get started,
 
 We've got it all on tap. 🚰🍻
 
-
+<br/>
 
 **If you're new to SwiftUI 🤓**
 
@@ -28,9 +28,9 @@ We get it, docs are overwhelming at first. To start, we recommend these resource
 
 1. Apple's Swift [book](https://docs.swift.org/swift-book/index.html) (if you're new to the language)
 2. Apple's SwiftUI [tutorials](https://developer.apple.com/tutorials/swiftui), which are quite good!
-3. [SwiftOnTap](https://docs.swift.org/swift-book/index.html) (these docs) once you get moving 🚴
+3. [SwiftOnTap](https://swiftontap.com) (these docs) once you get moving 🚴
 
-
+<br/>
 
 ## How It Works
 
@@ -38,20 +38,19 @@ We get it, docs are overwhelming at first. To start, we recommend these resource
 
 A bunch of us SwiftUI developers have been hard at work filling Apple's documentation hole 🕳. You can also [edit these docs](#add-docs)!
 
-
+<br/>
 
 **Where do the docs live?**
 
 All the docs live in one file called [*SwiftUI.swift*](https://github.com/SwiftOnTap/Docs/blob/main/SwiftUI.swift). It's just a regular `.swift` file with **lots** of documentation comments 🧑‍💻. Whenever anyone edits this file on [GitHub](https://github.com/SwiftOnTap/Docs), we automatically scan for the **comments**. Then it goes live to [swiftontap.com](https://swiftontap.com)!
 
-
+<br/>
 
 **Could this work for *any* `.swift` file?**
 
 Theoretically, yes! We've just been focused writing SwiftUI docs for now. [Let us know](mailto:ben@swiftontap.com) 📧 if you want to generate your own sweet documentation site.
 
-
-
+<br/>
 
 ## Add Docs
 
