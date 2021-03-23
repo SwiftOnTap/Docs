@@ -852,7 +852,7 @@ public struct ActionSheet {
 /// Notes:
 ///  - Stylistically, `.default` and `.cancel` alert button styles are nearly identical with
 ///  the exception that `.cancel` has a bolded font weight.
-///  - Alert is the equivalent to UIKit's `UIAlertView`.
+///  - Alert is the equivalent to UIKit's [`UIAlertController`](https://developer.apple.com/documentation/uikit/uialertcontroller).
 ///  - For information on the human interface guidelines for alerts, see:
 ///  [https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/](https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1032,15 +1032,15 @@ public struct Alert {
 /// #### The ``Alignment`` static properties
 ///
 /// There are 9 out-of-the-box alignments:
-/// 1. .``Alignment/topLeading``
-/// 2. .``Alignment/top``
-/// 3. .``Alignment/topTrailing``
-/// 4. .``Alignment/leading``
-/// 5. .``Alignment/center``
-/// 6. .``Alignment/trailing``
-/// 7. .``Alignment/bottomLeading``
-/// 8. .``Alignment/bottom``
-/// 9. .``Alignment/bottomTrailing``
+/// 1. ``Alignment/topLeading``
+/// 2. ``Alignment/top``
+/// 3. ``Alignment/topTrailing``
+/// 4. ``Alignment/leading``
+/// 5. ``Alignment/center``
+/// 6. ``Alignment/trailing``
+/// 7. ``Alignment/bottomLeading``
+/// 8. ``Alignment/bottom``
+/// 9. ``Alignment/bottomTrailing``
 ///
 /// ```
 /// struct ContentView: View {
@@ -1500,7 +1500,7 @@ extension Anchor.Source {
 ///
 /// ``Angle``s can also be used with drawing. Below, we define a custom
 /// ``Shape`` called `Arc`, and make its parameter type ``Angle``. In our
-/// ``View``, we pass 270 as the degrees parameter to specify the size of
+/// ``View``, we pass `270` as the degrees parameter to specify the size of
 /// the `Arc` to be displayed:
 ///
 /// ```
@@ -2211,9 +2211,9 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///     var body: some View {
 ///         VStack {
 ///             Rectangle()
-///                 .foregroundColor(flag ? Color.yellow : Color.red)
-///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+///                 .foregroundColor(flag ? .yellow : .red)
+///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+///                 .rotationEffect(.degrees(flag ? 90 : 0))
 ///                 .animation(.easeInOut)
 ///
 ///             Button("Animate") {
@@ -2260,9 +2260,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.spring(response: 0.55, dampingFraction: 0.825, blendDuration: 0))
     ///
     ///             Button("Animate") {
@@ -2300,9 +2300,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.interactiveSpring())
     ///
     ///             Button("Animate") {
@@ -2329,9 +2329,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.default)
     ///
     ///             Button("Animate") {
@@ -2359,9 +2359,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeInOut(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2389,9 +2389,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeInOut)
     ///
     ///             Button("Animate") {
@@ -2417,9 +2417,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeIn(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2448,9 +2448,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeIn)
     ///
     ///             Button("Animate") {
@@ -2476,9 +2476,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeOut(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2507,9 +2507,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeOut)
     ///
     ///             Button("Animate") {
@@ -2535,9 +2535,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.linear(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2566,9 +2566,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.linear)
     ///
     ///             Button("Animate") {
@@ -2600,9 +2600,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.timingCurve(0.42, 0, 0.58, 1, duration: 1.0))
     ///
     ///             Button("Animate") {
@@ -2640,9 +2640,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.interpolatingSpring(mass: 1, stiffness: 1, damping: 0.5, initialVelocity: 10))
     ///
     ///             Button("Animate") {
@@ -2676,10 +2676,10 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
-    ///                 .animation(.easeInOut.delay(1))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(Animation.easeInOut.delay(1))
     ///
     ///             Button("Animate") {
     ///                 flag.toggle()
@@ -2710,10 +2710,10 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
-    ///                 .animation(.easeInOut.speed(2))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(Animation.easeInOut.speed(2))
     ///
     ///             Button("Animate") {
     ///                 flag.toggle()
@@ -2737,10 +2737,10 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
-    ///                 .animation(.easeInOut.repeatCount(2, autoreverses: false))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(Animation.easeInOut.repeatCount(2, autoreverses: false))
     ///
     ///             Button("Animate") {
     ///                 flag.toggle()
@@ -3225,7 +3225,7 @@ extension AnyTransition {
     ///         }
     ///         if showBanana {
     ///             Text("🍌")
-    ///                 .transition(.scale)
+    ///                 .transition(AnyTransition.scale)
     ///         }
     ///     }
     /// }
@@ -3236,10 +3236,12 @@ extension AnyTransition {
     ///     @State var showBanana = true
     ///
     ///     var body: some View {
-    ///         Button("Scale the banana ⤴️") { showBanana.toggle() }
+    ///         Button("Scale the banana ⤴️") {
+    ///             showBanana.toggle()
+    ///         }
     ///         if showBanana {
     ///             Text("🍌")
-    ///                 .transition(AnyTransition.scale.animation(Animation.easeInOut))
+    ///                 .transition(AnyTransition.scale.animation(.easeInOut))
     ///         }
     ///     }
     /// }
@@ -3273,6 +3275,7 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
     public static let identity: AnyTransition
 }
 
@@ -3300,7 +3303,6 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// See ``AnyTransition`` for more on how to use this transition.
     public static func move(edge: Edge) -> AnyTransition { }
 }
 
@@ -3309,6 +3311,8 @@ extension AnyTransition {
 
     /// Provides a composite transition that uses a different transition for
     /// insertion versus removal.
+    ///
+    /// See ``AnyTransition`` for more on how to use this transition.
     ///
     /// ```
     /// struct TransitioningBananaView: View {
@@ -3325,18 +3329,15 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
-    ///
-    /// See ``AnyTransition`` for more on how to use this transition.
     public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
 }
 
 /// A view that provides type-erasure for views of other types.
 ///
-/// An `AnyView` hides the type of the ``View`` value passed to it (similar to how `AnyHashable` hides the type of `Hashable` value passed to it).
+/// An `AnyView` hides the type of the ``View`` value passed to it (similar
+/// to how `AnyHashable` hides the type of `Hashable` value passed to it).
 ///
 /// To type-erase your view, pass it to ``AnyView/init(_:)`` like this:
-///
-///  ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -3346,9 +3347,12 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and ``Color`` is created when `foo` is set to `false`:
+/// ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
 ///
-///  ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
+/// Changing the type of view using with `AnyView` destroys the view hierarchy
+/// for the old type and creates a new hierarchy for the new type. In the
+/// following example, ``Text`` is destroyed and ``Color`` is created when
+/// `foo` is set to `false`:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -3364,9 +3368,18 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in `List/init(_:id:selection:rowContent:)`. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or ``View/background(_:alignment:)``.
+/// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
-/// Consider whether the usage of ``AnyView`` is appropriate, or even necessary. A common mistake is to use ``AnyView`` like this:
+/// Avoid frequently changing the underlying type of view being erased,
+/// especially for complex views, as poor performance may result.
+/// `AnyView` is best suited for use in the deepest part of your view
+/// hierarchy, such as a list's row content in
+/// ``List/init(_:id:selection:rowContent:)``. It is also suited for use in
+/// different layers of your view hierarchy, via either
+/// ``View/overlay(_:alignment:)`` or ``View/background(_:alignment:)``.
+///
+/// Consider whether the usage of `AnyView` is appropriate, or even necessary.
+/// A common mistake is to use `AnyView` like this:
 ///
 /// ```
 /// func makeHelperView() -> some View {
@@ -3378,7 +3391,7 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// Wherein adding a `@ViewBuilder` would be more appropriate:
+/// Wherein adding a ``ViewBuilder`` would be more appropriate:
 ///
 /// ```
 /// @ViewBuilder
@@ -3391,11 +3404,16 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// The latter example performs better as the SwiftUI runtime is given a more explicit type hierarchy, where the switch between `foo` being true or false can only result in a `Text` or a ``Color``. The former example erases that information, forcing the SwiftUI runtime to evaluate the actual view type lazily, and thus requires more work to compute and render.
+/// The latter example performs better as the SwiftUI runtime is given a
+/// more explicit type hierarchy, where the switch between `foo` being `true`
+/// or `false` can only result in a ``Text`` or a ``Color``. The former
+/// example erases that information, forcing the SwiftUI runtime to evaluate
+/// the actual view type lazily, and thus requires more work to compute and
+/// render.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AnyView : View {
 
-    /// Create an instance that type-erases ``view``.
+    /// Create an instance that type-erases ``View``.
     ///
     /// See ``AnyView`` for the uses and dangers of using this structure.
     ///
@@ -3583,12 +3601,13 @@ extension App {
 /// Below shows a simple example using a `String`.
 ///
 ///     struct ContentView: View {
-/// 		@AppStorage("name") var name: String = "Javier"
+///         @AppStorage("name") var name: String = "Javier"
 ///
-/// 		var body: some View {
-/// 			TextField(name, text: $name)
-/// 		}
-/// 	}
+///         var body: some View {
+///             TextField(name, text: $name)
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
 
@@ -3607,15 +3626,16 @@ extension App {
 
     /// Provides a binding for the wrapped value.
     ///
-    /// You can access this using the $ prefix:
+    /// You can access this using the `$` prefix:
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("name") var name: String = "Javier"
+    ///     struct ContentView: View {
+    ///         @AppStorage("name") var name: String = "Javier"
     ///
-    /// 		var body: some View {
-    /// 			TextField(name, text: $name)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             TextField(name, text: $name)
+    ///         }
+    ///     }
+    ///
     public var projectedValue: Binding<Value> { get }
 }
 
@@ -3624,13 +3644,13 @@ extension AppStorage {
 
     /// Creates a property that can read and write to a boolean user default.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("airplane-mode") var on: Bool = false
+    ///     struct ContentView: View {
+    ///         @AppStorage("airplane-mode") var on: Bool = false
     ///
-    /// 		var body: some View {
-    /// 			Toggle("Airplane Mode", isOn: $on)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Toggle("Airplane Mode", isOn: $on)
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a boolean value is not specified
@@ -3643,13 +3663,13 @@ extension AppStorage {
 
     /// Creates a property that can read and write to an integer user default.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("donuts") var count: Int = 0
+    ///     struct ContentView: View {
+    ///         @AppStorage("donuts") var count: Int = 0
     ///
-    /// 		var body: some View {
-    /// 			Stepper("🍩 count: \(count)", value: $count)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Stepper("🍩 count: \(count)", value: $count)
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value is not specified
@@ -3662,14 +3682,14 @@ extension AppStorage {
 
     /// Creates a property that can read and write to a double user default.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("brightness") var level: Double = 0
+    ///     struct ContentView: View {
+    ///         @AppStorage("brightness") var level: Double = 0
     ///
-    /// 		var body: some View {
-    /// 			Text("🔆 \(level)")
+    ///         var body: some View {
+    ///             Text("🔆 \(level)")
     ///             Slider(value: $level)
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a double value is not specified
@@ -3683,12 +3703,12 @@ extension AppStorage {
     /// Creates a property that can read and write to a string user default.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("name") var name: String = "Javier"
+    ///         @AppStorage("name") var name: String = "Javier"
     ///
-    /// 		var body: some View {
-    /// 			TextField(name, text: $name)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             TextField(name, text: $name)
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value is not specified
@@ -3702,12 +3722,12 @@ extension AppStorage {
     /// Creates a property that can read and write to a url user default.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("site") var url = URL(string: "bananadocs.org")!
+    ///         @AppStorage("site") var url = URL(string: "bananadocs.org")!
     ///
-    /// 		var body: some View {
-    /// 			Text("Check out \(url)")
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Text("Check out \(url)")
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a url value is not specified for
@@ -3730,7 +3750,7 @@ extension AppStorage {
     ///         var age: Int
     ///     }
     ///
-    //      struct ContentView: View {
+    ///     struct ContentView: View {
     ///         @AppStorage("goat") var person = Data()
     ///
     ///         var body: some View {
@@ -3758,22 +3778,22 @@ extension AppStorage {
     ///
     /// A common usage is with enumerations:
     ///
-    ///    enum MyEnum: Int {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
+    ///     enum MyEnum: Int {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct MyView: View {
+    ///         @AppStorage("MyEnumValue") private var value = MyEnum.a
     ///
-    ///        var body: some View {
+    ///         var body: some View {
     ///             Picker("Choose!", selection: $value) {
     ///                 Text("a").tag(MyEnum.a)
     ///                 Text("b").tag(MyEnum.b)
     ///                 Text("c").tag(MyEnum.c)
     ///             }
     ///         }
-    ///    }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value
@@ -3789,21 +3809,21 @@ extension AppStorage {
     ///
     /// A common usage is with enumerations:
     ///
-    ///    enum MyEnum: String {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View {
+    ///     enum MyEnum: String {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct MyView: View {
+    ///         @AppStorage("MyEnumValue") private var value = MyEnum.a
+    ///         var body: some View {
     ///             Picker("Choose!", selection: $value) {
     ///                 Text("a").tag(MyEnum.a)
     ///                 Text("b").tag(MyEnum.b)
     ///                 Text("c").tag(MyEnum.c)
     ///             }
     ///         }
-    ///    }
+    ///     }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value
@@ -3823,14 +3843,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("airplane-mode") var on: Bool?
+    ///     struct ContentView: View {
+    ///         @AppStorage("airplane-mode") var on: Bool?
     ///
-    /// 		var body: some View {
-    /// 			Button("on") { on = true }
+    ///         var body: some View {
+    ///             Button("on") { on = true }
     ///             Button("off") { on = false }
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3844,14 +3864,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("donuts") var count: Int?
+    ///     struct ContentView: View {
+    ///         @AppStorage("donuts") var count: Int?
     ///
-    /// 		var body: some View {
-    /// 			Button("none ☹️") { count = 0 }
+    ///         var body: some View {
+    ///             Button("none ☹️") { count = 0 }
     ///             Button("LOTS 🍩") { count = 100 }
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3865,14 +3885,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("brightness") var level: Double?
+    ///     struct ContentView: View {
+    ///         @AppStorage("brightness") var level: Double?
     ///
-    /// 		var body: some View {
-    /// 			Button("MAX 🔆") { level = 1.0 }
+    ///         var body: some View {
+    ///             Button("MAX 🔆") { level = 1.0 }
     ///             Button("min 🔅") { level = 0.0 }
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3885,12 +3905,12 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// default.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("name") var name: String?
+    ///         @AppStorage("name") var name: String?
     ///
-    /// 		var body: some View {
-    /// 			Button("Save 🐐") { name = "Javier" }
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Button("Save 🐐") { name = "Javier" }
+    ///         }
+    ///     }
     ///
     /// Defaults to nil if there is no restored value.
     ///
@@ -3907,12 +3927,12 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// Defaults to nil if there is no restored value.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("site") var url: URL?
+    ///         @AppStorage("site") var url: URL?
     ///
-    /// 		var body: some View {
-    /// 			Text("Save the 🍌") { url = URL(string: "bananadocs.org" }
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Text("Save the 🍌") { url = URL(string: "bananadocs.org" }
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3931,7 +3951,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         var age: Int
     ///     }
     ///
-    //      struct ContentView: View {
+    ///     struct ContentView: View {
     ///         @AppStorage("goat") var person: Data?
     ///
     ///         var body: some View {
@@ -4310,7 +4330,11 @@ extension BackgroundStyle : ShapeStyle {
 
 /// This type handles shared values across views.
 ///
-/// ``Binding`` is a property wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. ``Binding`` defines a **getter** and a **setter** for a value.
+/// ``Binding`` is a property wrapper that creates a connection between stored
+/// data, and a view that displays and changes that data. It is a **two-way
+/// connection** to a source of truth. It is used to both read the latest
+/// value, as well as to set a new value. ``Binding`` defines a **getter**
+/// and a **setter** for a value.
 ///
 /// ### Structure of a ``Binding``
 ///
@@ -4323,13 +4347,14 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// ### Creating a ``Binding`` from `@State `
+/// ### Creating a ``Binding`` from `@State`
 ///
-/// A ``Binding`` typically represents a reference to a mutable source of truth - such as `@State`, `@ObservedObject` or a reference-writable keypath of an object. To create a ``Binding`` from a mutable source of truth, prefix the variable name for the source of truth with a dollar sign (`$`).
+/// A ``Binding`` typically represents a reference to a mutable source of
+/// truth - such as `@State`, `@ObservedObject` or a reference-writable keypath
+/// of an object. To create a ``Binding`` from a mutable source of truth,
+/// prefix the variable name for the source of truth with a dollar sign (`$`).
 ///
 /// For example, a ``TextField`` can be bound to a state variable:
-///
-/// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4342,15 +4367,27 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// In the example above, the source of truth is a `@State` variable, named `text`. `text`  represents a `String`, whereas `$text` represents a `Binding<String>`. `TextField`'s initializer accepts a placeholder `String` and a `Binding<String>`. In this example, `TextField` requires a ``Binding`` to the source of truth as `TextField` must be able to *write back* to the `@State` variable (a **mutable** source of truth).
+/// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
-/// Recall, a `Binding` is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth ``text`` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth ``text`` via the `Binding`  `$text` once again.
+/// In the example above, the source of truth is a `@State` variable,
+/// named `text`. `text`  represents a `String`, whereas `$text` represents
+/// a `Binding<String>`. ``TextField``'s initializer accepts a placeholder
+/// `String` and a `Binding<String>`. In this example, `TextField` requires a
+/// ``Binding`` to the source of truth as ``TextField`` must be able to
+/// *write back* to the `@State` variable (a **mutable** source of truth).
 ///
-/// ### Creating a ``Binding`` from an `ObservableObject`
+/// Recall, a `Binding` is a **two-way connection** to a source of truth.
+/// It is used to both read the latest value, as well as to set a new value.
+/// In the previous example, the view's initial render will display an
+/// editable text of "🍌🍌" on the screen - `TextField` reads the current
+/// value of the source of truth ``text`` via the  `Binding` `$text`. When
+/// the user starts editing, ``TextField`` *writes back* new values to the
+/// source of truth `text` via the `Binding`  `$text` once again.
 ///
-/// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
+/// ### Creating a `Binding from an ``ObservableObject``
 ///
-/// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
+/// In this example, the source of truth is an observable object
+/// `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4370,11 +4407,21 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a ``Binding`` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
+/// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
+///
+/// The binding between the model's `isEnabled` variable and a toggle is
+/// established using `$viewModel.isEnabled` within `ExampleView`'s body.
+/// Note that the dollar sign must prefix the **root** variable, even in the
+/// case where a child member is being referenced. `$viewModel.isEnabled`
+/// and `viewModel.$isEnabled` are **not** equivalent. The former creates a
+/// ``Binding`` to `isEnabled`, whereas the latter unwraps the projected
+/// value of the `@Published` property wrapper wrapping `isEnabled`.
 ///
 /// ### Animating Updates via a ``Binding``
 ///
-/// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with ``Binding/animation(_:)``. Usage looks as follows:
+/// Since a `Binding` is capable of updating a view's state, the state
+/// update can be made to animate with ``Binding/animation(_:)``.
+/// Usage looks as follows:
 ///
 /// ```
 /// $myVariable.animation(.default)
@@ -4382,11 +4429,12 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ### Creating a ``Binding`` from a constant
 ///
-/// At times, you may want to pass a fixed value as a `Binding`. This is possible via ``Binding/constant(_:)``, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
+/// At times, you may want to pass a fixed value as a `Binding`. This is
+/// possible via ``Binding/constant(_:)``, which creates a `Binding`
+/// to a fixed value, ignoring any updates from the consumer of the binding.
 ///
-/// Consider `EnvironmentValues/editMode`, for example. A ``List`` can be forced into active editing by passing a binding to `EditMode.active`.
-///
-/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+/// Consider ``EnvironmentValues/editMode``, for example. A ``List`` can be
+/// forced into active editing by passing a binding to ``EditMode.active``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4405,6 +4453,8 @@ extension BackgroundStyle : ShapeStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
@@ -5227,24 +5277,21 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 ///
-///     struct ExampleView: View {
+///     struct ContentView: View {
 ///         var body: some View {
-///              VStack {
-///                  Button("Plain Banana🍌🍌") { tap() }
-///                      .buttonStyle(PlainButtonStyle())
+///             VStack {
+///                 Button("Plain Banana🍌🍌", action: tap)
+///                     .buttonStyle(PlainButtonStyle())
+///                 Button("Borderless Banana🍌🍌", action: tap)
+///                     .buttonStyle(BorderlessButtonStyle())
+///                 Button("Default Banana🍌🍌", action: tap)
+///                     .buttonStyle(DefaultButtonStyle())
+///             }
+///             .font(.title2)
+///         }
 ///
-///                  Button("Borderless Banana🍌🍌") { tap() }
-///                      .buttonStyle(BorderlessButtonStyle())
-///
-///                  Button("Default Banana🍌🍌") { tap() }
-///                      .buttonStyle(DefaultButtonStyle())
-///              }
-///              .font(.title2)
-///          }
-///
-///          func tap() {}
-///      }
-///
+///         func tap() { }
+///     }
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// `View/buttonStyle(_:)-66fbx` modifier.
@@ -5416,12 +5463,23 @@ extension Button where Label == Text {
     /// ``Text`` for more information about localizing strings.
     ///
     /// To initialize a button with a string variable, use
-    /// `Button/init(_:action:)-lpm7` instead.
+    /// ``Button/init(_:action:)-40ffd`` instead.
     ///
     ///     struct EasySignInView: View {
     ///         let titleText = LocalizedStringKey("Sign In")
+    ///
     ///         var body: some View {
     ///             Button(titleTiext, action: { /*sign the user in*/ })
+    ///         }
+    ///     }
+    ///
+    /// If you directly pass the button a `String` literal, it will also
+    /// treat it as a localization key:
+    ///
+    ///     struct EasySignInView: View {
+    ///         var body: some View {
+    ///             // "Sign In" gets localized
+    ///             Button("Sign In", action: { /*sign the user in*/ })
     ///         }
     ///     }
     ///
@@ -8217,26 +8275,36 @@ public struct DatePickerComponents : OptionSet {
 
 /// A specification for the appearance and interaction of a ``DatePicker``.
 ///
-/// There is no public interface for ``DatePickerStyle``.
+/// Use this protocol with the ``View/datePickerStyle(_:)`` view modifier
+/// to set a ``DatePicker``'s style.
 ///
-/// There are currently 5 date picker styles:
-/// - ``DefaultDatePickerStyle`` on iOS and macOS
+/// Though you cannot currently create your own date picker style,
+/// there are 5 date picker pre-made styles to choose from:
 /// - ``WheelDatePickerStyle`` on iOS
+/// - ``DefaultDatePickerStyle`` on iOS and macOS
+/// - ``GraphicalDatePickerStyle`` on iOS and macOS
 /// - ``FieldDatePickerStyle`` on macOS
-/// - ``GraphicalDatePickerStyle`` on macOS
 /// - ``StepperFieldDatePickerStyle`` on macOS
 ///
-/// ![0AD88967-F661-4DCF-876D-952C992543D1](0AD88967-F661-4DCF-876D-952C992543D1.png)
+/// You can use the pre-defined styles like this:
+///
 /// ```
-/// struct StyledDatePickerView: View {
-///     @State private var date = Date()
+/// struct ContentView: View {
+///     @State var date = Date()
 ///
 ///     var body: some View {
-///         DatePicker(selection: $date, label: { Text("Date") })
+///         DatePicker("Choose a date 📆", selection: $date)
 ///             .datePickerStyle(WheelDatePickerStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![Wheel Date Picker Style](wheel-datepickerstyle.png)
+///
+/// Check out ``DatePicker`` for more on how to make date pickers. Or see
+/// [`Date`](https://developer.apple.com/documentation/foundation/date)
+/// for more on making and using date objects.
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -8384,21 +8452,68 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 
 /// The default label style in the current context.
 ///
-/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+/// Use this label style to ensure all the views in the hierarchy use
+/// the default label style.
+///
+/// This is one of 3 default label
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
+///
+/// These are the default styles:
+/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier:
 ///
 ///
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
 ///                 .labelStyle(DefaultLabelStyle())
-///        }
-///    }
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
 ///
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultLabelStyle : LabelStyle {
 
     /// Creates a default label style.
+    ///
+    /// Use this label style initializer to ensure all the views in the hierarchy use
+    /// the default label style.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(DefaultLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(IconOnlyLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Default Label Styles](default-labelstyle-comparison.png)
     public init() { }
 
     /// Creates a view that represents the body of a label.
@@ -11487,7 +11602,10 @@ public struct EmptyCommands : Commands {
 /// ``EmptyView`` is a special view that displays nothing and occupies no space.
 /// Modifying an ``EmptyView`` does nothing.
 ///
-/// For example, the following stack ignores the `EmptyView` between the two ``Text`` elements, even when it is modified to have a frame of 1000x1000 and a red background color. It simply behaves as if the middle view does not exist.
+/// For example, the following stack ignores the ```EmptyView`` between the
+/// two ``Text`` elements, even when it is modified to have a frame of
+/// `1000` x `1000` and a red background color. It simply behaves as if the
+/// middle view does not exist.
 ///
 /// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
 ///
@@ -11509,7 +11627,8 @@ public struct EmptyCommands : Commands {
 ///
 /// ![EmptyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-1.png)
 ///
-/// ``EmptyView`` has many uses. For example, it can be used to instruct SwiftUI that your UI control does not want a label:
+/// ``EmptyView`` has many uses. For example, it can be used to instruct
+/// SwiftUI that your UI control does not want a label:
 ///
 /// ```
 /// Toggle(isOn: $myBooleanValue, label: { EmptyView() })
@@ -11524,15 +11643,15 @@ public struct EmptyCommands : Commands {
 ///     @State var width: CGFloat? = nil
 ///
 ///     var body: some View {
-///         Text("Hello, world!").background(
-///             GeometryReader { geometry -> EmptyView in
-///                 DispatchQueue.main.async {
-///                     width = geometry.size.width
+///         Text("Hello, world!")
+///             .background(
+///                 GeometryReader { geometry -> EmptyView in
+///                     DispatchQueue.main.async {
+///                         width = geometry.size.width
+///                     }
+///                     return EmptyView()
 ///                 }
-///
-///                 return EmptyView()
-///             }
-///         )
+///             )
 ///     }
 /// }
 /// ```
@@ -11540,7 +11659,9 @@ public struct EmptyCommands : Commands {
 ///  ![EmptyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-2.png)
 ///
 /// Account for ``EmptyView`` when building your own custom UI controls.
-/// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of ``EmptyView``:
+/// For example, the following code specifies that `label` should be hidden
+/// from system accessibility features when the `label` is an instance of
+/// ``EmptyView``:
 ///
 /// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
@@ -11549,8 +11670,8 @@ public struct EmptyCommands : Commands {
 ///
 ///     var body: some View {
 ///         HStack {
-///             label.accessibility(hidden: label is EmptyView)
-///
+///             label
+///                 .accessibility(hidden: label is EmptyView)
 ///             content
 ///         }
 ///     }
@@ -14708,20 +14829,42 @@ extension Font {
 
     /// Adds italics to the font.
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// Use this modifier to add *italic* styling to a ``Font``.
     ///
     /// ```
-    /// struct FontView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
     ///             Text("I'm italicized text")
-    ///                 .font(Font.system(size: 16).italic())
+    ///                 .font(Font.system(size: 36).italic())
     ///             Text("And I'm bold")
-    ///                 .font(Font.system(size: 16).bold())
+    ///                 .font(Font.system(size: 36).bold())
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// There is a related ``Text`` modifier called ``Text/italic()`` that
+    /// gets applied directly to the text view:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).italic())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .italic()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Italic Modifier Comparison](font-text-italic.png)
+    ///
     public func italic() -> Font { }
 
     /// Adjusts the font to enable all small capitals.
@@ -14853,20 +14996,61 @@ extension Font {
 
     /// Adds bold styling to the font.
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// Use this modifier to add **bold** styling to a ``Font``.
     ///
     /// ```
-    /// struct FontView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
     ///             Text("I'm italicized text")
-    ///                 .font(Font.system(size: 16).italic())
+    ///                 .font(Font.system(size: 36).italic())
     ///             Text("And I'm bold")
-    ///                 .font(Font.system(size: 16).bold())
+    ///                 .font(Font.system(size: 36).bold())
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// This slightly different than using the ``Font`` modifier ``Font/weight(_:)``
+    /// and passing the ``Font/Weight/bold`` property. See the difference:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I use the `.bold()` modifier")
+    ///                 .font(Font.system(size: 24).bold())
+    ///             Text("I use the `.bold` property")
+    ///                 .font(Font.system(size: 24).weight(.bold))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold Comparison](font-bold-comparison.png)
+    ///
+    /// There is a related ``Text`` modifier called ``Text/bold()`` that
+    /// gets applied directly to the text view:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).bold())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .bold()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold Modifier Comparison](font-bold-twins.png)
+    ///
     public func bold() -> Font { }
 
     /// Create a version of `self` that uses leading (line spacing) adjustment.
@@ -17963,22 +18147,67 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-/// ![IconOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-icon-only-example-1.png)
+/// Use this label style to display a ``Label`` with an icon only.
 ///
+/// This is one of 3 default label
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
 ///
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
+/// These are the default styles:
+/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
 ///                 .labelStyle(IconOnlyLabelStyle())
-///        }
-///    }
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
 ///
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
-/// > The title of the label is still used for non-visual descriptions, such as VoiceOver.
+/// - Note: The title of the label is still used for non-visual descriptions,
+/// such as VoiceOver.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct IconOnlyLabelStyle : LabelStyle {
 
     /// Creates an icon-only label style.
+    ///
+    /// Use this initializer to create an icon-only label style.
+    /// This is the only initializer of ``TitleOnlyLabelStyle``.
+    ///
+    /// Apply a icon-only label style using the ``View/labelStyle(_:)``
+    /// view modifier:
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                 Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                     .labelStyle(IconOnlyLabelStyle())
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    ///
+    /// ![Icon-only Label Style](icon-only-labelstyle.png)
+    ///
     public init() { }
 
     /// Creates a view that represents the body of a label.
@@ -21185,38 +21414,107 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     public init(_ configuration: LabelStyleConfiguration) { }
 }
 
-/// This protocol is used to create styles for Label views
+/// A protocol for creating styles for Label views.
 ///
+/// Use this protocol to create a label style that can easily be reused, or
+/// to quickly implement one of the out-of-the-box label styles.
 ///
-/// Implement this protocol to create a labelstyle that can easily be reused.
+/// ### Making a ``LabelStyle``
 ///
-/// To configure the current label style for a view hierarchy, you only need to use the
-/// ``View/labelStyle(_:)`` modifier.
+/// There are two ways to style a ``Label``, by creating a `struct` that
+/// conforms to this protocol, or using a default `struct` that conforms
+/// to this protocol.
 ///
-/// ![LabelStyle Example 1](label-style-example.png)
+/// #### Conforming to ``LabelStyle``
 ///
-///```
-/// struct ExampleView: View {
-///     var body: some View {
-///         VStack{
-///             Label("Banana", systemImage: "suit.heart.fill")
-///                 .labelStyle(MyLabelStyle(color:.yellow))
-///             Label("Apple", systemImage: "suit.heart.fill")
-///                 .labelStyle(MyLabelStyle(color:.red))
-///         }
-///  }
-///     struct MyLabelStyle:LabelStyle{
-///         let color:Color
-///         func makeBody(configuration: Configuration) -> some View {
-///             VStack{
-///                 configuration.title
+/// To create your own label style by conforming to the ``LabelStyle`` protocol,
+/// there is only one required
+/// function: ``LabelStyle/makeBody(configuration:)``.
 ///
-///                 configuration.icon.foregroundColor(color)
-///             }
+/// ``LabelStyle/makeBody(configuration:)`` is a function that takes in a
+/// ``LabelStyleConfiguration`` parameter and expects `some View`
+/// to be returned. So what is a ``LabelStyleConfiguration``? Basically,
+/// just like a ``Label``, it's an ``LabelStyleConfiguration/icon`` and
+/// a ``LabelStyleConfiguration/title``.
+///
+/// Here's an example of a `struct` called `MyLabelStyle` that
+/// conforms to the ``LabelStyle`` protocol by implementing the
+/// ``LabelStyle/makeBody(configuration:)`` function:
+///
+/// ```
+/// struct MyLabelStyle: LabelStyle {
+///     let color: Color
+///
+///     func makeBody(configuration: Configuration) -> some View {
+///         VStack {
+///             configuration.title
+///             configuration.icon
+///                 .foregroundColor(color)
 ///         }
 ///     }
 /// }
 /// ```
+///
+/// This label style does two things: it stacks the title and icon vertically,
+/// and colors the icon. See below for how to use this custom label style.
+///
+/// #### Default ``LabelStyle`` Structures
+///
+/// If you don't want to create your own label style, there are 3 default
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
+///
+/// These are the default styles:
+/// - ``DefaultLabelStyle``, which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+/// See below for how to use them.
+///
+/// ### Using a ``LabelStyle``
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier.
+///
+/// Here is our custom label style from earlier:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .yellow))
+///             Label("Apple", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .red))
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
+///
+/// ![Custom Label Style](custom-labelstyle-comparison.png)
+///
+/// And here's a comparison of the 3 default label styles:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
+///
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol LabelStyle { }
@@ -21227,66 +21525,165 @@ extension LabelStyle {
 
     /// Creates a view that represents the body of a label.
     ///
-    /// The system calls this method for each ``Label`` instance in a view
-    /// hierarchy where this style is the current label style.
+    /// Implement this function to conform to the ``LabelStyle`` protocol,
+    /// which allows you to create reusable label styles.
     ///
-    /// ![LabelStyle Example 1](label-style-example.png)
+    /// ``LabelStyle/makeBody(configuration:)`` is a function that takes in a
+    /// ``LabelStyleConfiguration`` parameter and expects `some View`
+    /// to be returned. So what is a ``LabelStyleConfiguration``? Basically,
+    /// just like a ``Label``, it's an ``LabelStyleConfiguration/icon`` and
+    /// a ``LabelStyleConfiguration/title``.
     ///
-    ///```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         VStack{
-    ///             Label("Banana", systemImage: "suit.heart.fill")
-    ///                 .labelStyle(MyLabelStyle(color:.yellow))
-    ///             Label("Apple", systemImage: "suit.heart.fill")
-    ///                 .labelStyle(MyLabelStyle(color:.red))
-    ///         }
-    ///  }
-    ///     struct MyLabelStyle:LabelStyle{
-    ///         let color:Color
-    ///         func makeBody(configuration: Configuration) -> some View {
-    ///             VStack{
-    ///                 configuration.title
+    /// Here's an example of a `struct` called `MyLabelStyle` that
+    /// conforms to the ``LabelStyle`` protocol by implementing the
+    /// ``LabelStyle/makeBody(configuration:)`` function:
     ///
-    ///                 configuration.icon.foregroundColor(color)
-    ///             }
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// This label style does two things: it stacks the title and icon vertically,
+    /// and colors the icon. See below for how to use this custom label style.
+    ///
+    /// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+    /// modifier:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
+    ///
+    /// - Note: Any ``LabelStyle`` must implement this function. That means
+    /// that even the default styles like ``TitleOnlyLabelStyle`` and
+    /// ``IconOnlyLabelStyle`` implement this function internally.
+    ///
     /// - Parameter configuration: The properties of the label.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a label.
+    ///
+    /// This is the type passed as a parameter to the required
+    /// ``LabelStyle/makeBody(configuration:)`` function.
+    /// See ``LabelStyleConfiguration`` to learn about the properties
+    /// of a label style configuration.
     typealias Configuration = LabelStyleConfiguration
 }
 
 /// The properties of a label.
 ///
-/// There are 2 properties of a label:
+/// Use this structure to access the properties of a ``Label`` when
+/// creating your own ``LabelStyle``s. A `LabelStyleConfiguration` has
+/// two properties:
+/// 1. ``LabelStyleConfiguration/title``: The ``Label``'s ``Text`` part.
+/// 2. ``LabelStyleConfiguration/icon``: The ``Label``'s ``Image`` part.
 ///
+/// A parameter of this type called `configuration` is passed to the
+/// one required function of the ``LabelStyle`` protocol:
+/// ``LabelStyle/makeBody(configuration:)``.
 ///
+/// In the example below, we use the `configuration` parameter in the
+/// ``LabelStyle/makeBody(configuration:)`` function to create
+/// our own custom ``LabelStyle``
 ///
-/// 1. Title
-/// 2. Icon
+/// ```
+/// struct MyLabelStyle: LabelStyle {
+///     let color: Color
 ///
+///     func makeBody(configuration: Configuration) -> some View {
+///         VStack {
+///             configuration.title
+///             configuration.icon
+///                 .foregroundColor(color)
+///         }
+///     }
+/// }
+/// ```
 ///
+/// We can then reuse that custom label style:
 ///
-/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .yellow))
+///             Label("Apple", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .red))
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
 ///
-///
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
-///                 .labelStyle(DefaultLabelStyle())
-///        }
-///    }
-///
+/// ![Custom Label Style](custom-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LabelStyleConfiguration {
 
     /// A type-erased title view of a label.
+    ///
+    /// This is the type of a ``LabelStyleConfiguration``'s
+    /// ``LabelStyleConfiguration/title`` property. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses a
+    /// `Title` property called `configuration.title`:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public struct Title {
 
         /// The type of view representing the body of this view.
@@ -21297,6 +21694,48 @@ public struct LabelStyleConfiguration {
     }
 
     /// A type-erased icon view of a label.
+    ///
+    /// This is the type of a ``LabelStyleConfiguration``'s
+    /// ``LabelStyleConfiguration/icon`` property. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses an
+    /// `Icon` property called `configuration.icon`:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public struct Icon {
 
         /// The type of view representing the body of this view.
@@ -21307,9 +21746,91 @@ public struct LabelStyleConfiguration {
     }
 
     /// A description of the labeled item.
+    ///
+    /// This one of two properties in a ``LabelStyleConfiguration``. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses the
+    /// `configuration.title` property:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public var title: LabelStyleConfiguration.Title { get }
 
     /// A symbolic representation of the labeled item.
+    ///
+    /// This one of two properties in a ``LabelStyleConfiguration``. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses the
+    /// `configuration.icon` property:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public var icon: LabelStyleConfiguration.Icon { get }
 }
 
@@ -36649,38 +37170,50 @@ extension Text {
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
     public func font(_ font: Font?) -> Text { }
-    ///
+
     /// Sets the font weight of the text.
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// Use this font modifier to set the weight of your ``Font``.
     ///
+    /// This modifier takes a ``Font/Weight`` object. There are 9 font
+    /// weight.
     ///
-    ///     struct ExampleView: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             VStack {
     ///                 Text("ultraLight 🍌")
-    ///                     .fontWeight(Font.Weight.ultraLight)
+    ///                     .fontWeight(.ultraLight)
     ///                 Text("thin🍌")
-    ///                     .fontWeight(Font.Weight.thin)
+    ///                     .fontWeight(.thin)
     ///                 Text("light🍌")
-    ///                     .fontWeight(Font.Weight.light)
+    ///                     .fontWeight(.light)
     ///                 Text("regular🍌")
-    ///                     .fontWeight(Font.Weight.regular)
+    ///                     .fontWeight(.regular)
     ///                 Text("medium🍌")
-    ///                     .fontWeight(Font.Weight.medium)
+    ///                     .fontWeight(.medium)
     ///                 Text("semibold🍌")
-    ///                     .fontWeight(Font.Weight.semibold)
+    ///                     .fontWeight(.semibold)
     ///                 Text("bold🍌")
-    ///                     .fontWeight(Font.Weight.bold)
+    ///                     .fontWeight(.bold)
     ///                 Text("heavy🍌")
-    ///                     .fontWeight(Font.Weight.heavy)
+    ///                     .fontWeight(.heavy)
     ///                 Text("black🍌")
-    ///                     .fontWeight(Font.Weight.black)
-    ///            }
-    ///            .font(.title)
+    ///                     .fontWeight(.black)
+    ///             }
+    ///             .font(.title)
     ///         }
     ///     }
     ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    ///
+    /// - Note: The example above uses [*type inference*](https://www.swiftbysundell.com/basics/type-inference/)
+    /// shorten the code. The full version of using the modifier would
+    /// look like this:
+    ///
+    /// ```
+    /// Text("ultraLight 🍌")
+    ///     .fontWeight(Font.Weight.ultraLight)
+    /// ```
     ///
     /// - Parameter weight: One of the available font weights.
     ///
@@ -36689,59 +37222,138 @@ extension Text {
 
     /// Applies a bold font weight to the text.
     ///
-    /// ![Bold Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-bold-example-1.png)
+    /// Use this modifier to add **bold** styling to a ``Text`` view.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("Banana 🍌🍌")
-    ///             .bold()
-    ///             .font(.title)
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 36))
+    ///                 .italic()
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 36))
+    ///                 .bold()
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// This slightly different than using the ``Font`` modifier ``Font/weight(_:)``
+    /// and passing the ``Font/Weight/bold`` property. See the difference:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I use the `.bold()` modifier")
+    ///                 .font(Font.system(size: 24))
+    ///                 .bold()
+    ///             Text("I use the `.bold` property")
+    ///                 .font(Font.system(size: 24).weight(.bold))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold Comparison](font-bold-comparison.png)
+    ///
+    /// There is a related ``Font`` modifier called ``Font/bold()`` that
+    /// gets applied directly to the text view:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).bold())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .bold()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold Modifier Comparison](font-bold-twins.png)
+    ///
+    /// - Note: Since this modifier returns a ``Text``, you can apply other
+    /// text-only modifiers after this one.
     ///
     /// - Returns: Bold text.
     public func bold() -> Text { }
 
     /// Applies italics to the text.
     ///
-    /// ![Italic Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-italic-example-1.png)
+    /// Use this modifier to add *italic* styling to a ``Text`` view.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("Banana 🍌🍌")
-    ///             .italic()
-    ///             .font(.title)
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 36))
+    ///                 .italic()
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 36))
+    ///                 .bold()
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// There is a related ``Font`` modifier called ``Font/italic()`` that
+    /// gets applied to the ``Font``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).italic())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .italic()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Italic Modifier Comparison](font-text-italic.png)
+    ///
+    /// - Note: Since this modifier returns another ``Text``, you can
+    /// apply more text-specific modifiers after this one.
     ///
     /// - Returns: Italic text.
     public func italic() -> Text { }
 
     /// Applies a strikethrough to the text.
     ///
-    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
+    /// Use this modifier to apply a strikethrough to a ``Text`` view.
+    /// Pass two parameters: a boolean of whether to stirke through the
+    /// text (defaults to `true`) and the ``Color`` of the strikethrough.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("Banana 🍌🍌")
-    ///             .strikethrough(false)
-   ///              .font(.title)
-    ///
-    ///         Text("Banana 🍌🍌")
-    ///             .strikethrough()
-    ///             .font(.title)
-    ///
-    ///         Text("Banana 🍌🍌")
-    ///             .strikethrough(true, color: .yellow)
-    ///             .font(.title)
+    ///         VStack {
+    ///             Text("Banana 🍌🍌")
+    ///                 .strikethrough(false)
+    ///             Text("Banana 🍌🍌")
+    ///                 .strikethrough()
+    ///             Text("Banana 🍌🍌")
+    ///                 .strikethrough(true, color: .yellow)
+    ///         }
+    ///         .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has a
@@ -37371,27 +37983,85 @@ public struct TextFormattingCommands : Commands {
 
 /// A label style that only displays the title of the label.
 ///
-/// ![TitleOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-title-only-example-1.png)
+/// Use this label style to display a ``Label`` with a title only.
 ///
+/// This is one of 3 default label
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
 ///
-///     struct ExampleView: View {
-///         var body: some View {
-///              Label("Banana🍌🍌", systemImage: "heart.fill")
-///                  .labelStyle(TitleOnlyLabelStyle())
+/// These are the default styles:
+/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
 ///         }
+///         .font(.title)
 ///     }
+/// }
+/// ```
 ///
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct TitleOnlyLabelStyle : LabelStyle {
 
     /// Creates a title-only label style.
+    ///
+    /// Use this initializer to create a title only label style.
+    /// This is the only initializer of ``TitleOnlyLabelStyle``.
+    ///
+    /// Apply a title-only label style using the ``View/labelStyle(_:)``
+    /// view modifier:
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///     }
+    ///
+    /// ![Title-only Label Style](titleonlylabelstyle.png)
+    ///
     public init() { }
 
     /// Creates a view that represents the body of a label.
     ///
     /// The system calls this method for each ``Label`` instance in a view
     /// hierarchy where this style is the current label style.
+    ///
+    /// **Don't call this function directly.** This is the function called
+    /// behind the scenes by SwiftUI that allows ``TitleOnlyLabelStyle``
+    /// to conform to the ``LabelStyle`` protocol.
+    ///
+    /// To make a ``Label`` with a title only, just use the ``TitleOnlyLabelStyle/init()``
+    /// initializer.
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///     }
+    ///
+    /// ![Title-only Label Style](titleonlylabelstyle.png)
     ///
     /// - Parameter configuration: The properties of the label.
     public func makeBody(configuration: TitleOnlyLabelStyle.Configuration) -> some View { }
@@ -38485,10 +39155,10 @@ extension UIApplicationDelegateAdaptor where DelegateType : ObservableObject {
 
 /// A UIKit view controller that manages a SwiftUI view hierarchy.
 ///
-/// Create a ``UIHostingController`` object when you want to integrate SwiftUI
+/// Create a `UIHostingController` object when you want to integrate SwiftUI
 /// views into a UIKit view hierarchy. At creation time, specify the SwiftUI
 /// view you want to use as the root view for this view controller; you can
-/// change that view later using the `SwiftUI/UIHostingController/rootView`
+/// change that view later using the ``UIHostingController/rootView``
 /// property. Use the hosting controller like you would any other view
 /// controller, by presenting it or embedding it as a child view controller
 /// in your interface.
@@ -38500,7 +39170,9 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 	/// The key commands that trigger actions on this responder.
 	///
 	/// A responder object that supports hardware keyboard commands can redefine
-	/// this property and use it to return an array of `UIKit/UIKeyCommand` objects that
+	/// this property and use it to return an array of
+    /// [`UIKeyCommand`](https://developer.apple.com/documentation/uikit/uikeycommand)
+    /// objects that
 	/// it supports. Each key command object represents the keyboard sequence to
 	/// recognize and the action method of the responder to call in response.
 	///
@@ -39366,32 +40038,29 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
 /// A dynamic data structure for representing a point in a view.
 ///
-/// A unitpoint takes in x and y coordinates measured in points.
+/// A `UnitPoint` takes in `x` and `y` coordinates measured in points.
 ///
-/// You can customizde the x and y coordinates or you can use a constant.
-/// SwiftUI has 10 UnitPoint constants:
-///
-///
-///
+/// There are two ways to make a `UnitPoint`:
+/// you can either customize the `x` and `y` coordinates, or you can use a
+/// predefined constant.
+/// SwiftUI has 10 `UnitPoint` constants:
 /// 1. ``UnitPoint/zero``
 /// 2. ``UnitPoint/center``
-/// 3. ``UnitPoint/leading``
-/// 4. ``UnitPoint/trailing``
-/// 5. ``UnitPoint/top``
-/// 6. ``UnitPoint/bottom``
-/// 7. ``UnitPoint/topleading``
-/// 8. ``UnitPoint/toptrailing``
+/// 3. ``UnitPoint/topleading``
+/// 4. ``UnitPoint/top``
+/// 5. ``UnitPoint/toptrailing``
+/// 6. ``UnitPoint/trailing``
+/// 7. ``UnitPoint/bottomtrailing``
+/// 8. ``UnitPoint/bottom``
 /// 9. ``UnitPoint/bottomleading``
-/// 10. ``UnitPoint/bottomtrailing``
+/// 10. ``UnitPoint/leading``
 ///
+/// `UnitPoint`s are used commonly in shapes and gradients.
 ///
-///
-/// UnitPoints are used commonly in shapes and gradients.
-///
-/// For example, a ``LinearGradient`` accepts a ``UnitPoint`` for the startPoint and endPoint parameters.
-/// This example uses the constants ``UnitPoint/top`` and ``UnitPoint/bottom``.
-///
-/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
+/// For example, a ``LinearGradient`` accepts a `UnitPoint` for the
+/// `startPoint` and `endPoint` parameters.
+/// This example uses the ``UnitPoint/top`` and ``UnitPoint/bottom``
+/// unit points.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -39406,6 +40075,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///     }
 /// }
 /// ```
+///
+/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
 
@@ -41548,32 +42220,77 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-  /// Sets the color of the text displayed by this view.
+  /// Sets the color primary color of a view.
   ///
-  /// Use this method to change the color of the text rendered by a text view.
+  /// Use this modifier to change the main display color of a ``View``.
+  /// This can be used on any ``View``, and its effect depends on the view.
   ///
-  /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
+  /// For example, you can change the color of a ``Shape`` like
+  /// ``Circle``:
   ///
-  /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
-  ///
-  ///     struct ExampleView: View {
-  ///        var body: some View {
-  ///            VStack {
-  ///                Text("Banana🍌🍌")
-  ///                    .foregroundColor(.yellow)
-  ///                Text("Apple 🍎🍎")
-  ///                    .foregroundColor(.red)
-  ///                Text("Peach 🍑🍑")
-  ///                    .foregroundColor(.orange)
-  ///            }
-  ///            .font(.largeTitle)
-  ///        }
+  ///     struct ContentView: View {
+  ///         var body: some View {
+  ///             VStack {
+  ///                 Circle()
+  ///                     .foregroundColor(.red)
+  ///                 Circle()
+  ///                     .foregroundColor(.yellow)
+  ///                 Circle()
+  ///                     .foregroundColor(.gren)
+  ///             }
+  ///         }
   ///     }
   ///
+  /// ![Foreground Color Cicles](foregroundcolor-circles.png)
   ///
+  /// But this modifier is very general and wors in many places. For example,
+  /// you can change the text color of any control, like a ``Button``,
+  /// ``Toggle``, or ``DatePicker`` using `.foregroundColor(_:)`:
   ///
-  /// - Parameter color: The color to use when displaying this text.
-  /// - Returns: A text view that uses the color value you supply.
+  ///     struct ContentView: View {
+  ///         @State var isOn = true
+  ///         @State var date = Date()
+  ///
+  ///         var body: some View {
+  ///             VStack {
+  ///                 Button("I am a red button 🚗") { /* action */ }
+  ///                     .foregroundColor(.red)
+  ///                 Toggle("I'm a yellow toggle 🌽", isOn: $isOn)
+  ///                     .foregroundColor(.yellow)
+  ///                 DatePicker("Date! 🐊", selection: $date)
+  ///                     .foregroundColor(.green)
+  ///             }
+  ///         }
+  ///     }
+  ///
+  /// ![Foreground Color Controls](foregroundcolor-controls.png)
+  ///
+  /// Because this modifier is general, it's easy to use on a parent view,
+  /// then have the color show up on all of the children:
+  ///
+  ///     struct ContentView: View {
+  ///         @State var isOn = true
+  ///         @State var date = Date()
+  ///
+  ///         var body: some View {
+  ///             VStack {
+  ///                 Button("I am a pink button 🎀") { /* action */ }
+  ///                 Toggle("I'm a pink toggle 🐽", isOn: $isOn)
+  ///                 DatePicker("Date! 🌷", selection: $date)
+  ///             }
+  ///             .foregroundColor(.pink)
+  ///         }
+  ///     }
+  ///
+  /// ![Foreground Color Parent](foregroundcolor-pink.png)
+  ///
+  /// - Note: There is a related modifier for ``Text`` views
+  /// called ``Text/foregroundColor(_:)`` that acts
+  /// exactly the same as this modifier, but returns back a ``Text`` view
+  /// instead of a generic `some View`.
+  ///
+  /// - Parameter color: The color to use in the view's foreground.
+  /// - Returns: A some view that uses the foreround color value you supply.
     @inlinable public func foregroundColor(_ color: Color?) -> some View { }
 
 }
@@ -43948,13 +44665,64 @@ extension View {
 
     /// Sets the style for labels within this view.
     ///
-    /// Use this modifier to set a specific style for all labels within a view:
+    /// Use this modifier to set a specific style for all labels within a view.
     ///
-    ///     VStack {
-    ///         Label("Fire", systemImage: "flame.fill")
-    ///         Label("Lightning", systemImage: "bolt.fill")
+    /// For example, if we create a custom label style called
+    /// `MyLabelStyle`, we can apply it to a label using this modifier:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
     ///     }
-    ///     .labelStyle(MyCustomLabelStyle())
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
+    ///
+    /// This modifier also accepts the default label styles that ship with
+    /// SwiftUI:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(DefaultLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(IconOnlyLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Default Label Styles](default-labelstyle-comparison.png)
+    ///
+    /// - Note: Creating label styles can be complex. See ``LabelStyle``
+    /// for more.
+    ///
+    /// - Parameter style: The label style to use in the view hierarchy.
     ///
     public func labelStyle<S>(_ style: S) -> some View where S : LabelStyle { }
 
