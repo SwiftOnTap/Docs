@@ -22341,7 +22341,7 @@ extension Link where Label == Text {
 /// [list-deletable ->]
 /// ### Making list rows deletable
 ///
-/// Apply the `DynamicViewContent/onDelete(perform:)` modifier on a `ForEach` within a `List` to allow the list rows to become deletable.
+/// Apply the ``DynamicViewContent/onDelete(perform:)`` modifier on a ``ForEach`` within a ``List`` to allow the list rows to become deletable.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -25164,8 +25164,6 @@ public struct OutlineSubgroupChildren : View {
 
 /// An index view style that places a page index view over its content.
 ///
-/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -25179,15 +25177,16 @@ public struct OutlineSubgroupChildren : View {
 ///         .tabViewStyle(PageTabViewStyle())
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 ///     }
+/// ```
 ///
-/// Currently the PageIndexViewStyle is the only type that allows for customization
+/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
+///
+/// Currently the ``PageIndexViewStyle`` is the only type that allows for customization
 /// over a page index view. To configure the current ``IndexViewStyle`` for a view hierarchy, use the
-/// `.indexViewStyle()` modifier. When creating a new PageIndexViewStyle, it will
-/// default to the .automatic backgroundDisplayMode if none is specified.
+/// `.indexViewStyle()` modifier. When creating a new ``PageIndexViewStyle``, it will
+/// default to the ``.automatic` ``PageIndexViewStyle/backgroundDisplayMode`` if none is specified.
 ///
 /// For example:
-///
-/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -25202,6 +25201,9 @@ public struct OutlineSubgroupChildren : View {
 ///    }
 /// }
 /// ```
+///
+/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+///
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -27993,15 +27995,15 @@ extension PreviewProvider {
 
 /// This protocol is used to define custom button styles.
 ///
-/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and ``PlainButtonStyle``.
+/// ``PrimitiveButtonStyle`` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including ``BorderlessButtonStyle`` and ``PlainButtonStyle``.
 ///
-/// Your structure only needs to implement one method: `PlainButtonStyle/makeBody(configuration:)`. The desired button view is output by this method.
+/// Your structure only needs to implement one method: ```PlainButtonStyle/makeBody(configuration:)``. The desired button view is output by this method.
 ///
 /// To build a custom ``PrimitiveButtonStyle``, create a struct that conforms to the protocol.
 ///
-/// `PlainButtonStyle/makeBody(configuration:)` accepts a `PrimitiveButtonStyleConfiguration`, which passes the original label to display the button view and a `PrimitiveButtonStyle/trigger()` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
+/// ``PlainButtonStyle/makeBody(configuration:)`` accepts a ``PrimitiveButtonStyleConfiguration``, which passes the original label to display the button view and a ``PrimitiveButtonStyle/trigger()`` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
 ///
-/// Use `View/buttonStyle(_:)-1fa87` to apply a primitive button style.
+/// Use ``View/buttonStyle(_:)-1fa87`` to apply a primitive button style.
 ///
 /// ```
 ///  struct ExampleView: View {
@@ -28024,7 +28026,7 @@ extension PreviewProvider {
 ///
 /// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
 ///
-/// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a `VStack`.
+/// ``PrimitiveButtonStyle`` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a ``VStack``.
 ///
 /// ```
 ///  struct BananaView: View {
