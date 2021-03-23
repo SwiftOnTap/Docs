@@ -4499,7 +4499,8 @@ extension Binding : DynamicProperty {
 ///
 /// ![Space](space.jpg)
 ///
-/// ![Blended Image](DF45080C-D4E5-44D2-A2C0-4D6E911F47C9.png)
+/// ![Blended Image](blendmode-softLight.png)
+/// 
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
