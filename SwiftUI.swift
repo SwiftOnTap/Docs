@@ -3979,19 +3979,16 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 /// view can be scrolled vertically, horizontally, or both.
 ///
 /// There are two possible axes:
-///
 /// 1. ``Axis/horizontal``
 /// 2. ``Axis/vertical``
 ///
 /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
 /// on using this enumeration in the initializer.
 ///
-///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
-///         ScrollView(Axis.horizontal, showsIndicators: false) {
+///         ScrollView(Axis.Set.horizontal, showsIndicators: false) {
 ///             VStack {
 ///                 Text("Bananas 🍌🍌")
 ///                 Text("Apples 🍏🍏")
@@ -4001,6 +3998,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Axis : Int8, CaseIterable {
 
@@ -4012,10 +4012,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
     /// on using this enumeration in the initializer.
     ///
-    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ScrollView(.horizontal, showsIndicators: false) {
     ///             VStack {
@@ -4027,6 +4025,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+    ///
     case horizontal
 
     /// The vertical dimension.
@@ -4037,12 +4038,10 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
     /// on using this enumeration in the initializer.
     ///
-    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         ScrollView(.vertical) {
+    ///         ScrollView(.vertical, showsIndicators: false) {
     ///             VStack {
     ///                 Text("Bananas 🍌🍌")
     ///                 Text("Apples 🍏🍏")
@@ -4052,6 +4051,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
     case vertical
 
     /// An efficient set of axes.
@@ -4068,10 +4069,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
     /// on using this option set in the initializer.
     ///
-    /// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ScrollView([.horizontal, .vertical]) {
     ///             VStack {
@@ -4083,6 +4082,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
     ///
     @frozen public struct Set : OptionSet {
 
@@ -4135,10 +4136,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
         /// on using this in the initializer.
         ///
-        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-        ///
         /// ```
-        /// struct ExampleView: View {
+        /// struct ContentView: View {
         ///     var body: some View {
         ///         ScrollView(.horizontal, showsIndicators: false) {
         ///             VStack {
@@ -4150,6 +4149,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
         public static let horizontal: Axis.Set
 
         /// The option set corresponding to the vertical axis.
@@ -4160,12 +4162,10 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
         /// on using this in the initializer.
         ///
-        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-        ///
         /// ```
         /// struct ExampleView: View {
         ///     var body: some View {
-        ///         ScrollView(.vertical) {
+        ///         ScrollView(.vertical, showsIndicators: false) {
         ///             VStack {
         ///                 Text("Bananas 🍌🍌")
         ///                 Text("Apples 🍏🍏")
@@ -4175,6 +4175,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
         public static let vertical: Axis.Set
 
         /// The type of the elements of an array literal.
@@ -4617,9 +4620,8 @@ extension Binding : DynamicProperty {
 ///
 /// ![Space](space.jpg)
 ///
-/// ![Blended Image](DF45080C-D4E5-44D2-A2C0-4D6E911F47C9.png)
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         ZStack {
 ///             Image("ocean")
@@ -4629,44 +4631,45 @@ extension Binding : DynamicProperty {
 ///             Image("space")
 ///                 .resizable()
 ///                 .scaledToFit()
-///                 .blendMode(.softLight)
+///                 .blendMode(BlendMode.softLight)
 ///         }
 ///     }
 /// }
 /// ```
+///
+/// ![Blended Image](blendmode-softlight.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
 	/// Regular overlapping, with opacity taken into account.
-  ///
-  /// ![Blend Mode](blendmode-normal.png)
-  ///
-  /// ```
-  /// struct ExampleView: View {
-  ///     var body: some View {
-  ///         ZStack {
-  ///             Image("ocean")
-  ///                 .resizable()
-  ///                 .scaledToFit()
-  ///
-  ///             Image("space")
-  ///                 .resizable()
-  ///                 .scaledToFit()
-  ///                 .blendMode(.normal)
-  ///         }
-  ///     }
-  /// }
-  /// ```
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.normal)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Blend Mode](blendmode-normal.png)
+    ///
     case normal
 
     /// Multiplies the RGB channel numbers (0.0 - 1.0) of each pixel.
     ///
     /// The result is always a darker picture.
-    /// ![Blend Mode](blendmode-multiply.png)
-    ///
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4681,6 +4684,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-multiply.png)
+    ///
     case multiply
 
     /// Each RGB pixel value is inverted (subtracted from 1), multiplied together,
@@ -4696,10 +4702,9 @@ public enum BlendMode {
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
     ///
-    /// ![Blend Mode](blendmode-screen.png)
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4714,24 +4719,25 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-screen.png)
+    ///
     case screen
 
     /// The parts were the bottom layer is light become lighter, and dark becomes darker.
     ///
-    /// Overlay is a combo of multiply and screen. The formula is this:
+    /// Overlay is a combo of ``BlendMode/multiply`` and ``BlendMode/screen``. The formula is this:
     ///
     ///     func overlay(a: Double, b: Double) -> Double {
-    ///     	if a > 0.5 {
-    ///     		return 2 * a * b
-    ///     	} else {
-    ///     		return 1 - 2 * (1 - a) * (1 - b)
-    ///     	}
+    ///         if a > 0.5 {
+    ///             return 2 * a * b
+    ///         } else {
+    ///             return 1 - 2 * (1 - a) * (1 - b)
+    ///         }
     ///     }
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4746,14 +4752,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
     case overlay
 
     /// Takes the darker of the top and bottom picture pixels.
     ///
-    /// ![Blend Mode](blendmode-darken.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4763,19 +4770,20 @@ public enum BlendMode {
     ///             Image("space")
     ///                 .resizable()
     ///                 .scaledToFit()
-    ///                 .blendMode(.overlay)
+    ///                 .blendMode(.darken)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-darken.png)
+    ///
     case darken
 
     /// Takes the lighter of the top and bottom picture pixels.
     ///
-    /// ![Blend Mode](blendmode-lighten.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4791,6 +4799,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
+    /// ![Blend Mode](blendmode-lighten.png)
+    ///
     case lighten
 
     /// Divides the bottom layer by the inversion of the top layer.
@@ -4804,10 +4814,8 @@ public enum BlendMode {
     ///
     /// This operation is not invertible.
     ///
-    /// ![Blend Mode](blendmode-colorDodge.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4822,6 +4830,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-colorDodge.png)
+    ///
     case colorDodge
 
     /// Divides the inverted bottom layer by the top layer, then inverts the result.
@@ -4832,10 +4843,8 @@ public enum BlendMode {
     ///
     /// This operation is not invertible.
     ///
-    /// ![Blend Mode](blendmode-colorBurn.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4850,6 +4859,8 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-colorBurn.png)
     case colorBurn
 
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
@@ -4864,10 +4875,8 @@ public enum BlendMode {
     ///         }
     ///     }
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4882,6 +4891,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
     case softLight
 
     /// A combination of multiply and screen are applied.
@@ -4889,10 +4901,8 @@ public enum BlendMode {
     /// Hard light affects the bottom layer the way that overlay affects the top
     /// layer, and vice-versa.
     ///
-    /// ![Blend Mode](blendmode-hardLight.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4907,6 +4917,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-hardLight.png)
+    ///
     case hardLight
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
@@ -4914,10 +4927,8 @@ public enum BlendMode {
     /// If either layer is black, nothing changes. Blending with white inverts
     /// the picture.
     ///
-    /// ![Blend Mode](blendmode-difference.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4932,6 +4943,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-difference.png)
+    ///
     case difference
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
@@ -4939,10 +4953,8 @@ public enum BlendMode {
     /// The difference between difference and exclusion is that blending with
     /// 50% gray will produce 50% gray.
     ///
-    /// ![Blend Mode](blendmode-exclusion.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4957,14 +4969,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-exclusion.png)
+    ///
     case exclusion
 
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
     ///
-    /// ![Blend Mode](blendmode-hue.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4974,20 +4987,20 @@ public enum BlendMode {
     ///             Image("space")
     ///                 .resizable()
     ///                 .scaledToFit()
-    ///                 .blendMode(.hu)
+    ///                 .blendMode(.hue)
     ///         }
     ///     }
     /// }
     /// ```
     ///
+    /// ![Blend Mode](blendmode-hue.png)
+    ///
     case hue
 
     /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
     ///
-    /// ![Blend Mode](blendmode-saturation.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5002,14 +5015,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-saturation.png)
+    ///
     case saturation
 
     /// Keeps the brightness of the bottom layer, while taking the hue and saturation of the top layer.
     ///
-    /// ![Blend Mode](blendmode-color.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5024,14 +5038,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-color.png)
+    ///
     case color
 
     /// Keeps the hue and saturation of the bottom layer, while taking the brightness of the top layer.
     ///
-    /// ![Blend Mode](blendmode-luminosity.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5046,15 +5061,16 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-luminosity.png)
+    ///
     case luminosity
 
     /// Shows the bottom layer fully, with the top layer drawn only where it
     /// intersect the bottom.
     ///
-    /// ![Blend Mode](blendmode-sourceAtop.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5069,15 +5085,16 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-sourceAtop.png)
+    ///
     case sourceAtop
 
     /// The bottom is drawn over the top, and the top is only visible where the
     /// bottom is transparent.
     ///
-    /// ![Blend Mode](blendmode-destinationOver.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5092,14 +5109,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-destinationOver.png)
+    ///
     case destinationOver
 
     /// Displays only the bottom layer, and only where the top is transparent.
     ///
-    /// ![Blend Mode](blendmode-destinationOut.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5114,16 +5132,17 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-destinationOut.png)
+    ///
     case destinationOut
 
     /// Adds the top layer pixels to the bottom layer.
     ///
-    /// Displays white where the addition is greater than 1.0.
-    ///
-    /// ![Blend Mode](blendmode-plusDarker.png)
+    /// Displays white where the addition is greater than `1.0`.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5138,16 +5157,17 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-plusDarker.png)
+    ///
     case plusDarker
 
     /// Adds the top layer pixels to the bottom layer, than subtracts the result from 1.
     ///
-    /// Displays black where the result is less than 0.0.
-    ///
-    /// ![Blend Mode](blendmode-plusLighter.png)
+    /// Displays black where the result is less than `0.0`.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5162,6 +5182,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-plusLighter.png)
+    ///
     case plusLighter
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -7438,8 +7461,8 @@ extension ContainerRelativeShape : InsettableShape {
 /// Constants that define how a view's content fills the available space.
 ///
 /// Use this enumeration along with the
-/// ``View/aspectRatio(_:contentMode:)-27509`` and
-/// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+/// ``View/aspectRatio(_:contentMode:)-6576a`` and
+/// ``View/aspectRatio(_:contentMode:)-505fa`` modifiers
 /// to specify how to change the aspect ratio of a view.
 ///
 /// This enum has 2 options:
@@ -7452,18 +7475,24 @@ extension ContainerRelativeShape : InsettableShape {
 /// In the following example, we scale the ellipse down so that it fits
 /// perfectly in the space.
 ///
-/// ![8B69B8F4-E3D2-4C62-A9F7-EE7E7F58C602](8B69B8F4-E3D2-4C62-A9F7-EE7E7F58C602.png)
 /// ```
-/// struct EllipseView: View {
+/// struct ContentView: View {
 ///     var body: some View {
-///         Ellipse()
-///             .fill(Color.purple)
-///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
-///             .frame(width: 200, height: 200)
-///             .border(Color(white: 0.75))
+///         VStack {
+///             Ellipse()
+///                 .aspectRatio(1.5, contentMode: ContentMode.fit)
+///                 .frame(width: 200, height: 200)
+///                 .border(Color.orange)
+///             Ellipse()
+///                 .aspectRatio(1.5, contentMode: ContentMode.fill)
+///                 .frame(width: 200, height: 200)
+///                 .border(Color.orange)
+///         }
 ///     }
 /// }
 /// ```
+///
+/// ![](contentmode.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
@@ -7471,43 +7500,58 @@ extension ContainerRelativeShape : InsettableShape {
 	/// Fill mode that scales down view so that it can be fully seen in the
 	/// available space, even it it leaves whitespace.
     ///
-    /// Use this enumeration case along with the
-    /// ``View/aspectRatio(_:contentMode:)-27509`` and
-    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// Use this case along with the
+    /// ``View/aspectRatio(_:contentMode:)-6576a`` and
+    /// ``View/aspectRatio(_:contentMode:)-505fa`` modifiers
     /// to specify how to change the aspect ratio of a view.
     ///
     /// ```
-    /// struct EllipseView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Ellipse()
-    ///             .fill(Color.purple)
-    ///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
-    ///             .frame(width: 200, height: 200)
-    ///             .border(Color(white: 0.75))
+    ///         VStack {
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: .fit)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: .fill)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](contentmode.png)
+    ///
     case fit
 
     /// Fill mode that scales the view so that it fills the available space
     /// entirely, even if not all of the view can be seen.
     ///
-    /// Use this enumeration along with the
-    /// ``View/aspectRatio(_:contentMode:)-27509`` and
-    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// Use this case along with the
+    /// ``View/aspectRatio(_:contentMode:)-6576a`` and
+    /// ``View/aspectRatio(_:contentMode:)-505fa`` modifiers
     /// to specify how to change the aspect ratio of a view.
     ///
     /// ```
-    /// struct EllipseView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Ellipse()
-    ///             .fill(Color.purple)
-    ///             .aspectRatio(0.75, contentMode: .fill) // 3:4 aspect ratio -> 3/4 = 0.75
-    ///             .frame(width: 200, height: 200)
-    ///             .border(Color(white: 0.75))
+    ///         VStack {
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: ContentMode.fit)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: ContentMode.fit)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](contentmode.png)
     ///
     case fill
 
@@ -7691,33 +7735,34 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 ///
 /// For example:
 ///
-/// ![Coordinate space example 1](E708E01A-7F5B-4779-ABC8-2CD7CDA525AC.png)
-///
 /// ```
-/// struct ExampleView: View {
-///    var body: some View {
-///        HStack {
-///            Rectangle()
-///                .fill(Color.red)
+/// struct ContentView: View {
+///     var body: some View {
+///         HStack {
+///             Rectangle()
+///                 .fill(Color.red)
 ///
-///            GeometryReader { geometryProxy in
-///                Button(action: {
-///                    let globalFrame = geometryProxy.frame(in: CoordinateSpace.global)
-///                    let localFrame = geometryProxy.frame(in: CoordinateSpace.local)
-///                    print("Global center: \(globalFrame.midX) x \(globalFrame.midY)") // Prints: "Global center: 160.0 x 294.0"
-///                    print("Local center: \(localFrame.midX) x \(localFrame.midY)") // Prints: "50.67 x 274.0"
-///                }, label: {
-///                    Text("Button with coordinate spaces")
-///                })
-///                .background(Color.orange)
-///            }
+///             GeometryReader { geometryProxy in
+///                 Button(action: {
+///                     let globalFrame = geometryProxy.frame(in: CoordinateSpace.global)
+///                     let localFrame = geometryProxy.frame(in: CoordinateSpace.local)
 ///
-///            Rectangle()
-///                .fill(Color.red)
-///        }
-///    }
+///                     print("Global center: \(globalFrame.midX) x \(globalFrame.midY)") //"Global center: 160.0 x 294.0"
+///                     print("Local center: \(localFrame.midX) x \(localFrame.midY)") //"50.67 x 274.0"
+///                 }, label: {
+///                     Text("Button with coordinate spaces")
+///                 })
+///                 .background(Color.orange)
+///             }
+///
+///             Rectangle()
+///                 .fill(Color.red)
+///         }
+///     }
 /// }
 /// ```
+///
+/// ![Coordinate space example 1](E708E01A-7F5B-4779-ABC8-2CD7CDA525AC.png)
 ///
 /// In this example, the center of the Button coordinates is retrieved. The global center
 /// means that the middle of the button is 160 pixels from the left of the screen, and 294 pixels
@@ -21860,16 +21905,18 @@ extension LabelStyleConfiguration.Icon : View {
 /// In the example below, the left to right arrow is printed since we're
 /// in the English locale.
 ///
-/// ![66C3C5E5-8C26-43DD-9B2B-E29C621F48E9](66C3C5E5-8C26-43DD-9B2B-E29C621F48E9.png)
 /// ```
-/// struct LayoutView: View {
+/// struct ContentView: View {
 ///     @Environment(\.layoutDirection) var direction
 ///
 ///     var body: some View {
 ///         Text(direction == LayoutDirection.leftToRight ? "➡️" : "⬅️")
+///             .font(.title)
 ///     }
 /// }
 /// ```
+///
+/// ![](layoutdirection.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum LayoutDirection : Hashable, CaseIterable {
@@ -21895,9 +21942,12 @@ public enum LayoutDirection : Hashable, CaseIterable {
     ///
     ///     var body: some View {
     ///         Text(direction == .leftToRight ? "➡️" : "⬅️")
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](layoutdirection.png)
     ///
     case leftToRight
 
@@ -21924,9 +21974,12 @@ public enum LayoutDirection : Hashable, CaseIterable {
     ///
     ///     var body: some View {
     ///         Text(direction == .rightToLeft ? "⬅️" : "➡️")
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](layoutdirection.png)
     ///
     case rightToLeft
 
@@ -21979,8 +22032,8 @@ extension LayoutDirection {
     /// [these docs](https://developer.apple.com/documentation/uikit/uitraitenvironmentlayoutdirection)
     /// for more info on layout direction in UIKit.
     ///
-    /// Note that this is a failable initializer, so it must be unwrapped for
-    /// many use cases.
+    /// *Note that this is a failable initializer, so it must be unwrapped for
+    /// many use cases.*
     ///
     /// See below for a simple example of how to use this.
     ///
@@ -21993,10 +22046,13 @@ extension LayoutDirection {
     ///     let leftToRight = UITraitEnvironmentLayoutDirection.leftToRight
     ///
     ///     var body: some View {
-    ///         Text(direction == LayoutDirection(leftToRight) ? "➡️" : "⬅️")
+    ///         Text(direction == LayoutDirection(leftToRight)! ? "➡️" : "⬅️")
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](layoutdirection.png)
     ///
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
@@ -28092,6 +28148,8 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 /// }
 /// ```
 ///
+/// ![](previewlayout-sizethatfits.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewLayout {
 
@@ -28119,6 +28177,8 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-device.png)
+    ///
     case device
 
     /// Fit the container to the size of the preview when offered the size of
@@ -28143,6 +28203,8 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-sizethatfits.png)
+    ///
     case sizeThatFits
 
     /// Center the preview in a fixed size container.
@@ -28166,6 +28228,8 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-fixed.png)
+    ///
     case fixed(width: CGFloat, height: CGFloat)
 }
 
@@ -28174,8 +28238,12 @@ public enum PreviewLayout {
 /// By default, Xcode can infer the platform for a preview based on the
 /// target of the current file. However, you can also use this enumeration
 /// along with the
-/// ``PreviewProvider/platform``
+/// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
 /// property to change the way a view is displayed in a preview.
+///
+/// *I tried to use this to change the preview platform, but I couldn't get anything
+/// to work. It seems right now that the only way to change your preview
+/// device is by actually changing your build target.*
 ///
 /// This enumeration has 4 different cases:
 /// 1. ``PreviewPlatform/iOS``
@@ -28188,14 +28256,13 @@ public enum PreviewLayout {
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
-///         Text("I am in a Mac 🖥")
+///         Text("I should be in a Mac 🖥")
 ///     }
 /// }
 ///
 /// struct ContentView_Previews: PreviewProvider {
 ///     static var previews: some View {
 ///         ContentView()
-///             .previewLayout(.sizeThatFits)
 ///     }
 ///
 ///     static var platform: PreviewPlatform? { .macOS }
@@ -28210,23 +28277,26 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a phone 📲")
+    ///         Text("I should be in a phone 📲")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
-    ///     static var platform: PreviewPlatform? { .macOS }
+    ///     static var platform: PreviewPlatform? { .iOS }
     /// }
     /// ```
     ///
@@ -28237,20 +28307,23 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *I tried to use this to change the preview platorm, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a Mac 🖥")
+    ///         Text("I should be in a Mac 🖥")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .macOS }
@@ -28264,20 +28337,23 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a TV 📺")
+    ///         Text("I should be in a TV 📺")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .tvOS }
@@ -28290,20 +28366,23 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a watch! ⌚️")
+    ///         Text("I should be in a watch! ⌚️")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .watchOS }
@@ -28417,7 +28496,6 @@ extension PreviewProvider : _PreviewProvider {
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .watchOS }
@@ -28446,7 +28524,6 @@ extension PreviewProvider {
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .watchOS }
@@ -30938,34 +31015,72 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 /// Defines the shape of a rounded rectangle's corners.
 ///
 /// This rectanular corner style has two options:
-///
-/// 1. ``roundedcornerstyle/circular``: The corners are quarter circles or ovals
-/// 2. ``roundedcornerstyle/circular``: The corners are smooth
+/// 1. ``RoundedCornerStyle/circular``: The corners are quarter circles or ovals
+/// 2. ``RoundedCornerStyle/continuous``: The corners are smooth
 ///
 /// These styles have subtle but noticeable differences:
 ///
-/// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
-///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         VStack(spacing: 20) {
-///             RoundedRectangle(cornerRadius: 50, style: .circular)
+///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.circular)
 ///                 .frame(width: 250, height: 150)
 ///
-///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.continuous)
 ///                 .frame(width: 250, height: 150)
 ///         }
 ///     }
 /// }
 /// ```
+///
+/// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum RoundedCornerStyle {
 
     /// Quarter-circle rounded rect corners.
+    ///
+    /// In the example below, the top rectangle uses ``RoundedCornerStyle/circular``
+    /// corners.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
     case circular
 
     /// Continuous curvature rounded rect corners.
+    ///
+    /// In the example below, the bottom rectangle uses ``RoundedCornerStyle/continuous``
+    /// corners.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
     case continuous
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -37573,13 +37688,13 @@ extension Text.Case : Hashable {
 /// ![Text alignment center](B81ADC86-835C-4FED-BC53-B7E0F647CA60.png)
 ///
 /// ```
-/// struct ExampleView: View {
-///    var body: some View {
-///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
-///            .padding(20)
-///            .font(.system(size: 10))
-///            .multilineTextAlignment(TextAlignment.center)
-///    }
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+///             .padding(20)
+///             .font(.system(size: 10))
+///             .multilineTextAlignment(TextAlignment.center)
+///     }
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -37590,38 +37705,38 @@ extension Text.Case : Hashable {
     ///
     /// For example:
     ///
-    /// ![Text alignment leading](textalignment-leading.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
-    ///
+    /// struct ContentView: View {
     ///    var body: some View {
     ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
     ///            .padding(20)
     ///            .font(.system(size: 10))
-    ///            .multilineTextAlignment(TextAlignment.leading)
+    ///            .multilineTextAlignment(.leading)
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Text alignment leading](textalignment-leading.png)
+    ///
     case leading
 
     /// Aligns each line of the text with the center of the view.
     ///
     /// For example:
     ///
-    /// ![Text alignment center](textalignment-center.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
-    ///
-    ///    var body: some View {
-    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
-    ///            .padding(20)
-    ///            .font(.system(size: 10))
-    ///            .multilineTextAlignment(TextAlignment.center)
-    ///    }
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///             .padding(20)
+    ///             .font(.system(size: 10))
+    ///             .multilineTextAlignment(.center)
+    ///     }
     /// }
     /// ```
+    ///
+    /// ![Text alignment center](textalignment-center.png)
+    ///
     case center
 
     /// Aligns each line of the text to the trailing edge, right in left-to-right languages,
@@ -37629,19 +37744,19 @@ extension Text.Case : Hashable {
     ///
     /// For example:
     ///
-    /// ![Text alignment trailing](textalignment-trailing.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
-    ///
-    ///    var body: some View {
-    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
-    ///            .padding(20)
-    ///            .font(.system(size: 10))
-    ///            .multilineTextAlignment(TextAlignment.trailing)
-    ///    }
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///             .padding(20)
+    ///             .font(.system(size: 10))
+    ///             .multilineTextAlignment(.trailing)
+    ///     }
     /// }
     /// ```
+    ///
+    /// ![Text alignment trailing](textalignment-trailing.png)
+    ///
     case trailing
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -44243,14 +44358,9 @@ extension View {
     /// A view modifier that sets the size for a Xcode preview.
     ///
     /// There are 3 different Xcode ``PreviewLayout`` types:
-    ///
-    ///
-    ///
     /// 1. ``PreviewLayout/device``:  Adds the view to the center of the specified preview device.
     /// 2. ``PreviewLayout/sizeThatFits``: Fits a container around the previewed view.
     /// 3.  ``PreviewLayout/fixed(width:height:)``: Adds the view to a fixed size container.
-    ///
-    ///
     ///
     /// ```
     /// struct ContentView: View {
@@ -49231,6 +49341,9 @@ extension ViewModifier {
 
     /// Gets the current body of the caller.
     ///
+    /// Implement this function to create your own custom
+    /// ``ViewModifier``.
+    ///
     /// The `content` parameter is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it. In simpler terms, `content` is the
     /// view that is being transformed. For example:
@@ -49245,10 +49358,32 @@ extension ViewModifier {
     ///                RoundedRectangle(cornerRadius: 15)
     ///                    .stroke(lineWidth: 1)
     ///            )
-    ///            .foregroundColor(Color.blue)
+    ///            .foregroundColor(.blue)
     ///    }
     /// }
     /// ```
+    ///
+    /// This modifier can then be applied to a ``View``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text without bordered caption")
+    ///
+    ///             Text("Text with bordered caption")
+    ///                 .modifier(BorderedCaption())
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](viewmodifier-body.png)
+    ///
+    /// - Parameter content: The view to be modified.
+    ///
+    /// - Returns: A modified view
+    ///
     func body(content: Self.Content) -> Self.Body { }
 
     /// The content view type passed to `body()`.
@@ -49260,6 +49395,9 @@ extension ViewModifier where Self.Body == Never {
 
     /// Gets the current body of the caller.
     ///
+    /// Implement this function to create your own custom
+    /// ``ViewModifier``.
+    ///
     /// The `content` parameter is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it. In simpler terms, `content` is the
     /// view that is being transformed. For example:
@@ -49274,10 +49412,32 @@ extension ViewModifier where Self.Body == Never {
     ///                RoundedRectangle(cornerRadius: 15)
     ///                    .stroke(lineWidth: 1)
     ///            )
-    ///            .foregroundColor(Color.blue)
+    ///            .foregroundColor(.blue)
     ///    }
     /// }
     /// ```
+    ///
+    /// This modifier can then be applied to a ``View``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text without bordered caption")
+    ///
+    ///             Text("Text with bordered caption")
+    ///                 .modifier(BorderedCaption())
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](viewmodifier-body.png)
+    ///
+    /// - Parameter content: The view to be modified.
+    ///
+    /// - Returns: A modified view
+    ///
     public func body(content: Self.Content) -> Self.Body { }
 }
 
@@ -49291,10 +49451,8 @@ extension ViewModifier {
     /// The ``View/modifier(_:)`` only accepts a single modifier as a parameter, which
     /// is why concat is needed. For example:
     ///
-    /// ![View modifier concat example 1](view-modifier-concat-example-1.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///    var body: some View {
     ///        VStack {
     ///            Text("Text without blue border and padded shadow")
@@ -49325,6 +49483,9 @@ extension ViewModifier {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![View modifier concat example 1](view-modifier-concat-example-1.png)
+    ///
     @inlinable public func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
 }
 
