@@ -17891,7 +17891,7 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-/// ![IconOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-icon-only-example-1.png)
+/// ![IconOnlyLabelStyle Example 1](icononlylabelstyle.png)
 ///
 ///
 ///     struct ExampleView: View {
