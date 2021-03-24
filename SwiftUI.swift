@@ -4500,7 +4500,7 @@ extension Binding : DynamicProperty {
 /// ![Space](space.jpg)
 ///
 /// ![Blended Image](blendmode-softLight.png)
-/// 
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -17894,12 +17894,12 @@ public struct HoverEffect {
 /// ![IconOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-icon-only-example-1.png)
 ///
 ///
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
-///                 .labelStyle(IconOnlyLabelStyle())
-///        }
-///    }
+///     struct ExampleView: View {
+///         var body: some View {
+///              Label("Banana🍌", systemImage: "heart.fill")
+///                  .labelStyle(IconOnlyLabelStyle())
+///         }
+///     }
 ///
 ///
 /// > The title of the label is still used for non-visual descriptions, such as VoiceOver.
