@@ -17964,8 +17964,6 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-/// ![IconOnlyLabelStyle Example 1](icononlylabelstyle.png)
-///
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -17974,6 +17972,7 @@ public struct HoverEffect {
 ///         }
 ///     }
 ///
+/// ![IconOnlyLabelStyle Example 1](icononlylabelstyle.png)
 ///
 /// > The title of the label is still used for non-visual descriptions, such as VoiceOver.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
