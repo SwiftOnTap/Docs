@@ -1887,13 +1887,13 @@ extension Angle : Animatable {
 ///
 /// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData', which represents a view's animatable data.
 ///
-/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/animatableData-c6d9d``. This is also the reason why ``Animatable/animatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
+/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/AnimatableData-7101d``. This is also the reason why ``Animatable/animatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 /// [animatable-modifier ->]
 /// ### Implementations
 ///
 /// #### Using ``AnimatableModifier`` to implement a shake effect
 ///
-/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable`` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
+/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``AnimatableModifier`` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
 ///
 /// For example:
 ///
@@ -1942,7 +1942,7 @@ extension Angle : Animatable {
 ///
 /// Note:
 ///
-/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through ``Animatable/animatableData-c6d9d``, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
+/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through ``Animatable/animatableData-7101d``, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
 ///
 /// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the runtime needs to be able to interpolate fractionally between `0.0` and `10.0` 'shakes' - and it does so by making use of `CGFloat`'s ``VectorArithmetic`` conformance.
 ///
@@ -2001,7 +2001,7 @@ extension Angle : Animatable {
 /// [<-]
 /// ### Further notes
 ///
-/// - ```Animatable`` along with ``View`` is currently broken on iOS 14, please use ``AnimatableModifier``
+/// - ``Animatable`` along with ``View`` is currently broken on iOS 14, please use ``AnimatableModifier``
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol Animatable{ }
@@ -3368,7 +3368,7 @@ extension AnyTransition {
 ///
 /// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
-/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in `List/init(_:id:selection:rowContent:)-87709`. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or `View/background(_:alignment:)`.
+/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in `List/init(_:id:selection:rowContent:)-2ed8f`. It is also suited for use in different layers of your view hierarchy, via either ``View/overlay(_:alignment:)`` or ``View/background(_:alignment:)``.
 ///
 /// Consider whether the usage of ``AnyView`` is appropriate, or even necessary. A common mistake is to use ``AnyView`` like this:
 ///
@@ -4399,7 +4399,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// At times, you may want to pass a fixed value as a `Binding`. This is possible via ``Binding/constant(_:)``, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
 ///
-/// Consider `EnvironmentValues/editMode`, for example. A `List` can be forced into active editing by passing a binding to  `EditMode.active.
+/// Consider ``EnvironmentValues/editMode``, for example. A ``List`` can be forced into active editing by passing a binding to  `EditMode.active.
 ///
 /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
@@ -5261,7 +5261,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
-/// `View/buttonStyle(_:)-1fa87` modifier.
+/// ``View/buttonStyle(_:)-ea21b`` modifier.
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5511,7 +5511,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// Your structure only needs to implement one method: ``ButtonStyle/makeBody(configuration:)``.
 ///
-/// To change the style of your `Button`, use the `View/buttonStyle(_:)-3c92f` method. This method accepts a `ButtonStyle`.
+/// To change the style of your ``Button``, use the ``View/buttonStyle(_:)-ea21b`` method. This method accepts a `ButtonStyle`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5546,7 +5546,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 ///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
 ///
-/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a `VStack`.
+/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a ``VStack``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5595,12 +5595,10 @@ extension ButtonStyle {
 
     /// Creates a view that represents the body of a button.
     ///
-    /// This is the only required property of ``ButtonStyle``. See ```ButtonStyle``` for more.
+    /// This is the only required property of ``ButtonStyle``. See ``ButtonStyle`` for more.
     ///
     /// The system calls this method for each ``Button`` instance in a view
     /// hierarchy where this style is the current button style.
-    ///
-    ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -5636,6 +5634,9 @@ extension ButtonStyle {
     ///     }
     /// }
     /// ```
+    ///
+    ///
+    ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -6001,11 +6002,9 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 
 /// An environment-dependent color.
 ///
-/// `Color` represents an environment-dependent color that conforms to ``View``. Colors conformance to ``View`` means that a color can be used as a view itself.
+/// ``Color`` represents an environment-dependent color that conforms to ``View``. Colors conformance to ``View`` means that a color can be used as a view itself.
 ///
 /// For example:
-///
-/// ![Color Example One](color-example-one.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -6013,11 +6012,11 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
+/// ![Color Example One](color-example-one.png)
+///
 /// Color also conforms to ``ShapeStyle`` which allows it to serve as a fill or stroke on a shape.
 ///
-/// For example:
-///
-/// ![Color Example Two](color-example-two.png)
+/// For example, as a fill:
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -6026,9 +6025,9 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// And as a stroke:
+/// ![Color Example Two](color-example-two.png)
 ///
-/// ![Color Example Three](color-example-three.png)
+/// And as a stroke:
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -6036,6 +6035,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///                 .stroke(Color.yellow)
 ///         }
 ///     }
+///
+/// ![Color Example Three](color-example-three.png)
 ///
 /// **Note**: A ``Color`` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
@@ -8298,7 +8299,7 @@ extension DatePickerStyle {
 /// specific platform.
 ///
 /// You can override a button's style. To apply the default style to a button,
-/// or to a view that contains buttons, use the `View/buttonStyle(_:)-1fa87`
+/// or to a view that contains buttons, use the ``View/buttonStyle(_:)-ea21b``
 /// modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultButtonStyle : PrimitiveButtonStyle {
@@ -8378,19 +8379,24 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 	///
     /// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
     ///
-    ///
-    ///     struct ExampleView: View {
-    ///         var body: some View {
-    ///             GroupBox() {
-    ///                 Label("Bananas 🍌🍌", systemImage: "heart.fill")
-    ///                     .foregroundColor(.yellow)
-    ///                     .groupBoxStyle(DefaultGroupBoxStyle())
-    ///              }, {
-    ///                 Text("Go Bananas")
-    ///              }
-    ///             .padding()
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         GroupBox(label: BananaLabel()) {
+    ///             Text("Go Bananas")
     ///         }
-    ///      }
+    ///         .padding()
+    ///     }
+    /// }
+    ///
+    /// struct BananaLabel: View {
+    ///     var body: some View {
+    ///         Label("Bananas 🍌🍌", systemImage: "heart.fill")
+    ///             .foregroundColor(.yellow)
+    ///             .groupBoxStyle(DefaultGroupBoxStyle())
+    ///     }
+    /// }
+    /// ```
     ///
 	/// - SeeAlso: GroupBoxStyle
     public init() { }
@@ -8648,7 +8654,7 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// }
 ///
 /// struct ExampleView: View {
-///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///     @State var favoriteFruit: MyFruit = .banana
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit {
@@ -8692,7 +8698,6 @@ public struct DefaultPickerStyle : PickerStyle {
 /// The default progress view style in the current context of the view being
 /// styled.
 ///
-/// ![FA3176B9-AF8E-4DE6-9493-3D6271A2670C](FA3176B9-AF8E-4DE6-9493-3D6271A2670C.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -8702,6 +8707,7 @@ public struct DefaultPickerStyle : PickerStyle {
 ///    }
 /// }
 /// ```
+/// ![FA3176B9-AF8E-4DE6-9493-3D6271A2670C](FA3176B9-AF8E-4DE6-9493-3D6271A2670C.png)
 ///
 /// The default style represents the recommended style based on the original
 /// initialization parameters of the progress view, and the progress view's
@@ -8863,7 +8869,7 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 /// If you create a toggle inside a container, such as a `List`, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
 /// style to a toggle, or to a view that contains toggles, use the
-/// `View/toggleStyle(_:)` modifier. To revert a custom-styled toggle to the
+/// ``View/toggleStyle(_:)`` modifier. To revert a custom-styled toggle to the
 ///  default, use `.toggleStyle(DefaultToggleStyle())`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultToggleStyle : ToggleStyle {
@@ -9203,8 +9209,6 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 /// A navigation view style represented by a primary view stack that
 /// navigates to a detail view.
 ///
-/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -9215,6 +9219,9 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
 public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
@@ -9365,9 +9372,9 @@ public struct DragGesture : Gesture {
 /// #### Creating a drop ``View``
 /// Use `onDrop` to create a view that accepts "drops" from dragged data. There are three versions of the `onDrop` modifier:
 ///
-/// - `View/onDrop(of:isTargeted:perform)-bae65` is the simplest implementation. Specify a closure to execute when content is dropped.
-/// - `View/onDrop(of:isTargeted:perform)-55379` is similar to the former, but the closure also provides information about the drop location.
-/// - `View/onDrop(of:delegate)-a3cfb` requires a ``DropDelegate`` and is the most versatile.
+/// - `View/onDrop(of:isTargeted:perform)-ae20f` is the simplest implementation. Specify a closure to execute when content is dropped.
+/// - `View/onDrop(of:isTargeted:perform)-b7eed` is similar to the former, but the closure also provides information about the drop location.
+/// - `View/onDrop(of:delegate)-884b8` requires a ``DropDelegate`` and is the most versatile.
 ///
 /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
 ///
@@ -10345,8 +10352,6 @@ extension DropDelegate {
 
 /// The current state of a drop.
 ///
-/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
@@ -10375,6 +10380,9 @@ extension DropDelegate {
 ///     }
 /// }
 /// ```
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -13124,35 +13132,37 @@ extension FileDocument {
     /// - B: ``FileDocument/init(configuration:)``
     /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     struct ExampleDocument: FileDocument {
-    ///         var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = text.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -13196,6 +13206,8 @@ extension FileDocument {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     init(configuration: Self.ReadConfiguration) throws { }
 
@@ -13362,35 +13374,37 @@ extension FileDocument {
     /// - B: ``FileDocument/init(configuration:)``
     /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     struct ExampleDocument: FileDocument {
-    ///         var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = text.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -13434,6 +13448,8 @@ extension FileDocument {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     public static var writableContentTypes: [UTType] { get }
 }
@@ -13700,7 +13716,7 @@ public struct FocusedValues {
 ///
 /// ![Font Example 1](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
 ///
-/// In addition to standard system font types like `Font/TextStyle/largeTitle` and `Font/body`, you can customize the size, weight and design of your `Font` with the `Font/system(size:weight:design:)` modifier.
+/// In addition to standard system font types like ``Font/TextStyle/largeTitle`` and ``Font/body``, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13713,7 +13729,7 @@ public struct FocusedValues {
 ///
 /// ![Font Example 2](0C3CED07-2FD4-40E5-904D-8D1CD833E1F6.png)
 ///
-/// Non system-fonts can be applied using `Font/custom(_:size:)`
+/// Non system-fonts can be applied using ``Font/custom(_:size:)``
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13769,8 +13785,6 @@ extension Font {
 
     /// A font with the large title text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -13803,12 +13817,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let largeTitle: Font
 
     /// A font with the title text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -13841,6 +13856,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let title: Font
 
     /// Create a font for second level hierarchical headings.
@@ -15443,8 +15461,6 @@ extension Font {
     /// weight, and a type design together. The following styles the system font
     /// as 17 point, ``Font/Weight/semibold`` text:
     ///
-    /// ![Font System Semibold](font-system-semibold.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -15454,10 +15470,10 @@ extension Font {
     /// }
     /// ```
     ///
-    /// While the following styles the text as 17 point ``Font/Weight/bold``,
-    /// and applies a `serif` ``Font/Design`` to the system font:
+    /// ![Font System Semibold](font-system-semibold.png)
     ///
-    /// ![Font System Serif](font-system-serif.png)
+    /// The following styles the text as 17 point ``Font/Weight/bold``,
+    /// and applies a `serif` ``Font/Design`` to the system font:
     ///
     /// ```
     /// struct ContentView: View {
@@ -15468,12 +15484,12 @@ extension Font {
     /// }
     /// ```
     ///
+    /// ![Font System Serif](font-system-serif.png)
+    ///
     /// If you want to use the default ``Font/Weight``
     /// (`Font/Weight/regular`), you don't need to specify the `weight` in the
     /// method. The following example styles the text as 17 point
     /// `Font/Weight/regular`, and uses a ``Font/Design/rounded`` system font:
-    ///
-    /// ![Font System Rounded](font-system-rounded.png)
     ///
     /// ```
     /// struct ContentView: View {
@@ -15483,6 +15499,8 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font System Rounded](font-system-rounded.png)
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
@@ -15772,8 +15790,8 @@ extension Font.Leading : Hashable {
 /// Creates views from a collection of identified data.
 ///
 /// ForEach supports three identifiers:
-/// * ``ForEach/init(_:content:)-ed9f4``, for iterating over a range
-/// * ``ForEach/init(_:content:)-72c77``, for iterating over data that conforms to identifiable
+/// * ``ForEach/init(_:content:)-90399``, for iterating over a range
+/// * ``ForEach/init(_:content:)-cde2b``, for iterating over data that conforms to identifiable
 /// * ``ForEach/init(_:id:content:)`` for iterating over that can be identified, but does not conform to identifiable
 ///
 /// ### Iterating over a range
@@ -15861,6 +15879,9 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     ///     let id = UUID()
     /// }
     /// ```
+    ///
+    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.56.51.png)
+    ///
     /// [<-]
     /// Note:  It's important that the `id` of a data element doesn't change unless you
     /// replace the data element with a new data element that has a new
@@ -15897,6 +15918,8 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
+    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.59.20.png)
+    ///
     /// This initializer can also be used with objects that don't conform to `Identifiable`, but have identifiable properties. For example:
     ///
     /// ```
@@ -15921,6 +15944,8 @@ extension ForEach where Content : View {
     ///     var name: String
     /// }
     /// ```
+    ///
+    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.00.04.png)
     ///
     /// Notice, this initializer can be used for data that can change. For example:
     ///
@@ -15987,6 +16012,8 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// }
     /// ```
     ///
+    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.44.37.png)
+    ///
     /// Notice however, that this view is only rendered once. Therefore, if `myFruits.count` changes, the view will **not update**. For example, clicking `New Fruit` in the following code returns the error:
     ///
     /// `ForEach(_:content:) should only be used for *constant* data.`
@@ -16014,6 +16041,8 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// [](foreach-ex2.gif)
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
@@ -17651,9 +17680,6 @@ public struct GroupBoxStyleConfiguration {
 
 /// A standard grouped list style.
 ///
-/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
-///
-///
 ///      struct ExampleView: View {
 ///          var body: some View {
 ///             List {
@@ -17665,6 +17691,7 @@ public struct GroupBoxStyleConfiguration {
 ///          }
 ///      }
 ///
+/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
 ///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
@@ -17707,7 +17734,7 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
 ///
-/// Learn more about the properties of each alignment choice via the `VerticalAlignment` struct.
+/// Learn more about the properties of each alignment choice via the ``VerticalAlignment`` struct.
 ///
 /// `HStack` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -20207,8 +20234,6 @@ public struct InsetListStyle : ListStyle {
 
     /// Creates an inset list style.
     ///
-    /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
-    ///
     ///
     ///      struct ExampleView: View {
     ///          var body: some View {
@@ -20220,6 +20245,8 @@ public struct InsetListStyle : ListStyle {
     ///             .listStyle(InsetListStyle())
     ///          }
     ///      }
+    ///
+    /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
     ///
     public init() { }
 }
@@ -20996,7 +21023,6 @@ public struct KeyboardShortcut {
 /// [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/)
 /// collection:
 ///
-/// ![AAF70423-43CB-4A9F-8640-C9485C5EF390](AAF70423-43CB-4A9F-8640-C9485C5EF390.png)
 /// ```
 /// struct BoltView: View {
 ///     var body: some View {
@@ -21005,12 +21031,13 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![AAF70423-43CB-4A9F-8640-C9485C5EF390](AAF70423-43CB-4A9F-8640-C9485C5EF390.png)
+///
 /// You can also apply styles to labels in several ways. In the case of dynamic
 /// changes to the view after device rotation or change to a window size you
 /// might want to show only the text portion of the label using the title-only
 /// label style:
 ///
-/// ![922B50FC-5FEC-4F61-A07E-AB579F1B726E](922B50FC-5FEC-4F61-A07E-AB579F1B726E.png)
 /// ```
 /// struct TitleOnlyBoltView: View {
 ///     var body: some View {
@@ -21020,9 +21047,10 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![922B50FC-5FEC-4F61-A07E-AB579F1B726E](922B50FC-5FEC-4F61-A07E-AB579F1B726E.png)
+///
 /// Conversely, there's also an icon-only label style:
 ///
-/// ![D12AC27C-00DC-4F00-A4F1-B72735084CA4](D12AC27C-00DC-4F00-A4F1-B72735084CA4.png)
 /// ```
 /// struct IconOnlyBoltView: View {
 ///     var body: some View {
@@ -21032,10 +21060,11 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![D12AC27C-00DC-4F00-A4F1-B72735084CA4](D12AC27C-00DC-4F00-A4F1-B72735084CA4.png)
+///
 /// You can also create a customized label style by modifying an existing
 /// style; this example adds a red border to the default label style:
 ///
-/// ![491B486D-0E3C-450A-9FD3-74BB847D19FE](491B486D-0E3C-450A-9FD3-74BB847D19FE.png)
 /// ```
 /// struct RedBorderedLabelStyle: LabelStyle {
 ///     func makeBody(configuration: Configuration) -> some View {
@@ -21053,6 +21082,8 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![491B486D-0E3C-450A-9FD3-74BB847D19FE](491B486D-0E3C-450A-9FD3-74BB847D19FE.png)
+///
 /// For more extensive customization or to create a completely new label style,
 /// you'll need to adopt the ``LabelStyle`` protocol and implement a
 /// ``LabelStyleConfiguration`` for the new style.
@@ -21060,7 +21091,6 @@ public struct KeyboardShortcut {
 /// To apply a common label style to a group of labels, apply the style
 /// to the view hierarchy that contains the labels:
 ///
-/// ![9F864CBF-1FA1-4989-9F8B-8ED0515E1C56](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
 /// ```
 /// struct WeatherView: View {
 ///     var body: some View {
@@ -21074,12 +21104,13 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![9F864CBF-1FA1-4989-9F8B-8ED0515E1C56](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
+///
 /// It's also possible to make labels using views to compose the label's icon
 /// programmatically, rather than using a pre-made image. In this example, the
 /// icon portion of the label uses a filled ``Circle`` overlaid
 /// with the user's initials:
 ///
-/// ![BFE30CE7-C088-4B03-A564-0A1B8D272BCF](BFE30CE7-C088-4B03-A564-0A1B8D272BCF.png)
 /// ```
 /// struct CustomPersonView: View {
 ///     var body: some View {
@@ -21099,6 +21130,8 @@ public struct KeyboardShortcut {
 ///     }
 /// }
 /// ```
+///
+/// ![BFE30CE7-C088-4B03-A564-0A1B8D272BCF](BFE30CE7-C088-4B03-A564-0A1B8D272BCF.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Label<Title, Icon> : View where Title : View, Icon : View {
@@ -22182,7 +22215,7 @@ extension Link where Label == Text {
 ///
 /// ### Creating a `List` with a variable number of elements
 ///
-/// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a ``List`` over an array of strings, `fruits`.
+/// In the following example, ``List/init(_:id:rowContent:)`` is used to dynamically create a ``List`` over an array of strings, `fruits`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22228,7 +22261,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 3](2D10DFE0-3A9D-4AD6-B7C3-A350EC37D0C4.png)
 ///
-/// As seen in the above example, `ForEach` also accepts an `id` parameter along with a `rowContent`.
+/// As seen in the above example, ``ForEach`` also accepts an `id` parameter along with a `rowContent`.
 /// [list-sections ->]
 /// ### Adding sections to a ``List``
 ///
@@ -22256,14 +22289,14 @@ extension Link where Label == Text {
 ///
 /// ![List Example 4](0CAA80FC-BDA9-405A-8AB1-5ED8B0ECF92C.png)
 ///
-/// A `Section` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
+/// A ``Section`` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
 /// [<-]
 /// [list-style ->]
 /// ### Styling a ``List``
 ///
-/// A `List` can be styled using the ``View/listStyle(_:)`` modifier.
+/// A ``List`` can be styled using the ``View/listStyle(_:)`` modifier.
 ///
-/// The following example demonstrates how to style a `List` using the grouped-inset style:
+/// The following example demonstrates how to style a ``List` using the grouped-inset style:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22315,7 +22348,7 @@ extension Link where Label == Text {
 ///
 /// ![List Example 6](A6394785-F064-497F-A48B-7ED9DAA55452.png)
 ///
-/// A background can be provided for multiple list rows at a time, by applying the `View/listRowBackground(_:)` modifier to `ForEach`.
+/// A background can be provided for multiple list rows at a time, by applying the ``View/listRowBackground(_:)`` modifier to ``ForEach``.
 ///
 /// In the following example, all the rows of the ``List`` have the background view `Color.yellow`.
 ///
@@ -24291,13 +24324,11 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 1](CB034D71-ECFF-46DF-93B0-DE24A88C5721.png)
 ///
-/// A navigation bar is added by default. The navigation bar can be hidden via  `View/navigationBarHidden(_:)`.
+/// A navigation bar is added by default. The navigation bar can be hidden via  ``View/navigationBarHidden(_:)``.
 /// [navigation-title ->]
 /// ### Adding a navigation title
 ///
-/// Use `View/navigationTitle(_:)-5ad18` to add a title to the navigation bar within your `NavigationView`:
-///
-/// ![NavigationView Example 2](382BE2AE-E26A-4214-9F32-8F1786543B14.png)
+/// Use ``View/navigationTitle(_:)-5ad18`` to add a title to the navigation bar within your `NavigationView`:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24310,7 +24341,10 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// `View/navigationTitle(_:)-5ad18` is only available on iOS 14 and higher. If your application targets iOS 13, please use `View/navigationBarTitle(_:)-f9dda`.
+/// ![NavigationView Example 2](382BE2AE-E26A-4214-9F32-8F1786543B14.png)
+///
+///
+/// ``View/navigationTitle(_:)-d3628`` is only available on iOS 14 and higher. If your application targets iOS 13, please use ``View/navigationBarTitle(_:)-079a6``.
 /// [<-]
 /// [navigation-title-display-mode ->]
 /// ### Setting the navigation title display mode
@@ -24320,7 +24354,7 @@ extension NavigationLink {
 /// - `NavigationBarItem.TitleDisplayMode.inline`
 /// - `NavigationBarItem.TitleDisplayMode.large`
 ///
-/// An `NavigationBarItem/TitleDisplayMode/automatic` mode is also present, and represents the system default.
+/// An ``NavigationBarItem/TitleDisplayMode/automatic`` mode is also present, and represents the system default.
 ///
 /// The following example forces a large navigation title:
 ///
@@ -24388,7 +24422,7 @@ extension NavigationLink {
 ///
 /// ![NavigationView Example 5](83BA32E9-ABB0-401F-B66D-CC695D71AD54.png)
 ///
-/// Note that the navigation bar can be unhidden by child views. `View/navigationBarHidden(_:)` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
+/// Note that the navigation bar can be unhidden by child views. ``View/navigationBarHidden(_:)`` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
 ///
 /// For example, navigating to `SecondScreen` in the following unhides the bar:
 ///
@@ -24449,8 +24483,6 @@ extension NavigationLink {
 ///
 /// For example, the following forces a stack-based navigation style, overriding the default double-column style on macCatalyst:
 ///
-/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -24461,6 +24493,8 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
 /// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
 ///
@@ -24480,7 +24514,7 @@ extension NavigationLink {
 /// [<-]
 /// ### Handling selection
 ///
-/// ``NavigationLink`` provides the ability to observe and/or set the active navigation selection via its initializer ``NavigationLink/init(destination:tag:selection:label)``.
+/// ``NavigationLink`` provides the ability to observe and/or set the active navigation selection via its initializer ``NavigationLink/init(destination:tag:selection:label:)``.
 ///
 /// For example:
 ///
@@ -25184,7 +25218,7 @@ public struct OutlineSubgroupChildren : View {
 /// Currently the ``PageIndexViewStyle`` is the only type that allows for customization
 /// over a page index view. To configure the current ``IndexViewStyle`` for a view hierarchy, use the
 /// `.indexViewStyle()` modifier. When creating a new ``PageIndexViewStyle``, it will
-/// default to the ``.automatic` ``PageIndexViewStyle/backgroundDisplayMode`` if none is specified.
+/// default to the `.automatic` ``PageIndexViewStyle/backgroundDisplayMode`` if none is specified.
 ///
 /// For example:
 ///
@@ -25202,7 +25236,7 @@ public struct OutlineSubgroupChildren : View {
 /// }
 /// ```
 ///
-/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+/// ![Page index view style protocol example 2](pageindexviewstyle-ex2.gif)
 ///
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
@@ -27028,7 +27062,7 @@ public struct PinnedScrollableViews : OptionSet {
 ///
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
-/// > To apply this style to a button, or to a view that contains buttons, use the `View/buttonStyle(_:)-3c92f` modifier.
+/// > To apply this style to a button, or to a view that contains buttons, use the ``View/buttonStyle(_:)-ea21b`` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
@@ -27997,13 +28031,13 @@ extension PreviewProvider {
 ///
 /// ``PrimitiveButtonStyle`` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including ``BorderlessButtonStyle`` and ``PlainButtonStyle``.
 ///
-/// Your structure only needs to implement one method: ```PlainButtonStyle/makeBody(configuration:)``. The desired button view is output by this method.
+/// Your structure only needs to implement one method: ```PrimitiveButtonStyle/makeBody(configuration:)``. The desired button view is output by this method.
 ///
 /// To build a custom ``PrimitiveButtonStyle``, create a struct that conforms to the protocol.
 ///
 /// ``PlainButtonStyle/makeBody(configuration:)`` accepts a ``PrimitiveButtonStyleConfiguration``, which passes the original label to display the button view and a ``PrimitiveButtonStyle/trigger()`` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
 ///
-/// Use ``View/buttonStyle(_:)-1fa87`` to apply a primitive button style.
+/// Use ``View/buttonStyle(_:)-d2d0a`` to apply a primitive button style.
 ///
 /// ```
 ///  struct ExampleView: View {
@@ -28068,8 +28102,6 @@ extension PrimitiveButtonStyle {
     /// The system calls this method for each ``Button`` instance in a view
     /// hierarchy where this style is the current button style.
     ///
-    /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
-    ///
     /// ```
     ///  struct BananaView: View {
     ///      var body: some View {
@@ -28095,6 +28127,8 @@ extension PrimitiveButtonStyle {
     ///    }
     ///  }
     /// ```
+    ///
+    /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -28196,7 +28230,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 /// [rotation-effect ->]
-/// To create a ``ProgressViewStyle`` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
+/// To create a ``ProgressViewStyle`` that inverts the direction of the animation, use a ``View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)`` modifier.
 ///
 ///      struct ExampleView: View {
 ///         var body: some View {
@@ -29280,8 +29314,8 @@ public struct RedactionReasons : OptionSet {
 /// representation.
 ///
 /// This protocol is very similar to ``FileDocument``, with the difference being whether the data
-/// is stored as a `class` (reference type) or a ``struct`` (value type). Use the two protocols like this:
-/// - ``struct`` --> ``FileDocument``
+/// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
+/// - `struct` --> ``FileDocument``
 /// - `class` --> ``ReferenceFileDocument``
 ///
 /// While the two protocols are similar, ``ReferenceFileDocument`` has the unique challenge
@@ -29306,53 +29340,49 @@ public struct RedactionReasons : OptionSet {
 ///     struct ExampleApp: App {
 ///         var body: some Scene {
 ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-///                 ContentView(document: file.document)
+///                 ContentView(document: file.$document)
 ///             }
 ///         }
 ///     }
 ///
-/// #### ReferenceFileDocument conformance
+/// #### FileDocument conformance
 ///
-/// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-/// - A: ``ReferenceFileDocument/readableContentTypes``
-/// - B: ``ReferenceFileDocument/init(configuration:)``
-/// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-/// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+/// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+/// - A: ``FileDocument/readableContentTypes``
+/// - B: ``FileDocument/init(configuration:)``
+/// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
 ///
-///     import SwiftUI
-///     import UniformTypeIdentifiers
+/// ```
+/// import SwiftUI
+/// import UniformTypeIdentifiers
 ///
-///     class ExampleDocument: ReferenceFileDocument {
-///         @Published var text: String
+/// struct ExampleDocument: FileDocument {
+///    var text: String
 ///
-///         init(text: String = "This is a brand new document! 📃") {
-///             self.text = text
-///         }
+///    init(text: String = "This is a brand new document! 📃") {
+///        self.text = text
+///    }
 ///
-///         // A
-///         static var readableContentTypes: [UTType] { [.exampleText] }
+///    // A
+///    static var readableContentTypes: [UTType] { [.exampleText] }
 ///
-///         // B
-///         required init(configuration: ReadConfiguration) throws {
-///             guard let data = configuration.file.regularFileContents,
-///                 let string = String(data: data, encoding: .utf8)
-///             else {
-///                 throw CocoaError(.fileReadCorruptFile)
-///             }
-///             text = string
-///         }
+///    // B
+///    init(configuration: ReadConfiguration) throws {
+///        guard let data = configuration.file.regularFileContents,
+///            let string = String(data: data, encoding: .utf8)
+///        else {
+///            throw CocoaError(.fileReadCorruptFile)
+///        }
+///        text = string
+///    }
 ///
-///         // C
-///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-///             let data = snapshot.data(using: .utf8)!
-///             return .init(regularFileWithContents: data)
-///         }
-///
-///         // D
-///         func snapshot(contentType: UTType) throws -> String {
-///             return text
-///         }
-///     }
+///    // C
+///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///        let data = text.data(using: .utf8)!
+///        return .init(regularFileWithContents: data)
+///    }
+/// }
+/// ```
 ///
 /// #### View implementation
 ///
@@ -29361,7 +29391,8 @@ public struct RedactionReasons : OptionSet {
 ///     import SwiftUI
 ///
 ///     struct ExampleView: View {
-///         @ObservedObject var document: ExampleDocument
+///         @Binding var document: ExampleDocument
+///
 ///         var body: some View {
 ///             TextEditor(text: $document.text)
 ///         }
@@ -29396,6 +29427,9 @@ public struct RedactionReasons : OptionSet {
 ///         }
 ///     }
 ///
+/// ![](file-doc-config-ex.gif)
+///
+
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -30451,9 +30485,7 @@ public struct RotationGesture : Gesture {
 
 /// A text field style with a system-defined rounded border.
 ///
-/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
-///
-/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+/// ``TextField`` can be styled with the ``View/textFieldStyle(_:)`` modifier.
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -30465,6 +30497,9 @@ public struct RotationGesture : Gesture {
 ///                 .padding()
 ///         }
 ///     }
+///
+/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -30557,10 +30592,8 @@ extension RoundedCornerStyle : Hashable {
 ///
 /// It must be created with a specific corner radius or size.
 /// The example below creates a RoundedRectangle with a corner radius of 20,
-/// and uses the `Shape/fill(_:style:)` and ``View/frame(width:height:alignment:)`` modifiers
+/// and uses the ``Shape/fill(_:style:)``` and ``View/frame(width:height:alignment:)`` modifiers
 /// to set the color to blue and the frame to 250 by 150.
-///
-/// ![RoundedRectangle corner radius, fill, and frame example](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30572,10 +30605,10 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
+/// ![RoundedRectangle corner radius, fill, and frame example](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
+///
 /// The example below uses the same modifiers, but defines a corner size
 /// rather than a corner radius.
-///
-/// ![RoundedRectangle corner size, fill, and frame example](4E1D6264-F9BA-4558-804A-72643AFD2A3B.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30587,11 +30620,11 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
+/// ![RoundedRectangle corner size, fill, and frame example](4E1D6264-F9BA-4558-804A-72643AFD2A3B.png)
+///
 /// The RoundedRectangle initializer includes an optional parameter for
 /// specifying the `style`, a ``RoundedCornerStyle`` that can either be `circular`
 /// or `continuous`. These styles have subtle but noticeable differences:
-///
-/// ![RoundedRectangle init example](F25C23E2-86B8-42F5-8EB9-19E8D02A5177.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30607,11 +30640,11 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
+/// ![RoundedRectangle init example](F25C23E2-86B8-42F5-8EB9-19E8D02A5177.png)
+///
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the ``RoundedRectangle/inset(by:)`` modifier to inset the RoundedRectangle by
 /// half of the border width to keep the RoundedRectangle at its original size:
-///
-/// ![RoundedRectangle inset and stroke example](97611155-5069-4DFB-808C-7BBA7DD5DBAA.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30623,6 +30656,8 @@ extension RoundedCornerStyle : Hashable {
 ///     }
 /// }
 /// ```
+///
+/// ![RoundedRectangle inset and stroke example](97611155-5069-4DFB-808C-7BBA7DD5DBAA.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RoundedRectangle : Shape {
@@ -32614,7 +32649,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
 ///
-/// In this example, the `VStack` containing the text is made scrollable by wrapping it in a `ScrollView`.
+/// In this example, the ``VStack`` containing the text is made scrollable by wrapping it in a `ScrollView`.
 ///
 /// Note:
 ///
@@ -32675,7 +32710,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// By default, a ``ScrollView``'s scroll indicator is visible upon user interaction.
 ///
-/// Pass `false` to `ScrollView/showsIndicators` in `ScrollView/init(_:showsIndicators:content:)` to hide the scroll indicator(s). For example:
+/// Pass `false` to ``ScrollView/showsIndicators`` in ``ScrollView/init(_:showsIndicators:content:)`` to hide the scroll indicator(s). For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -32695,7 +32730,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// This `ScrollView` will never show a scroll indicator.
 ///
-/// You do not need to specify an axis to use `ScrollView/showsIndicators`. For example:
+/// You do not need to specify an axis to use ``ScrollView/showsIndicators``. For example:
 ///
 ///  ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
 ///
@@ -32743,7 +32778,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
 ///
-/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use `View/id(_:)` as is done inside the `ForEach`, for each element.
+/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use ``View/id(_:)`` as is done inside the ``ForEach``, for each element.
 ///
 /// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the text reading "Item #32", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, specify an anchor via ``ScrollViewProxy/scrollTo(_:anchor:)``. For example:
 ///
@@ -32773,7 +32808,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// [<-]
 /// [scrollview-scrollto ->]
 ///
-///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with ``View/withAnimation(_:_:)``.  For example:
+///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with ``withAnimation(_:_:)``.  For example:
 ///
 ///  ```
 ///  struct ExampleView: View {
@@ -34207,8 +34242,6 @@ extension Spacer : View {
 /// Use this with the ``View/navigationViewStyle(_:)``
 /// view modifier to change a ``NavigationView``'s style.
 ///
-/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -34219,6 +34252,9 @@ extension Spacer : View {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
+///
 @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct StackNavigationViewStyle : NavigationViewStyle {
@@ -35612,7 +35648,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// [tabview-tabitem ->]
 /// ### Tab-bar based navigation
 ///
-/// Place child views in a `TabView` and apply ``View/tabItem(_:)`` to each child
+/// Place child views in a ``TabView`` and apply ``View/tabItem(_:)`` to each child
 /// for tab-bar style navigation.
 ///
 /// ```
@@ -35681,14 +35717,16 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         TabView {
 ///             ForEach(items, id: \.self) {
 ///                 Text($0)
+///                     .foregroundColor(Color.white)
 ///             }
 ///         }
 ///         .tabViewStyle(PageTabViewStyle())
+///         .background(Color.black)
 ///     }
 /// }
 /// ```
 ///
-/// ![TabView Example 3](tabview-dynamic.gif)
+/// ![TabView Example 3](tabview-ex2.gif)
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
@@ -35697,8 +35735,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// each take the form of the corresponding tab item's primary image. If not -
 /// these page indicators resort to system defaults.
 ///
-/// To disable page indicators altogether, apply a ``PageIndexViewStyle`` using
-/// ``View/indexViewStyle(_:)``, like so:
+/// To disable page indicators altogether, apply a ``PageTabViewStyle`` using
+/// ``View/tabViewStyle(_:)``, like so:
 ///
 /// ```
 /// struct ContentView: View {
@@ -35710,13 +35748,13 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///                 Text(item)
 ///             }
 ///         }
-///         .tabViewStyle(PageTabViewStyle())
-///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+///         .background(Color.yellow)
+///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 ///     }
 /// }
 /// ```
 ///
-/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
+/// ![TabView Example 4](tabview-ex3.gif)
 /// [<-]
 /// [tabview-tag ->]
 ///
@@ -35976,7 +36014,7 @@ public struct TapGesture : Gesture {
 
 /// A view that displays read-only text.
 ///
-/// `Text` draws a `String` in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
+/// ``Text`` draws a `String` in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35988,9 +36026,9 @@ public struct TapGesture : Gesture {
 ///
 /// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
 ///
-/// `Text` is most commonly initialized with a `String`, however, it has 9 different initializers.
+/// ``Text`` is most commonly initialized with a `String`, however, it has 9 different initializers.
 ///
-/// For example, use `Text/init(_:style:)` to display a date in a `Text` view.
+/// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -36002,7 +36040,7 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
-/// `Text` also accepts 12 unique modifiers to customize your string.
+/// ``Text`` also accepts 12 unique modifiers to customize your string.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -36016,7 +36054,7 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
-/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some` ``View``, such as `View/foregroundColor(_:)`, are compatible with `Text`.
+/// ``Text`` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with ``Text``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -36030,7 +36068,7 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
 ///
-/// **Remember**, any modifier that returns `some` ``View`` must be used after modifiers that return `Text`.
+/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
 ///
 /// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
 ///
@@ -36311,7 +36349,7 @@ extension Text {
     /// Creates an instance that displays localized dates and times using a specific style.
     ///
     /// Use this initializer along with ``Text/DateStyle`` to style the
-    /// date. See `DateStyle` for the options of te style parameter.
+    /// date. See ``Text/DateStyle`` for the options of te style parameter.
     ///
     /// See ``Date`` for more on how to make and use a date.
     ///
@@ -36324,6 +36362,8 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// !©[Init style example](text-init-style-ex.gif)
     ///
     /// - Parameters:
     ///     - date: The target date to display.
@@ -36694,26 +36734,31 @@ extension Text {
 
     /// Sets the default font for text in the view.
     ///
-    /// Use `font(_:)` to apply a specific font to an individual
+    /// Use ``Text/font(_:)`` to apply a specific font to an individual
     /// Text View, or all of the text views in a container.
     ///
     /// In the example below, the first text field has a font set directly,
     /// while the font applied to the following container applies to all of the
     /// text views inside that container:
     ///
-    ///     VStack {
-    ///         Text("Font applied to a text view.")
-    ///             .font(.largeTitle)
-    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
     ///         VStack {
-    ///             Text("These two text views have the same font")
-    ///             Text("applied to their parent view.")
+    ///             Text("Font applied to a text view.")
+    ///                 .font(.largeTitle)
+    ///
+    ///             VStack {
+    ///                 Text("These two text views have the same font")
+    ///                 Text("applied to their parent view.")
+    ///             }
+    ///             .font(.system(size: 16, weight: .light, design: .default))
     ///         }
-    ///         .font(.system(size: 16, weight: .light, design: .default))
     ///     }
+    /// }
+    /// ```
     ///
-    ///
-    /// ![Applying a font to a single text view or a view container](SwiftUI-view-font.png)
+    /// ![Applying a font to a single text view or a view container](textfont-ex.png)
     ///
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
@@ -36822,8 +36867,6 @@ extension Text {
 
     /// Applies an underline to the text.
     ///
-    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -36841,6 +36884,8 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has an
@@ -37999,7 +38044,7 @@ extension ToolbarContentBuilder {
 ///
 /// ### Placing a toolbar item on the navigation bar
 ///
-/// `ToolbarItem` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement/navigationBarLeading` or `ToolbarItemPlacement/navigationBarTrailing`. For example:
+/// `ToolbarItem` can be explicitly placed on the navigation bar using either `T`oolbarItemPlacement/navigationBarLeading`` or ``ToolbarItemPlacement/navigationBarTrailing``. For example:
 ///
 /// ![130803BF-A58D-4BBB-B916-9AB446907185](130803BF-A58D-4BBB-B916-9AB446907185.png)
 /// ```
@@ -39082,13 +39127,13 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// ### Context-aware ``UIViewRepresentable``s
 ///
 /// SwiftUI heavily relies on the environment, by way of environment objects
-/// (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`).
+/// (``View/environmentObject(_:)``) and environment values (``EnvironmentValues``).
 /// Environment values are useful for creating intelligent
 /// and context-aware UIKit ports.
 ///
 /// For example, we can remove the `isAnimated` parameter from
-/// `ActivityIndicator`, and use `isEnabled` from the environment instead
-/// via `EnvironmentValues`'s ``EnvironmentValues/isEnabled``:
+/// `ActivityIndicator`, and use ``EnvironmentValues/isEnabled`` from the environment instead
+/// via ``EnvironmentValues``'s ``EnvironmentValues/isEnabled``:
 ///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
@@ -39435,7 +39480,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///
 /// A unitpoint takes in x and y coordinates measured in points.
 ///
-/// You can customizde the x and y coordinates or you can use a constant.
+/// You can customize the x and y coordinates or you can use a constant.
 /// SwiftUI has 10 UnitPoint constants:
 ///
 ///
@@ -39458,8 +39503,6 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// For example, a ``LinearGradient`` accepts a ``UnitPoint`` for the startPoint and endPoint parameters.
 /// This example uses the constants ``UnitPoint/top`` and ``UnitPoint/bottom``.
 ///
-/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     let colors: [Color] = [.yellow, .orange]
@@ -39473,6 +39516,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///     }
 /// }
 /// ```
+///
+/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
 
@@ -39719,7 +39765,7 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///
 /// See those pages for more on how to construct them.
 ///
-/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-babaf``
+/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c``
 /// view modifier. See that page for more on adding alignment
 /// guides to views.
 ///
@@ -39737,7 +39783,6 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///
 /// See the example below.
 ///
-/// ![68519915-B4B5-4531-9D49-B9DF5172967B](68519915-B4B5-4531-9D49-B9DF5172967B.png)
 /// ```
 /// struct VerticallyAlignedView: View {
 ///     var body: some View {
@@ -39755,6 +39800,9 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///     }
 /// }
 /// ```
+///
+/// ![68519915-B4B5-4531-9D49-B9DF5172967B](68519915-B4B5-4531-9D49-B9DF5172967B.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VerticalAlignment : Equatable {
 
@@ -40381,7 +40429,7 @@ extension View {
     ///
     /// This changes the style of the page dots.
     ///
-    /// See ``IndexViewStyle`` and ``PageIndexViewStyle``for more info on
+    /// See ``IndexViewStyle`` and ``PageIndexViewStyle`` for more info on
     /// the parameter.
     ///
     /// ```
@@ -40392,10 +40440,12 @@ extension View {
     ///             Color.pink
     ///         }
     ///         .tabViewStyle(PageTabViewStyle())
-    ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)
+    ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Index View Style Example 1](index-view-style-ex.gif)
     ///
     /// - Parameter style: The ``IndexViewStyle`` style to apply to this view.
     public func indexViewStyle<S>(_ style: S) -> some View where S : IndexViewStyle { }
@@ -40656,7 +40706,7 @@ extension View {
     /// to encapsulate them by creating a new ``ViewModifier``. Then, call that
     /// new modifier using this.
     ///
-    /// Use this modifier to combine a `View` and a ``ViewModifier``, to
+    /// Use this modifier to combine a ``View`` and a ``ViewModifier``, to
     /// create a new view. For example, if you create a view modifier for
     /// a new kind of caption with blue text surrounded by a rounded rectangle:
     ///
@@ -40673,7 +40723,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// You can use `modifier(_:)` to extend ``View`` to create new modifier
+    /// You can use ``View/modifier(_:)`` to extend ``View`` to create new modifier
     /// for applying the `BorderedCaption` defined above:
     ///
     ///     extension View {
@@ -40684,11 +40734,15 @@ extension View {
     ///
     /// Then you can apply the bordered caption to any view:
     ///
-    ///     Image(systemName: "bus")
-    ///         .resizable()
-    ///         .frame(width:50, height:50)
-    ///     Text("Downtown Bus")
-    ///         .borderedCaption()
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Image(systemName: "bus")
+    ///                 .resizable()
+    ///                 .frame(width:50, height:50)
+    ///             Text("Downtown Bus")
+    ///                 .borderedCaption()
+    ///         }
+    ///     }
     ///
     /// ![A screenshot showing the image of a bus with a caption reading
     /// Downtown Bus. A view extension, using custom a modifier, renders the
@@ -41304,7 +41358,7 @@ extension View {
 	/// size and location will stay the same.
 	///
 	/// If you would like to place a view in front of your current view instead,
-	/// you can use the `overlay(_:alignment:)` function.
+	/// you can use the ``View/overlay(_:alignment:)``` function.
     ///
     /// ```
     /// struct OverlayView: View {
@@ -41315,6 +41369,8 @@ extension View {
     /// }
     /// ```
 	///
+  /// ![Background alignment example](floral_background.png)
+  ///
 	/// - Parameters:
 	///   - background: The view to place behind.
 	///   - alignment: Where to align the behind view relative to the current view. Defaults to center.
@@ -41621,8 +41677,6 @@ extension View {
   ///
   /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
   ///
-  /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
-  ///
   ///     struct ExampleView: View {
   ///        var body: some View {
   ///            VStack {
@@ -41637,6 +41691,7 @@ extension View {
   ///        }
   ///     }
   ///
+  /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
   ///
   ///
   /// - Parameter color: The color to use when displaying this text.
@@ -41676,9 +41731,11 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.39.23.png)]
+    ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// ``View/padding(_:_:)``. To pad all outside edges of a view with an
-    /// amount you specify, see `View/padding(_:)-9f33x`.
+    /// amount you specify, see `View/padding(_:)-049c2`.
     ///
     /// - Parameter insets: The edges and amounts to inset.
     ///
@@ -41690,7 +41747,7 @@ extension View {
     /// A view that pads this view inside the specified edge insets with a
     /// system-calculated amount of padding.
     ///
-    /// Use `padding(_:)` to add a system-calculated amount of padding inside
+    /// Use ``View/padding(_:)-049c2` to add a system-calculated amount of padding inside
     /// one or more of the view's edges by passing either a single edge name, or
     /// an `OptionSet` describing which edges should be padded. For example you
     /// can add padding to the bottom of a text view:
@@ -41709,10 +41766,12 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.39.23.png)
+    ///
     /// To pad the view's insets, which affects the amount of padding _inside_
-    /// the edges of the view, see `View/padding(_:)-6pgqq`. To pad all
+    /// the edges of the view, see `View/padding(_:)-97aab`. To pad all
     /// outside edges of a view with an amount you specify, see
-    /// `View/padding(_:)-9f33x`.
+    /// `View/padding(_:)-049c2`.
     ///
     /// - Parameters:
     ///   - edges: The set of edges along which to pad this view; if `nil` the
@@ -41727,7 +41786,7 @@ extension View {
 
     /// Pads the view along all edges by the specified amount.
     ///
-    /// Use `padding(_:)` to add a specific amount of padding around all edges
+    /// Use ``View/padding(_:)-049c2`` to add a specific amount of padding around all edges
     /// of the view.
     ///
     /// ```
@@ -41743,6 +41802,7 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.27.58.png)
     ///
     /// - Parameter length: The amount to pad this view on each edge.
     ///
@@ -41782,7 +41842,7 @@ extension View {
 
     /// A view modifier this view by the specified horizontal and vertical CGFloats.
     ///
-    /// Use `offset(x:y:)` to to shift the displayed contents by the amount
+    /// Use ``View/offset(x:y:)`` to to shift the displayed contents by the amount
     /// specified in the `x` and `y` parameters.
     ///
     /// The original dimensions of the view aren't changed by offsetting the
@@ -41799,6 +41859,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.14.12.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal distance to offset this view.
@@ -42353,7 +42415,7 @@ extension View {
 
     /// A view modifier that rotates this view's rendered output around the specified point.
     ///
-    /// Use `rotationEffect(_:anchor:)` to rotate the view by a specific amount.
+    /// Use ``View/rotationEffect(_:anchor:)`` to rotate the view by a specific amount.
     ///
     /// In the example below, the text is rotated by 22˚.
     ///
@@ -42366,6 +42428,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.15.53.png)
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
@@ -42980,7 +43044,7 @@ extension View {
 
     /// Sets the unique tag value of this view.
     ///
-    /// Use `tag(_:)` to differentiate between a number of views for the purpose
+    /// Use ``View\tag(_:)`` to differentiate between a number of views for the purpose
     /// of selecting controls like pickers and lists. Tag values can be of any
     /// type that conforms to the [Hashable](https://developer.apple.com/documentation/swift/hashable)
     /// protocol.
@@ -42990,7 +43054,7 @@ extension View {
     /// In the example below, the `ForEach` loop in the ``Picker`` view
     /// builder iterates over the `Flavor` enumeration. It extracts the text raw
     /// value of each enumeration element for use as the row item label and uses
-    /// the enumeration item itself as input to the `tag(_:)` modifier.
+    /// the enumeration item itself as input to the ``View/tag(_:)`` modifier.
     /// The tag identifier can be any value that conforms to the
     /// [Hashable](https://developer.apple.com/documentation/swift/hashable) protocol:
     ///
@@ -43009,6 +43073,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](view-tag-flavor.gif)
     ///
     /// - SeeAlso: `List`, ``Picker``, `Hashable`
     /// - Parameter tag: A [Hashable](https://developer.apple.com/documentation/swift/hashable) value
@@ -43063,7 +43129,7 @@ extension View {
 
     /// Places a custom background view behind a list row item.
     ///
-    /// Use `listRowBackground(_:)` to place a custom background view behind a
+    /// Use ``View/listRowBackground(_:)``` to place a custom background view behind a
     /// list row item.
     ///
     /// [[list-row-background]]
@@ -43072,7 +43138,7 @@ extension View {
     /// items. The SwiftUI ``List`` builder iterates over the `Flavor`
     /// enumeration and extracts the raw value of each of its elements using the
     /// resulting text to create each list row item. After the list builder
-    /// finishes, the `listRowBackground(_:)` modifier places the view you
+    /// finishes, the ``View/listRowBackground(_:)`` modifier places the view you
     /// supply behind each of the list row items.
     ///
     ///     struct ListRowBackground: View {
@@ -43708,11 +43774,13 @@ extension View {
     /// }
     /// ```
     ///
-    /// `The alignment` parameter specifies this view's alignment within the
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.54.23.png)
+    ///
+    /// The `alignment` parameter specifies this view's alignment within the
     /// frame.
     ///
     /// ```
-    /// struct TextFrameView
+    /// struct TextFrameView: View {
     ///     var body: some View {
     ///         Text("Hello world!")
     ///             .frame(width: 200, height: 30, alignment: .topLeading)
@@ -43720,6 +43788,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.56.14.png)
     ///
     /// In the example above, the text is positioned at the top, leading corner
     /// of the frame. If the text is taller than the frame, its bounds may
@@ -43859,7 +43929,7 @@ extension View {
 
     /// A view modifier that sets the tab bar item associated with this view.
     ///
-    /// Use `tabItem(_:)` to configure a view as a tab bar item in a
+    /// Use ``View/tabItem(_:)`` to configure a view as a tab bar item in a
     /// ``TabView``. The example below adds two views as tabs in a ``TabView``:
     ///
     ///     struct View1: View {
@@ -43891,6 +43961,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![tabItem Example 1](tabitem-ex1.gif)
     ///
     /// [[tabview-tabitem]]
     ///
@@ -44459,7 +44531,7 @@ extension View {
 
     /// Hides the navigation bar for this view.
     ///
-    /// Use `navigationBarHidden(_:)` to hide the navigation bar. This modifier
+    /// Use ``View/navigationBarHidden(_:)`` to hide the navigation bar. This modifier
     /// only takes effect when this view is inside of and visible within a
     /// ``NavigationView``.
     ///
@@ -45040,7 +45112,7 @@ extension View {
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
-    /// `View/toolbar(content:)-f4928` populates the toolbar or navigation bar. For example:
+    /// `View/toolbar(content:)-64493` populates the toolbar or navigation bar. For example:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -45642,7 +45714,7 @@ extension View {
     /// Rotates this view's rendered output in three dimensions around the given
     /// axis of rotation.
     ///
-    /// Use `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` to rotate the
+    /// Use ``View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)`` to rotate the
     /// view in three dimensions around the given axis of rotation, and
     /// optionally, position the view at a custom display order and perspective.
     ///
@@ -45658,6 +45730,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.18.05.png)
     ///
     /// [[rotation-effect]]
     ///
@@ -45831,7 +45905,7 @@ extension View {
     ///
     /// Use this modifier on leaf views rather than container views. The
     /// animation applies to all child views within this view; calling
-    /// `animation(_:)` on a container view can lead to unbounded scope.
+    /// ``View/animation(_:)`` on a container view can lead to unbounded scope.
     ///
     /// - Parameter animation: The animation to apply to animatable values
     ///   within this view.
@@ -46387,8 +46461,6 @@ extension View {
     ///
     /// ### Basic Usage
     ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     @State var text: String = "🍌🍌"
@@ -46410,10 +46482,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
     /// ### Using `NSItemProvider` with `onDrop`
     /// `NSItemProvider` is a class that holds data on the dragged contents.
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -46456,9 +46528,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ### Using `CGPoint` with `onDrop`
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
+    /// ### Using `CGPoint` with `onDrop`
     ///
     /// ```
     /// struct ContentView: View {
@@ -46504,8 +46576,9 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - isTargeted: A binding to communicate when a user is dragging over this region.
     ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
@@ -46517,9 +46590,8 @@ extension View {
     /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the ``DropDelegate`` protocol.
     ///
     /// #### Conform to DropDelegate
-    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to ``DropDelegate``.
+    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a structure that conforms to ``DropDelegate``.
     ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46550,10 +46622,11 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
     /// ### Fully Featured ``DropDelegate``
     /// Utalize ``DropDelegate``s optional functions to provide additional behavior.
     ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46638,6 +46711,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
     /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent fruits from being dropped if the background is yellow.
     ///
     /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change the color the first time a user drags over the drop zone.
@@ -46647,7 +46722,7 @@ extension View {
     /// Note: if the user deselects their dragged object while over the drop zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called. ``DropDelegate/dropExited(info:)-3d540`` is only called when the user explicitly drags their dragged object **out** of the drop zone.
     ///
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - delegate: An object that conforms to  ``DropDelegate``.
     public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
@@ -46665,8 +46740,6 @@ extension View {
     /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
     ///
     /// ### Basic Usage
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -46689,10 +46762,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
     /// ### Using `NSItemProvider` with `onDrop`
     /// `NSItemProvider` is a class that holds data on the dragged contents.
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -46735,7 +46808,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// - Paremeters:
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - isTargeted: A binding to communicate when a user is dragging over this region.
     ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
@@ -46868,7 +46943,7 @@ extension View {
     /// ```
     ///
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - isTargeted: A binding to communicate when a user is dragging over this region.
     ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
@@ -46882,9 +46957,7 @@ extension View {
     /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the ``DropDelegate`` protocol.
     ///
     /// #### Conform to DropDelegate
-    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to ``DropDelegate``.
-    ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a structure that conforms to ``DropDelegate``.
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46915,10 +46988,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
     /// ### Fully Featured ``DropDelegate``
     /// Utalize ``DropDelegate``s optional functions to provide additional behavior.
-    ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -47003,6 +47076,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
     /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent fruits from being dropped if the background is yellow.
     ///
     /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change the color the first time a user drags over the drop zone.
@@ -47012,7 +47087,7 @@ extension View {
     /// Note: if the user deselects their dragged object while over the drop zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called. ``DropDelegate/dropExited(info:)-3d540`` is only called when the user explicitly drags their dragged object **out** of the drop zone.
     ///
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - delegate: An object that conforms to  ``DropDelegate``.
     @available(tvOS, unavailable)
@@ -47279,14 +47354,14 @@ extension View {
     ///
     /// [[navigation-bar-items]]
     ///
-    /// Use `navigationBarItems(leading:trailing:)` to add navigation bar items
+    /// Use ``View/navigationBarItems(leading:trailing:)`` to add navigation bar items
     /// to the leading and trailing edges of the navigation bar for this view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
     ///
-    /// On iOS 14 and later, the leading item supplements a visible back button,
-    /// instead of replacing it, by default. To hide the back button, use
+    /// By default on iOS 14 and later, the leading item supplements a visible back button,
+    /// instead of replacing it. To hide the back button, use
     /// ``View/navigationBarBackButtonHidden(_:)``.
     ///
     /// The example below adds buttons to the leading and trailing edges of
@@ -47322,6 +47397,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Nav Bar Item LeadingTrailing Example 2](Navigationbaritems-leading-trailing-ex2.png)
+    ///
     /// - Parameters:
     ///   - leading: A view that appears on the leading edge of the title.
     ///   - trailing: A view that appears on the trailing edge of the title.
@@ -47336,14 +47413,14 @@ extension View {
     ///
     /// [[navigation-bar-items]]
     ///
-    /// Use `navigationBarItems(leading:)` to add navigation bar items to the
+    /// Use ``View/navigationBarItems(leading:)`` to add navigation bar items to the
     /// leading edge of the navigation bar for this view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
     ///
-    /// On iOS 14 and later, the leading item supplements a visible back button,
-    /// instead of replacing it, by default. To hide the back button, use
+    /// By default on iOS 14 and later, the leading item supplements a visible back button,
+    /// instead of replacing it. To hide the back button, use
     /// ``View/navigationBarBackButtonHidden(_:)``.
     ///
     /// The example below adds buttons to the leading edge of the button area
@@ -47373,6 +47450,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![Nav Bar Items Leading Example 2](navigationbaritems-leading-ex2.png)
+    ///
     /// - Parameter leading: A view that appears on the leading edge of the
     ///   title.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
@@ -47386,7 +47465,7 @@ extension View {
     ///
     /// [[navigation-bar-items]]
     ///
-    /// Use `navigationBarItems(trailing:)` to add navigation bar items to the
+    /// Use ``View/navigationBarItems(trailing:)`` to add navigation bar items to the
     /// trailing edge of the navigation bar for this view. This modifier only
     /// takes effect when this view is inside of and visible within a
     /// ``NavigationView``.
@@ -47417,6 +47496,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![Nav bar items trailing example 2](Navigationbaritems-trailing-ex2.png)
     ///
     /// - Parameter trailing: A view shown on the trailing edge of the title.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
@@ -47457,7 +47538,6 @@ extension View {
 /// a ``Group`` by passing it a [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
 /// stacking views:
 ///
-/// ![1F38B3B4-1BCC-426D-BEB1-D365A09E5C30](1F38B3B4-1BCC-426D-BEB1-D365A09E5C30.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47469,13 +47549,14 @@ extension View {
 /// }
 /// ```
 ///
+/// ![1F38B3B4-1BCC-426D-BEB1-D365A09E5C30](1F38B3B4-1BCC-426D-BEB1-D365A09E5C30.png)
+///
 /// ### Using a ``ViewBuilder`` as a function
 ///
 /// You can also use ``ViewBuilder`` as a function. Just tag your
 /// function with `@ViewBuilder`, and use it just like you would with a
 /// trailing closure:
 ///
-/// ![5464434F-469F-4385-BFBE-C9B38C911F56](5464434F-469F-4385-BFBE-C9B38C911F56.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47490,9 +47571,11 @@ extension View {
 /// }
 /// ```
 ///
+/// ![5464434F-469F-4385-BFBE-C9B38C911F56](5464434F-469F-4385-BFBE-C9B38C911F56.png)
+///
 /// ### Using a `ViewBuilder` in your own ``View``s
 ///
-/// Exactly like `Group`, you can also use ``ViewBuilder``s in your own custom
+/// Exactly like ``Group``, you can also use ``ViewBuilder``s in your own custom
 /// views. Just tag the parameter of your ``View``'s initializer with
 /// `@ViewBuilder`, and anyone using your view will be able to easily
 /// pass you views just by listing them.
@@ -47502,7 +47585,6 @@ extension View {
 /// are actually functions, so in order to get the content they contain,
 /// you have to call the function. Below, this is done with `content()`.
 ///
-/// ![79B81C88-83A4-47C2-B3E7-68BAFFB230E4](79B81C88-83A4-47C2-B3E7-68BAFFB230E4.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47512,6 +47594,7 @@ extension View {
 ///         }
 ///     }
 /// }
+///
 ///
 /// struct GreenGroup<Content>: View where Content: View {
 ///     var views: Content
@@ -47527,6 +47610,8 @@ extension View {
 ///     }
 /// }
 /// ```
+///
+/// ![79B81C88-83A4-47C2-B3E7-68BAFFB230E4](79B81C88-83A4-47C2-B3E7-68BAFFB230E4.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_functionBuilder public struct ViewBuilder {
@@ -48855,14 +48940,12 @@ public struct WindowGroup<Content> : Scene where Content : View {
 
 /// Creates a view animation.
 ///
-/// This function sets the given `Animation` as the ``Transaction/animation``
+/// This function sets the given ``Animation`` as the ``Transaction/animation``
 /// property of the thread's current ``Transaction``.
 ///
 /// ``withAnimation(_:_:)`` executes the code in it's closure, and displays the results of that execution according to the provided animation.
 ///
 /// For example, use ``withAnimation(_:_:)`` to animate a toggle. Here, the action on the view is the `showBanana.toggle()`. Now, by using ``withAnimation(_:_:)`` the results of that action will be animated according to `.easeInOut`.
-///
-/// ![Toggle Animation](with-animation-2.gif)
 ///
 /// ```
 /// struct ExplicitTransitionView: View {
@@ -48880,9 +48963,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// }
 /// ```
 ///
-/// Or use `withAnimation(_:_)` for a shake effect, like so:
+/// ![Toggle Animation](with-animation-2.gif)
 ///
-/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+/// Or use ``withAnimation(_:_:)`` for a shake effect, like so:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -48920,9 +49003,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// }
 /// ```
 ///
-/// Alter the duration of your animation as follows:
+/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
-/// ![Animation Basic](with-animation-1.gif)
+/// Alter the duration of your animation as follows:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -48944,6 +49027,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
 ///     }
 /// }
 /// ```
+///
+/// ![Animation Basic](with-animation-1.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { }
 
