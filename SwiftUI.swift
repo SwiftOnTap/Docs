@@ -711,7 +711,7 @@ public struct AccessibilityTraits : SetAlgebra {
 /// of a user's screen. It provides **two or more** options
 /// to the user based on the app context.
 ///
-/// An `ActionSheet` is similar to an ``Alert``, but it appears at the bottom
+/// An ``ActionSheet`` is similar to an ``Alert``, but it appears at the bottom
 /// of the screen instead of in the middle. To let the user respond
 /// to the **state** of the app, use an ``Alert`` instead.
 ///
@@ -728,7 +728,7 @@ public struct AccessibilityTraits : SetAlgebra {
 /// action sheet.
 ///
 /// The buttons can take 3 styles: ``Alert/Button/cancel(_:action:)``
-/// `Alert/Button/default(_:action:)`, and
+/// ``Alert/Button/default(_:action:)``, and
 /// ``Alert/Button/destructive(_:action:)``.
 /// Check out ``Alert/Button`` for the full overview of action sheet buttons,
 /// the available styles, and how to create them.
@@ -796,8 +796,6 @@ public struct ActionSheet {
 /// An alert can be created with one of two initializers, depending on if one button
 /// or two is required. For example, to create an Alert with one button:
 ///
-/// ![Example alert 1](alert-example-1.gif)
-///
 /// ```
 /// struct ExampleAlertView: View {
 ///    @State private var showAlert = false
@@ -816,6 +814,8 @@ public struct ActionSheet {
 /// }
 /// ```
 ///
+/// ![Example alert 1](alert-example-1.gif)
+///
 /// If the `dismissButton` value is left unspecified (as it was in this example),
 /// it will default to a dismiss button with the text "Ok".
 ///
@@ -823,27 +823,28 @@ public struct ActionSheet {
 /// create a new ``Alert/Button`` instance and pass it in as a part of the initializer.
 /// For example, to make an alert with a cancel and destructive button:
 ///
-/// ![Example alert 2](alert-example-2.gif)
 ///
 /// ```
 /// struct ExampleAlertView: View {
-///    @State private var showAlert = false
+///     @State private var showAlert = false
 ///
-///    var body: some View {
-///        Button("Tap to view alert") {
-///            showAlert = true
-///        }
-///        .alert(isPresented: $showAlert) {
-///            Alert(
-///                title: Text("Are you sure?"),
-///                message: Text("The following action will delete everything. Please confirm."),
-///                primaryButton: Alert.Button.destructive(Text("Delete")),
-///                secondaryButton: Alert.Button.cancel(Text("No, take me back!"))
-///            )
-///        }
-///    }
+///     var body: some View {
+///         Button("Tap to view alert") {
+///             showAlert = true
+///         }
+///         .alert(isPresented: $showAlert) {
+///             Alert(
+///                 title: Text("Are you sure?"),
+///                 message: Text("The following action will delete everything. Please confirm."),
+///                 primaryButton: Alert.Button.destructive(Text("Delete")),
+///                 secondaryButton: Alert.Button.cancel(Text("No, take me back!"))
+///             )
+///         }
+///     }
 /// }
 /// ```
+///
+/// ![Example alert 2](alert-example-2.gif)
 ///
 /// For illustrative purposes, the alert button values used the expanded syntax in this example.
 /// It is also valid to use the shorthand syntax when declaring alert buttons: `.default(_:action:)`,
@@ -864,8 +865,6 @@ public struct Alert {
     ///
     /// For example, to create a new Alert with this initializer and present it:
     ///
-    /// ![Example alert 3](alert-example-3.gif)
-    ///
     /// ```
     /// struct ExampleAlertView: View {
     ///    @State private var showAlert = false
@@ -884,6 +883,9 @@ public struct Alert {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Example alert 3](alert-example-3.gif)
+    ///
     public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { }
 
     /// Creates an alert with two buttons.
@@ -893,8 +895,6 @@ public struct Alert {
     /// if they are a primary or secondary button.
     ///
     /// For example, to create a new Alert with this initializer and present it:
-    ///
-    /// ![Example alert 4](alert-example-2.gif)
     ///
     /// ```
     /// struct ExampleAlertView: View {
@@ -915,6 +915,9 @@ public struct Alert {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Example alert 4](alert-example-2.gif)
+    ///
     public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) { }
 
     /// A button representing an ``Alert`` button action.
@@ -1887,7 +1890,7 @@ extension Angle : Animatable {
 ///
 /// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData', which represents a view's animatable data.
 ///
-/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/AnimatableData-7101d``. This is also the reason why ``Animatable/animatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
+/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/AnimatableData-7101d``. This is also the reason why ``Animatable/AnimatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 /// [animatable-modifier ->]
 /// ### Implementations
 ///
@@ -3439,7 +3442,7 @@ extension AnyTransition {
 /// A type that represents the structure and behavior of an app.
 ///
 /// Create an app by declaring a structure that conforms to the ``App`` protocol.
-/// Implement the required `App/body-swift.property` computed property
+/// Implement the required ``App/body-swift.variable`` computed property
 /// to define the app's content:
 ///
 ///     @main
@@ -3458,7 +3461,7 @@ extension AnyTransition {
 /// the ``App/main()`` method that the system calls to launch your app.
 /// You can have exactly one entry point among all of your app's files.
 ///
-/// Compose the app's body from instances that conform to the `SwiftUI/Scene`
+/// Compose the app's body from instances that conform to the ``Scene``
 /// protocol. Each scene contains the root view of a view hierarchy and has a
 /// life cycle managed by the system. SwiftUI provides some concrete scene types
 /// to handle common scenarios, like for displaying documents or settings. You
@@ -3477,7 +3480,7 @@ extension AnyTransition {
 ///     }
 ///
 ///     struct MailViewer: View {
-///         var body: some View { /* implement here*/ }
+///         var body: some View { /* implement here */ }
 ///     }
 ///
 /// You can declare state in your app to share across all of its scenes. For
@@ -3503,15 +3506,15 @@ extension AnyTransition {
 ///
 ///     struct MailViewer: View {
 ///         @EnvironmentObject var model: MailModel
-///         var body: some View { /* implement here*/ }
+///         var body: some View { /* implement here */ }
 ///     }
 ///
 ///     struct SettingsView: View {
 ///         @ObservedObject var mdoel: MailModel
-///         var body: some View { /* implement here*/ }
+///         var body: some View { /* implement here */ }
 ///     }
 ///
-///     class MailModel: ObservableObject { /* implement here*/ }
+///     class MailModel: ObservableObject { /* implement here */ }
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol App { }
@@ -11808,7 +11811,6 @@ extension EnvironmentKey {
 ///
 /// Consider the following example:
 ///
-/// ![2B8CB1C2-A204-47A8-AF0D-95C69028ECAC](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     let text: String = "some text"
@@ -11832,13 +11834,14 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
+/// ![2B8CB1C2-A204-47A8-AF0D-95C69028ECAC](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
+///
 /// - An app model, `AppModel` is initialized in a `@StateObject` in the `ContentView`.
 /// - `ContentView` initializes `ChildView`, and then passes the app model initialized via ``View/environmentObject(_:)``.
 /// - `ChildView` uses `AppModel` to display a piece of text declared by the app model.
 /// [<-]
 /// Now consider a slightly different version of this example:
 ///
-/// ![6181BC35-A419-499C-B394-64E170CECAD1](6181BC35-A419-499C-B394-64E170CECAD1.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     let text: String = "some text"
@@ -11870,6 +11873,8 @@ extension EnvironmentKey {
 ///
 /// ```
 ///
+/// ![6181BC35-A419-499C-B394-64E170CECAD1](6181BC35-A419-499C-B394-64E170CECAD1.png)
+///
 /// In this example, `ChildView` is initialized by an `IntermediateView`, which in turn is initialized by `ContentView`. This example is different only in that there is an additional level of nesting, via `IntermediateView` (a view that adds padding to `ChildView`).
 ///
 /// Note that `ChildView` did not need to be changed at all. `@EnvironmentObject` is neither used nor declared in `IntermediateView`, yet it is still available in the same way at one level deeper.
@@ -11880,7 +11885,6 @@ extension EnvironmentKey {
 ///
 /// Here is another example:
 ///
-/// ![5BADAB08-D42D-4FF2-9174-06C29CB15738](5BADAB08-D42D-4FF2-9174-06C29CB15738.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -11904,6 +11908,8 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
+/// ![](bindings-ex.gif)
+///
 ///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a `Binding<Bool>` to read and write whether it is on.
 ///
 /// Just like `@State`, `@ObservedObject` and `@StateObject`, `@EnvironmentObject` allows you to create a ``Binding`` from its wrapped value type using the `$` syntax.
@@ -11926,7 +11932,6 @@ extension EnvironmentKey {
 ///
 /// On iOS 13, environment objects do not automatically pass to sheets or navigation destinations. The following code would crash on iOS 13, for example:
 ///
-/// ![CA7BCD70-C1A2-49F4-A005-36055F937FFF](CA7BCD70-C1A2-49F4-A005-36055F937FFF.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -11956,6 +11961,8 @@ extension EnvironmentKey {
 ///     }
 /// }
 /// ```
+///
+/// ![](environment-object-ex4.gif)
 ///
 /// To fix it, the ``View/environmentObject(_:)`` modifier would need to be added directly to the sheet's content, like this:
 ///
@@ -11990,6 +11997,9 @@ extension EnvironmentKey {
 ///     }
 /// }
 /// ```
+///
+/// ![](environment-object-ex5.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct EnvironmentObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -24600,7 +24610,6 @@ extension NavigationViewStyle {
 ///
 /// In the following example, an observable object is assigned to an `@ObservedObject` variable:
 ///
-/// ![FC1A678A-0513-408B-950E-5BE85697F297](FC1A678A-0513-408B-950E-5BE85697F297.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     static let shared = AppModel()
@@ -24623,6 +24632,8 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![FC1A678A-0513-408B-950E-5BE85697F297](FC1A678A-0513-408B-950E-5BE85697F297.png)
+///
 /// In the example above, `ExampleView` will update its displayed text to "Banana" when the button labeled "Change Text" is pressed. This is because `ExampleView` has subscribed to `AppModel.shared` via the `@ObservedObject` `appModel` variable.
 ///
 /// Whenever the object referenced by `appModel` (which is `AppModel.shared` in this case) emits a change, `ExampleView` will be invalidated and redrawn.
@@ -24633,7 +24644,6 @@ extension NavigationViewStyle {
 ///
 /// For example:
 ///
-/// ![596F2956-1B74-4E8C-B60D-43550414B9F0](596F2956-1B74-4E8C-B60D-43550414B9F0.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     static let shared = AppModel()
@@ -24650,6 +24660,8 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![](observed-object-ex3.gif)
+///
 /// In this example, a two-way connection is established between `appModel.fruitName` and ``TextField``, by using the `$` prefix to create a `Binding<String>`. This allows ``TextField`` to update the `fruitName` variable when the user enters text, and also to update its own displayed text if `fruitName` is changed programmatically.
 ///
 /// ### Passing an observable object to a child view using `@ObservedObject`
@@ -24657,6 +24669,12 @@ extension NavigationViewStyle {
 /// Pass an observable object like you would pass any other variable down to a child view. For example:
 ///
 /// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
 /// struct ExampleView: View {
 ///     @StateObject var appModel = AppModel()
 ///
@@ -24674,13 +24692,14 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![](observed-object-ex3.gif)
+///
 /// It is a common pattern for a parent view to create a `@StateObject` to hold an observable object, and then to pass it down to a child using an `@ObservedObject`. `@StateObject` **owns** the object, `@ObservedObject` simply holds a reference to the object.
 ///
 /// ### Comparison with `@StateObject`
 ///
 /// Consider the following:
 ///
-/// ![A725E911-9792-4A7E-985C-260E54522F35](A725E911-9792-4A7E-985C-260E54522F35.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -24711,6 +24730,8 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![](observed-object-ex4.gif)
+///
 /// `ExampleView` creates a vertical stack of a ``Toggle``, and a view that describes the toggle, `ToggleDescription`.
 ///
 /// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
@@ -24723,7 +24744,6 @@ extension NavigationViewStyle {
 ///
 /// Now consider the following:
 ///
-/// ![0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE](0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -24753,6 +24773,8 @@ extension NavigationViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE](0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE.png)
 ///
 /// This example is identical to the previous example **except** for the fact that `@StateObject` has been replaced with `@ObservedObject`. Run this code now, and observe the following print again:
 ///
@@ -28173,7 +28195,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 /// When initialized with a value ``ProgressView`` looks like `UIProgressView`, a loading bar that fills up from left to right. There are notable exceptions featured in the example above. For example, a value of nil or less than 0.0 shows an indeterminate progress indicator or “spinner”."
-/// The value can be any generic type that conforms to the `BinaryFloatingPoint` protocol, which includes     `CGFloat`, `Double`, `Float`, `Float16` and `Float80`.
+/// The value can be any generic type that conforms to the `BinaryFloatingPoint` protocol, which includes `CGFloat`, `Double`, `Float`, `Float16` and `Float80`.
 ///
 ///     struct DeteriminateProgressViews: View {
 ///         @State var value = Double()
@@ -28191,26 +28213,30 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
+/// ![](progress-view-ex2.gif)
+///
 /// ### Styling Progress Views
 ///
-/// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of ``ProgressView``. The structure passed to the
-/// `progressViewStyle(_:)` modifier applies to all `ProgressView` instances in the children of that ``View``.
+/// Structures that conform to the ``ProgressViewStyle`` protocol can be used to modify the appearance of ``ProgressView``. The structure passed to the
+/// ` View/progressViewStyle(_:)`` modifier applies to all ``ProgressView`` instances in the children of that ``View``.
 ///
-/// In this example, the same style is applied to two `ProgressView` instances that are children of a ``VStack``:
+/// In this example, the same style is applied to two ``ProgressView`` instances that are children of a ``VStack``:
 ///
 ///     struct DefaultProgressViews: View {
 ///         var body: some View {
 ///             VStack {
 ///                 ProgressView(value: 0.25)
-///                   .accentColor(.red)
+///                   .accentColor(Color.red)
 ///                 ProgressView(value: 0.75)
-///                   .background(.black)
+///                   .background(Color.black)
 ///             }
 ///             .progressViewStyle(DefaultProgressViewStyle())
 ///         }
 ///     }
 ///
-/// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the `DefaultProgressViewStyle`. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the ``ProgressView`` will be visible in the unfilled portion of the loading bar.
+/// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 12.34.24.png)
+///
+/// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the ``DefaultProgressViewStyle``. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the ``ProgressView`` will be visible in the unfilled portion of the loading bar.
 ///
 /// To swap the colors, you can approximate how `Color.gray.opacity(0.1)` would look on a given background. Swapping the default colors will cause the blue background to show through the translucent gray, so it won't look right.
 ///
@@ -28250,7 +28276,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 /// [<-]
-///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of ``GeometryReader`` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
+///   A vertical ``ProgressView`` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of ``GeometryReader`` in order to allow the view to scale accordingly. One method to keep your ``ProgressView`` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the ``ProgressView`` to move out of bounds.
 ///
 /// [progressview-style ->]
 ///
@@ -29444,7 +29470,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// ``ReferenceFileDocument/snapshot(contentType:)`` method.
     /// It is the return type of this function.
     ///
-    /// In the following example, the `snapshot(contentType:)` method returns a `String`,
+    /// In the following example, the ``ReferenceFileDocument/snapshot(contentType:)`` method returns a `String`,
     /// so the associated type `Snapshot` would resolve to `String`.
     ///
     /// ### Example
@@ -29459,53 +29485,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29514,7 +29536,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29548,6 +29571,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     associatedtype Snapshot
 
@@ -29570,53 +29595,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29625,7 +29646,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29659,6 +29681,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     static var readableContentTypes: [UTType] { get }
 
@@ -29680,53 +29704,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29735,7 +29755,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29769,6 +29790,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     static var writableContentTypes: [UTType] { get }
 
@@ -29791,53 +29814,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29846,7 +29865,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29880,6 +29900,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     /// - Parameter configuration: The read-configuration for creating a reference file document.
     init(configuration: Self.ReadConfiguration) throws { }
@@ -29923,53 +29945,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29978,7 +29996,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -30012,6 +30031,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     /// - Parameter contentType: The content type being written, for which the
     ///   snapshot should be created.
@@ -30036,53 +30057,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -30091,7 +30108,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -30125,6 +30143,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     /// - Parameters:
     ///   - snapshot: A snapshot of the document with the data to serialize.
@@ -30164,53 +30184,49 @@ extension ReferenceFileDocument {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///    var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
+    ///    init(text: String = "This is a brand new document! 📃") {
+    ///        self.text = text
+    ///    }
     ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
+    ///    // A
+    ///    static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
+    ///    // B
+    ///    init(configuration: ReadConfiguration) throws {
+    ///        guard let data = configuration.file.regularFileContents,
+    ///            let string = String(data: data, encoding: .utf8)
+    ///        else {
+    ///            throw CocoaError(.fileReadCorruptFile)
+    ///        }
+    ///        text = string
+    ///    }
     ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
-    ///     }
+    ///    // C
+    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///        let data = text.data(using: .utf8)!
+    ///        return .init(regularFileWithContents: data)
+    ///    }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -30219,7 +30235,8 @@ extension ReferenceFileDocument {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -30253,6 +30270,8 @@ extension ReferenceFileDocument {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     public static var writableContentTypes: [UTType] { get }
 }
@@ -34285,7 +34304,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// Modifying a `@State` variable causes the `body` of the view to be recomputed. For example:
 ///
-/// ![AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7](AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7.png)
 /// ```
 /// struct ExampleView: View {
 ///     @State var foo: String = "Apple"
@@ -34302,7 +34320,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This  new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
+/// ![AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7](AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7.png)
+///
+/// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
 ///
 /// Note:
 ///
@@ -34313,7 +34333,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// Pass a state variable just as you would pass any other variable to a struct. For example:
 ///
-/// ![C8500709-199E-43A7-A416-B97CF82F1151](C8500709-199E-43A7-A416-B97CF82F1151.png)
 /// ```
 /// struct ExampleView: View {
 ///     struct ChildView: View {
@@ -34338,6 +34357,8 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![C8500709-199E-43A7-A416-B97CF82F1151](C8500709-199E-43A7-A416-B97CF82F1151.png)
+///
 /// In this example, `foo` is passed to `ChildView` by initializer.
 ///
 /// And exactly as in the previous example, when `foo` updates, so will the `body` of `ExampleView`. When the `body` of `ExampleView` is recomputed, a new instance of `ChildView` is created with the latest value of `foo` (which is now "Banana"). `ChildView` in turn computes its own `body`, which creates a `Text("Banana")`.
@@ -34350,7 +34371,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// To create a binding to a state variable, prefix it with a dollar sign `$`. For example:
 ///
-/// ![67E06F60-E76B-42A8-9A18-0503382F1533](67E06F60-E76B-42A8-9A18-0503382F1533.png)
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
@@ -34362,6 +34382,8 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![67E06F60-E76B-42A8-9A18-0503382F1533](67E06F60-E76B-42A8-9A18-0503382F1533.png)
+///
 /// In this example, `TextField` requires a binding in order to read and write to a given value. The `text` state variable is converted to a `Binding<String>` using the dollar sign prefix (`$text`), and then passed to ``Textfield`` via its initializer.
 ///
 /// Note: The ``Binding`` type can also be used to create references to `@ObservedObject`, `@EnvironmentObject` and `@StateObject`. It is not unique to `@State`, but rather a general structure that represents a reference to some source of truth.
@@ -34370,7 +34392,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// It's possible to modify a state variable outside of a view's `body`. For example:
 ///
-/// ![8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C](8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C.png)
 /// ```
 /// struct ContentView: View {
 ///     @State var foo: String = "Apple"
@@ -34389,11 +34410,13 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C](8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C.png)
+///
 /// In this example, the button labeled "Change text" calls the function `changeText`, which modifies `foo`.
 ///
 /// Note:
 ///
-/// - `changeText` is not a `mutating ` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
+/// - `changeText` is not a `mutating` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
 /// - Only access a state property from inside the view’s body, or from methods called by it.
 /// - Declare state properties as private, to prevent outside code from accessing them.
 /// - Although you should only access the state from inside the body, you can mutate it elsewhere including from any thread.
@@ -34514,7 +34537,6 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// In the following example, an observable object class `AppModel` is instantiated and stored in a `@StateObject`:
 ///
-/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var foo: Bool = false
@@ -34528,6 +34550,8 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
 ///
 /// ### How it works
 ///
@@ -34547,7 +34571,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     @StateObject var appModel = AppModel()
 /// ```
 ///
-/// `AppModel` is only initialized once per the lifetime of the `View`, `Scene` or ``App`` that contains the `@StateObject`. This is made possible by the `@autoclosure` annotation, that wraps the instantiation of the app model, `AppModel()`, into a lazy expression at compile time, `{ return AppModel() }`. This allows the `@StateObject` to call it appropriately as needed, which is once per its parent's lifetime.
+/// `AppModel` is only initialized once per the lifetime of the ``View``, ``Scene`` or ``App`` that contains the `@StateObject`. This is made possible by the `@autoclosure` annotation, that wraps the instantiation of the app model, `AppModel()`, into a lazy expression at compile time, `{ return AppModel() }`. This allows the `@StateObject` to call it appropriately as needed, which is once per its parent's lifetime.
 ///
 /// ### Creating bindings
 ///
@@ -34555,7 +34579,6 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// For example:
 ///
-/// ![FACF7A60-5C80-42FE-B933-9A62D2A53DC5](FACF7A60-5C80-42FE-B933-9A62D2A53DC5.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -34569,6 +34592,8 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![FACF7A60-5C80-42FE-B933-9A62D2A53DC5](FACF7A60-5C80-42FE-B933-9A62D2A53DC5.png)
 ///
 ///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a `Binding<Bool>` to read and write whether it is on.
 ///
@@ -40137,6 +40162,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](date-picker-style-ex.gif)
+    ///
     /// - Parameters:
     ///   - style: The desired date picker style, conforming to ``DatePickerStyle``.
     @available(tvOS, unavailable)
@@ -40199,6 +40226,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](sheet-on-dismiss-ex.gif)
+    ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
     ///   when this value is not `nil`.
@@ -40216,7 +40245,7 @@ extension View {
     ///             Button("Open sesame 📬") {
     ///                 showSheet = true
     ///             }
-    ///             .sheet(isPresented: $showCover,
+    ///             .sheet(isPresented: $showSheet,
     ///                    onDismiss: { print("dismissed!") },
     ///                    content: { ExampleSheet() })
     ///         }
@@ -40231,6 +40260,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](sheet-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
@@ -40294,6 +40325,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](full-screen-on-dismiss-ex.gif)
+    ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the full screen cover. The full screen
     ///   cover will show when the value is not `nil`.
@@ -40338,6 +40371,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](full-screen-is-presented-ex.gif)
+    ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the modal view is presented.
     ///   - onDismiss: A closure executed when the modal view dismisses.
@@ -40369,6 +40404,8 @@ extension View {
     ///                     perform: { longPressed.toggle() })
     ///         }
     ///     }
+    ///
+    /// ![](press-me-ex.gif)
     ///
     /// - Parameters:
     ///   - minimumDuration: How long it takes to detect a long press.
@@ -40408,6 +40445,8 @@ extension View {
     ///                 .disableAutocorrection(false)
     ///         }
     ///     }
+    ///
+    /// ![](disable-autocorrect-ex.gif)
     ///
     /// - Parameter disable: Whether autocorrection is disabled for the view.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
@@ -40474,6 +40513,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 10.26.05.png)
+    ///
     /// - Parameter action: A function that returns an NSItemProvider.
     @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
 
@@ -40518,6 +40559,8 @@ extension View {
     ///             }
     ///        }
     ///     }
+    ///
+    /// ![](disable-delete-ex.gif)
     ///
     /// - Parameter isDisabled: Whether the view's delete functionality is disabled.
     @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { }
@@ -40568,6 +40611,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](disable-move-ex.gif)
+    ///
     /// - Parameter isDisabled: Whether the view's move functionality is disabled.
     @inlinable public func moveDisabled(_ isDisabled: Bool) -> some View { }
 
@@ -40594,6 +40639,8 @@ extension View {
     ///                 }
     ///         }
     ///     }
+    ///
+    /// ![](ondrag-ex.gif)
     ///
     /// - Parameter data: A function that returns an
     /// [NSItemProvider](https://developer.apple.com/documentation/foundation/nsitemprovider)
@@ -47251,7 +47298,7 @@ extension View {
 
     /// Supplies an `ObservableObject` to a view subhierachy.
     ///
-    /// ``environmentObject`` supplies an `ObservableObject` to a view subhierachy. See ``ObservableObject`` for more on passing data between views.
+    /// ``environmentObject`` supplies an ``ObservableObject`` to a view subhierachy. See ``ObservableObject`` for more on passing data between views.
     ///
     /// [[environment-objects]]
     ///
@@ -48677,7 +48724,7 @@ extension WidgetConfiguration {
 ///
 /// On macOS, a window's title is usually displayed in a window's title bar. A window's title bar contains a centered text item to display the window's title.
 ///
-/// Use `WindowGroup/init(_:content)` to title a window. For example:
+/// Use `WindowGroup/init(_:content)-0733f` to title a window. For example:
 ///
 /// ````
 /// @main
@@ -48694,7 +48741,7 @@ extension WidgetConfiguration {
 /// [window-commands ->]
 /// ### Adding commands to a window group
 ///
-/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a ``WindowGroup``, use `Scene/commands(_:)`.
+/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a ``WindowGroup``, use ``Scene/commands(content:)``.
 ///
 /// For example:
 ///
