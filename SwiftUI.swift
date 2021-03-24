@@ -4620,11 +4620,6 @@ extension Binding : DynamicProperty {
 ///
 /// ![Space](space.jpg)
 ///
-<<<<<<< HEAD
-=======
-/// ![Blended Image](blendmode-softLight.png)
-///
->>>>>>> 06251a27efad653af4a21a8bc7427f1210786b93
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -18197,7 +18192,6 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
-<<<<<<< HEAD
 /// Use this label style to display a ``Label`` with an icon only.
 ///
 /// This is one of 3 default label
@@ -18232,17 +18226,6 @@ public struct HoverEffect {
 /// ```
 ///
 /// ![Default Label Styles](default-labelstyle-comparison.png)
-=======
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///              Label("Banana🍌", systemImage: "heart.fill")
-///                  .labelStyle(IconOnlyLabelStyle())
-///         }
-///     }
-///
-/// ![IconOnlyLabelStyle Example 1](icononlylabelstyle.png)
->>>>>>> 06251a27efad653af4a21a8bc7427f1210786b93
 ///
 /// - Note: The title of the label is still used for non-visual descriptions,
 /// such as VoiceOver.
@@ -44269,6 +44252,8 @@ extension View {
     ///  }
     ///  ```
     ///
+    /// ![](drawinggroup.png)
+    ///
     /// - Note: Views backed by native platform views may not render into the
     ///   image. Instead, they log a warning and display a placeholder image to
     ///   highlight the error.
@@ -44301,12 +44286,12 @@ extension View {
     ///
     /// In the example below the `compositingGroup()` modifier separates the
     /// application of effects into stages. It applies the ``View/opacity(_:)``
-    /// effect to the VStack before the `blur(radius:)` effect is applied to the
+    /// effect to the ``VStack`` before the ``View/blur(radius:opaque:)`` effect is applied to the
     /// views inside the enclosed ``ZStack``. This limits the scope of the
     /// opacity change to the outermost view.
     ///
     /// ```
-    /// struct CompositingGroup {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
     ///             ZStack {
@@ -44325,6 +44310,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](compositinggroup.png)
+    ///
     /// - Returns: A view that wraps this view in a compositing group.
     @inlinable public func compositingGroup() -> some View { }
 
@@ -44338,16 +44325,16 @@ extension View {
     /// If you set the preview device to `nil`, as it is by default, Xcode
     /// automatically chooses an appropriate device based on your target.
     ///
-    /// You can get a list of supported values, like "iPhone 11",
-    /// "iPad Pro (11-inch)", and "Apple Watch Series 5 - 44mm" by using the
+    /// You can get a list of supported values, like `"iPhone 11"`,
+    /// `"iPad Pro (11-inch)"`, and `"Apple Watch Series 5 - 44mm"` by using the
     /// `xcrun` command in the Terminal app:
     ///
-    ///     % xcrun simctl list devicetypes
+    ///     $ xcrun simctl list devicetypes
     ///
     /// Additionally, the following values are supported for macOS platform
     /// development:
-    ///  - "Mac"
-    ///  - "Mac Catalyst"
+    ///  - `"Mac"`
+    ///  - `"Mac Catalyst"`
     ///
     /// See ``PreviewDevice`` for the full list of supported devices.
     ///
@@ -44363,10 +44350,12 @@ extension View {
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewDevice(rawValue: "iPhone SE")
+    ///             .previewDevice("iPhone SE")
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](previewdevice.png)
     ///
     ///- Parameter value: The device to display the preview on.
     @inlinable public func previewDevice(_ value: PreviewDevice?) -> some View { }
@@ -44394,11 +44383,17 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-sizethatfits.png)
+    ///
     /// The default value is ``PreviewLayout/device``.
     @inlinable public func previewLayout(_ value: PreviewLayout) -> some View { }
 
 
     /// A view modifier that sets a custom name in the Xcode preview.
+    ///
+    /// Use this modifier to change the little name at the top of the
+    /// screen in an Xcode preview.
+    /// By default, it's "Preview". In this example, we make it "🍌":
     ///
     /// ```
     /// struct ContentView: View {
@@ -44415,6 +44410,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](previewdisplayname.png)
+    ///
     /// The default value is `nil`.
     ///
     /// - Parameter value: The preview name to display.
@@ -44424,21 +44421,18 @@ extension View {
     /// A view modifier that declares a context for the Xcode preview.
     ///
     /// There is currently only one type of preview context:
-    /// ``WidgetPreviewContext``. Its initializer takes a ``WidgetFamily``.
+    /// [`WidgetPreviewContext`](https://developer.apple.com/documentation/widgetkit/widgetpreviewcontext).
+    /// Its initializer takes a
+    /// [`WidgetFamily`](https://developer.apple.com/documentation/widgetkit/widgetfamily).
     ///
     /// There are 3 types of `WidgetFamily` variables:
-    ///
-    ///
-    ///
-    /// 1. `systemSmall`
-    /// 2. `systemMedium`
-    /// 3. `systemLarge`
-    ///
-    ///
+    /// 1. [`systemSmall`](https://developer.apple.com/documentation/widgetkit/widgetfamily/systemsmall)
+    /// 2. [`systemMedium`](https://developer.apple.com/documentation/widgetkit/widgetfamily/systemmedium)
+    /// 3. [`systemLarge`](https://developer.apple.com/documentation/widgetkit/widgetfamily/systemlarge)
     ///
     /// The example below is pulled from Apple's widget boilerplate.
     /// To pull this up yourself, go to *File > New > Target* and search
-    /// for "WidgetExtension". This target is named "PreviewContextTest"
+    /// for "Widget Extension". This target is named "PreviewContextTest."
     ///
     /// ```
     /// struct PreviewContextTest_Previews: PreviewProvider {
@@ -44448,6 +44442,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](widgetpreviewcontext.png)
     ///
     /// For more on getting started with widgets, check out
     /// [this tutorial](https://www.raywenderlich.com/11303363-getting-started-with-widgets).
@@ -44508,6 +44504,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](anchorpreference.png)
 	///
 	/// - Parameters:
 	///   - key: The key type of the preference key.
@@ -44543,6 +44541,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](clipshape.png)
+    ///
     /// The resulting view shows only the portion of the text that lies within
     /// the bounds of the circle.
     ///
@@ -44565,7 +44565,7 @@ extension View {
     /// content that extends beyond the edges of the frame is still visible.
     ///
     /// ```
-    /// struct CippedView: View {
+    /// struct ClippedView: View {
     ///     var body: some View {
     ///         Text("This long text string is clipped")
     ///             .fixedSize()
@@ -44575,6 +44575,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](clipped-modifier.png)
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -44606,6 +44608,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](cornerradius-modifier.png)
+    ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
     ///   rectangle.
@@ -44628,52 +44632,60 @@ extension View {
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(radius: 10)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-1.png)
     ///
     /// Modify the color:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(color: .red, radius: 10)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-2.png)
     ///
     /// Modify the x offset:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(color: .red, radius: 10, x: 20)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-3.png)
     ///
     /// Modify the x & y offset:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(color: .red, radius: 10, x: 20, y: 20)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-4.png)
     ///
     /// - Parameters:
     ///   - color: The shadow's color.
@@ -44693,11 +44705,19 @@ extension View {
 
     /// A view modifier that sets the style for toggles within this view.
     ///
+    /// Use this modifier to specify the ``ToggleStyle`` of a
+    /// ``Toggle``. See ``ToggleStyle`` for more info on the styles
+    /// that SwiftUI provides out of the box, along with how to create
+    /// your own custom styles.
+    ///
     /// To set a specific style for all toggle instances within a view, use the
     /// ``View/toggleStyle(_:)`` modifier, as follows:
     ///
     /// ```
     /// struct StyledToggleView: View {
+    ///     @State var vibrateOnRing = true
+    ///     @State var vibrateOnSilent = true
+    ///
     ///     var body: some View {
     ///         VStack {
     ///             Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
@@ -44707,6 +44727,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](togglestyle-modifier.png)
     ///
     /// - Parameter style: The style to set.
     public func toggleStyle<S>(_ style: S) -> some View where S : ToggleStyle { }
@@ -44763,6 +44785,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](image-scale.png)
+    ///
     /// - Parameter scale: One of the relative sizes provided by the image scale
     ///   enumeration.
     @available(macOS 11.0, *)
@@ -44801,6 +44825,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](font-modifier.png)
     ///
     /// - Parameter font: The default font to use in this view.
     ///
@@ -44893,6 +44919,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](frame.png)
     @available(*, deprecated, message: "Please pass one or more parameters.")
     @inlinable public func frame() -> some View { }
 
@@ -44931,7 +44959,7 @@ extension View {
     /// The ideal width and height parameters can be enforced using the
     /// ``View/fixedSize()`` modifier.
     ///
-    /// Play with the numbers in the following example to see how then
+    /// Play with the numbers in the following example to see how the
     /// child view responds
     ///
     /// ```
@@ -44939,13 +44967,16 @@ extension View {
     ///     var body: some View {
     ///         ZStack {
     ///             Rectangle()
-    ///                 .frame(minWidth: 50.0, idealWidth: 100.0, maxWidth: 200.0,
+    ///                 .frame(minWidth: 50.0, idealWidth: 100.0, maxWidth: 100.0,
     ///                        minHeight: 50.0, idealHeight: 100.0, maxHeight: 200.0)
     ///         }
     ///         .frame(width: 150.0, height: 150.0)
+    ///         .border(Color.oragne)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](frame-custom.png)
     ///
     /// - Parameters:
     ///   - minWidth: The minimum width of the resulting frame.
@@ -45073,7 +45104,7 @@ extension View {
     /// }
     ///
     /// struct ExamplePopover: View {
-    ///     let item: item
+    ///     let item: Item
     ///     @Environment(\.presentationMode) var presentationMode
     ///
     ///     var body: some View {
@@ -45105,9 +45136,17 @@ extension View {
 
     /// Presents a popover when a given condition is true.
     ///
+    /// If your popover requires a passed-in parameter, use
+    /// ``View/popover(item:attachmentAnchor:arrowEdge:content:)``
+    /// instead.
+    ///
+    /// On iPhone, this modifier is very similar to
+    /// ``View/sheet(isPresented:onDismiss:content:)``.
+    /// However, on iPad, these two modifiers are different.
+    ///
     /// ```
     /// struct ContentView: View {
-    ///     @State private var showPopover = FalseContent
+    ///     @State private var showPopover = false
     ///
     ///     var body: some View {
     ///         Button("Open sesame 📬") { showPopover = true }
@@ -45121,7 +45160,7 @@ extension View {
     /// struct ExamplePopover: View {
     ///     @Environment(\.presentationMode) var presentationMode
     ///
-    ///     var body: some View { x
+    ///     var body: some View {
     ///         Button("CLOSE 📪") {
     ///             presentationMode.wrappedValue.dismiss()
     ///         }
@@ -45273,12 +45312,16 @@ extension View {
     /// ```
     /// struct PartiallyHiddenView: View {
     ///     var body: some View {
-    ///         Text("The invisible man hides below")
-    ///         Text("🧔")
-    ///             .hidden()
+    ///         VStack {
+    ///             Text("The invisible man hides below")
+    ///             Text("🧔")
+    ///                 .hidden()
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](hidden.png)
     ///
     /// - Returns: A hidden view.
     @inlinable public func hidden() -> some View { }
@@ -45309,9 +45352,11 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](keyboardtype.png)
+    ///
     /// There are several different kinds of specialized keyboard types
     /// available though the
-    /// [UIKeyboardType](https://developer.apple.com/documentation/uikit/uikeyboardtype)
+    /// [`UIKeyboardType`](https://developer.apple.com/documentation/uikit/uikeyboardtype)
     /// enumeration. To
     /// specify the default system keyboard type, use `.default`.
     ///
@@ -45346,9 +45391,9 @@ extension View {
     /// ```
     ///
     /// The
-    /// [UITextAutocapitalizationType](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
+    /// [`UITextAutocapitalizationType`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
     /// enumeration defines the available capitalization modes. The default is
-    /// [sentences](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype/sentences).
+    /// [`.sentences`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype/sentences).
     ///
     /// - Parameter style: One of the autocapitalization modes defined in the
     /// `UITextAutocapitalizationType` enumeration.
@@ -45466,10 +45511,13 @@ extension View {
     /// struct HebrewView: View {
     ///     var body: some View {
     ///         Text("שָׁלוֹם")
-    ///          .flipsForRightToLeftLayoutDirection(true)
+    ///             .flipsForRightToLeftLayoutDirection(true)
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](flipsforrighttoleftlayoutdirection.png)
     ///
     /// - Parameter enabled: A Boolean value that indicates whether this view
     ///   flips its content horizontally when the layout direction is
@@ -45486,10 +45534,11 @@ extension View {
     /// A view modifier that sets the text content type for this view, which the system uses to
     /// offer suggestions while the user enters text on an iOS or tvOS device.
     ///
-    /// Use ``View/textContentType(_:)`` to set the content type for this view.
+    /// Use `textContentType(_:) to set the content type for this view.
+    /// This is especially useful for auto-complete purposes.
     ///
     /// Available content type values can be found in the
-    /// [UITextContentType](https://developer.apple.com/documentation/uikit/uitextcontenttype)
+    /// [`UITextContentType`](https://developer.apple.com/documentation/uikit/uitextcontenttype)
     /// page.
     ///
     /// This example configures the ``TextField`` for the entry of email
@@ -45500,11 +45549,13 @@ extension View {
     ///     @State private var emailAddress = ""
     ///
     ///     var body: some View {
-    ///         TextField("billjames2@icloud.com", text: $emailAddress)
+    ///         TextField("Enter email:", text: $emailAddress)
     ///             .textContentType(.emailAddress)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](textcontenttype.png)
     ///
     /// - Parameter textContentType: One of the content types available in the
     ///   `UITextContentType` enumeration that identify the semantic meaning
@@ -45534,19 +45585,25 @@ extension View {
     ///
     /// ```
     /// struct TogglesView: View {
+    ///     @State var toggle1 = true
+    ///     @State var toggle2 = true
+    ///
     ///     var body: some View {
     ///         VStack {
     ///             Toggle(isOn: $toggle1) {
-    ///                 Text("Toggle1")
+    ///                 Text("I am hidden! 🐄")
     ///             }
     ///             .labelsHidden()
     ///
     ///             Toggle(isOn: $toggle2) {
-    ///                 Text("Toggle2")
+    ///                 Text("I am not 👀")
     ///             }
     ///         }
     ///     }
     /// }
+    /// ```
+    ///
+    /// ![](labelshidden.png)
     ///
     /// - Note: This modifier does not work for all labels. It applies to
     ///   labels that are external/separate from the rest of the control's
@@ -45579,9 +45636,20 @@ extension View {
     ///
     /// ```
     /// struct ShortcutView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Click or press command+ctrl+P to print 🍌") { print("🍌") }
-    ///             .keyboardShortcut(KeyEquivalent("P"), modifiers: [.command, .control])
+    ///         let key = KeyEquivalent("p")
+    ///         let modifiers: EventModifiers = [.command, .control]
+    ///
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Click or press command+ctrl+P to print 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(key, modifiers: modifiers)
+    ///         }
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
@@ -45610,9 +45678,21 @@ extension View {
     ///
     /// ```
     /// struct ShortcutView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Click or press command+ctrl+P to print 🍌") { print("🍌") }
-    ///             .keyboardShortcut(KeyboardShortcut(KeyEquivalent("P"), modifiers: [.command, .control])))
+    ///         let key = KeyEquivalent("p")
+    ///         let modifiers: EventModifiers = [.command, .control]
+    ///         let shortcut = KeyboardShortcut(key, modifiers: modifiers)
+    ///
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Click or press command+ctrl+P to print 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(shortcut)
+    ///         }
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
@@ -45621,12 +45701,15 @@ extension View {
     ///
     /// ```
     /// struct KeyboardShortcutView: View {
+    ///     @State var message = "Press ENTER to save or ESC to cancel."
+    ///
     ///     var body: some View {
-    ///         Text("Press ENTER to save or ESC to cancel.")
+    ///         Text(message)
+    ///
     ///         HStack {
-    ///             Button("Cancel") { print("cancel") }
+    ///             Button("Cancel") { message = "Canceled." }
     ///                 .keyboardShortcut(.cancelAction)
-    ///             Button("Save") { print("save") }
+    ///             Button("Save") { message = "Saved." }
     ///                 .keyboardShortcut(.defaultAction)
     ///         }
     ///     }
