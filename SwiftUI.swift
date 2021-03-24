@@ -2069,7 +2069,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// Every animation has 3 parts:
 ///
 /// 1. The numerical value in memory that changes over time --- usually
-/// a `@``State property
+/// a `@State` property
 /// 2. How the `View` depends on this numerical value --- often using
 /// a view modifier
 /// 3. The timing curve describing how this change happens --- this is the
@@ -2077,7 +2077,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///
 /// For example, say I want the screen to be **green** sometimes, but **red**
 /// at other times. The current color of the screen would be stored as a
-/// `@``State property. Then, the screen might use the
+/// `@State` property. Then, the screen might use the
 /// ``View/foregroundColor(_:)`` modifier to actually make the screen this
 /// color. And finally, when I change the screen color, I can specify a
 /// *timing curve*, or ``Animation``, to describe how it will happen.
@@ -2121,9 +2121,9 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// 1. By applying it to a view using ``View/animation(_:)``,
 /// so any animatable properties of the view change with that
 /// timing curve.
-/// 2. Directly when changing a `@``State` property, using the
+/// 2. Directly when changing a `@State` property, using the
 /// ``withAnimation(_:_:)`` global function.
-/// 3. By attaching the timing curve directly to a `@``Binding` property,
+/// 3. By attaching the timing curve directly to a `@Binding` property,
 /// using ``Binding/animation(_:)``, so any changes to the binding happen
 /// with a certain animation.
 ///
