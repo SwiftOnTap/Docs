@@ -1896,7 +1896,7 @@ extension Angle : Animatable {
 ///
 /// #### Using ``AnimatableModifier`` to implement a shake effect
 ///
-/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``AnimatableModifier`` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
+/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
 ///
 /// For example:
 ///
@@ -3371,7 +3371,7 @@ extension AnyTransition {
 ///
 /// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
-/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in `List/init(_:id:selection:rowContent:)-2ed8f`. It is also suited for use in different layers of your view hierarchy, via either ``View/overlay(_:alignment:)`` or ``View/background(_:alignment:)``.
+/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ``List/init(_:id:selection:rowContent:)-2ed8f``. It is also suited for use in different layers of your view hierarchy, via either ``View/overlay(_:alignment:)`` or ``View/background(_:alignment:)``.
 ///
 /// Consider whether the usage of ``AnyView`` is appropriate, or even necessary. A common mistake is to use ``AnyView`` like this:
 ///
@@ -4402,7 +4402,7 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// At times, you may want to pass a fixed value as a `Binding`. This is possible via ``Binding/constant(_:)``, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
 ///
-/// Consider ``EnvironmentValues/editMode``, for example. A ``List`` can be forced into active editing by passing a binding to  `EditMode.active.
+/// Consider ``EnvironmentValues/editMode``, for example. A ``List`` can be forced into active editing by passing a binding to `EditMode.active`.
 ///
 /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
@@ -6005,7 +6005,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 
 /// An environment-dependent color.
 ///
-/// ``Color`` represents an environment-dependent color that conforms to ``View``. Colors conformance to ``View`` means that a color can be used as a view itself.
+/// `Color` represents an environment-dependent color that conforms to ``View``. Colors conformance to ``View`` means that a color can be used as a view itself.
 ///
 /// For example:
 ///
@@ -6017,7 +6017,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///
 /// ![Color Example One](color-example-one.png)
 ///
-/// Color also conforms to ``ShapeStyle`` which allows it to serve as a fill or stroke on a shape.
+/// `Color` also conforms to ``ShapeStyle`` which allows it to serve as a fill or stroke on a shape.
 ///
 /// For example, as a fill:
 ///
@@ -9025,7 +9025,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
-/// Or use a ``Divider`` in a ``HStack`` to create a vertical line between horizontally laid out elements:
+/// Or use a ``Divider`` in an ``HStack`` to create a vertical line between horizontally laid out elements:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -9375,9 +9375,9 @@ public struct DragGesture : Gesture {
 /// #### Creating a drop ``View``
 /// Use `onDrop` to create a view that accepts "drops" from dragged data. There are three versions of the `onDrop` modifier:
 ///
-/// - `View/onDrop(of:isTargeted:perform)-ae20f` is the simplest implementation. Specify a closure to execute when content is dropped.
-/// - `View/onDrop(of:isTargeted:perform)-b7eed` is similar to the former, but the closure also provides information about the drop location.
-/// - `View/onDrop(of:delegate)-884b8` requires a ``DropDelegate`` and is the most versatile.
+/// - ``View/onDrop(of:isTargeted:perform:)-ae20f`` is the simplest implementation. Specify a closure to execute when content is dropped.
+/// - ``View/onDrop(of:isTargeted:perform:)-b7eed`` is similar to the former, but the closure also provides information about the drop location.
+/// - ``View/onDrop(of:delegate:)-884b8`` requires a ``DropDelegate`` and is the most versatile.
 ///
 /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
 ///
@@ -13389,30 +13389,30 @@ extension FileDocument {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -16295,7 +16295,7 @@ public struct GeometryProxy {
 ///
 /// ![GeometryReader Example 1](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
 ///
-/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is `Alignment/topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
+/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is ``Alignment/topLeading``. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
 ///
 /// ### ``GeometryReader`` to get a view's frame
 ///
@@ -27084,7 +27084,7 @@ public struct PinnedScrollableViews : OptionSet {
 ///
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
-/// > To apply this style to a button, or to a view that contains buttons, use the ``View/buttonStyle(_:)-ea21b`` modifier.
+/// > To apply this style to a button, or to a view that contains buttons, use the ``View/buttonStyle(_:)-d2d0a`` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
@@ -28053,11 +28053,11 @@ extension PreviewProvider {
 ///
 /// ``PrimitiveButtonStyle`` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including ``BorderlessButtonStyle`` and ``PlainButtonStyle``.
 ///
-/// Your structure only needs to implement one method: ```PrimitiveButtonStyle/makeBody(configuration:)``. The desired button view is output by this method.
+/// Your structure only needs to implement one method: ``PrimitiveButtonStyle/makeBody(configuration:)``. The desired button view is output by this method.
 ///
 /// To build a custom ``PrimitiveButtonStyle``, create a struct that conforms to the protocol.
 ///
-/// ``PlainButtonStyle/makeBody(configuration:)`` accepts a ``PrimitiveButtonStyleConfiguration``, which passes the original label to display the button view and a ``PrimitiveButtonStyle/trigger()`` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
+/// ``PrimitiveButtonStyle/makeBody(configuration:)`` accepts a ``PrimitiveButtonStyleConfiguration``, which passes the original label to display the button view and a ``PrimitiveButtonStyle/trigger()`` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
 ///
 /// Use ``View/buttonStyle(_:)-d2d0a`` to apply a primitive button style.
 ///
@@ -32822,7 +32822,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 7](scrollviewproxy-ex7.gif)
 ///
-/// In this example, the `ScrollView` still scrolls to "Item #32", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, `UnitPoint`, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
+/// In this example, the `ScrollView` still scrolls to "Item #32", but this ``Text`` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, ``UnitPoint``, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
 ///
 /// [<-]
 /// [scrollview-scrollto ->]
@@ -35900,7 +35900,7 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     ///[Selection Content Example 1](init-selection-content-ex1.png)
     ///
     /// In this example, each tab item is assigned a unique tag using the
-    /// user-defined, hashable enum ``View/tabItem(_:)`. ``TabView`` in turn takes a binding to
+    /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
     /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
     /// selected. `$selectedItem` in turn can also be used to programmatically
     /// control tab-selection, as bindings work bidirectionally.
@@ -38069,7 +38069,7 @@ extension ToolbarContentBuilder {
 ///
 /// ### Placing a toolbar item on the navigation bar
 ///
-/// `ToolbarItem` can be explicitly placed on the navigation bar using either `T`oolbarItemPlacement/navigationBarLeading`` or ``ToolbarItemPlacement/navigationBarTrailing``. For example:
+/// `ToolbarItem` can be explicitly placed on the navigation bar using either ``ToolbarItemPlacement/navigationBarLeading`` or ``ToolbarItemPlacement/navigationBarTrailing``. For example:
 ///
 /// ![130803BF-A58D-4BBB-B916-9AB446907185](130803BF-A58D-4BBB-B916-9AB446907185.png)
 /// ```
@@ -41782,7 +41782,7 @@ extension View {
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// ``View/padding(_:_:)``. To pad all outside edges of a view with an
-    /// amount you specify, see `View/padding(_:)-049c2`.
+    /// amount you specify, see ``View/padding(_:)-049c2``.
     ///
     /// - Parameter insets: The edges and amounts to inset.
     ///
@@ -41794,7 +41794,7 @@ extension View {
     /// A view that pads this view inside the specified edge insets with a
     /// system-calculated amount of padding.
     ///
-    /// Use ``View/padding(_:)-049c2` to add a system-calculated amount of padding inside
+    /// Use ``View/padding(_:)-049c2`` to add a system-calculated amount of padding inside
     /// one or more of the view's edges by passing either a single edge name, or
     /// an `OptionSet` describing which edges should be padded. For example you
     /// can add padding to the bottom of a text view:
@@ -41816,9 +41816,9 @@ extension View {
     /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.39.23.png)
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
-    /// the edges of the view, see `View/padding(_:)-97aab`. To pad all
+    /// the edges of the view, see ``View/padding(_:)-97aab``. To pad all
     /// outside edges of a view with an amount you specify, see
-    /// `View/padding(_:)-049c2`.
+    /// ``View/padding(_:)-049c2``.
     ///
     /// - Parameters:
     ///   - edges: The set of edges along which to pad this view; if `nil` the
@@ -43091,7 +43091,7 @@ extension View {
 
     /// Sets the unique tag value of this view.
     ///
-    /// Use ``View\tag(_:)`` to differentiate between a number of views for the purpose
+    /// Use ``View/tag(_:)`` to differentiate between a number of views for the purpose
     /// of selecting controls like pickers and lists. Tag values can be of any
     /// type that conforms to the [Hashable](https://developer.apple.com/documentation/swift/hashable)
     /// protocol.
@@ -45159,7 +45159,7 @@ extension View {
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
-    /// `View/toolbar(content:)-64493` populates the toolbar or navigation bar. For example:
+    /// ``View/toolbar(content:)-64493`` populates the toolbar or navigation bar. For example:
     ///
     /// ```
     /// struct ExampleView: View {
