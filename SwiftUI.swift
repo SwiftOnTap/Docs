@@ -45629,6 +45629,22 @@ extension View {
     /// only takes effect when this view is inside of and visible within a
     /// ``NavigationView``.
     ///
+    ///     struct FlavorView: View {
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
+    ///         var body: some View {
+    ///             NavigationView {
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
+    ///                 }
+    ///                 .navigationBarTitle("You can't see me 👀")
+    ///                 .navigationBarHidden(true)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// ![](navigationbarhidden.png)
+    ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   navigation bar.
     @available(macOS, unavailable)
@@ -45636,6 +45652,9 @@ extension View {
 
 
     /// A view modifier that sets the title in the navigation bar for this view.
+    ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-e8e60`` instead.**
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar.
     /// This modifier only takes effect when this view is inside of and visible
@@ -45645,17 +45664,19 @@ extension View {
     /// ``Text`` view:
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                 List(items, id: \.self) {
-    ///                     Text($0)
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
     ///                 }
     ///                 .navigationBarTitle(Text("Today's Flavors"))
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationbartitle.png)
     ///
     /// - Parameter title: A description of this view to display in the
     ///   navigation bar.
@@ -45667,6 +45688,9 @@ extension View {
 
 
     /// A view modifier that sets the title of this view's navigation bar with a localized string.
+    ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-d3628`` instead.**
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
     /// using a ``LocalizedStringKey`` that will be used to search for a
@@ -45682,17 +45706,19 @@ extension View {
     /// resolved, the text of the key name will be used as the title text.
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                 List(items, id: \.self) {
-    ///                     Text($0)
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
     ///                 }
     ///                 .navigationBarTitle("Today's Flavors")
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationbartitle.png)
     ///
     /// - Parameter titleKey: A key to a localized description of this view to
     ///   display in the navigation bar.
@@ -45705,6 +45731,9 @@ extension View {
 
     /// A view modifier that sets the title of this view's navigation bar with a string.
     ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-ee24d`` instead.**
+    ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
     /// using a `String`. This modifier only takes effect when this view is
     /// inside of and visible within a ``NavigationView``.
@@ -45713,18 +45742,19 @@ extension View {
     /// using a string:
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
     ///         let text = "Today's Flavors"
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                 List(items, id: \.self) {
-    ///                     Text($0)
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
     ///                 }
     ///                 .navigationBarTitle(text)
     ///             }
     ///         }
     ///     }
+    /// ![](navigationbartitle.png)
     ///
     /// - Parameter title: A title for this view to display in the navigation
     ///   bar.
@@ -45737,13 +45767,15 @@ extension View {
 
     /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-e8e60`` with
+    /// ``View/navigationBarTitleDisplayMode(_:)`` instead.**
+    ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
     /// from one of the ``NavigationBarItem/TitleDisplayMode`` styles. This
     /// modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
-    ///
-    /// [[navigation-title-display-mode]]
     ///
     /// In the example below, text for the navigation bar title is provided
     /// using a ``Text`` view. The navigation bar title's
@@ -45751,17 +45783,19 @@ extension View {
     /// the navigation bar title in the bounds of the navigation bar.
     ///
     ///     struct FlavorView: View {
-    ///        let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                     "Pistachio"]
+    ///        let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",  "Pistachio"]
+    ///
     ///        var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) {
-    ///                      Text($0)
+    ///                  List(items, id: \.self) { item in
+    ///                      Text(item)
     ///                  }
-    ///                 .navigationBarTitle(Text("Today's Flavors", displayMode: .inline)
+    ///                 .navigationBarTitle(Text("Today's Flavors"), displayMode: .inline)
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -45775,13 +45809,15 @@ extension View {
 
     /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-d3628`` with
+    /// ``View/navigationBarTitleDisplayMode(_:)`` instead.**
+    ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
     /// from one of the ``NavigationBarItem/TitleDisplayMode`` styles. This
     /// modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
-    ///
-    /// [[navigation-title-display-mode]]
     ///
     /// In the example below, text for the navigation bar title is provided
     /// using a string. The navigation bar title's
@@ -45789,17 +45825,19 @@ extension View {
     /// the navigation bar title in the bounds of the navigation bar.
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) {
-    ///                      Text($0)
+    ///                  List(items, id: \.self) { item in
+    ///                      Text(item)
     ///                  }
     ///                 .navigationBarTitle("Today's Flavors", displayMode: .inline)
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationtitle-string.png)
     ///
     /// If the `titleKey` can't be found, the title uses the text of the key
     /// name instead.
@@ -45818,16 +45856,15 @@ extension View {
 
     /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
-    /// Use `navigationBarTitle(_:, displayMode)` to set the title of the
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-ee24d`` with
+    /// ``View/navigationBarTitleDisplayMode(_:)`` instead.**
+    ///
+    /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the
-    /// title from one of the `NavigationBarItem.Title.DisplayMode`
+    /// title from one of the ``NavigationBarItem/Title/DisplayMode``
     /// styles. This modifier only takes effect when this view is inside of and
     /// visible within a ``NavigationView``.
-    ///
-    /// In the example below, `navigationBarTitle(_:, displayMode)` uses a
-    /// string to provide a title for the navigation bar. Setting the title's
-    /// `displaymode` to `.inline` places the navigation bar title within the
-    /// bounds of the navigation bar.
     ///
     /// In the example below, text for the navigation bar title is provided using
     /// a string. The navigation bar title's `displayMode` is set to
@@ -45835,22 +45872,20 @@ extension View {
     /// navigation bar.
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
     ///         let title = "Today's Flavors"
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) {
-    ///                      Text($0)
+    ///                  List(items, id: \.self) { item in
+    ///                      Text(item)
     ///                  }
     ///                 .navigationBarTitle(title, displayMode: .inline)
     ///             }
     ///         }
     ///     }
     ///
-    /// ![A screenshot of a navigation bar, showing the title within the bounds
-    ///  of the navigation bar]
-    /// (SwiftUI-navigationBarTitle-stringProtocol.png)
+    /// ![](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -45877,8 +45912,9 @@ extension View {
     /// struct TrapDoorView: View {
     ///     var body: some View {
     ///         NavigationView {
-    ///             NavigationLink(destination: NoReturnView(),
-    ///                            label { Text("Tap to fall into the trap door 🚪") })
+    ///             NavigationLink(destination: NoReturnView()) {
+    ///                 Text("Tap to fall into the trap door 🚪")
+    ///             }
     ///         }
     ///     }
     /// }
@@ -45937,6 +45973,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](multilinetextalignment.png)
+    ///
     /// - Parameter alignment: A value that you use to left-, right-, or
     ///   center-align the text within a view.
     ///
@@ -45967,6 +46005,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](truncationmode.png)
+    ///
     /// - Parameter mode: The truncation mode that specifies where to truncate
     ///   the text within the text view, if needed. You can truncate at the
     ///   beginning, middle, or end of the text view.
@@ -45996,6 +46036,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](linespacing.png)
+    ///
     /// - Parameter lineSpacing: The amount of space between the bottom of one
     ///   line and the top of the next line in points.
     @inlinable public func lineSpacing(_ lineSpacing: CGFloat) -> some View { }
@@ -46007,6 +46049,9 @@ extension View {
     /// Use `allowsTightening(_:)` to enable the compression of inter-character
     /// spacing of text in a view to try to fit the text in the view's bounds.
     ///
+    /// You can also use ``EnvironmentValues/allowsTightening``
+    /// to set the same effect in the environment.
+    ///
     /// In the example below, two identically configured text views show the
     /// effects of `allowsTightening(_:)` on the compression of the spacing
     /// between characters:
@@ -46015,13 +46060,13 @@ extension View {
     /// struct TightenedTextView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             Text("This is a wide text element")
+    ///             Text("This is a wiiiiide text element")
     ///                 .font(.body)
     ///                 .frame(width: 200, height: 50, alignment: .leading)
     ///                 .lineLimit(1)
     ///                 .allowsTightening(true)
     ///
-    ///             Text("This is a wide text element")
+    ///             Text("This is a wiiiiide text element")
     ///                 .font(.body)
     ///                 .frame(width: 200, height: 50, alignment: .leading)
     ///                 .lineLimit(1)
@@ -46030,6 +46075,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](allowstightening.png)
     ///
     /// - Parameter flag: A Boolean value that indicates whether the space
     ///   between characters compresses when necessary.
@@ -46056,12 +46103,14 @@ extension View {
     /// ```
     /// struct LimitedTextView: View {
     ///     var body: some View {
-    ///         Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator.")
+    ///         Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator. 😲")
     ///             .frame(width: 200, height: 200, alignment: .leading)
     ///             .lineLimit(2)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](linelimit.png)
     ///
     /// - Parameter number: The line limit. If `nil`, no line limit applies.
     ///
@@ -46078,7 +46127,7 @@ extension View {
     /// example, a label with a minimum scale factor of `0.5` draws its text in
     /// a font size as small as half of the actual font if needed.
     ///
-    /// In the example below, the `HStack` contains a ``Text`` label with a
+    /// In the example below, the ```HStack`` contains a ``Text`` label with a
     /// line limit of `1`, that is next to a ``TextField``. To allow the label
     /// to fit into the available space, the `minimumScaleFactor(_:)` modifier
     /// shrinks the text as needed to fit into the available space.
@@ -46095,6 +46144,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](minimumscalefactor.png)
     ///
     /// - Parameter factor: A fraction between 0 and 1 (inclusive) you use to
     ///   specify the minimum amount of text scaling that this view permits.
@@ -46118,6 +46169,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](textcase-uppercase.png)
+    ///
     /// - Parameter textCase: One of the ``Text/Case`` enumerations; the
     ///   default is `nil`.
     /// - Returns: A view that transforms the case of the text.
@@ -46133,7 +46186,7 @@ extension View {
     /// A view modifier that adds an action to perform when this view recognizes a tap gesture.
     ///
     /// Use this modifier as a shorthand for performing an function
-    /// when a ``TapGesture`` is sensed on a ``View.
+    /// when a ``TapGesture`` is sensed on a ``View``.
     ///
     /// **Do not use** this modifier in place of ``Button``, ``NavigationLink``,
     /// or other purpose-built controls for acting on tap gestures. Among
@@ -46141,12 +46194,17 @@ extension View {
     /// while applying this modifier will not add this effect.
     ///
     /// ```
-    /// struct TapAndPrintView: View {
+    /// struct ContentView: View {
+    ///     @State var color = Color.clear
+    ///
     ///     var body: some View {
-    ///         Text("Tap me once for a 🍌")
-    ///             .onTapGesture { print("🍌") }
-    ///         Text("Tap me twice for a 🍑")
-    ///             .onTapGesture(count: 2) { print("🍑") }
+    ///         VStack {
+    ///             Text("Tap me once for a 🍌")
+    ///                 .onTapGesture { color = .yellow }
+    ///             Text("Tap me twice for a 🍑")
+    ///                 .onTapGesture(count: 2) { color = .orange }
+    ///         }
+    ///         .background(color)
     ///     }
     /// }
     /// ```
@@ -46162,26 +46220,23 @@ extension View {
     /// Use `listRowInsets(_:)` to change the default padding of the content of
     /// list items.
     ///
-    /// In the example below, the `Flavor` enumeration provides content for list
-    /// items. The SwiftUI ``List`` builder iterates over the `Flavor`
-    /// enumeration and extracts the raw value of each of its elements using the
-    /// resulting text to create each list row item. After the list builder
-    /// finishes, the `listRowInsets(_:)` modifier changes the edge insets of
-    /// each row of the list according to the ``EdgeInsets`` values you provide.
+    /// In the example below, the list row is inset 15pts from the top edge,
+    /// and 100pts from the right edge. *Note: for some reason, the code
+    /// below does not work in a list alone. It must be in a ``ForEach``.*
     ///
-    ///     struct ListRowInsets: View {
-    ///         enum Flavor: String, CaseIterable, Identifiable {
-    ///             var id: String { self.rawValue }
-    ///             case vanilla, chocolate, strawberry
-    ///         }
+    ///     struct ContentView: View {
+    ///         let colors: [Color] = [Color.orange, .purple, .pink]
+    ///         let insets = EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 100)
     ///
     ///         var body: some View {
-    ///             List(Flavor.allCases, id: \.self) {
-    ///                 Text($0.rawValue)
+    ///             List {
+    ///                 ForEach(colors, id: \.self) {
+    ///                     color.listRowInsets(insets)
+    ///                 }
     ///             }
-    ///             .listRowInsets(EdgeInsets(top: 0, leading: 75, bottom: 0, trailing: 0))
     ///         }
     ///     }
+    /// ![](listrowinsets.png)
     ///
     /// - Parameter insets: ``EdgeInsets`` to apply to the edges of the view.
     ///
@@ -46605,27 +46660,28 @@ extension View {
     ///
     /// For example:
     ///
-    /// ![Background preference value example 1](backgroundpreference-example-1.png)
-    ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        Text("Bullseye")
-    ///            .preference(key: CustomPreferenceKey.self, value: Color.red)
-    ///            .backgroundPreferenceValue(CustomPreferenceKey.self) { PreferenceKey in
-    ///                Circle().fill(PreferenceKey)
-    ///        }
-    ///    }
+    ///     var body: some View {
+    ///         Text("Bullseye")
+    ///             .preference(key: CustomPreferenceKey.self, value: Color.red)
+    ///             .backgroundPreferenceValue(CustomPreferenceKey.self) { PreferenceKey in
+    ///                 Circle().fill(PreferenceKey)
+    ///         }
+    ///     }
     /// }
     ///
     /// struct CustomPreferenceKey: PreferenceKey {
-    ///    static var defaultValue: Color = Color.clear
+    ///     static var defaultValue = Color.clear
     ///
-    ///    static func reduce(value: inout Color, nextValue: () -> Color) {
-    ///        value = nextValue()
-    ///    }
+    ///     static func reduce(value: inout Color, nextValue: () -> Color) {
+    ///         value = nextValue()
+    ///     }
     /// }
     /// ```
+    ///
+    /// ![Background preference value example 1](backgroundpreference-example-1.png)
+    ///
     @inlinable public func backgroundPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
 
 }
@@ -46637,29 +46693,26 @@ extension View {
     /// value changes.
     ///
     /// You can use `onChange` to trigger a side effect as the result of a
-    /// value changing, such as an `Environment` key or a ``Binding``.
+    /// value changing, such as an ``Environment`` key or a ``Binding``.
     ///
     /// `onChange` is called on the main thread. Avoid performing long-running
     /// tasks on the main thread. If you need to perform a long-running task in
     /// response to `value` changing, you should dispatch to a background queue.
     ///
     /// The new value is passed into the closure. The previous value may be
-    /// captured by the closure to compare it to the new value. For example, in
-    /// the following code example, `PlayerView` passes both the old and new
-    /// values to the model.
+    /// captured by the closure to compare it to the new value.
     ///
-    ///     struct PlayerView : View {
-    ///         var episode: Episode
-    ///         @State private var playState: PlayState = .paused
+    ///     struct ContentView: View {
+    ///         @State private var name = ""
+    ///         @State private var greeting = "Hi there!"
     ///
     ///         var body: some View {
     ///             VStack {
-    ///                 Text(episode.title)
-    ///                 Text(episode.showTitle)
-    ///                 PlayButton(playState: $playState)
-    ///             }
-    ///             .onChange(of: playState) { [playState] newState in
-    ///                 model.playStateDidChange(from: playState, to: newState)
+    ///                 Text(greeting)
+    ///                 TextField("Enter your name:", text: $name)
+    ///                     .onChange(of: name) { newValue
+    ///                         greeting = "Hi \(newValue)!"
+    ///                     }
     ///             }
     ///         }
     ///     }
@@ -46760,6 +46813,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](listitemtint-orange.png)
+    ///
     /// - Parameter tint: The tint effect to use, or nil to not override the
     ///   inherited tint.
     @inlinable public func listItemTint(_ tint: ListItemTint?) -> some View { }
@@ -46780,11 +46835,13 @@ extension View {
     ///     var body: some View {
     ///         List {
     ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
-    ///                 .listItemTint(.orange)
+    ///                 .listItemTint(Color.orange)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](listitemtint-orange.png)
     ///
     /// - Parameter color: The color to use to tint the content, or nil to not
     ///   override the inherited tint.
@@ -46928,8 +46985,8 @@ extension View {
     ///         }
     ///     }
     ///
-    /// Here, the ``VStack`` in the `ContentView` named “stack” is composed of a
-    /// red frame with a custom `Circle` view ``View/overlay(_:alignment:)``
+    /// Here, the ``VStack`` in the `ContentView` named `"stack"` is composed of a
+    /// red frame with a custom ``Circle`` view ``View/overlay(_:alignment:)``
     /// at its center.
     ///
     /// The `circle` view has an attached ``DragGesture`` that targets the
@@ -46937,9 +46994,6 @@ extension View {
     /// registers events inside ``circle`` it stores them in the shared `location`
     /// state variable and the `VStack` displays the coordinates in a ``Text``
     /// view.
-    ///
-    /// ![A screenshot showing an example of finding a named view and tracking
-    /// relative locations in that view.](SwiftUI-View-coordinateSpace.png)
     ///
     /// - Parameter name: A name used to identify this coordinate space.
     @inlinable public func coordinateSpace<T>(name: T) -> some View where T : Hashable { }
@@ -46957,9 +47011,7 @@ extension View {
     /// when clicking on the spacer. However, setting the content shape allows
     /// everything in the container view to be clickable.
     ///
-    /// For example, to make an entire VStack container clickable:
-    ///
-    /// ![Content shape example 1](contentshape-example-1.gif)
+    /// For example, to make an entire `VStack` container clickable:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46985,9 +47037,34 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Content shape example 1](contentshape-example-1.gif)
+    ///
     /// For further clarification on how this works, see this animation of the
-    /// same example from above _without_ any defined contentShape. Notice how
+    /// same example from above **without** any defined `contentShape`. Notice how
     /// the rectangle color does not toggle when clicking on the spacers.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleColor: Bool = false
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Top text").border(Color.black)
+    ///            Spacer().frame(height: 50)
+    ///
+    ///            Rectangle()
+    ///                .fill(toggleColor ? Color.red : Color.blue)
+    ///                .frame(width: 150, height: 150)
+    ///
+    ///            Spacer().frame(height: 50)
+    ///            Text("Bottom text").border(Color.black)
+    ///        }
+    ///        .onTapGesture {
+    ///            self.toggleColor.toggle()
+    ///        }
+    ///    }
+    /// }
+    /// ```
     ///
     /// ![Content shape example 2](contentshape-example-2.gif)
     ///
@@ -47323,44 +47400,44 @@ extension View {
     ///
     /// For example, without a mask, the following view renders as a normal rectangle:
     ///
-    /// ![Rectangle Example](rounded-rectangle.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
+    ///         Rectangle()
     ///             .fill(LinearGradient(
     ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
     ///                     startPoint: .leading,
     ///                     endPoint: .trailing))
-    ///             .padding()
     ///     }
     /// }
     /// ```
     ///
+    /// ![](linear-gradient.png)
+    ///
     /// Now if we apply a mask on a text view, we get the following result:
     ///
-    /// ![Mask Example](mask-example-1.png)
-    ///
     /// ```
+    /// struct TextView: View {
+    ///     var body: some View {
+    ///         Text("Bananas are some of the best fruit")
+    ///             .font(.title)
+    ///             .fontWeight(.bold)
+    ///     }
+    /// }
+    ///
     /// struct ExampleView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
+    ///         Rectangle()
     ///             .fill(LinearGradient(
     ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
     ///                     startPoint: .leading,
     ///                     endPoint: .trailing))
     ///             .mask(TextView())
-    ///             .padding()
-    ///     }
-    /// }
-    ///
-    /// struct TextView: View {
-    ///     var body: some View {
-    ///         Text("Bananas are our favorite fruit.").font(.title).fontWeight(.bold)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Mask Example](mask-example-1.png)
     ///
     /// This page was inspired by work from @philipcdavis on Github.
     ///
@@ -47456,7 +47533,7 @@ extension View {
 
     /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
     ///
-    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// Whenever the ``@AppStorage` property wrapper is used, it defaults its location to
     /// `UserDefaults.standard`. Override this default location for all of your
     /// scene's views by using this modifier.
     ///
@@ -47488,6 +47565,8 @@ extension View {
     ///             TextField("Enter your name", text: $name)
     ///         }
     ///     }
+    ///
+    /// ![](defaultappstorage.png)
     ///
     /// - Parameter store: The default user defaults storage site for `@AppStorage`.
     public func defaultAppStorage(_ store: UserDefaults) -> some View { }
@@ -48233,16 +48312,20 @@ extension View {
     ///
     /// ```
     /// struct ContentView: View {
-    ///     // This transform represents a 30˚ rotation around the z axis.
-    ///     let transform = CATransform3DMakeRotation(-30 * (.pi / 180), 0.0, 0.0, 1.0)
     ///
     ///     var body: some View {
-    ///         Text("Projection effects using transforms")
-    ///             .projectionEffect(.init(transform))
+    ///         // This transform represents a 30˚ rotation around the z axis.
+    ///         let transform = CATransform3DMakeRotation(-30 * (.pi / 180), 0.0, 0.0, 1.0)
+    ///         let effect = ProjectionTransform(transform)
+    ///
+    ///         return Text("Projection effects using transforms 🙃")
+    ///             .projectionEffect(effect)
     ///             .border(Color.gray)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](projectiontransform.png)
     ///
     /// - Parameter transform: A ``ProjectionTransform`` to apply to the view.
     @inlinable public func projectionEffect(_ transform: ProjectionTransform) -> some View { }
@@ -48257,8 +48340,8 @@ extension View {
     /// Adding help to a view configures the view's accessibility hint and
     /// its tooltip ("help tag") on macOS.
     ///
-    /// For more information on using help tags, see [Help]
-    /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
+    /// For more information on using help tags, see
+    /// [Help](https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
     /// ```
@@ -48272,6 +48355,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](help-localized.png)
+    ///
     /// - Parameter textKey: The key for the localized text to use as help.
     public func help(_ textKey: LocalizedStringKey) -> some View { }
 
@@ -48281,8 +48366,8 @@ extension View {
     /// Adding help to a view configures the view's accessibility hint and
     /// its tooltip ("help tag") on macOS.
     ///
-    /// For more information on using help tags, see [Help]
-    /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
+    /// For more information on using help tags, see
+    /// [Help](https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
     /// ```
@@ -48290,11 +48375,13 @@ extension View {
     ///     @State var opacity = 0.0
     ///
     ///     var body: some View {
-    ///         Slider("Opacity", value: $opacity)
+    ///         Slider(value: $opacity)
     ///             .help(Text("Adjust the opacity"))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](help-text.png)
     ///
     /// - Parameter text: The Text view to use as help.
     public func help(_ text: Text) -> some View { }
@@ -48305,8 +48392,8 @@ extension View {
     /// Adding help to a view configures the view's accessibility hint and
     /// its tooltip ("help tag") on macOS.
     ///
-    /// For more information on using help tags, see [Help]
-    /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
+    /// For more information on using help tags, see
+    /// [Help](https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
     /// ```
@@ -48315,11 +48402,13 @@ extension View {
     ///
     ///     var body: some View {
     ///         Image(systemName: "pin.circle")
-    ///             .foregroundColor(.orane)
+    ///             .foregroundColor(.orange)
     ///             .help(helpText)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](help-orange.png)
     ///
     /// - Parameter text: The text to use as help.
     public func help<S>(_ text: S) -> some View where S : StringProtocol { }
@@ -48343,6 +48432,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](statusbar-hidden.png)
     ///
     /// You can also show or hide the status bar with an animation by
     /// attaching the modifier to a ``State`` property and using
@@ -49271,23 +49362,12 @@ extension ViewDimensions : Equatable {
 /// A modifier that you apply to a view or another view modifier, producing a
 /// new view.
 ///
-/// Adopt the ``ViewModifier`` protocol when you want to create a reusable
+/// Conform to the ``ViewModifier`` protocol when you want to create a reusable
 /// modifier that you can apply to any view. The example below combines several
 /// modifiers to create a new modifier that you can use to create blue caption
 /// text surrounded by a rounded rectangle:
 ///
-/// ![View modifier example 1](8786B2B4-A365-445D-96AB-DE5D5BD9F897.png)
-///
 /// ```
-/// struct ExampleView: View {
-///    var body: some View {
-///        VStack {
-///            Text("Text without blue border")
-///            Text("Text with blue border")
-///                .modifier(BorderedCaption())
-///        }
-///    }
-/// }
 ///
 /// struct BorderedCaption: ViewModifier {
 ///    func body(content: Content) -> some View {
@@ -49301,7 +49381,19 @@ extension ViewDimensions : Equatable {
 ///            .foregroundColor(Color.blue)
 ///    }
 /// }
+///
+/// struct ExampleView: View {
+///    var body: some View {
+///        VStack {
+///            Text("Text without blue border")
+///            Text("Text with blue border")
+///                .modifier(BorderedCaption())
+///        }
+///    }
+/// }
 /// ```
+///
+/// ![View modifier example 1](8786B2B4-A365-445D-96AB-DE5D5BD9F897.png)
 ///
 /// You can apply ``View/modifier(_:)`` directly to a view, but a more common and
 /// idiomatic approach uses ``View/modifier(_:)`` to define an extension to
