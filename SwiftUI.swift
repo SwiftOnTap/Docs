@@ -21540,6 +21540,11 @@ public struct Label<Title, Icon> : View where Title : View, Icon : View {
     ///             Image(systemName: "42.circle")
     ///                 .foregroundColor(.green)
     ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](label-title-icon-ex.png)
     ///
     /// - Parameters:
     ///   - title: A view builder for the label's title view.
@@ -21738,12 +21743,8 @@ extension LabelStyle {
 ///
 /// There are 2 properties of a label:
 ///
-///
-///
 /// 1. Title
 /// 2. Icon
-///
-///
 ///
 /// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
 ///
