@@ -13301,30 +13301,30 @@ extension FileDocument {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -13347,8 +13347,6 @@ extension FileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -13357,8 +13355,6 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -13465,8 +13461,6 @@ extension FileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -13475,8 +13469,6 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -13589,8 +13581,6 @@ extension FileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -13599,8 +13589,6 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -21424,6 +21412,8 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPod touch (7th generation) - 2021-03-24 at 18.04.32.png)
+    ///
     /// - Parameter configuration: The label style to use.
     public init(_ configuration: LabelStyleConfiguration) { }
 }
@@ -23702,6 +23692,8 @@ extension Menu {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](label-init-image-ex.gif)
     ///
     /// - Parameters:
     ///     - content: A group of menu items.
@@ -29537,30 +29529,30 @@ public struct RedactionReasons : OptionSet {
 /// import UniformTypeIdentifiers
 ///
 /// struct ExampleDocument: FileDocument {
-///    var text: String
+///     var text: String
 ///
-///    init(text: String = "This is a brand new document! 📃") {
-///        self.text = text
-///    }
+///     init(text: String = "This is a brand new document! 📃") {
+///         self.text = text
+///     }
 ///
-///    // A
-///    static var readableContentTypes: [UTType] { [.exampleText] }
+///     // A
+///     static var readableContentTypes: [UTType] { [.exampleText] }
 ///
-///    // B
-///    init(configuration: ReadConfiguration) throws {
-///        guard let data = configuration.file.regularFileContents,
-///            let string = String(data: data, encoding: .utf8)
-///        else {
-///            throw CocoaError(.fileReadCorruptFile)
-///        }
-///        text = string
-///    }
+///     // B
+///     init(configuration: ReadConfiguration) throws {
+///         guard let data = configuration.file.regularFileContents,
+///             let string = String(data: data, encoding: .utf8)
+///         else {
+///             throw CocoaError(.fileReadCorruptFile)
+///         }
+///         text = string
+///     }
 ///
-///    // C
-///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-///        let data = text.data(using: .utf8)!
-///        return .init(regularFileWithContents: data)
-///    }
+///     // C
+///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///         let data = text.data(using: .utf8)!
+///         return .init(regularFileWithContents: data)
+///     }
 /// }
 /// ```
 ///
@@ -29583,8 +29575,6 @@ public struct RedactionReasons : OptionSet {
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
 ///
-///
-///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
 /// 3. Expand the "Document Types" tab.
@@ -29593,8 +29583,6 @@ public struct RedactionReasons : OptionSet {
 /// 6. Ensure the **Type** is *String*.
 /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
 /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-///
-///
 ///
 /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
 ///
@@ -29656,30 +29644,30 @@ extension ReferenceFileDocument : ObservableObject {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -29702,8 +29690,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29712,8 +29698,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29766,30 +29750,30 @@ extension ReferenceFileDocument : ObservableObject {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -29812,8 +29796,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29822,8 +29804,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29875,30 +29855,30 @@ extension ReferenceFileDocument : ObservableObject {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -29921,8 +29901,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29931,8 +29909,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29985,30 +29961,30 @@ extension ReferenceFileDocument : ObservableObject {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -30031,8 +30007,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -30041,8 +30015,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -30116,30 +30088,30 @@ extension ReferenceFileDocument : ObservableObject {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -30162,8 +30134,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -30172,8 +30142,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -30228,30 +30196,30 @@ extension ReferenceFileDocument : ObservableObject {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -30274,8 +30242,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -30284,8 +30250,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -30355,30 +30319,30 @@ extension ReferenceFileDocument {
     /// import UniformTypeIdentifiers
     ///
     /// struct ExampleDocument: FileDocument {
-    ///    var text: String
+    ///     var text: String
     ///
-    ///    init(text: String = "This is a brand new document! 📃") {
-    ///        self.text = text
-    ///    }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
+    ///     }
     ///
-    ///    // A
-    ///    static var readableContentTypes: [UTType] { [.exampleText] }
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///    // B
-    ///    init(configuration: ReadConfiguration) throws {
-    ///        guard let data = configuration.file.regularFileContents,
-    ///            let string = String(data: data, encoding: .utf8)
-    ///        else {
-    ///            throw CocoaError(.fileReadCorruptFile)
-    ///        }
-    ///        text = string
-    ///    }
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
     ///
-    ///    // C
-    ///    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///        let data = text.data(using: .utf8)!
-    ///        return .init(regularFileWithContents: data)
-    ///    }
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
     /// }
     /// ```
     ///
@@ -30401,8 +30365,6 @@ extension ReferenceFileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -30411,8 +30373,6 @@ extension ReferenceFileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -30765,7 +30725,7 @@ extension RoundedCornerStyle : Hashable {
 ///
 /// It must be created with a specific corner radius or size.
 /// The example below creates a RoundedRectangle with a corner radius of 20,
-/// and uses the ``Shape/fill(_:style:)``` and ``View/frame(width:height:alignment:)`` modifiers
+/// and uses the ``Shape/fill(_:style:)`` and ``View/frame(width:height:alignment:)`` modifiers
 /// to set the color to blue and the frame to 250 by 150.
 ///
 /// ```
@@ -35982,7 +35942,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
 /// In this example, each tab item is assigned a unique tag using the
-/// user-defined, hashable enum `TabItem`. ``TabView`` in turn takes a binding to
+/// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
 /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
 /// selected. `$selectedItem` in turn can also be used to programmatically
 /// control tab-selection, as bindings work bidirectionally.
@@ -41559,7 +41519,7 @@ extension View {
 	/// size and location will stay the same.
 	///
 	/// If you would like to place a view in front of your current view instead,
-	/// you can use the ``View/overlay(_:alignment:)``` function.
+	/// you can use the ``View/overlay(_:alignment:)`` function.
     ///
     /// ```
     /// struct OverlayView: View {
