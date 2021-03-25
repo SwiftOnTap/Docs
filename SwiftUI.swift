@@ -1024,8 +1024,9 @@ public struct Alert {
 ///
 ///     var body: some View {
 ///         ZStack(alignment: alignment) {
-///             Text("Move me around 🤠")
+///             Text("I'm top aligned 🤠")
 ///             Color.clear
+///         }
 ///     }
 /// }
 /// ```
@@ -1051,6 +1052,7 @@ public struct Alert {
 ///         ZStack(alignment: Alignment.bottomLeading) { //Try changing this!
 ///             Text("Move me around 🤠")
 ///             Color.clear
+///        }
 ///     }
 /// }
 /// ```
@@ -1101,8 +1103,12 @@ public struct Alert {
     ///         return ZStack(alignment: alignment) {
     ///             Text("Move me around 🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.11.38.png)
+    ///
     /// ```
     public var horizontal: HorizontalAlignment
 
@@ -1125,9 +1131,13 @@ public struct Alert {
     ///         return ZStack(alignment: alignment) {
     ///             Text("Move me around 🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.14.47.png)
+    ///
     public var vertical: VerticalAlignment
 
     /// Creates an instance with the given horizontal and vertical alignments.
@@ -1139,14 +1149,17 @@ public struct Alert {
     /// ```
     /// struct AlignmentView: View {
     ///     var body: some View {
-    ///         let alignment = Alignment(horizontal: .top, vertical: .leading)
+    ///         let alignment = Alignment(horizontal: .leading, vertical: .top)
     ///
     ///         return ZStack(alignment: alignment) {
     ///             Text("Move me around 🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.18.52.png)
     ///
     /// - Parameters:
     ///   - horizontal: The alignment on the horizontal axis.
@@ -1161,9 +1174,13 @@ public struct Alert {
     ///         ZStack(alignment: .center) {
     ///             Text("🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.22.04.png)
+    ///
     public static let center: Alignment
 
     /// A guide marking the leading edge of the view.
@@ -1174,9 +1191,13 @@ public struct Alert {
     ///         ZStack(alignment: .leading) {
     ///             Text("⬅️")
     ///             Color.clear
-    ///     }
+    ///        }
+    ///    }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.23.18.png)
+    ///
     public static let leading: Alignment
 
     /// A guide marking the trailing edge of the view.
@@ -1187,9 +1208,13 @@ public struct Alert {
     ///         ZStack(alignment: .trailing) {
     ///             Text("➡️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.27.25.png)
+    ///
     public static let trailing: Alignment
 
     /// A guide marking the top edge of the view.
@@ -1200,9 +1225,13 @@ public struct Alert {
     ///         ZStack(alignment: .top) {
     ///             Text("⬆️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.28.22.png)
+    ///
     public static let top: Alignment
 
     /// A guide marking the bottom edge of the view.
@@ -1213,9 +1242,13 @@ public struct Alert {
     ///         ZStack(alignment: .bottom) {
     ///             Text("⬇️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.29.14.png)
+    ///
     public static let bottom: Alignment
 
     /// A guide marking the top and leading edges of the view.
@@ -1226,9 +1259,13 @@ public struct Alert {
     ///         ZStack(alignment: .topLeading) {
     ///             Text("↖️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.30.26.png)
+    ///
     public static let topLeading: Alignment
 
     /// A guide marking the top and trailing edges of the view.
@@ -1239,9 +1276,13 @@ public struct Alert {
     ///         ZStack(alignment: .topTrailing) {
     ///             Text("↖️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.31.17.png)
+    ///
     public static let topTrailing: Alignment
 
     /// A guide marking the bottom and leading edges of the view.
@@ -1252,9 +1293,13 @@ public struct Alert {
     ///         ZStack(alignment: .bottomLeading) {
     ///             Text("↙️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.33.12.png)
+    ///
     public static let bottomLeading: Alignment
 
     /// A guide marking the bottom and trailing edges of the view.
@@ -1262,12 +1307,16 @@ public struct Alert {
     /// ```
     /// struct AlignmentView: View {
     ///     var body: some View {
-    ///         ZStack(alignment: .center) {
+    ///         ZStack(alignment: .bottomTrailing) {
     ///             Text("↘️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.35.44.png)
+    ///
     public static let bottomTrailing: Alignment
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -1552,6 +1601,9 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.42.39.png)
+    ///
     public var radians: Double
 
     /// The size of the angle, measured in degrees.
@@ -1572,6 +1624,9 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    ///
+    ///
     @inlinable public var degrees: Double
 
     /// Creates an angle of 0 degrees or 0 radians.
@@ -1584,6 +1639,9 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.44.26.png)
+    ///
     @inlinable public init() { }
 
     /// Creates an angle from a specified number of radians.
@@ -1596,6 +1654,8 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.45.08.png)
     ///
     /// - Parameter radians: The number of radians in the angle.
     @inlinable public init(radians: Double) { }
@@ -1610,6 +1670,8 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.45.55.png)
     ///
     /// - Parameter degrees: The number of degrees in the angle.
     @inlinable public init(degrees: Double) { }
@@ -1628,6 +1690,8 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    ///
     /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle { }
 
@@ -1645,7 +1709,9 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// - Paramter degrees: The number of degrees the new angle should be.
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    ///
+    /// - Parameter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle { }
 }
 
@@ -1719,6 +1785,9 @@ extension Angle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.44.26.png)
+    ///
     @inlinable public static var zero: Angle { get }
 
     /// The type defining the data to animate.
@@ -1753,8 +1822,6 @@ extension Angle : Animatable {
 /// This is the normal case where the start and end angles make a complete circle.
 /// Every color will evenly distribute.
 ///
-/// ![AngularGradient Example 1](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
-///
 /// ```
 ///  struct AngularGradientView: View {
 ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
@@ -1767,12 +1834,12 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
+/// ![AngularGradient Example 1](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
+///
 /// ## End Angle - Start Angle > 2π
 ///
 /// This is the case where the total angle is greater than a circle.
-/// The gradient will only draw the last complete turn which effectively writes over the first circle portion
-///
-/// ![AngularGradient Example 2](89BED914-29DA-4009-9EA1-96E1849E55F0.png)
+/// The gradient will only draw the last complete turn which effectively writes over the first circle portion.
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1791,13 +1858,13 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
+/// ![AngularGradient Example 2](89BED914-29DA-4009-9EA1-96E1849E55F0.png)
+///
 /// ## End Angle - Start Angle < 2π
 ///
 /// This is the case where the total angle is less than a circle.
 /// The gradient will not make a complete circle, but the missing area between the start and end will be evenly colored with the
 /// first and last color of the gradient.
-///
-/// ![AngularGradient Example 3](94015C67-FC57-44CC-9EA4-F982A47AEB7D.png)
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1816,6 +1883,8 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
+/// ![AngularGradient Example 3](94015C67-FC57-44CC-9EA4-F982A47AEB7D.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AngularGradient : ShapeStyle, View {
 
@@ -1824,8 +1893,6 @@ extension Angle : Animatable {
     /// Gradient behavior acts differently according to whether the end angle - start angle is greater than, less than or equal to 2π.
     /// See ``AngularGradient`` for more information.
     /// An example,
-    ///
-    /// ![AngularGradient Example 3](angular-gradient-example-3.png)
     ///
     /// ```
     ///  struct AngularGradientView: View {
@@ -1844,6 +1911,8 @@ extension Angle : Animatable {
     /// }
     /// ```
     ///
+    /// ![AngularGradient Example 3](angular-gradient-example-3.png)
+    ///
 	/// - Parameters:
 	///   - gradient: The gradient with the colors to use.
 	///   - center: The unit point that is center of the angular gradient.
@@ -1854,8 +1923,6 @@ extension Angle : Animatable {
     /// Creates an angular gradient starting at and angle and going all the way around in a circle.
     ///
     /// For example,
-    ///
-    /// ![AngularGradient Example 1](angular-gradient-example-1.png)
     ///
     /// ```
     ///  struct ExampleView: View {
@@ -1868,6 +1935,8 @@ extension Angle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![AngularGradient Example 1](angular-gradient-example-1.png)
     ///
     /// - Parameters:
     ///   - gradient: The gradient with the colors to use.
@@ -2208,8 +2277,6 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// Putting all of the sections above together into one example, here
 /// is what it looks like:
 ///
-/// ![Animation Example 1](animation-example.gif)
-///
 /// ```
 /// struct AnimateView: View {
 ///     @State private var flag = true
@@ -2229,6 +2296,8 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///     }
 /// }
 /// ```
+///
+/// ![Animation Example 1](animation-ex.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Animation : Equatable {
@@ -2279,6 +2348,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-ex.gif)
+    ///
     /// - Parameters:
     ///   - response: The stiffness of the spring, defined as an
     ///     approximate duration in seconds. A value of zero requests
@@ -2318,6 +2389,9 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-ex.gif)
+    ///
     public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { }
 }
 
@@ -2347,6 +2421,9 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static let `default`: Animation
 }
 
@@ -2356,8 +2433,6 @@ extension Animation {
 	/// An animation where the effect starts out slower and ends slower, while
 	/// moving most quickly in the middle.
 	///
-    /// ![Animation Example 2](animation-example-2.gif)
-    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2378,6 +2453,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
 	/// - Parameter duration: How long the effect should last.
     public static func easeInOut(duration: Double) -> Animation { }
 
@@ -2385,8 +2462,6 @@ extension Animation {
 	/// moving most quickly in the middle.
 	///
 	/// Uses the default timing of 1 second.
-    ///
-    /// ![Animation Example 1](animation-example.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2408,13 +2483,13 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static var easeInOut: Animation { get }
 
     /// An animation where the effect starts out slower and then ends more quickly.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 3](animation-example-3.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2436,6 +2511,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func easeIn(duration: Double) -> Animation { }
 
@@ -2444,8 +2521,6 @@ extension Animation {
     /// Uses the default timing of 1 second.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 4](animation-example-4.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2467,13 +2542,13 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static var easeIn: Animation { get }
 
     /// An animation where the effect starts out more quickly and then slows down.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 5](animation-example-5.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2495,6 +2570,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func easeOut(duration: Double) -> Animation { }
 
@@ -2503,8 +2580,6 @@ extension Animation {
     /// Uses the default timing of 1 second.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 6](animation-example-6.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2526,13 +2601,13 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static var easeOut: Animation { get }
 
     /// An animation where the effect happens at a constant speed throughout.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 7](animation-example-7.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2554,6 +2629,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func linear(duration: Double) -> Animation { }
 
@@ -2562,8 +2639,6 @@ extension Animation {
     /// Uses the default timing of 1 second.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 8](animation-example-8.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2584,6 +2659,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-default-ex.gif)
     ///
     public static var linear: Animation { get }
 
@@ -2618,6 +2695,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-timing-curve-ex.gif)
     ///
     /// - Parameters:
     ///   - c0x: The x-coordinate of the first control point.
@@ -2659,6 +2738,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-interpolating-ex.gif)
+    ///
     /// - Parameters:
     ///   - mass: The mass of the object attached to the spring.
     ///   - stiffness: The stiffness of the spring.
@@ -2694,6 +2775,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-delay-ex.gif)
 	///
 	/// - Parameter delay: How long the animation will wait before starting, in seconds.
     public func delay(_ delay: Double) -> Animation { }
@@ -2728,6 +2811,9 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-speed-ex)
+    ///
     public func speed(_ speed: Double) -> Animation { }
 }
 
@@ -2755,6 +2841,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-rep-count-ex.gif)
 	///
 	/// - Parameters:
 	///   - repeatCount: The number of times the animation should repeat.
@@ -2974,6 +3062,8 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-offset-ex.gif)
 	///
 	/// - Parameter offset: The amount you want to move the view during the transition.
     public static func offset(_ offset: CGSize) -> AnyTransition { }
@@ -2998,6 +3088,8 @@ extension AnyTransition {
     /// }
     /// ```
     ///
+    /// ![](any-transition-offset-xy-ex.gif)
+    ///
     /// - Parameters:
     ///   - x: The number of points you want to move the view to the right. Negative means move left. Defaults to 0.
     ///   - y: The number of points you want to move the view down. Negative means move up. Defaults to 0.
@@ -3021,11 +3113,14 @@ extension AnyTransition {
     ///         }
     ///         if showBanana {
     ///             Text("🍌")
-    ///                 .transition(.scale))
+    ///                 .transition(.scale)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-scale-ex.gif)
+    ///
     public static var scale: AnyTransition { get }
 
     /// A transition that scales a view from its current size to a new size.
@@ -3047,6 +3142,8 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-scale-anchor-ex.gif)
     ///
     /// - Parameters:
     ///   - scale: The amount you want to scale the view.
@@ -3080,6 +3177,9 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-opacity-ex.gif)
+    ///
     public static let opacity: AnyTransition
 }
 
@@ -3107,7 +3207,9 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// - SeeAlso: `AnyTransition.move(edge:)`
+    /// ![](any-transition-slide-ex.gif)
+    ///
+    /// - SeeAlso: ``AnyTransition/move(edge:)``
     public static var slide: AnyTransition { get }
 }
 
@@ -3141,6 +3243,8 @@ extension AnyTransition {
     /// }
     /// ```
     ///
+    /// ![](any-transition-combined-ex.gif)
+    ///
     public func combined(with other: AnyTransition) -> AnyTransition { }
 }
 
@@ -3170,15 +3274,15 @@ extension AnyTransition {
     /// struct OpacityModifier: ViewModifier {
     ///     let opacity: Double
     ///
-    ///     func body(content: Content) {
+    ///     func body(content: Content) -> some View {
     ///         content.opacity(opacity)
     ///     }
     /// }
     ///
     /// extension AnyTransition {
     ///     static var opOpacity: AnyTransition {
-    ///         .modifier(active: CustomModifier(opacity: 0),
-    ///                   identity: CustomModifier(opacity: 1))
+    ///         .modifier(active: OpacityModifier(opacity: 0),
+    ///                   identity: OpacityModifier(opacity: 1))
     ///     }
     /// }
     ///
@@ -3196,6 +3300,9 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-modifier-ex.gif)
+    ///
     public static func modifier<E>(active: E, identity: E) -> AnyTransition where E : ViewModifier { }
 }
 
@@ -3251,6 +3358,8 @@ extension AnyTransition {
     /// }
     /// ```
     ///
+    /// ![](any-transition-anim-ex.gif)
+    ///
     public func animation(_ animation: Animation?) -> AnyTransition { }
 }
 
@@ -3279,6 +3388,9 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-identity-ex.gif)
+    ///
     public static let identity: AnyTransition
 }
 
@@ -3287,8 +3399,6 @@ extension AnyTransition {
 
     /// Returns a transition that moves the view away, towards the specified
     /// edge of the view.
-    ///
-    /// See ``AnyTransition`` for more on how to use this transition.
     ///
     /// ```
     /// struct TransitioningBananaView: View {
@@ -3305,6 +3415,8 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-move-edge-ex.gif)
     ///
     /// See ``AnyTransition`` for more on how to use this transition.
     public static func move(edge: Edge) -> AnyTransition { }
@@ -3331,6 +3443,8 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-asymmetric-ex.gif)
     ///
     /// See ``AnyTransition`` for more on how to use this transition.
     public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
@@ -3596,6 +3710,9 @@ extension App {
 /// 			TextField(name, text: $name)
 /// 		}
 /// 	}
+///
+/// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
 
@@ -3623,6 +3740,9 @@ extension App {
     /// 			TextField(name, text: $name)
     /// 		}
     /// 	}
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+    ///
     public var projectedValue: Binding<Value> { get }
 }
 
@@ -3638,6 +3758,8 @@ extension AppStorage {
     /// 			Toggle("Airplane Mode", isOn: $on)
     /// 		}
     /// 	}
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.40.39.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a boolean value is not specified
@@ -3657,6 +3779,8 @@ extension AppStorage {
     /// 			Stepper("🍩 count: \(count)", value: $count)
     /// 		}
     /// 	}
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.42.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value is not specified
@@ -3678,6 +3802,8 @@ extension AppStorage {
     /// 		}
     /// 	}
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.42.46.png)
+    ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a double value is not specified
     ///     for the given key.
@@ -3697,6 +3823,8 @@ extension AppStorage {
     /// 		}
     /// 	}
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+    ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value is not specified
     ///     for the given key.
@@ -3715,6 +3843,8 @@ extension AppStorage {
     /// 			Text("Check out \(url)")
     /// 		}
     /// 	}
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.44.14.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a url value is not specified for
@@ -3737,7 +3867,7 @@ extension AppStorage {
     ///         var age: Int
     ///     }
     ///
-    //      struct ContentView: View {
+    ///     struct ContentView: View {
     ///         @AppStorage("goat") var person = Data()
     ///
     ///         var body: some View {
@@ -3750,6 +3880,8 @@ extension AppStorage {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.47.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a data value is not specified for
@@ -3765,22 +3897,24 @@ extension AppStorage {
     ///
     /// A common usage is with enumerations:
     ///
-    ///    enum MyEnum: Int {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
+    ///     enum MyEnum: Int {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct MyView: View {
+    ///         @AppStorage("MyEnumValue") private var value = MyEnum.a
     ///
-    ///        var body: some View {
-    ///             Picker("Choose!", selection: $value) {
-    ///                 Text("a").tag(MyEnum.a)
-    ///                 Text("b").tag(MyEnum.b)
-    ///                 Text("c").tag(MyEnum.c)
-    ///             }
-    ///         }
-    ///    }
+    ///         var body: some View {
+    ///              Picker("Choose!", selection: $value) {
+    ///                  Text("a").tag(MyEnum.a)
+    ///                  Text("b").tag(MyEnum.b)
+    ///                  Text("c").tag(MyEnum.c)
+    ///              }
+    ///          }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value
@@ -3796,21 +3930,23 @@ extension AppStorage {
     ///
     /// A common usage is with enumerations:
     ///
-    ///    enum MyEnum: String {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View {
+    ///     enum MyEnum: String {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct MyView: View {
+    ///         @AppStorage("MyEnumValue") private var value = MyEnum.a
+    ///         var body: some View {
     ///             Picker("Choose!", selection: $value) {
     ///                 Text("a").tag(MyEnum.a)
     ///                 Text("b").tag(MyEnum.b)
     ///                 Text("c").tag(MyEnum.c)
     ///             }
     ///         }
-    ///    }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value
@@ -5440,7 +5576,7 @@ extension Button where Label == Text {
     /// ``Text`` for more information about localizing strings.
     ///
     /// To initialize a button with a string variable, use
-    /// `Button/init(_:action:)-lpm7` instead.
+    /// ` Button/init(_:action:)-0ffce`   instead.
     ///
     ///     struct EasySignInView: View {
     ///         let titleText = LocalizedStringKey("Sign In")
@@ -5458,11 +5594,11 @@ extension Button where Label == Text {
     /// Creates a button that generates its label from a string.
     ///
     /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to `Text/init(_:)-9d1g4`. See ``Text`` for more
+    /// title similar to ``Text/init(_:)-40ffd``. See ``Text`` for more
     /// information about localizing strings.
     ///
     /// To initialize a button with a localized string key, use
-    /// `Button/init(_:action:)-1asy` instead.
+    /// ``Button/init(_:action:)-1de06`` instead.
     ///
     ///     struct EasySignInView: View {
     ///         let titleText = "Sign In"
