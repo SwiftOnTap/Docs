@@ -1959,13 +1959,13 @@ extension Angle : Animatable {
 ///
 /// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData', which represents a view's animatable data.
 ///
-/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/AnimatableData-7101d``. This is also the reason why ``Animatable/AnimatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
+/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/animatableData-7101d``. This is also the reason why ``Animatable/AnimatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 /// [animatable-modifier ->]
 /// ### Implementations
 ///
 /// #### Using ``AnimatableModifier`` to implement a shake effect
 ///
-/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
+/// ``Animatable`` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
 ///
 /// For example:
 ///
@@ -3485,7 +3485,7 @@ extension AnyTransition {
 ///
 /// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
-/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ``List/init(_:id:selection:rowContent:)-2ed8f``. It is also suited for use in different layers of your view hierarchy, via either ``View/overlay(_:alignment:)`` or ``View/background(_:alignment:)``.
+/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. ``AnyView`` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in ``List/init(_:id:selection:rowContent:)-2ed8f``. It is also suited for use in different layers of your view hierarchy, via either ``View/overlay(_:alignment:)`` or ``View/background(_:alignment:)``.
 ///
 /// Consider whether the usage of ``AnyView`` is appropriate, or even necessary. A common mistake is to use ``AnyView`` like this:
 ///
@@ -43312,7 +43312,7 @@ extension View {
 
     /// Places a custom background view behind a list row item.
     ///
-    /// Use ``View/listRowBackground(_:)``` to place a custom background view behind a
+    /// Use ``View/listRowBackground(_:)`` to place a custom background view behind a
     /// list row item.
     ///
     /// [[list-row-background]]
@@ -48860,7 +48860,7 @@ extension WidgetConfiguration {
 ///
 /// On macOS, a window's title is usually displayed in a window's title bar. A window's title bar contains a centered text item to display the window's title.
 ///
-/// Use `WindowGroup/init(_:content)-0733f` to title a window. For example:
+/// Use ``WindowGroup/init(_:content)-0733f`` to title a window. For example:
 ///
 /// ````
 /// @main
