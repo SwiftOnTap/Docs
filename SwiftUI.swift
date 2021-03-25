@@ -18002,7 +18002,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// **First**, create an image in your Assets folder.
 ///
-/// ![Image in assets folder](image-assets.pngpng)
+/// ![An image in the XCode Assets folder that describes how to import images](image-assets.png)
 ///
 /// To follow along, save the following image as `"ocean"` in your project.
 ///
