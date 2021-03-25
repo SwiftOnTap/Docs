@@ -10820,7 +10820,7 @@ public struct DropProposal {
 /// - ``GestureState``
 ///
 /// The view gives values to these properties prior to recomputing the view's
-/// `View/body-swift.property`.
+/// ``View/body-swift.variable``.
 ///
 /// You will rarely implement this protocol yourself. However, if you do,
 /// It would look something like this:
@@ -10852,7 +10852,7 @@ extension DynamicProperty {
     /// Updates the underlying value of the stored value.
     ///
     /// SwiftUI calls this function before rending a view's
-    /// `View/body-swift.property` to ensure the view has the most recent
+    /// ``View/body-swift.variable`` to ensure the view has the most recent
     /// value.
     ///
     /// You will rarely implement this protocol yourself. However, if you do,
@@ -10887,7 +10887,7 @@ extension DynamicProperty {
     /// Updates the underlying value of the stored value.
     ///
     /// SwiftUI calls this function before rending a view's
-    /// `View/body-swift.property` to ensure the view has the most recent
+    /// ``View/body-swift.variable`` to ensure the view has the most recent
     /// value.
     ///
     /// You will rarely implement this protocol yourself. However, if you do,
@@ -20471,12 +20471,10 @@ extension Image.ResizingMode : Hashable {
 ///
 /// Currently the IndexViewStyle protocol is not public, so it cannot be implemented for
 /// a custom view. The only type conforming to this protocol is ``PageIndexViewStyle``.
-/// To configure the current ``IndexViewStyle`` for a view hierarchy, use the
+/// To configure the current `IndexViewStyle` for a view hierarchy, use the
 /// `.indexViewStyle()` modifier.
 ///
 /// For example:
-///
-/// ![Index view style protocol example 1](A68AC8DE-29C1-44C6-880C-2CEB9ED93988.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -20491,6 +20489,8 @@ extension Image.ResizingMode : Hashable {
 ///    }
 /// }
 /// ```
+///
+/// ![Index view style protocol example 1](A68AC8DE-29C1-44C6-880C-2CEB9ED93988.png)
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -20684,7 +20684,7 @@ public struct InsetListStyle : ListStyle {
 /// ```
 /// struct ArcView: View {
 ///     var body: some View {
-///         Arc(endAngle: Angle(.degrees(270)))
+///         Arc(endAngle: Angle(degrees: 270))
 ///             .strokeBorder(Color.green)
 ///     }
 /// }
@@ -20710,6 +20710,8 @@ public struct InsetListStyle : ListStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![](insettableshape.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol InsettableShape : Shape { }
@@ -20758,6 +20760,8 @@ extension InsettableShape : Shape {
     /// }
     /// ```
     ///
+    /// ![](insettableshape.png)
+    ///
     func inset(by amount: CGFloat) -> Self.InsetShape { }
 }
 
@@ -20785,12 +20789,14 @@ extension InsettableShape {
     ///                                 dash: [],
     ///                                 dashPhase: 0)
     ///
-    ///         return Cirlce()
+    ///         return Circle()
     ///             .strokeBorder(linearGradient, style: style)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](strokeborder-style.png)
     ///
     /// - Parameters:
     ///   - content: The ``ShapeStyle`` to fill the border with.
@@ -20816,12 +20822,14 @@ extension InsettableShape {
     ///                                 dash: [],
     ///                                 dashPhase: 0)
     ///
-    ///         return Cirlce()
+    ///         return Circle()
     ///             .strokeBorder(style: style)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](insettableshape-strokeborder.png)
     ///
     /// - Parameters:
     ///   - style: The ``StrokeStyle`` for filling the border.
@@ -20845,12 +20853,14 @@ extension InsettableShape {
     ///                                             startPoint: .leading,
     ///                                             endPoint: .trailing)
     ///
-    ///         return Cirlce()
+    ///         return Circle()
     ///             .strokeBorder(linearGradient, lineWidth: 15)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](strokeborder-style.png)
     ///
     /// - Parameters:
     ///   - content: The ``ShapeStyle`` to fill the border with.
@@ -20870,12 +20880,14 @@ extension InsettableShape {
     /// ```
     /// struct CircleView: View {
     ///     var body: some View {
-    ///         Cirlce()
+    ///         Circle()
     ///             .strokeBorder(lineWidth: 15)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](insettableshape-strokeborder.png)
     ///
     /// - Parameters:
     ///   - lineWidth: The border width.
@@ -27576,7 +27588,7 @@ extension Picker where Label == Text {
 
 /// Specifies the appearance and interaction of all pickers within a view hierarchy.
 ///
-/// ``PickerStyle`` does not have a public interface - and therefore your app is limited to their default styles.
+/// `PickerStyle` does not have a public interface - and therefore your app is limited to their default styles.
 ///
 /// There are 7 different styles:
 /// * ``DefaultPickerStyle``
@@ -27876,21 +27888,20 @@ public enum PopoverAttachmentAnchor {
     case point(UnitPoint)
 }
 
-/// The ``PreferenceKey`` protocol enables a way to send data _up_ the view hierarchy.
+/// The `PreferenceKey protocol enables a way to send data _up_ the view hierarchy.
 ///
-/// ``PreferenceKey`` allows for a child view to communicate with a parent, similar to how an
+/// `PreferenceKey` allows for a child view to communicate with a parent, similar to how an
 /// ``Environment`` allows for data to be sent down the view hierarchy. An excellent
-/// example of view preferences in action is Apple's ``NavigationView`` and ``View/navigationTitle(_:)``.
-/// The ``View/navigationTitle(_:)`` does not modify the navigation view directly, but rather it
+/// example of view preferences in action is Apple's ``NavigationView`` and ``View/navigationTitle(_:)-ee24d``.
+/// The ``View/navigationTitle(_:)-ee24d`` does not modify the navigation view directly, but rather it
 /// uses view preferences and the navigation view has a closure that is called when the title is updated.
 ///
-/// While it is possible to achieve basic communication up the view hierarchy using a ``@Binding``,
+/// While it is possible to achieve basic communication up the view hierarchy using a `@Binding`,
 /// this can produce unintended effects as a result of modifying state during a view update. In
 /// these scenarios, it may be better to use view preferences.
 ///
 /// For example, to set a preference key from a view and use it to change a state:
 ///
-/// ![48FAD8ED-F1A7-4BC2-B801-A5EB9C765728](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
 /// ```
 /// struct ExampleView: View {
 ///    @State private var customPreferenceKey: String = ""
@@ -27916,10 +27927,11 @@ public enum PopoverAttachmentAnchor {
 /// }
 /// ```
 ///
+/// ![48FAD8ED-F1A7-4BC2-B801-A5EB9C765728](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
+///
 /// It is also possible to use more complicated data structures as a preference key
 /// by changing the type of the defaultValue. For example:
 ///
-/// ![1EDB1FAE-72D3-4B34-AD1F-F848987DF57B](1EDB1FAE-72D3-4B34-AD1F-F848987DF57B.png)
 /// ```
 /// struct ExampleView: View {
 ///    @State private var customPreferenceKey: CustomPreferenceKeyData? = nil
@@ -27950,13 +27962,15 @@ public enum PopoverAttachmentAnchor {
 /// }
 /// ```
 ///
-/// For a detailed explanation of how view preferences work, check out this article:
-/// [https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d](https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d)
+/// ![1EDB1FAE-72D3-4B34-AD1F-F848987DF57B](1EDB1FAE-72D3-4B34-AD1F-F848987DF57B.png)
+///
+/// For a detailed explanation of how view preferences work, check out
+/// [this article](https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d)
 ///
 /// Note:
 ///  - A view with multiple children automatically combines its values for a given
 ///  preference into a single value visible to its ancestors. This functionality
-/// can be changed with the ``PreferenceKey/reduce(_:_:)`` function.
+/// can be changed with the ``PreferenceKey/reduce(value:nextValue:)`` function.
 ///  - When using view preferences, keep in mind that it can be easy to create
 ///  an infinite loop by having the preference value dependent on the state that it is changing.
 ///  A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
@@ -28013,8 +28027,10 @@ extension PreferenceKey {
     /// }
     /// ```
     ///
-    /// For additional details on how the reduce function works, see:
-    /// [https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b](https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b)
+    /// ![](preferencekey-reduce.png)
+    ///
+    /// For additional details on how the reduce function works, see
+    /// [this Medium article](https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b).
     ///
     /// - Parameters:
     ///   - value: The value accumulated through previous calls to this method.
@@ -28676,12 +28692,10 @@ extension PreviewPlatform : Hashable {
 
 /// A protocol that generates previews on the right-hand side of Xcode.
 ///
-/// Xcode statically discovers types that conform to the ``PreviewProvider``
+/// Xcode statically discovers types that conform to the `PreviewProvider`
 /// protocol in your app, and generates previews for each provider it discovers.
 ///
 /// For example, to have Xcode render a preview of a simple view:
-///
-/// ![Preview provider example 1](previewprovider-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -28700,6 +28714,9 @@ extension PreviewPlatform : Hashable {
 ///    }
 /// }
 /// ```
+///
+/// ![Preview provider example 1](previewprovider-example-1.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreviewProvider : _PreviewProvider{ }
 extension PreviewProvider : _PreviewProvider {
