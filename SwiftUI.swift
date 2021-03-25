@@ -7656,8 +7656,8 @@ extension ContainerRelativeShape : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
 
-	/// Fill mode that scales down view so that it can be fully seen in the
-	/// available space, even it it leaves whitespace.
+  	/// Fill mode that scales down view so that it can be fully seen in the
+  	/// available space, even it it leaves whitespace.
     ///
     /// Use this case along with the
     /// ``View/aspectRatio(_:contentMode:)-6576a`` and
@@ -18470,7 +18470,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// **First**, create an image in your Assets folder.
 ///
-/// ![Image in assets folder](image-assets.pngpng)
+/// ![An image in the XCode Assets folder that describes how to import images](image-assets.png)
 ///
 /// To follow along, save the following image as `"ocean"` in your project.
 ///
@@ -18492,7 +18492,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// Add some modifiers to style your image!
 ///
-/// ![Resiable Images](6422F09D-0D92-41F3-8067-0E7499A7F66C.png)
+/// ![A resizable image, scaled to fit the view, with a 10 point corner radius, and padding.](ocean-image.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -33763,7 +33763,8 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// A secure field is just like a ``TextField``, except the entered text is shown as dots instead of
 /// as the actual text.
 ///
-/// ![34BEFDFE-DA85-421E-8958-6D0B5D6F124A](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
+/// ![A secure text field user interface element designed to pass data into a state object.](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
+/// 
 /// ```
 /// struct PasswordView: View {
 ///     @State private var password = ""
