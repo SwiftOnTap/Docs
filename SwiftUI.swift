@@ -7411,8 +7411,8 @@ extension ContainerRelativeShape : InsettableShape {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
 
-	/// Fill mode that scales down view so that it can be fully seen in the
-	/// available space, even it it leaves whitespace.
+  	/// Fill mode that scales down view so that it can be fully seen in the
+  	/// available space, even it it leaves whitespace.
     ///
     /// Use this enumeration case along with the
     /// ``View/aspectRatio(_:contentMode:)-27509`` and
@@ -18024,7 +18024,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// Add some modifiers to style your image!
 ///
-/// ![Resiable Images](6422F09D-0D92-41F3-8067-0E7499A7F66C.png)
+/// ![A resizable image, scaled to fit the view, with a 10 point corner radius, and padding.](ocean-image.png)
 ///
 /// ```
 /// struct ExampleView: View {
