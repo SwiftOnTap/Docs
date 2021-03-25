@@ -1107,7 +1107,7 @@ public struct Alert {
     ///     }
     /// }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.11.38.png)
+    /// ![](14.11.38.png)
     ///
     /// ```
     public var horizontal: HorizontalAlignment
@@ -1136,7 +1136,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.14.47.png)
+    /// ![](14.14.47.png)
     ///
     public var vertical: VerticalAlignment
 
@@ -1159,7 +1159,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.18.52.png)
+    /// ![](14.18.52.png)
     ///
     /// - Parameters:
     ///   - horizontal: The alignment on the horizontal axis.
@@ -1179,7 +1179,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.22.04.png)
+    /// ![](14.22.04.png)
     ///
     public static let center: Alignment
 
@@ -1196,7 +1196,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.23.18.png)
+    /// ![](14.23.18.png)
     ///
     public static let leading: Alignment
 
@@ -1213,7 +1213,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.27.25.png)
+    /// ![](14.27.25.png)
     ///
     public static let trailing: Alignment
 
@@ -1230,7 +1230,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.28.22.png)
+    /// ![](14.28.22.png)
     ///
     public static let top: Alignment
 
@@ -1247,7 +1247,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.29.14.png)
+    /// ![](14.29.14.png)
     ///
     public static let bottom: Alignment
 
@@ -1264,7 +1264,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.30.26.png)
+    /// ![](14.30.26.png)
     ///
     public static let topLeading: Alignment
 
@@ -1281,7 +1281,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.31.17.png)
+    /// ![](14.31.17.png)
     ///
     public static let topTrailing: Alignment
 
@@ -1298,7 +1298,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.33.12.png)
+    /// ![](14.33.12.png)
     ///
     public static let bottomLeading: Alignment
 
@@ -1315,7 +1315,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.35.44.png)
+    /// ![](14.35.44.png)
     ///
     public static let bottomTrailing: Alignment
 
@@ -1602,7 +1602,7 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.42.39.png)
+    /// ![](14.42.39.png)
     ///
     public var radians: Double
 
@@ -1624,7 +1624,7 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    /// ![](14.43.27.png)
     ///
     ///
     @inlinable public var degrees: Double
@@ -1640,7 +1640,7 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.44.26.png)
+    /// ![](14.44.26.png)
     ///
     @inlinable public init() { }
 
@@ -1655,7 +1655,7 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.45.08.png)
+    /// ![](14.45.08.png)
     ///
     /// - Parameter radians: The number of radians in the angle.
     @inlinable public init(radians: Double) { }
@@ -1671,7 +1671,7 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.45.55.png)
+    /// ![](14.45.55.png)
     ///
     /// - Parameter degrees: The number of degrees in the angle.
     @inlinable public init(degrees: Double) { }
@@ -1690,7 +1690,7 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    /// ![](14.43.27.png)
     ///
     /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle { }
@@ -1709,7 +1709,7 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    /// ![](14.43.27.png)
     ///
     /// - Parameter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle { }
@@ -1786,7 +1786,7 @@ extension Angle : Animatable {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.44.26.png)
+    /// ![](14.44.26.png)
     ///
     @inlinable public static var zero: Angle { get }
 
@@ -3711,7 +3711,7 @@ extension App {
 /// 		}
 /// 	}
 ///
-/// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+/// ![](16.34.17.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
@@ -3741,7 +3741,7 @@ extension App {
     /// 		}
     /// 	}
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+    /// ![](16.34.17.png)
     ///
     public var projectedValue: Binding<Value> { get }
 }
@@ -3759,7 +3759,7 @@ extension AppStorage {
     /// 		}
     /// 	}
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.40.39.png)
+    /// ![](16.40.39.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a boolean value is not specified
@@ -3780,7 +3780,7 @@ extension AppStorage {
     /// 		}
     /// 	}
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.42.01.png)
+    /// ![](16.42.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value is not specified
@@ -3802,7 +3802,7 @@ extension AppStorage {
     /// 		}
     /// 	}
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.42.46.png)
+    /// ![](16.42.46.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a double value is not specified
@@ -3823,7 +3823,7 @@ extension AppStorage {
     /// 		}
     /// 	}
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+    /// ![](16.34.17.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value is not specified
@@ -3844,7 +3844,7 @@ extension AppStorage {
     /// 		}
     /// 	}
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.44.14.png)
+    /// ![](16.44.14.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a url value is not specified for
@@ -3881,7 +3881,7 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.47.01.png)
+    /// ![](16.47.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a data value is not specified for
@@ -3914,7 +3914,7 @@ extension AppStorage {
     ///          }
     ///     }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.58.02.png)
+    /// ![](16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value
@@ -3946,7 +3946,7 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.58.02.png)
+    /// ![](16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value
@@ -3975,7 +3975,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// 		    }
     /// 	  }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.15.34.png)
+    /// ![](17.15.34.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3998,7 +3998,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// 		    }
     /// 	   }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.16.17.png)
+    /// ![](17.16.17.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4021,7 +4021,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// 		     }
     /// 	   }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.18.26.png)
+    /// ![](17.18.26.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4043,7 +4043,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.19.59.png)
+    /// ![](17.19.59.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4065,7 +4065,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// 		    }
     /// 	   }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.31.44.png)
+    /// ![](17.31.44.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4098,7 +4098,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.33.08.png)
+    /// ![](17.33.08.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -5837,8 +5837,6 @@ public struct ButtonStyleConfiguration {
 /// To define a Capsule with a specific color and frame, use the ``Shape/fill(style:)``
 /// and ``View/frame(width:height:alignment:)`` modifiers:
 ///
-/// ![Capsule fill and frame example](E4167696-3528-4ADA-91DF-2D7E13C207B4.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5854,8 +5852,6 @@ public struct ButtonStyleConfiguration {
 /// To add a border, use the ``Shape/stroke(_:lineWidth:)`` modifier, and use
 /// the ``Capsule/inset(by:)`` modifier to inset the Capsule by half of the
 /// border width to keep the Capsule at its original size:
-///
-/// ![Capsule inset and stroke example](3E5132C6-76CC-47F9-96BF-8EBA0ADA3387.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5888,8 +5884,6 @@ public struct ButtonStyleConfiguration {
     /// `circular` and `continuous`. These styles have subtle but noticeable
     /// differences:
     ///
-    /// ![Ellipse init example](ellipse-example-3.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -5903,14 +5897,15 @@ public struct ButtonStyleConfiguration {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](18.59.51.png)
+    ///
     @inlinable public init(style: RoundedCornerStyle = .circular) { }
 
     /// Used to describe a Capsule as a path in a `CGRect`.
     ///
     /// A Capsule can be described as a path within a specific `CGRect` using
     /// the ``Capsule/path(in:)`` modifier:
-    ///
-    /// ![Capsule path example](capsule-example-3.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -5920,6 +5915,9 @@ public struct ButtonStyleConfiguration {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.02.03.png)
+    ///
     public func path(in r: CGRect) -> Path { }
 
     /// The type defining the data to animate.
@@ -5940,8 +5938,6 @@ extension Capsule : InsettableShape {
     /// For example, insetting by 10 points returns a Capsule that fills its
     /// container, with 10 points inset on all four side.
     ///
-    /// ![Capsule inset example](capsule-example-5.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -5950,6 +5946,9 @@ extension Capsule : InsettableShape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Capsule inset example](capsule-example-5.png)
+    ///
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
@@ -5964,8 +5963,6 @@ extension Capsule : InsettableShape {
 ///
 /// By default, a Circle is black, and takes up the space of its container:
 ///
-/// ![Circle init example](C12942E0-CB68-4630-B35B-957456816E95.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -5978,8 +5975,6 @@ extension Capsule : InsettableShape {
 ///
 /// Define a Circle with a specific color and frame with the `Shape/fill()`
 /// and `View/frame(width:height:)` modifiers. For example:
-///
-/// ![Circle fill and frame example](E6C8F731-967D-4F07-83AF-4BF0520A25B0.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5996,8 +5991,6 @@ extension Capsule : InsettableShape {
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the ``Circle/inset(by:)`` modifier to inset the circle by half of the border
 /// width to keep the circle at its original size:
-///
-/// ![Circle inset and stroke example](17858E49-2896-4225-8CB4-943BD3C7CC74.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -6019,8 +6012,6 @@ extension Capsule : InsettableShape {
     /// A Circle can be described as a path within a specific `CGRect` using the
     /// ``Circle/path(in:)`` modifier:
     ///
-    /// ![Circle path example](Circle-example-4.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -6029,12 +6020,13 @@ extension Capsule : InsettableShape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Circle path example](Circle-example-4.png)
+    ///
     public func path(in rect: CGRect) -> Path { }
 
     /// Creates a Circle that aligns itself inside of the view containing it
     /// by default.
-    ///
-    /// ![Circle init example](Circle-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -6043,6 +6035,9 @@ extension Capsule : InsettableShape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Circle init example](Circle-example-1.png)
+    ///
     @inlinable public init() { }
 
     /// > The type defining the data to animate.
@@ -6067,8 +6062,6 @@ extension Circle : InsettableShape {
     /// For example, insetting by 10 points returns a Circle that fills its
     /// container, with 10 points inset on all four side.
     ///
-    /// ![Circle inset example](Circle-example-5.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -6077,6 +6070,9 @@ extension Circle : InsettableShape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Circle inset example](Circle-example-5.png)
+    ///
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
@@ -6092,8 +6088,6 @@ extension Circle : InsettableShape {
 ///
 /// For example, to create a new ``ProgressView`` with this style:
 ///
-/// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -6103,14 +6097,15 @@ extension Circle : InsettableShape {
 ///    }
 /// }
 /// ```
+///
+/// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
 
     /// Creates a circular progress view style.
     ///
     /// For example, to create a new ``ProgressView`` with this style:
-    ///
-    /// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -6121,13 +6116,14 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+    ///
     public init() { }
 
     /// Creates a circular progress view style with a tint color.
 
     /// For example, to create a new ``ProgressView`` with this style:
-    ///
-    /// ![Circular progress view example 2](circularprogressviewstyle-example-2.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -6138,6 +6134,9 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Circular progress view example 2](circularprogressviewstyle-example-2.gif)
+    ///
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
@@ -6256,14 +6255,14 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// To call this property directly, try:
     ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text(Color.yellow.description)
+    ///         }
+    ///     }
+    ///
+    ///
     /// ![Description](color-description.png)
-    ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Text(Color.yellow.description)
-    ///        }
-    ///    }
-    ///
     ///
     public var description: String { get }
 
@@ -6299,6 +6298,8 @@ extension Color {
     ///             Color(cgColor)
     ///         }
     ///     }
+    ///
+    /// ![](19.17.28.png)
     ///
     public init(_ cgColor: CGColor) { }
 }
@@ -6356,13 +6357,13 @@ extension Color {
 
     /// Create a ``Color`` from RGB and opacity values along with an optional colorspace.
     ///
-    /// ![Color RGB](color-rgb-init.png)
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             Color(red: 1.0, green: 0.6, blue: 0.6, opacity: 0.5)
     ///         }
     ///     }
+    ///
+    /// ![Color RGB](color-rgb-init.png)
     ///
     /// **Note**: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
@@ -6379,13 +6380,13 @@ extension Color {
 
     /// Create a ``Color`` from grayscale and opacity.
     ///
-    /// ![Color White/Opacity](color-white-opacity.png)
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             Color(white: 0.2, opacity: 0.5)
     ///         }
     ///     }
+    ///
+    /// ![Color White/Opacity](color-white-opacity.png)
     ///
     /// **Note**: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
@@ -6399,13 +6400,13 @@ extension Color {
 
     /// Creates a ``Color`` from hue, saturation, brightness, and opacity values.
     ///
-    /// ![Hue Color Init](color-hue-init.png)
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             Color(hue: 0.5, saturation: 0.60, brightness: 0.90)
     ///         }
     ///     }
+    ///
+    /// ![Hue Color Init](color-hue-init.png)
     ///
     /// **Note**: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
@@ -6430,6 +6431,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.20.57.png)
     ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
@@ -6455,6 +6457,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.22.27.png)
     ///
     public static let black: Color
 
@@ -6467,6 +6470,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.22.43.png)
     ///
     public static let white: Color
 
@@ -6479,6 +6483,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.22.56.png)
     ///
     public static let gray: Color
 
@@ -6491,6 +6496,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.23.07.png)
     ///
     public static let red: Color
 
@@ -6503,6 +6509,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.23.20.png)
     ///
     public static let green: Color
 
@@ -6515,6 +6522,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.23.36.png)
     ///
     public static let blue: Color
 
@@ -6527,6 +6535,8 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.23.49.png)
+    ///
     public static let orange: Color
 
     /// A stylized yellow color ``View``.
@@ -6538,6 +6548,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.24.14.png)
     ///
     public static let yellow: Color
 
@@ -6550,6 +6561,7 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.24.29.png)
     ///
     public static let pink: Color
 
@@ -6562,16 +6574,11 @@ extension Color {
     ///         }
     ///     }
     ///
+    /// ![](19.24.41.png)
     ///
     public static let purple: Color
 
     /// The default color of text, based on the environment.
-    ///
-    /// Light Mode:
-    /// ![Light Primary](color-primary-light.png)
-    ///
-    /// Dark Mode:
-    /// ![Dark Primary](color-primary-dark.png)
     ///
     /// Code:
     ///
@@ -6581,6 +6588,12 @@ extension Color {
     ///                 .accentColor(.primary)
     ///         }
     ///     }
+    ///
+    /// Light Mode:
+    /// ![Light Primary](color-primary-light.png)
+    ///
+    /// Dark Mode:
+    /// ![Dark Primary](color-primary-dark.png)
     ///
     /// If you are in light mode, this will be black. If, on the other hand, you
     /// are in dark mode, this will be white. It is automatically updated for
@@ -6612,12 +6625,6 @@ extension Color {
     ///
     /// Next, run your app in both light theme and dark theme. Your color will automatically change.
     ///
-    /// Light theme:
-    /// ![Color Light Theme](color-name-light.png)
-    ///
-    /// Dark theme:
-    /// ![Color Dark Theme](color-name-dark.png)
-    ///
     /// Code:
     ///
     ///     struct ExampleView: View {
@@ -6625,6 +6632,12 @@ extension Color {
     ///             Color("Pink")
     ///         }
     ///     }
+    ///
+    /// Light theme:
+    /// ![Color Light Theme](color-name-light.png)
+    ///
+    /// Dark theme:
+    /// ![Color Dark Theme](color-name-dark.png)
     ///
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
@@ -6638,8 +6651,6 @@ extension Color {
 
     /// Creates a color from an instance of `UIColor`.
     ///
-    /// ![UIColor Init](color-uicolor-init.png)
-    ///
     ///     struct ExampleView: View {
     ///         let uiColor = UIColor.yellow
     ///
@@ -6647,6 +6658,8 @@ extension Color {
     ///             Color(uiColor)
     ///         }
     ///     }
+    ///
+    /// ![UIColor Init](color-uicolor-init.png)
     ///
     public init(_ color: UIColor) { }
 }
@@ -6657,8 +6670,6 @@ extension Color {
 	/// Updates the transparency channel of a ``Color``, returning a ``Color`` back.
 	///
     ///
-    /// ![Color Opacity](color-opacity.png)
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             ZStack {
@@ -6667,6 +6678,8 @@ extension Color {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![Color Opacity](color-opacity.png)
     ///
 	/// This is different from the ``View/opacity(_:)`` modifier because it
 	/// returns a ``Color`` object rather than `some View`.
@@ -6735,12 +6748,14 @@ public struct ColorPicker<Label> : View where Label : View {
     ///     @State private var color = Color.orange
     ///
     ///     var body: some View {
-    ///         ColorPicker(selection: $color, supportOpacity: false) {
+    ///         ColorPicker(selection: $color, supportsOpacity: false) {
     ///             Image(systemName: "eyedropper")
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.43.21.png)
     ///
     /// - Parameters:
     ///     - selection: A ``Binding`` to the variable that displays the
@@ -6761,12 +6776,14 @@ public struct ColorPicker<Label> : View where Label : View {
     ///     @State private var color = CGColor(gray: 1.0, alpha: 0.5)
     ///
     ///     var body: some View {
-    ///         ColorPicker(selection: $color, supportOpacity: false) {
+    ///         ColorPicker(selection: $color, supportsOpacity: false) {
     ///             Image(systemName: "eyedropper")
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.44.20.png)
     ///
     /// - Parameters:
     ///     - selection: A ``Binding`` to the variable that displays the
@@ -6809,10 +6826,12 @@ extension ColorPicker where Label == Text {
     ///     var body: some View {
     ///         ColorPicker(LocalizedStringKey("Choose a color"),
     ///                     selection: $color,
-    ///                     supportOpacity: false)
+    ///                     supportsOpacity: false)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.40.28.png)
     ///
     /// - Parameters:
     ///   - titleKey: The key for the localized title of the picker.
@@ -6836,10 +6855,12 @@ extension ColorPicker where Label == Text {
     ///     var body: some View {
     ///         ColorPicker("Choose a color 🎨",
     ///                     selection: $color,
-    ///                     supportOpacity: false)
+    ///                     supportsOpacity: false)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.41.34.png)
     ///
     /// - Parameters:
     ///   - title: The title displayed by the color picker.
@@ -6858,10 +6879,12 @@ extension ColorPicker where Label == Text {
     ///     var body: some View {
     ///         ColorPicker(LocalizedStringKey("Choose a color"),
     ///                     selection: $color,
-    ///                     supportOpacity: false)
+    ///                     supportsOpacity: false)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.34.58.png)
     ///
     /// - Parameters:
     ///   - titleKey: The key for the localized title of the picker.
@@ -6881,10 +6904,12 @@ extension ColorPicker where Label == Text {
     ///     var body: some View {
     ///         ColorPicker("Choose a color 🎨",
     ///                     selection: $color,
-    ///                     supportOpacity: false)
+    ///                     supportsOpacity: false)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.37.17.png)
     ///
     /// - Parameters:
     ///   - title: The title displayed by the color picker.
@@ -7497,7 +7522,7 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 ///                 .overlay(Text("time"))
 ///             ContainerRelativeShape()
 ///                 .fill(Color.blue)
-///                 .overlay(Text(entry.date, style: .time)))
+///                 .overlay(Text(entry.date, style: .time))
 ///         }
 ///     }
 /// }
@@ -7923,40 +7948,27 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 ///
 /// You create a picker by providing 3 things:
 ///
-///
-///
 /// 1. a selection binding
 /// 2. a label
 /// 3. the editable parts of the date
 ///
-///
-///
 /// There are four types of pickers, and three types of labels, making 12 total initializers.
 ///
 /// Picker types:
-///
-///
 ///
 /// 1. Unlimited range
 /// 2. Closed range (maximum and minimum)
 /// 3. From range (minimum only)
 /// 4. Through range (maximum only)
 ///
-///
-///
 /// Label types:
-///
-///
 ///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
 ///
-///
-///
 /// A simple example looks like this:
 ///
-/// ![71B19AF9-BDDE-4145-A04E-C0120FFC2029](71B19AF9-BDDE-4145-A04E-C0120FFC2029.png)
 /// ```
 /// struct DatePickerView: View {
 ///     @State private var date = Date()
@@ -7966,6 +7978,8 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 ///     }
 /// }
 /// ```
+///
+/// ![71B19AF9-BDDE-4145-A04E-C0120FFC2029](71B19AF9-BDDE-4145-A04E-C0120FFC2029.png)
 ///
 /// ### Styling Date Pickers
 ///
@@ -7982,7 +7996,6 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// To set a specific style for all picker instances within a view, use the
 /// ``View/datePickerStyle(_:)`` modifier.
 ///
-/// ![E5997C10-E4E0-4BE9-8364-E099CDA31862](E5997C10-E4E0-4BE9-8364-E099CDA31862.png)
 /// ```
 /// struct StyledDatePickerView: View {
 ///     @State private var date = Date()
@@ -7993,6 +8006,9 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 ///     }
 /// }
 /// ```
+///
+/// ![E5997C10-E4E0-4BE9-8364-E099CDA31862](E5997C10-E4E0-4BE9-8364-E099CDA31862.png)
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -8031,6 +8047,8 @@ extension DatePicker {
     /// }
     /// ```
     ///
+    /// ![](19.54.55.png)
+    ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
     ///   - displayedComponents: The components of the date that user is able to
@@ -8055,6 +8073,8 @@ extension DatePicker {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.56.49.png)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8082,6 +8102,8 @@ extension DatePicker {
     /// }
     /// ```
     ///
+    /// ![](19.57.44.png)
+    ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
     ///   - range: The range of selectable dates, with only a minimum specified.
@@ -8107,6 +8129,8 @@ extension DatePicker {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](19.58.32.png)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8139,6 +8163,8 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
+    /// ![](19.59.27.png)
+    ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
     ///   - selection: The binding Date value of the date picker.
@@ -8158,11 +8184,13 @@ extension DatePicker where Label == Text {
     ///         Text("\(date)")
     ///         DatePicker(LocalizedStringKey("Date and time"),
     ///                    selection: $date,
-    ///                    in: Date()...Date().advance(by: 3600 * 90),
+    ///                    in: Date()...Date().advanced(by: 3600 * 90),
     ///                    displayedComponents: [.hourAndMinute, .date])
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.04.21.png)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8190,6 +8218,8 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
+    /// !()[20.07.29.png]
+    ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
     ///   - selection: The binding Date value of the date picker.
@@ -8216,6 +8246,8 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
+    /// ![](20.06.14.png)
+    ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
     ///   - selection: The binding Date value of the date picker.
@@ -8241,6 +8273,8 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
+    /// ![](20.08.39.png)
+    ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
     ///   - selection: The binding Date value of the date picker.
@@ -8260,11 +8294,13 @@ extension DatePicker where Label == Text {
     ///         Text("\(date)")
     ///         DatePicker("Date 📆 and time ⏰",
     ///                    selection: $date,
-    ///                    in: Date()...Date().advance(by: 3600 * 90),
+    ///                    in: Date()...Date().advanced(by: 3600 * 90),
     ///                    displayedComponents: [.hourAndMinute, .date])
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.10.41.png)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -8292,6 +8328,8 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
+    /// ![](20.11.14.png)
+    ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
     ///   - selection: The binding Date value of the date picker.
@@ -8317,6 +8355,8 @@ extension DatePicker where Label == Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.12.09.png)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -8649,9 +8689,7 @@ public struct DefaultListStyle : ListStyle {
 /// You can override a menu's style. To apply the default style to a menu, or to
 /// a view that contains a menu, use the ``View/menuStyle(_:)`` modifier.
 ///
-/// For example,
-///
-/// ![DefaultMenu Example 1](default-menu-example.gif)
+/// For example:
 ///
 /// ```
 /// struct DefaultMenuView: View {
@@ -8665,14 +8703,14 @@ public struct DefaultListStyle : ListStyle {
 /// }
 /// ```
 ///
+/// ![DefaultMenu Example 1](default-menu-example.gif)
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct DefaultMenuStyle : MenuStyle {
 
     /// Creates a default menu style.
-    ///
-    /// ![DefaultMenu Example 1](default-menu-example.gif)
     ///
     /// ```
     /// struct DefaultMenuView: View {
@@ -8685,6 +8723,8 @@ public struct DefaultMenuStyle : MenuStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![DefaultMenu Example 1](default-menu-example.gif)
     ///
     public init() { }
 
@@ -8702,8 +8742,6 @@ public struct DefaultMenuStyle : MenuStyle {
 }
 
 /// The default navigation view style.
-///
-/// ![DefaultNavigationView Example](default-navigation-view-example.gif)
 ///
 /// ```
 ///  struct ExampleView: View {
@@ -8730,13 +8768,14 @@ public struct DefaultMenuStyle : MenuStyle {
 ///  }
 ///
 /// ```
+///
+/// ![DefaultNavigationView Example](default-navigation-view-example.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a default navigation view style.
 	///
-    /// ![DefaultNavigationView Example](default-navigation-view-example.gif)
-    ///
     /// ```
     ///  struct ExampleView: View {
     ///      struct SecondScreen: View {
@@ -8762,6 +8801,9 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
     ///  }
     ///
     /// ```
+    ///
+    /// ![DefaultNavigationView Example](default-navigation-view-example.gif)
+    ///
 	/// - SeeAlso: NavigationView
     public init() { }
 }
@@ -8897,8 +8939,6 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// On iOS the default TabView looks as follows:
 /// If you don't specify, a ``view/tabviewstyle(_:)``, this is what it defaults to.
 ///
-/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -8924,14 +8964,14 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// }
 /// ```
 ///
+/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultTabViewStyle : TabViewStyle {
 
 	/// Creates a default tab view style.
 	///
-	/// - SeeAlso: TabView
-    ///
-    /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+	/// - SeeAlso: ``TabView``
 ///
 /// ```
 /// struct ExampleView: View {
@@ -8959,17 +8999,17 @@ public struct DefaultTabViewStyle : TabViewStyle {
 /// }
 /// ```
 ///
+/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+///
     public init() { }
 }
 
 /// The default text field style.
 ///
 ///
-/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
+/// ``TextField`` can be styled with the ``View/textFieldStyle(_:)`` modifier.
 ///
 /// The Default TextField Style is Plain on iOS.
-///
-/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -8981,12 +9021,13 @@ public struct DefaultTabViewStyle : TabViewStyle {
 ///                 .padding()
 ///         }
 ///     }
+///
+/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultTextFieldStyle : TextFieldStyle {
 
 	/// Creates a default text field style.
-    ///
-    /// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
     ///
     ///     struct ExampleView: View {
     ///         @State var myFruit: String = ""
@@ -8998,6 +9039,9 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
     ///                 .padding()
     ///         }
     ///     }
+    ///
+    /// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+    ///
     public init() { }
 }
 
@@ -9217,6 +9261,9 @@ public struct Divider : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.20.56.png)
+    ///
     public init() { }
 
     /// The type of view representing the body of this view.
@@ -9408,8 +9455,6 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 /// Add a drag gesture to a ``Circle`` and change its color while the user
 /// performs the drag gesture:
 ///
-/// ![DragGesture Example 1](drag-gesture-example.gif)
-///
 /// ```
 /// struct DragGestureView: View {
 ///     @State private var location: CGPoint = CGPoint(x: 50, y: 50);
@@ -9434,6 +9479,9 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![DragGesture Example 1](drag-gesture-example.gif)
+///
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct DragGesture : Gesture {
@@ -11077,13 +11125,9 @@ extension Edge : RawRepresentable {
 ///
 /// Use this structure for 3 different modifiers:
 ///
-///
-///
 /// 1. ``View/listRowInsets(_:)``
 /// 2. ``View/padding(_:)-9f6b7``
 /// 3. ``Image/resizable(capInsets:resizingMode:)``
-///
-///
 ///
 /// This structure represents a point value in all 4 rectangular directions,
 /// top, leading, bottom, trailing.
@@ -11093,7 +11137,7 @@ extension Edge : RawRepresentable {
 ///
 /// ```
 /// struct PaddedRectangleView: View {
-///     let insets = EdgeInsets(top: 20, leading 5, bottom 30, trailing 10)
+///     let insets = EdgeInsets(top: 20, leading: 5, bottom: 30, trailing: 10)
 ///
 ///     var body: some View {
 ///         Rectangle()
@@ -11101,6 +11145,9 @@ extension Edge : RawRepresentable {
 ///     }
 /// }
 /// ```
+///
+/// ![](20.24.08.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EdgeInsets : Equatable {
 
@@ -11112,7 +11159,7 @@ extension Edge : RawRepresentable {
     /// ```
     /// struct PaddedRectangleView: View {
     ///     var body: some View {
-    ///         let insets = EdgeInsets()
+    ///         var insets = EdgeInsets()
     ///         insets.top = 20
     ///
     ///         return Rectangle()
@@ -11120,6 +11167,9 @@ extension Edge : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.25.10.png)
+    ///
     public var top: CGFloat
 
     /// How far inset the rectangle is from the leading edge.
@@ -11127,7 +11177,7 @@ extension Edge : RawRepresentable {
     /// ```
     /// struct PaddedRectangleView: View {
     ///     var body: some View {
-    ///         let insets = EdgeInsets()
+    ///         var insets = EdgeInsets()
     ///         insets.leading = 20
     ///
     ///         return Rectangle()
@@ -11135,6 +11185,9 @@ extension Edge : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.26.11.png)
+    ///
     public var leading: CGFloat
 
     /// How far inset the rectangle is from the bottom edge.
@@ -11142,7 +11195,7 @@ extension Edge : RawRepresentable {
     /// ```
     /// struct PaddedRectangleView: View {
     ///     var body: some View {
-    ///         let insets = EdgeInsets()
+    ///         var insets = EdgeInsets()
     ///         insets.bottom = 20
     ///
     ///         return Rectangle()
@@ -11150,6 +11203,9 @@ extension Edge : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.26.55.png)
+    ///
     public var bottom: CGFloat
 
     /// How far inset the rectangle is from the trailing edge.
@@ -11157,7 +11213,7 @@ extension Edge : RawRepresentable {
     /// ```
     /// struct PaddedRectangleView: View {
     ///     var body: some View {
-    ///         let insets = EdgeInsets()
+    ///         var insets = EdgeInsets()
     ///         insets.trailing = 20
     ///
     ///         return Rectangle()
@@ -11165,13 +11221,16 @@ extension Edge : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.27.41.png)
+    ///
     public var trailing: CGFloat
 
     /// Creates a new ``EdgeInsets`` from inset parameters.
     ///
     /// ```
     /// struct PaddedRectangleView: View {
-    ///     let insets = EdgeInsets(top: 20, leading 5, bottom 30, trailing 10)
+    ///     let insets = EdgeInsets(top: 20, leading: 5, bottom: 30, trailing: 10)
     ///
     ///     var body: some View {
     ///         Rectangle()
@@ -11179,6 +11238,8 @@ extension Edge : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.29.02.png)
     ///
     /// - Parameters:
     ///   - top: Inset distance from the top edge.
@@ -11192,7 +11253,7 @@ extension Edge : RawRepresentable {
     /// ```
     /// struct PaddedRectangleView: View {
     ///     var body: some View {
-    ///         let insets = EdgeInsets()
+    ///         var insets = EdgeInsets()
     ///         insets.trailing = 20
     ///
     ///         return Rectangle()
@@ -11200,6 +11261,9 @@ extension Edge : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](20.27.41.png)
+    ///
     @inlinable public init() { }
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -11223,14 +11287,17 @@ extension EdgeInsets {
     ///
     /// ```
     /// struct PaddedRectangleView: View {
-    ///     let insets = NSEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-    ///
     ///     var body: some View {
-    ///         Rectangle()
-    ///             .padding(insets)
+    ///         let insets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+    ///         let edgeInset = EdgeInsets(insets)
+    ///
+    ///         return Rectangle()
+    ///             .padding(edgeInset)
     ///     }
-    /// }
+    // }
     /// ```
+    ///
+    /// ![](22.00.40.png)
     ///
     /// - Parameter nsEdgeInsets: The NSEdgeInsets to use for creating an
     /// edge inset.
@@ -11416,10 +11483,8 @@ extension EditMode : Hashable {
 /// the view containing it. It differs from ``Circle`` in that its width and
 /// height are not necessarily equal.
 ///
-/// To define an Ellipse with a specific color and frame, use the `Shape/fill()`
-/// and `View/frame(width:height:)` modifiers:
-///
-/// ![Ellipse fill and frame example](EC260839-77DE-4EB8-9CE0-2F408060E379.png)
+/// To define an Ellipse with a specific color and frame, use the ``Shape/fill(_:style:)``
+/// and ``View/frame(width:height:alignment:)`` modifiers:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11433,11 +11498,9 @@ extension EditMode : Hashable {
 ///
 /// ![Ellipse fill and frame example](ellipse-example-1.png)
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// To add a border, use the ``Shape/stroke(_:lineWidth:)`` modifier, and use
 /// the ``Ellipse/inset(by:)`` modifier to inset the Ellipse by half of the
 /// border width to keep the Ellipse at its original size:
-///
-/// ![Ellipse inset and stroke example](D07FB0C8-EAC7-4129-B72B-6CC14FB89700.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11460,8 +11523,6 @@ extension EditMode : Hashable {
     /// An Ellipse can be described as a path within a specific `CGRect` using
     /// the ``Ellipse/path(in:)`` modifier:
     ///
-    /// ![Ellipse path example](ellipse-example-3.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -11470,12 +11531,13 @@ extension EditMode : Hashable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Ellipse path example](ellipse-example-3.png)
+    ///
     public func path(in rect: CGRect) -> Path { }
 
     /// Creates an Ellipse that aligns itself inside of the view containing it
     /// by default.
-    ///
-    /// ![Ellipse init example](ellipse-example-4.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -11484,6 +11546,9 @@ extension EditMode : Hashable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Ellipse init example](ellipse-example-4.png)
+    ///
     @inlinable public init() { }
 
     /// > The type defining the data to animate.
@@ -11504,8 +11569,6 @@ extension Ellipse : InsettableShape {
     /// For example, insetting by 10 points returns a Ellipse that fills its
     /// container, with 10 points inset on all four side.
     ///
-    /// ![Ellipse inset example](ellipse-example-5.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -11514,6 +11577,9 @@ extension Ellipse : InsettableShape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Ellipse inset example](ellipse-example-5.png)
+    ///
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
@@ -11658,6 +11724,8 @@ public struct EmptyCommands : Commands {
 ///         }
 ///     }
 ///
+/// ![](22.16.06.png)
+///
 /// In order to stack multiple modifiers, including the EmptyModifier, see
 /// ``ViewModifier/concat(_:)``
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -11777,6 +11845,9 @@ public struct EmptyCommands : Commands {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](22.17.47.png)
+    ///
     @inlinable public init() { }
 
     /// The type of view representing the body of this view.
@@ -11858,6 +11929,8 @@ public struct EmptyCommands : Commands {
     ///         }
     ///     }
     ///
+    /// ![](22.19.46.png)
+    ///
     /// SwiftUI automatically updates any parts of `MyView` that depend on
     /// the property when the associated environment value changes.
     /// You can't modify the environment value using a property like this.
@@ -11884,6 +11957,8 @@ public struct EmptyCommands : Commands {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](22.19.46.png)
     ///
     @inlinable public var wrappedValue: Value { get }
 }
@@ -12201,19 +12276,20 @@ extension EnvironmentKey {
     ///     let text: String = "some text"
     /// }
     ///
-    /// struct ContentView: View {
+    /// struct GrandparentView: View {
     ///     @StateObject var appModel = AppModel()
     ///
     ///     var body: some View {
-    ///         IntermediateView()
+    ///         ParentView()
     ///             .environmentObject(appModel)
     ///     }
     /// }
     ///
-    /// struct IntermediateView: View {
+    /// struct ParentView: View {
     ///     var body: some View {
     ///         ChildView()
     ///             .padding()
+    ///             .environmentObject(AppModel())
     ///     }
     /// }
     ///
@@ -12226,6 +12302,9 @@ extension EnvironmentKey {
     /// }
     ///
     /// ```
+    ///
+    /// ![](22.34.04.png)
+    ///
     public init() { }
 }
 
@@ -12709,7 +12788,7 @@ extension EnvironmentValues {
     ///             Button("Open sesame 📬") {
     ///                 showSheet = true
     ///             }
-    ///             .sheet(isPresented: $showCover,
+    ///             .sheet(isPresented: $showSheet,
     ///                    onDismiss: { print("dismissed!") },
     ///                    content: { ExampleSheet() })
     ///         }
@@ -12724,6 +12803,8 @@ extension EnvironmentValues {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](eviron-vals-presentation-mode.gif)
     ///
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public var presentationMode: Binding<PresentationMode> { get }
@@ -12751,7 +12832,6 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 /// - [Swift with Majid](https://swiftwithmajid.com/2020/01/22/optimizing-views-in-swiftui-using-equatableview/)
 /// - [The SwiftUI Lab](https://swiftui-lab.com/equatableview/)
 ///
-/// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
 /// ```
 /// struct ContentView: View {
 ///     @State private var bodyDoesntDependOnMe = false
@@ -12766,6 +12846,9 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 ///     }
 /// }
 /// ```
+///
+/// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EquatableView<Content> : View where Content : Equatable, Content : View {
 
@@ -12792,6 +12875,9 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
     ///         Text("I can be optimized using equatable! ⚖️")
     ///     }
     /// }
+    ///
+    /// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
+    ///
     /// ```
     public var content: Content
 
@@ -12818,6 +12904,8 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
     ///
     /// - Parameter content: The view you want to use as the body of the equatable view.
     @inlinable public init(content: Content) { }
@@ -13663,8 +13751,8 @@ public struct FileDocumentWriteConfiguration {
 
 /// A struct style for rasterizing vector shapes.
 ///
-/// FillStyle determines the even-odd fill mode and antialiased mode on the style.
-/// When initializing a new FillStyle, eoFill is set to false by default and
+/// `FillStyle` determines the even-odd fill mode and antialiased mode on the style.
+/// When initializing a new `FillStyle`, eoFill is set to false by default and
 /// antialiased is set to true by default.
 ///
 /// The even-odd rule fills a path depending on what is overlapping in the path.
@@ -13675,7 +13763,6 @@ public struct FileDocumentWriteConfiguration {
 ///
 /// For example, to create a view with a circle shape and fill style:
 ///
-/// ![3D0FC026-AFA8-4995-8F6B-D48485049731](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -13684,6 +13771,9 @@ public struct FileDocumentWriteConfiguration {
 ///    }
 /// }
 /// ```
+///
+/// ![3D0FC026-AFA8-4995-8F6B-D48485049731](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct FillStyle : Equatable {
 
@@ -13693,8 +13783,6 @@ public struct FileDocumentWriteConfiguration {
     /// The even-odd rule fills a path depending on what is overlapping in the path.
     /// For example, a path with no overlaps will be fully filled but a path with
     /// an overlap will not have the overlapping part filled.
-    ///
-    /// ![FillStyle even-odd rule example 1](fillstyle-eof-example.png)
     ///
     /// ```
     /// struct EvenOddRuleView: View {
@@ -13733,7 +13821,9 @@ public struct FileDocumentWriteConfiguration {
     /// }
     /// ```
     ///
-    /// When `isOEFilled` is `false`, the style uses the non-zero winding number
+    /// ![FillStyle even-odd rule example 1](fillstyle-eof-example.png)
+    ///
+    /// When `isEOFilled` is `false`, the style uses the non-zero winding number
     /// rule.
     public var isEOFilled: Bool
 
@@ -13754,6 +13844,8 @@ public struct FileDocumentWriteConfiguration {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![3D0FC026-AFA8-4995-8F6B-D48485049731](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
     ///
     /// - Parameters:
     ///   - eoFill: A Boolean value that indicates whether to use the even-odd
@@ -14015,8 +14107,6 @@ extension Font {
 
     /// Create a font for second level hierarchical headings.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14049,13 +14139,14 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static let title2: Font
 
     /// Create a font for third level hierarchical headings.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14088,13 +14179,14 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static let title3: Font
 
     /// A font with the headline text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14127,12 +14219,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let headline: Font
 
     /// A font with the subheadline text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14166,12 +14259,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let subheadline: Font
 
     /// A font with the body text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14205,12 +14299,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let body: Font
 
     /// A font with the callout text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14244,12 +14339,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let callout: Font
 
     /// A font with the footnote text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14283,12 +14379,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let footnote: Font
 
     /// A font with the caption text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14322,12 +14419,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let caption: Font
 
     /// Create a font with the alternate caption text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -14361,6 +14459,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static let caption2: Font
 
@@ -14377,7 +14478,9 @@ extension Font {
     ///         }
     ///     }
     ///
-    /// Your app can easily modify the system font by providing an alternate `desigin`. For example:
+    /// ![](22.54.51.png)
+    ///
+    /// Your app can easily modify the system font by providing an alternate `design`. For example:
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
@@ -14385,6 +14488,8 @@ extension Font {
     ///                 .font(Font.system(.title, design: .monospaced))
     ///         }
     ///     }
+    ///
+    /// ![](22.55.10.png)
     ///
     /// - Parameters:
     ///   - style: The ``Font/TextStyle`` of the font.
@@ -14406,8 +14511,6 @@ extension Font {
     /// - ``font/textstyle/footnote``
     /// - ``font/textstyle/caption``
     /// - ``font/textstyle/caption2``
-    ///
-    /// ![TextStyle Example 1](text-style-example.png)
     ///
     /// ```
     /// struct TextStyleView: View {
@@ -14441,12 +14544,12 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![TextStyle Example 1](text-style-example.png)
+    ///
     public enum TextStyle : CaseIterable {
 
         /// The font style for large titles.
-        ///
-        ///
-        /// ![TextStyle Example 1](text-style-example.png)
         ///
         /// ```
         /// struct TextStyleView: View {
@@ -14480,13 +14583,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
         ///
         case largeTitle
 
         /// The font used for first level hierarchical headings.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14519,12 +14622,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         case title
 
         /// The font used for second level hierarchical headings.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14557,13 +14661,14 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title2
 
         /// The font used for third level hierarchical headings.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14596,13 +14701,14 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title3
 
         /// The font used for headings.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14635,12 +14741,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         case headline
 
         /// The font used for subheadings.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14673,12 +14780,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         case subheadline
 
         /// The font used for body text.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14711,12 +14819,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         case body
 
         /// The font used for callouts.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14749,12 +14858,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         case callout
 
         /// The font used in footnotes.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14787,12 +14897,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         case footnote
 
         /// The font used for standard captions.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14825,12 +14936,13 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         case caption
 
         /// The font used for alternate captions.
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
-        ///
         /// ```
         /// struct TextStyleView: View {
         ///     var body: some View {
@@ -14863,6 +14975,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![TextStyle Example 1](text-style-example.png)
+        ///
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case caption2
 
@@ -14932,10 +15047,8 @@ extension Font {
 
     /// Adjusts the font to enable all small capitals.
     ///
-    /// See `Font/lowercaseSmallCaps()` and ``Font/uppercaseSmallCaps()`` for
+    /// See ``Font/lowercaseSmallCaps()`` and ``Font/uppercaseSmallCaps()`` for
     /// more details.
-    ///
-    /// ![Small Caps](font-smallcaps.png)
     ///
     /// ```
     /// struct FontView: View {
@@ -14951,6 +15064,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
     public func smallCaps() -> Font { }
 
     /// Adjusts the font to enable lowercase small capitals.
@@ -14960,8 +15076,6 @@ extension Font {
     /// caps, such as titles. It may include forms related to small capitals,
     /// such as old-style figures.
     ///
-    /// ![Small Caps](font-smallcaps.png)
-    ///
     /// ```
     /// struct FontView: View {
     ///     var body: some View {
@@ -14976,6 +15090,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
     public func lowercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to enable uppercase small capitals.
@@ -14985,8 +15102,6 @@ extension Font {
     /// as acronyms, but which are desired in small-cap form to avoid disrupting
     /// the flow of text.
     ///
-    /// ![Small Caps](font-smallcaps.png)
-    ///
     /// ```
     /// struct FontView: View {
     ///     var body: some View {
@@ -15001,13 +15116,14 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Small Caps](font-smallcaps.png)
+    ///
     public func uppercaseSmallCaps() -> Font { }
 
     /// Adjusts the font to use monospace digits.
     ///
     /// For example, to adjust a ``Text`` to use monospaced digits:
-    ///
-    /// ![monospacedDigit example 1](monospaced-digit-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -15019,6 +15135,8 @@ extension Font {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![monospacedDigit example 1](monospaced-digit-example-1.png)
     ///
     /// Note that this does not actually update the font to use the `.monospace` design.
     /// Rather, it updates digits to have a "fixed" width. For an example of the difference
@@ -15050,11 +15168,14 @@ extension Font {
     ///     var body: some View {
     ///         VStack {
     ///             Text("This is black text")
-    ///                 .font(Font.system(size: 20).weight(.blck))
+    ///                 .font(Font.system(size: 20).weight(.black))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](23.06.26.png)
+    ///
     public func weight(_ weight: Font.Weight) -> Font { }
 
     /// Adds bold styling to the font.
@@ -15081,8 +15202,6 @@ extension Font {
     /// Use this modifier to change the spacing between lines in a ``Text``
     /// view. See ``Font.Leading`` for the options.
     ///
-    /// ![Font Leading](font-leading.png)
-    ///
     /// ```
     /// struct LeadingView: View {
     ///     var body: some View {
@@ -15097,6 +15216,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Leading](font-leading.png)
+    ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public func leading(_ leading: Font.Leading) -> Font { }
 
@@ -15477,8 +15599,6 @@ extension Font {
     /// Use this enumeration with the ``Font/leading(_:)`` modifier to
     /// change the spacing between lines in a ``Text`` view.
     ///
-    /// ![Font Leading](font-leading.png)
-    ///
     /// ```
     /// struct LeadingView: View {
     ///     var body: some View {
@@ -15493,6 +15613,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Leading](font-leading.png)
+    ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public enum Leading {
 
@@ -15503,8 +15626,6 @@ extension Font {
         ///
         /// This is the default line spacing.
         ///
-        /// ![Font Leading](font-leading.png)
-        ///
         /// ```
         /// struct LeadingView: View {
         ///     var body: some View {
@@ -15519,6 +15640,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
         case standard
 
         /// Tight, small line spacing.
@@ -15526,8 +15650,6 @@ extension Font {
         /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
         /// specify tight spacing between lines in a ``Text`` view.
         ///
-        /// ![Font Leading](font-leading.png)
-        ///
         /// ```
         /// struct LeadingView: View {
         ///     var body: some View {
@@ -15542,6 +15664,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
         case tight
 
         /// Loose, large line spacing.
@@ -15549,8 +15674,6 @@ extension Font {
         /// Use this enumeration case with the ``Font/leading(_:)`` modifier to
         /// specify tight spacing between lines in a ``Text`` view.
         ///
-        /// ![Font Leading](font-leading.png)
-        ///
         /// ```
         /// struct LeadingView: View {
         ///     var body: some View {
@@ -15565,6 +15688,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Font Leading](font-leading.png)
+        ///
         case loose
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -15669,8 +15795,6 @@ extension Font {
     /// 3. ``Font/Design/rounded``
     /// 4. ``Font/Design/monospaced``
     ///
-    /// ![Font Design](font-design.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -15687,6 +15811,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Design](font-design.png)
+    ///
     public enum Design : Hashable {
 
     	/// The standard sans-serif font design.
@@ -15694,8 +15821,6 @@ extension Font {
         /// Use this enumeration case with the ``Font/system(size:weight:design:)``
         /// static function of ``Font`` to specify the sans serif system font.
         ///
-        /// ![Font Design](font-design.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -15712,6 +15837,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Font Design](font-design.png)
+        ///
         case `default`
 
         /// A font design with serifs, or small strokes attached to the end of letters.
@@ -15719,8 +15847,6 @@ extension Font {
         /// Use this enumeration case with the ``Font/system(size:weight:design:)``
         /// static function of ``Font`` to specify the serif system font.
         ///
-        /// ![Font Design](font-design.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -15737,6 +15863,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Font Design](font-design.png)
+        ///
         @available(watchOS 7.0, *)
         case serif
 
@@ -15745,8 +15874,6 @@ extension Font {
         /// Use this enumeration case with the ``Font/system(size:weight:design:)``
         /// static function of ``Font`` to specify the rounded system font.
         ///
-        /// ![Font Design](font-design.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -15763,6 +15890,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Font Design](font-design.png)
+        ///
         case rounded
 
         /// A monospaced font design.
@@ -15770,8 +15900,6 @@ extension Font {
         /// Use this enumeration case with the ``Font/system(size:weight:design:)``
         /// static function of ``Font`` to specify the monospaced system font.
         ///
-        /// ![Font Design](font-design.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -15788,6 +15916,9 @@ extension Font {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Font Design](font-design.png)
+        ///
         @available(watchOS 7.0, *)
         case monospaced
 
@@ -16032,7 +16163,7 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.56.51.png)
+    /// ![](for-each-content.png)
     ///
     /// [<-]
     /// Note:  It's important that the `id` of a data element doesn't change unless you
@@ -16070,7 +16201,7 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.59.20.png)
+    /// ![](16.59.20.png)
     ///
     /// This initializer can also be used with objects that don't conform to `Identifiable`, but have identifiable properties. For example:
     ///
@@ -16097,11 +16228,9 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.00.04.png)
+    /// ![](17.00.04.png)
     ///
     /// Notice, this initializer can be used for data that can change. For example:
-    ///
-    /// ![Changing List](foreach.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -16126,6 +16255,8 @@ extension ForEach where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Changing List](foreach.gif)
     ///
     /// **Note:** This initializer works well for externally loaded data. It enables your app's frontend to automatically reflect data as it arrives.
     /// [<-]
@@ -16164,7 +16295,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.44.37.png)
+    /// ![](16.44.37.png)
     ///
     /// Notice however, that this view is only rendered once. Therefore, if `myFruits.count` changes, the view will **not update**. For example, clicking `New Fruit` in the following code returns the error:
     ///
@@ -16210,9 +16341,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 /// A ShapeStyle that shows the correct fill for the foreground based on the current
 /// context.
 ///
-/// For example, to create a square view with a ForegroundStyle:
-///
-/// ![ForegroundStyle Example 1](92E0E472-F416-4E15-A196-D4B90EFDF978.png)
+/// For example, to create a square view with a `ForegroundStyle`:
 ///
 /// ```
 /// struct ForegroundStyleRectangle: View {
@@ -16226,6 +16355,8 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 /// }
 /// ```
 ///
+/// ![ForegroundStyle Example 1](92E0E472-F416-4E15-A196-D4B90EFDF978.png)
+///
 /// Note:
 /// - ForegroundStyle is typically the default ShapeStyle, so it is rare to explicitly need it.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -16233,7 +16364,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 
     /// Creates a foreground style.
     ///
-    /// For example, to create a square view with a ForegroundStyle:
+    /// For example, to create a square view with a `ForegroundStyle`:
     ///
     /// ```
     /// struct ForegroundStyleRectangle: View {
@@ -16245,6 +16376,9 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![ForegroundStyle Example 1](92E0E472-F416-4E15-A196-D4B90EFDF978.png)
+    ///
     @inlinable public init() { }
 }
 
@@ -21412,7 +21546,7 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPod touch (7th generation) - 2021-03-24 at 18.04.32.png)
+    /// ![](18.04.32.png)
     ///
     /// - Parameter configuration: The label style to use.
     public init(_ configuration: LabelStyleConfiguration) { }
@@ -28380,7 +28514,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
-/// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 12.34.24.png)
+/// ![](12.34.24.png)
 ///
 /// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the ``DefaultProgressViewStyle``. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the ``ProgressView`` will be visible in the unfilled portion of the loading bar.
 ///
@@ -40627,7 +40761,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 10.26.05.png)
+    /// ![](10.26.05.png)
     ///
     /// - Parameter action: A function that returns an NSItemProvider.
     @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
@@ -41892,7 +42026,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.39.23.png)]
+    /// ![](15.39.23.png)]
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// ``View/padding(_:_:)``. To pad all outside edges of a view with an
@@ -41927,7 +42061,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.39.23.png)
+    /// ![](15.39.23.png)
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
     /// the edges of the view, see ``View/padding(_:)-97aab``. To pad all
@@ -41963,7 +42097,7 @@ extension View {
     ///     }
     /// }
     /// ```
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.27.58.png)
+    /// ![](15.27.58.png)
     ///
     /// - Parameter length: The amount to pad this view on each edge.
     ///
@@ -42021,7 +42155,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.14.12.png)
+    /// ![](17.14.12.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal distance to offset this view.
@@ -42590,7 +42724,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.15.53.png)
+    /// ![](17.15.53.png)
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
@@ -43935,7 +44069,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.54.23.png)
+    /// ![](15.54.23.png)
     ///
     /// The `alignment` parameter specifies this view's alignment within the
     /// frame.
@@ -43950,7 +44084,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.56.14.png)
+    /// ![](15.56.14.png)
     ///
     /// In the example above, the text is positioned at the top, leading corner
     /// of the frame. If the text is taller than the frame, its bounds may
@@ -45892,7 +46026,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.18.05.png)
+    /// ![](17.18.05.png)
     ///
     /// [[rotation-effect]]
     ///
