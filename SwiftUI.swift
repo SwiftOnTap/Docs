@@ -3964,16 +3964,18 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// Creates a property that can read and write an Optional boolean user
     /// default.
     ///
-    /// Defaults to nil if there is no restored value.
+    /// Defaults to `nil` if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("airplane-mode") var on: Bool?
+    /// 	  struct ContentView: View {
+    /// 		    @AppStorage("airplane-mode") var on: Bool?
     ///
-    /// 		var body: some View {
-    /// 			Button("on") { on = true }
+    /// 		    var body: some View {
+    /// 			      Button("on") { on = true }
     ///             Button("off") { on = false }
-    /// 		}
-    /// 	}
+    /// 		    }
+    /// 	  }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.15.34.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3987,14 +3989,16 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("donuts") var count: Int?
+    /// 	  struct ContentView: View {
+    /// 		    @AppStorage("donuts") var count: Int?
     ///
-    /// 		var body: some View {
-    /// 			Button("none ☹️") { count = 0 }
+    /// 		    var body: some View {
+    /// 			      Button("none ☹️") { count = 0 }
     ///             Button("LOTS 🍩") { count = 100 }
-    /// 		}
-    /// 	}
+    /// 		    }
+    /// 	   }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.16.17.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4008,14 +4012,16 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("brightness") var level: Double?
+    /// 	   struct ContentView: View {
+    /// 		     @AppStorage("brightness") var level: Double?
     ///
-    /// 		var body: some View {
-    /// 			Button("MAX 🔆") { level = 1.0 }
-    ///             Button("min 🔅") { level = 0.0 }
-    /// 		}
-    /// 	}
+    /// 		     var body: some View {
+    /// 			       Button("MAX 🔆") { level = 1.0 }
+    ///              Button("min 🔅") { level = 0.0 }
+    /// 		     }
+    /// 	   }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.18.26.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4028,14 +4034,16 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// default.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("name") var name: String?
+    /// 		    @AppStorage("name") var name: String?
     ///
-    /// 		var body: some View {
-    /// 			Button("Save 🐐") { name = "Javier" }
-    /// 		}
-    /// 	}
+    /// 		    var body: some View {
+    /// 			      Button("Save 🐐") { name = "Javier" }
+    /// 		    }
+    /// 	   }
     ///
     /// Defaults to nil if there is no restored value.
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.19.59.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4050,12 +4058,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// Defaults to nil if there is no restored value.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("site") var url: URL?
+    /// 		    @AppStorage("site") var url: URL?
     ///
-    /// 		var body: some View {
-    /// 			Text("Save the 🍌") { url = URL(string: "bananadocs.org" }
-    /// 		}
-    /// 	}
+    /// 		    var body: some View {
+    /// 		        Button("Save the 🍌") { url = URL(string: "bananadocs.org") }
+    /// 		    }
+    /// 	   }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.31.44.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4074,7 +4084,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         var age: Int
     ///     }
     ///
-    //      struct ContentView: View {
+    ///     struct ContentView: View {
     ///         @AppStorage("goat") var person: Data?
     ///
     ///         var body: some View {
@@ -4087,6 +4097,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.33.08.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4414,7 +4426,6 @@ extension Axis : RawRepresentable {
 /// In the following example, the top circle is always invisible, since
 /// it is filled the same color as the background.
 ///
-/// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
 /// ```
 /// struct CircleOnButtomView: View {
 ///     var body: some View {
@@ -4424,6 +4435,9 @@ extension Axis : RawRepresentable {
 ///     }
 /// }
 /// ```
+///
+/// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct BackgroundStyle {
 
@@ -4444,6 +4458,9 @@ extension Axis : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
+    ///
     @inlinable public init() { }
 }
 
