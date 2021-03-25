@@ -22953,7 +22953,7 @@ extension Link where Label == Text {
 ///
 /// The `id` parameter requires a key-path to the *identifier* for each row of the ``List``. This is required so that ``List`` can efficiently process changes in the data source (in this example, the array `fruits`). These changes to the data source are animated as insertions, removals and reorders - reflecting the changes in the source.
 ///
-/// It is up to the programmer to decide what property best represents the 'identiifer' of a particular type. In this example, the `String` itself is a valid identifier for the data, therefore `.self` is passed along to the `id` parameter.
+/// It is up to the programmer to decide what property best represents the 'identiifer' of a particular type. In this example, the `String` itself is a valid identifier for the data, therefore `\\.self` is passed along to the `id` parameter.
 ///
 /// ### Creating a ``List`` with both fixed and dynamic elements
 ///
