@@ -16392,9 +16392,7 @@ extension ForegroundStyle : ShapeStyle {
 /// on iOS, forms appear as grouped lists. Use ``Section`` to group different
 /// parts of a form's content.
 ///
-/// For example,
-///
-/// ![Form Example 1](76F9D0FD-559A-46B7-AAFD-B6251C7A2AED.png)
+/// For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16411,6 +16409,8 @@ extension ForegroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
+/// ![Form Example 1](76F9D0FD-559A-46B7-AAFD-B6251C7A2AED.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Form<Content> : View where Content : View {
 
@@ -16423,8 +16423,6 @@ public struct Form<Content> : View where Content : View {
     /// However, when using a custom control results are undefined.
     ///
     /// Controls can be grouped using the ``Section`` view as seen in the example below.
-    ///
-    /// ![Form Example 2](form-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -16456,7 +16454,7 @@ public struct Form<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    ///
+    /// ![Form Example 2](form-example-2.png)
     ///
 	/// - Parameter content: A closure that returns the view to the ``Form``.
 	///
@@ -16500,8 +16498,8 @@ extension GeometryEffect {
 
 /// A proxy that encapsulates the container's frame and safe area insets, used by ``GeometryReader``.
 ///
-/// For example, to create a new GeometryProxy for use in a GeometryReader:
-/// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
+/// For example, to create a new `GeometryProxy` for use in a ``GeometryReader``:
+///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -16515,6 +16513,9 @@ extension GeometryEffect {
 ///     }
 /// }
 /// ```
+///
+/// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct GeometryProxy {
 
@@ -16715,6 +16716,9 @@ public struct GeometryProxy {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
+    ///
     public var content: (GeometryProxy) -> Content
 
     /// Creates a ``GeometryReader`` parent view using the parent's geometry.
@@ -16741,6 +16745,8 @@ public struct GeometryProxy {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
     ///
     /// - Parameter content: A closure that takes the geometry of the parent view and returns a content view.
     @inlinable public init(@ViewBuilder content: @escaping (GeometryProxy) -> Content) { }
@@ -17096,8 +17102,6 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 /// See the example below for a simple gradient being passed to a
 /// ``LinearGradient`` view.
 ///
-/// ![Rectangle Example](B1E517B3-0F3F-49F7-ABEC-F4C609FC166C.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -17110,6 +17114,8 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![Rectangle Example](B1E517B3-0F3F-49F7-ABEC-F4C609FC166C.png)
 ///
 /// A gradient is made up of a list of ``Gradient/Stop``s
 /// A stop contains a color along with the a value from 0 to 1 indicating
@@ -17144,7 +17150,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     /// ```
     /// struct ExampleView: View {
     ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
-    ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+    ///     let stop2 = Gradient.Stop(color: .purple, location: 1.0)
     ///
     ///     var body: some View {
     ///         RoundedRectangle(cornerRadius: 10)
@@ -17156,6 +17162,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](gradient-stop-ex.png)
+    ///
     @frozen public struct Stop : Equatable {
 
         /// The color for the stop.
@@ -17176,7 +17185,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         /// ```
         /// struct ExampleView: View {
         ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
-        ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+        ///     let stop2 = Gradient.Stop(color: .purple, location: 1.0)
         ///
         ///     var body: some View {
         ///         RoundedRectangle(cornerRadius: 10)
@@ -17188,6 +17197,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](gradient-stop-ex.png)
+        ///
         public var color: Color
 
         /// The parametric location of the stop.
@@ -17210,7 +17222,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         /// ```
         /// struct ExampleView: View {
         ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
-        ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+        ///     let stop2 = Gradient.Stop(color: .purple, location: 1.0)
         ///
         ///     var body: some View {
         ///         RoundedRectangle(cornerRadius: 10)
@@ -17222,6 +17234,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](gradient-stop-ex.png)
+        ///
         public var location: CGFloat
 
         /// Creates a color stop with a color and location.
@@ -17252,6 +17267,8 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](gradient-stop-ex.png)
         ///
         /// - Parameters:
         ///   - color: The color for the stop.
@@ -17285,7 +17302,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///         var gradient = Gradient(stops: [])
     ///
     ///         let stop1 = Gradient.Stop(color: .blue, location: 0.8)
-    ///         let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+    ///         let stop2 = Gradient.Stop(color: .purple, location: 1.0)
     ///
     ///         gradient.stops.append(stop1)
     ///         gradient.stops.append(stop2)
@@ -17299,6 +17316,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](gradient-stops-ex.png)
+    ///
     public var stops: [Gradient.Stop]
 
     /// Creates a gradient from an array of color stops.
@@ -17317,7 +17337,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     /// ```
     /// struct ExampleView: View {
     ///     let stop1 = Gradient.Stop(color: .blue, location: 0.8)
-    ///     let stop2 = Gradient.Stop(Color.purple, location: 1.0)
+    ///     let stop2 = Gradient.Stop(color: .purple, location: 1.0)
     ///
     ///     var body: some View {
     ///         RoundedRectangle(cornerRadius: 10)
@@ -17329,6 +17349,8 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](gradient-stop-ex.png)
     ///
     /// - Parameter stops: The list of gradient stops.
     public init(stops: [Gradient.Stop]) { }
@@ -17350,6 +17372,8 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](gradient-init-colors-ex.png)
     ///
     /// - Parameter colors: The list of colors to evenly space in the gradient.
     public init(colors: [Color]) { }
@@ -17404,13 +17428,9 @@ public struct GridItem {
     ///
     /// There are three types of sizes:
     ///
-    ///
-    ///
-    /// 1. ``griditem/size/fixed``
-    /// 2. ``griditem/size/flexible`
-    /// 3. ``griditem/size/adaptive``
-    ///
-    ///
+    /// 1. ``GridItem/size/fixed``
+    /// 2. ``GridItem/size/flexible`
+    /// 3. ``GridItem/size/adaptive``
     ///
     public enum Size {
 
@@ -17466,15 +17486,11 @@ public struct GridItem {
 /// There are five different types of groups. Each groups together
 /// a type of content.
 ///
-///
-///
 /// 1. ``ToolbarContent``
 /// 2. ``CustomizableToolbarContent``
 /// 3. ``Scene``
 /// 4. ``View``
 /// 5. ``Commands``
-///
-///
 ///
 /// There are 2 main reasons to use a ``Group``:
 /// - To exceed the 10 struct limitation of a function builder
@@ -17482,15 +17498,20 @@ public struct GridItem {
 ///
 /// Here is an example creating a `Group` of ``View``s:
 ///
-/// 	var body: some View {
-///         Group {
-/// 			Text("1")
-/// 			Text("2")
-/// 			Text("3")
-/// 			Text("4")
-/// 			Text("5")
-/// 		}
-/// 	}
+///     struct ExanmpleView: View {
+/// 	      var body: some View {
+///             Group {
+/// 			          Text("1")
+/// 			          Text("2")
+/// 		            Text("3")
+/// 			          Text("4")
+/// 			          Text("5")
+/// 		        }
+/// 	      }
+///     }
+///
+/// ![](group-ex1.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Group<Content> {
 
@@ -17633,7 +17654,7 @@ extension Group : CustomizableToolbarContent where Content : CustomizableToolbar
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension Group : Scene where Content : Scene {
 
-	/// Creates a ``Group`` of from component scenes.
+	/// Creates a ``Group`` from component scenes.
 	///
     /// Groups are particularly useful when you want several scenes to act
 	/// together.
@@ -17659,6 +17680,7 @@ extension Group : Scene where Content : Scene {
     ///         WindowGroup(id: "id10") { ContentView() }
     ///         WindowGroup(id: "id11") { ContentView() } //ERROR!
 	/// 	}
+    /// }
     /// ```
 	///
 	/// Instead, you should put your scenes into ``Group``s:
@@ -17683,6 +17705,7 @@ extension Group : Scene where Content : Scene {
     ///             WindowGroup(id: "id11") { ContentView() } //No error 😎
     ///         }
 	/// 	}
+    /// }
     /// ```
     ///
 	/// - Parameter content: A scene builder.
@@ -17762,7 +17785,7 @@ extension Group : Commands where Content : Commands {
     /// ```
     /// @main
     /// struct ErrorApp: App {
-	/// 	var body: some Scene {
+	  ///     var body: some Scene {
     ///         WindowGroup {
     ///             ContentView()
     ///         }
@@ -17778,8 +17801,8 @@ extension Group : Commands where Content : Commands {
     ///             EmptyCommands() //9
     ///             EmptyCommands() //10
     ///             EmptyCommands() //11 - ERROR!
-	/// 		}
-	/// 	}
+	  /// 		}
+	  /// }
     /// ```
 	///
 	/// Instead, you should put your commands into ``Group``s:
@@ -17787,7 +17810,7 @@ extension Group : Commands where Content : Commands {
     /// ```
     /// @main
     /// struct NoErrorApp: App {
-	/// 	var body: some Scene {
+	  ///     var body: some Scene {
     ///         WindowGroup {
     ///             ContentView()
     ///         }
@@ -17807,8 +17830,8 @@ extension Group : Commands where Content : Commands {
     ///                 EmptyCommands() //10
     ///                 EmptyCommands() //11 - No error 😎
     ///             }
-	/// 		}
-	/// 	}
+	  /// 		    }
+	  /// 	  }
     /// }
     /// ```
     ///
@@ -18027,8 +18050,6 @@ public struct GroupedListStyle : ListStyle {
 
     /// Creates an instance with the given spacing and vertical alignment.
     ///
-    ///  ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             HStack(alignment: .top, spacing: 32) {
@@ -18038,6 +18059,8 @@ public struct GroupedListStyle : ListStyle {
     ///             }
     ///         }
     ///     }
+    ///
+    ///  ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
     ///
     /// - Parameters:
     ///   - alignment: The guide for aligning the subviews in this stack. It has
@@ -18070,13 +18093,9 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// There are just 3 possible horizontal alignments:
 ///
-///
-///
 /// 1. ``HorizontalAlignment/leading``
 /// 2. ``HorizontalAlignment/center``
 /// 3. ``HorizontalAlignment/trailing``
-///
-///
 ///
 /// See the example below for all three.
 ///
@@ -18091,9 +18110,13 @@ public struct GroupedListStyle : ListStyle {
 ///         }
 ///         VStack(alignment: HorizontalAlignment.trailing) {
 ///             Text("➡️")
+///         }
 ///     }
 /// }
 /// ```
+///
+/// ![](horiz-alignment-ex1.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HorizontalAlignment : Equatable {
 
@@ -18164,9 +18187,14 @@ extension HorizontalAlignment {
     ///     var body: some View {
     ///         VStack(alignment: .leading) {
     ///             Text("⬅️")
+    ///             Text("leading")
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](horiz-alignment-leading.png)
+    ///
     public static let leading: HorizontalAlignment
 
     /// A guide marking the horizontal center of the view.
@@ -18187,9 +18215,14 @@ extension HorizontalAlignment {
     ///     var body: some View {
     ///         VStack(alignment: .center) {
     ///             Text("🤠")
+    ///             Text("center")
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](horiz-alignment-center.png)
+    ///
     public static let center: HorizontalAlignment
 
     /// A guide marking the trailing edge of the view.
@@ -18210,9 +18243,14 @@ extension HorizontalAlignment {
     ///     var body: some View {
     ///         VStack(alignment: .trailing) {
     ///             Text("➡️")
+    ///             Text("trailing")
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](horiz-alignment-trailing.png)
+    ///
     public static let trailing: HorizontalAlignment
 }
 
@@ -18227,7 +18265,6 @@ extension HorizontalAlignment {
 ///
 /// For example:
 ///
-/// ![10D7AAEA-D933-499B-A64B-143CEF3D8E0E](10D7AAEA-D933-499B-A64B-143CEF3D8E0E.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -18236,10 +18273,13 @@ extension HorizontalAlignment {
 ///                .fill(Color.red)
 ///                .frame(width: 100, height: 100)
 ///                .hoverEffect(.automatic)
-///        }.padding(75).background(Color.blue)
+///        }
+///        .padding(75).background(Color.blue)
 ///    }
 /// }
 /// ```
+///
+/// ![10D7AAEA-D933-499B-A64B-143CEF3D8E0E](10D7AAEA-D933-499B-A64B-143CEF3D8E0E.png)
 ///
 /// See the individual HoverEffect value pages for a visualization of each effect.
 @available(iOS 13.4, *)
@@ -18253,8 +18293,6 @@ public struct HoverEffect {
     ///
     /// For example:
     ///
-    /// ![Hover effect automatic example](hovereffect-automatic-example.gif)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///    var body: some View {
@@ -18263,18 +18301,20 @@ public struct HoverEffect {
     ///                .fill(Color.red)
     ///                .frame(width: 100, height: 100)
     ///                .hoverEffect(.automatic)
-    ///        }.padding(75).background(Color.blue)
+    ///        }
+    ///        .padding(75).background(Color.blue)
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Hover effect automatic example](hovereffect-automatic-example.gif)
+    ///
     public static let automatic: HoverEffect
 
     /// An effect that morphs the pointer into a platter behind the view
     /// and shows a light source indicating position.
     ///
     /// For example:
-    ///
-    /// ![Hover effect highlight example](hovereffect-highlight-example.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -18284,18 +18324,20 @@ public struct HoverEffect {
     ///                .fill(Color.red)
     ///                .frame(width: 100, height: 100)
     ///                .hoverEffect(.highlight)
-    ///        }.padding(75).background(Color.blue)
+    ///        }
+    ///        .padding(75).background(Color.blue)
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Hover effect highlight example](hovereffect-highlight-example.gif)
+    ///
     public static let highlight: HoverEffect
 
     /// An effect that slides the pointer under the view and disappears as the
     /// view scales up and gains a shadow.
     ///
     /// For example:
-    ///
-    /// ![Hover effect lift example](hovereffect-lift-example.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -18305,10 +18347,14 @@ public struct HoverEffect {
     ///                .fill(Color.red)
     ///                .frame(width: 100, height: 100)
     ///                .hoverEffect(.lift)
-    ///        }.padding(75).background(Color.blue)
+    ///        }
+    ///        .padding(75).background(Color.blue)
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Hover effect lift example](hovereffect-lift-example.gif)
+    ///
     public static let lift: HoverEffect
 }
 
@@ -18359,8 +18405,6 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// **Second**, reference the image by name in your code.
 ///
-/// ![Simple Image](image-basic.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -18369,11 +18413,11 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
+/// ![Simple Image](image-basic.png)
+///
 /// **Third**, remember to add the ``Image/resizable(capInsets:resizingMode:)`` modifier to make your image resizable.
 ///
 /// Add some modifiers to style your image!
-///
-/// ![Resiable Images](6422F09D-0D92-41F3-8067-0E7499A7F66C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -18386,6 +18430,8 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![Resiable Images](6422F09D-0D92-41F3-8067-0E7499A7F66C.png)
 ///
 /// ### Resizing Images
 ///
@@ -18407,7 +18453,6 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// weights from ultralight to black. To use these in custom images, simply
 /// use the ``Image/init(systemName:)`` initializer.
 ///
-/// ![1285236D-2F00-4099-8A5A-3CC5E76A5000](1285236D-2F00-4099-8A5A-3CC5E76A5000.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -18418,7 +18463,9 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///     }
 /// }
 /// ```
-//
+///
+/// ![1285236D-2F00-4099-8A5A-3CC5E76A5000](1285236D-2F00-4099-8A5A-3CC5E76A5000.png)
+///
 /// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
 /// symbol names easier to find. SF Symbols helps to maintain a consistent
 /// look with the Apple ecosystem.
@@ -18463,8 +18510,6 @@ extension Image {
     ///
     /// **Second**, reference the image by name in your code.
     ///
-    /// ![Simple Image](image-basic.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -18472,6 +18517,8 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Simple Image](image-basic.png)
     ///
     /// Note that the asset name of your image will also be used for
     /// accessiblity purposes. To make these names different, see the
@@ -18506,8 +18553,6 @@ extension Image {
     /// **Second**, reference the image by name in your code. Include a
     /// ``Text`` label for accessibility.
     ///
-    /// ![Simple Image](image-basic.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -18515,6 +18560,8 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Simple Image](image-basic.png)
     ///
     /// Note that the ``label`` parameter is required for
     /// accessiblity purposes. To use a the asset name for accessibility, see the
@@ -18549,8 +18596,6 @@ extension Image {
     ///
     /// **Second**, reference the image by name in your code.
     ///
-    /// ![Simple Image](image-basic.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -18558,6 +18603,8 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Simple Image](image-basic.png)
     ///
     /// Note that your image will name no alternative for accessibility.
     /// To use the asset name of your image for
@@ -18591,7 +18638,9 @@ extension Image {
     ///     }
     /// }
     /// ```
-    //
+    ///
+    /// ![](image-system-name-init.png)
+    ///
     /// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
     /// symbol names easier to find. SF Symbols helps to maintain a consistent
     /// look with the Apple ecosystem.
@@ -18632,10 +18681,8 @@ extension Image {
     ///
     /// ![Bird Image](bird.png)
     ///
-    /// ![Bird Image Rendering Mode](image-renderingmode.png)
-    ///
     /// ```
-    /// struct ContentView {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         HStack {
     ///             Image("bird")
@@ -18652,6 +18699,8 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird Image Rendering Mode](image-renderingmode.png)
 	///
 	/// The modifier does nothing if renderingMode is `nil`.
 	///
@@ -18683,8 +18732,6 @@ extension Image {
     ///
     /// In the following example, we define a helper function called
     /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
-    ///
-    /// ![Bird Orientation](image-orientation.png)
     ///
     /// ```
     /// struct ContentView: View {
@@ -18719,6 +18766,9 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird Orientation](image-orientation.png)
+    ///
     @frozen public enum Orientation : UInt8, CaseIterable, Hashable {
 
     	/// The original pixel data matches the intended display orientation.
@@ -18741,8 +18791,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -18776,6 +18824,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case up
 
         /// The image has been horizontally flipped from the orientation of its
@@ -18798,8 +18849,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -18833,6 +18882,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case upMirrored
 
         /// The image has been rotated 180° from the orientation of its original
@@ -18855,8 +18907,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -18890,6 +18940,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case down
 
         /// The image has been vertically flipped from the orientation of its
@@ -18912,8 +18965,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -18947,6 +18998,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case downMirrored
 
         /// The image has been rotated 90° counterclockwise from the orientation
@@ -18969,8 +19023,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -19004,6 +19056,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case left
 
         /// The image has been rotated 90° clockwise and flipped horizontally
@@ -19026,8 +19081,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -19061,6 +19114,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case leftMirrored
 
         /// The image has been rotated 90° clockwise from the orientation of its
@@ -19083,8 +19139,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -19118,6 +19172,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case right
 
         /// The image has been rotated 90° counterclockwise and flipped
@@ -19140,8 +19197,6 @@ extension Image {
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
         ///
-        /// ![Bird Orientation](image-orientation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     func image(_ orientation: Image.Orientation) -> some View {
@@ -19175,6 +19230,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Orientation](image-orientation.png)
+        ///
         case rightMirrored
 
         /// The raw type that can be used to represent all values of the conforming
@@ -19250,8 +19308,6 @@ extension Image {
     ///
     /// ![Bird Image](bird.png)
     ///
-    /// ![Bird Image Rendering Mode](image-renderingmode.png)
-    ///
     /// ```
     /// struct ContentView {
     ///     var body: some View {
@@ -19270,6 +19326,9 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird Image Rendering Mode](image-renderingmode.png)
+    ///
     public enum TemplateRenderingMode {
 
     	/// Render the image as all black except where opacity is 0.
@@ -19287,8 +19346,6 @@ extension Image {
         ///
         /// ![Bird Image](bird.png)
         ///
-        /// ![Bird Image Rendering Mode](image-renderingmode.png)
-        ///
         /// ```
         /// struct ContentView {
         ///     var body: some View {
@@ -19307,6 +19364,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        ///
         case template
 
         /// Render the image as usual.
@@ -19323,8 +19383,6 @@ extension Image {
         ///
         /// ![Bird Image](bird.png)
         ///
-        /// ![Bird Image Rendering Mode](image-renderingmode.png)
-        ///
         /// ```
         /// struct ContentView {
         ///     var body: some View {
@@ -19343,6 +19401,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        ///
         case original
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -19412,6 +19473,9 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](image-scale-ex.png)
+    ///
     @available(macOS 11.0, *)
     public enum Scale {
 
@@ -19439,6 +19503,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](image-scale-ex.png)
+        ///
         case small
 
         /// The medium image scale size.
@@ -19465,6 +19532,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](image-scale-ex.png)
+        ///
         case medium
 
         /// The large image scale size.
@@ -19491,6 +19561,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](image-scale-ex.png)
+        ///
         case large
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -19560,8 +19633,6 @@ extension Image {
     ///
     /// ![Bird Small Image](bird-small.png)
     ///
-    /// ![Bird Image Interpolation](image-interpolation.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -19586,6 +19657,9 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird Image Interpolation](image-interpolation.png)
+    ///
     public enum Interpolation {
 
     	/// Apply no interpolation to the image when remapping.
@@ -19606,8 +19680,6 @@ extension Image {
         ///
         /// ![Bird Small Image](bird-small.png)
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -19632,6 +19704,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
         case none
 
         /// Apply a low amount of interpolation to the image when remapping.
@@ -19652,8 +19727,6 @@ extension Image {
         ///
         /// ![Bird Small Image](bird-small.png)
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -19678,6 +19751,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
         case low
 
         /// Apply a medium amount of interpolation to the image when remapping.
@@ -19698,8 +19774,6 @@ extension Image {
         ///
         /// ![Bird Small Image](bird-small.png)
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -19724,6 +19798,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
         case medium
 
         /// Apply a high amount of interpolation to the image when remapping.
@@ -19744,8 +19821,6 @@ extension Image {
         ///
         /// ![Bird Small Image](bird-small.png)
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -19770,6 +19845,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Image Interpolation](image-interpolation.png)
+        ///
         case high
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -19829,8 +19907,6 @@ extension Image {
     ///
     /// ![Bird Small Image](bird-small.png)
     ///
-    /// ![Bird Image Interpolation](image-interpolation.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -19855,6 +19931,9 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird Image Interpolation](image-interpolation.png)
+    ///
 	///
 	/// - Parameter interpolation: The image's interpolation property.
     public func interpolation(_ interpolation: Image.Interpolation) -> Image { }
@@ -19872,7 +19951,7 @@ extension Image {
     /// ![Bird Image](bird.png)
     ///
     /// ```
-    /// struct ContentView {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         HStack {
     ///             Image("bird")
@@ -19888,7 +19967,9 @@ extension Image {
     /// }
     /// ```
     ///
-    /// - Paramter isAntialiased: Whether the image is antialiased.
+    /// ![](image-antialiased-ex.png)
+    ///
+    /// - Parameter isAntialiased: Whether the image is antialiased.
     public func antialiased(_ isAntialiased: Bool) -> Image { }
 }
 
@@ -19906,8 +19987,6 @@ extension Image {
     ///
     /// ![Bird Image](bird.png)
     ///
-    /// ![Bird on screen](image-bird.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     let cgImage = UIImage(named: "bird")!.cgImage!
@@ -19920,11 +19999,11 @@ extension Image {
     /// }
     /// ```
     ///
+    /// ![Bird on screen](image-bird.png)
+    ///
     /// The main benefit of using this initializer is that it gives you
     /// the option to scale and re-orient your image. See
     /// ``Image/Orientation`` for all of the orientation options.
-    ///
-    /// ![Bird left mirrored](image-leftmirrored.png)
     ///
     /// ```
     /// struct ContentView: View {
@@ -19937,6 +20016,8 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird left mirrored](image-leftmirrored.png)
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -19961,8 +20042,6 @@ extension Image {
     ///
     /// ![Bird Image](bird.png)
     ///
-    /// ![Bird on screen](image-bird.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     let cgImage = UIImage(named: "bird")!.cgImage!
@@ -19975,11 +20054,11 @@ extension Image {
     /// }
     /// ```
     ///
+    /// ![Bird on screen](image-bird.png)
+    ///
     /// The main benefit of using this initializer is that it gives you
     /// the option to scale and re-orient your image. See
     /// ``Image/Orientation`` for all of the orientation options.
-    ///
-    /// ![Bird left mirrored](image-leftmirrored.png)
     ///
     /// ```
     /// struct ContentView: View {
@@ -19992,6 +20071,8 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird left mirrored](image-leftmirrored.png)
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -20015,8 +20096,6 @@ extension Image {
     ///
     /// ![Bird Image](bird.png)
     ///
-    /// ![Bird on screen](image-bird.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     let uiImage = UIImage(named: "bird")!
@@ -20028,6 +20107,9 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird on screen](image-bird.png)
+    ///
     public init(uiImage: UIImage) { }
 }
 
@@ -20049,22 +20131,23 @@ extension Image {
     ///
     /// ![Bird Small Image](bird-small.png)
     ///
-    /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
     ///             Image("bird-small")
-    ///                 .resizable(resizingMode: ResizingMode.stretch)
+    ///                 .resizable(resizingMode: .stretch)
     ///                 .frame(width: 200, height: 100)
     ///             Image("bird-small")
-    ///                 .resizable(resizingMode: ResizingMode.tile)
+    ///                 .resizable(resizingMode: .tile)
     ///                 .frame(width: 200, height: 100)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+    ///
     public enum ResizingMode {
 
     	/// The resizing method of maintaining image properties, positioning
@@ -20083,8 +20166,6 @@ extension Image {
         ///
         /// ![Bird Small Image](bird-small.png)
         ///
-        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -20099,6 +20180,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        ///
         case tile
 
         /// The resizing method of stretching the image, distorting the properties
@@ -20117,8 +20201,6 @@ extension Image {
         ///
         /// ![Bird Small Image](bird-small.png)
         ///
-        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
-        ///
         /// ```
         /// struct ContentView: View {
         ///     var body: some View {
@@ -20133,6 +20215,9 @@ extension Image {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        ///
         case stretch
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -20191,8 +20276,6 @@ extension Image {
     ///
     /// ![Bird Image](bird.png)
     ///
-    /// ![Bird on screen](image-bird.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -20202,6 +20285,8 @@ extension Image {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Bird on screen](image-bird.png)
     ///
     /// - Parameters:
     ///   - capInsets: The values to use for the cap insets.
@@ -20251,7 +20336,6 @@ extension Image.ResizingMode : Hashable {
 ///
 /// See ``ShapeStyle`` for more info on how and where to use shape styles.
 ///
-/// ![FDA4F2F3-84D2-49C4-A894-ED78FAE07A34](FDA4F2F3-84D2-49C4-A894-ED78FAE07A34.png)
 /// ```
 /// struct DogsEverywhereView: View {
 ///     var body: some View {
@@ -20383,8 +20467,6 @@ extension IndexViewStyle {
 /// [pickerstyle-inline ->]
 /// Your app can use explicit tags to identify picker content.
 ///
-/// ![Inline Example](/picker-style-2.gif)
-///
 /// ```
 /// enum MyFruit {
 ///     case banana, apple, peach
@@ -20419,13 +20501,13 @@ extension IndexViewStyle {
 /// }
 /// ```
 ///
+/// ![Inline Example](/picker-style-2.gif)
+///
 /// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct InlinePickerStyle : PickerStyle {
 
     /// Creates an inline picker style.
-    ///
-    /// ![Inline Example](/picker-style-2.gif)
     ///
     /// ```
     /// enum MyFruit {
@@ -20460,6 +20542,8 @@ public struct InlinePickerStyle : PickerStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Inline Example](/picker-style-2.gif)
     ///
     public init() { }
 }
@@ -20790,14 +20874,22 @@ extension InsettableShape {
 ///
 /// ```
 /// struct ShortcutEnabledView: View {
+///     @State var bananas = ""
+
 ///     var body: some View {
-///         Button("Press command-P to print the 🍌") {
-///             print("🍌")
+///         return VStack {
+///             Text(bananas)
+///             Button("Click or press command+P to print 🍌") {
+///                 bananas += "🍌"
+///             }
+///             .keyboardShortcut(KeyEquivalent("p"), modifiers: [.command])
 ///         }
-///         .keyboaredShortcut(KeyEquivalent("p"), modifiers: [.command])
+///         .frame(maxWidth: .infinity, maxHeight: .infinity)
 ///     }
 /// }
 /// ```
+///
+/// ![](key-equivalent-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -20818,7 +20910,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-up to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.upArrow, modifiers: [.command])
+    ///         .keyboardShortcut(.upArrow, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -20838,7 +20930,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-down to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.downArrow, modifiers: [.command])
+    ///         .keyboardShortcut(.downArrow, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -20858,7 +20950,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-left to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.leftArrow, modifiers: [.command])
+    ///         .keyboardShortcut(.leftArrow, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -20878,7 +20970,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-right to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.rightArrow, modifiers: [.command])
+    ///         .keyboardShortcut(.rightArrow, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -20898,7 +20990,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-ctrl-esacpe to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.escape, modifiers: [.command, .control])
+    ///         .keyboardShortcut(.escape, modifiers: [.command, .control])
     ///     }
     /// }
     /// ```
@@ -20918,7 +21010,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-delete to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.delete, modifiers: [.command])
+    ///         .keyboardShortcut(.delete, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -20940,7 +21032,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-delete forward to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.deleteForward, modifiers: [.command])
+    ///         .keyboardShortcut(.deleteForward, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -20963,7 +21055,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-home to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.home, modifiers: [.command])
+    ///         .keyboardShortcut(.home, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -20986,7 +21078,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-end to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.end, modifiers: [.command])
+    ///         .keyboardShortcut(.end, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -21006,7 +21098,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-page up to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.pageUp, modifiers: [.command])
+    ///         .keyboardShortcut(.pageUp, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -21026,7 +21118,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-page down to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.pageDown, modifiers: [.command])
+    ///         .keyboardShortcut(.pageDown, modifiers: [.command])
     ///     }
     /// }
     /// ```
@@ -21046,7 +21138,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-control-clear to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.clear, modifiers: [.command, .control])
+    ///         .keyboardShortcut(.clear, modifiers: [.command, .control])
     ///     }
     /// }
     /// ```
@@ -21066,7 +21158,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-control-tab to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.tab, modifiers: [.command, .control])
+    ///         .keyboardShortcut(.tab, modifiers: [.command, .control])
     ///     }
     /// }
     /// ```
@@ -21086,7 +21178,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-control-option-sace to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.space, modifiers: [.command, .control, .option])
+    ///         .keyboardShortcut(.space, modifiers: [.command, .control, .option])
     ///     }
     /// }
     /// ```
@@ -21106,7 +21198,7 @@ public struct KeyEquivalent {
     ///         Button("Press command-control-return to print the 🍌") {
     ///             print("🍌")
     ///         }
-    ///         .keyboaredShortcut(.return, modifiers: [.command, .control])
+    ///         .keyboardShortcut(.return, modifiers: [.command, .control])
     ///     }
     /// }
     /// ```
@@ -21121,7 +21213,7 @@ public struct KeyEquivalent {
     /// struct PPrinterView: View {
     ///     let p = Character("p")
     ///     var body: some View {
-    ///         Button("Print p!") {
+    ///         Button("Press command-control-p to print p!") {
     ///             print(p)
     ///         }
     ///         .keyboardShortcut(KeyEquivalent(p), modifiers: [.command, .control])
@@ -21143,7 +21235,7 @@ public struct KeyEquivalent {
     /// ```
     /// struct ShortcutEnabledView: View {
     ///     var body: some View {
-    ///         Button("Press command-p to print the 🍌") {
+    ///         Button("Press command-control-p to print the 🍌") {
     ///             print("🍌")
     ///         }
     ///         .keyboardShortcut(KeyEquivalent(Character("p")), modifiers: [.command, .control])
@@ -21206,6 +21298,9 @@ public struct KeyboardShortcut {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](keyboard-shortcut-default.png)
+    ///
     public static let defaultAction: KeyboardShortcut
 
     /// The standard keyboard shortcut for cancelling the in-progress action
@@ -21228,6 +21323,9 @@ public struct KeyboardShortcut {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](keyboard-shortcut-default.png)
+    ///
     public static let cancelAction: KeyboardShortcut
 
     /// The key equivalent that the user presses in conjunction with any
@@ -21242,7 +21340,7 @@ public struct KeyboardShortcut {
     /// ```
     /// struct ShortcutEnabledView: View {
     ///     var body: some View {
-    ///         var shortcut = KeyboardShortcut(.esc, modifiers: [.command, .control])
+    ///         var shortcut = KeyboardShortcut(.escape, modifiers: [.command, .control])
     ///         shortcut.key = .return
     ///
     ///         return Button("Press command-control-return to print the 🍌") {
@@ -21252,6 +21350,9 @@ public struct KeyboardShortcut {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](keyboard-shortcut-key-ex.png)
+    ///
     public var key: KeyEquivalent
 
     /// The modifier keys that the user presses in conjunction with a key
@@ -21276,6 +21377,9 @@ public struct KeyboardShortcut {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](keyboard-shortcut-key-ex.png)
+    ///
     public var modifiers: EventModifiers
 
     /// Creates a new keyboard shortcut with the given key equivalent and set of
@@ -21284,7 +21388,7 @@ public struct KeyboardShortcut {
     /// ```
     /// struct ShortcutEnabledView: View {
     ///     var body: some View {
-    ///         var shortcut = KeyboardShortcut(.return, modifiers = [.command, .control])
+    ///         var shortcut = KeyboardShortcut(.return, modifiers: [.command, .control])
     ///
     ///         return Button("Press command-control-return to print the 🍌") {
     ///             print("🍌")
@@ -21293,6 +21397,9 @@ public struct KeyboardShortcut {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](keyboard-shortcut-key-ex.png)
+    ///
     public init(_ key: KeyEquivalent, modifiers: EventModifiers = .command) { }
 }
 
