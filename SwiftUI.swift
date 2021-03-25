@@ -32903,7 +32903,8 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// A secure field is just like a ``TextField``, except the entered text is shown as dots instead of
 /// as the actual text.
 ///
-/// ![34BEFDFE-DA85-421E-8958-6D0B5D6F124A](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
+/// ![A secure text field user interface element designed to pass data into a state object.](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
+/// 
 /// ```
 /// struct PasswordView: View {
 ///     @State private var password = ""
