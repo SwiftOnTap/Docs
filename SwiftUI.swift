@@ -4387,7 +4387,7 @@ extension BackgroundStyle : ShapeStyle {
 /// the user starts editing, ``TextField`` *writes back* new values to the
 /// source of truth `text` via the `Binding`  `$text` once again.
 ///
-/// ### Creating a `Binding from an ``ObservableObject``
+/// ### Creating a `Binding` from an ``ObservableObject``
 ///
 /// In this example, the source of truth is an observable object
 /// `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
@@ -15059,7 +15059,7 @@ extension Font {
     ///
     /// ![Font Bold and Italic](font-bold-italic.png)
     ///
-    /// This slightly different than using the ``Font`` modifier ``Font/weight(_:)``
+    /// This is slightly different than using the ``Font`` modifier ``Font/weight(_:)``
     /// and passing the ``Font/Weight/bold`` property. See the difference:
     ///
     /// ```
@@ -21792,7 +21792,7 @@ public struct LabelStyleConfiguration {
 
     /// A description of the labeled item.
     ///
-    /// This one of two properties in a ``LabelStyleConfiguration``. You get access
+    /// This is one of two properties in a ``LabelStyleConfiguration``. You get access
     /// to a ``LabelStyleConfiguration`` called `configuration` when you
     /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
     /// one requirement of
@@ -21836,7 +21836,7 @@ public struct LabelStyleConfiguration {
 
     /// A symbolic representation of the labeled item.
     ///
-    /// This one of two properties in a ``LabelStyleConfiguration``. You get access
+    /// This is one of two properties in a ``LabelStyleConfiguration``. You get access
     /// to a ``LabelStyleConfiguration`` called `configuration` when you
     /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
     /// one requirement of
@@ -28310,7 +28310,7 @@ public enum PreviewPlatform {
     /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
     ///
-    /// *I tried to use this to change the preview platorm, but I couldn't get anything
+    /// *Author's note: I tried to use this to change the preview platorm, but I couldn't get anything
     /// to work. It seems right now that the only way to change your preview
     /// device is by actually changing your build target.*
     ///
@@ -31957,15 +31957,15 @@ extension Scene {
     ///
     ///     struct CustomScene: Scene {
     ///         @Environment(\.scenePhase) private var scenePhase
-    ///         @State private var count = 0
+    ///         @State private var message = "Don't go! 😢"
     ///
     ///         var body: some Scene {
     ///             WindowGroup {
-    ///                 Text("If you're seeing this active was printed.")
+    ///                 Text(message)
     ///             }
     ///             .onChange(of: scenePhase) { newScenePhase in
-    ///                 if newScenePhase == .active {
-    ///                     print("Active!")
+    ///                 if newScenePhase != .active {
+    ///                     message = "Come back! 👋"
     ///                 }
     ///             }
     ///         }
@@ -32025,7 +32025,7 @@ extension Scene {
 
     /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
     ///
-    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// Whenever the `@AppStorage` property wrapper is used, it defaults its location to
     /// `UserDefaults.standard`. Override this default location for all of your
     /// scene's views by using this modifier.
     ///
@@ -33754,7 +33754,6 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// The most simple example of creating your own shape is a rectangle
 /// that looks like this:
 ///
-/// ![09FB69B8-A5EF-4E46-9B27-4B59DF735287](09FB69B8-A5EF-4E46-9B27-4B59DF735287.png)
 /// ```
 /// struct SimplestShapeView: View {
 ///     var body: some View {
@@ -33769,6 +33768,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// }
 /// ```
 ///
+/// ![09FB69B8-A5EF-4E46-9B27-4B59DF735287](09FB69B8-A5EF-4E46-9B27-4B59DF735287.png)
+///
 /// For more info on how to create a path from a bounding rectangle,
 /// check out the ``Path`` structure.
 ///
@@ -33776,23 +33777,16 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 ///
 /// In addition to the ability to create your own shape, there are also
 /// many pre-defined shapes for you to use:
-///
-///
-///
 /// 1. ``Capsule``
 /// 2. ``Circle``
 /// 3. ``ContainerRelativeShape``
 /// 4. ``Ellipse``
-/// 5. ``OffsetShape``
-/// 6. ``Path``
-/// 7. ``Rectangle``
-/// 8. ``RoundedRectangle``
-///
-///
+/// 5. ``Path``
+/// 6. ``Rectangle``
+/// 7. ``RoundedRectangle``
 ///
 /// Example usage would look like this:
 ///
-/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
 /// ```
 /// struct PillView: View {
 ///     var body: some View {
@@ -33800,6 +33794,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 ///     }
 /// }
 /// ```
+///
+/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
 ///
 /// Check out these shapes directly for more info on how to use them.
 ///
@@ -33833,6 +33829,8 @@ extension Shape : Animatable, View {
     /// }
     /// ```
     ///
+    /// ![](rectangle-example-4.png)
+    ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
@@ -33853,31 +33851,54 @@ extension Shape {
     /// starting from its center, setting the `startFraction` and `endFraction`
     /// to different values determines the parts of the overall shape.
     ///
-    /// The following example shows a simplified infinity symbol that draws
-    /// only three quarters of the full shape. That is, of the two lobes of the
-    /// symbol, one lobe is complete and the other is half complete.
+    /// Here is a simplified infinity symbol, represented as a ``Path``:
     ///
     /// ```
-    /// struct TrimmedPathView: View {
-    ///     var body: some View {
+    /// struct Infinity: Shape {
+    ///     func path(in rect: CGRect) -> Path {
     ///         Path { path in
     ///             path.addLines([
-    ///                 .init(x: 2, y: 1),
-    ///                 .init(x: 1, y: 0),
-    ///                 .init(x: 0, y: 1),
-    ///                 .init(x: 1, y: 2),
-    ///                 .init(x: 3, y: 0),
-    ///                 .init(x: 4, y: 1),
-    ///                 .init(x: 3, y: 2),
-    ///                 .init(x: 2, y: 1)
+    ///                 CGPoint(x: 100, y: 50),
+    ///                 CGPoint(x: 50, y: 0),
+    ///                 CGPoint(x: 0, y: 50),
+    ///                 CGPoint(x: 50, y: 100),
+    ///                 CGPoint(x: 150, y: 0),
+    ///                 CGPoint(x: 200, y: 50),
+    ///                 CGPoint(x: 150, y: 100),
+    ///                 CGPoint(x: 100, y: 50)
     ///             ])
     ///         }
-    ///         .trim(from: 0.25, to: 1.0)
-    ///         .scale(50, anchor: .topLeading)
-    ///         .stroke(Color.black, lineWidth: 3)
     ///     }
     /// }
     /// ```
+    ///
+    /// To see the shape, we can just stroke it:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Infinity()
+    ///             .stroke(Color.green, lineWidth: 3)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](infinity-1.png)
+    ///
+    /// That looks good. But what if we want to trim the shape? We can cut the
+    /// path short using `trim(from:to:)`:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Infinity()
+    ///             .trim(from: 0.25, to: 1)
+    ///             .stroke(Color.green, lineWidth: 3)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](infinity-2.png)
     ///
     /// Changing the parameters of `trim(from:to:)` to
     /// `.trim(from: 0, to: 1)` draws the full infinity symbol, while
@@ -33900,19 +33921,23 @@ extension Shape {
     ///
     /// The following example renders two circles. It places one circle at its
     /// default position. The second circle is outlined with a stroke,
-    /// positioned on top of the first circle and offset by 100 points to the
-    /// left and 50 points below.
+    /// positioned on top of the first circle and offset by `100` points to the
+    /// left and `50` points below.
     ///
     /// ```
     /// struct OffsetCircleView: View {
     ///     var body: some View {
     ///         Circle()
-    ///             .overlay(Circle()
-    ///                 .offset(CGSize(width: -100, height: 50))
-    ///                 .stroke())
+    ///             .overlay(
+    ///                 Circle()
+    ///                     .offset(CGSize(width: -100, height: 50))
+    ///                     .stroke()
+    ///             )
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-3.png)
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -33925,19 +33950,23 @@ extension Shape {
     ///
     /// The following example renders two circles. It places one circle at its
     /// default position. The second circle is outlined with a stroke,
-    /// positioned on top of the first circle and offset by 100 points to the
-    /// left and 50 points below.
+    /// positioned on top of the first circle and offset by `100` points to the
+    /// left and `50` points below.
     ///
     /// ```
     /// struct OffsetCircleView: View {
     ///     var body: some View {
     ///         Circle()
-    ///             .overlay(Circle()
-    ///                 .offset(CGPoint(x: -100, y: 50))
-    ///                 .stroke())
+    ///             .overlay(
+    ///                 Circle()
+    ///                     .offset(CGPoint(x: -100, y: 50))
+    ///                     .stroke()
+    ///             )
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-3.png)
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -33950,19 +33979,23 @@ extension Shape {
     ///
     /// The following example renders two circles. It places one circle at its
     /// default position. The second circle is outlined with a stroke,
-    /// positioned on top of the first circle and offset by 100 points to the
-    /// left and 50 points below.
+    /// positioned on top of the first circle and offset by `100` points to the
+    /// left and `50` points below.
     ///
     /// ```
     /// struct OffsetCircleView: View {
     ///     var body: some View {
     ///         Circle()
-    ///             .overlay(Circle()
-    ///                 .offset(x: -100, y: 50)
-    ///                 .stroke())
+    ///             .overlay(
+    ///                 Circle()
+    ///                     .offset(x: -100, y: 50)
+    ///                     .stroke()
+    ///             )
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-3.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal amount, in points, by which you offset the shape.
@@ -33985,12 +34018,16 @@ extension Shape {
     ///     var body: some View {
     ///         ZStack {
     ///             Circle()
+    ///                 .fill(Color.red)
     ///             Circle()
-    //                  .scale(x: 1.3, y: 1.2, anchor: .center)
+    ///                 .scale(x: 0.5, y: 0.1, anchor: .leading)
+    ///                 .fill(Color.white)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scale.png)
     ///
     /// - Parameters:
     ///   - x: The multiplication factor used to resize this shape along its
@@ -34008,12 +34045,16 @@ extension Shape {
     ///     var body: some View {
     ///         ZStack {
     ///             Circle()
+    ///                 .fill(Color.red)
     ///             Circle()
-    //                  .scale(1.2, anchor: .center)
+    ///                 .scale(0.5, anchor: .center)
+    ///                 .fill(Color.white)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scale-2.png)
     ///
     /// - Parameter scale: The multiplication factor used to resize this shape.
     ///   A value of `0` scales the shape to have no size, `0.5` scales to half
@@ -34024,6 +34065,9 @@ extension Shape {
     @inlinable public func scale(_ scale: CGFloat, anchor: UnitPoint = .center) -> ScaledShape<Self> { }
 
     /// Rotates this shape around an anchor point at the angle you specify.
+    ///
+    /// Use this modifier to rotate a ``Shape``. See ``Angle`` for more
+    /// on creating angles.
     ///
     /// The following example rotates a square by 45 degrees to the right to
     /// create a diamond shape:
@@ -34037,6 +34081,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](rotation.png)
     ///
     /// - Parameters:
     ///   - angle: The angle of rotation to apply. Positive angles rotate
@@ -34060,10 +34106,13 @@ extension Shape {
     ///     var body: some View {
     ///         Rectangle()
     ///             .transform(CGAffineTransform(a: 1, b: 0, c: 0.5, d: 1, tx: 0, ty: 0))
+    ///             .border(Color.orange)
     ///             .frame(width: 100, height: 100)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](transform.png)
     ///
     /// - Parameter transform: The affine transformation matrix to apply to this
     ///   shape.
@@ -34082,7 +34131,7 @@ extension Shape {
     /// If you would prefer not to change the passed in rectangle,
     /// use ``Shape/scale(x:y:anchor:)`` function instead.
     ///
-    /// This is similar the ``View/frame(width:height:)`` modifier
+    /// This is similar the ``View/frame(width:height:alignment:)`` modifier
     /// from ``View``, except this returns a ``Shape``.
     ///
     /// ```
@@ -34092,7 +34141,9 @@ extension Shape {
     ///             .size(CGSize(width: 100, height: 100))
     ///     }
     /// }
-    // ```
+    /// ```
+    ///
+    /// ![](size.png)
     ///
     /// - Parameter size: The new rectangle size.
     @inlinable public func size(_ size: CGSize) -> some Shape { }
@@ -34105,7 +34156,7 @@ extension Shape {
     /// If you would prefer not to change the passed in rectangle,
     /// use ``Shape/scale(x:y:anchor:)`` function instead.
     ///
-    /// This is similar the ``View/frame(width:height:)`` modifier
+    /// This is similar the ``View/frame(width:height:alignment:)`` modifier
     /// from ``View``, except this returns a ``Shape``.
     ///
     /// ```
@@ -34116,6 +34167,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](size.png)
     ///
     /// - Parameters:
     ///   - width: The shape's new bounding rectangle width.
@@ -34135,13 +34188,15 @@ extension Shape {
     /// method.
     ///
     /// ```
-    /// struct TwoCirclesView: View {
+    /// struct Cirlce: View {
     ///     var body: some View {
     ///         Circle()
     ///             .fill(Color.pink, style: FillStyle(eoFill: true, antialiased: true))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fill-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient to use when filling this shape.
@@ -34156,11 +34211,11 @@ extension Shape {
     /// Use this method to fill a shape with the foreground color
     /// of the view.
     ///
-    /// See ``FillStyle for more info on the `style` parameter of this
+    /// See ``FillStyle`` for more info on the `style` parameter of this
     /// method.
     ///
     /// ```
-    /// struct TwoCirclesView: View {
+    /// struct Circle: View {
     ///     var body: some View {
     ///         Circle()
     ///             .fill(style: FillStyle(eoFill: true, antialiased: true))
@@ -34168,6 +34223,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fill-style.png)
     ///
     /// - Parameter style: The style options that determine how the fill
     ///   renders.
@@ -34189,7 +34246,7 @@ extension Shape {
     /// struct StrokedCapsuleView: View {
     ///     let style = StrokeStyle(lineWidth: 5,
     ///                             lineCap: .round,
-    ///                             lineJoine: .miter,
+    ///                             lineJoin: .miter,
     ///                             miterLimit: 0,
     ///                             dash: [5, 10],
     ///                             dashPhase: 0)
@@ -34199,6 +34256,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient with which to stroke this shape.
@@ -34227,6 +34286,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke.png)
     ///
     /// - Parameters style: The stroke characteristics --- such as the line's width and
     /// whether the stroke is dashed --- that determine how to render this
@@ -34263,7 +34324,7 @@ extension Shape {
     /// struct StrokedCapsuleView: View {
     ///     let style = StrokeStyle(lineWidth: 5,
     ///                             lineCap: .round,
-    ///                             lineJoine: .miter,
+    ///                             lineJoin: .miter,
     ///                             miterLimit: 0,
     ///                             dash: [5, 10],
     ///                             dashPhase: 0)
@@ -34274,6 +34335,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient with which to stroke this shape.
@@ -34299,6 +34362,9 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke.png)
+    ///
     @inlinable public func stroke(lineWidth: CGFloat = 1) -> some Shape { }
 
 }
@@ -36488,7 +36554,7 @@ extension TabView where SelectionValue == Int {
 /// types available are the ones included in the framework and are platform dependent:
 /// - ``DefaultTabViewStyle`` (all platforms)
 /// - ``PageTabViewStyle`` (NO macOS)
-/// - CarouselTabViewStyle (watchOS only)
+/// - `CarouselTabViewStyle` (watchOS only)
 ///
 /// To learn more about each style, visit their pages.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -37356,7 +37422,7 @@ extension Text {
     ///
     /// ![Font Bold and Italic](font-bold-italic.png)
     ///
-    /// This slightly different than using the ``Font`` modifier ``Font/weight(_:)``
+    /// This is slightly different than using the ``Font`` modifier ``Font/weight(_:)``
     /// and passing the ``Font/Weight/bold`` property. See the difference:
     ///
     /// ```
@@ -38165,7 +38231,7 @@ public struct TitleOnlyLabelStyle : LabelStyle {
     /// behind the scenes by SwiftUI that allows ``TitleOnlyLabelStyle``
     /// to conform to the ``LabelStyle`` protocol.
     ///
-    /// To make a ``Label`` with a title only, just use the ``TitleOnlyLabelStyle/init()``
+    /// To make a ``Label`` with a title only, use the ``TitleOnlyLabelStyle/init()``
     /// initializer.
     ///
     ///     struct ContentView: View {
@@ -38352,16 +38418,39 @@ extension Toggle where Label == Text {
 ///
 /// ToggleStyle allows for easy customization of a toggle view. In order to customize the style,
 /// simply create a new type conforming to this protocol that returns the custom view
-/// in the ``ToggleStyle/makeBody(_:)`` function. Note that while theToggleStyle
+/// in the ``ToggleStyle/makeBody(configuration:)`` function. Note that while the `ToggleStyle`
 /// protocol takes care of most the implementation, the conforming type must still
-/// toggle the isOn property.
+/// toggle the `isOn` property.
 ///
 /// To configure the current toggle style for a view hierarchy, use the
 /// ``View/toggleStyle(_:)`` modifier.
 ///
 /// For example, to make a custom toggle style which conforms to this protocol:
 ///
-/// ![Toggle style example 1](togglestyle-example-1.gif)
+/// ```
+/// struct CustomRectangleToggleStyle: ToggleStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         HStack {
+///             configuration.label
+///             Rectangle()
+///                 .frame(width: 75, height: 30)
+///                 .overlay(
+///                     Circle()
+///                         .foregroundColor(configuration.isOn ? Color.green : Color.red)
+///                         .padding(.all, 3)
+///                         .offset(x: configuration.isOn ? 20 : -20, y: 0)
+///                         .animation(Animation.linear(duration: 0.1))
+///                 )
+///                 .onTapGesture {
+///                     configuration.isOn.toggle()
+///                 }
+///         }
+///     }
+/// }
+/// ```
+///
+/// You can then apply this ``ToggleStyle`` to a ``Toggle``
+/// using ``View/toggleStyle(_:)``:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -38375,29 +38464,10 @@ extension Toggle where Label == Text {
 ///        .toggleStyle(CustomRectangleToggleStyle())
 ///    }
 /// }
-///
-/// struct CustomRectangleToggleStyle: ToggleStyle {
-///
-///    func makeBody(configuration: Configuration) -> some View {
-///        HStack {
-///            configuration.label
-///            Rectangle()
-///                .frame(width: 75, height: 30)
-///                .overlay(
-///                    Circle()
-///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
-///                        .padding(.all, 3)
-///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
-///                        .animation(Animation.linear(duration: 0.1))
-///                )
-///                .onTapGesture {
-///                    configuration.isOn.toggle()
-///
-///                }
-///        }
-///    }
-/// }
 /// ```
+///
+/// ![Toggle style example 1](togglestyle-example-1.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ToggleStyle{ }
 extension ToggleStyle {
@@ -38410,9 +38480,33 @@ extension ToggleStyle {
     /// The system calls this method for each ``Toggle`` instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
-    /// For example, to make a custom toggle style which returns a ``HStack`` from makeBody:
+    /// For example, to make a custom toggle style which returns a ``HStack`` from
+    /// `makeBody(configuration:)`:
     ///
-    /// ![Toggle style example 1](togglestyle-example-1.gif)
+    /// ```
+    /// struct CustomRectangleToggleStyle: ToggleStyle {
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         HStack {
+    ///             configuration.label
+    ///             Rectangle()
+    ///                 .frame(width: 75, height: 30)
+    ///                 .overlay(
+    ///                     Circle()
+    ///                         .foregroundColor(configuration.isOn ? Color.green : Color.red)
+    ///                         .padding(.all, 3)
+    ///                         .offset(x: configuration.isOn ? 20 : -20, y: 0)
+    ///                         .animation(Animation.linear(duration: 0.1))
+    ///                 )
+    ///                 .onTapGesture {
+    ///                     configuration.isOn.toggle()
+    ///                 }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can then apply this ``ToggleStyle`` to a ``Toggle``
+    /// using ``View/toggleStyle(_:)``:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -38426,29 +38520,9 @@ extension ToggleStyle {
     ///        .toggleStyle(CustomRectangleToggleStyle())
     ///    }
     /// }
-    ///
-    /// struct CustomRectangleToggleStyle: ToggleStyle {
-    ///
-    ///    func makeBody(configuration: Configuration) -> some View {
-    ///        HStack {
-    ///            configuration.label
-    ///            Rectangle()
-    ///                .frame(width: 75, height: 30)
-    ///                .overlay(
-    ///                    Circle()
-    ///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
-    ///                        .padding(.all, 3)
-    ///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
-    ///                        .animation(Animation.linear(duration: 0.1))
-    ///                )
-    ///                .onTapGesture {
-    ///                    configuration.isOn.toggle()
-    ///
-    ///                }
-    ///        }
-    ///    }
-    /// }
     /// ```
+    ///
+    /// ![Toggle style example 1](togglestyle-example-1.gif)
     ///
     /// - Parameter configuration: The properties of the toggle, such as its
     ///   label and its “on” state.
@@ -40179,7 +40253,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///
 /// `UnitPoints`s can be used to specify the anchor point for view
 /// transformations like ``View/rotationEffect(_:anchor:)``
-/// and ``View/scaleEffect(_:anchor:)-31528``.They are used commonly in
+/// and ``View/scaleEffect(_:anchor:)-31528``. They are used commonly in
 /// ``Shape``s and gradients.
 ///
 /// For example, a ``LinearGradient`` accepts a `UnitPoint` for the
@@ -40509,6 +40583,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///
     /// Use this static constant to specify a ``UnitPoint`` with an
     /// `x` of `0` and a `y` of `0`.
+    ///
+    /// - Note: This is the same as ``UnitPoint/zero``.
     ///
     /// ```
     /// struct ContentView: View {
@@ -41703,6 +41779,7 @@ extension View {
     ///     let timer = Timer.publish(every: 1.0, on: .main, in: .default).autoconnect()
     ///
     ///     @State var time = ""
+    ///
     ///     var body: some View {
     ///         Text(time)
     ///             .onReceive(timer) { t in time = String(describing: t) }
@@ -41820,7 +41897,9 @@ extension View {
     /// struct AppearedView: View {
     ///     var body: some View {
     ///         Text("If you're reading this 🍌 was printed")
-    ///             .onAppear { print("🍌") }
+    ///             .onAppear {
+    ///                 print("🍌")
+    ///             }
     ///     }
     /// }
     /// ```
@@ -41859,10 +41938,16 @@ extension View {
     /// A view modifier that performs an action when the view disappears.
     ///
     /// ```
-    /// struct DisappearingView: View {
+    /// struct ContentView: View {
+    ///     @State var show = true
+    ///     @State var message = "DO IT"
+    ///
     ///     var body: some View {
-    ///         Text("When you close this 🍌 WILL be printed")
-    ///             .onDisappear { print("🍌") }
+    ///         VStack {
+    ///             Button(message) { show = false }
+    ///             Text("When I disappear, this 👆 will become a banana")
+    ///                 .onDisappear { message = "🍌" }
+    ///         }
     ///     }
     /// }
     /// ```
@@ -41918,7 +42003,7 @@ extension View {
     /// ```
     /// struct ContextMenuView: View {
     ///     var body: some View {
-    ///         Text("Favorite Card Suit")
+    ///         Text("Press and hold for cards")
     ///             .contextMenu {
     ///                 Button("♥️ - Hearts", action: { })
     ///                 Button("♣️ - Clubs", action: { })
@@ -41945,7 +42030,7 @@ extension View {
     ///
     /// Use `contextMenu(_:)` to attach a contextual menu struct and its
     /// children to the view. This modifier allows for the contextual menu to be
-    /// conditionally available by passing `nil` as the value for ``contextMenu``.
+    /// conditionally available by passing `nil` as the value for `contextMenu`.
     ///
     /// In the example below a ``ContextMenu`` that contains four menu items is
     /// created and is passed into the `contextMenu(_:)` modifier. The
@@ -41959,9 +42044,9 @@ extension View {
     ///     func selectHearts() {
     ///         // Act on hearts selection.
     ///     }
-    ///     func selectClubs() { ... }
-    ///     func selectSpades() { ... }
-    ///     func selectDiamonds() { ... }
+    ///     func selectClubs() { }
+    ///     func selectSpades() { }
+    ///     func selectDiamonds() { }
     ///
     ///     let menuItems = ContextMenu {
     ///         Button("♥️ - Hearts", action: selectHearts)
@@ -41972,9 +42057,10 @@ extension View {
     ///
     ///     struct ContextMenuMenuItems: View {
     ///         private var shouldShowMenu = true
+    ///
     ///         var body: some View {
     ///             VStack {
-    ///                 Text("Favorite Card Suit")
+    ///                 Text("Press and hold for cards")
     ///                     .padding()
     ///                     .contextMenu(shouldShowMenu ? menuItems : nil)
     ///             }
@@ -42001,9 +42087,9 @@ extension View {
     /// conforms to the ``MenuStyle`` protocol.
     ///
     /// Existing menu styles include:
-    /// - ``DefaultMenuButtonStyle``
-    /// - ``BorderlessMenuButtonStyle``
-    /// - ``BorderedMenuButtonStyle`` (on macOS)
+    /// - ``DefaultMenuStyle``
+    /// - ``BorderlessButtonMenuStyle``
+    /// - ``BorderedButtonMenuStyle`` (on macOS)
     ///
     /// The ``MenuStyle`` protocol also supports custom structures.
     ///
@@ -42014,10 +42100,12 @@ extension View {
     ///             Button("Open in Preview", action: { })
     ///             Button("Save as PDF", action: { })
     ///         }
-    ///         .menuStyle(ButtonMenuStyle())
+    ///         .menuStyle(BorderlessButtonMenuStyle())
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](menustyle-modifier.png)
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
@@ -42044,10 +42132,17 @@ extension View {
     ///
     /// ```
     /// struct DoubleTapView: View {
-    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     @State var message = "Double tap me 👇"
+    ///
+    ///     var two: some Gesture {
+    ///         TapGesture(count: 2)
+    ///             .onEnded { message += "2️⃣" }
+    ///         }
+    ///     }
+    ///
     ///     var body: some View {
     ///         Text("Double tap me 👇")
-    ///             .gesture(g)
+    ///             .gesture(two)
     ///     }
     /// }
     /// ```
@@ -42076,13 +42171,23 @@ extension View {
     ///
     /// ```
     /// struct DoubleTapView: View {
-    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     @State var message = "Double tap me 👇"
+    ///
+    ///     var one: some Gesture {
+    ///         TapGesture(count: 1)
+    ///             .onEnded { message += "1️⃣" }
+    ///     }
+    ///     var two: some Gesture {
+    ///         TapGesture(count: 2)
+    ///             .onEnded { message += "2️⃣" }
+    ///     }
+    ///
     ///     var body: some View {
     ///         ZStack {
-    ///             Text("Double tap me 👇")
-    ///                 .onTapGesture { /*this never happens*/ }
+    ///             Text(message)
+    ///                 .gesture(two) //this never happens
     ///         }
-    ///         .highPriorityGesture(g)
+    ///         .highPriorityGesture(one)
     ///     }
     /// }
     /// ```
@@ -42111,11 +42216,17 @@ extension View {
     ///
     /// ```
     /// struct DoubleTapView: View {
-    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     @State var message = "Double tap me 👇"
+    ///
+    ///     var g: some Gesture {
+    ///         TapGesture(count: 2)
+    ///             .onEnded { message += "2️⃣" }
+    ///         }
+    ///     }
     ///     var body: some View {
     ///         ZStack {
-    ///             Text("Double tap me 👇")
-    ///                 .onTapGesture { print("1️⃣") }
+    ///             Text(message)
+    ///                 .onTapGesture { message += "1️⃣" }
     ///         }
     ///         .simultaneousGesture(g)
     ///     }
@@ -42164,7 +42275,7 @@ extension View {
     ///
     ///              switch result {
     ///              case .failure(let error):
-    ///                  print("Error selecting file: \(error.localizedDescription:)")
+    ///                  print("Error selecting file: \(error.localizedDescription)")
     ///              case .success(let url):
     ///                 do {
     ///                     if url.startAccessingSecurityScopedResource() {
@@ -42223,7 +42334,7 @@ extension View {
     ///
     ///              switch result {
     ///              case .failure(let error):
-    ///                  print("Error selecting file: \(error.localizedDescription:)")
+    ///                  print("Error selecting file: \(error.localizedDescription)")
     ///              case .success(let urls):
     ///                 textInFiles = []
     ///                 for url in urls {
@@ -42308,7 +42419,7 @@ extension View {
     ///
     /// Use this modifier to add a redaction reason to a view hierarchy. Redaction
     /// reasons often update the appearance of the view. Currently,
-    /// there is only 1 redaction reason: ``RedactionReasons.placeholder``.
+    /// there is only 1 redaction reason: ``RedactionReasons/placeholder``.
     /// Adding this reason to the view will replace the view with a placeholder graphic.
     ///
     /// Adding a redaction is an additive process: any redaction
@@ -42323,6 +42434,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](redacted-1.png)
     ///
     /// Your child view can also read the redacted reason from its environment:
     ///
@@ -42345,11 +42458,18 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](redacted-2.png)
+    ///
     /// - Parameter reason: The reason for redacting the content.
     public func redacted(reason: RedactionReasons) -> some View { }
 
 
     /// A view modifier that removes all redaction reasons from a view.
+    ///
+    /// Use this modifier to unredact a ``View``. See
+    /// ``View/redacted(reason:)`` for an overview of redaction,
+    /// what it is, and why you might want to use it.
     ///
     /// ```
     /// struct UnredactedView: View {
@@ -42366,6 +42486,9 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](unredacted.png)
+    ///
     public func unredacted() -> some View { }
 
 }
@@ -42389,6 +42512,11 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](background.png)
+    ///
+    /// Check out ``View/overlay(_:alignment:)``, which is the opposite
+    /// modifier.
 	///
 	/// - Parameters:
 	///   - background: The view to place behind.
@@ -42418,12 +42546,15 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](overlay.png)
+    ///
+    /// Check out ``View/background(_:alignment:)``, which is the opposite
+    /// modifier.
 	///
 	/// - Parameters:
 	///   - overlay: The view to place in front.
 	///   - alignment: Where to align the in-front view relative to the current view. Defaults to center.
-	///
-	/// - SeeAlso: background(_:alignment:)
     @inlinable public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View { }
 
 
@@ -42442,11 +42573,13 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](border-1.png)
+    ///
     /// To place a border around the outside of this view, apply padding of the
     /// same width before adding the border:
     ///
     /// ```
-    /// struct PaddedBorderView {
+    /// struct PaddedBorderView: View {
     ///     var body: some View {
     ///         Text("Purple border outside the view bounds.")
     ///             .padding(4)
@@ -42455,19 +42588,23 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](border-2.png)
+    ///
     /// A border doesn't have to be a plain color - it can be any ``ShapeStyle``, for example,
     /// a ``LinearGradient``:
     ///
     /// ```
-    /// struct GradientBorderView {
+    /// struct GradientBorderView: View {
     ///     var body: some View {
     ///         Text("Gradient border.")
-    ///             .border(LinearGradient(gradient: Gradient(color: [.purple, .pink]),
+    ///             .border(LinearGradient(gradient: Gradient(colors: [.purple, .pink]),
     ///                                    startPoint: .top,
     ///                                    endPoint: .bottom), width: 4)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](border-3.png)
     ///
     /// - Parameters:
     ///   - content: The border style.
@@ -42486,7 +42623,7 @@ extension View {
     /// A view modifier that constrains this view's dimensions to the specified aspect ratio.
     ///
     /// Use `aspectRatio(_:contentMode:)` to constrain a view's dimensions to an
-    /// aspect ratio specified by a [CGFloat](https://developer.apple.com/documentation/coregraphics/cgfloat)
+    /// aspect ratio specified by a [`CGFloat`](https://developer.apple.com/documentation/coregraphics/cgfloat)
     /// using the specified content mode.
     ///
     /// If this view is resizable, the resulting view will have `aspectRatio` as
@@ -42505,6 +42642,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](aspectratio-2.png)
+    ///
     /// - Parameters:
     ///   - aspectRatio: The ratio of width to height to use for the resulting
     ///     view. Use `nil` to maintain the current aspect ratio in the
@@ -42520,7 +42659,7 @@ extension View {
     /// A view modifier that constrains this view's dimensions to the aspect ratio of the given size.
     ///
     /// Use `aspectRatio(_:contentMode:)` to contstrain a view's dimentsions to
-    /// an aspect ratio specified by a [CGSize](https://developer.apple.com/documentation/coregraphics/cgsize).
+    /// an aspect ratio specified by a [`CGSize`](https://developer.apple.com/documentation/coregraphics/cgsize).
     ///
     /// If this view is resizable, the resulting view uses `aspectRatio` as its
     /// own aspect ratio. In this example, the purple ellipse has a 3:4
@@ -42535,7 +42674,10 @@ extension View {
     ///             .frame(width: 200, height: 200)
     ///             .border(Color(white: 0.75))
     ///     }
+    /// }
     /// ```
+    ///
+    /// ![](aspectratio-1.png)
     ///
     /// - Parameters:
     ///   - aspectRatio: A size that specifies the ratio of width to height to
@@ -42565,8 +42707,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](scaledtofit.png)
+    ///
     /// This method is equivalent to calling
-    /// `View/aspectRatio(_:contentMode:)-5ehx6` with a `nil` aspectRatio and
+    /// `View/aspectRatio(_:contentMode:)-6576a` with a `nil` aspectRatio and
     /// a content mode of ``ContentMode/fit``.
     ///
     /// - Returns: A view that scales this view to fit its parent, maintaining
@@ -42591,8 +42735,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](scaledtofill.png)
+    ///
     /// This method is equivalent to calling
-    /// `View/aspectRatio(_:contentMode:)-5ehx6` with a `nil` aspectRatio and
+    /// `View/aspectRatio(_:contentMode:)-6576a` with a `nil` aspectRatio and
     /// a content mode of ``ContentMode/fill``.
     ///
     /// - Returns: A view that scales this view to fill its parent, maintaining
@@ -42623,6 +42769,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -42657,6 +42805,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](fixedsize-1.png)
+    ///
     /// The `fixedSize()` modifier can be used to create a view that maintains
     /// the *ideal size* of its children both dimensions:
     ///
@@ -42670,6 +42820,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -42713,7 +42865,7 @@ extension View {
   ///
   /// ![Foreground Color Cicles](foregroundcolor-circles.png)
   ///
-  /// But this modifier is very general and wors in many places. For example,
+  /// But this modifier is very general and works in many places. For example,
   /// you can change the text color of any control, like a ``Button``,
   /// ``Toggle``, or ``DatePicker`` using `.foregroundColor(_:)`:
   ///
@@ -42760,7 +42912,7 @@ extension View {
   /// instead of a generic `some View`.
   ///
   /// - Parameter color: The color to use in the view's foreground.
-  /// - Returns: A some view that uses the foreround color value you supply.
+  /// - Returns: A view that uses the foreround color value you supply.
     @inlinable public func foregroundColor(_ color: Color?) -> some View { }
 
 }
@@ -42893,6 +43045,7 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// ![](offset-2.png)
     ///
     /// - Parameter offset: The distance to offset this view.
     ///
@@ -42920,6 +43073,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](offset.png)
+    ///
     /// - Parameters:
     ///   - x: The horizontal distance to offset this view.
     ///   - y: The vertical distance to offset this view.
@@ -42942,26 +43097,31 @@ extension View {
     /// In the example below, the ``HStack`` is offset by a constant of 50
     /// points to the right of center:
     ///
-    ///     VStack {
-    ///         Text("Today's Weather")
-    ///             .font(.title)
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Today's Weather")
+    ///                 .font(.title)
+    ///                 .border(Color.gray)
+    ///             HStack {
+    ///                 Text("🌧")
+    ///                 Text("Rain & Thunderstorms")
+    ///                 Text("⛈")
+    ///             }
+    ///             .alignmentGuide(HorizontalAlignment.center) { _ in  50 }
     ///             .border(Color.gray)
-    ///         HStack {
-    ///             Text("🌧")
-    ///             Text("Rain & Thunderstorms")
-    ///             Text("⛈")
     ///         }
-    ///         .alignmentGuide(HorizontalAlignment.center) { _ in  50 }
     ///         .border(Color.gray)
     ///     }
-    ///     .border(Color.gray)
+    /// }
+    /// ```
+    ///
+    /// ![](alignmentguide-2.png)
     ///
     /// Changing the alignment of one view may have effects on surrounding
     /// views. Here the offset values inside a stack and its contained views is
     /// the difference of their absolute offsets.
-    ///
-    /// ![A view showing the two emoji offset from a text element using a
-    /// horizontal alignment guide.](SwiftUI-View-HAlignmentGuide.png)
     ///
     /// - Parameters:
     ///   - g: A ``HorizontalAlignment`` value at which to a base the offset.
@@ -42983,28 +43143,33 @@ extension View {
     /// In the example below, the weather emoji are offset 20 points from the
     /// vertical center of the ``HStack``.
     ///
-    ///     VStack {
-    ///         Text("Today's Weather")
-    ///             .font(.title)
-    ///             .border(Color.gray)
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Today's Weather")
+    ///                 .font(.title)
+    ///                 .border(Color.gray)
     ///
-    ///         HStack {
-    ///             Text("🌧")
-    ///                 .alignmentGuide(VerticalAlignment.center) { _ in -20 }
-    ///             Text("Rain & Thunderstorms")
-    ///                 .border(Color.gray)
-    ///             Text("⛈")
-    ///                 .alignmentGuide(VerticalAlignment.center) { _ in 20 }
-    ///                 .border(Color.gray)
+    ///             HStack {
+    ///                 Text("🌧")
+    ///                     .alignmentGuide(VerticalAlignment.center) { _ in -20 }
+    ///                 Text("Rain & Thunderstorms")
+    ///                     .border(Color.gray)
+    ///                 Text("⛈")
+    ///                     .alignmentGuide(VerticalAlignment.center) { _ in 20 }
+    ///                     .border(Color.gray)
+    ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](alignmentguide.png)
     ///
     /// Changing the alignment of one view may have effects on surrounding
     /// views. Here the offset values inside a stack and its contained views is
     /// the difference of their absolute offsets.
-    ///
-    /// ![A view showing the two emoji offset from a text element using a
-    /// vertical alignment guide.](SwiftUI-View-VAlignmentGuide.png)
     ///
     /// - Parameters:
     ///   - g: A ``VerticalAlignment`` value at which to a base the offset.
@@ -43038,6 +43203,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](position-2.png)
+    ///
     /// - Parameter position: The point at which to place the center of this
     ///   view.
     ///
@@ -43060,6 +43227,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](position.png)
     ///
     /// - Parameters:
     ///   - x: The x-coordinate at which to place the center of this view.
@@ -43085,20 +43254,19 @@ extension View {
     /// outside the safe area to the bounds of the screen for the specified
     /// edges.
     ///
-    /// For example, you can propose that a text view ignore the safe area's top
-    /// inset:
-    ///
-    ///     VStack {
-    ///         Text("This text is outside of the top safe area.")
-    ///             .edgesIgnoringSafeArea([.top])
-    ///             .border(Color.purple)
-    ///         Text("This text is inside VStack.")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere")
+    ///         }
+    ///         .edgesIgnoringSafeArea(.all)
     ///     }
-    ///     .border(Color.gray)
+    /// }
+    /// ```
     ///
-    /// ![A screenshot showing a view whose bounds exceed the safe area of the
-    /// screen.](SwiftUI-View-edgesIgnoringSafeArea.png)
+    /// ![](ignoressafearea.png)
     ///
     /// Depending on the surrounding view hierarchy, SwiftUI may not honor an
     /// `edgesIgnoringSafeArea(_:)` request. This can happen, for example, if
@@ -43126,15 +43294,15 @@ extension View {
     /// you would like to ignore those safe areas.
     ///
     /// The first parameter is of type ``SafeAreaRegions``. The options are:
-    /// - `.container`: The navigation bar and bottom bar on iPhone X+.
-    /// - `.keyboard`: The software keyboard area.
-    /// - `.all`: All safe areas
+    /// - `SafeAreaRegions/container`: The navigation bar and bottom bar on iPhone X+.
+    /// - `SafeAreaRegions/keyboard`: The software keyboard area.
+    /// - `SafeAreaRegions/all`: All safe areas
     ///
     /// The second parameter has edge options:
-    /// - `.leading`
-    /// - `.trailing`
-    /// - `.top`
-    /// - `.bottom`
+    /// - `Edge/Set/leading`
+    /// - `Edge/Set/trailing`
+    /// - `Edge/Set/top`
+    /// - `Edge/Set/bottom`
     ///
     /// ```
     /// struct SafeAreaIgnoringView: View {
@@ -43147,6 +43315,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ignoressafearea.png)
     ///
     /// - Parameters:
     ///   - regions: the kinds of rectangles removed from the safe area
@@ -43199,6 +43369,28 @@ extension View {
     /// as well as that view's descendant views. It has no effect
     /// outside the view hierarchy on which you call it.
     ///
+    /// This is actually how SwiftUI is able to create modifiers that get
+    /// passed through the environment instead of being applied to a specific
+    /// view. You can apply this technique in your own views as well.
+    /// To illustrate, see this demonstration using truncation mode from above:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("This is a long 🛹 piece of text 💬 to demonstrate environment")
+    ///                 .lineLimit(1)
+    ///                 .environment(\.truncationMode, .head)
+    ///             Text("This is a long 🛹 piece of text 💬 to demonstrate environment")
+    ///                 .lineLimit(1)
+    ///                 .truncationMode(.head)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](environment-modifier.png)
+    ///
     /// - Parameters:
     ///   - keyPath: A key path that indicates the property of the
     ///     ``EnvironmentValues`` structure to update.
@@ -43240,6 +43432,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](zindex.png)
+    ///
     /// - Parameter value: A relative front-to-back ordering for this view; the
     ///   default is `0`.
     @inlinable public func zIndex(_ value: Double) -> some View { }
@@ -43253,7 +43447,7 @@ extension View {
     ///
     /// Use `transformEffect(_:)` to rotate, scale, translate, or skew the
     /// output of the view according to the provided
-    /// [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
+    /// [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
     ///
     /// In the example below, the text is rotated at -30˚ on the `y` axis.
     ///
@@ -43268,6 +43462,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](transformeffect.png)
     ///
     /// - Parameter transform: A
     /// [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
@@ -43302,7 +43498,7 @@ extension View {
     ///             Button("Eat 🍑") { selection = Emoji(name: "🍑") }
     ///         }
     ///         .actionSheet(item: $selection) { selection in
-    ///             let confirm = ActionSheet.Button.default(Text("Confirm \(selection.name)") { /* action here */ }
+    ///             let confirm = ActionSheet.Button.default(Text("Confirm \(selection.name)")) { /* action here */ }
     ///             let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /* action here */ }
     ///             let buttons = [confirm, cancel]
     ///
@@ -43340,7 +43536,7 @@ extension View {
     ///             .actionSheet(isPresented: $showActionSheet) {
     ///                 let confirm = ActionSheet.Button.default(Text("Confirm")) { /*action here*/ }
     ///                 let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /*action here*/ }
-    ///                 let buttons = [save, cancel]
+    ///                 let buttons = [confirm, cancel]
     ///
     ///                 return ActionSheet(title: Text("Food alert!"),
     ///                                message: Text("You have made a selection"),
@@ -43403,22 +43599,28 @@ extension View {
     /// }
     /// ```
     ///
-    /// Apply colors in lightmode & darkmode with `accentcolor`.
+    /// ![](accentcolor.png)
     ///
-    /// Light Mode:
+    /// Another common use of `accentColor(_:)` by mixing it with
+    /// The ``Color`` property
+    /// ``Color/primary``.
+    /// This allows you to make text white in dark mode and black in light mode.
+    /// For example:
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .accentColor(.primary)
+    ///         }
+    ///     }
+    ///
+    /// In light mode, this produces:
+    ///
     /// ![Light Primary](color-primary-light.png)
     ///
-    /// Dark Mode:
+    /// And in dark mode:
+    ///
     /// ![Dark Primary](color-primary-dark.png)
-    ///
-    /// Code:
-    ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Text("Bananas 🍌🍌")
-    ///                .accentColor(.primary)
-    ///        }
-    ///    }
     ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
@@ -43434,30 +43636,34 @@ extension View {
     ///
     /// Disable interaction on a view.
     ///
-    /// ![Disabled Example](disabled-example.gif)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     @State var isDisabled = false
-    ///     var body: some View {
-    ///         Toggle("Disable The Banana", isOn: $isDisabled)
     ///
-    ///         Button("Banana 🍌🍌") { }
-    ///             .disabled(isDisabled)
+    ///     var body: some View {
+    ///         VStack {
+    ///             Toggle("Disable The Banana", isOn: $isDisabled)
+    ///             Button("Banana 🍌🍌") { }
+    ///                 .disabled(isDisabled)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Disabled Example](disabled-example.gif)
     ///
     /// Another example:
     ///
     /// ```
     /// struct CantTouchThisView: View {
     ///     var body: some View {
-    ///         Button(Text("Can't touch this 🎶")) { }
+    ///         Button("Can't touch this 🎶") { }
     ///             .disabled(true)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](disabled.png)
     ///
     /// - Parameter disabled: A Boolean value that determines whether users can
     ///   interact with this view.
@@ -43511,11 +43717,13 @@ extension View {
     ///             .resizable()
     ///             .frame(width: 100, height: 100, alignment: .center)
     ///             .foregroundColor(Color.red)
-    ///             .scaleEffect(CGSize(x: 0.9, y: 1.3), anchor: .leading)
+    ///             .scaleEffect(CGSize(width: 0.9, height: 1.3), anchor: .leading)
     ///             .border(Color.gray)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scaleeffect-3.png)
     ///
     /// - Parameters:
     ///   - scale: A [CGSize](https://developer.apple.com/documentation/CoreGraphics/CGSize) that
@@ -43545,6 +43753,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](scaleeffect-2.png)
+    ///
     /// - Parameters:
     ///   - s: The amount to scale the view in the view in both the horizontal
     ///     and vertical directions.
@@ -43571,6 +43781,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scaleeffect.png)
     ///
     /// - Parameters:
     ///   - x: An amount that represents the horizontal amount to scale the
@@ -43606,6 +43818,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](blur.png)
+    ///
     /// - Parameters:
     ///   - radius: The radial size of the blur. A blur is more diffuse when its
     ///     radius is large.
@@ -43626,18 +43840,20 @@ extension View {
     /// increasing from 0 (fully red) to 100% (white) in 20% increments.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .brightness(Double(idx)*0.2)
+    ///                     .brightness(Double(i) * 0.2)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    //
+    /// ![](brightness.png)
     ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
@@ -43668,7 +43884,7 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct ColorInvert: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 Color.red.frame(width: 100, height: 100, alignment: .center)
@@ -43692,6 +43908,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](color-invert.png)
+    ///
     /// - Returns: A view that inverts its colors.
     @inlinable public func colorInvert() -> some View { }
 
@@ -43714,7 +43932,7 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct ColorMultiply: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 Color.red.frame(width: 100, height: 100, alignment: .center)
@@ -43737,6 +43955,8 @@ extension View {
     ///             .padding(50)
     ///         }
     ///     }
+    ///
+    /// ![](color-multiply.png)
     ///
     /// - Parameter color: The color to bias this view toward.
     ///
@@ -43771,14 +43991,14 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct Contrast: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
-    ///                 ForEach(-1..<6) {
+    ///                 ForEach(-1..<6) { i in
     ///                     Color.red.frame(width: 50, height: 50, alignment: .center)
     ///                         .overlay(CircleView(), alignment: .center)
-    ///                         .contrast(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%")
+    ///                         .contrast(Double(i) * 0.2)
+    ///                         .overlay(Text("\(Double(i) * 0.2 * 100, specifier: "%.0f")%")
     ///                                      .font(.callout),
     ///                                  alignment: .bottom)
     ///                         .border(Color.gray)
@@ -43786,6 +44006,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](contrast.png)
     ///
     /// - Parameter amount: The intensity of color contrast to apply. negative
     ///   values invert colors in addition to applying contrast.
@@ -43806,15 +44028,17 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .greyscale(Double(idx)*0.2 - 0.01)
+    ///                     .grayscale(Double(i) *0 .2 - 0.01)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](grayscale.png)
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -43837,15 +44061,17 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .hueRotation(Angle(degrees: Double(idx)*360/12))
+    ///                     .hueRotation(Angle(degrees: Double(i) * 360/12))
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](huerotation.png)
     ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
@@ -43869,18 +44095,25 @@ extension View {
     ///
     /// ```
     /// struct DarkView: View {
-    ///     VStack {
-    ///         Button(action: { }) {
-    ///             Text(" Button")
+    ///     @State var sliderValue: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Button(action: { }) {
+    ///                 Text(" Button")
+    ///             }
+    ///             HStack {
+    ///                 Text("Slider").accentColor(Color.green)
+    ///                 Slider(value: $sliderValue, in: -100...100, step: 0.1)
+    ///             }
     ///         }
-    ///         HStack {
-    ///             Text("Slider").accentColor(Color.green)
-    ///             Slider(value: $sliderValue, in: -100...100, step: 0.1)
+    ///         .preferredColorScheme(.dark)
     ///         }
     ///     }
-    ///     .preferredColorScheme(.dark)
     /// }
     /// ```
+    ///
+    /// ![](preferredcolorscheme.png)
     ///
     /// - Parameter colorScheme: The color scheme for this view.
     ///
@@ -43913,7 +44146,7 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct LuminanceToAlpha: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 Color.red.frame(width: 60, height: 60, alignment: .center)
@@ -43926,6 +44159,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](luminancetoalpha.png)
     ///
     /// - Returns: A view that applies a luminance to alpha effect to this view.
     @inlinable public func luminanceToAlpha() -> some View { }
@@ -43944,17 +44179,20 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .saturation(Double(idx)*0.2)
+    ///                     .saturation(Double(i) * 0.2)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// - SeeAlso: ``View/contrast(_:)``
+    /// ![](saturation-modifier.png)
+    ///
+    /// See related symbol ``View/contrast(_:)``.
+    ///
     /// - Parameter amount: The amount of saturation to apply to this view.
     ///
     /// - Returns: A view that adjusts the saturation of this view.
@@ -43973,35 +44211,39 @@ extension View {
     /// The transition is only one part of the equation - a timer curve (animation)
     /// must also be specified. There are two ways to specify the associated animation:
     ///
-    ///
-    ///
     /// 1. With ``View/animation(_:)``.
     /// 2. Explicitly, using ``withAnimation(_:_:)``.
     ///
-    ///
-    ///
     /// See ``AnyTransition`` for more on how to create a transition.
     ///
-    /// ### Using animation(_:)
+    /// ### Using `animation(_:)`
+    ///
+    /// We can animate the toggle `animation(.easeInOut)`.
     ///
     /// ```
     /// struct ImplicitTransitionView: View {
     ///     @State var showBanana = false
     ///
     ///     var body: some View {
-    ///         Button("Toggle") { showBanana.toggle() }
-    ///         if showBanana {
-    ///             Text("🍌")
-    ///                 .animation(.easeInOut)
-    ///                 .transition(.slide)
+    ///         VStack {
+    ///             Button("Toggle") { showBanana.toggle() }
+    ///             if showBanana {
+    ///                 Text("🍌")
+    ///                     .animation(.easeInOut)
+    ///                     .transition(.slide)
+    ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ### Using withAnimation(_:_:)
-    ///
     /// ![Slide transition](with-animation-2.gif)
+    ///
+    /// ### Using `withAnimation(_:_:)`
+    ///
+    /// We can get the same effect by toggling `showBanana` explicitly
+    /// with an animation
+    /// using ``withAnimation(_:_:)``.
     ///
     /// ```
     /// struct ExplicitTransitionView: View {
@@ -44018,6 +44260,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Slide transition](with-animation-2.gif)
     @inlinable public func transition(_ t: AnyTransition) -> some View { }
 
 }
@@ -44038,15 +44282,17 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .opacity(Double(idx)*0.2)
+    ///                     .opacity(Double(i) * 0.2)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](opacity-modifier.png)
     ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
@@ -44062,7 +44308,7 @@ extension View {
     /// A view modifier that applies the given animation to this view when the specified value
     /// changes.
     ///
-    /// Use this modifier to when you only want to animate a particular @``State``
+    /// Use this modifier to when you only want to animate a particular `@State`
     /// property instead of animating all of them.
     ///
     /// To animate all properties associated with a ``View``, use
@@ -44074,12 +44320,14 @@ extension View {
     ///     @State var transportFlag = false
     ///
     ///     var body: some View {
-    ///         Button("Move the banana") { moveFlag.toggle() }
-    ///         Button("Transport the banana") { transportFlag.toggle() }
-    ///         Text("🍌")
-    ///             .offset(x: moveFlag ? 0 : 50)
-    ///             .offset(x: transportFlag ? 0 : 50)
-    ///             .animation(.easeInOut, value: moveFlag)
+    ///         VStack {
+    ///             Button("Move the banana") { moveFlag.toggle() }
+    ///             Button("Transport the banana") { transportFlag.toggle() }
+    ///             Text("🍌")
+    ///                 .offset(x: moveFlag ? 0 : 50)
+    ///                 .offset(x: transportFlag ? 0 : 50)
+    ///                 .animation(.easeInOut, value: moveFlag)
+    ///         }
     ///     }
     /// }
     /// ```
@@ -44960,7 +45208,7 @@ extension View {
     /// ``View/fixedSize()`` modifier.
     ///
     /// Play with the numbers in the following example to see how the
-    /// child view responds
+    /// child view responds.
     ///
     /// ```
     /// struct CustomFrameView: View {
@@ -47633,7 +47881,7 @@ extension View {
 
     /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
     ///
-    /// Whenever the ``@AppStorage` property wrapper is used, it defaults its location to
+    /// Whenever the `@AppStorage` property wrapper is used, it defaults its location to
     /// `UserDefaults.standard`. Override this default location for all of your
     /// scene's views by using this modifier.
     ///
