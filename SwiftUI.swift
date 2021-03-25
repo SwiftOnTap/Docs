@@ -2322,8 +2322,8 @@ extension Animation {
     /// in the beginning, then overshoots the target, and returns back
     /// with a spring effect.
     ///
-    /// > When mixed with other `Animation/spring()`
-    /// or `Animation/interactiveSpring()` animations on the same property, each
+    /// When mixed with other ``Animation/spring(response:dampingFraction:blendDuration:)``
+    /// or ``Animation/interactiveSpring(response:dampingFraction:blendDuration:)`` animations on the same property, each
     /// animation will be replaced by their successor, preserving
     /// velocity from one animation to the next. Optionally blends the
     /// response values between springs over a time period.
@@ -2399,8 +2399,6 @@ extension Animation {
 extension Animation {
 
 	/// An identity animation that happens immediately.
-    ///
-    /// Use this property to turn off animation on a view.
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2812,7 +2810,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-speed-ex)
+    /// ![](animation-speed-ex.gif)
     ///
     public func speed(_ speed: Double) -> Animation { }
 }
