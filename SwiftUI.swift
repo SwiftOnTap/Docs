@@ -711,7 +711,7 @@ public struct AccessibilityTraits : SetAlgebra {
 /// of a user's screen. It provides **two or more** options
 /// to the user based on the app context.
 ///
-/// An `ActionSheet` is similar to an ``Alert``, but it appears at the bottom
+/// An ``ActionSheet`` is similar to an ``Alert``, but it appears at the bottom
 /// of the screen instead of in the middle. To let the user respond
 /// to the **state** of the app, use an ``Alert`` instead.
 ///
@@ -728,7 +728,7 @@ public struct AccessibilityTraits : SetAlgebra {
 /// action sheet.
 ///
 /// The buttons can take 3 styles: ``Alert/Button/cancel(_:action:)``
-/// `Alert/Button/default(_:action:)`, and
+/// ``Alert/Button/default(_:action:)``, and
 /// ``Alert/Button/destructive(_:action:)``.
 /// Check out ``Alert/Button`` for the full overview of action sheet buttons,
 /// the available styles, and how to create them.
@@ -796,8 +796,6 @@ public struct ActionSheet {
 /// An alert can be created with one of two initializers, depending on if one button
 /// or two is required. For example, to create an Alert with one button:
 ///
-/// ![Example alert 1](alert-example-1.gif)
-///
 /// ```
 /// struct ExampleAlertView: View {
 ///    @State private var showAlert = false
@@ -816,6 +814,8 @@ public struct ActionSheet {
 /// }
 /// ```
 ///
+/// ![Example alert 1](alert-example-1.gif)
+///
 /// If the `dismissButton` value is left unspecified (as it was in this example),
 /// it will default to a dismiss button with the text "Ok".
 ///
@@ -823,27 +823,28 @@ public struct ActionSheet {
 /// create a new ``Alert/Button`` instance and pass it in as a part of the initializer.
 /// For example, to make an alert with a cancel and destructive button:
 ///
-/// ![Example alert 2](alert-example-2.gif)
 ///
 /// ```
 /// struct ExampleAlertView: View {
-///    @State private var showAlert = false
+///     @State private var showAlert = false
 ///
-///    var body: some View {
-///        Button("Tap to view alert") {
-///            showAlert = true
-///        }
-///        .alert(isPresented: $showAlert) {
-///            Alert(
-///                title: Text("Are you sure?"),
-///                message: Text("The following action will delete everything. Please confirm."),
-///                primaryButton: Alert.Button.destructive(Text("Delete")),
-///                secondaryButton: Alert.Button.cancel(Text("No, take me back!"))
-///            )
-///        }
-///    }
+///     var body: some View {
+///         Button("Tap to view alert") {
+///             showAlert = true
+///         }
+///         .alert(isPresented: $showAlert) {
+///             Alert(
+///                 title: Text("Are you sure?"),
+///                 message: Text("The following action will delete everything. Please confirm."),
+///                 primaryButton: Alert.Button.destructive(Text("Delete")),
+///                 secondaryButton: Alert.Button.cancel(Text("No, take me back!"))
+///             )
+///         }
+///     }
 /// }
 /// ```
+///
+/// ![Example alert 2](alert-example-2.gif)
 ///
 /// For illustrative purposes, the alert button values used the expanded syntax in this example.
 /// It is also valid to use the shorthand syntax when declaring alert buttons: `.default(_:action:)`,
@@ -852,7 +853,7 @@ public struct ActionSheet {
 /// Notes:
 ///  - Stylistically, `.default` and `.cancel` alert button styles are nearly identical with
 ///  the exception that `.cancel` has a bolded font weight.
-///  - Alert is the equivalent to UIKit's `UIAlertView`.
+///  - Alert is the equivalent to UIKit's [`UIAlertController`](https://developer.apple.com/documentation/uikit/uialertcontroller).
 ///  - For information on the human interface guidelines for alerts, see:
 ///  [https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/](https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -863,8 +864,6 @@ public struct Alert {
     /// If the `dismissButton` parameter is left unspecified, it will default to a button with the text "Ok".
     ///
     /// For example, to create a new Alert with this initializer and present it:
-    ///
-    /// ![Example alert 3](alert-example-3.gif)
     ///
     /// ```
     /// struct ExampleAlertView: View {
@@ -884,6 +883,9 @@ public struct Alert {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Example alert 3](alert-example-3.gif)
+    ///
     public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { }
 
     /// Creates an alert with two buttons.
@@ -893,8 +895,6 @@ public struct Alert {
     /// if they are a primary or secondary button.
     ///
     /// For example, to create a new Alert with this initializer and present it:
-    ///
-    /// ![Example alert 4](alert-example-2.gif)
     ///
     /// ```
     /// struct ExampleAlertView: View {
@@ -915,6 +915,9 @@ public struct Alert {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Example alert 4](alert-example-2.gif)
+    ///
     public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) { }
 
     /// A button representing an ``Alert`` button action.
@@ -1021,8 +1024,9 @@ public struct Alert {
 ///
 ///     var body: some View {
 ///         ZStack(alignment: alignment) {
-///             Text("Move me around 🤠")
+///             Text("I'm top aligned 🤠")
 ///             Color.clear
+///         }
 ///     }
 /// }
 /// ```
@@ -1032,15 +1036,15 @@ public struct Alert {
 /// #### The ``Alignment`` static properties
 ///
 /// There are 9 out-of-the-box alignments:
-/// 1. .``Alignment/topLeading``
-/// 2. .``Alignment/top``
-/// 3. .``Alignment/topTrailing``
-/// 4. .``Alignment/leading``
-/// 5. .``Alignment/center``
-/// 6. .``Alignment/trailing``
-/// 7. .``Alignment/bottomLeading``
-/// 8. .``Alignment/bottom``
-/// 9. .``Alignment/bottomTrailing``
+/// 1. ``Alignment/topLeading``
+/// 2. ``Alignment/top``
+/// 3. ``Alignment/topTrailing``
+/// 4. ``Alignment/leading``
+/// 5. ``Alignment/center``
+/// 6. ``Alignment/trailing``
+/// 7. ``Alignment/bottomLeading``
+/// 8. ``Alignment/bottom``
+/// 9. ``Alignment/bottomTrailing``
 ///
 /// ```
 /// struct ContentView: View {
@@ -1048,6 +1052,7 @@ public struct Alert {
 ///         ZStack(alignment: Alignment.bottomLeading) { //Try changing this!
 ///             Text("Move me around 🤠")
 ///             Color.clear
+///        }
 ///     }
 /// }
 /// ```
@@ -1098,8 +1103,12 @@ public struct Alert {
     ///         return ZStack(alignment: alignment) {
     ///             Text("Move me around 🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.11.38.png)
+    ///
     /// ```
     public var horizontal: HorizontalAlignment
 
@@ -1122,9 +1131,13 @@ public struct Alert {
     ///         return ZStack(alignment: alignment) {
     ///             Text("Move me around 🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.14.47.png)
+    ///
     public var vertical: VerticalAlignment
 
     /// Creates an instance with the given horizontal and vertical alignments.
@@ -1136,14 +1149,17 @@ public struct Alert {
     /// ```
     /// struct AlignmentView: View {
     ///     var body: some View {
-    ///         let alignment = Alignment(horizontal: .top, vertical: .leading)
+    ///         let alignment = Alignment(horizontal: .leading, vertical: .top)
     ///
     ///         return ZStack(alignment: alignment) {
     ///             Text("Move me around 🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.18.52.png)
     ///
     /// - Parameters:
     ///   - horizontal: The alignment on the horizontal axis.
@@ -1158,9 +1174,13 @@ public struct Alert {
     ///         ZStack(alignment: .center) {
     ///             Text("🤠")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.22.04.png)
+    ///
     public static let center: Alignment
 
     /// A guide marking the leading edge of the view.
@@ -1171,9 +1191,13 @@ public struct Alert {
     ///         ZStack(alignment: .leading) {
     ///             Text("⬅️")
     ///             Color.clear
-    ///     }
+    ///        }
+    ///    }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.23.18.png)
+    ///
     public static let leading: Alignment
 
     /// A guide marking the trailing edge of the view.
@@ -1184,9 +1208,13 @@ public struct Alert {
     ///         ZStack(alignment: .trailing) {
     ///             Text("➡️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.27.25.png)
+    ///
     public static let trailing: Alignment
 
     /// A guide marking the top edge of the view.
@@ -1197,9 +1225,13 @@ public struct Alert {
     ///         ZStack(alignment: .top) {
     ///             Text("⬆️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.28.22.png)
+    ///
     public static let top: Alignment
 
     /// A guide marking the bottom edge of the view.
@@ -1210,9 +1242,13 @@ public struct Alert {
     ///         ZStack(alignment: .bottom) {
     ///             Text("⬇️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.29.14.png)
+    ///
     public static let bottom: Alignment
 
     /// A guide marking the top and leading edges of the view.
@@ -1223,9 +1259,13 @@ public struct Alert {
     ///         ZStack(alignment: .topLeading) {
     ///             Text("↖️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.30.26.png)
+    ///
     public static let topLeading: Alignment
 
     /// A guide marking the top and trailing edges of the view.
@@ -1236,9 +1276,13 @@ public struct Alert {
     ///         ZStack(alignment: .topTrailing) {
     ///             Text("↖️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.31.17.png)
+    ///
     public static let topTrailing: Alignment
 
     /// A guide marking the bottom and leading edges of the view.
@@ -1249,9 +1293,13 @@ public struct Alert {
     ///         ZStack(alignment: .bottomLeading) {
     ///             Text("↙️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.33.12.png)
+    ///
     public static let bottomLeading: Alignment
 
     /// A guide marking the bottom and trailing edges of the view.
@@ -1259,12 +1307,16 @@ public struct Alert {
     /// ```
     /// struct AlignmentView: View {
     ///     var body: some View {
-    ///         ZStack(alignment: .center) {
+    ///         ZStack(alignment: .bottomTrailing) {
     ///             Text("↘️")
     ///             Color.clear
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.35.44.png)
+    ///
     public static let bottomTrailing: Alignment
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -1500,7 +1552,7 @@ extension Anchor.Source {
 ///
 /// ``Angle``s can also be used with drawing. Below, we define a custom
 /// ``Shape`` called `Arc`, and make its parameter type ``Angle``. In our
-/// ``View``, we pass 270 as the degrees parameter to specify the size of
+/// ``View``, we pass `270` as the degrees parameter to specify the size of
 /// the `Arc` to be displayed:
 ///
 /// ```
@@ -1549,6 +1601,9 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.42.39.png)
+    ///
     public var radians: Double
 
     /// The size of the angle, measured in degrees.
@@ -1569,6 +1624,9 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    ///
+    ///
     @inlinable public var degrees: Double
 
     /// Creates an angle of 0 degrees or 0 radians.
@@ -1581,6 +1639,9 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.44.26.png)
+    ///
     @inlinable public init() { }
 
     /// Creates an angle from a specified number of radians.
@@ -1593,6 +1654,8 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.45.08.png)
     ///
     /// - Parameter radians: The number of radians in the angle.
     @inlinable public init(radians: Double) { }
@@ -1607,6 +1670,8 @@ extension Anchor.Source {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.45.55.png)
     ///
     /// - Parameter degrees: The number of degrees in the angle.
     @inlinable public init(degrees: Double) { }
@@ -1625,6 +1690,8 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    ///
     /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle { }
 
@@ -1642,7 +1709,9 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// - Paramter degrees: The number of degrees the new angle should be.
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.43.27.png)
+    ///
+    /// - Parameter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle { }
 }
 
@@ -1716,6 +1785,9 @@ extension Angle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 14.44.26.png)
+    ///
     @inlinable public static var zero: Angle { get }
 
     /// The type defining the data to animate.
@@ -1745,12 +1817,10 @@ extension Angle : Animatable {
 ///
 /// Note: Angles default to a clockwise rotation, but angles can be a negative value which will rotate the color counter-clockwise.
 ///
-/// #### End Angle - Start Angle = 2π
+/// ## End Angle - Start Angle = 2π
 ///
 /// This is the normal case where the start and end angles make a complete circle.
 /// Every color will evenly distribute.
-///
-/// ![AngularGradient Example 1](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1764,12 +1834,12 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// #### End Angle - Start Angle > 2π
+/// ![AngularGradient Example 1](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
+///
+/// ## End Angle - Start Angle > 2π
 ///
 /// This is the case where the total angle is greater than a circle.
-/// The gradient will only draw the last complete turn which effectively writes over the first circle portion
-///
-/// ![AngularGradient Example 2](89BED914-29DA-4009-9EA1-96E1849E55F0.png)
+/// The gradient will only draw the last complete turn which effectively writes over the first circle portion.
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1788,13 +1858,13 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// #### End Angle - Start Angle < 2π
+/// ![AngularGradient Example 2](89BED914-29DA-4009-9EA1-96E1849E55F0.png)
+///
+/// ## End Angle - Start Angle < 2π
 ///
 /// This is the case where the total angle is less than a circle.
 /// The gradient will not make a complete circle, but the missing area between the start and end will be evenly colored with the
 /// first and last color of the gradient.
-///
-/// ![AngularGradient Example 3](94015C67-FC57-44CC-9EA4-F982A47AEB7D.png)
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1813,6 +1883,8 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
+/// ![AngularGradient Example 3](94015C67-FC57-44CC-9EA4-F982A47AEB7D.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AngularGradient : ShapeStyle, View {
 
@@ -1821,8 +1893,6 @@ extension Angle : Animatable {
     /// Gradient behavior acts differently according to whether the end angle - start angle is greater than, less than or equal to 2π.
     /// See ``AngularGradient`` for more information.
     /// An example,
-    ///
-    /// ![AngularGradient Example 3](angular-gradient-example-3.png)
     ///
     /// ```
     ///  struct AngularGradientView: View {
@@ -1841,6 +1911,8 @@ extension Angle : Animatable {
     /// }
     /// ```
     ///
+    /// ![AngularGradient Example 3](angular-gradient-example-3.png)
+    ///
 	/// - Parameters:
 	///   - gradient: The gradient with the colors to use.
 	///   - center: The unit point that is center of the angular gradient.
@@ -1851,8 +1923,6 @@ extension Angle : Animatable {
     /// Creates an angular gradient starting at and angle and going all the way around in a circle.
     ///
     /// For example,
-    ///
-    /// ![AngularGradient Example 1](angular-gradient-example-1.png)
     ///
     /// ```
     ///  struct ExampleView: View {
@@ -1865,6 +1935,8 @@ extension Angle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![AngularGradient Example 1](angular-gradient-example-1.png)
     ///
     /// - Parameters:
     ///   - gradient: The gradient with the colors to use.
@@ -1883,21 +1955,19 @@ extension Angle : Animatable {
 ///
 /// ``Animatable`` describes how to animate a view with respect to some change in the view's data.
 ///
-/// Use `Animatable` when you are unable to achieve the animation you want with ``View/animation(_:)`` or `withAnimation`.
+/// Use `Animatable` when you are unable to achieve the animation you want with ``View/animation(_:)`` or ``withAnimation(_:_:)``.
 ///
-/// `Animtable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData`, which represents a view's animatable data.
+/// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData', which represents a view's animatable data.
 ///
-/// By conforming to `Animatable`, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for `animatableData`. This is also the reason why `AnimatableData` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
+/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/animatableData-7101d``. This is also the reason why ``Animatable/AnimatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
 /// [animatable-modifier ->]
 /// ### Implementations
 ///
 /// #### Using ``AnimatableModifier`` to implement a shake effect
 ///
-/// `Animatable` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines `Animatable` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
+/// ``Animatable`` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable`` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
 ///
 /// For example:
-///
-/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -1934,22 +2004,25 @@ extension Angle : Animatable {
 ///     }
 /// }
 /// ```
+///![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
-/// This example demonstrates a horizontal "shake effect", applied on a ``Text``. When run, the text animates by shaking 10 times. This is achieved by triggering an animation using `withAnimation`, and modifying the `shakeNumber` to go from `0` to `10`.
+///
+/// This example demonstrates a horizontal "shake effect", applied on a
+/// ``Text``. When run, the text animates by shaking 10 times. This is achieved
+/// by triggering an animation using ``withAnimation(_:_:)``, and modifying the
+/// `shakeNumber` to go from `0` to `10`.
 ///
 /// Note:
 ///
-/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through `animatableData`, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
+/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through ``Animatable/animatableData-7101d``, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
 ///
 /// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the runtime needs to be able to interpolate fractionally between `0.0` and `10.0` 'shakes' - and it does so by making use of `CGFloat`'s ``VectorArithmetic`` conformance.
 ///
-/// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of ``Animation`` is used in `withAnimation`, to animate the change from `0` shakes to `10` shakes.
+/// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of ``Animation`` is used in ``withAnimation(_:_:)``, to animate the change from `0` shakes to `10` shakes.
 ///
 /// #### Using ``AnimatableModifier`` to continuously animate a view along a circle
 ///
-/// `AnimatableModifier`, used with ``Animation/repeatForever(autoreverses:)`` can also be used to create a continuous animation.
-///
-/// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
+/// ``AnimatableModifier``, used with ``Animation/repeatForever(autoreverses:)`` can also be used to create a continuous animation.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -1990,15 +2063,17 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
+/// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
+///
 /// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
 ///
 /// `CircleAnimation` is an implementation of an ``AnimatableModifier`` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
 ///
-/// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using `withAnimation`. The `Animation` used in `withAnimation` is modified using ``Animation/repeatForever(autoreverses:)``, in order to create a loop. Note that `autoreverses` is explicitly set as `false` to prevent the animation from being reversed.
+/// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using ``withAnimation(_:_:)``. The ``Animation`` used in ``withAnimation(_:_:)`` is modified using ``Animation/repeatForever(autoreverses:)``, in order to create a loop. Note that ``Animation/repeatForever(autoreverses:)`` is explicitly set as `false` to prevent the animation from being reversed.
 /// [<-]
 /// ### Further notes
 ///
-/// - `Animatable` along with `View` is currently broken on iOS 14, please use ``AnimatableModifier``
+/// - ``Animatable`` along with ``View`` is currently broken on iOS 14, please use ``AnimatableModifier``
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol Animatable{ }
@@ -2027,7 +2102,7 @@ extension Animatable where Self.AnimatableData == EmptyAnimatableData {
 
 /// A modifier that can create another modifier with animation.
 ///
-/// `AnimatableModifier` is closely coupled with ``Animatable``.
+/// ``AnimatableModifier`` is closely coupled with ``Animatable``.
 ///
 /// [[animatable-modifier]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -2138,7 +2213,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///
 /// 1. The numerical value in memory that changes over time --- usually
 /// a `@State` property
-/// 2. How the `View` depends on this numerical value --- often using
+/// 2. How the ``View`` depends on this numerical value --- often using
 /// a view modifier
 /// 3. The timing curve describing how this change happens --- this is the
 /// ``Animation``
@@ -2202,8 +2277,6 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// Putting all of the sections above together into one example, here
 /// is what it looks like:
 ///
-/// ![Animation Example 1](animation-example.gif)
-///
 /// ```
 /// struct AnimateView: View {
 ///     @State private var flag = true
@@ -2211,9 +2284,9 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///     var body: some View {
 ///         VStack {
 ///             Rectangle()
-///                 .foregroundColor(flag ? Color.yellow : Color.red)
-///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+///                 .foregroundColor(flag ? .yellow : .red)
+///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+///                 .rotationEffect(.degrees(flag ? 90 : 0))
 ///                 .animation(.easeInOut)
 ///
 ///             Button("Animate") {
@@ -2223,6 +2296,8 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///     }
 /// }
 /// ```
+///
+/// ![Animation Example 1](animation-ex.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Animation : Equatable {
@@ -2247,8 +2322,8 @@ extension Animation {
     /// in the beginning, then overshoots the target, and returns back
     /// with a spring effect.
     ///
-    /// > When mixed with other `Animation/spring()`
-    /// or `Animation/interactiveSpring()` animations on the same property, each
+    /// When mixed with other ``Animation/spring(response:dampingFraction:blendDuration:)``
+    /// or ``Animation/interactiveSpring(response:dampingFraction:blendDuration:)`` animations on the same property, each
     /// animation will be replaced by their successor, preserving
     /// velocity from one animation to the next. Optionally blends the
     /// response values between springs over a time period.
@@ -2260,9 +2335,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.spring(response: 0.55, dampingFraction: 0.825, blendDuration: 0))
     ///
     ///             Button("Animate") {
@@ -2272,6 +2347,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-ex.gif)
     ///
     /// - Parameters:
     ///   - response: The stiffness of the spring, defined as an
@@ -2300,9 +2377,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.interactiveSpring())
     ///
     ///             Button("Animate") {
@@ -2312,6 +2389,9 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-ex.gif)
+    ///
     public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { }
 }
 
@@ -2320,8 +2400,6 @@ extension Animation {
 
 	/// An identity animation that happens immediately.
     ///
-    /// Use this property to turn off animation on a view.
-    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2329,9 +2407,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.default)
     ///
     ///             Button("Animate") {
@@ -2341,6 +2419,9 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static let `default`: Animation
 }
 
@@ -2350,8 +2431,6 @@ extension Animation {
 	/// An animation where the effect starts out slower and ends slower, while
 	/// moving most quickly in the middle.
 	///
-    /// ![Animation Example 2](animation-example-2.gif)
-    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2359,9 +2438,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeInOut(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2372,6 +2451,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
 	/// - Parameter duration: How long the effect should last.
     public static func easeInOut(duration: Double) -> Animation { }
 
@@ -2380,8 +2461,6 @@ extension Animation {
 	///
 	/// Uses the default timing of 1 second.
     ///
-    /// ![Animation Example 1](animation-example.gif)
-    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2389,9 +2468,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeInOut)
     ///
     ///             Button("Animate") {
@@ -2402,13 +2481,13 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static var easeInOut: Animation { get }
 
     /// An animation where the effect starts out slower and then ends more quickly.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 3](animation-example-3.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2417,9 +2496,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeIn(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2430,6 +2509,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func easeIn(duration: Double) -> Animation { }
 
@@ -2439,8 +2520,6 @@ extension Animation {
     ///
     /// For example,
     ///
-    /// ![Animation Example 4](animation-example-4.gif)
-    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2448,9 +2527,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeIn)
     ///
     ///             Button("Animate") {
@@ -2461,13 +2540,13 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static var easeIn: Animation { get }
 
     /// An animation where the effect starts out more quickly and then slows down.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 5](animation-example-5.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2476,9 +2555,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeOut(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2489,6 +2568,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func easeOut(duration: Double) -> Animation { }
 
@@ -2498,8 +2579,6 @@ extension Animation {
     ///
     /// For example,
     ///
-    /// ![Animation Example 6](animation-example-6.gif)
-    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2507,9 +2586,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.easeOut)
     ///
     ///             Button("Animate") {
@@ -2520,13 +2599,13 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-default-ex.gif)
+    ///
     public static var easeOut: Animation { get }
 
     /// An animation where the effect happens at a constant speed throughout.
     ///
     /// For example,
-    ///
-    /// ![Animation Example 7](animation-example-7.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2535,9 +2614,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.linear(duration: 3.0))
     ///
     ///             Button("Animate") {
@@ -2548,6 +2627,8 @@ extension Animation {
     /// }
     /// ```
     ///
+    /// ![](animation-easeinout-ex.gif)
+    ///
     /// - Parameter duration: How long the effect should last.
     public static func linear(duration: Double) -> Animation { }
 
@@ -2557,8 +2638,6 @@ extension Animation {
     ///
     /// For example,
     ///
-    /// ![Animation Example 8](animation-example-8.gif)
-    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2566,9 +2645,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.linear)
     ///
     ///             Button("Animate") {
@@ -2578,6 +2657,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-default-ex.gif)
     ///
     public static var linear: Animation { get }
 
@@ -2600,9 +2681,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.timingCurve(0.42, 0, 0.58, 1, duration: 1.0))
     ///
     ///             Button("Animate") {
@@ -2612,6 +2693,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-timing-curve-ex.gif)
     ///
     /// - Parameters:
     ///   - c0x: The x-coordinate of the first control point.
@@ -2640,9 +2723,9 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
     ///                 .animation(.interpolatingSpring(mass: 1, stiffness: 1, damping: 0.5, initialVelocity: 10))
     ///
     ///             Button("Animate") {
@@ -2652,6 +2735,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-interpolating-ex.gif)
     ///
     /// - Parameters:
     ///   - mass: The mass of the object attached to the spring.
@@ -2676,10 +2761,10 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
-    ///                 .animation(.easeInOut.delay(1))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(Animation.easeInOut.delay(1))
     ///
     ///             Button("Animate") {
     ///                 flag.toggle()
@@ -2688,6 +2773,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-delay-ex.gif)
 	///
 	/// - Parameter delay: How long the animation will wait before starting, in seconds.
     public func delay(_ delay: Double) -> Animation { }
@@ -2710,10 +2797,10 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
-    ///                 .animation(.easeInOut.speed(2))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(Animation.easeInOut.speed(2))
     ///
     ///             Button("Animate") {
     ///                 flag.toggle()
@@ -2722,6 +2809,9 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-speed-ex.gif)
+    ///
     public func speed(_ speed: Double) -> Animation { }
 }
 
@@ -2737,10 +2827,10 @@ extension Animation {
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                 .foregroundColor(flag ? Color.yellow : Color.red)
-    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50: 100)
-    ///                 .rotationEffect(Angle(degrees: flag ? 90 : 0))
-    ///                 .animation(.easeInOut.repeatCount(2, autoreverses: false))
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(Animation.easeInOut.repeatCount(2, autoreverses: false))
     ///
     ///             Button("Animate") {
     ///                 flag.toggle()
@@ -2749,6 +2839,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](animation-rep-count-ex.gif)
 	///
 	/// - Parameters:
 	///   - repeatCount: The number of times the animation should repeat.
@@ -2756,8 +2848,6 @@ extension Animation {
     public func repeatCount(_ repeatCount: Int, autoreverses: Bool = true) -> Animation { }
 
     /// Adjusts whether the animation repeats forever.
-    ///
-    /// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -2797,6 +2887,8 @@ extension Animation {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
     ///
     /// - Parameter autoreverses: Whether the animation should reverse when repeating.
     public func repeatForever(autoreverses: Bool = true) -> Animation { }
@@ -2968,6 +3060,8 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-offset-ex.gif)
 	///
 	/// - Parameter offset: The amount you want to move the view during the transition.
     public static func offset(_ offset: CGSize) -> AnyTransition { }
@@ -2992,6 +3086,8 @@ extension AnyTransition {
     /// }
     /// ```
     ///
+    /// ![](any-transition-offset-xy-ex.gif)
+    ///
     /// - Parameters:
     ///   - x: The number of points you want to move the view to the right. Negative means move left. Defaults to 0.
     ///   - y: The number of points you want to move the view down. Negative means move up. Defaults to 0.
@@ -3015,11 +3111,14 @@ extension AnyTransition {
     ///         }
     ///         if showBanana {
     ///             Text("🍌")
-    ///                 .transition(.scale))
+    ///                 .transition(.scale)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-scale-ex.gif)
+    ///
     public static var scale: AnyTransition { get }
 
     /// A transition that scales a view from its current size to a new size.
@@ -3041,6 +3140,8 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-scale-anchor-ex.gif)
     ///
     /// - Parameters:
     ///   - scale: The amount you want to scale the view.
@@ -3074,6 +3175,9 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-opacity-ex.gif)
+    ///
     public static let opacity: AnyTransition
 }
 
@@ -3101,7 +3205,9 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// - SeeAlso: `AnyTransition.move(edge:)`
+    /// ![](any-transition-slide-ex.gif)
+    ///
+    /// - SeeAlso: ``AnyTransition/move(edge:)``
     public static var slide: AnyTransition { get }
 }
 
@@ -3135,6 +3241,8 @@ extension AnyTransition {
     /// }
     /// ```
     ///
+    /// ![](any-transition-combined-ex.gif)
+    ///
     public func combined(with other: AnyTransition) -> AnyTransition { }
 }
 
@@ -3164,15 +3272,15 @@ extension AnyTransition {
     /// struct OpacityModifier: ViewModifier {
     ///     let opacity: Double
     ///
-    ///     func body(content: Content) {
+    ///     func body(content: Content) -> some View {
     ///         content.opacity(opacity)
     ///     }
     /// }
     ///
     /// extension AnyTransition {
     ///     static var opOpacity: AnyTransition {
-    ///         .modifier(active: CustomModifier(opacity: 0),
-    ///                   identity: CustomModifier(opacity: 1))
+    ///         .modifier(active: OpacityModifier(opacity: 0),
+    ///                   identity: OpacityModifier(opacity: 1))
     ///     }
     /// }
     ///
@@ -3190,6 +3298,9 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-modifier-ex.gif)
+    ///
     public static func modifier<E>(active: E, identity: E) -> AnyTransition where E : ViewModifier { }
 }
 
@@ -3225,7 +3336,7 @@ extension AnyTransition {
     ///         }
     ///         if showBanana {
     ///             Text("🍌")
-    ///                 .transition(.scale)
+    ///                 .transition(AnyTransition.scale)
     ///         }
     ///     }
     /// }
@@ -3236,14 +3347,18 @@ extension AnyTransition {
     ///     @State var showBanana = true
     ///
     ///     var body: some View {
-    ///         Button("Scale the banana ⤴️") { showBanana.toggle() }
+    ///         Button("Scale the banana ⤴️") {
+    ///             showBanana.toggle()
+    ///         }
     ///         if showBanana {
     ///             Text("🍌")
-    ///                 .transition(AnyTransition.scale.animation(Animation.easeInOut))
+    ///                 .transition(AnyTransition.scale.animation(.easeInOut))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-anim-ex.gif)
     ///
     public func animation(_ animation: Animation?) -> AnyTransition { }
 }
@@ -3273,6 +3388,9 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](any-transition-identity-ex.gif)
+    ///
     public static let identity: AnyTransition
 }
 
@@ -3281,8 +3399,6 @@ extension AnyTransition {
 
     /// Returns a transition that moves the view away, towards the specified
     /// edge of the view.
-    ///
-    /// See ``AnyTransition`` for more on how to use this transition.
     ///
     /// ```
     /// struct TransitioningBananaView: View {
@@ -3300,6 +3416,8 @@ extension AnyTransition {
     /// }
     /// ```
     ///
+    /// ![](any-transition-move-edge-ex.gif)
+    ///
     /// See ``AnyTransition`` for more on how to use this transition.
     public static func move(edge: Edge) -> AnyTransition { }
 }
@@ -3309,6 +3427,8 @@ extension AnyTransition {
 
     /// Provides a composite transition that uses a different transition for
     /// insertion versus removal.
+    ///
+    /// See ``AnyTransition`` for more on how to use this transition.
     ///
     /// ```
     /// struct TransitioningBananaView: View {
@@ -3326,17 +3446,18 @@ extension AnyTransition {
     /// }
     /// ```
     ///
+    /// ![](any-transition-asymmetric-ex.gif)
+    ///
     /// See ``AnyTransition`` for more on how to use this transition.
     public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
 }
 
 /// A view that provides type-erasure for views of other types.
 ///
-/// An `AnyView` hides the type of the ``View`` value passed to it (similar to how `AnyHashable` hides the type of `Hashable` value passed to it).
+/// An `AnyView` hides the type of the ``View`` value passed to it (similar
+/// to how `AnyHashable` hides the type of `Hashable` value passed to it).
 ///
 /// To type-erase your view, pass it to ``AnyView/init(_:)`` like this:
-///
-///  ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -3346,9 +3467,12 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// Changing the type of view using with `AnyView` destroys the view hierarchy for the old type and creates a new hierarchy for the new type. In the following example, `Text` is destroyed and ``Color`` is created when `foo` is set to `false`:
+/// ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
 ///
-///  ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
+/// Changing the type of view using with `AnyView` destroys the view hierarchy
+/// for the old type and creates a new hierarchy for the new type. In the
+/// following example, ``Text`` is destroyed and ``Color`` is created when
+/// `foo` is set to `false`:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -3364,9 +3488,18 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// Avoid frequently changing the underlying type of view being erased, especially for complex views, as poor performance may result. `AnyView` is best suited for use in the deepest part of your view hierarchy, such as a list's row content in `List/init(_:id:selection:rowContent:)`. It is also suited for use in different layers of your view hierarchy, via either `View/overlay(_:alignment:)` or ``View/background(_:alignment:)``.
+/// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
-/// Consider whether the usage of ``AnyView`` is appropriate, or even necessary. A common mistake is to use ``AnyView`` like this:
+/// Avoid frequently changing the underlying type of view being erased,
+/// especially for complex views, as poor performance may result.
+/// `AnyView` is best suited for use in the deepest part of your view
+/// hierarchy, such as a list's row content in
+/// ``List/init(_:id:selection:rowContent:)``. It is also suited for use in
+/// different layers of your view hierarchy, via either
+/// ``View/overlay(_:alignment:)`` or ``View/background(_:alignment:)``.
+///
+/// Consider whether the usage of `AnyView` is appropriate, or even necessary.
+/// A common mistake is to use `AnyView` like this:
 ///
 /// ```
 /// func makeHelperView() -> some View {
@@ -3378,7 +3511,7 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// Wherein adding a `@ViewBuilder` would be more appropriate:
+/// Wherein adding a ``ViewBuilder`` would be more appropriate:
 ///
 /// ```
 /// @ViewBuilder
@@ -3391,11 +3524,17 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// The latter example performs better as the SwiftUI runtime is given a more explicit type hierarchy, where the switch between `foo` being true or false can only result in a `Text` or a ``Color``. The former example erases that information, forcing the SwiftUI runtime to evaluate the actual view type lazily, and thus requires more work to compute and render.
+/// The latter example performs better as the SwiftUI runtime is given a
+/// more explicit type hierarchy, where the switch between `foo` being `true`
+/// or `false` can only result in a ``Text`` or a ``Color``. The former
+/// example erases that information, forcing the SwiftUI runtime to evaluate
+/// the actual view type lazily, and thus requires more work to compute and
+/// render.
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AnyView : View {
 
-    /// Create an instance that type-erases ``view``.
+    /// Create an instance that type-erases ``View``.
     ///
     /// See ``AnyView`` for the uses and dangers of using this structure.
     ///
@@ -3435,7 +3574,7 @@ extension AnyTransition {
 /// A type that represents the structure and behavior of an app.
 ///
 /// Create an app by declaring a structure that conforms to the ``App`` protocol.
-/// Implement the required `App/body-swift.property` computed property
+/// Implement the required ``App/body-swift.variable`` computed property
 /// to define the app's content:
 ///
 ///     @main
@@ -3454,7 +3593,7 @@ extension AnyTransition {
 /// the ``App/main()`` method that the system calls to launch your app.
 /// You can have exactly one entry point among all of your app's files.
 ///
-/// Compose the app's body from instances that conform to the `SwiftUI/Scene`
+/// Compose the app's body from instances that conform to the ``Scene``
 /// protocol. Each scene contains the root view of a view hierarchy and has a
 /// life cycle managed by the system. SwiftUI provides some concrete scene types
 /// to handle common scenarios, like for displaying documents or settings. You
@@ -3473,7 +3612,7 @@ extension AnyTransition {
 ///     }
 ///
 ///     struct MailViewer: View {
-///         var body: some View { /* implement here*/ }
+///         var body: some View { /* implement here */ }
 ///     }
 ///
 /// You can declare state in your app to share across all of its scenes. For
@@ -3499,15 +3638,15 @@ extension AnyTransition {
 ///
 ///     struct MailViewer: View {
 ///         @EnvironmentObject var model: MailModel
-///         var body: some View { /* implement here*/ }
+///         var body: some View { /* implement here */ }
 ///     }
 ///
 ///     struct SettingsView: View {
 ///         @ObservedObject var mdoel: MailModel
-///         var body: some View { /* implement here*/ }
+///         var body: some View { /* implement here */ }
 ///     }
 ///
-///     class MailModel: ObservableObject { /* implement here*/ }
+///     class MailModel: ObservableObject { /* implement here */ }
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol App { }
@@ -3583,12 +3722,15 @@ extension App {
 /// Below shows a simple example using a `String`.
 ///
 ///     struct ContentView: View {
-/// 		@AppStorage("name") var name: String = "Javier"
+///         @AppStorage("name") var name: String = "Javier"
 ///
 /// 		var body: some View {
 /// 			TextField(name, text: $name)
 /// 		}
 /// 	}
+///
+/// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
 
@@ -3607,15 +3749,18 @@ extension App {
 
     /// Provides a binding for the wrapped value.
     ///
-    /// You can access this using the $ prefix:
+    /// You can access this using the `$` prefix:
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("name") var name: String = "Javier"
+    ///     struct ContentView: View {
+    ///         @AppStorage("name") var name: String = "Javier"
     ///
-    /// 		var body: some View {
-    /// 			TextField(name, text: $name)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             TextField(name, text: $name)
+    ///         }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
+    ///
     public var projectedValue: Binding<Value> { get }
 }
 
@@ -3624,13 +3769,15 @@ extension AppStorage {
 
     /// Creates a property that can read and write to a boolean user default.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("airplane-mode") var on: Bool = false
+    ///     struct ContentView: View {
+    ///         @AppStorage("airplane-mode") var on: Bool = false
     ///
-    /// 		var body: some View {
-    /// 			Toggle("Airplane Mode", isOn: $on)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Toggle("Airplane Mode", isOn: $on)
+    ///         }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.40.39.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a boolean value is not specified
@@ -3643,13 +3790,15 @@ extension AppStorage {
 
     /// Creates a property that can read and write to an integer user default.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("donuts") var count: Int = 0
+    ///     struct ContentView: View {
+    ///         @AppStorage("donuts") var count: Int = 0
     ///
-    /// 		var body: some View {
-    /// 			Stepper("🍩 count: \(count)", value: $count)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Stepper("🍩 count: \(count)", value: $count)
+    ///         }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.42.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value is not specified
@@ -3662,14 +3811,16 @@ extension AppStorage {
 
     /// Creates a property that can read and write to a double user default.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("brightness") var level: Double = 0
+    ///     struct ContentView: View {
+    ///         @AppStorage("brightness") var level: Double = 0
     ///
-    /// 		var body: some View {
-    /// 			Text("🔆 \(level)")
+    ///         var body: some View {
+    ///             Text("🔆 \(level)")
     ///             Slider(value: $level)
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.42.46.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a double value is not specified
@@ -3683,12 +3834,14 @@ extension AppStorage {
     /// Creates a property that can read and write to a string user default.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("name") var name: String = "Javier"
+    ///         @AppStorage("name") var name: String = "Javier"
     ///
-    /// 		var body: some View {
-    /// 			TextField(name, text: $name)
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             TextField(name, text: $name)
+    ///         }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.34.17.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value is not specified
@@ -3702,12 +3855,14 @@ extension AppStorage {
     /// Creates a property that can read and write to a url user default.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("site") var url = URL(string: "bananadocs.org")!
+    ///         @AppStorage("site") var url = URL(string: "bananadocs.org")!
     ///
-    /// 		var body: some View {
-    /// 			Text("Check out \(url)")
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Text("Check out \(url)")
+    ///         }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.44.14.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a url value is not specified for
@@ -3730,7 +3885,7 @@ extension AppStorage {
     ///         var age: Int
     ///     }
     ///
-    //      struct ContentView: View {
+    ///     struct ContentView: View {
     ///         @AppStorage("goat") var person = Data()
     ///
     ///         var body: some View {
@@ -3743,6 +3898,8 @@ extension AppStorage {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.47.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a data value is not specified for
@@ -3758,22 +3915,24 @@ extension AppStorage {
     ///
     /// A common usage is with enumerations:
     ///
-    ///    enum MyEnum: Int {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
+    ///     enum MyEnum: Int {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct MyView: View {
+    ///         @AppStorage("MyEnumValue") private var value = MyEnum.a
     ///
-    ///        var body: some View {
-    ///             Picker("Choose!", selection: $value) {
-    ///                 Text("a").tag(MyEnum.a)
-    ///                 Text("b").tag(MyEnum.b)
-    ///                 Text("c").tag(MyEnum.c)
-    ///             }
-    ///         }
-    ///    }
+    ///         var body: some View {
+    ///              Picker("Choose!", selection: $value) {
+    ///                  Text("a").tag(MyEnum.a)
+    ///                  Text("b").tag(MyEnum.b)
+    ///                  Text("c").tag(MyEnum.c)
+    ///              }
+    ///          }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value
@@ -3789,21 +3948,23 @@ extension AppStorage {
     ///
     /// A common usage is with enumerations:
     ///
-    ///    enum MyEnum: String {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View {
+    ///     enum MyEnum: String {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct MyView: View {
+    ///         @AppStorage("MyEnumValue") private var value = MyEnum.a
+    ///         var body: some View {
     ///             Picker("Choose!", selection: $value) {
     ///                 Text("a").tag(MyEnum.a)
     ///                 Text("b").tag(MyEnum.b)
     ///                 Text("c").tag(MyEnum.c)
     ///             }
     ///         }
-    ///    }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value
@@ -3821,16 +3982,16 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// Creates a property that can read and write an Optional boolean user
     /// default.
     ///
-    /// Defaults to nil if there is no restored value.
+    /// Defaults to `nil` if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("airplane-mode") var on: Bool?
+    ///     struct ContentView: View {
+    ///         @AppStorage("airplane-mode") var on: Bool?
     ///
-    /// 		var body: some View {
-    /// 			Button("on") { on = true }
+    ///         var body: some View {
+    ///             Button("on") { on = true }
     ///             Button("off") { on = false }
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3844,14 +4005,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("donuts") var count: Int?
+    ///     struct ContentView: View {
+    ///         @AppStorage("donuts") var count: Int?
     ///
-    /// 		var body: some View {
-    /// 			Button("none ☹️") { count = 0 }
+    ///         var body: some View {
+    ///             Button("none ☹️") { count = 0 }
     ///             Button("LOTS 🍩") { count = 100 }
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3865,14 +4026,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// 	struct ContentView: View {
-    /// 		@AppStorage("brightness") var level: Double?
+    ///     struct ContentView: View {
+    ///         @AppStorage("brightness") var level: Double?
     ///
-    /// 		var body: some View {
-    /// 			Button("MAX 🔆") { level = 1.0 }
+    ///         var body: some View {
+    ///             Button("MAX 🔆") { level = 1.0 }
     ///             Button("min 🔅") { level = 0.0 }
-    /// 		}
-    /// 	}
+    ///         }
+    ///     }
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3885,14 +4046,16 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// default.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("name") var name: String?
+    ///         @AppStorage("name") var name: String?
     ///
-    /// 		var body: some View {
-    /// 			Button("Save 🐐") { name = "Javier" }
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Button("Save 🐐") { name = "Javier" }
+    ///         }
+    ///     }
     ///
     /// Defaults to nil if there is no restored value.
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.19.59.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3907,12 +4070,14 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// Defaults to nil if there is no restored value.
     ///
     ///     struct ContentView: View {
-    /// 		@AppStorage("site") var url: URL?
+    ///         @AppStorage("site") var url: URL?
     ///
-    /// 		var body: some View {
-    /// 			Text("Save the 🍌") { url = URL(string: "bananadocs.org" }
-    /// 		}
-    /// 	}
+    ///         var body: some View {
+    ///             Button("Save the 🍌") { url = URL(string: "bananadocs.org") }
+    ///         }
+    ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.31.44.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3931,7 +4096,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         var age: Int
     ///     }
     ///
-    //      struct ContentView: View {
+    ///     struct ContentView: View {
     ///         @AppStorage("goat") var person: Data?
     ///
     ///         var body: some View {
@@ -3944,6 +4109,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 17.33.08.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -3959,19 +4126,16 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 /// view can be scrolled vertically, horizontally, or both.
 ///
 /// There are two possible axes:
-///
 /// 1. ``Axis/horizontal``
 /// 2. ``Axis/vertical``
 ///
 /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
 /// on using this enumeration in the initializer.
 ///
-///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
-///         ScrollView(Axis.horizontal, showsIndicators: false) {
+///         ScrollView(Axis.Set.horizontal, showsIndicators: false) {
 ///             VStack {
 ///                 Text("Bananas 🍌🍌")
 ///                 Text("Apples 🍏🍏")
@@ -3981,6 +4145,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Axis : Int8, CaseIterable {
 
@@ -3992,10 +4159,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
     /// on using this enumeration in the initializer.
     ///
-    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ScrollView(.horizontal, showsIndicators: false) {
     ///             VStack {
@@ -4007,6 +4172,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+    ///
     case horizontal
 
     /// The vertical dimension.
@@ -4017,12 +4185,10 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
     /// on using this enumeration in the initializer.
     ///
-    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         ScrollView(.vertical) {
+    ///         ScrollView(.vertical, showsIndicators: false) {
     ///             VStack {
     ///                 Text("Bananas 🍌🍌")
     ///                 Text("Apples 🍏🍏")
@@ -4032,6 +4198,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
     case vertical
 
     /// An efficient set of axes.
@@ -4048,10 +4216,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
     /// on using this option set in the initializer.
     ///
-    /// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ScrollView([.horizontal, .vertical]) {
     ///             VStack {
@@ -4063,6 +4229,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
     ///
     @frozen public struct Set : OptionSet {
 
@@ -4115,10 +4283,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
         /// on using this in the initializer.
         ///
-        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-        ///
         /// ```
-        /// struct ExampleView: View {
+        /// struct ContentView: View {
         ///     var body: some View {
         ///         ScrollView(.horizontal, showsIndicators: false) {
         ///             VStack {
@@ -4130,6 +4296,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
         public static let horizontal: Axis.Set
 
         /// The option set corresponding to the vertical axis.
@@ -4140,12 +4309,10 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         /// See ``ScrollView/init(_:showsIndicators:content:)`` for more details
         /// on using this in the initializer.
         ///
-        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-        ///
         /// ```
         /// struct ExampleView: View {
         ///     var body: some View {
-        ///         ScrollView(.vertical) {
+        ///         ScrollView(.vertical, showsIndicators: false) {
         ///             VStack {
         ///                 Text("Bananas 🍌🍌")
         ///                 Text("Apples 🍏🍏")
@@ -4155,6 +4322,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        ///
         public static let vertical: Axis.Set
 
         /// The type of the elements of an array literal.
@@ -4271,7 +4441,6 @@ extension Axis : RawRepresentable {
 /// In the following example, the top circle is always invisible, since
 /// it is filled the same color as the background.
 ///
-/// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
 /// ```
 /// struct CircleOnButtomView: View {
 ///     var body: some View {
@@ -4281,6 +4450,9 @@ extension Axis : RawRepresentable {
 ///     }
 /// }
 /// ```
+///
+/// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct BackgroundStyle {
 
@@ -4301,6 +4473,9 @@ extension Axis : RawRepresentable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
+    ///
     @inlinable public init() { }
 }
 
@@ -4310,7 +4485,11 @@ extension BackgroundStyle : ShapeStyle {
 
 /// This type handles shared values across views.
 ///
-/// ``Binding`` is a property wrapper that creates a connection between stored data, and a view that displays and changes that data. It is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. ``Binding`` defines a **getter** and a **setter** for a value.
+/// ``Binding`` is a property wrapper that creates a connection between stored
+/// data, and a view that displays and changes that data. It is a **two-way
+/// connection** to a source of truth. It is used to both read the latest
+/// value, as well as to set a new value. ``Binding`` defines a **getter**
+/// and a **setter** for a value.
 ///
 /// ### Structure of a ``Binding``
 ///
@@ -4323,13 +4502,14 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// ### Creating a ``Binding`` from `@State `
+/// ### Creating a ``Binding`` from `@State`
 ///
-/// A ``Binding`` typically represents a reference to a mutable source of truth - such as `@State`, `@ObservedObject` or a reference-writable keypath of an object. To create a ``Binding`` from a mutable source of truth, prefix the variable name for the source of truth with a dollar sign (`$`).
+/// A ``Binding`` typically represents a reference to a mutable source of
+/// truth - such as `@State`, `@ObservedObject` or a reference-writable keypath
+/// of an object. To create a ``Binding`` from a mutable source of truth,
+/// prefix the variable name for the source of truth with a dollar sign (`$`).
 ///
 /// For example, a ``TextField`` can be bound to a state variable:
-///
-/// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4342,15 +4522,27 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// In the example above, the source of truth is a `@State` variable, named `text`. `text`  represents a `String`, whereas `$text` represents a `Binding<String>`. `TextField`'s initializer accepts a placeholder `String` and a `Binding<String>`. In this example, `TextField` requires a ``Binding`` to the source of truth as `TextField` must be able to *write back* to the `@State` variable (a **mutable** source of truth).
+/// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
-/// Recall, a `Binding` is a **two-way connection** to a source of truth. It is used to both read the latest value, as well as to set a new value. In the previous example, the view's initial render will display an editable text of "🍌🍌" on the screen - `TextField` reads the current value of the source of truth ``text`` via the  `Binding` `$text`. When the user starts editing, `TextField` *writes back* new values to the source of truth ``text`` via the `Binding`  `$text` once again.
+/// In the example above, the source of truth is a `@State` variable,
+/// named `text`. `text`  represents a `String`, whereas `$text` represents
+/// a `Binding<String>`. ``TextField``'s initializer accepts a placeholder
+/// `String` and a `Binding<String>`. In this example, `TextField` requires a
+/// ``Binding`` to the source of truth as ``TextField`` must be able to
+/// *write back* to the `@State` variable (a **mutable** source of truth).
 ///
-/// ### Creating a ``Binding`` from an `ObservableObject`
+/// Recall, a `Binding` is a **two-way connection** to a source of truth.
+/// It is used to both read the latest value, as well as to set a new value.
+/// In the previous example, the view's initial render will display an
+/// editable text of "🍌🍌" on the screen - `TextField` reads the current
+/// value of the source of truth ``text`` via the  `Binding` `$text`. When
+/// the user starts editing, ``TextField`` *writes back* new values to the
+/// source of truth `text` via the `Binding`  `$text` once again.
 ///
-/// In this example, the source of truth is an observable object `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
+/// ### Creating a `Binding` from an ``ObservableObject``
 ///
-/// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
+/// In this example, the source of truth is an observable object
+/// `ExampleModel` - stored in a `@StateObject` owned by `ExampleView`:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4370,11 +4562,21 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// The binding between the model's `isEnabled` variable and a toggle is established using `$viewModel.isEnabled` within `ExampleView`'s body. Note that the dollar sign must prefix the **root** variable, even in the case where a child member is being referenced. `$viewModel.isEnabled` and `viewModel.$isEnabled` are **not** equivalent. The former creates a ``Binding`` to `isEnabled`, whereas the latter unwraps the projected value of the `@Published` property wrapper wrapping `isEnabled`.
+/// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
+///
+/// The binding between the model's `isEnabled` variable and a toggle is
+/// established using `$viewModel.isEnabled` within `ExampleView`'s body.
+/// Note that the dollar sign must prefix the **root** variable, even in the
+/// case where a child member is being referenced. `$viewModel.isEnabled`
+/// and `viewModel.$isEnabled` are **not** equivalent. The former creates a
+/// ``Binding`` to `isEnabled`, whereas the latter unwraps the projected
+/// value of the `@Published` property wrapper wrapping `isEnabled`.
 ///
 /// ### Animating Updates via a ``Binding``
 ///
-/// Since a `Binding` is capable of updating a view's state, the state update can be made to animate with ``Binding/animation(_:)``. Usage looks as follows:
+/// Since a `Binding` is capable of updating a view's state, the state
+/// update can be made to animate with ``Binding/animation(_:)``.
+/// Usage looks as follows:
 ///
 /// ```
 /// $myVariable.animation(.default)
@@ -4382,11 +4584,11 @@ extension BackgroundStyle : ShapeStyle {
 ///
 /// ### Creating a ``Binding`` from a constant
 ///
-/// At times, you may want to pass a fixed value as a `Binding`. This is possible via ``Binding/constant(_:)``, which creates a `Binding` to a fixed value, ignoring any updates from the consumer of the binding.
+/// At times, you may want to pass a fixed value as a `Binding`. This is
+/// possible via ``Binding/constant(_:)``, which creates a `Binding`
+/// to a fixed value, ignoring any updates from the consumer of the binding.
 ///
-/// Consider `EnvironmentValues/editMode`, for example. A ``List`` can be forced into active editing by passing a binding to `EditMode.active`.
-///
-/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+/// Consider ``EnvironmentValues/editMode``, for example. A ``List`` can be forced into active editing by passing a binding to `EditMode.active`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4405,6 +4607,8 @@ extension BackgroundStyle : ShapeStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
@@ -4567,10 +4771,8 @@ extension Binding : DynamicProperty {
 ///
 /// ![Space](space.jpg)
 ///
-/// ![Blended Image](blendmode-softLight.png)
-///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         ZStack {
 ///             Image("ocean")
@@ -4580,44 +4782,45 @@ extension Binding : DynamicProperty {
 ///             Image("space")
 ///                 .resizable()
 ///                 .scaledToFit()
-///                 .blendMode(.softLight)
+///                 .blendMode(BlendMode.softLight)
 ///         }
 ///     }
 /// }
 /// ```
+///
+/// ![Blended Image](blendmode-softlight.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
 	/// Regular overlapping, with opacity taken into account.
-  ///
-  /// ![Blend Mode](blendmode-normal.png)
-  ///
-  /// ```
-  /// struct ExampleView: View {
-  ///     var body: some View {
-  ///         ZStack {
-  ///             Image("ocean")
-  ///                 .resizable()
-  ///                 .scaledToFit()
-  ///
-  ///             Image("space")
-  ///                 .resizable()
-  ///                 .scaledToFit()
-  ///                 .blendMode(.normal)
-  ///         }
-  ///     }
-  /// }
-  /// ```
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Image("ocean")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///
+    ///             Image("space")
+    ///                 .resizable()
+    ///                 .scaledToFit()
+    ///                 .blendMode(.normal)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Blend Mode](blendmode-normal.png)
+    ///
     case normal
 
     /// Multiplies the RGB channel numbers (0.0 - 1.0) of each pixel.
     ///
     /// The result is always a darker picture.
-    /// ![Blend Mode](blendmode-multiply.png)
-    ///
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4632,6 +4835,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-multiply.png)
+    ///
     case multiply
 
     /// Each RGB pixel value is inverted (subtracted from 1), multiplied together,
@@ -4647,10 +4853,9 @@ public enum BlendMode {
     ///         return 1 - (1 - a) * (1 - b)
     ///     }
     ///
-    /// ![Blend Mode](blendmode-screen.png)
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4665,24 +4870,25 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-screen.png)
+    ///
     case screen
 
     /// The parts were the bottom layer is light become lighter, and dark becomes darker.
     ///
-    /// Overlay is a combo of multiply and screen. The formula is this:
+    /// Overlay is a combo of ``BlendMode/multiply`` and ``BlendMode/screen``. The formula is this:
     ///
     ///     func overlay(a: Double, b: Double) -> Double {
-    ///     	if a > 0.5 {
-    ///     		return 2 * a * b
-    ///     	} else {
-    ///     		return 1 - 2 * (1 - a) * (1 - b)
-    ///     	}
+    ///         if a > 0.5 {
+    ///             return 2 * a * b
+    ///         } else {
+    ///             return 1 - 2 * (1 - a) * (1 - b)
+    ///         }
     ///     }
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4697,14 +4903,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
     case overlay
 
     /// Takes the darker of the top and bottom picture pixels.
     ///
-    /// ![Blend Mode](blendmode-darken.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4714,19 +4921,20 @@ public enum BlendMode {
     ///             Image("space")
     ///                 .resizable()
     ///                 .scaledToFit()
-    ///                 .blendMode(.overlay)
+    ///                 .blendMode(.darken)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-darken.png)
+    ///
     case darken
 
     /// Takes the lighter of the top and bottom picture pixels.
     ///
-    /// ![Blend Mode](blendmode-lighten.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4742,6 +4950,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
+    /// ![Blend Mode](blendmode-lighten.png)
+    ///
     case lighten
 
     /// Divides the bottom layer by the inversion of the top layer.
@@ -4755,10 +4965,8 @@ public enum BlendMode {
     ///
     /// This operation is not invertible.
     ///
-    /// ![Blend Mode](blendmode-colorDodge.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4773,6 +4981,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-colorDodge.png)
+    ///
     case colorDodge
 
     /// Divides the inverted bottom layer by the top layer, then inverts the result.
@@ -4783,10 +4994,8 @@ public enum BlendMode {
     ///
     /// This operation is not invertible.
     ///
-    /// ![Blend Mode](blendmode-colorBurn.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4801,6 +5010,8 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-colorBurn.png)
     case colorBurn
 
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
@@ -4815,10 +5026,8 @@ public enum BlendMode {
     ///         }
     ///     }
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4833,6 +5042,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-overlay.png)
+    ///
     case softLight
 
     /// A combination of multiply and screen are applied.
@@ -4840,10 +5052,8 @@ public enum BlendMode {
     /// Hard light affects the bottom layer the way that overlay affects the top
     /// layer, and vice-versa.
     ///
-    /// ![Blend Mode](blendmode-hardLight.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4858,6 +5068,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-hardLight.png)
+    ///
     case hardLight
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
@@ -4865,10 +5078,8 @@ public enum BlendMode {
     /// If either layer is black, nothing changes. Blending with white inverts
     /// the picture.
     ///
-    /// ![Blend Mode](blendmode-difference.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4883,6 +5094,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-difference.png)
+    ///
     case difference
 
     /// Subtracts the bottom layer from the top layer, and then makes the result positive.
@@ -4890,10 +5104,8 @@ public enum BlendMode {
     /// The difference between difference and exclusion is that blending with
     /// 50% gray will produce 50% gray.
     ///
-    /// ![Blend Mode](blendmode-exclusion.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4908,14 +5120,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-exclusion.png)
+    ///
     case exclusion
 
     /// Keeps the brightness and saturation of the bottom layer, while taking the hue of the top layer.
     ///
-    /// ![Blend Mode](blendmode-hue.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4925,20 +5138,20 @@ public enum BlendMode {
     ///             Image("space")
     ///                 .resizable()
     ///                 .scaledToFit()
-    ///                 .blendMode(.hu)
+    ///                 .blendMode(.hue)
     ///         }
     ///     }
     /// }
     /// ```
     ///
+    /// ![Blend Mode](blendmode-hue.png)
+    ///
     case hue
 
     /// Keeps the brightness and hue of the bottom layer, while taking the saturation of the top layer.
     ///
-    /// ![Blend Mode](blendmode-saturation.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4953,14 +5166,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-saturation.png)
+    ///
     case saturation
 
     /// Keeps the brightness of the bottom layer, while taking the hue and saturation of the top layer.
     ///
-    /// ![Blend Mode](blendmode-color.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4975,14 +5189,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-color.png)
+    ///
     case color
 
     /// Keeps the hue and saturation of the bottom layer, while taking the brightness of the top layer.
     ///
-    /// ![Blend Mode](blendmode-luminosity.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -4997,15 +5212,16 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-luminosity.png)
+    ///
     case luminosity
 
     /// Shows the bottom layer fully, with the top layer drawn only where it
     /// intersect the bottom.
     ///
-    /// ![Blend Mode](blendmode-sourceAtop.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5020,15 +5236,16 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-sourceAtop.png)
+    ///
     case sourceAtop
 
     /// The bottom is drawn over the top, and the top is only visible where the
     /// bottom is transparent.
     ///
-    /// ![Blend Mode](blendmode-destinationOver.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5043,14 +5260,15 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-destinationOver.png)
+    ///
     case destinationOver
 
     /// Displays only the bottom layer, and only where the top is transparent.
     ///
-    /// ![Blend Mode](blendmode-destinationOut.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5065,16 +5283,17 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-destinationOut.png)
+    ///
     case destinationOut
 
     /// Adds the top layer pixels to the bottom layer.
     ///
-    /// Displays white where the addition is greater than 1.0.
-    ///
-    /// ![Blend Mode](blendmode-plusDarker.png)
+    /// Displays white where the addition is greater than `1.0`.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5089,16 +5308,17 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-plusDarker.png)
+    ///
     case plusDarker
 
     /// Adds the top layer pixels to the bottom layer, than subtracts the result from 1.
     ///
-    /// Displays black where the result is less than 0.0.
-    ///
-    /// ![Blend Mode](blendmode-plusLighter.png)
+    /// Displays black where the result is less than `0.0`.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Image("ocean")
@@ -5113,6 +5333,9 @@ public enum BlendMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Blend Mode](blendmode-plusLighter.png)
+    ///
     case plusLighter
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -5167,9 +5390,7 @@ extension BlendMode : Hashable {
 /// Pressing and then dragging into the contents triggers the chosen action on
 /// release.
 ///
-/// For example,
-///
-/// ![DefaultMenu Example 1](default-menu-example.gif)
+/// For example:
 ///
 /// ```
 /// struct BorderlessButtonMenuView: View {
@@ -5183,6 +5404,8 @@ extension BlendMode : Hashable {
 /// }
 /// ```
 ///
+/// ![DefaultMenu Example 1](default-menu-example.gif)
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5193,9 +5416,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     /// By default, the borderless style displays a visual indicator that it
     /// represents a menu.
     ///
-    /// For example,
-    ///
-    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    /// For example:
     ///
     /// ```
     /// struct BorderlessButtonMenuView: View {
@@ -5208,6 +5429,9 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    ///
     public init() { }
 
     /// Creates a view that represents the body of a menu.
@@ -5225,30 +5449,26 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 
 /// A button style that doesn't apply a border.
 ///
+///     struct ContentView: View {
+///         var body: some View {
+///             VStack {
+///                 Button("Plain Banana🍌🍌", action: tap)
+///                     .buttonStyle(PlainButtonStyle())
+///                 Button("Borderless Banana🍌🍌", action: tap)
+///                     .buttonStyle(BorderlessButtonStyle())
+///                 Button("Default Banana🍌🍌", action: tap)
+///                     .buttonStyle(DefaultButtonStyle())
+///             }
+///             .font(.title2)
+///         }
+///
+///         func tap() { }
+///     }
+///
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
-///
-///     struct ExampleView: View {
-///         var body: some View {
-///              VStack {
-///                  Button("Plain Banana🍌🍌") { tap() }
-///                      .buttonStyle(PlainButtonStyle())
-///
-///                  Button("Borderless Banana🍌🍌") { tap() }
-///                      .buttonStyle(BorderlessButtonStyle())
-///
-///                  Button("Default Banana🍌🍌") { tap() }
-///                      .buttonStyle(DefaultButtonStyle())
-///              }
-///              .font(.title2)
-///          }
-///
-///          func tap() {}
-///      }
-///
-///
 /// To apply this style to a button, or to a view that contains buttons, use the
-/// `View/buttonStyle(_:)-66fbx` modifier.
+/// ``View/buttonStyle(_:)-ea21b`` modifier.
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5277,7 +5497,6 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 /// the button. The label is a view that describes the button's action, for
 /// example, by showing text such as Cancel or an icon such as a back arrow.
 ///
-/// ![Button with sign in text](button-signin.png)
 ///
 ///     struct SignInView: View {
 ///         var body: some View {
@@ -5286,6 +5505,8 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///             }
 ///         }
 ///     }
+///
+/// ![Button with sign in text](button-signin.png)
 ///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
@@ -5330,6 +5551,8 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
+/// ![Add Item List Cell](AddItem.png)
+///
 /// Similarly, to create a context menu item that triggers an action, add a
 /// button to the menu's content:
 ///
@@ -5343,6 +5566,8 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///                 }
 ///         }
 ///     }
+///
+///![Button Example 4](press-and-hold-example.gif)
 ///
 /// This pattern extends to most other container views in SwiftUI that have
 /// customizable, interactive content, like forms (instances of ``Form``).
@@ -5362,9 +5587,11 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///                 Button("Sign In", action: { /* sign in */ } )
 ///                 Button("Register", action: { /* register */ } )
 ///             }
-///             .buttonStyle(BorderedButtonStyle())
+///             .buttonStyle(PlainButtonStyle())
 ///         }
 ///     }
+///
+///![Plain Button Example](Plain-Button.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Button<Label> : View where Label : View {
@@ -5417,12 +5644,23 @@ extension Button where Label == Text {
     /// ``Text`` for more information about localizing strings.
     ///
     /// To initialize a button with a string variable, use
-    /// `Button/init(_:action:)-lpm7` instead.
+    /// ``Button/init(_:action:)-0ffce`` instead.
     ///
     ///     struct EasySignInView: View {
     ///         let titleText = LocalizedStringKey("Sign In")
+    ///
     ///         var body: some View {
     ///             Button(titleTiext, action: { /*sign the user in*/ })
+    ///         }
+    ///     }
+    ///
+    /// If you directly pass the button a `String` literal, it will also
+    /// treat it as a localization key:
+    ///
+    ///     struct EasySignInView: View {
+    ///         var body: some View {
+    ///             // "Sign In" gets localized
+    ///             Button("Sign In", action: { /*sign the user in*/ })
     ///         }
     ///     }
     ///
@@ -5435,11 +5673,11 @@ extension Button where Label == Text {
     /// Creates a button that generates its label from a string.
     ///
     /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to `Text/init(_:)-9d1g4`. See ``Text`` for more
+    /// title similar to ``Text/init(_:)-40ffd``. See ``Text`` for more
     /// information about localizing strings.
     ///
     /// To initialize a button with a localized string key, use
-    /// `Button/init(_:action:)-1asy` instead.
+    /// ``Button/init(_:action:)-1de06`` instead.
     ///
     ///     struct EasySignInView: View {
     ///         let titleText = "Sign In"
@@ -5491,9 +5729,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 /// Your structure only needs to implement one method: ``ButtonStyle/makeBody(configuration:)``.
 ///
-/// To change the style of your `Button`, use the `View/buttonStyle(_:)` method. This method accepts a ``ButtonStyle``.
-///
-///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
+/// To change the style of your ``Button``, use the ``View/buttonStyle(_:)-ea21b`` method. This method accepts a `ButtonStyle`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5526,9 +5762,9 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// }
 /// ```
 ///
-/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a ``VStack``.
+///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
 ///
-///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
+/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a ``VStack``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5565,7 +5801,9 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// }
 /// ```
 ///
-/// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use ``PrimitiveButtonStyle``. While this property requires more work to setup, it provides more customization.
+///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
+///
+/// For more on how to customize your button style body, check out ``ButtonStyle/makeBody(configuration:)``. To provide greater control over when and how a button triggers it's action use ``PrimitiveButtonStyle``. While this property requires more work to setup, it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle { }
 extension ButtonStyle {
@@ -5575,12 +5813,10 @@ extension ButtonStyle {
 
     /// Creates a view that represents the body of a button.
     ///
-    /// This is the only required property of ``ButtonStyle``. See ```ButtonStyle``` for more.
+    /// This is the only required property of ``ButtonStyle``. See ``ButtonStyle`` for more.
     ///
     /// The system calls this method for each ``Button`` instance in a view
     /// hierarchy where this style is the current button style.
-    ///
-    ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -5616,6 +5852,9 @@ extension ButtonStyle {
     ///     }
     /// }
     /// ```
+    ///
+    ///
+    ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -5985,19 +6224,17 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///
 /// For example:
 ///
-/// ![Color Example One](color-example-one.png)
-///
 ///     struct ExampleView: View {
 ///         var body: some View {
 ///             Color.yellow
 ///         }
 ///     }
 ///
-/// Color also conforms to ``ShapeStyle`` which allows it to serve as a fill or stroke on a shape.
+/// ![Color Example One](color-example-one.png)
 ///
-/// For example:
+/// `Color` also conforms to ``ShapeStyle`` which allows it to serve as a fill or stroke on a shape.
 ///
-/// ![Color Example Two](color-example-two.png)
+/// For example, as a fill:
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -6006,9 +6243,9 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// And as a stroke:
+/// ![Color Example Two](color-example-two.png)
 ///
-/// ![Color Example Three](color-example-three.png)
+/// And as a stroke:
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -6016,6 +6253,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///                 .stroke(Color.yellow)
 ///         }
 ///     }
+///
+/// ![Color Example Three](color-example-three.png)
 ///
 /// **Note**: A ``Color`` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
@@ -7276,7 +7515,7 @@ extension CommandsBuilder {
 
 /// Display a date picker in a compact, textual format.
 ///
-/// > "This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup."
+/// This style is useful when space is constrained and users expect to make specific date and time selections. Some variants may include rich editing controls in a popup.
 ///
 /// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
 ///
@@ -7381,8 +7620,8 @@ extension ContainerRelativeShape : InsettableShape {
 /// Constants that define how a view's content fills the available space.
 ///
 /// Use this enumeration along with the
-/// ``View/aspectRatio(_:contentMode:)-27509`` and
-/// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+/// ``View/aspectRatio(_:contentMode:)-6576a`` and
+/// ``View/aspectRatio(_:contentMode:)-505fa`` modifiers
 /// to specify how to change the aspect ratio of a view.
 ///
 /// This enum has 2 options:
@@ -7395,18 +7634,24 @@ extension ContainerRelativeShape : InsettableShape {
 /// In the following example, we scale the ellipse down so that it fits
 /// perfectly in the space.
 ///
-/// ![8B69B8F4-E3D2-4C62-A9F7-EE7E7F58C602](8B69B8F4-E3D2-4C62-A9F7-EE7E7F58C602.png)
 /// ```
-/// struct EllipseView: View {
+/// struct ContentView: View {
 ///     var body: some View {
-///         Ellipse()
-///             .fill(Color.purple)
-///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
-///             .frame(width: 200, height: 200)
-///             .border(Color(white: 0.75))
+///         VStack {
+///             Ellipse()
+///                 .aspectRatio(1.5, contentMode: ContentMode.fit)
+///                 .frame(width: 200, height: 200)
+///                 .border(Color.orange)
+///             Ellipse()
+///                 .aspectRatio(1.5, contentMode: ContentMode.fill)
+///                 .frame(width: 200, height: 200)
+///                 .border(Color.orange)
+///         }
 ///     }
 /// }
 /// ```
+///
+/// ![](contentmode.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
@@ -7414,43 +7659,58 @@ extension ContainerRelativeShape : InsettableShape {
   	/// Fill mode that scales down view so that it can be fully seen in the
   	/// available space, even it it leaves whitespace.
     ///
-    /// Use this enumeration case along with the
-    /// ``View/aspectRatio(_:contentMode:)-27509`` and
-    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// Use this case along with the
+    /// ``View/aspectRatio(_:contentMode:)-6576a`` and
+    /// ``View/aspectRatio(_:contentMode:)-505fa`` modifiers
     /// to specify how to change the aspect ratio of a view.
     ///
     /// ```
-    /// struct EllipseView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Ellipse()
-    ///             .fill(Color.purple)
-    ///             .aspectRatio(0.75, contentMode: .fit) // 3:4 aspect ratio -> 3/4 = 0.75
-    ///             .frame(width: 200, height: 200)
-    ///             .border(Color(white: 0.75))
+    ///         VStack {
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: .fit)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: .fill)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](contentmode.png)
+    ///
     case fit
 
     /// Fill mode that scales the view so that it fills the available space
     /// entirely, even if not all of the view can be seen.
     ///
-    /// Use this enumeration along with the
-    /// ``View/aspectRatio(_:contentMode:)-27509`` and
-    /// ``View/aspectRatio(_:contentMode:)-1eff2`` modifiers
+    /// Use this case along with the
+    /// ``View/aspectRatio(_:contentMode:)-6576a`` and
+    /// ``View/aspectRatio(_:contentMode:)-505fa`` modifiers
     /// to specify how to change the aspect ratio of a view.
     ///
     /// ```
-    /// struct EllipseView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Ellipse()
-    ///             .fill(Color.purple)
-    ///             .aspectRatio(0.75, contentMode: .fill) // 3:4 aspect ratio -> 3/4 = 0.75
-    ///             .frame(width: 200, height: 200)
-    ///             .border(Color(white: 0.75))
+    ///         VStack {
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: ContentMode.fit)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///             Ellipse()
+    ///                 .aspectRatio(1.5, contentMode: ContentMode.fit)
+    ///                 .frame(width: 200, height: 200)
+    ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](contentmode.png)
     ///
     case fill
 
@@ -7634,33 +7894,34 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 ///
 /// For example:
 ///
-/// ![Coordinate space example 1](E708E01A-7F5B-4779-ABC8-2CD7CDA525AC.png)
-///
 /// ```
-/// struct ExampleView: View {
-///    var body: some View {
-///        HStack {
-///            Rectangle()
-///                .fill(Color.red)
+/// struct ContentView: View {
+///     var body: some View {
+///         HStack {
+///             Rectangle()
+///                 .fill(Color.red)
 ///
-///            GeometryReader { geometryProxy in
-///                Button(action: {
-///                    let globalFrame = geometryProxy.frame(in: CoordinateSpace.global)
-///                    let localFrame = geometryProxy.frame(in: CoordinateSpace.local)
-///                    print("Global center: \(globalFrame.midX) x \(globalFrame.midY)") // Prints: "Global center: 160.0 x 294.0"
-///                    print("Local center: \(localFrame.midX) x \(localFrame.midY)") // Prints: "50.67 x 274.0"
-///                }, label: {
-///                    Text("Button with coordinate spaces")
-///                })
-///                .background(Color.orange)
-///            }
+///             GeometryReader { geometryProxy in
+///                 Button(action: {
+///                     let globalFrame = geometryProxy.frame(in: CoordinateSpace.global)
+///                     let localFrame = geometryProxy.frame(in: CoordinateSpace.local)
 ///
-///            Rectangle()
-///                .fill(Color.red)
-///        }
-///    }
+///                     print("Global center: \(globalFrame.midX) x \(globalFrame.midY)") //"Global center: 160.0 x 294.0"
+///                     print("Local center: \(localFrame.midX) x \(localFrame.midY)") //"50.67 x 274.0"
+///                 }, label: {
+///                     Text("Button with coordinate spaces")
+///                 })
+///                 .background(Color.orange)
+///             }
+///
+///             Rectangle()
+///                 .fill(Color.red)
+///         }
+///     }
 /// }
 /// ```
+///
+/// ![Coordinate space example 1](E708E01A-7F5B-4779-ABC8-2CD7CDA525AC.png)
 ///
 /// In this example, the center of the Button coordinates is retrieved. The global center
 /// means that the middle of the button is 160 pixels from the left of the screen, and 294 pixels
@@ -8218,26 +8479,36 @@ public struct DatePickerComponents : OptionSet {
 
 /// A specification for the appearance and interaction of a ``DatePicker``.
 ///
-/// There is no public interface for ``DatePickerStyle``.
+/// Use this protocol with the ``View/datePickerStyle(_:)`` view modifier
+/// to set a ``DatePicker``'s style.
 ///
-/// There are currently 5 date picker styles:
-/// - ``DefaultDatePickerStyle`` on iOS and macOS
+/// Though you cannot currently create your own date picker style,
+/// there are 5 date picker pre-made styles to choose from:
 /// - ``WheelDatePickerStyle`` on iOS
+/// - ``DefaultDatePickerStyle`` on iOS and macOS
+/// - ``GraphicalDatePickerStyle`` on iOS and macOS
 /// - ``FieldDatePickerStyle`` on macOS
-/// - ``GraphicalDatePickerStyle`` on macOS
 /// - ``StepperFieldDatePickerStyle`` on macOS
 ///
-/// ![0AD88967-F661-4DCF-876D-952C992543D1](0AD88967-F661-4DCF-876D-952C992543D1.png)
+/// You can use the pre-defined styles like this:
+///
 /// ```
-/// struct StyledDatePickerView: View {
-///     @State private var date = Date()
+/// struct ContentView: View {
+///     @State var date = Date()
 ///
 ///     var body: some View {
-///         DatePicker(selection: $date, label: { Text("Date") })
+///         DatePicker("Choose a date 📆", selection: $date)
 ///             .datePickerStyle(WheelDatePickerStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![Wheel Date Picker Style](wheel-datepickerstyle.png)
+///
+/// Check out ``DatePicker`` for more on how to make date pickers. Or see
+/// [`Date`](https://developer.apple.com/documentation/foundation/date)
+/// for more on making and using date objects.
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -8276,7 +8547,7 @@ extension DatePickerStyle {
 /// specific platform.
 ///
 /// You can override a button's style. To apply the default style to a button,
-/// or to a view that contains buttons, use the `View/buttonStyle(_:)-66fbx`
+/// or to a view that contains buttons, use the ``View/buttonStyle(_:)-ea21b``
 /// modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultButtonStyle : PrimitiveButtonStyle {
@@ -8331,16 +8602,20 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
-///             GroupBox() {
-///                 Label("Bananas 🍌🍌", systemImage: "heart.fill")
-///                     .foregroundColor(.yellow)
-///                     .groupBoxStyle(DefaultGroupBoxStyle())
-///              }, {
+///             GroupBox(label: BananaLabel()) {
 ///                 Text("Go Bananas")
-///              }
+///             }
 ///             .padding()
 ///         }
-///      }
+///     }
+///
+///     struct BananaLabel: View {
+///         var body: some View {
+///             Label("Bananas 🍌🍌", systemImage: "heart.fill")
+///                 .foregroundColor(.yellow)
+///                 .groupBoxStyle(DefaultGroupBoxStyle())
+///         }
+///     }
 ///
 ///
 @available(iOS 14.0, macOS 11.0, *)
@@ -8352,19 +8627,24 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 	///
     /// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
     ///
-    ///
-    ///     struct ExampleView: View {
-    ///         var body: some View {
-    ///             GroupBox() {
-    ///                 Label("Bananas 🍌🍌", systemImage: "heart.fill")
-    ///                     .foregroundColor(.yellow)
-    ///                     .groupBoxStyle(DefaultGroupBoxStyle())
-    ///              }, {
-    ///                 Text("Go Bananas")
-    ///              }
-    ///             .padding()
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         GroupBox(label: BananaLabel()) {
+    ///             Text("Go Bananas")
     ///         }
-    ///      }
+    ///         .padding()
+    ///     }
+    /// }
+    ///
+    /// struct BananaLabel: View {
+    ///     var body: some View {
+    ///         Label("Bananas 🍌🍌", systemImage: "heart.fill")
+    ///             .foregroundColor(.yellow)
+    ///             .groupBoxStyle(DefaultGroupBoxStyle())
+    ///     }
+    /// }
+    /// ```
     ///
 	/// - SeeAlso: GroupBoxStyle
     public init() { }
@@ -8385,21 +8665,68 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 
 /// The default label style in the current context.
 ///
-/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+/// Use this label style to ensure all the views in the hierarchy use
+/// the default label style.
+///
+/// This is one of 3 default label
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
+///
+/// These are the default styles:
+/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier:
 ///
 ///
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
 ///                 .labelStyle(DefaultLabelStyle())
-///        }
-///    }
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
 ///
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultLabelStyle : LabelStyle {
 
     /// Creates a default label style.
+    ///
+    /// Use this label style initializer to ensure all the views in the hierarchy use
+    /// the default label style.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(DefaultLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(IconOnlyLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Default Label Styles](default-labelstyle-comparison.png)
     public init() { }
 
     /// Creates a view that represents the body of a label.
@@ -8583,15 +8910,13 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// platform and the view type in which it appears. For example, in a standard
 /// view, the default picker styles by platform are:
 ///
-/// * On iOS and watchOS the default is a wheel.
-/// * On macOS, the default is a pop-up button.
-/// * On tvOS, the default is a segmented control.
+/// * A wheel on iOS and watchOS
+/// * A pop-up button on macOS
+/// * A segmented control on tvOS
 ///
 /// The default picker style may also take into account other factors — like
 /// whether the picker appears in a container view — when setting the appearance
 /// of a picker.
-///
-/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -8612,21 +8937,26 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
 /// [pickerstyle-default ->]
 /// Your app can also use explicit tags to identify picker content.
 ///
-/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
-///
 /// ```
+/// enum MyFruit {
+///     case banana, apple, peach
+/// }
+///
 /// struct ExampleView: View {
-///     @State var favoriteFruit: MyFruit = MyFruit.banana
+///     @State var favoriteFruit: MyFruit = .banana
 ///
 ///     var fruitName: String {
-///         switch favoriteFruit{
-///         case .apple:
-///             return "Apple 🍎🍎"
+///         switch favoriteFruit {
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -8642,10 +8972,13 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///                 .tag(MyFruit.apple)
 ///             Text("Peach 🍑🍑")
 ///                 .tag(MyFruit.peach)
-///         }.pickerStyle(DefaultPickerStyle())
+///         }
+///         .pickerStyle(DefaultPickerStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
 ///
 /// [<-]
 /// You can override a picker’s style. To apply the default style to a picker,
@@ -8660,7 +8993,6 @@ public struct DefaultPickerStyle : PickerStyle {
 /// The default progress view style in the current context of the view being
 /// styled.
 ///
-/// ![FA3176B9-AF8E-4DE6-9493-3D6271A2670C](FA3176B9-AF8E-4DE6-9493-3D6271A2670C.png)
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -8670,6 +9002,7 @@ public struct DefaultPickerStyle : PickerStyle {
 ///    }
 /// }
 /// ```
+/// ![FA3176B9-AF8E-4DE6-9493-3D6271A2670C](FA3176B9-AF8E-4DE6-9493-3D6271A2670C.png)
 ///
 /// The default style represents the recommended style based on the original
 /// initialization parameters of the progress view, and the progress view's
@@ -8808,12 +9141,10 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 
 /// The default toggle style.
 ///
-/// > If you create a toggle directly on a blank canvas, the style varies:
-/// > - For the phone, pad, and watch idioms, the default toggle style is a switch.
-/// > - For the Mac idiom, the default toggle style is a checkbox.
-/// > - For the TV idom, the default toggle style is a button.
-///
-/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+/// If you create a toggle directly on a blank canvas, the style varies:
+/// - For the phone, pad, and watch idioms, the default toggle style is a switch.
+/// - For the Mac idiom, the default toggle style is a checkbox.
+/// - For the TV idom, the default toggle style is a button.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -8828,11 +9159,13 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 ///  }
 /// ```
 ///
-/// If you create a toggle inside a container, such as a ``List``, the toggle
+/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+///
+/// If you create a toggle inside a container, such as a `List`, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
 /// style to a toggle, or to a view that contains toggles, use the
 /// ``View/toggleStyle(_:)`` modifier. To revert a custom-styled toggle to the
-///  default, use `toggleStyle(DefaultToggleStyle())`.
+///  default, use `.toggleStyle(DefaultToggleStyle())`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultToggleStyle : ToggleStyle {
 
@@ -8968,8 +9301,6 @@ extension DisclosureGroup where Label == Text {
 ///
 /// For example, use a `Divider` in a ``VStack`` to create a horizontal line between vertically laid out elements:
 ///
-/// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -8984,9 +9315,9 @@ extension DisclosureGroup where Label == Text {
 /// }
 /// ```
 ///
-/// Or use a `Divider` in a ``HStack`` to create a vertical line between horizontally laid out elements:
+/// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
-/// ![Divider Example 2](BB31E0D0-1271-43CD-A1AD-AC9CD1E047E1.png)
+/// Or use a ``Divider`` in an ``HStack`` to create a vertical line between horizontally laid out elements:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -9001,6 +9332,9 @@ extension DisclosureGroup where Label == Text {
 ///     }
 /// }
 /// ```
+///
+/// ![Divider Example 2](Horizontally-Split-Text.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
 
@@ -9170,8 +9504,6 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 /// A navigation view style represented by a primary view stack that
 /// navigates to a detail view.
 ///
-/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -9182,6 +9514,9 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
 public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
@@ -9332,9 +9667,9 @@ public struct DragGesture : Gesture {
 /// #### Creating a drop ``View``
 /// Use `onDrop` to create a view that accepts "drops" from dragged data. There are three versions of the `onDrop` modifier:
 ///
-/// - `View/onDrop(of:isTargeted:perform)-bae65` is the simplest implementation. Specify a closure to execute when content is dropped.
-/// - `View/onDrop(of:isTargeted:perform)-55379` is similar to the former, but the closure also provides information about the drop location.
-/// - `View/onDrop(of:delegate)-a3cfb` requires a ``DropDelegate`` and is the most versatile.
+/// - ``View/onDrop(of:isTargeted:perform:)-ae20f`` is the simplest implementation. Specify a closure to execute when content is dropped.
+/// - ``View/onDrop(of:isTargeted:perform:)-b7eed`` is similar to the former, but the closure also provides information about the drop location.
+/// - ``View/onDrop(of:delegate:)-884b8`` requires a ``DropDelegate`` and is the most versatile.
 ///
 /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
 ///
@@ -10312,8 +10647,6 @@ extension DropDelegate {
 
 /// The current state of a drop.
 ///
-/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
@@ -10342,6 +10675,9 @@ extension DropDelegate {
 ///     }
 /// }
 /// ```
+///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -10482,7 +10818,7 @@ public struct DropProposal {
 /// - ``GestureState``
 ///
 /// The view gives values to these properties prior to recomputing the view's
-/// `View/body-swift.property`.
+/// ``View/body-swift.variable``.
 ///
 /// You will rarely implement this protocol yourself. However, if you do,
 /// It would look something like this:
@@ -10514,7 +10850,7 @@ extension DynamicProperty {
     /// Updates the underlying value of the stored value.
     ///
     /// SwiftUI calls this function before rending a view's
-    /// `View/body-swift.property` to ensure the view has the most recent
+    /// ``View/body-swift.variable`` to ensure the view has the most recent
     /// value.
     ///
     /// You will rarely implement this protocol yourself. However, if you do,
@@ -10549,7 +10885,7 @@ extension DynamicProperty {
     /// Updates the underlying value of the stored value.
     ///
     /// SwiftUI calls this function before rending a view's
-    /// `View/body-swift.property` to ensure the view has the most recent
+    /// ``View/body-swift.variable`` to ensure the view has the most recent
     /// value.
     ///
     /// You will rarely implement this protocol yourself. However, if you do,
@@ -11508,9 +11844,10 @@ public struct EmptyCommands : Commands {
 /// }
 /// ```
 ///
-/// ![EmptyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-1.png)
+/// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
 ///
-/// ``EmptyView`` has many uses. For example, it can be used to instruct SwiftUI that your UI control does not want a label:
+/// ``EmptyView`` has many uses. For example, it can be used to instruct
+/// SwiftUI that your UI control does not want a label:
 ///
 /// ```
 /// Toggle(isOn: $myBooleanValue, label: { EmptyView() })
@@ -11525,23 +11862,25 @@ public struct EmptyCommands : Commands {
 ///     @State var width: CGFloat? = nil
 ///
 ///     var body: some View {
-///         Text("Hello, world!").background(
-///             GeometryReader { geometry -> EmptyView in
-///                 DispatchQueue.main.async {
-///                     width = geometry.size.width
+///         Text("Hello, world!")
+///             .background(
+///                 GeometryReader { geometry -> EmptyView in
+///                     DispatchQueue.main.async {
+///                         width = geometry.size.width
+///                     }
+///                     return EmptyView()
 ///                 }
-///
-///                 return EmptyView()
-///             }
-///         )
+///             )
 ///     }
 /// }
 /// ```
 ///
-///  ![EmptyView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/emptyview-example-2.png)
+///  ![EmptyView Example 2](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
 ///
 /// Account for ``EmptyView`` when building your own custom UI controls.
-/// For example, the following code specifies that `label` should be hidden from system accessibility features when the `label` is an instance of ``EmptyView``:
+/// For example, the following code specifies that `label` should be hidden
+/// from system accessibility features when the `label` is an instance of
+/// ``EmptyView``:
 ///
 /// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
@@ -11550,8 +11889,8 @@ public struct EmptyCommands : Commands {
 ///
 ///     var body: some View {
 ///         HStack {
-///             label.accessibility(hidden: label is EmptyView)
-///
+///             label
+///                 .accessibility(hidden: label is EmptyView)
 ///             content
 ///         }
 ///     }
@@ -11767,7 +12106,6 @@ extension EnvironmentKey {
 ///
 /// Consider the following example:
 ///
-/// ![2B8CB1C2-A204-47A8-AF0D-95C69028ECAC](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     let text: String = "some text"
@@ -11791,13 +12129,14 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
+/// ![2B8CB1C2-A204-47A8-AF0D-95C69028ECAC](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
+///
 /// - An app model, `AppModel` is initialized in a `@StateObject` in the `ContentView`.
 /// - `ContentView` initializes `ChildView`, and then passes the app model initialized via ``View/environmentObject(_:)``.
 /// - `ChildView` uses `AppModel` to display a piece of text declared by the app model.
 /// [<-]
 /// Now consider a slightly different version of this example:
 ///
-/// ![6181BC35-A419-499C-B394-64E170CECAD1](6181BC35-A419-499C-B394-64E170CECAD1.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     let text: String = "some text"
@@ -11829,6 +12168,8 @@ extension EnvironmentKey {
 ///
 /// ```
 ///
+/// ![6181BC35-A419-499C-B394-64E170CECAD1](6181BC35-A419-499C-B394-64E170CECAD1.png)
+///
 /// In this example, `ChildView` is initialized by an `IntermediateView`, which in turn is initialized by `ContentView`. This example is different only in that there is an additional level of nesting, via `IntermediateView` (a view that adds padding to `ChildView`).
 ///
 /// Note that `ChildView` did not need to be changed at all. `@EnvironmentObject` is neither used nor declared in `IntermediateView`, yet it is still available in the same way at one level deeper.
@@ -11839,7 +12180,6 @@ extension EnvironmentKey {
 ///
 /// Here is another example:
 ///
-/// ![5BADAB08-D42D-4FF2-9174-06C29CB15738](5BADAB08-D42D-4FF2-9174-06C29CB15738.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -11863,6 +12203,8 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
+/// ![](bindings-ex.gif)
+///
 ///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a `Binding<Bool>` to read and write whether it is on.
 ///
 /// Just like `@State`, `@ObservedObject` and `@StateObject`, `@EnvironmentObject` allows you to create a ``Binding`` from its wrapped value type using the `$` syntax.
@@ -11885,7 +12227,6 @@ extension EnvironmentKey {
 ///
 /// On iOS 13, environment objects do not automatically pass to sheets or navigation destinations. The following code would crash on iOS 13, for example:
 ///
-/// ![CA7BCD70-C1A2-49F4-A005-36055F937FFF](CA7BCD70-C1A2-49F4-A005-36055F937FFF.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -11915,6 +12256,8 @@ extension EnvironmentKey {
 ///     }
 /// }
 /// ```
+///
+/// ![](environment-object-ex4.gif)
 ///
 /// To fix it, the ``View/environmentObject(_:)`` modifier would need to be added directly to the sheet's content, like this:
 ///
@@ -11949,6 +12292,9 @@ extension EnvironmentKey {
 ///     }
 /// }
 /// ```
+///
+/// ![](environment-object-ex5.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct EnvironmentObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -13091,35 +13437,37 @@ extension FileDocument {
     /// - B: ``FileDocument/init(configuration:)``
     /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     struct ExampleDocument: FileDocument {
-    ///         var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = text.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -13140,8 +13488,6 @@ extension FileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -13150,8 +13496,6 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -13163,6 +13507,8 @@ extension FileDocument {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     init(configuration: Self.ReadConfiguration) throws { }
 
@@ -13256,8 +13602,6 @@ extension FileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -13266,8 +13610,6 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -13329,35 +13671,37 @@ extension FileDocument {
     /// - B: ``FileDocument/init(configuration:)``
     /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     struct ExampleDocument: FileDocument {
-    ///         var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = text.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -13378,8 +13722,6 @@ extension FileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -13388,8 +13730,6 @@ extension FileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -13401,6 +13741,8 @@ extension FileDocument {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     public static var writableContentTypes: [UTType] { get }
 }
@@ -13656,8 +13998,6 @@ public struct FocusedValues {
 ///
 /// Fonts can be applied to your view with the ``View/font(_:)`` modifier.
 ///
-/// ![Font Example 1](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -13667,9 +14007,9 @@ public struct FocusedValues {
 /// }
 /// ```
 ///
-/// In addition to standard system font types like `largeTitle` and `body`, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
+/// ![Font Example 1](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
 ///
-/// ![Font Example 2](0C3CED07-2FD4-40E5-904D-8D1CD833E1F6.png)
+/// In addition to standard system font types like ``Font/TextStyle/largeTitle`` and ``Font/body``, you can customize the size, weight and design of your `Font` with the ``Font/system(size:weight:design:)`` modifier.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13680,9 +14020,9 @@ public struct FocusedValues {
 /// }
 /// ```
 ///
-/// Non system-fonts can be applied using ``Font/custom(_:size:)``
+/// ![Font Example 2](0C3CED07-2FD4-40E5-904D-8D1CD833E1F6.png)
 ///
-/// ![Font Example 3](E683BBEB-8DE2-412D-9A3F-BB3C7E658764.png)
+/// Non system-fonts can be applied using ``Font/custom(_:size:)``
 ///
 /// ```
 /// struct ExampleView: View {
@@ -13692,6 +14032,9 @@ public struct FocusedValues {
 ///     }
 /// }
 /// ```
+///
+/// ![Font Example 3](E683BBEB-8DE2-412D-9A3F-BB3C7E658764.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Font : Hashable {
 
@@ -13735,8 +14078,6 @@ extension Font {
 
     /// A font with the large title text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -13769,12 +14110,13 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let largeTitle: Font
 
     /// A font with the title text style.
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -13807,6 +14149,9 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    ///
     public static let title: Font
 
     /// Create a font for second level hierarchical headings.
@@ -14709,20 +15054,42 @@ extension Font {
 
     /// Adds italics to the font.
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// Use this modifier to add *italic* styling to a ``Font``.
     ///
     /// ```
-    /// struct FontView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
     ///             Text("I'm italicized text")
-    ///                 .font(Font.system(size: 16).italic())
+    ///                 .font(Font.system(size: 36).italic())
     ///             Text("And I'm bold")
-    ///                 .font(Font.system(size: 16).bold())
+    ///                 .font(Font.system(size: 36).bold())
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// There is a related ``Text`` modifier called ``Text/italic()`` that
+    /// gets applied directly to the text view:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).italic())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .italic()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Italic Modifier Comparison](font-text-italic.png)
+    ///
     public func italic() -> Font { }
 
     /// Adjusts the font to enable all small capitals.
@@ -14854,20 +15221,61 @@ extension Font {
 
     /// Adds bold styling to the font.
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// Use this modifier to add **bold** styling to a ``Font``.
     ///
     /// ```
-    /// struct FontView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
     ///             Text("I'm italicized text")
-    ///                 .font(Font.system(size: 16).italic())
+    ///                 .font(Font.system(size: 36).italic())
     ///             Text("And I'm bold")
-    ///                 .font(Font.system(size: 16).bold())
+    ///                 .font(Font.system(size: 36).bold())
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// This is slightly different than using the ``Font`` modifier ``Font/weight(_:)``
+    /// and passing the ``Font/Weight/bold`` property. See the difference:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I use the `.bold()` modifier")
+    ///                 .font(Font.system(size: 24).bold())
+    ///             Text("I use the `.bold` property")
+    ///                 .font(Font.system(size: 24).weight(.bold))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold Comparison](font-bold-comparison.png)
+    ///
+    /// There is a related ``Text`` modifier called ``Text/bold()`` that
+    /// gets applied directly to the text view:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).bold())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .bold()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold Modifier Comparison](font-bold-twins.png)
+    ///
     public func bold() -> Font { }
 
     /// Create a version of `self` that uses leading (line spacing) adjustment.
@@ -15407,8 +15815,6 @@ extension Font {
     /// weight, and a type design together. The following styles the system font
     /// as 17 point, ``Font/Weight/semibold`` text:
     ///
-    /// ![Font System Semibold](font-system-semibold.png)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -15418,10 +15824,10 @@ extension Font {
     /// }
     /// ```
     ///
-    /// While the following styles the text as 17 point ``Font/Weight/bold``,
-    /// and applies a `serif` ``Font/Design`` to the system font:
+    /// ![Font System Semibold](font-system-semibold.png)
     ///
-    /// ![Font System Serif](font-system-serif.png)
+    /// The following styles the text as 17 point ``Font/Weight/bold``,
+    /// and applies a `serif` ``Font/Design`` to the system font:
     ///
     /// ```
     /// struct ContentView: View {
@@ -15432,12 +15838,12 @@ extension Font {
     /// }
     /// ```
     ///
+    /// ![Font System Serif](font-system-serif.png)
+    ///
     /// If you want to use the default ``Font/Weight``
     /// (`Font/Weight/regular`), you don't need to specify the `weight` in the
     /// method. The following example styles the text as 17 point
     /// `Font/Weight/regular`, and uses a ``Font/Design/rounded`` system font:
-    ///
-    /// ![Font System Rounded](font-system-rounded.png)
     ///
     /// ```
     /// struct ContentView: View {
@@ -15447,6 +15853,8 @@ extension Font {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font System Rounded](font-system-rounded.png)
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
@@ -15736,8 +16144,8 @@ extension Font.Leading : Hashable {
 /// Creates views from a collection of identified data.
 ///
 /// ForEach supports three identifiers:
-/// * ``ForEach/init(_:content:)-ed9f4``, for iterating over a range
-/// * ``ForEach/init(_:content:)-72c77``, for iterating over data that conforms to identifiable
+/// * ``ForEach/init(_:content:)-90399``, for iterating over a range
+/// * ``ForEach/init(_:content:)-cde2b``, for iterating over data that conforms to identifiable
 /// * ``ForEach/init(_:id:content:)`` for iterating over that can be identified, but does not conform to identifiable
 ///
 /// ### Iterating over a range
@@ -15825,6 +16233,9 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     ///     let id = UUID()
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.56.51.png)
+    ///
     /// [<-]
     /// Note:  It's important that the `id` of a data element doesn't change unless you
     /// replace the data element with a new data element that has a new
@@ -15861,6 +16272,8 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.59.20.png)
+    ///
     /// This initializer can also be used with objects that don't conform to `Identifiable`, but have identifiable properties. For example:
     ///
     /// ```
@@ -15885,6 +16298,8 @@ extension ForEach where Content : View {
     ///     var name: String
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.00.04.png)
     ///
     /// Notice, this initializer can be used for data that can change. For example:
     ///
@@ -15951,6 +16366,8 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.44.37.png)
+    ///
     /// Notice however, that this view is only rendered once. Therefore, if `myFruits.count` changes, the view will **not update**. For example, clicking `New Fruit` in the following code returns the error:
     ///
     /// `ForEach(_:content:) should only be used for *constant* data.`
@@ -15978,6 +16395,8 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](foreach-ex2.gif)
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
@@ -16204,8 +16623,6 @@ public struct GeometryProxy {
 ///
 /// In this example, ``GeometryReader`` is used to create a view scaled down to exactly half of its parent container:
 ///
-/// ![GeometryReader Example 1](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -16220,7 +16637,9 @@ public struct GeometryProxy {
 /// }
 /// ```
 ///
-/// Note: ``GeometryReader`` **fills into** its parent container, and the current default alignment of its content is `.topLeading`. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
+/// ![GeometryReader Example 1](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
+///
+/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is ``Alignment/topLeading``. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
 ///
 /// ### ``GeometryReader`` to get a view's frame
 ///
@@ -16260,7 +16679,9 @@ public struct GeometryProxy {
 /// }
 /// ```
 ///
-/// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not* the frame of its container, the `VStack`. This is achieved by forcing a ``GeometryReader`` as a background of `SomeView`, thereby constraining it to `SomeView`'s bounds.
+/// ![6DEDD064-9A38-4714-9732-9C8D6F6D5715](6DEDD064-9A38-4714-9732-9C8D6F6D5715.png)
+///
+/// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not* the frame of its container, the `VStack`. This is achieved by forcing a `GeometryReader` as a background of `SomeView`, thereby constraining it to `SomeView`'s bounds.
 ///
 /// This task of acquiring a view's frame can be done in a generic and reusable way using ``ViewModifier``:
 ///
@@ -17015,10 +17436,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 
 /// An interactive calendar or clock.
 ///
-/// > "This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate."
-///
-/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
-///
+/// This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate.
 ///
 ///      struct ExampleView: View {
 ///          @State var date: Date = Date()
@@ -17030,6 +17448,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///          }
 ///      }
 ///
+/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
 ///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -17615,9 +18034,6 @@ public struct GroupBoxStyleConfiguration {
 
 /// A standard grouped list style.
 ///
-/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
-///
-///
 ///      struct ExampleView: View {
 ///          var body: some View {
 ///             List {
@@ -17629,6 +18045,7 @@ public struct GroupBoxStyleConfiguration {
 ///          }
 ///      }
 ///
+/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
 ///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
@@ -17643,7 +18060,6 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// ``HStack`` is a horizontal stack of views.
 ///
-///  ![HStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -17655,9 +18071,9 @@ public struct GroupedListStyle : ListStyle {
 ///         }
 ///     }
 ///
-/// Modify your stack's alignment or spacing with the built in initializer.
+///  ![HStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
 ///
-///  ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
+/// Modify your stack's alignment or spacing with the built in initializer.
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -17668,6 +18084,9 @@ public struct GroupedListStyle : ListStyle {
 ///             }
 ///         }
 ///     }
+///
+///
+/// ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
 ///
 /// Learn more about the properties of each alignment choice via the ``VerticalAlignment`` struct.
 ///
@@ -17964,21 +18383,67 @@ public struct HoverEffect {
 
 /// A label style that only displays the icon of the label.
 ///
+/// Use this label style to display a ``Label`` with an icon only.
 ///
-///     struct ExampleView: View {
-///         var body: some View {
-///              Label("Banana🍌", systemImage: "heart.fill")
-///                  .labelStyle(IconOnlyLabelStyle())
+/// This is one of 3 default label
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
+///
+/// These are the default styles:
+/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
 ///         }
+///         .font(.title)
 ///     }
+/// }
+/// ```
 ///
-/// ![IconOnlyLabelStyle Example 1](icononlylabelstyle.png)
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
-/// > The title of the label is still used for non-visual descriptions, such as VoiceOver.
+/// - Note: The title of the label is still used for non-visual descriptions,
+/// such as VoiceOver.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct IconOnlyLabelStyle : LabelStyle {
 
     /// Creates an icon-only label style.
+    ///
+    /// Use this initializer to create an icon-only label style.
+    /// This is the only initializer of ``TitleOnlyLabelStyle``.
+    ///
+    /// Apply a icon-only label style using the ``View/labelStyle(_:)``
+    /// view modifier:
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                 Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                     .labelStyle(IconOnlyLabelStyle())
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    ///
+    /// ![Icon-only Label Style](icon-only-labelstyle.png)
+    ///
     public init() { }
 
     /// Creates a view that represents the body of a label.
@@ -20001,12 +20466,10 @@ extension Image.ResizingMode : Hashable {
 ///
 /// Currently the IndexViewStyle protocol is not public, so it cannot be implemented for
 /// a custom view. The only type conforming to this protocol is ``PageIndexViewStyle``.
-/// To configure the current ``IndexViewStyle`` for a view hierarchy, use the
+/// To configure the current `IndexViewStyle` for a view hierarchy, use the
 /// `.indexViewStyle()` modifier.
 ///
 /// For example:
-///
-/// ![Index view style protocol example 1](A68AC8DE-29C1-44C6-880C-2CEB9ED93988.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -20021,6 +20484,8 @@ extension Image.ResizingMode : Hashable {
 ///    }
 /// }
 /// ```
+///
+/// ![Index view style protocol example 1](A68AC8DE-29C1-44C6-880C-2CEB9ED93988.png)
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -20037,15 +20502,19 @@ extension IndexViewStyle {
 /// ![Inline Example](/picker-style-2.gif)
 ///
 /// ```
+/// enum MyFruit {
+///     case banana, apple, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit{
-///         case .apple:
-///             return "Apple 🍎🍎"
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -20075,15 +20544,19 @@ public struct InlinePickerStyle : PickerStyle {
     /// ![Inline Example](/picker-style-2.gif)
     ///
     /// ```
+    /// enum MyFruit {
+    ///     case banana, apple, peach
+    /// }
+    ///
     /// struct ExampleView: View {
     ///     @State var favoriteFruit: MyFruit = MyFruit.banana
     ///
     ///     var fruitName: String {
     ///         switch favoriteFruit{
-    ///         case .apple:
-    ///             return "Apple 🍎🍎"
     ///         case .banana:
     ///             return "Banana 🍌🍌"
+    ///         case .apple:
+    ///             return "Apple 🍎🍎"
     ///         case .peach:
     ///             return "Peach 🍑🍑"
     ///         }
@@ -20109,8 +20582,7 @@ public struct InlinePickerStyle : PickerStyle {
 
 /// The instance that describes the behavior and appearance of an inset grouped list.
 ///
-/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
-///
+/// This style creates a gap between the borders of the list and the edge of the screen:
 ///
 ///      struct ExampleView: View {
 ///          var body: some View {
@@ -20123,6 +20595,7 @@ public struct InlinePickerStyle : PickerStyle {
 ///          }
 ///      }
 ///
+/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
 ///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
@@ -20136,11 +20609,9 @@ public struct InsetGroupedListStyle : ListStyle {
 
 /// The behavior and appearance of an inset list.
 ///
-/// Use the ``View/listStyle(_:)`` modifier
-/// to apply this list style to a ``List``.
-///
-/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
-///
+/// Use the ``View/listStyle(_:)`` modifier to apply this list style to a
+/// ``List``. This style creates a gap between the borders of the list and the
+/// edge of the screen:
 ///
 ///      struct ExampleView: View {
 ///          var body: some View {
@@ -20154,14 +20625,15 @@ public struct InsetGroupedListStyle : ListStyle {
 ///      }
 ///
 ///
+/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+///
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct InsetListStyle : ListStyle {
 
     /// Creates an inset list style.
-    ///
-    /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
     ///
     ///
     ///      struct ExampleView: View {
@@ -20174,6 +20646,8 @@ public struct InsetListStyle : ListStyle {
     ///             .listStyle(InsetListStyle())
     ///          }
     ///      }
+    ///
+    /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
     ///
     public init() { }
 }
@@ -20205,7 +20679,7 @@ public struct InsetListStyle : ListStyle {
 /// ```
 /// struct ArcView: View {
 ///     var body: some View {
-///         Arc(endAngle: Angle(.degrees(270)))
+///         Arc(endAngle: Angle(degrees: 270))
 ///             .strokeBorder(Color.green)
 ///     }
 /// }
@@ -20231,6 +20705,8 @@ public struct InsetListStyle : ListStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![](insettableshape.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol InsettableShape : Shape { }
@@ -20279,6 +20755,8 @@ extension InsettableShape : Shape {
     /// }
     /// ```
     ///
+    /// ![](insettableshape.png)
+    ///
     func inset(by amount: CGFloat) -> Self.InsetShape { }
 }
 
@@ -20306,12 +20784,14 @@ extension InsettableShape {
     ///                                 dash: [],
     ///                                 dashPhase: 0)
     ///
-    ///         return Cirlce()
+    ///         return Circle()
     ///             .strokeBorder(linearGradient, style: style)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](strokeborder-style.png)
     ///
     /// - Parameters:
     ///   - content: The ``ShapeStyle`` to fill the border with.
@@ -20337,12 +20817,14 @@ extension InsettableShape {
     ///                                 dash: [],
     ///                                 dashPhase: 0)
     ///
-    ///         return Cirlce()
+    ///         return Circle()
     ///             .strokeBorder(style: style)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](insettableshape-strokeborder.png)
     ///
     /// - Parameters:
     ///   - style: The ``StrokeStyle`` for filling the border.
@@ -20366,12 +20848,14 @@ extension InsettableShape {
     ///                                             startPoint: .leading,
     ///                                             endPoint: .trailing)
     ///
-    ///         return Cirlce()
+    ///         return Circle()
     ///             .strokeBorder(linearGradient, lineWidth: 15)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](strokeborder-style.png)
     ///
     /// - Parameters:
     ///   - content: The ``ShapeStyle`` to fill the border with.
@@ -20391,12 +20875,14 @@ extension InsettableShape {
     /// ```
     /// struct CircleView: View {
     ///     var body: some View {
-    ///         Cirlce()
+    ///         Circle()
     ///             .strokeBorder(lineWidth: 15)
     ///             .border(Color.primary)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](insettableshape-strokeborder.png)
     ///
     /// - Parameters:
     ///   - lineWidth: The border width.
@@ -20950,7 +21436,6 @@ public struct KeyboardShortcut {
 /// [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/)
 /// collection:
 ///
-/// ![AAF70423-43CB-4A9F-8640-C9485C5EF390](AAF70423-43CB-4A9F-8640-C9485C5EF390.png)
 /// ```
 /// struct BoltView: View {
 ///     var body: some View {
@@ -20959,12 +21444,13 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![AAF70423-43CB-4A9F-8640-C9485C5EF390](AAF70423-43CB-4A9F-8640-C9485C5EF390.png)
+///
 /// You can also apply styles to labels in several ways. In the case of dynamic
 /// changes to the view after device rotation or change to a window size you
 /// might want to show only the text portion of the label using the title-only
 /// label style:
 ///
-/// ![922B50FC-5FEC-4F61-A07E-AB579F1B726E](922B50FC-5FEC-4F61-A07E-AB579F1B726E.png)
 /// ```
 /// struct TitleOnlyBoltView: View {
 ///     var body: some View {
@@ -20974,9 +21460,10 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![922B50FC-5FEC-4F61-A07E-AB579F1B726E](922B50FC-5FEC-4F61-A07E-AB579F1B726E.png)
+///
 /// Conversely, there's also an icon-only label style:
 ///
-/// ![D12AC27C-00DC-4F00-A4F1-B72735084CA4](D12AC27C-00DC-4F00-A4F1-B72735084CA4.png)
 /// ```
 /// struct IconOnlyBoltView: View {
 ///     var body: some View {
@@ -20986,10 +21473,11 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![D12AC27C-00DC-4F00-A4F1-B72735084CA4](D12AC27C-00DC-4F00-A4F1-B72735084CA4.png)
+///
 /// You can also create a customized label style by modifying an existing
 /// style; this example adds a red border to the default label style:
 ///
-/// ![491B486D-0E3C-450A-9FD3-74BB847D19FE](491B486D-0E3C-450A-9FD3-74BB847D19FE.png)
 /// ```
 /// struct RedBorderedLabelStyle: LabelStyle {
 ///     func makeBody(configuration: Configuration) -> some View {
@@ -21007,6 +21495,8 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![491B486D-0E3C-450A-9FD3-74BB847D19FE](491B486D-0E3C-450A-9FD3-74BB847D19FE.png)
+///
 /// For more extensive customization or to create a completely new label style,
 /// you'll need to adopt the ``LabelStyle`` protocol and implement a
 /// ``LabelStyleConfiguration`` for the new style.
@@ -21014,7 +21504,6 @@ public struct KeyboardShortcut {
 /// To apply a common label style to a group of labels, apply the style
 /// to the view hierarchy that contains the labels:
 ///
-/// ![9F864CBF-1FA1-4989-9F8B-8ED0515E1C56](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
 /// ```
 /// struct WeatherView: View {
 ///     var body: some View {
@@ -21028,12 +21517,13 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
+/// ![9F864CBF-1FA1-4989-9F8B-8ED0515E1C56](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
+///
 /// It's also possible to make labels using views to compose the label's icon
 /// programmatically, rather than using a pre-made image. In this example, the
 /// icon portion of the label uses a filled ``Circle`` overlaid
 /// with the user's initials:
 ///
-/// ![BFE30CE7-C088-4B03-A564-0A1B8D272BCF](BFE30CE7-C088-4B03-A564-0A1B8D272BCF.png)
 /// ```
 /// struct CustomPersonView: View {
 ///     var body: some View {
@@ -21053,6 +21543,8 @@ public struct KeyboardShortcut {
 ///     }
 /// }
 /// ```
+///
+/// ![BFE30CE7-C088-4B03-A564-0A1B8D272BCF](BFE30CE7-C088-4B03-A564-0A1B8D272BCF.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Label<Title, Icon> : View where Title : View, Icon : View {
@@ -21181,42 +21673,113 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPod touch (7th generation) - 2021-03-24 at 18.04.32.png)
+    ///
     /// - Parameter configuration: The label style to use.
     public init(_ configuration: LabelStyleConfiguration) { }
 }
 
-/// This protocol is used to create styles for Label views
+/// A protocol for creating styles for Label views.
 ///
+/// Use this protocol to create a label style that can easily be reused, or
+/// to quickly implement one of the out-of-the-box label styles.
 ///
-/// Implement this protocol to create a labelstyle that can easily be reused.
+/// ### Making a ``LabelStyle``
 ///
-/// To configure the current label style for a view hierarchy, you only need to use the
-/// ``View/labelStyle(_:)`` modifier.
+/// There are two ways to style a ``Label``, by creating a `struct` that
+/// conforms to this protocol, or using a default `struct` that conforms
+/// to this protocol.
 ///
-/// ![LabelStyle Example 1](label-style-example.png)
+/// #### Conforming to ``LabelStyle``
 ///
-///```
-/// struct ExampleView: View {
-///     var body: some View {
-///         VStack{
-///             Label("Banana", systemImage: "suit.heart.fill")
-///                 .labelStyle(MyLabelStyle(color:.yellow))
-///             Label("Apple", systemImage: "suit.heart.fill")
-///                 .labelStyle(MyLabelStyle(color:.red))
-///         }
-///  }
-///     struct MyLabelStyle:LabelStyle{
-///         let color:Color
-///         func makeBody(configuration: Configuration) -> some View {
-///             VStack{
-///                 configuration.title
+/// To create your own label style by conforming to the ``LabelStyle`` protocol,
+/// there is only one required
+/// function: ``LabelStyle/makeBody(configuration:)``.
 ///
-///                 configuration.icon.foregroundColor(color)
-///             }
+/// ``LabelStyle/makeBody(configuration:)`` is a function that takes in a
+/// ``LabelStyleConfiguration`` parameter and expects `some View`
+/// to be returned. So what is a ``LabelStyleConfiguration``? Basically,
+/// just like a ``Label``, it's an ``LabelStyleConfiguration/icon`` and
+/// a ``LabelStyleConfiguration/title``.
+///
+/// Here's an example of a `struct` called `MyLabelStyle` that
+/// conforms to the ``LabelStyle`` protocol by implementing the
+/// ``LabelStyle/makeBody(configuration:)`` function:
+///
+/// ```
+/// struct MyLabelStyle: LabelStyle {
+///     let color: Color
+///
+///     func makeBody(configuration: Configuration) -> some View {
+///         VStack {
+///             configuration.title
+///             configuration.icon
+///                 .foregroundColor(color)
 ///         }
 ///     }
 /// }
 /// ```
+///
+/// This label style does two things: it stacks the title and icon vertically,
+/// and colors the icon. See below for how to use this custom label style.
+///
+/// #### Default ``LabelStyle`` Structures
+///
+/// If you don't want to create your own label style, there are 3 default
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
+///
+/// These are the default styles:
+/// - ``DefaultLabelStyle``, which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+/// See below for how to use them.
+///
+/// ### Using a ``LabelStyle``
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier.
+///
+/// Here is our custom label style from earlier:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .yellow))
+///             Label("Apple", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .red))
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
+///
+/// ![Custom Label Style](custom-labelstyle-comparison.png)
+///
+/// And here's a comparison of the 3 default label styles:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
+///
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol LabelStyle { }
@@ -21227,66 +21790,165 @@ extension LabelStyle {
 
     /// Creates a view that represents the body of a label.
     ///
-    /// The system calls this method for each ``Label`` instance in a view
-    /// hierarchy where this style is the current label style.
+    /// Implement this function to conform to the ``LabelStyle`` protocol,
+    /// which allows you to create reusable label styles.
     ///
-    /// ![LabelStyle Example 1](label-style-example.png)
+    /// ``LabelStyle/makeBody(configuration:)`` is a function that takes in a
+    /// ``LabelStyleConfiguration`` parameter and expects `some View`
+    /// to be returned. So what is a ``LabelStyleConfiguration``? Basically,
+    /// just like a ``Label``, it's an ``LabelStyleConfiguration/icon`` and
+    /// a ``LabelStyleConfiguration/title``.
     ///
-    ///```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         VStack{
-    ///             Label("Banana", systemImage: "suit.heart.fill")
-    ///                 .labelStyle(MyLabelStyle(color:.yellow))
-    ///             Label("Apple", systemImage: "suit.heart.fill")
-    ///                 .labelStyle(MyLabelStyle(color:.red))
-    ///         }
-    ///  }
-    ///     struct MyLabelStyle:LabelStyle{
-    ///         let color:Color
-    ///         func makeBody(configuration: Configuration) -> some View {
-    ///             VStack{
-    ///                 configuration.title
+    /// Here's an example of a `struct` called `MyLabelStyle` that
+    /// conforms to the ``LabelStyle`` protocol by implementing the
+    /// ``LabelStyle/makeBody(configuration:)`` function:
     ///
-    ///                 configuration.icon.foregroundColor(color)
-    ///             }
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// This label style does two things: it stacks the title and icon vertically,
+    /// and colors the icon. See below for how to use this custom label style.
+    ///
+    /// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+    /// modifier:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
+    ///
+    /// - Note: Any ``LabelStyle`` must implement this function. That means
+    /// that even the default styles like ``TitleOnlyLabelStyle`` and
+    /// ``IconOnlyLabelStyle`` implement this function internally.
+    ///
     /// - Parameter configuration: The properties of the label.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a label.
+    ///
+    /// This is the type passed as a parameter to the required
+    /// ``LabelStyle/makeBody(configuration:)`` function.
+    /// See ``LabelStyleConfiguration`` to learn about the properties
+    /// of a label style configuration.
     typealias Configuration = LabelStyleConfiguration
 }
 
 /// The properties of a label.
 ///
-/// There are 2 properties of a label:
+/// Use this structure to access the properties of a ``Label`` when
+/// creating your own ``LabelStyle``s. A `LabelStyleConfiguration` has
+/// two properties:
+/// 1. ``LabelStyleConfiguration/title``: The ``Label``'s ``Text`` part.
+/// 2. ``LabelStyleConfiguration/icon``: The ``Label``'s ``Image`` part.
 ///
+/// A parameter of this type called `configuration` is passed to the
+/// one required function of the ``LabelStyle`` protocol:
+/// ``LabelStyle/makeBody(configuration:)``.
 ///
+/// In the example below, we use the `configuration` parameter in the
+/// ``LabelStyle/makeBody(configuration:)`` function to create
+/// our own custom ``LabelStyle``
 ///
-/// 1. Title
-/// 2. Icon
+/// ```
+/// struct MyLabelStyle: LabelStyle {
+///     let color: Color
 ///
+///     func makeBody(configuration: Configuration) -> some View {
+///         VStack {
+///             configuration.title
+///             configuration.icon
+///                 .foregroundColor(color)
+///         }
+///     }
+/// }
+/// ```
 ///
+/// We can then reuse that custom label style:
 ///
-/// ![DefaultLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-default-example-1.png)
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .yellow))
+///             Label("Apple", systemImage: "suit.heart.fill")
+///                 .labelStyle(MyLabelStyle(color: .red))
+///         }
+///         .font(.title)
+///     }
+/// }
+/// ```
 ///
-///
-///    struct ExampleView: View {
-///        var body: some View {
-///             Label("Banana🍌", systemImage: "heart.fill")
-///                 .labelStyle(DefaultLabelStyle())
-///        }
-///    }
-///
+/// ![Custom Label Style](custom-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LabelStyleConfiguration {
 
     /// A type-erased title view of a label.
+    ///
+    /// This is the type of a ``LabelStyleConfiguration``'s
+    /// ``LabelStyleConfiguration/title`` property. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses a
+    /// `Title` property called `configuration.title`:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public struct Title {
 
         /// The type of view representing the body of this view.
@@ -21297,6 +21959,48 @@ public struct LabelStyleConfiguration {
     }
 
     /// A type-erased icon view of a label.
+    ///
+    /// This is the type of a ``LabelStyleConfiguration``'s
+    /// ``LabelStyleConfiguration/icon`` property. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses an
+    /// `Icon` property called `configuration.icon`:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public struct Icon {
 
         /// The type of view representing the body of this view.
@@ -21307,9 +22011,91 @@ public struct LabelStyleConfiguration {
     }
 
     /// A description of the labeled item.
+    ///
+    /// This is one of two properties in a ``LabelStyleConfiguration``. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses the
+    /// `configuration.title` property:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public var title: LabelStyleConfiguration.Title { get }
 
     /// A symbolic representation of the labeled item.
+    ///
+    /// This is one of two properties in a ``LabelStyleConfiguration``. You get access
+    /// to a ``LabelStyleConfiguration`` called `configuration` when you
+    /// implement the ``LabelStyle/makeBody(configuration:)`` function - the
+    /// one requirement of
+    /// conforming to the ``LabelStyle`` protocol.
+    ///
+    /// Here is an example of a custom ``LabelStyle``, which uses the
+    /// `configuration.icon` property:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// We can then reuse that custom label style:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
     public var icon: LabelStyleConfiguration.Icon { get }
 }
 
@@ -21339,16 +22125,18 @@ extension LabelStyleConfiguration.Icon : View {
 /// In the example below, the left to right arrow is printed since we're
 /// in the English locale.
 ///
-/// ![66C3C5E5-8C26-43DD-9B2B-E29C621F48E9](66C3C5E5-8C26-43DD-9B2B-E29C621F48E9.png)
 /// ```
-/// struct LayoutView: View {
+/// struct ContentView: View {
 ///     @Environment(\.layoutDirection) var direction
 ///
 ///     var body: some View {
 ///         Text(direction == LayoutDirection.leftToRight ? "➡️" : "⬅️")
+///             .font(.title)
 ///     }
 /// }
 /// ```
+///
+/// ![](layoutdirection.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum LayoutDirection : Hashable, CaseIterable {
@@ -21374,9 +22162,12 @@ public enum LayoutDirection : Hashable, CaseIterable {
     ///
     ///     var body: some View {
     ///         Text(direction == .leftToRight ? "➡️" : "⬅️")
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](layoutdirection.png)
     ///
     case leftToRight
 
@@ -21403,9 +22194,12 @@ public enum LayoutDirection : Hashable, CaseIterable {
     ///
     ///     var body: some View {
     ///         Text(direction == .rightToLeft ? "⬅️" : "➡️")
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](layoutdirection.png)
     ///
     case rightToLeft
 
@@ -21458,8 +22252,8 @@ extension LayoutDirection {
     /// [these docs](https://developer.apple.com/documentation/uikit/uitraitenvironmentlayoutdirection)
     /// for more info on layout direction in UIKit.
     ///
-    /// Note that this is a failable initializer, so it must be unwrapped for
-    /// many use cases.
+    /// *Note that this is a failable initializer, so it must be unwrapped for
+    /// many use cases.*
     ///
     /// See below for a simple example of how to use this.
     ///
@@ -21472,10 +22266,13 @@ extension LayoutDirection {
     ///     let leftToRight = UITraitEnvironmentLayoutDirection.leftToRight
     ///
     ///     var body: some View {
-    ///         Text(direction == LayoutDirection(leftToRight) ? "➡️" : "⬅️")
+    ///         Text(direction == LayoutDirection(leftToRight)! ? "➡️" : "⬅️")
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](layoutdirection.png)
     ///
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
@@ -22120,8 +22917,6 @@ extension Link where Label == Text {
 ///
 /// The following creates a ``List`` with three rows of text:
 ///
-/// ![List Example 1](7EF39BE9-B27B-4BA3-A4AD-CA3FCD274F9F.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -22134,11 +22929,11 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ### Creating a ``List`` with a variable number of elements
+/// ![List Example 1](7EF39BE9-B27B-4BA3-A4AD-CA3FCD274F9F.png)
 ///
-/// In the following example, `List/init(_:id:rowContent:)` is used to dynamically create a ``List`` over an array of strings, `fruits`.
+/// ### Creating a `List` with a variable number of elements
 ///
-/// ![List Example 2](5A921B5A-4B90-457C-A65F-8AE616E0E932.png)
+/// In the following example, ``List/init(_:id:rowContent:)`` is used to dynamically create a ``List`` over an array of strings, `fruits`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22152,7 +22947,9 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// This is different from the previous example, because this initializer accepts a `rowContent` parameter that allows the ``List`` to generate SwiftUI views for the list's rows on-demand.
+/// ![List Example 2](5A921B5A-4B90-457C-A65F-8AE616E0E932.png)
+///
+/// This is different from the previous example, because this initializer accepts a `rowContent` parameter that allows the `List` to generate SwiftUI views for the list's rows on-demand.
 ///
 /// The `id` parameter requires a key-path to the *identifier* for each row of the ``List``. This is required so that ``List`` can efficiently process changes in the data source (in this example, the array `fruits`). These changes to the data source are animated as insertions, removals and reorders - reflecting the changes in the source.
 ///
@@ -22163,8 +22960,6 @@ extension Link where Label == Text {
 /// `List` allows you to mix both fixed and dynamic elements using ``ForEach``.
 ///
 /// The following example displays a ``List`` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
-///
-/// ![List Example 3](2D10DFE0-3A9D-4AD6-B7C3-A350EC37D0C4.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22182,13 +22977,13 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
+/// ![List Example 3](2D10DFE0-3A9D-4AD6-B7C3-A350EC37D0C4.png)
+///
 /// As seen in the above example, ``ForEach`` also accepts an `id` parameter along with a `rowContent`.
 /// [list-sections ->]
 /// ### Adding sections to a ``List``
 ///
 /// The following example demonstrates the usage of ``Section``.
-///
-/// ![List Example 4](0CAA80FC-BDA9-405A-8AB1-5ED8B0ECF92C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22210,16 +23005,16 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// A `Section` used within a ``List`` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
+/// ![List Example 4](0CAA80FC-BDA9-405A-8AB1-5ED8B0ECF92C.png)
+///
+/// A ``Section`` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
 /// [<-]
 /// [list-style ->]
 /// ### Styling a ``List``
 ///
-/// A `List` can be styled using the ``View/listStyle(_:)`` modifier.
+/// A ``List`` can be styled using the ``View/listStyle(_:)`` modifier.
 ///
-/// The following example demonstrates how to style a ``List`` to use a grouped-inset style:
-///
-/// ![List Example 5](7FC84606-BB3F-41C2-BEC1-40346A413676.png)
+/// The following example demonstrates how to style a ``List` using the grouped-inset style:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22233,6 +23028,8 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
+///
+/// ![List Example 5](7FC84606-BB3F-41C2-BEC1-40346A413676.png)
 ///
 /// SwiftUI offers various list styles:
 ///
@@ -22252,8 +23049,6 @@ extension Link where Label == Text {
 ///
 /// The following example demonstrates how ``View/listRowBackground(_:)`` can be used to provide specific background colors for a list's rows:
 ///
-/// ![List Example 6](A6394785-F064-497F-A48B-7ED9DAA55452.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -22261,7 +23056,7 @@ extension Link where Label == Text {
 ///             Text("Bananas 🍌🍌")
 ///                 .listRowBackground(Color.yellow)
 ///             Text("Apples 🍏🍏")
-///                 .listRowBackground(Color.red)
+///                 .listRowBackground(Color.green)
 ///             Text("Peaches 🍑🍑")
 ///                 .listRowBackground(Color.orange)
 ///         }
@@ -22269,11 +23064,11 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// A background can be provided for multiple list rows at a time, by applying the `View/listRowBackground(_:)` modifier to ``ForEach``.
+/// ![List Example 6](A6394785-F064-497F-A48B-7ED9DAA55452.png)
+///
+/// A background can be provided for multiple list rows at a time, by applying the ``View/listRowBackground(_:)`` modifier to ``ForEach``.
 ///
 /// In the following example, all the rows of the ``List`` have the background view `Color.yellow`.
-///
-/// ![List Example 7](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22289,14 +23084,15 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
+///
+/// ![List Example 7](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
+///
 /// [<-]
 ///
 /// [list-deletable ->]
 /// ### Making list rows deletable
 ///
-/// Apply the `DynamicViewContent/onDelete(_:)` modifier on a `ForEach` within a ``List`` to allow the list rows to become deletable.
-///
-/// ![List Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
+/// Apply the ``DynamicViewContent/onDelete(perform:)`` modifier on a ``ForEach`` within a ``List`` to allow the list rows to become deletable.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22319,6 +23115,9 @@ extension Link where Label == Text {
 ///     }
 /// }
 /// ```
+///
+///![List Example 8](list-items-deletable.gif)
+///
 /// [<-]
 ///
 /// [list-edit-button ->]
@@ -22348,7 +23147,8 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-9.gif)
+/// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
+///
 /// [<-]
 /// ### Further notes
 ///
@@ -22723,8 +23523,6 @@ public struct ListItemTint {
 ///
 /// No public interface is provided for this protocol, but several styles are provided by SwiftUI. These can be applied to a `List` with the ``View/listStyle(_:)`` modifier.
 ///
-/// ![ListStyle Example 1](BF5B130F-5A57-4FC5-8A40-723D8F924A06.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -22737,13 +23535,13 @@ public struct ListItemTint {
 /// }
 /// ```
 ///
+/// ![ListStyle Example 1](BF5B130F-5A57-4FC5-8A40-723D8F924A06.png)
+///
 /// Two list styles are included specifically for rendering grouped lists:
 /// - ``GroupedListStyle``
 /// - ``InsetGroupedListStyle``
 ///
 /// These styles provide styling consistent with operating system standards for sectioned lists, including header styling.
-///
-/// ![ListStyle Example 2](8BDD107D-5866-4017-8B13-08DCF8F17495.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -22760,6 +23558,8 @@ public struct ListItemTint {
 ///     }
 /// }
 /// ```
+///
+/// ![ListStyle Example 2](8BDD107D-5866-4017-8B13-08DCF8F17495.png)
 ///
 /// Many SwiftUI list styles can be visualized [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly referenced below.
 ///
@@ -23457,6 +24257,8 @@ extension Menu {
     /// }
     /// ```
     ///
+    /// ![](label-init-image-ex.gif)
+    ///
     /// - Parameters:
     ///     - content: A group of menu items.
     ///     - label: A view describing the content of the menu.
@@ -23539,8 +24341,6 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///
 /// Use this style when there are more than five options. Consider using ``InlinePickerStyle`` when there are fewer than five options.
 ///
-/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
@@ -23561,21 +24361,25 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 /// }
 /// ```
 ///
+/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
+///
 /// [pickerstyle-menu ->]
 /// Your app can also use explicit tags to identify picker content.
 ///
-/// ![Menu Picker Style Example](/picker-style-3.gif)
-///
 /// ```
+/// enum MyFruit {
+///     case banana, apple, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit {
-///         case .apple:
-///             return "Apple 🍎🍎"
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -23596,6 +24400,8 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///     }
 /// }
 /// ```
+///
+/// ![Menu Picker Style Example](picker-style-3.gif)
 ///
 /// [<-]
 ///
@@ -24224,9 +25030,7 @@ extension NavigationLink {
 ///
 /// ### Setting up a navigation stack
 ///
-/// A navigation stack is set up simply by wrapping your view in a ``NavigationView``
-///
-/// ![NavigationView Example 1](CB034D71-ECFF-46DF-93B0-DE24A88C5721.png)
+/// A navigation stack is set up simply by wrapping your view in a `NavigationView`:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24238,13 +25042,13 @@ extension NavigationLink {
 /// }
 /// ```
 ///
+/// ![NavigationView Example 1](CB034D71-ECFF-46DF-93B0-DE24A88C5721.png)
+///
 /// A navigation bar is added by default. The navigation bar can be hidden via  ``View/navigationBarHidden(_:)``.
 /// [navigation-title ->]
 /// ### Adding a navigation title
 ///
-/// Use `View/navigationTitle(_:)` to add a title to the navigation bar within your ``NavigationView``:
-///
-/// ![NavigationView Example 2](382BE2AE-E26A-4214-9F32-8F1786543B14.png)
+/// Use ``View/navigationTitle(_:)-5ad18`` to add a title to the navigation bar within your `NavigationView`:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24257,7 +25061,10 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// `View/navigationTitle(_:)` is only available on iOS 14 and higher. If your application targets iOS 13, please use `View/navigationBarTitle(_:)`.
+/// ![NavigationView Example 2](382BE2AE-E26A-4214-9F32-8F1786543B14.png)
+///
+///
+/// ``View/navigationTitle(_:)-d3628`` is only available on iOS 14 and higher. If your application targets iOS 13, please use ``View/navigationBarTitle(_:)-079a6``.
 /// [<-]
 /// [navigation-title-display-mode ->]
 /// ### Setting the navigation title display mode
@@ -24267,11 +25074,9 @@ extension NavigationLink {
 /// - `NavigationBarItem.TitleDisplayMode.inline`
 /// - `NavigationBarItem.TitleDisplayMode.large`
 ///
-/// An `.automatic` mode is also present, and represents the system default.
+/// An ``NavigationBarItem/TitleDisplayMode/automatic`` mode is also present, and represents the system default.
 ///
 /// The following example forces a large navigation title:
-///
-/// ![NavigationView Example 3](538F7154-7B14-41AD-B913-2391A4D850CB.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24284,15 +25089,16 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 3](538F7154-7B14-41AD-B913-2391A4D850CB.png)
+///
 /// [<-]
 /// [navigation-link ->]
 /// ### Navigating to a view
 ///
 /// Use ``NavigationLink`` to add a button that pushes a new view onto the navigation stack.
 ///
-/// For example, the following presents `ApplesView` when the link "I want apples!" is pressed:
-///
-/// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
+/// For example, the following presents `BananasView` when the link "I want bananas!" is pressed:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24312,6 +25118,9 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
+///
 /// [<-]
 /// [navigation-bar-hidden ->]
 /// ### Hiding the navigation bar
@@ -24319,8 +25128,6 @@ extension NavigationLink {
 /// The navigation bar is on by default within a `NavigationView`. It can be hidden using ``View/navigationBarHidden(_:)``.
 ///
 /// For example:
-///
-/// ![NavigationView Example 5](83BA32E9-ABB0-401F-B66D-CC695D71AD54.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24333,11 +25140,11 @@ extension NavigationLink {
 /// }
 /// ```
 ///
+/// ![NavigationView Example 5](83BA32E9-ABB0-401F-B66D-CC695D71AD54.png)
+///
 /// Note that the navigation bar can be unhidden by child views. ``View/navigationBarHidden(_:)`` is a *preference value*, and uses the value proposed by the deepest view in the hierarchy as its active value. This is to say, a screen with the navigation bar hidden can push a screen that unhides the bar.
 ///
 /// For example, navigating to `SecondScreen` in the following unhides the bar:
-///
-/// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24364,6 +25171,8 @@ extension NavigationLink {
 /// }
 /// ```
 ///
+/// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
+///
 /// And popping `SecondScreen` (or navigating back) hides it again, as `SecondScreen` is removed from the view hierarchy, leaving `ExampleView` as the deepest view in the hierarchy - which has hidden the navigation bar.
 /// [<-]
 /// [navigation-bar-items ->]
@@ -24372,8 +25181,6 @@ extension NavigationLink {
 /// Use ``View/navigationBarItems(leading:trailing:)`` to add items to a navigation bar's leading and trailing areas.
 ///
 /// For example, the following adds "🍌🍌" to the leading area, and "🍏🍏" to the trailing area:
-///
-/// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-11.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24385,15 +25192,16 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-11.png)
+///
 /// [<-]
 /// [navigation-view-style ->]
 /// ### Styling a navigation view
 ///
 /// Use ``View/navigationViewStyle(_:)`` to style a navigation view.
 ///
-/// For example, the following forces a stack-based navigation style, overriding the default double-colum style on macCatalyst:
-///
-/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
+/// For example, the following forces a stack-based navigation style, overriding the default double-column style on macCatalyst:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24406,9 +25214,9 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
+/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
-/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
+/// And the following forces a double-column navigation style, overriding the default stack-based navigation style on iPadOS:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24420,14 +25228,15 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
+///
 /// [<-]
 /// ### Handling selection
 ///
-/// ``NavigationLink`` provides the ability to observe and/or set the active navigation selection via its initializer `NavigationLink/init(destination:tag:selection:label)`.
+/// ``NavigationLink`` provides the ability to observe and/or set the active navigation selection via its initializer ``NavigationLink/init(destination:tag:selection:label:)``.
 ///
 /// For example:
-///
-/// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -24469,6 +25278,8 @@ extension NavigationLink {
 /// }
 /// ```
 ///
+/// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.gif)
+///
 /// In the example above, the navigation selection is written to a state variable, `navigatedItem`. `navigatedItem` is an optional, because it is possible for the screen to not be navigated to any particular screen (i.e. be at the root view containing the 3 navigation links).
 ///
 ///  See ``ToolbarItem`` for more on what can be placed in the navigation bar.
@@ -24509,7 +25320,6 @@ extension NavigationViewStyle {
 ///
 /// In the following example, an observable object is assigned to an `@ObservedObject` variable:
 ///
-/// ![FC1A678A-0513-408B-950E-5BE85697F297](FC1A678A-0513-408B-950E-5BE85697F297.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     static let shared = AppModel()
@@ -24532,6 +25342,8 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![FC1A678A-0513-408B-950E-5BE85697F297](FC1A678A-0513-408B-950E-5BE85697F297.png)
+///
 /// In the example above, `ExampleView` will update its displayed text to "Banana" when the button labeled "Change Text" is pressed. This is because `ExampleView` has subscribed to `AppModel.shared` via the `@ObservedObject` `appModel` variable.
 ///
 /// Whenever the object referenced by `appModel` (which is `AppModel.shared` in this case) emits a change, `ExampleView` will be invalidated and redrawn.
@@ -24542,7 +25354,6 @@ extension NavigationViewStyle {
 ///
 /// For example:
 ///
-/// ![596F2956-1B74-4E8C-B60D-43550414B9F0](596F2956-1B74-4E8C-B60D-43550414B9F0.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     static let shared = AppModel()
@@ -24559,6 +25370,8 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![](observed-object-ex3.gif)
+///
 /// In this example, a two-way connection is established between `appModel.fruitName` and ``TextField``, by using the `$` prefix to create a `Binding<String>`. This allows ``TextField`` to update the `fruitName` variable when the user enters text, and also to update its own displayed text if `fruitName` is changed programmatically.
 ///
 /// ### Passing an observable object to a child view using `@ObservedObject`
@@ -24566,6 +25379,12 @@ extension NavigationViewStyle {
 /// Pass an observable object like you would pass any other variable down to a child view. For example:
 ///
 /// ```
+/// class AppModel: ObservableObject {
+///     static let shared = AppModel()
+///
+///     @Published var fruitName: String = "Apple"
+/// }
+///
 /// struct ExampleView: View {
 ///     @StateObject var appModel = AppModel()
 ///
@@ -24583,13 +25402,14 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![](observed-object-ex3.gif)
+///
 /// It is a common pattern for a parent view to create a `@StateObject` to hold an observable object, and then to pass it down to a child using an `@ObservedObject`. `@StateObject` **owns** the object, `@ObservedObject` simply holds a reference to the object.
 ///
 /// ### Comparison with `@StateObject`
 ///
 /// Consider the following:
 ///
-/// ![A725E911-9792-4A7E-985C-260E54522F35](A725E911-9792-4A7E-985C-260E54522F35.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -24620,6 +25440,8 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![](observed-object-ex4.gif)
+///
 /// `ExampleView` creates a vertical stack of a ``Toggle``, and a view that describes the toggle, `ToggleDescription`.
 ///
 /// `ToggleDescription` also contains a `ViewModel`, that is instantiated and held by `@StateObject`. The `ViewModel` prints on initialization. Run this code and observe that the following is printed:
@@ -24632,7 +25454,6 @@ extension NavigationViewStyle {
 ///
 /// Now consider the following:
 ///
-/// ![0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE](0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -24662,6 +25483,8 @@ extension NavigationViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE](0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE.png)
 ///
 /// This example is identical to the previous example **except** for the fact that `@StateObject` has been replaced with `@ObservedObject`. Run this code now, and observe the following print again:
 ///
@@ -25107,8 +25930,6 @@ public struct OutlineSubgroupChildren : View {
 
 /// An index view style that places a page index view over its content.
 ///
-/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var items = ["Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑"]
@@ -25122,15 +25943,16 @@ public struct OutlineSubgroupChildren : View {
 ///         .tabViewStyle(PageTabViewStyle())
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 ///     }
+/// ```
 ///
-/// Currently the PageIndexViewStyle is the only type that allows for customization
+/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
+///
+/// Currently the ``PageIndexViewStyle`` is the only type that allows for customization
 /// over a page index view. To configure the current ``IndexViewStyle`` for a view hierarchy, use the
-/// `.indexViewStyle()` modifier. When creating a new PageIndexViewStyle, it will
-/// default to the .automatic backgroundDisplayMode if none is specified.
+/// `.indexViewStyle()` modifier. When creating a new ``PageIndexViewStyle``, it will
+/// default to the `.automatic` ``PageIndexViewStyle/backgroundDisplayMode`` if none is specified.
 ///
 /// For example:
-///
-/// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -25145,6 +25967,9 @@ public struct OutlineSubgroupChildren : View {
 ///    }
 /// }
 /// ```
+///
+/// ![Page index view style protocol example 2](pageindexviewstyle-ex2.gif)
+///
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -25304,9 +26129,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
     public init(backgroundDisplayMode: PageIndexViewStyle.BackgroundDisplayMode = .automatic) { }
 }
 
-/// A `TabViewStyle` that implements a paged scrolling ``TabView``.
+/// A ``TabViewStyle`` that implements a paged scrolling ``TabView``.
 ///
-/// ![7418DAC9-D144-4F7D-BB54-AC5E0A88F324](7418DAC9-D144-4F7D-BB54-AC5E0A88F324.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -25321,6 +26145,9 @@ public struct PageIndexViewStyle : IndexViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![7418DAC9-D144-4F7D-BB54-AC5E0A88F324](7418DAC9-D144-4F7D-BB54-AC5E0A88F324.png)
+///
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct PageTabViewStyle : TabViewStyle {
@@ -26756,7 +27583,7 @@ extension Picker where Label == Text {
 
 /// Specifies the appearance and interaction of all pickers within a view hierarchy.
 ///
-/// ``PickerStyle`` does not have a public interface - and therefore your app is limited to their default styles.
+/// `PickerStyle` does not have a public interface - and therefore your app is limited to their default styles.
 ///
 /// There are 7 different styles:
 /// * ``DefaultPickerStyle``
@@ -26948,8 +27775,6 @@ public struct PinnedScrollableViews : OptionSet {
 ///
 /// > A button style that doesn't style or decorate its content while idle, but may apply a visual effect to indicate the pressed, focused, or enabled state of the button.
 ///
-/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
-///
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -26967,8 +27792,9 @@ public struct PinnedScrollableViews : OptionSet {
 ///          func tap() { }
 ///      }
 ///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
-/// > To apply this style to a button, or to a view that contains buttons, use the `View/buttonStyle(_:)-66fbx` modifier.
+/// > To apply this style to a button, or to a view that contains buttons, use the ``View/buttonStyle(_:)-d2d0a`` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
@@ -26990,8 +27816,6 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 
 /// The instance that describes the behavior and appearance of a plain list.
 ///
-/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
-///
 ///
 ///      struct ExampleView: View {
 ///          var body: some View {
@@ -27004,6 +27828,7 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 ///          }
 ///      }
 ///
+/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainListStyle : ListStyle {
@@ -27058,21 +27883,20 @@ public enum PopoverAttachmentAnchor {
     case point(UnitPoint)
 }
 
-/// The ``PreferenceKey`` protocol enables a way to send data _up_ the view hierarchy.
+/// The `PreferenceKey protocol enables a way to send data _up_ the view hierarchy.
 ///
-/// ``PreferenceKey`` allows for a child view to communicate with a parent, similar to how an
+/// `PreferenceKey` allows for a child view to communicate with a parent, similar to how an
 /// ``Environment`` allows for data to be sent down the view hierarchy. An excellent
-/// example of view preferences in action is Apple's ``NavigationView`` and ``View/navigationTitle(_:)``.
-/// The ``View/navigationTitle(_:)`` does not modify the navigation view directly, but rather it
+/// example of view preferences in action is Apple's ``NavigationView`` and ``View/navigationTitle(_:)-ee24d``.
+/// The ``View/navigationTitle(_:)-ee24d`` does not modify the navigation view directly, but rather it
 /// uses view preferences and the navigation view has a closure that is called when the title is updated.
 ///
-/// While it is possible to achieve basic communication up the view hierarchy using a ``@Binding``,
+/// While it is possible to achieve basic communication up the view hierarchy using a `@Binding`,
 /// this can produce unintended effects as a result of modifying state during a view update. In
 /// these scenarios, it may be better to use view preferences.
 ///
 /// For example, to set a preference key from a view and use it to change a state:
 ///
-/// ![48FAD8ED-F1A7-4BC2-B801-A5EB9C765728](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
 /// ```
 /// struct ExampleView: View {
 ///    @State private var customPreferenceKey: String = ""
@@ -27098,10 +27922,11 @@ public enum PopoverAttachmentAnchor {
 /// }
 /// ```
 ///
+/// ![48FAD8ED-F1A7-4BC2-B801-A5EB9C765728](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
+///
 /// It is also possible to use more complicated data structures as a preference key
 /// by changing the type of the defaultValue. For example:
 ///
-/// ![1EDB1FAE-72D3-4B34-AD1F-F848987DF57B](1EDB1FAE-72D3-4B34-AD1F-F848987DF57B.png)
 /// ```
 /// struct ExampleView: View {
 ///    @State private var customPreferenceKey: CustomPreferenceKeyData? = nil
@@ -27132,13 +27957,15 @@ public enum PopoverAttachmentAnchor {
 /// }
 /// ```
 ///
-/// For a detailed explanation of how view preferences work, check out this article:
-/// [https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d](https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d)
+/// ![1EDB1FAE-72D3-4B34-AD1F-F848987DF57B](1EDB1FAE-72D3-4B34-AD1F-F848987DF57B.png)
+///
+/// For a detailed explanation of how view preferences work, check out
+/// [this article](https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d)
 ///
 /// Note:
 ///  - A view with multiple children automatically combines its values for a given
 ///  preference into a single value visible to its ancestors. This functionality
-/// can be changed with the ``PreferenceKey/reduce(_:_:)`` function.
+/// can be changed with the ``PreferenceKey/reduce(value:nextValue:)`` function.
 ///  - When using view preferences, keep in mind that it can be easy to create
 ///  an infinite loop by having the preference value dependent on the state that it is changing.
 ///  A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
@@ -27195,8 +28022,10 @@ extension PreferenceKey {
     /// }
     /// ```
     ///
-    /// For additional details on how the reduce function works, see:
-    /// [https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b](https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b)
+    /// ![](preferencekey-reduce.png)
+    ///
+    /// For additional details on how the reduce function works, see
+    /// [this Medium article](https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b).
     ///
     /// - Parameters:
     ///   - value: The value accumulated through previous calls to this method.
@@ -27571,6 +28400,8 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 /// }
 /// ```
 ///
+/// ![](previewlayout-sizethatfits.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewLayout {
 
@@ -27598,6 +28429,8 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-device.png)
+    ///
     case device
 
     /// Fit the container to the size of the preview when offered the size of
@@ -27622,6 +28455,8 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-sizethatfits.png)
+    ///
     case sizeThatFits
 
     /// Center the preview in a fixed size container.
@@ -27645,6 +28480,8 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-fixed.png)
+    ///
     case fixed(width: CGFloat, height: CGFloat)
 }
 
@@ -27653,8 +28490,12 @@ public enum PreviewLayout {
 /// By default, Xcode can infer the platform for a preview based on the
 /// target of the current file. However, you can also use this enumeration
 /// along with the
-/// ``PreviewProvider/platform``
+/// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
 /// property to change the way a view is displayed in a preview.
+///
+/// *I tried to use this to change the preview platform, but I couldn't get anything
+/// to work. It seems right now that the only way to change your preview
+/// device is by actually changing your build target.*
 ///
 /// This enumeration has 4 different cases:
 /// 1. ``PreviewPlatform/iOS``
@@ -27667,14 +28508,13 @@ public enum PreviewLayout {
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
-///         Text("I am in a Mac 🖥")
+///         Text("I should be in a Mac 🖥")
 ///     }
 /// }
 ///
 /// struct ContentView_Previews: PreviewProvider {
 ///     static var previews: some View {
 ///         ContentView()
-///             .previewLayout(.sizeThatFits)
 ///     }
 ///
 ///     static var platform: PreviewPlatform? { .macOS }
@@ -27689,23 +28529,26 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a phone 📲")
+    ///         Text("I should be in a phone 📲")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
-    ///     static var platform: PreviewPlatform? { .macOS }
+    ///     static var platform: PreviewPlatform? { .iOS }
     /// }
     /// ```
     ///
@@ -27716,20 +28559,23 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *Author's note: I tried to use this to change the preview platorm, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a Mac 🖥")
+    ///         Text("I should be in a Mac 🖥")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .macOS }
@@ -27743,20 +28589,23 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a TV 📺")
+    ///         Text("I should be in a TV 📺")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .tvOS }
@@ -27769,20 +28618,23 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform``
+    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
     /// property to change the way a view is displayed in a preview.
+    ///
+    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// to work. It seems right now that the only way to change your preview
+    /// device is by actually changing your build target.*
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("I am in a watch! ⌚️")
+    ///         Text("I should be in a watch! ⌚️")
     ///     }
     /// }
     ///
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .watchOS }
@@ -27835,12 +28687,10 @@ extension PreviewPlatform : Hashable {
 
 /// A protocol that generates previews on the right-hand side of Xcode.
 ///
-/// Xcode statically discovers types that conform to the ``PreviewProvider``
+/// Xcode statically discovers types that conform to the `PreviewProvider`
 /// protocol in your app, and generates previews for each provider it discovers.
 ///
 /// For example, to have Xcode render a preview of a simple view:
-///
-/// ![Preview provider example 1](previewprovider-example-1.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -27859,6 +28709,9 @@ extension PreviewPlatform : Hashable {
 ///    }
 /// }
 /// ```
+///
+/// ![Preview provider example 1](previewprovider-example-1.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreviewProvider : _PreviewProvider{ }
 extension PreviewProvider : _PreviewProvider {
@@ -27896,7 +28749,6 @@ extension PreviewProvider : _PreviewProvider {
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .watchOS }
@@ -27925,7 +28777,6 @@ extension PreviewProvider {
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewLayout(.sizeThatFits)
     ///     }
     ///
     ///     static var platform: PreviewPlatform? { .watchOS }
@@ -27936,17 +28787,15 @@ extension PreviewProvider {
 
 /// This protocol is used to define custom button styles.
 ///
-/// `PrimitiveButtonStyle` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including`BorderlessButtonStyle` and ``PlainButtonStyle``.
+/// ``PrimitiveButtonStyle`` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including ``BorderlessButtonStyle`` and ``PlainButtonStyle``.
 ///
-/// Your structure only needs to implement one method: `makeBody(configuration:)`. The desired button view is output by this method.
+/// Your structure only needs to implement one method: ``PrimitiveButtonStyle/makeBody(configuration:)``. The desired button view is output by this method.
 ///
 /// To build a custom ``PrimitiveButtonStyle``, create a struct that conforms to the protocol.
 ///
-/// `makeBody(configuration:)` accepts a ``PrimitiveButtonStyleConfiguration``, which passes the original label to display the button view and a `trigger()` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
+/// ``PrimitiveButtonStyle/makeBody(configuration:)`` accepts a ``PrimitiveButtonStyleConfiguration``, which passes the original label to display the button view and a ``PrimitiveButtonStyle/trigger()`` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
 ///
-/// Use `View/buttonStyle(_:)` to apply a primitive button style.
-///
-/// ![PrimitiveButtonStyle Example 1](214C0942-2ADB-482B-AC8F-77CFA9EA6FFE.png)
+/// Use ``View/buttonStyle(_:)-d2d0a`` to apply a primitive button style.
 ///
 /// ```
 ///  struct ExampleView: View {
@@ -27967,9 +28816,9 @@ extension PreviewProvider {
 ///  }
 /// ```
 ///
-/// `PrimitiveButtonStyle` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a ``VStack``.
+/// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
 ///
-/// ![PrimitiveButtonStyle Example 2](F8DF5AE9-2B00-480B-8A2F-2C96A1D33BC2.png)
+/// ``PrimitiveButtonStyle`` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a ``VStack``.
 ///
 /// ```
 ///  struct BananaView: View {
@@ -27996,6 +28845,9 @@ extension PreviewProvider {
 ///    }
 ///  }
 /// ```
+///
+/// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PrimitiveButtonStyle { }
 extension PrimitiveButtonStyle {
@@ -28007,8 +28859,6 @@ extension PrimitiveButtonStyle {
     ///
     /// The system calls this method for each ``Button`` instance in a view
     /// hierarchy where this style is the current button style.
-    ///
-    /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
     ///
     /// ```
     ///  struct BananaView: View {
@@ -28035,6 +28885,8 @@ extension PrimitiveButtonStyle {
     ///    }
     ///  }
     /// ```
+    ///
+    /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -28079,7 +28931,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 /// When initialized with a value ``ProgressView`` looks like `UIProgressView`, a loading bar that fills up from left to right. There are notable exceptions featured in the example above. For example, a value of nil or less than 0.0 shows an indeterminate progress indicator or “spinner”."
-/// The value can be any generic type that conforms to the `BinaryFloatingPoint` protocol, which includes     `CGFloat`, `Double`, `Float`, `Float16` and `Float80`.
+/// The value can be any generic type that conforms to the `BinaryFloatingPoint` protocol, which includes `CGFloat`, `Double`, `Float`, `Float16` and `Float80`.
 ///
 ///     struct DeteriminateProgressViews: View {
 ///         @State var value = Double()
@@ -28097,26 +28949,30 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
+/// ![](progress-view-ex2.gif)
+///
 /// ### Styling Progress Views
 ///
-/// Structures that conform to the `ProgressViewStyle` protocol can be used to modify the appearance of ``ProgressView``. The structure passed to the
-/// `progressViewStyle(_:)` modifier applies to all `ProgressView` instances in the children of that ``View``.
+/// Structures that conform to the ``ProgressViewStyle`` protocol can be used to modify the appearance of ``ProgressView``. The structure passed to the
+/// ``View/progressViewStyle(_:)`` modifier applies to all ``ProgressView`` instances in the children of that ``View``.
 ///
-/// In this example, the same style is applied to two `ProgressView` instances that are children of a ``VStack``:
+/// In this example, the same style is applied to two ``ProgressView`` instances that are children of a ``VStack``:
 ///
 ///     struct DefaultProgressViews: View {
 ///         var body: some View {
 ///             VStack {
 ///                 ProgressView(value: 0.25)
-///                   .accentColor(.red)
+///                   .accentColor(Color.red)
 ///                 ProgressView(value: 0.75)
-///                   .background(.black)
+///                   .background(Color.black)
 ///             }
 ///             .progressViewStyle(DefaultProgressViewStyle())
 ///         }
 ///     }
 ///
-/// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the `DefaultProgressViewStyle`. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the ``ProgressView`` will be visible in the unfilled portion of the loading bar.
+/// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 12.34.24.png)
+///
+/// Although a custom `accentColor` and `background` were set in the example above, these modifiers were overridden by the ``DefaultProgressViewStyle``. This style sets `accentColor` to `Color.blue` and `background` to `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`, any content behind the ``ProgressView`` will be visible in the unfilled portion of the loading bar.
 ///
 /// To swap the colors, you can approximate how `Color.gray.opacity(0.1)` would look on a given background. Swapping the default colors will cause the blue background to show through the translucent gray, so it won't look right.
 ///
@@ -28136,7 +28992,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 /// [rotation-effect ->]
-/// To create a ``ProgressViewStyle`` that inverts the direction of the animation, use a `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` modifier.
+/// To create a ``ProgressViewStyle`` that inverts the direction of the animation, use a ``View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)`` modifier.
 ///
 ///      struct ExampleView: View {
 ///         var body: some View {
@@ -28156,7 +29012,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 /// [<-]
-///   A vertical `ProgressView` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of ``GeometryReader`` in order to allow the view to scale accordingly. One method to keep your `ProgressView` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the `ProgressView` to move out of bounds.
+///   A vertical ``ProgressView`` can be achieved by rotating 90 degrees, but this will not make enough vertical space for it to display within the available space. Instead make use of ``GeometryReader`` in order to allow the view to scale accordingly. One method to keep your ``ProgressView`` centered after a rotation is to use the offset modifier. Without this modifier the rotation could cause the ``ProgressView`` to move out of bounds.
 ///
 /// [progressview-style ->]
 ///
@@ -29220,8 +30076,8 @@ public struct RedactionReasons : OptionSet {
 /// representation.
 ///
 /// This protocol is very similar to ``FileDocument``, with the difference being whether the data
-/// is stored as a `class` (reference type) or a ``struct`` (value type). Use the two protocols like this:
-/// - ``struct`` --> ``FileDocument``
+/// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
+/// - `struct` --> ``FileDocument``
 /// - `class` --> ``ReferenceFileDocument``
 ///
 /// While the two protocols are similar, ``ReferenceFileDocument`` has the unique challenge
@@ -29246,53 +30102,49 @@ public struct RedactionReasons : OptionSet {
 ///     struct ExampleApp: App {
 ///         var body: some Scene {
 ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-///                 ContentView(document: file.document)
+///                 ContentView(document: file.$document)
 ///             }
 ///         }
 ///     }
 ///
-/// #### ReferenceFileDocument conformance
+/// #### FileDocument conformance
 ///
-/// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-/// - A: ``ReferenceFileDocument/readableContentTypes``
-/// - B: ``ReferenceFileDocument/init(configuration:)``
-/// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-/// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+/// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+/// - A: ``FileDocument/readableContentTypes``
+/// - B: ``FileDocument/init(configuration:)``
+/// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
 ///
-///     import SwiftUI
-///     import UniformTypeIdentifiers
+/// ```
+/// import SwiftUI
+/// import UniformTypeIdentifiers
 ///
-///     class ExampleDocument: ReferenceFileDocument {
-///         @Published var text: String
+/// struct ExampleDocument: FileDocument {
+///     var text: String
 ///
-///         init(text: String = "This is a brand new document! 📃") {
-///             self.text = text
-///         }
-///
-///         // A
-///         static var readableContentTypes: [UTType] { [.exampleText] }
-///
-///         // B
-///         required init(configuration: ReadConfiguration) throws {
-///             guard let data = configuration.file.regularFileContents,
-///                 let string = String(data: data, encoding: .utf8)
-///             else {
-///                 throw CocoaError(.fileReadCorruptFile)
-///             }
-///             text = string
-///         }
-///
-///         // C
-///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-///             let data = snapshot.data(using: .utf8)!
-///             return .init(regularFileWithContents: data)
-///         }
-///
-///         // D
-///         func snapshot(contentType: UTType) throws -> String {
-///             return text
-///         }
+///     init(text: String = "This is a brand new document! 📃") {
+///         self.text = text
 ///     }
+///
+///     // A
+///     static var readableContentTypes: [UTType] { [.exampleText] }
+///
+///     // B
+///     init(configuration: ReadConfiguration) throws {
+///         guard let data = configuration.file.regularFileContents,
+///             let string = String(data: data, encoding: .utf8)
+///         else {
+///             throw CocoaError(.fileReadCorruptFile)
+///         }
+///         text = string
+///     }
+///
+///     // C
+///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///         let data = text.data(using: .utf8)!
+///         return .init(regularFileWithContents: data)
+///     }
+/// }
+/// ```
 ///
 /// #### View implementation
 ///
@@ -29301,7 +30153,8 @@ public struct RedactionReasons : OptionSet {
 ///     import SwiftUI
 ///
 ///     struct ExampleView: View {
-///         @ObservedObject var document: ExampleDocument
+///         @Binding var document: ExampleDocument
+///
 ///         var body: some View {
 ///             TextEditor(text: $document.text)
 ///         }
@@ -29312,8 +30165,6 @@ public struct RedactionReasons : OptionSet {
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
 ///
-///
-///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
 /// 3. Expand the "Document Types" tab.
@@ -29322,8 +30173,6 @@ public struct RedactionReasons : OptionSet {
 /// 6. Ensure the **Type** is *String*.
 /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
 /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-///
-///
 ///
 /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
 ///
@@ -29336,6 +30185,9 @@ public struct RedactionReasons : OptionSet {
 ///         }
 ///     }
 ///
+/// ![](file-doc-config-ex.gif)
+///
+
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -29350,7 +30202,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// ``ReferenceFileDocument/snapshot(contentType:)`` method.
     /// It is the return type of this function.
     ///
-    /// In the following example, the `snapshot(contentType:)` method returns a `String`,
+    /// In the following example, the ``ReferenceFileDocument/snapshot(contentType:)`` method returns a `String`,
     /// so the associated type `Snapshot` would resolve to `String`.
     ///
     /// ### Example
@@ -29365,53 +30217,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29420,7 +30268,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29431,8 +30280,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29441,8 +30288,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29454,6 +30299,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     associatedtype Snapshot
 
@@ -29476,53 +30323,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ©ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29531,7 +30374,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29542,8 +30386,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29552,8 +30394,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29565,6 +30405,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     static var readableContentTypes: [UTType] { get }
 
@@ -29586,53 +30428,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29641,7 +30479,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29652,8 +30491,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29662,8 +30499,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29675,6 +30510,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     static var writableContentTypes: [UTType] { get }
 
@@ -29697,53 +30534,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29752,7 +30585,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29763,8 +30597,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29773,8 +30605,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29786,6 +30616,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     /// - Parameter configuration: The read-configuration for creating a reference file document.
     init(configuration: Self.ReadConfiguration) throws { }
@@ -29829,53 +30661,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29884,7 +30712,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -29895,8 +30724,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -29905,8 +30732,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -29918,6 +30743,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     /// - Parameter contentType: The content type being written, for which the
     ///   snapshot should be created.
@@ -29942,53 +30769,49 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -29997,7 +30820,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -30008,8 +30832,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -30018,8 +30840,6 @@ extension ReferenceFileDocument : ObservableObject {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -30031,6 +30851,8 @@ extension ReferenceFileDocument : ObservableObject {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     /// - Parameters:
     ///   - snapshot: A snapshot of the document with the data to serialize.
@@ -30070,53 +30892,49 @@ extension ReferenceFileDocument {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.document)
+    ///                 ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
     ///
-    /// #### ReferenceFileDocument conformance
+    /// #### FileDocument conformance
     ///
-    /// Next, conform to the ReferenceFileDocument protocol by implementing these properties:
-    /// - A: ``ReferenceFileDocument/readableContentTypes``
-    /// - B: ``ReferenceFileDocument/init(configuration:)``
-    /// - C: ``ReferenceFileDocument/fileWrapper(snapshot:configuration:)``
-    /// - D: ``ReferenceFileDocument/snapshot(contentType:)``
+    /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
+    /// - A: ``FileDocument/readableContentTypes``
+    /// - B: ``FileDocument/init(configuration:)``
+    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
-    ///     import SwiftUI
-    ///     import UniformTypeIdentifiers
+    /// ```
+    /// import SwiftUI
+    /// import UniformTypeIdentifiers
     ///
-    ///     class ExampleDocument: ReferenceFileDocument {
-    ///         @Published var text: String
+    /// struct ExampleDocument: FileDocument {
+    ///     var text: String
     ///
-    ///         init(text: String = "This is a brand new document! 📃") {
-    ///             self.text = text
-    ///         }
-    ///
-    ///         // A
-    ///         static var readableContentTypes: [UTType] { [.exampleText] }
-    ///
-    ///         // B
-    ///         required init(configuration: ReadConfiguration) throws {
-    ///             guard let data = configuration.file.regularFileContents,
-    ///                 let string = String(data: data, encoding: .utf8)
-    ///             else {
-    ///                 throw CocoaError(.fileReadCorruptFile)
-    ///             }
-    ///             text = string
-    ///         }
-    ///
-    ///         // C
-    ///         func fileWrapper(snapshot: String, configuration: WriteConfiguration) throws -> FileWrapper {
-    ///             let data = snapshot.data(using: .utf8)!
-    ///             return .init(regularFileWithContents: data)
-    ///         }
-    ///
-    ///         // D
-    ///         func snapshot(contentType: UTType) throws -> String {
-    ///             return text
-    ///         }
+    ///     init(text: String = "This is a brand new document! 📃") {
+    ///         self.text = text
     ///     }
+    ///
+    ///     // A
+    ///     static var readableContentTypes: [UTType] { [.exampleText] }
+    ///
+    ///     // B
+    ///     init(configuration: ReadConfiguration) throws {
+    ///         guard let data = configuration.file.regularFileContents,
+    ///             let string = String(data: data, encoding: .utf8)
+    ///         else {
+    ///             throw CocoaError(.fileReadCorruptFile)
+    ///         }
+    ///         text = string
+    ///     }
+    ///
+    ///     // C
+    ///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    ///         let data = text.data(using: .utf8)!
+    ///         return .init(regularFileWithContents: data)
+    ///     }
+    /// }
+    /// ```
     ///
     /// #### View implementation
     ///
@@ -30125,7 +30943,8 @@ extension ReferenceFileDocument {
     ///     import SwiftUI
     ///
     ///     struct ExampleView: View {
-    ///         @ObservedObject var document: ExampleDocument
+    ///         @Binding var document: ExampleDocument
+    ///
     ///         var body: some View {
     ///             TextEditor(text: $document.text)
     ///         }
@@ -30136,8 +30955,6 @@ extension ReferenceFileDocument {
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
     ///
-    ///
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
     /// 3. Expand the "Document Types" tab.
@@ -30146,8 +30963,6 @@ extension ReferenceFileDocument {
     /// 6. Ensure the **Type** is *String*.
     /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
     /// 8. Change the **Types** (top right) to *com.example.plain-text*.
-    ///
-    ///
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -30159,6 +30974,8 @@ extension ReferenceFileDocument {
     ///             UTType(importedAs: "com.example.plain-text")
     ///         }
     ///     }
+    ///
+    /// ![](file-doc-config-ex.gif)
     ///
     public static var writableContentTypes: [UTType] { get }
 }
@@ -30391,9 +31208,7 @@ public struct RotationGesture : Gesture {
 
 /// A text field style with a system-defined rounded border.
 ///
-/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
-///
-/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+/// ``TextField`` can be styled with the ``View/textFieldStyle(_:)`` modifier.
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -30405,6 +31220,9 @@ public struct RotationGesture : Gesture {
 ///                 .padding()
 ///         }
 ///     }
+///
+/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -30417,34 +31235,72 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 /// Defines the shape of a rounded rectangle's corners.
 ///
 /// This rectanular corner style has two options:
-///
-/// 1. ``roundedcornerstyle/circular``: The corners are quarter circles or ovals
-/// 2. ``roundedcornerstyle/circular``: The corners are smooth
+/// 1. ``RoundedCornerStyle/circular``: The corners are quarter circles or ovals
+/// 2. ``RoundedCornerStyle/continuous``: The corners are smooth
 ///
 /// These styles have subtle but noticeable differences:
 ///
-/// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
-///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         VStack(spacing: 20) {
-///             RoundedRectangle(cornerRadius: 50, style: .circular)
+///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.circular)
 ///                 .frame(width: 250, height: 150)
 ///
-///             RoundedRectangle(cornerRadius: 50, style: .continuous)
+///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.continuous)
 ///                 .frame(width: 250, height: 150)
 ///         }
 ///     }
 /// }
 /// ```
+///
+/// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum RoundedCornerStyle {
 
     /// Quarter-circle rounded rect corners.
+    ///
+    /// In the example below, the top rectangle uses ``RoundedCornerStyle/circular``
+    /// corners.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
     case circular
 
     /// Continuous curvature rounded rect corners.
+    ///
+    /// In the example below, the bottom rectangle uses ``RoundedCornerStyle/continuous``
+    /// corners.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 20) {
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.circular)
+    ///                 .frame(width: 250, height: 150)
+    ///
+    ///             RoundedRectangle(cornerRadius: 50, style: RoundedCornerStyle.continuous)
+    ///                 .frame(width: 250, height: 150)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
     case continuous
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -30497,10 +31353,8 @@ extension RoundedCornerStyle : Hashable {
 ///
 /// It must be created with a specific corner radius or size.
 /// The example below creates a RoundedRectangle with a corner radius of 20,
-/// and uses the `Shape/fill(_:style:)` and ``View/frame(width:height:alignment:)`` modifiers
+/// and uses the ``Shape/fill(_:style:)`` and ``View/frame(width:height:alignment:)`` modifiers
 /// to set the color to blue and the frame to 250 by 150.
-///
-/// ![RoundedRectangle corner radius, fill, and frame example](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30512,10 +31366,10 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
+/// ![RoundedRectangle corner radius, fill, and frame example](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
+///
 /// The example below uses the same modifiers, but defines a corner size
 /// rather than a corner radius.
-///
-/// ![RoundedRectangle corner size, fill, and frame example](4E1D6264-F9BA-4558-804A-72643AFD2A3B.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30527,11 +31381,11 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
+/// ![RoundedRectangle corner size, fill, and frame example](4E1D6264-F9BA-4558-804A-72643AFD2A3B.png)
+///
 /// The RoundedRectangle initializer includes an optional parameter for
 /// specifying the `style`, a ``RoundedCornerStyle`` that can either be `circular`
 /// or `continuous`. These styles have subtle but noticeable differences:
-///
-/// ![RoundedRectangle init example](F25C23E2-86B8-42F5-8EB9-19E8D02A5177.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30547,11 +31401,11 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
+/// ![RoundedRectangle init example](F25C23E2-86B8-42F5-8EB9-19E8D02A5177.png)
+///
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the ``RoundedRectangle/inset(by:)`` modifier to inset the RoundedRectangle by
 /// half of the border width to keep the RoundedRectangle at its original size:
-///
-/// ![RoundedRectangle inset and stroke example](97611155-5069-4DFB-808C-7BBA7DD5DBAA.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -30563,6 +31417,8 @@ extension RoundedCornerStyle : Hashable {
 ///     }
 /// }
 /// ```
+///
+/// ![RoundedRectangle inset and stroke example](97611155-5069-4DFB-808C-7BBA7DD5DBAA.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RoundedRectangle : Shape {
@@ -31204,8 +32060,6 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// Primitive scenes like `WindowGroup` can go directly in the body of your ``App``.
 ///
-/// ![Scene Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
-///
 ///     @main
 ///     struct SuperSimpleApp: App {
 ///         var body: some Scene {
@@ -31215,12 +32069,12 @@ extension RoundedRectangle : InsettableShape {
 ///         }
 ///     }
 ///
+/// ![Scene Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
+///
 /// #### Using custom Scenes
 ///
 /// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
 /// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
-///
-/// ![Scene Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
 ///
 ///     @main
 ///     struct MacCompatibleApp: App {
@@ -31242,9 +32096,11 @@ extension RoundedRectangle : InsettableShape {
 ///         }
 ///     }
 ///
+/// ![Scene Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
+///
 /// ### Modifiers
 ///
-/// Just like how `Views` have a bunch of custom modifiers that work right out of the box,
+/// Just like how ``View``s have a bunch of custom modifiers that work right out of the box,
 /// ``Scene`` provides default implementations of many useful modifiers. These can be used to do things
 /// like adding macOS commands, changing the toolbar, and adding support for app storage.
 /// [scene-phase ->]
@@ -31321,15 +32177,15 @@ extension Scene {
     ///
     ///     struct CustomScene: Scene {
     ///         @Environment(\.scenePhase) private var scenePhase
-    ///         @State private var count = 0
+    ///         @State private var message = "Don't go! 😢"
     ///
     ///         var body: some Scene {
     ///             WindowGroup {
-    ///                 Text("If you're seeing this active was printed.")
+    ///                 Text(message)
     ///             }
     ///             .onChange(of: scenePhase) { newScenePhase in
-    ///                 if newScenePhase == .active {
-    ///                     print("Active!")
+    ///                 if newScenePhase != .active {
+    ///                     message = "Come back! 👋"
     ///                 }
     ///             }
     ///         }
@@ -31389,7 +32245,7 @@ extension Scene {
 
     /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
     ///
-    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// Whenever the `@AppStorage` property wrapper is used, it defaults its location to
     /// `UserDefaults.standard`. Override this default location for all of your
     /// scene's views by using this modifier.
     ///
@@ -32538,8 +33394,6 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// ``ScrollView`` is a container view that makes its content scrollable. For example:
 ///
-///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -32554,7 +33408,9 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// In this example, the `VStack` containing the text is made scrollable by wrapping it in a ``ScrollView``.
+///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+///
+/// In this example, the ``VStack`` containing the text is made scrollable by wrapping it in a `ScrollView`.
 ///
 /// Note:
 ///
@@ -32573,8 +33429,6 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// To set a single allowed direction for a ``ScrollView``, specify the axis of direction in the initializer. For example:
 ///
-///  ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -32588,12 +33442,12 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///  ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+///
 /// [<-]
 /// This example takes the previous example, and modifies it so that the ``ScrollView`` scrolls horizontally. This ``ScrollView`` will **not** scroll vertically, as an explict axis, `.horizontal`, has been specified.
 ///
 /// To allow *both* directions of scrolling, pass the set of axes that you want to permit. For example:
-///
-///  ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -32609,15 +33463,15 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// In this example, ``ScrollView`` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
+///  ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
+///
+/// In this example, `ScrollView` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
 /// [scrollview-hide-indicators ->]
 /// ### Hiding the scroll view indicator
 ///
 /// By default, a ``ScrollView``'s scroll indicator is visible upon user interaction.
 ///
-/// Pass `false` to `showsIndicators` in ``ScrollView/init(_:showsIndicators:content:)`` to hide the scroll indicator(s). For example:
-///
-///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
+/// Pass `false` to ``ScrollView/showsIndicators`` in ``ScrollView/init(_:showsIndicators:content:)`` to hide the scroll indicator(s). For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -32633,9 +33487,11 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// This ``ScrollView`` will never show a scroll indicator.
+///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
 ///
-/// You do not need to specify an axis to use `showsIndicators`. For example:
+/// This `ScrollView` will never show a scroll indicator.
+///
+/// You do not need to specify an axis to use ``ScrollView/showsIndicators``. For example:
 ///
 ///  ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
 ///
@@ -32662,8 +33518,6 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// For example:
 ///
-///  ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -32683,11 +33537,11 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use `View/id(_:)` as is done inside the ``ForEach``, for each element.
+///  ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
+///
+/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use ``View/id(_:)`` as is done inside the ``ForEach``, for each element.
 ///
 /// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the text reading "Item #32", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, specify an anchor via ``ScrollViewProxy/scrollTo(_:anchor:)``. For example:
-///
-///  ![ScrollView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-7.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -32708,14 +33562,14 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// In this example, the `ScrollView` still scrolls to "Item #32", but this `Text` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, ``UnitPoint``, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
+///  ![ScrollView Example 7](scrollviewproxy-ex7.gif)
+///
+/// In this example, the `ScrollView` still scrolls to "Item #32", but this ``Text`` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, ``UnitPoint``, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
 ///
 /// [<-]
 /// [scrollview-scrollto ->]
 ///
-///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with `View/withAnimation(_:_:)`.  For example:
-///
-///  ![ScrollView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-8.gif)
+///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with ``withAnimation(_:_:)``.  For example:
 ///
 ///  ```
 ///  struct ExampleView: View {
@@ -32736,6 +33590,9 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///          }
 ///      }
 ///  }
+///
+///  ![ScrollView Example 8](scrollviewproxy-ex7.gif)
+///
 /// ```
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -32794,8 +33651,8 @@ public struct ScrollViewProxy {
 
     /// Scroll to a section given a specific identifier.
     ///
-    /// Scans all scroll views contained by the proxy for the first
-    /// with a child view with identifier `id`, and then scrolls to
+    /// Scans all scroll views within the proxy for the first
+    /// that has a child view with identifier `id`, and then scrolls to
     /// that view.
     ///
     /// [[scrollview-scrollto]]
@@ -32983,8 +33840,6 @@ extension SecureField where Label == Text {
 
 /// A picker style that presents the options in a segmented control.
 ///
-/// ![SegmentedPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-segmented-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
@@ -33004,21 +33859,27 @@ extension SecureField where Label == Text {
 ///  }
 /// ```
 ///
+/// ![SegmentedPickerStyle Example 1](segmented-picker-ex1.gif)
+///
 /// [pickerstyle-segmented ->]
 /// Your app can also use explicit tags to identify picker content.
 ///
 /// ![Segmented Example 1](/picker-style-6.gif)
 ///
 /// ```
+/// enum MyFruit {
+///     case banana, apple, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
 ///         switch favoriteFruit{
-///         case .apple:
-///             return "Apple 🍎🍎"
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -33119,7 +33980,6 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// The most simple example of creating your own shape is a rectangle
 /// that looks like this:
 ///
-/// ![09FB69B8-A5EF-4E46-9B27-4B59DF735287](09FB69B8-A5EF-4E46-9B27-4B59DF735287.png)
 /// ```
 /// struct SimplestShapeView: View {
 ///     var body: some View {
@@ -33134,6 +33994,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// }
 /// ```
 ///
+/// ![09FB69B8-A5EF-4E46-9B27-4B59DF735287](09FB69B8-A5EF-4E46-9B27-4B59DF735287.png)
+///
 /// For more info on how to create a path from a bounding rectangle,
 /// check out the ``Path`` structure.
 ///
@@ -33141,23 +34003,16 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 ///
 /// In addition to the ability to create your own shape, there are also
 /// many pre-defined shapes for you to use:
-///
-///
-///
 /// 1. ``Capsule``
 /// 2. ``Circle``
 /// 3. ``ContainerRelativeShape``
 /// 4. ``Ellipse``
-/// 5. ``OffsetShape``
-/// 6. ``Path``
-/// 7. ``Rectangle``
-/// 8. ``RoundedRectangle``
-///
-///
+/// 5. ``Path``
+/// 6. ``Rectangle``
+/// 7. ``RoundedRectangle``
 ///
 /// Example usage would look like this:
 ///
-/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
 /// ```
 /// struct PillView: View {
 ///     var body: some View {
@@ -33165,6 +34020,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 ///     }
 /// }
 /// ```
+///
+/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
 ///
 /// Check out these shapes directly for more info on how to use them.
 ///
@@ -33198,6 +34055,8 @@ extension Shape : Animatable, View {
     /// }
     /// ```
     ///
+    /// ![](rectangle-example-4.png)
+    ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
     /// - Returns: A path that describes this shape.
@@ -33218,31 +34077,54 @@ extension Shape {
     /// starting from its center, setting the `startFraction` and `endFraction`
     /// to different values determines the parts of the overall shape.
     ///
-    /// The following example shows a simplified infinity symbol that draws
-    /// only three quarters of the full shape. That is, of the two lobes of the
-    /// symbol, one lobe is complete and the other is half complete.
+    /// Here is a simplified infinity symbol, represented as a ``Path``:
     ///
     /// ```
-    /// struct TrimmedPathView: View {
-    ///     var body: some View {
+    /// struct Infinity: Shape {
+    ///     func path(in rect: CGRect) -> Path {
     ///         Path { path in
     ///             path.addLines([
-    ///                 .init(x: 2, y: 1),
-    ///                 .init(x: 1, y: 0),
-    ///                 .init(x: 0, y: 1),
-    ///                 .init(x: 1, y: 2),
-    ///                 .init(x: 3, y: 0),
-    ///                 .init(x: 4, y: 1),
-    ///                 .init(x: 3, y: 2),
-    ///                 .init(x: 2, y: 1)
+    ///                 CGPoint(x: 100, y: 50),
+    ///                 CGPoint(x: 50, y: 0),
+    ///                 CGPoint(x: 0, y: 50),
+    ///                 CGPoint(x: 50, y: 100),
+    ///                 CGPoint(x: 150, y: 0),
+    ///                 CGPoint(x: 200, y: 50),
+    ///                 CGPoint(x: 150, y: 100),
+    ///                 CGPoint(x: 100, y: 50)
     ///             ])
     ///         }
-    ///         .trim(from: 0.25, to: 1.0)
-    ///         .scale(50, anchor: .topLeading)
-    ///         .stroke(Color.black, lineWidth: 3)
     ///     }
     /// }
     /// ```
+    ///
+    /// To see the shape, we can just stroke it:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Infinity()
+    ///             .stroke(Color.green, lineWidth: 3)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](infinity-1.png)
+    ///
+    /// That looks good. But what if we want to trim the shape? We can cut the
+    /// path short using `trim(from:to:)`:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Infinity()
+    ///             .trim(from: 0.25, to: 1)
+    ///             .stroke(Color.green, lineWidth: 3)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](infinity-2.png)
     ///
     /// Changing the parameters of `trim(from:to:)` to
     /// `.trim(from: 0, to: 1)` draws the full infinity symbol, while
@@ -33265,19 +34147,23 @@ extension Shape {
     ///
     /// The following example renders two circles. It places one circle at its
     /// default position. The second circle is outlined with a stroke,
-    /// positioned on top of the first circle and offset by 100 points to the
-    /// left and 50 points below.
+    /// positioned on top of the first circle and offset by `100` points to the
+    /// left and `50` points below.
     ///
     /// ```
     /// struct OffsetCircleView: View {
     ///     var body: some View {
     ///         Circle()
-    ///             .overlay(Circle()
-    ///                 .offset(CGSize(width: -100, height: 50))
-    ///                 .stroke())
+    ///             .overlay(
+    ///                 Circle()
+    ///                     .offset(CGSize(width: -100, height: 50))
+    ///                     .stroke()
+    ///             )
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-3.png)
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -33290,19 +34176,23 @@ extension Shape {
     ///
     /// The following example renders two circles. It places one circle at its
     /// default position. The second circle is outlined with a stroke,
-    /// positioned on top of the first circle and offset by 100 points to the
-    /// left and 50 points below.
+    /// positioned on top of the first circle and offset by `100` points to the
+    /// left and `50` points below.
     ///
     /// ```
     /// struct OffsetCircleView: View {
     ///     var body: some View {
     ///         Circle()
-    ///             .overlay(Circle()
-    ///                 .offset(CGPoint(x: -100, y: 50))
-    ///                 .stroke())
+    ///             .overlay(
+    ///                 Circle()
+    ///                     .offset(CGPoint(x: -100, y: 50))
+    ///                     .stroke()
+    ///             )
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-3.png)
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -33315,19 +34205,23 @@ extension Shape {
     ///
     /// The following example renders two circles. It places one circle at its
     /// default position. The second circle is outlined with a stroke,
-    /// positioned on top of the first circle and offset by 100 points to the
-    /// left and 50 points below.
+    /// positioned on top of the first circle and offset by `100` points to the
+    /// left and `50` points below.
     ///
     /// ```
     /// struct OffsetCircleView: View {
     ///     var body: some View {
     ///         Circle()
-    ///             .overlay(Circle()
-    ///                 .offset(x: -100, y: 50)
-    ///                 .stroke())
+    ///             .overlay(
+    ///                 Circle()
+    ///                     .offset(x: -100, y: 50)
+    ///                     .stroke()
+    ///             )
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-3.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal amount, in points, by which you offset the shape.
@@ -33350,12 +34244,16 @@ extension Shape {
     ///     var body: some View {
     ///         ZStack {
     ///             Circle()
+    ///                 .fill(Color.red)
     ///             Circle()
-    //                  .scale(x: 1.3, y: 1.2, anchor: .center)
+    ///                 .scale(x: 0.5, y: 0.1, anchor: .leading)
+    ///                 .fill(Color.white)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scale.png)
     ///
     /// - Parameters:
     ///   - x: The multiplication factor used to resize this shape along its
@@ -33373,12 +34271,16 @@ extension Shape {
     ///     var body: some View {
     ///         ZStack {
     ///             Circle()
+    ///                 .fill(Color.red)
     ///             Circle()
-    //                  .scale(1.2, anchor: .center)
+    ///                 .scale(0.5, anchor: .center)
+    ///                 .fill(Color.white)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scale-2.png)
     ///
     /// - Parameter scale: The multiplication factor used to resize this shape.
     ///   A value of `0` scales the shape to have no size, `0.5` scales to half
@@ -33389,6 +34291,9 @@ extension Shape {
     @inlinable public func scale(_ scale: CGFloat, anchor: UnitPoint = .center) -> ScaledShape<Self> { }
 
     /// Rotates this shape around an anchor point at the angle you specify.
+    ///
+    /// Use this modifier to rotate a ``Shape``. See ``Angle`` for more
+    /// on creating angles.
     ///
     /// The following example rotates a square by 45 degrees to the right to
     /// create a diamond shape:
@@ -33402,6 +34307,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](rotation.png)
     ///
     /// - Parameters:
     ///   - angle: The angle of rotation to apply. Positive angles rotate
@@ -33425,10 +34332,13 @@ extension Shape {
     ///     var body: some View {
     ///         Rectangle()
     ///             .transform(CGAffineTransform(a: 1, b: 0, c: 0.5, d: 1, tx: 0, ty: 0))
+    ///             .border(Color.orange)
     ///             .frame(width: 100, height: 100)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](transform.png)
     ///
     /// - Parameter transform: The affine transformation matrix to apply to this
     ///   shape.
@@ -33447,7 +34357,7 @@ extension Shape {
     /// If you would prefer not to change the passed in rectangle,
     /// use ``Shape/scale(x:y:anchor:)`` function instead.
     ///
-    /// This is similar the ``View/frame(width:height:)`` modifier
+    /// This is similar the ``View/frame(width:height:alignment:)`` modifier
     /// from ``View``, except this returns a ``Shape``.
     ///
     /// ```
@@ -33457,7 +34367,9 @@ extension Shape {
     ///             .size(CGSize(width: 100, height: 100))
     ///     }
     /// }
-    // ```
+    /// ```
+    ///
+    /// ![](size.png)
     ///
     /// - Parameter size: The new rectangle size.
     @inlinable public func size(_ size: CGSize) -> some Shape { }
@@ -33470,7 +34382,7 @@ extension Shape {
     /// If you would prefer not to change the passed in rectangle,
     /// use ``Shape/scale(x:y:anchor:)`` function instead.
     ///
-    /// This is similar the ``View/frame(width:height:)`` modifier
+    /// This is similar the ``View/frame(width:height:alignment:)`` modifier
     /// from ``View``, except this returns a ``Shape``.
     ///
     /// ```
@@ -33481,6 +34393,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](size.png)
     ///
     /// - Parameters:
     ///   - width: The shape's new bounding rectangle width.
@@ -33500,13 +34414,15 @@ extension Shape {
     /// method.
     ///
     /// ```
-    /// struct TwoCirclesView: View {
+    /// struct Cirlce: View {
     ///     var body: some View {
     ///         Circle()
     ///             .fill(Color.pink, style: FillStyle(eoFill: true, antialiased: true))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fill-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient to use when filling this shape.
@@ -33521,11 +34437,11 @@ extension Shape {
     /// Use this method to fill a shape with the foreground color
     /// of the view.
     ///
-    /// See ``FillStyle for more info on the `style` parameter of this
+    /// See ``FillStyle`` for more info on the `style` parameter of this
     /// method.
     ///
     /// ```
-    /// struct TwoCirclesView: View {
+    /// struct Circle: View {
     ///     var body: some View {
     ///         Circle()
     ///             .fill(style: FillStyle(eoFill: true, antialiased: true))
@@ -33533,6 +34449,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fill-style.png)
     ///
     /// - Parameter style: The style options that determine how the fill
     ///   renders.
@@ -33554,7 +34472,7 @@ extension Shape {
     /// struct StrokedCapsuleView: View {
     ///     let style = StrokeStyle(lineWidth: 5,
     ///                             lineCap: .round,
-    ///                             lineJoine: .miter,
+    ///                             lineJoin: .miter,
     ///                             miterLimit: 0,
     ///                             dash: [5, 10],
     ///                             dashPhase: 0)
@@ -33564,6 +34482,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient with which to stroke this shape.
@@ -33592,6 +34512,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke.png)
     ///
     /// - Parameters style: The stroke characteristics --- such as the line's width and
     /// whether the stroke is dashed --- that determine how to render this
@@ -33628,7 +34550,7 @@ extension Shape {
     /// struct StrokedCapsuleView: View {
     ///     let style = StrokeStyle(lineWidth: 5,
     ///                             lineCap: .round,
-    ///                             lineJoine: .miter,
+    ///                             lineJoin: .miter,
     ///                             miterLimit: 0,
     ///                             dash: [5, 10],
     ///                             dashPhase: 0)
@@ -33639,6 +34561,8 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient with which to stroke this shape.
@@ -33664,6 +34588,9 @@ extension Shape {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroke.png)
+    ///
     @inlinable public func stroke(lineWidth: CGFloat = 1) -> some Shape { }
 
 }
@@ -33711,8 +34638,6 @@ public struct SidebarCommands : Commands {
 
 /// The behavior and appearance of a sidebar or source list.
 ///
-/// ![SidebarListStyle Example 1](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
-///
 /// ```
 ///      struct ExampleView: View {
 ///          var body: some View {
@@ -33725,6 +34650,8 @@ public struct SidebarCommands : Commands {
 ///          }
 ///      }
 /// ```
+///
+/// ![SidebarListStyle Example 1](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
 ///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -34143,8 +35070,6 @@ extension Spacer : View {
 /// Use this with the ``View/navigationViewStyle(_:)``
 /// view modifier to change a ``NavigationView``'s style.
 ///
-/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -34155,6 +35080,9 @@ extension Spacer : View {
 ///     }
 /// }
 /// ```
+///
+/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
+///
 @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct StackNavigationViewStyle : NavigationViewStyle {
@@ -34185,7 +35113,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// Modifying a `@State` variable causes the `body` of the view to be recomputed. For example:
 ///
-/// ![AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7](AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7.png)
 /// ```
 /// struct ExampleView: View {
 ///     @State var foo: String = "Apple"
@@ -34202,7 +35129,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This  new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
+/// ![AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7](AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7.png)
+///
+/// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
 ///
 /// Note:
 ///
@@ -34213,7 +35142,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// Pass a state variable just as you would pass any other variable to a struct. For example:
 ///
-/// ![C8500709-199E-43A7-A416-B97CF82F1151](C8500709-199E-43A7-A416-B97CF82F1151.png)
 /// ```
 /// struct ExampleView: View {
 ///     struct ChildView: View {
@@ -34238,6 +35166,8 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![C8500709-199E-43A7-A416-B97CF82F1151](C8500709-199E-43A7-A416-B97CF82F1151.png)
+///
 /// In this example, `foo` is passed to `ChildView` by initializer.
 ///
 /// And exactly as in the previous example, when `foo` updates, so will the `body` of `ExampleView`. When the `body` of `ExampleView` is recomputed, a new instance of `ChildView` is created with the latest value of `foo` (which is now "Banana"). `ChildView` in turn computes its own `body`, which creates a `Text("Banana")`.
@@ -34250,7 +35180,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// To create a binding to a state variable, prefix it with a dollar sign `$`. For example:
 ///
-/// ![67E06F60-E76B-42A8-9A18-0503382F1533](67E06F60-E76B-42A8-9A18-0503382F1533.png)
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
@@ -34262,6 +35191,8 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![67E06F60-E76B-42A8-9A18-0503382F1533](67E06F60-E76B-42A8-9A18-0503382F1533.png)
+///
 /// In this example, `TextField` requires a binding in order to read and write to a given value. The `text` state variable is converted to a `Binding<String>` using the dollar sign prefix (`$text`), and then passed to ``Textfield`` via its initializer.
 ///
 /// Note: The ``Binding`` type can also be used to create references to `@ObservedObject`, `@EnvironmentObject` and `@StateObject`. It is not unique to `@State`, but rather a general structure that represents a reference to some source of truth.
@@ -34270,7 +35201,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 ///
 /// It's possible to modify a state variable outside of a view's `body`. For example:
 ///
-/// ![8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C](8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C.png)
 /// ```
 /// struct ContentView: View {
 ///     @State var foo: String = "Apple"
@@ -34289,11 +35219,13 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
+/// ![8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C](8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C.png)
+///
 /// In this example, the button labeled "Change text" calls the function `changeText`, which modifies `foo`.
 ///
 /// Note:
 ///
-/// - `changeText` is not a `mutating ` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
+/// - `changeText` is not a `mutating` function. This is because the `@State` property wrapper internally uses a reference based storage managed by the SwiftUI runtime.
 /// - Only access a state property from inside the view’s body, or from methods called by it.
 /// - Declare state properties as private, to prevent outside code from accessing them.
 /// - Although you should only access the state from inside the body, you can mutate it elsewhere including from any thread.
@@ -34414,7 +35346,6 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// In the following example, an observable object class `AppModel` is instantiated and stored in a `@StateObject`:
 ///
-/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var foo: Bool = false
@@ -34428,6 +35359,8 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
 ///
 /// ### How it works
 ///
@@ -34447,7 +35380,7 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     @StateObject var appModel = AppModel()
 /// ```
 ///
-/// `AppModel` is only initialized once per the lifetime of the `View`, `Scene` or ``App`` that contains the `@StateObject`. This is made possible by the `@autoclosure` annotation, that wraps the instantiation of the app model, `AppModel()`, into a lazy expression at compile time, `{ return AppModel() }`. This allows the `@StateObject` to call it appropriately as needed, which is once per its parent's lifetime.
+/// `AppModel` is only initialized once per the lifetime of the ``View``, ``Scene`` or ``App`` that contains the `@StateObject`. This is made possible by the `@autoclosure` annotation, that wraps the instantiation of the app model, `AppModel()`, into a lazy expression at compile time, `{ return AppModel() }`. This allows the `@StateObject` to call it appropriately as needed, which is once per its parent's lifetime.
 ///
 /// ### Creating bindings
 ///
@@ -34455,7 +35388,6 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// For example:
 ///
-/// ![FACF7A60-5C80-42FE-B933-9A62D2A53DC5](FACF7A60-5C80-42FE-B933-9A62D2A53DC5.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -34469,6 +35401,8 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![FACF7A60-5C80-42FE-B933-9A62D2A53DC5](FACF7A60-5C80-42FE-B933-9A62D2A53DC5.png)
 ///
 ///  In this example, `AppModel` contains a boolean, `flag`, which is represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a `Binding<Bool>` to read and write whether it is on.
 ///
@@ -35548,7 +36482,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// [tabview-tabitem ->]
 /// ### Tab-bar based navigation
 ///
-/// Place child views in a `TabView` and apply ``View/tabItem(_:)`` to each child
+/// Place child views in a ``TabView`` and apply ``View/tabItem(_:)`` to each child
 /// for tab-bar style navigation.
 ///
 /// ```
@@ -35577,6 +36511,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ```
 ///
 /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+///
 /// [<-]
 /// [tabview-style ->]
 /// ### Page-style navigation
@@ -35616,14 +36551,16 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         TabView {
 ///             ForEach(items, id: \.self) {
 ///                 Text($0)
+///                     .foregroundColor(Color.white)
 ///             }
 ///         }
 ///         .tabViewStyle(PageTabViewStyle())
+///         .background(Color.black)
 ///     }
 /// }
 /// ```
 ///
-/// ![TabView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-3.gif)
+/// ![TabView Example 3](tabview-ex2.gif)
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
@@ -35632,8 +36569,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// each take the form of the corresponding tab item's primary image. If not -
 /// these page indicators resort to system defaults.
 ///
-/// To disable page indicators altogether, apply a ``PageIndexViewStyle`` using
-/// ``View/indexViewStyle(_:)``, like so:
+/// To disable page indicators altogether, apply a ``PageTabViewStyle`` using
+/// ``View/tabViewStyle(_:)``, like so:
 ///
 /// ```
 /// struct ContentView: View {
@@ -35645,15 +36582,16 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///                 Text(item)
 ///             }
 ///         }
-///         .tabViewStyle(PageTabViewStyle())
-///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+///         .background(Color.yellow)
+///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 ///     }
 /// }
 /// ```
 ///
-/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
+/// ![TabView Example 4](tabview-ex3.gif)
 /// [<-]
 /// [tabview-tag ->]
+///
 /// ### Handling tab-selection
 ///
 /// ``TabView`` provides the ability to observe and/or set the active tab
@@ -35699,7 +36637,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
 /// In this example, each tab item is assigned a unique tag using the
-/// user-defined, hashable enum `TabItem`. ``TabView`` in turn takes a binding to
+/// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
 /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
 /// selected. `$selectedItem` in turn can also be used to programmatically
 /// control tab-selection, as bindings work bidirectionally.
@@ -35741,8 +36679,7 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// page. If you don't need access to this ``Binding``, use
     /// ``TabView/init(content:)`` instead.
     ///
-    /// The following example writes the tab selection to a `@```State``
-    /// variable:
+    /// The following example writes the tab selection to a `@State` variable:
     ///
     /// ```
     /// struct ContentView: View {
@@ -35769,8 +36706,10 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
+    ///[Selection Content Example 1](init-selection-content-ex1.png)
+    ///
     /// In this example, each tab item is assigned a unique tag using the
-    /// user-defined, hashable enum `TabItem`. ``TabView`` in turn takes a binding to
+    /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
     /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
     /// selected. `$selectedItem` in turn can also be used to programmatically
     /// control tab-selection, as bindings work bidirectionally.
@@ -35801,6 +36740,9 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     ///     }
     /// }
     /// ```
+    ///
+    ///
+    /// [Selection Content Example 2](init-selection-content-ex2.png)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -35853,7 +36795,7 @@ extension TabView where SelectionValue == Int {
 /// types available are the ones included in the framework and are platform dependent:
 /// - ``DefaultTabViewStyle`` (all platforms)
 /// - ``PageTabViewStyle`` (NO macOS)
-/// - CarouselTabViewStyle (watchOS only)
+/// - `CarouselTabViewStyle` (watchOS only)
 ///
 /// To learn more about each style, visit their pages.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -35906,9 +36848,7 @@ public struct TapGesture : Gesture {
 
 /// A view that displays read-only text.
 ///
-/// ``Text`` draws a string in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
-///
-/// ![Text Example 1](812D1AB1-2586-4AFB-8AC7-93CBEA17A17C.png)
+/// ``Text`` draws a `String` in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35918,11 +36858,11 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// ``Text`` is most commonly initialized with a string, however, it has 9 different initializers.
+/// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
 ///
-/// For example, use `Text/init(_:style:)` to display a date in a ``Text`` view.
+/// ``Text`` is most commonly initialized with a `String`, however, it has 9 different initializers.
 ///
-///  ![Text Example 2](6EE9A053-9AB7-48EC-AD3B-CAA74991229C.png)
+/// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35932,9 +36872,9 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// ``Text`` also accepts 12 unique modifiers to customize your string.
+///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
-///  ![Text Example 3](EB9EAFB7-6644-42E4-9711-E4284B8203BE.png)
+/// ``Text`` also accepts 12 unique modifiers to customize your string.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35946,9 +36886,9 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// `Text` conforms to the `View` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with `Text`.
+///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
-///  ![Text Example 4](2574726A-FCCA-458A-8FC4-245901FD3292.png)
+/// ``Text`` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with ``Text``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35960,7 +36900,9 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// **Remember**, any modifier that returns `some View` must be used after modifiers that return ``Text``.
+///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
+///
+/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
 ///
 /// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
 ///
@@ -36241,7 +37183,7 @@ extension Text {
     /// Creates an instance that displays localized dates and times using a specific style.
     ///
     /// Use this initializer along with ``Text/DateStyle`` to style the
-    /// date. See `DateStyle` for the options of te style parameter.
+    /// date. See ``Text/DateStyle`` for the options of te style parameter.
     ///
     /// See ``Date`` for more on how to make and use a date.
     ///
@@ -36254,6 +37196,8 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// !©[Init style example](text-init-style-ex.gif)
     ///
     /// - Parameters:
     ///     - date: The target date to display.
@@ -36600,9 +37544,7 @@ extension Text {
     ///
     /// Use this method to change the color of the text rendered by a text view.
     ///
-    /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
-    ///
-    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
+    /// For example, you can change the colors of Banana🍌🍌 to yellow, Apple🍎🍎 to red, and Peach🍑🍑 to orange.
     ///
     ///     struct ExampleView: View {
     ///        var body: some View {
@@ -36618,7 +37560,7 @@ extension Text {
     ///        }
     ///     }
     ///
-    ///
+    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
     ///
     /// - Parameter color: The color to use when displaying this text.
     /// - Returns: A text view that uses the color value you supply.
@@ -36626,62 +37568,79 @@ extension Text {
 
     /// Sets the default font for text in the view.
     ///
-    /// Use `font(_:)` to apply a specific font to an individual
+    /// Use ``Text/font(_:)`` to apply a specific font to an individual
     /// Text View, or all of the text views in a container.
     ///
     /// In the example below, the first text field has a font set directly,
     /// while the font applied to the following container applies to all of the
     /// text views inside that container:
     ///
-    ///     VStack {
-    ///         Text("Font applied to a text view.")
-    ///             .font(.largeTitle)
-    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
     ///         VStack {
-    ///             Text("These two text views have the same font")
-    ///             Text("applied to their parent view.")
+    ///             Text("Font applied to a text view.")
+    ///                 .font(.largeTitle)
+    ///
+    ///             VStack {
+    ///                 Text("These two text views have the same font")
+    ///                 Text("applied to their parent view.")
+    ///             }
+    ///             .font(.system(size: 16, weight: .light, design: .default))
     ///         }
-    ///         .font(.system(size: 16, weight: .light, design: .default))
     ///     }
+    /// }
+    /// ```
     ///
-    ///
-    /// ![Applying a font to a single text view or a view container](SwiftUI-view-font.png)
+    /// ![Applying a font to a single text view or a view container](textfont-ex.png)
     ///
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
     public func font(_ font: Font?) -> Text { }
-    ///
+
     /// Sets the font weight of the text.
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// Use this font modifier to set the weight of your ``Font``.
     ///
+    /// This modifier takes a ``Font/Weight`` object. There are 9 font
+    /// weight.
     ///
-    ///     struct ExampleView: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             VStack {
     ///                 Text("ultraLight 🍌")
-    ///                     .fontWeight(Font.Weight.ultraLight)
+    ///                     .fontWeight(.ultraLight)
     ///                 Text("thin🍌")
-    ///                     .fontWeight(Font.Weight.thin)
+    ///                     .fontWeight(.thin)
     ///                 Text("light🍌")
-    ///                     .fontWeight(Font.Weight.light)
+    ///                     .fontWeight(.light)
     ///                 Text("regular🍌")
-    ///                     .fontWeight(Font.Weight.regular)
+    ///                     .fontWeight(.regular)
     ///                 Text("medium🍌")
-    ///                     .fontWeight(Font.Weight.medium)
+    ///                     .fontWeight(.medium)
     ///                 Text("semibold🍌")
-    ///                     .fontWeight(Font.Weight.semibold)
+    ///                     .fontWeight(.semibold)
     ///                 Text("bold🍌")
-    ///                     .fontWeight(Font.Weight.bold)
+    ///                     .fontWeight(.bold)
     ///                 Text("heavy🍌")
-    ///                     .fontWeight(Font.Weight.heavy)
+    ///                     .fontWeight(.heavy)
     ///                 Text("black🍌")
-    ///                     .fontWeight(Font.Weight.black)
-    ///            }
-    ///            .font(.title)
+    ///                     .fontWeight(.black)
+    ///             }
+    ///             .font(.title)
     ///         }
     ///     }
     ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    ///
+    /// - Note: The example above uses [*type inference*](https://www.swiftbysundell.com/basics/type-inference/)
+    /// to shorten the code. The full version of using the modifier would
+    /// look like this:
+    ///
+    /// ```
+    /// Text("ultraLight 🍌")
+    ///     .fontWeight(Font.Weight.ultraLight)
+    /// ```
     ///
     /// - Parameter weight: One of the available font weights.
     ///
@@ -36690,59 +37649,138 @@ extension Text {
 
     /// Applies a bold font weight to the text.
     ///
-    /// ![Bold Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-bold-example-1.png)
+    /// Use this modifier to add **bold** styling to a ``Text`` view.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("Banana 🍌🍌")
-    ///             .bold()
-    ///             .font(.title)
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 36))
+    ///                 .italic()
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 36))
+    ///                 .bold()
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// This is slightly different than using the ``Font`` modifier ``Font/weight(_:)``
+    /// and passing the ``Font/Weight/bold`` property. See the difference:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("I use the `.bold()` modifier")
+    ///                 .font(Font.system(size: 24))
+    ///                 .bold()
+    ///             Text("I use the `.bold` property")
+    ///                 .font(Font.system(size: 24).weight(.bold))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold Comparison](font-bold-comparison.png)
+    ///
+    /// There is a related ``Font`` modifier called ``Font/bold()`` that
+    /// gets applied directly to the text view:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).bold())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .bold()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Bold Modifier Comparison](font-bold-twins.png)
+    ///
+    /// - Note: Since this modifier returns a ``Text``, you can apply other
+    /// text-only modifiers after this one.
     ///
     /// - Returns: Bold text.
     public func bold() -> Text { }
 
     /// Applies italics to the text.
     ///
-    /// ![Italic Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-italic-example-1.png)
+    /// Use this modifier to add *italic* styling to a ``Text`` view.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("Banana 🍌🍌")
-    ///             .italic()
-    ///             .font(.title)
+    ///         VStack {
+    ///             Text("I'm italicized text")
+    ///                 .font(Font.system(size: 36))
+    ///                 .italic()
+    ///             Text("And I'm bold")
+    ///                 .font(Font.system(size: 36))
+    ///                 .bold()
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Font Bold and Italic](font-bold-italic.png)
+    ///
+    /// There is a related ``Font`` modifier called ``Font/italic()`` that
+    /// gets applied to the ``Font``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24).italic())
+    ///             Text("We are the same 👯‍")
+    ///                 .font(Font.system(size: 24))
+    ///                 .italic()
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Font Italic Modifier Comparison](font-text-italic.png)
+    ///
+    /// - Note: Since this modifier returns another ``Text``, you can
+    /// apply more text-specific modifiers after this one.
     ///
     /// - Returns: Italic text.
     public func italic() -> Text { }
 
     /// Applies a strikethrough to the text.
     ///
-    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
+    /// Use this modifier to apply a strikethrough to a ``Text`` view.
+    /// Pass two parameters: a boolean of whether to stirke through the
+    /// text (defaults to `true`) and the ``Color`` of the strikethrough.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         Text("Banana 🍌🍌")
-    ///             .strikethrough(false)
-   ///              .font(.title)
-    ///
-    ///         Text("Banana 🍌🍌")
-    ///             .strikethrough()
-    ///             .font(.title)
-    ///
-    ///         Text("Banana 🍌🍌")
-    ///             .strikethrough(true, color: .yellow)
-    ///             .font(.title)
+    ///         VStack {
+    ///             Text("Banana 🍌🍌")
+    ///                 .strikethrough(false)
+    ///             Text("Banana 🍌🍌")
+    ///                 .strikethrough()
+    ///             Text("Banana 🍌🍌")
+    ///                 .strikethrough(true, color: .yellow)
+    ///         }
+    ///         .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has a
@@ -36754,8 +37792,6 @@ extension Text {
     public func strikethrough(_ active: Bool = true, color: Color? = nil) -> Text { }
 
     /// Applies an underline to the text.
-    ///
-    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -36774,6 +37810,8 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has an
@@ -36962,13 +38000,13 @@ extension Text.Case : Hashable {
 /// ![Text alignment center](B81ADC86-835C-4FED-BC53-B7E0F647CA60.png)
 ///
 /// ```
-/// struct ExampleView: View {
-///    var body: some View {
-///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
-///            .padding(20)
-///            .font(.system(size: 10))
-///            .multilineTextAlignment(TextAlignment.center)
-///    }
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+///             .padding(20)
+///             .font(.system(size: 10))
+///             .multilineTextAlignment(TextAlignment.center)
+///     }
 /// }
 /// ```
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -36979,38 +38017,38 @@ extension Text.Case : Hashable {
     ///
     /// For example:
     ///
-    /// ![Text alignment leading](textalignment-leading.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
-    ///
+    /// struct ContentView: View {
     ///    var body: some View {
     ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
     ///            .padding(20)
     ///            .font(.system(size: 10))
-    ///            .multilineTextAlignment(TextAlignment.leading)
+    ///            .multilineTextAlignment(.leading)
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Text alignment leading](textalignment-leading.png)
+    ///
     case leading
 
     /// Aligns each line of the text with the center of the view.
     ///
     /// For example:
     ///
-    /// ![Text alignment center](textalignment-center.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
-    ///
-    ///    var body: some View {
-    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
-    ///            .padding(20)
-    ///            .font(.system(size: 10))
-    ///            .multilineTextAlignment(TextAlignment.center)
-    ///    }
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///             .padding(20)
+    ///             .font(.system(size: 10))
+    ///             .multilineTextAlignment(.center)
+    ///     }
     /// }
     /// ```
+    ///
+    /// ![Text alignment center](textalignment-center.png)
+    ///
     case center
 
     /// Aligns each line of the text to the trailing edge, right in left-to-right languages,
@@ -37018,19 +38056,19 @@ extension Text.Case : Hashable {
     ///
     /// For example:
     ///
-    /// ![Text alignment trailing](textalignment-trailing.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
-    ///
-    ///    var body: some View {
-    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
-    ///            .padding(20)
-    ///            .font(.system(size: 10))
-    ///            .multilineTextAlignment(TextAlignment.trailing)
-    ///    }
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///             .padding(20)
+    ///             .font(.system(size: 10))
+    ///             .multilineTextAlignment(.trailing)
+    ///     }
     /// }
     /// ```
+    ///
+    /// ![Text alignment trailing](textalignment-trailing.png)
+    ///
     case trailing
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -37203,7 +38241,6 @@ public struct TextEditor : View {
 ///
 /// ``TextField`` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
 ///
-/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -37216,10 +38253,11 @@ public struct TextEditor : View {
 ///             .padding()
 ///         }
 ///     }
+///
+/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+///
 /// [textfield-style ->]
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
-///
-/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -37231,6 +38269,8 @@ public struct TextEditor : View {
 ///                 .padding()
 ///         }
 ///     }
+///
+/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
 ///
 /// [<-]
 /// The `TextFieldStyle` protocol and `View/textFieldStyle(_:)` modifier provide helpful functionality to implement a well styled ``TextField``.
@@ -37372,27 +38412,85 @@ public struct TextFormattingCommands : Commands {
 
 /// A label style that only displays the title of the label.
 ///
-/// ![TitleOnlyLabelStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/labelstyle-title-only-example-1.png)
+/// Use this label style to display a ``Label`` with a title only.
 ///
+/// This is one of 3 default label
+/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// by implementing the ``LabelStyle/makeBody(configuration:)`` function
+/// internally, so you don't have to do it yourself.
 ///
-///     struct ExampleView: View {
-///         var body: some View {
-///              Label("Banana🍌🍌", systemImage: "heart.fill")
-///                  .labelStyle(TitleOnlyLabelStyle())
+/// These are the default styles:
+/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``TitleOnlyLabelStyle``, which displays the title only
+///
+/// All 3 styles have only one initializer, which takes no parameters.
+///
+/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(DefaultLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(IconOnlyLabelStyle())
+///             Label("Banana", systemImage: "suit.heart.fill")
+///                 .labelStyle(TitleOnlyLabelStyle())
 ///         }
+///         .font(.title)
 ///     }
+/// }
+/// ```
 ///
+/// ![Default Label Styles](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct TitleOnlyLabelStyle : LabelStyle {
 
     /// Creates a title-only label style.
+    ///
+    /// Use this initializer to create a title only label style.
+    /// This is the only initializer of ``TitleOnlyLabelStyle``.
+    ///
+    /// Apply a title-only label style using the ``View/labelStyle(_:)``
+    /// view modifier:
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///     }
+    ///
+    /// ![Title-only Label Style](titleonlylabelstyle.png)
+    ///
     public init() { }
 
     /// Creates a view that represents the body of a label.
     ///
     /// The system calls this method for each ``Label`` instance in a view
     /// hierarchy where this style is the current label style.
+    ///
+    /// **Don't call this function directly.** This is the function called
+    /// behind the scenes by SwiftUI that allows ``TitleOnlyLabelStyle``
+    /// to conform to the ``LabelStyle`` protocol.
+    ///
+    /// To make a ``Label`` with a title only, use the ``TitleOnlyLabelStyle/init()``
+    /// initializer.
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///             Label("Banana🍌🍌", systemImage: "heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///     }
+    ///
+    /// ![Title-only Label Style](titleonlylabelstyle.png)
     ///
     /// - Parameter configuration: The properties of the label.
     public func makeBody(configuration: TitleOnlyLabelStyle.Configuration) -> some View { }
@@ -37568,16 +38666,39 @@ extension Toggle where Label == Text {
 ///
 /// ToggleStyle allows for easy customization of a toggle view. In order to customize the style,
 /// simply create a new type conforming to this protocol that returns the custom view
-/// in the ``ToggleStyle/makeBody(_:)`` function. Note that while theToggleStyle
+/// in the ``ToggleStyle/makeBody(configuration:)`` function. Note that while the `ToggleStyle`
 /// protocol takes care of most the implementation, the conforming type must still
-/// toggle the isOn property.
+/// toggle the `isOn` property.
 ///
 /// To configure the current toggle style for a view hierarchy, use the
 /// ``View/toggleStyle(_:)`` modifier.
 ///
 /// For example, to make a custom toggle style which conforms to this protocol:
 ///
-/// ![Toggle style example 1](togglestyle-example-1.gif)
+/// ```
+/// struct CustomRectangleToggleStyle: ToggleStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         HStack {
+///             configuration.label
+///             Rectangle()
+///                 .frame(width: 75, height: 30)
+///                 .overlay(
+///                     Circle()
+///                         .foregroundColor(configuration.isOn ? Color.green : Color.red)
+///                         .padding(.all, 3)
+///                         .offset(x: configuration.isOn ? 20 : -20, y: 0)
+///                         .animation(Animation.linear(duration: 0.1))
+///                 )
+///                 .onTapGesture {
+///                     configuration.isOn.toggle()
+///                 }
+///         }
+///     }
+/// }
+/// ```
+///
+/// You can then apply this ``ToggleStyle`` to a ``Toggle``
+/// using ``View/toggleStyle(_:)``:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -37591,29 +38712,10 @@ extension Toggle where Label == Text {
 ///        .toggleStyle(CustomRectangleToggleStyle())
 ///    }
 /// }
-///
-/// struct CustomRectangleToggleStyle: ToggleStyle {
-///
-///    func makeBody(configuration: Configuration) -> some View {
-///        HStack {
-///            configuration.label
-///            Rectangle()
-///                .frame(width: 75, height: 30)
-///                .overlay(
-///                    Circle()
-///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
-///                        .padding(.all, 3)
-///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
-///                        .animation(Animation.linear(duration: 0.1))
-///                )
-///                .onTapGesture {
-///                    configuration.isOn.toggle()
-///
-///                }
-///        }
-///    }
-/// }
 /// ```
+///
+/// ![Toggle style example 1](togglestyle-example-1.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ToggleStyle{ }
 extension ToggleStyle {
@@ -37626,9 +38728,33 @@ extension ToggleStyle {
     /// The system calls this method for each ``Toggle`` instance in a view
     /// hierarchy where this style is the current toggle style.
     ///
-    /// For example, to make a custom toggle style which returns a ``HStack`` from makeBody:
+    /// For example, to make a custom toggle style which returns a ``HStack`` from
+    /// `makeBody(configuration:)`:
     ///
-    /// ![Toggle style example 1](togglestyle-example-1.gif)
+    /// ```
+    /// struct CustomRectangleToggleStyle: ToggleStyle {
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         HStack {
+    ///             configuration.label
+    ///             Rectangle()
+    ///                 .frame(width: 75, height: 30)
+    ///                 .overlay(
+    ///                     Circle()
+    ///                         .foregroundColor(configuration.isOn ? Color.green : Color.red)
+    ///                         .padding(.all, 3)
+    ///                         .offset(x: configuration.isOn ? 20 : -20, y: 0)
+    ///                         .animation(Animation.linear(duration: 0.1))
+    ///                 )
+    ///                 .onTapGesture {
+    ///                     configuration.isOn.toggle()
+    ///                 }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can then apply this ``ToggleStyle`` to a ``Toggle``
+    /// using ``View/toggleStyle(_:)``:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -37642,29 +38768,9 @@ extension ToggleStyle {
     ///        .toggleStyle(CustomRectangleToggleStyle())
     ///    }
     /// }
-    ///
-    /// struct CustomRectangleToggleStyle: ToggleStyle {
-    ///
-    ///    func makeBody(configuration: Configuration) -> some View {
-    ///        HStack {
-    ///            configuration.label
-    ///            Rectangle()
-    ///                .frame(width: 75, height: 30)
-    ///                .overlay(
-    ///                    Circle()
-    ///                        .foregroundColor(configuration.isOn ? Color.green : Color.red)
-    ///                        .padding(.all, 3)
-    ///                        .offset(x: configuration.isOn ? 20 : -20, y: 0)
-    ///                        .animation(Animation.linear(duration: 0.1))
-    ///                )
-    ///                .onTapGesture {
-    ///                    configuration.isOn.toggle()
-    ///
-    ///                }
-    ///        }
-    ///    }
-    /// }
     /// ```
+    ///
+    /// ![Toggle style example 1](togglestyle-example-1.gif)
     ///
     /// - Parameter configuration: The properties of the toggle, such as its
     ///   label and its “on” state.
@@ -37920,23 +39026,17 @@ extension ToolbarContentBuilder {
 ///                     ToolbarItem(id: "bananas") {
 ///                         Text("🍌🍌")
 ///                     }
-///
-///                     ToolbarItem(id: "apples") {
-///                         Text("🍏🍏")
-///                     }
-///
-///                     ToolbarItem(id: "peaches") {
-///                         Text("🍑🍑")
-///                     }
 ///                 }
 ///         }
 ///     }
 /// }
 /// ```
 ///
+/// ![ToolBarItem Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+///
 /// ### Placing a toolbar item on the navigation bar
 ///
-/// ``ToolbarItem`` can be explicitly placed on the navigation bar using either `ToolbarItemPlacement.navigationBarLeading` or `ToolbarItemPlacement.navigationBarTrailing`. For example:
+/// `ToolbarItem` can be explicitly placed on the navigation bar using either ``ToolbarItemPlacement/navigationBarLeading`` or ``ToolbarItemPlacement/navigationBarTrailing``. For example:
 ///
 /// ![130803BF-A58D-4BBB-B916-9AB446907185](130803BF-A58D-4BBB-B916-9AB446907185.png)
 /// ```
@@ -37945,7 +39045,8 @@ extension ToolbarContentBuilder {
 ///         NavigationView {
 ///             Text("Hello, World!")
 ///                 .toolbar {
-///                     ToolbarItem(placement: .navigationBarLeading) {
+///                     ToolbarItem(id: "bananas", placement: .navigationBarLeading) {
+///                         Text("🍌🍌")
 ///                         Spacer()
 ///                     }
 ///                 }
@@ -37953,6 +39054,8 @@ extension ToolbarContentBuilder {
 ///     }
 /// }
 /// ```
+///
+/// ![ToolBarItem Example 2](toolbar-leading.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItem<ID, Content> : ToolbarContent where Content : View {
@@ -38486,10 +39589,10 @@ extension UIApplicationDelegateAdaptor where DelegateType : ObservableObject {
 
 /// A UIKit view controller that manages a SwiftUI view hierarchy.
 ///
-/// Create a ``UIHostingController`` object when you want to integrate SwiftUI
+/// Create a `UIHostingController` object when you want to integrate SwiftUI
 /// views into a UIKit view hierarchy. At creation time, specify the SwiftUI
 /// view you want to use as the root view for this view controller; you can
-/// change that view later using the `SwiftUI/UIHostingController/rootView`
+/// change that view later using the ``UIHostingController/rootView``
 /// property. Use the hosting controller like you would any other view
 /// controller, by presenting it or embedding it as a child view controller
 /// in your interface.
@@ -38501,7 +39604,9 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 	/// The key commands that trigger actions on this responder.
 	///
 	/// A responder object that supports hardware keyboard commands can redefine
-	/// this property and use it to return an array of `UIKit/UIKeyCommand` objects that
+	/// this property and use it to return an array of
+    /// [`UIKeyCommand`](https://developer.apple.com/documentation/uikit/uikeycommand)
+    /// objects that
 	/// it supports. Each key command object represents the keyboard sequence to
 	/// recognize and the action method of the responder to call in response.
 	///
@@ -39016,13 +40121,13 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// ### Context-aware ``UIViewRepresentable``s
 ///
 /// SwiftUI heavily relies on the environment, by way of environment objects
-/// (`View/environmentObject(_:)`) and environment values (`EnvironmentValues`).
+/// (``View/environmentObject(_:)``) and environment values (``EnvironmentValues``).
 /// Environment values are useful for creating intelligent
 /// and context-aware UIKit ports.
 ///
 /// For example, we can remove the `isAnimated` parameter from
-/// `ActivityIndicator`, and use `isEnabled` from the environment instead
-/// via `EnvironmentValues`'s ``EnvironmentValues/isEnabled``:
+/// `ActivityIndicator`, and use ``EnvironmentValues/isEnabled`` from the environment instead
+/// via ``EnvironmentValues``'s ``EnvironmentValues/isEnabled``:
 ///
 /// ```
 /// struct ActivityIndicator: UIViewRepresentable {
@@ -39367,59 +40472,217 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
 /// A dynamic data structure for representing a point in a view.
 ///
-/// A unitpoint takes in x and y coordinates measured in points.
+/// ### What is a `UnitPoint`?
 ///
-/// You can customizde the x and y coordinates or you can use a constant.
-/// SwiftUI has 10 UnitPoint constants:
+/// A `UnitPoint` is a 2D coordinate. Its `x` and `y` values are measured
+/// from `0.0` to `1.0`, and represent fractions of the parent view.
+/// The positive **x-axis** runs from **leading** edge to **trailing** edge, and the positve
+/// **y-axis** moves from **top** to **bottom**.
 ///
+/// There are two ways to make a `UnitPoint`:
+/// you can either customize the `x` and `y` coordinates, or you can use a
+/// predefined constant.
+/// SwiftUI has 10 `UnitPoint` constants:
+/// 1. ``UnitPoint/zero``: `x = 0` and `y = 0`
+/// 2. ``UnitPoint/center``: `x = 0.5` and `y = 0.5`
+/// 3. ``UnitPoint/topleading``: `x = 0` and `y = 0`
+/// 4. ``UnitPoint/top``: `x = 0.5` and `y = 0`
+/// 5. ``UnitPoint/toptrailing``: `x = 1` and `y = 0`
+/// 6. ``UnitPoint/trailing``: `x = 1` and `y = 0.5`
+/// 7. ``UnitPoint/bottomtrailing``: `x = 1` and `y = 1`
+/// 8. ``UnitPoint/bottom``: `x = 0.5` and `y = 1`
+/// 9. ``UnitPoint/bottomleading``: `x = 0` and `y = 1`
+/// 10. ``UnitPoint/leading``: `x = 0` and `y = 0.5`
 ///
+/// ### How to use a `UnitPoint`
 ///
-/// 1. ``UnitPoint/zero``
-/// 2. ``UnitPoint/center``
-/// 3. ``UnitPoint/leading``
-/// 4. ``UnitPoint/trailing``
-/// 5. ``UnitPoint/top``
-/// 6. ``UnitPoint/bottom``
-/// 7. ``UnitPoint/topleading``
-/// 8. ``UnitPoint/toptrailing``
-/// 9. ``UnitPoint/bottomleading``
-/// 10. ``UnitPoint/bottomtrailing``
+/// `UnitPoints`s can be used to specify the anchor point for view
+/// transformations like ``View/rotationEffect(_:anchor:)``
+/// and ``View/scaleEffect(_:anchor:)-31528``. They are used commonly in
+/// ``Shape``s and gradients.
 ///
-///
-///
-/// UnitPoints are used commonly in shapes and gradients.
-///
-/// For example, a ``LinearGradient`` accepts a ``UnitPoint`` for the startPoint and endPoint parameters.
-/// This example uses the constants ``UnitPoint/top`` and ``UnitPoint/bottom``.
-///
-/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
+/// For example, a ``LinearGradient`` accepts a `UnitPoint` for the
+/// `startPoint` and `endPoint` parameters.
+/// This example uses the ``UnitPoint/top`` and ``UnitPoint/bottom``
+/// unit points.
 ///
 /// ```
-/// struct ExampleView: View {
-///     let colors: [Color] = [.yellow, .orange]
-///
+/// struct ContentView: View {
 ///     var body: some View {
-///         Rectangle()
-///             .fill(LinearGradient(gradient: Gradient(colors: colors),
-///                                  startPoint: .top,
-///                                  endPoint: .bottom))
+///         let colors = [Color.yellow, Color.orange]
+///         let gradient = Gradient(colors: colors)
+///         let linearGradient = LinearGradient(gradient: gradient,
+///                                             startPoint: UnitPoint.top,
+///                                             endPoint: UnitPoint.bottom)
+///         return Rectangle()
+///             .fill(linearGradient)
 ///             .frame(width:100, height:100)
 ///     }
 /// }
 /// ```
+///
+/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
+///
+/// To use a unit point as an anchor for rotation, pass it to the
+/// ``View/rotationEffect(_:anchor:)`` modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack(spacing: 200) {
+///             Text("I'm rotated around my center 👈")
+///                 .rotationEffect(.degrees(22), anchor: UnitPoint.center)
+///                 .border(Color.gray)
+///             Text("I'm rotated on the left 🍃")
+///                 .rotationEffect(.degrees(22), anchor: UnitPoint.leading)
+///                 .border(Color.gray)
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![](unitpoint-anchor.png)
+///
+/// You can get the same effect by creating your own custom `UnitPoint`s,
+/// using the ``UnitPoint/init(x:y:)`` initialzer:
+///
+/// ```
+/// struct ContentView: View {
+///     let center = UnitPoint(x: 0.5, y: 0.5)
+///     let leading = UnitPoint(x: 0, y: 0.5)
+///
+///     var body: some View {
+///         VStack(spacing: 200) {
+///             Text("I'm rotated around my center 👈")
+///                 .rotationEffect(.degrees(22), anchor: center)
+///                 .border(Color.gray)
+///             Text("I'm rotated on the left 🍃")
+///                 .rotationEffect(.degrees(22), anchor: leading)
+///                 .border(Color.gray)
+///         }
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
 
 	/// The x coordinate of the point, measured in points.
+    ///
+    /// The `x` value of a ``UnitPoint`` runs from `0.0` to `1.0`,
+    /// and represents the fractional distance of the parent view's
+    /// width. `0` corresponds to the **leading** edge, and `1` corresponds
+    /// to the **trailing** edge.
+    ///
+    /// You can also use values outside this range, like `2.0`, and they'll represent
+    /// places **outside** of the view.
+    ///
+    /// You usually specify this value using the ``UnitPoint``
+    /// ``UnitPoint/init(x:y:)`` initialzer, but you can also specify it
+    /// directly:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var point = UnitPoint()
+    ///         point.x = 0.5
+    ///
+    ///         return Text("I'm rotated around my center 👈")
+    ///             .rotationEffect(.degrees(22), anchor: point)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](unitpoint-rotation-center.png)
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public var x: CGFloat
 
     /// The y coordinate of the point, measured in points.
+    ///
+    /// The `y` value of a ``UnitPoint`` runs from `0.0` to `1.0`,
+    /// and represents the fractional distance of the parent view's
+    /// height. `0` corresponds to the **top** edge, and `1` corresponds
+    /// to the **bottom** edge.
+    ///
+    /// You can also use values outside this range, like `2.0`, and they'll represent
+    /// places **outside** of the view.
+    ///
+    /// You usually specify this value using the ``UnitPoint``
+    /// ``UnitPoint/init(x:y:)`` initialzer, but you can also specify it
+    /// directly:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var point = UnitPoint()
+    ///         point.y = 0.5
+    ///         point.x = 0.5
+    ///
+    ///         return Text("I'm rotated around my center 👈")
+    ///             .rotationEffect(.degrees(22), anchor: point)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](unitpoint-rotation-center.png)
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public var y: CGFloat
 
     /// Creates a unit point with x and y values of 0.
+    ///
+    /// Use this convenience initializer to create a unit point with
+    /// `x` and `y` values of `0`. This corresponds to the top leading
+    /// edge of the view.
+    ///
+    /// This intializer is equivalent to ``UnitPoint``'s ``UnitPoint/zero``
+    /// static constant.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let point = UnitPoint()
+    ///
+    ///     var body: some View {
+    ///         Text("I'm rotated on the left 🍃")
+    ///             .rotationEffect(.degrees(22), anchor: point)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](unitpoint-rotation-left.png)
     @inlinable public init() { }
 
     /// Creates a unit point from x and y values.
+    ///
+    /// Use this initializer to create a custom ``UnitPoint``.
+    ///
+    /// The `x` and `y` values of a ``UnitPoint`` run from `0.0` to `1.0`,
+    /// and represents the fractional distance of the parent view's
+    /// width. `0` corresponds to the **leading** or **top** edge,
+    /// and `1` corresponds to the **trailing** or **bottom** edge.
+    ///
+    /// You can also use values outside this range, like `2.0`, and they'll represent
+    /// places **outside** of the view.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let point = UnitPoint(x: 0.5, y: 0.5)
+    ///
+    ///     var body: some View {
+    ///         Text("I'm rotated around my center 👈")
+    ///             .rotationEffect(.degrees(22), anchor: point)
+    ///             .border(Color.gray)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](unitpoint-rotation-center.png)
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     ///
     /// - Parameters:
     ///   x: The x coordinate of the unit point.
@@ -39427,33 +40690,232 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     @inlinable public init(x: CGFloat, y: CGFloat) { }
 
     /// A unit point with x and y values of 0.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `0` and a `y` of `0`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .frame(width: 100, height: 100)
+    ///             .rotationEffect(.degrees(22), anchor: .zero)
+    ///             .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](unitpoint-zero.png)
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let zero: UnitPoint
 
     /// The unit point at the center of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `0.5` and a `y` of `0.5`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .frame(width: 100, height: 100)
+    ///             .rotationEffect(.degrees(22), anchor: .center)
+    ///             .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](unitpoint-center.png)
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let center: UnitPoint
 
     /// The unit point at the middle of the leading edge of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `0` and a `y` of `0.5`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .leading)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let leading: UnitPoint
 
     /// The unit point at the middle of the trailing edge of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `1` and a `y` of `0.5`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .trailing)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let trailing: UnitPoint
 
     /// The unit point at the middle of the top edge of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `0.5` and a `y` of `0`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .top)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
+    ///
     public static let top: UnitPoint
 
     /// The unit point at the middle of the bottom edge of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `0.5` and a `y` of `1`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .bottom)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottom: UnitPoint
 
     /// The unit point at the top leading corner of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `0` and a `y` of `0`.
+    ///
+    /// - Note: This is the same as ``UnitPoint/zero``.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .topLeading)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let topLeading: UnitPoint
 
     /// The unit point at the top trailing corner of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `1` and a `y` of `0`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .topTrailing)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let topTrailing: UnitPoint
 
     /// The unit point at the bottom leading corner of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `0` and a `y` of `1`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .bottomLeading)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottomLeading: UnitPoint
 
     /// The unit point at the bottom trailing corner of a given view.
+    ///
+    /// Use this static constant to specify a ``UnitPoint`` with an
+    /// `x` of `1` and a `y` of `1`.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var angle: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Slider(value: $angle, in: 0...360)
+    ///             Rectangle()
+    ///                 .frame(width: 100, height: 100)
+    ///                 .rotationEffect(.degrees(22), anchor: .bottomTrailing)
+    ///                 .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottomTrailing: UnitPoint
 
     /// The hash value.
@@ -39577,8 +41039,6 @@ extension UserInterfaceSizeClass : Hashable {
 ///
 /// ``VStack`` is a vertical stack of views.
 ///
-///  ![VStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
-///
 ///     struct ExampleView: View {
 ///         var body: some View {
 ///             VStack {
@@ -39589,9 +41049,9 @@ extension UserInterfaceSizeClass : Hashable {
 ///         }
 ///     }
 ///
-/// Modify your stack's alignment or spacing with the built in initializer.
+///  ![VStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
 ///
-/// ![VStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-2.png)
+/// Modify your stack's alignment or spacing with the built in initializer.
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -39603,9 +41063,11 @@ extension UserInterfaceSizeClass : Hashable {
 ///         }
 ///     }
 ///
+/// ![VStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-2.png)
+///
 /// Learn more about the properties of each alignment choice via the ``HorizontalAlignment`` struct.
 ///
-/// `VStack` uses a ``ViewBuilder`` to construct the content.
+/// ``VStack`` uses a ``ViewBuilder`` to construct the content.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VStack<Content> : View where Content : View {
 
@@ -39653,7 +41115,7 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///
 /// See those pages for more on how to construct them.
 ///
-/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-babaf``
+/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c``
 /// view modifier. See that page for more on adding alignment
 /// guides to views.
 ///
@@ -39671,7 +41133,6 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///
 /// See the example below.
 ///
-/// ![68519915-B4B5-4531-9D49-B9DF5172967B](68519915-B4B5-4531-9D49-B9DF5172967B.png)
 /// ```
 /// struct VerticallyAlignedView: View {
 ///     var body: some View {
@@ -39689,6 +41150,9 @@ extension VectorArithmetic : AdditiveArithmetic {
 ///     }
 /// }
 /// ```
+///
+/// ![68519915-B4B5-4531-9D49-B9DF5172967B](68519915-B4B5-4531-9D49-B9DF5172967B.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VerticalAlignment : Equatable {
 
@@ -40023,6 +41487,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](date-picker-style-ex.gif)
+    ///
     /// - Parameters:
     ///   - style: The desired date picker style, conforming to ``DatePickerStyle``.
     @available(tvOS, unavailable)
@@ -40085,6 +41551,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](sheet-on-dismiss-ex.gif)
+    ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
     ///   when this value is not `nil`.
@@ -40102,7 +41570,7 @@ extension View {
     ///             Button("Open sesame 📬") {
     ///                 showSheet = true
     ///             }
-    ///             .sheet(isPresented: $showCover,
+    ///             .sheet(isPresented: $showSheet,
     ///                    onDismiss: { print("dismissed!") },
     ///                    content: { ExampleSheet() })
     ///         }
@@ -40117,6 +41585,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](sheet-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
@@ -40180,6 +41650,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](full-screen-on-dismiss-ex.gif)
+    ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the full screen cover. The full screen
     ///   cover will show when the value is not `nil`.
@@ -40224,6 +41696,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](full-screen-is-presented-ex.gif)
+    ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the modal view is presented.
     ///   - onDismiss: A closure executed when the modal view dismisses.
@@ -40255,6 +41729,8 @@ extension View {
     ///                     perform: { longPressed.toggle() })
     ///         }
     ///     }
+    ///
+    /// ![](press-me-ex.gif)
     ///
     /// - Parameters:
     ///   - minimumDuration: How long it takes to detect a long press.
@@ -40295,6 +41771,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](disable-autocorrect-ex.gif)
+    ///
     /// - Parameter disable: Whether autocorrection is disabled for the view.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
     @available(watchOS, unavailable)
@@ -40315,7 +41793,7 @@ extension View {
     ///
     /// This changes the style of the page dots.
     ///
-    /// See ``IndexViewStyle`` and ``PageIndexViewStyle``for more info on
+    /// See ``IndexViewStyle`` and ``PageIndexViewStyle`` for more info on
     /// the parameter.
     ///
     /// ```
@@ -40326,10 +41804,12 @@ extension View {
     ///             Color.pink
     ///         }
     ///         .tabViewStyle(PageTabViewStyle())
-    ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)
+    ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Index View Style Example 1](index-view-style-ex.gif)
     ///
     /// - Parameter style: The ``IndexViewStyle`` style to apply to this view.
     public func indexViewStyle<S>(_ style: S) -> some View where S : IndexViewStyle { }
@@ -40357,6 +41837,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-24 at 10.26.05.png)
     ///
     /// - Parameter action: A function that returns an NSItemProvider.
     @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
@@ -40402,6 +41884,8 @@ extension View {
     ///             }
     ///        }
     ///     }
+    ///
+    /// ![](disable-delete-ex.gif)
     ///
     /// - Parameter isDisabled: Whether the view's delete functionality is disabled.
     @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { }
@@ -40452,6 +41936,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](disable-move-ex.gif)
+    ///
     /// - Parameter isDisabled: Whether the view's move functionality is disabled.
     @inlinable public func moveDisabled(_ isDisabled: Bool) -> some View { }
 
@@ -40478,6 +41964,8 @@ extension View {
     ///                 }
     ///         }
     ///     }
+    ///
+    /// ![](ondrag-ex.gif)
     ///
     /// - Parameter data: A function that returns an
     /// [NSItemProvider](https://developer.apple.com/documentation/foundation/nsitemprovider)
@@ -40562,6 +42050,7 @@ extension View {
     ///     let timer = Timer.publish(every: 1.0, on: .main, in: .default).autoconnect()
     ///
     ///     @State var time = ""
+    ///
     ///     var body: some View {
     ///         Text(time)
     ///             .onReceive(timer) { t in time = String(describing: t) }
@@ -40590,7 +42079,7 @@ extension View {
     /// to encapsulate them by creating a new ``ViewModifier``. Then, call that
     /// new modifier using this.
     ///
-    /// Use this modifier to combine a `View` and a ``ViewModifier``, to
+    /// Use this modifier to combine a ``View`` and a ``ViewModifier``, to
     /// create a new view. For example, if you create a view modifier for
     /// a new kind of caption with blue text surrounded by a rounded rectangle:
     ///
@@ -40607,7 +42096,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// You can use `modifier(_:)` to extend ``View`` to create new modifier
+    /// You can use ``View/modifier(_:)`` to extend ``View`` to create new modifier
     /// for applying the `BorderedCaption` defined above:
     ///
     ///     extension View {
@@ -40618,11 +42107,15 @@ extension View {
     ///
     /// Then you can apply the bordered caption to any view:
     ///
-    ///     Image(systemName: "bus")
-    ///         .resizable()
-    ///         .frame(width:50, height:50)
-    ///     Text("Downtown Bus")
-    ///         .borderedCaption()
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Image(systemName: "bus")
+    ///                 .resizable()
+    ///                 .frame(width:50, height:50)
+    ///             Text("Downtown Bus")
+    ///                 .borderedCaption()
+    ///         }
+    ///     }
     ///
     /// ![A screenshot showing the image of a bus with a caption reading
     /// Downtown Bus. A view extension, using custom a modifier, renders the
@@ -40679,7 +42172,9 @@ extension View {
     /// struct AppearedView: View {
     ///     var body: some View {
     ///         Text("If you're reading this 🍌 was printed")
-    ///             .onAppear { print("🍌") }
+    ///             .onAppear {
+    ///                 print("🍌")
+    ///             }
     ///     }
     /// }
     /// ```
@@ -40718,10 +42213,16 @@ extension View {
     /// A view modifier that performs an action when the view disappears.
     ///
     /// ```
-    /// struct DisappearingView: View {
+    /// struct ContentView: View {
+    ///     @State var show = true
+    ///     @State var message = "DO IT"
+    ///
     ///     var body: some View {
-    ///         Text("When you close this 🍌 WILL be printed")
-    ///             .onDisappear { print("🍌") }
+    ///         VStack {
+    ///             Button(message) { show = false }
+    ///             Text("When I disappear, this 👆 will become a banana")
+    ///                 .onDisappear { message = "🍌" }
+    ///         }
     ///     }
     /// }
     /// ```
@@ -40777,7 +42278,7 @@ extension View {
     /// ```
     /// struct ContextMenuView: View {
     ///     var body: some View {
-    ///         Text("Favorite Card Suit")
+    ///         Text("Press and hold for cards")
     ///             .contextMenu {
     ///                 Button("♥️ - Hearts", action: { })
     ///                 Button("♣️ - Clubs", action: { })
@@ -40804,7 +42305,7 @@ extension View {
     ///
     /// Use `contextMenu(_:)` to attach a contextual menu struct and its
     /// children to the view. This modifier allows for the contextual menu to be
-    /// conditionally available by passing `nil` as the value for ``contextMenu``.
+    /// conditionally available by passing `nil` as the value for `contextMenu`.
     ///
     /// In the example below a ``ContextMenu`` that contains four menu items is
     /// created and is passed into the `contextMenu(_:)` modifier. The
@@ -40818,9 +42319,9 @@ extension View {
     ///     func selectHearts() {
     ///         // Act on hearts selection.
     ///     }
-    ///     func selectClubs() { ... }
-    ///     func selectSpades() { ... }
-    ///     func selectDiamonds() { ... }
+    ///     func selectClubs() { }
+    ///     func selectSpades() { }
+    ///     func selectDiamonds() { }
     ///
     ///     let menuItems = ContextMenu {
     ///         Button("♥️ - Hearts", action: selectHearts)
@@ -40831,9 +42332,10 @@ extension View {
     ///
     ///     struct ContextMenuMenuItems: View {
     ///         private var shouldShowMenu = true
+    ///
     ///         var body: some View {
     ///             VStack {
-    ///                 Text("Favorite Card Suit")
+    ///                 Text("Press and hold for cards")
     ///                     .padding()
     ///                     .contextMenu(shouldShowMenu ? menuItems : nil)
     ///             }
@@ -40860,9 +42362,9 @@ extension View {
     /// conforms to the ``MenuStyle`` protocol.
     ///
     /// Existing menu styles include:
-    /// - ``DefaultMenuButtonStyle``
-    /// - ``BorderlessMenuButtonStyle``
-    /// - ``BorderedMenuButtonStyle`` (on macOS)
+    /// - ``DefaultMenuStyle``
+    /// - ``BorderlessButtonMenuStyle``
+    /// - ``BorderedButtonMenuStyle`` (on macOS)
     ///
     /// The ``MenuStyle`` protocol also supports custom structures.
     ///
@@ -40873,10 +42375,12 @@ extension View {
     ///             Button("Open in Preview", action: { })
     ///             Button("Save as PDF", action: { })
     ///         }
-    ///         .menuStyle(ButtonMenuStyle())
+    ///         .menuStyle(BorderlessButtonMenuStyle())
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](menustyle-modifier.png)
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
@@ -40903,10 +42407,17 @@ extension View {
     ///
     /// ```
     /// struct DoubleTapView: View {
-    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     @State var message = "Double tap me 👇"
+    ///
+    ///     var two: some Gesture {
+    ///         TapGesture(count: 2)
+    ///             .onEnded { message += "2️⃣" }
+    ///         }
+    ///     }
+    ///
     ///     var body: some View {
     ///         Text("Double tap me 👇")
-    ///             .gesture(g)
+    ///             .gesture(two)
     ///     }
     /// }
     /// ```
@@ -40935,13 +42446,23 @@ extension View {
     ///
     /// ```
     /// struct DoubleTapView: View {
-    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     @State var message = "Double tap me 👇"
+    ///
+    ///     var one: some Gesture {
+    ///         TapGesture(count: 1)
+    ///             .onEnded { message += "1️⃣" }
+    ///     }
+    ///     var two: some Gesture {
+    ///         TapGesture(count: 2)
+    ///             .onEnded { message += "2️⃣" }
+    ///     }
+    ///
     ///     var body: some View {
     ///         ZStack {
-    ///             Text("Double tap me 👇")
-    ///                 .onTapGesture { /*this never happens*/ }
+    ///             Text(message)
+    ///                 .gesture(two) //this never happens
     ///         }
-    ///         .highPriorityGesture(g)
+    ///         .highPriorityGesture(one)
     ///     }
     /// }
     /// ```
@@ -40970,11 +42491,17 @@ extension View {
     ///
     /// ```
     /// struct DoubleTapView: View {
-    ///     let g = TapGesture(count: 2).onEnded { print("2️⃣") }
+    ///     @State var message = "Double tap me 👇"
+    ///
+    ///     var g: some Gesture {
+    ///         TapGesture(count: 2)
+    ///             .onEnded { message += "2️⃣" }
+    ///         }
+    ///     }
     ///     var body: some View {
     ///         ZStack {
-    ///             Text("Double tap me 👇")
-    ///                 .onTapGesture { print("1️⃣") }
+    ///             Text(message)
+    ///                 .onTapGesture { message += "1️⃣" }
     ///         }
     ///         .simultaneousGesture(g)
     ///     }
@@ -41023,7 +42550,7 @@ extension View {
     ///
     ///              switch result {
     ///              case .failure(let error):
-    ///                  print("Error selecting file: \(error.localizedDescription:)")
+    ///                  print("Error selecting file: \(error.localizedDescription)")
     ///              case .success(let url):
     ///                 do {
     ///                     if url.startAccessingSecurityScopedResource() {
@@ -41082,7 +42609,7 @@ extension View {
     ///
     ///              switch result {
     ///              case .failure(let error):
-    ///                  print("Error selecting file: \(error.localizedDescription:)")
+    ///                  print("Error selecting file: \(error.localizedDescription)")
     ///              case .success(let urls):
     ///                 textInFiles = []
     ///                 for url in urls {
@@ -41167,7 +42694,7 @@ extension View {
     ///
     /// Use this modifier to add a redaction reason to a view hierarchy. Redaction
     /// reasons often update the appearance of the view. Currently,
-    /// there is only 1 redaction reason: ``RedactionReasons.placeholder``.
+    /// there is only 1 redaction reason: ``RedactionReasons/placeholder``.
     /// Adding this reason to the view will replace the view with a placeholder graphic.
     ///
     /// Adding a redaction is an additive process: any redaction
@@ -41182,6 +42709,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](redacted-1.png)
     ///
     /// Your child view can also read the redacted reason from its environment:
     ///
@@ -41204,11 +42733,18 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](redacted-2.png)
+    ///
     /// - Parameter reason: The reason for redacting the content.
     public func redacted(reason: RedactionReasons) -> some View { }
 
 
     /// A view modifier that removes all redaction reasons from a view.
+    ///
+    /// Use this modifier to unredact a ``View``. See
+    /// ``View/redacted(reason:)`` for an overview of redaction,
+    /// what it is, and why you might want to use it.
     ///
     /// ```
     /// struct UnredactedView: View {
@@ -41225,6 +42761,9 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](unredacted.png)
+    ///
     public func unredacted() -> some View { }
 
 }
@@ -41238,7 +42777,7 @@ extension View {
 	/// size and location will stay the same.
 	///
 	/// If you would like to place a view in front of your current view instead,
-	/// you can use the `overlay(_:alignment:)` function.
+	/// you can use the ``View/overlay(_:alignment:)`` function.
     ///
     /// ```
     /// struct OverlayView: View {
@@ -41248,7 +42787,14 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](background.png)
+    ///
+    /// Check out ``View/overlay(_:alignment:)``, which is the opposite
+    /// modifier.
 	///
+  /// ![Background alignment example](floral_background.png)
+  ///
 	/// - Parameters:
 	///   - background: The view to place behind.
 	///   - alignment: Where to align the behind view relative to the current view. Defaults to center.
@@ -41277,12 +42823,15 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](overlay.png)
+    ///
+    /// Check out ``View/background(_:alignment:)``, which is the opposite
+    /// modifier.
 	///
 	/// - Parameters:
 	///   - overlay: The view to place in front.
 	///   - alignment: Where to align the in-front view relative to the current view. Defaults to center.
-	///
-	/// - SeeAlso: background(_:alignment:)
     @inlinable public func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View { }
 
 
@@ -41301,11 +42850,13 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](border-1.png)
+    ///
     /// To place a border around the outside of this view, apply padding of the
     /// same width before adding the border:
     ///
     /// ```
-    /// struct PaddedBorderView {
+    /// struct PaddedBorderView: View {
     ///     var body: some View {
     ///         Text("Purple border outside the view bounds.")
     ///             .padding(4)
@@ -41314,19 +42865,23 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](border-2.png)
+    ///
     /// A border doesn't have to be a plain color - it can be any ``ShapeStyle``, for example,
     /// a ``LinearGradient``:
     ///
     /// ```
-    /// struct GradientBorderView {
+    /// struct GradientBorderView: View {
     ///     var body: some View {
     ///         Text("Gradient border.")
-    ///             .border(LinearGradient(gradient: Gradient(color: [.purple, .pink]),
+    ///             .border(LinearGradient(gradient: Gradient(colors: [.purple, .pink]),
     ///                                    startPoint: .top,
     ///                                    endPoint: .bottom), width: 4)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](border-3.png)
     ///
     /// - Parameters:
     ///   - content: The border style.
@@ -41345,7 +42900,7 @@ extension View {
     /// A view modifier that constrains this view's dimensions to the specified aspect ratio.
     ///
     /// Use `aspectRatio(_:contentMode:)` to constrain a view's dimensions to an
-    /// aspect ratio specified by a [CGFloat](https://developer.apple.com/documentation/coregraphics/cgfloat)
+    /// aspect ratio specified by a [`CGFloat`](https://developer.apple.com/documentation/coregraphics/cgfloat)
     /// using the specified content mode.
     ///
     /// If this view is resizable, the resulting view will have `aspectRatio` as
@@ -41364,6 +42919,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](aspectratio-2.png)
+    ///
     /// - Parameters:
     ///   - aspectRatio: The ratio of width to height to use for the resulting
     ///     view. Use `nil` to maintain the current aspect ratio in the
@@ -41379,7 +42936,7 @@ extension View {
     /// A view modifier that constrains this view's dimensions to the aspect ratio of the given size.
     ///
     /// Use `aspectRatio(_:contentMode:)` to contstrain a view's dimentsions to
-    /// an aspect ratio specified by a [CGSize](https://developer.apple.com/documentation/coregraphics/cgsize).
+    /// an aspect ratio specified by a [`CGSize`](https://developer.apple.com/documentation/coregraphics/cgsize).
     ///
     /// If this view is resizable, the resulting view uses `aspectRatio` as its
     /// own aspect ratio. In this example, the purple ellipse has a 3:4
@@ -41394,7 +42951,10 @@ extension View {
     ///             .frame(width: 200, height: 200)
     ///             .border(Color(white: 0.75))
     ///     }
+    /// }
     /// ```
+    ///
+    /// ![](aspectratio-1.png)
     ///
     /// - Parameters:
     ///   - aspectRatio: A size that specifies the ratio of width to height to
@@ -41424,8 +42984,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](scaledtofit.png)
+    ///
     /// This method is equivalent to calling
-    /// `View/aspectRatio(_:contentMode:)-5ehx6` with a `nil` aspectRatio and
+    /// `View/aspectRatio(_:contentMode:)-6576a` with a `nil` aspectRatio and
     /// a content mode of ``ContentMode/fit``.
     ///
     /// - Returns: A view that scales this view to fit its parent, maintaining
@@ -41450,8 +43012,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](scaledtofill.png)
+    ///
     /// This method is equivalent to calling
-    /// `View/aspectRatio(_:contentMode:)-5ehx6` with a `nil` aspectRatio and
+    /// `View/aspectRatio(_:contentMode:)-6576a` with a `nil` aspectRatio and
     /// a content mode of ``ContentMode/fill``.
     ///
     /// - Returns: A view that scales this view to fill its parent, maintaining
@@ -41482,6 +43046,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -41516,6 +43082,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](fixedsize-1.png)
+    ///
     /// The `fixedSize()` modifier can be used to create a view that maintains
     /// the *ideal size* of its children both dimensions:
     ///
@@ -41529,6 +43097,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -41549,32 +43119,77 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-  /// Sets the color of the text displayed by this view.
+  /// Sets the color primary color of a view.
   ///
-  /// Use this method to change the color of the text rendered by a text view.
+  /// Use this modifier to change the main display color of a ``View``.
+  /// This can be used on any ``View``, and its effect depends on the view.
   ///
-  /// For example, you can change the color of Banana🍌🍌 to yellow and Apple🍎🍎 to red.
+  /// For example, you can change the color of a ``Shape`` like
+  /// ``Circle``:
   ///
-  /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
-  ///
-  ///     struct ExampleView: View {
-  ///        var body: some View {
-  ///            VStack {
-  ///                Text("Banana🍌🍌")
-  ///                    .foregroundColor(.yellow)
-  ///                Text("Apple 🍎🍎")
-  ///                    .foregroundColor(.red)
-  ///                Text("Peach 🍑🍑")
-  ///                    .foregroundColor(.orange)
-  ///            }
-  ///            .font(.largeTitle)
-  ///        }
+  ///     struct ContentView: View {
+  ///         var body: some View {
+  ///             VStack {
+  ///                 Circle()
+  ///                     .foregroundColor(.red)
+  ///                 Circle()
+  ///                     .foregroundColor(.yellow)
+  ///                 Circle()
+  ///                     .foregroundColor(.gren)
+  ///             }
+  ///         }
   ///     }
   ///
+  /// ![Foreground Color Cicles](foregroundcolor-circles.png)
   ///
+  /// But this modifier is very general and works in many places. For example,
+  /// you can change the text color of any control, like a ``Button``,
+  /// ``Toggle``, or ``DatePicker`` using `.foregroundColor(_:)`:
   ///
-  /// - Parameter color: The color to use when displaying this text.
-  /// - Returns: A text view that uses the color value you supply.
+  ///     struct ContentView: View {
+  ///         @State var isOn = true
+  ///         @State var date = Date()
+  ///
+  ///         var body: some View {
+  ///             VStack {
+  ///                 Button("I am a red button 🚗") { /* action */ }
+  ///                     .foregroundColor(.red)
+  ///                 Toggle("I'm a yellow toggle 🌽", isOn: $isOn)
+  ///                     .foregroundColor(.yellow)
+  ///                 DatePicker("Date! 🐊", selection: $date)
+  ///                     .foregroundColor(.green)
+  ///             }
+  ///         }
+  ///     }
+  ///
+  /// ![Foreground Color Controls](foregroundcolor-controls.png)
+  ///
+  /// Because this modifier is general, it's easy to use on a parent view,
+  /// then have the color show up on all of the children:
+  ///
+  ///     struct ContentView: View {
+  ///         @State var isOn = true
+  ///         @State var date = Date()
+  ///
+  ///         var body: some View {
+  ///             VStack {
+  ///                 Button("I am a pink button 🎀") { /* action */ }
+  ///                 Toggle("I'm a pink toggle 🐽", isOn: $isOn)
+  ///                 DatePicker("Date! 🌷", selection: $date)
+  ///             }
+  ///             .foregroundColor(.pink)
+  ///         }
+  ///     }
+  ///
+  /// ![Foreground Color Parent](foregroundcolor-pink.png)
+  ///
+  /// - Note: There is a related modifier for ``Text`` views
+  /// called ``Text/foregroundColor(_:)`` that acts
+  /// exactly the same as this modifier, but returns back a ``Text`` view
+  /// instead of a generic `some View`.
+  ///
+  /// - Parameter color: The color to use in the view's foreground.
+  /// - Returns: A view that uses the foreround color value you supply.
     @inlinable public func foregroundColor(_ color: Color?) -> some View { }
 
 }
@@ -41610,9 +43225,11 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.39.23.png)]
+    ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// ``View/padding(_:_:)``. To pad all outside edges of a view with an
-    /// amount you specify, see `View/padding(_:)-9f33x`.
+    /// amount you specify, see ``View/padding(_:)-049c2``.
     ///
     /// - Parameter insets: The edges and amounts to inset.
     ///
@@ -41624,7 +43241,7 @@ extension View {
     /// A view that pads this view inside the specified edge insets with a
     /// system-calculated amount of padding.
     ///
-    /// Use `padding(_:)` to add a system-calculated amount of padding inside
+    /// Use ``View/padding(_:)-049c2`` to add a system-calculated amount of padding inside
     /// one or more of the view's edges by passing either a single edge name, or
     /// an `OptionSet` describing which edges should be padded. For example you
     /// can add padding to the bottom of a text view:
@@ -41643,10 +43260,12 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.39.23.png)
+    ///
     /// To pad the view's insets, which affects the amount of padding _inside_
-    /// the edges of the view, see `View/padding(_:)-6pgqq`. To pad all
+    /// the edges of the view, see ``View/padding(_:)-97aab``. To pad all
     /// outside edges of a view with an amount you specify, see
-    /// `View/padding(_:)-9f33x`.
+    /// ``View/padding(_:)-049c2``.
     ///
     /// - Parameters:
     ///   - edges: The set of edges along which to pad this view; if `nil` the
@@ -41661,7 +43280,7 @@ extension View {
 
     /// Pads the view along all edges by the specified amount.
     ///
-    /// Use `padding(_:)` to add a specific amount of padding around all edges
+    /// Use ``View/padding(_:)-049c2`` to add a specific amount of padding around all edges
     /// of the view.
     ///
     /// ```
@@ -41677,6 +43296,7 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.27.58.png)
     ///
     /// - Parameter length: The amount to pad this view on each edge.
     ///
@@ -41707,6 +43327,7 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// ![](offset-2.png)
     ///
     /// - Parameter offset: The distance to offset this view.
     ///
@@ -41716,7 +43337,7 @@ extension View {
 
     /// A view modifier this view by the specified horizontal and vertical CGFloats.
     ///
-    /// Use `offset(x:y:)` to to shift the displayed contents by the amount
+    /// Use ``View/offset(x:y:)`` to to shift the displayed contents by the amount
     /// specified in the `x` and `y` parameters.
     ///
     /// The original dimensions of the view aren't changed by offsetting the
@@ -41733,6 +43354,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal distance to offset this view.
@@ -41756,26 +43379,31 @@ extension View {
     /// In the example below, the ``HStack`` is offset by a constant of 50
     /// points to the right of center:
     ///
-    ///     VStack {
-    ///         Text("Today's Weather")
-    ///             .font(.title)
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Today's Weather")
+    ///                 .font(.title)
+    ///                 .border(Color.gray)
+    ///             HStack {
+    ///                 Text("🌧")
+    ///                 Text("Rain & Thunderstorms")
+    ///                 Text("⛈")
+    ///             }
+    ///             .alignmentGuide(HorizontalAlignment.center) { _ in  50 }
     ///             .border(Color.gray)
-    ///         HStack {
-    ///             Text("🌧")
-    ///             Text("Rain & Thunderstorms")
-    ///             Text("⛈")
     ///         }
-    ///         .alignmentGuide(HorizontalAlignment.center) { _ in  50 }
     ///         .border(Color.gray)
     ///     }
-    ///     .border(Color.gray)
+    /// }
+    /// ```
+    ///
+    /// ![](alignmentguide-2.png)
     ///
     /// Changing the alignment of one view may have effects on surrounding
     /// views. Here the offset values inside a stack and its contained views is
     /// the difference of their absolute offsets.
-    ///
-    /// ![A view showing the two emoji offset from a text element using a
-    /// horizontal alignment guide.](SwiftUI-View-HAlignmentGuide.png)
     ///
     /// - Parameters:
     ///   - g: A ``HorizontalAlignment`` value at which to a base the offset.
@@ -41797,28 +43425,33 @@ extension View {
     /// In the example below, the weather emoji are offset 20 points from the
     /// vertical center of the ``HStack``.
     ///
-    ///     VStack {
-    ///         Text("Today's Weather")
-    ///             .font(.title)
-    ///             .border(Color.gray)
+    /// ```
+    /// struct ContentView {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Today's Weather")
+    ///                 .font(.title)
+    ///                 .border(Color.gray)
     ///
-    ///         HStack {
-    ///             Text("🌧")
-    ///                 .alignmentGuide(VerticalAlignment.center) { _ in -20 }
-    ///             Text("Rain & Thunderstorms")
-    ///                 .border(Color.gray)
-    ///             Text("⛈")
-    ///                 .alignmentGuide(VerticalAlignment.center) { _ in 20 }
-    ///                 .border(Color.gray)
+    ///             HStack {
+    ///                 Text("🌧")
+    ///                     .alignmentGuide(VerticalAlignment.center) { _ in -20 }
+    ///                 Text("Rain & Thunderstorms")
+    ///                     .border(Color.gray)
+    ///                 Text("⛈")
+    ///                     .alignmentGuide(VerticalAlignment.center) { _ in 20 }
+    ///                     .border(Color.gray)
+    ///             }
     ///         }
     ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](alignmentguide.png)
     ///
     /// Changing the alignment of one view may have effects on surrounding
     /// views. Here the offset values inside a stack and its contained views is
     /// the difference of their absolute offsets.
-    ///
-    /// ![A view showing the two emoji offset from a text element using a
-    /// vertical alignment guide.](SwiftUI-View-VAlignmentGuide.png)
     ///
     /// - Parameters:
     ///   - g: A ``VerticalAlignment`` value at which to a base the offset.
@@ -41852,6 +43485,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](position-2.png)
+    ///
     /// - Parameter position: The point at which to place the center of this
     ///   view.
     ///
@@ -41874,6 +43509,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](position.png)
     ///
     /// - Parameters:
     ///   - x: The x-coordinate at which to place the center of this view.
@@ -41899,20 +43536,19 @@ extension View {
     /// outside the safe area to the bounds of the screen for the specified
     /// edges.
     ///
-    /// For example, you can propose that a text view ignore the safe area's top
-    /// inset:
-    ///
-    ///     VStack {
-    ///         Text("This text is outside of the top safe area.")
-    ///             .edgesIgnoringSafeArea([.top])
-    ///             .border(Color.purple)
-    ///         Text("This text is inside VStack.")
-    ///             .border(Color.yellow)
+    /// ```
+    /// struct SafeAreaIgnoringView: View {
+    ///     var body: some View {
+    ///         ZStack {
+    ///             Color.pink
+    ///             Text("I am everywhere")
+    ///         }
+    ///         .edgesIgnoringSafeArea(.all)
     ///     }
-    ///     .border(Color.gray)
+    /// }
+    /// ```
     ///
-    /// ![A screenshot showing a view whose bounds exceed the safe area of the
-    /// screen.](SwiftUI-View-edgesIgnoringSafeArea.png)
+    /// ![](ignoressafearea.png)
     ///
     /// Depending on the surrounding view hierarchy, SwiftUI may not honor an
     /// `edgesIgnoringSafeArea(_:)` request. This can happen, for example, if
@@ -41940,15 +43576,15 @@ extension View {
     /// you would like to ignore those safe areas.
     ///
     /// The first parameter is of type ``SafeAreaRegions``. The options are:
-    /// - `.container`: The navigation bar and bottom bar on iPhone X+.
-    /// - `.keyboard`: The software keyboard area.
-    /// - `.all`: All safe areas
+    /// - `SafeAreaRegions/container`: The navigation bar and bottom bar on iPhone X+.
+    /// - `SafeAreaRegions/keyboard`: The software keyboard area.
+    /// - `SafeAreaRegions/all`: All safe areas
     ///
     /// The second parameter has edge options:
-    /// - `.leading`
-    /// - `.trailing`
-    /// - `.top`
-    /// - `.bottom`
+    /// - `Edge/Set/leading`
+    /// - `Edge/Set/trailing`
+    /// - `Edge/Set/top`
+    /// - `Edge/Set/bottom`
     ///
     /// ```
     /// struct SafeAreaIgnoringView: View {
@@ -41961,6 +43597,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ignoressafearea.png)
     ///
     /// - Parameters:
     ///   - regions: the kinds of rectangles removed from the safe area
@@ -42013,6 +43651,28 @@ extension View {
     /// as well as that view's descendant views. It has no effect
     /// outside the view hierarchy on which you call it.
     ///
+    /// This is actually how SwiftUI is able to create modifiers that get
+    /// passed through the environment instead of being applied to a specific
+    /// view. You can apply this technique in your own views as well.
+    /// To illustrate, see this demonstration using truncation mode from above:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("This is a long 🛹 piece of text 💬 to demonstrate environment")
+    ///                 .lineLimit(1)
+    ///                 .environment(\.truncationMode, .head)
+    ///             Text("This is a long 🛹 piece of text 💬 to demonstrate environment")
+    ///                 .lineLimit(1)
+    ///                 .truncationMode(.head)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](environment-modifier.png)
+    ///
     /// - Parameters:
     ///   - keyPath: A key path that indicates the property of the
     ///     ``EnvironmentValues`` structure to update.
@@ -42054,6 +43714,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](zindex.png)
+    ///
     /// - Parameter value: A relative front-to-back ordering for this view; the
     ///   default is `0`.
     @inlinable public func zIndex(_ value: Double) -> some View { }
@@ -42067,7 +43729,7 @@ extension View {
     ///
     /// Use `transformEffect(_:)` to rotate, scale, translate, or skew the
     /// output of the view according to the provided
-    /// [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
+    /// [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
     ///
     /// In the example below, the text is rotated at -30˚ on the `y` axis.
     ///
@@ -42082,6 +43744,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](transformeffect.png)
     ///
     /// - Parameter transform: A
     /// [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
@@ -42116,7 +43780,7 @@ extension View {
     ///             Button("Eat 🍑") { selection = Emoji(name: "🍑") }
     ///         }
     ///         .actionSheet(item: $selection) { selection in
-    ///             let confirm = ActionSheet.Button.default(Text("Confirm \(selection.name)") { /* action here */ }
+    ///             let confirm = ActionSheet.Button.default(Text("Confirm \(selection.name)")) { /* action here */ }
     ///             let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /* action here */ }
     ///             let buttons = [confirm, cancel]
     ///
@@ -42154,7 +43818,7 @@ extension View {
     ///             .actionSheet(isPresented: $showActionSheet) {
     ///                 let confirm = ActionSheet.Button.default(Text("Confirm")) { /*action here*/ }
     ///                 let cancel = ActionSheet.Button.cancel(Text("Cancel")) { /*action here*/ }
-    ///                 let buttons = [save, cancel]
+    ///                 let buttons = [confirm, cancel]
     ///
     ///                 return ActionSheet(title: Text("Food alert!"),
     ///                                message: Text("You have made a selection"),
@@ -42217,22 +43881,28 @@ extension View {
     /// }
     /// ```
     ///
-    /// Apply colors in lightmode & darkmode with `accentcolor`.
+    /// ![](accentcolor.png)
     ///
-    /// Light Mode:
+    /// Another common use of `accentColor(_:)` by mixing it with
+    /// The ``Color`` property
+    /// ``Color/primary``.
+    /// This allows you to make text white in dark mode and black in light mode.
+    /// For example:
+    ///
+    ///     struct ExampleView: View {
+    ///         var body: some View {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .accentColor(.primary)
+    ///         }
+    ///     }
+    ///
+    /// In light mode, this produces:
+    ///
     /// ![Light Primary](color-primary-light.png)
     ///
-    /// Dark Mode:
+    /// And in dark mode:
+    ///
     /// ![Dark Primary](color-primary-dark.png)
-    ///
-    /// Code:
-    ///
-    ///    struct ExampleView: View {
-    ///        var body: some View {
-    ///            Text("Bananas 🍌🍌")
-    ///                .accentColor(.primary)
-    ///        }
-    ///    }
     ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
@@ -42248,30 +43918,34 @@ extension View {
     ///
     /// Disable interaction on a view.
     ///
-    /// ![Disabled Example](disabled-example.gif)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     @State var isDisabled = false
-    ///     var body: some View {
-    ///         Toggle("Disable The Banana", isOn: $isDisabled)
     ///
-    ///         Button("Banana 🍌🍌") { }
-    ///             .disabled(isDisabled)
+    ///     var body: some View {
+    ///         VStack {
+    ///             Toggle("Disable The Banana", isOn: $isDisabled)
+    ///             Button("Banana 🍌🍌") { }
+    ///                 .disabled(isDisabled)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Disabled Example](disabled-example.gif)
     ///
     /// Another example:
     ///
     /// ```
     /// struct CantTouchThisView: View {
     ///     var body: some View {
-    ///         Button(Text("Can't touch this 🎶")) { }
+    ///         Button("Can't touch this 🎶") { }
     ///             .disabled(true)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](disabled.png)
     ///
     /// - Parameter disabled: A Boolean value that determines whether users can
     ///   interact with this view.
@@ -42287,7 +43961,7 @@ extension View {
 
     /// A view modifier that rotates this view's rendered output around the specified point.
     ///
-    /// Use `rotationEffect(_:anchor:)` to rotate the view by a specific amount.
+    /// Use ``View/rotationEffect(_:anchor:)`` to rotate the view by a specific amount.
     ///
     /// In the example below, the text is rotated by 22˚.
     ///
@@ -42300,6 +43974,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.15.53.png)
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
@@ -42325,11 +44001,13 @@ extension View {
     ///             .resizable()
     ///             .frame(width: 100, height: 100, alignment: .center)
     ///             .foregroundColor(Color.red)
-    ///             .scaleEffect(CGSize(x: 0.9, y: 1.3), anchor: .leading)
+    ///             .scaleEffect(CGSize(width: 0.9, height: 1.3), anchor: .leading)
     ///             .border(Color.gray)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scaleeffect-3.png)
     ///
     /// - Parameters:
     ///   - scale: A [CGSize](https://developer.apple.com/documentation/CoreGraphics/CGSize) that
@@ -42359,6 +44037,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](scaleeffect-2.png)
+    ///
     /// - Parameters:
     ///   - s: The amount to scale the view in the view in both the horizontal
     ///     and vertical directions.
@@ -42385,6 +44065,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scaleeffect.png)
     ///
     /// - Parameters:
     ///   - x: An amount that represents the horizontal amount to scale the
@@ -42420,6 +44102,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](blur.png)
+    ///
     /// - Parameters:
     ///   - radius: The radial size of the blur. A blur is more diffuse when its
     ///     radius is large.
@@ -42440,18 +44124,20 @@ extension View {
     /// increasing from 0 (fully red) to 100% (white) in 20% increments.
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .brightness(Double(idx)*0.2)
+    ///                     .brightness(Double(i) * 0.2)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    //
+    /// ![](brightness.png)
     ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
@@ -42482,7 +44168,7 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct ColorInvert: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 Color.red.frame(width: 100, height: 100, alignment: .center)
@@ -42506,6 +44192,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](color-invert.png)
+    ///
     /// - Returns: A view that inverts its colors.
     @inlinable public func colorInvert() -> some View { }
 
@@ -42528,7 +44216,7 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct ColorMultiply: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 Color.red.frame(width: 100, height: 100, alignment: .center)
@@ -42551,6 +44239,8 @@ extension View {
     ///             .padding(50)
     ///         }
     ///     }
+    ///
+    /// ![](color-multiply.png)
     ///
     /// - Parameter color: The color to bias this view toward.
     ///
@@ -42585,14 +44275,14 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct Contrast: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
-    ///                 ForEach(-1..<6) {
+    ///                 ForEach(-1..<6) { i in
     ///                     Color.red.frame(width: 50, height: 50, alignment: .center)
     ///                         .overlay(CircleView(), alignment: .center)
-    ///                         .contrast(Double($0) * 0.2)
-    ///                         .overlay(Text("\(Double($0) * 0.2 * 100, specifier: "%.0f")%")
+    ///                         .contrast(Double(i) * 0.2)
+    ///                         .overlay(Text("\(Double(i) * 0.2 * 100, specifier: "%.0f")%")
     ///                                      .font(.callout),
     ///                                  alignment: .bottom)
     ///                         .border(Color.gray)
@@ -42600,6 +44290,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](contrast.png)
     ///
     /// - Parameter amount: The intensity of color contrast to apply. negative
     ///   values invert colors in addition to applying contrast.
@@ -42620,15 +44312,17 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .greyscale(Double(idx)*0.2 - 0.01)
+    ///                     .grayscale(Double(i) *0 .2 - 0.01)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](grayscale.png)
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -42651,15 +44345,17 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .hueRotation(Angle(degrees: Double(idx)*360/12))
+    ///                     .hueRotation(Angle(degrees: Double(i) * 360/12))
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](huerotation.png)
     ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
@@ -42683,18 +44379,25 @@ extension View {
     ///
     /// ```
     /// struct DarkView: View {
-    ///     VStack {
-    ///         Button(action: { }) {
-    ///             Text(" Button")
+    ///     @State var sliderValue: Double = 0
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Button(action: { }) {
+    ///                 Text(" Button")
+    ///             }
+    ///             HStack {
+    ///                 Text("Slider").accentColor(Color.green)
+    ///                 Slider(value: $sliderValue, in: -100...100, step: 0.1)
+    ///             }
     ///         }
-    ///         HStack {
-    ///             Text("Slider").accentColor(Color.green)
-    ///             Slider(value: $sliderValue, in: -100...100, step: 0.1)
+    ///         .preferredColorScheme(.dark)
     ///         }
     ///     }
-    ///     .preferredColorScheme(.dark)
     /// }
     /// ```
+    ///
+    /// ![](preferredcolorscheme.png)
     ///
     /// - Parameter colorScheme: The color scheme for this view.
     ///
@@ -42727,7 +44430,7 @@ extension View {
     ///         }
     ///     }
     ///
-    ///     struct LuminanceToAlpha: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             HStack {
     ///                 Color.red.frame(width: 60, height: 60, alignment: .center)
@@ -42740,6 +44443,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](luminancetoalpha.png)
     ///
     /// - Returns: A view that applies a luminance to alpha effect to this view.
     @inlinable public func luminanceToAlpha() -> some View { }
@@ -42758,17 +44463,20 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .saturation(Double(idx)*0.2)
+    ///                     .saturation(Double(i) * 0.2)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// - SeeAlso: ``View/contrast(_:)``
+    /// ![](saturation-modifier.png)
+    ///
+    /// See related symbol ``View/contrast(_:)``.
+    ///
     /// - Parameter amount: The amount of saturation to apply to this view.
     ///
     /// - Returns: A view that adjusts the saturation of this view.
@@ -42787,35 +44495,39 @@ extension View {
     /// The transition is only one part of the equation - a timer curve (animation)
     /// must also be specified. There are two ways to specify the associated animation:
     ///
-    ///
-    ///
     /// 1. With ``View/animation(_:)``.
     /// 2. Explicitly, using ``withAnimation(_:_:)``.
     ///
-    ///
-    ///
     /// See ``AnyTransition`` for more on how to create a transition.
     ///
-    /// ### Using animation(_:)
+    /// ### Using `animation(_:)`
+    ///
+    /// We can animate the toggle `animation(.easeInOut)`.
     ///
     /// ```
     /// struct ImplicitTransitionView: View {
     ///     @State var showBanana = false
     ///
     ///     var body: some View {
-    ///         Button("Toggle") { showBanana.toggle() }
-    ///         if showBanana {
-    ///             Text("🍌")
-    ///                 .animation(.easeInOut)
-    ///                 .transition(.slide)
+    ///         VStack {
+    ///             Button("Toggle") { showBanana.toggle() }
+    ///             if showBanana {
+    ///                 Text("🍌")
+    ///                     .animation(.easeInOut)
+    ///                     .transition(.slide)
+    ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ### Using withAnimation(_:_:)
-    ///
     /// ![Slide transition](with-animation-2.gif)
+    ///
+    /// ### Using `withAnimation(_:_:)`
+    ///
+    /// We can get the same effect by toggling `showBanana` explicitly
+    /// with an animation
+    /// using ``withAnimation(_:_:)``.
     ///
     /// ```
     /// struct ExplicitTransitionView: View {
@@ -42832,6 +44544,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Slide transition](with-animation-2.gif)
     @inlinable public func transition(_ t: AnyTransition) -> some View { }
 
 }
@@ -42852,15 +44566,17 @@ extension View {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             ForEach(0..<6) { idx in
+    ///             ForEach(0..<6) { i in
     ///                 RoundedRectangle(cornerRadius: 10.0)
     ///                     .fill(Color.yellow)
-    ///                     .opacity(Double(idx)*0.2)
+    ///                     .opacity(Double(i) * 0.2)
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](opacity-modifier.png)
     ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
@@ -42876,7 +44592,7 @@ extension View {
     /// A view modifier that applies the given animation to this view when the specified value
     /// changes.
     ///
-    /// Use this modifier to when you only want to animate a particular @``State``
+    /// Use this modifier to when you only want to animate a particular `@State`
     /// property instead of animating all of them.
     ///
     /// To animate all properties associated with a ``View``, use
@@ -42888,12 +44604,14 @@ extension View {
     ///     @State var transportFlag = false
     ///
     ///     var body: some View {
-    ///         Button("Move the banana") { moveFlag.toggle() }
-    ///         Button("Transport the banana") { transportFlag.toggle() }
-    ///         Text("🍌")
-    ///             .offset(x: moveFlag ? 0 : 50)
-    ///             .offset(x: transportFlag ? 0 : 50)
-    ///             .animation(.easeInOut, value: moveFlag)
+    ///         VStack {
+    ///             Button("Move the banana") { moveFlag.toggle() }
+    ///             Button("Transport the banana") { transportFlag.toggle() }
+    ///             Text("🍌")
+    ///                 .offset(x: moveFlag ? 0 : 50)
+    ///                 .offset(x: transportFlag ? 0 : 50)
+    ///                 .animation(.easeInOut, value: moveFlag)
+    ///         }
     ///     }
     /// }
     /// ```
@@ -42914,7 +44632,7 @@ extension View {
 
     /// Sets the unique tag value of this view.
     ///
-    /// Use `tag(_:)` to differentiate between a number of views for the purpose
+    /// Use ``View/tag(_:)`` to differentiate between a number of views for the purpose
     /// of selecting controls like pickers and lists. Tag values can be of any
     /// type that conforms to the [Hashable](https://developer.apple.com/documentation/swift/hashable)
     /// protocol.
@@ -42924,7 +44642,7 @@ extension View {
     /// In the example below, the `ForEach` loop in the ``Picker`` view
     /// builder iterates over the `Flavor` enumeration. It extracts the text raw
     /// value of each enumeration element for use as the row item label and uses
-    /// the enumeration item itself as input to the `tag(_:)` modifier.
+    /// the enumeration item itself as input to the ``View/tag(_:)`` modifier.
     /// The tag identifier can be any value that conforms to the
     /// [Hashable](https://developer.apple.com/documentation/swift/hashable) protocol:
     ///
@@ -42943,6 +44661,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](view-tag-flavor.gif)
     ///
     /// - SeeAlso: `List`, ``Picker``, `Hashable`
     /// - Parameter tag: A [Hashable](https://developer.apple.com/documentation/swift/hashable) value
@@ -42997,7 +44717,7 @@ extension View {
 
     /// Places a custom background view behind a list row item.
     ///
-    /// Use `listRowBackground(_:)` to place a custom background view behind a
+    /// Use ``View/listRowBackground(_:)`` to place a custom background view behind a
     /// list row item.
     ///
     /// [[list-row-background]]
@@ -43006,7 +44726,7 @@ extension View {
     /// items. The SwiftUI ``List`` builder iterates over the `Flavor`
     /// enumeration and extracts the raw value of each of its elements using the
     /// resulting text to create each list row item. After the list builder
-    /// finishes, the `listRowBackground(_:)` modifier places the view you
+    /// finishes, the ``View/listRowBackground(_:)`` modifier places the view you
     /// supply behind each of the list row items.
     ///
     ///     struct ListRowBackground: View {
@@ -43066,6 +44786,8 @@ extension View {
     ///  }
     ///  ```
     ///
+    /// ![](drawinggroup.png)
+    ///
     /// - Note: Views backed by native platform views may not render into the
     ///   image. Instead, they log a warning and display a placeholder image to
     ///   highlight the error.
@@ -43098,12 +44820,12 @@ extension View {
     ///
     /// In the example below the `compositingGroup()` modifier separates the
     /// application of effects into stages. It applies the ``View/opacity(_:)``
-    /// effect to the VStack before the `blur(radius:)` effect is applied to the
+    /// effect to the ``VStack`` before the ``View/blur(radius:opaque:)`` effect is applied to the
     /// views inside the enclosed ``ZStack``. This limits the scope of the
     /// opacity change to the outermost view.
     ///
     /// ```
-    /// struct CompositingGroup {
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         VStack {
     ///             ZStack {
@@ -43122,6 +44844,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](compositinggroup.png)
+    ///
     /// - Returns: A view that wraps this view in a compositing group.
     @inlinable public func compositingGroup() -> some View { }
 
@@ -43135,16 +44859,16 @@ extension View {
     /// If you set the preview device to `nil`, as it is by default, Xcode
     /// automatically chooses an appropriate device based on your target.
     ///
-    /// You can get a list of supported values, like "iPhone 11",
-    /// "iPad Pro (11-inch)", and "Apple Watch Series 5 - 44mm" by using the
+    /// You can get a list of supported values, like `"iPhone 11"`,
+    /// `"iPad Pro (11-inch)"`, and `"Apple Watch Series 5 - 44mm"` by using the
     /// `xcrun` command in the Terminal app:
     ///
-    ///     % xcrun simctl list devicetypes
+    ///     $ xcrun simctl list devicetypes
     ///
     /// Additionally, the following values are supported for macOS platform
     /// development:
-    ///  - "Mac"
-    ///  - "Mac Catalyst"
+    ///  - `"Mac"`
+    ///  - `"Mac Catalyst"`
     ///
     /// See ``PreviewDevice`` for the full list of supported devices.
     ///
@@ -43160,10 +44884,12 @@ extension View {
     /// struct ContentView_Previews: PreviewProvider {
     ///     static var previews: some View {
     ///         ContentView()
-    ///             .previewDevice(rawValue: "iPhone SE")
+    ///             .previewDevice("iPhone SE")
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](previewdevice.png)
     ///
     ///- Parameter value: The device to display the preview on.
     @inlinable public func previewDevice(_ value: PreviewDevice?) -> some View { }
@@ -43172,14 +44898,9 @@ extension View {
     /// A view modifier that sets the size for a Xcode preview.
     ///
     /// There are 3 different Xcode ``PreviewLayout`` types:
-    ///
-    ///
-    ///
     /// 1. ``PreviewLayout/device``:  Adds the view to the center of the specified preview device.
     /// 2. ``PreviewLayout/sizeThatFits``: Fits a container around the previewed view.
     /// 3.  ``PreviewLayout/fixed(width:height:)``: Adds the view to a fixed size container.
-    ///
-    ///
     ///
     /// ```
     /// struct ContentView: View {
@@ -43196,11 +44917,17 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](previewlayout-sizethatfits.png)
+    ///
     /// The default value is ``PreviewLayout/device``.
     @inlinable public func previewLayout(_ value: PreviewLayout) -> some View { }
 
 
     /// A view modifier that sets a custom name in the Xcode preview.
+    ///
+    /// Use this modifier to change the little name at the top of the
+    /// screen in an Xcode preview.
+    /// By default, it's "Preview". In this example, we make it "🍌":
     ///
     /// ```
     /// struct ContentView: View {
@@ -43217,6 +44944,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](previewdisplayname.png)
+    ///
     /// The default value is `nil`.
     ///
     /// - Parameter value: The preview name to display.
@@ -43226,21 +44955,18 @@ extension View {
     /// A view modifier that declares a context for the Xcode preview.
     ///
     /// There is currently only one type of preview context:
-    /// ``WidgetPreviewContext``. Its initializer takes a ``WidgetFamily``.
+    /// [`WidgetPreviewContext`](https://developer.apple.com/documentation/widgetkit/widgetpreviewcontext).
+    /// Its initializer takes a
+    /// [`WidgetFamily`](https://developer.apple.com/documentation/widgetkit/widgetfamily).
     ///
     /// There are 3 types of `WidgetFamily` variables:
-    ///
-    ///
-    ///
-    /// 1. `systemSmall`
-    /// 2. `systemMedium`
-    /// 3. `systemLarge`
-    ///
-    ///
+    /// 1. [`systemSmall`](https://developer.apple.com/documentation/widgetkit/widgetfamily/systemsmall)
+    /// 2. [`systemMedium`](https://developer.apple.com/documentation/widgetkit/widgetfamily/systemmedium)
+    /// 3. [`systemLarge`](https://developer.apple.com/documentation/widgetkit/widgetfamily/systemlarge)
     ///
     /// The example below is pulled from Apple's widget boilerplate.
     /// To pull this up yourself, go to *File > New > Target* and search
-    /// for "WidgetExtension". This target is named "PreviewContextTest"
+    /// for "Widget Extension". This target is named "PreviewContextTest."
     ///
     /// ```
     /// struct PreviewContextTest_Previews: PreviewProvider {
@@ -43250,6 +44976,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](widgetpreviewcontext.png)
     ///
     /// For more on getting started with widgets, check out
     /// [this tutorial](https://www.raywenderlich.com/11303363-getting-started-with-widgets).
@@ -43310,6 +45038,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](anchorpreference.png)
 	///
 	/// - Parameters:
 	///   - key: The key type of the preference key.
@@ -43345,6 +45075,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](clipshape.png)
+    ///
     /// The resulting view shows only the portion of the text that lies within
     /// the bounds of the circle.
     ///
@@ -43367,7 +45099,7 @@ extension View {
     /// content that extends beyond the edges of the frame is still visible.
     ///
     /// ```
-    /// struct CippedView: View {
+    /// struct ClippedView: View {
     ///     var body: some View {
     ///         Text("This long text string is clipped")
     ///             .fixedSize()
@@ -43377,6 +45109,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](clipped-modifier.png)
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -43408,6 +45142,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](cornerradius-modifier.png)
+    ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
     ///   rectangle.
@@ -43430,52 +45166,60 @@ extension View {
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(radius: 10)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-1.png)
     ///
     /// Modify the color:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(color: .red, radius: 10)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-2.png)
     ///
     /// Modify the x offset:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(color: .red, radius: 10, x: 20)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-3.png)
     ///
     /// Modify the x & y offset:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
-    ///             .fill(Color.yellow)
+    ///         Rectangle()
+    ///             .fill(Color.white)
+    ///             .frame(width: 100, height: 100)
     ///             .shadow(color: .red, radius: 10, x: 20, y: 20)
-    ///             .padding()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](shadow-4.png)
     ///
     /// - Parameters:
     ///   - color: The shadow's color.
@@ -43495,11 +45239,19 @@ extension View {
 
     /// A view modifier that sets the style for toggles within this view.
     ///
+    /// Use this modifier to specify the ``ToggleStyle`` of a
+    /// ``Toggle``. See ``ToggleStyle`` for more info on the styles
+    /// that SwiftUI provides out of the box, along with how to create
+    /// your own custom styles.
+    ///
     /// To set a specific style for all toggle instances within a view, use the
     /// ``View/toggleStyle(_:)`` modifier, as follows:
     ///
     /// ```
     /// struct StyledToggleView: View {
+    ///     @State var vibrateOnRing = true
+    ///     @State var vibrateOnSilent = true
+    ///
     ///     var body: some View {
     ///         VStack {
     ///             Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
@@ -43509,6 +45261,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](togglestyle-modifier.png)
     ///
     /// - Parameter style: The style to set.
     public func toggleStyle<S>(_ style: S) -> some View where S : ToggleStyle { }
@@ -43565,6 +45319,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](image-scale.png)
+    ///
     /// - Parameter scale: One of the relative sizes provided by the image scale
     ///   enumeration.
     @available(macOS 11.0, *)
@@ -43604,6 +45360,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](font-modifier.png)
+    ///
     /// - Parameter font: The default font to use in this view.
     ///
     /// - Returns: A view with the default font set to the value you supply.
@@ -43642,11 +45400,13 @@ extension View {
     /// }
     /// ```
     ///
-    /// `The alignment` parameter specifies this view's alignment within the
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.54.23.png)
+    ///
+    /// The `alignment` parameter specifies this view's alignment within the
     /// frame.
     ///
     /// ```
-    /// struct TextFrameView
+    /// struct TextFrameView: View {
     ///     var body: some View {
     ///         Text("Hello world!")
     ///             .frame(width: 200, height: 30, alignment: .topLeading)
@@ -43654,6 +45414,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 15.56.14.png)
     ///
     /// In the example above, the text is positioned at the top, leading corner
     /// of the frame. If the text is taller than the frame, its bounds may
@@ -43695,6 +45457,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](frame.png)
     @available(*, deprecated, message: "Please pass one or more parameters.")
     @inlinable public func frame() -> some View { }
 
@@ -43733,21 +45497,24 @@ extension View {
     /// The ideal width and height parameters can be enforced using the
     /// ``View/fixedSize()`` modifier.
     ///
-    /// Play with the numbers in the following example to see how then
-    /// child view responds
+    /// Play with the numbers in the following example to see how the
+    /// child view responds.
     ///
     /// ```
     /// struct CustomFrameView: View {
     ///     var body: some View {
     ///         ZStack {
     ///             Rectangle()
-    ///                 .frame(minWidth: 50.0, idealWidth: 100.0, maxWidth: 200.0,
+    ///                 .frame(minWidth: 50.0, idealWidth: 100.0, maxWidth: 100.0,
     ///                        minHeight: 50.0, idealHeight: 100.0, maxHeight: 200.0)
     ///         }
     ///         .frame(width: 150.0, height: 150.0)
+    ///         .border(Color.oragne)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](frame-custom.png)
     ///
     /// - Parameters:
     ///   - minWidth: The minimum width of the resulting frame.
@@ -43793,7 +45560,7 @@ extension View {
 
     /// A view modifier that sets the tab bar item associated with this view.
     ///
-    /// Use `tabItem(_:)` to configure a view as a tab bar item in a
+    /// Use ``View/tabItem(_:)`` to configure a view as a tab bar item in a
     /// ``TabView``. The example below adds two views as tabs in a ``TabView``:
     ///
     ///     struct View1: View {
@@ -43825,6 +45592,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![tabItem Example 1](tabitem-ex1.gif)
     ///
     /// [[tabview-tabitem]]
     ///
@@ -43875,7 +45644,7 @@ extension View {
     /// }
     ///
     /// struct ExamplePopover: View {
-    ///     let item: item
+    ///     let item: Item
     ///     @Environment(\.presentationMode) var presentationMode
     ///
     ///     var body: some View {
@@ -43907,9 +45676,17 @@ extension View {
 
     /// Presents a popover when a given condition is true.
     ///
+    /// If your popover requires a passed-in parameter, use
+    /// ``View/popover(item:attachmentAnchor:arrowEdge:content:)``
+    /// instead.
+    ///
+    /// On iPhone, this modifier is very similar to
+    /// ``View/sheet(isPresented:onDismiss:content:)``.
+    /// However, on iPad, these two modifiers are different.
+    ///
     /// ```
     /// struct ContentView: View {
-    ///     @State private var showPopover = FalseContent
+    ///     @State private var showPopover = false
     ///
     ///     var body: some View {
     ///         Button("Open sesame 📬") { showPopover = true }
@@ -43923,7 +45700,7 @@ extension View {
     /// struct ExamplePopover: View {
     ///     @Environment(\.presentationMode) var presentationMode
     ///
-    ///     var body: some View { x
+    ///     var body: some View {
     ///         Button("CLOSE 📪") {
     ///             presentationMode.wrappedValue.dismiss()
     ///         }
@@ -43949,13 +45726,64 @@ extension View {
 
     /// Sets the style for labels within this view.
     ///
-    /// Use this modifier to set a specific style for all labels within a view:
+    /// Use this modifier to set a specific style for all labels within a view.
     ///
-    ///     VStack {
-    ///         Label("Fire", systemImage: "flame.fill")
-    ///         Label("Lightning", systemImage: "bolt.fill")
+    /// For example, if we create a custom label style called
+    /// `MyLabelStyle`, we can apply it to a label using this modifier:
+    ///
+    /// ```
+    /// struct MyLabelStyle: LabelStyle {
+    ///     let color: Color
+    ///
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         VStack {
+    ///             configuration.title
+    ///             configuration.icon
+    ///                 .foregroundColor(color)
+    ///         }
     ///     }
-    ///     .labelStyle(MyCustomLabelStyle())
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .yellow))
+    ///             Label("Apple", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(MyLabelStyle(color: .red))
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Custom Label Style](custom-labelstyle-comparison.png)
+    ///
+    /// This modifier also accepts the default label styles that ship with
+    /// SwiftUI:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(DefaultLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(IconOnlyLabelStyle())
+    ///             Label("Banana", systemImage: "suit.heart.fill")
+    ///                 .labelStyle(TitleOnlyLabelStyle())
+    ///         }
+    ///         .font(.title)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Default Label Styles](default-labelstyle-comparison.png)
+    ///
+    /// - Note: Creating label styles can be complex. See ``LabelStyle``
+    /// for more.
+    ///
+    /// - Parameter style: The label style to use in the view hierarchy.
     ///
     public func labelStyle<S>(_ style: S) -> some View where S : LabelStyle { }
 
@@ -44024,12 +45852,16 @@ extension View {
     /// ```
     /// struct PartiallyHiddenView: View {
     ///     var body: some View {
-    ///         Text("The invisible man hides below")
-    ///         Text("🧔")
-    ///             .hidden()
+    ///         VStack {
+    ///             Text("The invisible man hides below")
+    ///             Text("🧔")
+    ///                 .hidden()
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](hidden.png)
     ///
     /// - Returns: A hidden view.
     @inlinable public func hidden() -> some View { }
@@ -44060,9 +45892,11 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](keyboardtype.png)
+    ///
     /// There are several different kinds of specialized keyboard types
     /// available though the
-    /// [UIKeyboardType](https://developer.apple.com/documentation/uikit/uikeyboardtype)
+    /// [`UIKeyboardType`](https://developer.apple.com/documentation/uikit/uikeyboardtype)
     /// enumeration. To
     /// specify the default system keyboard type, use `.default`.
     ///
@@ -44097,9 +45931,9 @@ extension View {
     /// ```
     ///
     /// The
-    /// [UITextAutocapitalizationType](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
+    /// [`UITextAutocapitalizationType`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
     /// enumeration defines the available capitalization modes. The default is
-    /// [sentences](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype/sentences).
+    /// [`.sentences`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype/sentences).
     ///
     /// - Parameter style: One of the autocapitalization modes defined in the
     /// `UITextAutocapitalizationType` enumeration.
@@ -44217,10 +46051,13 @@ extension View {
     /// struct HebrewView: View {
     ///     var body: some View {
     ///         Text("שָׁלוֹם")
-    ///          .flipsForRightToLeftLayoutDirection(true)
+    ///             .flipsForRightToLeftLayoutDirection(true)
+    ///             .font(.title)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](flipsforrighttoleftlayoutdirection.png)
     ///
     /// - Parameter enabled: A Boolean value that indicates whether this view
     ///   flips its content horizontally when the layout direction is
@@ -44237,10 +46074,11 @@ extension View {
     /// A view modifier that sets the text content type for this view, which the system uses to
     /// offer suggestions while the user enters text on an iOS or tvOS device.
     ///
-    /// Use ``View/textContentType(_:)`` to set the content type for this view.
+    /// Use `textContentType(_:) to set the content type for this view.
+    /// This is especially useful for auto-complete purposes.
     ///
     /// Available content type values can be found in the
-    /// [UITextContentType](https://developer.apple.com/documentation/uikit/uitextcontenttype)
+    /// [`UITextContentType`](https://developer.apple.com/documentation/uikit/uitextcontenttype)
     /// page.
     ///
     /// This example configures the ``TextField`` for the entry of email
@@ -44251,11 +46089,13 @@ extension View {
     ///     @State private var emailAddress = ""
     ///
     ///     var body: some View {
-    ///         TextField("billjames2@icloud.com", text: $emailAddress)
+    ///         TextField("Enter email:", text: $emailAddress)
     ///             .textContentType(.emailAddress)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](textcontenttype.png)
     ///
     /// - Parameter textContentType: One of the content types available in the
     ///   `UITextContentType` enumeration that identify the semantic meaning
@@ -44285,19 +46125,25 @@ extension View {
     ///
     /// ```
     /// struct TogglesView: View {
+    ///     @State var toggle1 = true
+    ///     @State var toggle2 = true
+    ///
     ///     var body: some View {
     ///         VStack {
     ///             Toggle(isOn: $toggle1) {
-    ///                 Text("Toggle1")
+    ///                 Text("I am hidden! 🐄")
     ///             }
     ///             .labelsHidden()
     ///
     ///             Toggle(isOn: $toggle2) {
-    ///                 Text("Toggle2")
+    ///                 Text("I am not 👀")
     ///             }
     ///         }
     ///     }
     /// }
+    /// ```
+    ///
+    /// ![](labelshidden.png)
     ///
     /// - Note: This modifier does not work for all labels. It applies to
     ///   labels that are external/separate from the rest of the control's
@@ -44330,9 +46176,20 @@ extension View {
     ///
     /// ```
     /// struct ShortcutView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Click or press command+ctrl+P to print 🍌") { print("🍌") }
-    ///             .keyboardShortcut(KeyEquivalent("P"), modifiers: [.command, .control])
+    ///         let key = KeyEquivalent("p")
+    ///         let modifiers: EventModifiers = [.command, .control]
+    ///
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Click or press command+ctrl+P to print 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(key, modifiers: modifiers)
+    ///         }
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
@@ -44361,9 +46218,21 @@ extension View {
     ///
     /// ```
     /// struct ShortcutView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Click or press command+ctrl+P to print 🍌") { print("🍌") }
-    ///             .keyboardShortcut(KeyboardShortcut(KeyEquivalent("P"), modifiers: [.command, .control])))
+    ///         let key = KeyEquivalent("p")
+    ///         let modifiers: EventModifiers = [.command, .control]
+    ///         let shortcut = KeyboardShortcut(key, modifiers: modifiers)
+    ///
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Click or press command+ctrl+P to print 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(shortcut)
+    ///         }
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
@@ -44372,12 +46241,15 @@ extension View {
     ///
     /// ```
     /// struct KeyboardShortcutView: View {
+    ///     @State var message = "Press ENTER to save or ESC to cancel."
+    ///
     ///     var body: some View {
-    ///         Text("Press ENTER to save or ESC to cancel.")
+    ///         Text(message)
+    ///
     ///         HStack {
-    ///             Button("Cancel") { print("cancel") }
+    ///             Button("Cancel") { message = "Canceled." }
     ///                 .keyboardShortcut(.cancelAction)
-    ///             Button("Save") { print("save") }
+    ///             Button("Save") { message = "Saved." }
     ///                 .keyboardShortcut(.defaultAction)
     ///         }
     ///     }
@@ -44393,9 +46265,25 @@ extension View {
 
     /// Hides the navigation bar for this view.
     ///
-    /// Use `navigationBarHidden(_:)` to hide the navigation bar. This modifier
+    /// Use ``View/navigationBarHidden(_:)`` to hide the navigation bar. This modifier
     /// only takes effect when this view is inside of and visible within a
     /// ``NavigationView``.
+    ///
+    ///     struct FlavorView: View {
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
+    ///         var body: some View {
+    ///             NavigationView {
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
+    ///                 }
+    ///                 .navigationBarTitle("You can't see me 👀")
+    ///                 .navigationBarHidden(true)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// ![](navigationbarhidden.png)
     ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   navigation bar.
@@ -44405,6 +46293,9 @@ extension View {
 
     /// A view modifier that sets the title in the navigation bar for this view.
     ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-e8e60`` instead.**
+    ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar.
     /// This modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
@@ -44413,17 +46304,19 @@ extension View {
     /// ``Text`` view:
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                 List(items, id: \.self) {
-    ///                     Text($0)
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
     ///                 }
     ///                 .navigationBarTitle(Text("Today's Flavors"))
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationbartitle.png)
     ///
     /// - Parameter title: A description of this view to display in the
     ///   navigation bar.
@@ -44435,6 +46328,9 @@ extension View {
 
 
     /// A view modifier that sets the title of this view's navigation bar with a localized string.
+    ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-d3628`` instead.**
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
     /// using a ``LocalizedStringKey`` that will be used to search for a
@@ -44450,17 +46346,19 @@ extension View {
     /// resolved, the text of the key name will be used as the title text.
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                 List(items, id: \.self) {
-    ///                     Text($0)
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
     ///                 }
     ///                 .navigationBarTitle("Today's Flavors")
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationbartitle.png)
     ///
     /// - Parameter titleKey: A key to a localized description of this view to
     ///   display in the navigation bar.
@@ -44473,6 +46371,9 @@ extension View {
 
     /// A view modifier that sets the title of this view's navigation bar with a string.
     ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-ee24d`` instead.**
+    ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
     /// using a `String`. This modifier only takes effect when this view is
     /// inside of and visible within a ``NavigationView``.
@@ -44481,18 +46382,19 @@ extension View {
     /// using a string:
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
     ///         let text = "Today's Flavors"
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                 List(items, id: \.self) {
-    ///                     Text($0)
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
     ///                 }
     ///                 .navigationBarTitle(text)
     ///             }
     ///         }
     ///     }
+    /// ![](navigationbartitle.png)
     ///
     /// - Parameter title: A title for this view to display in the navigation
     ///   bar.
@@ -44505,13 +46407,15 @@ extension View {
 
     /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-e8e60`` with
+    /// ``View/navigationBarTitleDisplayMode(_:)`` instead.**
+    ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
     /// from one of the ``NavigationBarItem/TitleDisplayMode`` styles. This
     /// modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
-    ///
-    /// [[navigation-title-display-mode]]
     ///
     /// In the example below, text for the navigation bar title is provided
     /// using a ``Text`` view. The navigation bar title's
@@ -44519,17 +46423,19 @@ extension View {
     /// the navigation bar title in the bounds of the navigation bar.
     ///
     ///     struct FlavorView: View {
-    ///        let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                     "Pistachio"]
+    ///        let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",  "Pistachio"]
+    ///
     ///        var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) {
-    ///                      Text($0)
+    ///                  List(items, id: \.self) { item in
+    ///                      Text(item)
     ///                  }
-    ///                 .navigationBarTitle(Text("Today's Flavors", displayMode: .inline)
+    ///                 .navigationBarTitle(Text("Today's Flavors"), displayMode: .inline)
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -44543,13 +46449,15 @@ extension View {
 
     /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-d3628`` with
+    /// ``View/navigationBarTitleDisplayMode(_:)`` instead.**
+    ///
     /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the title
     /// from one of the ``NavigationBarItem/TitleDisplayMode`` styles. This
     /// modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
-    ///
-    /// [[navigation-title-display-mode]]
     ///
     /// In the example below, text for the navigation bar title is provided
     /// using a string. The navigation bar title's
@@ -44557,17 +46465,19 @@ extension View {
     /// the navigation bar title in the bounds of the navigation bar.
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) {
-    ///                      Text($0)
+    ///                  List(items, id: \.self) { item in
+    ///                      Text(item)
     ///                  }
     ///                 .navigationBarTitle("Today's Flavors", displayMode: .inline)
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](navigationtitle-string.png)
     ///
     /// If the `titleKey` can't be found, the title uses the text of the key
     /// name instead.
@@ -44586,16 +46496,15 @@ extension View {
 
     /// A view modifier that sets the title and display mode in the navigation bar for this view.
     ///
-    /// Use `navigationBarTitle(_:, displayMode)` to set the title of the
+    /// **This modifier has been deprecated. Use
+    /// ``View/navigationTitle(_:)-ee24d`` with
+    /// ``View/navigationBarTitleDisplayMode(_:)`` instead.**
+    ///
+    /// Use `navigationBarTitle(_:displayMode:)` to set the title of the
     /// navigation bar for this view and specify a display mode for the
-    /// title from one of the `NavigationBarItem.Title.DisplayMode`
+    /// title from one of the ``NavigationBarItem/Title/DisplayMode``
     /// styles. This modifier only takes effect when this view is inside of and
     /// visible within a ``NavigationView``.
-    ///
-    /// In the example below, `navigationBarTitle(_:, displayMode)` uses a
-    /// string to provide a title for the navigation bar. Setting the title's
-    /// `displaymode` to `.inline` places the navigation bar title within the
-    /// bounds of the navigation bar.
     ///
     /// In the example below, text for the navigation bar title is provided using
     /// a string. The navigation bar title's `displayMode` is set to
@@ -44603,22 +46512,20 @@ extension View {
     /// navigation bar.
     ///
     ///     struct FlavorView: View {
-    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",
-    ///                      "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip", "Pistachio"]
     ///         let title = "Today's Flavors"
+    ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) {
-    ///                      Text($0)
+    ///                  List(items, id: \.self) { item in
+    ///                      Text(item)
     ///                  }
     ///                 .navigationBarTitle(title, displayMode: .inline)
     ///             }
     ///         }
     ///     }
     ///
-    /// ![A screenshot of a navigation bar, showing the title within the bounds
-    ///  of the navigation bar]
-    /// (SwiftUI-navigationBarTitle-stringProtocol.png)
+    /// ![](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -44645,8 +46552,9 @@ extension View {
     /// struct TrapDoorView: View {
     ///     var body: some View {
     ///         NavigationView {
-    ///             NavigationLink(destination: NoReturnView(),
-    ///                            label { Text("Tap to fall into the trap door 🚪") })
+    ///             NavigationLink(destination: NoReturnView()) {
+    ///                 Text("Tap to fall into the trap door 🚪")
+    ///             }
     ///         }
     ///     }
     /// }
@@ -44705,6 +46613,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](multilinetextalignment.png)
+    ///
     /// - Parameter alignment: A value that you use to left-, right-, or
     ///   center-align the text within a view.
     ///
@@ -44735,6 +46645,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](truncationmode.png)
+    ///
     /// - Parameter mode: The truncation mode that specifies where to truncate
     ///   the text within the text view, if needed. You can truncate at the
     ///   beginning, middle, or end of the text view.
@@ -44764,6 +46676,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](linespacing.png)
+    ///
     /// - Parameter lineSpacing: The amount of space between the bottom of one
     ///   line and the top of the next line in points.
     @inlinable public func lineSpacing(_ lineSpacing: CGFloat) -> some View { }
@@ -44775,6 +46689,9 @@ extension View {
     /// Use `allowsTightening(_:)` to enable the compression of inter-character
     /// spacing of text in a view to try to fit the text in the view's bounds.
     ///
+    /// You can also use ``EnvironmentValues/allowsTightening``
+    /// to set the same effect in the environment.
+    ///
     /// In the example below, two identically configured text views show the
     /// effects of `allowsTightening(_:)` on the compression of the spacing
     /// between characters:
@@ -44783,13 +46700,13 @@ extension View {
     /// struct TightenedTextView: View {
     ///     var body: some View {
     ///         VStack {
-    ///             Text("This is a wide text element")
+    ///             Text("This is a wiiiiide text element")
     ///                 .font(.body)
     ///                 .frame(width: 200, height: 50, alignment: .leading)
     ///                 .lineLimit(1)
     ///                 .allowsTightening(true)
     ///
-    ///             Text("This is a wide text element")
+    ///             Text("This is a wiiiiide text element")
     ///                 .font(.body)
     ///                 .frame(width: 200, height: 50, alignment: .leading)
     ///                 .lineLimit(1)
@@ -44798,6 +46715,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](allowstightening.png)
     ///
     /// - Parameter flag: A Boolean value that indicates whether the space
     ///   between characters compresses when necessary.
@@ -44824,12 +46743,14 @@ extension View {
     /// ```
     /// struct LimitedTextView: View {
     ///     var body: some View {
-    ///         Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator.")
+    ///         Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator. 😲")
     ///             .frame(width: 200, height: 200, alignment: .leading)
     ///             .lineLimit(2)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](linelimit.png)
     ///
     /// - Parameter number: The line limit. If `nil`, no line limit applies.
     ///
@@ -44846,7 +46767,7 @@ extension View {
     /// example, a label with a minimum scale factor of `0.5` draws its text in
     /// a font size as small as half of the actual font if needed.
     ///
-    /// In the example below, the `HStack` contains a ``Text`` label with a
+    /// In the example below, the ```HStack`` contains a ``Text`` label with a
     /// line limit of `1`, that is next to a ``TextField``. To allow the label
     /// to fit into the available space, the `minimumScaleFactor(_:)` modifier
     /// shrinks the text as needed to fit into the available space.
@@ -44863,6 +46784,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](minimumscalefactor.png)
     ///
     /// - Parameter factor: A fraction between 0 and 1 (inclusive) you use to
     ///   specify the minimum amount of text scaling that this view permits.
@@ -44886,6 +46809,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](textcase-uppercase.png)
+    ///
     /// - Parameter textCase: One of the ``Text/Case`` enumerations; the
     ///   default is `nil`.
     /// - Returns: A view that transforms the case of the text.
@@ -44901,7 +46826,7 @@ extension View {
     /// A view modifier that adds an action to perform when this view recognizes a tap gesture.
     ///
     /// Use this modifier as a shorthand for performing an function
-    /// when a ``TapGesture`` is sensed on a ``View.
+    /// when a ``TapGesture`` is sensed on a ``View``.
     ///
     /// **Do not use** this modifier in place of ``Button``, ``NavigationLink``,
     /// or other purpose-built controls for acting on tap gestures. Among
@@ -44909,12 +46834,17 @@ extension View {
     /// while applying this modifier will not add this effect.
     ///
     /// ```
-    /// struct TapAndPrintView: View {
+    /// struct ContentView: View {
+    ///     @State var color = Color.clear
+    ///
     ///     var body: some View {
-    ///         Text("Tap me once for a 🍌")
-    ///             .onTapGesture { print("🍌") }
-    ///         Text("Tap me twice for a 🍑")
-    ///             .onTapGesture(count: 2) { print("🍑") }
+    ///         VStack {
+    ///             Text("Tap me once for a 🍌")
+    ///                 .onTapGesture { color = .yellow }
+    ///             Text("Tap me twice for a 🍑")
+    ///                 .onTapGesture(count: 2) { color = .orange }
+    ///         }
+    ///         .background(color)
     ///     }
     /// }
     /// ```
@@ -44930,26 +46860,23 @@ extension View {
     /// Use `listRowInsets(_:)` to change the default padding of the content of
     /// list items.
     ///
-    /// In the example below, the `Flavor` enumeration provides content for list
-    /// items. The SwiftUI ``List`` builder iterates over the `Flavor`
-    /// enumeration and extracts the raw value of each of its elements using the
-    /// resulting text to create each list row item. After the list builder
-    /// finishes, the `listRowInsets(_:)` modifier changes the edge insets of
-    /// each row of the list according to the ``EdgeInsets`` values you provide.
+    /// In the example below, the list row is inset 15pts from the top edge,
+    /// and 100pts from the right edge. *Note: for some reason, the code
+    /// below does not work in a list alone. It must be in a ``ForEach``.*
     ///
-    ///     struct ListRowInsets: View {
-    ///         enum Flavor: String, CaseIterable, Identifiable {
-    ///             var id: String { self.rawValue }
-    ///             case vanilla, chocolate, strawberry
-    ///         }
+    ///     struct ContentView: View {
+    ///         let colors: [Color] = [Color.orange, .purple, .pink]
+    ///         let insets = EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 100)
     ///
     ///         var body: some View {
-    ///             List(Flavor.allCases, id: \.self) {
-    ///                 Text($0.rawValue)
+    ///             List {
+    ///                 ForEach(colors, id: \.self) {
+    ///                     color.listRowInsets(insets)
+    ///                 }
     ///             }
-    ///             .listRowInsets(EdgeInsets(top: 0, leading: 75, bottom: 0, trailing: 0))
     ///         }
     ///     }
+    /// ![](listrowinsets.png)
     ///
     /// - Parameter insets: ``EdgeInsets`` to apply to the edges of the view.
     ///
@@ -44974,9 +46901,7 @@ extension View {
     /// - Parameters:
     ///   - items: The items representing the content of the toolbar.
     ///
-    /// `.toolbar(content:)` populates the toolbar or navigation bar. For example:
-    ///
-    /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+    /// ``View/toolbar(content:)-64493`` populates the toolbar or navigation bar. For example:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -45001,13 +46926,13 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+    ///
     /// ### Aligning a toolbar item
     ///
     /// Think of a toolbar in terms of spacers and items.
     ///
     /// For example, this is how a single toolbar item is aligned to the right:
-    ///
-    /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -45027,6 +46952,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
+    ///
     public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
 
 
@@ -45038,57 +46965,23 @@ extension View {
     ///
     /// For example:
     ///
-    /// ![toolbar Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-3.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         NavigationView {
     ///             Text("Hello, World!")
-    ///                 .toolbar {
+    ///                 .toolbar(id: "fruitItems") {
     ///                     ToolbarItem(id: "bananas") {
     ///                         Text("🍌🍌")
     ///                     }
-    ///
-    ///                     ToolbarItem(id: "apples") {
-    ///                         Text("🍏🍏")
-    ///                     }
-    ///
-    ///                     ToolbarItem(id: "peaches") {
-    ///                         Text("🍑🍑")
-    ///                     }
     ///                 }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ### Aligning a toolbar item
+    /// ![toolbar Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-3.png)
     ///
-    /// Think of a toolbar in terms of spacers and items.
-    ///
-    /// For example, this is how a single toolbar item is aligned to the right:
-    ///
-    /// ![toolbar Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-4.png)
-    ///
-    /// ```
-    /// struct ExampleView: View {
-    ///     var body: some View {
-    ///         NavigationView {
-    ///             Text("Hello, World!")
-    ///                 .toolbar {
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Spacer()
-    ///                     }
-    ///
-    ///                     ToolbarItem(placement: .bottomBar) {
-    ///                         Text("🍌🍌")
-    ///                     }
-    ///                 }
-    ///         }
-    ///     }
-    /// }
-    /// ```
     public func toolbar<Content>(id: String, @ToolbarContentBuilder content: () -> Content) -> some View where Content : CustomizableToolbarContent { }
 
 }
@@ -45373,27 +47266,28 @@ extension View {
     ///
     /// For example:
     ///
-    /// ![Background preference value example 1](backgroundpreference-example-1.png)
-    ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        Text("Bullseye")
-    ///            .preference(key: CustomPreferenceKey.self, value: Color.red)
-    ///            .backgroundPreferenceValue(CustomPreferenceKey.self) { PreferenceKey in
-    ///                Circle().fill(PreferenceKey)
-    ///        }
-    ///    }
+    ///     var body: some View {
+    ///         Text("Bullseye")
+    ///             .preference(key: CustomPreferenceKey.self, value: Color.red)
+    ///             .backgroundPreferenceValue(CustomPreferenceKey.self) { PreferenceKey in
+    ///                 Circle().fill(PreferenceKey)
+    ///         }
+    ///     }
     /// }
     ///
     /// struct CustomPreferenceKey: PreferenceKey {
-    ///    static var defaultValue: Color = Color.clear
+    ///     static var defaultValue = Color.clear
     ///
-    ///    static func reduce(value: inout Color, nextValue: () -> Color) {
-    ///        value = nextValue()
-    ///    }
+    ///     static func reduce(value: inout Color, nextValue: () -> Color) {
+    ///         value = nextValue()
+    ///     }
     /// }
     /// ```
+    ///
+    /// ![Background preference value example 1](backgroundpreference-example-1.png)
+    ///
     @inlinable public func backgroundPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
 
 }
@@ -45405,29 +47299,26 @@ extension View {
     /// value changes.
     ///
     /// You can use `onChange` to trigger a side effect as the result of a
-    /// value changing, such as an `Environment` key or a ``Binding``.
+    /// value changing, such as an ``Environment`` key or a ``Binding``.
     ///
     /// `onChange` is called on the main thread. Avoid performing long-running
     /// tasks on the main thread. If you need to perform a long-running task in
     /// response to `value` changing, you should dispatch to a background queue.
     ///
     /// The new value is passed into the closure. The previous value may be
-    /// captured by the closure to compare it to the new value. For example, in
-    /// the following code example, `PlayerView` passes both the old and new
-    /// values to the model.
+    /// captured by the closure to compare it to the new value.
     ///
-    ///     struct PlayerView : View {
-    ///         var episode: Episode
-    ///         @State private var playState: PlayState = .paused
+    ///     struct ContentView: View {
+    ///         @State private var name = ""
+    ///         @State private var greeting = "Hi there!"
     ///
     ///         var body: some View {
     ///             VStack {
-    ///                 Text(episode.title)
-    ///                 Text(episode.showTitle)
-    ///                 PlayButton(playState: $playState)
-    ///             }
-    ///             .onChange(of: playState) { [playState] newState in
-    ///                 model.playStateDidChange(from: playState, to: newState)
+    ///                 Text(greeting)
+    ///                 TextField("Enter your name:", text: $name)
+    ///                     .onChange(of: name) { newValue
+    ///                         greeting = "Hi \(newValue)!"
+    ///                     }
     ///             }
     ///         }
     ///     }
@@ -45528,6 +47419,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](listitemtint-orange.png)
+    ///
     /// - Parameter tint: The tint effect to use, or nil to not override the
     ///   inherited tint.
     @inlinable public func listItemTint(_ tint: ListItemTint?) -> some View { }
@@ -45548,11 +47441,13 @@ extension View {
     ///     var body: some View {
     ///         List {
     ///             Label("Airplane Mode", systemImage: "airplane.circle.fill")
-    ///                 .listItemTint(.orange)
+    ///                 .listItemTint(Color.orange)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](listitemtint-orange.png)
     ///
     /// - Parameter color: The color to use to tint the content, or nil to not
     ///   override the inherited tint.
@@ -45610,7 +47505,7 @@ extension View {
     /// Rotates this view's rendered output in three dimensions around the given
     /// axis of rotation.
     ///
-    /// Use `rotation3DEffect(_:axis:anchor:anchorZ:perspective:)` to rotate the
+    /// Use ``View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)`` to rotate the
     /// view in three dimensions around the given axis of rotation, and
     /// optionally, position the view at a custom display order and perspective.
     ///
@@ -45626,6 +47521,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.18.05.png)
     ///
     /// [[rotation-effect]]
     ///
@@ -45696,8 +47593,8 @@ extension View {
     ///         }
     ///     }
     ///
-    /// Here, the ``VStack`` in the `ContentView` named “stack” is composed of a
-    /// red frame with a custom `Circle` view ``View/overlay(_:alignment:)``
+    /// Here, the ``VStack`` in the `ContentView` named `"stack"` is composed of a
+    /// red frame with a custom ``Circle`` view ``View/overlay(_:alignment:)``
     /// at its center.
     ///
     /// The `circle` view has an attached ``DragGesture`` that targets the
@@ -45705,9 +47602,6 @@ extension View {
     /// registers events inside ``circle`` it stores them in the shared `location`
     /// state variable and the `VStack` displays the coordinates in a ``Text``
     /// view.
-    ///
-    /// ![A screenshot showing an example of finding a named view and tracking
-    /// relative locations in that view.](SwiftUI-View-coordinateSpace.png)
     ///
     /// - Parameter name: A name used to identify this coordinate space.
     @inlinable public func coordinateSpace<T>(name: T) -> some View where T : Hashable { }
@@ -45725,9 +47619,7 @@ extension View {
     /// when clicking on the spacer. However, setting the content shape allows
     /// everything in the container view to be clickable.
     ///
-    /// For example, to make an entire VStack container clickable:
-    ///
-    /// ![Content shape example 1](contentshape-example-1.gif)
+    /// For example, to make an entire `VStack` container clickable:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -45753,9 +47645,34 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Content shape example 1](contentshape-example-1.gif)
+    ///
     /// For further clarification on how this works, see this animation of the
-    /// same example from above _without_ any defined contentShape. Notice how
+    /// same example from above **without** any defined `contentShape`. Notice how
     /// the rectangle color does not toggle when clicking on the spacers.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///    @State private var toggleColor: Bool = false
+    ///
+    ///    var body: some View {
+    ///        VStack {
+    ///            Text("Top text").border(Color.black)
+    ///            Spacer().frame(height: 50)
+    ///
+    ///            Rectangle()
+    ///                .fill(toggleColor ? Color.red : Color.blue)
+    ///                .frame(width: 150, height: 150)
+    ///
+    ///            Spacer().frame(height: 50)
+    ///            Text("Bottom text").border(Color.black)
+    ///        }
+    ///        .onTapGesture {
+    ///            self.toggleColor.toggle()
+    ///        }
+    ///    }
+    /// }
+    /// ```
     ///
     /// ![Content shape example 2](contentshape-example-2.gif)
     ///
@@ -45799,7 +47716,7 @@ extension View {
     ///
     /// Use this modifier on leaf views rather than container views. The
     /// animation applies to all child views within this view; calling
-    /// `animation(_:)` on a container view can lead to unbounded scope.
+    /// ``View/animation(_:)`` on a container view can lead to unbounded scope.
     ///
     /// - Parameter animation: The animation to apply to animatable values
     ///   within this view.
@@ -46091,44 +48008,44 @@ extension View {
     ///
     /// For example, without a mask, the following view renders as a normal rectangle:
     ///
-    /// ![Rectangle Example](rounded-rectangle.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
+    ///         Rectangle()
     ///             .fill(LinearGradient(
     ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
     ///                     startPoint: .leading,
     ///                     endPoint: .trailing))
-    ///             .padding()
     ///     }
     /// }
     /// ```
     ///
+    /// ![](linear-gradient.png)
+    ///
     /// Now if we apply a mask on a text view, we get the following result:
     ///
-    /// ![Mask Example](mask-example-1.png)
-    ///
     /// ```
+    /// struct TextView: View {
+    ///     var body: some View {
+    ///         Text("Bananas are some of the best fruit")
+    ///             .font(.title)
+    ///             .fontWeight(.bold)
+    ///     }
+    /// }
+    ///
     /// struct ExampleView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
+    ///         Rectangle()
     ///             .fill(LinearGradient(
     ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
     ///                     startPoint: .leading,
     ///                     endPoint: .trailing))
     ///             .mask(TextView())
-    ///             .padding()
-    ///     }
-    /// }
-    ///
-    /// struct TextView: View {
-    ///     var body: some View {
-    ///         Text("Bananas are our favorite fruit.").font(.title).fontWeight(.bold)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Mask Example](mask-example-1.png)
     ///
     /// This page was inspired by work from @philipcdavis on Github.
     ///
@@ -46224,7 +48141,7 @@ extension View {
 
     /// Use this modifier to change a scene's default storage for the @AppStorage property wrapper.
     ///
-    /// Whenever the @AppStorage property wrapper is used, it defaults its location to
+    /// Whenever the `@AppStorage` property wrapper is used, it defaults its location to
     /// `UserDefaults.standard`. Override this default location for all of your
     /// scene's views by using this modifier.
     ///
@@ -46256,6 +48173,8 @@ extension View {
     ///             TextField("Enter your name", text: $name)
     ///         }
     ///     }
+    ///
+    /// ![](defaultappstorage.png)
     ///
     /// - Parameter store: The default user defaults storage site for `@AppStorage`.
     public func defaultAppStorage(_ store: UserDefaults) -> some View { }
@@ -46355,8 +48274,6 @@ extension View {
     ///
     /// ### Basic Usage
     ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     @State var text: String = "🍌🍌"
@@ -46378,10 +48295,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
     /// ### Using `NSItemProvider` with `onDrop`
     /// `NSItemProvider` is a class that holds data on the dragged contents.
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -46424,9 +48341,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ### Using `CGPoint` with `onDrop`
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
+    /// ### Using `CGPoint` with `onDrop`
     ///
     /// ```
     /// struct ContentView: View {
@@ -46472,8 +48389,9 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - isTargeted: A binding to communicate when a user is dragging over this region.
     ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
@@ -46485,9 +48403,8 @@ extension View {
     /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the ``DropDelegate`` protocol.
     ///
     /// #### Conform to DropDelegate
-    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to ``DropDelegate``.
+    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a structure that conforms to ``DropDelegate``.
     ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46518,10 +48435,11 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
     /// ### Fully Featured ``DropDelegate``
     /// Utalize ``DropDelegate``s optional functions to provide additional behavior.
     ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46606,6 +48524,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
     /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent fruits from being dropped if the background is yellow.
     ///
     /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change the color the first time a user drags over the drop zone.
@@ -46615,7 +48535,7 @@ extension View {
     /// Note: if the user deselects their dragged object while over the drop zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called. ``DropDelegate/dropExited(info:)-3d540`` is only called when the user explicitly drags their dragged object **out** of the drop zone.
     ///
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - delegate: An object that conforms to  ``DropDelegate``.
     public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
@@ -46633,8 +48553,6 @@ extension View {
     /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
     ///
     /// ### Basic Usage
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -46657,10 +48575,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
     /// ### Using `NSItemProvider` with `onDrop`
     /// `NSItemProvider` is a class that holds data on the dragged contents.
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -46703,7 +48621,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// - Paremeters:
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - isTargeted: A binding to communicate when a user is dragging over this region.
     ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
@@ -46836,7 +48756,7 @@ extension View {
     /// ```
     ///
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - isTargeted: A binding to communicate when a user is dragging over this region.
     ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
@@ -46850,9 +48770,7 @@ extension View {
     /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the ``DropDelegate`` protocol.
     ///
     /// #### Conform to DropDelegate
-    /// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to ``DropDelegate``.
-    ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a structure that conforms to ``DropDelegate``.
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46883,10 +48801,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+    ///
     /// ### Fully Featured ``DropDelegate``
     /// Utalize ``DropDelegate``s optional functions to provide additional behavior.
-    ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -46971,6 +48889,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+    ///
     /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent fruits from being dropped if the background is yellow.
     ///
     /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change the color the first time a user drags over the drop zone.
@@ -46980,7 +48900,7 @@ extension View {
     /// Note: if the user deselects their dragged object while over the drop zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called. ``DropDelegate/dropExited(info:)-3d540`` is only called when the user explicitly drags their dragged object **out** of the drop zone.
     ///
     ///
-    /// - Paremeters:
+    /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
     ///     - delegate: An object that conforms to  ``DropDelegate``.
     @available(tvOS, unavailable)
@@ -47001,16 +48921,20 @@ extension View {
     ///
     /// ```
     /// struct ContentView: View {
-    ///     // This transform represents a 30˚ rotation around the z axis.
-    ///     let transform = CATransform3DMakeRotation(-30 * (.pi / 180), 0.0, 0.0, 1.0)
     ///
     ///     var body: some View {
-    ///         Text("Projection effects using transforms")
-    ///             .projectionEffect(.init(transform))
+    ///         // This transform represents a 30˚ rotation around the z axis.
+    ///         let transform = CATransform3DMakeRotation(-30 * (.pi / 180), 0.0, 0.0, 1.0)
+    ///         let effect = ProjectionTransform(transform)
+    ///
+    ///         return Text("Projection effects using transforms 🙃")
+    ///             .projectionEffect(effect)
     ///             .border(Color.gray)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](projectiontransform.png)
     ///
     /// - Parameter transform: A ``ProjectionTransform`` to apply to the view.
     @inlinable public func projectionEffect(_ transform: ProjectionTransform) -> some View { }
@@ -47025,8 +48949,8 @@ extension View {
     /// Adding help to a view configures the view's accessibility hint and
     /// its tooltip ("help tag") on macOS.
     ///
-    /// For more information on using help tags, see [Help]
-    /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
+    /// For more information on using help tags, see
+    /// [Help](https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
     /// ```
@@ -47040,6 +48964,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](help-localized.png)
+    ///
     /// - Parameter textKey: The key for the localized text to use as help.
     public func help(_ textKey: LocalizedStringKey) -> some View { }
 
@@ -47049,8 +48975,8 @@ extension View {
     /// Adding help to a view configures the view's accessibility hint and
     /// its tooltip ("help tag") on macOS.
     ///
-    /// For more information on using help tags, see [Help]
-    /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
+    /// For more information on using help tags, see
+    /// [Help](https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
     /// ```
@@ -47058,11 +48984,13 @@ extension View {
     ///     @State var opacity = 0.0
     ///
     ///     var body: some View {
-    ///         Slider("Opacity", value: $opacity)
+    ///         Slider(value: $opacity)
     ///             .help(Text("Adjust the opacity"))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](help-text.png)
     ///
     /// - Parameter text: The Text view to use as help.
     public func help(_ text: Text) -> some View { }
@@ -47073,8 +49001,8 @@ extension View {
     /// Adding help to a view configures the view's accessibility hint and
     /// its tooltip ("help tag") on macOS.
     ///
-    /// For more information on using help tags, see [Help]
-    /// (https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
+    /// For more information on using help tags, see
+    /// [Help](https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/help/)
     /// in the macOS Human Interface Guidelines.
     ///
     /// ```
@@ -47083,11 +49011,13 @@ extension View {
     ///
     ///     var body: some View {
     ///         Image(systemName: "pin.circle")
-    ///             .foregroundColor(.orane)
+    ///             .foregroundColor(.orange)
     ///             .help(helpText)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](help-orange.png)
     ///
     /// - Parameter text: The text to use as help.
     public func help<S>(_ text: S) -> some View where S : StringProtocol { }
@@ -47111,6 +49041,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](statusbar-hidden.png)
     ///
     /// You can also show or hide the status bar with an animation by
     /// attaching the modifier to a ``State`` property and using
@@ -47144,7 +49076,7 @@ extension View {
 
     /// Supplies an `ObservableObject` to a view subhierachy.
     ///
-    /// ``environmentObject`` supplies an `ObservableObject` to a view subhierachy. See ``ObservableObject`` for more on passing data between views.
+    /// ``View/environmentObject(_:)`` supplies an ``ObservableObject`` to a view subhierachy. See ``ObservableObject`` for more on passing data between views.
     ///
     /// [[environment-objects]]
     ///
@@ -47247,14 +49179,14 @@ extension View {
     ///
     /// [[navigation-bar-items]]
     ///
-    /// Use `navigationBarItems(leading:trailing:)` to add navigation bar items
+    /// Use ``View/navigationBarItems(leading:trailing:)`` to add navigation bar items
     /// to the leading and trailing edges of the navigation bar for this view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
     ///
-    /// On iOS 14 and later, the leading item supplements a visible back button,
-    /// instead of replacing it, by default. To hide the back button, use
+    /// By default on iOS 14 and later, the leading item supplements a visible back button,
+    /// instead of replacing it. To hide the back button, use
     /// ``View/navigationBarBackButtonHidden(_:)``.
     ///
     /// The example below adds buttons to the leading and trailing edges of
@@ -47290,6 +49222,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Nav Bar Item LeadingTrailing Example 2](Navigationbaritems-leading-trailing-ex2.png)
+    ///
     /// - Parameters:
     ///   - leading: A view that appears on the leading edge of the title.
     ///   - trailing: A view that appears on the trailing edge of the title.
@@ -47304,14 +49238,14 @@ extension View {
     ///
     /// [[navigation-bar-items]]
     ///
-    /// Use `navigationBarItems(leading:)` to add navigation bar items to the
+    /// Use ``View/navigationBarItems(leading:)`` to add navigation bar items to the
     /// leading edge of the navigation bar for this view.
     ///
     /// This modifier only takes effect when this view is inside of and visible
     /// within a ``NavigationView``.
     ///
-    /// On iOS 14 and later, the leading item supplements a visible back button,
-    /// instead of replacing it, by default. To hide the back button, use
+    /// By default on iOS 14 and later, the leading item supplements a visible back button,
+    /// instead of replacing it. To hide the back button, use
     /// ``View/navigationBarBackButtonHidden(_:)``.
     ///
     /// The example below adds buttons to the leading edge of the button area
@@ -47341,6 +49275,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![Nav Bar Items Leading Example 2](navigationbaritems-leading-ex2.png)
+    ///
     /// - Parameter leading: A view that appears on the leading edge of the
     ///   title.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
@@ -47354,7 +49290,7 @@ extension View {
     ///
     /// [[navigation-bar-items]]
     ///
-    /// Use `navigationBarItems(trailing:)` to add navigation bar items to the
+    /// Use ``View/navigationBarItems(trailing:)`` to add navigation bar items to the
     /// trailing edge of the navigation bar for this view. This modifier only
     /// takes effect when this view is inside of and visible within a
     /// ``NavigationView``.
@@ -47385,6 +49321,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![Nav bar items trailing example 2](Navigationbaritems-trailing-ex2.png)
     ///
     /// - Parameter trailing: A view shown on the trailing edge of the title.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
@@ -47425,7 +49363,6 @@ extension View {
 /// a ``Group`` by passing it a [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
 /// stacking views:
 ///
-/// ![1F38B3B4-1BCC-426D-BEB1-D365A09E5C30](1F38B3B4-1BCC-426D-BEB1-D365A09E5C30.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47437,13 +49374,14 @@ extension View {
 /// }
 /// ```
 ///
+/// ![1F38B3B4-1BCC-426D-BEB1-D365A09E5C30](1F38B3B4-1BCC-426D-BEB1-D365A09E5C30.png)
+///
 /// ### Using a ``ViewBuilder`` as a function
 ///
 /// You can also use ``ViewBuilder`` as a function. Just tag your
 /// function with `@ViewBuilder`, and use it just like you would with a
 /// trailing closure:
 ///
-/// ![5464434F-469F-4385-BFBE-C9B38C911F56](5464434F-469F-4385-BFBE-C9B38C911F56.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47458,9 +49396,11 @@ extension View {
 /// }
 /// ```
 ///
+/// ![5464434F-469F-4385-BFBE-C9B38C911F56](5464434F-469F-4385-BFBE-C9B38C911F56.png)
+///
 /// ### Using a `ViewBuilder` in your own ``View``s
 ///
-/// Exactly like `Group`, you can also use ``ViewBuilder``s in your own custom
+/// Exactly like ``Group``, you can also use ``ViewBuilder``s in your own custom
 /// views. Just tag the parameter of your ``View``'s initializer with
 /// `@ViewBuilder`, and anyone using your view will be able to easily
 /// pass you views just by listing them.
@@ -47470,7 +49410,6 @@ extension View {
 /// are actually functions, so in order to get the content they contain,
 /// you have to call the function. Below, this is done with `content()`.
 ///
-/// ![79B81C88-83A4-47C2-B3E7-68BAFFB230E4](79B81C88-83A4-47C2-B3E7-68BAFFB230E4.png)
 /// ```
 /// struct ContentView: View {
 ///     var body: some View {
@@ -47480,6 +49419,7 @@ extension View {
 ///         }
 ///     }
 /// }
+///
 ///
 /// struct GreenGroup<Content>: View where Content: View {
 ///     var views: Content
@@ -47495,6 +49435,8 @@ extension View {
 ///     }
 /// }
 /// ```
+///
+/// ![79B81C88-83A4-47C2-B3E7-68BAFFB230E4](79B81C88-83A4-47C2-B3E7-68BAFFB230E4.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_functionBuilder public struct ViewBuilder {
@@ -48039,23 +49981,12 @@ extension ViewDimensions : Equatable {
 /// A modifier that you apply to a view or another view modifier, producing a
 /// new view.
 ///
-/// Adopt the ``ViewModifier`` protocol when you want to create a reusable
+/// Conform to the ``ViewModifier`` protocol when you want to create a reusable
 /// modifier that you can apply to any view. The example below combines several
 /// modifiers to create a new modifier that you can use to create blue caption
 /// text surrounded by a rounded rectangle:
 ///
-/// ![View modifier example 1](8786B2B4-A365-445D-96AB-DE5D5BD9F897.png)
-///
 /// ```
-/// struct ExampleView: View {
-///    var body: some View {
-///        VStack {
-///            Text("Text without blue border")
-///            Text("Text with blue border")
-///                .modifier(BorderedCaption())
-///        }
-///    }
-/// }
 ///
 /// struct BorderedCaption: ViewModifier {
 ///    func body(content: Content) -> some View {
@@ -48069,7 +50000,19 @@ extension ViewDimensions : Equatable {
 ///            .foregroundColor(Color.blue)
 ///    }
 /// }
+///
+/// struct ExampleView: View {
+///    var body: some View {
+///        VStack {
+///            Text("Text without blue border")
+///            Text("Text with blue border")
+///                .modifier(BorderedCaption())
+///        }
+///    }
+/// }
 /// ```
+///
+/// ![View modifier example 1](8786B2B4-A365-445D-96AB-DE5D5BD9F897.png)
 ///
 /// You can apply ``View/modifier(_:)`` directly to a view, but a more common and
 /// idiomatic approach uses ``View/modifier(_:)`` to define an extension to
@@ -48109,6 +50052,9 @@ extension ViewModifier {
 
     /// Gets the current body of the caller.
     ///
+    /// Implement this function to create your own custom
+    /// ``ViewModifier``.
+    ///
     /// The `content` parameter is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it. In simpler terms, `content` is the
     /// view that is being transformed. For example:
@@ -48123,10 +50069,32 @@ extension ViewModifier {
     ///                RoundedRectangle(cornerRadius: 15)
     ///                    .stroke(lineWidth: 1)
     ///            )
-    ///            .foregroundColor(Color.blue)
+    ///            .foregroundColor(.blue)
     ///    }
     /// }
     /// ```
+    ///
+    /// This modifier can then be applied to a ``View``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text without bordered caption")
+    ///
+    ///             Text("Text with bordered caption")
+    ///                 .modifier(BorderedCaption())
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](viewmodifier-body.png)
+    ///
+    /// - Parameter content: The view to be modified.
+    ///
+    /// - Returns: A modified view
+    ///
     func body(content: Self.Content) -> Self.Body { }
 
     /// The content view type passed to `body()`.
@@ -48138,6 +50106,9 @@ extension ViewModifier where Self.Body == Never {
 
     /// Gets the current body of the caller.
     ///
+    /// Implement this function to create your own custom
+    /// ``ViewModifier``.
+    ///
     /// The `content` parameter is a proxy for the view that will have the modifier
     /// represented by `Self` applied to it. In simpler terms, `content` is the
     /// view that is being transformed. For example:
@@ -48152,10 +50123,32 @@ extension ViewModifier where Self.Body == Never {
     ///                RoundedRectangle(cornerRadius: 15)
     ///                    .stroke(lineWidth: 1)
     ///            )
-    ///            .foregroundColor(Color.blue)
+    ///            .foregroundColor(.blue)
     ///    }
     /// }
     /// ```
+    ///
+    /// This modifier can then be applied to a ``View``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text without bordered caption")
+    ///
+    ///             Text("Text with bordered caption")
+    ///                 .modifier(BorderedCaption())
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](viewmodifier-body.png)
+    ///
+    /// - Parameter content: The view to be modified.
+    ///
+    /// - Returns: A modified view
+    ///
     public func body(content: Self.Content) -> Self.Body { }
 }
 
@@ -48169,10 +50162,8 @@ extension ViewModifier {
     /// The ``View/modifier(_:)`` only accepts a single modifier as a parameter, which
     /// is why concat is needed. For example:
     ///
-    /// ![View modifier concat example 1](view-modifier-concat-example-1.png)
-    ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///    var body: some View {
     ///        VStack {
     ///            Text("Text without blue border and padded shadow")
@@ -48203,6 +50194,9 @@ extension ViewModifier {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![View modifier concat example 1](view-modifier-concat-example-1.png)
+    ///
     @inlinable public func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
 }
 
@@ -48223,9 +50217,6 @@ extension ViewModifier {
 
 /// A date style that displays components as columns in a scrollable wheel.
 ///
-/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
-///
-///
 ///      struct ExampleView: View {
 ///          @State var date: Date = Date()
 ///          var body: some View {
@@ -48234,6 +50225,8 @@ extension ViewModifier {
 ///                  .padding()
 ///          }
 ///      }
+///
+/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
 ///
 ///
 @available(iOS 13.0, *)
@@ -48248,8 +50241,6 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 
 /// A picker style that presents the options in a scrollable wheel that shows
 /// the selected option and a few neighboring options.
-///
-/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -48270,24 +50261,28 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// }
 /// ```
 ///
+/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+///
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
 ///
 /// [pickerstyle-wheel ->]
 /// Your app can also use explicit tags to identify picker content.
 ///
-/// ![Wheel Example 1](/picker-style-7.gif)
-///
 /// ```
+/// enum MyFruit {
+///     case banana, apple, peach
+/// }
+///
 /// struct ExampleView: View {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
-///         switch favoriteFruit{
-///         case .apple:
-///             return "Apple 🍎🍎"
+///         switch favoriteFruit {
 ///         case .banana:
 ///             return "Banana 🍌🍌"
+///         case .apple:
+///             return "Apple 🍎🍎"
 ///         case .peach:
 ///             return "Peach 🍑🍑"
 ///         }
@@ -48303,10 +50298,13 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 ///                 .tag(MyFruit.apple)
 ///             Text("Peach 🍑🍑")
 ///                 .tag(MyFruit.peach)
-///         }.pickerStyle(WheelPickerStyle())
+///         }
+///         .pickerStyle(WheelPickerStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![Wheel Example 2](/picker-style-7.gif)
 ///
 /// [<-]
 ///
@@ -48556,7 +50554,7 @@ extension WidgetConfiguration {
 ///
 /// On macOS, a window's title is usually displayed in a window's title bar. A window's title bar contains a centered text item to display the window's title.
 ///
-/// Use `WindowGroup/init(_:content)` to title a window. For example:
+/// Use ``WindowGroup/init(_:content)-0733f`` to title a window. For example:
 ///
 /// ````
 /// @main
@@ -48573,7 +50571,7 @@ extension WidgetConfiguration {
 /// [window-commands ->]
 /// ### Adding commands to a window group
 ///
-/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a ``WindowGroup``, use `Scene/commands(_:)`.
+/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a ``WindowGroup``, use ``Scene/commands(content:)``.
 ///
 /// For example:
 ///
@@ -48819,14 +50817,12 @@ public struct WindowGroup<Content> : Scene where Content : View {
 
 /// Creates a view animation.
 ///
-/// This function sets the given `Animation` as the ``Transaction/animation``
+/// This function sets the given ``Animation`` as the ``Transaction/animation``
 /// property of the thread's current ``Transaction``.
 ///
 /// ``withAnimation(_:_:)`` executes the code in it's closure, and displays the results of that execution according to the provided animation.
 ///
 /// For example, use ``withAnimation(_:_:)`` to animate a toggle. Here, the action on the view is the `showBanana.toggle()`. Now, by using ``withAnimation(_:_:)`` the results of that action will be animated according to `.easeInOut`.
-///
-/// ![Toggle Animation](with-animation-2.gif)
 ///
 /// ```
 /// struct ExplicitTransitionView: View {
@@ -48844,9 +50840,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// }
 /// ```
 ///
-/// Or use `withAnimation(_:_)` for a shake effect, like so:
+/// ![Toggle Animation](with-animation-2.gif)
 ///
-/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+/// Or use ``withAnimation(_:_:)`` for a shake effect, like so:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -48884,9 +50880,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// }
 /// ```
 ///
-/// Alter the duration of your animation as follows:
+/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
-/// ![Animation Basic](with-animation-1.gif)
+/// Alter the duration of your animation as follows:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -48908,6 +50904,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
 ///     }
 /// }
 /// ```
+///
+/// ![Animation Basic](with-animation-1.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { }
 
