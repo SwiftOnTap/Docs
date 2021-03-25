@@ -1965,7 +1965,7 @@ extension Angle : Animatable {
 ///
 /// #### Using ``AnimatableModifier`` to implement a shake effect
 ///
-/// ``Animatable`` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
+/// ``Animatable`` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable`` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
 ///
 /// For example:
 ///
@@ -2212,7 +2212,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// Every animation has 3 parts:
 ///
 /// 1. The numerical value in memory that changes over time --- usually
-/// a `@``State property
+/// a `@State` property
 /// 2. How the ``View`` depends on this numerical value --- often using
 /// a view modifier
 /// 3. The timing curve describing how this change happens --- this is the
@@ -2220,7 +2220,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///
 /// For example, say I want the screen to be **green** sometimes, but **red**
 /// at other times. The current color of the screen would be stored as a
-/// `@``State property. Then, the screen might use the
+/// `@State` property. Then, the screen might use the
 /// ``View/foregroundColor(_:)`` modifier to actually make the screen this
 /// color. And finally, when I change the screen color, I can specify a
 /// *timing curve*, or ``Animation``, to describe how it will happen.
@@ -2264,9 +2264,9 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// 1. By applying it to a view using ``View/animation(_:)``,
 /// so any animatable properties of the view change with that
 /// timing curve.
-/// 2. Directly when changing a `@``State` property, using the
+/// 2. Directly when changing a `@State` property, using the
 /// ``withAnimation(_:_:)`` global function.
-/// 3. By attaching the timing curve directly to a `@``Binding` property,
+/// 3. By attaching the timing curve directly to a `@Binding` property,
 /// using ``Binding/animation(_:)``, so any changes to the binding happen
 /// with a certain animation.
 ///
@@ -5337,9 +5337,7 @@ extension BlendMode : Hashable {
 /// Pressing and then dragging into the contents triggers the chosen action on
 /// release.
 ///
-/// For example,
-///
-/// ![DefaultMenu Example 1](default-menu-example.gif)
+/// For example:
 ///
 /// ```
 /// struct BorderlessButtonMenuView: View {
@@ -5353,6 +5351,8 @@ extension BlendMode : Hashable {
 /// }
 /// ```
 ///
+/// ![DefaultMenu Example 1](default-menu-example.gif)
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -5363,9 +5363,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     /// By default, the borderless style displays a visual indicator that it
     /// represents a menu.
     ///
-    /// For example,
-    ///
-    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    /// For example:
     ///
     /// ```
     /// struct BorderlessButtonMenuView: View {
@@ -5378,6 +5376,9 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    ///
     public init() { }
 
     /// Creates a view that represents the body of a menu.
@@ -5593,7 +5594,7 @@ extension Button where Label == Text {
     /// ``Text`` for more information about localizing strings.
     ///
     /// To initialize a button with a string variable, use
-    /// ` Button/init(_:action:)-0ffce`   instead.
+    /// ``Button/init(_:action:)-0ffce`` instead.
     ///
     ///     struct EasySignInView: View {
     ///         let titleText = LocalizedStringKey("Sign In")
@@ -5741,7 +5742,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
 ///
-/// For more on how to customize your button style body, check out `ButtonStyle/makeBody(configuration:)`. To provide greater control over when and how a button triggers it's action use `PrimitiveButtonStyle`. While this property requires more work to setup, it provides more customization.
+/// For more on how to customize your button style body, check out ``ButtonStyle/makeBody(configuration:)``. To provide greater control over when and how a button triggers it's action use ``PrimitiveButtonStyle``. While this property requires more work to setup, it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle { }
 extension ButtonStyle {
@@ -16043,7 +16044,7 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     /// }
     /// ```
     ///
-    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.56.51.png)
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.56.51.png)
     ///
     /// [<-]
     /// Note:  It's important that the `id` of a data element doesn't change unless you
@@ -16081,7 +16082,7 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
-    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.59.20.png)
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.59.20.png)
     ///
     /// This initializer can also be used with objects that don't conform to `Identifiable`, but have identifiable properties. For example:
     ///
@@ -16108,7 +16109,7 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
-    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.00.04.png)
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 17.00.04.png)
     ///
     /// Notice, this initializer can be used for data that can change. For example:
     ///
@@ -16175,7 +16176,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// }
     /// ```
     ///
-    /// [](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.44.37.png)
+    /// ![](Simulator Screen Shot - iPhone 11 - 2021-03-23 at 16.44.37.png)
     ///
     /// Notice however, that this view is only rendered once. Therefore, if `myFruits.count` changes, the view will **not update**. For example, clicking `New Fruit` in the following code returns the error:
     ///
@@ -16205,7 +16206,7 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// }
     /// ```
     ///
-    /// [](foreach-ex2.gif)
+    /// ![](foreach-ex2.gif)
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
@@ -23844,7 +23845,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 /// }
 /// ```
 ///
-/// ![Menu Picker Style Example](/picker-style-3.gif)
+/// ![Menu Picker Style Example](picker-style-3.gif)
 ///
 /// [<-]
 ///
@@ -28371,7 +28372,7 @@ public struct PrimitiveButtonStyleConfiguration {
 /// ### Styling Progress Views
 ///
 /// Structures that conform to the ``ProgressViewStyle`` protocol can be used to modify the appearance of ``ProgressView``. The structure passed to the
-/// ` View/progressViewStyle(_:)`` modifier applies to all ``ProgressView`` instances in the children of that ``View``.
+/// ``View/progressViewStyle(_:)`` modifier applies to all ``ProgressView`` instances in the children of that ``View``.
 ///
 /// In this example, the same style is applied to two ``ProgressView`` instances that are children of a ``VStack``:
 ///
@@ -29748,7 +29749,7 @@ extension ReferenceFileDocument : ObservableObject {
     ///     struct ExampleApp: App {
     ///         var body: some Scene {
     ///             DocumentGroup(newDocument: { ExampleDocument() }) { file in
-    ///                 ContentView(document: file.$document)
+    ///                 ©ContentView(document: file.$document)
     ///             }
     ///         }
     ///     }
@@ -47451,7 +47452,7 @@ extension View {
 
     /// Supplies an `ObservableObject` to a view subhierachy.
     ///
-    /// ``environmentObject`` supplies an ``ObservableObject`` to a view subhierachy. See ``ObservableObject`` for more on passing data between views.
+    /// ``View/environmentObject(_:)`` supplies an ``ObservableObject`` to a view subhierachy. See ``ObservableObject`` for more on passing data between views.
     ///
     /// [[environment-objects]]
     ///
