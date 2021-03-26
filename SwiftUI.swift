@@ -3581,19 +3581,22 @@ extension AnyTransition {
 ///     struct MyApp: App {
 ///         var body: some Scene {
 ///             WindowGroup {
-///                 Text("Hello, world!")
+///                 Text("Hello, world! 🌍🙋")
+////                    .font(.title)
 ///             }
 ///         }
 ///     }
 ///
+/// ![](app.png)
+///
 /// Precede the structure's declaration with the
-/// [@main](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
+/// [`@main`](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
 /// attribute to indicate that your custom ``App`` protocol conformer provides the
 /// entry point into your app. The protocol provides a default implementation of
 /// the ``App/main()`` method that the system calls to launch your app.
 /// You can have exactly one entry point among all of your app's files.
 ///
-/// Compose the app's body from instances that conform to the ``Scene``
+/// Compose the app's ``App/body-swift.variable`` from instances that conform to the ``Scene``
 /// protocol. Each scene contains the root view of a view hierarchy and has a
 /// life cycle managed by the system. SwiftUI provides some concrete scene types
 /// to handle common scenarios, like for displaying documents or settings. You
@@ -3605,14 +3608,16 @@ extension AnyTransition {
 ///             WindowGroup {
 ///                 MailViewer()
 ///             }
-///             Settings {
-///                 SettingsView()
-///             }
 ///         }
 ///     }
 ///
+/// Then `MailViewer` would be the root view of the app:
+///
 ///     struct MailViewer: View {
-///         var body: some View { /* implement here */ }
+///         var body: some View {
+///             // Implement here
+///             Text("Turn me into a mail app! 📨")
+///         }
 ///     }
 ///
 /// You can declare state in your app to share across all of its scenes. For
@@ -3630,20 +3635,22 @@ extension AnyTransition {
 ///                 MailViewer()
 ///                     .environmentObject(model) //Passed through the environment.
 ///             }
+///             #if os(iOS)
 ///             Settings {
 ///                 SettingsView(model: model) //Passed as an observed object.
 ///             }
+///             #endif
 ///         }
 ///     }
 ///
 ///     struct MailViewer: View {
 ///         @EnvironmentObject var model: MailModel
-///         var body: some View { /* implement here */ }
+///         var body: some View { Text("Implement me! 📬") }
 ///     }
 ///
 ///     struct SettingsView: View {
 ///         @ObservedObject var mdoel: MailModel
-///         var body: some View { /* implement here */ }
+///         var body: some View { Text("Implement me! ⚙️") }
 ///     }
 ///
 ///     class MailModel: ObservableObject { /* implement here */ }
@@ -3700,8 +3707,8 @@ extension App {
     /// **Don't use this function directly.** See ``App`` for details
     /// and examples of how to use this protocol.
     ///
-    /// If you precede your `SwiftUI/App` conformer's declaration with the
-    /// [@main](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
+    /// If you precede your ``App`` conformer's declaration with the
+    /// [`@main`](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
     /// attribute, the system calls the conformer's `main()` method to launch
     /// the app. SwiftUI provides a
     /// default implementation of the method that manages the launch process in
@@ -8487,8 +8494,8 @@ public struct DatePickerComponents : OptionSet {
 /// - ``WheelDatePickerStyle`` on iOS
 /// - ``DefaultDatePickerStyle`` on iOS and macOS
 /// - ``GraphicalDatePickerStyle`` on iOS and macOS
-/// - ``FieldDatePickerStyle`` on macOS
-/// - ``StepperFieldDatePickerStyle`` on macOS
+/// - `FieldDatePickerStyle` on macOS
+/// - `StepperFieldDatePickerStyle` on macOS
 ///
 /// You can use the pre-defined styles like this:
 ///
@@ -26817,6 +26824,9 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](strokedpath.png)
+    ///
     public func strokedPath(_ style: StrokeStyle) -> Path { }
 
     /// Trims a path along a given 0 to 1 percentage range.
@@ -33764,7 +33774,7 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// as the actual text.
 ///
 /// ![A secure text field user interface element designed to pass data into a state object.](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
-/// 
+///
 /// ```
 /// struct PasswordView: View {
 ///     @State private var password = ""
@@ -36059,52 +36069,99 @@ extension Stepper where Label == Text {
 ///
 /// Use this structure to stroke (add a border to) a ``Shape`` in a customized way.
 ///
-/// - Note: You cannot use a ``StrokeStyle`` when applying a
+/// - Note: You cannot use a `StrokeStyle` when applying a
 /// ``View/border(_:width:)`` to a ``View``. Instead, use ``ShapeStyle``.
 ///
-/// ### Creating a ``StrokeStyle``
+/// ### Creating a `StrokeStyle`
 ///
-/// Create a ``StrokeStyle`` using its initilizer,
+/// Create a `StrokeStyle` using its initilizer,
 /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
 /// A simple example is below.
 ///
 /// ```
-/// struct StrokedCircle: View {
-///     var body: some View {
-///         Circle()
-///             .stroke(StrokeStyle())
-///     }
-/// }
+/// let style = StrokeStyle(lineWidth: 5, lineCap: .butt)
 /// ```
 ///
-/// ### Using a ``StrokeStyle``
+/// ### Using a `StrokeStyle`
 ///
 /// Use the ``Shape/stroke(_:style:)``
 /// or ``Shape/stroke(style:)`` methods to add a custom stroke
 /// to a ``Shape``.
 ///
+/// For example, here is a stroke style applied to a ``Capsule``:
+///
+/// ```
+/// struct StrokedCapsuleView: View {
+///     let style = StrokeStyle(lineWidth: 5,
+///                             lineCap: .round,
+///                             lineJoin: .miter,
+///                             miterLimit: 0,
+///                             dash: [5, 10],
+///                             dashPhase: 0)
+///     var body: some View {
+///         Capsule()
+///             .stroke(Color.purple, style: style)
+///     }
+/// }
+/// ```
+///
+/// ![](stroke-style.png)
+///
 /// In addition, two special kinds of ``Shape``s have their own methods
 /// for adding strokes with custom styles:
-///
-///
-///
-/// 1. ``InsettableShape``: An insettable shape allows you to inset the shape
+/// - ``InsettableShape``: An insettable shape allows you to inset the shape
 /// by half the stroke width, then apply the stroke, so that the final
 /// result remains inside the original frame. To achieve this effect,
 /// use one of these methods:
+///     - ``InsettableShape/strokeBorder(_:style:antialiased:)``
+///     - ``InsettableShape/strokeBorder(style:antialiased:)``
 ///
+/// ```
+/// struct CircleView: View {
+///     var body: some View {
+///         let style = StrokeStyle(lineWidth: 15,
+///                                 lineCap: .butt,
+///                                 lineJoin: .round,
+///                                 miterLimit: 1,
+///                                 dash: [],
+///                                 dashPhase: 0)
 ///
+///         return Circle()
+///             .strokeBorder(style: style)
+///             .border(Color.primary)
+///     }
+/// }
+/// ```
 ///
-///     1. ``InsettableShape/strokeBorder(_:style:antialiased:)``
-///     2. ``InsettableShape/strokeBorder(style:antialiased:)``
-///
-///
+/// ![](insettableshape-strokeborder.png)
 ///
 /// 2. ``Path``: A path is a special kind of customizable shape. Use path's
 /// special stroking method, ``Path/strokedPath(_:)``, to return another path,
 /// rather than a generic shape.
 ///
+/// ```
+/// struct PaperCutoutView: View {
+///     var body: some View {
+///         CutHereLines()
+///             .stroke()
+///     }
+/// }
 ///
+/// struct CutHereLines: Shape {
+///     func path(in rect: CGRect) -> Path {
+///         let style = StrokeStyle(lineWidth: 3.0,
+///                                 lineCap: .butt,
+///                                 lineJoin: .bevel,
+///                                 miterLimit: 3.0,
+///                                 dash: [9.0, 9.0, 0.0, 9.0, 9.0, 9.0],
+///                                 dashPhase: 0.0)
+///         return Path(rect)
+///             .strokedPath(style)
+///     }
+/// }
+/// ```
+///
+/// ![](strokedpath.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct StrokeStyle : Equatable {
@@ -36122,10 +36179,12 @@ extension Stepper where Label == Text {
     ///         style.lineWidth = 16
     ///
     ///         return Circle()
-    ///             .stroke(style)
+    ///             .stroke(style: style)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](strokestyle-linewidth.png)
     public var lineWidth: CGFloat
 
     /// The style for rendering the endpoint of the stroke line.
@@ -36134,103 +36193,467 @@ extension Stepper where Label == Text {
     /// can also be specified in the initilizer,
     /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
     ///
+    /// There are 3 types of line caps:
+    /// - `.square`
+    /// - `.round`
+    /// - `.butt`
+    ///
+    /// To illustrate, begin with this custom semicircle shape:
+    ///
+    /// ```
+    /// struct Semicircle: Shape {
+    ///     func path(in rect: CGRect) -> Path {
+    ///         let center = CGPoint(x: rect.midX, y: rect.midY)
+    ///         let radius = rect.width / 3
+    ///         let startAngle = Angle.zero
+    ///         let endAngle = Angle(degrees: 180)
+    ///         let clockwise = true
+    ///
+    ///         return Path { p in
+    ///             p.addArc(center: center,
+    ///                      radius: radius,
+    ///                      startAngle: startAngle,
+    ///                      endAngle: endAngle,
+    ///                      clockwise: clockwise)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Now apply `.square` line cap, and some `lineWidth` so we can see
+    /// the effect:
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineCap = .square
+    ///         style.lineWidth = 20
+    ///
+    ///         return Semicircle()
+    ///             .stroke(Color.pink, style: style)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](linecap-square.png)
+    ///
+    /// You can see the edges protrude slightly as squares.
+    /// If we change the `lineCap` to `.round`, we can see the corners
+    /// change look:
+    ///
+    /// ```
+    /// struct CircleView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineCap = .round
+    ///         style.lineWidth = 20
+    ///
+    ///         return Semicircle()
+    ///             .stroke(Color.purple, style: style)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](linecap-round.png)
+    ///
+    /// That's a bit softer. Finally, `.butt` is just standard, cut-off
+    /// line caps as you would expect:
+    ///
     /// ```
     /// struct CircleView: View {
     ///     var body: some View {
     ///         var style = StrokeStyle()
     ///         style.lineCap = .butt
+    ///         style.lineWidth = 20
     ///
-    ///         return Circle()
-    ///             .stroke(style)
+    ///         return Semicircle()
+    ///             .stroke(Color.orange, style: style)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](linecap-butt.png)
+    ///
     public var lineCap: CGLineCap
 
-    /// The style for rendering the joining point of stroked lines
+    /// The style for rendering the joining point of stroked lines.
+    ///
+    /// Line join is the property of a ``StrokeStyle`` describing what
+    /// happens at places where the ``Path`` makes sharp turns. There
+    /// are 3 types of `lineJoin`:
+    /// - `.bevel` - Chopped-off corners
+    /// - `.miter` - Sharp corners
+    /// - `.round` - Smooth corners
     ///
     /// This property can be written to or read directly, but it
     /// can also be specified in the initilizer,
     /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
     ///
-    /// ```
-    /// struct CircleView: View {
-    ///     var body: some View {
-    ///         var style = StrokeStyle()
-    ///         style.lineJoin = .bevel
+    /// To illustrate, begin with this custom arch shape:
     ///
-    ///         return Circle()
-    ///             .stroke(style)
+    /// ```
+    /// struct Arch: Shape {
+    ///     func path(in rect: CGRect) -> Path {
+    ///         let point1 = CGPoint(x: rect.minX, y: rect.midY)
+    ///         let point2 = CGPoint(x: rect.midX, y: rect.midY - rect.width / 2)
+    ///         let point3 = CGPoint(x: rect.maxX, y: rect.midY)
+    ///
+    ///         return Path { p in
+    ///             p.move(to: point1)
+    ///             p.addLine(to: point2)
+    ///             p.addLine(to: point3)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// Stroke it to see the shape:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Arch().stroke()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](linejoin.png)
+    ///
+    /// Now apply `.bevel` line cap, and some `lineWidth` so we can see
+    /// the effect:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineCap = .bevel
+    ///         style.lineWidth = 50
+    ///
+    ///         return Arch()
+    ///             .stroke(Color.pink, style: style)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](bevel.png)
+    ///
+    /// You can see the "chopped off" corners.
+    /// If we change the `lineJoin` to `.round`, we can see the corners
+    /// change look:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineCap = .round
+    ///         style.lineWidth = 50
+    ///
+    ///         return Arch()
+    ///             .stroke(Color.purple, style: style)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](linejoin-round.png)
+    ///
+    /// That's a bit softer. Finally, `.miter` is just standard, sharp
+    /// corners as you would expect:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle()
+    ///         style.lineCap = .miter
+    ///         style.lineWidth = 50
+    ///
+    ///         return Arch()
+    ///             .stroke(Color.orange, style: style)
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](linejoin-miter.png)
     public var lineJoin: CGLineJoin
 
     /// The limit on the ratio of the miter length to stroke width.
     ///
-    /// This property can be written to or read directly, but it
-    /// can also be specified in the initilizer,
-    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    /// According Apple's documentation, `miterLimit` is "the limit
+    /// on the ratio of the miter length to stroke width." If this is
+    /// still unclear, here is a deep dive.
+    ///
+    /// ### What is miter length?
+    ///
+    /// `miter` is a type of ``StrokeStyle/lineJoin`` which has
+    /// pointed corners at sharp turns. This is in contrast to `round`
+    /// ``StrokeStyle/lineJoin``, which has rounded corners, and
+    /// `bevel` ``StrokeStyle/lineJoin``, which has chopped-off corners.
+    ///
+    /// Take a shape like this:
     ///
     /// ```
-    /// struct CircleView: View {
-    ///     var body: some View {
-    ///         var style = StrokeStyle()
-    ///         style.miterLimit = 24.0
+    /// struct Arch: Shape {
+    ///     func path(in rect: CGRect) -> Path {
+    ///         let point1 = CGPoint(x: rect.minX, y: rect.midY)
+    ///         let point2 = CGPoint(x: rect.midX, y: rect.midY - rect.width / 2)
+    ///         let point3 = CGPoint(x: rect.maxX, y: rect.midY)
     ///
-    ///         return Circle()
-    ///             .stroke(style)
+    ///         return Path { p in
+    ///             p.move(to: point1)
+    ///             p.addLine(to: point2)
+    ///             p.addLine(to: point3)
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Arch().stroke()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](linejoin.png)
+    ///
+    /// Now, stroke it with `50` pt ``StrokeStyle/lineWidth``, and
+    /// compare `miter` ``StrokeStyle/lineJoin`` with `bevel`
+    /// ``StrokeStyle/lineJoin``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let style1 = StrokeStyle(lineWidth: 50, lineJoin: .miter)
+    ///     let style2 = StrokeStyle(lineWidth: 50, lineJoin: .bevel)
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Arch()
+    ///                 .stroke(Color.pink, style: style1) // Miter
+    ///             Arch()
+    ///                 .stroke(Color.purple, style: style2) // Bevel
+    ///         }
+    ///         .padding(50)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](miter-bevel.png)
+    ///
+    /// So what is the **miter length**? We can figure this out using math. In the
+    /// top image above, miter length is the distance from the inside of the
+    /// corner to the outside. Well, we know the line width (`50`), and we
+    /// know the angle of the line join is 90 degrees, so we can use
+    /// trigonometry.
+    ///
+    /// Looking at the following diagram, we can see that the **miter length**
+    /// of the corner on top
+    /// is the square root of 2, or about `1.4142135`, times the line width, `50`:
+    ///
+    /// ![](square-root-of-2.png)
+    ///
+    /// ### What is miter limit?
+    ///
+    /// Once we know the miter length, we can figure out what the maximum
+    /// possible miter limit. Recall, miter limit is the **maximum
+    /// ratio of the miter length to stroke width**.
+    ///
+    /// So if we pass in a miter limit greater than the square root of 2,
+    /// we should get normal miters. And if we we pass in a miter
+    /// limit less than the square root of 2, we should get "limited"
+    /// miters:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style1 = StrokeStyle(lineWidth: 50, lineJoin: .miter)
+    ///         var style2 = StrokeStyle(lineWidth: 50, lineJoin: .bevel)
+    ///
+    ///         style1.miterLimit = 1.4142136
+    ///         style2.miterLimit = 1.4142135
+    ///
+    ///         return VStack {
+    ///             Arch()
+    ///                 .stroke(Color.pink, style: style1) // ...6
+    ///             Arch()
+    ///                 .stroke(Color.orange, style: style2) // ...5
+    ///         }
+    ///         .padding(50)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](miter-limit.png)
+    ///
+    /// So if the actual miter in the shape exceeds the `miterLimit` that
+    /// you set, your ``ShapeStyle/lineJoin`` turns from `miter` to `bevel`!
+    /// That's what it means to have limited miters.
+    ///
     public var miterLimit: CGFloat
 
     /// The dash array for allowing the stroke to show discontinuities.
     ///
-    /// This property can be written to or read directly, but it
-    /// can also be specified in the initilizer,
-    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    /// The dash array specifies the length of **drawn** and **un-drawn** portions
+    /// of a stroked path.
+    ///
+    /// To follow along, use this straight, horizontal line ``Shape``:
     ///
     /// ```
-    /// struct CircleView: View {
-    ///     var body: some View {
-    ///         var style = StrokeStyle()
-    ///         style.dash = [25.0, 25.0, 0.0, 25.0]
+    /// struct Line: Shape {
+    ///     func path(in rect: CGRect) -> Path {
+    ///         let start = CGPoint(x: rect.minX, y: rect.midY)
+    ///         let end = CGPoint(x: rect.maxX, y: rect.midY)
     ///
-    ///         return Circle()
-    ///             .stroke(style)
+    ///         return Path { p in
+    ///             p.move(to: start)
+    ///             p.addLine(to: end)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// By default, the dash array is empty, meaning the line is solid:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         let style = StrokeStyle(lineWidth: 20)
+    ///
+    ///         return Line()
+    ///             .stroke(Color.pink, style: style)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](dash-1.png)
+    ///
+    /// If we specify a dash array of `[40]`, then there is only one element.
+    /// This means the first line gets drawn `40` pts long, then the pattern
+    /// repeats. A blank space `40` pts long gets drawn, then another `40` pt
+    /// line, and so on:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle(lineWidth: 20)
+    ///         style.dash = [40]
+    ///
+    ///         return Line()
+    ///             .stroke(Color.pink, style: style)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](dash-2.png)
+    ///
+    /// Next, we specify a dash array of `[60, 20]`. This begins by drawing
+    /// a `60` pt line, then a `20` pt space. Then the pattern repeats
+    /// with a `60` pt line, another `20` pt space, and so on:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle(lineWidth: 20)
+    ///         style.dash = [60, 20]
+    ///
+    ///         return Line()
+    ///             .stroke(Color.pink, style: style)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](dash-3.png)
+    ///
+    /// Finally, we specify a dash array of `[30, 10, 5]`. This begins by
+    /// drawing a `30` pt line, then a `10` pt space, then a `5` pt line.
+    /// Then the pattern repeats, so it draws a `30` pt space, then a
+    /// `10` pt line, then a `5` pt space. And so on. We get a funny
+    /// looking dash here, but the pattern makes sense if you follow it:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle(lineWidth: 20)
+    ///         style.dash = [30, 10, 5]
+    ///
+    ///         return Line()
+    ///             .stroke(Color.pink, style: style)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// [](dash-4.png)
+    ///
+    /// We could condinue this patter indefinitely.
+    ///
     public var dash: [CGFloat]
 
     /// The dash phase for moving the dashes forward or backward along the stroke.
     ///
-    /// This property can be written to or read directly, but it
-    /// can also be specified in the initilizer,
-    /// ``StrokeStyle/init(lineWidth:lineCap:lineJoin:miterLimit:dash:dashPhase:)``.
+    /// This property offsets the phase of the dash pattern by a
+    /// specified number of pts. (See ``StrokeStyle/dash`` if you aren't
+    /// familiary with how to create a dashed ``Path``.
+    ///
+    /// Take this `Line` ``Shape``:
     ///
     /// ```
-    /// struct CircleView: View {
-    ///     var body: some View {
-    ///         var style = StrokeStyle()
-    ///         style.dashPhase = 3.0
+    /// struct Line: Shape {
+    ///     func path(in rect: CGRect) -> Path {
+    ///         let start = CGPoint(x: rect.minX, y: rect.midY)
+    ///         let end = CGPoint(x: rect.maxX, y: rect.midY)
     ///
-    ///         return Circle()
-    ///             .stroke(style)
+    ///         return Path { p in
+    ///             p.move(to: start)
+    ///             p.addLine(to: end)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// Now applying a `dashPhase` will move the first dash up by 15 points.
+    /// Compare the two stroked lines below:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         var style = StrokeStyle(lineWidth: 10, dash: [80, 5])
+    ///         var style2 = StrokeStyle(lineWidth: 10, dash: [80, 5])
+    ///
+    ///         style1.dashPhase = 15 // Move the first line up 15 pts
+    ///         style2.dashPhase = 0
+    ///
+    ///         return VStack {
+    ///             Line()
+    ///                 .stroke(Color.pink, style: style1)
+    ///             Line()
+    ///                 .stroke(Color.pink, style: style2)
+    ///         }
+    ///         .frame(height: 30)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](dashphase.png)
+    ///
     public var dashPhase: CGFloat
 
    	/// Creates a custom stroke style.
+    ///
+    /// A stoke style has 6 components:
+    /// - ``StrokeStyle/lineWidth``
+    /// - ``StrokeStyle/lineCap``
+    /// - ``StrokeStyle/lineJoin``
+    /// - ``StrokeStyle/miterLimit``
+    /// - ``StrokeStyle/dash``
+    /// - ``StrokeStyle/dashPhase``
    	///
+    /// Visit one of those pages to learn more about an individual property,
+    /// or play with the values in the example below.
     /// See ``StrokeStyle`` for info on how to use a stroke style once it
     /// is created.
     ///
-    /// Play with the parameters in the example below to see how to customize
-    /// your own shape style.
-    ///
+    /// ```
     /// struct WeirdStrokedCircleView: View {
     ///     let style = StrokeStyle(lineWidth: 15.0,
     ///                             lineCap: .butt,
@@ -36239,10 +36662,13 @@ extension Stepper where Label == Text {
     ///                             dash: [25.0, 25.0, 0.0, 25.0],
     ///                             dashPhase: 3.0)
     ///     var body: some View {
-    ///         Cirlce()
+    ///         Circle()
     ///             .stroke(style: style)
     ///     }
     /// }
+    /// ```
+    ///
+    /// ![](weird-circle.png)
     ///
    	/// - Parameters:
    	///   - lineWidth: The stroke line width.
@@ -36277,14 +36703,13 @@ extension StrokeStyle : Animatable {
 /// A view that subscribes to a publisher with an action.
 ///
 /// This view produces basically the same thing as another
-/// view with the ``View/onReceive(_:)`` modifier applied to it.
-/// Whenver possible, use ``View/onReceive(_:)``, as it results
+/// view with the ``View/onReceive(_:perform:)`` modifier applied to it.
+/// Whenver possible, use ``View/onReceive(_:perform:)``, as it results
 /// in cleaner code.
 ///
-/// The following example shows ``SubscriptionView`` used to exactly reproduct
-/// a view with ``View/onReceive(_:)``.
+/// The following example shows `SubscriptionView` used to exactly reproduct
+/// a view with ``View/onReceive(_:perform:)``.
 ///
-/// ![3DA56538-402A-40C8-ABC7-96D202774582](3DA56538-402A-40C8-ABC7-96D202774582.png)
 /// ```
 /// struct TimerView: View {
 ///     @State private var time1 = ""
@@ -36320,7 +36745,7 @@ extension StrokeStyle : Animatable {
     ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     ///
     ///     var body: some View {
-    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///         SubscriptionView(content: Text(time), publisher: timer) { t in
     ///             time = String(describing: t)
     ///         }
     ///     }
@@ -36336,21 +36761,22 @@ extension StrokeStyle : Animatable {
     /// ``SubscriptionView/content`` view can get updated when this publisher
     /// sends a change.
     ///
-    /// See [Publisher](https://developer.apple.com/documentation/combine/publisher)
+    /// See [`Publisher`](https://developer.apple.com/documentation/combine/publisher)
     /// for the Apple docs on what a publisher is and how to use it. Note
     /// that for a ``SubscriptionView``, the publisher's
-    /// [Failure](https://developer.apple.com/documentation/combine/publisher/failure)
+    /// [`Failure`](https://developer.apple.com/documentation/combine/publisher/failure)
     /// type must be
-    /// [Never](https://developer.apple.com/documentation/swift/never),
+    /// [`Never`](https://developer.apple.com/documentation/swift/never),
     /// meaning the publisher can never fail.
     ///
     /// If you're really interested in asynchronous event processing,
     /// check out Apple's documentation on their
     /// [Combine](https://developer.apple.com/documentation/combine)
-    /// framework.
+    /// framework (or drop us a [line](mailto:ben@swiftontap.com) if
+    /// you want to see it documented here 🙂).
     ///
     /// In the example below, the publisher is a
-    /// [Timer](https://developer.apple.com/documentation/foundation/timer).
+    /// [`Timer`](https://developer.apple.com/documentation/foundation/timer).
     ///
     /// ```
     /// struct TimerView: View {
@@ -36358,7 +36784,7 @@ extension StrokeStyle : Animatable {
     ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     ///
     ///     var body: some View {
-    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///         SubscriptionView(content: Text(time), publisher: timer) { t in
     ///             time = String(describing: t)
     ///         }
     ///     }
@@ -36382,7 +36808,7 @@ extension StrokeStyle : Animatable {
     ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     ///
     ///     var body: some View {
-    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///         SubscriptionView(content: Text(time), publisher: timer) { t in
     ///             time = String(describing: t)
     ///         }
     ///     }
@@ -36398,7 +36824,7 @@ extension StrokeStyle : Animatable {
     ///     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     ///
     ///     var body: some View {
-    ///         SubscriptionView(content: Text(time1), publisher: timer) { t in
+    ///         SubscriptionView(content: Text(time), publisher: timer) { t in
     ///             time = String(describing: t)
     ///         }
     ///     }
@@ -36420,8 +36846,6 @@ extension StrokeStyle : Animatable {
 
 /// A toggle style that displays a leading label and a trailing switch.
 ///
-/// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
-///
 /// ```
 /// struct ContentView: View {
 ///     @State private var status = true
@@ -36435,14 +36859,14 @@ extension StrokeStyle : Animatable {
 /// }
 /// ```
 ///
-/// > To apply this style to a toggle, or to a view that contains toggles, use the ``View/toggleStyle(_:)`` modifier.
+/// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+///
+/// To apply this style to a toggle, or to a view that contains toggles, use the ``View/toggleStyle(_:)`` modifier.
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
 public struct SwitchToggleStyle : ToggleStyle {
 
     /// Creates a switch toggle style.
-    ///
-    /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -36456,6 +36880,8 @@ public struct SwitchToggleStyle : ToggleStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
     public init() { }
 
     /// Creates a switch style with a tint color.
@@ -36851,7 +37277,7 @@ public struct TapGesture : Gesture {
 
 /// A view that displays read-only text.
 ///
-/// ``Text`` draws a `String` in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
+/// `Text` draws a `String` in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -36863,7 +37289,7 @@ public struct TapGesture : Gesture {
 ///
 /// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
 ///
-/// ``Text`` is most commonly initialized with a `String`, however, it has 9 different initializers.
+/// `Text` is most commonly initialized with a `String`, however, it has 9 different initializers.
 ///
 /// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
@@ -36877,7 +37303,7 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
-/// ``Text`` also accepts 12 unique modifiers to customize your string.
+/// `Text` also accepts 12 unique modifiers to customize your string.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -36891,7 +37317,9 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
-/// ``Text`` conforms to the ``View`` protocol. Therefore, any modifiers that return `some View`, such as ``View/foregroundColor(_:)``, are compatible with ``Text``.
+/// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that
+/// return `some View`, such as ``View/foregroundColor(_:)``, are compatible with
+/// `Text`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -36905,9 +37333,13 @@ public struct TapGesture : Gesture {
 ///
 ///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
 ///
-/// **Remember**, any modifier that returns `some View` must be used after modifiers that return `Text`.
+/// **Remember**, any modifier that returns `some View` must be used after
+/// modifiers that return `Text`.
 ///
-/// If your app is localized, you can display localized text by passing the key to the initializer. For example, if you used the localization key of "banana" and mapped it to 🍌🍌 for your current location, the localized string could be displayed with this line:
+/// If your app is localized, you can display localized text by passing the key
+/// to the initializer. For example, if you used the localization key of
+/// `"banana"` and mapped it to `"🍌🍌"` for your current location, the
+/// localized string could be displayed with this line:
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -36915,12 +37347,21 @@ public struct TapGesture : Gesture {
 ///         }
 ///     }
 ///
-/// See `Text/init(_:tableName:bundle:comment:)` for more information on how to initialize ``Text`` with localized strings. This initializer can be used to display localized keys coming from a non-standard bundle or string table.
+/// See `Text/init(_:tableName:bundle:comment:)`` for more information on how
+/// to initialize `Text` with localized strings. This initializer can
+/// be used to display localized keys coming from a non-standard bundle or
+/// string table.
 ///
-/// Images can be displayed in a text view. This enables your app to optionally include them inside a text string, where they will resize based on your view's font. See `Text/init(_:)-9a226` for more on initializing ``Text`` with images.
+/// Images can be displayed in a text view. This enables your app to
+/// optionally include them inside a text string, where they will resize
+/// based on your view's font. See `Text/init(_:)-b90ab` for more on
+/// initializing `Text` with images.
 ///
-/// Use the `View` modifiers `View/lineLimit(_:)`, ``View/allowsTightening(_:)``,
-/// `View/minimumScaleFactor(_:)`, and `View/truncationMode(_:)` to configure how ``Text`` handles space constraints.
+/// Use the ``View`` modifiers ``View/lineLimit(_:)``,
+/// ``View/allowsTightening(_:)``,
+/// ``View/minimumScaleFactor(_:)``,
+/// and ``View/truncationMode(_:)`` to configure how ``Text`` handles
+/// space constraints.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Text : Equatable {
 
@@ -36937,9 +37378,11 @@ public struct TapGesture : Gesture {
     /// }
     /// ```
     ///
+    /// ![](text-init-verbatim.png)
+    ///
     /// If you want to localize a string literal before displaying it, use the
     /// ``Text/init(_:tableName:bundle:comment:)`` initializer instead. If you
-    /// want to display a string variable, use the `Text/init(_:)-9d1g4`
+    /// want to display a string variable, use the `Text/init(_:)-40ffd`
     /// initializer, which also bypasses localization.
     ///
     /// - Parameter content: A string to display without localization.
@@ -36958,6 +37401,8 @@ public struct TapGesture : Gesture {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-verbatim.png)
     ///
     /// SwiftUI doesn't call the `init(_:)` method when you initialize a text
     /// view with a string literal as the input. Instead, a string literal
@@ -37015,24 +37460,28 @@ extension Text {
     /// Use this initializer to create a text view that will format `subject`
     /// using `formatter`.
     ///
-    /// - Note: The first parameter to this initializer must either of type
-    /// [NSObject](https://developer.apple.com/documentation/objectivec/nsobject),
-    /// like [NSNumber](https://developer.apple.com/documentation/foundation/nsnumber),
-    /// or [ReferenceConvertible](https://developer.apple.com/documentation/foundation/referenceconvertible),
-    /// like [Date](https://developer.apple.com/documentation/foundation/date).
-    /// The type will depend on the formatter.
+    /// The first parameter to this initializer must either of type
+    /// [**`NSObject`**](https://developer.apple.com/documentation/objectivec/nsobject),
+    /// like [`NSNumber`](https://developer.apple.com/documentation/foundation/nsnumber),
+    /// or [**`ReferenceConvertible`**](https://developer.apple.com/documentation/foundation/referenceconvertible),
+    /// like [`Date`](https://developer.apple.com/documentation/foundation/date).
+    /// The type will depend on the `formatter`.
     ///
-    /// See [Formatter](https://developer.apple.com/documentation/foundation/formatter)
+    /// See [`Formatter`](https://developer.apple.com/documentation/foundation/formatter)
     /// for more info on creating a formatter.
     ///
     /// ```
     /// struct ByteCountView: View {
+    ///     let number = NSNumber(value: 19728)
+    ///     let formatter = ByteCountFormatter()
+    ///
     ///     var body: some View {
-    ///         Text(NSNumber(value: 19728),
-    ///              formatter: ByteCountFormatter()) //"20 KB"
+    ///         Text(number, formatter: formatter)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-nsobject.png)
     ///
     /// - Paramters:
     ///   - subject: The item to be formatted and then displayed by the ``Text`` view.
@@ -37044,24 +37493,28 @@ extension Text {
     /// Use this initializer to create a text view that will format `subject`
     /// using `formatter`.
     ///
-    /// - Note: The first parameter to this initializer must either of type
-    /// [NSObject](https://developer.apple.com/documentation/objectivec/nsobject),
-    /// like [NSNumber](https://developer.apple.com/documentation/foundation/nsnumber),
-    /// or [ReferenceConvertible](https://developer.apple.com/documentation/foundation/referenceconvertible),
-    /// like [Date](https://developer.apple.com/documentation/foundation/date).
-    /// The type will depend on the formatter.
+    /// The first parameter to this initializer must either of type
+    /// [**`NSObject`**](https://developer.apple.com/documentation/objectivec/nsobject),
+    /// like [`NSNumber`](https://developer.apple.com/documentation/foundation/nsnumber),
+    /// or [**`ReferenceConvertible`**](https://developer.apple.com/documentation/foundation/referenceconvertible),
+    /// like [`Date`](https://developer.apple.com/documentation/foundation/date).
+    /// The type will depend on the `formatter`.
     ///
-    /// See [Formatter](https://developer.apple.com/documentation/foundation/formatter)
+    /// See [`Formatter`](https://developer.apple.com/documentation/foundation/formatter)
     /// for more info on creating a formatter.
     ///
     /// ```
     /// struct ByteCountView: View {
+    ///     let number = NSNumber(value: 19728)
+    ///     let formatter = ByteCountFormatter()
+    ///
     ///     var body: some View {
-    ///         Text(NSNumber(value: 19728),
-    ///              formatter: ByteCountFormatter()) //"20 KB"
+    ///         Text(number, formatter: formatter)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-nsobject.png)
     ///
     /// - Paramters:
     ///   - subject: The item to be formatted and then displayed by the ``Text`` view.
@@ -37075,7 +37528,8 @@ extension Text {
     /// A predefined style used to display a Date.
     ///
     /// Use this structure along with the ``Text/init(_:style:)``
-    /// initializer to easily style a ``Date``.
+    /// initializer to easily style a
+    /// [`Date`](https://developer.apple.com/documentation/foundation/date).
     ///
     /// Options include:
     /// - ``Text/DateStyle/time``: The time component only.
@@ -37092,11 +37546,13 @@ extension Text {
     ///     let time = Date() //Sets time from when the view appears
     ///
     ///     var body: some View {
-    ///         Text(time, style: .time) //"5:08 PM"
-    ///         Text(time, style: .date) //"February 10, 2021"
-    ///         Text(time, style: .relative) //"2 hr, 3 min"
-    ///         Text(time, style: .offset) //"+2 hours"
-    ///         Text(time, style: .timer) //"2:04:19"
+    ///         VStack(alignment: .leading) {
+    ///             Text("1. ") + Text(time, style: .time)
+    ///             Text("2. ") + Text(time, style: .date)
+    ///             Text("3. ") + Text(time, style: .relative)
+    ///             Text("4. ") + Text(time, style: .offset)
+    ///             Text("6. ") + Text(time, style: .timer)
+    ///         }
     ///     }
     /// }
     /// ```
@@ -37105,46 +37561,53 @@ extension Text {
         /// A style displaying only the time component for a date.
         ///
         /// Use this structure along with the ``Text/init(_:style:)``
-        /// initializer to easily style a ``Date``.
+        /// initializer to easily style a
+        /// [`Date`](https://developer.apple.com/documentation/foundation/date).
         ///
         /// ```
         /// struct TimeView: View {
         ///     let time = Date() //Sets time from when the view appears
         ///
         ///     var body: some View {
-        ///         Text(time, style: .time) //"5:08 PM"
+        ///         Text(time, style: .time)
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](datestyle-time.png)
         public static let time: Text.DateStyle
 
         /// A style displaying a date.
         ///
         /// Use this structure along with the ``Text/init(_:style:)``
-        /// initializer to easily style a ``Date``.
+        /// initializer to easily style a
+        /// [`Date`](https://developer.apple.com/documentation/foundation/date).
         ///
         /// ```
         /// struct DateView: View {
         ///     let time = Date() //Sets time from when the view appears
         ///
         ///     var body: some View {
-        ///         Text(time, style: .date) //"February 10, 2021"
+        ///         Text(time, style: .date)
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](datestyle-date.png)
         public static let date: Text.DateStyle
 
         /// A style displaying a date as relative to now.
         ///
         /// Use this structure along with the ``Text/init(_:style:)``
-        /// initializer to easily style a ``Date``.
+        /// initializer to easily style a
+        /// [`Date`](https://developer.apple.com/documentation/foundation/date).
         ///
         /// ```
         /// struct RelativeView: View {
         ///     let time = Date() //Sets time from when the view appears
         ///
         ///     var body: some View {
-        ///         Text(time, style: .relative) //"2 hr, 3 min"
+        ///         Text(time, style: .relative)
         ///     }
         /// }
         /// ```
@@ -37153,14 +37616,15 @@ extension Text {
         /// A style displaying a date as offset from now.
         ///
         /// Use this structure along with the ``Text/init(_:style:)``
-        /// initializer to easily style a ``Date``.
+        /// initializer to easily style a
+        /// [`Date`](https://developer.apple.com/documentation/foundation/date).
         ///
         /// ```
         /// struct OffsetView: View {
         ///     let time = Date() //Sets time from when the view appears
         ///
         ///     var body: some View {
-        ///         Text(time, style: .offset) //"+2 hours"
+        ///         Text(time, style: .offset)
         ///     }
         /// }
         /// ```
@@ -37169,14 +37633,15 @@ extension Text {
         /// A style displaying a date as timer counting from now.
         ///
         /// Use this structure along with the ``Text/init(_:style:)``
-        /// initializer to easily style a ``Date``.
+        /// initializer to easily style a
+        /// [`Date`](https://developer.apple.com/documentation/foundation/date).
         ///
         /// ```
         /// struct TimerView: View {
         ///     let time = Date() //Sets time from when the view appears
         ///
         ///     var body: some View {
-        ///         Text(time, style: .timer) //"2:04:19"
+        ///         Text(time, style: .timer)
         ///     }
         /// }
         /// ```
@@ -37188,19 +37653,21 @@ extension Text {
     /// Use this initializer along with ``Text/DateStyle`` to style the
     /// date. See ``Text/DateStyle`` for the options of te style parameter.
     ///
-    /// See ``Date`` for more on how to make and use a date.
+    /// See
+    /// [`Date`](https://developer.apple.com/documentation/foundation/date)
+    /// for more on how to make and use a date.
     ///
     /// ```
     /// struct TimerView: View {
     ///     let time = Date() //Sets time from when the view appears
     ///
     ///     var body: some View {
-    ///         Text(time, style: .timer) //"2:04:19"
+    ///         Text(time, style: .timer)
     ///     }
     /// }
     /// ```
     ///
-    /// !©[Init style example](text-init-style-ex.gif)
+    /// ![Init style example](text-init-style-ex.gif)
     ///
     /// - Parameters:
     ///     - date: The target date to display.
@@ -37212,17 +37679,21 @@ extension Text {
     /// Use this initializer to automatically format a range of dates
     /// based on the user's locale.
     ///
-    /// See ``Date`` for more on how to create and manage a date.
+    /// See
+    /// [`Date`](https://developer.apple.com/documentation/foundation/date)
+    /// for more on how to create and manage a date.
     ///
     /// ```
     /// struct TimerView: View {
     ///     let time = Date() //Sets time from when the view appears
     ///
     ///     var body: some View {
-    ///         Text(time...time.addingTimeInterval(600)) //"10:30 AM-10:40 AM"
+    ///         Text(time...time.addingTimeInterval(600))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-closedrange.png)
     ///
     /// - Parameters:
     ///     - dates: The range of dates to display
@@ -37233,13 +37704,16 @@ extension Text {
     /// ```
     /// struct TimerView: View {
     ///     let time = Date() //Sets time from when the view appears
+    ///     let end = time.addingTimeInterval(600)
+    ///     let interval = DateInterval(start: time, end: end)
     ///
     ///     var body: some View {
-    ///         Text(DateInterval(start: time,
-    ///                           end: time.addingTimeInterval(600))) //"10:30 AM-10:40 AM"
+    ///         Text(interval)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-dateinterval.png)
     ///
     /// - Parameters:
     ///     - interval: The date interval to display
@@ -37306,8 +37780,6 @@ extension Text {
 extension Text {
     /// Concatenates two text views into one new text view.
     ///
-    /// ![plus Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-plus-example-1.png)
-    ///
     /// ```
     ///struct ExampleView: View {
     ///     var body: some View {
@@ -37318,6 +37790,8 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![plus Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-plus-example-1.png)
     ///
     /// - Parameters:
     ///   - lhs: The first text view with text to combine.
@@ -37345,10 +37819,12 @@ extension Text {
     ///     var body: some View {
     ///         Text("abcdefghijklmnopqrstuvwxyz")
     ///             .frame(width: 55, height: 20)
-    ///             .truncationMode(.middle) //"ab...yz"
+    ///             .truncationMode(.middle)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-truncationmode.png)
     public enum TruncationMode {
 
         /// Truncate at the beginning of the line.
@@ -37365,10 +37841,12 @@ extension Text {
         ///     var body: some View {
         ///         Text("abcdefghijklmnopqrstuvwxyz")
         ///             .frame(width: 55, height: 20)
-        ///             .truncationMode(.head) //"...wxyz"
+        ///             .truncationMode(.head)
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](text-truncationmode.png)
         case head
 
         /// Truncate at the end of the line.
@@ -37382,10 +37860,12 @@ extension Text {
         ///     var body: some View {
         ///         Text("abcdefghijklmnopqrstuvwxyz")
         ///             .frame(width: 55, height: 20)
-        ///             .truncationMode(.tail) //"abcd..."
+        ///             .truncationMode(.tail)
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](truncationmode-tail.png)
         case tail
 
         /// Truncate in the middle of the line.
@@ -37403,6 +37883,8 @@ extension Text {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](truncationmode-middle.png)
         case middle
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -37449,10 +37931,13 @@ extension Text {
     /// struct FriendlyTextView: View {
     ///     var body: some View {
     ///         Text("Hello")
-    ///             .textCase(Case.uppercase) //"HELLO"
+    ///             .textCase(Text.Case.uppercase)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-case.png)
+    ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public enum Case {
 
@@ -37467,12 +37952,15 @@ extension Text {
         /// struct FriendlyTextView: View {
         ///     var body: some View {
         ///         Text("Hello")
-        ///             .textCase(.uppercase) //"HELLO"
+        ///             .textCase(.uppercase)
         ///     }
         /// }
         /// ```
         ///
-        /// - SeeAlso: `StringProtocol.uppercased(with:)`
+        /// ![](text-case.png)
+        ///
+        /// See the similar modifier for `String`:
+        /// [`uppercased()`](https://developer.apple.com/documentation/swift/stringprotocol/2908613-uppercased).
         case uppercase
 
         /// Displays text in all lowercase characters.
@@ -37491,7 +37979,10 @@ extension Text {
         /// }
         /// ```
         ///
-        /// - SeeAlso: `StringProtocol.lowercased(with:)`
+        /// ![](text-case-lowercase.png)
+        ///
+        /// See the similar modifier for `String`:
+        /// [`lowercased()`](https://developer.apple.com/documentation/swift/stringprotocol/2906197-lowercased).
         case lowercase
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -37846,6 +38337,8 @@ extension Text {
     /// }
     /// ```
     ///
+    /// ![](kearning.png)
+    ///
     /// The last character in the first case, which uses negative kerning,
     /// experiences cropping because the kerning affects the trailing edge of
     /// the text view as well.
@@ -37859,7 +38352,7 @@ extension Text {
     /// however, kerning does disable nonessential ligatures.
     ///
     /// - Important: If you add both the ``Text/tracking(_:)`` and
-    ///   ``Text/kerning(_:)`` modifiers to a view, the view applies the
+    ///   `kerning(_:)` modifiers to a view, the view applies the
     ///   tracking and ignores the kerning.
     ///
     /// - Parameter kerning: The spacing to use between individual characters in
@@ -37888,6 +38381,8 @@ extension Text {
     /// }
     /// ```
     ///
+    /// ![](tracking.png)
+    ///
     /// The code above uses an unusually large amount of tracking to make it
     /// easy to see the effect.
     ///
@@ -37896,7 +38391,7 @@ extension Text {
     /// character offsets. Also, using any nonzero amount of tracking disables
     /// nonessential ligatures, whereas kerning attempts to maintain ligatures.
     ///
-    /// - Important: If you add both the ``Text/tracking(_:)`` and
+    /// - Important: If you add both the `tracking(_:)` and
     ///   ``Text/kerning(_:)`` modifiers to a view, the view applies the
     ///   tracking and ignores the kerning.
     ///
@@ -37929,6 +38424,8 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](baselineoffset.png)
     ///
     /// By drawing a border around each text view, you can see how the text
     /// moves, and how that affects the view.
@@ -38149,7 +38646,7 @@ public struct TextEditingCommands : Commands {
 ///
 /// ### Creating a text editor
 ///
-/// You create a text editor by adding a ``TextEditor`` instance to the
+/// You create a text editor by adding a `TextEditor` instance to the
 /// body of your view, and initialize it by passing in a
 /// ``Binding`` to a string variable in your app:
 ///
@@ -38158,8 +38655,11 @@ public struct TextEditingCommands : Commands {
 ///
 ///         var body: some View {
 ///             TextEditor(text: $fullText)
+///                 .padding()
 ///         }
 ///     }
+///
+/// ![](text-editor.png)
 ///
 /// ### Styling a text editor
 ///
@@ -38176,15 +38676,18 @@ public struct TextEditingCommands : Commands {
 ///             TextEditor(text: $fullText)
 ///                 .foregroundColor(Color.gray)
 ///                 .font(.custom("HelveticaNeue", size: 13))
+///                 .padding()
 ///         }
 ///     }
 ///
+/// ![](texteditor-2.png)
+///
 /// If you want to change the spacing or font scaling aspects of the text, you
 /// can use modifiers like ``View/lineLimit(_:)``,
-/// `View/lineSpacing(_:)`, and ``View/minimumScaleFactor(_:)`` to configure
+/// ``View/lineSpacing(_:)``, and ``View/minimumScaleFactor(_:)`` to configure
 /// how the view displays text depending on the space constraints. For example,
 /// here the ``View/lineSpacing(_:)`` modifier sets the spacing between lines
-/// to 5 points:
+/// to `5` points:
 ///
 ///     struct TextEditingView: View {
 ///         @State private var fullText = "This is some editable text..."
@@ -38194,8 +38697,11 @@ public struct TextEditingCommands : Commands {
 ///                 .lineLimit(3)
 ///                 .lineSpacing(5)
 ///                 .minimumScaleFactor(0.5)
+///                 .padding()
 ///         }
 ///     }
+///
+/// ![](texteditor-3.png)
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -38206,8 +38712,8 @@ public struct TextEditor : View {
     /// Use a ``TextEditor`` instance to create a view in which users can enter
     /// and edit long-form text.
     ///
-    /// In this example, the text editor renders gray text using the 13
-    /// point Helvetica Neue font with 5 points of spacing between each line:
+    /// In this example, the text editor renders gray text using the `13`
+    /// point Helvetica Neue font with `5` points of spacing between each line:
     ///
     ///     struct TextEditingView: View {
     ///         @State private var fullText: String = "This is some editable text..."
@@ -38217,8 +38723,11 @@ public struct TextEditor : View {
     ///                 .foregroundColor(Color.gray)
     ///                 .font(.custom("HelveticaNeue", size: 13))
     ///                 .lineSpacing(5)
+    ///                 .padding()
     ///         }
     ///     }
+    ///
+    /// ![](texteditor-2.png)
     ///
     /// You can define the styling for the text within the view, including the
     /// text color, font, and line spacing. You define these styles by applying
@@ -38507,7 +39016,6 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 ///
 /// Create a toggle by providing an `isOn` binding and a label.
 ///
-/// ![BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C](BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C.png)
 /// ```
 /// struct SwitchView: View {
 ///     @State private var vibrateOnRing = false
@@ -38520,11 +39028,12 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
+/// ![BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C](BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C.png)
+///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
 /// parameter, instead of a trailing closure:
 ///
-/// ![75A3C8E1-A542-4D7D-8370-91C70DE6C502](75A3C8E1-A542-4D7D-8370-91C70DE6C502.png)
 /// ```
 /// struct SwitchView: View {
 ///     @State private var vibrateOnRing = true
@@ -38535,21 +39044,23 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
+/// ![75A3C8E1-A542-4D7D-8370-91C70DE6C502](75A3C8E1-A542-4D7D-8370-91C70DE6C502.png)
+///
 /// ### Styling Toggles
 ///
 /// You can customize the appearance of toggles by using a ``ToggleStyle``, or creating your own
 /// styles that conform to the ``ToggleStyle`` protocol. Available styles include:
 /// - ``DefaultToggleStyle``
 /// - ``SwitchToggleStyle``
-/// - ``CheckboxToggleStyle``
+/// - `CheckboxToggleStyle` on macOS
 ///
 /// To set the style, use the ``View/toggleStyle(_:)`` modifier:
 ///
-/// ![3BE5966E-7786-4581-AF97-A7A2B18CEEA6](3BE5966E-7786-4581-AF97-A7A2B18CEEA6.png)
 /// ```
 /// struct RingerView: View {
 ///     @State private var vibrateOnRing = true
 ///     @State private var vibrateOnSilent = true
+///
 ///     var body: some View {
 ///         VStack {
 ///             Toggle("Vibrate on Ring 🔔", isOn: $vibrateOnRing)
@@ -38559,6 +39070,8 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![3BE5966E-7786-4581-AF97-A7A2B18CEEA6](3BE5966E-7786-4581-AF97-A7A2B18CEEA6.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Toggle<Label> : View where Label : View {
 
@@ -38567,13 +39080,16 @@ public struct Toggle<Label> : View where Label : View {
     /// ```
     /// struct ToggleView: View {
     ///     @State private var on = false
+    ///
     ///     var body: some View {
-    ///         Toggle(isOn: $on, label: {
+    ///         Toggle(isOn: $on) {
     ///             Text("Airplane Mode ✈️")
-    ///          })
+    ///          }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](toggle-init-2.png)
     ///
     /// - Parameters:
     ///   - isOn: A boolean binding connected to whether the toggle is on.
@@ -38596,7 +39112,7 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
     /// Creates a an on-off switch based on a toggle style configuration.
     ///
     /// Use this initializer **only** within the
-    /// `ToggleStyle/makeBody(configuration:)` method of a ``ToggleStyle`` to
+    /// ``ToggleStyle/makeBody(configuration:)`` method of a ``ToggleStyle`` to
     /// create a toggle for configuring. This is useful for new custom
     /// toggle styles that only modify the current toggle style, instead of
     /// implementing a brand new style.
@@ -38620,6 +39136,8 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
     ///         }
     ///     }
     ///
+    /// ![](toggle-init.png)
+    ///
     /// - Parameter configuration: A toggle style configuration, passed from makeBody(configuration:).
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public init(_ configuration: ToggleStyleConfiguration) { }
@@ -38635,11 +39153,32 @@ extension Toggle where Label == Text {
     /// ```
     /// struct LocalizedToggleView: View {
     ///     @State private var on = false
+    ///
     ///     var body: some View {
-    ///         Toggle(LocalizedStringKey("Airplane Mode"), isOn: $on)
+    ///         Toggle(LocalizedStringKey("Airplane Mode ✈️"), isOn: $on)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](toggle-init-2.png)
+    ///
+    /// Conveniently, if you pass the ``Toggle`` a `String` literal,
+    /// it will call this initializer to treat the text you provide
+    /// as a localization key:
+    ///
+    /// ```
+    /// struct LocalizedToggleView: View {
+    ///     @State private var on = false
+    ///
+    ///     var body: some View {
+    ///         Toggle("Airplane Mode ✈️", isOn: $on)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Note: If you pass in a `String` **variable** instead of a `String`,
+    /// **literal**, ``Toggle/init(_:isOn:)-fcaeb`` will get called instead.
+    /// The text will not get localized.
     ///
     /// - Parameters:
     ///   - titleKey: A localized string label.
@@ -38653,11 +39192,18 @@ extension Toggle where Label == Text {
     /// ```
     /// struct SettingsToggleView: View {
     ///     @State private var on = false
+    ///     let title = "Airplane Mode ✈️"
+    ///
     ///     var body: some View {
-    ///         Toggle("Airplane Mode ✈️", isOn: $on)
+    ///         Toggle(title, isOn: $on)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](toggle-init-2.png)
+    ///
+    /// - Note: If you'd like to localize your text, use ``Toggle/init(_:isOn:)-00a8a``
+    /// instead.
     ///
     /// - Parameters:
     ///   - title: A string label.
@@ -39134,20 +39680,20 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
 /// Toolbar placements are used with the ``ToolbarItem`` when defining a toolbar.
 /// For example:
 ///
-/// ![Toolbar item placement example 1](9B900A7C-AA39-4C5B-9022-EFFF9308F236.png)
-///
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        Text("🍌🍌")
-///        .toolbar {
-///            ToolbarItem(placement: .bottomBar) {
-///                Button("Bottom bar button") {}
-///            }
-///        }
-///    }
+///     var body: some View {
+///         Text("🍌🍌")
+///             .toolbar {
+///                 ToolbarItem(placement: .bottomBar) {
+///                     Button("Bottom bar button") { }
+///                 }
+///             }
+///     }
 /// }
 /// ```
+///
+/// ![Toolbar item placement example 1](9B900A7C-AA39-4C5B-9022-EFFF9308F236.png)
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItemPlacement {
 
@@ -39343,28 +39889,27 @@ extension Transaction {
 /// A shape with an affine transform applied to it.
 ///
 /// A transformed shape has two use cases:
-///
-///
-///
 /// 1. Used directly via its initializer ``TransformedShape/init(shape:transform:)``.
 /// 2. The return value of ``Shape/transform(_:)``.
-///
-///
 ///
 /// Having an offset shape is helpful because it allows you to translate a shape
 /// and then continue to use its shape properties, instead of turning into ``View``.
 ///
-/// A simple example of constructing a ``TransformedShape``:
+/// A simple example of constructing a `TransformedShape`:
 ///
-/// ![D08FFE9B-43D6-4BC7-9B64-DD36AE1044EE](D08FFE9B-43D6-4BC7-9B64-DD36AE1044EE.png)
 /// ```
 /// struct TransformedShapeView: View {
+///     let transform = CGAffineTransform(rotationAngle: 0.5)
+///
 ///     var body: some View {
-///         TransformedShape(shape: Rectangle(),
-///                          transform: .init(rotationAngle: 6))
+///         TransformedShape(shape: Rectangle(), transform: transform)
+///             .frame(width: 100, height: 100)
+///             .border(Color.orange)
 ///     }
 /// }
 /// ```
+///
+/// ![](transformedshape.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TransformedShape<Content> : Shape where Content : Shape {
 
@@ -39372,43 +39917,61 @@ extension Transaction {
     ///
     /// ```
     /// struct TransformedShapeView: View {
-    ///     let transformedShape = TransformedShape(shape: Rectangle(),
-    ///                                             transform: .init(rotationAngle: 6))
     ///     var body: some View {
-    ///         ZStack {
+    ///         let transform = CGAffineTransform(rotationAngle: 0.5)
+    ///         let transformedShape = TransformedShape(shape: Rectangle(), transform: transform)
+    ///
+    ///         return ZStack {
     ///             transformedShape
+    ///                 .frame(width: 100, height: 100)
     ///             transformedShape.shape
-    ///                 .opacity(0.2)
+    ///                 .fill(Color.red.opacity(0.5))
+    ///                 .frame(width: 100, height: 100)
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](transformedshape-shape.png)
     public var shape: Content
 
     /// The affine transformation to apply to the original shape
     ///
     /// ```
     /// struct TransformedShapeView: View {
-    ///     let transformedShape = TransformedShape(shape: Rectangle(),
-    ///                                             transform: .init(rotationAngle: 6))
     ///     var body: some View {
-    ///         transformedShape
-    ///             .onAppear { print(transformedShape.transform.isIdentity) } //false
+    ///         let transform = CGAffineTransform(rotationAngle: 0.5)
+    ///         let transformedShape = TransformedShape(shape: Rectangle(), transform: transform)
+    ///
+    ///         return VStack {
+    ///             Text("Identity transform? ")
+    ///                 + Text(transformedShape.transform.isIdentity ? "Yes" : "No")
+    ///             transformedShape
+    ///                 .frame(width: 100, height: 100)
+    ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](transformedshape-transform.png)
     public var transform: CGAffineTransform
 
     /// Creates a new shape from an original shape and an affine transform.
     ///
     /// ```
     /// struct TransformedShapeView: View {
+    ///     let transform = CGAffineTransform(rotationAngle: 0.5)
+    ///
     ///     var body: some View {
-    ///         TransformedShape(shape: Rectangle(),
-    ///                          transform: .init(rotationAngle: 6))
+    ///         TransformedShape(shape: Rectangle(), transform: transform)
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](transformedshape.png)
     ///
     /// - Parameters:
     ///   - shape: The original shape to be affine transformed.
@@ -39466,6 +40029,8 @@ extension Transaction {
 ///         }
 ///     }
 ///
+/// ![](tupleview.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TupleView<T> : View {
 
@@ -39500,6 +40065,8 @@ extension Transaction {
     ///         }
     ///     }
     ///
+    /// ![](tupleview.png)
+    ///
     public var value: T
 
     /// Creates a tuple view.
@@ -39532,6 +40099,8 @@ extension Transaction {
     ///             first
     ///         }
     ///     }
+    ///
+    /// ![](tupleview.png)
     ///
     /// - Parameter value: A tuple of any number of views.
     @inlinable public init(_ value: T) { }
@@ -40486,22 +41055,22 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// you can either customize the `x` and `y` coordinates, or you can use a
 /// predefined constant.
 /// SwiftUI has 10 `UnitPoint` constants:
-/// 1. ``UnitPoint/zero``: `x = 0` and `y = 0`
-/// 2. ``UnitPoint/center``: `x = 0.5` and `y = 0.5`
-/// 3. ``UnitPoint/topleading``: `x = 0` and `y = 0`
-/// 4. ``UnitPoint/top``: `x = 0.5` and `y = 0`
-/// 5. ``UnitPoint/toptrailing``: `x = 1` and `y = 0`
-/// 6. ``UnitPoint/trailing``: `x = 1` and `y = 0.5`
-/// 7. ``UnitPoint/bottomtrailing``: `x = 1` and `y = 1`
-/// 8. ``UnitPoint/bottom``: `x = 0.5` and `y = 1`
-/// 9. ``UnitPoint/bottomleading``: `x = 0` and `y = 1`
-/// 10. ``UnitPoint/leading``: `x = 0` and `y = 0.5`
+/// 1. ``UnitPoint/zero``
+/// 2. ``UnitPoint/center``
+/// 3. ``UnitPoint/topleading``
+/// 4. ``UnitPoint/top``
+/// 5. ``UnitPoint/toptrailing``
+/// 6. ``UnitPoint/trailing``
+/// 7. ``UnitPoint/bottomtrailing``
+/// 8. ``UnitPoint/bottom``
+/// 9. ``UnitPoint/bottomleading``
+/// 10. ``UnitPoint/leading``
 ///
 /// ### How to use a `UnitPoint`
 ///
 /// `UnitPoints`s can be used to specify the anchor point for view
 /// transformations like ``View/rotationEffect(_:anchor:)``
-/// and ``View/scaleEffect(_:anchor:)-31528``. They are used commonly in
+/// and ``View/scaleEffect(_:anchor:)-92995``. They are used commonly in
 /// ``Shape``s and gradients.
 ///
 /// For example, a ``LinearGradient`` accepts a `UnitPoint` for the
@@ -40649,14 +41218,15 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///     let point = UnitPoint()
     ///
     ///     var body: some View {
-    ///         Text("I'm rotated on the left 🍃")
+    ///         Rectangle()
+    ///             .frame(width: 100, height: 100)
     ///             .rotationEffect(.degrees(22), anchor: point)
-    ///             .border(Color.gray)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](unitpoint-rotation-left.png)
+    /// ![](unitpoint-zero.png)
     @inlinable public init() { }
 
     /// Creates a unit point from x and y values.
@@ -40715,8 +41285,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
     /// The unit point at the center of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `0.5` and a `y` of `0.5`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 0.5`
+    /// - `y = 0.5`
     ///
     /// ```
     /// struct ContentView: View {
@@ -40736,8 +41307,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
     /// The unit point at the middle of the leading edge of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `0` and a `y` of `0.5`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 0`
+    /// - `y = 0.5`
     ///
     /// ```
     /// struct ContentView: View {
@@ -40748,8 +41320,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///             Slider(value: $angle, in: 0...360)
     ///             Rectangle()
     ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .leading)
+    ///                 .rotationEffect(.degrees(angle), anchor: .leading)
     ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
@@ -40759,8 +41332,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
     /// The unit point at the middle of the trailing edge of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `1` and a `y` of `0.5`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 1`
+    /// - `y = 0.5`
     ///
     /// ```
     /// struct ContentView: View {
@@ -40771,8 +41345,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///             Slider(value: $angle, in: 0...360)
     ///             Rectangle()
     ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .trailing)
+    ///                 .rotationEffect(.degrees(angle), anchor: .trailing)
     ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
@@ -40782,8 +41357,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
     /// The unit point at the middle of the top edge of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `0.5` and a `y` of `0`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 0.5`
+    /// - `y = 1`
     ///
     /// ```
     /// struct ContentView: View {
@@ -40794,8 +41370,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///             Slider(value: $angle, in: 0...360)
     ///             Rectangle()
     ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .top)
+    ///                 .rotationEffect(.degrees(angle), anchor: .top)
     ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
@@ -40806,8 +41383,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
     /// The unit point at the middle of the bottom edge of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `0.5` and a `y` of `1`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 0.5`
+    /// - `y = 1`
     ///
     /// ```
     /// struct ContentView: View {
@@ -40818,8 +41396,9 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///             Slider(value: $angle, in: 0...360)
     ///             Rectangle()
     ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .bottom)
+    ///                 .rotationEffect(.degrees(angle), anchor: .bottom)
     ///                 .border(Color.orange)
+    ///         }
     ///     }
     /// }
     /// ```
@@ -40829,94 +41408,90 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 
     /// The unit point at the top leading corner of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `0` and a `y` of `0`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 0`
+    /// - `y = 0`
     ///
     /// - Note: This is the same as ``UnitPoint/zero``.
     ///
     /// ```
     /// struct ContentView: View {
-    ///     @State var angle: Double = 0
-    ///
     ///     var body: some View {
-    ///         VStack {
-    ///             Slider(value: $angle, in: 0...360)
-    ///             Rectangle()
-    ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .topLeading)
-    ///                 .border(Color.orange)
+    ///         Rectangle()
+    ///             .frame(width: 100, height: 100)
+    ///             .rotationEffect(.degrees(22), anchor: .topLeading)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](topleading.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let topLeading: UnitPoint
 
     /// The unit point at the top trailing corner of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `1` and a `y` of `0`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 1`
+    /// - `y = 0`
     ///
     /// ```
     /// struct ContentView: View {
-    ///     @State var angle: Double = 0
-    ///
     ///     var body: some View {
-    ///         VStack {
-    ///             Slider(value: $angle, in: 0...360)
-    ///             Rectangle()
-    ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .topTrailing)
-    ///                 .border(Color.orange)
+    ///         Rectangle()
+    ///             .frame(width: 100, height: 100)
+    ///             .rotationEffect(.degrees(22), anchor: .topTrailing)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](toptrailing.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let topTrailing: UnitPoint
 
     /// The unit point at the bottom leading corner of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `0` and a `y` of `1`.
+    /// Use this static constant to specify a ``UnitPoint`` with:
+    /// - `x = 0`
+    /// - `y = 1`
     ///
     /// ```
     /// struct ContentView: View {
-    ///     @State var angle: Double = 0
-    ///
     ///     var body: some View {
-    ///         VStack {
-    ///             Slider(value: $angle, in: 0...360)
-    ///             Rectangle()
-    ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .bottomLeading)
-    ///                 .border(Color.orange)
+    ///         Rectangle()
+    ///             .frame(width: 100, height: 100)
+    ///             .rotationEffect(.degrees(22), anchor: .bottomLeading)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](bottomleading.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottomLeading: UnitPoint
 
     /// The unit point at the bottom trailing corner of a given view.
     ///
-    /// Use this static constant to specify a ``UnitPoint`` with an
-    /// `x` of `1` and a `y` of `1`.
+    /// Use this static constant to specify a ``UnitPoint`` with
+    /// - `x = 1`
+    /// - `y = 1`
     ///
     /// ```
     /// struct ContentView: View {
-    ///     @State var angle: Double = 0
-    ///
     ///     var body: some View {
-    ///         VStack {
-    ///             Slider(value: $angle, in: 0...360)
-    ///             Rectangle()
-    ///                 .frame(width: 100, height: 100)
-    ///                 .rotationEffect(.degrees(22), anchor: .bottomTrailing)
-    ///                 .border(Color.orange)
+    ///         Rectangle()
+    ///             .frame(width: 100, height: 100)
+    ///             .rotationEffect(.degrees(22), anchor: .bottomTrailing)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](bottomtrailing.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottomTrailing: UnitPoint
@@ -41218,7 +41793,7 @@ extension VerticalAlignment {
     ///
     /// See those pages for more on how to construct them.
     ///
-    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c``
     /// view modifier. See that page for more on adding alignment
     /// guides to views.
     ///
@@ -41239,6 +41814,8 @@ extension VerticalAlignment {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](top.png)
     public static let top: VerticalAlignment
 
     /// A guide marking the vertical center of the view.
@@ -41250,7 +41827,7 @@ extension VerticalAlignment {
     ///
     /// See those pages for more on how to construct them.
     ///
-    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c``
     /// view modifier. See that page for more on adding alignment
     /// guides to views.
     ///
@@ -41271,6 +41848,8 @@ extension VerticalAlignment {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](center.png)
     public static let center: VerticalAlignment
 
     /// A guide marking the bottom edge of the view.
@@ -41282,7 +41861,7 @@ extension VerticalAlignment {
     ///
     /// See those pages for more on how to construct them.
     ///
-    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c``
     /// view modifier. See that page for more on adding alignment
     /// guides to views.
     ///
@@ -41303,6 +41882,8 @@ extension VerticalAlignment {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](bottom.png)
     public static let bottom: VerticalAlignment
 
     /// A guide marking the topmost text baseline view.
@@ -41314,7 +41895,7 @@ extension VerticalAlignment {
     ///
     /// See those pages for more on how to construct them.
     ///
-    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c```
     /// view modifier. See that page for more on adding alignment
     /// guides to views.
     ///
@@ -41335,6 +41916,8 @@ extension VerticalAlignment {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](firsttextbaseline.png)
     public static let firstTextBaseline: VerticalAlignment
 
     /// A guide marking the bottom-most text baseline in a view.
@@ -41346,7 +41929,7 @@ extension VerticalAlignment {
     ///
     /// See those pages for more on how to construct them.
     ///
-    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c``
     /// view modifier. See that page for more on adding alignment
     /// guides to views.
     ///
@@ -41367,6 +41950,8 @@ extension VerticalAlignment {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](lasttextbaseline.png)
     public static let lastTextBaseline: VerticalAlignment
 }
 
@@ -41469,11 +42054,11 @@ extension View {
     /// Use this modifier to change the style of a view hierarchy's date pickers.
     ///
     /// There are currently 5 date picker styles:
-    /// - ``DefaultDatePickerStyle`` on iOS and macOS
     /// - ``WheelDatePickerStyle`` on iOS
-    /// - ``FieldDatePickerStyle`` on macOS
-    /// - ``GraphicalDatePickerStyle`` on macOS
-    /// - ``StepperFieldDatePickerStyle`` on macOS
+    /// - ``DefaultDatePickerStyle`` on iOS and macOS
+    /// - ``GraphicalDatePickerStyle`` on iOS and macOS
+    /// - `FieldDatePickerStyle` on macOS
+    /// - `StepperFieldDatePickerStyle` on macOS
     ///
     /// See ``DatePicker`` and ``DatePickerStyle`` for more.
     ///
@@ -49338,7 +49923,7 @@ extension View {
 
 /// A property wrapper that lets you build views declaratively.
 ///
-/// ``ViewBuilder`` is used extensively in SwiftUI to let you create new
+/// `ViewBuilder` is used extensively in SwiftUI to let you create new
 /// on-screen views by just listing them out in a trailing closure.
 /// It's a **property wrapper** applied to function parameter.
 /// Usually, it's just working behind the scenes, so you don't have to
@@ -49350,11 +49935,11 @@ extension View {
 /// that you can use with ``View``s. Check out that link to learn
 /// more about using these to write clean code.)
 ///
-/// ### Using a ``ViewBuilder`` as a trailing closure
+/// ### Using a `ViewBuilder` as a trailing closure
 ///
-/// ``ViewBuilder`` works behind the scenes of many common SwiftUI
+/// `ViewBuilder` works behind the scenes of many common SwiftUI
 /// views - like ``VStack`` and ``HStack``. For example, here
-/// is the declaration of ``Group``'s initializer:
+/// is the declaration of ``Group``'s **initializer**:
 ///
 /// ```
 /// public init(@ViewBuilder content: () -> Content) {
@@ -49362,7 +49947,7 @@ extension View {
 /// }
 /// ```
 ///
-/// Since that last parameter is a ``ViewBuilder``, you can easily create
+/// Since that last parameter is a `ViewBuilders`, you can easily create
 /// a ``Group`` by passing it a [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
 /// stacking views:
 ///
@@ -49379,9 +49964,9 @@ extension View {
 ///
 /// ![1F38B3B4-1BCC-426D-BEB1-D365A09E5C30](1F38B3B4-1BCC-426D-BEB1-D365A09E5C30.png)
 ///
-/// ### Using a ``ViewBuilder`` as a function
+/// ### Using a `ViewBuilder` as a function
 ///
-/// You can also use ``ViewBuilder`` as a function. Just tag your
+/// You can also use `ViewBuilder` as a function. Just tag your
 /// function with `@ViewBuilder`, and use it just like you would with a
 /// trailing closure:
 ///
@@ -49403,7 +49988,7 @@ extension View {
 ///
 /// ### Using a `ViewBuilder` in your own ``View``s
 ///
-/// Exactly like ``Group``, you can also use ``ViewBuilder``s in your own custom
+/// Exactly like ``Group``, you can also use `ViewBuilder`s in your own custom
 /// views. Just tag the parameter of your ``View``'s initializer with
 /// `@ViewBuilder`, and anyone using your view will be able to easily
 /// pass you views just by listing them.
@@ -49462,6 +50047,9 @@ extension View {
     ///     }
     /// }
     /// ```
+    //
+    /// ![](buildblock-view.png)
+    ///
     public static func buildBlock() -> EmptyView { }
 
     /// Passes a single view written as a child view through unmodified.
@@ -49483,6 +50071,9 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-1-view.png)
+    ///
     public static func buildBlock<Content>(_ content: Content) -> Content where Content : View { }
 }
 
@@ -49514,6 +50105,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildif-view.png)
     public static func buildIf<Content>(_ content: Content?) -> Content? where Content : View { }
 
     /// Provides support for "if" statements in multi-statement closures,
@@ -49538,10 +50131,13 @@ extension ViewBuilder {
     ///                 Text("I am on screen! 🙋‍♀️")
     ///             } else {
     ///                 Text("Hey why aren't you showing me ☁️")
+    ///             }
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildeither-first-view.png)
     public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
 
     /// Provides support for "if-else" statements in multi-statement closures,
@@ -49571,6 +50167,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildeither-first-view.png)
     public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
 }
 
@@ -49603,6 +50201,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildeither-first-view.png)
     public static func buildLimitedAvailability<Content>(_ content: Content) -> AnyView where Content : View { }
 }
 
@@ -49629,6 +50229,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-2-view.png)
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> TupleView<(C0, C1)> where C0 : View, C1 : View { }
 }
 
@@ -49656,6 +50258,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-3-view.png)
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleView<(C0, C1, C2)> where C0 : View, C1 : View, C2 : View { }
 }
 
@@ -49684,6 +50288,9 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-4-view.png)
+    ///
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleView<(C0, C1, C2, C3)> where C0 : View, C1 : View, C2 : View, C3 : View { }
 }
 
@@ -49713,6 +50320,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-5-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleView<(C0, C1, C2, C3, C4)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View { }
 }
 
@@ -49743,6 +50352,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-6-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleView<(C0, C1, C2, C3, C4, C5)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View { }
 }
 
@@ -49774,6 +50385,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-7-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleView<(C0, C1, C2, C3, C4, C5, C6)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View { }
 }
 
@@ -49806,6 +50419,8 @@ extension ViewBuilder {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-8-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View { }
 }
 
@@ -49834,11 +50449,14 @@ extension ViewBuilder {
     ///             Text("I am #6 6️⃣")
     ///             Text("This is getting crowded 🕺")
     ///             Text("Nearing capacity! 🎊")
-    ///             Text("Is this COVID safe? 😷")
+    ///             Text("Room for one more? 🍻")
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-9-view.png)
+    ///
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View { }
 }
 
@@ -49870,12 +50488,14 @@ extension ViewBuilder {
     ///             Text("I am #6 6️⃣")
     ///             Text("This is getting crowded 🕺")
     ///             Text("Nearing capacity! 🎊")
-    ///             Text("Is this COVID safe? 😷")
-    ///             Text("No more views!! 🙅")
+    ///             Text("Room for one more? 🍻")
+    ///             Text("No more views!! 🛑")
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](buildblock-10-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View, C9 : View { }
 }
 
@@ -50772,7 +51392,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
 
 /// A view that arranges children on top of each other.
 ///
-/// ``ZStack`` arranges views "into" and "out of" the screen. The result
+/// `ZStack` arranges views "into" and "out of" the screen. The result
 /// is vies stacked on top of each other.
 ///
 ///     struct ExampleView: View {
@@ -50783,6 +51403,8 @@ public struct WindowGroup<Content> : Scene where Content : View {
 ///             }
 ///         }
 ///     }
+///
+/// ![](zstack.png)
 ///
 /// Learn more about the properties of each alignment choice via the
 /// ``Alignment`` struct.
@@ -50804,6 +51426,8 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](zstack-2.png)
     ///
     /// - Parameters:
     ///   - alignment: The guide for aligning the subviews in this stack on both
