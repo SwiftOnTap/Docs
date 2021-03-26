@@ -24595,6 +24595,8 @@ extension Menu {
     /// }
     /// ```
     ///
+    /// ![](menu-96799.gif)
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the link's localized title, which describes
     ///         the contents of the menu.
@@ -24617,6 +24619,8 @@ extension Menu {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](menu-96799.gif)
     ///
     /// - Parameters:
     ///     - title: A string that describes the contents of the menu.
@@ -24759,7 +24763,7 @@ extension MenuStyle {
 
 /// A configuration of a menu.
 ///
-/// Use the `Menu/init(_:)` initializer of ``Menu`` to create an
+/// Use the ``Menu/init(_:)`` initializer of ``Menu`` to create an
 /// instance using the current menu style, which you can modify to create a
 /// custom style.
 ///
@@ -25880,7 +25884,6 @@ extension NavigationViewStyle {
 ///
 /// A simple example of constructing an ``OffsetShape``:
 ///
-/// ![20B2CBEC-08BB-4349-B451-C6DE14BD68A3](20B2CBEC-08BB-4349-B451-C6DE14BD68A3.png)
 /// ```
 /// struct OffsetShapeView: View {
 ///     var body: some View {
@@ -25889,6 +25892,9 @@ extension NavigationViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![20B2CBEC-08BB-4349-B451-C6DE14BD68A3](20B2CBEC-08BB-4349-B451-C6DE14BD68A3.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct OffsetShape<Content> : Shape where Content : Shape {
 
@@ -25907,6 +25913,9 @@ extension NavigationViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-shape-shape.png)
+    ///
     public var shape: Content
 
     /// The amount the shape is offset.
@@ -25923,6 +25932,9 @@ extension NavigationViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-shape-offset.png)
+    ///
     public var offset: CGSize
 
     /// Use this to take an original shape and move it to a new place on the screen.
@@ -25935,6 +25947,8 @@ extension NavigationViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](offset-shape-init.png)
     ///
     /// - Parameters:
     ///   - shape: The original shape that you want to move.
@@ -26292,10 +26306,10 @@ public struct PageIndexViewStyle : IndexViewStyle {
     /// The background style for the page index view.
     ///
     /// There are 4 background style options:
-    /// - automatic: uses the default background for the platform
-    /// - interactive: shows a background when the index is interacted with
-    /// - always: the background is always shown
-    /// - never: the background is never shown
+    /// - ``PageIndexViewStyle/BackgroundDisplayMode/automatic``: uses the default background for the platform
+    /// - ``PageIndexViewStyle/BackgroundDisplayMode/interactive``: shows a background when the index is interacted with
+    /// - ``PageIndexViewStyle/BackgroundDisplayMode/always``: the background is always shown
+    /// - ``PageIndexViewStyle/BackgroundDisplayMode/never``: the background is never shown
     ///
     /// See the individual style pages for visualizations of each option.
     public struct BackgroundDisplayMode {
@@ -26303,8 +26317,6 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// Background will use the default for the platform.
         ///
         /// For example:
-        ///
-        /// ![PageIndexViewStyle automatic background display mode](pageindexviewstyle-automatic-example.png)
         ///
         /// ```
         /// struct ExampleView: View {
@@ -26325,6 +26337,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
+        /// ![PageIndexViewStyle automatic background display mode](pageindexviewstyle-automatic-example.png)
+        ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
         public static let automatic: PageIndexViewStyle.BackgroundDisplayMode
@@ -26332,8 +26346,6 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// Background is only shown while the index view is interacted with.
         ///
         /// For example:
-        ///
-        /// ![PageIndexViewStyle interactive background display mode](pageindexviewstyle-automatic-example.png)
         ///
         /// ```
         /// struct ExampleView: View {
@@ -26354,6 +26366,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
+        /// ![PageIndexViewStyle interactive background display mode](pageindexviewstyle-automatic-example.png)
+        ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
         public static let interactive: PageIndexViewStyle.BackgroundDisplayMode
@@ -26361,8 +26375,6 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// Background is always displayed behind the page index view.
         ///
         /// For example:
-        ///
-        /// ![PageIndexViewStyle always background display mode](indexviewstyle-protocol-example-1.png)
         ///
         /// ```
         /// struct ExampleView: View {
@@ -26383,6 +26395,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
+        /// ![](background-display-mode-always.png)
+        ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
         public static let always: PageIndexViewStyle.BackgroundDisplayMode
@@ -26390,8 +26404,6 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// Background is never displayed behind the page index view.
         ///
         /// For example:
-        ///
-        /// ![PageIndexViewStyle never background display mode](pageindexviewstyle-automatic-example.png)
         ///
         /// ```
         /// struct ExampleView: View {
@@ -26412,6 +26424,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
+        /// ![PageIndexViewStyle never background display mode](pageindexviewstyle-automatic-example.png)
+        ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
         public static let never: PageIndexViewStyle.BackgroundDisplayMode
@@ -26419,10 +26433,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
 
     /// Creates a page index view style.
     ///
-    /// When creating a new PageIndexViewStyle, it will default to the .automatic
-    /// backgroundDisplayMode if none is specified. For example:
-    ///
-    /// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
+    /// When creating a new ``PageIndexViewStyle``, it will default to the .automatic
+    /// ``PageIndexViewStyle/BackgroundDisplayMode`` if none is specified. For example:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -26437,6 +26449,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Index view style protocol example 1](indexviewstyle-protocol-example-1.png)
     ///
     /// - Parameter backgroundDisplayMode: The display mode of the background of any
     /// page index views receiving this style
@@ -26493,8 +26507,6 @@ public struct PageTabViewStyle : TabViewStyle {
 ///
 /// There are 8 different ways to create a path:
 ///
-///
-///
 /// 1. Empty path: ``Path/init()``
 /// 2. Path from closure
 /// 3. Path from `CGMutablePath`
@@ -26506,8 +26518,6 @@ public struct PageTabViewStyle : TabViewStyle {
 /// 8. Path from ``RoundedRectangle``:
 /// ``Path/init(roundedRect:cornerSize:style:)`` or
 /// ``Path/init(roundedRect:cornerRadius:style:)``
-///
-///
 ///
 /// ### Modifying and mutating a path
 ///
@@ -26521,7 +26531,6 @@ public struct PageTabViewStyle : TabViewStyle {
 /// In the following example, `move(to:)` and `addLine(to:)` are
 /// mutating methods, while `stroke()` is a non-mutating method.
 ///
-/// ![75F56224-5C30-4AE3-B526-336907676D1E](75F56224-5C30-4AE3-B526-336907676D1E.png)
 /// ```
 /// struct PathView: View {
 ///     var body: some View {
@@ -26534,6 +26543,8 @@ public struct PageTabViewStyle : TabViewStyle {
 /// }
 /// ```
 ///
+/// ![75F56224-5C30-4AE3-B526-336907676D1E](75F56224-5C30-4AE3-B526-336907676D1E.png)
+///
 /// ### Using a path
 ///
 /// The primary way to use a path is in conjunction with the
@@ -26541,7 +26552,6 @@ public struct PageTabViewStyle : TabViewStyle {
 /// and return it to this function in order to create
 /// a custom shape:
 ///
-/// ![CE1CCD64-157A-4908-B57D-96FC577A693D](CE1CCD64-157A-4908-B57D-96FC577A693D.png)
 /// ```
 /// struct CustomShapeView: View {
 ///     var body: some View {
@@ -26556,6 +26566,9 @@ public struct PageTabViewStyle : TabViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![CE1CCD64-157A-4908-B57D-96FC577A693D](CE1CCD64-157A-4908-B57D-96FC577A693D.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Path : Equatable, LosslessStringConvertible {
 
@@ -26586,6 +26599,9 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-init-ex.png)
+    ///
     public init() { }
 
     /// Creates a path from a CGPath.
@@ -26611,6 +26627,8 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-456c1.png)
     ///
     /// - Parameter path: A CGPath to define the path.
     public init(_ path: CGPath) { }
@@ -26646,6 +26664,8 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
+    /// ![](path-5f79d.png)
+    ///
     /// - Parameter path: A CGMutablePath to define the path.
     public init(_ path: CGMutablePath) { }
 
@@ -26668,6 +26688,8 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-40028.png)
     ///
     /// - Parameter path: A CGRect to define the path.
     public init(_ rect: CGRect) { }
@@ -26694,6 +26716,8 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
+    /// ![](path-init-rrcss.png)
+    ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
     ///   - cornerSize: A CGSize to define the size of the path's corners.
@@ -26716,11 +26740,13 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
     ///         return Path(roundedRect: rect,
-    ///                     cornerSize: 10,
+    ///                     cornerRadius: CGFloat(10),
     ///                     style: .continuous)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-init-rrcrs.png)
     ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
@@ -26745,6 +26771,8 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
+    /// ![](path-init-ellipse-in.png)
+    ///
     /// - Parameter ellipseIn: The rectangle defining the outside of the ellipse.
     public init(ellipseIn rect: CGRect) { }
 
@@ -26758,12 +26786,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     var body: some View {
     ///         Path { path in
     ///             path.move(to: .zero)
-    ///             path.addLine(CGPoint(x: 100, y: 100))
+    ///             path.addLine(to: CGPoint(x: 100, y: 100))
     ///         }
     ///         .stroke()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-13504.png)
     ///
     /// - Parameter callback: A closure that takes in an empty path which
     /// can be mutated.
@@ -26791,6 +26821,8 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-initq.png)
     ///
     /// - Parameter string: The string description of the path, obtained from `description`.
     public init?(_ string: String) { }
@@ -26820,6 +26852,9 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-description-ex.png)
+    ///
     public var description: String { get }
 
     /// A property that holds the path as a Core Graphics Path (CGPath).
@@ -26839,6 +26874,9 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-cg.png)
+    ///
     public var cgPath: CGPath { get }
 
     /// A Boolean property that cointains whether the path is empty.
@@ -26854,6 +26892,9 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-is-empty.png)
+    ///
     public var isEmpty: Bool { get }
 
     /// A property that contains the outter bounding rectangle of the path.
@@ -26875,11 +26916,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///      }
     /// }
     /// ```
+    ///
+    /// ![](path-bounding-rect.png)
+    ///
     public var boundingRect: CGRect { get }
 
     /// Returns true if the path contains a specified point.
     ///
-    /// If `eoFill` is true, this method uses the even-odd rule to define which
+    /// If `eoFill` is `true`, this method uses the even-odd rule to define which
     /// points are inside the path. Otherwise, it uses the non-zero rule.
     ///
     /// ```
@@ -26890,12 +26934,15 @@ public struct PageTabViewStyle : TabViewStyle {
     ///             path.addLine(to: CGPoint(x: 100, y: 100))
     ///         }
     ///
-    ///         print(line.cointains(CGPoint(x: 50, y: 50))) //true
+    ///         print(line.contains(CGPoint(x: 50, y: 50))) //true
     ///
     ///         return line.stroke()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-contains.png)
+    ///
     public func contains(_ p: CGPoint, eoFill: Bool = false) -> Bool { }
 
     /// An element of a path.
@@ -26926,7 +26973,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///             case .move(let point):
     ///                 print("I moved to \(point).")
     ///             case .line(let point):
-    ///                 print("I drew a line to \(point.)")
+    ///                 print("I drew a line to \(point).")
     ///             case .quadCurve(let point, let control):
     ///                 print("I drew a quad curve to \(point).")
     ///             case .curve(let point, let control1, let control2):
@@ -26940,6 +26987,9 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-element.png)
+    ///
     @frozen public enum Element : Equatable {
 
         /// A path element that terminates the current subpath (without closing
@@ -26959,6 +27009,9 @@ public struct PageTabViewStyle : TabViewStyle {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](path-element-move.png)
+        ///
         case move(to: CGPoint)
 
         /// A line from the previous current point to the given point, which
@@ -26978,6 +27031,9 @@ public struct PageTabViewStyle : TabViewStyle {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](path-element-move.png)
+        ///
         case line(to: CGPoint)
 
         /// A quadratic Bézier curve from the previous current point to the
@@ -26994,12 +27050,15 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         Path { path in
         ///             path.move(to: .zero)
         ///             path.addQuadCurve(to: CGPoint(x: 100, y: 100),
-        ///                               control: CGPoint(x: x: 200, y: 0))
+        ///                               control: CGPoint(x: 200, y: 0))
         ///         }
         ///         .stroke()
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](QUADCURVE.png)
+        ///
         case quadCurve(to: CGPoint, control: CGPoint)
 
         /// A cubic Bézier curve from the previous current point to the given
@@ -27023,6 +27082,9 @@ public struct PageTabViewStyle : TabViewStyle {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](path-element-curve.png)
+        ///
         case curve(to: CGPoint, control1: CGPoint, control2: CGPoint)
 
         /// A line from the start point of the current subpath (if any) to the
@@ -27047,6 +27109,9 @@ public struct PageTabViewStyle : TabViewStyle {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](lazy-triangle.png)
+        ///
         case closeSubpath
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -27084,7 +27149,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///             case .move(let point):
     ///                 print("I moved to \(point).")
     ///             case .line(let point):
-    ///                 print("I drew a line to \(point.)")
+    ///                 print("I drew a line to \(point).")
     ///             case .quadCurve(let point, let control):
     ///                 print("I drew a quad curve to \(point).")
     ///             case .curve(let point, let control1, let control2):
@@ -27098,6 +27163,9 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-element.png)
+    ///
     public func forEach(_ body: (Path.Element) -> Void) { }
 
     /// Sets the style for a path's stroke.
@@ -27128,6 +27196,8 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stroked-path.png)
     public func strokedPath(_ style: StrokeStyle) -> Path { }
 
     /// Trims a path along a given 0 to 1 percentage range.
@@ -27142,13 +27212,16 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         Path { path in
     ///             path.move(to: .zero)
     ///             path.addQuadCurve(to: CGPoint(x: 100, y: 100),
-    ///                               control: CGPoint(x: x: 200, y: 0))
+    ///                               control: CGPoint(x: 200, y: 0))
     ///         }
     ///         .trimmedPath(from: 0.25, to: 0.75)
     ///         .stroke()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](trimmed-path.png)
+    ///
     public func trimmedPath(from: CGFloat, to: CGFloat) -> Path { }
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -27204,6 +27277,8 @@ extension Path {
     /// }
     /// ```
     ///
+    /// ![](path-element-move.png)
+    ///
     /// - Parameter p: The point to move the path to.
     public mutating func move(to p: CGPoint) { }
 
@@ -27222,6 +27297,8 @@ extension Path {
     /// }
     /// ```
     ///
+    /// ![](path-element-move.png)
+    ///
     /// - Parameter p: The point to draw a line to.
     public mutating func addLine(to p: CGPoint) { }
 
@@ -27234,12 +27311,14 @@ extension Path {
     ///         Path { path in
     ///             path.move(to: .zero)
     ///             path.addQuadCurve(to: CGPoint(x: 100, y: 100),
-    ///                               control: CGPoint(x: x: 200, y: 0))
+    ///                               control: CGPoint(x: 200, y: 0))
     ///         }
     ///         .stroke()
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](QUADCURVE.png)
     ///
     /// - Parameters:
     ///   - p: The point to end the quad curve at.
@@ -27263,6 +27342,8 @@ extension Path {
     /// }
     /// ```
     ///
+    /// ![](path-element-curve.png)
+    ///
     /// - Parameters:
     ///   - p: The point to end the curve at.
     ///   - cp1: The first control point to use for drawing the curve.
@@ -27285,13 +27366,16 @@ extension Path {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](lazy-triangle.png)
+    ///
     public mutating func closeSubpath() { }
 
     /// Adds a rectangular subpath to the path.
     ///
     /// Use this method to add a rectangular subpath to an existing path.
-    /// See `CGRect` for info on how to make a rectangle.
-    /// See `CGAffineTransform` for info on how to make an affine transform.
+    /// See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
+    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
     ///
     /// ```
     /// struct RectangularPathView: View {
@@ -27304,11 +27388,13 @@ extension Path {
     /// struct RectangularShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
     ///         Path { path in
-    ///             path.addRect(rect, transform: .init(scaleX: 0.5, scaleY: 0.25))
+    ///             path.addRect(rect, transform: .init(scaleX: 0.5, y: 0.25))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-addrect-transform.png)
     ///
     /// - Parameters:
     ///   - rect: The rectangle to use for adding the rectangular path.
@@ -27318,11 +27404,11 @@ extension Path {
     /// Adds a rounded rectangle to the path.
     ///
     /// Use this method to add a rounded rectangular subpath to an existing
-    /// path. See `CGRect` for info on how to make an rectangle.
-    /// See `CGSize` for info on how to create a corner size.
+    /// path. See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make an rectangle.
+    /// See ![CGSize](https://developer.apple.com/documentation/coregraphics/cgsize) for info on how to create a corner size.
     /// See ``RoundedCornerStyle`` for info on the available corner
     /// styles.
-    /// See `CGAffineTransform` for info on how to make an affine
+    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine
     /// transform.
     ///
     /// ```
@@ -27336,10 +27422,10 @@ extension Path {
     /// struct RoundedRectangularShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
     ///         Path { path in
-    ///             path.addRect(in: rect,
+    ///             path.addRoundedRect(in: rect,
     ///                          cornerSize: .init(width: 10, height: 10),
     ///                          style: .continuous,
-    ///                          transform: .init(scaleX: 0.5, scaleY: 0.25))
+    ///                          transform: .init(scaleX: 0.5, y: 0.25))
     ///         }
     ///     }
     /// }
@@ -27351,13 +27437,16 @@ extension Path {
     ///   - style: The rounded corner style.
     ///   - transform: The affine transform to apply to the rounded
     ///   rectangle subpath.
+    ///
+    /// ![](add-rr.png)
+    ///
     public mutating func addRoundedRect(in rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular, transform: CGAffineTransform = .identity) { }
 
     /// Adds an ellipse to the path.
     ///
     /// Use this method to add an oval subpath to an existing path.
-    /// See `CGRect` for info on how to make a rectangle.
-    /// See `CGAffineTransform` for info on how to make an affine transform.
+    /// See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
+    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
     ///
     /// ```
     /// struct OvalPathView: View {
@@ -27370,11 +27459,13 @@ extension Path {
     /// struct OvalShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
     ///         Path { path in
-    ///             path.addRect(in: rect, transform: .init(scaleX: 0.5, scaleY: 0.25))
+    ///             path.addEllipse(in: rect, transform: .init(scaleX: 0.5, y: 0.25))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](path-add-ellipse.png)
     ///
     /// - Parameters:
     ///   - rect: The bounding rectangle for the oval subpath.
@@ -27384,8 +27475,8 @@ extension Path {
     /// Adds a sequence of rectangular subpaths to the path.
     ///
     /// Use this method to add an oval subpath to an existing path.
-    /// See `CGRect` for info on how to make a rectangle.
-    /// See `CGAffineTransform` for info on how to make an affine transform.
+    /// See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
+    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
     ///
     /// ```
     /// struct RectanglesPathView: View {
@@ -27402,11 +27493,13 @@ extension Path {
     ///             rect.insetBy(dx: 30, dy: 10)
     ///         ]
     ///         return Path { path in
-    ///             path.addRects(rects, transform: .init(scaleX: 0.5, scaleY: 0.25))
+    ///             path.addRects(rects, transform: .init(scaleX: 0.5, y: 0.25))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](add-Rects.png)
     ///
     /// - Parameters:
     ///   - rects: The rectangles for the rectangular subpaths.
@@ -27416,7 +27509,7 @@ extension Path {
     /// Adds a sequence of connected straight-line segments to the path.
     ///
     /// Use this method to add connected lines to a path by specifying
-    /// their connecting points. See `CGPoint`
+    /// their connecting points. See ![CGPoint](https://developer.apple.com/documentation/coregraphics/cgpoint)
     /// for info on how to create a point.
     ///
     /// ```
