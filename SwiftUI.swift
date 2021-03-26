@@ -11894,15 +11894,13 @@ public struct EmptyCommands : Commands {
 
 /// A ``View`` that displays nothing.
 ///
-/// ``EmptyView`` is a special view that displays nothing and occupies no space.
-/// Modifying an ``EmptyView`` does nothing.
+/// `EmptyView` is a special view that displays nothing and occupies no space.
+/// Modifying an `EmptyView` does nothing.
 ///
-/// For example, the following stack ignores the ```EmptyView`` between the
+/// For example, the following stack ignores the `EmptyView` between the
 /// two ``Text`` elements, even when it is modified to have a frame of
-/// `1000` x `1000` and a red background color. It simply behaves as if the
+/// 1000 x 1000 and a red background color. It simply behaves as if the
 /// middle view does not exist.
-///
-/// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11922,7 +11920,7 @@ public struct EmptyCommands : Commands {
 ///
 /// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
 ///
-/// ``EmptyView`` has many uses. For example, it can be used to instruct
+/// `EmptyView` has many uses. For example, it can be used to instruct
 /// SwiftUI that your UI control does not want a label:
 ///
 /// ```
@@ -11930,8 +11928,6 @@ public struct EmptyCommands : Commands {
 /// ```
 ///
 /// `EmptyView` can also be used in conjunction with ``GeometryReader``:
-///
-///  ![EmptyView Example 2](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -11951,12 +11947,12 @@ public struct EmptyCommands : Commands {
 /// }
 /// ```
 ///
-///  ![EmptyView Example 2](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
+/// ![EmptyView Example 2](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
 ///
-/// Account for ``EmptyView`` when building your own custom UI controls.
+/// Account for `EmptyView when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden
 /// from system accessibility features when the `label` is an instance of
-/// ``EmptyView``:
+/// `EmptyView`:
 ///
 /// ```
 /// struct MyCustomControl<Label: View, Content: View>: View {
@@ -22547,7 +22543,6 @@ extension LayoutDirection {
 /// a Unicode code point from the "Smileys" group, and the bottom shows its
 /// corresponding emoji.
 ///
-/// ![50E77E82-CB96-4841-B769-8B9D59F9DBE8](50E77E82-CB96-4841-B769-8B9D59F9DBE8.png)
 /// ```
 /// struct HorizontalEmojiView: View {
 ///     var rows: [GridItem] =
@@ -22570,6 +22565,9 @@ extension LayoutDirection {
 ///     }
 /// }
 /// ```
+///
+/// ![50E77E82-CB96-4841-B769-8B9D59F9DBE8](50E77E82-CB96-4841-B769-8B9D59F9DBE8.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyHGrid<Content> : View where Content : View {
 
@@ -22631,7 +22629,6 @@ public struct LazyHGrid<Content> : View where Content : View {
 /// consists of a horizontal row of text views. The stack aligns to the top
 /// of the scroll view and uses 10-point spacing between each text view.
 ///
-/// ![8CA08532-A8DD-452D-9A37-B62ACD2EECFE](8CA08532-A8DD-452D-9A37-B62ACD2EECFE.png)
 /// ```
 /// struct ColumnNumberView: View {
 ///     var body: some View {
@@ -22645,6 +22642,9 @@ public struct LazyHGrid<Content> : View where Content : View {
 ///     }
 /// }
 /// ```
+///
+/// ![](lazy-h-stack-ex1.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyHStack<Content> : View where Content : View {
 
@@ -22667,6 +22667,8 @@ public struct LazyHStack<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](lazy-h-stack-ex1.png)
     ///
     /// - Parameters:
     ///     - alignment: The guide for aligning the subviews in this stack. All
@@ -22695,7 +22697,6 @@ public struct LazyHStack<Content> : View where Content : View {
 /// `LazyVGrid` consisting of a two-column grid of ``Text`` views, showing
 /// Unicode code points from the "Smileys" group and their corresponding emoji:
 ///
-/// ![D3F809F0-9891-47DC-8E95-99160DC1B7F5](D3F809F0-9891-47DC-8E95-99160DC1B7F5.png)
 /// ```
 /// struct EmojiGridView: View {
 ///     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
@@ -22715,6 +22716,9 @@ public struct LazyHStack<Content> : View where Content : View {
 ///     }
 /// }
 /// ```
+///
+/// ![D3F809F0-9891-47DC-8E95-99160DC1B7F5](D3F809F0-9891-47DC-8E95-99160DC1B7F5.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyVGrid<Content> : View where Content : View {
 
@@ -22744,6 +22748,8 @@ public struct LazyVGrid<Content> : View where Content : View {
     /// }
     /// ```
     ///
+    /// ![D3F809F0-9891-47DC-8E95-99160DC1B7F5](D3F809F0-9891-47DC-8E95-99160DC1B7F5.png)
+    ///
     /// - Parameters:
     ///   - columns: An array of grid items to size and position each row of
     ///    the grid.
@@ -22767,12 +22773,11 @@ public struct LazyVGrid<Content> : View where Content : View {
 /// The stack is "lazy," in that the stack view doesn't create items until
 /// it needs to render them onscreen.
 ///
-/// In the following example, a `ScrollView` contains a ``LazyVStack`` that
+/// In the following example, a ``ScrollView`` contains a ``LazyVStack`` that
 /// consists of a vertical row of text views. The stack aligns to the
 /// leading edge of the scroll view, and uses default spacing between the
 /// text views.
 ///
-/// ![0DBD3AFE-572F-4451-92F1-10BFB3126933](0DBD3AFE-572F-4451-92F1-10BFB3126933.png)
 /// ```
 /// struct RowNumbersView: View {
 ///     var body: some View {
@@ -22786,6 +22791,9 @@ public struct LazyVGrid<Content> : View where Content : View {
 ///     }
 /// }
 /// ```
+///
+/// ![0DBD3AFE-572F-4451-92F1-10BFB3126933](0DBD3AFE-572F-4451-92F1-10BFB3126933.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LazyVStack<Content> : View where Content : View {
 
@@ -22808,6 +22816,8 @@ public struct LazyVStack<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![0DBD3AFE-572F-4451-92F1-10BFB3126933](0DBD3AFE-572F-4451-92F1-10BFB3126933.png)
     ///
     /// - Parameters:
     ///     - alignment: The guide for aligning the subviews in this stack. All
@@ -22884,8 +22894,6 @@ extension LegibilityWeight {
 
 /// A linear gradient.
 ///
-/// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -22899,6 +22907,8 @@ extension LegibilityWeight {
 /// }
 /// ```
 ///
+/// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
+///
 /// The gradient applies the color function along an axis, as defined by its
 /// start and end points. The gradient maps the unit-space points into the
 /// bounding rectangle of each shape filled with the gradient.
@@ -22906,6 +22916,21 @@ extension LegibilityWeight {
 @frozen public struct LinearGradient : ShapeStyle, View {
 
 	/// Creates a new linear gradient from the Gradient colors, the start, and the end.
+  ///
+  /// ```
+  /// struct ExampleView: View {
+  ///     var body: some View {
+  ///         RoundedRectangle(cornerRadius: 10)
+  ///             .fill(LinearGradient(
+  ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
+  ///                     startPoint: .leading,
+  ///                     endPoint: .trailing))
+  ///             .padding()
+  ///     }
+  /// }
+  /// ```
+  ///
+  /// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
 	///
 	/// - Parameters:
 	///   - gradient: The gradient containing the ordered colors to be used.
@@ -22927,8 +22952,6 @@ extension LegibilityWeight {
 ///
 /// For example, to create a new ``ProgressView`` with this style:
 ///
-/// ![Linear progress view example 1](04B8FA7C-F4B6-4661-ADA4-16EA1E340EBD.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///    var body: some View {
@@ -22938,14 +22961,15 @@ extension LegibilityWeight {
 ///    }
 /// }
 /// ```
+///
+/// ![Linear progress view example 1](04B8FA7C-F4B6-4661-ADA4-16EA1E340EBD.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LinearProgressViewStyle : ProgressViewStyle {
 
     /// Creates a linear progress view style.
     ///
     /// For example, to create a new ``ProgressView`` with this style:
-    ///
-    /// ![Linear progress view example 1](linearprogressview-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -22957,13 +22981,14 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Linear progress view example 1](linearprogressview-example-1.png)
+    ///
     public init() { }
 
     /// Creates a linear progress view style with a tint color.
     ///
     /// For example, to create a new ``ProgressView`` with this style:
-    ///
-    /// ![Linear progress view example 2](linearprogressview-example-2.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -22975,6 +23000,9 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![Linear progress view example 2](linearprogressview-example-2.png)
+    ///
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
@@ -23005,8 +23033,6 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///
 /// For example:
 ///
-/// ![Link](/link.gif)
-///
 ///     struct ExampleView: View {
 ///
 ///         let urlString = "https://swiftontap.com"
@@ -23021,29 +23047,35 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
+/// ![Link](/link.gif)
+///
 /// ### Creating a ``Link`` with a View
 /// [[link-view]]
 ///
 /// ### Background on ``Link`` in SwiftUI
 ///
-///  Before Link was added to SwiftUI, there was no way equivalent of a hyperlink outside of a WKWebView.
+/// Before Link was added to SwiftUI, there was no equivalent of a hyperlink outside of a [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview).
 ///
 /// It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time. For example:
 ///
-///  ```
-///  if URL(string: urlString) != nil {
-///    //The old way to create a Link-style Button
-///    Button("Read more") {
-///      if let url = URL(string: urlString) {
-///        UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
-///      }
-///    }
-///  } else {
-///      EmptyView()
-///          .onAppear { assertionFailure("URL was nil") }
-///      }
-///  }
-///     ```
+/// ```
+/// struct D: View {
+///     let urlString = "https://swiftontap.com"
+///     var body: some View {
+///         if URL(string: urlString) != nil {
+///           //The old way to create a Link-style Button
+///           Button("Read more") {
+///             if let url = URL(string: urlString) {
+///               UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
+///             }
+///           }
+///         } else {
+///             EmptyView()
+///                 .onAppear { assertionFailure("URL was nil") }
+///           }
+///     }
+/// }
+/// ```
 ///
 ///  In iOS 14 there is the option of Link, which does the action part of the Button above for us. Apple’s documentation unsafely unwraps a URL using the ‘!’ operator, but this is bad practice. You may know that this particular URL is created successfully because it links to example.com/TOS.html, a site owned by the Internet Assigned Numbers Authority (IANA) that convert URLs to IP addresses. But it's a mistake to assume that a URL string is valid and force unwrap the optional.
 ///
@@ -23053,9 +23085,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///
 ///  This would allow us to be aware that the URL was nil, but without causing a crash for the end-user.
 ///
-/// With updates to SwiftUI, the old code would roughly translate to the code below:
-///
-/// ![Link](/link.gif)
+///  With updates to SwiftUI, the old code would roughly translate to the code below:
 ///
 ///     struct ExampleView: View {
 ///
@@ -23071,6 +23101,8 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
+/// ![Link](/link.gif)
+///
 ///  Now that SwiftUI supports if let, it is possible to directly create properties like the URL and create Views that use that data. Just as before, the link is only shown when the URL can be created, but it is not necessary to do multiple checks just to make sure that this is the case.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Link<Label> : View where Label : View {
@@ -23078,7 +23110,6 @@ public struct Link<Label> : View where Label : View {
     /// A ``Link`` initializer that opens a link when a view is clicked.
     ///
     /// [link-view ->]
-    /// ![Link View](/link-view.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -23098,6 +23129,9 @@ public struct Link<Label> : View where Label : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Link View](/link-view.gif)
+    ///
     /// [<-]
     ///
     /// - Parameters:
@@ -23122,8 +23156,6 @@ extension Link where Label == Text {
     ///
     /// The example below creates a link to `swiftontap.com` and uses `View SwiftOnTap` as the title key to generate a link-styled view in your app:
     ///
-    /// ![Link](/link.gif)
-    ///
     ///     struct ExampleView: View {
     ///
     ///         let urlString = "https://swiftontap.com"
@@ -23138,6 +23170,7 @@ extension Link where Label == Text {
     ///         }
     ///     }
     ///
+    /// ![Link](/link.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the localized title that describes the
@@ -23701,7 +23734,6 @@ extension List where SelectionValue == Never {
 ///
 /// Below is a simple example.
 ///
-/// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
 /// ```
 /// struct SettingsView: View {
 ///     var body: some View {
@@ -23712,6 +23744,9 @@ extension List where SelectionValue == Never {
 ///     }
 /// }
 /// ```
+///
+/// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ListItemTint {
 
@@ -23733,6 +23768,9 @@ public struct ListItemTint {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
+    ///
     public static func fixed(_ tint: Color) -> ListItemTint { }
 
     /// An explicit tint color that is overridable.
@@ -23754,6 +23792,10 @@ public struct ListItemTint {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
+    ///
+
     public static func preferred(_ tint: Color) -> ListItemTint { }
 
     /// A standard grayscale tint effect.
@@ -23767,10 +23809,13 @@ public struct ListItemTint {
     /// struct SettingsView: View {
     ///     var body: some View {
     ///         Label("General", systemImage: "gearshape.fill")
-    ///             listItemTint(.monochrome)
+    ///             .listItemTint(.monochrome)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](list-item-tint-monochrome-ex.png)
+    ///
     public static let monochrome: ListItemTint
 }
 
@@ -23875,6 +23920,8 @@ extension ListStyle {
 ///         }
 ///     }
 ///
+/// ![](keyboard-shortcut-default.png)
+///
 /// Also, since SwiftUI is localization-first, if you pass a string literal
 /// to these initializers, they will be interpreted as localized string keys!
 ///
@@ -23883,6 +23930,8 @@ extension ListStyle {
 ///             Text("This gets localized!")
 ///         }
 ///     }
+///
+/// ![](keyboard-shortcut-key-ex.png)
 ///
 /// However, if your variable is already a string, the intializer will
 /// not localize the string:
@@ -23894,6 +23943,8 @@ extension ListStyle {
 ///             Text("Hello") //Localized!
 ///         }
 ///     }
+///
+/// ![](label-title-icon-ex.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
