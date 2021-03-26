@@ -23959,6 +23959,8 @@ extension ListStyle {
     ///             Text(text)
     ///         }
     ///     }
+    ///
+    /// ![](localized-key-string-init.png)
 	///
 	/// - Parameter value: The value for keying a string.
     public init(_ value: String) { }
@@ -23974,12 +23976,14 @@ extension ListStyle {
     ///         }
     ///     }
     ///
+    /// ![](localized-key-string-aloha.png)
+    ///
     /// - Parameter value: The value of the new instance.
     public init(stringLiteral value: String) { }
 
     /// Creates an instance from a string interpolation.
     ///
-    /// Most `StringInterpolation` types will store information about the
+    /// Most ``LocalizedStringKey/StringInterpolation`` types will store information about the
     /// literals and interpolations appended to them in one or more properties.
     /// `init(stringInterpolation:)` should use these properties to initialize
     /// the instance.
@@ -23987,9 +23991,11 @@ extension ListStyle {
     ///     struct UsingLocalizationView: View {
     ///         let name = "Majid"
     ///         var body: some View {
-    ///             Text("myNameIs \(name)") //My name is Majid"
+    ///             Text("myNameIs \(name)")
     ///         }
     ///     }
+    ///
+    /// ![](localization-string-key-interpolation.png)
     ///
     /// And in the localization file, we will have:
     ///
@@ -24364,6 +24370,8 @@ public struct LongPressGesture : Gesture {
 ///         }
 ///     }
 ///
+/// ![](magnification-gesture-ex1.png)
+///
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
 @available(watchOS, unavailable)
@@ -24464,18 +24472,13 @@ public struct MagnificationGesture : Gesture {
 ///
 /// There are 3 different initializers, one for each of the different label types:
 ///
-///
-///
 /// 1. String
 /// 2. Localized string key
 /// 3. View
 ///
-///
-///
 /// The following example presents a menu of three buttons and a submenu, which
 /// contains three buttons of its own.
 ///
-/// ![350D6845-194E-4242-88D0-B6F71AAE45D7](350D6845-194E-4242-88D0-B6F71AAE45D7.png)
 /// ```
 /// struct MenuView: View {
 ///     var body: some View {
@@ -24491,11 +24494,12 @@ public struct MagnificationGesture : Gesture {
 /// }
 /// ```
 ///
+/// ![](menu-ex1.gif)
+///
 /// You can create the menu's title with a ``LocalizedStringKey``, as seen in
 /// the previous example, or with a view builder that creates multiple views,
 /// such as an image and a text view:
 ///
-/// ![E2186A15-54CC-45D6-A957-438146F92907](E2186A15-54CC-45D6-A957-438146F92907.png)
 /// ```
 /// struct MenuView: View {
 ///     var body: some View {
@@ -24510,10 +24514,12 @@ public struct MagnificationGesture : Gesture {
 /// }
 /// ```
 ///
+/// ![](menu-ex2.gif)
+///
 /// ### Styling Menus
 ///
 /// Use the ``View/menuStyle(_:)`` modifier to change the style of all menus
-/// in a view. The following example shows how to apply a custom style:
+/// in a view. The following example shows how to apply a style:
 ///
 /// ```
 /// struct MenuView: View {
@@ -24522,10 +24528,12 @@ public struct MagnificationGesture : Gesture {
 ///             Button("Set In Point", action: { })
 ///             Button("Set Out Point", action: { })
 ///         }
-///         .menuStyle(EditingControlsMenuStyle())
+///         .menuStyle(DefaultMenuStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![](menu-ex3)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
