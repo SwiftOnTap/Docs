@@ -3524,6 +3524,8 @@ extension AnyTransition {
 /// }
 /// ```
 ///
+/// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
+///
 /// The latter example performs better as the SwiftUI runtime is given a
 /// more explicit type hierarchy, where the switch between `foo` being `true`
 /// or `false` can only result in a ``Text`` or a ``Color``. The former
@@ -3726,7 +3728,7 @@ extension App {
 /// setting the default app storage location for a view.
 ///
 ///
-/// Below shows a simple example using a `String`.
+/// Below shows a simple example using a [`String`](https://developer.apple.com/documentation/swift/string).
 ///
 ///     struct ContentView: View {
 ///         @AppStorage("name") var name: String = "Javier"
@@ -4537,9 +4539,9 @@ extension BackgroundStyle : ShapeStyle {
 /// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
 /// In the example above, the source of truth is a `@State` variable,
-/// named `text`. `text`  represents a `String`, whereas `$text` represents
+/// named `text`. `text`  represents a [`String`](https://developer.apple.com/documentation/swift/string), whereas `$text` represents
 /// a `Binding<String>`. ``TextField``'s initializer accepts a placeholder
-/// `String` and a `Binding<String>`. In this example, `TextField` requires a
+/// [`String`](https://developer.apple.com/documentation/swift/string) and a `Binding<String>`. In this example, `TextField` requires a
 /// ``Binding`` to the source of truth as ``TextField`` must be able to
 /// *write back* to the `@State` variable (a **mutable** source of truth).
 ///
@@ -5666,7 +5668,7 @@ extension Button where Label == Text {
     ///         }
     ///     }
     ///
-    /// If you directly pass the button a `String` literal, it will also
+    /// If you directly pass the button a [`String`](https://developer.apple.com/documentation/swift/string) literal, it will also
     /// treat it as a localization key:
     ///
     ///     struct EasySignInView: View {
@@ -6519,10 +6521,80 @@ extension Color {
 extension Color {
 
     /// A clear color ``View``, equivalent to an empty view.
+    ///
+    /// Though seemingly useless, `Color.clear` is actually used
+    /// widely throughout SwiftUI in two main ways:
+    /// - As a substitue for ``EmptyView``
+    /// - In situations where a ``Color`` on screen is changing, and
+    /// you need a placeholder.
+    ///
+    /// To demonstrate the first use, consider this example of a
+    /// ``Text``, aligned to the top left, within a ``ZStack``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ZStack(alignment: .topLeading) {
+    ///             Text("I'm inside a ZStack 📚")
+    ///         }
+    ///         .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](color-clear-1.png)
+    ///
+    /// Even though we said `alignment: .topLeading`, the ``Text`` is still
+    /// in the middle of the screen. This is because, as you can
+    /// see from the border, the ``ZStack`` fits snugly around the ``Text``.
+    ///
+    /// To expand the ``ZStack`` to the entire space of the screen,
+    /// allowing the ``Text`` to move to the top left corner,
+    /// we can use `Color.clear`:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ZStack(alignment: .topLeading) {
+    ///             Color.clear
+    ///             Text("I'm inside a ZStack 📚")
+    ///         }
+    ///         .border(Color.orange)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](color-clear-2.png)
+    ///
+    /// A second use for `Color.clear` is as a placeholder
+    /// when the ``Color`` on screen is changing. For example, below
+    /// we want to set a background color based on which ``Button``
+    /// is tapped. But to start, we just make it `Color.clear`!
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State var color = Color.clear
+    ///
+    ///     var body: some View {
+    ///         ZStack {
+    ///             color
+    ///
+    ///             VStack {
+    ///                 Button("Tap me for 🟠🍑🎃") {
+    ///                     color = Color.orange
+    ///                 }
+    ///                 Button("Press me for 🟨🌕🍋") {
+    ///                     color = Color.yellow
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     public static let clear: Color
 
     /// A true black color ``View``.
-    ///
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
@@ -6783,7 +6855,7 @@ extension Color.RGBColorSpace : Hashable {
 ///
 /// Title types:
 ///
-/// 1. `String`
+/// 1. [`String`](https://developer.apple.com/documentation/swift/string)
 /// 2. ``LocalizedStringKey``
 /// 3. ``View``
 ///
@@ -11032,7 +11104,7 @@ extension DynamicViewContent {
     ///   - action: A closure that SwiftUI invokes when elements are added to
     ///     the view. The closure takes two arguments: The first argument is the
     ///     offset relative to the dynamic view's underlying collection of data.
-    ///     The second argument is an array of [NSItemProvider](https://developer.apple.com/documentation/foundation/nsitemprovider)
+    ///     The second argument is an array of [`NSItemProvider`](https://developer.apple.com/documentation/foundation/nsitemprovider)
     ///     items that represents the data that you want to insert.
     ///
     /// - Returns: A view that calls `action` when elements are inserted into
@@ -11433,7 +11505,7 @@ extension EdgeInsets {
     ///
     /// To learn more about the parameter, check out the documentation
     /// page on
-    /// [NSDirectionalEdgeInsets](https://developer.apple.com/documentation/uikit/nsdirectionaledgeinsets).
+    /// [`NSDirectionalEdgeInsets`](https://developer.apple.com/documentation/uikit/nsdirectionaledgeinsets).
     ///
     /// ```
     /// struct PaddedRectangleView: View {
@@ -11956,7 +12028,7 @@ public struct EmptyCommands : Commands {
 ///
 /// ![EmptyView Example 2](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
 ///
-/// Account for `EmptyView when building your own custom UI controls.
+/// Account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden
 /// from system accessibility features when the `label` is an instance of
 /// `EmptyView`:
@@ -12462,7 +12534,7 @@ extension EnvironmentKey {
 /// A collection of environment values propagated through a view hierarchy.
 ///
 /// SwiftUI exposes a collection of values to your app's views in an
-/// ``EnvironmentValues`` structure. To read a value from the structure,
+/// `EnvironmentValues` structure. To read a value from the structure,
 /// declare a property using the ``Environment`` property wrapper and
 /// specify the value's key path. For example, you can read the current locale:
 ///
@@ -12470,7 +12542,7 @@ extension EnvironmentKey {
 ///
 /// Use the property you declare to dynamically control a view's layout.
 /// SwiftUI automatically sets or updates many environment values, like
-/// `EnvironmentValues/pixelLength`, ``EnvironmentValues/scenePhase``, or
+/// ``EnvironmentValues/pixelLength``, ``EnvironmentValues/scenePhase``, or
 /// ``EnvironmentValues/locale``, based on device characteristics, system state,
 /// or user settings. For others, like ``EnvironmentValues/lineLimit``, SwiftUI
 /// provides a reasonable default value.
@@ -12478,8 +12550,15 @@ extension EnvironmentKey {
 /// You can set or override some values using the ``View/environment(_:_:)``
 /// view modifier:
 ///
-///     MyView()
-///         .environment(\.lineLimit, 2)
+///     struct ContentView: View {
+///         var body: some View {
+///             Text("This is some long, multiline text 💬, that just keeps going")
+///                 .frame(width: 200)
+///                 .environment(\.lineLimit, 2)
+///         }
+///     }
+///
+/// ![](enviornmentvalues-1.png)
 ///
 /// The value that you set affects the environment for the view that you modify
 /// --- including its descendants in the view hierarchy --- but only up to the
@@ -12490,8 +12569,15 @@ extension EnvironmentKey {
 /// the ``EnvironmentValues/lineLimit`` value directly, as in the previous
 /// example, you should instead use the ``View/lineLimit(_:)`` modifier:
 ///
-///     MyView()
-///         .lineLimit(2)
+///     struct ContentView: View {
+///         var body: some View {
+///             Text("This is some long, multiline text 💬, that just keeps going")
+///                 .frame(width: 200)
+///                 .lineLimit(2)
+///         }
+///     }
+///
+/// ![](enviornmentvalues-1.png)
 ///
 /// In some cases, using a dedicated view modifier provides additional
 /// functionality. For example, you must use the
@@ -12500,11 +12586,17 @@ extension EnvironmentKey {
 /// value propagates up to the presenting container when presenting a view
 /// like a popover:
 ///
-///     MyView()
-///         .popover(isPresented: $isPopped) {
-///             PopoverContent()
-///                 .preferredColorScheme(.dark)
+///     struct ContentView {
+///         @State var isPopped = false
+///
+///         var body: some View {
+///             Button("Tap me for dark mode! 🌚🌙") { isPopped = true }
+///                 .popover(isPresented: $isPopped) {
+///                     Text("This is some dark 🌠🌉🌌 text")
+///                         .preferredColorScheme(.dark)
+///                 }
 ///         }
+///     }
 ///
 /// Create custom environment values by defining a type that
 /// conforms to the ``EnvironmentKey`` protocol, and then extending the
@@ -13509,7 +13601,7 @@ extension FileDocument {
     /// See ``FileDocumentReadConfiguration`` to learn how to use the configuration parameter.
     ///
     /// In the following example, the initializer parses the configuration parameter
-    /// to pull out the simple text `String` from the document.
+    /// to pull out the simple text [`String`](https://developer.apple.com/documentation/swift/string) from the document.
     ///
     /// ### Example
     ///
@@ -16248,7 +16340,7 @@ extension Font {
     ///
     /// Initializing ``Font`` with platform font instance
     /// ([`CTFont`](https://developer.apple.com/documentation/coretext/ctfont-q6r)) can bridge SwiftUI
-    /// ``Font`` with [NSFont](https://developer.apple.com/documentation/appkit/nsfont) or
+    /// ``Font`` with [`NSFont`](https://developer.apple.com/documentation/appkit/nsfont) or
     /// [`UIFont`](https://developer.apple.com/documentation/uikit/uifont), both of which are
     /// toll-free bridged to
     /// [`CTFont`](https://developer.apple.com/documentation/coretext/ctfont-q6r). For example:
@@ -16256,13 +16348,16 @@ extension Font {
     /// ```
     /// struct ContentView: View {
     ///     // Use native Core Text API to create desired ctFont.
-    ///     let ctFont = CTFontCreateUIFontForLanguage(.system, 12, nil)!
+    ///     let ctFont = CTFontCreateUIFontForLanguage(.system, 36, nil)!
     ///
     ///     var body: some View {
-    ///         Text("Hello").font(Font(ctFont))
+    ///         Text("I'm a big CT font 🦑")
+    ///             .font(Font(ctFont))
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](font-init.png)
     public init(_ font: CTFont) { }
 }
 
@@ -16750,7 +16845,7 @@ public struct GeometryProxy {
 ///
 /// ### How it works
 ///
-/// ``GeometryReader`` can be expressed simply with the following pseudocode:
+/// `GeometryReader` can be expressed simply with the following pseudocode:
 ///
 /// ```
 /// struct GeometryReader<Content: View> {
@@ -16762,11 +16857,14 @@ public struct GeometryProxy {
 /// }
 /// ```
 ///
-/// In the implementation above, `<container geometry>` is an instance of ``GeometryProxy``. ``GeometryProxy`` simply encapsulates the container's frame and safe area insets, provided at runtime by SwiftUI.
+/// In the implementation above, `<container geometry>` is an instance of
+/// ``GeometryProxy``. ``GeometryProxy`` simply encapsulates the container's
+/// frame and safe area insets, provided at runtime by SwiftUI.
 ///
-/// ### ``GeometryReader`` to get container bounds
+/// ### `GeometryReader` to get container bounds
 ///
-/// In this example, ``GeometryReader`` is used to create a view scaled down to exactly half of its parent container:
+/// In this example, `GeometryReader` is used to create a view scaled down to
+/// exactly half of its parent container:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16784,13 +16882,17 @@ public struct GeometryProxy {
 ///
 /// ![GeometryReader Example 1](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
 ///
-/// Note: `GeometryReader` **fills into** its parent container, and the current default alignment of its content is ``Alignment/topLeading``. The example above results in a green rectangle aligned to the top left corner of the screen, inset by the screen's safe area. The alignment cannot be overriden, and is liable to change in the future.
+/// Note: `GeometryReader` **fills into** its parent container, and the current
+/// default alignment of its content is ``Alignment/topLeading``. The example
+/// above results in a green rectangle aligned to the top left corner of the
+/// screen, inset by the screen's safe area. The alignment cannot be overriden,
+/// and is liable to change in the future.
 ///
 /// ### ``GeometryReader`` to get a view's frame
 ///
-/// ``GeometryReader`` can also be used with`View/background(_:)`, to acquire the geometry of a target view. Consider `SomeView` in the following example:
+/// `GeometryReader` can also be used with`View/background(_:)`, to acquire the
+/// geometry of a target view. Consider `SomeView` in the following example:
 ///
-/// ![6DEDD064-9A38-4714-9732-9C8D6F6D5715](6DEDD064-9A38-4714-9732-9C8D6F6D5715.png)
 /// ```
 /// struct ExampleView: View {
 ///     struct SomeView: View {
@@ -16826,11 +16928,13 @@ public struct GeometryProxy {
 ///
 /// ![6DEDD064-9A38-4714-9732-9C8D6F6D5715](6DEDD064-9A38-4714-9732-9C8D6F6D5715.png)
 ///
-/// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not* the frame of its container, the `VStack`. This is achieved by forcing a `GeometryReader` as a background of `SomeView`, thereby constraining it to `SomeView`'s bounds.
+/// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not*
+/// the frame of its container, the `VStack`. This is achieved by forcing a
+/// `GeometryReader` as a background of `SomeView`, thereby constraining it to
+/// `SomeView`'s bounds.
 ///
-/// This task of acquiring a view's frame can be done in a generic and reusable way using ``ViewModifier``:
-///
-/// ![GeometryReader Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/GeometryReader-example-2.png)
+/// This task of acquiring a view's frame can be done in a generic and reusable
+/// way using ``ViewModifier``:
 ///
 /// ```
 /// struct GetGlobalFrame: ViewModifier {
@@ -16853,8 +16957,6 @@ public struct GeometryProxy {
 /// ```
 ///
 /// The modifier above can be used in the following manner:
-///
-/// ![GeometryReader Example 3](7933D23D-6833-4FE6-8BDE-21C08211172C.png)
 ///
 /// ```
 /// struct ExampleView: View {
@@ -16897,6 +16999,8 @@ public struct GeometryProxy {
 ///     }
 /// }
 /// ```
+///
+/// ![GeometryReader Example 3](7933D23D-6833-4FE6-8BDE-21C08211172C.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct GeometryReader<Content> : View where Content : View {
@@ -23047,7 +23151,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///
 /// A ``Link`` opens a URL when the user clicks. There are three initializers:
 ///
-/// - A `String`
+/// - A [`String`](https://developer.apple.com/documentation/swift/string)
 /// - A ``LocalizedStringKey``
 /// - A ``View``
 ///
@@ -23244,7 +23348,8 @@ extension Link where Label == Text {
 ///
 /// ### Creating a `List` with a variable number of elements
 ///
-/// In the following example, ``List/init(_:id:rowContent:)`` is used to dynamically create a ``List`` over an array of strings, `fruits`.
+/// In the following example, ``List/init(_:id:rowContent:)`` is used to
+/// dynamically create a ``List`` over an array of strings, `fruits`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23260,17 +23365,28 @@ extension Link where Label == Text {
 ///
 /// ![List Example 2](5A921B5A-4B90-457C-A65F-8AE616E0E932.png)
 ///
-/// This is different from the previous example, because this initializer accepts a `rowContent` parameter that allows the `List` to generate SwiftUI views for the list's rows on-demand.
+/// This is different from the previous example, because this initializer
+/// accepts a `rowContent` parameter that allows the `List` to generate SwiftUI
+/// views for the list's rows on-demand.
 ///
-/// The `id` parameter requires a key-path to the *identifier* for each row of the ``List``. This is required so that ``List`` can efficiently process changes in the data source (in this example, the array `fruits`). These changes to the data source are animated as insertions, removals and reorders - reflecting the changes in the source.
+/// The `id` parameter requires a key-path to the *identifier* for each row of
+/// the ``List``. This is required so that ``List`` can efficiently process
+/// changes in the data source (in this example, the array `fruits`). These
+/// changes to the data source are animated as insertions, removals and
+/// reorders - reflecting the changes in the source.
 ///
-/// It is up to the programmer to decide what property best represents the 'identiifer' of a particular type. In this example, the `String` itself is a valid identifier for the data, therefore `\.self` is passed along to the `id` parameter.
+/// It is up to the programmer to decide what property best represents the
+/// 'identiifer' of a particular type. In this example, the [`String`](https://developer.apple.com/documentation/swift/string) itself
+/// is a valid identifier for the data, therefore `\\.self` is passed along to
+/// the `id` parameter.
 ///
 /// ### Creating a ``List`` with both fixed and dynamic elements
 ///
 /// `List` allows you to mix both fixed and dynamic elements using ``ForEach``.
 ///
-/// The following example displays a ``List`` of a fixed element ("Hello, World!") followed by dynamic elements from the previous example (using the `fruits` array):
+/// The following example displays a ``List`` of a fixed element
+/// (`"Hello, World!"`) followed by dynamic elements from the previous
+/// example (using the `fruits` array):
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23290,7 +23406,8 @@ extension Link where Label == Text {
 ///
 /// ![List Example 3](2D10DFE0-3A9D-4AD6-B7C3-A350EC37D0C4.png)
 ///
-/// As seen in the above example, ``ForEach`` also accepts an `id` parameter along with a `rowContent`.
+/// As seen in the above example, ``ForEach`` also accepts an `id` parameter
+/// along with a `rowContent`.
 /// [list-sections ->]
 /// ### Adding sections to a ``List``
 ///
@@ -23318,14 +23435,17 @@ extension Link where Label == Text {
 ///
 /// ![List Example 4](0CAA80FC-BDA9-405A-8AB1-5ED8B0ECF92C.png)
 ///
-/// A ``Section`` used within a `List` will render as a table-section containing the elements wrapped by that section. Just as for unsectioned elements, sections can hold both fixed and dynamic elements.
+/// A ``Section`` used within a `List` will render as a table-section containing
+/// the elements wrapped by that section. Just as for unsectioned elements,
+/// sections can hold both fixed and dynamic elements.
 /// [<-]
 /// [list-style ->]
 /// ### Styling a ``List``
 ///
 /// A ``List`` can be styled using the ``View/listStyle(_:)`` modifier.
 ///
-/// The following example demonstrates how to style a ``List` using the grouped-inset style:
+/// The following example demonstrates how to style a `List` using the
+/// grouped-inset style:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23351,14 +23471,17 @@ extension Link where Label == Text {
 /// - ``PlainListStyle``
 /// - ``SidebarListStyle``
 ///
-/// Note: List styles only modify the appearance of a ``List``. They do not affect the order or positioning of rows within the ``List``.
+/// Note: List styles only modify the appearance of a ``List``. They do not
+/// affect the order or positioning of rows within the ``List``.
 /// [<-]
 /// [list-row-background ->]
 /// ### Setting the background view for a list row
 ///
-/// Use ``View/listRowBackground(_:)`` to set the background view for a given row.
+/// Use ``View/listRowBackground(_:)`` to set the background view for a given
+/// row.
 ///
-/// The following example demonstrates how ``View/listRowBackground(_:)`` can be used to provide specific background colors for a list's rows:
+/// The following example demonstrates how ``View/listRowBackground(_:)`` can
+/// be used to provide specific background colors for a list's rows:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23377,9 +23500,11 @@ extension Link where Label == Text {
 ///
 /// ![List Example 6](A6394785-F064-497F-A48B-7ED9DAA55452.png)
 ///
-/// A background can be provided for multiple list rows at a time, by applying the ``View/listRowBackground(_:)`` modifier to ``ForEach``.
+/// A background can be provided for multiple list rows at a time, by applying
+/// the ``View/listRowBackground(_:)`` modifier to ``ForEach``.
 ///
-/// In the following example, all the rows of the ``List`` have the background view `Color.yellow`.
+/// In the following example, all the rows of the ``List`` have the background
+/// view `Color.yellow`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23403,7 +23528,8 @@ extension Link where Label == Text {
 /// [list-deletable ->]
 /// ### Making list rows deletable
 ///
-/// Apply the ``DynamicViewContent/onDelete(perform:)`` modifier on a ``ForEach`` within a ``List`` to allow the list rows to become deletable.
+/// Apply the ``DynamicViewContent/onDelete(perform:)`` modifier on a
+/// ``ForEach`` within a ``List`` to allow the list rows to become deletable.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23434,7 +23560,8 @@ extension Link where Label == Text {
 /// [list-edit-button ->]
 /// ### Editing a `List` using ``EditButton``
 ///
-/// An `EditButton` placed in the navigation bar of a `NavigationView` with a ``List`` in it can be used to provide an edit button for the ``List``.
+/// An `EditButton` placed in the navigation bar of a `NavigationView` with a
+/// ``List`` in it can be used to provide an edit button for the ``List``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -23904,7 +24031,7 @@ extension ListStyle {
 ///
 /// To make the text in your app appear as many different languages
 /// depending on the user's preference, use this structure in place
-/// of ``String``.
+/// of [`String`](https://developer.apple.com/documentation/swift/string).
 ///
 /// Essentially the way localization works is that rather than using
 /// strings directly throughout your app, you use this structure instead.
@@ -23925,7 +24052,7 @@ extension ListStyle {
 ///
 /// You can also create a localized string key from a string literal,
 /// but you must specify the type explicitly or else it will be
-/// interpreted as a ``String``:
+/// interpreted as a [`String`](https://developer.apple.com/documentation/swift/string):
 ///
 ///     let hello1 = "Hello" //Type String
 ///     let hello2: LocalizedStringKey = "Hello" //Type LocalizedStringKey
@@ -26535,7 +26662,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// 3. Path from `CGMutablePath`
 /// 4. Path from `CGPath`
 /// 5. Path from ``Rectangle``
-/// 6. Path from `String`
+/// 6. Path from [`String`](https://developer.apple.com/documentation/swift/string)
 /// 7. Path from ellipse:
 /// ``Path/init(ellipseIn:)``
 /// 8. Path from ``RoundedRectangle``:
@@ -26825,7 +26952,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// Creates a path from a string.
     ///
     /// Use this initializer to create a path from the result of a previous call to
-    /// `Path.stringRepresentation`. Fails if the `string` does not
+    /// `Path.stringRepresentation`. Fails if the [`String`](https://developer.apple.com/documentation/swift/string) does not
     /// describe a valid path.
     ///
     /// ```
@@ -29220,33 +29347,40 @@ extension PreviewProvider {
 
 /// This protocol is used to define custom button styles.
 ///
-/// ``PrimitiveButtonStyle`` is a modifier used to define custom styling and interaction behavior for buttons. The primitive style will override the default action trigger of the button, and allows interactions to be customized. SwiftUI provides a number of these styles including ``BorderlessButtonStyle`` and ``PlainButtonStyle``.
+/// ``PrimitiveButtonStyle`` is a modifier used to define custom styling and
+/// interaction behavior for buttons. The primitive style will override the
+/// default action trigger of the button, and allows interactions to be
+/// customized. SwiftUI provides a number of these styles including
+/// ``BorderlessButtonStyle`` and ``PlainButtonStyle``.
 ///
-/// Your structure only needs to implement one method: ``PrimitiveButtonStyle/makeBody(configuration:)``. The desired button view is output by this method.
+/// To conform to ``PrimitiveButtonsTyle``, your structure only needs to
+/// implement one method: ``PrimitiveButtonStyle/makeBody(configuration:)``.
+/// The desired button view is output by this method.
 ///
-/// To build a custom ``PrimitiveButtonStyle``, create a struct that conforms to the protocol.
-///
-/// ``PrimitiveButtonStyle/makeBody(configuration:)`` accepts a ``PrimitiveButtonStyleConfiguration``, which passes the original label to display the button view and a ``PrimitiveButtonStyle/trigger()`` to execute its action. A gesture is commonly added to the label in order to trigger the button action.
+/// ``PrimitiveButtonStyle/makeBody(configuration:)`` accepts a
+/// ``PrimitiveButtonStyleConfiguration``, which passes the original label
+/// to display the button view and a ``PrimitiveButtonStyleConfiguration/trigger()``
+/// to execute its action. A gesture is commonly added to the label in order to trigger the button action.
 ///
 /// Use ``View/buttonStyle(_:)-d2d0a`` to apply a primitive button style.
 ///
 /// ```
-///  struct ExampleView: View {
-///      var body: some View {
-///         Button("Banana 🍌🍌", action: { tap() })
+/// struct ExampleView: View {
+///     var body: some View {
+///         Button("Banana 🍌🍌", action: tap)
 ///             .buttonStyle(MyPrimitiveButtonStyle())
-///      }
+///     }
 ///
-///      func tap() {}
-///  }
+///     func tap() { /* implement here */  }
+/// }
 ///
-///  struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
-///    func makeBody(configuration: Configuration) -> some View {
-///      configuration.label
-///         .foregroundColor(.yellow)
-///         .onTapGesture { configuration.trigger() }
-///    }
-///  }
+/// struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.label
+///             .foregroundColor(.yellow)
+///             .onTapGesture { configuration.trigger() }
+///     }
+/// }
 /// ```
 ///
 /// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
@@ -29254,29 +29388,29 @@ extension PreviewProvider {
 /// ``PrimitiveButtonStyle`` applies to all buttons within a view hierarchy. For example, you could apply `BananaButtonStyle` to a ``VStack``.
 ///
 /// ```
-///  struct BananaView: View {
-///      var body: some View {
-///          VStack {
-///              Button("Banana 🍌🍌", action: { tap() })
-///              Button("Apple 🍏🍏", action: { tap() })
-///              Button("Peach 🍑🍑", action: { tap() })
-///          }
-///          .buttonStyle(BananaButtonStyle(color: .yellow))
-///      }
+/// struct BananaView: View {
+///     var body: some View {
+///         VStack {
+///             Button("Banana 🍌🍌", action: { tap() })
+///             Button("Apple 🍏🍏", action: { tap() })
+///             Button("Peach 🍑🍑", action: { tap() })
+///         }
+///         .buttonStyle(BananaButtonStyle(color: .yellow))
+///     }
 ///
-///      func tap() { }
-///  }
+///     func tap() { }
+/// }
 ///
-///  struct BananaButtonStyle: PrimitiveButtonStyle {
-///    let color: Color
+/// struct BananaButtonStyle: PrimitiveButtonStyle {
+///     let color: Color
 ///
-///    func makeBody(configuration: Configuration) -> some View {
-///        configuration.label
-///            .padding()
-///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///            .onTapGesture { configuration.trigger() }
-///    }
-///  }
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.label
+///             .padding()
+///             .background(RoundedRectangle(cornerRadius: 10).fill(color))
+///             .onTapGesture { configuration.trigger() }
+///     }
+/// }
 /// ```
 ///
 /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
@@ -29920,11 +30054,7 @@ public struct ProgressViewStyleConfiguration {
 /// one of three ways:
 /// - Using a [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
 /// - Using a [`CATransform3D`](https://developer.apple.com/documentation/quartzcore/catransform3d)
-<<<<<<< HEAD
 /// - Using ``GeometryEffect/effectValue(size:)``
-=======
-/// - Using ``GeometryEfect/effectValue(size:)``
->>>>>>> e53f8a0ac121e5e84744b9b9fb357d6b77ce3639
 ///
 /// See below for an example.
 ///
@@ -30699,8 +30829,8 @@ extension ReferenceFileDocument : ObservableObject {
     /// ``ReferenceFileDocument/snapshot(contentType:)`` method.
     /// It is the return type of this function.
     ///
-    /// In the following example, the ``ReferenceFileDocument/snapshot(contentType:)`` method returns a `String`,
-    /// so the associated type `Snapshot` would resolve to `String`.
+    /// In the following example, the ``ReferenceFileDocument/snapshot(contentType:)`` method returns a [`String`](https://developer.apple.com/documentation/swift/string),
+    /// so the associated type `Snapshot` would resolve to [`String`](https://developer.apple.com/documentation/swift/string).
     ///
     /// ### Example
     ///
@@ -31017,7 +31147,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// See ``FileDocumentReadConfiguration`` to learn how to use the configuration parameter.
     ///
     /// In the following example, the required initializer parses the configuration parameter
-    /// to pull out the simple text `String` from the document.
+    /// to pull out the simple text [`String`](https://developer.apple.com/documentation/swift/string) from the document.
     ///
     /// ### Example
     ///
@@ -33421,7 +33551,7 @@ extension SceneBuilder {
 /// How you interpret the value depends on where it's read from.
 /// If you read the phase from inside a ``View`` instance, you obtain a value
 /// that reflects the phase of the scene that contains the view. The following
-/// example uses the `SwiftUI/View/onChange(of:perform:)` method to enable
+/// example uses the ``View/onChange(of:perform:)`` method to enable
 /// a timer whenever the enclosing scene enters the ``ScenePhase/active`` phase
 /// and disable the timer when entering any other phase:
 ///
@@ -34061,8 +34191,6 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// You do not need to specify an axis to use ``ScrollView/showsIndicators``. For example:
 ///
-///  ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -34077,7 +34205,9 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// This ``ScrollView``  hides its scroll indicator, with a default `.vertical` scroll direction.
+/// ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
+///
+/// This ``ScrollView`` hides its scroll indicator, with a default `.vertical` scroll direction.
 /// [<-]
 /// [scrollview-proxy ->]
 /// ### Scrolling to an item
@@ -34105,7 +34235,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-///  ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
+/// ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
 ///
 /// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use ``View/id(_:)`` as is done inside the ``ForEach``, for each element.
 ///
@@ -34130,7 +34260,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-///  ![ScrollView Example 7](scrollviewproxy-ex7.gif)
+/// ![ScrollView Example 7](scrollviewproxy-ex7.gif)
 ///
 /// In this example, the `ScrollView` still scrolls to "Item #32", but this ``Text`` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, ``UnitPoint``, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
 ///
@@ -34139,29 +34269,29 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with ``withAnimation(_:_:)``.  For example:
 ///
-///  ```
-///  struct ExampleView: View {
-///      var body: some View {
-///          ScrollView {
-///              ScrollViewReader { (proxy: ScrollViewProxy) in
-///                  Button("Jump to #32") {
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         ScrollView {
+///             ScrollViewReader { (proxy: ScrollViewProxy) in
+///                 Button("Jump to #32") {
 ///                     withAnimation(.easeInOut(duration: 60)) {
 ///                         proxy.scrollTo(32, anchor: .top)
 ///                     }
-///                  }
+///                 }
 ///
-///                  ForEach(1..<101) { number in
-///                      Text("Item #\(number)")
-///                          .id(number)
-///                  }
-///              }
-///          }
-///      }
-///  }
-///
-///  ![ScrollView Example 8](scrollviewproxy-ex7.gif)
-///
+///                 ForEach(1..<101) { number in
+///                     Text("Item #\(number)")
+///                         .id(number)
+///                 }
+///             }
+///         }
+///     }
+/// }
 /// ```
+///
+/// ![ScrollView Example 8](scrollviewproxy-ex7.gif)
+///
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ScrollView<Content> : View where Content : View {
@@ -36195,7 +36325,7 @@ extension State where Value : ExpressibleByNilLiteral {
 /// types, for a total of 9 different initializers.
 ///
 /// Label types:
-/// 1. `String`
+/// 1. [`String`](https://developer.apple.com/documentation/swift/string)
 /// 2. ``LocalizedStringKey``
 /// 3. ``View``
 ///
@@ -36701,7 +36831,7 @@ extension Stepper where Label == Text {
 ///
 /// ![](insettableshape-strokeborder.png)
 ///
-/// 2. ``Path``: A path is a special kind of customizable shape. Use path's
+/// - ``Path``: A path is a special kind of customizable shape. Use path's
 /// special stroking method, ``Path/strokedPath(_:)``, to return another path,
 /// rather than a generic shape.
 ///
@@ -37151,7 +37281,7 @@ extension Stepper where Label == Text {
     ///
     /// [](dash-4.png)
     ///
-    /// We could condinue this patter indefinitely.
+    /// We could continue this pattern indefinitely.
     ///
     public var dash: [CGFloat]
 
@@ -37177,7 +37307,7 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// Now applying a `dashPhase` will move the first dash up by 15 points.
+    /// Applying a `dashPhase` will move the first dash up by 15 points.
     /// Compare the two stroked lines below:
     ///
     /// ```
@@ -37843,7 +37973,10 @@ public struct TapGesture : Gesture {
 
 /// A view that displays read-only text.
 ///
-/// `Text` draws a `String` in your app and comes equipped with modifiers to customize your text. This view sizes itself to fit the provided content, styling and containing view.
+/// `Text` draws a [`String`](https://developer.apple.com/documentation/swift/string)
+/// in your app and comes equipped with modifiers to customize your text.
+/// This view sizes itself to fit the provided content, styling and containing
+/// view.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -37855,7 +37988,9 @@ public struct TapGesture : Gesture {
 ///
 /// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
 ///
-/// `Text` is most commonly initialized with a `String`, however, it has 9 different initializers.
+/// `Text` is most commonly initialized with a
+/// [`String`](https://developer.apple.com/documentation/swift/string),
+/// however, it has 9 different initializers.
 ///
 /// For example, use ``Text/init(_:style:)`` to display a date in a `Text` view.
 ///
@@ -37913,14 +38048,14 @@ public struct TapGesture : Gesture {
 ///         }
 ///     }
 ///
-/// See `Text/init(_:tableName:bundle:comment:)`` for more information on how
+/// See ``Text/init(_:tableName:bundle:comment:)`` for more information on how
 /// to initialize `Text` with localized strings. This initializer can
 /// be used to display localized keys coming from a non-standard bundle or
 /// string table.
 ///
 /// Images can be displayed in a text view. This enables your app to
 /// optionally include them inside a text string, where they will resize
-/// based on your view's font. See `Text/init(_:)-b90ab` for more on
+/// based on your view's font. See ``Text/init(_:)-b90ab`` for more on
 /// initializing `Text` with images.
 ///
 /// Use the ``View`` modifiers ``View/lineLimit(_:)``,
@@ -38525,7 +38660,7 @@ extension Text {
         ///
         /// ![](text-case.png)
         ///
-        /// See the similar modifier for `String`:
+        /// See the similar modifier for [`String`](https://developer.apple.com/documentation/swift/string):
         /// [`uppercased()`](https://developer.apple.com/documentation/swift/stringprotocol/2908613-uppercased).
         case uppercase
 
@@ -38547,7 +38682,7 @@ extension Text {
         ///
         /// ![](text-case-lowercase.png)
         ///
-        /// See the similar modifier for `String`:
+        /// See the similar modifier for [`String`](https://developer.apple.com/documentation/swift/string):
         /// [`lowercased()`](https://developer.apple.com/documentation/swift/stringprotocol/2906197-lowercased).
         case lowercase
 
@@ -39317,7 +39452,8 @@ public struct TextEditor : View {
 ///
 /// ``TextField`` provides an interface to display and modify editable text.
 ///
-/// ``TextField`` has 4 different initializers, and is most commonly initialized with a `@State` variable and placeholder text.
+/// ``TextField`` has 4 different initializers, and is most commonly
+/// initialized with a `@State` variable and placeholder text.
 ///
 ///
 ///     struct ExampleView: View {
@@ -39351,7 +39487,8 @@ public struct TextEditor : View {
 /// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
 ///
 /// [<-]
-/// The `TextFieldStyle` protocol and `View/textFieldStyle(_:)` modifier provide helpful functionality to implement a well styled ``TextField``.
+/// The ``TextFieldStyle`` protocol and ``View/textFieldStyle(_:)`` modifier
+/// provide helpful functionality to implement a well styled ``TextField``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct TextField<Label> : View where Label : View {
 
@@ -39728,7 +39865,9 @@ extension Toggle where Label == Text {
     ///
     /// ![](toggle-init-2.png)
     ///
-    /// Conveniently, if you pass the ``Toggle`` a `String` literal,
+    /// Conveniently, if you pass the ``Toggle`` a
+    /// [`String`](https://developer.apple.com/documentation/swift/string)
+    /// literal,
     /// it will call this initializer to treat the text you provide
     /// as a localization key:
     ///
@@ -39742,7 +39881,10 @@ extension Toggle where Label == Text {
     /// }
     /// ```
     ///
-    /// - Note: If you pass in a `String` **variable** instead of a `String`,
+    /// - Note: If you pass in a
+    /// [`String`](https://developer.apple.com/documentation/swift/string)
+    /// **variable** instead of a
+    /// [`String`](https://developer.apple.com/documentation/swift/string),
     /// **literal**, ``Toggle/init(_:isOn:)-fcaeb`` will get called instead.
     /// The text will not get localized.
     ///
@@ -41191,7 +41333,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// called *once*
 /// after the call to ``UIViewRepresentable/makeUIView(context:)``, then called
 /// whenever any state changes.
-/// 3. `UIViewRepresentable/dismantleUIView(context:)-78ab4`: Upon
+/// 3. ``UIViewRepresentable/dismantleUIView(_:coordinator:)-77431``: Upon
 /// destruction of the parent container, this gets called.
 /// (This is **optional**. A default implementation is provided.)
 /// 4. ``UIViewRepresentable/makeCoordinator()-138cc``: This creates a
@@ -41238,8 +41380,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///
 /// Having implemented it as a `UViewRepresentable`, you could now use it in SwiftUI. For example:
 ///
-/// ![UIViewRepresentable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
-///
 /// ```
 /// struct ContentView: View {
 ///     @State var isAnimating: Bool = false
@@ -41252,6 +41392,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 /// }
 /// ```
+///
+/// ![UIViewRepresentable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
 ///
 /// In this example, the `ActivityIndicator` from before is used and can be
 /// toggled by passing a boolean to `ActivityIndicator.init(isAnimated:)`.
@@ -41298,8 +41440,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// ``EnvironmentValues/isEnabled``. The example usage must be updated to use
 /// ``View/disabled(_:)`` instead of `isAnimated`:
 ///
-/// ![UIViewRepresentable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
-///
 /// ```
 /// struct ContentView: View {
 ///     @State var isAnimating: Bool = false
@@ -41315,11 +41455,11 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// }
 /// ```
 ///
+/// ![UIViewRepresentable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
+///
 /// Using ``View/disabled(_:)``, the activity indicator can now be made active or inactive.
 ///
 /// The benefits of using the environment and context become apparent when multiple views are used together. For example:
-///
-/// ![UIViewRepresentable Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
 ///
 /// ```
 /// struct ContentView: View {
@@ -41338,6 +41478,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 /// }
 /// ```
+///
+/// ![UIViewRepresentable Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
 ///
 /// A single `View/disabled(_:)` modifier on the ``VStack`` can now become
 /// responsible for enabling/disabling the activity indicators inside the stack.
@@ -41411,7 +41553,9 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// `UIViewType` is `UISearchBar` and its primary delegate type is
 /// `UISearchBarDelegate`.
 ///
-/// Text input controls in SwiftUI often take a `String` ``Binding`` in their
+/// Text input controls in SwiftUI often take a
+/// [`String`](https://developer.apple.com/documentation/swift/string)
+/// ``Binding`` in their
 /// initializer, and use it to get/set the latest text entered by the user
 /// via control. It's extremely important to note that bindings are
 /// bidirectional, because SwiftUI ports of UIKit views must also **get** the
@@ -41420,8 +41564,6 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// imperative to handle both to be a good SwiftUI citizen.
 ///
 /// Here is example of using the search part port:
-///
-/// ![UIViewRepresentable Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
 ///
 /// ```
 /// struct ContentView: View {
@@ -41435,6 +41577,8 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 ///     }
 /// }
 /// ```
+///
+/// ![UIViewRepresentable Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
 ///
 /// In this example, `SearchBar` is bound to a state variable, `searchText`.
 /// To confirm that values are being written as they are input, a ``Text``
@@ -43122,7 +43266,7 @@ extension View {
     /// ![](ondrag-ex.gif)
     ///
     /// - Parameter data: A function that returns an
-    /// [NSItemProvider](https://developer.apple.com/documentation/foundation/nsitemprovider)
+    /// [`NSItemProvider`](https://developer.apple.com/documentation/foundation/nsitemprovider)
     /// object storing draggable data from a view.
     ///
     /// - Returns: A view that can be used as the source of drag and drop.
@@ -47529,7 +47673,9 @@ extension View {
     /// ``View/navigationTitle(_:)-ee24d`` instead.**
     ///
     /// Use `navigationBarTitle(_:)` to set the title of the navigation bar
-    /// using a `String`. This modifier only takes effect when this view is
+    /// using a
+    /// [`String`](https://developer.apple.com/documentation/swift/string).
+    /// This modifier only takes effect when this view is
     /// inside of and visible within a ``NavigationView``.
     ///
     /// In the example below, text for the navigation bar title is provided
@@ -47897,7 +48043,7 @@ extension View {
     /// ```
     /// struct LimitedTextView: View {
     ///     var body: some View {
-    ///         Text("This is a long string that demonstrates the effect of SwuiftUI's lineLimit(:_) operator. 😲")
+    ///         Text("This is a long string that demonstrates the effect of SwiftUI's lineLimit(_:) operator. 😲")
     ///             .frame(width: 200, height: 200, alignment: .leading)
     ///             .lineLimit(2)
     ///     }
@@ -48933,7 +49079,7 @@ extension View {
     /// - Parameters:
     ///   - activityType: The type of activity to handle.
     ///   - action: A function to call that takes a
-    ///     [NSUserActivity](https://developer.apple.com/documentation/foundation/nsuseractivity)
+    ///     [`NSUserActivity`](https://developer.apple.com/documentation/foundation/nsuseractivity)
     ///     object as its parameter
     ///     when delivering the activity to the scene or window the view is in.
     public func onContinueUserActivity(_ activityType: String, perform action: @escaping (NSUserActivity) -> ()) -> some View { }
@@ -48942,9 +49088,9 @@ extension View {
     /// Registers a handler to invoke when the view receives a url for the
     /// scene or window the view is in.
     ///
-    /// > Note: This method handles the reception of Universal Links,
+    /// - Note: This method handles the reception of Universal Links,
     ///   rather than a
-    ///   [NSUserActivity](https://developer.apple.com/documentation/foundation/nsuseractivity).
+    ///   [`NSUserActivity`](https://developer.apple.com/documentation/foundation/nsuseractivity).
     ///
     /// - Parameter action: A function that takes a
     ///  [URL](https://developer.apple.com/documentation/foundation/url)
