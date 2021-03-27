@@ -16240,11 +16240,11 @@ extension Font {
     /// Creates a custom font from a platform font instance.
     ///
     /// Initializing ``Font`` with platform font instance
-    /// ([CTFont](https://developer.apple.com/documentation/coretext/ctfont-q6r)) can bridge SwiftUI
+    /// ([`CTFont`](https://developer.apple.com/documentation/coretext/ctfont-q6r)) can bridge SwiftUI
     /// ``Font`` with [NSFont](https://developer.apple.com/documentation/appkit/nsfont) or
-    /// [UIFont](https://developer.apple.com/documentation/uikit/uifont), both of which are
+    /// [`UIFont`](https://developer.apple.com/documentation/uikit/uifont), both of which are
     /// toll-free bridged to
-    /// [CTFont](https://developer.apple.com/documentation/coretext/ctfont-q6r). For example:
+    /// [`CTFont`](https://developer.apple.com/documentation/coretext/ctfont-q6r). For example:
     ///
     /// ```
     /// struct ContentView: View {
@@ -18988,7 +18988,7 @@ extension Image {
     ///
     /// In order to use this initializer, you must create your
     /// ``Image`` using a
-    /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+    /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
     /// See that documentation page to learn more about `CGImage`
     /// objects.
     ///
@@ -19046,7 +19046,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -19104,7 +19104,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -19162,7 +19162,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -19220,7 +19220,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -19278,7 +19278,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -19336,7 +19336,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -19394,7 +19394,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -19452,7 +19452,7 @@ extension Image {
         ///
         /// In order to use this initializer, you must create your
         /// ``Image`` using a
-        /// [CGImage](https://developer.apple.com/documentation/coregraphics/cgimage).
+        /// [`CGImage`](https://developer.apple.com/documentation/coregraphics/cgimage).
         /// See that documentation page to learn more about `CGImage`
         /// objects.
         ///
@@ -27390,8 +27390,8 @@ extension Path {
     /// Adds a rectangular subpath to the path.
     ///
     /// Use this method to add a rectangular subpath to an existing path.
-    /// See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
-    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
+    /// See [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
+    /// See [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
     ///
     /// ```
     /// struct RectangularPathView: View {
@@ -27420,11 +27420,11 @@ extension Path {
     /// Adds a rounded rectangle to the path.
     ///
     /// Use this method to add a rounded rectangular subpath to an existing
-    /// path. See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make an rectangle.
-    /// See ![CGSize](https://developer.apple.com/documentation/coregraphics/cgsize) for info on how to create a corner size.
+    /// path. See [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make an rectangle.
+    /// See [`CGSize`](https://developer.apple.com/documentation/coregraphics/cgsize) for info on how to create a corner size.
     /// See ``RoundedCornerStyle`` for info on the available corner
     /// styles.
-    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine
+    /// See [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine
     /// transform.
     ///
     /// ```
@@ -27461,8 +27461,8 @@ extension Path {
     /// Adds an ellipse to the path.
     ///
     /// Use this method to add an oval subpath to an existing path.
-    /// See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
-    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
+    /// See [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
+    /// See [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
     ///
     /// ```
     /// struct OvalPathView: View {
@@ -27491,8 +27491,8 @@ extension Path {
     /// Adds a sequence of rectangular subpaths to the path.
     ///
     /// Use this method to add an oval subpath to an existing path.
-    /// See ![CGRect](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
-    /// See ![CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
+    /// See [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect) for info on how to make a rectangle.
+    /// See [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform) for info on how to make an affine transform.
     ///
     /// ```
     /// struct RectanglesPathView: View {
@@ -27525,7 +27525,7 @@ extension Path {
     /// Adds a sequence of connected straight-line segments to the path.
     ///
     /// Use this method to add connected lines to a path by specifying
-    /// their connecting points. See ![CGPoint](https://developer.apple.com/documentation/coregraphics/cgpoint)
+    /// their connecting points. See [`CGPoint`](https://developer.apple.com/documentation/coregraphics/cgpoint)
     /// for info on how to create a point.
     ///
     /// ```
@@ -29881,8 +29881,8 @@ public struct ProgressViewStyleConfiguration {
 ///
 /// Constructing a ``ProjectionTransform`` is most commonly done in
 /// one of three ways:
-/// - Using a [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
-/// - Using a [CATransform3D](https://developer.apple.com/documentation/quartzcore/catransform3d)
+/// - Using a [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
+/// - Using a [`CATransform3D`](https://developer.apple.com/documentation/quartzcore/catransform3d)
 /// - Using ``GeometryEfect/effectValue(size:)``
 ///
 /// See below for an example.
@@ -30093,7 +30093,7 @@ public struct ProgressViewStyleConfiguration {
 
     /// Creates a projection transform from a `CGAffineTransform`.
     ///
-    /// See [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
+    /// See [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform)
     /// for more info on how to create an affine transform.
     ///
     /// ```
@@ -30113,7 +30113,7 @@ public struct ProgressViewStyleConfiguration {
 
     /// Creates a projection transform from a `CATransform3D`.
     ///
-    /// See [CATransform3D](https://developer.apple.com/documentation/quartzcore/catransform3d)
+    /// See [`CATransform3D`](https://developer.apple.com/documentation/quartzcore/catransform3d)
     /// for more info on how to create a 3D transform.
     ///
     /// ```
@@ -40281,7 +40281,7 @@ open class UIHostingController<Content> : UIViewController where Content : View 
 /// A view that represents a UIKit view controller.
 ///
 /// Use a ``UIViewControllerRepresentable`` instance to create and manage a
-/// [UIViewController](https://developer.apple.com/documentation/uikit/uiviewcontroller) object in your
+/// [`UIViewController`](https://developer.apple.com/documentation/uikit/uiviewcontroller) object in your
 /// SwiftUI interface. Adopt this protocol in one of your app's custom
 /// instances, and use its methods to create, update, and tear down your view
 /// controller. The creation and update processes parallel the behavior of
@@ -40461,7 +40461,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// A view to import a UIKit view into SwiftUI.
 ///
 /// Use this protocol to port a
-/// [UIView](https://developer.apple.com/documentation/uikit/uiview)
+/// [`UIView`](https://developer.apple.com/documentation/uikit/uiview)
 /// from [UIKit](https://developer.apple.com/documentation/uikit)
 /// into SwiftUI.
 ///
@@ -43894,7 +43894,7 @@ extension View {
     /// coordinate space.
     ///
     /// Use the `position(_:)` modifier to place the center of a view at a
-    /// specific coordinate in the parent view using a [CGPoint](https://developer.apple.com/documentation/coregraphics/cgpoint)
+    /// specific coordinate in the parent view using a [`CGPoint`](https://developer.apple.com/documentation/coregraphics/cgpoint)
     /// to specify the `x`
     /// and `y` offset.
     ///
@@ -44171,7 +44171,7 @@ extension View {
     /// ![](transformeffect.png)
     ///
     /// - Parameter transform: A
-    /// [CGAffineTransform](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
+    /// [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
     @inlinable public func transformEffect(_ transform: CGAffineTransform) -> some View { }
 
 }
@@ -44433,7 +44433,7 @@ extension View {
     /// ![](scaleeffect-3.png)
     ///
     /// - Parameters:
-    ///   - scale: A [CGSize](https://developer.apple.com/documentation/CoreGraphics/CGSize) that
+    ///   - scale: A [`CGSize`](https://developer.apple.com/documentation/CoreGraphics/CGSize) that
     ///     represents the horizontal and vertical amount to scale the view.
     ///   - anchor: The point with a default of ``UnitPoint/center`` that
     ///     defines the location within the view from which to apply the
