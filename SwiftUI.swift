@@ -27340,7 +27340,7 @@ extension Path {
     /// struct NormalShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
     ///         Path(rect)
-    ///             .applying(CGAffineTransform(scaleX: 0.5, scaleY: 1))
+    ///             .applying(CGAffineTransform(scaleX: 0.5, y: 1))
     ///     }
     /// }
     /// ```
