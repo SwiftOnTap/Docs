@@ -1,6 +1,6 @@
 <h1 align="center">🍻 SwiftOnTap</h1>
 
-<h3 align="center"> Better SwiftUI Docs with Examples. </h3>
+<h3 align="center"> Complete SwiftUI Docs with Examples. </h3>
 
 <p align="center">
   <strong><a href="#get-started">Get Started</a></strong> |
