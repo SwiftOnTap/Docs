@@ -11824,7 +11824,9 @@ public struct EmptyCommands : Commands {
 /// ``EmptyView`` is a special view that displays nothing and occupies no space.
 /// Modifying an ``EmptyView`` does nothing.
 ///
-/// For example, the following stack ignores the ``EmptyView`` between the two ``Text`` elements, even when it is modified to have a frame of `1000`x`1000` and a red background color. It simply behaves as if the middle view does not exist.
+/// For example, the following stack ignores the ``EmptyView`` between the two
+/// ``Text`` elements, even when it is modified to have a frame of `1000`x`1000`
+/// and a red background color. It simply behaves as if the middle view does not exist.
 ///
 /// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
 ///
