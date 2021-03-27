@@ -206,12 +206,14 @@ public enum AccessibilityAdjustmentDirection {
 
     /// Increment an adjustable component.
     ///
-    /// VoiceOver generates this action when the component has a role of `adjustable` and the user places focus on it and swipes upward.
+    /// VoiceOver generates this action when the component has a role of
+    /// `adjustable` and the user places focus on it and swipes upward.
     case increment
 
     /// Decrement an adjustable component.
     ///
-    /// VoiceOver generates this action when the component has a role of `adjustable` and the user places focus on it and swipes downward.
+    /// VoiceOver generates this action when the component has a role of
+    /// `adjustable` and the user places focus on it and swipes downward.
     case decrement
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -259,8 +261,11 @@ extension AccessibilityAdjustmentDirection : Hashable {
 
 /// A ``ViewModifier`` used to provide accessibility content.
 ///
-/// The ``AccessibilityAttachmentModifier`` is most commonly found as the modified content in an accessibility modifiers attached to a View.
-/// See ``View/accessibilityAction(_:_:)`` for example usage. See [Creating Accessible Views](https://developer.apple.com/documentation/swiftui/view/accessibility/creating_accessible_views?changes=_8) for an example accessibility project.
+/// The ``AccessibilityAttachmentModifier`` is most commonly found as the
+/// modified content in an accessibility modifiers attached to a View.
+/// See ``View/accessibilityAction(_:_:)`` for example usage. See
+/// [Creating Accessible Views](https://developer.apple.com/documentation/swiftui/view/accessibility/creating_accessible_views?changes=_8)
+/// for an example accessibility project.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityAttachmentModifier : ViewModifier {
 
@@ -270,7 +275,9 @@ public struct AccessibilityAttachmentModifier : ViewModifier {
 
 /// Defines the children's behavior of accessibility elements.
 ///
-/// See [Accessibility in SwiftUI](https://swiftwithmajid.com/2019/09/10/accessibility-in-swiftui/) for more information on implementing accessibility functionality.
+/// See
+/// [Accessibility in SwiftUI](https://swiftwithmajid.com/2019/09/10/accessibility-in-swiftui/)
+/// for more information on implementing accessibility functionality.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityChildBehavior : Hashable {
 
@@ -324,7 +331,8 @@ extension AccessibilityChildBehavior {
     public static let combine: AccessibilityChildBehavior
 }
 
-/// Pair related views such that one view serves as the view content, and one view serves as the view label.
+/// Pair related views such that one view serves as the view content, and one
+/// view serves as the view label.
 ///
 /// ``AccessibilityLabeledPairRole`` is almost always used in conjunction with the ``View/accessibilityLabeledPair(role:id:in:)`` modifier.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -379,10 +387,13 @@ extension AccessibilityLabeledPairRole : Hashable {
     public func hash(into hasher: inout Hasher) { }
 }
 
-/// A struct used to define the characteristics of a view when accessed for accessibility.
+/// A struct used to define the characteristics of a view when accessed for
+/// accessibility.
 ///
-/// `AccessibilityTraits` are almost always used in conjunction with the ``View/accessibilityAddTraits(_:)`` view modifier.
-/// They are used to tell an assistive accessibility application (such as VoiceOver)
+/// `AccessibilityTraits` are almost always used in conjunction with the
+/// ``View/accessibilityAddTraits(_:)`` view modifier.
+/// They are used to tell an assistive accessibility application (such as
+/// VoiceOver)
 /// how an element should be treated.
 ///
 /// For example:
@@ -403,7 +414,8 @@ public struct AccessibilityTraits : SetAlgebra {
     /// The accessibility element is a button.
     public static let isButton: AccessibilityTraits
 
-    /// The accessibility element is a header that divides content into sections, like the title of a navigation bar.
+    /// The accessibility element is a header that divides content into sections,
+    /// like the title of a navigation bar.
     public static let isHeader: AccessibilityTraits
 
     /// The accessibility element is currently selected.
@@ -791,7 +803,8 @@ public struct ActionSheet {
 /// between one and two action buttons. Alerts often convey important information
 /// about the state of the app and typically request feedback from the user. While the
 /// styling of alerts is semi-fixed, there are three available styles for the buttons to choose from:
-/// ``Alert/Button/default(_:action:)``, ``Alert/Button/destructive(_:action:)``, and ``Alert/Button/cancel(_:action:)``. To actually present an alert, see
+/// ``Alert/Button/default(_:action:)``, ``Alert/Button/destructive(_:action:)``,
+/// and ``Alert/Button/cancel(_:action:)``. To actually present an alert, see
 /// ``View/alert(isPresented:content:)``.
 ///
 /// An alert can be created with one of two initializers, depending on if one button
@@ -892,7 +905,8 @@ public struct Alert {
     /// Creates an alert with two buttons.
     ///
     /// When the screen is too small to display both buttons horizontally, they will
-    /// switch to being vertically stacked. The system determines the visual ordering of the buttons based on their type and
+    /// switch to being vertically stacked. The system determines the visual
+    /// ordering of the buttons based on their type and
     /// if they are a primary or secondary button.
     ///
     /// For example, to create a new Alert with this initializer and present it:
@@ -1816,7 +1830,8 @@ extension Angle : Animatable {
 ///
 ///
 ///
-/// Note: Angles default to a clockwise rotation, but angles can be a negative value which will rotate the color counter-clockwise.
+/// Note: Angles default to a clockwise rotation, but angles can be a negative
+/// value which will rotate the color counter-clockwise.
 ///
 /// ## End Angle - Start Angle = 2π
 ///
@@ -1840,7 +1855,8 @@ extension Angle : Animatable {
 /// ## End Angle - Start Angle > 2π
 ///
 /// This is the case where the total angle is greater than a circle.
-/// The gradient will only draw the last complete turn which effectively writes over the first circle portion.
+/// The gradient will only draw the last complete turn which effectively writes
+/// over the first circle portion.
 ///
 /// ```
 ///  struct AngularGradientView: View {
@@ -1864,7 +1880,8 @@ extension Angle : Animatable {
 /// ## End Angle - Start Angle < 2π
 ///
 /// This is the case where the total angle is less than a circle.
-/// The gradient will not make a complete circle, but the missing area between the start and end will be evenly colored with the
+/// The gradient will not make a complete circle, but the missing area between
+/// the start and end will be evenly colored with the
 /// first and last color of the gradient.
 ///
 /// ```
@@ -1891,7 +1908,8 @@ extension Angle : Animatable {
 
 	/// Creates an angular gradient from a starting and ending angle.
 	///
-    /// Gradient behavior acts differently according to whether the end angle - start angle is greater than, less than or equal to 2π.
+    /// Gradient behavior acts differently according to whether the end angle -
+    /// start angle is greater than, less than or equal to 2π.
     /// See ``AngularGradient`` for more information.
     /// An example,
     ///
@@ -1954,19 +1972,33 @@ extension Angle : Animatable {
 
 /// Animate a view when data changes.
 ///
-/// ``Animatable`` describes how to animate a view with respect to some change in the view's data.
+/// ``Animatable`` describes how to animate a view with respect to some change
+/// in the view's data.
 ///
-/// Use `Animatable` when you are unable to achieve the animation you want with ``View/animation(_:)`` or ``withAnimation(_:_:)``.
+/// Use `Animatable` when you are unable to achieve the animation you want with
+/// ``View/animation(_:)`` or ``withAnimation(_:_:)``.
 ///
-/// `Animatable` allows fine-grained control over the animation of a SwiftUI view's animatable values. It does so by requiring `animatableData: AnimatableData', which represents a view's animatable data.
+/// `Animatable` allows fine-grained control over the animation of a SwiftUI
+/// view's animatable values. It does so by requiring
+/// `animatableData: AnimatableData', which represents a view's animatable data.
 ///
-/// By conforming to ``Animatable``, you are able to effectively **decouple** the animation of your view from the concept of *duration*, as you give SwiftUI the ability to interpolate arbitrarily between two different values for ``Animatable/animatableData-7101d``. This is also the reason why ``Animatable/AnimatableData`` must conform to ``VectorArithmetic``, which provides the runtime means to add, subtract and scale the animated values as necessary to generate data points for each frame of the animation over an arbitrary time interval.
+/// By conforming to ``Animatable``, you are able to effectively **decouple**
+/// the animation of your view from the concept of *duration*, as you give
+/// SwiftUI the ability to interpolate arbitrarily between two different values
+/// for ``Animatable/animatableData-7101d``. This is also the reason why
+/// ``Animatable/AnimatableData`` must conform to ``VectorArithmetic``,
+/// which provides the runtime means to add, subtract and scale the animated
+/// values as necessary to generate data points for each frame of the animation
+/// over an arbitrary time interval.
 /// [animatable-modifier ->]
 /// ### Implementations
 ///
 /// #### Using ``AnimatableModifier`` to implement a shake effect
 ///
-/// ``Animatable`` is best used via `AnimatableModifier`, which is nothing but a simple protocol that combines ``Animatable`` and ``ViewModifier``. This allows you to decouple the animation effect from the view you want to animate.
+/// ``Animatable`` is best used via `AnimatableModifier`, which is nothing but
+/// a simple protocol that combines ``Animatable`` and ``ViewModifier``. This
+/// allows you to decouple the animation effect from the view you want to
+/// animate.
 ///
 /// For example:
 ///
@@ -2014,16 +2046,24 @@ extension Angle : Animatable {
 /// `shakeNumber` to go from `0` to `10`.
 ///
 /// Note:
-///
-/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI runtime can set this value through ``Animatable/animatableData-7101d``, and it can be any value between the initial and the final value (`0.0` and `10.0` in this case).
-///
-/// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the runtime needs to be able to interpolate fractionally between `0.0` and `10.0` 'shakes' - and it does so by making use of `CGFloat`'s ``VectorArithmetic`` conformance.
-///
-/// - The exact mathematical function used to interpolate `shakeNumber` is determined by what type of ``Animation`` is used in ``withAnimation(_:_:)``, to animate the change from `0` shakes to `10` shakes.
+/// - `shakeNumber` represents the *progress* of the animation. The SwiftUI
+/// runtime can set this value through ``Animatable/animatableData-7101d``,
+/// and it can be any value between the initial and the final value (`0.0`
+/// and `10.0` in this case).
+/// - `shakeNumber` is a `CGFloat` and not an `Int`. This is because the
+/// runtime needs to be able to interpolate fractionally between `0.0` and
+/// `10.0` 'shakes' - and it does so by making use of `CGFloat`'s
+/// ``VectorArithmetic`` conformance.
+/// - The exact mathematical function used to interpolate `shakeNumber` is
+/// determined by what type of ``Animation`` is used in
+/// ``withAnimation(_:_:)``, to animate the change from `0` shakes to `10`
+/// shakes.
 ///
 /// #### Using ``AnimatableModifier`` to continuously animate a view along a circle
 ///
-/// ``AnimatableModifier``, used with ``Animation/repeatForever(autoreverses:)`` can also be used to create a continuous animation.
+/// ``AnimatableModifier``, used with
+/// ``Animation/repeatForever(autoreverses:)`` can also be used to create a
+/// continuous animation.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -2068,13 +2108,21 @@ extension Angle : Animatable {
 ///
 /// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
 ///
-/// `CircleAnimation` is an implementation of an ``AnimatableModifier`` that uses a simple mathematical function to calculate the `x` and `y` offset of a view, given a radius and a progress value between `0.0` and `1.0`.
+/// `CircleAnimation` is an implementation of an ``AnimatableModifier`` that
+/// uses a simple mathematical function to calculate the `x` and `y` offset of
+/// a view, given a radius and a progress value between `0.0` and `1.0`.
 ///
-/// When the view appears, the `CircleAnimation` modifier is animated from a progress value of `0.0` to `1.0` using ``withAnimation(_:_:)``. The ``Animation`` used in ``withAnimation(_:_:)`` is modified using ``Animation/repeatForever(autoreverses:)``, in order to create a loop. Note that ``Animation/repeatForever(autoreverses:)`` is explicitly set as `false` to prevent the animation from being reversed.
+/// When the view appears, the `CircleAnimation` modifier is animated from a
+/// progress value of `0.0` to `1.0` using ``withAnimation(_:_:)``. The
+/// ``Animation`` used in ``withAnimation(_:_:)`` is modified using
+/// ``Animation/repeatForever(autoreverses:)``, in order to create a loop.
+/// Note that ``Animation/repeatForever(autoreverses:)`` is explicitly set as
+/// `false` to prevent the animation from being reversed.
 /// [<-]
 /// ### Further notes
 ///
-/// - ``Animatable`` along with ``View`` is currently broken on iOS 14, please use ``AnimatableModifier``
+/// - ``Animatable`` along with ``View`` is currently broken on iOS 14,
+/// please use ``AnimatableModifier``
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol Animatable{ }
@@ -2324,7 +2372,8 @@ extension Animation {
     /// with a spring effect.
     ///
     /// When mixed with other ``Animation/spring(response:dampingFraction:blendDuration:)``
-    /// or ``Animation/interactiveSpring(response:dampingFraction:blendDuration:)`` animations on the same property, each
+    /// or ``Animation/interactiveSpring(response:dampingFraction:blendDuration:)``
+    /// animations on the same property, each
     /// animation will be replaced by their successor, preserving
     /// velocity from one animation to the next. Optionally blends the
     /// response values between springs over a time period.
@@ -3865,7 +3914,7 @@ extension AppStorage {
     /// Creates a property that can read and write to a url user default.
     ///
     ///     struct ContentView: View {
-    ///         @AppStorage("site") var url = URL(string: "bananadocs.org")!
+    ///         @AppStorage("site") var url = URL(string: "https://swiftontap.com")!
     ///
     ///         var body: some View {
     ///             Text("Check out \(url)")
@@ -4088,7 +4137,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         @AppStorage("site") var url: URL?
     ///
     ///         var body: some View {
-    ///             Button("Save the 🍌") { url = URL(string: "bananadocs.org") }
+    ///             Button("Save the 🍌") { url = URL(string: "https://swiftontap.com") }
     ///         }
     ///     }
     ///
@@ -4540,9 +4589,12 @@ extension BackgroundStyle : ShapeStyle {
 /// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
 /// In the example above, the source of truth is a `@State` variable,
-/// named `text`. `text`  represents a [`String`](https://developer.apple.com/documentation/swift/string), whereas `$text` represents
+/// named `text`. `text`  represents a
+/// [`String`](https://developer.apple.com/documentation/swift/string),
+/// whereas `$text` represents
 /// a `Binding<String>`. ``TextField``'s initializer accepts a placeholder
-/// [`String`](https://developer.apple.com/documentation/swift/string) and a `Binding<String>`. In this example, `TextField` requires a
+/// [`String`](https://developer.apple.com/documentation/swift/string) and a
+/// `Binding<String>`. In this example, `TextField` requires a
 /// ``Binding`` to the source of truth as ``TextField`` must be able to
 /// *write back* to the `@State` variable (a **mutable** source of truth).
 ///
@@ -4603,7 +4655,8 @@ extension BackgroundStyle : ShapeStyle {
 /// possible via ``Binding/constant(_:)``, which creates a `Binding`
 /// to a fixed value, ignoring any updates from the consumer of the binding.
 ///
-/// Consider ``EnvironmentValues/editMode``, for example. A ``List`` can be forced into active editing by passing a binding to `EditMode.active`.
+/// Consider ``EnvironmentValues/editMode``, for example. A ``List`` can be
+/// forced into active editing by passing a binding to `EditMode.active`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -4780,7 +4833,8 @@ extension Binding : DynamicProperty {
 
 /// Modes for compositing a view with overlapping content.
 ///
-/// There are 21 different types of blend modes. To use the following example, drag in the following two photos and label them "ocean" and "space".
+/// There are 21 different types of blend modes. To use the following example,
+/// drag in the following two photos and label them "ocean" and "space".
 ///
 /// ![Ocean](ocean.jpg)
 ///
@@ -4890,9 +4944,11 @@ public enum BlendMode {
     ///
     case screen
 
-    /// The parts were the bottom layer is light become lighter, and dark becomes darker.
+    /// The parts were the bottom layer is light become lighter, and dark
+    /// becomes darker.
     ///
-    /// Overlay is a combo of ``BlendMode/multiply`` and ``BlendMode/screen``. The formula is this:
+    /// Overlay is a combo of ``BlendMode/multiply`` and ``BlendMode/screen``.
+    /// The formula is this:
     ///
     ///     func overlay(a: Double, b: Double) -> Double {
     ///         if a > 0.5 {
@@ -5477,7 +5533,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 ///             .font(.title2)
 ///         }
 ///
-///         func tap() { }
+///         func tap() { /* implement here */ }
 ///     }
 ///
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
@@ -5738,13 +5794,20 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 
 /// This protocol is used to create a custom button style.
 ///
-/// The ``ButtonStyle`` protocol provides a template to create a reusable style for your buttons. It also provides data about the button and its interaction state.
+/// The ``ButtonStyle`` protocol provides a template to create a reusable style
+/// for your buttons. It also provides data about the button and its
+/// interaction state.
 ///
-/// To make a custom style, create a new structure that conforms to ``ButtonStyle``. This new style can be easily reused across your application. The style adapts to the user's current interaction state (i.e. on press, on release).
+/// To make a custom style, create a new structure that conforms to
+/// ``ButtonStyle``. This new style can be easily reused across your
+/// application. The style adapts to the user's current interaction state
+/// (i.e. on press, on release).
 ///
-/// Your structure only needs to implement one method: ``ButtonStyle/makeBody(configuration:)``.
+/// Your structure only needs to implement one method:
+/// ``ButtonStyle/makeBody(configuration:)``.
 ///
-/// To change the style of your ``Button``, use the ``View/buttonStyle(_:)-ea21b`` method. This method accepts a `ButtonStyle`.
+/// To change the style of your ``Button``, use the
+/// ``View/buttonStyle(_:)-ea21b`` method. This method accepts a `ButtonStyle`.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5753,7 +5816,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///             .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
 ///
-///     func tap() { }
+///     func tap() { /* implement here */ }
 /// }
 ///
 /// struct BananaButtonStyle: ButtonStyle {
@@ -5779,7 +5842,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 ///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
 ///
-/// Button style applies to all buttons within a view hierarchy. For example, you could apply `ButtonStyle` to a ``VStack``.
+/// Button style applies to all buttons within a view hierarchy. For example,
+/// you could apply `ButtonStyle` to a ``VStack``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -5792,7 +5856,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///         .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
 ///
-///     func tap() { }
+///     func tap() { /* implement here */ }
 /// }
 ///
 /// struct BananaButtonStyle: ButtonStyle {
@@ -5818,7 +5882,11 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///
 ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
 ///
-/// For more on how to customize your button style body, check out ``ButtonStyle/makeBody(configuration:)``. To provide greater control over when and how a button triggers it's action use ``PrimitiveButtonStyle``. While this property requires more work to setup, it provides more customization.
+/// For more on how to customize your button style body, check out
+/// ``ButtonStyle/makeBody(configuration:)``. To provide greater control over
+/// when and how a button triggers it's action use
+/// ``PrimitiveButtonStyle``. While this property requires more work to setup,
+/// it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle { }
 extension ButtonStyle {
@@ -5828,7 +5896,8 @@ extension ButtonStyle {
 
     /// Creates a view that represents the body of a button.
     ///
-    /// This is the only required property of ``ButtonStyle``. See ``ButtonStyle`` for more.
+    /// This is the only required property of ``ButtonStyle``. See
+    /// ``ButtonStyle`` for more.
     ///
     /// The system calls this method for each ``Button`` instance in a view
     /// hierarchy where this style is the current button style.
@@ -5844,7 +5913,7 @@ extension ButtonStyle {
     ///         .buttonStyle(BananaButtonStyle(color: .yellow))
     ///     }
     ///
-    ///     func tap() {}
+    ///     func tap() { /* implement here */ }
     /// }
     ///
     /// struct BananaButtonStyle: ButtonStyle {
@@ -5881,7 +5950,9 @@ extension ButtonStyle {
 /// The properties of a button.
 ///
 /// This property represents the view state of the `Button` that ``ButtonStyle`` modifies.
-//`ButtonStyleConfiguration` consits of a label representing the button view, and `isPressed`, which indicates whether or not the button is currently being pressed.
+//`ButtonStyleConfiguration` consits of a label representing the button view,
+/// and `isPressed`, which indicates whether or not the button is currently
+/// being pressed.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -6049,8 +6120,8 @@ extension Capsule : InsettableShape {
 ///
 /// ![Circle init example](Circle-example-1.png)
 ///
-/// Define a Circle with a specific color and frame with the `Shape/fill()`
-/// and `View/frame(width:height:)` modifiers. For example:
+/// Define a Circle with a specific color and frame with the ``Shape/fill()``
+/// and ``View/frame(width:height:)`` modifiers. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -6064,7 +6135,7 @@ extension Capsule : InsettableShape {
 ///
 /// ![Circle fill and frame example](Circle-example-2.png)
 ///
-/// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
+/// To add a border, use the ``Shape/stroke(:lineWidth:)`` modifier, and use
 /// the ``Circle/inset(by:)`` modifier to inset the circle by half of the border
 /// width to keep the circle at its original size:
 ///
@@ -6085,8 +6156,9 @@ extension Capsule : InsettableShape {
 
     /// Used to describe a Circle as a path in a `CGRect`.
     ///
-    /// A Circle can be described as a path within a specific `CGRect` using the
-    /// ``Circle/path(in:)`` modifier:
+    /// A Circle can be described as a path within a specific
+    /// [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect)
+    //// using the ``Circle/path(in:)`` modifier:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -6234,7 +6306,9 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 
 /// An environment-dependent color.
 ///
-/// `Color` represents an environment-dependent color that conforms to ``View``. Colors conformance to ``View`` means that a color can be used as a view itself.
+/// `Color` represents an environment-dependent color that conforms to ``View``.
+/// Colors conformance to ``View`` means that a color can be used as a view
+/// itself.
 ///
 /// For example:
 ///
@@ -6246,7 +6320,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///
 /// ![Color Example One](color-example-one.png)
 ///
-/// `Color` also conforms to ``ShapeStyle`` which allows it to serve as a fill or stroke on a shape.
+/// `Color` also conforms to ``ShapeStyle`` which allows it to serve as a fill
+/// or stroke on a shape.
 ///
 /// For example, as a fill:
 ///
@@ -6502,7 +6577,7 @@ extension Color {
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
-    ///             Link("Banana🍌 Docs", destination: URL(string: "bananadocs.org")!)
+    ///             Link("Banana🍌 Docs", destination: URL(string: "https://swiftontap.com")!)
     ///                 .accentColor(Color.accentColor)
     ///         }
     ///     }
@@ -6763,13 +6838,16 @@ extension Color {
 
     /// Creates a named color.
     ///
-    /// To declare a color with a `name` create your color in the `Assets.xcassets` folder.
+    /// To declare a color with a `name` create your color in the
+    /// `Assets.xcassets` folder.
     ///
     /// ![Create Color Name](color-name-showcase.png)
     ///
-    /// Create a light theme and dark theme color to adjust your view depending on the user's environment.
+    /// Create a light theme and dark theme color to adjust your view depending
+    /// on the user's environment.
     ///
-    /// Next, run your app in both light theme and dark theme. Your color will automatically change.
+    /// Next, run your app in both light theme and dark theme. Your color will
+    /// automatically change.
     ///
     /// Code:
     ///
@@ -6813,7 +6891,8 @@ extension Color {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Color {
 
-	/// Updates the transparency channel of a ``Color``, returning a ``Color`` back.
+	/// Updates the transparency channel of a ``Color``, returning a ``Color``
+    /// back.
 	///
     ///
     ///     struct ExampleView: View {
@@ -6852,7 +6931,8 @@ extension Color.RGBColorSpace : Hashable {
 /// of the selected color, and strips out opacity from any color set
 /// programmatically or selected from the user's system favorites.
 ///
-/// In general, there are 3 types of color picker titles, and 2 binding types, for 6 initializers total.
+/// In general, there are 3 types of color picker titles, and 2 binding types,
+/// for 6 initializers total.
 ///
 /// Title types:
 ///
@@ -8662,7 +8742,7 @@ extension DatePickerStyle {
 ///             .font(.title2)
 ///         }
 ///
-///         func tap() { }
+///         func tap() { /* implement here */ }
 ///     }
 ///
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
@@ -9420,11 +9500,17 @@ extension DisclosureGroup where Label == Text {
 
 /// A divider that visually separates views in a stack.
 ///
-/// The ``Divider`` in iOS is either a horizontal or a vertical `1pt` thick line. The color and height of a ``Divider`` is determined by the system, and cannot be overriden. The system is responsible for adapting the appearance of ``Divider`` as best appropriate for the host platform.
+/// The ``Divider`` in iOS is either a horizontal or a vertical `1pt` thick line.
+/// The color and height of a ``Divider`` is determined by the system, and
+/// cannot be overriden. The system is responsible for adapting the appearance
+/// of ``Divider`` as best appropriate for the host platform.
 ///
-/// When contained in a stack, the divider stretches across the axis perpendicular to the axis of the stack. When not in a stack, the divider stretches across the horizontal axis.
+/// When contained in a stack, the divider stretches across the axis
+/// perpendicular to the axis of the stack. When not in a stack, the divider
+/// stretches across the horizontal axis.
 ///
-/// For example, use a `Divider` in a ``VStack`` to create a horizontal line between vertically laid out elements:
+/// For example, use a `Divider` in a ``VStack`` to create a horizontal line
+/// between vertically laid out elements:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -9442,7 +9528,8 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
-/// Or use a ``Divider`` in an ``HStack`` to create a vertical line between horizontally laid out elements:
+/// Or use a ``Divider`` in an ``HStack`` to create a vertical line between
+/// horizontally laid out elements:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -9764,21 +9851,28 @@ public struct DragGesture : Gesture {
 
 /// An interface to easily perform drag & drop operations.
 ///
-/// The ``DropDelegate`` protocol offers functionality to customize drag and drop behaviors. It is preffered over ``View/onDrop(of:isTargeted:perform)`` view modifier when your drop behavior requires non-standard implementations.
+/// The ``DropDelegate`` protocol offers functionality to customize drag and
+/// drop behaviors. It is preffered over ``View/onDrop(of:isTargeted:perform:)``
+/// view modifier when your drop behavior requires non-standard implementations.
 ///
-/// ``DropDelegate`` heavily utalizes `NSItemProvider`, which provides information about the dragged data.
+/// ``DropDelegate`` heavily utalizes `NSItemProvider`, which provides
+/// information about the dragged data.
 ///
 /// ### Setup
-/// ``DropDelegate`` has one required implementation and four optional implementations.
+/// ``DropDelegate`` has one required implementation and four optional
+/// implementations.
 ///
 /// Required:
 /// - ``DropDelegate/performDrop(info:)`` specifies the behavior for your drop.
 ///
 /// Optional:
 /// - ``DropDelegate/validateDrop(info:)-954f7`` validates if a drop can be made.
-/// - ``DropDelegate/dropEntered(info:)-525fa`` provides custom behavior when an object is dragged over the `onDrop` view.
-/// - ``DropDelegate/dropExited(info:)-3d540`` provides custom behavior when an object is dragged off of the `onDrop` view.
-/// - ``DropDelegate/dropUpdated(info:)-72cd3`` provides custom behavior when the drop is updated.
+/// - ``DropDelegate/dropEntered(info:)-525fa`` provides custom behavior when
+/// an object is dragged over the `onDrop` view.
+/// - ``DropDelegate/dropExited(info:)-3d540`` provides custom behavior when an
+/// object is dragged off of the `onDrop` view.
+/// - ``DropDelegate/dropUpdated(info:)-72cd3`` provides custom behavior when
+/// the drop is updated.
 ///
 /// ### Creating a simple Drag & Drop
 /// #### Create a draggable ``View``
@@ -9794,11 +9888,15 @@ public struct DragGesture : Gesture {
 /// ```
 ///
 /// #### Creating a drop ``View``
-/// Use `onDrop` to create a view that accepts "drops" from dragged data. There are three versions of the `onDrop` modifier:
+/// Use `onDrop` to create a view that accepts "drops" from dragged data. There
+/// are three versions of the `onDrop` modifier:
 ///
-/// - ``View/onDrop(of:isTargeted:perform:)-ae20f`` is the simplest implementation. Specify a closure to execute when content is dropped.
-/// - ``View/onDrop(of:isTargeted:perform:)-b7eed`` is similar to the former, but the closure also provides information about the drop location.
-/// - ``View/onDrop(of:delegate:)-884b8`` requires a ``DropDelegate`` and is the most versatile.
+/// - ``View/onDrop(of:isTargeted:perform:)-ae20f`` is the simplest
+/// implementation. Specify a closure to execute when content is dropped.
+/// - ``View/onDrop(of:isTargeted:perform:)-b7eed`` is similar to the former,
+/// but the closure also provides information about the drop location.
+/// - ``View/onDrop(of:delegate:)-884b8`` requires a ``DropDelegate`` and is
+/// the most versatile.
 ///
 /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
 ///
@@ -28360,7 +28458,7 @@ public struct PinnedScrollableViews : OptionSet {
 ///             .font(.title2)
 ///         }
 ///
-///         func tap() { }
+///         func tap() { /* implement here */ }
 ///     }
 ///
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
@@ -29393,7 +29491,7 @@ extension PreviewProvider {
 ///         .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
 ///
-///     func tap() { }
+///     func tap() { /* implement here */ }
 /// }
 ///
 /// struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -29433,7 +29531,7 @@ extension PrimitiveButtonStyle {
     ///          .buttonStyle(BananaButtonStyle(color: .yellow))
     ///      }
     ///
-    ///      func tap() { }
+    ///      func tap() { /* implement here */ }
     ///  }
     ///
     ///  struct BananaButtonStyle: PrimitiveButtonStyle {
@@ -30449,10 +30547,10 @@ extension ProjectionTransform {
 /// scaled to fit within the defined start and end radii.
 ///
 /// A Radial Gradient is very similar to a ``LinearGradient``, but instead of defining starting and ending points,
-/// it is necessary to define a start radius, an end radius and the center of the gradeint.
+/// it is necessary to define a start radius, an end radius and the center of the gradient.
 ///
 /// The gradient is drawn as circular around the center, moving outwards to the end radius.
-/// `RadialGradient` accepts a ``UnitPoint`` for the center of the gradeint and
+/// `RadialGradient` accepts a ``UnitPoint`` for the center of the gradient and
 /// [`CGFloat`](https://developer.apple.com/documentation/coregraphics/cgfloat)
 /// for radius in points.
 ///
@@ -33854,7 +33952,7 @@ extension SceneStorage {
     /// Creates a property that can save and restore a URL.
     ///
     ///     struct ContentView: View {
-    ///         @SceneStorage("site") var url = URL(string: "bananadocs.org")!
+    ///         @SceneStorage("site") var url = URL(string: "https://swiftontap.com")!
     ///
     ///         var body: some View {
     ///             Text("Check out \(url)")
@@ -34040,7 +34138,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///         @SceneStorage("site") var url: URL?
     ///
     ///         var body: some View {
-    ///             Button("Save the 🍌") { url = URL(string: "bananadocs.org") }
+    ///             Button("Save the 🍌") { url = URL(string: "https://swiftontap.com") }
     ///         }
     ///     }
     ///
@@ -37112,7 +37210,7 @@ extension Stepper where Label == Text {
 
     /// The limit on the ratio of the miter length to stroke width.
     ///
-    /// According Apple's documentation, `miterLimit` is "the limit
+    /// According to Apple's documentation, `miterLimit` is "the limit
     /// on the ratio of the miter length to stroke width." If this is
     /// still unclear, here is a deep dive.
     ///
@@ -37324,7 +37422,7 @@ extension Stepper where Label == Text {
     ///
     /// This property offsets the phase of the dash pattern by a
     /// specified number of pts. (See ``StrokeStyle/dash`` if you aren't
-    /// familiary with how to create a dashed ``Path``.
+    /// familiary with how to create a dashed ``Path``.)
     ///
     /// Take this `Line` ``Shape``:
     ///
@@ -43364,7 +43462,7 @@ extension View {
     ///             .font(.title2)
     ///         }
     ///
-    ///         func tap() { }
+    ///         func tap() { /* implement here */ }
     ///     }
     public func buttonStyle<S>(_ style: S) -> some View where S : PrimitiveButtonStyle { }
 
@@ -43997,7 +44095,7 @@ extension View {
     ///              .font(.title2)
     ///          }
     ///
-    ///          func tap() {}
+    ///          func tap() { /* implement here */ }
     ///      }
     public func buttonStyle<S>(_ style: S) -> some View where S : ButtonStyle { }
 
@@ -46772,9 +46870,9 @@ extension View {
 
     /// Positions this view within an invisible frame.
     ///
-    /// **This does nothing and was only implemented so people who
+    /// **This does nothing**. It was only implemented so people who
     /// don't know what they're doing don't have their programs
-    /// always breaking.**
+    /// always breaking.
     ///
     /// Use ``View/frame(width:height:alignment:)`` or
     /// ``View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)``
@@ -49519,7 +49617,9 @@ extension View {
 
     /// Creates a drop-zone for drag & drop contents.
     ///
-    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
+    /// `onDrop` modifies a view such that contents can be dropped there in a
+    /// drag-and-drop operation. The dropped contents are handled with a
+    /// specified closure.
     ///
     /// ### Basic Usage
     ///
@@ -49593,15 +49693,23 @@ extension View {
     /// ```
     ///
     /// - Paremeters:
-    ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
-    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
-    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
+    ///     - of: The type you want to drop. Accepts an array of `UTType`,
+    ///     which can include "Uniform Resource Identifiers", or URI for short.
+    ///     Common URI include "public.image", "public.text", "public.file-url",
+    ///     and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging over
+    ///     this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an
+    ///     `NSItemProvider` and returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
 
 
     /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure. That closure includes a `CGPoint` of where the dragged contents were dropped.
+    /// `onDrop` modifies a view such that contents can be dropped there in a
+    /// drag-and-drop operation. The dropped contents are handled with a
+    /// specified closure. That closure includes a `CGPoint` of where the
+    /// dragged contents were dropped.
     ///
     /// ### Basic Usage
     ///
@@ -49723,18 +49831,26 @@ extension View {
     /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
-    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
-    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
+    ///     - of: The type you want to drop. Accepts an array of "Uniform
+    ///     Resource Identifiers", or URI for short. Common URI include
+    ///     "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging
+    ///     over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an
+    ///     `NSItemProvider` and a CGPoint which represents the drop location.
+    ///     It returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
 
 
     /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the ``DropDelegate`` protocol.
+    /// `onDrop` modifies a view such that contents can be dropped there in a
+    /// drag-and-drop operation. The dropped contents are handled with a struct
+    /// that conforms to the ``DropDelegate`` protocol.
     ///
     /// #### Conform to DropDelegate
-    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a structure that conforms to ``DropDelegate``.
+    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a
+    /// structure that conforms to ``DropDelegate``.
     ///
     ///
     /// ```
@@ -49857,17 +49973,27 @@ extension View {
     ///
     /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
     ///
-    /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent fruits from being dropped if the background is yellow.
+    /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent
+    /// fruits from being dropped if the background is yellow.
     ///
-    /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change the color the first time a user drags over the drop zone.
+    /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change
+    /// the color the first time a user drags over the drop zone.
     ///
-    /// Finally, when a user drags out of the view, ``DropDelegate/dropExited(info:)-3d540`` changes the background color to a dark gray.
+    /// Finally, when a user drags out of the view,
+    /// ``DropDelegate/dropExited(info:)-3d540``
+    /// changes the background color to a dark gray.
     ///
-    /// Note: if the user deselects their dragged object while over the drop zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called. ``DropDelegate/dropExited(info:)-3d540`` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+    /// Note: if the user deselects their dragged object while over the drop
+    /// zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called.
+    /// ``DropDelegate/dropExited(info:)-3d540`` is only called when the user
+    /// explicitly drags their dragged object **out** of the drop zone.
     ///
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - of: The type you want to drop. Accepts an array of UTType which
+    ///     include "Uniform Resource Identifiers", or URI for short.
+    ///     ommon URI include "public.image", "public.text",
+    ///     "public.file-url", and "public.url".
     ///     - delegate: An object that conforms to  ``DropDelegate``.
     public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
 
@@ -49881,7 +50007,9 @@ extension View {
 
     /// Creates a drop-zone for drag & drop contents.
     ///
-    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure.
+    /// `onDrop` modifies a view such that contents can be dropped there in a
+    /// drag-and-drop operation. The dropped contents are handled with a
+    /// specified closure.
     ///
     /// ### Basic Usage
     ///
@@ -49955,9 +50083,14 @@ extension View {
     /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of `UTType`, which can include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
-    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
-    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and returns a boolean.
+    ///     - of: The type you want to drop. Accepts an array of `UTType`,
+    ///     which can include "Uniform Resource Identifiers", or URI for short.
+    ///     Common URI include "public.image", "public.text", "public.file-url",
+    ///     and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging
+    ///     over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an
+    ///     `NSItemProvider` and returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
@@ -49965,7 +50098,10 @@ extension View {
 
     /// Creates a drop-zone for drag & drop contents and provides drop location data.
     ///
-    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a specified closure. That closure includes a `CGPoint` of where the dragged contents were dropped.
+    /// `onDrop` modifies a view such that contents can be dropped there in a
+    /// drag-and-drop operation. The dropped contents are handled with a
+    /// specified closure. That closure includes a `CGPoint` of where the
+    /// dragged contents were dropped.
     ///
     /// ### Basic Usage
     ///
@@ -50088,20 +50224,29 @@ extension View {
     ///
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
-    ///     - isTargeted: A binding to communicate when a user is dragging over this region.
-    ///     - perform: The action to perform on drop. `perform` accepts an `NSItemProvider` and a CGPoint which represents the drop location. It returns a boolean.
+    ///     - of: The type you want to drop. Accepts an array of "Uniform
+    ///     Resource Identifiers", or URI for short. Common URI include
+    ///     "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - isTargeted: A binding to communicate when a user is dragging
+    ///     over this region.
+    ///     - perform: The action to perform on drop. `perform` accepts an
+    ///     `NSItemProvider` and a CGPoint which represents the drop location.
+    ///     It returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
 
 
-    /// Creates a drop-zone for drag & drop contents and provides drop location data.
+    /// Creates a drop-zone for drag & drop contents and provides drop location
+    /// data.
     ///
-    /// `onDrop` modifies a view such that contents can be dropped there in a drag-and-drop operation. The dropped contents are handled with a struct that conforms to the ``DropDelegate`` protocol.
+    /// `onDrop` modifies a view such that contents can be dropped there in a
+    /// drag-and-drop operation. The dropped contents are handled with a
+    /// struct that conforms to the ``DropDelegate`` protocol.
     ///
     /// #### Conform to DropDelegate
-    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a structure that conforms to ``DropDelegate``.
+    /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a
+    /// structure that conforms to ``DropDelegate``.
     ///
     /// ```
     /// struct ExampleView: View {
@@ -50135,7 +50280,8 @@ extension View {
     /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
     ///
     /// ### Fully Featured ``DropDelegate``
-    /// Utalize ``DropDelegate``s optional functions to provide additional behavior.
+    /// Utilize ``DropDelegate``s optional functions to provide additional
+    /// behavior.
     ///
     /// ```
     /// struct ExampleView: View {
@@ -50148,7 +50294,7 @@ extension View {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -50222,17 +50368,27 @@ extension View {
     ///
     /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
     ///
-    /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent fruits from being dropped if the background is yellow.
+    /// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent
+    /// fruits from being dropped if the background is yellow.
     ///
-    /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change the color the first time a user drags over the drop zone.
+    /// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change
+    /// the color the first time a user drags over the drop zone.
     ///
-    /// Finally, when a user drags out of the view, ``DropDelegate/dropExited(info:)-3d540`` changes the background color to a dark gray.
+    /// Finally, when a user drags out of the view,
+    /// ``DropDelegate/dropExited(info:)-3d540`` changes the background color
+    /// to a dark gray.
     ///
-    /// Note: if the user deselects their dragged object while over the drop zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called. ``DropDelegate/dropExited(info:)-3d540`` is only called when the user explicitly drags their dragged object **out** of the drop zone.
+    /// Note: if the user deselects their dragged object while over the drop
+    /// zone, ``DropDelegate/dropExited(info:)-3d540`` will **not** be called.
+    /// ``DropDelegate/dropExited(info:)-3d540`` is only called when the user
+    /// explicitly drags their dragged object **out** of the drop zone.
     ///
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of UTType which include "Uniform Resource Identifiers", or URI for short. Common URI include "public.image", "public.text", "public.file-url", and "public.url".
+    ///     - of: The type you want to drop. Accepts an array of UTType which
+    ///     include "Uniform Resource Identifiers", or URI for short.
+    ///     Common URI include "public.image", "public.text",
+    ///     "public.file-url", and "public.url".
     ///     - delegate: An object that conforms to  ``DropDelegate``.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -50407,7 +50563,9 @@ extension View {
 
     /// Supplies an `ObservableObject` to a view subhierachy.
     ///
-    /// ``View/environmentObject(_:)`` supplies an ``ObservableObject`` to a view subhierachy. See ``ObservableObject`` for more on passing data between views.
+    /// ``View/environmentObject(_:)`` supplies an ``ObservableObject`` to a
+    /// view subhierachy. See ``ObservableObject`` for more on passing data
+    /// between views.
     ///
     /// [[environment-objects]]
     ///
@@ -50422,8 +50580,10 @@ extension View {
 
     /// A view modifier that presents an alert when a given value is not nil.
     ///
-    /// Use this modifier to present an alert over the current view when you need to pass the alert a value.
-    /// The alert will be presented only when the binding value you pass it is not nil.
+    /// Use this modifier to present an alert over the current view when you
+    /// need to pass the alert a value.
+    /// The alert will be presented only when the binding value you pass it is
+    /// not nil.
     ///
     /// If your alert doesn't need an `item` parameter, use
     /// ``View/alert(isPresented:content)`` instead.
@@ -50691,7 +50851,8 @@ extension View {
 /// ```
 ///
 /// Since that last parameter is a `ViewBuilders`, you can easily create
-/// a ``Group`` by passing it a [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
+/// a ``Group`` by passing it a
+/// [trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
 /// stacking views:
 ///
 /// ```
@@ -51706,7 +51867,8 @@ public struct WheelPickerStyle : PickerStyle {
 ///   over time.
 /// * SwiftUI views used by WidgetKit to display the widget.
 ///
-/// To add a widget to your app go to: `File -> New -> Target`. Name your widget "Banana Widget" to use code from this tutorial.
+/// To add a widget to your app go to: `File -> New -> Target`. Name your widget
+/// "Banana Widget" to use code from this tutorial.
 ///
 /// Next, from the options, select "Widget"
 ///
@@ -51716,7 +51878,8 @@ public struct WheelPickerStyle : PickerStyle {
 ///
 /// ![Widget](widget-2.png)
 ///
-/// Your widget can now be styled similar to a standard SwiftUI view. For example, modify `Banana_WidgetEntryView` to create:
+/// Your widget can now be styled similar to a standard SwiftUI view. For
+/// example, modify `Banana_WidgetEntryView` to create:
 ///
 /// ![Widget](widget-3.png)
 ///
@@ -51912,13 +52075,19 @@ extension WidgetConfiguration {
 /// ```
 ///
 /// Note:
-///
-/// - The default implementation of a ``WindowGroup`` allows multiple instances of the window to be created (either using ⌘N , or the "Show Tab Bar" command).
-/// - Each instance of a window created from a window group contains the same SwiftUI hierarchy, but maintains an independent state. That means if the user creates two instances of your app's window, each window will maintain its own separate (independent) state, unaffected by what the user does on another window of your app.
+/// - The default implementation of a ``WindowGroup`` allows multiple instances
+/// of the window to be created (either using ⌘N , or the "Show Tab Bar" command).
+/// - Each instance of a window created from a window group contains the same
+/// SwiftUI hierarchy, but maintains an independent state. That means if the
+/// user creates two instances of your app's window, each window will maintain
+/// its own separate (independent) state, unaffected by what the user does on
+/// another window of your app.
 ///
 /// ### Adding a title to a window
 ///
-/// On macOS, a window's title is usually displayed in a window's title bar. A window's title bar contains a centered text item to display the window's title.
+/// On macOS, a window's title is usually displayed in a window's title bar. A
+/// window's title bar contains a centered text item to display the window's
+/// title.
 ///
 /// Use ``WindowGroup/init(_:content)-0733f`` to title a window. For example:
 ///
@@ -51933,11 +52102,15 @@ extension WidgetConfiguration {
 /// }
 /// ````
 ///
-/// Note: The system may use the provided window title as a part of some default window command names. For example, the "New Window" command would become "New Fruit App Window".
+/// Note: The system may use the provided window title as a part of some default
+/// window command names. For example, the "New Window" command would become
+/// "New Fruit App Window".
 /// [window-commands ->]
 /// ### Adding commands to a window group
 ///
-/// On macOS, a window can provide a set of contextual commands as menu items in the menu bar. To add a command menu to a ``WindowGroup``, use ``Scene/commands(content:)``.
+/// On macOS, a window can provide a set of contextual commands as menu items
+/// in the menu bar. To add a command menu to a ``WindowGroup``, use
+/// ``Scene/commands(content:)``.
 ///
 /// For example:
 ///
@@ -51959,14 +52132,18 @@ extension WidgetConfiguration {
 /// [<-]
 /// ### Disabling creating multiple window instances
 ///
-/// Currently, SwiftUI offers no canonical way to disable the user from creating multiple instances of a window from a ``WindowGroup`` scene. This can be done in two ways:
+/// Currently, SwiftUI offers no canonical way to disable the user from creating
+/// multiple instances of a window from a ``WindowGroup`` scene. This can be
+/// done in two ways:
 ///
 /// - Using the "New Window" (⌘N) command to create a new window instance
-/// - Using the "Show Tab Bar" command, and creating a new tab containing a new window instance
+/// - Using the "Show Tab Bar" command, and creating a new tab containing a new
+/// window instance
 ///
 /// #### Disabling the "New Window" command
 ///
-/// The "New Window" (⌘N) command can be disabled by replacing the "New Item" command group with an empty command group.
+/// The "New Window" (⌘N) command can be disabled by replacing the "New Item"
+/// command group with an empty command group.
 ///
 /// ```
 /// @main
@@ -51986,7 +52163,9 @@ extension WidgetConfiguration {
 ///
 /// #### Disabling the "Show Tab Bar" command
 ///
-/// To disable the "Show Tab Bar" command, use `NSApplication` to iterate over your app's windows at launch and set each window's `tabbingMode` to `.disallowed`.
+/// To disable the "Show Tab Bar" command, use `NSApplication` to iterate over
+/// your app's windows at launch and set each window's `tabbingMode` to
+/// `.disallowed`.
 ///
 /// For example:
 ///
@@ -52190,9 +52369,13 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// This function sets the given ``Animation`` as the ``Transaction/animation``
 /// property of the thread's current ``Transaction``.
 ///
-/// ``withAnimation(_:_:)`` executes the code in it's closure, and displays the results of that execution according to the provided animation.
+/// ``withAnimation(_:_:)`` executes the code in it's closure, and displays the
+/// results of that execution according to the provided animation.
 ///
-/// For example, use ``withAnimation(_:_:)`` to animate a toggle. Here, the action on the view is the `showBanana.toggle()`. Now, by using ``withAnimation(_:_:)`` the results of that action will be animated according to `.easeInOut`.
+/// For example, use ``withAnimation(_:_:)`` to animate a toggle. Here, the
+/// action on the view is the `showBanana.toggle()`. Now, by using
+/// ``withAnimation(_:_:)`` the results of that action will be animated
+/// according to `.easeInOut`.
 ///
 /// ```
 /// struct ExplicitTransitionView: View {
