@@ -17,6 +17,7 @@ import os.signpost
 /// ### Understanding `ObservableObject`
 ///
 /// The `ObservableObject` protocol definition is as follows:
+///
 /// ```
 /// public protocol ObservableObject: AnyObject {
 ///     associatedtype ObjectWillChangePublisher: Publisher
@@ -5784,14 +5785,14 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         VStack {
-///             Button("🍌🍌", action: { tap() })
-///             Button("🍎🍎", action: { tap() })
-///             Button("🍑🍑", action: { tap() })
+///             Button("🍌🍌", action: tap)
+///             Button("🍎🍎", action: tap)
+///             Button("🍑🍑", action: tap )
 ///         }
 ///         .buttonStyle(BananaButtonStyle(color: .yellow))
 ///     }
 ///
-///     func tap() {}
+///     func tap() { }
 /// }
 ///
 /// struct BananaButtonStyle: ButtonStyle {
@@ -8642,36 +8643,36 @@ extension DatePickerStyle {
 
 /// The default button style, based on the button's context.
 ///
-/// > "If you create a button directly on a blank canvas, the style varies by platform. iOS uses the borderless button style by default, whereas macOS, tvOS, and watchOS use the bordered button style."
-///
-/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
-///
+/// If you create a button directly on a blank canvas, the style varies by
+/// platform. iOS uses the borderless button style by default, whereas macOS,
+/// tvOS, and watchOS use the bordered button style.
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
-///              VStack {
-///                  Button("PlainBanana🍌🍌") { tap() }
-///                     .buttonStyle(PlainButtonStyle())
+///             VStack {
+///                 Button("PlainBanana🍌🍌") { tap() }
+///                    .buttonStyle(PlainButtonStyle())
 ///
-///                  Button("BorderlessBanana🍌🍌") { tap() }
-///                     .buttonStyle(BorderlessButtonStyle())
+///                 Button("BorderlessBanana🍌🍌") { tap() }
+///                    .buttonStyle(BorderlessButtonStyle())
 ///
-///                  Button("DefaultBanana🍌🍌") { tap() }
-///                     .buttonStyle(DefaultButtonStyle())
-///              }
-///              .font(.title2)
-///          }
+///                 Button("DefaultBanana🍌🍌") { tap() }
+///                    .buttonStyle(DefaultButtonStyle())
+///             }
+///             .font(.title2)
+///         }
 ///
-///          func tap() {}
-///      }
+///         func tap() { }
+///     }
 ///
+/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// If you create a button inside a container, like a ``List``, the style
 /// resolves to the recommended style for buttons inside that container for that
 /// specific platform.
 ///
 /// You can override a button's style. To apply the default style to a button,
-/// or to a view that contains buttons, use the ``View/buttonStyle(_:)-ea21b``
+/// or to a view that contains buttons, use the ``View/buttonStyle(_:)-d2d0a``
 /// modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultButtonStyle : PrimitiveButtonStyle {
@@ -8694,19 +8695,17 @@ public struct DefaultButtonStyle : PrimitiveButtonStyle {
 
 /// The default ``DatePicker`` style.
 ///
+///     struct ExampleView: View {
+///         @State var date: Date = Date()
+///
+///         var body: some View {
+///             DatePicker("Date", selection: $date)
+///                 .datePickerStyle(DefaultDatePickerStyle())
+///                 .padding()
+///         }
+///     }
+///
 /// ![DefaultDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
-///
-///
-///      struct ExampleView: View {
-///          @State var date: Date = Date()
-///
-///          var body: some View {
-///              DatePicker("Date", selection: $date)
-///                  .datePickerStyle(DefaultDatePickerStyle())
-///                  .padding()
-///          }
-///      }
-///
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -8749,8 +8748,6 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 
 	/// Creates a default group box style.
 	///
-    /// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -8769,6 +8766,8 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
     ///
 	/// - SeeAlso: GroupBoxStyle
     public init() { }
@@ -8869,20 +8868,18 @@ public struct DefaultLabelStyle : LabelStyle {
 /// The instance that describes a platform's default behavior and appearance for
 /// a list.
 ///
-/// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
-///
-///
-///      struct ExampleView: View {
-///          var body: some View {
+///     struct ExampleView: View {
+///         var body: some View {
 ///             List {
-///                Text("Bananas 🍌🍌")
-///                Text("Apples 🍎🍎")
-///                Text("Peaches 🍑🍑")
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
 ///             }
 ///             .listStyle(DefaultListStyle())
-///          }
-///      }
+///         }
+///     }
 ///
+/// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultListStyle : ListStyle {
@@ -9050,16 +9047,16 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 ///     @State private var selectedFruit = 0
 ///
 ///     var body: some View {
-///          VStack {
-///              Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
-///                  ForEach(0..<fruits.count) {
-///                      Text(self.fruits[$0])
-///                  }
-///              }
-
-///              Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
-///          }
-///          .pickerStyle(DefaultPickerStyle())
+///         VStack {
+///             Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                 ForEach(0..<fruits.count) {
+///                     Text(self.fruits[$0])
+///                 }
+///             }
+///
+///             Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///         }
+///         .pickerStyle(DefaultPickerStyle())
 ///     }
 /// }
 /// ```
@@ -9278,13 +9275,13 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 /// struct ExampleView: View {
 ///     @State private var status = true
 ///     var body: some View {
-///          Toggle(isOn: $status) {
-///              Text("Banana🍌🍌")
-///           }
-///           .toggleStyle(DefaultToggleStyle())
-///           .padding()
-///      }
-///  }
+///         Toggle(isOn: $status) {
+///             Text("Banana🍌🍌")
+///         }
+///         .toggleStyle(DefaultToggleStyle())
+///         .padding()
+///     }
+/// }
 /// ```
 ///
 /// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
@@ -16041,48 +16038,48 @@ extension Font {
     ///
     /// Use this function to create a system font by specifying the size and
     /// weight, and a type design together. The following styles the system font
-    /// as 17 point, ``Font/Weight/semibold`` text:
+    /// as 48 point, ``Font/Weight/semibold`` text:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
     ///         Text("Hello")
-    ///             .font(.system(size: 17, weight: .semibold))
+    ///             .font(.system(size: 48, weight: .semibold))
     ///     }
     /// }
     /// ```
     ///
-    /// ![Font System Semibold](font-system-semibold.png)
+    /// ![](font-system-1.png)
     ///
-    /// The following styles the text as 17 point ``Font/Weight/bold``,
+    /// The following styles the text as 48 point
     /// and applies a `serif` ``Font/Design`` to the system font:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
     ///         Text("Hello")
-    ///             .font(.system(size: 17, weight: .bold, design: .serif))
+    ///             .font(.system(size: 48, weight: .semibold, design: .serif))
     ///     }
     /// }
     /// ```
     ///
-    /// ![Font System Serif](font-system-serif.png)
+    /// ![](font-system-2.png)
     ///
     /// If you want to use the default ``Font/Weight``
-    /// (`Font/Weight/regular`), you don't need to specify the `weight` in the
-    /// method. The following example styles the text as 17 point
-    /// `Font/Weight/regular`, and uses a ``Font/Design/rounded`` system font:
+    /// (``Font/Weight/regular``), you don't need to specify the `weight` in the
+    /// method. The following example styles the text as 48 point
+    /// ``Font/Weight/regular``, and uses a ``Font/Design/rounded`` system font:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
     ///         Text("Hello")
-    ///             .font(.system(size: 17, design: .rounded))
+    ///             .font(.system(size: 48, design: .rounded))
     ///     }
     /// }
     /// ```
     ///
-    /// ![Font System Rounded](font-system-rounded.png)
+    /// ![](font-system-3.png)
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
@@ -17710,15 +17707,15 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///
 /// This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate.
 ///
-///      struct ExampleView: View {
-///          @State var date: Date = Date()
+///     struct ExampleView: View {
+///         @State var date: Date = Date()
 ///
-///          var body: some View {
-///              DatePicker("Date",selection: $date)
+///         var body: some View {
+///             DatePicker("Date",selection: $date)
 ///                 .datePickerStyle(GraphicalDatePickerStyle())
 ///                 .padding()
-///          }
-///      }
+///         }
+///     }
 ///
 /// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
 ///
@@ -20931,16 +20928,16 @@ public struct InlinePickerStyle : PickerStyle {
 ///
 /// This style creates a gap between the borders of the list and the edge of the screen:
 ///
-///      struct ExampleView: View {
-///          var body: some View {
+///     struct ExampleView: View {
+///         var body: some View {
 ///             List {
 ///                 Text("Bananas 🍌🍌")
 ///                 Text("Apples 🍎🍎")
 ///                 Text("Peaches 🍑🍑")
 ///             }
 ///             .listStyle(InsetGroupedListStyle())
-///          }
-///      }
+///         }
+///     }
 ///
 /// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
 ///
@@ -20982,17 +20979,16 @@ public struct InsetListStyle : ListStyle {
 
     /// Creates an inset list style.
     ///
-    ///
-    ///      struct ExampleView: View {
-    ///          var body: some View {
+    ///     struct ExampleView: View {
+    ///         var body: some View {
     ///             List {
-    ///                Text("Bananas 🍌🍌")
-    ///                Text("Apples 🍎🍎")
-    ///                Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍎🍎")
+    ///                 Text("Peaches 🍑🍑")
     ///             }
     ///             .listStyle(InsetListStyle())
-    ///          }
-    ///      }
+    ///         }
+    ///     }
     ///
     /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
     ///
@@ -23471,7 +23467,7 @@ extension Link where Label == Text {
 /// - ``PlainListStyle``
 /// - ``SidebarListStyle``
 ///
-/// Note: List styles only modify the appearance of a ``List``. They do not
+/// - Note: List styles only modify the appearance of a ``List``. They do not
 /// affect the order or positioning of rows within the ``List``.
 /// [<-]
 /// [list-row-background ->]
@@ -28349,28 +28345,27 @@ public struct PinnedScrollableViews : OptionSet {
 
 /// A button effect that only modifies the label on interaction.
 ///
-/// > A button style that doesn't style or decorate its content while idle, but may apply a visual effect to indicate the pressed, focused, or enabled state of the button.
-///
+/// A button style that doesn't style or decorate its content while idle, but may apply a visual effect to indicate the pressed, focused, or enabled state of the button.
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
-///              VStack {
-///                  Button("Plain Banana🍌🍌") { tap() }
-///                       .buttonStyle(PlainButtonStyle())
-///                  Button("Borderless Banana 🍌🍌") { tap() }
-///                       .buttonStyle(BorderlessButtonStyle())
-///                  Button("Default Banana🍌🍌") { tap() }
-///                       .buttonStyle(PlainButtonStyle())
-///              }
-///              .font(.title2)
-///          }
+///             VStack {
+///                 Button("Plain Banana🍌🍌") { tap() }
+///                     .buttonStyle(PlainButtonStyle())
+///                 Button("Borderless Banana 🍌🍌") { tap() }
+///                     .buttonStyle(BorderlessButtonStyle())
+///                 Button("Default Banana🍌🍌") { tap() }
+///                     .buttonStyle(PlainButtonStyle())
+///             }
+///             .font(.title2)
+///         }
 ///
-///          func tap() { }
-///      }
+///         func tap() { }
+///     }
 ///
 /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
-/// > To apply this style to a button, or to a view that contains buttons, use the ``View/buttonStyle(_:)-d2d0a`` modifier.
+/// To apply this style to a button, or to a view that contains buttons, use the ``View/buttonStyle(_:)-d2d0a`` modifier.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainButtonStyle : PrimitiveButtonStyle {
 
@@ -29431,9 +29426,9 @@ extension PrimitiveButtonStyle {
     ///  struct BananaView: View {
     ///      var body: some View {
     ///          VStack {
-    ///              Button("Banana 🍌🍌", action: { tap() })
-    ///              Button("Apple 🍏🍏", action: { tap() })
-    ///              Button("Peach 🍑🍑", action: { tap() })
+    ///              Button("Banana 🍌🍌", action: tap)
+    ///              Button("Apple 🍏🍏", action: tap)
+    ///              Button("Peach 🍑🍑", action: tap)
     ///          }
     ///          .buttonStyle(BananaButtonStyle(color: .yellow))
     ///      }
@@ -34090,7 +34085,8 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// ### Making a view scrollable
 ///
-/// ``ScrollView`` is a container view that makes its content scrollable. For example:
+/// ``ScrollView`` is a container view that makes its content scrollable.
+/// For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -34108,24 +34104,33 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
 ///
-/// In this example, the ``VStack`` containing the text is made scrollable by wrapping it in a `ScrollView`.
+/// In this example, the ``VStack`` containing the text is made scrollable by
+/// wrapping it in a `ScrollView`.
 ///
 /// Note:
 ///
-/// - The content of a ``ScrollView`` is scrollable regardless of whether all of it fits on screen or not.
-/// - It is not possible to selectively disable the scrolling of a `ScrollView`, while allowing its content to remain interactive. A ``View/disabled(_:)`` attached to a `ScrollView` will disable both the scrolling and all the interaction with the content visible.
-/// - A ``ScrollView``'s scrollable region is sized to fit the content view passed to the ``ScrollView``.
-/// - ``ScrollView`` fits to occupy as much space as possible. It is important to distinguish between the actual bounds of the scroll view, and the bounds of the *content* of the ``ScrollView``.
+/// - The content of a ``ScrollView`` is scrollable regardless of whether all
+/// of it fits on screen or not.
+/// - It is not possible to selectively disable the scrolling of a
+/// ``ScrollView``, while allowing its content to remain interactive. A
+/// ``View/disabled(_:)`` attached to a ``ScrollView`` will disable both the
+/// scrolling and all the interaction with the content visible.
+/// - A ``ScrollView``'s scrollable region is sized to fit the content view
+/// passed to the ``ScrollView``.
+/// - ``ScrollView`` fits to occupy as much space as possible. It is important
+/// to distinguish between the actual bounds of the scroll view, and the
+/// bounds of the *content* of the ``ScrollView``.
 /// [scrollview-axis ->]
 /// ### Setting the direction of scrolling
 ///
-/// The default scrolling direction of a ``ScrollView`` is **vertical**. ``ScrollView`` supports 3 types of scrolling:
-///
+/// The default scrolling direction of a ``ScrollView`` is **vertical**.
+/// ``ScrollView`` supports 3 types of scrolling:
 /// - vertical
 /// - horizontal
 /// - both vertical and horizontal
 ///
-/// To set a single allowed direction for a ``ScrollView``, specify the axis of direction in the initializer. For example:
+/// To set a single allowed direction for a ``ScrollView``, specify the axis
+/// of direction in the initializer. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -34143,9 +34148,12 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///  ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
 ///
 /// [<-]
-/// This example takes the previous example, and modifies it so that the ``ScrollView`` scrolls horizontally. This ``ScrollView`` will **not** scroll vertically, as an explict axis, `.horizontal`, has been specified.
+/// This example takes the previous example, and modifies it so that the
+/// ``ScrollView`` scrolls horizontally. This ``ScrollView`` will **not**
+/// scroll vertically, as an explict axis, `.horizontal`, has been specified.
 ///
-/// To allow *both* directions of scrolling, pass the set of axes that you want to permit. For example:
+/// To allow *both* directions of scrolling, pass the set of axes that you want
+/// to permit. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -34163,13 +34171,17 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 ///  ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
 ///
-/// In this example, `ScrollView` can scroll both horizontally *and* vertically, because both axes have been specified explicitly.
+/// In this example, `ScrollView` can scroll both horizontally *and*
+/// vertically, because both axes have been specified explicitly.
 /// [scrollview-hide-indicators ->]
 /// ### Hiding the scroll view indicator
 ///
-/// By default, a ``ScrollView``'s scroll indicator is visible upon user interaction.
+/// By default, a ``ScrollView``'s scroll indicator is visible upon user
+/// interaction.
 ///
-/// Pass `false` to ``ScrollView/showsIndicators`` in ``ScrollView/init(_:showsIndicators:content:)`` to hide the scroll indicator(s). For example:
+/// Pass `false` to ``ScrollView/showsIndicators`` in
+/// ``ScrollView/init(_:showsIndicators:content:)`` to hide the scroll
+/// indicator(s). For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -34185,11 +34197,12 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-///  ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
+/// ![ScrollView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-4.gif)
 ///
-/// This `ScrollView` will never show a scroll indicator.
+/// This ``ScrollView`` will never show a scroll indicator.
 ///
-/// You do not need to specify an axis to use ``ScrollView/showsIndicators``. For example:
+/// You do not need to specify an axis to use
+/// ``ScrollView/showsIndicators``. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -34207,12 +34220,16 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
 ///
-/// This ``ScrollView`` hides its scroll indicator, with a default `.vertical` scroll direction.
+/// This ``ScrollView`` hides its scroll indicator, with a default
+/// `.vertical` scroll direction.
 /// [<-]
 /// [scrollview-proxy ->]
 /// ### Scrolling to an item
 ///
-/// To programmatically scroll to a particular item in your `ScrollView`, use `ScrollViewProxy/scrollTo(_:anchor:)`. `ScrollViewProxy` is a type that allows you to control a `ScrollView`, and can be obtained using a ``ScrollViewReader``.
+/// To programmatically scroll to a particular item in your ``ScrollView``,
+/// use ``ScrollViewProxy/scrollTo(_:anchor:)``. ``ScrollViewProxy`` is a type
+/// that allows you to control a ``ScrollView``, and can be obtained using a
+/// ``ScrollViewReader``.
 ///
 /// For example:
 ///
@@ -34237,9 +34254,16 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
 ///
-/// In this example, clicking the button reading "Jump to #32", will cause the `ScrollView` to scroll to the item with the ID of the value `32`. To assign an ID to a view, use ``View/id(_:)`` as is done inside the ``ForEach``, for each element.
+/// In this example, clicking the button reading "Jump to #32", will cause the
+/// ``ScrollView`` to scroll to the item with the ID of the value `32`.
+/// To assign an ID to a view, use ``View/id(_:)`` as is done inside the
+/// ``ForEach``, for each element.
 ///
-/// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the text reading "Item #32", with that text centered vertically in the `ScrollView`'s bounds. To change the anchor of the finalled scrolled-to destination, specify an anchor via ``ScrollViewProxy/scrollTo(_:anchor:)``. For example:
+/// The call of `proxy.scrollTo(32)` causes the `ScrollView` to scroll to the
+/// text reading "Item #32", with that text centered vertically in the
+/// ``ScrollView``'s bounds. To change the anchor of the finalled scrolled-to
+/// destination, specify an anchor via
+/// ``ScrollViewProxy/scrollTo(_:anchor:)``. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -34262,12 +34286,17 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///
 /// ![ScrollView Example 7](scrollviewproxy-ex7.gif)
 ///
-/// In this example, the `ScrollView` still scrolls to "Item #32", but this ``Text`` is seen at the top of the `ScrollView`, rather than it's vertical center. The `anchor` parameter uses a type, ``UnitPoint``, to determine the relative alignment (relative to the scroll view's bounds) of the scrolled-to item.
+/// In this example, the `ScrollView` still scrolls to "Item #32", but this
+/// ``Text`` is seen at the top of the `ScrollView`, rather than it's
+/// vertical center. The `anchor` parameter uses a type,
+/// ``UnitPoint``, to determine the relative alignment (relative to the
+/// scroll view's bounds) of the scrolled-to item.
 ///
 /// [<-]
 /// [scrollview-scrollto ->]
 ///
-///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)`` with ``withAnimation(_:_:)``.  For example:
+///  Add a transition to your ``ScrollViewProxy/scrollTo(_:anchor:)``
+/// with ``withAnimation(_:_:)``.  For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -34301,7 +34330,8 @@ public struct ScrollView<Content> : View where Content : View {
 
     /// The scrollable axes of the scroll view.
     ///
-    /// The default value is `Axis/vertical`. Change the ``Axis`` to modify the scroll direction.
+    /// The default value is `Axis/vertical`. Change the ``Axis`` to modify
+    /// the scroll direction.
     ///
     /// [[scrollview-axis]]
     public var axes: Axis.Set
@@ -34394,7 +34424,7 @@ public struct ScrollViewProxy {
 
 /// A container that groups views.
 ///
-/// Often used in Lists and Forms to set Parent, Content, and Footer information.
+/// Often used in ``List``s and ``Form``s to set `Parent`, `Content`, and `Footer` information.
 ///
 /// [[list-sections]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -34550,26 +34580,25 @@ extension SecureField where Label == Text {
 ///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
 ///     @State private var selectedFruit = 0
 ///
-///      var body: some View {
-///           VStack {
-///               Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
-///                   ForEach(0..<fruits.count) {
-///                       Text(self.fruits[$0])
-///                   }
-///               }
-///               Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
-///           }
-///           .pickerStyle(SegmentedPickerStyle())
-///       }
-///  }
+///     var body: some View {
+///         VStack {
+///             Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                 ForEach(0..<fruits.count) {
+///                     Text(self.fruits[$0])
+///                 }
+///             }
+///
+///             Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///         }
+///         .pickerStyle(SegmentedPickerStyle())
+///     }
+/// }
 /// ```
 ///
 /// ![SegmentedPickerStyle Example 1](segmented-picker-ex1.gif)
 ///
 /// [pickerstyle-segmented ->]
 /// Your app can also use explicit tags to identify picker content.
-///
-/// ![Segmented Example 1](picker-style-6.gif)
 ///
 /// ```
 /// enum MyFruit {
@@ -34591,27 +34620,32 @@ extension SecureField where Label == Text {
 ///     }
 ///
 ///     var body: some View {
-///         Text("My Favorite Fruit: \(fruitName)")
+///         VStack {
+///             Text("My Favorite Fruit: \(fruitName)")
 ///
-///         Picker("My Picker", selection: $favoriteFruit) {
-///             Text("Banana 🍌🍌")
-///                 .tag(MyFruit.banana)
-///             Text("Apple 🍎🍎")
-///                 .tag(MyFruit.apple)
-///             Text("Peach 🍑🍑")
-///                 .tag(MyFruit.peach)
-///         }.pickerStyle(SegmentedPickerStyle())
+///             Picker("My Picker", selection: $favoriteFruit) {
+///                 Text("Banana 🍌🍌")
+///                     .tag(MyFruit.banana)
+///                 Text("Apple 🍎🍎")
+///                     .tag(MyFruit.apple)
+///                 Text("Peach 🍑🍑")
+///                     .tag(MyFruit.peach)
+///             }
+///             .pickerStyle(SegmentedPickerStyle())
+///         }
 ///     }
 /// }
 /// ```
 ///
+/// ![Segmented Example 1](picker-style-6.gif)
+///
 /// [<-]
 ///
 ///
-/// > To apply this style to a picker, or to a view that contains pickers, use the
+/// To apply this style to a picker, or to a view that contains pickers, use the
 /// ``View/pickerStyle(_:)`` modifier.
 ///
-/// > Note: The segmented picker style supports `Text` and ``Image`` segments only.
+/// Note: The segmented picker style supports ``Text`` and ``Image`` segments only.
 /// Any other view results in a visible, but empty, segment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
@@ -35344,16 +35378,16 @@ public struct SidebarCommands : Commands {
 /// The behavior and appearance of a sidebar or source list.
 ///
 /// ```
-///      struct ExampleView: View {
-///          var body: some View {
-///             List {
-///                 Text("Bananas 🍌🍌")
-///                 Text("Apples 🍎🍎")
-///                 Text("Peaches 🍑🍑")
-///             }
-///             .listStyle(SidebarListStyle())
-///          }
-///      }
+/// struct ExampleView: View {
+///     var body: some View {
+///         List {
+///             Text("Bananas 🍌🍌")
+///             Text("Apples 🍎🍎")
+///             Text("Peaches 🍑🍑")
+///         }
+///         .listStyle(SidebarListStyle())
+///     }
+/// }
 /// ```
 ///
 /// ![SidebarListStyle Example 1](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
@@ -35812,8 +35846,6 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// Use this with the ``View/navigationViewStyle(_:)``
     /// view modifier to change a ``NavigationView``'s style.
     ///
-    /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -35824,6 +35856,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
+    ///
     public init() { }
 }
 
@@ -37546,11 +37581,11 @@ extension StrokeStyle : Animatable {
 /// struct ContentView: View {
 ///     @State private var status = true
 ///     var body: some View {
-///          Toggle(isOn: $status) {
-///              Text("Banana🍌🍌")
-///          }
-///          .toggleStyle(SwitchToggleStyle())
-///          .padding()
+///         Toggle(isOn: $status) {
+///             Text("Banana🍌🍌")
+///         }
+///         .toggleStyle(SwitchToggleStyle())
+///         .padding()
 ///     }
 /// }
 /// ```
@@ -37568,11 +37603,11 @@ public struct SwitchToggleStyle : ToggleStyle {
     /// struct ContentView: View {
     ///     @State private var status = true
     ///     var body: some View {
-    ///          Toggle(isOn: $status) {
-    ///              Text("Banana🍌🍌")
-    ///          }
-    ///          .toggleStyle(SwitchToggleStyle())
-    ///          .padding()
+    ///         Toggle(isOn: $status) {
+    ///             Text("Banana🍌🍌")
+    ///         }
+    ///         .toggleStyle(SwitchToggleStyle())
+    ///         .padding()
     ///     }
     /// }
     /// ```
@@ -37831,7 +37866,7 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
-    ///[Selection Content Example 1](init-selection-content-ex1.png)
+    /// ![Selection Content Example 1](init-selection-content-ex1.png)
     ///
     /// In this example, each tab item is assigned a unique tag using the
     /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
@@ -37866,8 +37901,7 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
-    ///
-    /// [Selection Content Example 2](init-selection-content-ex2.png)
+    /// ![Selection Content Example 2](init-selection-content-ex2.png)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -38742,17 +38776,17 @@ extension Text {
     /// For example, you can change the colors of Banana🍌🍌 to yellow, Apple🍎🍎 to red, and Peach🍑🍑 to orange.
     ///
     ///     struct ExampleView: View {
-    ///        var body: some View {
-    ///            VStack {
-    ///                Text("Banana🍌🍌")
-    ///                    .foregroundColor(.yellow)
-    ///                Text("Apple 🍎🍎")
-    ///                    .foregroundColor(.red)
-    ///                Text("Peach 🍑🍑")
-    ///                    .foregroundColor(.orange)
-    ///            }
-    ///            .font(.largeTitle)
-    ///        }
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text("Banana🍌🍌")
+    ///                     .foregroundColor(.yellow)
+    ///                 Text("Apple 🍎🍎")
+    ///                     .foregroundColor(.red)
+    ///                 Text("Peach 🍑🍑")
+    ///                     .foregroundColor(.orange)
+    ///             }
+    ///             .font(.largeTitle)
+    ///         }
     ///     }
     ///
     /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
@@ -40267,13 +40301,12 @@ extension ToolbarContentBuilder {
 /// }
 /// ```
 ///
-/// -  `id` is responsible for efficient updates to the toolbar item.
+/// - `id` is responsible for efficient updates to the toolbar item.
 /// - `placement` controls where the item is placed.
 /// - `content` represents the actual content of the item.
 ///
 /// ### Adding toolbar items
 ///
-/// ![198635BF-F1C9-4F43-9434-B86269EBF1CD](198635BF-F1C9-4F43-9434-B86269EBF1CD.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -40295,7 +40328,6 @@ extension ToolbarContentBuilder {
 ///
 /// `ToolbarItem` can be explicitly placed on the navigation bar using either ``ToolbarItemPlacement/navigationBarLeading`` or ``ToolbarItemPlacement/navigationBarTrailing``. For example:
 ///
-/// ![130803BF-A58D-4BBB-B916-9AB446907185](130803BF-A58D-4BBB-B916-9AB446907185.png)
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -43319,21 +43351,21 @@ extension View {
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
-    ///              VStack {
-    ///                  Button("Plain Banana🍌🍌") { tap() }
-    ///                      .buttonStyle(PlainButtonStyle())
+    ///             VStack {
+    ///                 Button("Plain Banana🍌🍌") { tap() }
+    ///                     .buttonStyle(PlainButtonStyle())
     ///
-    ///                  Button("Borderless Banana🍌🍌") { tap() }
-    ///                      .buttonStyle(BorderlessButtonStyle())
+    ///                 Button("Borderless Banana🍌🍌") { tap() }
+    ///                     .buttonStyle(BorderlessButtonStyle())
     ///
-    ///                  Button("Default Banana🍌🍌") { tap() }
-    ///                      .buttonStyle(DefaultButtonStyle())
-    ///              }
-    ///              .font(.title2)
-    ///          }
+    ///                 Button("Default Banana🍌🍌") { tap() }
+    ///                     .buttonStyle(DefaultButtonStyle())
+    ///             }
+    ///             .font(.title2)
+    ///         }
     ///
-    ///          func tap() {}
-    ///      }
+    ///         func tap() { }
+    ///     }
     public func buttonStyle<S>(_ style: S) -> some View where S : PrimitiveButtonStyle { }
 
 }
@@ -44091,8 +44123,6 @@ extension View {
     /// Check out ``View/overlay(_:alignment:)``, which is the opposite
     /// modifier.
 	///
-  /// ![Background alignment example](floral_background.png)
-  ///
 	/// - Parameters:
 	///   - background: The view to place behind.
 	///   - alignment: Where to align the behind view relative to the current view. Defaults to center.
@@ -45962,7 +45992,6 @@ extension View {
     ///
     /// ![](view-tag-flavor.gif)
     ///
-    /// - SeeAlso: `List`, ``Picker``, `Hashable`
     /// - Parameter tag: A [Hashable](https://developer.apple.com/documentation/swift/hashable) value
     ///   to use as the view's tag.
     ///
@@ -46035,12 +46064,16 @@ extension View {
     ///         }
     ///
     ///         var body: some View {
-    ///             List(Flavor.allCases, id: \.self) {
-    ///                 Text($0.rawValue)
+    ///             List {
+    ///                 ForEach(Flavor.allCases, id: \.self) { flavor in
+    ///                     Text(flavor.rawValue)
+    ///                         .listRowBackground(Image(systemName: "sparkles"))
+    ///                 }
     ///             }
-    ///             .listRowBackground(Image(systemName: "sparkles"))
     ///         }
     ///     }
+    ///
+    /// ![](listrowbackground.png)
     ///
     /// - Parameter view: The ``View`` to use as the background behind the list
     ///   row view.
@@ -46890,8 +46923,6 @@ extension View {
     ///             }
     ///         }
     ///     }
-    ///
-    /// ![tabItem Example 1](tabitem-ex1.gif)
     ///
     /// [[tabview-tabitem]]
     ///
