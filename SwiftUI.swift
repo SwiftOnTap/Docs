@@ -4795,7 +4795,7 @@ extension Binding : DynamicProperty {
 /// }
 /// ```
 ///
-/// ![Blended Image](blendmode-softlight.png)
+/// ![Blended Image](blendmode-softLight.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
@@ -11831,10 +11831,9 @@ public struct EmptyCommands : Commands {
 /// ``EmptyView`` is a special view that displays nothing and occupies no space.
 /// Modifying an ``EmptyView`` does nothing.
 ///
-/// For example, the following stack ignores the ```EmptyView`` between the
-/// two ``Text`` elements, even when it is modified to have a frame of
-/// `1000` x `1000` and a red background color. It simply behaves as if the
-/// middle view does not exist.
+/// For example, the following stack ignores the ``EmptyView`` between the two
+/// ``Text`` elements, even when it is modified to have a frame of `1000`x`1000`
+/// and a red background color. It simply behaves as if the middle view does not exist.
 ///
 /// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
 ///
@@ -22963,7 +22962,7 @@ extension Link where Label == Text {
 ///
 /// The `id` parameter requires a key-path to the *identifier* for each row of the ``List``. This is required so that ``List`` can efficiently process changes in the data source (in this example, the array `fruits`). These changes to the data source are animated as insertions, removals and reorders - reflecting the changes in the source.
 ///
-/// It is up to the programmer to decide what property best represents the 'identiifer' of a particular type. In this example, the `String` itself is a valid identifier for the data, therefore `\.self` is passed along to the `id` parameter.
+/// It is up to the programmer to decide what property best represents the 'identiifer' of a particular type. In this example, the `String` itself is a valid identifier for the data, therefore `\\.self` is passed along to the `id` parameter.
 ///
 /// ### Creating a ``List`` with both fixed and dynamic elements
 ///
@@ -33919,6 +33918,8 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 ///     }
 /// }
 /// ```
+///
+/// ![A secure text field user interface element designed to pass data into a state object.](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct SecureField<Label> : View where Label : View {
 
