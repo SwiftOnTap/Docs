@@ -9025,7 +9025,7 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![DefaultPickerStyle Example 1](/picker-style-1.gif)
+/// ![DefaultPickerStyle Example 1](picker-style-1.gif)
 ///
 /// [<-]
 /// You can override a picker’s style. To apply the default style to a picker,
@@ -11899,7 +11899,7 @@ public struct EmptyCommands : Commands {
 ///
 /// For example, the following stack ignores the `EmptyView` between the
 /// two ``Text`` elements, even when it is modified to have a frame of
-/// 1000 x 1000 and a red background color. It simply behaves as if the
+/// `1000` x `1000` and a red background color. It simply behaves as if the
 /// middle view does not exist.
 ///
 /// ```
@@ -17633,10 +17633,9 @@ public struct GridItem {
     /// layout.
     ///
     /// There are three types of sizes:
-    ///
-    /// 1. ``GridItem/size/fixed``
-    /// 2. ``GridItem/size/flexible`
-    /// 3. ``GridItem/size/adaptive``
+    /// 1. ``GridItem/Size/fixed``
+    /// 2. ``GridItem/Size/flexible`
+    /// 3. ``GridItem/Size/adaptive``
     ///
     public enum Size {
 
@@ -17691,7 +17690,6 @@ public struct GridItem {
 /// Use this structure to group together structures of different types.
 /// There are five different types of groups. Each groups together
 /// a type of content.
-///
 /// 1. ``ToolbarContent``
 /// 2. ``CustomizableToolbarContent``
 /// 3. ``Scene``
@@ -17704,16 +17702,16 @@ public struct GridItem {
 ///
 /// Here is an example creating a `Group` of ``View``s:
 ///
-///     struct ExanmpleView: View {
-/// 	      var body: some View {
+///     struct ExampleView: View {
+///         var body: some View {
 ///             Group {
-/// 			          Text("1")
-/// 			          Text("2")
-/// 		            Text("3")
-/// 			          Text("4")
-/// 			          Text("5")
-/// 		        }
-/// 	      }
+///                 Text("1")
+///                 Text("2")
+///                 Text("3")
+///                 Text("4")
+///                 Text("5")
+///             }
+///         }
 ///     }
 ///
 /// ![](group-ex1.png)
@@ -17873,7 +17871,7 @@ extension Group : Scene where Content : Scene {
     /// ```
     /// @main
     /// struct ErrorApp: App {
-	/// 	var body: some Scene {
+	///     var body: some Scene {
     ///         WindowGroup(id: "id1") { ContentView() }
     ///         WindowGroup(id: "id2") { ContentView() }
     ///         WindowGroup(id: "id3") { ContentView() }
@@ -17885,7 +17883,7 @@ extension Group : Scene where Content : Scene {
     ///         WindowGroup(id: "id9") { ContentView() }
     ///         WindowGroup(id: "id10") { ContentView() }
     ///         WindowGroup(id: "id11") { ContentView() } //ERROR!
-	/// 	}
+	///     }
     /// }
     /// ```
 	///
@@ -17894,7 +17892,7 @@ extension Group : Scene where Content : Scene {
     /// ```
     /// @main
     /// struct NoErrorApp: App {
-	/// 	var body: some Scene {
+	///     var body: some Scene {
     ///         Group {
     ///             WindowGroup(id: "id1") { ContentView() }
     ///             WindowGroup(id: "id2") { ContentView() }
@@ -17910,7 +17908,7 @@ extension Group : Scene where Content : Scene {
     ///             WindowGroup(id: "id10") { ContentView() }
     ///             WindowGroup(id: "id11") { ContentView() } //No error 😎
     ///         }
-	/// 	}
+	///     }
     /// }
     /// ```
     ///
@@ -17931,43 +17929,51 @@ extension Group : View where Content : View {
 	/// builder can generally only take 10 views at once. So if you try to do
 	/// this, you'll get an error:
 	///
-	/// 	var body: some View {
-	/// 		VStack {
-	/// 			Text("1")
-	/// 			Text("2")
-	/// 			Text("3")
-	/// 			Text("4")
-	/// 			Text("5")
-	/// 			Text("6")
-	/// 			Text("7")
-	/// 			Text("8")
-	/// 			Text("9")
-	/// 			Text("10")
-	/// 			Text("11") // ERROR!
-	/// 		}
-	/// 	}
+    /// ```
+    /// struct ContentView: View {
+	///     var body: some View {
+	///         VStack {
+	///             Text("1")
+	///             Text("2")
+	///             Text("3")
+	///             Text("4")
+	///             Text("5")
+	///             Text("6")
+	///             Text("7")
+	///             Text("8")
+	///             Text("9")
+	///             Text("10")
+	///             Text("11") // ERROR!
+	///         }
+	///     }
+    /// }
+    /// ```
 	///
 	/// Instead, you should put your text into ``Group``s:
 	///
-	/// 	var body: some View {
-	/// 		VStack {
-	/// 			Group {
-	/// 				Text("1")
-	/// 				Text("2")
-	/// 				Text("3")
-	/// 				Text("4")
-	/// 				Text("5")
-	/// 			}
-	///				Group {
-	///					Text("6")
-	/// 				Text("7")
-	/// 				Text("8")
-	/// 				Text("9")
-	/// 				Text("10")
-	/// 				Text("11") //No error 😎
-	///				}
-	/// 		}
-	/// 	}
+    /// ```
+    /// struct ContentView: View {
+	///     var body: some View {
+	///         VStack {
+	///             Group {
+	///                 Text("1")
+	///                 Text("2")
+	///                 Text("3")
+	///                 Text("4")
+	///                 Text("5")
+	///             }
+	///	            Group {
+	///	                Text("6")
+	///                 Text("7")
+	///                 Text("8")
+	///                 Text("9")
+	///                 Text("10")
+	///                 Text("11") //No error 😎
+	///	            }
+	///         }
+	///     }
+    /// }
+    /// ```
 	///
 	/// - Parameter content: A view content builder.
     @inlinable public init(@ViewBuilder content: () -> Content) { }
@@ -17991,7 +17997,7 @@ extension Group : Commands where Content : Commands {
     /// ```
     /// @main
     /// struct ErrorApp: App {
-	  ///     var body: some Scene {
+	///     var body: some Scene {
     ///         WindowGroup {
     ///             ContentView()
     ///         }
@@ -18007,8 +18013,9 @@ extension Group : Commands where Content : Commands {
     ///             EmptyCommands() //9
     ///             EmptyCommands() //10
     ///             EmptyCommands() //11 - ERROR!
-	  /// 		}
-	  /// }
+	///         }
+    ///     }
+	/// }
     /// ```
 	///
 	/// Instead, you should put your commands into ``Group``s:
@@ -18016,7 +18023,7 @@ extension Group : Commands where Content : Commands {
     /// ```
     /// @main
     /// struct NoErrorApp: App {
-	  ///     var body: some Scene {
+	///     var body: some Scene {
     ///         WindowGroup {
     ///             ContentView()
     ///         }
@@ -18036,8 +18043,8 @@ extension Group : Commands where Content : Commands {
     ///                 EmptyCommands() //10
     ///                 EmptyCommands() //11 - No error 😎
     ///             }
-	  /// 		    }
-	  /// 	  }
+	///         }
+	///     }
     /// }
     /// ```
     ///
@@ -18473,15 +18480,16 @@ extension HorizontalAlignment {
 ///
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        VStack {
-///            Rectangle()
-///                .fill(Color.red)
-///                .frame(width: 100, height: 100)
-///                .hoverEffect(.automatic)
-///        }
-///        .padding(75).background(Color.blue)
-///    }
+///     var body: some View {
+///         VStack {
+///             Rectangle()
+///                 .fill(Color.red)
+///                 .frame(width: 100, height: 100)
+///                 .hoverEffect(.automatic)
+///         }
+///         .padding(75)
+///         .background(Color.blue)
+///     }
 /// }
 /// ```
 ///
@@ -18501,15 +18509,16 @@ public struct HoverEffect {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        VStack {
-    ///            Rectangle()
-    ///                .fill(Color.red)
-    ///                .frame(width: 100, height: 100)
-    ///                .hoverEffect(.automatic)
-    ///        }
-    ///        .padding(75).background(Color.blue)
-    ///    }
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .fill(Color.red)
+    ///                 .frame(width: 100, height: 100)
+    ///                 .hoverEffect(.automatic)
+    ///         }
+    ///         .padding(75)
+    ///         .background(Color.blue)
+    ///     }
     /// }
     /// ```
     ///
@@ -18524,15 +18533,16 @@ public struct HoverEffect {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        VStack {
-    ///            Rectangle()
-    ///                .fill(Color.red)
-    ///                .frame(width: 100, height: 100)
-    ///                .hoverEffect(.highlight)
-    ///        }
-    ///        .padding(75).background(Color.blue)
-    ///    }
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .fill(Color.red)
+    ///                 .frame(width: 100, height: 100)
+    ///                 .hoverEffect(.highlight)
+    ///         }
+    ///         .padding(75)
+    ///         .background(Color.blue)
+    ///     }
     /// }
     /// ```
     ///
@@ -18547,15 +18557,16 @@ public struct HoverEffect {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        VStack {
-    ///            Rectangle()
-    ///                .fill(Color.red)
-    ///                .frame(width: 100, height: 100)
-    ///                .hoverEffect(.lift)
-    ///        }
-    ///        .padding(75).background(Color.blue)
-    ///    }
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .fill(Color.red)
+    ///                 .frame(width: 100, height: 100)
+    ///                 .hoverEffect(.lift)
+    ///         }
+    ///         .padding(75)
+    ///         .background(Color.blue)
+    ///     }
     /// }
     /// ```
     ///
@@ -20751,12 +20762,13 @@ extension IndexViewStyle {
 ///                 .tag(MyFruit.apple)
 ///             Text("Peach 🍑🍑")
 ///                 .tag(MyFruit.peach)
-///         }.pickerStyle(InlinePickerStyle())
+///         }
+///         .pickerStyle(InlinePickerStyle())
 ///     }
 /// }
 /// ```
 ///
-/// ![Inline Example](/picker-style-2.gif)
+/// ![Inline Example](picker-style-2.gif)
 ///
 /// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -20793,12 +20805,13 @@ public struct InlinePickerStyle : PickerStyle {
     ///                 .tag(MyFruit.apple)
     ///             Text("Peach 🍑🍑")
     ///                 .tag(MyFruit.peach)
-    ///         }.pickerStyle(InlinePickerStyle())
+    ///         }
+    ///         /.pickerStyle(InlinePickerStyle())
     ///     }
     /// }
     /// ```
     ///
-    /// ![Inline Example](/picker-style-2.gif)
+    /// ![Inline Example](picker-style-2.gif)
     ///
     public init() { }
 }
@@ -22915,22 +22928,22 @@ extension LegibilityWeight {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LinearGradient : ShapeStyle, View {
 
-	/// Creates a new linear gradient from the Gradient colors, the start, and the end.
-  ///
-  /// ```
-  /// struct ExampleView: View {
-  ///     var body: some View {
-  ///         RoundedRectangle(cornerRadius: 10)
-  ///             .fill(LinearGradient(
-  ///                     gradient: Gradient(colors: [.green, .blue, .purple]),
-  ///                     startPoint: .leading,
-  ///                     endPoint: .trailing))
-  ///             .padding()
-  ///     }
-  /// }
-  /// ```
-  ///
-  /// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
+    /// Creates a new linear gradient from the Gradient colors, the start, and the end.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         RoundedRectangle(cornerRadius: 10)
+    ///             .fill(LinearGradient(
+    ///                 gradient: Gradient(colors: [.green, .blue, .purple]),
+    ///                 startPoint: .leading,
+    ///                 endPoint: .trailing))
+    ///             .padding()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
 	///
 	/// - Parameters:
 	///   - gradient: The gradient containing the ordered colors to be used.
@@ -23047,32 +23060,34 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![Link](/link.gif)
+/// ![Link](link.gif)
 ///
 /// ### Creating a ``Link`` with a View
 /// [[link-view]]
 ///
 /// ### Background on ``Link`` in SwiftUI
 ///
-/// Before Link was added to SwiftUI, there was no equivalent of a hyperlink outside of a [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview).
+/// Before Link was added to SwiftUI, there was no equivalent of a hyperlink outside of a [`WKWebView`](https://developer.apple.com/documentation/webkit/wkwebview).
 ///
 /// It was possible to create a button with blue text that opens a URL, but this requires the logic to be added manually each time. For example:
 ///
 /// ```
-/// struct D: View {
+/// struct ContentView: View {
 ///     let urlString = "https://swiftontap.com"
+///
 ///     var body: some View {
 ///         if URL(string: urlString) != nil {
-///           //The old way to create a Link-style Button
-///           Button("Read more") {
-///             if let url = URL(string: urlString) {
-///               UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
+///
+///             //The old way to create a Link-style Button
+///             Button("Read more") {
+///                 if let url = URL(string: urlString) {
+///                     UIApplication.shared.open(url, options: [:], completionHandler: {_ in })
+///                 }
 ///             }
-///           }
 ///         } else {
 ///             EmptyView()
 ///                 .onAppear { assertionFailure("URL was nil") }
-///           }
+///         }
 ///     }
 /// }
 /// ```
@@ -23094,6 +23109,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         var body: some View {
 ///             Group {
 ///                 if let url = URL(string: urlString) {
+///
 ///                     // The new way to create a Link
 ///                     Link("View SwiftOnTap", destination: url)
 ///                 }
@@ -23101,7 +23117,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![Link](/link.gif)
+/// ![Link](link.gif)
 ///
 ///  Now that SwiftUI supports if let, it is possible to directly create properties like the URL and create Views that use that data. Just as before, the link is only shown when the URL can be created, but it is not necessary to do multiple checks just to make sure that this is the case.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -23130,7 +23146,7 @@ public struct Link<Label> : View where Label : View {
     /// }
     /// ```
     ///
-    /// ![Link View](/link-view.gif)
+    /// ![Link View](link-view.gif)
     ///
     /// [<-]
     ///
@@ -23170,7 +23186,7 @@ extension Link where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![Link](/link.gif)
+    /// ![Link](link.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the localized title that describes the
@@ -27783,7 +27799,7 @@ extension Path {
 /// You can create a picker to select among these values by providing ``Text``
 /// views in the picker initializer's content:
 ///
-/// ![Picker Ice Cream](/picker-ice-cream.png)
+/// ![Picker Ice Cream](picker-ice-cream.png)
 ///
 /// ```
 /// struct IceCreamView: View {
@@ -34271,7 +34287,7 @@ extension SecureField where Label == Text {
 /// [pickerstyle-segmented ->]
 /// Your app can also use explicit tags to identify picker content.
 ///
-/// ![Segmented Example 1](/picker-style-6.gif)
+/// ![Segmented Example 1](picker-style-6.gif)
 ///
 /// ```
 /// enum MyFruit {
@@ -50711,7 +50727,7 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// }
 /// ```
 ///
-/// ![Wheel Example 2](/picker-style-7.gif)
+/// ![Wheel Example 2](picker-style-7.gif)
 ///
 /// [<-]
 ///
