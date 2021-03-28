@@ -3590,7 +3590,7 @@ extension AnyTransition {
     ///
     /// See ``AnyView`` for the uses and dangers of using this structure.
     ///
-    ///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
+    /// ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -3605,7 +3605,7 @@ extension AnyTransition {
     ///
     /// See ``AnyView`` for the uses and dangers of using this structure.
     ///
-    ///  ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
+    /// ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -3634,7 +3634,7 @@ extension AnyTransition {
 ///         var body: some Scene {
 ///             WindowGroup {
 ///                 Text("Hello, world! 🌍🙋")
-////                    .font(.title)
+///                    .font(.title)
 ///             }
 ///         }
 ///     }
@@ -3781,7 +3781,7 @@ extension App {
 /// Below shows a simple example using a [`String`](https://developer.apple.com/documentation/swift/string).
 ///
 ///     struct ContentView: View {
-///         @AppStorage("name") var name: String = "Javier"
+///         @AppStorage("name") var name: String = "Kanye"
 ///
 /// 		var body: some View {
 /// 			TextField(name, text: $name)
@@ -3798,7 +3798,7 @@ extension App {
 	/// This is rarely used directly. Instead, you normally use the property wrapper syntax:
 	///
 	///     struct ContentView: View {
-    /// 		@AppStorage("name") var name: String = "Javier"
+    /// 		@AppStorage("name") var name: String = "Kanye"
     ///
     /// 		var body: some View {
     /// 			TextField(name, text: $name)
@@ -3811,7 +3811,7 @@ extension App {
     /// You can access this using the `$` prefix:
     ///
     ///     struct ContentView: View {
-    ///         @AppStorage("name") var name: String = "Javier"
+    ///         @AppStorage("name") var name: String = "Kanye"
     ///
     ///         var body: some View {
     ///             TextField(name, text: $name)
@@ -3893,7 +3893,7 @@ extension AppStorage {
     /// Creates a property that can read and write to a string user default.
     ///
     ///     struct ContentView: View {
-    ///         @AppStorage("name") var name: String = "Javier"
+    ///         @AppStorage("name") var name: String = "Kanye"
     ///
     ///         var body: some View {
     ///             TextField(name, text: $name)
@@ -3983,12 +3983,12 @@ extension AppStorage {
     ///         @AppStorage("MyEnumValue") private var value = MyEnum.a
     ///
     ///         var body: some View {
-    ///              Picker("Choose!", selection: $value) {
-    ///                  Text("a").tag(MyEnum.a)
-    ///                  Text("b").tag(MyEnum.b)
-    ///                  Text("c").tag(MyEnum.c)
-    ///              }
-    ///          }
+    ///             Picker("Choose!", selection: $value) {
+    ///                 Text("a").tag(MyEnum.a)
+    ///                 Text("b").tag(MyEnum.b)
+    ///                 Text("c").tag(MyEnum.c)
+    ///             }
+    ///         }
     ///     }
     ///
     /// ![](16.58.02.png)
@@ -4049,8 +4049,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         var body: some View {
     ///             Button("on") { on = true }
     ///             Button("off") { on = false }
-    /// 		    }
-    /// 	  }
+    ///         }
+    ///     }
     ///
     /// ![](17.15.34.png)
     ///
@@ -4072,8 +4072,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         var body: some View {
     ///             Button("none ☹️") { count = 0 }
     ///             Button("LOTS 🍩") { count = 100 }
-    /// 		    }
-    /// 	   }
+    ///         }
+    ///     }
     ///
     /// ![](17.16.17.png)
     ///
@@ -4091,6 +4091,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     ///     struct ContentView: View {
     ///         @AppStorage("brightness") var level: Double?
+    ///
     ///         var body: some View {
     ///             Button("MAX 🔆") { level = 1.0 }
     ///             Button("min 🔅") { level = 0.0 }
@@ -5840,7 +5841,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// }
 /// ```
 ///
-///  ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
+/// ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
 ///
 /// Button style applies to all buttons within a view hierarchy. For example,
 /// you could apply `ButtonStyle` to a ``VStack``.
@@ -5880,7 +5881,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// }
 /// ```
 ///
-///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
+/// ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
 ///
 /// For more on how to customize your button style body, check out
 /// ``ButtonStyle/makeBody(configuration:)``. To provide greater control over
@@ -5938,7 +5939,7 @@ extension ButtonStyle {
     /// ```
     ///
     ///
-    ///  ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
+    /// ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -6051,7 +6052,7 @@ public struct ButtonStyleConfiguration {
 
     /// Used to describe a Capsule as a path in a `CGRect`.
     ///
-    /// A Capsule can be described as a path within a specific `CGRect` using
+    /// A Capsule can be described as a path within a specific [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect) using
     /// the ``Capsule/path(in:)`` modifier:
     ///
     /// ```
@@ -8802,9 +8803,6 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 
 /// The default ``GroupBoxStyle``.
 ///
-/// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
-///
-///
 ///     struct ExampleView: View {
 ///         var body: some View {
 ///             GroupBox(label: BananaLabel()) {
@@ -8822,7 +8820,7 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 ///         }
 ///     }
 ///
-///
+/// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -8851,7 +8849,7 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
     ///
     /// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
     ///
-	/// - SeeAlso: GroupBoxStyle
+	/// Check out ``GroupBoxStyle`` for more.
     public init() { }
 
     /// Creates a `View` representing the body of a ``GroupBox``.
@@ -9854,10 +9852,10 @@ public struct DragGesture : Gesture {
 /// An interface to easily perform drag & drop operations.
 ///
 /// The ``DropDelegate`` protocol offers functionality to customize drag and
-/// drop behaviors. It is preffered over ``View/onDrop(of:isTargeted:perform:)``
+/// drop behaviors. It is preffered over ``View/onDrop(of:isTargeted:perform:)-ae20f``
 /// view modifier when your drop behavior requires non-standard implementations.
 ///
-/// ``DropDelegate`` heavily utalizes `NSItemProvider`, which provides
+/// ``DropDelegate`` heavily utilizes `NSItemProvider`, which provides
 /// information about the dragged data.
 ///
 /// ### Setup
@@ -9865,20 +9863,22 @@ public struct DragGesture : Gesture {
 /// implementations.
 ///
 /// Required:
-/// - ``DropDelegate/performDrop(info:)`` specifies the behavior for your drop.
+/// - ``DropDelegate/performDrop(info:)-2a687`` specifies the behavior for your drop.
 ///
 /// Optional:
-/// - ``DropDelegate/validateDrop(info:)-954f7`` validates if a drop can be made.
-/// - ``DropDelegate/dropEntered(info:)-525fa`` provides custom behavior when
+/// - ``DropDelegate/validateDrop(info:)-ff0e6`` validates if a drop can be made.
+/// - ``DropDelegate/dropEntered(info:)-4bfcb`` provides custom behavior when
 /// an object is dragged over the `onDrop` view.
 /// - ``DropDelegate/dropExited(info:)-3d540`` provides custom behavior when an
 /// object is dragged off of the `onDrop` view.
-/// - ``DropDelegate/dropUpdated(info:)-72cd3`` provides custom behavior when
+/// - ``DropDelegate/dropUpdated(info:)-686f2`` provides custom behavior when
 /// the drop is updated.
 ///
 /// ### Creating a simple Drag & Drop
+///
 /// #### Create a draggable ``View``
-/// Make a view draggable with the ``View/.onDrag(_:)`` modifier.
+///
+/// Make a view draggable with the `.onDrag(_:)` modifier.
 ///
 /// Use `NSItemProvider` to define the specific data dragged from that view.
 ///
@@ -9886,7 +9886,7 @@ public struct DragGesture : Gesture {
 /// //  Text to drag
 /// Text(text)
 ///     .font(.title)
-///     .onDrag{ return NSItemProvider(object: "🍌🍌" as NSString) }
+///     .onDrag { return NSItemProvider(object: "🍌🍌" as NSString) }
 /// ```
 ///
 /// #### Creating a drop ``View``
@@ -9900,8 +9900,6 @@ public struct DragGesture : Gesture {
 /// - ``View/onDrop(of:delegate:)-884b8`` requires a ``DropDelegate`` and is
 /// the most versatile.
 ///
-/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var text: String = "🍌🍌"
@@ -9911,7 +9909,7 @@ public struct DragGesture : Gesture {
 ///             //  Text to drag
 ///             Text(text)
 ///                 .font(.title)
-///                 .onDrag{ return NSItemProvider(object: self.text as NSItemProviderWriting) }
+///                 .onDrag { return NSItemProvider(object: self.text as NSItemProviderWriting) }
 ///
 ///             //  Area to drop
 ///             RoundedRectangle(cornerRadius: 10)
@@ -9925,10 +9923,11 @@ public struct DragGesture : Gesture {
 /// }
 /// ```
 ///
-/// #### Conforming to DropDelegate
-/// Implement `DropDelegate/performDrop(info:)` to create a structure that conforms to ``DropDelegate``.
-///
 /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
+/// #### Conforming to DropDelegate
+///
+/// Implement `DropDelegate/performDrop(info:)-2a687` to create a structure that conforms to ``DropDelegate``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -9939,7 +9938,7 @@ public struct DragGesture : Gesture {
 ///             //  Text to drag
 ///             Text(text)
 ///                 .font(.title)
-///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
 ///
 ///             //  Area to drop
 ///             RoundedRectangle(cornerRadius: 10)
@@ -9959,12 +9958,14 @@ public struct DragGesture : Gesture {
 /// }
 /// ```
 ///
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+///
 /// ### Using ``DropInfo`` for custom logic
 /// ``DropInfo`` provides information about the drop and is used to create
 /// custom drop behaviors.
 ///
 /// For example, say your user drags & drops `NSString` data. Use the
-/// ``DropInfo/itemproviders(for:)-7f580`` to get an array of `NSItemProvider`
+/// ``DropInfo/itemProviders(for:)-7f580`` to get an array of `NSItemProvider`
 /// data (recall all dragged data arrives in this format).
 ///
 /// Next, use `NSItemProvider`'s property `loadItem` to extract an
@@ -9977,8 +9978,6 @@ public struct DragGesture : Gesture {
 /// The view in the example below is conditionally colored depending on the
 /// dragged string.
 ///
-/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var backgroundColor: Color = .black
@@ -9990,7 +9989,7 @@ public struct DragGesture : Gesture {
 ///                 ForEach(self.fruits, id: \.self, content: { fruit in
 ///                     Text(fruit)
 ///                         .font(.title)
-///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
 ///                 })
 ///             }
 ///
@@ -10041,10 +10040,10 @@ public struct DragGesture : Gesture {
 /// }
 /// ```
 ///
-/// ### Fully Featured ``DropDelegate``
-/// Utalize ``DropDelegate``s optional functions to provide additional behavior.
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
 ///
-/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+/// ### Fully Featured ``DropDelegate``
+/// Utilize ``DropDelegate``s optional functions to provide additional behavior.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10057,7 +10056,7 @@ public struct DragGesture : Gesture {
 ///                 ForEach(self.fruits, id: \.self, content: { fruit in
 ///                     Text(fruit)
 ///                         .font(.title)
-///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
 ///                 })
 ///             }
 ///
@@ -10129,19 +10128,21 @@ public struct DragGesture : Gesture {
 /// }
 /// ```
 ///
-/// This example uses ``DropDelegate/dropUpdated(info:)-72cd3`` to prevent
+/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-3.gif)
+///
+/// This example uses ``DropDelegate/dropUpdated(info:)-686f2`` to prevent
 /// fruits from being dropped if the background is yellow.
 ///
-/// The example uses ``DropDelegate/dropEntered(info:)-525fa`` to change the
+/// The example uses ``DropDelegate/dropEntered(info:)-4bfcb`` to change the
 /// color the first time a user drags over the drop zone.
 ///
 /// Finally, when a user drags out of the view,
-/// ``DropDelegate/dropExited(info:)-3d540`` changes the background color
+/// ``DropDelegate/dropExited(info:)-fa04d`` changes the background color
 /// to a dark gray.
 ///
 /// Note: if the user deselects their dragged object while over the drop zone,
-/// ``DropDelegate/dropExited(info:)-3d540`` will **not** be called.
-/// ``DropDelegate/dropExited(info:)-3d540`` is only called when the user
+/// ``DropDelegate/dropExited(info:)-fa04d`` will **not** be called.
+/// ``DropDelegate/dropExited(info:)-fa04d`` is only called when the user
 /// explicitly drags their dragged object **out** of the drop zone.
 ///
 /// *Bug*: On iOS ``DropInfo`` provides its location in global coordinates.
@@ -10165,7 +10166,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10243,7 +10244,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10310,7 +10311,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10383,7 +10384,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10460,7 +10461,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10536,7 +10537,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10614,7 +10615,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10681,7 +10682,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10754,7 +10755,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10831,7 +10832,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10900,7 +10901,7 @@ extension DropDelegate {
 ///             // Text to drag
 ///             Text(text)
 ///                 .font(.title)
-///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+///                 .onDrag { NSItemProvider(object: self.text as NSString) }
 ///
 ///             // Area to drop
 ///             RoundedRectangle(cornerRadius: 10)
@@ -11707,8 +11708,6 @@ public struct EditButton : View {
 
 /// The mode of a view indicating whether the user can edit its content.
 ///
-/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
-///
 /// ```
 /// struct ExampleView: View {
 ///     @State var fruits = ["🍌", "🍏", "🍑"]
@@ -11726,6 +11725,9 @@ public struct EditButton : View {
 ///     }
 /// }
 /// ```
+///
+/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
@@ -11742,8 +11744,6 @@ public enum EditMode {
     case transient
 
     /// The view content can be edited.
-    ///
-    /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -11762,6 +11762,8 @@ public enum EditMode {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
     case active
 
     /// Indicates whether a view is being edited.
@@ -11858,7 +11860,7 @@ extension EditMode : Hashable {
 
     /// Used to describe an Ellipse as a path in a `CGRect`.
     ///
-    /// An Ellipse can be described as a path within a specific `CGRect` using
+    /// An Ellipse can be described as a path within a specific [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect) using
     /// the ``Ellipse/path(in:)`` modifier:
     ///
     /// ```
@@ -13558,15 +13560,15 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 
 /// The protocol used to serialize a document to and from a file.
 ///
-/// Conform to this protocol to move a document between its **file representation** and its **"swift-usable"
-/// representation**.
+/// Conform to this protocol to move a document between its **file** representation and its **"swift-usable"**
+/// representation.
 ///
-/// This protocol is very similar to `ReferenceFileDocument, with the difference being whether the data
-/// is stored as a `class` (reference type) or a ``struct`` (value type). Use the two protocols like this:
+/// This protocol is very similar to ``ReferenceFileDocument``, with the difference being whether the data
+/// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
 /// - `struct` --> ``FileDocument``
 /// - `class` --> ``ReferenceFileDocument``
 ///
-/// Don't worry about thread safety when using ``ReferenceFileDocument``, since
+/// Don't worry about thread safety when using `ReferenceFileDocument`, since
 /// deserialization and serialization are done on a background thread.
 ///
 /// - Note: If your app will have documents, it very likely will be easiest to begin from Apple's own
@@ -13594,37 +13596,39 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
 /// - A: ``FileDocument/readableContentTypes``
 /// - B: ``FileDocument/init(configuration:)``
-/// - C: `FileDocument/fileWrapper(snapshot:configuration:)`
+/// - C: ``FileDocument/fileWrapper(configuration:)``
 ///
-///     import SwiftUI
-///     import UniformTypeIdentifiers
+/// ```
+/// import SwiftUI
+/// import UniformTypeIdentifiers
 ///
-///     struct ExampleDocument: FileDocument {
-///         var text: String
+/// struct ExampleDocument: FileDocument {
+///     var text: String
 ///
-///         init(text: String = "This is a brand new document! 📃") {
-///             self.text = text
-///         }
-///
-///         // A
-///         static var readableContentTypes: [UTType] { [.exampleText] }
-///
-///         // B
-///         init(configuration: ReadConfiguration) throws {
-///             guard let data = configuration.file.regularFileContents,
-///                 let string = String(data: data, encoding: .utf8)
-///             else {
-///                 throw CocoaError(.fileReadCorruptFile)
-///             }
-///             text = string
-///         }
-///
-///         // C
-///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-///             let data = text.data(using: .utf8)!
-///             return .init(regularFileWithContents: data)
-///         }
+///     init(text: String = "This is a brand new document! 📃") {
+///         self.text = text
 ///     }
+///
+///     // A
+///     static var readableContentTypes: [UTType] { [.exampleText] }
+///
+///     // B
+///     init(configuration: ReadConfiguration) throws {
+///         guard let data = configuration.file.regularFileContents,
+///             let string = String(data: data, encoding: .utf8)
+///         else {
+///             throw CocoaError(.fileReadCorruptFile)
+///         }
+///         text = string
+///     }
+///
+///     // C
+///     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+///         let data = text.data(using: .utf8)!
+///         return .init(regularFileWithContents: data)
+///     }
+/// }
+/// ```
 ///
 /// Note that in this example, we create a custom ``FileDocument/readableContentTypes`` called `UTType.exampleText`.
 ///
@@ -13644,19 +13648,18 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 /// }
 /// ```
 ///
-/// #### UTType settings
+/// #### `UTType` settings
 ///
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
-///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
-/// 3. Expand the "Document Types" tab.
-/// 4. Click *"Click here to add additional document type properties"*
-/// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-/// 6. Ensure the **Type** is *String*.
-/// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-/// 8. Change the **Types** (top right) to *com.example.plain-text*.
+/// 3. Expand the `Document Types` tab.
+/// 4. Click `Click here to add additional document type properties`
+/// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+/// 6. Ensure the **Type** is `String`.
+/// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+/// 8. Change the **Types** (top right) to `com.example.plain-text`.
 ///
 /// Lastly, in your **ExampleDocument.swift** file, extend `UTType`:
 ///
@@ -13680,7 +13683,7 @@ extension FileDocument {
     /// The file types the ``FileDocument`` document is able to open.
     ///
     /// The readable types of a document should be specified in its declaration. Often,
-    /// the process of creating a document-based app requires a custom UTType object.
+    /// the process of creating a document-based app requires a custom `UTType` object.
     static var readableContentTypes: [UTType] { get }
 
     /// The file types that a file document is able to save or export to.
@@ -13710,10 +13713,10 @@ extension FileDocument {
     ///             self.text = text
     ///         }
     ///
-    ///         // A
+    ///         // 1.
     ///         static var readableContentTypes: [UTType] { [.exampleText] }
     ///
-    ///         // B
+    ///         // 2.
     ///         init(configuration: ReadConfiguration) throws {
     ///             guard let data = configuration.file.regularFileContents,
     ///                 let string = String(data: data, encoding: .utf8)
@@ -13723,7 +13726,7 @@ extension FileDocument {
     ///             text = string
     ///         }
     ///
-    ///         // C
+    ///         // 3.
     ///         func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
     ///             let data = text.data(using: .utf8)!
     ///             return .init(regularFileWithContents: data)
@@ -13773,9 +13776,9 @@ extension FileDocument {
     /// #### FileDocument conformance
     ///
     /// Next, conform to the ``FileDocument`` protocol by implementing these properties:
-    /// - A: ``FileDocument/readableContentTypes``
-    /// - B: ``FileDocument/init(configuration:)``
-    /// - C: ``FileDocument/fileWrapper(snapshot:configuration:)``
+    /// 1. ``FileDocument/readableContentTypes``
+    /// 2. ``FileDocument/init(configuration:)``
+    /// 3. ``FileDocument/fileWrapper(snapshot:configuration:)``
     ///
     /// ```
     /// import SwiftUI
@@ -13823,19 +13826,18 @@ extension FileDocument {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -13937,19 +13939,18 @@ extension FileDocument {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -14057,19 +14058,18 @@ extension FileDocument {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -18515,7 +18515,7 @@ public struct GroupedListStyle : ListStyle {
 ///         }
 ///     }
 ///
-///  ![HStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
+/// ![HStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
 ///
@@ -18550,7 +18550,7 @@ public struct GroupedListStyle : ListStyle {
     ///         }
     ///     }
     ///
-    ///  ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
+    /// ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
     ///
     /// - Parameters:
     ///   - alignment: The guide for aligning the subviews in this stack. It has
@@ -24268,38 +24268,44 @@ extension ListStyle {
 /// accept localized string keys directly through their initializers by default.
 ///
 ///     struct UsingLocalizationView: View {
-///         let text: LocalizedStringKey = "Hello"
+///         let text: LocalizedStringKey = "Hello 🙋‍♀️"
+///
 ///         var body: some View {
-///             Button(text) { }
-///             Text(text)
+///             VStack {
+///                 Button(text) { }
+///                 Text(text)
+///             }
 ///         }
 ///     }
 ///
-/// ![](keyboard-shortcut-default.png)
+/// ![](localization-1.png)
 ///
 /// Also, since SwiftUI is localization-first, if you pass a string literal
 /// to these initializers, they will be interpreted as localized string keys!
 ///
 ///     struct WithStringLiteralView: View {
 ///         var body: some View {
-///             Text("This gets localized!")
+///             Text("This gets localized! 🌎")
 ///         }
 ///     }
 ///
-/// ![](keyboard-shortcut-key-ex.png)
+/// ![](localizedstringkey-2.png)
 ///
 /// However, if your variable is already a string, the intializer will
 /// not localize the string:
 ///
-///     struct RightAndWrongView: View {
-///         let s = "Hello"
+///     struct ContentView: View {
+///         let s = "Hello 🙋‍♀️"
+///
 ///         var body: some View {
-///             Text(s) //Not localized
-///             Text("Hello") //Localized!
+///             VStack {
+///                 Text(s) //Not localized
+///                 Text("Hello 🙋‍♀️") //Localized!
+///             }
 ///         }
 ///     }
 ///
-/// ![](label-title-icon-ex.png)
+/// ![](localization-3.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
@@ -24310,6 +24316,7 @@ extension ListStyle {
     ///
     ///     struct UsingLocalizationView: View {
     ///         let text = LocalizedStringKey("Hello")
+    ///
     ///         var body: some View {
     ///             Text(text)
     ///         }
@@ -26916,16 +26923,16 @@ public struct PageTabViewStyle : TabViewStyle {
 /// There are 8 different ways to create a path:
 ///
 /// 1. Empty path: ``Path/init()``
-/// 2. Path from closure
-/// 3. Path from `CGMutablePath`
-/// 4. Path from `CGPath`
+/// 2. Path from closure: ``Path/init(_:)-13504``
+/// 3. Path from [`CGMutablePath`](https://developer.apple.com/documentation/coregraphics/cgmutablepath)
+/// 4. Path from [`CGPath`](https://developer.apple.com/documentation/coregraphics/cgpath)
 /// 5. Path from ``Rectangle``
 /// 6. Path from [`String`](https://developer.apple.com/documentation/swift/string)
 /// 7. Path from ellipse:
 /// ``Path/init(ellipseIn:)``
 /// 8. Path from ``RoundedRectangle``:
-/// ``Path/init(roundedRect:cornerSize:style:)`` or
-/// ``Path/init(roundedRect:cornerRadius:style:)``
+///     1. ``Path/init(roundedRect:cornerSize:style:)``
+///     2. ``Path/init(roundedRect:cornerRadius:style:)``
 ///
 /// ### Modifying and mutating a path
 ///
@@ -30856,7 +30863,7 @@ extension ProjectionTransform {
 
     /// Used to describe a Rectangle as a path in a `CGRect`.
     ///
-    /// A Rectangle can be described as a path within a specific `CGRect` using
+    /// A Rectangle can be described as a path within a specific [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect) using
     /// the ``Rectangle/path(in:)`` modifier:
     ///
     /// ![Rectangle path example](rectangle-example-3.png)
@@ -31089,19 +31096,18 @@ public struct RedactionReasons : OptionSet {
 ///         }
 ///     }
 ///
-/// #### UTType settings
+/// #### `UTType` settings
 ///
 /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
 /// follow these steps:
-///
 /// 1. Go to the Xcode project settings.
 /// 2. Click on your target to the left.
-/// 3. Expand the "Document Types" tab.
-/// 4. Click *"Click here to add additional document type properties"*
-/// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-/// 6. Ensure the **Type** is *String*.
-/// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-/// 8. Change the **Types** (top right) to *com.example.plain-text*.
+/// 3. Expand the `Document Types` tab.
+/// 4. Click `Click here to add additional document type properties`
+/// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+/// 6. Ensure the **Type** is `String`.
+/// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+/// 8. Change the **Types** (top right) to `com.example.plain-text`.
 ///
 /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
 ///
@@ -31208,20 +31214,19 @@ extension ReferenceFileDocument : ObservableObject {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define
     /// a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -31241,7 +31246,7 @@ extension ReferenceFileDocument : ObservableObject {
     /// The types the ``ReferenceFileDocument`` document is able to open.
     ///
     /// The readable types of a document should be specified in its declaration. Very often,
-    /// the process of creating a document-based app requires a custom UTType object.
+    /// the process of creating a document-based app requires a custom `UTType` object.
     ///
     /// In the following example, we create a custom readable content type called `exampleText`.
     ///
@@ -31315,20 +31320,19 @@ extension ReferenceFileDocument : ObservableObject {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to
     /// define a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -31421,20 +31425,19 @@ extension ReferenceFileDocument : ObservableObject {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define
     /// a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -31533,20 +31536,19 @@ extension ReferenceFileDocument : ObservableObject {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define
     /// a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -31661,19 +31663,18 @@ extension ReferenceFileDocument : ObservableObject {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -31769,19 +31770,18 @@ extension ReferenceFileDocument : ObservableObject {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -31892,19 +31892,18 @@ extension ReferenceFileDocument {
     ///         }
     ///     }
     ///
-    /// #### UTType settings
+    /// #### `UTType` settings
     ///
     /// In order for any of this to work, your Xcode project will have to define a document type. To do this,
     /// follow these steps:
-    ///
     /// 1. Go to the Xcode project settings.
     /// 2. Click on your target to the left.
-    /// 3. Expand the "Document Types" tab.
-    /// 4. Click *"Click here to add additional document type properties"*
-    /// 5. Make the **Key** *NSUbiquitousDocumentUserActivityType*.
-    /// 6. Ensure the **Type** is *String*.
-    /// 7. Make the Value *$(PRODUCT_BUNDLE_IDENTIFIER).example-document*.
-    /// 8. Change the **Types** (top right) to *com.example.plain-text*.
+    /// 3. Expand the `Document Types` tab.
+    /// 4. Click `Click here to add additional document type properties`
+    /// 5. Make the **Key** `NSUbiquitousDocumentUserActivityType`.
+    /// 6. Ensure the **Type** is `String`.
+    /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
+    /// 8. Change the **Types** (top right) to `com.example.plain-text`.
     ///
     /// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
     ///
@@ -32484,7 +32483,7 @@ extension RoundedCornerStyle : Hashable {
 
     /// Used to describe a RoundedRectangle as a path in a `CGRect`.
     ///
-    /// A RoundedRectangle can be described as a path within a specific `CGRect`
+    /// A RoundedRectangle can be described as a path within a specific [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect)
     /// using the `path(in:)` modifier:
     ///
     /// ![RoundedRectangle path example](roundedrectangle-example-7.png)
@@ -34437,7 +34436,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-///  ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+/// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
 ///
 /// In this example, the ``VStack`` containing the text is made scrollable by
 /// wrapping it in a `ScrollView`.
@@ -34480,7 +34479,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
-///  ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+/// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
 ///
 /// [<-]
 /// This example takes the previous example, and modifies it so that the
@@ -34504,7 +34503,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-///  ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
+/// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
 ///
 /// In this example, `ScrollView` can scroll both horizontally *and*
 /// vertically, because both axes have been specified explicitly.
@@ -37518,7 +37517,11 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     /// }
+    /// ```
     ///
+    /// Apply ``Shape/stroke(lineWidth:)`` to see the shape:
+    ///
+    /// ```
     /// struct ContentView: View {
     ///     var body: some View {
     ///         Arch().stroke()
@@ -37578,7 +37581,7 @@ extension Stepper where Label == Text {
     /// struct ContentView: View {
     ///     var body: some View {
     ///         var style1 = StrokeStyle(lineWidth: 50, lineJoin: .miter)
-    ///         var style2 = StrokeStyle(lineWidth: 50, lineJoin: .bevel)
+    ///         var style2 = StrokeStyle(lineWidth: 50, lineJoin: .miter)
     ///
     ///         style1.miterLimit = 1.4142136
     ///         style2.miterLimit = 1.4142135
@@ -37693,7 +37696,7 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// [](dash-4.png)
+    /// ![](dash-4.png)
     ///
     /// We could continue this pattern indefinitely.
     ///
@@ -38416,7 +38419,7 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-///  ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
+/// ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
 /// `Text` also accepts 12 unique modifiers to customize your string.
 ///
@@ -38430,7 +38433,7 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-///  ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
+/// ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
 /// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that
 /// return `some View`, such as ``View/foregroundColor(_:)``, are compatible with
@@ -38446,7 +38449,7 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-///  ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
+/// ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
 ///
 /// **Remember**, any modifier that returns `some View` must be used after
 /// modifiers that return `Text`.
@@ -42751,7 +42754,7 @@ extension UserInterfaceSizeClass : Hashable {
 ///         }
 ///     }
 ///
-///  ![VStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
+/// ![VStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
 ///
@@ -43353,10 +43356,13 @@ extension View {
     ///         @Environment (\.presentationMode) var presentationMode
     ///
     ///         var body: some View {
-    ///             VStack {
-    ///                 Text(item.text)
-    ///                 Button("Tap to Dismiss") {
-    ///                     presentationMode.wrappedValue.dismiss()
+    ///             ZStack {
+    ///                 Color.yellow
+    ///                 VStack {
+    ///                     Text(item.text)
+    ///                     Button("Tap to Dismiss") {
+    ///                         presentationMode.wrappedValue.dismiss()
+    ///                     }
     ///                 }
     ///             }
     ///         }
@@ -43402,8 +43408,10 @@ extension View {
     ///         @Environment(\.presentationMode) var presentationMode
     ///
     ///         var body: some View {
-    ///             Button("CLOSE 📪") {
-    ///                 presentationMode.wrappedValue.dismiss()
+    ///             ZStack {
+    ///                 Button("CLOSE 📪") {
+    ///                     presentationMode.wrappedValue.dismiss()
+    ///                 }
     ///             }
     ///         }
     ///     }
@@ -43728,9 +43736,6 @@ extension View {
     /// Sets the style for buttons within this view to a button style with a
     /// custom appearance and custom interaction behavior.
     ///
-    /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
-    ///
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             VStack {
@@ -43748,6 +43753,9 @@ extension View {
     ///
     ///         func tap() { /* implement here */ }
     ///     }
+    ///
+    /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+    ///
     public func buttonStyle<S>(_ style: S) -> some View where S : PrimitiveButtonStyle { }
 
 }
@@ -44508,8 +44516,6 @@ extension View {
 	/// - Parameters:
 	///   - background: The view to place behind.
 	///   - alignment: Where to align the behind view relative to the current view. Defaults to center.
-	///
-	/// - SeeAlso: overlay(_:alignment:)
     @inlinable public func background<Background>(_ background: Background, alignment: Alignment = .center) -> some View where Background : View { }
 
 }
@@ -49909,8 +49915,6 @@ extension View {
     ///
     /// ### Basic Usage
     ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     @State var text: String = "🍌🍌"
@@ -49919,7 +49923,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -49932,10 +49936,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
     /// ### Using `NSItemProvider` with `onDrop`
     /// `NSItemProvider` is a class that holds data on the dragged contents.
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -49946,11 +49950,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -49978,15 +49982,17 @@ extension View {
     /// }
     /// ```
     ///
-    /// - Paremeters:
-    ///     - of: The type you want to drop. Accepts an array of `UTType`,
-    ///     which can include "Uniform Resource Identifiers", or URI for short.
-    ///     Common URI include "public.image", "public.text", "public.file-url",
-    ///     and "public.url".
-    ///     - isTargeted: A binding to communicate when a user is dragging over
-    ///     this region.
-    ///     - perform: The action to perform on drop. `perform` accepts an
-    ///     `NSItemProvider` and returns a boolean.
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
+    ///
+    /// - Parameters:
+    ///   - of: The type you want to drop. Accepts an array of `UTType`,
+    ///   which can include "Uniform Resource Identifiers", or URI for short.
+    ///   Common URI include `"public.image"`, `"public.text"`, `"public.file-url"`,
+    ///   and `"public.url"`.
+    ///   - isTargeted: A binding to communicate when a user is dragging over
+    ///   this region.
+    ///   - perform: The action to perform on drop. `perform` accepts an
+    ///   `NSItemProvider` and returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
 
 
@@ -50007,7 +50013,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50034,11 +50040,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50083,7 +50089,7 @@ extension View {
     ///                 HStack {
     ///                     Text(topBananas)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider() }
+    ///                         .onDrag { return NSItemProvider() }
     ///                 }
     ///
     ///                 RoundedRectangle(cornerRadius: 10)
@@ -50104,7 +50110,7 @@ extension View {
     ///                 HStack {
     ///                     Text(bottomBananas)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider() }
+    ///                         .onDrag { return NSItemProvider() }
     ///                 }
     ///
     ///                 Spacer()
@@ -50119,11 +50125,11 @@ extension View {
     /// - Parameters:
     ///     - of: The type you want to drop. Accepts an array of "Uniform
     ///     Resource Identifiers", or URI for short. Common URI include
-    ///     "public.image", "public.text", "public.file-url", and "public.url".
+    ///     `"public.image"`, `"public.text"`, `"public.file-url"`, and `"public.url"`.
     ///     - isTargeted: A binding to communicate when a user is dragging
     ///     over this region.
     ///     - perform: The action to perform on drop. `perform` accepts an
-    ///     `NSItemProvider` and a CGPoint which represents the drop location.
+    ///     `NSItemProvider` and a `CGPoint` which represents the drop location.
     ///     It returns a boolean.
     public func onDrop(of supportedContentTypes: [UTType], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
 
@@ -50138,7 +50144,6 @@ extension View {
     /// Implement ``DropDelegate/performDrop(info:)-386a3`` to create a
     /// structure that conforms to ``DropDelegate``.
     ///
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     @State var text: String = "🍌🍌"
@@ -50148,7 +50153,7 @@ extension View {
     ///             // Text to drag
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
     ///
     ///             // Area to drop
     ///             RoundedRectangle(cornerRadius: 10)
@@ -50171,8 +50176,7 @@ extension View {
     /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
     ///
     /// ### Fully Featured ``DropDelegate``
-    /// Utalize ``DropDelegate``s optional functions to provide additional behavior.
-    ///
+    /// Utilize ``DropDelegate``s optional functions to provide additional behavior.
     ///
     /// ```
     /// struct ExampleView: View {
@@ -50185,7 +50189,7 @@ extension View {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -50274,13 +50278,12 @@ extension View {
     /// ``DropDelegate/dropExited(info:)-3d540`` is only called when the user
     /// explicitly drags their dragged object **out** of the drop zone.
     ///
-    ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of UTType which
-    ///     include "Uniform Resource Identifiers", or URI for short.
-    ///     ommon URI include "public.image", "public.text",
-    ///     "public.file-url", and "public.url".
-    ///     - delegate: An object that conforms to  ``DropDelegate``.
+    ///   - of: The type you want to drop. Accepts an array of `UTType` which
+    ///   include "Uniform Resource Identifiers", or URI for short.
+    ///   common URI include "public.image", "public.text",
+    ///   "public.file-url", and "public.url".
+    ///   - delegate: An object that conforms to  ``DropDelegate``.
     public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
 
 }
@@ -50307,7 +50310,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50334,11 +50337,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50369,14 +50372,14 @@ extension View {
     /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of `UTType`,
-    ///     which can include "Uniform Resource Identifiers", or URI for short.
-    ///     Common URI include "public.image", "public.text", "public.file-url",
-    ///     and "public.url".
-    ///     - isTargeted: A binding to communicate when a user is dragging
-    ///     over this region.
-    ///     - perform: The action to perform on drop. `perform` accepts an
-    ///     `NSItemProvider` and returns a boolean.
+    ///   - of: The type you want to drop. Accepts an array of `UTType`,
+    ///   which can include "Uniform Resource Identifiers", or URI for short.
+    ///   Common URI include `"public.image"`, `"public.text"`, `"public.file-url"`,
+    ///   and `"public.url"`.
+    ///   - isTargeted: A binding to communicate when a user is dragging
+    ///   over this region.
+    ///   - perform: The action to perform on drop. `perform` accepts an
+    ///   `NSItemProvider` and returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider]) -> Bool) -> some View { }
@@ -50391,8 +50394,6 @@ extension View {
     ///
     /// ### Basic Usage
     ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
-    ///
     /// ```
     /// struct ContentView: View {
     ///     @State var text: String = "🍌🍌"
@@ -50401,7 +50402,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50414,10 +50415,10 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-1.gif)
+    ///
     /// ### Using `NSItemProvider` with `onDrop`
     /// `NSItemProvider` is a class that holds data on the dragged contents.
-    ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -50428,11 +50429,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50460,9 +50461,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ### Using `CGPoint` with `onDrop`
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-2.gif)
     ///
-    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
+    /// ### Using `CGPoint` with `onDrop`
     ///
     /// ```
     /// struct ContentView: View {
@@ -50477,7 +50478,7 @@ extension View {
     ///                 HStack {
     ///                     Text(topBananas)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider() }
+    ///                         .onDrag { return NSItemProvider() }
     ///                 }
     ///
     ///                 RoundedRectangle(cornerRadius: 10)
@@ -50498,7 +50499,7 @@ extension View {
     ///                 HStack {
     ///                     Text(bottomBananas)
     ///                         .font(.title)
-    ///                         .onDrag{ return NSItemProvider() }
+    ///                         .onDrag { return NSItemProvider() }
     ///                 }
     ///
     ///                 Spacer()
@@ -50508,16 +50509,17 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![Drop View](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ondrop-example-3.gif)
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of "Uniform
-    ///     Resource Identifiers", or URI for short. Common URI include
-    ///     "public.image", "public.text", "public.file-url", and "public.url".
-    ///     - isTargeted: A binding to communicate when a user is dragging
-    ///     over this region.
-    ///     - perform: The action to perform on drop. `perform` accepts an
-    ///     `NSItemProvider` and a CGPoint which represents the drop location.
-    ///     It returns a boolean.
+    ///   - of: The type you want to drop. Accepts an array of "Uniform
+    ///   Resource Identifiers", or URI for short. Common URI include
+    ///   "public.image", "public.text", "public.file-url", and "public.url".
+    ///   - isTargeted: A binding to communicate when a user is dragging
+    ///   over this region.
+    ///   - perform: The action to perform on drop. `perform` accepts an
+    ///   `NSItemProvider` and a CGPoint which represents the drop location.
+    ///   It returns a boolean.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping ([NSItemProvider], CGPoint) -> Bool) -> some View { }
@@ -50543,7 +50545,7 @@ extension View {
     ///             //  Text to drag
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag{ return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
     ///
     ///             //  Area to drop
     ///             RoundedRectangle(cornerRadius: 10)
@@ -50671,11 +50673,11 @@ extension View {
     ///
     ///
     /// - Parameters:
-    ///     - of: The type you want to drop. Accepts an array of UTType which
-    ///     include "Uniform Resource Identifiers", or URI for short.
-    ///     Common URI include "public.image", "public.text",
-    ///     "public.file-url", and "public.url".
-    ///     - delegate: An object that conforms to  ``DropDelegate``.
+    ///   - of: The type you want to drop. Accepts an array of `UTType` which
+    ///   include "Uniform Resource Identifiers", or URI for short.
+    ///   Common URI include "public.image", "public.text",
+    ///   "public.file-url", and "public.url".
+    ///   - delegate: An object that conforms to  ``DropDelegate``.
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public func onDrop(of supportedTypes: [String], delegate: DropDelegate) -> some View { }
