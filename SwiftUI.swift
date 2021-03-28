@@ -37730,7 +37730,7 @@ extension Stepper where Label == Text {
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         var style = StrokeStyle(lineWidth: 10, dash: [80, 5])
+    ///         var style1 = StrokeStyle(lineWidth: 10, dash: [80, 5])
     ///         var style2 = StrokeStyle(lineWidth: 10, dash: [80, 5])
     ///
     ///         style1.dashPhase = 15 // Move the first line up 15 pts
