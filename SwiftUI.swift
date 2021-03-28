@@ -37294,6 +37294,9 @@ extension Stepper where Label == Text {
     /// ```
     ///
     /// ![](strokestyle-linewidth.png)
+    ///
+    /// - Note: If you just want to specify a stroke's line width,
+    /// you can do this directly using ``Shape/stroke(lineWidth:)``.
     public var lineWidth: CGFloat
 
     /// The style for rendering the endpoint of the stroke line.
