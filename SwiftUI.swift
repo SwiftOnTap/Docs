@@ -37706,7 +37706,7 @@ extension Stepper where Label == Text {
     ///
     /// This property offsets the phase of the dash pattern by a
     /// specified number of pts. (See ``StrokeStyle/dash`` if you aren't
-    /// familiary with how to create a dashed ``Path``.)
+    /// familiary with how to create a dashed ``StrokeStyle``.)
     ///
     /// Take this `Line` ``Shape``:
     ///
