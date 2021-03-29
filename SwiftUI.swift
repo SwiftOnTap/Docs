@@ -40055,7 +40055,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// called *once*
 /// after the call to ``UIViewRepresentable/makeUIView(context:)``, then called
 /// whenever any state changes.
-/// 3. `UIViewRepresentable/dismantleUIView(context:)-78ab4`: Upon
+/// 3. `UIViewRepresentable/dismantleUIView(context:)-77431`: Upon
 /// destruction of the parent container, this gets called.
 /// (This is **optional**. A default implementation is provided.)
 /// 4. ``UIViewRepresentable/makeCoordinator()-138cc``: This creates a
