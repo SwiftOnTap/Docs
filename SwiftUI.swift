@@ -25573,21 +25573,138 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 /// A configuration for a navigation bar that represents a view at the top of a
 /// navigation stack.
 ///
-/// [[navigation-bar-items]]
+/// Use this structure's members to configure the appearance of a
+/// navigation bar. Currently, there is only one member:
+/// ``NavigationBarItem/TitleDisplayMode``. Below is a simple example,
+/// but see ``NavigationBarItem/TitleDisplayMode`` for more on when
+/// and how to use the options.
+///
+/// ```
+/// struct ContentView: View {
+///     let mode = NavigationBarItem.TitleDisplayMode.large
+///
+///     var body: some View {
+///         NavigationView {
+///             Text("Hello Bananas🍌🍌")
+///                 .navigationTitle("Home")
+///                 .navigationBarTitleDisplayMode(mode)
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![NavigationView Example 3](538F7154-7B14-41AD-B913-2391A4D850CB.png)
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 public struct NavigationBarItem {
 
     /// A style for displaying the title of a navigation bar.
+    ///
+    /// Use this enumeration with
+    /// ``NavigationView`` and the ``View/navigationBarTitleDisplayMode(_:)``
+    /// view modifier to set the size and style of the navigation bar title.
+    ///
+    /// There are currently 3 options:
+    /// - ``NavigationBarItem.TitleDisplayMode.automatic`` - Use the system default, either
+    /// `inline` or `large` depending on the context.
+    /// - ``NavigationBarItem.TitleDisplayMode.inline`` - Centered, smaller title font.
+    /// - ``NavigationBarItem.TitleDisplayMode.large`` - Large, left-aligned title font.
+    ///
+    /// Here is an example of specifying `automatic` display mode:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let mode = NavigationBarItem.TitleDisplayMode.automatic
+    ///
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("My title is large! 👣")
+    ///                 .navigationTitle("Title")
+    ///                 .navigationBarTitleDisplayMode(mode)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![NavigationView Example 3](displaymode.png)
     public enum TitleDisplayMode {
 
         /// Inherit the display mode from the previous navigation item.
+        ///
+        /// Use this case with
+        /// ``NavigationView`` and the ``View/navigationBarTitleDisplayMode(_:)``
+        /// view modifier to specify automatic title size. Automatic size tends to be
+        /// `large` by default, and then after that, views inherit from their
+        /// parent unless overridden.
+        ///
+        /// Here is an example of specifying `automatic` display mode:
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         NavigationView {
+        ///             Text("My title is large! 👣")
+        ///                 .navigationTitle("Title")
+        ///                 .navigationBarTitleDisplayMode(.automatic)
+        ///         }
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// ![NavigationView Example 3](displaymode.png)
+        ///
+        /// - Note: You don't need to specify `automatic` title display
+        /// mode. If no other mode is specified, it is the default.
         case automatic
 
         /// Display the title within the standard bounds of the navigation bar.
+        ///
+        /// Use this case with
+        /// ``NavigationView`` and the ``View/navigationBarTitleDisplayMode(_:)``
+        /// view modifier to specify inline, or smaller, title size. This
+        /// is especially useful for overriding the default `large` title
+        /// size for root views in a ``NavigationView``.
+        ///
+        /// Here is an example of specifying `inline` display mode:
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         NavigationView {
+        ///             Text("My title is inline ➿")
+        ///                 .navigationTitle("Inline Title")
+        ///                 .navigationBarTitleDisplayMode(.inline)
+        ///         }
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// ![NavigationView Example 3](displaymode-inline.png)
         case inline
 
         /// Display a large title within an expanded navigation bar.
+        ///
+        /// Use this case with
+        /// ``NavigationView`` and the ``View/navigationBarTitleDisplayMode(_:)``
+        /// view modifier to specify large size. Large titles are the
+        /// default for root views, but they must be specified explicitly
+        /// for deeper-level views.
+        ///
+        /// Here is an example of specifying `large` display mode:
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         NavigationView {
+        ///             Text("My title is large! 👣")
+        ///                 .navigationTitle("Large")
+        ///                 .navigationBarTitleDisplayMode(.large)
+        ///         }
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// ![NavigationView Example 3](displaymode-large.png)
         @available(tvOS, unavailable)
         @available(watchOS, unavailable)
         case large
