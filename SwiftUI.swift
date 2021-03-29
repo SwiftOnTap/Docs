@@ -1015,7 +1015,7 @@ public struct Alert {
 /// Use this structure to align a view when it has both a vertical and
 /// horizontal degree of freedom.
 ///
-/// ### What is an ``Alignment``?
+/// ### What is an `Alignment`?
 ///
 /// An alignment is made up of 2 properties:
 /// 1. The ``Alignment/vertical`` alignment, of type ``VerticalAlignment``
@@ -1029,9 +1029,11 @@ public struct Alert {
 /// #### The ``Alignment`` initializer
 ///
 /// You can also create your own alignments from the
-/// ``Alignment/init(horizontal:vertical:)`` initializer (*Note: the
+/// ``Alignment/init(horizontal:vertical:)`` initializer
+///
+/// - Note: The
 /// clear color is added to expand the view to the entire screen,
-/// so that the alignment movement can be seen*):
+/// so that the alignment movement can be seen
 ///
 /// ```
 /// struct ContentView: View {
@@ -1121,10 +1123,10 @@ public struct Alert {
     ///         }
     ///     }
     /// }
+    /// ```
     ///
     /// ![](14.11.38.png)
     ///
-    /// ```
     public var horizontal: HorizontalAlignment
 
     /// The alignment on the vertical axis.
@@ -1523,24 +1525,24 @@ extension Anchor.Source {
 
 /// A geometric angle whose value you access in either radians or degrees.
 ///
-/// ``Angle``s are used all over SwiftUI to specify a geometric angle.
+/// `Angle`s are used all over SwiftUI to specify a geometric angle.
 /// Common uses include **rotation** and **drawing**.
 ///
-/// ### Creating an ``Angle``
+/// ### Creating an `Angle`
 ///
 /// You can create an ``Angle`` by using either **radians** or **degrees**.
 /// Each has an initializer as well as a static method:
 ///
-/// - Radians:
+/// - **Radians**:
 ///     - ``Angle/init(radians:)``
 ///     - ``Angle/radians(_:)``
-/// - Degrees:
+/// - **Degrees**:
 ///     - ``Angle/init(degrees:)``
 ///     - ``Angle/degrees(_:)``
 ///
 /// See usage examples below.
 ///
-/// ### Using an ``Angle`` with rotation
+/// ### Using an `Angle` with rotation
 ///
 /// `Angles` are commonly used with the ``View/rotationEffect(_:anchor:)``
 /// and similar modifiers:
@@ -1563,10 +1565,10 @@ extension Anchor.Source {
 ///
 /// ![Rectangle with rotation by angle](angle-rotation.png)
 ///
-/// ### Using an ``Angle`` with drawing
+/// ### Using an `Angle` with drawing
 ///
-/// ``Angle``s can also be used with drawing. Below, we define a custom
-/// ``Shape`` called `Arc`, and make its parameter type ``Angle``. In our
+/// `Angle`s can also be used with drawing. Below, we define a custom
+/// ``Shape`` called `Arc`, and make its parameter type `Angle`. In our
 /// ``View``, we pass `270` as the degrees parameter to specify the size of
 /// the `Arc` to be displayed:
 ///
@@ -2256,16 +2258,15 @@ extension AnimatableModifier : Animatable, ViewModifier {
 
 /// Specifies the timing curve of a changing on-screen value.
 ///
-/// ### An ``Animation`` is just a timing curve
+/// ### An `Animation` is just a timing curve
 ///
 /// Every animation has 3 parts:
-///
 /// 1. The numerical value in memory that changes over time --- usually
 /// a `@State` property
 /// 2. How the ``View`` depends on this numerical value --- often using
 /// a view modifier
 /// 3. The timing curve describing how this change happens --- this is the
-/// ``Animation``
+/// `Animation`
 ///
 /// For example, say I want the screen to be **green** sometimes, but **red**
 /// at other times. The current color of the screen would be stored as a
@@ -2276,7 +2277,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 ///
 /// ### Types of timing curves
 ///
-/// There are many different types of timing curves, or ``Animations``.
+/// There are many different types of timing curves, or `Animation`s.
 /// For example, how long does the animation last (**duration**)? Does it move
 /// at the same speed the whole time (**linear**), or does it **ease in and out**?
 /// Or maybe it goes so fast at the beginning that it actually overshoots
@@ -3036,7 +3037,7 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
 /// ### Creating a transition
 ///
 /// The easiest way to creat a transition is using one of
-/// the many pre-made static members available in ``AnyTransition``.
+/// the many pre-made static members available in `AnyTransition`.
 /// See the sliding banana example at the bottom of this page.
 ///
 /// You can also create your own static members by extending this
@@ -3061,12 +3062,11 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
 ///
 /// There are many ways to add an animation to the transition:
 /// - Using ``withAnimation(_:_:)``
-/// - Using ``AnyTransition``'s own ``AnyTransition/animation(_:)`` modifier.
+/// - Using `AnyTransition`'s own ``AnyTransition/animation(_:)`` modifier.
 /// - Using ``View``'s ``View/animation(_:)`` modifier.
 ///
 /// The following example applies the ``AnyTransition/slide`` transition:
 ///
-/// ![211933DE-9819-4921-A945-9E4B30BB8453](211933DE-9819-4921-A945-9E4B30BB8453.png)
 /// ```
 /// struct TransitioningBananaView: View {
 ///     @State var showBanana = true
