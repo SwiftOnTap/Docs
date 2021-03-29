@@ -13155,15 +13155,10 @@ extension EnvironmentValues {
     /// view currently presented.
     ///
     /// This is useful for 4 types of views:
-    ///
-    ///
-    ///
     /// 1. ``NavigationView``
-    /// 2. ``View/sheet(isPresented:onDismiss:)``
-    /// 3. ``View/popover(isPresented:onDismiss:)``
-    /// 4. ``View/fullScreenCover(isPresented:onDismiss)``
-    ///
-    ///
+    /// 2. ``View/sheet(isPresented:onDismiss:content:)``
+    /// 3. ``View/popover(isPresented:attachmentAnchor:arrowEdge:content:)``
+    /// 4. ``View/fullScreenCover(isPresented:onDismiss:content:)``
     ///
     /// See ``Environment`` for more on environment values and how to use
     /// the property wrapper.
@@ -35044,6 +35039,32 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// used just like any other view. However, there are many default methods
 /// that shapes have which views do not.
 ///
+/// ### Using a pre-defined shape
+///
+/// In addition to the ability to create your own shape, there are also
+/// many pre-defined shapes for you to use:
+/// 1. ``Capsule``
+/// 2. ``Circle``
+/// 3. ``ContainerRelativeShape``
+/// 4. ``Ellipse``
+/// 5. ``Path``
+/// 6. ``Rectangle``
+/// 7. ``RoundedRectangle``
+///
+/// Example usage would look like this:
+///
+/// ```
+/// struct PillView: View {
+///     var body: some View {
+///         Capsule()
+///     }
+/// }
+/// ```
+///
+/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
+///
+/// Check out these shapes directly for more info on how to use them.
+///
 /// ### Creating your own shape
 ///
 /// The only requirement of conforming to the shape protocol is implementing
@@ -35072,33 +35093,7 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// For more info on how to create a path from a bounding rectangle,
 /// check out the ``Path`` structure.
 ///
-/// ### Using a pre-defined shape
-///
-/// In addition to the ability to create your own shape, there are also
-/// many pre-defined shapes for you to use:
-/// 1. ``Capsule``
-/// 2. ``Circle``
-/// 3. ``ContainerRelativeShape``
-/// 4. ``Ellipse``
-/// 5. ``Path``
-/// 6. ``Rectangle``
-/// 7. ``RoundedRectangle``
-///
-/// Example usage would look like this:
-///
-/// ```
-/// struct PillView: View {
-///     var body: some View {
-///         Capsule()
-///     }
-/// }
-/// ```
-///
-/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
-///
-/// Check out these shapes directly for more info on how to use them.
-///
-/// In general, while view modifiers can be applied to shapes, note that
+/// - Note: In general, while view modifiers can be applied to shapes, note that
 /// applying a view modifier will return a ``View`` rather than a shape.
 /// Whenever possible, try to use shape modifiers instead of
 /// view modifiers to accomplish the same tasks with your shapes.
