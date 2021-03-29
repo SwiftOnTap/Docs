@@ -34761,9 +34761,114 @@ public struct ScrollViewProxy {
 
 /// A container that groups views.
 ///
-/// Often used in ``List``s and ``Form``s to set `Parent`, `Content`, and `Footer` information.
+/// Use `Section` inside of ``List`` and ``Form`` to visually
+/// separate sections of content.
 ///
-/// [[list-sections]]
+/// Here's a `Section` in a ``List``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         List {
+///             Section {
+///                 Text("I'm in the first 🥇 section")
+///                 Text("Numba 1️⃣")
+///             }
+///             Section {
+///                 Text("Second is the best 🥈")
+///                 Text("Preach✌️")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![](section-1.png)
+///
+/// And, for comparison, a ``Form``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Form {
+///             Section {
+///                 Text("I'm in the first 🥇 section")
+///                 Text("Numba 1️⃣")
+///             }
+///             Section {
+///                 Text("Second is the best 🥈")
+///                 Text("Preach✌️")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![](section-2.png)
+///
+/// You can also (optionally) add **header** and **footer** content
+/// to a `Section`:
+///
+/// ```
+/// struct ContentView: View {
+///     var footer: some View {
+///         Text("This is a disclaimer about section number 2. Use at your own risk.")
+///     }
+///
+///     var body: some View {
+///         Form {
+///             Section(header: Text("Section #1")) {
+///                 Text("I'm in the first 🥇 section")
+///                 Text("Numba 1️⃣")
+///             }
+///             Section(header: Text("Section #2"), footer: footer) {
+///                 Text("Second is the best 🥈")
+///                 Text("Preach✌️")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![](section-3.png)
+///
+/// You can style a ``List``, and the `Section`s will automatically
+/// get styled accordingly.
+///
+/// ```
+/// struct ContentView: View {
+///     var footer: some View {
+///         Text("This is a disclaimer about section number 2. Use at your own risk.")
+///     }
+///
+///     var body: some View {
+///         List {
+///             Section(header: Text("Section #1")) {
+///                 Text("I'm in the first 🥇 section")
+///                 Text("Numba 1️⃣")
+///             }
+///             Section(header: Text("Section #2"), footer: footer) {
+///                 Text("Second is the best 🥈")
+///                 Text("Preach✌️")
+///             }
+///         }
+///         .listStyle(InsetGroupedListStyle()) //Try changing this to SidebarListStyle()
+///     }
+/// }
+/// ```
+///
+/// ![](section-4.png)
+///
+/// Beyond ``List`` and ``Form``, the four `lazy` layout elements also
+/// support `Section`:
+/// - ``LazyVStack``
+/// - ``LazyHStack``
+/// - ``LazyVGrid``
+/// - ``LazyHGrid``
+///
+/// They even enable you to pin the headers and footers as you scroll
+/// using ``PinnedScrollableViews``. See those pages for more.
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Section<Parent, Content, Footer> {
 }
@@ -34778,6 +34883,62 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     public typealias Body = Never
 
     /// Initialize a ``Section`` with an explicit header, footer, and content.
+    ///
+    /// Use this initializer to create a ``Section`` with a `header`,
+    /// a `footer`, and a ``ViewBuilder`` to create the content.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Section(header: Text("Section #1"), footer: Text("Disclaimer #1")) {
+    ///                 Text("I'm in the first 🥇 section")
+    ///                 Text("Numba 1️⃣")
+    ///             }
+    ///             Section(header: Text("Section #2"), footer: Text("Disclaimer #2")) {
+    ///                 Text("Second is the best 🥈")
+    ///                 Text("Preach✌️")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](section-init-1.png)
+    ///
+    /// You can actually make the `header` and `footer` any ``View``, though
+    /// the initializer doesn't allow much space for it. If you want
+    /// something more than just a plain ``Text`` view, try refactoring
+    /// the value:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var header: some View {
+    ///         HStack {
+    ///             Image(systemName: "1.square.fill")
+    ///                 .imageScale(.large)
+    ///             Text("Section")
+    ///                 .font(.largeTitle)
+    ///                 .bold()
+    ///         }
+    ///         .foregroundColor(.white)
+    ///     }
+    ///     var footer: some View {
+    ///         Text("A disclaimer might go here")
+    ///             .font(.footnote)
+    ///     }
+    ///     var body: some View {
+    ///         List {
+    ///             Section(header: header, footer: footer) {
+    ///                 Text("I'm in the first 🥇 section")
+    ///                 Text("Numba 1️⃣")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](section-init-2.png)
     ///
     /// - Parameters:
     ///   - header: A view placed on top
@@ -34794,6 +34955,48 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
 
     /// Initialize a ``Section`` with an explicit footer and content.
     ///
+    /// Use this initializer to create a ``Section`` that has `footer`
+    /// content, but no `header` content. See
+    /// ``Section/init(header:footer:content:)`` for how to create
+    /// a section with both `header` and `footer` content.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let message = "Disclaimer: there is only one section so it's nothing to be proud about."
+    ///
+    ///     var body: some View {
+    ///         List {
+    ///             Section(footer: Text(message)) {
+    ///                 Text("I'm in the first 🥇 section")
+    ///                 Text("Numba 1️⃣")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](section-init-3.png)
+    ///
+    /// Footer content will look different depending on the ``ListStyle``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let message = "Disclaimer: there is only one section so it's nothing to be proud about."
+    ///
+    ///     var body: some View {
+    ///         List {
+    ///             Section(footer: Text(message)) {
+    ///                 Text("I'm in the first 🥇 section")
+    ///                 Text("Numba 1️⃣")
+    ///             }
+    ///         }
+    ///         .listStyle(InsetGroupedListStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](section-init-4.png)
+    ///
     /// - Parameters:
     ///   - footer: A view placed on bottom
     ///   - content: The section contents
@@ -34805,6 +35008,54 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
 
     /// Initialize a ``Section`` with an explicit header and content.
     ///
+    /// Use this initializer to create a ``Section`` that has `header`
+    /// content, but no `footer` content. See
+    /// ``Section/init(header:footer:content:)`` for how to create
+    /// a section with both `header` and `footer` content.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Section(header: Text("Section #1")) {
+    ///                 Text("I'm in the first 🥇 section")
+    ///                 Text("Numba 1️⃣")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](section-init-5.png)
+    ///
+    /// Header content can be any view, so you can style the parameter
+    /// however you would like:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var header: some View {
+    ///         HStack {
+    ///             Image(systemName: "1.square.fill")
+    ///                 .imageScale(.large)
+    ///             Text("Section #1")
+    ///                 .font(.largeTitle)
+    ///                 .bold()
+    ///         }
+    ///         .foregroundColor(.white)
+    ///     }
+    ///     var body: some View {
+    ///         List {
+    ///             Section(header: header) {
+    ///                 Text("I'm in the first 🥇 section")
+    ///                 Text("Numba 1️⃣")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](section-init-6.png)
+    ///
     /// - Parameters:
     ///   - header: A view placed on top
     ///   - content: The section contents
@@ -34815,6 +35066,30 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
 extension Section where Parent == EmptyView, Content : View, Footer == EmptyView {
 
     /// Initialize a ``Section`` with specified content.
+    ///
+    /// Use this initializer to create a ``Section`` that has
+    /// no header and no footer. See
+    /// ``Section/init(header:footer:content:)`` for how to create
+    /// a section with both `header` and `footer` content.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Section {
+    ///                 Text("I'm in the first 🥇 section")
+    ///                 Text("Numba 1️⃣")
+    ///             }
+    ///             Section {
+    ///                 Text("Second is the best 🥈")
+    ///                 Text("Preach✌️")
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](section-1.png)
     ///
     /// - Parameters content: The section contents
     public init(@ViewBuilder content: () -> Content) { }
