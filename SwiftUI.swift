@@ -34981,21 +34981,120 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 public struct ScrollView<Content> : View where Content : View {
 
     /// The scroll view's content.
+    ///
+    /// This is the content displayed in a ``ScrollView``. To specify the
+    /// content, pass a trailing ``ViewBuilder`` to the
+    /// ``ScrollView/init(_:showsIndicators:content:)`` initializer:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             VStack(spacing: 50) {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// The `content` is usually a ``VStack`` or an ``HStack``, but it
+    /// can be any ``View`` that requires scrolling.
     public var content: Content
 
     /// The scrollable axes of the scroll view.
     ///
-    /// The default value is `Axis/vertical`. Change the ``Axis`` to modify
+    /// The default value is ``Axis/vertical``. Change the ``Axis`` to modify
     /// the scroll direction.
     ///
-    /// [[scrollview-axis]]
+    /// You can set this value using
+    /// ``ScrollView/init(_:showsIndicators:content:)``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView(.horizontal) {
+    ///             HStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can also allow the the ``ScrollView`` to scroll both horizontally
+    /// and vertically:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView([.horizontal, .vertical]) {
+    ///             VStack(spacing: 50) {
+    ///                 ForEach(0...10) { _ in
+    ///                     HStack {
+    ///                         Text("Bananas 🍌🍌")
+    ///                         Text("Apples 🍏🍏")
+    ///                         Text("Peaches 🍑🍑")
+    ///                     }
+    ///                     .padding()
+    ///                 }
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
     public var axes: Axis.Set
 
     /// A value that indicates whether the scroll view displays the scrollable
     /// component of the content offset, in a way that's suitable for the
     /// platform.
     ///
-    /// The default is `true`.
+    /// Use this value to set the display mode of the
+    /// indicators on a ``ScrollView``. The default is `true`.
+    ///
+    /// You can set this value using
+    /// ``ScrollView/init(_:showsIndicators:content:)``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView(showsIndicators: false) {
+    ///             VStack(spacing: 50) {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var showsIndicators: Bool
 
     /// Creates a new instance that's scrollable in the direction of the given
