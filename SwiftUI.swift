@@ -50284,7 +50284,7 @@ extension View {
     /// - Parameters:
     ///   - of: The type you want to drop. Accepts an array of `UTType` which
     ///   include "Uniform Resource Identifiers", or URI for short.
-    ///   common URI include "public.image", "public.text",
+    ///   Common URI include "public.image", "public.text",
     ///   "public.file-url", and "public.url".
     ///   - delegate: An object that conforms to  ``DropDelegate``.
     public func onDrop(of supportedContentTypes: [UTType], delegate: DropDelegate) -> some View { }
