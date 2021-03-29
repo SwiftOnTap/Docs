@@ -17060,7 +17060,7 @@ public struct GeometryProxy {
 ///
 /// ### ``GeometryReader`` to get a view's frame
 ///
-/// `GeometryReader` can also be used with`View/background(_:)`, to acquire the
+/// `GeometryReader` can also be used with ``View/background(_:alignment:)``, to acquire the
 /// geometry of a target view. Consider `SomeView` in the following example:
 ///
 /// ```
