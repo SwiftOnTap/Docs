@@ -9886,7 +9886,7 @@ public struct DragGesture : Gesture {
 /// //  Text to drag
 /// Text(text)
 ///     .font(.title)
-///     .onDrag { return NSItemProvider(object: "🍌🍌" as NSString) }
+///     .onDrag { NSItemProvider(object: "🍌🍌" as NSString) }
 /// ```
 ///
 /// #### Creating a drop ``View``
@@ -9909,7 +9909,7 @@ public struct DragGesture : Gesture {
 ///             //  Text to drag
 ///             Text(text)
 ///                 .font(.title)
-///                 .onDrag { return NSItemProvider(object: self.text as NSItemProviderWriting) }
+///                 .onDrag { NSItemProvider(object: self.text as NSItemProviderWriting) }
 ///
 ///             //  Area to drop
 ///             RoundedRectangle(cornerRadius: 10)
@@ -9938,7 +9938,7 @@ public struct DragGesture : Gesture {
 ///             //  Text to drag
 ///             Text(text)
 ///                 .font(.title)
-///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
+///                 .onDrag { NSItemProvider(object: self.text as NSString) }
 ///
 ///             //  Area to drop
 ///             RoundedRectangle(cornerRadius: 10)
@@ -9989,7 +9989,7 @@ public struct DragGesture : Gesture {
 ///                 ForEach(self.fruits, id: \.self, content: { fruit in
 ///                     Text(fruit)
 ///                         .font(.title)
-///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+///                         .onDrag { NSItemProvider(object: fruit as NSString) }
 ///                 })
 ///             }
 ///
@@ -10056,7 +10056,7 @@ public struct DragGesture : Gesture {
 ///                 ForEach(self.fruits, id: \.self, content: { fruit in
 ///                     Text(fruit)
 ///                         .font(.title)
-///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+///                         .onDrag { NSItemProvider(object: fruit as NSString) }
 ///                 })
 ///             }
 ///
@@ -10166,7 +10166,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10244,7 +10244,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10311,7 +10311,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10384,7 +10384,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10461,7 +10461,7 @@ extension DropDelegate {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -10537,7 +10537,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10615,7 +10615,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10682,7 +10682,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10755,7 +10755,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -10832,7 +10832,7 @@ extension DropDelegate {
       ///                 ForEach(self.fruits, id: \.self, content: { fruit in
       ///                     Text(fruit)
       ///                         .font(.title)
-      ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+      ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
       ///                 })
       ///             }
       ///
@@ -29331,7 +29331,7 @@ public enum PreviewLayout {
 /// By default, Xcode can infer the platform for a preview based on the
 /// target of the current file. However, you can also use this enumeration
 /// along with the
-/// ``PreviewProvider/platform-b6bd6`
+/// ``PreviewProvider/platform-b6bd6``
 /// property to change the way a view is displayed in a preview.
 ///
 /// *Author's note: I tried to use this to change the preview platform, but I couldn't get anything
@@ -49926,7 +49926,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -49953,11 +49953,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50016,7 +50016,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50043,11 +50043,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50092,7 +50092,7 @@ extension View {
     ///                 HStack {
     ///                     Text(topBananas)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider() }
+    ///                         .onDrag { NSItemProvider() }
     ///                 }
     ///
     ///                 RoundedRectangle(cornerRadius: 10)
@@ -50113,7 +50113,7 @@ extension View {
     ///                 HStack {
     ///                     Text(bottomBananas)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider() }
+    ///                         .onDrag { NSItemProvider() }
     ///                 }
     ///
     ///                 Spacer()
@@ -50156,7 +50156,7 @@ extension View {
     ///             // Text to drag
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.text as NSString) }
     ///
     ///             // Area to drop
     ///             RoundedRectangle(cornerRadius: 10)
@@ -50192,7 +50192,7 @@ extension View {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
@@ -50313,7 +50313,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50340,11 +50340,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50405,7 +50405,7 @@ extension View {
     ///         HStack {
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.text as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50432,11 +50432,11 @@ extension View {
     ///         HStack {
     ///             Text(bananas)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.bananas as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.bananas as NSString) }
     ///
     ///             Text(apples)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.apples as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.apples as NSString) }
     ///
     ///             RoundedRectangle(cornerRadius: 10)
     ///                 .frame(width: 150, height: 150)
@@ -50481,7 +50481,7 @@ extension View {
     ///                 HStack {
     ///                     Text(topBananas)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider() }
+    ///                         .onDrag { NSItemProvider() }
     ///                 }
     ///
     ///                 RoundedRectangle(cornerRadius: 10)
@@ -50502,7 +50502,7 @@ extension View {
     ///                 HStack {
     ///                     Text(bottomBananas)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider() }
+    ///                         .onDrag { NSItemProvider() }
     ///                 }
     ///
     ///                 Spacer()
@@ -50548,7 +50548,7 @@ extension View {
     ///             //  Text to drag
     ///             Text(text)
     ///                 .font(.title)
-    ///                 .onDrag { return NSItemProvider(object: self.text as NSString) }
+    ///                 .onDrag { NSItemProvider(object: self.text as NSString) }
     ///
     ///             //  Area to drop
     ///             RoundedRectangle(cornerRadius: 10)
@@ -50585,7 +50585,7 @@ extension View {
     ///                 ForEach(self.fruits, id: \.self, content: { fruit in
     ///                     Text(fruit)
     ///                         .font(.title)
-    ///                         .onDrag { return NSItemProvider(object: fruit as NSString) }
+    ///                         .onDrag { NSItemProvider(object: fruit as NSString) }
     ///                 })
     ///             }
     ///
