@@ -8469,7 +8469,7 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// !()[20.07.29.png]
+    /// ![](20.07.29.png)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -12550,7 +12550,7 @@ extension EnvironmentKey {
 ///         Button("Present") {
 ///             isPresented = true
 ///         }
-///         .sheet(isPresented: $isPresented ){
+///         .sheet(isPresented: $isPresented) {
 ///             ChildView()
 ///         }
 ///         .environmentObject(appModel)
@@ -12586,7 +12586,7 @@ extension EnvironmentKey {
 ///         Button("Present") {
 ///             isPresented = true
 ///         }
-///         .sheet(isPresented: $isPresented ){
+///         .sheet(isPresented: $isPresented) {
 ///             ChildView()
 ///                 .environmentObject(appModel)
 ///         }
@@ -15691,8 +15691,6 @@ extension Font {
     /// 8. ``Weight/heavy``
     /// 9. ``Weight/black``
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///             VStack {
@@ -15718,11 +15716,11 @@ extension Font {
     ///             .font(.title)
     ///         }
     ///     }
+    ///
+    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
     @frozen public struct Weight : Hashable {
 
     	/// A font weight of ultra light.
-        ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
         ///     struct ExampleView: View {
         ///         var body: some View {
@@ -15750,12 +15748,12 @@ extension Font {
         ///         }
         ///     }
         ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        ///
         public static let ultraLight: Font.Weight
 
         /// A font weight of thin.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -15782,13 +15780,11 @@ extension Font {
         ///         }
         ///     }
         ///
-        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let thin: Font.Weight
 
         /// A font weight of light.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -15815,13 +15811,11 @@ extension Font {
         ///         }
         ///     }
         ///
-        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let light: Font.Weight
 
         /// A font weight of regular.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -15848,13 +15842,11 @@ extension Font {
         ///         }
         ///     }
         ///
-        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let regular: Font.Weight
 
         /// A font weight of medium.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -15881,13 +15873,11 @@ extension Font {
         ///         }
         ///     }
         ///
-        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let medium: Font.Weight
 
         /// A font weight of semibold.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -15914,13 +15904,11 @@ extension Font {
         ///         }
         ///     }
         ///
-        ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let semibold: Font.Weight
 
         /// A font weight of bold.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -15947,12 +15935,11 @@ extension Font {
         ///         }
         ///     }
         ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let bold: Font.Weight
 
         /// A font weight of heavy.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -15979,12 +15966,11 @@ extension Font {
         ///         }
         ///     }
         ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let heavy: Font.Weight
 
         /// A font weight of black.
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
-        ///
         ///     struct ExampleView: View {
         ///         var body: some View {
         ///             VStack {
@@ -16011,6 +15997,7 @@ extension Font {
         ///         }
         ///     }
         ///
+        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let black: Font.Weight
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -16233,6 +16220,31 @@ extension Font {
     /// ```
     ///
     /// ![](font-system-3.png)
+    ///
+    /// Interestingly, this function works well with
+    /// [SF Symbols](https://developer.apple.com/sf-symbols/)
+    /// as well:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let image = Image(systemName: "pencil")
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             image
+    ///                 .font(.system(size: 30, weight: .ultraLight))
+    ///             image
+    ///                 .font(.system(size: 30, weight: .black))
+    ///             image
+    ///                 .font(.system(size: 100, weight: .ultraLight))
+    ///             image
+    ///                 .font(.system(size: 100, weight: .black))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](font-system-sfsymbols.png)
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
@@ -16861,7 +16873,6 @@ extension ForegroundStyle : ShapeStyle {
 ///
 /// ```
 /// struct ExampleView: View {
-///     let gradient = Gradient(colors: [.red,.yellow])
 ///     @State private var myFruit = ""
 ///
 ///     var body: some View {
@@ -16893,7 +16904,6 @@ public struct Form<Content> : View where Content : View {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///     let gradient = Gradient(colors: [.red,.yellow])
     ///     @State private var email = ""
     ///     @State private var first = ""
     ///     @State private var last = ""
@@ -22219,27 +22229,25 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// Use this protocol to create a label style that can easily be reused, or
 /// to quickly implement one of the out-of-the-box label styles.
 ///
-/// ### Making a ``LabelStyle``
+/// ### Making a `LabelStyle`
 ///
-/// There are two ways to style a ``Label``, by creating a `struct` that
-/// conforms to this protocol, or using a default `struct` that conforms
+/// There are two ways to style a ``Label``:
+/// - By creating a `struct` that
+/// conforms to this protocol.
+/// - By using a default `struct` that conforms
 /// to this protocol.
 ///
-/// #### Conforming to ``LabelStyle``
+/// #### Conforming to `LabelStyle`
 ///
-/// To create your own label style by conforming to the ``LabelStyle`` protocol,
+/// To create your own label style by conforming to the `LabelStyle` protocol,
 /// there is only one required
 /// function: ``LabelStyle/makeBody(configuration:)``.
 ///
 /// ``LabelStyle/makeBody(configuration:)`` is a function that takes in a
 /// ``LabelStyleConfiguration`` parameter and expects `some View`
 /// to be returned. So what is a ``LabelStyleConfiguration``? Basically,
-/// just like a ``Label``, it's an ``LabelStyleConfiguration/icon`` and
-/// a ``LabelStyleConfiguration/title``.
-///
-/// Here's an example of a `struct` called `MyLabelStyle` that
-/// conforms to the ``LabelStyle`` protocol by implementing the
-/// ``LabelStyle/makeBody(configuration:)`` function:
+/// just like a ``Label``, it's an ``LabelStyleConfiguration/icon-swift.variable`` and
+/// a ``LabelStyleConfiguration/title-swift.variable``.
 ///
 /// ```
 /// struct MyLabelStyle: LabelStyle {
@@ -22258,10 +22266,10 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// This label style does two things: it stacks the title and icon vertically,
 /// and colors the icon. See below for how to use this custom label style.
 ///
-/// #### Default ``LabelStyle`` Structures
+/// #### Default `LabelStyle` Structures
 ///
 /// If you don't want to create your own label style, there are 3 default
-/// styles. These are `struct`s that conform to the ``LabelStyle`` protocol
+/// styles. These are `struct`s that conform to the `LabelStyle` protocol
 /// by implementing the ``LabelStyle/makeBody(configuration:)`` function
 /// internally, so you don't have to do it yourself.
 ///
@@ -22275,7 +22283,7 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 ///
 /// ### Using a ``LabelStyle``
 ///
-/// To use a ``LabelStyle``, pass it to a ``Label``'s ``View/labelStyle(_:)``
+/// To use a `LabelStyle`, pass it to a ``Label``'s ``View/labelStyle(_:)``
 /// modifier.
 ///
 /// Here is our custom label style from earlier:
@@ -28325,8 +28333,6 @@ extension Path {
 /// To set a specific style for all picker instances within a view, use the
 /// ``View/pickerStyle(_:)`` modifier.
 ///
-/// ![Picker Segmented with Ice Cream](picker-segmented-ice-cream.png)
-///
 /// ```
 /// struct ContentView: View {
 ///     @State private var selectedFlavor = Flavor.chocolate
@@ -28341,6 +28347,8 @@ extension Path {
 ///     }
 /// }
 /// ```
+///
+/// ![Picker Segmented with Ice Cream](picker-segmented-ice-cream.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Picker<Label, SelectionValue, Content> : View where Label : View, SelectionValue : Hashable, Content : View {
 
@@ -29323,10 +29331,10 @@ public enum PreviewLayout {
 /// By default, Xcode can infer the platform for a preview based on the
 /// target of the current file. However, you can also use this enumeration
 /// along with the
-/// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
+/// ``PreviewProvider/platform-b6bd6`
 /// property to change the way a view is displayed in a preview.
 ///
-/// *I tried to use this to change the preview platform, but I couldn't get anything
+/// *Author's note: I tried to use this to change the preview platform, but I couldn't get anything
 /// to work. It seems right now that the only way to change your preview
 /// device is by actually changing your build target.*
 ///
@@ -29362,10 +29370,10 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
+    /// ``PreviewProvider/platform-b6bd6``
     /// property to change the way a view is displayed in a preview.
     ///
-    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// *Author's note: I tried to use this to change the preview platform, but I couldn't get anything
     /// to work. It seems right now that the only way to change your preview
     /// device is by actually changing your build target.*
     ///
@@ -29392,7 +29400,7 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
+    /// ``PreviewProvider/platform-b6bd6``
     /// property to change the way a view is displayed in a preview.
     ///
     /// *Author's note: I tried to use this to change the preview platorm, but I couldn't get anything
@@ -29422,10 +29430,10 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
+    /// ``PreviewProvider/platform-b6bd6``
     /// property to change the way a view is displayed in a preview.
     ///
-    /// *I tried to use this to change the preview platform, but I couldn't get anything
+    /// *Author's note: I tried to use this to change the preview platform, but I couldn't get anything
     /// to work. It seems right now that the only way to change your preview
     /// device is by actually changing your build target.*
     ///
@@ -29451,7 +29459,7 @@ public enum PreviewPlatform {
     /// By default, Xcode can infer the platform for a preview based on the
     /// target of the current file. However, you can also use this enumeration
     /// along with the
-    /// ``PreviewProvider/platform-b6bd6`` and ``PreviewProvider/platform-5fbda``
+    /// ``PreviewProvider/platform-b6bd6``
     /// property to change the way a view is displayed in a preview.
     ///
     /// *I tried to use this to change the preview platform, but I couldn't get anything
@@ -30001,7 +30009,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     ///     - title: A string that describes the task in progress.
     ///
     /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to `Text/init(verbatim:)`. See ``Text`` for more
+    /// title similar to ``Text/init(verbatim:)``. See ``Text`` for more
     /// information about localizing strings. To initialize a progress view with
     /// a localized string key, use the corresponding initializer that takes a
     /// ``LocalizedStringKey`` instance.
@@ -30155,7 +30163,7 @@ extension ProgressView {
     /// progress, in which case the progress view ignores `total`.
     ///
     /// This initializer creates a ``Text`` view on your behalf, and treats the
-    /// title similar to `Text/init(verbatim:)`. See ``Text`` for more
+    /// title similar to ``Text/init(verbatim:)``. See ``Text`` for more
     /// information about localizing strings. To initialize a determinate
     /// progress view with a localized string key, use the corresponding
     /// initializer that takes a ``LocalizedStringKey`` instance.
@@ -30769,7 +30777,7 @@ extension ProjectionTransform {
 ///
 /// ```
 /// struct RadialView: View {
-///     let gradient = Gradient(colors: [.red,.yellow])
+///     let gradient = Gradient(colors: [.red, .yellow])
 ///
 ///     var body: some View {
 ///         Rectangle()
@@ -30792,7 +30800,7 @@ extension ProjectionTransform {
 	///
     /// ```
     /// struct RadialView: View {
-    ///    let gradient = Gradient(colors: [.red,.yellow])
+    ///    let gradient = Gradient(colors: [.red, .yellow])
     ///
     ///    var body: some View {
     ///        Rectangle()
@@ -35314,8 +35322,8 @@ extension Shape {
     ///             Circle()
     ///                 .fill(Color.red)
     ///             Circle()
-    ///                 .scale(x: 0.5, y: 0.1, anchor: .leading)
-    ///                 .fill(Color.white)
+    ///                 .scale(x: 0.1, y: 0.5, anchor: .top)
+    ///                 .fill(Color.black)
     ///         }
     ///     }
     /// }
@@ -35369,9 +35377,10 @@ extension Shape {
     /// ```
     /// struct RotatedRectView: View {
     ///     var body: some View {
-    ///         RoundedRectangle(cornerRadius: 10)
+    ///         Rectangle()
     ///             .rotation(Angle(degrees: 45))
-    ///             .aspectRatio(1.0, contentMode: .fit)
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
@@ -36488,7 +36497,7 @@ extension State where Value : ExpressibleByNilLiteral {
 /// expression. This means that the following code is evaluated lazily:
 ///
 /// ```
-///     @StateObject var appModel = AppModel()
+/// @StateObject var appModel = AppModel()
 /// ```
 ///
 /// `AppModel` is only initialized once per the lifetime of the ``View``,
@@ -36520,9 +36529,7 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![FACF7A60-5C80-42FE-B933-9A62D2A53DC5](FACF7A60-5C80-42FE-B933-9A62D2A53DC5.png)
-///
-///  In this example, `AppModel` contains a boolean, `flag`, which is
+/// In this example, `AppModel` contains a boolean, `flag`, which is
 /// represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a
 /// `Binding<Bool>` to read and write whether it is on.
 ///
@@ -36530,7 +36537,6 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// Consider the following:
 ///
-/// ![D465C0A4-0042-47C8-9840-4E58837FD18F](D465C0A4-0042-47C8-9840-4E58837FD18F.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -36577,7 +36583,6 @@ extension State where Value : ExpressibleByNilLiteral {
 ///
 /// Now consider the following:
 ///
-/// ![E74A3E6E-9A49-41AC-AEDB-38849CAB5A4D](E74A3E6E-9A49-41AC-AEDB-38849CAB5A4D.png)
 /// ```
 /// struct ExampleView: View {
 ///     class ViewModel: ObservableObject {
@@ -38498,7 +38503,7 @@ public struct TapGesture : Gesture {
     ///
     /// If you want to localize a string literal before displaying it, use the
     /// ``Text/init(_:tableName:bundle:comment:)`` initializer instead. If you
-    /// want to display a string variable, use the `Text/init(_:)-40ffd`
+    /// want to display a string variable, use the ``Text/init(_:)-40ffd``
     /// initializer, which also bypasses localization.
     ///
     /// - Parameter content: A string to display without localization.
@@ -38962,7 +38967,7 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](text-truncationmode.png)
+        /// ![](truncationmode-head.png)
         case head
 
         /// Truncate at the end of the line.
@@ -40004,7 +40009,6 @@ extension TextField where Label == Text {
 /// The best way to create a custom text field is by placing
 /// your ``TextField`` in a ``ZStack``, and styling the elements around it.
 ///
-/// ![0EF3C7CA-FE46-4A14-A775-A736E13BE3AE](0EF3C7CA-FE46-4A14-A775-A736E13BE3AE.png)
 /// ```
 /// struct TextFieldView: View {
 ///     @State private var input = ""
@@ -43020,7 +43024,7 @@ extension VerticalAlignment {
     ///
     /// See those pages for more on how to construct them.
     ///
-    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c```
+    /// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-72c7c``
     /// view modifier. See that page for more on adding alignment
     /// guides to views.
     ///
@@ -44701,7 +44705,7 @@ extension View {
     /// ![](scaledtofit.png)
     ///
     /// This method is equivalent to calling
-    /// `View/aspectRatio(_:contentMode:)-6576a` with a `nil` aspectRatio and
+    /// ``View/aspectRatio(_:contentMode:)-6576a`` with a `nil` aspectRatio and
     /// a content mode of ``ContentMode/fit``.
     ///
     /// - Returns: A view that scales this view to fit its parent, maintaining
@@ -44729,7 +44733,7 @@ extension View {
     /// ![](scaledtofill.png)
     ///
     /// This method is equivalent to calling
-    /// `View/aspectRatio(_:contentMode:)-6576a` with a `nil` aspectRatio and
+    /// ``View/aspectRatio(_:contentMode:)-6576a`` with a `nil` aspectRatio and
     /// a content mode of ``ContentMode/fill``.
     ///
     /// - Returns: A view that scales this view to fill its parent, maintaining
@@ -45290,15 +45294,15 @@ extension View {
     /// you would like to ignore those safe areas.
     ///
     /// The first parameter is of type ``SafeAreaRegions``. The options are:
-    /// - `SafeAreaRegions/container`: The navigation bar and bottom bar on iPhone X+.
-    /// - `SafeAreaRegions/keyboard`: The software keyboard area.
-    /// - `SafeAreaRegions/all`: All safe areas
+    /// - ``SafeAreaRegions/container``: The navigation bar and bottom bar on iPhone X+.
+    /// - ``SafeAreaRegions/keyboard``: The software keyboard area.
+    /// - ``SafeAreaRegions/all``: All safe areas
     ///
     /// The second parameter has edge options:
-    /// - `Edge/Set/leading`
-    /// - `Edge/Set/trailing`
-    /// - `Edge/Set/top`
-    /// - `Edge/Set/bottom`
+    /// - ``Edge/Set/leading``
+    /// - ``Edge/Set/trailing``
+    /// - ``Edge/Set/top``
+    /// - ``Edge/Set/bottom``
     ///
     /// ```
     /// struct SafeAreaIgnoringView: View {
@@ -45991,7 +45995,7 @@ extension View {
     ///
     ///     struct ContentView: View {
     ///         var body: some View {
-    ///             HStack {
+    ///             VStack {
     ///                 ForEach(-1..<6) { i in
     ///                     Color.red.frame(width: 50, height: 50, alignment: .center)
     ///                         .overlay(CircleView(), alignment: .center)
@@ -46106,7 +46110,6 @@ extension View {
     ///             }
     ///         }
     ///         .preferredColorScheme(.dark)
-    ///         }
     ///     }
     /// }
     /// ```
@@ -46214,7 +46217,7 @@ extension View {
     ///
     /// See ``AnyTransition`` for more on how to create a transition.
     ///
-    /// ### Using `animation(_:)`
+    /// ### Using ``View/animation(_:)``
     ///
     /// We can animate the toggle `animation(.easeInOut)`.
     ///
@@ -46237,7 +46240,7 @@ extension View {
     ///
     /// ![Slide transition](with-animation-2.gif)
     ///
-    /// ### Using `withAnimation(_:_:)`
+    /// ### Using ``withAnimation(_:_:)``
     ///
     /// We can get the same effect by toggling `showBanana` explicitly
     /// with an animation
@@ -46721,7 +46724,7 @@ extension View {
     /// for more.
     ///
     /// For more info on anchor preferences specifically, see
-    /// [this article](https://swiftwithmajid.com/2020/03/18/anchor-preferences-in-swiftui/)
+    /// [this article](https://swiftwithmajid.com/2020/03/18/anchor-preferences-in-swiftui/).
     ///
     /// ```
     /// struct BoundsPreferenceKey: PreferenceKey {
@@ -48580,7 +48583,9 @@ extension View {
     /// list items.
     ///
     /// In the example below, the list row is inset 15pts from the top edge,
-    /// and 100pts from the right edge. *Note: for some reason, the code
+    /// and 100pts from the right edge.
+    ///
+    /// - Note: The code
     /// below does not work in a list alone. It must be in a ``ForEach``.*
     ///
     ///     struct ContentView: View {
