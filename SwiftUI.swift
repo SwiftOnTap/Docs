@@ -9239,6 +9239,38 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// If you don't specify, a ``view/tabviewstyle(_:)``, this is what it defaults to.
 ///
 /// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///                 .tabItem {
+///                     Image(systemName: "1.circle.fill")
+///                     Text("🍌🍌")
+///                 }
+///             Text("Apples 🍏🍏")
+///                 .tabItem {
+///                     Image(systemName: "2.square.fill")
+///                     Text("🍏🍏")
+///                 }
+///             Text("Peaches 🍑🍑")
+///                 .tabItem {
+///                     Image(systemName: "3.square.fill")
+///                     Text("🍑🍑")
+///                 }
+///         }
+///         .tabViewStyle(DefaultTabViewStyle())
+///         .font(.headline)
+///     }
+/// }
+/// ```
+///
+/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+///
+/// Since this is the default style,
+/// if you omit the line `.tabViewStyle(DefaultTabViewStyle())`, you
+/// get the same result:
+///
+/// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         TabView {
@@ -9268,38 +9300,39 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultTabViewStyle : TabViewStyle {
 
-	/// Creates a default tab view style.
-	///
-	/// - SeeAlso: ``TabView``
-///
-/// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         TabView {
-///             Text("Bananas 🍌🍌")
-///                 .tabItem {
-///                     Image(systemName: "1.circle.fill")
-///                     Text("🍌🍌")
-///                 }
-///             Text("Apples 🍏🍏")
-///                 .tabItem {
-///                     Image(systemName: "2.square.fill")
-///                     Text("🍏🍏")
-///                 }
-///             Text("Peaches 🍑🍑")
-///                 .tabItem {
-///                     Image(systemName: "3.square.fill")
-///                     Text("🍑🍑")
-///                 }
-///         }
-///         .tabViewStyle(DefaultTabViewStyle())
-///         .font(.headline)
-///     }
-/// }
-/// ```
-///
-/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
-///
+    /// Creates a default tab view style.
+    ///
+    /// Use this initializer to create a ``DefaultTabViewStyle``.
+    /// The initializer takes no parameters:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .tabItem {
+    ///                     Image(systemName: "1.circle.fill")
+    ///                     Text("🍌🍌")
+    ///                 }
+    ///             Text("Apples 🍏🍏")
+    ///                 .tabItem {
+    ///                     Image(systemName: "2.square.fill")
+    ///                     Text("🍏🍏")
+    ///                 }
+    ///             Text("Peaches 🍑🍑")
+    ///                 .tabItem {
+    ///                     Image(systemName: "3.square.fill")
+    ///                     Text("🍑🍑")
+    ///                 }
+    ///         }
+    ///         .tabViewStyle(DefaultTabViewStyle())
+    ///         .font(.headline)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+    ///
     public init() { }
 }
 
@@ -9511,6 +9544,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// For example, use a `Divider` in a ``VStack`` to create a horizontal line
 /// between vertically laid out elements:
+///
 ///
 /// ```
 /// struct ExampleView: View {
@@ -25605,10 +25639,10 @@ public struct NavigationBarItem {
     /// view modifier to set the size and style of the navigation bar title.
     ///
     /// There are currently 3 options:
-    /// - ``NavigationBarItem.TitleDisplayMode.automatic`` - Use the system default, either
+    /// - ``NavigationBarItem/TitleDisplayMode/automatic`` - Use the system default, either
     /// `inline` or `large` depending on the context.
-    /// - ``NavigationBarItem.TitleDisplayMode.inline`` - Centered, smaller title font.
-    /// - ``NavigationBarItem.TitleDisplayMode.large`` - Large, left-aligned title font.
+    /// - ``NavigationBarItem/TitleDisplayMode/inline`` - Centered, smaller title font.
+    /// - ``NavigationBarItem/TitleDisplayMode/large`` - Large, left-aligned title font.
     ///
     /// Here is an example of specifying `automatic` display mode:
     ///
@@ -26994,8 +27028,11 @@ public struct PageIndexViewStyle : IndexViewStyle {
 
 /// A ``TabViewStyle`` that implements a paged scrolling ``TabView``.
 ///
+/// Use this style with the ``View/tabViewStyle(_:)`` view modifier to
+/// change the style of a ``TabView`` to look like swipable pages:
+///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     var body: some View {
 ///         TabView {
 ///             Text("Bananas 🍌🍌")
@@ -27009,28 +27046,190 @@ public struct PageIndexViewStyle : IndexViewStyle {
 /// }
 /// ```
 ///
-/// ![7418DAC9-D144-4F7D-BB54-AC5E0A88F324](7418DAC9-D144-4F7D-BB54-AC5E0A88F324.png)
+/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
+///
+/// You can also use `PageTabViewStyle`'s initializer
+/// ``PageTabViewStyle/init(indexDisplayMode:)`` to specify whether
+/// or not you want the page dots at the bottom to show up:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///             Text("Apples 🍏🍏")
+///             Text("Peaches 🍑🍑")
+///         }
+///         .foregroundColor(Color.white)
+///         .background(Color.yellow)
+///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+///     }
+/// }
+/// ```
 ///
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct PageTabViewStyle : TabViewStyle {
 
-    /// A style for displaying the page index view
+    /// A style for displaying the page index view.
+    ///
+    /// Use this structure with ``PageTabViewStyle``'s
+    /// ``PageTabViewStyle/init(indexDisplayMode:)`` initializer to
+    /// specify whether or not the page dots should appear at the bottom
+    /// of the screen:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///             Text("Apples 🍏🍏")
+    ///             Text("Peaches 🍑🍑")
+    ///         }
+    ///         .foregroundColor(Color.white)
+    ///         .background(Color.yellow)
+    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This struture has three static properties:
+    /// - ``PageTabViewStyle/IndexDisplayMode/automatic`` - Display
+    /// the page dots only if there is more than one page in the
+    /// ``TabView``.
+    /// - ``PageTabViewStyle/IndexDisplayMode/always`` - Always
+    /// display the page dots.
+    /// - ``PageTabViewStyle/IndexDisplayMode/never`` - Never
+    /// display the page dots.
+    ///
+    /// - Notes: If you want more control over the look of the dots,
+    /// see ``View/indexViewStyle(_:)``.
+    ///
     public struct IndexDisplayMode {
 
-        /// Displays an index view when there are more than one page
+        /// Displays page dots when there are more than one page.
+        ///
+        /// This property dynamically displays the page dots of a
+        /// ``TabView`` depending on the number of pages. If there is only
+        /// one page, they are hidden:
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         TabView {
+        ///             Text("Bananas 🍌🍌")
+        ///         }
+        ///         .foregroundColor(Color.white)
+        ///         .background(Color.yellow)
+        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// If there are multiple pages, they are shown:
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         TabView {
+        ///             Text("Bananas 🍌🍌")
+        ///             Text("Apples 🍏🍏")
+        ///             Text("Peaches 🍑🍑")
+        ///         }
+        ///         .foregroundColor(Color.white)
+        ///         .background(Color.yellow)
+        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// - Notes: If you want more control over the look of the dots,
+        /// see ``View/indexViewStyle(_:)``.
+        ///
         public static let automatic: PageTabViewStyle.IndexDisplayMode
 
-        /// Always display an index view regardless of page count
+        /// Always display page dots regardless of page count.
+        ///
+        /// Use this property to always show the page dots, regardless
+        /// of how many pages there are in the ``TabView``:
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         TabView {
+        ///             Text("Bananas 🍌🍌")
+        ///             Text("Apples 🍏🍏")
+        ///             Text("Peaches 🍑🍑")
+        ///         }
+        ///         .foregroundColor(Color.white)
+        ///         .background(Color.yellow)
+        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// - Notes: If you want more control over the look of the dots,
+        /// see ``View/indexViewStyle(_:)``.
+        ///
         @available(watchOS, unavailable)
         public static let always: PageTabViewStyle.IndexDisplayMode
 
-        /// Never display an index view
+        /// Never display page dots.
+        ///
+        /// Use this property to never display page dots
+        /// of a ``TabView``:
+        ///
+        /// ```
+        /// struct ContentView: View {
+        ///     var body: some View {
+        ///         TabView {
+        ///             Text("Bananas 🍌🍌")
+        ///             Text("Apples 🍏🍏")
+        ///             Text("Peaches 🍑🍑")
+        ///         }
+        ///         .foregroundColor(Color.white)
+        ///         .background(Color.yellow)
+        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        ///     }
+        /// }
+        /// ```
+        ///
+        /// - Notes: If you want more control over the look of the dots,
+        /// see ``View/indexViewStyle(_:)``.
+        ///
         @available(watchOS, unavailable)
         public static let never: PageTabViewStyle.IndexDisplayMode
     }
 
     /// Creates a new ``PageTabViewStyle`` with an index display mode
+    ///
+    /// Use this initializer with the ``View/tabViewStyle(_:)`` modifier
+    /// to specify a ``TabView`` style of swipable
+    /// pages.
+    ///
+    /// This initializer takes a parameter of type ``PageTabViewStyle/IndexDisplayMode``
+    /// to describe whether the page dots at the bottom of the screen
+    /// should be visible. If left blank, it defaults to
+    /// ``PageTabViewStyle/IndexDisplayMode/automatic``.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///             Text("Apples 🍏🍏")
+    ///             Text("Peaches 🍑🍑")
+    ///         }
+    ///         .foregroundColor(Color.white)
+    ///         .background(Color.yellow)
+    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Notes: If you want more control over the look of the dots,
+    /// see ``View/indexViewStyle(_:)``.
+    ///
     public init(indexDisplayMode: PageTabViewStyle.IndexDisplayMode = .automatic) { }
 }
 
@@ -38644,8 +38843,6 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
-    /// ![Selection Content Example 1](init-selection-content-ex1.png)
-    ///
     /// In this example, each tab item is assigned a unique tag using the
     /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
     /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
@@ -38678,8 +38875,6 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     ///     }
     /// }
     /// ```
-    ///
-    /// ![Selection Content Example 2](init-selection-content-ex2.png)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -38730,11 +38925,31 @@ extension TabView where SelectionValue == Int {
 ///
 /// This protocol does not make its interface public and cannot be customized. The only
 /// types available are the ones included in the framework and are platform dependent:
-/// - ``DefaultTabViewStyle`` (all platforms)
-/// - ``PageTabViewStyle`` (NO macOS)
+/// - ``DefaultTabViewStyle`` (iOS and macOS)
+/// - ``PageTabViewStyle`` (iOS only)
 /// - `CarouselTabViewStyle` (watchOS only)
 ///
 /// To learn more about each style, visit their pages.
+///
+/// Apply a ``TabViewStyle`` using ``View/tabViewStyle(_:)``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         TabView {
+///             Text("Bananas 🍌🍌")
+///             Text("Apples 🍏🍏")
+///             Text("Peaches 🍑🍑")
+///         }
+///         .foregroundColor(Color.white)
+///         .background(Color.yellow)
+///         .tabViewStyle(PageTabViewStyle())
+///     }
+/// }
+/// ```
+///
+/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol TabViewStyle{ }
 extension TabViewStyle {
@@ -44117,7 +44332,69 @@ extension View {
 
     /// Sets the style for the tab view within the the current environment.
     ///
-    /// [[tabview-style]]
+    /// Use this modifier to set the style of a ``TabView``. For example,
+    /// below, we set the ``TabView`` style to
+    /// ``PageTabViewStyle``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///             Text("Apples 🍏🍏")
+    ///             Text("Peaches 🍑🍑")
+    ///         }
+    ///         .foregroundColor(Color.white)
+    ///         .background(Color.yellow)
+    ///         .tabViewStyle(PageTabViewStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
+    ///
+    /// The parameter of the function must conform to ``TabViewStyle``.
+    /// There are currently only 3 styles:
+    /// - ``DefaultTabViewStyle`` (iOS and macOS)
+    /// - ``PageTabViewStyle`` (iOS)
+    /// - `CarouselTabViewStyle` (watchOS)
+    ///
+    /// ``PageTabViewStyle`` accepts an ``PageTabViewStyle/IndexDisplayMode``
+    /// parameter, which allows you to hide the page dots at the bottom
+    /// of the screen:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///             Text("Apples 🍏🍏")
+    ///             Text("Peaches 🍑🍑")
+    ///         }
+    ///         .foregroundColor(Color.white)
+    ///         .background(Color.yellow)
+    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// By default, ``DefaultTabViewStyle`` is used:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Bananas 🍌🍌")
+    ///                 .tabItem { Image(systemName: "1.circle.fill") }
+    ///             Text("Apples 🍏🍏")
+    ///                 .tabItem { Image(systemName: "2.circle.fill") }
+    ///             Text("Peaches 🍑🍑")
+    ///                 .tabItem { Image(systemName: "3.circle.fill") }
+    ///         }
+    ///         .tabViewStyle(DefaultTabViewStyle())
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter style: The style to apply to this tab view.
     public func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle { }
