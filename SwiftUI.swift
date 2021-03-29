@@ -35001,7 +35001,102 @@ public struct ScrollView<Content> : View where Content : View {
     /// Creates a new instance that's scrollable in the direction of the given
     /// axis and can show indicators while scrolling.
     ///
-    /// [[scrollview-hide-indicators]]
+    /// Use this initializer to create a ``ScrollView``. The simplest
+    /// example looks like this:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView {
+    ///             VStack(spacing: 50) {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can specify the scroll direction using the `axes` parameter:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView(.horizontal) {
+    ///             HStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Make the scroll bar invisible using `showsIndicators`:
+    //
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView(.horizontal, showsIndicators: false) {
+    ///             HStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///             .font(.title)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Notice how the ``HStack`` doesn't take up the full view, so the
+    /// indicators are inset from the side of the screen. We can
+    /// fix this with
+    /// ``View/frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)``.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ScrollView(.horizontal) {
+    ///             HStack {
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///                 Text("Bananas 🍌🍌")
+    ///                 Text("Apples 🍏🍏")
+    ///                 Text("Peaches 🍑🍑")
+    ///             }
+    ///             .font(.title)
+    ///             .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         }
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - axes: The scroll view's scrollable axis. The default axis is the
