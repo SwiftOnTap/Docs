@@ -3634,7 +3634,7 @@ extension AnyTransition {
 ///         var body: some Scene {
 ///             WindowGroup {
 ///                 Text("Hello, world! 🌍🙋")
-////                    .font(.title)
+///                    .font(.title)
 ///             }
 ///         }
 ///     }
@@ -6158,7 +6158,7 @@ extension Capsule : InsettableShape {
     ///
     /// A Circle can be described as a path within a specific
     /// [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect)
-    //// using the ``Circle/path(in:)`` modifier:
+    /// using the ``Circle/path(in:)`` modifier:
     ///
     /// ```
     /// struct ExampleView: View {
