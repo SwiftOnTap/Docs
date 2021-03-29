@@ -4858,7 +4858,7 @@ extension Binding : DynamicProperty {
 /// }
 /// ```
 ///
-/// ![Blended Image](blendmode-softlight.png)
+/// ![Blended Image](blendmode-softLight.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
@@ -6159,7 +6159,7 @@ extension Capsule : InsettableShape {
     ///
     /// A Circle can be described as a path within a specific
     /// [`CGRect`](https://developer.apple.com/documentation/coregraphics/cgrect)
-    //// using the ``Circle/path(in:)`` modifier:
+    /// using the ``Circle/path(in:)`` modifier:
     ///
     /// ```
     /// struct ExampleView: View {
@@ -12772,7 +12772,7 @@ extension EnvironmentKey {
 /// value propagates up to the presenting container when presenting a view
 /// like a popover:
 ///
-///     struct ContentView {
+///     struct ContentView: View {
 ///         @State var isPopped = false
 ///
 ///         var body: some View {
@@ -12783,6 +12783,8 @@ extension EnvironmentKey {
 ///                 }
 ///         }
 ///     }
+///
+/// ![](eviron-vals-dark-mode.gif)
 ///
 /// Create custom environment values by defining a type that
 /// conforms to the ``EnvironmentKey`` protocol, and then extending the
@@ -28756,7 +28758,7 @@ extension Picker where Label == Text {
 
 /// Specifies the appearance and interaction of all pickers within a view hierarchy.
 ///
-/// `PickerStyle` does not have a public interface - and therefore your app is limited to their default styles.
+/// `PickerStyle` styles a ``Picker`` and does not have a public interface - and therefore your app is limited to their default styles.
 ///
 /// There are 7 different styles:
 /// * ``DefaultPickerStyle``
@@ -38697,7 +38699,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 3](tabview-ex2.gif)
+/// ![TabView Example 3](tab-view-dynam.gif)
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
@@ -47984,6 +47986,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](tab-item-ex1.gif)
+    ///
     /// [[tabview-tabitem]]
     ///
     /// - Parameter label: The tab bar item to associate with this view.
@@ -48583,6 +48587,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](key-board-short-cut-modifiers.gif)
+    ///
     /// - Parameters:
     ///   - key: A key of type ``KeyEquivalent``.
     ///   - modifiers: The modifier or function keys to use for the shortcut.
@@ -48626,6 +48632,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](key-board-short-cut-modifiers.gif)
+    ///
     /// You can also use ``KeyboardShortcut`` actions directly:
     ///
     /// ```
@@ -48644,6 +48652,9 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](key-board-short-cut-ex2.gif)
+    ///
     public func keyboardShortcut(_ shortcut: KeyboardShortcut) -> some View { }
 
 }
@@ -49239,6 +49250,9 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](on-tap-gesture-count-perform-ex1.gif)
+    ///
     public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View { }
 
 }
@@ -49709,12 +49723,14 @@ extension View {
     ///             VStack {
     ///                 Text(greeting)
     ///                 TextField("Enter your name:", text: $name)
-    ///                     .onChange(of: name) { newValue
+    ///                     .onChange(of: name) { newValue in
     ///                         greeting = "Hi \(newValue)!"
     ///                     }
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](on-change-perform-ex1.gif)
     ///
     /// - Parameters:
     ///   - value: The value to check against when determining whether
@@ -49986,6 +50002,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](coordinate-space-ex.png)
+    ///
     /// Here, the ``VStack`` in the `ContentView` named `"stack"` is composed of a
     /// red frame with a custom ``Circle`` view ``View/overlay(_:alignment:)``
     /// at its center.
@@ -49993,7 +50011,7 @@ extension View {
     /// The `circle` view has an attached ``DragGesture`` that targets the
     /// enclosing VStack's coordinate space. As the gesture recognizer's closure
     /// registers events inside ``circle`` it stores them in the shared `location`
-    /// state variable and the `VStack` displays the coordinates in a ``Text``
+    /// state variable and the ``VStack`` displays the coordinates in a ``Text``
     /// view.
     ///
     /// - Parameter name: A name used to identify this coordinate space.
@@ -51497,17 +51515,20 @@ extension View {
     ///
     /// ```
     /// struct ToggleMyStatusBarView: View {
-    ///     @State private var showBar = true
+    ///     @State private var hideBar = false
     ///
     ///     var body: some View {
     ///         Button("Toggle the status bar! 🎚") {
     ///             withAnimation {
-    ///                 showBar.toggle()
+    ///                 hideBar.toggle()
     ///             }
     ///         }
+    ///         .statusBar(hidden: hideBar)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](status-bar-hidden.gif)
     ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   status bar.
@@ -51581,6 +51602,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// ![](alert-item-content.gif)
+    ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
     ///   when this value is not `nil`.
@@ -51616,6 +51639,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](alert-is-presented.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the alert is presented.
