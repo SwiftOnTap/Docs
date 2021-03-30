@@ -26909,7 +26909,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
-        /// ![PageIndexViewStyle interactive background display mode](pageindexviewstyle-automatic-example.png)
+        /// ![PageIndexViewStyle interactive background display mode](page-index-view-style-background-display-mode-interactive.gif)
         ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
@@ -28352,8 +28352,6 @@ extension Path {
 /// You can create a picker to select among these values by providing ``Text``
 /// views in the picker initializer's content:
 ///
-/// ![Picker Ice Cream](picker-ice-cream.png)
-///
 /// ```
 /// struct IceCreamView: View {
 ///     @State private var selectedFlavor = Flavor.chocolate
@@ -28372,7 +28370,7 @@ extension Path {
 /// }
 /// ```
 ///
-/// ![Picker Ice Cream](/picker-ice-cream.png)
+/// ![Picker Ice Cream](picker-ex1.gif)
 ///
 /// You append a tag to each text view so that the type of each selection
 /// matches the type of the bound state variable.
@@ -28396,6 +28394,8 @@ extension Path {
 ///     }
 /// }
 /// ```
+///
+/// ![](picker-ex2.gif)
 ///
 /// In this case, ``ForEach`` automatically assigns a tag to the selection
 /// views, using each option's `id`, which it can do because `Flavor` conforms
@@ -28447,6 +28447,8 @@ extension Path {
 ///     }
 /// }
 /// ```
+///
+/// ![](picker-ex3.gif)
 ///
 /// ### Styling Pickers
 ///
@@ -29088,6 +29090,8 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 ///         }
 ///     }
 ///
+/// ![](presentation-mode-dismiss-ex.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PresentationMode {
 
@@ -29115,7 +29119,7 @@ public struct PresentationMode {
     ///             Button("Open sesame 📬") {
     ///                 showSheet = true
     ///             }
-    ///             .sheet(isPresented: $showCover,
+    ///             .sheet(isPresented: $showSheet,
     ///                    onDismiss: { print("dismissed!") },
     ///                    content: { ExampleSheet() })
     ///         }
@@ -29131,6 +29135,8 @@ public struct PresentationMode {
     ///                 }
     ///         }
     ///     }
+    ///
+    /// ![](presentation-mode-is-presented-ex.gif)
     ///
     public var isPresented: Bool { get }
 
@@ -29155,7 +29161,7 @@ public struct PresentationMode {
     ///             Button("Open sesame 📬") {
     ///                 showSheet = true
     ///             }
-    ///             .sheet(isPresented: $showCover,
+    ///             .sheet(isPresented: $showSheet,
     ///                    onDismiss: { print("dismissed!") },
     ///                    content: { ExampleSheet() })
     ///         }
@@ -29170,6 +29176,8 @@ public struct PresentationMode {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](presentation-mode-dismiss-ex.gif)
     ///
     public mutating func dismiss() { }
 }
@@ -30086,6 +30094,9 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](progress-view-init-plain.png)
+    ///
     public init() where Label == EmptyView { }
 
     /// Creates a progress spinner froma custom label.
@@ -30099,6 +30110,8 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](progress-view-init-label.png)
     ///
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
@@ -30122,6 +30135,8 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](progress-view-init-517e1.png)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
@@ -30148,6 +30163,9 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](progress-view-init-517e1.png)
+    ///
     public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
 }
 
@@ -30382,6 +30400,8 @@ extension ProgressView {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](progress-view-init-1a15a.png)
     ///
     public init(_ configuration: ProgressViewStyleConfiguration) where Label == ProgressViewStyleConfiguration.Label, CurrentValueLabel == ProgressViewStyleConfiguration.CurrentValueLabel { }
 }
@@ -34275,6 +34295,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
+    /// ![](scene-storage-init-10da5-ex.gif)
+    ///
     /// - Parameter wrappedValue: The default value if an integer is not
     ///   available for the given key.
     /// - Parameter key: a key used to save and restore the value.
@@ -34290,6 +34312,8 @@ extension SceneStorage {
     ///             Slider(value: $level)
     ///         }
     ///     }
+    ///
+    /// ![](scene-storage-init-70ae4-ex.gif)
     ///
     /// - Parameter wrappedValue: The default value if a double is not available
     ///   for the given key.
@@ -35241,6 +35265,8 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// }
 /// ```
 ///
+/// ![](secure-field-ex.gif)
+///
 /// ![A secure text field user interface element designed to pass data into a state object.](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct SecureField<Label> : View where Label : View {
@@ -35282,7 +35308,7 @@ public struct SecureField<Label> : View where Label : View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SecureField where Label == Text {
 
-    /// Creates a text field for entering private text, usually a password, with a LocalizedStringKey placeholder.
+    /// Creates a text field for entering private text, usually a password, with a ``LocalizedStringKey`` placeholder.
     ///
     /// ```
     /// struct PasswordView: View {
@@ -35294,6 +35320,8 @@ extension SecureField where Label == Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](localized-string-key-ex.gif)
     ///
     /// - Parameters:
     ///   - titleKey: The localized string key placeholder, which is visible when the field is empty.
@@ -36416,7 +36444,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     ///   parameter equal to true when editing begins, and false when it ends.
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
-    /// Creates a a slider with a step size.
+    /// Creates a slider with a step size.
     ///
     /// ```
     /// struct LabeledSliderView: View {
@@ -36433,6 +36461,8 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](slider-init-visoec-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -36503,6 +36533,9 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](spacer-min-length-ex.gif)
+    ///
     public var minLength: CGFloat?
 
     /// Creates a spacer view.
@@ -36765,6 +36798,8 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// }
     /// ```
     ///
+    /// ![](wrapped-value-ex.gif)
+    ///
     /// - Parameter wrappedValue: An initial wrappedValue for a state.
     public init(wrappedValue value: Value) { }
 
@@ -36796,6 +36831,8 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](initial-value-ex.gif)
     ///
     /// - Parameter value: An initial value of the state.
     public init(initialValue value: Value) { }
