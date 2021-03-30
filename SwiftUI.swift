@@ -6231,70 +6231,89 @@ extension Circle : InsettableShape {
 
 /// A progress view that visually indicates its progress using a circular gauge.
 ///
-/// When initializing a ProgressView with ``ProgressView/init(_:_:)``, the
-/// ``DefaultProgressViewStyle`` will typically display a circular progress view on
-/// watchOS.
+/// Use this style to specify a circular "spinner" loading progress view. This
+/// is usually best for indeterminant amounts of load time.
 ///
-/// For example, to create a new ``ProgressView`` with this style:
+/// To illustrate, look at a ``ProgressView`` that uses the
+/// ``ProgressView/init(value:total:)`` initializer. By default, it
+/// is a linear load bar.
 ///
 /// ```
-/// struct ExampleView: View {
-///    var body: some View {
-///        ProgressView()
-///            .progressViewStyle(CircularProgressViewStyle())
-///            .padding(20)
-///    }
+/// struct ContentView: View {
+///     var body: some View {
+///         ProgressView(value: 0.75)
+///     }
 /// }
 /// ```
 ///
-/// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+/// ![](circularprogressview-1.png)
+///
+/// But when you apply `CircularProgressViewStyle`
+/// with ``View/progressViewStyle(_:)``, it becomes a spinner:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ProgressView(value: 0.75)
+///             .progressViewStyle(CircularProgressViewStyle())
+///     }
+/// }
+/// ```
+///
+/// You can also apply a tint to the spinner using
+/// `CircularProgressViewStyle`'s ``CircularProgressViewStyle/init(tint:)``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ProgressView(value: 0.75)
+///             .progressViewStyle(CircularProgressViewStyle(tint: .orange))
+///     }
+/// }
+/// ```
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
 
     /// Creates a circular progress view style.
     ///
-    /// For example, to create a new ``ProgressView`` with this style:
+    /// Use this intitializer to create a ``CircularProgressViewStyle``.
+    /// This allows you to style a ``ProgressView`` like a spinner,
+    /// overriding any default styles:
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///    var body: some View {
-    ///        ProgressView()
+    ///        ProgressView(value: 0.75)
     ///            .progressViewStyle(CircularProgressViewStyle())
-    ///            .padding(20)
     ///    }
     /// }
     /// ```
     ///
     /// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
     ///
+    /// - Note: To give the spinner a tint color, use ``CircularProgressViewStyle/init(tint:)``
+    /// instead.
+    ///
     public init() { }
 
     /// Creates a circular progress view style with a tint color.
-
-    /// For example, to create a new ``ProgressView`` with this style:
+    ///
+    /// Use this initializer to create a ``CircularProgressViewStyle``
+    /// with a `tint` color:
     ///
     /// ```
-    /// struct ExampleView: View {
+    /// struct ContentView: View {
     ///    var body: some View {
     ///        ProgressView()
-    ///            .progressViewStyle(CircularProgressViewStyle(tint: Color.red))
-    ///            .padding(20)
+    ///            .progressViewStyle(CircularProgressViewStyle(tint: .orange))
     ///    }
     /// }
     /// ```
     ///
-    /// ![Circular progress view example 2](circularprogressviewstyle-example-2.gif)
-    ///
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.
-    ///
-    /// - Parameter configuration: The properties of the progress view being
-    ///   created.
-    ///
-    /// The view hierarchy calls this method for each progress view where this
-    /// style is the current progress view style.
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
@@ -23275,17 +23294,38 @@ extension LegibilityWeight {
 
 /// A progress view that visually indicates its progress using a horizontal bar.
 ///
-/// When initializing a ProgressView with ``ProgressView/init(value:,total:)``, the
-/// ``DefaultProgressViewStyle`` will typically display a linear progress view style.
-///
-/// For example, to create a new ``ProgressView`` with this style:
+/// When initializing a ``ProgressView`` with ``ProgressView/init(value:total:)``, the
+/// ``DefaultProgressViewStyle`` will typically display a linear progress view style:
 ///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
+///     var body: some View {
+///         ProgressView(value: 0.5)
+///     }
+/// }
+/// ```
+///
+/// ![](progressview.png)
+///
+/// A ``ProgressView`` initialized with ``ProgressView/init()``, on the
+/// other hand, defaults to a "spinner" style:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ProgressView()
+///     }
+/// }
+/// ```
+///
+/// To turn it into a linear progress view, apply this style
+/// with the ``View/progressViewStyle(_:)`` modifier:
+///
+/// ```
+/// struct ContentView: View {
 ///    var body: some View {
 ///        ProgressView()
 ///            .progressViewStyle(LinearProgressViewStyle())
-///            .padding(20)
 ///    }
 /// }
 /// ```
@@ -23297,20 +23337,23 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 
     /// Creates a linear progress view style.
     ///
-    /// For example, to create a new ``ProgressView`` with this style:
+    /// Use this initializer to create a linear progress view style.
     ///
     /// ```
-    /// struct ExampleView: View {
-    ///
+    /// struct ContentView: View {
     ///    var body: some View {
     ///        ProgressView()
     ///            .progressViewStyle(LinearProgressViewStyle())
-    ///            .padding(20)
     ///    }
     /// }
     /// ```
     ///
     /// ![Linear progress view example 1](linearprogressview-example-1.png)
+    ///
+    /// - Note: This style will use a default blue color for the loaded
+    /// portion of the bar, and gray for the unload portion. To change
+    /// the tint color, use ``LinearProgressViewStyle/init(tint:)``
+    /// instead.
     ///
     public init() { }
 
@@ -23319,17 +23362,15 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     /// For example, to create a new ``ProgressView`` with this style:
     ///
     /// ```
-    /// struct ExampleView: View {
-    ///
+    /// struct ContentView: View {
     ///    var body: some View {
     ///        ProgressView(value: 5, total: 10)
-    ///            .progressViewStyle(LinearProgressViewStyle(tint: Color.red))
-    ///            .padding(20)
+    ///            .progressViewStyle(LinearProgressViewStyle(tint: .red))
     ///    }
     /// }
     /// ```
     ///
-    /// ![Linear progress view example 2](linearprogressview-example-2.png)
+    /// ![](linearprogress.png)
     ///
     public init(tint: Color) { }
 
@@ -30085,175 +30126,63 @@ public struct PrimitiveButtonStyleConfiguration {
 
 /// An animated loading bar or "spinner" shown when an ongoing task has started but is not yet complete
 ///
-/// A progress view is a combination of `UIProgressView` and
-/// `UIActivityIndicatorView` from UIKit. When initialized without
-/// arguments, it resembles `UIActivityIndicatorView`, an indeterminate
-/// progress indicator or “spinner”.
+/// A progress view is a combination of
+/// [`UIProgressView`](https://developer.apple.com/documentation/uikit/uiprogressview)
+/// and
+/// [`UIActivityIndicatorView`](https://developer.apple.com/documentation/uikit/uiactivityindicatorview)
+/// from
+/// [UIKit](https://developer.apple.com/documentation/uikit).
+/// When initialized without
+/// arguments, it resembles a “spinner”.
 ///
-///     struct IndeterminateProgressViews: View {
+///     struct ContentView: View {
 ///         var body: some View {
-///            VStack {
-///               ProgressView()
-///               ProgressView(value: Double?(nil))
-///               ProgressView(value: -1)
-///            }
+///             ProgressView()
 ///         }
 ///     }
 ///
-/// When initialized with a value ``ProgressView`` looks like `UIProgressView`,
-/// a loading bar that fills up from left to right. There are notable exceptions
-/// featured in the example above. For example, a value of nil or less than 0.0
-/// shows an indeterminate progress indicator or “spinner”."
-/// The value can be any generic type that conforms to the `BinaryFloatingPoint`
-/// protocol, which includes `CGFloat`, `Double`, `Float`, `Float16` and
-/// `Float80`.
+/// When initialized with a value `ProgressView` looks like a
+/// loading bar that fills up from left to right.
 ///
-///     struct DeteriminateProgressViews: View {
-///         @State var value = Double()
+///     struct ContentView: View {
 ///         var body: some View {
-///             VStack {
-///                 Slider(value: $value, in: 0...1)
-///                 ProgressView(value: value)
-///                 ProgressView(value: value, total: 1)
-///                 ProgressView(value: value, total: 2)
-///                 ProgressView(value: value) {
-///                     Text("Label")
-///                 }
-///                 ProgressView("Title", value: value)
-///             }
+///             ProgressView(value: 0.5)
 ///         }
 ///     }
 ///
-/// ![](progress-view-ex2.gif)
+/// ![](progressview.png)
+///
+/// `ProgressView` has many custom initializers, differing in the **label**
+/// type and whether it is a **spinner** or a **linear** progress bar. Explore
+/// them in the sidebar.
 ///
 /// ### Styling Progress Views
 ///
-/// Structures that conform to the ``ProgressViewStyle`` protocol can be used
-/// to modify the appearance of ``ProgressView``. The structure passed to the
-/// ``View/progressViewStyle(_:)`` modifier applies to all ``ProgressView``
-/// instances in the children of that ``View``.
+/// You can customize the appearance and interaction of progress views
+/// by creating styles that conform to the ``ProgressViewStyle``
+/// protocol. To set a specific style for all progress view instances
+/// within a view, use the ``View/progressViewStyle(_:)`` modifier.
+/// In the following example, a custom style adds a dark blue shadow
+/// to all progress views within the enclosing ``VStack``:
 ///
-/// In this example, the same style is applied to two ``ProgressView``
-/// instances that are children of a ``VStack``:
-///
-///     struct DefaultProgressViews: View {
+///     struct ShadowedProgressViews: View {
 ///         var body: some View {
-///             VStack {
-///                 ProgressView(value: 0.25)
-///                   .accentColor(Color.red)
+///             VStack(spacing: 50) {
+///                 ProgressView()
 ///                 ProgressView(value: 0.75)
-///                   .background(Color.black)
 ///             }
-///             .progressViewStyle(DefaultProgressViewStyle())
+///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
 ///         }
 ///     }
 ///
-/// ![](12.34.24.png)
-///
-/// Although a custom `accentColor` and `background` were set in the example
-/// above, these modifiers were overridden by the ``DefaultProgressViewStyle``.
-/// This style sets `accentColor` to `Color.blue` and `background` to
-/// `Color.gray.opacity(0.1)`. As the default opacity of the background is `0.1`,
-/// any content behind the ``ProgressView`` will be visible in the unfilled
-/// portion of the loading bar.
-///
-/// To swap the colors, you can approximate how `Color.gray.opacity(0.1)`
-/// would look on a given background. Swapping the default colors will cause
-/// the blue background to show through the translucent gray, so it won't look
-/// right.
-///
-///      struct ExampleView: View {
-///         var body: some View {
-///             ProgressView()
-///                 .progressViewStyle(InvertedColorProgressViewStyle())
-///         }
-///      }
-///
-///     struct InvertedColorProgressViewStyle: ProgressViewStyle {
+///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 ///         func makeBody(configuration: Configuration) -> some View {
-///           ProgressView(configuration)
-///            .background(Color.blue)
-///            .accentColor(Color(red: 0.894, green: 0.894, blue: 0.902))
-///         }
-///     }
-///
-/// [rotation-effect ->]
-/// To create a ``ProgressViewStyle`` that inverts the direction of the
-/// animation, use a
-/// ``View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)``
-/// modifier.
-///
-///      struct ExampleView: View {
-///         var body: some View {
-///             ProgressView()
-///                 .progressViewStyle(InvertedDirectionProgressViewStyle())
-///         }
-///      }
-///
-///     struct InvertedDirectionProgressViewStyle: ProgressViewStyle {
-///         func makeBody(configuration: Configuration) -> some View {
-///             GeometryReader { geometry in
-///                 ProgressView(configuration)
-///                     .frame(height: geometry.size.height)
-///                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-///             }
-///         }
-///     }
-///
-/// [<-]
-///   A vertical ``ProgressView`` can be achieved by rotating 90 degrees, but
-/// this will not make enough vertical space for it to display within the
-/// available space. Instead make use of ``GeometryReader`` in order to allow
-/// the view to scale accordingly. One method to keep your ``ProgressView``
-/// centered after a rotation is to use the offset modifier. Without this
-/// modifier the rotation could cause the ``ProgressView`` to move out of
-/// bounds.
-///
-/// [progressview-style ->]
-///
-///      struct ExampleView: View {
-///         var body: some View {
-///             ProgressView()
-///                 .progressViewStyle(VerticalProgressViewStyle())
-///         }
-///      }
-///
-///     struct VerticalProgressViewStyle: ProgressViewStyle {
-///         func makeBody(configuration: Configuration) -> some View {
-///           GeometryReader { geometry in
 ///             ProgressView(configuration)
-///                 .frame(width: geometry.size.height)
-///                 .offset(x: geometry.size.height / 2, y: geometry.size.height / 2)
-///                 .rotationEffect(.degrees(90))
-///             }
+///                 .shadow(color: Color(red, green, blue: 0.6),
+///                         radius: 4.0, x: 1.0, y: 2.0)
 ///         }
-///      }
-///
-///  To invert the direction of progress in the vertical style, merely apply
-/// the ``View/rotation3DEffect(_:axis:anchor:anchorZ:perspective:)`` modifier
-/// as before.
-///
-///
-///      struct ExampleView: View {
-///         var body: some View {
-///             ProgressView()
-///                 .progressViewStyle(InvertedVerticalProgressViewStyle())
-///         }
-///      }
-///
-///     struct InvertedVerticalProgressViewStyle: ProgressViewStyle {
-///          func makeBody(configuration: Configuration) -> some View {
-///              GeometryReader { geometry in
-///                  ProgressView(configuration)
-///                     .frame(width: geometry.size.height)
-///                     .rotationEffect(.degrees(90))
-///                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 0, z: 1))
-///                     .offset(x: -(geometry.size.height / 2), y: geometry.size.height / 2)
-///              }
-///          }
 ///     }
 ///
-/// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, CurrentValueLabel : View {
 
@@ -30416,7 +30345,7 @@ extension ProgressView {
     ///             Text("We are halfway done 🌗")
     ///                 .font(.title2)
     ///         } currentValueLabel: {
-    ///             Text("150 of 200 tasks")
+    ///             Text("100 of 200 tasks")
     ///                 .font(.title2)
     ///         }
     ///     }
@@ -30584,6 +30513,8 @@ extension ProgressView {
 ///
 /// To configure the current progress view style for a view hiearchy, use the
 /// ``View/progressViewStyle(_:)`` modifier.
+///
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol ProgressViewStyle{ }
 extension ProgressViewStyle {
@@ -46207,24 +46138,39 @@ extension View {
     /// create. For example, you can set the value associated with the
     /// ``EnvironmentValues/truncationMode`` key:
     ///
-    ///     MyView()
-    ///         .environment(\.truncationMode, .head)
+    ///     struct ParentView: View {
+    ///         var body: some View {
+    ///             ChildView()
+    ///                 .environment(\.truncationMode, .head)
+    ///         }
+    ///     }
     ///
-    /// You then read the value inside `MyView` or one of its descendants
+    /// You then read the value inside `ChildView` or one of its descendants
     /// using the ``Environment`` property wrapper:
     ///
-    ///     struct MyView: View {
-    ///         @Environment(\.truncationMode) var truncationMode: Text.TruncationMode
+    ///     struct ChildView: View {
+    ///         @Environment(\.truncationMode) var truncationMode
     ///
-    ///         var body: some View { ... }
+    ///         let working = "Environment 🌳 in SwiftUI works!"
+    ///         let broken = "SwiftUI broke again 🤦"
+    ///
+    ///         var body: some View {
+    ///             Text(truncationMode == .head ? working : broken)
+    ///         }
     ///     }
+    ///
+    /// ![](environment.png)
     ///
     /// SwiftUI provides dedicated view modifiers for setting most
     /// environment values, like the ``View/truncationMode(_:)``
     /// modifier which sets the ``EnvironmentValues/truncationMode`` value:
     ///
-    ///     MyView()
-    ///         .truncationMode(.head)
+    ///     struct ParentView: View {
+    ///         var body: some View {
+    ///             ChildView()
+    ///                 .truncationMode(.head)
+    ///         }
+    ///     }
     ///
     /// Prefer the dedicated modifier when available, and offer your own when
     /// defining custom environment values, as described in
@@ -49942,13 +49888,42 @@ extension View {
 
     /// Sets the style for progress views in this view.
     ///
-    /// [[progressview-style]]
+    /// Use this modifier to change the style of a progress view.
+    /// To use it, you must pass a value of type ``ProgressViewStyle``.
     ///
-    /// For example, the following code creates a progress view that uses the
-    /// "circular" style:
+    /// There are three default ``ProgressViewStyle``s:
+    /// - ``DefaultProgressViewStyle`` - Uses the default style of the current
+    /// progress view.
+    /// - ``CircularProgressViewStyle`` - A "spinner" progress view style.
+    /// - ``LinearProgressViewStyle`` -  A linear loading bar that fills
+    /// from right to left.
     ///
-    ///     ProgressView()
-    ///         .progressViewStyle(CircularProgressViewStyle())
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             ProgressView(value: 0.25)
+    ///                 .progressViewStyle(CircularProgressViewStyle(tint: .orange))
+    ///         }
+    ///     }
+    ///
+    /// You can also create your own ``ProgressViewStyle``:
+    ///
+    ///     struct ShadowedProgressViews: View {
+    ///         var body: some View {
+    ///             VStack(spacing: 50) {
+    ///                 ProgressView()
+    ///                 ProgressView(value: 0.75)
+    ///             }
+    ///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+    ///         }
+    ///     }
+    ///
+    ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
+    ///         func makeBody(configuration: Configuration) -> some View {
+    ///             ProgressView(configuration)
+    ///                 .shadow(color: Color(red, green, blue: 0.6),
+    ///                         radius: 4.0, x: 1.0, y: 2.0)
+    ///         }
+    ///     }
     ///
     /// - Parameter style: The progress view style to use for this view.
     public func progressViewStyle<S>(_ style: S) -> some View where S : ProgressViewStyle { }
