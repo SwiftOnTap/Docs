@@ -11141,6 +11141,9 @@ public struct DropProposal {
 ///             Button("RELOAD ❗️") { reloadSwitch.toggle() }
 ///         }
 ///     }
+///
+/// ![](dynamic-prop-ex1.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol DynamicProperty{ }
 extension DynamicProperty {
@@ -11174,6 +11177,9 @@ extension DynamicProperty {
     ///             Button("RELOAD ❗️") { reloadSwitch.toggle() }
     ///         }
     ///     }
+    ///
+    /// ![](dynamic-prop-ex1.gif)
+    ///
     mutating func update() { }
 }
 
@@ -37480,6 +37486,8 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
+/// ![](stepper-ex.gif)
+///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -37520,6 +37528,8 @@ public struct Stepper<Label> : View where Label : View {
     ///             .background(colors[value])
     ///         }
     ///     }
+    ///
+    /// ![](stepper-init-oi-od-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///     - onIncrement: The closure to execute when the user clicks or taps
@@ -37570,6 +37580,8 @@ extension Stepper {
     ///         }
     ///     }
     ///
+    /// ![](stepper-init-v-s-oec-l-ex.gif)
+    ///
     /// - Parameters:
     ///   - value: The ``Binding`` to a value that you provide.
     ///   - step: The amount to increment or decrement `value` each time the
@@ -37608,6 +37620,8 @@ extension Stepper {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](stepper-init-v-i-s-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A ``Binding`` to a value that you provide.
@@ -37671,6 +37685,8 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
+    /// ![](stepper-init-oi-od-oec-l-ex.gif)
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
     ///       the purpose of the stepper.
@@ -37722,6 +37738,8 @@ extension Stepper where Label == Text {
     ///                 .background(colors[value])
     ///         }
     ///     }
+    ///
+    /// ![](stepper-init-oi-od-oec-ex.gif)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
@@ -38563,6 +38581,9 @@ extension StrokeStyle : Animatable {
 ///     }
 /// }
 /// ```
+///
+/// ![](subscription-view-init-ex.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SubscriptionView<PublisherType, Content> : View where PublisherType : Publisher, Content : View, PublisherType.Failure == Never {
 
@@ -38585,6 +38606,9 @@ extension StrokeStyle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](subscription-view-init-cpa.ex.gif)
+    ///
     public var content: Content
 
     /// The `Publisher` that is being subscribed.
@@ -38624,6 +38648,9 @@ extension StrokeStyle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](subscription-view-init-cpa.ex.gif)
+    ///
     public var publisher: PublisherType
 
     /// The `Action` executed when `publisher` emits an event.
@@ -38648,6 +38675,9 @@ extension StrokeStyle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](subscription-view-init-cpa.ex.gif)
+    ///
     public var action: (PublisherType.Output) -> Void
 
     /// Create a view with content the subscribes to a publisher with an action.
@@ -38664,6 +38694,8 @@ extension StrokeStyle : Animatable {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](subscription-view-init-cpa.ex.gif)
     ///
     /// - Parameters:
     ///   - content: The content that you want displayed in the view.
@@ -39411,6 +39443,9 @@ extension Text {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](text-date-style-ex.gif)
+    ///
     public struct DateStyle {
 
         /// A style displaying only the time component for a date.
@@ -39466,6 +39501,9 @@ extension Text {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](text-date-style-relative-ex.gif)
+        ///
         public static let relative: Text.DateStyle
 
         /// A style displaying a date as offset from now.
@@ -39483,6 +39521,9 @@ extension Text {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](text-date-style-offset-ex.gif)
+        ///
         public static let offset: Text.DateStyle
 
         /// A style displaying a date as timer counting from now.
@@ -39500,6 +39541,9 @@ extension Text {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](text-date-style-timer-ex.gif)
+        ///
         public static let timer: Text.DateStyle
     }
 
@@ -40753,6 +40797,9 @@ extension TextField where Label == Text {
 ///     }
 /// }
 /// ```
+///
+/// ![](text-field-style.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol TextFieldStyle { }
 extension TextFieldStyle {
@@ -43190,6 +43237,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
+    /// ![](unipoint-leading-ex.gif)
+    ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let leading: UnitPoint
 
@@ -43214,6 +43263,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](unipoint-trailing-ex.gif)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let trailing: UnitPoint
@@ -43240,6 +43291,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
+    /// ![](unipoint-top-ex.gif)
+    ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     ///
     public static let top: UnitPoint
@@ -43265,6 +43318,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](unipoint-bottom-ex.gif)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottom: UnitPoint
@@ -44673,6 +44728,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](allow-hit-testing-ex.png)
+    ///
     /// - Parameter enabled: A boolean for whether the view allows user interaction.
     @inlinable public func allowsHitTesting(_ enabled: Bool) -> some View { }
 
@@ -44807,6 +44864,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](context-menu-card-ex.gif)
+    ///
     /// - Parameter menuItems: A ``contextMenu`` that contains one or more menu items.
     /// - Returns: A view that adds a contextual menu to this view.
     public func contextMenu<MenuItems>(@ViewBuilder menuItems: () -> MenuItems) -> some View where MenuItems : View { }
@@ -44859,6 +44918,8 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](context-menu-card-ex.gif)
     ///
     /// - Parameter contextMenu: A context menu container for views that you
     ///   present as menu items in a contextual menu.
@@ -44930,15 +44991,16 @@ extension View {
     ///     var two: some Gesture {
     ///         TapGesture(count: 2)
     ///             .onEnded { message += "2️⃣" }
-    ///         }
     ///     }
     ///
     ///     var body: some View {
-    ///         Text("Double tap me 👇")
+    ///         Text(message)
     ///             .gesture(two)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -44985,6 +45047,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](high-priority-gesture-including-ex.gif)
+    ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
     ///   - mask: The ``GestureMask`` to use.
@@ -45014,8 +45078,8 @@ extension View {
     ///     var g: some Gesture {
     ///         TapGesture(count: 2)
     ///             .onEnded { message += "2️⃣" }
-    ///         }
     ///     }
+    ///
     ///     var body: some View {
     ///         ZStack {
     ///             Text(message)
@@ -45025,6 +45089,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](simultaneous-gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -45146,6 +45212,8 @@ extension View {
     /// }
     ///
     /// ```
+    ///
+    /// ![](film-importer-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the interface should be shown.
@@ -46321,6 +46389,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](action-sheet-item-ex.gif)
+    ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the action
     ///     sheet. When representing a non-`nil` item, the system uses
@@ -46356,6 +46426,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](action-sheet-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the action sheet should be
@@ -48191,6 +48263,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](popover-item-ex.gif)
+    ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the popover.
     ///     When representing a non-`nil` item, the system uses `content` to
@@ -48240,6 +48314,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](popover-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the popover is presented.
@@ -48342,9 +48418,12 @@ extension View {
     ///             .onHover { hovering in
     ///                 isHovering = hovering
     ///             }
+    ///             .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](on-hover-perform-ex.gif)
     ///
     /// - Parameter action: The action to perform whenever the pointer enters or
     ///   exits this view's frame. If the pointer is in the view's frame, the
@@ -48462,6 +48541,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](auto-cap-ex.gif)
     ///
     /// The
     /// [`UITextAutocapitalizationType`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
