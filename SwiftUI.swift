@@ -9215,24 +9215,53 @@ public struct DefaultPickerStyle : PickerStyle {
 /// The default progress view style in the current context of the view being
 /// styled.
 ///
+/// Use this style to specify the default style for a ``ProgressView``.
+/// The style depends on the type of progress view that is being
+/// initialized. For example:
+///
 /// ```
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///    var body: some View {
 ///        ProgressView()
-///            .progressViewStyle(LinearProgressViewStyle())
-///            .padding(20)
+///            .progressViewStyle(DefaultProgressViewStyle())
 ///    }
 /// }
 /// ```
-/// ![FA3176B9-AF8E-4DE6-9493-3D6271A2670C](FA3176B9-AF8E-4DE6-9493-3D6271A2670C.png)
 ///
-/// The default style represents the recommended style based on the original
-/// initialization parameters of the progress view, and the progress view's
-/// context within the view hierarchy.
+/// In this instance, the style displays a spinner. However, if we initialize
+/// the ``ProgressView`` using ``ProgressView/init(value:total:)`` instead,
+/// we get a different look:
+///
+/// ```
+/// struct ContentView: View {
+///    var body: some View {
+///        ProgressView(value: 5, total: 10)
+///            .progressViewStyle(DefaultProgressViewStyle())
+///    }
+/// }
+/// ```
+///
+/// - Note: This style does not need to be specified explicitly unless
+/// you would like to override a style from higher up in the view hierarchy.
+/// This style is used if no others are specified.
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultProgressViewStyle : ProgressViewStyle {
 
     /// Creates a default progress view style.
+    ///
+    /// Use this initializer to create a ``DefaultProgressViewStyle``.
+    /// It is the only initializer of the structure, and takes no parameters:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///    var body: some View {
+    ///        ProgressView()
+    ///            .progressViewStyle(DefaultProgressViewStyle())
+    ///    }
+    /// }
+    /// ```
+    ///
     public init() { }
 
     /// Creates a view representing the body of a progress view.
@@ -30207,6 +30236,9 @@ extension ProgressView where CurrentValueLabel == EmptyView {
 
     /// Creates a progress spinner.
     ///
+    /// Use this initializer to create a ``ProgressView`` with
+    /// a loading spinner.
+    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -30216,7 +30248,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// ```
     public init() where Label == EmptyView { }
 
-    /// Creates a progress spinner froma custom label.
+    /// Creates a progress spinner from a custom label.
     ///
     /// ```
     /// struct ContentView: View {
@@ -30324,7 +30356,7 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](progressview-init-2.png)
+    /// ![](200-tasks.png)
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -30389,8 +30421,7 @@ extension ProgressView {
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
-    ///         ProgressView(LocalizedStringKey("We are halfway done 🌗",
-    ///                      value: 1.0, total: 2.0)
+    ///         ProgressView("We are halfway done 🌗", value: 1.0, total: 2.0)
     ///     }
     /// }
     /// ```
@@ -30453,7 +30484,7 @@ extension ProgressView {
     /// `localizedDescription` of the given progress instance.
     ///
     /// The parameter of this initializer is type
-    /// [Progress](https://developer.apple.com/documentation/foundation/progress).
+    /// [`Progress`](https://developer.apple.com/documentation/foundation/progress).
     /// See the Apple developer docs for more on how to create and modify
     /// one of these objects.
     ///
@@ -30517,8 +30548,53 @@ extension ProgressView {
 /// A type that applies standard interaction behavior to all progress views
 /// within a view hierarchy.
 ///
-/// To configure the current progress view style for a view hiearchy, use the
-/// ``View/progressViewStyle(_:)`` modifier.
+/// Use this protocol to create custom and reusable styles for your
+/// ``ProgressView``s.
+///
+/// You can either use a **predefined** style or **create your own** style
+///
+/// ### Predefined Styles
+///
+/// There are 3 predefined ``ProgressView`` styles in SwiftUI:
+/// - ``CircularProgressViewStyle`` - A "spinner" style.
+/// - ``LinearProgressViewStyle`` - A loading bar style.
+/// - ``DefaultProgressViewStyle`` - The default style based on the context.
+///
+/// To use one of these styles, pass an instance to ``View/progressViewStyle(_:)``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ProgressView()
+///             .progressViewStyle(CircularProgressViewStyle())
+///     }
+/// }
+/// ```
+///
+/// ### Custom Styles
+///
+/// To create a custom `ProgressViewStyle`, create a structure that
+/// implements the ``ProgressViewStyle/makeBody(configuration:)``:
+///
+///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///             ProgressView(configuration)
+///                 .shadow(color: Color(red, green, blue: 0.6),
+///                         radius: 4.0, x: 1.0, y: 2.0)
+///         }
+///     }
+///
+/// Then apply it to a ``ProgressView`` using ``View/progressViewStyle(_:)``:
+///
+///     struct ShadowedProgressViews: View {
+///         var body: some View {
+///             VStack(spacing: 50) {
+///                 ProgressView()
+///                 ProgressView(value: 0.75)
+///             }
+///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+///         }
+///     }
 ///
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -30530,21 +30606,129 @@ extension ProgressViewStyle {
 
     /// Creates a view representing the body of a progress view.
     ///
-    /// - Parameter configuration: The properties of the progress view being
-    ///   created.
+    /// Implement this function to create a custom ``ProgressViewStyle``.
+    /// This is the one requirement of conforming to the protocol.
     ///
-    /// The view hierarchy calls this method for each progress view where this
-    /// style is the current progress view style.
+    /// The function passes in a `configuration` of type
+    /// ``ProgressViewStyleConfiguration``. This structure contains:
+    /// - ``ProgressViewStyleConfiguration/fractionCompleted`` - How much
+    /// of the progress view has been completed.
+    /// - ``ProgressViewStyleConfiguration/label`` - The label ``View``
+    /// of a ``ProgressView``.
+    /// - ``ProgressViewStyleConfiguration/currentValueLabel`` - The "current value"
+    /// label of a ``ProgressView``.
+    ///
+    /// See ``ProgressViewStyleConfiguration`` for more on the parameter.
+    ///
+    /// Here is a simple example:
+    ///
+    ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
+    ///         func makeBody(configuration: Configuration) -> some View {
+    ///             ProgressView(configuration)
+    ///                 .shadow(color: Color(red, green, blue: 0.6),
+    ///                         radius: 4.0, x: 1.0, y: 2.0)
+    ///         }
+    ///     }
+    ///
+    /// To apply the style, use ``View/progressViewStyle(_:)``:
+    ///
+    ///     struct ShadowedProgressViews: View {
+    ///         var body: some View {
+    ///             VStack(spacing: 50) {
+    ///                 ProgressView()
+    ///                 ProgressView(value: 0.75)
+    ///             }
+    ///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+    ///         }
+    ///     }
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// A type alias for the properties of a progress view instance.
+    ///
+    /// See ``ProgressViewStyleConfiguration`` for more on what a progress
+    /// view's configuration properties provides.
     typealias Configuration = ProgressViewStyleConfiguration
 }
 
 /// The properties of a progress view instance.
+///
+/// This is the type of the parameter in ``ProgressViewStyle``'s
+/// one required function: ``ProgressViewStyle/makeBody(configuration:)``.
+///
+/// This structure comes with several properties for you to read
+/// in that function:
+/// - ``ProgressViewStyleConfiguration/fractionCompleted``
+/// - ``ProgressViewStyleConfiguration/label``
+/// - ``ProgressViewStyleConfiguration/currentValueLabel``
+///
+/// Here is an example of a custom style created by reading these values:
+///
+/// ```
+/// struct ArcProgressViewStyle: ProgressViewStyle {
+///     var color = Color.orange
+///     var style = StrokeStyle(lineWidth: CGFloat(30), lineCap: .round)
+///
+///     func makebody(configuration: ProgressViewStyleConfiguration) -> some View {
+///         let frac = CGFloat(configuration.fractionCompleted ?? 0)
+///
+///         return ZStack {
+///             VStack {
+///                 configuration.label
+///                 configuration.currentValueLabel
+///             }
+///             Circle()
+///                 .trim(from: 0, to: frac)
+///                 .stroke(color, style: style)
+///                 .rotationEffect(.degrees(-90))
+///         }
+///     }
+/// }
+/// ```
+///
+/// You can then use the style on a ``ProgressView``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         ProgressView(value: 5, total: 10) {
+///             Text("Progress is happening !🎡")
+///         } currentValueLabel: {
+///             Text("50% done")
+///                 .font(.caption)
+///         }
+///         .progressViewStyle(ArcProgressViewStyle())
+///     }
+/// }
+/// ```
+///
+/// ![](custom-progressview.png)
+///
+/// You can also just pass this property wholesale to ``ProgressView``'s
+/// ``ProgressView/init(_:)-1a15a``:
+///
+///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
+///         func makeBody(configuration: Configuration) -> some View {
+///             ProgressView(configuration)
+///                 .shadow(color: Color(red, green, blue: 0.6),
+///                         radius: 4.0, x: 1.0, y: 2.0)
+///         }
+///     }
+///
+/// Then apply it to a ``ProgressView``:
+///
+///     struct ShadowedProgressViews: View {
+///         var body: some View {
+///             VStack(spacing: 50) {
+///                 ProgressView()
+///                 ProgressView(value: 0.75)
+///             }
+///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressViewStyleConfiguration {
 
@@ -30572,6 +30756,40 @@ public struct ProgressViewStyleConfiguration {
     /// The completed fraction of the task represented by the progress view,
     /// from `0.0` (not yet started) to `1.0` (fully complete), or `nil` if the
     /// progress is indeterminate.
+    ///
+    /// Use this property with ``ProgressViewStyle/makeBody(configuration:)``
+    /// to read the completed fraction of the ``ProgressView``
+    /// when creating a custom ``ProgressViewStyle``.
+    ///
+    /// ```
+    /// struct ArcProgressViewStyle: ProgressViewStyle {
+    ///     var color = Color.orange
+    ///     var style = StrokeStyle(lineWidth: CGFloat(30), lineCap: .round)
+    ///
+    ///     func makebody(configuration: ProgressViewStyleConfiguration) -> some View {
+    ///         let frac = CGFloat(configuration.fractionCompleted ?? 0)
+    ///
+    ///         return Circle()
+    ///             .trim(from: 0, to: frac)
+    ///             .stroke(color, style: style)
+    ///             .rotationEffect(.degrees(-90))
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can then use the style on a ``ProgressView``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 5, total: 10)
+    ///             .progressViewStyle(ArcProgressViewStyle)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](progressviestyle-fractioncompleted.png)
+    ///
     public let fractionCompleted: Double?
 
     /// A view that describes the task represented by the progress view.
@@ -30581,6 +30799,37 @@ public struct ProgressViewStyleConfiguration {
     ///
     /// If the progress view is defined using a `Progress` instance, then this
     /// label is equivalent to its `localizedDescription`.
+    ///
+    /// Use this property with ``ProgressViewStyle/makeBody(configuration:)``
+    /// to read the `label` of the ``ProgressView``
+    /// when creating a custom ``ProgressViewStyle``.
+    ///
+    /// ```
+    /// struct BigTitleViewStyle: ProgressViewStyle {
+    ///     func makebody(configuration: ProgressViewStyleConfiguration) -> some View {
+    ///         VStack {
+    ///             configuration.label
+    ///                 .font(.title)
+    ///             ProgressView(value: configuration.fractionCompleted)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can then use the style on a ``ProgressView``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 5, total: 10) {
+    ///             Text("Progress is happening !🎡")
+    ///         }
+    ///         .progressViewStyle(BigTitleViewStyle)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](bigtitlelabelstyle.png)
     public var label: ProgressViewStyleConfiguration.Label?
 
     /// A view that describes the current value of a progress view.
@@ -30591,6 +30840,50 @@ public struct ProgressViewStyleConfiguration {
     ///
     /// If the progress view is defined using a `Progress` instance, then this
     /// label is equivalent to its `localizedAdditionalDescription`.
+    ///
+    /// Use this property with ``ProgressViewStyle/makeBody(configuration:)``
+    /// to read the completed fraction of the ``ProgressView``
+    /// when creating a custom ``ProgressViewStyle``.
+    ///
+    /// ```
+    /// struct ArcProgressViewStyle: ProgressViewStyle {
+    ///     var color = Color.orange
+    ///     var style = StrokeStyle(lineWidth: CGFloat(30), lineCap: .round)
+    ///
+    ///     func makebody(configuration: ProgressViewStyleConfiguration) -> some View {
+    ///         let frac = CGFloat(configuration.fractionCompleted ?? 0)
+    ///
+    ///         return ZStack {
+    ///             VStack {
+    ///                 configuration.label
+    ///                 configuration.currentValueLabel
+    ///             }
+    ///             Circle()
+    ///                 .trim(from: 0, to: frac)
+    ///                 .stroke(color, style: style)
+    ///                 .rotationEffect(.degrees(-90))
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can then use the style on a ``ProgressView``:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         ProgressView(value: 5, total: 10) {
+    ///             Text("Progress is happening !🎡")
+    ///         } currentValueLabel: {
+    ///             Text("50% done")
+    ///                 .font(.caption)
+    ///         }
+    ///         .progressViewStyle(ArcProgressViewStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](custom-progressview.png)
     public var currentValueLabel: ProgressViewStyleConfiguration.CurrentValueLabel?
 }
 
