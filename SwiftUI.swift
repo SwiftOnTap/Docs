@@ -38070,6 +38070,8 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
+    /// ![](stepper-init-v-s-oec-l-ex.gif)
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
     ///       the purpose of the stepper.
@@ -38146,6 +38148,8 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
+    /// ![](stepper-init-75f88-ex.gif)
+    ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
     ///       the purpose of the stepper.
@@ -38184,6 +38188,8 @@ extension Stepper where Label == Text {
     ///                     step: step)
     ///         }
     ///     }
+    ///
+    /// ![](stepper-init-v-i-s-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
