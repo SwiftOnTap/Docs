@@ -3788,7 +3788,7 @@ extension App {
 /// 		}
 /// 	}
 ///
-/// ![](16.34.17.png)
+/// ![](app-storage-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
@@ -6679,6 +6679,7 @@ extension Color {
     ///                 Button("Tap me for 🟠🍑🎃") {
     ///                     color = Color.orange
     ///                 }
+    ///                 .padding()
     ///                 Button("Press me for 🟨🌕🍋") {
     ///                     color = Color.yellow
     ///                 }
@@ -6687,6 +6688,8 @@ extension Color {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](color-clear-ex3.gif)
     ///
     public static let clear: Color
 
@@ -8249,7 +8252,7 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// }
 /// ```
 ///
-/// ![71B19AF9-BDDE-4145-A04E-C0120FFC2029](71B19AF9-BDDE-4145-A04E-C0120FFC2029.png)
+/// ![](date-picker-ex1.gif)
 ///
 /// ### Styling Date Pickers
 ///
@@ -8277,7 +8280,7 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// }
 /// ```
 ///
-/// ![E5997C10-E4E0-4BE9-8364-E099CDA31862](E5997C10-E4E0-4BE9-8364-E099CDA31862.png)
+/// ![](date-picker-ex2.gif)
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -9284,7 +9287,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// The default ``TabView`` style.
 ///
 /// On iOS the default TabView looks as follows:
-/// If you don't specify, a ``view/tabviewstyle(_:)``, this is what it defaults to.
+/// If you don't specify a ``view/tabviewstyle(_:)``, this is what it defaults to.
 ///
 /// ```
 /// struct ContentView: View {
@@ -18346,6 +18349,8 @@ extension Group : View where Content : View {
 	///     }
     /// }
     /// ```
+  ///
+  /// ![](group-init-content-97249.png)
 	///
 	/// - Parameter content: A view content builder.
     @inlinable public init(@ViewBuilder content: () -> Content) { }
@@ -21511,9 +21516,9 @@ extension InsettableShape {
 /// The modifier keys necessary to type a key equivalent are factored in to the
 /// resulting keyboard shortcut. That is, a key equivalent whose raw value is
 /// the capitalized string "A" corresponds with the keyboard shortcut
-/// Command-Shift-A. The exact mapping may depend on the keyboard layout—for
+/// **Command-Shift-A**. The exact mapping may depend on the keyboard layout—for
 /// example, a key equivalent whith the character value "}" produces a shortcut
-/// equivalent to Command-Shift-] on ANSI keyboards, but would produce a
+/// equivalent to **Command-Shift-]** on ANSI keyboards, but would produce a
 /// different shortcut for keyboard layouts where punctuation characters are in
 /// different locations.
 ///
@@ -21557,14 +21562,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-up to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-up to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.upArrow, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.upArrow, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](key-equivalent-up-arrow-ex.gif)
+    ///
     public static let upArrow: KeyEquivalent
 
     /// Down Arrow (U+F701) key equivalent
@@ -21577,14 +21591,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-down to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-down to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.downArrow, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.downArrow, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-down-arrow-ex.gif)
+    ///
     public static let downArrow: KeyEquivalent
 
     /// Left Arrow (U+F702) key equivalent.
@@ -21597,14 +21620,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-left to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-left to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.leftArrow, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.leftArrow, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-left-arrow-ex.gif)
+    ///
     public static let leftArrow: KeyEquivalent
 
     /// Right Arrow (U+F703) key equivalent
@@ -21617,14 +21649,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-right to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-right to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.rightArrow, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.rightArrow, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-right-arrow-ex.gif)
+    ///
     public static let rightArrow: KeyEquivalent
 
     /// Escape (U+001B) key equivalent
@@ -21637,14 +21678,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-ctrl-esacpe to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-ctrl-escape to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.escape, modifiers: [.command, .control])
     ///         }
-    ///         .keyboardShortcut(.escape, modifiers: [.command, .control])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](escape-ex.gif)
+    ///
     public static let escape: KeyEquivalent
 
     /// Delete (U+0008) key equivalent
@@ -21657,14 +21707,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-delete to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-delete to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.delete, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.delete, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](delete-ex.gif)
+    ///
     public static let delete: KeyEquivalent
 
     /// Delete Forward (U+F728) key equivalent
@@ -21679,14 +21738,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-delete forward to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-delete forward to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.deleteForward, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.deleteForward, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](delete-forward-ex.gif)
+    ///
     public static let deleteForward: KeyEquivalent
 
     /// Home (U+F729) key equivalent
@@ -21702,14 +21770,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-home to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-home to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.home, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.home, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](home-ex.gif)
+    ///
     public static let home: KeyEquivalent
 
     /// End (U+F72B)
@@ -21725,14 +21802,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-end to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-end to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.end, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.end, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](end-ex.gif)
+    ///
     public static let end: KeyEquivalent
 
     /// Page Up (U+F72C) key equivalent
@@ -21745,14 +21831,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-page up to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-page up to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.pageUp, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.pageUp, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](page-up-ex.gif)
+    ///
     public static let pageUp: KeyEquivalent
 
     /// Page Down (U+F72D) key equivalent
@@ -21765,14 +21860,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-page down to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-page down to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.pageDown, modifiers: [.command])
     ///         }
-    ///         .keyboardShortcut(.pageDown, modifiers: [.command])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-page-down-ex.gif)
+    ///
     public static let pageDown: KeyEquivalent
 
     /// Clear (U+F739) key equivalent
@@ -21785,14 +21889,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-control-clear to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-control-clear to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.clear, modifiers: [.command, .control])
     ///         }
-    ///         .keyboardShortcut(.clear, modifiers: [.command, .control])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-clear-ex.gif)
+    ///
     public static let clear: KeyEquivalent
 
     /// Tab (U+0009) key equivalent
@@ -21805,14 +21918,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-control-tab to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-control-tab to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.tab, modifiers: [.command, .control])
     ///         }
-    ///         .keyboardShortcut(.tab, modifiers: [.command, .control])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-tab-ex.gif)
+    ///
     public static let tab: KeyEquivalent
 
     /// Space (U+0020) key equivalent
@@ -21825,14 +21947,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-control-option-sace to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-control-option-space to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.space, modifiers: [.command, .control, .option])
     ///         }
-    ///         .keyboardShortcut(.space, modifiers: [.command, .control, .option])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-space-ex.gif)
+    ///
     public static let space: KeyEquivalent
 
     /// Return (U+000D) key equivalent
@@ -21845,14 +21976,23 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-control-return to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-control-return to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(.return, modifiers: [.command, .control])
     ///         }
-    ///         .keyboardShortcut(.return, modifiers: [.command, .control])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-return-ex.gif)
+    ///
     public static let `return`: KeyEquivalent
 
     /// The character value that the key equivalent represents.
@@ -21862,15 +22002,24 @@ public struct KeyEquivalent {
     ///
     /// ```
     /// struct PPrinterView: View {
+    ///     @State var bananas = ""
     ///     let p = Character("p")
+    ///
     ///     var body: some View {
-    ///         Button("Press command-control-p to print p!") {
-    ///             print(p)
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-control-p to print the 🍌!") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(KeyEquivalent(p), modifiers: [.command, .control])
     ///         }
-    ///         .keyboardShortcut(KeyEquivalent(p), modifiers: [.command, .control])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-character-ex.gif)
+    ///
     public var character: Character
 
     /// Creates a new key equivalent from the given character value.
@@ -21881,18 +22030,27 @@ public struct KeyEquivalent {
     ///
     /// Note that characters are case sensitive, and passing a capital key
     /// equivalent to ``View/keyboardShortcut(_:modifiers)``
-    /// means [modifiers]+SHIFT+letter.
+    /// means **[modifiers]+SHIFT+letter**.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
+    ///     @State var bananas = ""
+    ///
     ///     var body: some View {
-    ///         Button("Press command-control-p to print the 🍌") {
-    ///             print("🍌")
+    ///         return VStack {
+    ///             Text(bananas)
+    ///             Button("Press command-control-p to print the 🍌") {
+    ///                 bananas += "🍌"
+    ///             }
+    ///             .keyboardShortcut(KeyEquivalent(Character("p")), modifiers: [.command, .control])
     ///         }
-    ///         .keyboardShortcut(KeyEquivalent(Character("p")), modifiers: [.command, .control])
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](ke-init-ex1.gif)
+    ///
     public init(_ character: Character) { }
 }
 
@@ -23352,6 +23510,8 @@ extension LegibilityWeight {
 ///     }
 /// }
 /// ```
+///
+/// ![](linear-progress-view-style-ex2.png)
 ///
 /// To turn it into a linear progress view, apply this style
 /// with the ``View/progressViewStyle(_:)`` modifier:
@@ -24847,7 +25007,7 @@ public struct LongPressGesture : Gesture {
 ///         }
 ///     }
 ///
-/// ![](magnification-gesture-ex1.png)
+/// ![](magnification-gesture-ex.gif)
 ///
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
@@ -28900,6 +29060,9 @@ extension PickerStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![](pinned-scroll-headers-ex.gif)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct PinnedScrollableViews : OptionSet {
 
@@ -28954,12 +29117,12 @@ public struct PinnedScrollableViews : OptionSet {
     ///     var body: some View {
     ///         ScrollView {
     ///             LazyVStack(pinnedViews: .sectionHeaders) {
-    ///                 Section(header: Text("**Top half**")) {
+    ///                 Section(header: Text("**Top half**").background(Color.white)) {
     ///                     ForEach(1...50, id: \.self) { number in
     ///                         Text("Row \(number)")
     ///                     }
     ///                 }
-    ///                 Section(header: Text("**Bottom half**")) {
+    ///                 Section(header: Text("**Bottom half**").background(Color.white)) {
     ///                     ForEach(51...100, id: \.self) { number in
     ///                         Text("Row \(number)")
     ///                     }
@@ -28969,6 +29132,9 @@ public struct PinnedScrollableViews : OptionSet {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](pinned-scroll-headers-ex.gif)
+    ///
     public static let sectionHeaders: PinnedScrollableViews
 
     /// The footer view of each ``Section`` will be pinned.
@@ -28987,12 +29153,12 @@ public struct PinnedScrollableViews : OptionSet {
     ///     var body: some View {
     ///         ScrollView {
     ///             LazyVStack(pinnedViews: .sectionFooters) {
-    ///                 Section(footer: Text("**Top half**")) {
+    ///                 Section(footer: Text("**Top half**").background(Color.white)) {
     ///                     ForEach(1...50, id: \.self) { number in
     ///                         Text("Row \(number)")
     ///                     }
     ///                 }
-    ///                 Section(footer: Text("**Bottom half**")) {
+    ///                 Section(footer: Text("**Bottom half**").background(Color.white)) {
     ///                     ForEach(51...100, id: \.self) { number in
     ///                         Text("Row \(number)")
     ///                     }
@@ -29002,6 +29168,9 @@ public struct PinnedScrollableViews : OptionSet {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](pinned-scroll-footers-ex.gif)
+    ///
     public static let sectionFooters: PinnedScrollableViews
 
     /// The element type of the option set.
