@@ -1552,18 +1552,19 @@ extension Anchor.Source {
 ///     var body: some View {
 ///         VStack(spacing: 50) {
 ///             Rectangle()
-///                 .frame(width: 200, height: 100)
+///                 .frame(width: 100, height: 100)
 ///                 .rotationEffect(Angle(degrees: 15))
 ///                 .border(Color.orange)
 ///             Rectangle()
-///                 .frame(width: 200, height: 100)
+///                 .frame(width: 100, height: 100)
 ///                 .rotationEffect(.degrees(15))
+///                 .border(Color.orange)
 ///         }
 ///     }
 /// }
 /// ```
 ///
-/// ![Rectangle with rotation by angle](angle-rotation.png)
+/// ![Rectangle with rotation by angle](angle.png)
 ///
 /// ### Using an `Angle` with drawing
 ///
@@ -1590,12 +1591,12 @@ extension Anchor.Source {
 /// struct ArcView: View {
 ///     var body: some View {
 ///         Arc(endAngle: Angle.degrees(270))
-///             .stroke(Color.orange)
+///             .stroke(Color.orange, lineWidth: 20)
 ///     }
 /// }
 /// ```
 ///
-/// ![Angle example with drawing](angle-drawing.png)
+/// ![Angle example with drawing](angle-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Angle {
@@ -1604,22 +1605,22 @@ extension Anchor.Source {
     ///
     /// Usually, this property is specified using the
     /// ``Angle/init(radians:)`` initializer, or the
-    /// ``Angle/radians(_:)`` static function, but
-    /// it can also be specified directly!
+    /// ``Angle/radians(_:)`` static function.
     ///
     /// ```
     /// struct ContentView: View {
-    ///     var body: some View {
-    ///         var angle = Angle()
-    ///         angle.radians = Double.pi / 6
+    ///     let angle = Angle(radians: Double.pi / 6)
     ///
-    ///         return Rectangle()
+    ///     var body: some View {
+    ///         Rectangle()
     ///             .rotationEffect(angle)
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](14.42.39.png)
+    /// ![](angle-radians.png)
     ///
     public var radians: Double
 
@@ -1627,21 +1628,22 @@ extension Anchor.Source {
     ///
     /// Usually, this property is specified using the
     /// ``Angle/init(degrees:)`` initializer, or the
-    /// ``Angle/degrees(_:)`` static function, but
-    /// it can also be specified directly!
+    /// ``Angle/degrees(_:)`` static function.
     ///
     /// ```
     /// struct ContentView: View {
-    ///     var body: some View {
-    ///         var angle = Angle()
-    ///         angle.degrees = 15
+    ///     let angle = Angle(degrees: 15)
     ///
-    ///         return Rectangle()
+    ///     var body: some View {
+    ///         Rectangle()
     ///             .rotationEffect(angle)
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
-    /// ![](14.43.27.png)
+    ///
+    /// ![](angle-degress.png)
     ///
     ///
     @inlinable public var degrees: Double
@@ -1650,45 +1652,61 @@ extension Anchor.Source {
     ///
     /// ```
     /// struct ContentView: View {
+    ///     let angle = Angle()
+    ///
     ///     var body: some View {
     ///         Rectangle()
-    ///             .rotationEffect(Angle()) // Does nothing
+    ///             .rotationEffect(angle) //Does nothing
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](14.44.26.png)
+    /// ![](angle-zero.png)
     ///
     @inlinable public init() { }
 
     /// Creates an angle from a specified number of radians.
     ///
+    /// Use this initializer to create an ``Angle`` of a specified number of `radians`.
+    ///
     /// ```
     /// struct ContentView: View {
+    ///     let angle = Angle(radians: Double.pi / 6)
+    ///
     ///     var body: some View {
     ///         Rectangle()
-    ///             .rotationEffect(Angle(radians: Double.pi / 6))
+    ///             .rotationEffect(angle)
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](14.45.08.png)
+    /// ![](angle-radians.png)
     ///
     /// - Parameter radians: The number of radians in the angle.
     @inlinable public init(radians: Double) { }
 
     /// Creates an angle from a specified number of degrees.
     ///
+    /// Use this initializer to create an ``Angle`` of a specified number of `degrees`.
+    ///
     /// ```
     /// struct ContentView: View {
+    ///     let angle = Angle(degrees: 15)
+    ///
     ///     var body: some View {
     ///         Rectangle()
-    ///             .rotationEffect(Angle(degrees: 15))
+    ///             .rotationEffect(angle)
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](14.45.55.png)
+    /// ![](angle-degrees.png)
     ///
     /// - Parameter degrees: The number of degrees in the angle.
     @inlinable public init(degrees: Double) { }
@@ -1703,11 +1721,13 @@ extension Anchor.Source {
     ///     var body: some View {
     ///         Rectangle()
     ///             .rotationEffect(.radians(Double.pi / 6))
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](14.43.27.png)
+    /// ![](angle-radians.png)
     ///
     /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle { }
@@ -1722,11 +1742,13 @@ extension Anchor.Source {
     ///     var body: some View {
     ///         Rectangle()
     ///             .rotationEffect(.degrees(15))
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](14.43.27.png)
+    /// ![](angle-degrees.png)
     ///
     /// - Parameter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle { }
@@ -1799,11 +1821,13 @@ extension Angle : Animatable {
     ///     var body: some View {
     ///         Rectangle()
     ///             .rotationEffect(.zero) // Does nothing
+    ///             .frame(width: 100, height: 100)
+    ///             .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](14.44.26.png)
+    /// ![](angle-zero.png)
     ///
     @inlinable public static var zero: Angle { get }
 
@@ -1823,14 +1847,9 @@ extension Angle : Animatable {
 /// bounding rectangle of each shape filled with the gradient.
 ///
 /// There are 3 main cases where AngularGradient can change:
-///
-///
-///
 /// 1. `endAngle - startAngle = 2π`
 /// 2. `endAngle - startAngle > 2π`
 /// 3. `endAngle - startAngle < 2π`
-///
-///
 ///
 /// Note: Angles default to a clockwise rotation, but angles can be a negative
 /// value which will rotate the color counter-clockwise.
@@ -5795,33 +5814,26 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 
 /// This protocol is used to create a custom button style.
 ///
-/// The ``ButtonStyle`` protocol provides a template to create a reusable style
+/// The `ButtonStyle` protocol provides a template to create a reusable style
 /// for your buttons. It also provides data about the button and its
 /// interaction state.
 ///
 /// To make a custom style, create a new structure that conforms to
-/// ``ButtonStyle``. This new style can be easily reused across your
+/// `ButtonStyle`. This new style can be easily reused across your
 /// application. The style adapts to the user's current interaction state
 /// (i.e. on press, on release).
 ///
 /// Your structure only needs to implement one method:
 /// ``ButtonStyle/makeBody(configuration:)``.
-///
-/// To change the style of your ``Button``, use the
-/// ``View/buttonStyle(_:)-ea21b`` method. This method accepts a `ButtonStyle`.
+/// ``ButtonStyle/makeBody(configuration:)`` accepts a
+/// ``ButtonStyleConfiguration``, which passes the original label to
+/// display the button view and a ``ButtonStyleConfiguration/trigger()``
+/// to execute its action.
 ///
 /// ```
-/// struct ExampleView: View {
-///     var body: some View {
-///         Button("Banana🍌🍌", action: { tap() })
-///             .buttonStyle(BananaButtonStyle(color: .yellow))
-///     }
-///
-///     func tap() { /* implement here */ }
-/// }
-///
 /// struct BananaButtonStyle: ButtonStyle {
 ///     var color: Color
+///
 ///     func makeBody(configuration: Self.Configuration) -> some View {
 ///         BananaButton(configuration: configuration, color: color)
 ///     }
@@ -5838,6 +5850,20 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///                 .animation(.spring())
 ///         }
 ///     }
+/// }
+/// ```
+///
+/// To change the style of your ``Button``, use the
+/// ``View/buttonStyle(_:)-ea21b`` method. This method accepts a `ButtonStyle`.
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         Button("Banana🍌🍌", action: { tap() })
+///             .buttonStyle(BananaButtonStyle(color: .yellow))
+///     }
+///
+///     func tap() { /* implement here */ }
 /// }
 /// ```
 ///
@@ -5858,26 +5884,6 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 ///     }
 ///
 ///     func tap() { /* implement here */ }
-/// }
-///
-/// struct BananaButtonStyle: ButtonStyle {
-///     var color: Color
-///     func makeBody(configuration: Self.Configuration) -> some View {
-///         BananaButton(configuration: configuration, color: color)
-///     }
-///
-///     struct BananaButton: View {
-///         let configuration: BananaButtonStyle.Configuration
-///         let color: Color
-///
-///         var body: some View {
-///             return configuration.label
-///                 .padding()
-///                 .background(RoundedRectangle(cornerRadius: 10).fill(color))
-///                 .scaleEffect(configuration.isPressed ? 0.8: 1)
-///                 .animation(.spring())
-///         }
-///     }
 /// }
 /// ```
 ///
@@ -7756,8 +7762,16 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 /// container shape. If no container shape was defined, is replaced by
 /// a rectangle.
 ///
-/// Use this shape primarily with widgets, to generate container-relative
+/// Use this shape primarily with **widgets**. It generates container-relative
 /// rounded rectangles.
+///
+/// The example below is generated by going to
+///
+/// *File > New > Target*
+///
+/// Then search for "Widget Extension", click **Next**, give it a
+/// **Product Name**, then click **Finish**. In the new `.swift` file,
+/// edit the ``View``:
 ///
 /// ```
 /// struct TimeEntryView: View {
@@ -7775,6 +7789,9 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![](containerrelativeshape.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct ContainerRelativeShape : Shape {
 
@@ -7787,8 +7804,19 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 
     /// Creates a relative container shape.
     ///
-    /// Use this shape primarily with widgets, to generate container-relative
+    /// This is the only initializer of ``ContainerRelativeShape``, and it
+    /// take no parameters.
+    ///
+    /// Use this shape primarily with **widgets**. It generates container-relative
     /// rounded rectangles.
+    ///
+    /// The example below is generated by going to
+    ///
+    /// *File > New > Target*
+    ///
+    /// Then search for "Widget Extension", click **Next**, give it a
+    /// **Product Name**, then click **Finish**. In the new `.swift` file,
+    /// edit the ``View``:
     ///
     /// ```
     /// struct TimeEntryView: View {
@@ -7801,11 +7829,13 @@ public struct CompactDatePickerStyle : DatePickerStyle {
     ///                 .overlay(Text("time"))
     ///             ContainerRelativeShape()
     ///                 .fill(Color.blue)
-    ///                 .overlay(Text(entry.date, style: .time)))
+    ///                 .overlay(Text(entry.date, style: .time))
     ///         }
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](containerrelativeshape.png)
     @inlinable public init() { }
 
     /// The type defining the data to animate.
@@ -8217,25 +8247,23 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// A picker control for selecting dates.
 ///
 /// You create a picker by providing 3 things:
-///
-/// 1. a selection binding
-/// 2. a label
-/// 3. the editable parts of the date
+/// 1. a `selection` binding
+/// 2. a `label`
+/// 3. the editable parts of the `Date`
 ///
 /// There are four types of pickers, and three types of labels, making 12 total initializers.
 ///
 /// Picker types:
 ///
-/// 1. Unlimited range
-/// 2. Closed range (maximum and minimum)
-/// 3. From range (minimum only)
-/// 4. Through range (maximum only)
+/// 1. **Unlimited** range
+/// 2. **Closed** range (maximum and minimum)
+/// 3. **From** range (minimum only)
+/// 4. **Through** range (maximum only)
 ///
 /// Label types:
-///
-/// 1. String
-/// 2. Localized string key
-/// 3. View
+/// 1. [`String`](https://developer.apple.com/documentation/swift/string)
+/// 2. ``LocalizedStringKey``
+/// 3. ``View``
 ///
 /// A simple example looks like this:
 ///
@@ -9665,9 +9693,8 @@ public struct Divider : View {
 ///
 /// ``DocumentGroup`` provides a default scene for basic file management.
 ///
-/// ![Document Group](document-group.gif)
-///
 /// ```
+/// import SwiftUI
 /// import UniformTypeIdentifiers
 ///
 /// @main
@@ -9716,6 +9743,9 @@ public struct Divider : View {
 ///     }
 /// }
 /// ```
+///
+/// ![Document Group](document-group.gif)
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -13650,8 +13680,8 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 ///
 /// This protocol is very similar to ``ReferenceFileDocument``, with the difference being whether the data
 /// is stored as a `class` (reference type) or a `struct` (value type). Use the two protocols like this:
-/// - `struct` --> ``FileDocument``
-/// - `class` --> ``ReferenceFileDocument``
+/// - ``FileDocument``: `struct`
+/// - ``ReferenceFileDocument``: `class`
 ///
 /// Don't worry about thread safety when using `ReferenceFileDocument`, since
 /// deserialization and serialization are done on a background thread.
@@ -13724,7 +13754,7 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 /// ```
 /// import SwiftUI
 ///
-/// struct ExampleView: View {
+/// struct ContentView: View {
 ///     @Binding var document: ExampleDocument
 ///
 ///     var body: some View {
@@ -17148,26 +17178,24 @@ public struct GeometryProxy {
 /// screen, inset by the screen's safe area. The alignment cannot be overriden,
 /// and is liable to change in the future.
 ///
-/// ### ``GeometryReader`` to get a view's frame
+/// ### `GeometryReader` to get a view's frame
 ///
 /// `GeometryReader` can also be used with ``View/background(_:alignment:)``, to acquire the
-/// geometry of a target view. Consider `SomeView` in the following example:
+/// geometry of a target view. Consider `redView` in the following example:
 ///
 /// ```
 /// struct ExampleView: View {
-///     struct SomeView: View {
-///         var body: some View {
-///             Rectangle()
-///                 .fill(Color.red)
-///                 .frame(width: 500, height: 500)
-///         }
+///     var redView: some View {
+///         Rectangle()
+///             .fill(Color.red)
+///             .frame(width: 500, height: 500)
 ///     }
 ///
 ///     @State var someFrame: CGRect? // will be updated after the first layout pass
 ///
 ///     var body: some View {
 ///         VStack {
-///             SomeView()
+///             redView
 ///                 .frame(width: 500, height: 500)
 ///                 .background(
 ///                     GeometryReader { (proxy: GeometryProxy) -> EmptyView in
@@ -18672,12 +18700,11 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// See those pages for more on how to construct them.
 ///
-/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)``
+/// This structure is also used in the ``View/alignmentGuide(_:computeValue:)-4e1d1``
 /// view modifier. See that page for more on adding alignment
 /// guides to views.
 ///
-/// There are just 3 possible horizontal alignments:
-///
+/// There are 3 possible horizontal alignments:
 /// 1. ``HorizontalAlignment/leading``
 /// 2. ``HorizontalAlignment/center``
 /// 3. ``HorizontalAlignment/trailing``
@@ -23376,10 +23403,10 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     ///
     /// ```
     /// struct ContentView: View {
-    ///    var body: some View {
-    ///        ProgressView()
-    ///            .progressViewStyle(LinearProgressViewStyle())
-    ///    }
+    ///     var body: some View {
+    ///         ProgressView()
+    ///             .progressViewStyle(LinearProgressViewStyle())
+    ///     }
     /// }
     /// ```
     ///
@@ -23398,10 +23425,10 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     ///
     /// ```
     /// struct ContentView: View {
-    ///    var body: some View {
-    ///        ProgressView(value: 5, total: 10)
-    ///            .progressViewStyle(LinearProgressViewStyle(tint: .red))
-    ///    }
+    ///     var body: some View {
+    ///         ProgressView(value: 5, total: 10)
+    ///             .progressViewStyle(LinearProgressViewStyle(tint: .red))
+    ///     }
     /// }
     /// ```
     ///
@@ -28840,10 +28867,10 @@ extension Picker where Label == Text {
 /// * ``DefaultPickerStyle``
 /// * ``InlinePickerStyle``
 /// * ``MenuPickerStyle``
-/// * `PopUpButtonPickerStyle` (not availible on iOS)
-/// * `RadioGroupPickerStyle` (not availible on iOS)
 /// * ``SegmentedPickerStyle``
 /// * ``WheelPickerStyle``
+/// * `PopUpButtonPickerStyle` (not availible on iOS)
+/// * `RadioGroupPickerStyle` (not availible on iOS)
 ///
 /// ### ``DefaultPickerStyle``
 /// [[pickerstyle-default]]
@@ -30671,7 +30698,7 @@ extension ProgressViewStyle {
 ///     var color = Color.orange
 ///     var style = StrokeStyle(lineWidth: CGFloat(30), lineCap: .round)
 ///
-///     func makebody(configuration: ProgressViewStyleConfiguration) -> some View {
+///     func makeBody(configuration: ProgressViewStyleConfiguration) -> some View {
 ///         let frac = CGFloat(configuration.fractionCompleted ?? 0)
 ///
 ///         return ZStack {
@@ -31660,7 +31687,7 @@ public struct RedactionReasons : OptionSet {
 /// 7. Make the **Value** `$(PRODUCT_BUNDLE_IDENTIFIER).example-document`.
 /// 8. Change the **Types** (top right) to `com.example.plain-text`.
 ///
-/// Lastly, in your *ExampleDocument.swift* file, extend `UTType`:
+/// Lastly, in your **ExampleDocument.swift** file, extend `UTType`:
 ///
 ///     import SwiftUI
 ///     import UniformTypeIdentifiers
@@ -31671,9 +31698,6 @@ public struct RedactionReasons : OptionSet {
 ///         }
 ///     }
 ///
-/// ![](file-doc-config-ex.gif)
-///
-
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -39105,7 +39129,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// [tabview-style ->]
 /// ### Page-style navigation
 ///
-/// Place child views in a ``TabView`` with a
+/// **In iOS 14+ only**, you can place child views in a ``TabView`` with a
 /// `View.tabViewStyle(PageTabViewStyle())` attached to the ``TabView``
 /// for a page-style style navigation.
 ///
@@ -42829,7 +42853,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// 3. ``UIViewRepresentable/dismantleUIView(_:coordinator:)-77431``: Upon
 /// destruction of the parent container, this gets called.
 /// (This is **optional**. A default implementation is provided.)
-/// 4. ``UIViewRepresentable/makeCoordinator()-138cc``: This creates a
+/// 4. ``UIViewRepresentable/makeCoordinator()-0d1c6``: This creates a
 /// ``UIViewRepresentable/Coordinator`` for the view.
 /// (This is also **optional**.)
 ///
@@ -43225,6 +43249,11 @@ extension UIViewRepresentable {
 /// in this structure to configure your view. For example, use the provided
 /// environment values to configure the appearance of your view. Don't create
 /// this structure yourself.
+///
+/// This structure contains 3 values:
+/// - ``UIViewRepresentableContext/coordinator``
+/// - ``UIViewRepresentableContext/transaction``
+/// - ``UIViewRepresentableContext/environment``
 ///
 /// [[uiviewrepresentable-context]]
 @available(iOS 13.0, tvOS 13.0, *)
@@ -50272,6 +50301,9 @@ extension View {
     /// - ``LinearProgressViewStyle`` -  A linear loading bar that fills
     /// from right to left.
     ///
+    /// Create an instance of one of these styles and use `progressViewStyle(_:)`
+    /// to apply it to a ``ProgressView``.
+    ///
     ///     struct ContentView: View {
     ///         var body: some View {
     ///             ProgressView(value: 0.25)
@@ -52933,8 +52965,10 @@ extension ViewBuilder {
 
 /// A view's size and its alignment guides in its own coordinate space.
 ///
-/// Most frequently used when working with alignment guides. See ``View/alignmentGuide(_:_:)`` for more
-/// on how to apply ViewDimensions.
+/// Most frequently used when working with alignment guides.
+/// See ``View/alignmentGuide(_:computeValue:)-4e1d1``
+/// and ``View/alignmentGuide(_:computeValue:)-72c7c`` for more
+/// on how to apply `ViewDimensions`.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ViewDimensions {
 
@@ -53042,28 +53076,27 @@ extension ViewDimensions : Equatable {
 /// text surrounded by a rounded rectangle:
 ///
 /// ```
-///
 /// struct BorderedCaption: ViewModifier {
-///    func body(content: Content) -> some View {
-///        content
-///            .font(.caption2)
-///            .padding(10)
-///            .overlay(
-///                RoundedRectangle(cornerRadius: 15)
-///                    .stroke(lineWidth: 1)
-///            )
-///            .foregroundColor(Color.blue)
-///    }
+///     func body(content: Content) -> some View {
+///         content
+///             .font(.caption2)
+///             .padding(10)
+///             .overlay(
+///                 RoundedRectangle(cornerRadius: 15)
+///                     .stroke(lineWidth: 1)
+///             )
+///             .foregroundColor(Color.blue)
+///     }
 /// }
 ///
 /// struct ExampleView: View {
-///    var body: some View {
-///        VStack {
-///            Text("Text without blue border")
-///            Text("Text with blue border")
-///                .modifier(BorderedCaption())
-///        }
-///    }
+///     var body: some View {
+///         VStack {
+///             Text("Text without blue border")
+///             Text("Text with blue border")
+///                 .modifier(BorderedCaption())
+///         }
+///     }
 /// }
 /// ```
 ///
