@@ -28871,8 +28871,8 @@ extension Picker where Label == Text {
 /// * ``MenuPickerStyle``
 /// * ``SegmentedPickerStyle``
 /// * ``WheelPickerStyle``
-/// * `PopUpButtonPickerStyle` (not availible on iOS)
-/// * `RadioGroupPickerStyle` (not availible on iOS)
+/// * `PopUpButtonPickerStyle` (not available on iOS)
+/// * `RadioGroupPickerStyle` (not available on iOS)
 ///
 /// ### ``DefaultPickerStyle``
 /// [[pickerstyle-default]]
