@@ -44,7 +44,7 @@ import os.signpost
 /// }
 /// ```
 ///
-/// `ObservableObject` provides a default implementation for `objectWillChange`
+/// `ObservableObject` provides a default implementation for ``ObservableObject/objectWillChange``
 /// using `Combine/ObservableObjectPublisher`.
 ///
 /// To trigger `objectWillChange` events when your data changes, annotate your
