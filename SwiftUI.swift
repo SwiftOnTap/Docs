@@ -5691,6 +5691,8 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
+/// ![Button with sign in text](button-signin.png)
+///
 /// The method of triggering the button varies by platform:
 /// - In iOS and watchOS, the user triggers a standard button by tapping on it.
 /// - In macOS, the user triggers a standard button by clicking on it.
@@ -5740,7 +5742,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-///![Button Example 4](press-and-hold-example.gif)
+///![Button Example 4](button-menu-content-ex.gif)
 ///
 /// This pattern extends to most other container views in SwiftUI that have
 /// customizable, interactive content, like forms (instances of ``Form``).
@@ -27418,6 +27420,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
 /// }
 /// ```
 ///
+/// ![](pg-tab-view-style-ex2.gif)
+///
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(macOS, unavailable)
 public struct PageTabViewStyle : TabViewStyle {
@@ -35659,7 +35663,9 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// You can specify the scroll direction using the `axes` parameter:
+    /// ![](scroll-view-init-shows-indicators-content-ex1.gif)
+    ///
+    /// You can specify the scroll direction using the ``ScrollView/axes`` parameter:
     ///
     /// ```
     /// struct ContentView: View {
@@ -35682,7 +35688,9 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// Make the scroll bar invisible using `showsIndicators`:
+    /// ![](scroll-view-init-shows-indicators-content-ex2.gif)
+    ///
+    /// Make the scroll bar invisible using ``ScrollView/showsIndicators``:
     //
     /// ```
     /// struct ContentView: View {
@@ -35704,6 +35712,8 @@ public struct ScrollView<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scroll-view-init-shows-indicators-content-ex3.gif)
     ///
     /// Notice how the ``HStack`` doesn't take up the full view, so the
     /// indicators are inset from the side of the screen. We can
@@ -35731,6 +35741,8 @@ public struct ScrollView<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scroll-view-init-shows-indicators-content-ex4.gif)
     ///
     /// - Parameters:
     ///   - axes: The scroll view's scrollable axis. The default axis is the
@@ -39510,7 +39522,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 4](tabview-ex3.gif)
+/// ![TabView Example 4](tab-view-ex4.gif)
 /// [<-]
 /// [tabview-tag ->]
 ///
@@ -39628,6 +39640,8 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
+    /// ![](tab-view-init-selection-content-ex1.gif)
+    ///
     /// In this example, each tab item is assigned a unique tag using the
     /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
     /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
@@ -39660,6 +39674,8 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](tab-view-init-selection-content-ex2.gif)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -45210,6 +45226,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](view-tab-view-style-ex3.gif)
     ///
     /// - Parameter style: The style to apply to this tab view.
     public func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle { }
