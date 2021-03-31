@@ -3788,7 +3788,7 @@ extension App {
 /// 		}
 /// 	}
 ///
-/// ![](16.34.17.png)
+/// ![](app-storage-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
@@ -6679,6 +6679,7 @@ extension Color {
     ///                 Button("Tap me for 🟠🍑🎃") {
     ///                     color = Color.orange
     ///                 }
+    ///                 .padding()
     ///                 Button("Press me for 🟨🌕🍋") {
     ///                     color = Color.yellow
     ///                 }
@@ -6687,6 +6688,8 @@ extension Color {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](color-clear-ex3.gif)
     ///
     public static let clear: Color
 
@@ -8249,7 +8252,7 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// }
 /// ```
 ///
-/// ![71B19AF9-BDDE-4145-A04E-C0120FFC2029](71B19AF9-BDDE-4145-A04E-C0120FFC2029.png)
+/// ![](date-picker-ex1.gif)
 ///
 /// ### Styling Date Pickers
 ///
@@ -8277,7 +8280,7 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// }
 /// ```
 ///
-/// ![E5997C10-E4E0-4BE9-8364-E099CDA31862](E5997C10-E4E0-4BE9-8364-E099CDA31862.png)
+/// ![](date-picker-ex2.gif)
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -9284,7 +9287,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// The default ``TabView`` style.
 ///
 /// On iOS the default TabView looks as follows:
-/// If you don't specify, a ``view/tabviewstyle(_:)``, this is what it defaults to.
+/// If you don't specify a ``view/tabviewstyle(_:)``, this is what it defaults to.
 ///
 /// ```
 /// struct ContentView: View {
@@ -23508,6 +23511,8 @@ extension LegibilityWeight {
 /// }
 /// ```
 ///
+/// ![](linear-progress-view-style-ex2.png)
+///
 /// To turn it into a linear progress view, apply this style
 /// with the ``View/progressViewStyle(_:)`` modifier:
 ///
@@ -25002,7 +25007,7 @@ public struct LongPressGesture : Gesture {
 ///         }
 ///     }
 ///
-/// ![](magnification-gesture-ex1.png)
+/// ![](magnification-gesture-ex.gif)
 ///
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
