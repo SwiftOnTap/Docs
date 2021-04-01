@@ -17840,7 +17840,7 @@ public struct GridItem {
     ///
     /// There are three types of sizes:
     /// 1. ``GridItem/Size/fixed``
-    /// 2. ``GridItem/Size/flexible`
+    /// 2. ``GridItem/Size/flexible``
     /// 3. ``GridItem/Size/adaptive``
     ///
     public enum Size {
