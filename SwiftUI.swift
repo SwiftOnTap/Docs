@@ -4215,7 +4215,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         @AppStorage("name") var name: String?
     ///
     ///         var body: some View {
-    ///             Button("Save 🐐") { name = "Javier" }
+    ///             Button("Save 🐐") { name = "Kanye" }
     ///         }
     ///     }
     ///
@@ -25341,7 +25341,7 @@ public struct MagnificationGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![](menu-ex3)
+/// ![](menu-ex3.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
