@@ -9347,6 +9347,8 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
+/// ![](default-progress-view-style-ex1.png)
+///
 /// In this instance, the style displays a spinner. However, if we initialize
 /// the ``ProgressView`` using ``ProgressView/init(value:total:)`` instead,
 /// we get a different look:
@@ -9359,6 +9361,8 @@ public struct DefaultPickerStyle : PickerStyle {
 ///    }
 /// }
 /// ```
+///
+/// ![](default-progress-view-style-ex2.png)
 ///
 /// - Note: This style does not need to be specified explicitly unless
 /// you would like to override a style from higher up in the view hierarchy.
@@ -50659,6 +50663,8 @@ extension View {
     ///                         radius: 4.0, x: 1.0, y: 2.0)
     ///         }
     ///     }
+    ///
+    /// ![](progress-view-style-ex2.png)
     ///
     /// - Parameter style: The progress view style to use for this view.
     public func progressViewStyle<S>(_ style: S) -> some View where S : ProgressViewStyle { }
