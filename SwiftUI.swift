@@ -2310,7 +2310,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// up towards the end.
 /// - ``Animation/easeOut``: The value begins quickly, and slows down towards
 /// the end.
-/// - ``Animation/easeInOut``: THe value begins by changing slowly, goes quickly
+/// - ``Animation/easeInOut``: The value begins by changing slowly, goes quickly
 /// in the middle, and ends slowly.
 /// - ``Animation/spring(response:dampingFraction:blendDuration:)``: The value begins very quickly, then overshoots
 /// the target and springs back.
