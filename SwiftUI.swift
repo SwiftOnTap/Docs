@@ -1884,7 +1884,7 @@ extension Angle : Animatable {
 ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
 ///
 ///     var body: some View {
-///         VStack{
+///         VStack {
 ///             Rectangle()
 ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
 ///                .frame(width:200, height:200)
@@ -1910,7 +1910,7 @@ extension Angle : Animatable {
 ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
 ///
 ///     var body: some View {
-///         VStack{
+///         VStack {
 ///             Rectangle()
 ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
 ///                .frame(width:200, height:200)
@@ -1939,7 +1939,7 @@ extension Angle : Animatable {
     ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
     ///
     ///     var body: some View {
-    ///         VStack{
+    ///         VStack {
     ///             Rectangle()
     ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
     ///                .frame(width:200, height:200)
@@ -2146,7 +2146,7 @@ extension Angle : Animatable {
 /// please use ``AnimatableModifier``
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol Animatable{ }
+public protocol Animatable { }
 extension Animatable {
 
     /// The type defining the data to animate.
@@ -2176,7 +2176,7 @@ extension Animatable where Self.AnimatableData == EmptyAnimatableData {
 ///
 /// [[animatable-modifier]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol AnimatableModifier : Animatable, ViewModifier{ }
+public protocol AnimatableModifier : Animatable, ViewModifier { }
 extension AnimatableModifier : Animatable, ViewModifier {
 }
 
@@ -5697,6 +5697,8 @@ public struct Button<Label> : View where Label : View {
     ///         }
     ///     }
     ///
+    /// ![](button-init.png)
+    ///
     /// You can also use multiple trailing closure syntax to accomplish
     /// the same task:
     ///
@@ -5709,6 +5711,8 @@ public struct Button<Label> : View where Label : View {
     ///             }
     ///         }
     ///     }
+    ///
+    /// ![](button-init.png)
     ///
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
@@ -5805,6 +5809,18 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     ///         }
     ///     }
     ///
+    /// You can then apply the style to a ``Button`` using the
+    /// ``View/buttonStyle(_:)-d2d0a`` view modifier:
+    ///
+    ///     struct ContentView: View {
+    ///         var body: some View {
+    ///             Button("Sign In") { }
+    ///                 .buttonStyle(RedBorderedButtonStyle())
+    ///         }
+    ///     }
+    ///
+    /// ![](buttonstyle-redborder.png)
+    ///
     /// - Parameter configuration: A configuration for a style with a custom
     ///   appearance and custom interaction behavior.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5817,6 +5833,10 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// The `ButtonStyle` protocol provides a template to create a reusable style
 /// for your buttons. It also provides data about the button and its
 /// interaction state.
+///
+/// - Note: This protocol gives you a way to detect when the button is being pressed. If
+/// you would like to trigger the button programmatically, use
+/// ``PrimitiveButtonStyle`` instead.
 ///
 /// To make a custom style, create a new structure that conforms to
 /// `ButtonStyle`. This new style can be easily reused across your
@@ -7617,7 +7637,7 @@ public struct CommandMenu<Content> : Commands where Content : View {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol Commands{ }
+public protocol Commands { }
 extension Commands {
 
     /// The type of command group representing the body of this command group.
@@ -8243,7 +8263,7 @@ extension CoordinateSpace : Equatable, Hashable {
 /// Conforming types represent items that can be placed in various locations
 /// in a customizable toolbar.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent{ }
+public protocol CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent { }
 extension CustomizableToolbarContent : ToolbarContent where Self.Body : CustomizableToolbarContent {
 }
 
@@ -8770,7 +8790,7 @@ public struct DatePickerComponents : OptionSet {
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol DatePickerStyle{ }
+public protocol DatePickerStyle { }
 extension DatePickerStyle {
 }
 
@@ -9092,68 +9112,77 @@ public struct DefaultMenuStyle : MenuStyle {
 
 /// The default navigation view style.
 ///
-/// ```
-///  struct ExampleView: View {
-///      struct SecondScreen: View {
-///          var body: some View {
-///              Text("Bananas🍌🍌")
-///                  .navigationTitle("Second Screen")
-///                  .navigationBarHidden(false)
-///          }
-///      }
+/// Use this style with the ``View/navigationViewStyle(_:)`` modifier
+/// to set a ``NavigationView`` to use the default style given the context.
 ///
-///      var body: some View {
-///          NavigationView {
-///              VStack {
-///                  Text("Hello Bananas🍌🍌")
-///                  NavigationLink(destination: SecondScreen()) {
-///                     Text("Take me to the second screen!")
-///                 }
-///              }
-///              .navigationBarHidden(true)
-///          }
-///     .navigationViewStyle(DefaultNavigationViewStyle())
-///      }
-///  }
+/// On iOS and Mac Catalyst, ``StackNavigationViewStyle`` is the default:
 ///
 /// ```
+/// struct ExampleView: View {
+///     var destination: some View {
+///         Text("I'm stacked on the pancakes 📚")
+///             .navigationTitle("Second Screen")
+///     }
 ///
-/// ![DefaultNavigationView Example](default-navigation-view-example.gif)
+///     var body: some View {
+///         NavigationView {
+///             NavigationLink(destination: destination) {
+///                 Text("Stack the second screen! 🥞")
+///             }
+///         }
+///         .navigationViewStyle(DefaultNavigationViewStyle())
+///     }
+/// }
+/// ```
+///
+/// On macOS, ``DoubleColumnNavigationViewStyle`` is the default:
+///
+/// ```
+/// struct ExampleView: View {
+///     var destination: some View {
+///         Text("I just appeared in the middle 🤠")
+///             .navigationTitle("Second Screen")
+///     }
+///
+///     var body: some View {
+///         NavigationView {
+///             NavigationLink(destination: destination) {
+///                 Text("I'm in the sidebar ⬅️")
+///             }
+///         }
+///         .navigationViewStyle(DefaultNavigationViewStyle())
+///     }
+/// }
+/// ```
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a default navigation view style.
+    ///
+    /// Use this initializer with ``View/navigationViewStyle(_:)`` to
+    /// give a ``NavigationView`` a default style.
 	///
-    /// ```
-    ///  struct ExampleView: View {
-    ///      struct SecondScreen: View {
-    ///          var body: some View {
-    ///              Text("Bananas🍌🍌")
-    ///                  .navigationTitle("Second Screen")
-    ///                  .navigationBarHidden(false)
-    ///          }
-    ///      }
-    ///
-    ///      var body: some View {
-    ///          NavigationView {
-    ///              VStack {
-    ///                  Text("Hello Bananas🍌🍌")
-    ///                  NavigationLink(destination: SecondScreen()) {
-    ///                     Text("Take me to the second screen!")
-    ///                 }
-    ///              }
-    ///              .navigationBarHidden(true)
-    ///          }
-    ///     .navigationViewStyle(DefaultNavigationViewStyle())
-    ///      }
-    ///  }
+    /// On iOS and Mac Catalyst, for example,
+    /// ``StackNavigationViewStyle`` is the default:
     ///
     /// ```
+    /// struct ExampleView: View {
+    ///     var destination: some View {
+    ///         Text("I'm stacked on the pancakes 📚")
+    ///             .navigationTitle("Second Screen")
+    ///     }
     ///
-    /// ![DefaultNavigationView Example](default-navigation-view-example.gif)
-    ///
-	/// - SeeAlso: NavigationView
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             NavigationLink(destination: destination) {
+    ///                 Text("Stack the second screen! 🥞")
+    ///             }
+    ///         }
+    ///         .navigationViewStyle(DefaultNavigationViewStyle())
+    ///     }
+    /// }
+    /// ```
     public init() { }
 }
 
@@ -9834,37 +9863,60 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 /// A navigation view style represented by a primary view stack that
 /// navigates to a detail view.
 ///
+/// Use this style with the ``View/navigationViewStyle(_:)`` modifier
+/// to set a ``NavigationView`` to use the double column style.
+///
+/// This
+/// is the default behavior in macOS, and works well in iPadOS. In iOS,
+/// it is overriden and ``StackNavigationViewStyle`` is used instead.
+///
 /// ```
 /// struct ExampleView: View {
+///     var destination: some View {
+///         Text("I just appeared in the middle 🤠")
+///             .navigationTitle("Second Screen")
+///     }
+///
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
+///             NavigationLink(destination: destination) {
+///                 Text("I'm in the sidebar ⬅️")
+///             }
 ///         }
-///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
+///         .navigationViewStyle(DefaultNavigationViewStyle())
 ///     }
 /// }
 /// ```
-///
-/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
 public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 
-	/// Creates a double column navigation view style.
-  ///
-  /// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
-  ///
-  /// ```
-  /// struct ExampleView: View {
-  ///     var body: some View {
-  ///         NavigationView {
-  ///             Text("Hello Bananas🍌🍌")
-  ///         }
-  ///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
-  ///     }
-  /// }
-  /// ```
+    /// Creates a double column navigation view style.
+    ///
+    /// Use this initializer to create an instance of ``DoubleColumnNavigationViewStyle``
+    /// that can be passed to ``View/navigationViewStyle(_:)``.
+    ///
+    /// This is the only initilaizer of ``DoubleColumnNavigationViewStyle``.
+    /// It takes no parameters.
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var destination: some View {
+    ///         Text("I just appeared in the middle 🤠")
+    ///             .navigationTitle("Second Screen")
+    ///     }
+    ///
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             NavigationLink(destination: destination) {
+    ///                 Text("I'm in the sidebar ⬅️")
+    ///             }
+    ///         }
+    ///         .navigationViewStyle(DefaultNavigationViewStyle())
+    ///     }
+    /// }
+    /// ```
     public init() { }
 }
 
@@ -9888,7 +9940,7 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 ///                self.isDragging = true
 ///
 ///             }
-///             .onEnded{_ in self.isDragging = false}
+///             .onEnded {_ in self.isDragging = false}
 ///     }
 ///
 ///     var body: some View {
@@ -10265,7 +10317,7 @@ public struct DragGesture : Gesture {
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol DropDelegate{ }
+public protocol DropDelegate { }
 extension DropDelegate {
 
     /// Validates a drop.
@@ -11207,7 +11259,7 @@ public struct DropProposal {
 /// ![](dynamic-prop-ex1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol DynamicProperty{ }
+public protocol DynamicProperty { }
 extension DynamicProperty {
 
     /// Updates the underlying value of the stored value.
@@ -11282,7 +11334,7 @@ extension DynamicProperty {
 
 /// A type of view that generates views from an underlying collection of data.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol DynamicViewContent : View{ }
+public protocol DynamicViewContent : View { }
 extension DynamicViewContent : View {
 
     /// The type of the underlying collection of data.
@@ -12482,7 +12534,7 @@ public struct EmptyCommands : Commands {
 ///     }
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol EnvironmentKey{ }
+public protocol EnvironmentKey { }
 extension EnvironmentKey {
 
     /// The associated type representing the type of the environment key's
@@ -13326,7 +13378,7 @@ extension EnvironmentValues {
 /// A modifier that must resolve to a concrete modifier in an environment before
 /// use.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never{ }
+public protocol EnvironmentalModifier : ViewModifier where Self.Body == Never { }
 extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 
     /// The type of modifier to use after being resolved.
@@ -13795,7 +13847,7 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol FileDocument{ }
+public protocol FileDocument { }
 extension FileDocument {
 
     /// The file types the ``FileDocument`` document is able to open.
@@ -14436,7 +14488,7 @@ public struct FileDocumentWriteConfiguration {
 /// Unlike ``EnvironmentKey``, `FocusedValuesHostKey` has no default value
 /// requirement, because the default value for a key is always `nil`.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol FocusedValueKey{ }
+public protocol FocusedValueKey { }
 extension FocusedValueKey {
 
 	/// The type of the value that the key-value pair is using.
@@ -17077,7 +17129,7 @@ public struct Form<Content> : View where Content : View {
 /// The only change the effect makes to the view's ancestors and descendants is
 /// to change the coordinate transform to and from them.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol GeometryEffect : Animatable, ViewModifier where Self.Body == Never{ }
+public protocol GeometryEffect : Animatable, ViewModifier where Self.Body == Never { }
 extension GeometryEffect : Animatable, ViewModifier where Self.Body == Never {
 
     /// Returns the current value of the effect.
@@ -17373,7 +17425,7 @@ public struct GeometryProxy {
 /// Create custom gestures by declaring types that conform to the ``Gesture``
 /// protocol.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol Gesture{ }
+public protocol Gesture { }
 extension Gesture {
 
     /// The type representing the gesture's value.
@@ -18510,7 +18562,7 @@ extension GroupBox where Label == EmptyView {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol GroupBoxStyle{ }
+public protocol GroupBoxStyle { }
 extension GroupBoxStyle {
 
     /// A `View` representing the body of a ``GroupBox``.
@@ -21127,7 +21179,7 @@ extension Image.ResizingMode : Hashable {
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public protocol IndexViewStyle{ }
+public protocol IndexViewStyle { }
 extension IndexViewStyle {
 }
 
@@ -21146,7 +21198,7 @@ extension IndexViewStyle {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
-///         switch favoriteFruit{
+///         switch favoriteFruit {
 ///         case .banana:
 ///             return "Banana 🍌🍌"
 ///         case .apple:
@@ -21189,7 +21241,7 @@ public struct InlinePickerStyle : PickerStyle {
     ///     @State var favoriteFruit: MyFruit = MyFruit.banana
     ///
     ///     var fruitName: String {
-    ///         switch favoriteFruit{
+    ///         switch favoriteFruit {
     ///         case .banana:
     ///             return "Banana 🍌🍌"
     ///         case .apple:
@@ -24529,7 +24581,7 @@ public struct ListItemTint {
 /// - `CarouselListStyle` - provides a coverflow-like experience on watchOS
 /// lists including scroll animations that shrinks cells off-screen.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ListStyle{ }
+public protocol ListStyle { }
 extension ListStyle {
 }
 
@@ -25409,7 +25461,7 @@ public struct MenuPickerStyle : PickerStyle {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol MenuStyle{ }
+public protocol MenuStyle { }
 extension MenuStyle {
 
     /// A view that represents the body of a menu.
@@ -26320,20 +26372,18 @@ extension NavigationLink {
 /// Use ``View/navigationViewStyle(_:)`` to style a navigation view.
 ///
 /// For example, the following forces a stack-based navigation style,
-/// overriding the default double-column style on macCatalyst:
+/// overriding the default double-column style on Mac Catalyst:
 ///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
+///             NavigationLink("Hello Bananas", destination: Text("🍌🍌"))
 ///         }
 ///         .navigationViewStyle(StackNavigationViewStyle())
 ///     }
 /// }
 /// ```
-///
-/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
 /// And the following forces a double-column navigation style, overriding the
 /// default stack-based navigation style on iPadOS:
@@ -26342,14 +26392,12 @@ extension NavigationLink {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
+///             NavigationLink("Hello Bananas", destination: Text("🍌🍌"))
 ///         }
 ///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
 ///     }
 /// }
 /// ```
-///
-/// ![NavigationView Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-9.png)
 ///
 /// [<-]
 /// ### Handling selection
@@ -26433,8 +26481,23 @@ public struct NavigationView<Content> : View where Content : View {
 /// - ``DefaultNavigationViewStyle``
 /// - ``DoubleColumnNavigationViewStyle``
 /// - ``StackNavigationViewStyle``
+///
+/// In the example below, we apply a ``StackNavigationViewStyle``
+/// which conforms to this protocol.
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         NavigationView {
+///             NavigationLink("Hello Bananas", destination: Text("🍌🍌"))
+///         }
+///         .navigationViewStyle(StackNavigationViewStyle())
+///     }
+/// }
+/// ```
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
-public protocol NavigationViewStyle{ }
+public protocol NavigationViewStyle { }
 extension NavigationViewStyle {
 }
 
@@ -29023,7 +29086,11 @@ extension Picker where Label == Text {
 
 /// Specifies the appearance and interaction of all pickers within a view hierarchy.
 ///
-/// `PickerStyle` styles a ``Picker`` and does not have a public interface - and therefore your app is limited to their default styles.
+/// `PickerStyle` styles a ``Picker`` and does not have a public interface
+/// - and therefore your app is limited to their default styles.
+///
+/// To apply a `PickerStyle` to a ``Picker``, use the ``View/pickerStyle(_:)``
+/// view modifier.
 ///
 /// There are 7 different styles:
 /// * ``DefaultPickerStyle``
@@ -29049,7 +29116,7 @@ extension Picker where Label == Text {
 /// ### ``WheelPickerStyle``
 /// [[pickerstyle-wheel]]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PickerStyle{ }
+public protocol PickerStyle { }
 extension PickerStyle {
 }
 
@@ -29419,7 +29486,7 @@ public enum PopoverAttachmentAnchor {
 ///  A few signs this may be happening is a spike in CPU usage, a flickering screen, or a crashing app.
 ///  - In order to pass information _down_ the View hierarchy, see ``Environment``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PreferenceKey{ }
+public protocol PreferenceKey { }
 extension PreferenceKey {
 
     /// The type of value produced by this preference.
@@ -29661,7 +29728,7 @@ extension PreviewContext {
 ///
 /// The default value is nil.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol PreviewContextKey{ }
+public protocol PreviewContextKey { }
 extension PreviewContextKey {
 
     /// The type of the value returned by the key.
@@ -30152,7 +30219,7 @@ extension PreviewPlatform : Hashable {
 /// ![Preview provider example 1](previewprovider-example-1.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol PreviewProvider : _PreviewProvider{ }
+public protocol PreviewProvider : _PreviewProvider { }
 extension PreviewProvider : _PreviewProvider {
 
     /// The type to preview.
@@ -30226,20 +30293,48 @@ extension PreviewProvider {
 
 /// This protocol is used to define custom button styles.
 ///
-/// ``PrimitiveButtonStyle`` is a modifier used to define custom styling and
-/// interaction behavior for buttons. The primitive style will override the
-/// default action trigger of the button, and allows interactions to be
-/// customized. SwiftUI provides a number of these styles including
-/// ``BorderlessButtonStyle`` and ``PlainButtonStyle``.
+/// Use this protocol to define custom styling and
+/// interaction behavior for buttons.
 ///
-/// To conform to ``PrimitiveButtonsTyle``, your structure only needs to
+/// - Note: This protocol gives you a way trigger the button programmatically. If
+/// you would like to detect when the button is being pressed, use
+/// ``ButtonStyle`` instead.
+///
+/// ### Creating a `PrimitiveButtonStyle`
+///
+/// There are two ways to make a `PrimitiveButtonStyle`:
+/// - Use one of SwiftUI's out-of-the-box options
+/// - Create your own style by making a structure that implements
+/// the ``PrimitiveButtonStyle/makeBody(configuration:)`` function.
+///
+/// #### Out-Of-The-Box `PrimitiveButtonStyle`
+///
+/// There are 3 primitive button styles that ship with SwiftUI:
+/// - ``DefaultButtonStyle``
+/// - ``PlainButtonStyle``
+/// - ``BorderlessButtonStyle``
+///
+/// #### Create Your Own `PrimitiveButtonStyle`
+///
+/// To conform to `PrimitiveButtonStyle`, your structure only needs to
 /// implement one method: ``PrimitiveButtonStyle/makeBody(configuration:)``.
-/// The desired button view is output by this method.
 ///
 /// ``PrimitiveButtonStyle/makeBody(configuration:)`` accepts a
-/// ``PrimitiveButtonStyleConfiguration``, which passes the original label
+/// ``PrimitiveButtonStyleConfiguration``, which passes the original ``PrimitiveButtonStyleConfiguration/label``
 /// to display the button view and a ``PrimitiveButtonStyleConfiguration/trigger()``
 /// to execute its action. A gesture is commonly added to the label in order to trigger the button action.
+///
+/// ```
+/// struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.label
+///             .foregroundColor(.yellow)
+///             .onTapGesture { configuration.trigger() }
+///     }
+/// }
+/// ```
+///
+/// ### Using `PrimitiveButtonStyle`
 ///
 /// Use ``View/buttonStyle(_:)-d2d0a`` to apply a primitive button style.
 ///
@@ -30251,14 +30346,6 @@ extension PreviewProvider {
 ///     }
 ///
 ///     func tap() { /* implement here */  }
-/// }
-///
-/// struct MyPrimitiveButtonStyle: PrimitiveButtonStyle {
-///     func makeBody(configuration: Configuration) -> some View {
-///         configuration.label
-///             .foregroundColor(.yellow)
-///             .onTapGesture { configuration.trigger() }
-///     }
 /// }
 /// ```
 ///
@@ -30304,33 +30391,39 @@ extension PrimitiveButtonStyle {
 
     /// Creates a view that represents the body of a button.
     ///
-    /// The system calls this method for each ``Button`` instance in a view
-    /// hierarchy where this style is the current button style.
+    /// Implement this function in your structure to conform to the
+    /// ``PrimitiveButtonStyle`` protocol. The ``PrimitiveButtonStyle``
+    /// protocol gives you an easy way to reuse button styles across your app.
+    ///
+    /// `makeBody(configuration:)` passes in a
+    /// `configuration` parameter of type ``PrimitiveButtonStyleConfiguration``.
+    /// Use the properties of this parameter to create your custom button
+    /// style.
     ///
     /// ```
-    ///  struct BananaView: View {
-    ///      var body: some View {
-    ///          VStack {
-    ///              Button("Banana 🍌🍌", action: tap)
-    ///              Button("Apple 🍏🍏", action: tap)
-    ///              Button("Peach 🍑🍑", action: tap)
-    ///          }
-    ///          .buttonStyle(BananaButtonStyle(color: .yellow))
-    ///      }
+    /// struct BananaView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Button("Banana 🍌🍌", action: tap)
+    ///             Button("Apple 🍏🍏", action: tap)
+    ///             Button("Peach 🍑🍑", action: tap)
+    ///         }
+    ///         .buttonStyle(BananaButtonStyle(color: .yellow))
+    ///     }
     ///
-    ///      func tap() { /* implement here */ }
-    ///  }
+    ///     func tap() { /* implement here */ }
+    /// }
     ///
-    ///  struct BananaButtonStyle: PrimitiveButtonStyle {
-    ///    let color: Color
+    /// struct BananaButtonStyle: PrimitiveButtonStyle {
+    ///     let color: Color
     ///
-    ///    func makeBody(configuration: Configuration) -> some View {
-    ///        configuration.label
-    ///            .padding()
-    ///            .background(RoundedRectangle(cornerRadius: 10).fill(color))
-    ///            .onTapGesture { configuration.trigger() }
-    ///    }
-    ///  }
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         configuration.label
+    ///             .padding()
+    ///             .background(RoundedRectangle(cornerRadius: 10).fill(color))
+    ///             .onTapGesture { configuration.trigger() }
+    ///     }
+    /// }
     /// ```
     ///
     /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
@@ -30339,6 +30432,8 @@ extension PrimitiveButtonStyle {
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a button.
+    ///
+    /// See ``PrimitiveButtonStyleConfiguration`` for more.
     typealias Configuration = PrimitiveButtonStyleConfiguration
 }
 
@@ -30410,14 +30505,14 @@ public struct PrimitiveButtonStyleConfiguration {
 ///                 ProgressView()
 ///                 ProgressView(value: 0.75)
 ///             }
-///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
 ///         }
 ///     }
 ///
 ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 ///         func makeBody(configuration: Configuration) -> some View {
 ///             ProgressView(configuration)
-///                 .shadow(color: Color(red, green, blue: 0.6),
+///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
 ///                         radius: 4.0, x: 1.0, y: 2.0)
 ///         }
 ///     }
@@ -30795,7 +30890,7 @@ extension ProgressView {
 ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 ///         func makeBody(configuration: Configuration) -> some View {
 ///             ProgressView(configuration)
-///                 .shadow(color: Color(red, green, blue: 0.6),
+///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
 ///                         radius: 4.0, x: 1.0, y: 2.0)
 ///         }
 ///     }
@@ -30808,13 +30903,13 @@ extension ProgressView {
 ///                 ProgressView()
 ///                 ProgressView(value: 0.75)
 ///             }
-///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
 ///         }
 ///     }
 ///
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol ProgressViewStyle{ }
+public protocol ProgressViewStyle { }
 extension ProgressViewStyle {
 
     /// A view representing the body of a progress view.
@@ -30841,7 +30936,7 @@ extension ProgressViewStyle {
     ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
     ///         func makeBody(configuration: Configuration) -> some View {
     ///             ProgressView(configuration)
-    ///                 .shadow(color: Color(red, green, blue: 0.6),
+    ///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
     ///                         radius: 4.0, x: 1.0, y: 2.0)
     ///         }
     ///     }
@@ -30854,7 +30949,7 @@ extension ProgressViewStyle {
     ///                 ProgressView()
     ///                 ProgressView(value: 0.75)
     ///             }
-    ///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+    ///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
     ///         }
     ///     }
     ///
@@ -30928,7 +31023,7 @@ extension ProgressViewStyle {
 ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 ///         func makeBody(configuration: Configuration) -> some View {
 ///             ProgressView(configuration)
-///                 .shadow(color: Color(red, green, blue: 0.6),
+///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
 ///                         radius: 4.0, x: 1.0, y: 2.0)
 ///         }
 ///     }
@@ -30941,7 +31036,7 @@ extension ProgressViewStyle {
 ///                 ProgressView()
 ///                 ProgressView(value: 0.75)
 ///             }
-///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
 ///         }
 ///     }
 ///
@@ -31890,7 +31985,7 @@ public struct RedactionReasons : OptionSet {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol ReferenceFileDocument : ObservableObject{ }
+public protocol ReferenceFileDocument : ObservableObject { }
 extension ReferenceFileDocument : ObservableObject {
 
     /// The type of the the document snapshot used for serialization
@@ -33887,7 +33982,7 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol Scene{ }
+public protocol Scene { }
 extension Scene {
 
     /// The type of the body variable in a scene.
@@ -36184,7 +36279,7 @@ extension SecureField where Label == Text {
 ///     @State var favoriteFruit: MyFruit = MyFruit.banana
 ///
 ///     var fruitName: String {
-///         switch favoriteFruit{
+///         switch favoriteFruit {
 ///         case .banana:
 ///             return "Banana 🍌🍌"
 ///         case .apple:
@@ -36912,7 +37007,7 @@ extension Shape {
 
 /// A way to turn a shape into a view.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ShapeStyle{ }
+public protocol ShapeStyle { }
 extension ShapeStyle {
 }
 
@@ -37402,21 +37497,29 @@ extension Spacer : View {
 /// A navigation view style represented by a view stack that only shows a
 /// single top view at a time.
 ///
-/// Use this with the ``View/navigationViewStyle(_:)``
-/// view modifier to change a ``NavigationView``'s style.
+/// Use this style with the ``View/navigationViewStyle(_:)``
+/// view modifier to change a ``NavigationView`` to use a stack style.
+///
+/// For example, below we override the default style of macOS
+/// to use stacking:
 ///
 /// ```
 /// struct ExampleView: View {
+///     var destination: some View {
+///         Text("I'm stacked on the pancakes 📚")
+///             .navigationTitle("Second Screen")
+///     }
+///
 ///     var body: some View {
 ///         NavigationView {
-///             Text("Hello Bananas🍌🍌")
+///             NavigationLink(destination: destination) {
+///                 Text("Stack the second screen! 🥞")
+///             }
 ///         }
-///         .navigationViewStyle(StackNavigationViewStyle())
+///         .navigationViewStyle(DefaultNavigationViewStyle())
 ///     }
 /// }
 /// ```
-///
-/// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
 ///
 @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
 @available(macOS, unavailable)
@@ -37424,21 +37527,29 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 
 	/// Creates a stack navigation view style.
     ///
-    /// Use this with the ``View/navigationViewStyle(_:)``
+    /// Use this initializer with the ``View/navigationViewStyle(_:)``
     /// view modifier to change a ``NavigationView``'s style.
+    ///
+    /// This is the only initializer of ``StackNavigationViewStyle``.
+    /// It takes no parameters.
     ///
     /// ```
     /// struct ExampleView: View {
+    ///     var destination: some View {
+    ///         Text("I'm stacked on the pancakes 📚")
+    ///             .navigationTitle("Second Screen")
+    ///     }
+    ///
     ///     var body: some View {
     ///         NavigationView {
-    ///             Text("Hello Bananas🍌🍌")
+    ///             NavigationLink(destination: destination) {
+    ///                 Text("Stack the second screen! 🥞")
+    ///             }
     ///         }
-    ///         .navigationViewStyle(StackNavigationViewStyle())
+    ///         .navigationViewStyle(DefaultNavigationViewStyle())
     ///     }
     /// }
     /// ```
-    ///
-    /// ![NavigationView Example 8](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-8.png)
     ///
     public init() { }
 }
@@ -39639,7 +39750,7 @@ extension TabView where SelectionValue == Int {
 /// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol TabViewStyle{ }
+public protocol TabViewStyle { }
 extension TabViewStyle {
 }
 
@@ -41703,7 +41814,7 @@ extension Toggle where Label == Text {
 /// ![Toggle style example 1](togglestyle-example-1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol ToggleStyle{ }
+public protocol ToggleStyle { }
 extension ToggleStyle {
 
     /// A view that represents the appearance and interaction of a toggle.
@@ -41816,7 +41927,7 @@ public struct ToolbarCommands : Commands {
 /// Conforming types represent items that can be placed in various locations
 /// in a toolbar.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol ToolbarContent{ }
+public protocol ToolbarContent { }
 extension ToolbarContent {
 
     /// The type of content representing the body of this toolbar content.
@@ -44126,7 +44237,7 @@ extension UserInterfaceSizeClass : Hashable {
 /// this type as the `animatableData` associated type of a type that conforms to
 /// the ``Animatable`` protocol.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public protocol VectorArithmetic : AdditiveArithmetic{ }
+public protocol VectorArithmetic : AdditiveArithmetic { }
 extension VectorArithmetic : AdditiveArithmetic {
 
     /// Multiplies each component of this value by the given value.
@@ -46314,6 +46425,44 @@ extension View {
 extension View {
 
     /// Sets the style for pickers within this view.
+    ///
+    /// Use this view modifier to change the style of all ``Picker``s in
+    /// a view hierarchy.
+    ///
+    /// Pass the function a structure that conforms to the
+    /// ``PickerStyle`` protocol. There is no way to create a custom
+    /// style, but there are 7 styles available. See ``PickerStyle`` for more.
+    ///
+    /// ```
+    /// enum MyFruit {
+    ///     case banana = ""Banana 🍌🍌"
+    ///     case apple = "Apple 🍎🍎"
+    ////    case peach = "Peach 🍑🍑"
+    /// }
+    ///
+    /// struct ExampleView: View {
+    ///     @State var favoriteFruit = MyFruit.banana
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("My Favorite Fruit: \(favoriteFruit.rawValue)")
+    ///
+    ///             Picker("My Picker", selection: $favoriteFruit) {
+    ///                 Text("Banana 🍌🍌")
+    ///                     .tag(MyFruit.banana)
+    ///                 Text("Apple 🍎🍎")
+    ///                     .tag(MyFruit.apple)
+    ///                 Text("Peach 🍑🍑")
+    ///                     .tag(MyFruit.peach)
+    ///             }
+    ///             .pickerStyle(SegmentedPickerStyle())
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Segmented Example 1](picker-style-6.gif)
+    ///
     public func pickerStyle<S>(_ style: S) -> some View where S : PickerStyle { }
 
 }
@@ -49158,7 +49307,44 @@ extension View {
 
     /// Sets the style for navigation views within this view.
     ///
-    /// [[navigation-view-style]]
+    /// Use `navigationViewStyle(_:)` to style a ``NavigationView``.
+    ///
+    /// `navigationViewStyle(_:)` accepts a parameter that conforms
+    /// to the ``NavigationViewStyle`` protocol. There are currently
+    /// 3 navigation view styles:
+    /// - ``DefaultNavigationViewStyle``
+    /// - ``StackNavigationViewStyle`` (iOS only)
+    /// - ``DoubleColumnNavigationViewStyle``
+    ///
+    /// For example, the following forces a stack-based navigation style,
+    /// overriding the default double-column style on Mac Catalyst:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             NavigationLink("Hello Bananas", destination: Text("🍌🍌"))
+    ///         }
+    ///         .navigationViewStyle(StackNavigationViewStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// And the following forces a double-column navigation style, overriding the
+    /// default stack-based navigation style on iPadOS:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             NavigationLink("Hello Bananas", destination: Text("🍌🍌"))
+    ///         }
+    ///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter style: The desired style of the ``NavigationView``.
     @available(watchOS 7.0, *)
     public func navigationViewStyle<S>(_ style: S) -> some View where S : NavigationViewStyle { }
 
@@ -50531,14 +50717,14 @@ extension View {
     ///                 ProgressView()
     ///                 ProgressView(value: 0.75)
     ///             }
-    ///             .progressViewStyle(DarkBlueShadowProgressViewStyle)
+    ///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
     ///         }
     ///     }
     ///
     ///     struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
     ///         func makeBody(configuration: Configuration) -> some View {
     ///             ProgressView(configuration)
-    ///                 .shadow(color: Color(red, green, blue: 0.6),
+    ///                 .shadow(color: Color(red: 0, green: 0, blue: 0.6),
     ///                         radius: 4.0, x: 1.0, y: 2.0)
     ///         }
     ///     }
@@ -53670,7 +53856,7 @@ public struct WheelPickerStyle : PickerStyle {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol Widget{ }
+public protocol Widget { }
 extension Widget {
 
     /// The type of configuration representing the content of the widget.
@@ -53711,7 +53897,7 @@ extension Widget {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol WidgetBundle{ }
+public protocol WidgetBundle { }
 extension WidgetBundle {
 
     /// The type of widget that represents the content of the bundle.
@@ -53816,7 +54002,7 @@ extension WidgetBundleBuilder {
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public protocol WidgetConfiguration{ }
+public protocol WidgetConfiguration { }
 extension WidgetConfiguration {
 
     /// The type of widget configuration representing the body of
@@ -53838,14 +54024,19 @@ extension WidgetConfiguration {
 ///
 /// ```
 /// @main
-/// struct MyApp: SwiftUI.App {
+/// struct MyApp: App {
 ///     var body: some Scene {
 ///         WindowGroup {
 ///             Text("Bananas")
+///                 .frame(width: 500, height: 300)
 ///         }
 ///     }
 /// }
 /// ```
+///
+/// ![](windowgroup.png)
+///
+/// ![](windowgroup-ios.png)
 ///
 /// Note:
 /// - The default implementation of a ``WindowGroup`` allows multiple instances
@@ -53862,22 +54053,25 @@ extension WidgetConfiguration {
 /// window's title bar contains a centered text item to display the window's
 /// title.
 ///
-/// Use ``WindowGroup/init(_:content)-0733f`` to title a window. For example:
+/// Use ``WindowGroup/init(_:content:)-0733f`` to title a window. For example:
 ///
-/// ````
+/// ```
 /// @main
 /// struct MyApp: App {
 ///     var body: some Scene {
 ///         WindowGroup("Fruit App") {
 ///             Text("Bananas")
+///                 .frame(width: 500, height: 300)
 ///         }
 ///     }
 /// }
-/// ````
+/// ```
 ///
-/// Note: The system may use the provided window title as a part of some default
-/// window command names. For example, the "New Window" command would become
-/// "New Fruit App Window".
+/// ![](windowgroup-3.png)
+///
+/// - Note: The system may use the provided window title as a part of some default
+/// window command names. For example, the **"New Window"** command would become
+/// **"New Fruit App Window"**.
 /// [window-commands ->]
 /// ### Adding commands to a window group
 ///
@@ -53893,6 +54087,7 @@ extension WidgetConfiguration {
 ///     var body: some Scene {
 ///         WindowGroup {
 ///             Text("Bananas")
+///                 .frame(width: 500, height: 300)
 ///         }
 ///         .commands {
 ///             CommandMenu("Some Commands") {
@@ -53902,6 +54097,8 @@ extension WidgetConfiguration {
 ///     }
 /// }
 /// ```
+///
+/// ![](windowgroup-4.png)
 /// [<-]
 /// ### Disabling creating multiple window instances
 ///
@@ -53924,6 +54121,7 @@ extension WidgetConfiguration {
 ///     var body: some Scene {
 ///         WindowGroup {
 ///             Text("Bananas")
+///                 .frame(width: 500, height: 300)
 ///         }
 ///         .commands {
 ///             CommandGroup(replacing: .newItem, addition: { })
