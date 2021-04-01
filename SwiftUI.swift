@@ -19237,8 +19237,6 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// Add some modifiers to style your image!
 ///
-/// ![A resizable image, scaled to fit the view, with a 10 point corner radius, and padding.](ocean-image.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -19251,11 +19249,11 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![Resizable Images](6422F09D-0D92-41F3-8067-0E7499A7F66C.png)
+/// ![A resizable image, scaled to fit the view, with a 10 point corner radius, and padding.](ocean-image.png)
 ///
 /// ### Resizing Images
 ///
-/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier
+/// - Important:  The ``Image/resizable(capInsets:resizingMode:)`` modifier
 /// must come first on an Image before making changes to its size in subsequent
 /// modifiers.
 ///
@@ -25286,9 +25284,9 @@ public struct MagnificationGesture : Gesture {
 ///
 /// There are 3 different initializers, one for each of the different label types:
 ///
-/// 1. String
-/// 2. Localized string key
-/// 3. View
+/// 1. [`String`](https://developer.apple.com/documentation/swift/string)
+/// 2. ``LocalizedStringKey``
+/// 3. ``View``
 ///
 /// The following example presents a menu of three buttons and a submenu, which
 /// contains three buttons of its own.
@@ -25311,7 +25309,7 @@ public struct MagnificationGesture : Gesture {
 /// ![](menu-ex1.gif)
 ///
 /// You can create the menu's title with a ``LocalizedStringKey``, as seen in
-/// the previous example, or with a view builder that creates multiple views,
+/// the previous example, or with a ``ViewBuilder`` that creates multiple views,
 /// such as an image and a text view:
 ///
 /// ```
@@ -25333,7 +25331,8 @@ public struct MagnificationGesture : Gesture {
 /// ### Styling Menus
 ///
 /// Use the ``View/menuStyle(_:)`` modifier to change the style of all menus
-/// in a view. The following example shows how to apply a style:
+/// in a view. See the ``MenuStyle`` page for more on the types of
+/// styles available, as well as how to create your own style.
 ///
 /// ```
 /// struct MenuView: View {
@@ -25573,8 +25572,49 @@ public struct MenuPickerStyle : PickerStyle {
 /// A type that applies standard interaction behavior and a custom appearance
 /// to all menus within a view hierarchy.
 ///
-/// To configure the current menu style for a view hiearchy, use the
-/// ``View/menuStyle(_:)`` modifier.
+/// Use this protocol to create
+/// a componentized style to apply to a ``Menu``.
+///
+/// ### Creating Your Own Style
+///
+/// There is only one requirement of conforming to the `MenuStyle`
+/// protocol: ``MenuStyle/makeBody(configuration:)``. It takes a
+/// `configuration` parameter of type ``MenuStyleConfiguration``
+/// which can be passed to ``Menu``'s ``Menu/init(_:)`` initializer:
+///
+/// ```
+/// struct RedBorderMenuStyle: MenuStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         Menu(configuration)
+///             .border(Color.red)
+///     }
+/// }
+/// ```
+///
+/// After creating a `MenuStyle`, you can apply it to a ``Menu`` using the
+/// ``View/menuStyle(_:)`` view modifier:
+///
+/// ```
+/// struct ButtonStyleView: View {
+///     var body: some View {
+///         Menu("PDF") {
+///             Button("Open in Preview", action: { })
+///             Button("Save as PDF", action: { })
+///         }
+///         .menuStyle(RedBorderMenuStyle())
+///     }
+/// }
+///
+/// ### Pre-Packaged Styles
+///
+/// Existing menu styles include:
+/// - ``DefaultMenuStyle``
+/// - ``BorderlessButtonMenuStyle``
+/// - ``BorderedButtonMenuStyle`` (on macOS)
+///
+/// On iOS, ``BorderlessButtonMenuStyle`` is the
+/// ``DefaultMenuStyle``, so there is no reason to use these.
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -25586,10 +25626,38 @@ extension MenuStyle {
 
     /// Creates a view that represents the body of a menu.
     ///
-    /// - Parameter configuration: The properties of the menu.
+    /// Implement this function to conform to the
+    /// ``MenuStyle`` protocol. It is the only requirement.
     ///
-    /// The system calls this method for each ``Menu`` instance in a view
-    /// hierarchy where this style is the current menu style.
+    /// This function takes in a `configuration` paramter of type
+    /// ``MenuStyleConfiguration``. You can initialize a ``Menu``
+    /// using the ``Menu/init(_:)`` initializer and this parameter,
+    /// and then style it. Return the result:
+    ///
+    /// ```
+    /// struct RedBorderMenuStyle: MenuStyle {
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         return Menu(configuration)
+    ///             .border(Color.red)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// After implementing this function, pass an instance of your structure
+    /// to the ``View/menuStyle(_:)`` view modifier to style a ``Menu``:
+    ///
+    /// ```
+    /// struct ButtonStyleView: View {
+    ///     var body: some View {
+    ///         Menu("PDF") {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         }
+    ///         .menuStyle(RedBorderMenuStyle())
+    ///     }
+    /// }
+    ///
+    /// - Parameter configuration: The properties of the menu.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a menu.
@@ -45609,7 +45677,7 @@ extension View {
     ///     var body: some View {
     ///         VStack {
     ///             Button(message) { show = false }
-    ///             if (show) {
+    ///             if show {
     ///                 Text("When I disappear, this 👆 will become a banana")
     ///                      .onDisappear { message = "🍌" }
     ///             }
@@ -45756,13 +45824,6 @@ extension View {
     /// `menuStyle(_:)` modifier. Pass an instance of a struct that
     /// conforms to the ``MenuStyle`` protocol.
     ///
-    /// Existing menu styles include:
-    /// - ``DefaultMenuStyle``
-    /// - ``BorderlessButtonMenuStyle``
-    /// - ``BorderedButtonMenuStyle`` (on macOS)
-    ///
-    /// The ``MenuStyle`` protocol also supports custom structures.
-    ///
     /// ```
     /// struct ButtonStyleView: View {
     ///     var body: some View {
@@ -45776,6 +45837,43 @@ extension View {
     /// ```
     ///
     /// ![](menustyle-modifier.png)
+    ///
+    /// Existing menu styles include:
+    /// - ``DefaultMenuStyle``
+    /// - ``BorderlessButtonMenuStyle``
+    /// - ``BorderedButtonMenuStyle`` (on macOS)
+    ///
+    /// On iOS, ``BorderlessButtonMenuStyle`` is the
+    /// ``DefaultMenuStyle``, so there is no reason to use these.
+    ///
+    /// ### Custom Menu Styles
+    ///
+    /// The ``MenuStyle`` protocol also supports custom structures.
+    /// To create a custom ``MenuStyle``, implement the
+    /// ``MenuStyle/makeBody(configuration:)`` function:
+    ///
+    /// ```
+    /// struct RedBorderMenuStyle: MenuStyle {
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         Menu(configuration)
+    ///             .border(Color.red)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can then use `menuStyle(_:)` to apply the style:
+    ///
+    /// ```
+    /// struct ButtonStyleView: View {
+    ///     var body: some View {
+    ///         Menu("PDF") {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         }
+    ///         .menuStyle(RedBorderMenuStyle())
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
