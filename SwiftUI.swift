@@ -35722,6 +35722,8 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
+    /// ![](scroll-view-init-shows-indicators-content-ex2.gif)
+    ///
     /// You can also allow the the ``ScrollView`` to scroll both horizontally
     /// and vertically:
     ///
@@ -35730,7 +35732,7 @@ public struct ScrollView<Content> : View where Content : View {
     ///     var body: some View {
     ///         ScrollView([.horizontal, .vertical]) {
     ///             VStack(spacing: 50) {
-    ///                 ForEach(0...10) { _ in
+    ///                 ForEach(0..<10) { _ in
     ///                     HStack {
     ///                         Text("Bananas 🍌🍌")
     ///                         Text("Apples 🍏🍏")
@@ -35744,6 +35746,8 @@ public struct ScrollView<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scroll-view-axes-ex2.gif)
     ///
     public var axes: Axis.Set
 
