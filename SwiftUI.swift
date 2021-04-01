@@ -27734,14 +27734,14 @@ public struct PageTabViewStyle : TabViewStyle {
 ///     var body: some View {
 ///         Path { path in
 ///             path.move(to: .zero)
-///             path.addLine(to: CGPoint(x: 0, y: 100))
+///             path.addLine(to: CGPoint(x: 300, y: 300))
 ///         }
-///         .stroke()
+///         .stroke(Color.orange, lineWidth: 5)
 ///     }
 /// }
 /// ```
 ///
-/// ![75F56224-5C30-4AE3-B526-336907676D1E](75F56224-5C30-4AE3-B526-336907676D1E.png)
+/// ![75F56224-5C30-4AE3-B526-336907676D1E](path.png)
 ///
 /// ### Using a path
 ///
@@ -27754,7 +27754,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// struct CustomShapeView: View {
 ///     var body: some View {
 ///         CustomShape()
-///             .stroke()
+///             .stroke(Color.orange, linewidth: 10)
 ///     }
 /// }
 ///
@@ -27765,7 +27765,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// }
 /// ```
 ///
-/// ![CE1CCD64-157A-4908-B57D-96FC577A693D](CE1CCD64-157A-4908-B57D-96FC577A693D.png)
+/// ![CE1CCD64-157A-4908-B57D-96FC577A693D](path-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Path : Equatable, LosslessStringConvertible {
@@ -27782,7 +27782,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 5)
     ///     }
     /// }
     ///
@@ -27791,14 +27791,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         var path = Path()
     ///
     ///         path.move(to: .zero)
-    ///         path.addLine(to: CGPoint(x: 0, y: 10))
+    ///         path.addLine(to: CGPoint(x: 300, y: 300))
     ///
     ///         return path
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-init-ex.png)
+    /// ![](path.png)
     ///
     public init() { }
 
@@ -27813,7 +27813,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// ```
     /// struct CustomShapeView: View {
     ///     var body: some View {
-    ///         CustomShape()
+    ///         CustomShape(Color.orange, lineWidth: 10)
     ///             .stroke()
     ///     }
     /// }
@@ -27826,7 +27826,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-456c1.png)
+    /// ![](path.png)
     ///
     /// - Parameter path: A CGPath to define the path.
     public init(_ path: CGPath) { }
@@ -27846,7 +27846,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     ///
@@ -27855,14 +27855,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         let cgMutablePath = CGPath(rect: rect, transform: .none).mutableCopy()!
     ///
     ///         cgMutablePath.move(to: .zero)
-    ///         cgMutablePath.addLine(to: CGPoint(x: 100, y: 100))
+    ///         cgMutablePath.addLine(to: CGPoint(x: 200, y: 200))
     ///
     ///         return Path(cgMutablePath)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-5f79d.png)
+    /// ![](path-3.png)
     ///
     /// - Parameter path: A CGMutablePath to define the path.
     public init(_ path: CGMutablePath) { }
@@ -27876,7 +27876,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     ///
@@ -27887,7 +27887,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-40028.png)
+    /// ![](path-2.png)
     ///
     /// - Parameter path: A CGRect to define the path.
     public init(_ rect: CGRect) { }
@@ -27901,20 +27901,21 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 5)
+    ///             .padding()
     ///     }
     /// }
     ///
     /// struct CustomShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
-    ///         return Path(roundedRect: rect,
-    ///                     cornerSize: CGSize(width: 5, height: 10),
-    ///                     style: .continuous)
+    ///         Path(roundedRect: rect,
+    ///              cornerSize: CGSize(width: 50, height: 50),
+    ///              style: .continuous)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-init-rrcss.png)
+    /// ![](path-rounded.png)
     ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
@@ -27931,20 +27932,21 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 5)
+    ///             .padding()
     ///     }
     /// }
     ///
     /// struct CustomShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
-    ///         return Path(roundedRect: rect,
-    ///                     cornerRadius: CGFloat(10),
-    ///                     style: .continuous)
+    ///         Path(roundedRect: rect,
+    ///              cornerRadius: CGFloat(50),
+    ///              style: .continuous)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-init-rrcrs.png)
+    /// ![](path-rounded.png)
     ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
@@ -27958,7 +27960,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     ///
@@ -27969,7 +27971,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-init-ellipse-in.png)
+    /// ![](ellipse.png)
     ///
     /// - Parameter ellipseIn: The rectangle defining the outside of the ellipse.
     public init(ellipseIn rect: CGRect) { }
@@ -27984,14 +27986,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     var body: some View {
     ///         Path { path in
     ///             path.move(to: .zero)
-    ///             path.addLine(to: CGPoint(x: 100, y: 100))
+    ///             path.addLine(to: CGPoint(x: 300, y: 300))
     ///         }
-    ///         .stroke()
+    ///         .stroke(Color.orange, lineWidth: 5)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-13504.png)
+    /// ![](path.png)
     ///
     /// - Parameter callback: A closure that takes in an empty path which
     /// can be mutated.
@@ -28008,19 +28010,19 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     var pathString: String {
     ///         Path { path in
     ///             path.move(to: .zero)
-    ///             path.addLine(to: CGPoint(x: 100, y: 100))
+    ///             path.addLine(to: CGPoint(x: 300, y: 300))
     ///         }
     ///         .description
     ///     }
     ///
     ///     var body: some View {
     ///         Path(pathString)!
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-initq.png)
+    /// ![](path.png)
     ///
     /// - Parameter string: The string description of the path, obtained from `description`.
     public init?(_ string: String) { }
@@ -45603,8 +45605,10 @@ extension View {
     ///     var body: some View {
     ///         VStack {
     ///             Button(message) { show = false }
-    ///             Text("When I disappear, this 👆 will become a banana")
-    ///                 .onDisappear { message = "🍌" }
+    ///             if (show) {
+    ///                 Text("When I disappear, this 👆 will become a banana")
+    ///                      .onDisappear { message = "🍌" }
+    ///             }
     ///         }
     ///     }
     /// }
