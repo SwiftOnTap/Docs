@@ -25450,9 +25450,9 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     /// Creates a menu based on a style configuration.
     ///
     /// Use this initializer within the ``MenuStyle/makeBody(configuration:)``
-    /// method of a ``MenuStyle`` instance to create an instance of the menu
-    /// being styled. This is useful for custom menu styles that modify the
-    /// current menu style.
+    /// function of a custom ``MenuStyle``. It takes a parameter of the
+    /// exact same type as `makeBody(configuration:)`, so you don't have to
+    /// worry about reconstructing the ``Menu``.
     ///
     /// For example, the following code creates a new, custom style that adds a
     /// red border around the current menu style:
@@ -25463,6 +25463,25 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     ///                 .border(Color.red)
     ///         }
     ///     }
+    ///
+    /// You can then apply this custom style to your ``Menu`` using the
+    /// ``View/menuStyle(_:)`` view modifier:
+    ///
+    ///     strut ContentView: View {
+    ///         var body: some View {
+    ///             Menu {
+    ///                 Button("Open in Preview", action: { })
+    ///                 Button("Save as PDF", action: { })
+    ///             } label: {
+    ///                 Image(systemName: "doc")
+    ///                 Text("PDF")
+    ///             }
+    ///             .menuStyle(RedBorderMenuStyle())
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: The ``MenuStyleConfiguration`` value
+    /// passed to ``MenuStyle/makeBody(configuration:)``.
     ///
     public init(_ configuration: MenuStyleConfiguration) { }
 }
@@ -25579,19 +25598,36 @@ extension MenuStyle {
 
 /// A configuration of a menu.
 ///
-/// Use the ``Menu/init(_:)`` initializer of ``Menu`` to create an
-/// instance using the current menu style, which you can modify to create a
-/// custom style.
+/// Use this type in ``MenuStyle/makeBody(configuration:)`` to create
+/// your own custom ``MenuStyle``. The parameter passed to `makeBody(configuration:)`
+/// is of type `MenuStyleConfiguration`.
 ///
 /// For example, the following code creates a new, custom style that adds a red
 /// border to the current menu style:
 ///
 ///     struct RedBorderMenuStyle : MenuStyle {
-///         func makeBody(configuration: Configuration) -> some View {
+///         func makeBody(configuration: MenuStyleConfiguration) -> some View {
 ///             Menu(configuration)
 ///                 .border(Color.red)
 ///         }
 ///     }
+///
+/// You can then apply the style to a ``Menu`` using the
+/// ``View/menuStyle(_:)`` view modifier:
+///
+///     strut ContentView: View {
+///         var body: some View {
+///             Menu {
+///                 Button("Open in Preview", action: { })
+///                 Button("Save as PDF", action: { })
+///             } label: {
+///                 Image(systemName: "doc")
+///                 Text("PDF")
+///             }
+///             .menuStyle(RedBorderMenuStyle())
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
