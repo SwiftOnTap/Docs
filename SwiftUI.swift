@@ -6354,6 +6354,8 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
+/// ![](default-progress-view-style-ex1.png)
+///
 /// You can also apply a tint to the spinner using
 /// `CircularProgressViewStyle`'s ``CircularProgressViewStyle/init(tint:)``:
 ///
@@ -6365,6 +6367,8 @@ extension Circle : InsettableShape {
 ///     }
 /// }
 /// ```
+///
+/// ![](progress-view-style-ex2.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
@@ -6404,6 +6408,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![](progress-view-style-ex2.png)
     ///
     public init(tint: Color) { }
 
@@ -54271,7 +54277,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// For example, use ``withAnimation(_:_:)`` to animate a toggle. Here, the
 /// action on the view is the `showBanana.toggle()`. Now, by using
 /// ``withAnimation(_:_:)`` the results of that action will be animated
-/// according to `.easeInOut`.
+/// according to ``Animation/easeInOut``.
 ///
 /// ```
 /// struct ExplicitTransitionView: View {
