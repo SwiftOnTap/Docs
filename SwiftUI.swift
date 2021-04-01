@@ -44,7 +44,7 @@ import os.signpost
 /// }
 /// ```
 ///
-/// `ObservableObject` provides a default implementation for `objectWillChange`
+/// `ObservableObject` provides a default implementation for ``ObservableObject/objectWillChange``
 /// using `Combine/ObservableObjectPublisher`.
 ///
 /// To trigger `objectWillChange` events when your data changes, annotate your
@@ -771,7 +771,7 @@ public struct AccessibilityTraits : SetAlgebra {
 ///                 message: Text("You have made a selection"),
 ///                 buttons: [
 ///                     .cancel(),
-///                     .destructive(Text("Change to 🍑") { /* override */ },
+///                     .destructive(Text("Change to 🍑")) { /* override */ },
 ///                     .default(Text("Confirm")) { /* confirm */ }
 ///                 ]
 ///             )
@@ -779,6 +779,8 @@ public struct AccessibilityTraits : SetAlgebra {
 ///     }
 /// }
 /// ```
+///
+/// ![](action-sheet-main-ex.gif)
 ///
 /// Notes:
 /// - The system can override your button order. In the example above,
@@ -2391,12 +2393,7 @@ extension Animation {
     /// in the beginning, then overshoots the target, and returns back
     /// with a spring effect.
     ///
-    /// When mixed with other ``Animation/spring(response:dampingFraction:blendDuration:)``
-    /// or ``Animation/interactiveSpring(response:dampingFraction:blendDuration:)``
-    /// animations on the same property, each
-    /// animation will be replaced by their successor, preserving
-    /// velocity from one animation to the next. Optionally blends the
-    /// response values between springs over a time period.
+    /// For example:
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2408,7 +2405,7 @@ extension Animation {
     ///                 .foregroundColor(flag ? .yellow : .red)
     ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
     ///                 .rotationEffect(.degrees(flag ? 90 : 0))
-    ///                 .animation(.spring(response: 0.55, dampingFraction: 0.825, blendDuration: 0))
+    ///                 .animation(.spring())
     ///
     ///             Button("Animate") {
     ///                 flag.toggle()
@@ -2418,7 +2415,38 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-ex.gif)
+    /// ![](animation-spring-noparams-ex.gif)
+    ///
+    /// Here, `spring(response:dampingFraction:blendDuration:)`'s parameters
+    /// have been adjusted to pronounce the spring:
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(.spring(response: 0.75, dampingFraction: 0.5, blendDuration: 0))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// ![](animation-spring-pronounced-ex.gif)
+    ///
+    /// When mixed with other ``Animation/spring(response:dampingFraction:blendDuration:)``
+    /// or ``Animation/interactiveSpring(response:dampingFraction:blendDuration:)``
+    /// animations on the same property, each
+    /// animation will be replaced by their successor, preserving
+    /// velocity from one animation to the next. Optionally blends the
+    /// response values between springs over a time period.
     ///
     /// - Parameters:
     ///   - response: The stiffness of the spring, defined as an
@@ -2440,6 +2468,11 @@ extension Animation {
     /// in the beginning, then overshoots the target, and returns back
     /// with a spring effect.
     ///
+    /// When passed no parameters, the effect does not show, unlike
+    /// ``Animation/spring(response:dampingFraction:blendDuration:)``.
+    ///
+    /// For example:
+    ///
     /// ```
     /// struct AnimateView: View {
     ///     @State private var flag = true
@@ -2460,7 +2493,54 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-ex.gif)
+    /// ![](animation-interactive-spring-ex.gif)
+    ///
+    /// When passed the same parameters, `interactiveSpring(response:dampingFraction:blendDuration:)`
+    /// and ``Animation/spring(response:dampingFraction:blendDuration:)`` produce the same result:
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(.interactiveSpring(response: 0.75, dampingFraction: 0.5, blendDuration: 0))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](animation-interactive-spring-pronounced-ex.gif)
+    ///
+    /// ```
+    /// struct AnimateView: View {
+    ///     @State private var flag = true
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             Rectangle()
+    ///                 .foregroundColor(flag ? .yellow : .red)
+    ///                 .frame(width: flag ? 50 : 100, height: flag ? 50 : 100)
+    ///                 .rotationEffect(.degrees(flag ? 90 : 0))
+    ///                 .animation(.spring(response: 0.75, dampingFraction: 0.5, blendDuration: 0))
+    ///
+    ///             Button("Animate") {
+    ///                 flag.toggle()
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![](animation-spring-pronounced-ex.gif)
     ///
     public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { }
 }
@@ -2551,7 +2631,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-default-ex.gif)
+    /// ![](animation-ease-in-out-ex.gif)
     ///
     public static var easeInOut: Animation { get }
 
@@ -2579,7 +2659,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-easeinout-ex.gif)
+    /// ![](animation-ease-in-duration-ex.gif)
     ///
     /// - Parameter duration: How long the effect should last.
     public static func easeIn(duration: Double) -> Animation { }
@@ -2610,7 +2690,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-default-ex.gif)
+    /// ![](animation-ease-in-ex.gif)
     ///
     public static var easeIn: Animation { get }
 
@@ -2638,7 +2718,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-easeinout-ex.gif)
+    /// ![](animation-ease-out-duration-ex.gif)
     ///
     /// - Parameter duration: How long the effect should last.
     public static func easeOut(duration: Double) -> Animation { }
@@ -2669,7 +2749,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-default-ex.gif)
+    /// ![](animation-ease-out-ex.gif)
     ///
     public static var easeOut: Animation { get }
 
@@ -2697,7 +2777,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-easeinout-ex.gif)
+    /// ![](animation-linear-duration-ex.gif)
     ///
     /// - Parameter duration: How long the effect should last.
     public static func linear(duration: Double) -> Animation { }
@@ -2728,7 +2808,7 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-default-ex.gif)
+    /// ![](animation-linear-ex.gif)
     ///
     public static var linear: Animation { get }
 
@@ -3101,6 +3181,8 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
 ///     }
 /// }
 /// ```
+///
+/// ![](any-transition-using-ex.gif)
 ///
 /// - Note: By default, views transition using ``AnyTransition/opacity``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -5609,6 +5691,8 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
+/// ![Button with sign in text](button-signin.png)
+///
 /// The method of triggering the button varies by platform:
 /// - In iOS and watchOS, the user triggers a standard button by tapping on it.
 /// - In macOS, the user triggers a standard button by clicking on it.
@@ -5658,7 +5742,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-///![Button Example 4](press-and-hold-example.gif)
+///![Button Example 4](button-menu-content-ex.gif)
 ///
 /// This pattern extends to most other container views in SwiftUI that have
 /// customizable, interactive content, like forms (instances of ``Form``).
@@ -5755,6 +5839,8 @@ extension Button where Label == Text {
     ///         }
     ///     }
     ///
+    /// ![](button-init-0ffce-ex.gif)
+    ///
     /// - Parameters:
     ///   - titleKey: The key for the button's localized title, that describes
     ///     the purpose of the button's `action`.
@@ -5773,9 +5859,11 @@ extension Button where Label == Text {
     ///     struct EasySignInView: View {
     ///         let titleText = "Sign In"
     ///         var body: some View {
-    ///             Button(titleTiext, action: { /*sign the user in*/ } )
+    ///             Button(titleText, action: { /*sign the user in*/ } )
     ///         }
     ///     }
+    ///
+    /// ![](button-init-0ffce-ex.gif)
     ///
     /// - Parameters:
     ///   - title: A string that describes the purpose of the button's `action`.
@@ -26473,7 +26561,7 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![FC1A678A-0513-408B-950E-5BE85697F297](FC1A678A-0513-408B-950E-5BE85697F297.png)
+/// ![](wrapped-value-ex.gif)
 ///
 /// In the example above, `ExampleView` will update its displayed text to
 /// "Banana" when the button labeled "Change Text" is pressed. This is because
@@ -26633,7 +26721,7 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE](0F0C34D7-9EA6-416C-AE82-AF121E2AD8FE.png)
+/// ![](state-object-ex3.gif)
 ///
 /// This example is identical to the previous example **except** for the fact
 /// that `@StateObject` has been replaced with `@ObservedObject`. Run this
@@ -27331,6 +27419,8 @@ public struct PageIndexViewStyle : IndexViewStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![](pg-tab-view-style-ex2.gif)
 ///
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(macOS, unavailable)
@@ -30379,6 +30469,8 @@ public struct PrimitiveButtonStyleConfiguration {
 ///             ProgressView()
 ///         }
 ///     }
+///
+/// ![](progress-view-default-ex.png)
 ///
 /// When initialized with a value `ProgressView` looks like a
 /// loading bar that fills up from left to right.
@@ -35571,7 +35663,9 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// You can specify the scroll direction using the `axes` parameter:
+    /// ![](scroll-view-init-shows-indicators-content-ex1.gif)
+    ///
+    /// You can specify the scroll direction using the ``ScrollView/axes`` parameter:
     ///
     /// ```
     /// struct ContentView: View {
@@ -35594,7 +35688,9 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// Make the scroll bar invisible using `showsIndicators`:
+    /// ![](scroll-view-init-shows-indicators-content-ex2.gif)
+    ///
+    /// Make the scroll bar invisible using ``ScrollView/showsIndicators``:
     //
     /// ```
     /// struct ContentView: View {
@@ -35616,6 +35712,8 @@ public struct ScrollView<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scroll-view-init-shows-indicators-content-ex3.gif)
     ///
     /// Notice how the ``HStack`` doesn't take up the full view, so the
     /// indicators are inset from the side of the screen. We can
@@ -35643,6 +35741,8 @@ public struct ScrollView<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scroll-view-init-shows-indicators-content-ex4.gif)
     ///
     /// - Parameters:
     ///   - axes: The scroll view's scrollable axis. The default axis is the
@@ -37465,7 +37565,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7](AC409A5C-FFE1-499F-8C47-C62AEA3E4AE7.png)
+/// ![](wrapped-value-ex.gif)
 ///
 /// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
 ///
@@ -37502,7 +37602,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![C8500709-199E-43A7-A416-B97CF82F1151](C8500709-199E-43A7-A416-B97CF82F1151.png)
+/// ![](wrapped-value-ex.gif)
 ///
 /// In this example, `foo` is passed to `ChildView` by initializer.
 ///
@@ -37540,7 +37640,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![67E06F60-E76B-42A8-9A18-0503382F1533](67E06F60-E76B-42A8-9A18-0503382F1533.png)
+/// ![](state-ex3.gif)
 ///
 /// In this example, `TextField` requires a binding in order to read and write
 /// to a given value. The `text` state variable is converted to a
@@ -37574,7 +37674,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C](8CFDCB91-F7DD-4AF6-B2FE-83FBC337002C.png)
+/// ![](wrapped-value-ex.gif)
 ///
 /// In this example, the button labeled "Change text" calls the function `changeText`, which modifies `foo`.
 ///
@@ -37776,6 +37876,8 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
+/// ![](state-object-ex2.gif)
+///
 /// In this example, `AppModel` contains a boolean, `flag`, which is
 /// represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a
 /// `Binding<Bool>` to read and write whether it is on.
@@ -37813,6 +37915,8 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![](state-object-ex3.gif)
 ///
 /// `ExampleView` creates a vertical stack of a ``Toggle``, and a view that
 /// describes the toggle, `ToggleDescription`.
@@ -37859,6 +37963,8 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![](state-object-ex3.gif)
 ///
 /// This example is identical to the previous example **except** for the
 /// fact that `@StateObject` has been replaced with `@ObservedObject`. Run
@@ -37915,6 +38021,9 @@ extension State where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
+///
+/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct StateObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
 
@@ -39413,7 +39522,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 4](tabview-ex3.gif)
+/// ![TabView Example 4](tab-view-ex4.gif)
 /// [<-]
 /// [tabview-tag ->]
 ///
@@ -39531,6 +39640,8 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
+    /// ![](tab-view-init-selection-content-ex1.gif)
+    ///
     /// In this example, each tab item is assigned a unique tag using the
     /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
     /// the tab selection, `$selectedItem`, and updates it whenever a new tab is
@@ -39563,6 +39674,8 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](tab-view-init-selection-content-ex2.gif)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -44775,7 +44888,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](press-me-ex.gif)
+    /// ![](view-on-long-press-gesture-mdmdpp-ex.gif)
     ///
     /// - Parameters:
     ///   - minimumDuration: How long it takes to detect a long press.
@@ -45094,6 +45207,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](view-tab-view-style-ex2.gif)
+    ///
     /// By default, ``DefaultTabViewStyle`` is used:
     ///
     /// ```
@@ -45111,6 +45226,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](view-tab-view-style-ex3.gif)
     ///
     /// - Parameter style: The style to apply to this tab view.
     public func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle { }
