@@ -2312,7 +2312,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// up towards the end.
 /// - ``Animation/easeOut``: The value begins quickly, and slows down towards
 /// the end.
-/// - ``Animation/easeInOut``: THe value begins by changing slowly, goes quickly
+/// - ``Animation/easeInOut``: The value begins by changing slowly, goes quickly
 /// in the middle, and ends slowly.
 /// - ``Animation/spring(response:dampingFraction:blendDuration:)``: The value begins very quickly, then overshoots
 /// the target and springs back.
@@ -29947,7 +29947,7 @@ public enum PreviewLayout {
     /// Center the preview in a container the size of the device on which the
     /// preview is running.
     ///
-    /// Use this case alog with the
+    /// Use this case along with the
     /// ``View/previewLayout(_:)``
     /// view modifier to change the way a view is displayed in a preview.
     ///
@@ -29975,9 +29975,9 @@ public enum PreviewLayout {
     /// Fit the container to the size of the preview when offered the size of
     /// the device on which the preview is running.
     ///
-    /// Use this case alog with the
+    /// Use this case along with the
     /// ``View/previewLayout(_:)``
-    /// view odifier to change the way a view is displayed in a preview.
+    /// view modifier to change the way a view is displayed in a preview.
     ///
     /// ```
     /// struct ContentView: View {
@@ -30000,9 +30000,9 @@ public enum PreviewLayout {
 
     /// Center the preview in a fixed size container.
     ///
-    /// Use this case alog with the
+    /// Use this case along with the
     /// ``View/previewLayout(_:)``
-    /// view odifier to change the way a view is displayed in a preview.
+    /// view modifier to change the way a view is displayed in a preview.
     ///
     /// ```
     /// struct ContentView: View {
