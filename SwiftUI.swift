@@ -97,7 +97,7 @@ import os.signpost
 /// }
 /// ```
 ///
-/// This example uses a `Combine/PassthroughSubject` for its `objectWillChange`
+/// This example uses a ``Combine/PassthroughSubject`` for its `objectWillChange`
 /// requirement. A passthrough subject is a publisher that lets you send values
 /// manually (i.e. "passes through" any values sent to it).
 ///
@@ -18866,23 +18866,68 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// See the example below for all three.
 ///
+/// ### Leading
+///
 /// ```
-/// struct HorizontallyAlignedView: View {
+/// struct ContentView: View {
 ///     var body: some View {
-///         VStack(alignment: HorizontalAlignment.leading) {
+///         VStack(alignment: HorizontalAlignment.leading) { //Try changing this
 ///             Text("⬅️")
+///
+///             HStack {
+///                 Text("Leading")
+///                 Text("Center")
+///                 Text("Trailing")
+///             }
 ///         }
-///         VStack(alignment: HorizontalAlignment.center) {
-///             Text("🤠")
-///         }
-///         VStack(alignment: HorizontalAlignment.trailing) {
-///             Text("➡️")
-///         }
+///         .font(.largeTitle)
 ///     }
 /// }
 /// ```
 ///
-/// ![](horiz-alignment-ex1.png)
+/// ![](horizontalalignment-leading.png)
+///
+/// ### Center
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack(alignment: HorizontalAlignment.center) { //Try changing this
+///             Text("🤠")
+///
+///             HStack {
+///                 Text("Leading")
+///                 Text("Center")
+///                 Text("Trailing")
+///             }
+///         }
+///         .font(.largeTitle)
+///     }
+/// }
+/// ```
+///
+/// ![](horizontalalignment-center.png)
+///
+/// ### Trailing
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack(alignment: HorizontalAlignment.trailing) { //Try changing this
+///             Text("➡️")
+///
+///             HStack {
+///                 Text("Leading")
+///                 Text("Center")
+///                 Text("Trailing")
+///             }
+///         }
+///         .font(.largeTitle)
+///     }
+/// }
+/// ```
+///
+/// ![](horizontalalignment-trailing.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HorizontalAlignment : Equatable {
@@ -18950,17 +18995,23 @@ extension HorizontalAlignment {
     /// guides to views.
     ///
     /// ```
-    /// struct HorizontallyAlignedView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         VStack(alignment: .leading) {
+    ///         VStack(alignment: HorizontalAlignment.leading) { //Try changing this
     ///             Text("⬅️")
-    ///             Text("leading")
+    ///
+    ///             HStack {
+    ///                 Text("Leading")
+    ///                 Text("Center")
+    ///                 Text("Trailing")
+    ///             }
     ///         }
+    ///         .font(.largeTitle)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](horiz-alignment-leading.png)
+    /// ![](horizontalalignment-leading.png)
     ///
     public static let leading: HorizontalAlignment
 
@@ -18978,17 +19029,23 @@ extension HorizontalAlignment {
     /// guides to views.
     ///
     /// ```
-    /// struct HorizontallyAlignedView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         VStack(alignment: .center) {
+    ///         VStack(alignment: HorizontalAlignment.center) { //Try changing this
     ///             Text("🤠")
-    ///             Text("center")
+    ///
+    ///             HStack {
+    ///                 Text("Leading")
+    ///                 Text("Center")
+    ///                 Text("Trailing")
+    ///             }
     ///         }
+    ///         .font(.largeTitle)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](horiz-alignment-center.png)
+    /// ![](horizontalalignment-center.png)
     ///
     public static let center: HorizontalAlignment
 
@@ -19006,17 +19063,23 @@ extension HorizontalAlignment {
     /// guides to views.
     ///
     /// ```
-    /// struct HorizontallyAlignedView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         VStack(alignment: .trailing) {
+    ///         VStack(alignment: HorizontalAlignment.trailing) { //Try changing this
     ///             Text("➡️")
-    ///             Text("trailing")
+    ///
+    ///             HStack {
+    ///                 Text("Leading")
+    ///                 Text("Center")
+    ///                 Text("Trailing")
+    ///             }
     ///         }
+    ///         .font(.largeTitle)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](horiz-alignment-trailing.png)
+    /// ![](horizontalalignment-trailing.png)
     ///
     public static let trailing: HorizontalAlignment
 }
