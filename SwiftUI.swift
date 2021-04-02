@@ -9229,6 +9229,8 @@ public struct DefaultMenuStyle : MenuStyle {
 /// }
 /// ```
 ///
+/// ![](default-nav-view-style-ex1.gif)
+///
 /// On macOS, ``DoubleColumnNavigationViewStyle`` is the default:
 ///
 /// ```
@@ -9248,6 +9250,8 @@ public struct DefaultMenuStyle : MenuStyle {
 ///     }
 /// }
 /// ```
+///
+/// ![](default-nav-view-style-ex2.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultNavigationViewStyle : NavigationViewStyle {
@@ -9277,6 +9281,9 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](default-nav-view-style-ex1.gif)
+    ///
     public init() { }
 }
 
@@ -9419,6 +9426,8 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
     ///    }
     /// }
     /// ```
+    ///
+    /// ![](progress-view-default-ex.png)
     ///
     public init() { }
 
@@ -9981,10 +9990,12 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 ///                 Text("I'm in the sidebar ⬅️")
 ///             }
 ///         }
-///         .navigationViewStyle(DefaultNavigationViewStyle())
+///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![](doub-column-nav-view-style-ex1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
@@ -10011,10 +10022,13 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
     ///                 Text("I'm in the sidebar ⬅️")
     ///             }
     ///         }
-    ///         .navigationViewStyle(DefaultNavigationViewStyle())
+    ///         .navigationViewStyle(DoubleColumnNavigationViewStyle())
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](doub-column-nav-view-style-ex1.gif)
+    ///
     public init() { }
 }
 
@@ -26483,6 +26497,8 @@ extension NavigationLink {
 /// }
 /// ```
 ///
+/// ![](nav-view-ex8.gif)
+///
 /// And the following forces a double-column navigation style, overriding the
 /// default stack-based navigation style on iPadOS:
 ///
@@ -26496,6 +26512,8 @@ extension NavigationLink {
 ///     }
 /// }
 /// ```
+///
+/// ![](nav-view-ex9.gif)
 ///
 /// [<-]
 /// ### Handling selection
@@ -26593,6 +26611,8 @@ public struct NavigationView<Content> : View where Content : View {
 ///     }
 /// }
 /// ```
+///
+/// ![](nav-view-style-ex1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public protocol NavigationViewStyle { }
@@ -27521,7 +27541,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// This struture has three static properties:
+    /// ![](pg-tab-view-style-ex2.gif)
+    ///
+    /// This structure has three static properties:
     /// - ``PageTabViewStyle/IndexDisplayMode/automatic`` - Display
     /// the page dots only if there is more than one page in the
     /// ``TabView``.
@@ -27554,6 +27576,8 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
+        /// ![](tab-view-auto-ex1.png)
+        ///
         /// If there are multiple pages, they are shown:
         ///
         /// ```
@@ -27570,6 +27594,8 @@ public struct PageTabViewStyle : TabViewStyle {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](tab-view-auto-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -27596,6 +27622,8 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
+        /// ![](tab-view-auto-ex2.gif)
+        ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
         ///
@@ -27621,6 +27649,8 @@ public struct PageTabViewStyle : TabViewStyle {
         ///     }
         /// }
         /// ```
+        ///
+        /// ![](pg-tab-view-style-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -27654,6 +27684,8 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](pg-tab-view-style-ex2.gif)
     ///
     /// - Notes: If you want more control over the look of the dots,
     /// see ``View/indexViewStyle(_:)``.
@@ -30619,6 +30651,9 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
+///
+/// ![](dark-blue-shadowed-progress-view-ex.png)
+///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, CurrentValueLabel : View {
 
@@ -30984,6 +31019,8 @@ extension ProgressView {
 /// }
 /// ```
 ///
+///![](progress-view-default-ex.png)
+///
 /// ### Custom Styles
 ///
 /// To create a custom `ProgressViewStyle`, create a structure that
@@ -31008,6 +31045,8 @@ extension ProgressView {
 ///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
 ///         }
 ///     }
+///
+/// ![](dark-blue-shadowed-progress-view-ex.png)
 ///
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -31054,6 +31093,8 @@ extension ProgressViewStyle {
     ///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
     ///         }
     ///     }
+    ///
+    /// ![](dark-blue-shadowed-progress-view-ex.png)
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
@@ -31141,6 +31182,8 @@ extension ProgressViewStyle {
 ///             .progressViewStyle(DarkBlueShadowProgressViewStyle())
 ///         }
 ///     }
+///
+/// ![](dark-blue-shadowed-progress-view-ex.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressViewStyleConfiguration {
@@ -31263,7 +31306,7 @@ public struct ProgressViewStyleConfiguration {
     ///     var color = Color.orange
     ///     var style = StrokeStyle(lineWidth: CGFloat(30), lineCap: .round)
     ///
-    ///     func makebody(configuration: ProgressViewStyleConfiguration) -> some View {
+    ///     func makeBody(configuration: ProgressViewStyleConfiguration) -> some View {
     ///         let frac = CGFloat(configuration.fractionCompleted ?? 0)
     ///
     ///         return ZStack {
@@ -31297,6 +31340,7 @@ public struct ProgressViewStyleConfiguration {
     /// ```
     ///
     /// ![](custom-progressview.png)
+    ///
     public var currentValueLabel: ProgressViewStyleConfiguration.CurrentValueLabel?
 }
 
@@ -35743,6 +35787,9 @@ public struct ScrollView<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](show-indicators-ex.gif)
+    ///
     public var showsIndicators: Bool
 
     /// Creates a new instance that's scrollable in the direction of the given
@@ -37614,7 +37661,7 @@ extension Spacer : View {
 /// Use this style with the ``View/navigationViewStyle(_:)``
 /// view modifier to change a ``NavigationView`` to use a stack style.
 ///
-/// For example, below we override the default style of macOS
+/// For example, below we override the default style of Mac Catalyst
 /// to use stacking:
 ///
 /// ```
@@ -37630,10 +37677,12 @@ extension Spacer : View {
 ///                 Text("Stack the second screen! 🥞")
 ///             }
 ///         }
-///         .navigationViewStyle(DefaultNavigationViewStyle())
+///         .navigationViewStyle(StackNavigationViewStyle())
 ///     }
 /// }
 /// ```
+///
+/// ![](stack-nav-view-style-ex.gif)
 ///
 @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
 @available(macOS, unavailable)
@@ -37660,10 +37709,12 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     ///                 Text("Stack the second screen! 🥞")
     ///             }
     ///         }
-    ///         .navigationViewStyle(DefaultNavigationViewStyle())
+    ///         .navigationViewStyle(StaclkNavigationViewStyle())
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](stack-nav-view-style-ex.gif)
     ///
     public init() { }
 }
@@ -38831,7 +38882,7 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// Now apply `.square` line cap, and some `lineWidth` so we can see
+    /// Now apply `.square` line cap, and some ``StrokeStyle/lineWidth`` so we can see
     /// the effect:
     ///
     /// ```
@@ -38931,14 +38982,14 @@ extension Stepper where Label == Text {
     ///
     /// ![](linejoin.png)
     ///
-    /// Now apply `.bevel` line cap, and some `lineWidth` so we can see
+    /// Now apply `.bevel` line join, and some ``StrokeStyle/lineWidth`` so we can see
     /// the effect:
     ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
     ///         var style = StrokeStyle()
-    ///         style.lineCap = .bevel
+    ///         style.lineJoin = .bevel
     ///         style.lineWidth = 50
     ///
     ///         return Arch()
@@ -38958,7 +39009,7 @@ extension Stepper where Label == Text {
     /// struct ContentView: View {
     ///     var body: some View {
     ///         var style = StrokeStyle()
-    ///         style.lineCap = .round
+    ///         style.lineJoin = .round
     ///         style.lineWidth = 50
     ///
     ///         return Arch()
@@ -38977,7 +39028,7 @@ extension Stepper where Label == Text {
     /// struct ContentView: View {
     ///     var body: some View {
     ///         var style = StrokeStyle()
-    ///         style.lineCap = .miter
+    ///         style.lineJoin = .miter
     ///         style.lineWidth = 50
     ///
     ///         return Arch()
@@ -39842,6 +39893,8 @@ extension TabView where SelectionValue == Int {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](tab-view-init-selection-content-ex1.gif)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(@ViewBuilder content: () -> Content) { }
@@ -49461,6 +49514,9 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](nav-view-ex8.gif)
+    ///
+    ///
     /// And the following forces a double-column navigation style, overriding the
     /// default stack-based navigation style on iPadOS:
     ///
@@ -49474,6 +49530,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](nav-view-ex9.gif)
     ///
     /// - Parameter style: The desired style of the ``NavigationView``.
     @available(watchOS 7.0, *)
