@@ -2155,7 +2155,7 @@ extension Animatable {
     associatedtype AnimatableData : VectorArithmetic
 
     /// The data to animate.
-    var animatableData: Self.AnimatableData { get set }
+    var animatableData: Self.AnimatableData { get /*set*/ }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3905,7 +3905,7 @@ extension App {
     /// 			TextField(name, text: $name)
     /// 		}
     /// 	}
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// Provides a binding for the wrapped value.
     ///
@@ -4856,7 +4856,7 @@ extension BackgroundStyle : ShapeStyle {
     /// When a mutable binding value changes, the new value is immediately
     /// available. However, updates to a view displaying the value happens
     /// asynchronously, so the view may not show the change immediately.
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// A projection of the binding value that returns a binding.
     ///
@@ -14382,7 +14382,7 @@ public struct FileDocumentConfiguration<Document> where Document : FileDocument 
     /// value.
     ///
     /// If `isEditable` is `false`, setting a new value will have no effect.
-    public var document: Document { get nonmutating set }
+    public var document: Document { get /*nonmutating set*/ }
 
     /// A read-write binding to the current document model.
     public var $document: Binding<Document> { get }
@@ -14561,7 +14561,7 @@ public struct FileDocumentWriteConfiguration {
 
     /// The unwrapped value for the focus key given the current scope and state
     /// of the focused view hierarchy.
-    @inlinable public var wrappedValue: Value? { get nonmutating set }
+    @inlinable public var wrappedValue: Value? { get /*nonmutating set*/ }
 
     /// A binding to the optional value.
     ///
@@ -19216,8 +19216,8 @@ public struct HoverEffect {
 /// internally, so you don't have to do it yourself.
 ///
 /// These are the default styles:
-/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
-/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``DefaultLabelStyle``, which displays the ``Label`` as-is
+/// - `IconOnlyLabelStyle` (this style), which displays the icon only
 /// - ``TitleOnlyLabelStyle``, which displays the title only
 ///
 /// All 3 styles have only one initializer, which takes no parameters.
@@ -35287,7 +35287,7 @@ extension ScenePhase : Hashable {
     /// ![](scenestorage-1.png)
     ///
     /// - See also: ``State`` and ``State/projectedValue``.
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// A binding to the state value.
     ///
@@ -38135,7 +38135,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// When a mutable binding value changes, the new value is immediately
     /// available. However, updates to a view displaying the value happens
     /// asynchronously, so the view may not show the change immediately.
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// A binding to the state value.
     ///
@@ -41844,9 +41844,9 @@ public struct TextFormattingCommands : Commands {
 /// internally, so you don't have to do it yourself.
 ///
 /// These are the default styles:
-/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``DefaultLabelStyle``, which displays the ``Label`` as-is
 /// - ``IconOnlyLabelStyle``, which displays the icon only
-/// - ``TitleOnlyLabelStyle``, which displays the title only
+/// - `TitleOnlyLabelStyle` (this style), which displays the title only
 ///
 /// All 3 styles have only one initializer, which takes no parameters.
 ///
@@ -42268,7 +42268,7 @@ public struct ToggleStyleConfiguration {
 
     /// A binding to a state property that indicates whether the toggle is on or
     /// off.
-    public var isOn: Bool { get nonmutating set }
+    public var isOn: Bool { get /*nonmutating set*/ }
 
     /// A binding to let you listen to changes in the toggle's "is on" property.
     public var $isOn: Binding<Bool> { get }
