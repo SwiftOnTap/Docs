@@ -97,7 +97,7 @@ import os.signpost
 /// }
 /// ```
 ///
-/// This example uses a `Combine/PassthroughSubject` for its `objectWillChange`
+/// This example uses a ``Combine/PassthroughSubject`` for its `objectWillChange`
 /// requirement. A passthrough subject is a publisher that lets you send values
 /// manually (i.e. "passes through" any values sent to it).
 ///
@@ -4215,7 +4215,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         @AppStorage("name") var name: String?
     ///
     ///         var body: some View {
-    ///             Button("Save 🐐") { name = "Javier" }
+    ///             Button("Save 🐐") { name = "Kanye" }
     ///         }
     ///     }
     ///
@@ -18880,23 +18880,68 @@ public struct GroupedListStyle : ListStyle {
 ///
 /// See the example below for all three.
 ///
+/// ### Leading
+///
 /// ```
-/// struct HorizontallyAlignedView: View {
+/// struct ContentView: View {
 ///     var body: some View {
-///         VStack(alignment: HorizontalAlignment.leading) {
+///         VStack(alignment: HorizontalAlignment.leading) { //Try changing this
 ///             Text("⬅️")
+///
+///             HStack {
+///                 Text("Leading")
+///                 Text("Center")
+///                 Text("Trailing")
+///             }
 ///         }
-///         VStack(alignment: HorizontalAlignment.center) {
-///             Text("🤠")
-///         }
-///         VStack(alignment: HorizontalAlignment.trailing) {
-///             Text("➡️")
-///         }
+///         .font(.largeTitle)
 ///     }
 /// }
 /// ```
 ///
-/// ![](horiz-alignment-ex1.png)
+/// ![](horizontalalignment-leading.png)
+///
+/// ### Center
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack(alignment: HorizontalAlignment.center) { //Try changing this
+///             Text("🤠")
+///
+///             HStack {
+///                 Text("Leading")
+///                 Text("Center")
+///                 Text("Trailing")
+///             }
+///         }
+///         .font(.largeTitle)
+///     }
+/// }
+/// ```
+///
+/// ![](horizontalalignment-center.png)
+///
+/// ### Trailing
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack(alignment: HorizontalAlignment.trailing) { //Try changing this
+///             Text("➡️")
+///
+///             HStack {
+///                 Text("Leading")
+///                 Text("Center")
+///                 Text("Trailing")
+///             }
+///         }
+///         .font(.largeTitle)
+///     }
+/// }
+/// ```
+///
+/// ![](horizontalalignment-trailing.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HorizontalAlignment : Equatable {
@@ -18964,17 +19009,23 @@ extension HorizontalAlignment {
     /// guides to views.
     ///
     /// ```
-    /// struct HorizontallyAlignedView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         VStack(alignment: .leading) {
+    ///         VStack(alignment: HorizontalAlignment.leading) { //Try changing this
     ///             Text("⬅️")
-    ///             Text("leading")
+    ///
+    ///             HStack {
+    ///                 Text("Leading")
+    ///                 Text("Center")
+    ///                 Text("Trailing")
+    ///             }
     ///         }
+    ///         .font(.largeTitle)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](horiz-alignment-leading.png)
+    /// ![](horizontalalignment-leading.png)
     ///
     public static let leading: HorizontalAlignment
 
@@ -18992,17 +19043,23 @@ extension HorizontalAlignment {
     /// guides to views.
     ///
     /// ```
-    /// struct HorizontallyAlignedView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         VStack(alignment: .center) {
+    ///         VStack(alignment: HorizontalAlignment.center) { //Try changing this
     ///             Text("🤠")
-    ///             Text("center")
+    ///
+    ///             HStack {
+    ///                 Text("Leading")
+    ///                 Text("Center")
+    ///                 Text("Trailing")
+    ///             }
     ///         }
+    ///         .font(.largeTitle)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](horiz-alignment-center.png)
+    /// ![](horizontalalignment-center.png)
     ///
     public static let center: HorizontalAlignment
 
@@ -19020,17 +19077,23 @@ extension HorizontalAlignment {
     /// guides to views.
     ///
     /// ```
-    /// struct HorizontallyAlignedView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         VStack(alignment: .trailing) {
+    ///         VStack(alignment: HorizontalAlignment.trailing) { //Try changing this
     ///             Text("➡️")
-    ///             Text("trailing")
+    ///
+    ///             HStack {
+    ///                 Text("Leading")
+    ///                 Text("Center")
+    ///                 Text("Trailing")
+    ///             }
     ///         }
+    ///         .font(.largeTitle)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](horiz-alignment-trailing.png)
+    /// ![](horizontalalignment-trailing.png)
     ///
     public static let trailing: HorizontalAlignment
 }
@@ -19251,8 +19314,6 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// Add some modifiers to style your image!
 ///
-/// ![A resizable image, scaled to fit the view, with a 10 point corner radius, and padding.](ocean-image.png)
-///
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
@@ -19265,11 +19326,11 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![Resizable Images](6422F09D-0D92-41F3-8067-0E7499A7F66C.png)
+/// ![A resizable image, scaled to fit the view, with a 10 point corner radius, and padding.](ocean-image.png)
 ///
 /// ### Resizing Images
 ///
-/// **Important:** The ``Image/resizable(capInsets:resizingMode:)`` modifier
+/// - Important: The ``Image/resizable(capInsets:resizingMode:)`` modifier
 /// must come first on an Image before making changes to its size in subsequent
 /// modifiers.
 ///
@@ -25300,9 +25361,9 @@ public struct MagnificationGesture : Gesture {
 ///
 /// There are 3 different initializers, one for each of the different label types:
 ///
-/// 1. String
-/// 2. Localized string key
-/// 3. View
+/// 1. [`String`](https://developer.apple.com/documentation/swift/string)
+/// 2. ``LocalizedStringKey``
+/// 3. ``View``
 ///
 /// The following example presents a menu of three buttons and a submenu, which
 /// contains three buttons of its own.
@@ -25325,7 +25386,7 @@ public struct MagnificationGesture : Gesture {
 /// ![](menu-ex1.gif)
 ///
 /// You can create the menu's title with a ``LocalizedStringKey``, as seen in
-/// the previous example, or with a view builder that creates multiple views,
+/// the previous example, or with a ``ViewBuilder`` that creates multiple views,
 /// such as an image and a text view:
 ///
 /// ```
@@ -25347,7 +25408,8 @@ public struct MagnificationGesture : Gesture {
 /// ### Styling Menus
 ///
 /// Use the ``View/menuStyle(_:)`` modifier to change the style of all menus
-/// in a view. The following example shows how to apply a style:
+/// in a view. See the ``MenuStyle`` page for more on the types of
+/// styles available, as well as how to create your own style.
 ///
 /// ```
 /// struct MenuView: View {
@@ -25361,7 +25423,7 @@ public struct MagnificationGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![](menu-ex3)
+/// ![](menu-ex3.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -25464,9 +25526,9 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     /// Creates a menu based on a style configuration.
     ///
     /// Use this initializer within the ``MenuStyle/makeBody(configuration:)``
-    /// method of a ``MenuStyle`` instance to create an instance of the menu
-    /// being styled. This is useful for custom menu styles that modify the
-    /// current menu style.
+    /// function of a custom ``MenuStyle``. It takes a parameter of the
+    /// exact same type as `makeBody(configuration:)`, so you don't have to
+    /// worry about reconstructing the ``Menu``.
     ///
     /// For example, the following code creates a new, custom style that adds a
     /// red border around the current menu style:
@@ -25477,6 +25539,25 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     ///                 .border(Color.red)
     ///         }
     ///     }
+    ///
+    /// You can then apply this custom style to your ``Menu`` using the
+    /// ``View/menuStyle(_:)`` view modifier:
+    ///
+    ///     strut ContentView: View {
+    ///         var body: some View {
+    ///             Menu {
+    ///                 Button("Open in Preview", action: { })
+    ///                 Button("Save as PDF", action: { })
+    ///             } label: {
+    ///                 Image(systemName: "doc")
+    ///                 Text("PDF")
+    ///             }
+    ///             .menuStyle(RedBorderMenuStyle())
+    ///         }
+    ///     }
+    ///
+    /// - Parameter configuration: The ``MenuStyleConfiguration`` value
+    /// passed to ``MenuStyle/makeBody(configuration:)``.
     ///
     public init(_ configuration: MenuStyleConfiguration) { }
 }
@@ -25568,8 +25649,50 @@ public struct MenuPickerStyle : PickerStyle {
 /// A type that applies standard interaction behavior and a custom appearance
 /// to all menus within a view hierarchy.
 ///
-/// To configure the current menu style for a view hiearchy, use the
-/// ``View/menuStyle(_:)`` modifier.
+/// Use this protocol to create
+/// a componentized style to apply to a ``Menu``.
+///
+/// ### Creating Your Own Style
+///
+/// There is only one requirement of conforming to the `MenuStyle`
+/// protocol: ``MenuStyle/makeBody(configuration:)``. It takes a
+/// `configuration` parameter of type ``MenuStyleConfiguration``
+/// which can be passed to ``Menu``'s ``Menu/init(_:)`` initializer:
+///
+/// ```
+/// struct RedBorderMenuStyle: MenuStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         Menu(configuration)
+///             .border(Color.red)
+///     }
+/// }
+/// ```
+///
+/// After creating a `MenuStyle`, you can apply it to a ``Menu`` using the
+/// ``View/menuStyle(_:)`` view modifier:
+///
+/// ```
+/// struct ButtonStyleView: View {
+///     var body: some View {
+///         Menu("PDF") {
+///             Button("Open in Preview", action: { })
+///             Button("Save as PDF", action: { })
+///         }
+///         .menuStyle(RedBorderMenuStyle())
+///     }
+/// }
+/// ```
+///
+/// ### Pre-Packaged Styles
+///
+/// Existing menu styles include:
+/// - ``DefaultMenuStyle``
+/// - ``BorderlessButtonMenuStyle``
+/// - ``BorderedButtonMenuStyle`` (on macOS)
+///
+/// On iOS, ``BorderlessButtonMenuStyle`` is the
+/// ``DefaultMenuStyle``, so there is no reason to use these.
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -25581,31 +25704,80 @@ extension MenuStyle {
 
     /// Creates a view that represents the body of a menu.
     ///
-    /// - Parameter configuration: The properties of the menu.
+    /// Implement this function to conform to the
+    /// ``MenuStyle`` protocol. It is the only requirement.
     ///
-    /// The system calls this method for each ``Menu`` instance in a view
-    /// hierarchy where this style is the current menu style.
+    /// This function takes in a `configuration` paramter of type
+    /// ``MenuStyleConfiguration``. You can initialize a ``Menu``
+    /// using the ``Menu/init(_:)`` initializer and this parameter,
+    /// and then style it. Return the result:
+    ///
+    /// ```
+    /// struct RedBorderMenuStyle: MenuStyle {
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         return Menu(configuration)
+    ///             .border(Color.red)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// After implementing this function, pass an instance of your structure
+    /// to the ``View/menuStyle(_:)`` view modifier to style a ``Menu``:
+    ///
+    /// ```
+    /// struct ButtonStyleView: View {
+    ///     var body: some View {
+    ///         Menu("PDF") {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         }
+    ///         .menuStyle(RedBorderMenuStyle())
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter configuration: The properties of the menu.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a menu.
+    ///
+    /// This is just a convenience type alias. See ``MenuStyleConfiguration``
+    /// for more.
     typealias Configuration = MenuStyleConfiguration
 }
 
 /// A configuration of a menu.
 ///
-/// Use the ``Menu/init(_:)`` initializer of ``Menu`` to create an
-/// instance using the current menu style, which you can modify to create a
-/// custom style.
+/// Use this type in ``MenuStyle/makeBody(configuration:)`` to create
+/// your own custom ``MenuStyle``. The parameter passed to `makeBody(configuration:)`
+/// is of type `MenuStyleConfiguration`.
 ///
 /// For example, the following code creates a new, custom style that adds a red
 /// border to the current menu style:
 ///
 ///     struct RedBorderMenuStyle : MenuStyle {
-///         func makeBody(configuration: Configuration) -> some View {
+///         func makeBody(configuration: MenuStyleConfiguration) -> some View {
 ///             Menu(configuration)
 ///                 .border(Color.red)
 ///         }
 ///     }
+///
+/// You can then apply the style to a ``Menu`` using the
+/// ``View/menuStyle(_:)`` view modifier:
+///
+///     strut ContentView: View {
+///         var body: some View {
+///             Menu {
+///                 Button("Open in Preview", action: { })
+///                 Button("Save as PDF", action: { })
+///             } label: {
+///                 Image(systemName: "doc")
+///                 Text("PDF")
+///             }
+///             .menuStyle(RedBorderMenuStyle())
+///         }
+///     }
+///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -27730,14 +27902,14 @@ public struct PageTabViewStyle : TabViewStyle {
 ///     var body: some View {
 ///         Path { path in
 ///             path.move(to: .zero)
-///             path.addLine(to: CGPoint(x: 0, y: 100))
+///             path.addLine(to: CGPoint(x: 300, y: 300))
 ///         }
-///         .stroke()
+///         .stroke(Color.orange, lineWidth: 5)
 ///     }
 /// }
 /// ```
 ///
-/// ![75F56224-5C30-4AE3-B526-336907676D1E](75F56224-5C30-4AE3-B526-336907676D1E.png)
+/// ![75F56224-5C30-4AE3-B526-336907676D1E](path.png)
 ///
 /// ### Using a path
 ///
@@ -27750,7 +27922,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// struct CustomShapeView: View {
 ///     var body: some View {
 ///         CustomShape()
-///             .stroke()
+///             .stroke(Color.orange, linewidth: 10)
 ///     }
 /// }
 ///
@@ -27761,7 +27933,7 @@ public struct PageTabViewStyle : TabViewStyle {
 /// }
 /// ```
 ///
-/// ![CE1CCD64-157A-4908-B57D-96FC577A693D](CE1CCD64-157A-4908-B57D-96FC577A693D.png)
+/// ![CE1CCD64-157A-4908-B57D-96FC577A693D](path-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Path : Equatable, LosslessStringConvertible {
@@ -27778,7 +27950,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 5)
     ///     }
     /// }
     ///
@@ -27787,14 +27959,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         var path = Path()
     ///
     ///         path.move(to: .zero)
-    ///         path.addLine(to: CGPoint(x: 0, y: 10))
+    ///         path.addLine(to: CGPoint(x: 300, y: 300))
     ///
     ///         return path
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-init-ex.png)
+    /// ![](path.png)
     ///
     public init() { }
 
@@ -27809,7 +27981,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// ```
     /// struct CustomShapeView: View {
     ///     var body: some View {
-    ///         CustomShape()
+    ///         CustomShape(Color.orange, lineWidth: 10)
     ///             .stroke()
     ///     }
     /// }
@@ -27822,7 +27994,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-456c1.png)
+    /// ![](path.png)
     ///
     /// - Parameter path: A CGPath to define the path.
     public init(_ path: CGPath) { }
@@ -27842,7 +28014,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     ///
@@ -27851,14 +28023,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         let cgMutablePath = CGPath(rect: rect, transform: .none).mutableCopy()!
     ///
     ///         cgMutablePath.move(to: .zero)
-    ///         cgMutablePath.addLine(to: CGPoint(x: 100, y: 100))
+    ///         cgMutablePath.addLine(to: CGPoint(x: 200, y: 200))
     ///
     ///         return Path(cgMutablePath)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-5f79d.png)
+    /// ![](path-3.png)
     ///
     /// - Parameter path: A CGMutablePath to define the path.
     public init(_ path: CGMutablePath) { }
@@ -27872,7 +28044,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     ///
@@ -27883,7 +28055,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-40028.png)
+    /// ![](path-2.png)
     ///
     /// - Parameter path: A CGRect to define the path.
     public init(_ rect: CGRect) { }
@@ -27897,20 +28069,21 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 5)
+    ///             .padding()
     ///     }
     /// }
     ///
     /// struct CustomShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
-    ///         return Path(roundedRect: rect,
-    ///                     cornerSize: CGSize(width: 5, height: 10),
-    ///                     style: .continuous)
+    ///         Path(roundedRect: rect,
+    ///              cornerSize: CGSize(width: 50, height: 50),
+    ///              style: .continuous)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-init-rrcss.png)
+    /// ![](path-rounded.png)
     ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
@@ -27927,20 +28100,21 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 5)
+    ///             .padding()
     ///     }
     /// }
     ///
     /// struct CustomShape: Shape {
     ///     func path(in rect: CGRect) -> Path {
-    ///         return Path(roundedRect: rect,
-    ///                     cornerRadius: CGFloat(10),
-    ///                     style: .continuous)
+    ///         Path(roundedRect: rect,
+    ///              cornerRadius: CGFloat(50),
+    ///              style: .continuous)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-init-rrcrs.png)
+    /// ![](path-rounded.png)
     ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
@@ -27954,7 +28128,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// struct CustomShapeView: View {
     ///     var body: some View {
     ///         CustomShape()
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     ///
@@ -27965,7 +28139,7 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-init-ellipse-in.png)
+    /// ![](ellipse.png)
     ///
     /// - Parameter ellipseIn: The rectangle defining the outside of the ellipse.
     public init(ellipseIn rect: CGRect) { }
@@ -27980,14 +28154,14 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     var body: some View {
     ///         Path { path in
     ///             path.move(to: .zero)
-    ///             path.addLine(to: CGPoint(x: 100, y: 100))
+    ///             path.addLine(to: CGPoint(x: 300, y: 300))
     ///         }
-    ///         .stroke()
+    ///         .stroke(Color.orange, lineWidth: 5)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-13504.png)
+    /// ![](path.png)
     ///
     /// - Parameter callback: A closure that takes in an empty path which
     /// can be mutated.
@@ -28004,19 +28178,19 @@ public struct PageTabViewStyle : TabViewStyle {
     ///     var pathString: String {
     ///         Path { path in
     ///             path.move(to: .zero)
-    ///             path.addLine(to: CGPoint(x: 100, y: 100))
+    ///             path.addLine(to: CGPoint(x: 300, y: 300))
     ///         }
     ///         .description
     ///     }
     ///
     ///     var body: some View {
     ///         Path(pathString)!
-    ///             .stroke()
+    ///             .stroke(Color.orange, lineWidth: 10)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](path-initq.png)
+    /// ![](path.png)
     ///
     /// - Parameter string: The string description of the path, obtained from `description`.
     public init?(_ string: String) { }
@@ -45624,8 +45798,10 @@ extension View {
     ///     var body: some View {
     ///         VStack {
     ///             Button(message) { show = false }
-    ///             Text("When I disappear, this 👆 will become a banana")
-    ///                 .onDisappear { message = "🍌" }
+    ///             if show {
+    ///                 Text("When I disappear, this 👆 will become a banana")
+    ///                      .onDisappear { message = "🍌" }
+    ///             }
     ///         }
     ///     }
     /// }
@@ -45769,13 +45945,6 @@ extension View {
     /// `menuStyle(_:)` modifier. Pass an instance of a struct that
     /// conforms to the ``MenuStyle`` protocol.
     ///
-    /// Existing menu styles include:
-    /// - ``DefaultMenuStyle``
-    /// - ``BorderlessButtonMenuStyle``
-    /// - ``BorderedButtonMenuStyle`` (on macOS)
-    ///
-    /// The ``MenuStyle`` protocol also supports custom structures.
-    ///
     /// ```
     /// struct ButtonStyleView: View {
     ///     var body: some View {
@@ -45789,6 +45958,43 @@ extension View {
     /// ```
     ///
     /// ![](menustyle-modifier.png)
+    ///
+    /// Existing menu styles include:
+    /// - ``DefaultMenuStyle``
+    /// - ``BorderlessButtonMenuStyle``
+    /// - ``BorderedButtonMenuStyle`` (on macOS)
+    ///
+    /// On iOS, ``BorderlessButtonMenuStyle`` is the
+    /// ``DefaultMenuStyle``, so there is no reason to use these.
+    ///
+    /// ### Custom Menu Styles
+    ///
+    /// The ``MenuStyle`` protocol also supports custom structures.
+    /// To create a custom ``MenuStyle``, implement the
+    /// ``MenuStyle/makeBody(configuration:)`` function:
+    ///
+    /// ```
+    /// struct RedBorderMenuStyle: MenuStyle {
+    ///     func makeBody(configuration: Configuration) -> some View {
+    ///         Menu(configuration)
+    ///             .border(Color.red)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// You can then use `menuStyle(_:)` to apply the style:
+    ///
+    /// ```
+    /// struct ButtonStyleView: View {
+    ///     var body: some View {
+    ///         Menu("PDF") {
+    ///             Button("Open in Preview", action: { })
+    ///             Button("Save as PDF", action: { })
+    ///         }
+    ///         .menuStyle(RedBorderMenuStyle())
+    ///     }
+    /// }
+    /// ```
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
