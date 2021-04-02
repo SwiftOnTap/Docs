@@ -19253,7 +19253,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// ### Resizing Images
 ///
-/// - Important:  The ``Image/resizable(capInsets:resizingMode:)`` modifier
+/// - Important: The ``Image/resizable(capInsets:resizingMode:)`` modifier
 /// must come first on an Image before making changes to its size in subsequent
 /// modifiers.
 ///
