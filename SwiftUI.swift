@@ -36008,7 +36008,7 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](scroll-view-init-shows-indicators-content-ex1.gif)
+    /// ![A scroll view containing a VStack with the default scrollbar along right edge of text items.](scroll-view-init-shows-indicators-content-ex1.gif)
     ///
     /// You can specify the scroll direction using the ``ScrollView/axes`` parameter:
     ///
@@ -36033,7 +36033,7 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](scroll-view-init-shows-indicators-content-ex2.gif)
+    /// ![A scroll view containing an HStack with a horizontal scrollbaralong the bottom edge of the text items.](scroll-view-init-shows-indicators-content-ex2.gif)
     ///
     /// Make the scroll bar invisible using ``ScrollView/showsIndicators``:
     //
@@ -36058,7 +36058,7 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](scroll-view-init-shows-indicators-content-ex3.gif)
+    /// ![A scroll view containing an HStack with a hidden horizontal scroll bar along the bottom edge of the text items.](scroll-view-init-shows-indicators-content-ex3.gif)
     ///
     /// Notice how the ``HStack`` doesn't take up the full view, so the
     /// indicators are inset from the side of the screen. We can
@@ -36087,7 +36087,7 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](scroll-view-init-shows-indicators-content-ex4.gif)
+    /// ![A scroll view containing an HStack with a horizontal scrollbar along the bottom of the frame.](scroll-view-init-shows-indicators-content-ex4.gif)
     ///
     /// - Parameters:
     ///   - axes: The scroll view's scrollable axis. The default axis is the
@@ -46846,7 +46846,7 @@ extension View {
     /// enum MyFruit: String {
     ///     case banana = "Banana 🍌🍌"
     ///     case apple = "Apple 🍎🍎"
-    ////    case peach = "Peach 🍑🍑"
+    ///    case peach = "Peach 🍑🍑"
     /// }
     ///
     /// struct ExampleView: View {
@@ -47319,7 +47319,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](environment.png)
+    /// ![A white child view displaying the text "Environment 🌳 in SwiftUI works!"](environment.png)
     ///
     /// SwiftUI provides dedicated view modifiers for setting most
     /// environment values, like the ``View/truncationMode(_:)``
@@ -47346,7 +47346,7 @@ extension View {
     /// To illustrate, see this demonstration using truncation mode from above:
     ///
     /// ```
-    /// struct ContentView: View {
+    /// struct ChildView: View {
     ///     var body: some View {
     ///         VStack {
     ///             Text("This is a long 🛹 piece of text 💬 to demonstrate environment")
@@ -47360,7 +47360,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](environment-modifier.png)
+    /// ![A white child view displaying two of the same head-truncated lines of text, which read "...of text 💬 to demonstrate environment", within a VStack.](environment-modifier.png)
     ///
     /// - Parameters:
     ///   - keyPath: A key path that indicates the property of the
