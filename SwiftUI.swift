@@ -25667,6 +25667,7 @@ public struct MenuPickerStyle : PickerStyle {
 ///         .menuStyle(RedBorderMenuStyle())
 ///     }
 /// }
+/// ```
 ///
 /// ### Pre-Packaged Styles
 ///
