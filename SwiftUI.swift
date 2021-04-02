@@ -34366,11 +34366,24 @@ extension Scene {
     ///             }
     ///             .onChange(of: scenePhase) { newScenePhase in
     ///                 if newScenePhase != .active {
-    ///                     message = "Come back! 👋"
+    ///                     DispatchQueue.main.async {
+    ///                         message = "Come back! 👋"
+    ///                     }
     ///                 }
     ///             }
     ///         }
     ///     }
+    ///
+    /// Then you can add this ``Scene`` to your ``App``:
+    ///
+    ///     @main
+    ///     struct MyApp: App {
+    ///         var body: some Scene {
+    ///             CustomScene()
+    ///         }
+    ///     }
+    ///
+    /// Now when you leave the app via multitasking, you get a message:
     ///
     /// - Parameters:
     ///   - value: The value to watch for changes.
