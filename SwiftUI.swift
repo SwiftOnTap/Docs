@@ -5907,7 +5907,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     ///         }
     ///     }
     ///
-    /// ![](buttonstyle-redborder.png)
+    /// ![](button-init-red-outline-ex.gif)
     ///
     /// - Parameter configuration: A configuration for a style with a custom
     ///   appearance and custom interaction behavior.
@@ -6388,7 +6388,7 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](progress-view-style-ex2.png)
+/// ![](progress-spinnner-orange-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
@@ -6429,7 +6429,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![](progress-view-style-ex2.png)
+    /// ![](progress-spinnner-orange-ex.gif)
     ///
     public init(tint: Color) { }
 
@@ -30826,7 +30826,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.png)
+/// ![](dark-blue-shadowed-progress-view-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, CurrentValueLabel : View {
@@ -30857,7 +30857,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-view-init-plain.png)
+    /// ![](progress-spinner-gray.gif)
     ///
     public init() where Label == EmptyView { }
 
@@ -30873,7 +30873,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-view-init-label.png)
+    /// ![](progress-spinner-runner.gif)
     ///
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
@@ -30898,7 +30898,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-view-init-517e1.png)
+    /// ![](progress-spinner-runner.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
@@ -30926,7 +30926,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-view-init-517e1.png)
+    /// ![](progress-spinner-runner.gif)
     ///
     public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
 }
@@ -31220,7 +31220,7 @@ extension ProgressView {
 ///         }
 ///     }
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.png)
+/// ![](dark-blue-shadowed-progress-view-ex.gif)
 ///
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -31268,7 +31268,7 @@ extension ProgressViewStyle {
     ///         }
     ///     }
     ///
-    /// ![](dark-blue-shadowed-progress-view-ex.png)
+    /// ![](dark-blue-shadowed-progress-view-ex.gif)
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
@@ -31357,7 +31357,7 @@ extension ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.png)
+/// ![](dark-blue-shadowed-progress-view-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressViewStyleConfiguration {
@@ -35881,6 +35881,8 @@ public struct ScrollView<Content> : View where Content : View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](scroll-view-content-ex.gif)
     ///
     /// The `content` is usually a ``VStack`` or an ``HStack``, but it
     /// can be any ``View`` that requires scrolling.
@@ -45069,7 +45071,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](sheet-on-dismiss-ex.gif)
+    /// ![](sheet-i-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
@@ -45104,7 +45106,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](sheet-is-presented-ex.gif)
+    /// ![](sheet-ip-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
@@ -45171,7 +45173,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](full-screen-on-dismiss-ex.gif)
+    /// ![](full-screen-cover-i-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the full screen cover. The full screen
@@ -45219,7 +45221,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](full-screen-is-presented-ex.gif)
+    /// ![](full-screen-cover-ip-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the modal view is presented.
@@ -45820,6 +45822,8 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![](view-on-dissapear-perform-ex.gif)
+    ///
     /// - Parameter action: The action to perform. If `action` is `nil`, the
     ///   call has no effect.
     ///
@@ -46008,6 +46012,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    /// 
+    /// ![](view-menu-style-pdf-ex.gif)
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
@@ -46837,8 +46843,8 @@ extension View {
     /// style, but there are 7 styles available. See ``PickerStyle`` for more.
     ///
     /// ```
-    /// enum MyFruit {
-    ///     case banana = ""Banana 🍌🍌"
+    /// enum MyFruit: String {
+    ///     case banana = "Banana 🍌🍌"
     ///     case apple = "Apple 🍎🍎"
     ////    case peach = "Peach 🍑🍑"
     /// }
@@ -50317,6 +50323,8 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![](nav-bar-bbh-ex.gif)
     ///
     /// - Parameter hidesBackButton: A Boolean value that indicates whether to
     ///   hide the back button.
