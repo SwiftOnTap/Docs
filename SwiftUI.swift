@@ -44891,7 +44891,7 @@ extension VerticalAlignment {
 /// modifiers that you use to configure views.
 ///
 /// You create custom views by declaring types that conform to the ``View``
-/// protocol. Implement the required `View/body-swift.property` computed
+/// protocol. Implement the required ``View/body-swift.variable`` computed
 /// property to provide the content for your custom view.
 ///
 ///     struct MyView: View {
