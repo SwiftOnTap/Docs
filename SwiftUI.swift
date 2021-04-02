@@ -25656,11 +25656,15 @@ extension MenuStyle {
     ///         .menuStyle(RedBorderMenuStyle())
     ///     }
     /// }
+    /// ```
     ///
     /// - Parameter configuration: The properties of the menu.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
 
     /// The properties of a menu.
+    ///
+    /// This is just a convenience type alias. See ``MenuStyleConfiguration``
+    /// for more.
     typealias Configuration = MenuStyleConfiguration
 }
 
