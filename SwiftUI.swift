@@ -35695,6 +35695,8 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
+    /// ![](scroll-view-content-ex.gif)
+    ///
     /// The `content` is usually a ``VStack`` or an ``HStack``, but it
     /// can be any ``View`` that requires scrolling.
     public var content: Content
@@ -46620,8 +46622,8 @@ extension View {
     /// style, but there are 7 styles available. See ``PickerStyle`` for more.
     ///
     /// ```
-    /// enum MyFruit {
-    ///     case banana = ""Banana 🍌🍌"
+    /// enum MyFruit: String {
+    ///     case banana = "Banana 🍌🍌"
     ///     case apple = "Apple 🍎🍎"
     ////    case peach = "Peach 🍑🍑"
     /// }
