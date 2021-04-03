@@ -3618,7 +3618,7 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// ![AnyView Example 1](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
+/// ![A white AnyView displaying the text "Hello,world!"](17C757BC-E76E-4E17-9513-6C5AB3A80796.png)
 ///
 /// Changing the type of view using with `AnyView` destroys the view hierarchy
 /// for the old type and creates a new hierarchy for the new type. In the
@@ -3639,7 +3639,7 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
+/// ![A blank red AnyView.](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
 /// Avoid frequently changing the underlying type of view being erased,
 /// especially for complex views, as poor performance may result.
@@ -3675,7 +3675,7 @@ extension AnyTransition {
 /// }
 /// ```
 ///
-/// ![AnyView Example 2](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
+/// ![A blank red AnyView.](5AFA4383-AD4C-4AC6-9C25-5E3F154E395D.png)
 ///
 /// The latter example performs better as the SwiftUI runtime is given a
 /// more explicit type hierarchy, where the switch between `foo` being `true`
@@ -4688,7 +4688,7 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// ![Binding Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
+/// ![A gif showing a text field that displays the corresponding placeholder text in the view center until changed.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-1.gif)
 ///
 /// In the example above, the source of truth is a `@State` variable,
 /// named `text`. `text`  represents a
@@ -4731,7 +4731,7 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// ![Binding Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
+/// ![A gif showing a view with the text "Disabled", which is replaced by "Enabled" when the corresponding toggle on the right side of the frame is clicked.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-2.gif)
 ///
 /// The binding between the model's `isEnabled` variable and a toggle is
 /// established using `$viewModel.isEnabled` within `ExampleView`'s body.
@@ -4778,7 +4778,7 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+/// ![A gif displaying a view containing a list with three members; the gif shows two of the items being deleted frim the list.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
@@ -5679,7 +5679,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-/// ![Button with sign in text](button-signin.png)
+/// ![Button with text reading "Sign in".](button-signin.png)
 ///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
@@ -5691,7 +5691,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-/// ![Button with sign in text](button-signin.png)
+/// ![Button with text reading "Sign in".](button-signin.png)
 ///
 /// The method of triggering the button varies by platform:
 /// - In iOS and watchOS, the user triggers a standard button by tapping on it.
@@ -5726,7 +5726,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-/// ![Add Item List Cell](AddItem.png)
+/// ![A list with three items, the last of which is a button reading "Add Item".](AddItem.png)
 ///
 /// Similarly, to create a context menu item that triggers an action, add a
 /// button to the menu's content:
@@ -5742,7 +5742,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-///![Button Example 4](button-menu-content-ex.gif)
+///![A gif showing a view containing a button reading "Press and hold for copy-past options"; once the button is clicked, a pop-up containing three buttons, reading "Cut," "Copy," and "Paste", appears.](button-menu-content-ex.gif)
 ///
 /// This pattern extends to most other container views in SwiftUI that have
 /// customizable, interactive content, like forms (instances of ``Form``).
@@ -5766,7 +5766,7 @@ public struct BorderlessButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-///![Plain Button Example](Plain-Button.png)
+///![A view containing an HStack with two plain text buttons, "Sign In" and "Register".](Plain-Button.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Button<Label> : View where Label : View {
@@ -9775,7 +9775,7 @@ extension DisclosureGroup where Label == Text {
 /// }
 /// ```
 ///
-/// ![Divider Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
+/// ![A view containing a VStack with two text lines, "My Awesome Book" and "My Name," separated by a horizontal divider in the form of a thin gray line.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
 /// Or use a ``Divider`` in an ``HStack`` to create a vertical line between
 /// horizontally laid out elements:
@@ -9794,7 +9794,7 @@ extension DisclosureGroup where Label == Text {
 /// }
 /// ```
 ///
-/// ![Divider Example 2](Horizontally-Split-Text.png)
+/// ![A view containing an HStack with two text lines "This is a line of text" and "This is an unrelated line of text," separated by a vertical divider in the form of a thin gray line.](Horizontally-Split-Text.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
@@ -11966,7 +11966,7 @@ extension EdgeInsets : Animatable {
 /// }
 /// ```
 ///
-/// ![EditButton Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/EditButton-example-1.gif)
+/// ![A gif showing a view with an "Edit" button right aligned above a list containg three fruit emojis as members; when clicked, the word "Edit" is replaced by "Done" and a red circle appears next to each list item, allowing it to be deleted.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/EditButton-example-1.gif)
 ///
 /// [[list-edit-button]]
 ///
@@ -12400,7 +12400,7 @@ public struct EmptyCommands : Commands {
 /// }
 /// ```
 ///
-/// ![EmptyView Example 1](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
+/// ![A view containing a VStack with two lines of text, "Hello" and "World", without an empty view between them.](AC0D635E-9E22-490E-83A5-F7E4B93C6F45.png)
 ///
 /// `EmptyView` has many uses. For example, it can be used to instruct
 /// SwiftUI that your UI control does not want a label:
@@ -12429,7 +12429,7 @@ public struct EmptyCommands : Commands {
 /// }
 /// ```
 ///
-/// ![EmptyView Example 2](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
+/// ![A view displaying the text "Hello, world!"](5B6AA5FC-AE37-414B-B13A-FD1854710D5D.png)
 ///
 /// Account for `EmptyView` when building your own custom UI controls.
 /// For example, the following code specifies that `label` should be hidden
@@ -12995,7 +12995,7 @@ extension EnvironmentKey {
 ///         }
 ///     }
 ///
-/// ![](enviornmentvalues-1.png)
+/// ![A white view containing text with a small frame width and an evironment modifier defining a line limit of two; the text displays as "This is some long,\n multiline text 💬, that ju...". ](enviornmentvalues-1.png)
 ///
 /// The value that you set affects the environment for the view that you modify
 /// --- including its descendants in the view hierarchy --- but only up to the
@@ -13014,7 +13014,7 @@ extension EnvironmentKey {
 ///         }
 ///     }
 ///
-/// ![](enviornmentvalues-1.png)
+/// ![A white view containing text with a small frame width and a line limit of two; the text displays as "This is some long,\n multiline text 💬, that ju...".](enviornmentvalues-1.png)
 ///
 /// In some cases, using a dedicated view modifier provides additional
 /// functionality. For example, you must use the
@@ -13035,7 +13035,7 @@ extension EnvironmentKey {
 ///         }
 ///     }
 ///
-/// ![](eviron-vals-dark-mode.gif)
+/// ![A gif displaying a white view with a default style button reading "Tap me for dark mode! 🌚🌙", which when clicked results in the appearance of a popover view with the preferred color scheme .dark.](eviron-vals-dark-mode.gif)
 ///
 /// Create custom environment values by defining a type that
 /// conforms to the ``EnvironmentKey`` protocol, and then extending the
@@ -14636,7 +14636,7 @@ public struct FocusedValues {
 /// }
 /// ```
 ///
-/// ![Font Example 1](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
+/// ![A view displaying the text "Banana🍌🍌" in large title font.](D0E11E53-F994-4D76-BEE9-FB617380BEB1.png)
 ///
 /// In addition to standard system font types like ``Font/TextStyle/largeTitle``
 /// and ``Font/body``, you can customize the size, weight and design of your
@@ -14651,7 +14651,7 @@ public struct FocusedValues {
 /// }
 /// ```
 ///
-/// ![Font Example 2](0C3CED07-2FD4-40E5-904D-8D1CD833E1F6.png)
+/// ![A view displaying the text "Banana🍌🍌" in bolded, rounded, 32 point font.](0C3CED07-2FD4-40E5-904D-8D1CD833E1F6.png)
 ///
 /// Non system-fonts can be applied using ``Font/custom(_:size:)``
 ///
@@ -14664,7 +14664,7 @@ public struct FocusedValues {
 /// }
 /// ```
 ///
-/// ![Font Example 3](E683BBEB-8DE2-412D-9A3F-BB3C7E658764.png)
+/// ![A view displaying the text "Banana🍌🍌" in the non-system font "American Typewriter."](E683BBEB-8DE2-412D-9A3F-BB3C7E658764.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Font : Hashable {
@@ -16806,7 +16806,7 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![](font-init.png)
+    /// ![A white view displaying the text "I'm a big CT font 🦑" in a large, custom font made using the native Core Text API.](font-init.png)
     public init(_ font: CTFont) { }
 }
 
@@ -17337,7 +17337,7 @@ public struct GeometryProxy {
 /// }
 /// ```
 ///
-/// ![GeometryReader Example 1](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
+/// ![A view displaying a green geometry reader frame in the upper left quadrant of the view.](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
 ///
 /// Note: `GeometryReader` **fills into** its parent container, and the current
 /// default alignment of its content is ``Alignment/topLeading``. The example
@@ -17381,7 +17381,7 @@ public struct GeometryProxy {
 /// }
 /// ```
 ///
-/// ![6DEDD064-9A38-4714-9732-9C8D6F6D5715](6DEDD064-9A38-4714-9732-9C8D6F6D5715.png)
+/// ![A view containing a VStack composed of a red background geometry reader frame with the text "Hello, World!" below it.](6DEDD064-9A38-4714-9732-9C8D6F6D5715.png)
 ///
 /// Note that `someFrame` will be updated to hold the frame of `SomeView`, *not*
 /// the frame of its container, the `VStack`. This is achieved by forcing a
@@ -17455,7 +17455,7 @@ public struct GeometryProxy {
 /// }
 /// ```
 ///
-/// ![GeometryReader Example 3](7933D23D-6833-4FE6-8BDE-21C08211172C.png)
+/// ![A view containing a VStack composed of a red background geometry reader frame with the text "Hello, World!" below it.](7933D23D-6833-4FE6-8BDE-21C08211172C.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct GeometryReader<Content> : View where Content : View {
@@ -18807,7 +18807,7 @@ public struct GroupedListStyle : ListStyle {
 ///         }
 ///     }
 ///
-/// ![HStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
+/// ![A view displaying an HStack composed of three text components, "🍌🍌", "🍏🍏", and "🍑🍑".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-1.png)
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
 ///
@@ -18822,7 +18822,7 @@ public struct GroupedListStyle : ListStyle {
 ///     }
 ///
 ///
-/// ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
+/// ![A view displaying an HStack composed of three text components, "🍌🍌", "🍏🍏", and "🍑🍑", with spacing between them and top alignment.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
 ///
 /// Learn more about the properties of each alignment choice via the ``VerticalAlignment`` struct.
 ///
@@ -24060,7 +24060,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 1](7EF39BE9-B27B-4BA3-A4AD-CA3FCD274F9F.png)
+/// ![A view displaying a list containing three text members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑".](7EF39BE9-B27B-4BA3-A4AD-CA3FCD274F9F.png)
 ///
 /// ### Creating a `List` with a variable number of elements
 ///
@@ -24079,7 +24079,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 2](5A921B5A-4B90-457C-A65F-8AE616E0E932.png)
+/// ![A view displaying a dynamic list containing an array with three string members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑," each displayed as a separate list item.](5A921B5A-4B90-457C-A65F-8AE616E0E932.png)
 ///
 /// This is different from the previous example, because this initializer
 /// accepts a `rowContent` parameter that allows the `List` to generate SwiftUI
@@ -24120,7 +24120,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 3](2D10DFE0-3A9D-4AD6-B7C3-A350EC37D0C4.png)
+/// ![A view displaying a list containing a fixed element "Hello, World!" and three dynamic elements, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑".](2D10DFE0-3A9D-4AD6-B7C3-A350EC37D0C4.png)
 ///
 /// As seen in the above example, ``ForEach`` also accepts an `id` parameter
 /// along with a `rowContent`.
@@ -24149,7 +24149,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 4](0CAA80FC-BDA9-405A-8AB1-5ED8B0ECF92C.png)
+/// ![A view displaying a list separated into two sections, one with the header "NOT A FRUIT" above the element "Hello, World!" and another with the header "FRUIT" above three dynamic elements, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑".](0CAA80FC-BDA9-405A-8AB1-5ED8B0ECF92C.png)
 ///
 /// A ``Section`` used within a `List` will render as a table-section containing
 /// the elements wrapped by that section. Just as for unsectioned elements,
@@ -24176,7 +24176,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 5](7FC84606-BB3F-41C2-BEC1-40346A413676.png)
+/// ![A view displaying an inset grouped list containing three text members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑".](7FC84606-BB3F-41C2-BEC1-40346A413676.png)
 ///
 /// SwiftUI offers various list styles:
 ///
@@ -24214,7 +24214,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 6](A6394785-F064-497F-A48B-7ED9DAA55452.png)
+/// ![A view displaying a list containing three text members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑", each with a different list row background color.](A6394785-F064-497F-A48B-7ED9DAA55452.png)
 ///
 /// A background can be provided for multiple list rows at a time, by applying
 /// the ``View/listRowBackground(_:)`` modifier to ``ForEach``.
@@ -24237,7 +24237,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 7](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
+/// ![A view displaying a dynamic list containing an array with three string members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑," each displayed as a separate list item with a yellow list row background.](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
 ///
 /// [<-]
 ///
@@ -24269,7 +24269,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-///![List Example 8](list-items-deletable.gif)
+///![A view displaying a list containing an array with three string members, "🍌", "🍏", and "🍑," each displayed as a separate deletable list item. The gif shows the "🍏" being deleted by sliding the row to the right and clicking the red "Delete" button that appears.](list-items-deletable.gif)
 ///
 /// [<-]
 ///
@@ -24301,7 +24301,7 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![List Example 9](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
+/// ![A gif showing a view with an "Edit" button right aligned above a list containg three fruit emojis as members; when clicked, the word "Edit" is replaced by "Done" and red "Delete" button appears in line with any list item when it is slid to the left.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
 ///
 /// [<-]
 /// ### Further notes
@@ -26261,7 +26261,7 @@ public struct NavigationBarItem {
     /// }
     /// ```
     ///
-    /// ![NavigationView Example 3](displaymode.png)
+    /// ![A white navigation view displaying the centered body text "My title is large! 👣" with a left aligned title "Title" in automatic display mode.](displaymode.png)
     public enum TitleDisplayMode {
 
         /// Inherit the display mode from the previous navigation item.
@@ -26339,7 +26339,7 @@ public struct NavigationBarItem {
         /// }
         /// ```
         ///
-        /// ![NavigationView Example 3](displaymode-large.png)
+        /// ![A white navigation view displaying the centered body text "My title is large! 👣" with a left aligned title "Large" in large display mode.](displaymode-large.png)
         @available(tvOS, unavailable)
         @available(watchOS, unavailable)
         case large
@@ -26479,7 +26479,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 1](CB034D71-ECFF-46DF-93B0-DE24A88C5721.png)
+/// ![A navigation view displaying the plain text "Hello Bananas🍌🍌".](CB034D71-ECFF-46DF-93B0-DE24A88C5721.png)
 ///
 /// A navigation bar is added by default. The navigation bar can be hidden via
 /// ``View/navigationBarHidden(_:)``.
@@ -26500,7 +26500,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 2](382BE2AE-E26A-4214-9F32-8F1786543B14.png)
+/// ![A navigation view displaying the plain text "Hello Bananas🍌🍌" under a left aligned navigation title that reads "Home".](382BE2AE-E26A-4214-9F32-8F1786543B14.png)
 ///
 ///
 /// ``View/navigationTitle(_:)-d3628`` is only available on iOS 14 and higher.
@@ -26533,7 +26533,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 3](538F7154-7B14-41AD-B913-2391A4D850CB.png)
+/// ![A navigation view displaying the plain text "Hello Bananas🍌🍌" under a navigation title with display mode .large that reads "Home".](538F7154-7B14-41AD-B913-2391A4D850CB.png)
 ///
 /// [<-]
 /// [navigation-link ->]
@@ -26564,7 +26564,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
+/// ![A gif that shows a view displaying a navigation link with a text button that reads "I want bananas!"; once the button is clicked, another view with a navigation title reading "🍌🍌" and text reading "Bananas" slides left over the main view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-4.gif)
 ///
 /// [<-]
 /// [navigation-bar-hidden ->]
@@ -26586,7 +26586,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 5](83BA32E9-ABB0-401F-B66D-CC695D71AD54.png)
+/// ![A navigation view displaying the text "Hello Bananas🍌🍌" and hiding the navigation bar.](83BA32E9-ABB0-401F-B66D-CC695D71AD54.png)
 ///
 /// Note that the navigation bar can be unhidden by child views.
 /// ``View/navigationBarHidden(_:)`` is a *preference value*, and uses the
@@ -26621,7 +26621,10 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
+/// ![A gif that shows a view displaying a navigation view containing a VStack
+/// with the text "Hello Bananas🍌🍌" and a navigation link reading "Take me to
+/// the second screen!"; with a text button that reads "Take me to the second screen!";
+/// once the link is clicked, another view with a navigation title reading "Second Screen" and text reading "Bananas🍌🍌" slides left over the main view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
 ///
 /// And popping `SecondScreen` (or navigating back) hides it again, as
 /// `SecondScreen` is removed from the view hierarchy, leaving `ExampleView`
@@ -36008,7 +36011,7 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![A scroll view containing a VStack with the default scrollbar along right edge of text items.](scroll-view-init-shows-indicators-content-ex1.gif)
+    /// ![A scroll view containing a VStack with the default scrollbar along the right edge of text items.](scroll-view-init-shows-indicators-content-ex1.gif)
     ///
     /// You can specify the scroll direction using the ``ScrollView/axes`` parameter:
     ///
@@ -36033,7 +36036,7 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![A scroll view containing an HStack with a horizontal scrollbaralong the bottom edge of the text items.](scroll-view-init-shows-indicators-content-ex2.gif)
+    /// ![A scroll view containing an HStack with a horizontal scrollbar along the bottom edge of the text items.](scroll-view-init-shows-indicators-content-ex2.gif)
     ///
     /// Make the scroll bar invisible using ``ScrollView/showsIndicators``:
     //
@@ -36308,7 +36311,7 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     /// }
     /// ```
     ///
-    /// ![](section-init-1.png)
+    /// ![A white view showing a list divided into two sections, each with a header reading "Section #_" and a footer reading "Dislaimer #_".](section-init-1.png)
     ///
     /// You can actually make the `header` and `footer` any ``View``, though
     /// the initializer doesn't allow much space for it. If you want
@@ -36342,7 +36345,7 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     /// }
     /// ```
     ///
-    /// ![](section-init-2.png)
+    /// ![A white view with one section containing a header, which displays an HStack made up of an image and the text "Section", and a footer, which reads "A disclaimer might go here", in footnote text.](section-init-2.png)
     ///
     /// - Parameters:
     ///   - header: A view placed on top
@@ -36379,7 +36382,7 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
     /// }
     /// ```
     ///
-    /// ![](section-init-3.png)
+    /// ![A white view displaying a list with two members and a footer reading "Disclaimer:..."](section-init-3.png)
     ///
     /// Footer content will look different depending on the ``ListStyle``:
     ///
@@ -36399,7 +36402,7 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
     /// }
     /// ```
     ///
-    /// ![](section-init-4.png)
+    /// ![A white view displaying an inset grouped list with two members and a small footer below the edge of the list that reads "Disclaimer:..."](section-init-4.png)
     ///
     /// - Parameters:
     ///   - footer: A view placed on bottom
@@ -36430,7 +36433,7 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](section-init-5.png)
+    /// ![A white view displaying a list with two items and a text header that reads "Section #1".](section-init-5.png)
     ///
     /// Header content can be any view, so you can style the parameter
     /// however you would like:
@@ -36458,7 +36461,7 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](section-init-6.png)
+    /// ![A white view displaying a list with two items and a header containing an HStack made up of a small image and the text "Section #1".](section-init-6.png)
     ///
     /// - Parameters:
     ///   - header: A view placed on top
@@ -36493,9 +36496,10 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
     /// }
     /// ```
     ///
-    /// ![](section-1.png)
+    /// ![A white view displaying a list with two sections, each without a header or footer, resulting in no line between.](section-1.png)
     ///
-    /// - Parameters content: The section contents
+    /// - Parameters
+    ///   - content: The section contents
     public init(@ViewBuilder content: () -> Content) { }
 }
 
