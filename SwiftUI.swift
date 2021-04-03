@@ -2060,7 +2060,7 @@ extension Angle : Animatable {
 ///     }
 /// }
 /// ```
-///![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+///![A gif that displays a VStack containing the text "Banana🍌🍌", which has been animated to shake ten times.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
 ///
 /// This example demonstrates a horizontal "shake effect", applied on a
@@ -2127,7 +2127,7 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
+/// ![A gif that displays a VStack containing the text "Banana🍌🍌", which has been animated to repeatedly move in a circular motion around the view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
 ///
 /// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
 ///
@@ -5638,7 +5638,7 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 ///         func tap() { /* implement here */ }
 ///     }
 ///
-/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+/// ![A view containing a VStack with three buttons; the first button is plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// ``View/buttonStyle(_:)-ea21b`` modifier.
@@ -5975,7 +5975,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// }
 /// ```
 ///
-/// ![ButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
+/// ![A gif showing a styled yellow button reading "Banana🍌🍌" that enlarges slightly when tapped.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-1.gif)
 ///
 /// Button style applies to all buttons within a view hierarchy. For example,
 /// you could apply `ButtonStyle` to a ``VStack``.
@@ -5995,7 +5995,7 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
 /// }
 /// ```
 ///
-/// ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
+/// ![A gif showing a view containg a VStacj with three fruit emoji buttons; each button enlarges slightly whe tapped.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
 ///
 /// For more on how to customize your button style body, check out
 /// ``ButtonStyle/makeBody(configuration:)``. To provide greater control over
@@ -7852,9 +7852,6 @@ extension CommandsBuilder {
 /// specific date and time selections. Some variants may include rich editing
 /// controls in a popup.
 ///
-/// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
-///
-///
 ///      struct ExampleView: View {
 ///          @State var date: Date = Date()
 ///
@@ -7865,6 +7862,7 @@ extension CommandsBuilder {
 ///          }
 ///      }
 ///
+/// ![A gif displaying the selection of a date using a calendar and time using a text input and am/pm switch in a compact date picker.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
 ///
 @available(iOS 14.0, macCatalyst 13.4, macOS 10.15.4, *)
 @available(tvOS, unavailable)
@@ -8912,7 +8910,7 @@ extension DatePickerStyle {
 ///         func tap() { /* implement here */ }
 ///     }
 ///
-/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+/// ![A view containing a VStack with three buttons; the first button is plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// If you create a button inside a container, like a ``List``, the style
 /// resolves to the recommended style for buttons inside that container for that
@@ -8952,7 +8950,7 @@ public struct DefaultButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-/// ![DefaultDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+/// ![A gif displaying the selection of a date using a calendar and time using a text input and am/pm switch in a default date picker.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -8978,13 +8976,13 @@ public struct DefaultDatePickerStyle : DatePickerStyle {
 ///
 ///     struct BananaLabel: View {
 ///         var body: some View {
-///             Label("Bananas 🍌🍌", systemImage: "heart.fill")
+///             Label("Banana 🍌🍌", systemImage: "heart.fill")
 ///                 .foregroundColor(.yellow)
 ///                 .groupBoxStyle(DefaultGroupBoxStyle())
 ///         }
 ///     }
 ///
-/// ![DefaultGroupBoxStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
+/// ![A default group box view containing a label with a heart that reads "Banana 🍌🍌" followed underneath by a text view which says "Go Bananas".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/default-groupboxstyle-example-1.png)
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -9067,7 +9065,9 @@ public struct DefaultGroupBoxStyle : GroupBoxStyle {
 /// }
 /// ```
 ///
-/// ![Default Label Styles](default-labelstyle-comparison.png)
+/// ![A view displaying a VStack with three labels; the first reads as
+/// "<3 Banana" and is of default style, the second reads as "<3" and is of
+/// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct DefaultLabelStyle : LabelStyle {
@@ -9123,7 +9123,7 @@ public struct DefaultLabelStyle : LabelStyle {
 ///         }
 ///     }
 ///
-/// ![DefaultListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
+/// ![A white view containing a list with three text items.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-default-example-1.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultListStyle : ListStyle {
@@ -9321,7 +9321,9 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![DefaultPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+/// ![Gif displays a view with a VStack that contains a default wheel picker rolling
+/// through each of three options, "Banana🍌🍌","Apple🍎🍎", and "Peach🍑🍑",
+/// and a corresponding text view which reads "Your Favorite Fruit: _".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
 ///
 /// [pickerstyle-default ->]
 /// Your app can also use explicit tags to identify picker content.
@@ -9361,7 +9363,10 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![DefaultPickerStyle Example 1](picker-style-1.gif)
+/// ![Gif displays a view with a VStack that contains a default wheel picker rolling
+/// through each of three options, "Banana🍌🍌","Apple🍎🍎", and "Peach🍑🍑",
+/// and a corresponding text view which reads "Your Favorite Fruit: _" using explicit
+/// tags.](picker-style-1.gif)
 ///
 /// [<-]
 /// You can override a picker’s style. To apply the default style to a picker,
@@ -9594,10 +9599,10 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 
 /// The default toggle style.
 ///
-/// If you create a toggle directly on a blank canvas, the style varies:
-/// - For the phone, pad, and watch idioms, the default toggle style is a switch.
-/// - For the Mac idiom, the default toggle style is a checkbox.
-/// - For the TV idom, the default toggle style is a button.
+/// If you create a toggle directly on a blank canvas, the default toggle style varies:
+/// - A switch for the phone, pad, and watch idioms
+/// - A checkbox for the Mac idiom
+/// - A button for the TV idom
 ///
 /// ```
 /// struct ExampleView: View {
@@ -9612,7 +9617,7 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
 /// }
 /// ```
 ///
-/// ![DefaultToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+/// ![Gif displays a view containing the text "Banana🍌🍌" with a corresponding default toggle, which is being switched on and off.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
 ///
 /// If you create a toggle inside a container, such as a `List`, the toggle
 /// automatically uses a style appropriate to the context. To apply a different
@@ -18176,7 +18181,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///         }
 ///     }
 ///
-/// ![Graphical Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
+/// ![Gif displays a graphical date picker view consisting of a calendar in
+/// which a date is selected and a a time selector in which an hour and minute
+/// can be entered and a toggle flips between AM and PM.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
 ///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -19241,7 +19248,9 @@ public struct HoverEffect {
 /// }
 /// ```
 ///
-/// ![Default Label Styles](default-labelstyle-comparison.png)
+/// ![A view displaying a VStack with three labels; the first reads as
+/// "<3 Banana" and is of default style, the second reads as "<3" and is of
+/// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
 ///
 /// - Note: The title of the label is still used for non-visual descriptions,
 /// such as VoiceOver.
@@ -21460,7 +21469,9 @@ public struct InlinePickerStyle : PickerStyle {
 ///         }
 ///     }
 ///
-/// ![InsetGroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
+/// ![A view which contains an inset grouped list, separated by a gap from
+/// the edge of the frame, with three text items, "Bananas 🍌🍌","Apples 🍎🍎",
+/// and "Peaches 🍑🍑", ](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
 ///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
@@ -24703,7 +24714,7 @@ public struct ListItemTint {
 /// }
 /// ```
 ///
-/// ![ListStyle Example 1](BF5B130F-5A57-4FC5-8A40-723D8F924A06.png)
+/// ![A view containing an inset list wiht two text items.](BF5B130F-5A57-4FC5-8A40-723D8F924A06.png)
 ///
 /// Two list styles are included specifically for rendering grouped lists:
 /// - ``GroupedListStyle``
@@ -24728,7 +24739,7 @@ public struct ListItemTint {
 /// }
 /// ```
 ///
-/// ![ListStyle Example 2](8BDD107D-5866-4017-8B13-08DCF8F17495.png)
+/// ![A view containing a list with two grouped sections.](8BDD107D-5866-4017-8B13-08DCF8F17495.png)
 ///
 /// Many SwiftUI list styles can be visualized
 /// [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly
@@ -26624,7 +26635,8 @@ extension NavigationLink {
 /// ![A gif that shows a view displaying a navigation view containing a VStack
 /// with the text "Hello Bananas🍌🍌" and a navigation link reading "Take me to
 /// the second screen!"; with a text button that reads "Take me to the second screen!";
-/// once the link is clicked, another view with a navigation title reading "Second Screen" and text reading "Bananas🍌🍌" slides left over the main view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
+/// once the link is clicked, another view with a navigation title reading
+/// "Second Screen" and text reading "Bananas🍌🍌" slides left over the main view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-6.gif)
 ///
 /// And popping `SecondScreen` (or navigating back) hides it again, as
 /// `SecondScreen` is removed from the view hierarchy, leaving `ExampleView`
@@ -26650,7 +26662,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 7](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-11.png)
+/// ![A navigation view displaying the text "Hello Bananas🍌🍌" with a naviagation bar containing the leading text "🍌🍌" and the trailing text "🍏🍏".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-11.png)
 ///
 /// [<-]
 /// [navigation-view-style ->]
@@ -26672,7 +26684,8 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![](nav-view-ex8.gif)
+/// ![A navigation view on Mac Catalyst containing a navigation link with the text "Hello Bananas";
+/// once clicked the navigation link displays a stacked view with the text "🍌🍌" and a back arrow button in the upper left corner.](nav-view-ex8.gif)
 ///
 /// And the following forces a double-column navigation style, overriding the
 /// default stack-based navigation style on iPadOS:
@@ -26688,7 +26701,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![](nav-view-ex9.gif)
+/// ![A navigation view on iPadOS with two columns; the left column contains a navigation link with the text "Hello Bananas" that populates the right column with the text "🍌🍌" once clicked.](nav-view-ex9.gif)
 ///
 /// [<-]
 /// ### Handling selection
@@ -26739,7 +26752,7 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 10](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.gif)
+/// ![A gif displaying a view containing three navigation views, each with text that displays a corresponding stacked view when clicked.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-10.gif)
 ///
 /// In the example above, the navigation selection is written to a state
 /// variable, `navigatedItem`. `navigatedItem` is an optional, because it is
@@ -30658,7 +30671,7 @@ extension PreviewProvider {
 /// }
 /// ```
 ///
-/// ![PrimitiveButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
+/// ![A view displaying a primitive style button reading "Banana 🍌🍌".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-1.png)
 ///
 /// ``PrimitiveButtonStyle`` applies to all buttons within a view hierarchy.
 /// For example, you could apply `BananaButtonStyle` to a ``VStack``.
@@ -30689,7 +30702,7 @@ extension PreviewProvider {
 /// }
 /// ```
 ///
-/// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
+/// ![A view displaying a VStack with three "banana style" buttons that enlarge slightly when tapped.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PrimitiveButtonStyle { }
@@ -34253,7 +34266,7 @@ extension RoundedRectangle : InsettableShape {
 ///         }
 ///     }
 ///
-/// ![Scene Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
+/// ![A white view that displays the text ""This is an entire app! 🙌""](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
 ///
 /// #### Using custom Scenes
 ///
@@ -34280,7 +34293,7 @@ extension RoundedRectangle : InsettableShape {
 ///         }
 ///     }
 ///
-/// ![Scene Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
+/// ![A white view that displays the text "This is a mac-compatible app! 💻"](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-2.png)
 ///
 /// ### Modifiers
 ///
@@ -35635,7 +35648,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+/// ![A gif that displays a scroll view with a VStack containing three text elements being scrolled up and down.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
 ///
 /// In this example, the ``VStack`` containing the text is made scrollable by
 /// wrapping it in a `ScrollView`.
@@ -35678,7 +35691,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 ///     }
 /// }
 /// ```
-/// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+/// ![A gif that displays a .horizontal scroll view with a VStack containing three text elements being scrolled left and right.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
 ///
 /// [<-]
 /// This example takes the previous example, and modifies it so that the
@@ -35702,7 +35715,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
+/// ![A gif that displays a .horizontal and .vertical scroll view with a VStack containing three text elements being scrolled diagonally.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
 ///
 /// In this example, `ScrollView` can scroll both horizontally *and*
 /// vertically, because both axes have been specified explicitly.
@@ -35751,7 +35764,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![ScrollView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
+/// ![A gif that displays a .horizontal scroll view with a VStack containing three text elements being scrolled left and right wihtout a visible scroll indicator.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-5.gif)
 ///
 /// This ``ScrollView`` hides its scroll indicator, with a default
 /// `.vertical` scroll direction.
@@ -35785,7 +35798,7 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![ScrollView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
+/// ![A gif that displays a scroll view with a VStack containing three text elements being scrolled up and down wihtout a visible scroll indicator.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
 ///
 /// In this example, clicking the button reading "Jump to #32", will cause the
 /// ``ScrollView`` to scroll to the item with the ID of the value `32`.
@@ -35817,7 +35830,9 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![ScrollView Example 7](scrollviewproxy-ex7.gif)
+/// ![A gif that displays a scroll view with a VStack containing a button reading
+/// "Jump to # 32" directly above text elements; the text elements read "Item #_",
+/// where _ is filled by the numbers 1-101.](scrollviewproxy-ex7.gif)
 ///
 /// In this example, the `ScrollView` still scrolls to "Item #32", but this
 /// ``Text`` is seen at the top of the `ScrollView`, rather than it's
@@ -35852,7 +35867,10 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![ScrollView Example 8](scrollviewproxy-ex7.gif)
+/// ![A gif that displays a scroll view with a VStack containing a button reading
+/// "Jump to # 32" directly above text elements reading "Item #_",
+/// where _ is filled by the numbers 1-101; when the button is clicked, the view
+/// jumps down to the text "Item #32".](scrollviewproxy-ex7.gif)
 ///
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -35885,7 +35903,10 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](scroll-view-content-ex.gif)
+    /// ![A gif that displays a scroll view with a VStack containing a button reading
+    /// "Jump to # 32" directly above text elements reading "Item #_",
+    /// where _ is filled by the numbers 1-101; when the button is clicked, the view
+    /// jumps down to the text "Item #32".](scroll-view-content-ex.gif)
     ///
     /// The `content` is usually a ``VStack`` or an ``HStack``, but it
     /// can be any ``View`` that requires scrolling.
@@ -39813,7 +39834,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+/// ![A gif that jumps between the three children in a TabView by clicking the various symbols on the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 /// [<-]
 /// [tabview-style ->]
@@ -39841,7 +39862,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
+/// ![A gif that flips between the three pages, each containing a text item, in a tabview whilst displaying the page indicators at the bottom of the view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
 /// ``TabView`` also supports dynamically loading pages. The example above can be
 /// re-expressed as the following:
@@ -39863,7 +39884,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 3](tab-view-dynam.gif)
+/// ![A gif that flips between the three dynamically loading pages, each containing a text item, in a tabview whilst displaying the page indicators at the bottom of the view.](tab-view-dynam.gif)
 ///
 /// This example supports loading a dynamic list of pages from `items`.
 ///
@@ -39891,7 +39912,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 4](tab-view-ex4.gif)
+/// ![A gif that flips between the three dynamically loading pages, each containing a text item, in a tabview without displaying page indicators.](tab-view-ex4.gif)
 /// [<-]
 /// [tabview-tag ->]
 ///
@@ -39937,7 +39958,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 5](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
+/// ![A gif that jumps between the three children in a TabView by clicking the various symbols on the tab-bar; the tab selection is written to a state variable.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
 /// In this example, each tab item is assigned a unique tag using the
 /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
@@ -39970,7 +39991,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 6](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
+/// ![[A gif that jumps between the three children in a TabView wihtout icons in the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
@@ -40185,7 +40206,7 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![Text Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
+/// ![A view displaying the text "🍌🍌".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-1.png)
 ///
 /// `Text` is most commonly initialized with a
 /// [`String`](https://developer.apple.com/documentation/swift/string),
@@ -40201,7 +40222,7 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![Text Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
+/// ![A text view displaying the date.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
 /// `Text` also accepts 12 unique modifiers to customize your string.
 ///
@@ -40215,7 +40236,7 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![Text Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
+/// ![A text view displaying the date with an orange underline and a bolded, rounded text font.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-3.png)
 ///
 /// `Text` conforms to the ``View`` protocol. Therefore, any modifiers that
 /// return `some View`, such as ``View/foregroundColor(_:)``, are compatible with
@@ -40231,7 +40252,7 @@ public struct TapGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![Text Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
+/// ![A text view displaying the date in an orange, bolded, rounded text font.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-4.png)
 ///
 /// **Remember**, any modifier that returns `some View` must be used after
 /// modifiers that return `Text`.
@@ -41679,7 +41700,7 @@ public struct TextEditor : View {
 ///         }
 ///     }
 ///
-/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+/// ![A gif showing a view with a VStack containing a text field that once populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 ///
 /// [textfield-style ->]
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
@@ -41695,7 +41716,7 @@ public struct TextEditor : View {
 ///         }
 ///     }
 ///
-/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+/// ![A gif showing a view with a VStack containing a text field that once populated displays the corresponding text in a text item; the text field has a rounded border style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
 ///
 /// [<-]
 /// The ``TextFieldStyle`` protocol and ``View/textFieldStyle(_:)`` modifier
@@ -42501,7 +42522,7 @@ extension ToolbarContentBuilder {
 /// }
 /// ```
 ///
-/// ![ToolBarItem Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+/// ![A navigation view displaying the text "Hello, World!" and a toolbar along the top edge of the frame containing the right-aligned item "🍌🍌".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
 ///
 /// ### Placing a toolbar item on the navigation bar
 ///
@@ -42525,7 +42546,7 @@ extension ToolbarContentBuilder {
 /// }
 /// ```
 ///
-/// ![ToolBarItem Example 2](toolbar-leading.png)
+/// ![A navigation view displaying the text "Hello, World!" and a toolbar along the top edge of the frame containing the leading / left-aligned item "🍌🍌".](toolbar-leading.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItem<ID, Content> : ToolbarContent where Content : View {
@@ -43606,7 +43627,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// }
 /// ```
 ///
-/// ![UIViewRepresentable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
+/// ![A gif that displays a view with a VStack containing a toggle named "Animating" and an activity indicator; when the toggle is flipped on, the small gray rotating activity indicator appears.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-1.gif)
 ///
 /// In this example, the `ActivityIndicator` from before is used and can be
 /// toggled by passing a boolean to `ActivityIndicator.init(isAnimated:)`.
@@ -43668,7 +43689,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// }
 /// ```
 ///
-/// ![UIViewRepresentable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
+/// ![A gif that displays a view with a VStack containing a toggle named "Animating" and an activity indicator; when the toggle is flipped on, the small gray rotating activity indicator appears.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-2.gif)
 ///
 /// Using ``View/disabled(_:)``, the activity indicator can now be made active or inactive.
 ///
@@ -43692,7 +43713,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// }
 /// ```
 ///
-/// ![UIViewRepresentable Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
+/// ![A gif that displays a view with a VStack containing a toggle named "Animating" and three activity indicators; when the toggle is flipped on, the small gray rotating activity indicators appear.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-3.gif)
 ///
 /// A single `View/disabled(_:)` modifier on the ``VStack`` can now become
 /// responsible for enabling/disabling the activity indicators inside the stack.
@@ -43791,7 +43812,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// }
 /// ```
 ///
-/// ![UIViewRepresentable Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
+/// ![A gif that displays a view with a VStack containing a search var with a placeholder that reads "Enter somethign here" and a text view that reads "Entered text:"; whne text is entered in the search bar, it is also displayed in the text view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/UIViewRepresentable-example-4.gif)
 ///
 /// In this example, `SearchBar` is bound to a state variable, `searchText`.
 /// To confirm that values are being written as they are input, a ``Text``
@@ -44563,7 +44584,7 @@ extension UserInterfaceSizeClass : Hashable {
 ///         }
 ///     }
 ///
-/// ![VStack Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
+/// ![A view containing a vertical stack of text views.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-1.png)
 ///
 /// Modify your stack's alignment or spacing with the built in initializer.
 ///
@@ -44577,7 +44598,7 @@ extension UserInterfaceSizeClass : Hashable {
 ///         }
 ///     }
 ///
-/// ![VStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-2.png)
+/// ![A view containing a vertical stack of text views with spacing between them.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/vstack-example-2.png)
 ///
 /// Learn more about the properties of each alignment choice via the ``HorizontalAlignment`` struct.
 ///
@@ -50694,7 +50715,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![toolbar Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
+    /// ![A navigation view displaying the text "Hello, World!" and a toolbar along the top edge of the frame containing the right-aligned item "🍌🍌".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-1.png)
     ///
     /// ### Aligning a toolbar item
     ///
@@ -50720,7 +50741,7 @@ extension View {
     ///     }
     /// }
     /// ```
-    /// ![toolbar Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
+    /// ![A navigation view displaying the text "Hello, World!" and a gray toolbar along the botton of the frame containing the right-aligned item "🍌🍌".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/toolbar-example-2.png)
     ///
     public func toolbar<Content>(@ToolbarContentBuilder content: () -> Content) -> some View where Content : ToolbarContent { }
 
