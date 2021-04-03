@@ -6303,12 +6303,12 @@ extension Capsule : InsettableShape {
     ///
     @inlinable public init() { }
 
-    /// > The type defining the data to animate.
+    /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// > The type of view representing the body of this view.
+    /// The type of view representing the body of this view.
     ///
-    /// > When you create a custom view, Swift infers this type from your
+    /// When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -6339,7 +6339,7 @@ extension Circle : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// > The type of the inset shape.
+    /// The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -12176,12 +12176,12 @@ extension EditMode : Hashable {
     ///
     @inlinable public init() { }
 
-    /// > The type defining the data to animate.
+    /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// > The type of view representing the body of this view.
+    /// The type of view representing the body of this view.
     ///
-    /// > When you create a custom view, Swift infers this type from your
+    /// When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -12208,7 +12208,7 @@ extension Ellipse : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// > The type of the inset shape.
+    /// The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -25634,9 +25634,9 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///
 /// [<-]
 ///
-/// > The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
+/// The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
 ///
-/// > To apply this style to a picker, or to a view that contains pickers, use the ``View/pickerStyle(_:)`` modifier.
+/// To apply this style to a picker, or to a view that contains pickers, use the ``View/pickerStyle(_:)`` modifier.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -26015,7 +26015,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Content, Modifier> { }
@@ -26025,7 +26025,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Content, Modifier> where S : StringProtocol { }
@@ -32105,7 +32105,7 @@ extension Rectangle : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// > The type of the inset shape.
+    /// The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -50783,7 +50783,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     ///
@@ -50866,7 +50866,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
@@ -50876,7 +50876,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { }
@@ -50930,7 +50930,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibility(label:)` modifier.
     ///
