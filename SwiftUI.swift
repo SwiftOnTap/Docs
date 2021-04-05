@@ -41552,9 +41552,14 @@ public struct TextEditingCommands : Commands {
 /// A text editor view allows you to display and edit multiline, scrollable
 /// text in your app's user interface. The text editor responds to usual
 /// view modifiers like:
+///
+///
+///
 /// - ``View/font(_:)``
 /// - ``View/foregroundColor(_:)``
 /// - ``View/multilineTextAlignment(_:)``
+///
+///
 ///
 /// ### Creating a text editor
 ///
