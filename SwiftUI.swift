@@ -41553,13 +41553,9 @@ public struct TextEditingCommands : Commands {
 /// text in your app's user interface. The text editor responds to usual
 /// view modifiers like:
 ///
-///
-///
 /// - ``View/font(_:)``
 /// - ``View/foregroundColor(_:)``
 /// - ``View/multilineTextAlignment(_:)``
-///
-///
 ///
 /// ### Creating a text editor
 ///
@@ -41796,10 +41792,10 @@ extension TextField where Label == Text {
 /// style of ``TextField`` views.
 ///
 /// There are currently only 3 styles available on iOS:
-/// - ``DefaultTextFieldStyle``
-/// - ``PlainTextFieldStyle``
-/// - ``RoundedBorderTextFieldStyle``
-/// - ``SquareBorderTextFieldStyle`` (macOS only)
+///     - ``DefaultTextFieldStyle``
+///     - ``PlainTextFieldStyle``
+///     - ``RoundedBorderTextFieldStyle``
+///     - ``SquareBorderTextFieldStyle`` (macOS only)
 ///
 /// There is currently no way to create your own text field styles.
 /// The best way to create a custom text field is by placing
