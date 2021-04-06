@@ -50592,7 +50592,7 @@ extension View {
     /// Use this modifier as a shorthand for performing an function
     /// when a ``TapGesture`` is sensed on a ``View``.
     ///
-    /// **Do not use** this modifier in place of ``Button``, ``NavigationLink``,
+    /// - Important: Do not use this modifier in place of ``Button``, ``NavigationLink``,
     /// or other purpose-built controls for acting on tap gestures. Among
     /// other benefits, those controls *dim slightly* when they are tapped,
     /// while applying this modifier will not add this effect.
