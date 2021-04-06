@@ -3038,7 +3038,8 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![Animatable Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
+    /// ![A gif showing the animation of the text "Banana🍌🍌" moving in a small
+    /// clockwise oval around the center of the page repeatedly, forever.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
     ///
     /// - Parameter autoreverses: Whether the animation should reverse when repeating.
     public func repeatForever(autoreverses: Bool = true) -> Animation { }
@@ -8873,7 +8874,10 @@ public struct DatePickerComponents : OptionSet {
 /// }
 /// ```
 ///
-/// ![Wheel Date Picker Style](wheel-datepickerstyle.png)
+/// ![A gif displaying a wheel style date picker, in which the week day month
+/// and date, the hour time, the minute time, and meridiam (am/pm) can be
+/// selected separately by scrolling around a wheel; a light gray box highlights
+/// the current selections.](wheel-date-picker-ex.gif)
 ///
 /// Check out ``DatePicker`` for more on how to make date pickers. Or see
 /// [`Date`](https://developer.apple.com/documentation/foundation/date)
@@ -21469,9 +21473,9 @@ public struct InlinePickerStyle : PickerStyle {
 ///         }
 ///     }
 ///
-/// ![A view which contains an inset grouped list, separated by a gap from
-/// the edge of the frame, with three text items, "Bananas 🍌🍌","Apples 🍎🍎",
-/// and "Peaches 🍑🍑", ](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
+/// ![A view which contains an inset grouped listwith three text items, "Bananas 🍌🍌","Apples 🍎🍎",
+/// and "Peaches 🍑🍑"; the set of list items sit together in a rounded box that is separated by a gap from
+/// the edge of the frame.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-grouped-example-1.png)
 ///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
@@ -21501,7 +21505,9 @@ public struct InsetGroupedListStyle : ListStyle {
 ///      }
 ///
 ///
-/// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+/// ![A view displaying an inset list with three items "Bananas 🍌🍌", "Apples 🍎🍎",
+/// and "Peaches 🍑🍑"; the list items and the thin gray lines that separate them
+/// sit condensed in the center of the view, creating a gap between the list and the edges of the frame.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
 ///
 ///
 @available(iOS 14.0, macOS 11.0, *)
@@ -25601,7 +25607,11 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 /// }
 /// ```
 ///
-/// ![MenuPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
+/// ![A gif that displays a view containing a VStack with a menu picker style
+/// labeled as "Select Favorite Fruit" that once clicked displays the five menu
+/// options, "Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", and
+/// "Grapes🍇🍇", followed by text reading "Your Favorite Fruit: _", which is
+/// populated once a menu item is selected.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
 ///
 /// [pickerstyle-menu ->]
 /// Your app can also use explicit tags to identify picker content.
@@ -25641,13 +25651,16 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 /// }
 /// ```
 ///
-/// ![Menu Picker Style Example](picker-style-3.gif)
+/// ![A gif that displays a view containing a VStack with the text "My Favorite Fruit: _",
+/// which is populated by the following menu picker stylemenu picker style
+/// labeled as "My Picker"; once clicked, "My Picker" displays three menu
+/// items, "Peach🍑🍑", "Apple🍎🍎", and "Banana🍌🍌", originated from tags connected to the state vairabe "MyFruit".](picker-style-3.gif)
 ///
 /// [<-]
 ///
-/// > The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
+/// The button itself indicates the selected option. You can include additional controls in the set of options, such as a button to customize the list of options.
 ///
-/// > To apply this style to a picker, or to a view that contains pickers, use the ``View/pickerStyle(_:)`` modifier.
+/// To apply this style to a picker, or to a view that contains pickers, use the ``View/pickerStyle(_:)`` modifier.
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -27680,7 +27693,10 @@ public struct PageIndexViewStyle : IndexViewStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
+/// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+/// "Apples 🍏🍏", and "Peaches 🍑🍑", and a yellow background; the gif
+/// displays the page tab view style by flipping through each of the three tabs,
+/// as reflected by the page indicator dots at the bottom of the frame.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
 /// You can also use `PageTabViewStyle`'s initializer
 /// ``PageTabViewStyle/init(indexDisplayMode:)`` to specify whether
@@ -27729,7 +27745,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](pg-tab-view-style-ex2.gif)
+    /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+    /// "Apples 🍏🍏", and "Peaches 🍑🍑", with a yellow background and no
+    /// index displays / page indicator.; the gif flips through each of the three tabs.](pg-tab-view-style-ex2.gif)
     ///
     /// This structure has three static properties:
     /// - ``PageTabViewStyle/IndexDisplayMode/automatic`` - Display
@@ -29629,7 +29647,7 @@ public struct PinnedScrollableViews : OptionSet {
 ///         func tap() { /* implement here */ }
 ///     }
 ///
-/// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+/// ![A view containing a VStack with three buttons; the first button is plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// ``View/buttonStyle(_:)-d2d0a`` modifier.
@@ -29666,7 +29684,8 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 ///          }
 ///      }
 ///
-/// ![PlainListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
+/// ![A view diplaying a plain list with three items "Bananas 🍌🍌", "Apples
+/// 🍎🍎", "Peaches 🍑🍑", which are separated by thin gray lines.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainListStyle : ListStyle {
@@ -36211,7 +36230,7 @@ public struct ScrollViewProxy {
 /// }
 /// ```
 ///
-/// ![](section-1.png)
+/// ![A white view showing a plain list with two sections, each with two text views.](section-1.png)
 ///
 /// And, for comparison, a ``Form``:
 ///
@@ -36232,7 +36251,7 @@ public struct ScrollViewProxy {
 /// }
 /// ```
 ///
-/// ![](section-2.png)
+/// ![A white view showing a form with two sections, each with two text views.](section-2.png)
 ///
 /// You can also (optionally) add **header** and **footer** content
 /// to a `Section`:
@@ -36258,7 +36277,9 @@ public struct ScrollViewProxy {
 /// }
 /// ```
 ///
-/// ![](section-3.png)
+/// ![A white view showing a form with two sections, each with a header
+/// reading "Section #_" and two text views, and the second with a footer in small gray lettering
+/// eading "This is a disclaimer about section number 2. Use at your own risk."](section-3.png)
 ///
 /// You can style a ``List``, and the `Section`s will automatically
 /// get styled accordingly.
@@ -36285,7 +36306,9 @@ public struct ScrollViewProxy {
 /// }
 /// ```
 ///
-/// ![](section-4.png)
+/// ![A white view showing an inset grouped list split into two sections, each with a header
+/// reading "Section #_" and two text views, and the second with a footer in small gray lettering
+/// eading "This is a disclaimer about section number 2. Use at your own risk."](section-4.png)
 ///
 /// Beyond ``List`` and ``Form``, the four `lazy` layout elements also
 /// support `Section`:
@@ -36366,7 +36389,7 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     /// }
     /// ```
     ///
-    /// ![A white view with one section containing a header, which displays an HStack made up of an image and the text "Section", and a footer, which reads "A disclaimer might go here", in footnote text.](section-init-2.png)
+    /// ![A white view with one section containing a header, which displays an HStack made up of an image and the text "Section", as well as a footer, which reads "A disclaimer might go here", in footnote text.](section-init-2.png)
     ///
     /// - Parameters:
     ///   - header: A view placed on top
@@ -36640,7 +36663,10 @@ extension SecureField where Label == Text {
 /// }
 /// ```
 ///
-/// ![SegmentedPickerStyle Example 1](segmented-picker-ex1.gif)
+/// ![A gif displaying a view with a VStack containing a segmented picker with
+/// 5 options,"Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇",
+// followed by the text "Your Favorite Fruit: _"; the gif shows the user looping
+/// through all of the picker options, which then populate the blank in the text.](segmented-picker-ex1.gif)
 ///
 /// [pickerstyle-segmented ->]
 /// Your app can also use explicit tags to identify picker content.
@@ -36682,7 +36708,10 @@ extension SecureField where Label == Text {
 /// }
 /// ```
 ///
-/// ![Segmented Example 1](picker-style-6.gif)
+/// ![A gif displaying a view with a VStack containing the text "My Favorite Fruit: _",
+/// which is populated by the following stack element, a segmented picker with
+/// 3 options,"Banana🍌🍌","Apple🍎🍎", and "Peach🍑🍑"; The picker uses tags
+/// from the state variable favoriteFruit.](picker-style-6.gif)
 ///
 /// [<-]
 ///
@@ -37436,7 +37465,8 @@ public struct SidebarCommands : Commands {
 /// }
 /// ```
 ///
-/// ![SidebarListStyle Example 1](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
+/// ![A view diplaying a sidebar list with three items "Bananas 🍌🍌", "Apples
+/// 🍎🍎", "Peaches 🍑🍑", which are right aligned and separated by spacing.](6BC5187B-683C-4E3C-9EA1-BDA2950108F6.png)
 ///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -39753,7 +39783,7 @@ extension StrokeStyle : Animatable {
 /// }
 /// ```
 ///
-/// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+/// ![The gif shows a switch toggle with the text "Banana🍌🍌" flipping on and off.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
 ///
 /// To apply this style to a toggle, or to a view that contains toggles, use
 /// the ``View/toggleStyle(_:)`` modifier.
@@ -39834,7 +39864,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![A gif that jumps between the three children in a TabView by clicking the various symbols on the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+/// ![A gif that jumps between the three children in a TabView by clicking the corresponding symbols on the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 /// [<-]
 /// [tabview-style ->]
@@ -39991,7 +40021,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![[A gif that jumps between the three children in a TabView wihtout icons in the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
+/// ![A gif that jumps between the three children in a TabView without icons in the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
@@ -40030,7 +40060,10 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
-    /// ![](tab-view-init-selection-content-ex1.gif)
+    /// ![A gif that jumps between the three children in a TabView,
+    /// "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑", by clicking the
+    /// corresponding symbols "🍌", "🍏", and "🍑", on the tab-bar, which
+    /// appear as grayed out sillouettes when not selected.](tab-view-init-selection-content-ex1.gif)
     ///
     /// In this example, each tab item is assigned a unique tag using the
     /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
@@ -40065,7 +40098,9 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     /// }
     /// ```
     ///
-    /// ![](tab-view-init-selection-content-ex2.gif)
+    /// ![A gif that jumps between the three children in a TabView,
+    /// "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑", using traditional
+    /// 0-based tab indexing and no visible tab indicators.](tab-view-init-selection-content-ex2.gif)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -40987,7 +41022,9 @@ extension Text {
     ///         }
     ///     }
     ///
-    /// ![foregroundColor Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
+    /// ![A view containing a VStack with three text items, each with a
+    /// different foreground color; "Banana🍌🍌" is yellow, "Apple🍎🍎" is red,
+    /// and "Peach🍑🍑" is orange.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-foregroundColor-example-1.png)
     ///
     /// - Parameter color: The color to use when displaying this text.
     /// - Returns: A text view that uses the color value you supply.
@@ -41058,7 +41095,10 @@ extension Text {
     ///         }
     ///     }
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// ![A view with a VStack containing 9 text items, each with a different
+    /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+    /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+    /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
     ///
     /// - Note: The example above uses [*type inference*](https://www.swiftbysundell.com/basics/type-inference/)
     /// to shorten the code. The full version of using the modifier would
@@ -41093,7 +41133,8 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// ![A view displaying two text lines in a VStack: "I'm italicized text"
+    /// in italic text font and "And I'm bold" in bold text font.](font-bold-italic.png)
     ///
     /// This is slightly different than using the ``Font`` modifier ``Font/weight(_:)``
     /// and passing the ``Font/Weight/bold`` property. See the difference:
@@ -41112,7 +41153,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Font Bold Comparison](font-bold-comparison.png)
+    /// ![A view displaying two text lines in a VStack: "I use the `.bold()`
+    /// modifier", bolded using the .bold() modifier, and "I use the `.bold`
+    /// property" bolded using the .bold property.](font-bold-comparison.png)
     ///
     /// There is a related ``Font`` modifier called ``Font/bold()`` that
     /// gets applied directly to the text view:
@@ -41131,7 +41174,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Font Bold Modifier Comparison](font-bold-twins.png)
+    /// ![A view displaying two bolded text lines in a VStack both reading
+    /// "We are the same 👯‍," one using the bold property and one using the
+    /// Font modifier called bold().](font-bold-twins.png)
     ///
     /// - Note: Since this modifier returns a ``Text``, you can apply other
     /// text-only modifiers after this one.
@@ -41158,7 +41203,8 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// ![A view displaying two text lines in a VStack: "I'm italicized text"
+    /// in italic text font and "And I'm bold" in bold text font.](font-bold-italic.png)
     ///
     /// There is a related ``Font`` modifier called ``Font/italic()`` that
     /// gets applied to the ``Font``:
@@ -41177,7 +41223,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Font Italic Modifier Comparison](font-text-italic.png)
+    /// ![A view displaying two bolded text lines in a VStack both reading
+    /// "We are the same 👯‍," one using the italic property and one using the
+    /// Font modifier called italic().](font-text-italic.png)
     ///
     /// - Note: Since this modifier returns another ``Text``, you can
     /// apply more text-specific modifiers after this one.
@@ -41188,7 +41236,7 @@ extension Text {
     /// Applies a strikethrough to the text.
     ///
     /// Use this modifier to apply a strikethrough to a ``Text`` view.
-    /// Pass two parameters: a boolean of whether to stirke through the
+    /// Pass two parameters: a boolean of whether to strike through the
     /// text (defaults to `true`) and the ``Color`` of the strikethrough.
     ///
     /// ```
@@ -41207,7 +41255,10 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Strikethrough Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
+    /// ![A view displaying three text items in a VStack, "Banana 🍌🍌" with no
+    /// strikethrough, "Banana 🍌🍌" with a strikethrough, and "Banana 🍌🍌"
+    /// with a yellow strikethrough; all three text views use the strikthrough
+    /// modifier.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-strikethrough-example-1.png)
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has a
@@ -41894,7 +41945,9 @@ public struct TextFormattingCommands : Commands {
 /// }
 /// ```
 ///
-/// ![Default Label Styles](default-labelstyle-comparison.png)
+/// ![A view displaying a VStack with three labels; the first reads as
+/// "<3 Banana" and is of default style, the second reads as "<3" and is of
+/// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct TitleOnlyLabelStyle : LabelStyle {
@@ -54155,7 +54208,10 @@ extension ViewModifier {
 ///          }
 ///      }
 ///
-/// ![WheelDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
+/// ![A gif displaying a wheel style date picker, in which the week day month
+/// and date, the hour time, the minute time, and meridiam (am/pm) can be
+/// selected separately by scrolling around a wheel; a light gray box highlights
+/// the current selections.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
 ///
 ///
 @available(iOS 13.0, *)
@@ -54190,7 +54246,11 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// }
 /// ```
 ///
-/// ![WheelPickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
+/// ![A gif displaying view with a VStack containing a wheel style picker, in
+/// which three options, "Banana🍌🍌","Apple🍎🍎", or "Peach🍑🍑", are shown
+/// being scrolled throughfollowed by a text view reading "Your Favorite Fruit:
+/// _" which is populated by the currently selected picker option; a light gray box highlights
+/// the current selection.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-wheel-example-1.gif)
 ///
 /// Because most options aren't visible, organize them in a predictable order,
 /// such as alphabetically.
@@ -54233,7 +54293,9 @@ public struct WheelDatePickerStyle : DatePickerStyle {
 /// }
 /// ```
 ///
-/// ![Wheel Example 2](picker-style-7.gif)
+/// ![A gif displaying a view with a VStack containing a text view reading "My Favorite Fruit:
+/// _", which is populated by a wheel style picker below with the options "Banana🍌🍌","Apple🍎🍎",
+/// or "Peach🍑🍑"; the three options are tagged through the state variabke favoriteFruit.](picker-style-7.gif)
 ///
 /// [<-]
 ///
