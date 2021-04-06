@@ -101,7 +101,7 @@ import os.signpost
 /// requirement. A passthrough subject is a publisher that lets you send values
 /// manually (i.e. "passes through" any values sent to it).
 ///
-/// **Note:** The `@Published` property wrapper does not work with custom
+/// - Note: The `@Published` property wrapper does not work with custom
 /// publishers. If you use a custom publisher, you are responsible for updating
 /// the object yourself. For example:
 ///
@@ -2157,7 +2157,7 @@ extension Animatable {
     associatedtype AnimatableData : VectorArithmetic
 
     /// The data to animate.
-    var animatableData: Self.AnimatableData { get set }
+    var animatableData: Self.AnimatableData { get /*set*/ }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3908,7 +3908,7 @@ extension App {
     /// 			TextField(name, text: $name)
     /// 		}
     /// 	}
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// Provides a binding for the wrapped value.
     ///
@@ -4859,7 +4859,7 @@ extension BackgroundStyle : ShapeStyle {
     /// When a mutable binding value changes, the new value is immediately
     /// available. However, updates to a view displaying the value happens
     /// asynchronously, so the view may not show the change immediately.
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// A projection of the binding value that returns a binding.
     ///
@@ -6306,12 +6306,12 @@ extension Capsule : InsettableShape {
     ///
     @inlinable public init() { }
 
-    /// > The type defining the data to animate.
+    /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// > The type of view representing the body of this view.
+    /// The type of view representing the body of this view.
     ///
-    /// > When you create a custom view, Swift infers this type from your
+    /// When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -6342,7 +6342,7 @@ extension Circle : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// > The type of the inset shape.
+    /// The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -6488,7 +6488,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///
 /// ![Color Example Three](color-example-three.png)
 ///
-/// **Note**: A ``Color`` is a late-binding token: SwiftUI only resolves it to a concrete
+/// - Note: A ``Color`` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Color : Hashable, CustomStringConvertible {
@@ -6659,7 +6659,7 @@ extension Color {
     ///
     /// ![Color RGB](color-rgb-init.png)
     ///
-    /// **Note**: The colorspace value defaults to sRGB, which is standard for apps. Note
+    /// - Note: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
     /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
     /// divide them by 255 in order to use this initializer.
@@ -6682,7 +6682,7 @@ extension Color {
     ///
     /// ![Color White/Opacity](color-white-opacity.png)
     ///
-    /// **Note**: Both the white and the opacity must be specified from 0.0 to 1.0. If
+    /// - Note: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
     /// be divided by their maximum value.
     ///
@@ -6702,7 +6702,7 @@ extension Color {
     ///
     /// ![Hue Color Init](color-hue-init.png)
     ///
-    /// **Note**: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
+    /// - Note: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
     /// - Parameters:
     ///   - hue: The hue of the color.
@@ -12187,12 +12187,12 @@ extension EditMode : Hashable {
     ///
     @inlinable public init() { }
 
-    /// > The type defining the data to animate.
+    /// The type defining the data to animate.
     public typealias AnimatableData = EmptyAnimatableData
 
-    /// > The type of view representing the body of this view.
+    /// The type of view representing the body of this view.
     ///
-    /// > When you create a custom view, Swift infers this type from your
+    /// When you create a custom view, Swift infers this type from your
     /// implementation of the required `body` property.
     public typealias Body
 }
@@ -12219,7 +12219,7 @@ extension Ellipse : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// > The type of the inset shape.
+    /// The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -14393,7 +14393,7 @@ public struct FileDocumentConfiguration<Document> where Document : FileDocument 
     /// value.
     ///
     /// If `isEditable` is `false`, setting a new value will have no effect.
-    public var document: Document { get nonmutating set }
+    public var document: Document { get /*nonmutating set*/ }
 
     /// A read-write binding to the current document model.
     public var $document: Binding<Document> { get }
@@ -14572,7 +14572,7 @@ public struct FileDocumentWriteConfiguration {
 
     /// The unwrapped value for the focus key given the current scope and state
     /// of the focused view hierarchy.
-    @inlinable public var wrappedValue: Value? { get nonmutating set }
+    @inlinable public var wrappedValue: Value? { get /*nonmutating set*/ }
 
     /// A binding to the optional value.
     ///
@@ -17028,10 +17028,10 @@ extension ForEach where Content : View {
     ///
     /// ![Changing List](foreach.gif)
     ///
-    /// **Note:** This initializer works well for externally loaded data. It
+    /// - Note: This initializer works well for externally loaded data. It
     /// enables your app's frontend to automatically reflect data as it arrives.
     /// [<-]
-    /// **Note:** It's important that the `id` of a data element doesn't change, unless
+    /// - Note: It's important that the `id` of a data element doesn't change, unless
     /// SwiftUI considers the data element to have been replaced with a new data
     /// element that has a new identity. If the `id` of a data element changes,
     /// then the content view generated from that data element will lose any
@@ -19229,8 +19229,8 @@ public struct HoverEffect {
 /// internally, so you don't have to do it yourself.
 ///
 /// These are the default styles:
-/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
-/// - ``IconOnlyLabelStyle``, which displays the icon only
+/// - ``DefaultLabelStyle``, which displays the ``Label`` as-is
+/// - `IconOnlyLabelStyle` (this style), which displays the icon only
 /// - ``TitleOnlyLabelStyle``, which displays the title only
 ///
 /// All 3 styles have only one initializer, which takes no parameters.
@@ -23314,8 +23314,8 @@ extension LayoutDirection {
     /// [these docs](https://developer.apple.com/documentation/uikit/uitraitenvironmentlayoutdirection)
     /// for more info on layout direction in UIKit.
     ///
-    /// *Note that this is a failable initializer, so it must be unwrapped for
-    /// many use cases.*
+    /// - Note: This is a failable initializer, so it must be unwrapped for
+    /// many use cases.
     ///
     /// See below for a simple example of how to use this.
     ///
@@ -26044,7 +26044,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Content, Modifier> { }
@@ -26054,7 +26054,7 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Content, Modifier> where S : StringProtocol { }
@@ -32145,7 +32145,7 @@ extension Rectangle : InsettableShape {
     @inlinable public func inset(by amount: CGFloat) -> some InsettableShape { }
 
 
-    /// > The type of the inset shape.
+    /// The type of the inset shape.
     public typealias InsetShape = some InsettableShape
 }
 
@@ -34035,7 +34035,7 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// The view changes accordingly while the code stays constant.
 ///
-/// *Note*: The scaled float generated from this font initialier is `36.00`,
+/// - Note: The scaled float generated from this font initialier is `36.00`,
 /// whereas the scaled float generated from the `CGFloat` was `42.00`.
 ///
 /// ![Large View](scaledmetric-example-3.png)
@@ -34066,7 +34066,7 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// The ``RoundedRectangle`` shrinks while the code still has note changed.
 ///
-/// *Note*: The scaled float generated from this font initialier is `31.00`,
+/// - Note: The scaled float generated from this font initialier is `31.00`,
 /// whereas the scaled float generated from the `CGFloat` was `27.50`.
 ///
 /// ![Small View](scaledmetric-example-2.png)
@@ -35327,7 +35327,7 @@ extension ScenePhase : Hashable {
     /// ![](scenestorage-1.png)
     ///
     /// - See also: ``State`` and ``State/projectedValue``.
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// A binding to the state value.
     ///
@@ -38195,7 +38195,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// When a mutable binding value changes, the new value is immediately
     /// available. However, updates to a view displaying the value happens
     /// asynchronously, so the view may not show the change immediately.
-    public var wrappedValue: Value { get nonmutating set }
+    public var wrappedValue: Value { get /*nonmutating set*/ }
 
     /// A binding to the state value.
     ///
@@ -41926,9 +41926,9 @@ public struct TextFormattingCommands : Commands {
 /// internally, so you don't have to do it yourself.
 ///
 /// These are the default styles:
-/// - `DefaultLabelStyle` (this style), which displays the ``Label`` as-is
+/// - ``DefaultLabelStyle``, which displays the ``Label`` as-is
 /// - ``IconOnlyLabelStyle``, which displays the icon only
-/// - ``TitleOnlyLabelStyle``, which displays the title only
+/// - `TitleOnlyLabelStyle` (this style), which displays the title only
 ///
 /// All 3 styles have only one initializer, which takes no parameters.
 ///
@@ -42352,7 +42352,7 @@ public struct ToggleStyleConfiguration {
 
     /// A binding to a state property that indicates whether the toggle is on or
     /// off.
-    public var isOn: Bool { get nonmutating set }
+    public var isOn: Bool { get /*nonmutating set*/ }
 
     /// A binding to let you listen to changes in the toggle's "is on" property.
     public var $isOn: Binding<Bool> { get }
@@ -43877,7 +43877,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// To confirm that values are being written as they are input, a ``Text``
 /// reflects the latest value of the state variable.
 ///
-/// **Note** that if `searchText`'s initial value is used to set the initial
+/// - Note: If `searchText`'s initial value is used to set the initial
 /// text of the` UISearchBar` represented by `SearchBar`. This means if the
 /// initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar`'
 /// would have an initial search text of `"Bananas 🍌🍌"` already loaded.
@@ -44975,7 +44975,7 @@ extension VerticalAlignment {
 /// modifiers that you use to configure views.
 ///
 /// You create custom views by declaring types that conform to the ``View``
-/// protocol. Implement the required `View/body-swift.property` computed
+/// protocol. Implement the required ``View/body-swift.variable`` computed
 /// property to provide the content for your custom view.
 ///
 ///     struct MyView: View {
@@ -50677,7 +50677,7 @@ extension View {
     /// Use this modifier as a shorthand for performing an function
     /// when a ``TapGesture`` is sensed on a ``View``.
     ///
-    /// **Do not use** this modifier in place of ``Button``, ``NavigationLink``,
+    /// - Important: Do not use this modifier in place of ``Button``, ``NavigationLink``,
     /// or other purpose-built controls for acting on tap gestures. Among
     /// other benefits, those controls *dim slightly* when they are tapped,
     /// while applying this modifier will not add this effect.
@@ -50715,8 +50715,8 @@ extension View {
     /// In the example below, the list row is inset 15pts from the top edge,
     /// and 100pts from the right edge.
     ///
-    /// - Note: The code
-    /// below does not work in a list alone. It must be in a ``ForEach``.*
+    /// - Note: The code below does not work in a list alone.
+    /// It must be in a ``ForEach``.
     ///
     ///     struct ContentView: View {
     ///         let colors: [Color] = [Color.orange, .purple, .pink]
@@ -50730,6 +50730,7 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
     /// ![](listrowinsets.png)
     ///
     /// - Parameter insets: ``EdgeInsets`` to apply to the edges of the view.
@@ -50873,7 +50874,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     ///
@@ -50956,7 +50957,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels(_ inputLabelKeys: [LocalizedStringKey]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> { }
@@ -50966,7 +50967,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibilityLabel()` modifier.
     public func accessibilityInputLabels<S>(_ inputLabels: [S]) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol { }
@@ -51020,7 +51021,7 @@ extension View {
     /// Provide labels in descending order of importance. Voice Control
     /// and Full Keyboard Access use the input labels.
     ///
-    /// > Note: If you don't specify any input labels, the user can still
+    /// - Note: If you don't specify any input labels, the user can still
     ///   refer to the view using the accessibility label that you add with the
     ///   `accessibility(label:)` modifier.
     ///
