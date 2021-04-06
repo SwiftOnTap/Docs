@@ -2060,7 +2060,8 @@ extension Angle : Animatable {
 ///     }
 /// }
 /// ```
-///![A gif that displays a VStack containing the text "Banana🍌🍌", which has been animated to shake ten times.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+///![A gif that displays a VStack containing the text "Banana🍌🍌", which has
+/// been animated to shake side to side / left to right ten times.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
 ///
 /// This example demonstrates a horizontal "shake effect", applied on a
@@ -2127,7 +2128,8 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ![A gif that displays a VStack containing the text "Banana🍌🍌", which has been animated to repeatedly move in a circular motion around the view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
+/// ![A gif that displays a VStack containing the text "Banana🍌🍌", which
+/// has been animated to endlessly move in a circular motion around the view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-2.gif)
 ///
 /// In this example, `Text("Banana🍌🍌")` is animated along a circle continuously.
 ///
@@ -24286,7 +24288,10 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-///![A view displaying a list containing an array with three string members, "🍌", "🍏", and "🍑," each displayed as a separate deletable list item. The gif shows the "🍏" being deleted by sliding the row to the right and clicking the red "Delete" button that appears.](list-items-deletable.gif)
+///![A view displaying a list containing an array with three string members,
+/// "🍌", "🍏", and "🍑," each displayed as a separate deletable list item.
+/// The gif shows the "🍏" being deleted by sliding the row to the right and
+/// clicking the red "Delete" button that appears.](list-items-deletable.gif)
 ///
 /// [<-]
 ///
@@ -40100,7 +40105,7 @@ public struct TabView<SelectionValue, Content> : View where SelectionValue : Has
     ///
     /// ![A gif that jumps between the three children in a TabView,
     /// "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑", using traditional
-    /// 0-based tab indexing and no visible tab indicators.](tab-view-init-selection-content-ex2.gif)
+    /// 0-based tab indexing.](tab-view-init-selection-content-ex1.gif))
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(selection: Binding<SelectionValue>?, @ViewBuilder content: () -> Content) { }
@@ -45625,7 +45630,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
+    /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+    /// "Apples 🍏🍏", and "Peaches 🍑🍑", and a yellow background; the gif
+    /// displays the page tab view style by flipping through each of the three tabs,
+    /// as reflected by the page indicator dots at the bottom of the frame.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
     ///
     /// The parameter of the function must conform to ``TabViewStyle``.
     /// There are currently only 3 styles:
@@ -45652,7 +45660,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](view-tab-view-style-ex2.gif)
+    /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+    /// "Apples 🍏🍏", and "Peaches 🍑🍑", and a yellow background; the gif
+    /// displays the page tab view style by flipping through each of the three tabs,
+    /// without displaying any page indicator.](view-tab-view-style-ex2.gif)
     ///
     /// By default, ``DefaultTabViewStyle`` is used:
     ///
