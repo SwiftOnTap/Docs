@@ -50634,8 +50634,8 @@ extension View {
     /// In the example below, the list row is inset 15pts from the top edge,
     /// and 100pts from the right edge.
     ///
-    /// - Note: The code
-    /// below does not work in a list alone. It must be in a ``ForEach``.*
+    /// - Note: The code below does not work in a list alone.
+    /// It must be in a ``ForEach``.
     ///
     ///     struct ContentView: View {
     ///         let colors: [Color] = [Color.orange, .purple, .pink]
@@ -50649,6 +50649,7 @@ extension View {
     ///             }
     ///         }
     ///     }
+    ///
     /// ![](listrowinsets.png)
     ///
     /// - Parameter insets: ``EdgeInsets`` to apply to the edges of the view.
