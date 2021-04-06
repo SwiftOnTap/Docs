@@ -41792,10 +41792,10 @@ extension TextField where Label == Text {
 /// style of ``TextField`` views.
 ///
 /// There are currently only 3 styles available on iOS:
-/// - ``DefaultTextFieldStyle``
-/// - ``PlainTextFieldStyle``
-/// - ``RoundedBorderTextFieldStyle``
-/// - ``SquareBorderTextFieldStyle`` (macOS only)
+///     - ``DefaultTextFieldStyle``
+///     - ``PlainTextFieldStyle``
+///     - ``RoundedBorderTextFieldStyle``
+///     - ``SquareBorderTextFieldStyle`` (macOS only)
 ///
 /// There is currently no way to create your own text field styles.
 /// The best way to create a custom text field is by placing
