@@ -3823,7 +3823,7 @@ extension App {
     ///
     /// For any app that you create, provide a computed `body` property that
     /// defines your app's scenes, which are instances that conform to the
-    /// `SwiftUI/Scene` protocol. For example, you can create a simple app
+    /// ``Scene`` protocol. For example, you can create a simple app
     /// with a single scene containing a single view:
     ///
     ///     @main
@@ -8402,9 +8402,9 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// ``DatePickerStyle``s provided by SwiftUI. The full list of styles is:
 /// - ``DefaultDatePickerStyle`` (iOS and macOS)
 /// - ``WheelDatePickerStyle`` (iOS)
-/// - ``FieldDatePickerStyle`` (macOS)
 /// - ``GraphicalDatePickerStyle`` (macOS)
-/// - ``StepperFieldDatePickerStyle`` (macOS)
+/// - `FieldDatePickerStyle` (macOS)
+/// - `StepperFieldDatePickerStyle` (macOS)
 ///
 /// Currently, you cannot create your own custom ``DatePickerStyle``.
 ///
@@ -9897,14 +9897,14 @@ public struct DocumentGroup<Document, Content> : Scene where Content : View {
     /// scene from primitive scenes that SwiftUI provides, as well as other
     /// scenes that you've defined.
     ///
-    /// Swift infers the scene's `SwiftUI/Scene/Body-swift.associatedtype`
+    /// Swift infers the scene's ``Scene/Body-swift.associatedtype``
     /// associated type based on the contents of the `body` property.
     public var body: some Scene { get }
 
     /// The type of scene that represents the body of this scene.
     ///
     /// When you create a custom scene, Swift infers this type from your
-    /// implementation of the required `SwiftUI/Scene/body-swift.property`
+    /// implementation of the required ``Scene/body-swift.variable``
     /// property.
     public typealias Body = some Scene
 }
@@ -25899,7 +25899,7 @@ extension ModifiedContent : Scene where Content : Scene, Modifier : _SceneModifi
     /// scene from primitive scenes that SwiftUI provides, as well as other
     /// scenes that you've defined.
     ///
-    /// Swift infers the scene's `SwiftUI/Scene/Body-swift.associatedtype`
+    /// Swift infers the scene's ``Scene/Body-swift.associatedtype``
     /// associated type based on the contents of the `body` property.
     public var body: ModifiedContent<Content, Modifier>.Body { get }
 }
@@ -38399,8 +38399,8 @@ extension State where Value : ExpressibleByNilLiteral {
     /// Creates a new state object with an initial wrapped value.
     ///
     /// You don’t call this initializer directly. Instead, declare a property
-    /// with the `@StateObject` attribute in a `SwiftUI/View`,
-    /// `SwiftUI/App`, or `SwiftUI/Scene`, and provide an initial value:
+    /// with the `@StateObject` attribute in a ``View``,
+    /// ``App``, or ``Scene``, and provide an initial value:
     ///
     ///     struct MyView: View {
     ///         @StateObject var model = DataModel()
@@ -38440,7 +38440,7 @@ extension State where Value : ExpressibleByNilLiteral {
     /// Use the projected value to pass a binding value down a view hierarchy.
     /// To get the projected value, prefix the property variable with `$`. For
     /// example, you can get a binding to a model's `isEnabled` Boolean so that
-    /// a `SwiftUI/Toggle` view can control the value:
+    /// a ``Toggle`` view can control the value:
     ///
     ///     struct MyView: View {
     ///         @StateObject var model = DataModel()
@@ -41039,7 +41039,7 @@ extension Text {
     ///
     /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
     ///
-    /// - Note: The example above uses [*type inference*](https://www.swiftbysundell.com/basics/type-inference/)
+    /// - Note: The example above uses [type inference](https://www.swiftbysundell.com/basics/type-inference/)
     /// to shorten the code. The full version of using the modifier would
     /// look like this:
     ///
@@ -51802,7 +51802,25 @@ extension View {
 
     /// Sets the style for text fields within this view.
     ///
-    /// [[textfield-style]]
+    /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
+    /// Pass an instance that conforms to the ``TextFieldStyle`` protocol.
+    ///
+    ///     struct ExampleView: View {
+    ///         @State var myFruit: String = ""
+    ///
+    ///         var body: some View {
+    ///             VStack {
+    ///                 Text(myFruit)
+    ///                 TextField("Fruit", text: $myFruit)
+    ///                     .textFieldStyle(RoundedBorderTextFieldStyle())
+    ///                     .padding()
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+    ///
+    /// - Parameter style: The ``TextFieldStyle`` to apply to the ``TextField``.
     public func textFieldStyle<S>(_ style: S) -> some View where S : TextFieldStyle { }
 
 }
@@ -51930,9 +51948,33 @@ extension View {
 
     /// Configures the title display mode for this view.
     ///
-    /// [[navigation-title-display-mode]]
+    /// Use
+    /// `navigationBarTitleDisplayMode(_:)` to control the appearance
+    /// of the navigation bar title. There are two main display
+    /// modes:
+    /// - ``NavigationBarItem/TitleDisplayMode/inline``
+    /// - ``NavigationBarItem/TitleDisplayMode/large``
     ///
-    /// - Parameter displayMode: The style to use for displaying the title.
+    /// An ``NavigationBarItem/TitleDisplayMode/automatic`` mode is also present,
+    /// and represents the system default.
+    ///
+    /// The following example forces a large navigation title:
+    ///
+    /// ```
+    /// struct ExampleView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             Text("Hello Bananas🍌🍌")
+    ///                 .navigationTitle("Home")
+    ///                 .navigationBarTitleDisplayMode(.large)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![A navigation view displaying the plain text "Hello Bananas🍌🍌" under a navigation title with display mode .large that reads "Home".](538F7154-7B14-41AD-B913-2391A4D850CB.png)
+    ///
+    /// - Parameter displayMode: The ``NavigationBarItem/TitleDisplayMode`` style to use for displaying the title.
     public func navigationBarTitleDisplayMode(_ displayMode: NavigationBarItem.TitleDisplayMode) -> some View { }
 
 }
@@ -54297,7 +54339,7 @@ extension Widget {
     /// For any widgets that you create, provide a computed `body` property that
     /// defines the widget as a composition of SwiftUI views.
     ///
-    /// Swift infers the widget's `SwiftUI/Scene/Body-swift.associatedtype`
+    /// Swift infers the widget's ``Scene/Body-swift.associatedtype``
     /// associated type based on the contents of the `body` property.
     var body: Self.Body { get }
 }
@@ -54695,14 +54737,14 @@ public struct WindowGroup<Content> : Scene where Content : View {
     /// scene from primitive scenes that SwiftUI provides, as well as other
     /// scenes that you've defined.
     ///
-    /// Swift infers the scene's `SwiftUI/Scene/Body-swift.associatedtype`
+    /// Swift infers the scene's ``Scene/Body-swift.associatedtype``
     /// associated type based on the contents of the `body` property.
     public var body: some Scene { get }
 
     /// The type of scene that represents the body of this scene.
     ///
     /// When you create a custom scene, Swift infers this type from your
-    /// implementation of the required `SwiftUI/Scene/body-swift.property`
+    /// implementation of the required ``Scene/body-swift.variable``
     /// property.
     public typealias Body = some Scene
 }
