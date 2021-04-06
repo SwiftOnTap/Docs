@@ -101,7 +101,7 @@ import os.signpost
 /// requirement. A passthrough subject is a publisher that lets you send values
 /// manually (i.e. "passes through" any values sent to it).
 ///
-/// **Note:** The `@Published` property wrapper does not work with custom
+/// - Note: The `@Published` property wrapper does not work with custom
 /// publishers. If you use a custom publisher, you are responsible for updating
 /// the object yourself. For example:
 ///
@@ -6485,7 +6485,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///
 /// ![Color Example Three](color-example-three.png)
 ///
-/// **Note**: A ``Color`` is a late-binding token: SwiftUI only resolves it to a concrete
+/// - Note: A ``Color`` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Color : Hashable, CustomStringConvertible {
@@ -6656,7 +6656,7 @@ extension Color {
     ///
     /// ![Color RGB](color-rgb-init.png)
     ///
-    /// **Note**: The colorspace value defaults to sRGB, which is standard for apps. Note
+    /// - Note: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
     /// 0.0 to 1.0, so if your numbers are given from 0-255, you will need to
     /// divide them by 255 in order to use this initializer.
@@ -6679,7 +6679,7 @@ extension Color {
     ///
     /// ![Color White/Opacity](color-white-opacity.png)
     ///
-    /// **Note**: Both the white and the opacity must be specified from 0.0 to 1.0. If
+    /// - Note: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
     /// be divided by their maximum value.
     ///
@@ -6699,7 +6699,7 @@ extension Color {
     ///
     /// ![Hue Color Init](color-hue-init.png)
     ///
-    /// **Note**: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
+    /// - Note: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
     /// - Parameters:
     ///   - hue: The hue of the color.
@@ -17017,10 +17017,10 @@ extension ForEach where Content : View {
     ///
     /// ![Changing List](foreach.gif)
     ///
-    /// **Note:** This initializer works well for externally loaded data. It
+    /// - Note: This initializer works well for externally loaded data. It
     /// enables your app's frontend to automatically reflect data as it arrives.
     /// [<-]
-    /// **Note:** It's important that the `id` of a data element doesn't change, unless
+    /// - Note: It's important that the `id` of a data element doesn't change, unless
     /// SwiftUI considers the data element to have been replaced with a new data
     /// element that has a new identity. If the `id` of a data element changes,
     /// then the content view generated from that data element will lose any
@@ -23295,8 +23295,8 @@ extension LayoutDirection {
     /// [these docs](https://developer.apple.com/documentation/uikit/uitraitenvironmentlayoutdirection)
     /// for more info on layout direction in UIKit.
     ///
-    /// *Note that this is a failable initializer, so it must be unwrapped for
-    /// many use cases.*
+    /// - Note: This is a failable initializer, so it must be unwrapped for
+    /// many use cases.
     ///
     /// See below for a simple example of how to use this.
     ///
@@ -33995,7 +33995,7 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// The view changes accordingly while the code stays constant.
 ///
-/// *Note*: The scaled float generated from this font initialier is `36.00`,
+/// - Note: The scaled float generated from this font initialier is `36.00`,
 /// whereas the scaled float generated from the `CGFloat` was `42.00`.
 ///
 /// ![Large View](scaledmetric-example-3.png)
@@ -34026,7 +34026,7 @@ extension RoundedRectangle : InsettableShape {
 ///
 /// The ``RoundedRectangle`` shrinks while the code still has note changed.
 ///
-/// *Note*: The scaled float generated from this font initialier is `31.00`,
+/// - Note: The scaled float generated from this font initialier is `31.00`,
 /// whereas the scaled float generated from the `CGFloat` was `27.50`.
 ///
 /// ![Small View](scaledmetric-example-2.png)
@@ -43793,7 +43793,7 @@ public struct UIViewControllerRepresentableContext<Representable> where Represen
 /// To confirm that values are being written as they are input, a ``Text``
 /// reflects the latest value of the state variable.
 ///
-/// **Note** that if `searchText`'s initial value is used to set the initial
+/// - Note: If `searchText`'s initial value is used to set the initial
 /// text of the` UISearchBar` represented by `SearchBar`. This means if the
 /// initial value of `searchText` was set to `"Bananas 🍌🍌"`, `SearchBar`'
 /// would have an initial search text of `"Bananas 🍌🍌"` already loaded.
