@@ -4781,7 +4781,8 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// ![A gif displaying a view containing a list with three members; the gif shows two of the items being deleted frim the list.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+/// ![A gif displaying a view containing a list with three members; the gif
+/// shows two of the items being deleted from the list.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper @dynamicMemberLookup public struct Binding<Value> {
@@ -5641,7 +5642,8 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
 ///         func tap() { /* implement here */ }
 ///     }
 ///
-/// ![A view containing a VStack with three buttons; the first button is plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+/// ![A view containing a VStack with three buttons; the first button is plain,
+/// the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// ``View/buttonStyle(_:)-ea21b`` modifier.
@@ -6056,7 +6058,9 @@ extension ButtonStyle {
     /// ```
     ///
     ///
-    /// ![ButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
+    /// ![A view containing a VStack with three rounded yellow buttons, "🍌🍌", "🍎🍎",
+    /// "🍑🍑", all of which have padding and contract before springing
+    /// back once pressed as defined by the custom ButtonStyle configuration.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ButtonStyle-example-2.gif)
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -6377,7 +6381,7 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](default-progress-view-style-ex1.png)
+/// ![](progress-spinner-gray.gif)
 ///
 /// You can also apply a tint to the spinner using
 /// `CircularProgressViewStyle`'s ``CircularProgressViewStyle/init(tint:)``:
@@ -6391,7 +6395,7 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](progress-spinnner-orange-ex.gif)
+/// ![A gif displaying an orange circular style progress view spinnning.](progress-spinnner-orange-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
@@ -6432,7 +6436,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![](progress-spinnner-orange-ex.gif)
+    /// ![A gif displaying an orange circular style progress view spinnning.](progress-spinnner-orange-ex.gif)
     ///
     public init(tint: Color) { }
 
@@ -6461,7 +6465,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![Color Example One](color-example-one.png)
+/// ![A yellow view in which the color conforms to view and hence is
+/// used as a view itself.](color-example-one.png)
 ///
 /// `Color` also conforms to ``ShapeStyle`` which allows it to serve as a fill
 /// or stroke on a shape.
@@ -6475,7 +6480,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![Color Example Two](color-example-two.png)
+/// ![A view containing a large yellow-filled circle in which the color conforms
+/// to ShapeStyle and serves as the fill on the circle shape.](color-example-two.png)
 ///
 /// And as a stroke:
 ///
@@ -6486,7 +6492,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![Color Example Three](color-example-three.png)
+/// ![A view containing a large circle with a yellow outline in which the color conforms
+/// to ShapeStyle and serves as the stroke on the circle shape.](color-example-three.png)
 ///
 /// **Note**: A ``Color`` is a late-binding token: SwiftUI only resolves it to a concrete
 /// value just before using it in a given environment.
@@ -8916,7 +8923,8 @@ extension DatePickerStyle {
 ///         func tap() { /* implement here */ }
 ///     }
 ///
-/// ![A view containing a VStack with three buttons; the first button is plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+/// ![A view containing a VStack with three buttons; the first button is plain,
+/// the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// If you create a button inside a container, like a ``List``, the style
 /// resolves to the recommended style for buttons inside that container for that
@@ -9099,7 +9107,9 @@ public struct DefaultLabelStyle : LabelStyle {
     /// }
     /// ```
     ///
-    /// ![Default Label Styles](default-labelstyle-comparison.png)
+    /// ![A view displaying a VStack with three labels; the first reads as
+    /// "<3 Banana" and is of default style, the second reads as "<3" and is of
+    /// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
     public init() { }
 
     /// Creates a view that represents the body of a label.
@@ -9400,7 +9410,7 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
-/// ![](default-progress-view-style-ex1.png)
+/// ![](progress-spinner-gray.gif)
 ///
 /// In this instance, the style displays a spinner. However, if we initialize
 /// the ``ProgressView`` using ``ProgressView/init(value:total:)`` instead,
@@ -9438,7 +9448,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![](progress-view-default-ex.png)
+    /// ![](progress-spinner-gray.gif)
     ///
     public init() { }
 
@@ -10006,7 +10016,10 @@ extension DocumentGroup where Document : ReferenceFileDocument {
 /// }
 /// ```
 ///
-/// ![](doub-column-nav-view-style-ex1.gif)
+/// ![A gif displaying a double-column style NavigationView with a NavigationLink
+/// reading "I'm in the sidebar ⬅️" in the left column that once clicked results in
+/// the appearance of the text view "I just appeared in the middle 🤠" with the
+/// navigation title "Second Screen" in the right column.](doub-column-nav-view-style-ex1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
 @available(watchOS, unavailable)
@@ -10038,7 +10051,10 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](doub-column-nav-view-style-ex1.gif)
+    /// ![A gif displaying a double-column style NavigationView with a NavigationLink
+    /// reading "I'm in the sidebar ⬅️" in the left column that once clicked results in
+    /// the appearance of the text view "I just appeared in the middle 🤠" with the
+    /// navigation title "Second Screen" in the right column.](doub-column-nav-view-style-ex1.gif)
     ///
     public init() { }
 }
@@ -11211,7 +11227,11 @@ extension DropDelegate {
 /// }
 /// ```
 ///
-/// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
+/// ![A gif displaying a view containing an HStack with two components, a text
+/// view "🍌🍌", derived from a state variable, and a rounded rectangle with an
+/// onDrop condition; once the text is dragged into the rectangle, onDrop is
+/// triggered and the text object is switched out with another reading
+/// "Dropped My Bananas 🍌🍌!"](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-1.gif)
 ///
 @available(iOS 13.4, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -12022,7 +12042,8 @@ public struct EditButton : View {
 /// }
 /// ```
 ///
-/// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+/// ![A gif displaying a view containing a list with three members; the gif
+/// shows two of the items being deleted from the list.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
 ///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
@@ -12059,7 +12080,8 @@ public enum EditMode {
     /// }
     /// ```
     ///
-    /// ![Binding Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
+    /// ![A gif displaying a view containing a list with three members; the gif
+    /// shows two of the items being deleted from the list.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Binding-example-3.gif)
     case active
 
     /// Indicates whether a view is being edited.
@@ -14753,7 +14775,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let largeTitle: Font
 
@@ -14792,7 +14819,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let title: Font
 
@@ -14831,7 +14863,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static let title2: Font
@@ -14871,7 +14908,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static let title3: Font
@@ -14911,7 +14953,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let headline: Font
 
@@ -14951,7 +14998,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let subheadline: Font
 
@@ -14991,7 +15043,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let body: Font
 
@@ -15031,7 +15088,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let callout: Font
 
@@ -15071,7 +15133,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let footnote: Font
 
@@ -15111,7 +15178,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     public static let caption: Font
 
@@ -15151,7 +15223,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied to the font;
+    /// the text item for each example reads "_ 🍌🍌" where the blank is the name of
+    /// the applied text style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/font-types.png)
     ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public static let caption2: Font
@@ -16015,7 +16092,10 @@ extension Font {
     ///         }
     ///     }
     ///
-    /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+    /// ![A view with a VStack containing 9 text items, each with a different
+    /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+    /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+    /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
     @frozen public struct Weight : Hashable {
 
     	/// A font weight of ultra light.
@@ -16046,7 +16126,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         ///
         public static let ultraLight: Font.Weight
 
@@ -16078,7 +16161,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let thin: Font.Weight
 
         /// A font weight of light.
@@ -16109,7 +16195,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let light: Font.Weight
 
         /// A font weight of regular.
@@ -16140,7 +16229,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let regular: Font.Weight
 
         /// A font weight of medium.
@@ -16171,7 +16263,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let medium: Font.Weight
 
         /// A font weight of semibold.
@@ -16202,7 +16297,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.c](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let semibold: Font.Weight
 
         /// A font weight of bold.
@@ -16233,7 +16331,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let bold: Font.Weight
 
         /// A font weight of heavy.
@@ -16264,7 +16365,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let heavy: Font.Weight
 
         /// A font weight of black.
@@ -16295,7 +16399,10 @@ extension Font {
         ///         }
         ///     }
         ///
-        /// ![fontWeight Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
+        /// ![A view with a VStack containing 9 text items, each with a different
+        /// font weight; "ultraLight 🍌" in ultraLight, "thin🍌" in thin, "light🍌"
+        /// in light, "regular🍌" in regular, "medium🍌" in medium, "semibold🍌" in semibold,
+        /// "bold🍌" in bold, "heavy🍌" in heavy, and "black🍌" in black.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-fontWeight-example-1.png)
         public static let black: Font.Weight
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -16487,7 +16594,8 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![](font-system-1.png)
+    /// ![A text view reading "Hello" where the system font has been styled with
+    /// a 48 point size and semibold weight.](font-system-1.png)
     ///
     /// The following styles the text as 48 point
     /// and applies a `serif` ``Font/Design`` to the system font:
@@ -16501,7 +16609,8 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![](font-system-2.png)
+    /// ![A text view reading "Hello" where the system font has been styled with
+    /// a 48 point size, semibold weight, and the serif design.](font-system-2.png)
     ///
     /// If you want to use the default ``Font/Weight``
     /// (``Font/Weight/regular``), you don't need to specify the `weight` in the
@@ -16517,7 +16626,8 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![](font-system-3.png)
+    /// ![A text view reading "Hello" where the system font has been styled with
+    /// a 48 point size and the rounded design.](font-system-3.png)
     ///
     /// Interestingly, this function works well with
     /// [SF Symbols](https://developer.apple.com/sf-symbols/)
@@ -16542,7 +16652,11 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![](font-system-sfsymbols.png)
+    /// ![A view with a VStack containing four of the same SF symbol / image
+    /// styled in different ways: the first with a system font of size 30 and
+    /// ultraLight weight, the second with a system font of size 20 and black weight,
+    /// the third with a system font of size 100 and ultraLight weight, and the
+    /// fourth with a system font of size 100 and black weight.](font-system-sfsymbols.png)
     ///
     public static func system(size: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font { }
 
@@ -16913,8 +17027,8 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     ///     ]
     ///
     ///     var body: some View {
-    ///         ForEach(myFruits) { fruit in
-    ///             HStack {
+    ///         VStack {
+    ///             ForEach(myFruits) { fruit in
     ///                 Text(fruit.name + fruit.emoji)
     ///             }
     ///         }
@@ -16930,7 +17044,11 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     /// }
     /// ```
     ///
-    /// ![](for-each-content.png)
+    /// ![A view containing a ForEach statement that houses a VStack with a
+    /// text view populated by a Fruit array called myFruits that the enveloping
+    /// ForEach statement loops through; each Fruit item has both an emoji
+    /// string and a name and the text view concatenates them in reverse order,
+    /// resulting in a VStack with "Banana🍌🍌", "Peach🍑🍑", "Apple🍎🍎".](for-each-content.png)
     ///
     /// [<-]
     /// Note:  It's important that the `id` of a data element doesn't change unless you
@@ -16970,7 +17088,10 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
-    /// ![](16.59.20.png)
+    /// ![A view containing a ForEach statement that houses a VStack with a
+    /// text view populated by a string array, "🍌🍌", "🍑🍑", "🍎🍎", called
+    /// myFruits that the enveloping ForEach statement iterates through as
+    /// identifiable units.](16.59.20.png)
     ///
     /// This initializer can also be used with objects that don't conform to
     /// `Identifiable`, but have identifiable properties. For example:
@@ -16998,7 +17119,11 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
-    /// ![](17.00.04.png)
+    /// ![A view containing a ForEach statement that houses a VStack with a
+    /// text view populated by a Fruit array called myFruits that the enveloping
+    /// ForEach statement iterates through as identifiable objects; each Fruit
+    /// item has both an emoji string and a name and the text view concatenates
+    /// them in reverse order, resulting in a VStack with "Banana🍌🍌", "Peach🍑🍑", "Apple🍎🍎".](17.00.04.png)
     ///
     /// Notice, this initializer can be used for data that can change. For example:
     ///
@@ -17026,7 +17151,12 @@ extension ForEach where Content : View {
     /// }
     /// ```
     ///
-    /// ![Changing List](foreach.gif)
+    /// ![A view containing buttn reading "NewFruit" and a ForEach statement
+    /// that houses a VStack with a text view populated by a string array,
+    /// "🍌🍌", "🍑🍑", "🍎🍎", called myFruits that the enveloping ForEach
+    /// statement loops through as identifiable objects; the button calls a
+    /// function that appends a new fruit to the string array, printing it to
+    /// the VStack.](foreach.gif)
     ///
     /// **Note:** This initializer works well for externally loaded data. It
     /// enables your app's frontend to automatically reflect data as it arrives.
@@ -17058,8 +17188,8 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///     let myFruits: [String] = ["🍌🍌", "🍑🍑", "🍎🍎"]
     ///
     ///     var body: some View {
-    ///         ForEach(0..<myFruits.count) { index in
-    ///             HStack {
+    ///         VStack {
+    ///             ForEach(0..<myFruits.count) { index in
     ///                 Text(myFruits[index])
     ///             }
     ///         }
@@ -17067,13 +17197,15 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// }
     /// ```
     ///
-    /// ![](16.44.37.png)
+    /// ![A view containing a ForEach statement that houses a VStack with a
+    /// text view populated by a string array, "🍌🍌", "🍑🍑", "🍎🍎", called
+    /// myFruits that the enveloping ForEach statement indexes through.](16.44.37.png)
     ///
     /// Notice however, that this view is only rendered once. Therefore, if
     /// `myFruits.count` changes, the view will **not update**. For example,
     /// clicking `New Fruit` in the following code returns the error:
     ///
-    /// `ForEach(_:content:) should only be used for *constant* data.`
+    /// `ForEach(_:content:)` should only be used for *constant* data.
     ///
     /// ```
     /// struct ErrorView: View {
@@ -17083,9 +17215,8 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///         Button("New Fruit") {
     ///             newFruit()
     ///         }
-    ///
-    ///         ForEach(0..<myFruits.count) { index in
-    ///             HStack {
+    ///         VStack {
+    ///             ForEach(0..<myFruits.count) { index in
     ///                 Text(myFruits[index])
     ///             }
     ///         }
@@ -17099,7 +17230,12 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     /// }
     /// ```
     ///
-    /// ![](foreach-ex2.gif)
+    /// ![A view containing buttn reading "NewFruit" and a ForEach statement
+    /// that houses a VStack with a text view populated by a string array,
+    /// "🍌🍌", "🍑🍑", "🍎🍎", called myFruits that the enveloping ForEach
+    /// statement loops through; the button calls a function that appends a new
+    /// fruit to the string array, resulting in an error because
+    /// ForEach(_:content:) should only be used with constant data.](foreach-ex2.gif)
     ///
     /// The instance only reads the initial value of the provided `data` and
     /// doesn't need to identify views across updates. To compute views on
@@ -18783,18 +18919,19 @@ public struct GroupBoxStyleConfiguration {
 
 /// A standard grouped list style.
 ///
-///      struct ExampleView: View {
-///          var body: some View {
+///     struct ExampleView: View {
+///         var body: some View {
 ///             List {
-///              Text("Bananas 🍌🍌")
-///              Text("Apples 🍎🍎")
-///              Text("Peaches 🍑🍑")
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
 ///             }
 ///             .listStyle(GroupedListStyle())
-///          }
-///      }
+///         }
+///     }
 ///
-/// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
+/// ![A view containing a grouped list with three text views, "Bananas 🍌🍌",
+/// "Apples 🍎🍎", and "Peaches 🍑🍑".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
 ///
 @available(iOS 13.0, tvOS 13.0, *)
 @available(macOS, unavailable)
@@ -21530,7 +21667,10 @@ public struct InsetListStyle : ListStyle {
     ///         }
     ///     }
     ///
-    /// ![InsetListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
+    /// ![A view displaying an inset list with three items "Bananas 🍌🍌", "Apples 🍎🍎",
+    /// and "Peaches 🍑🍑"; the list items and the thin gray lines that separate them
+    /// sit condensed in the center of the view, creating a gap between the list and the
+    /// edges of the frame.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-inset-example-1.png)
     ///
     public init() { }
 }
@@ -22503,7 +22643,8 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
-/// ![AAF70423-43CB-4A9F-8640-C9485C5EF390](AAF70423-43CB-4A9F-8640-C9485C5EF390.png)
+/// ![A view containing a label with the title "Lightning" preceded by a
+/// black-filled lightning bolt symbol from the SF symbols collection.](AAF70423-43CB-4A9F-8640-C9485C5EF390.png)
 ///
 /// You can also apply styles to labels in several ways. In the case of dynamic
 /// changes to the view after device rotation or change to a window size you
@@ -22519,7 +22660,7 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
-/// ![922B50FC-5FEC-4F61-A07E-AB579F1B726E](922B50FC-5FEC-4F61-A07E-AB579F1B726E.png)
+/// ![A view containing a title only label with the title "Lightning".](922B50FC-5FEC-4F61-A07E-AB579F1B726E.png)
 ///
 /// Conversely, there's also an icon-only label style:
 ///
@@ -22532,7 +22673,8 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
-/// ![D12AC27C-00DC-4F00-A4F1-B72735084CA4](D12AC27C-00DC-4F00-A4F1-B72735084CA4.png)
+/// ![A view containing an icon only label with no visible title and a
+/// black-filled lightning bolt symbol from the SF symbols collection.](D12AC27C-00DC-4F00-A4F1-B72735084CA4.png)
 ///
 /// You can also create a customized label style by modifying an existing
 /// style; this example adds a red border to the default label style:
@@ -22554,7 +22696,9 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
-/// ![491B486D-0E3C-450A-9FD3-74BB847D19FE](491B486D-0E3C-450A-9FD3-74BB847D19FE.png)
+/// ![A view containing a bordered label with the title "Lightning" preceded by a
+/// black-filled lightning bold symbol from the SF symbols collection surrounded
+/// red border with padding between.](491B486D-0E3C-450A-9FD3-74BB847D19FE.png)
 ///
 /// For more extensive customization or to create a completely new label style,
 /// you'll need to adopt the ``LabelStyle`` protocol and implement a
@@ -22576,7 +22720,8 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
-/// ![9F864CBF-1FA1-4989-9F8B-8ED0515E1C56](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
+/// ![A view containing a VStack with three icon only labels, each with a different
+/// icon from the SF symbols collection: a rain cloude, a snowflake, and a shining un.](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
 ///
 /// It's also possible to make labels using views to compose the label's icon
 /// programmatically, rather than using a pre-made image. In this example, the
@@ -22603,7 +22748,10 @@ public struct KeyboardShortcut {
 /// }
 /// ```
 ///
-/// ![BFE30CE7-C088-4B03-A564-0A1B8D272BCF](BFE30CE7-C088-4B03-A564-0A1B8D272BCF.png)
+/// ![A view containing a label with two text views, "Aaron" with body style font and
+/// primary coloring and "Goat" with subheadline style font and secondary coloring;
+/// the label icon is a purple-filled circle with a width of 44, hieght of 44,
+/// center alignmnet, and an overlay with the text "AG".the former.](BFE30CE7-C088-4B03-A564-0A1B8D272BCF.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct Label<Title, Icon> : View where Title : View, Icon : View {
@@ -22841,7 +22989,9 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// }
 /// ```
 ///
-/// ![Default Label Styles](default-labelstyle-comparison.png)
+/// ![A view displaying a VStack with three labels; the first reads as
+/// "<3 Banana" and is of default style, the second reads as "<3" and is of
+/// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol LabelStyle { }
@@ -24195,7 +24345,8 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![A view displaying an inset grouped list containing three text members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑".](7FC84606-BB3F-41C2-BEC1-40346A413676.png)
+/// ![A view displaying a grouped-inset list containing three text members,
+/// "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑".](7FC84606-BB3F-41C2-BEC1-40346A413676.png)
 ///
 /// SwiftUI offers various list styles:
 ///
@@ -24233,7 +24384,9 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![A view displaying a list containing three text members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑", each with a different list row background color.](A6394785-F064-497F-A48B-7ED9DAA55452.png)
+/// ![A view displaying a list containing three text members, "Bananas 🍌🍌",
+/// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a different list row
+/// background color.](A6394785-F064-497F-A48B-7ED9DAA55452.png)
 ///
 /// A background can be provided for multiple list rows at a time, by applying
 /// the ``View/listRowBackground(_:)`` modifier to ``ForEach``.
@@ -24256,7 +24409,9 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![A view displaying a dynamic list containing an array with three string members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑," each displayed as a separate list item with a yellow list row background.](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
+/// ![A view displaying a dynamic list containing an array with three string
+/// members, "Bananas 🍌🍌", "Apples 🍏🍏", and "Peaches 🍑🍑," each displayed
+/// as a separate list item with a yellow list row background.](9236312D-0F88-47FE-A2C8-B5BE665FBBE3.png)
 ///
 /// [<-]
 ///
@@ -24323,7 +24478,10 @@ extension Link where Label == Text {
 /// }
 /// ```
 ///
-/// ![A gif showing a view with an "Edit" button right aligned above a list containg three fruit emojis as members; when clicked, the word "Edit" is replaced by "Done" and red "Delete" button appears in line with any list item when it is slid to the left.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
+/// ![A gif showing a view with an "Edit" button right aligned above a list
+/// containg three fruit emojis as members; when clicked, the word "Edit" is
+/// replaced by "Done" and red "Delete" button appears in line with any list
+/// item when it is slid to the left.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/List-example-8.gif)
 ///
 /// [<-]
 /// ### Further notes
@@ -26257,7 +26415,8 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 /// }
 /// ```
 ///
-/// ![NavigationView Example 3](538F7154-7B14-41AD-B913-2391A4D850CB.png)
+/// ![A navigation view displaying the plain text "Hello Bananas🍌🍌" under a
+/// navigation title with display mode .large that reads "Home".](538F7154-7B14-41AD-B913-2391A4D850CB.png)
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 public struct NavigationBarItem {
@@ -26562,7 +26721,8 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![A navigation view displaying the plain text "Hello Bananas🍌🍌" under a navigation title with display mode .large that reads "Home".](538F7154-7B14-41AD-B913-2391A4D850CB.png)
+/// ![A navigation view displaying the plain text "Hello Bananas🍌🍌" under a
+/// navigation title with display mode .large that reads "Home".](538F7154-7B14-41AD-B913-2391A4D850CB.png)
 ///
 /// [<-]
 /// [navigation-link ->]
@@ -26680,7 +26840,8 @@ extension NavigationLink {
 /// }
 /// ```
 ///
-/// ![A navigation view displaying the text "Hello Bananas🍌🍌" with a naviagation bar containing the leading text "🍌🍌" and the trailing text "🍏🍏".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-11.png)
+/// ![A navigation view displaying the text "Hello Bananas🍌🍌" with a
+/// navigation bar containing the leading text "🍌🍌" and the trailing text "🍏🍏".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/NavigationView-example-11.png)
 ///
 /// [<-]
 /// [navigation-view-style ->]
@@ -27492,9 +27653,12 @@ public struct OutlineSubgroupChildren : View {
 ///         .tabViewStyle(PageTabViewStyle())
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 ///     }
+/// }
 /// ```
 ///
-/// ![TabView Example 4](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
+/// ![A gif flipping through the pages of a TabView with three items,
+/// "Bananas 🍌🍌", "Apples 🍏🍏", "Peaches 🍑🍑", derived from a state variable;
+/// the TabView has no page index indicators.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-4.gif)
 ///
 /// Currently the ``PageIndexViewStyle`` is the only type that allows for customization
 /// over a page index view. To configure the current ``IndexViewStyle`` for a view hierarchy, use the
@@ -27505,19 +27669,21 @@ public struct OutlineSubgroupChildren : View {
 ///
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        TabView {
-///            Text("Tab 1")
-///            Text("Tab 2")
-///            Text("Tab 3")
-///        }
-///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-///    }
+///     var body: some View {
+///         TabView {
+///             Text("Tab 1")
+///             Text("Tab 2")
+///             Text("Tab 3")
+///         }
+///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///     }
 /// }
 /// ```
 ///
-/// ![Page index view style protocol example 2](pageindexviewstyle-ex2.gif)
+/// ![A gif flipping through the pages of a TabView with three text views, "Tab 1",
+/// "Tab 2", and "Tab 3", as reflected in the page index indicator dots at the bottom
+/// of the frame.](pg-index-view-style-always-ex.gif)
 ///
 @available(iOS 14.0, tvOS 14.0, *)
 @available(macOS, unavailable)
@@ -29652,7 +29818,8 @@ public struct PinnedScrollableViews : OptionSet {
 ///         func tap() { /* implement here */ }
 ///     }
 ///
-/// ![A view containing a VStack with three buttons; the first button is plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+/// ![A view containing a VStack with three buttons; the first button is plain,
+/// the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
 ///
 /// To apply this style to a button, or to a view that contains buttons, use the
 /// ``View/buttonStyle(_:)-d2d0a`` modifier.
@@ -30772,7 +30939,9 @@ extension PrimitiveButtonStyle {
     /// }
     /// ```
     ///
-    /// ![PrimitiveButtonStyle Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
+    /// ![A view containing a VStack with three rounded yellow buttons,
+    /// "Banana 🍌🍌", "Apple 🍏🍏", "Peach 🍑🍑", all of which have padding
+    /// as defined by the custom PrimitiveButtonStyle configuration.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/PrimitiveButtonStyle-example-2.png)
     ///
     /// - Parameter configuration : The properties of the button.
     func makeBody(configuration: Self.Configuration) -> Self.Body { }
@@ -30821,7 +30990,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
-/// ![](progress-view-default-ex.png)
+/// ![](progress-spinner-gray.gif)
 ///
 /// When initialized with a value `ProgressView` looks like a
 /// loading bar that fills up from left to right.
@@ -30866,7 +31035,9 @@ public struct PrimitiveButtonStyleConfiguration {
 ///     }
 ///
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.gif)
+/// ![A gif showing a view with a VStack containing a ProgressView with a
+/// custom style; a circular gray progress spinner sits above a progress bar filled
+/// 75% by a dark blue bar with a dramatic shadow.](dark-blue-custom-progress-view-spinner-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressView<Label, CurrentValueLabel> : View where Label : View, CurrentValueLabel : View {
@@ -31233,7 +31404,7 @@ extension ProgressView {
 /// }
 /// ```
 ///
-///![](progress-view-default-ex.png)
+///![](progress-spinner-gray.gif)
 ///
 /// ### Custom Styles
 ///
@@ -31260,7 +31431,9 @@ extension ProgressView {
 ///         }
 ///     }
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.gif)
+/// ![A gif showing a view with a VStack containing a ProgressView with a
+/// custom style; a circular gray progress spinner sits above a progress bar filled
+/// 75% by a dark blue bar with a dramatic shadow.](dark-blue-custom-progress-view-spinner-ex.gif)
 ///
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -31308,7 +31481,9 @@ extension ProgressViewStyle {
     ///         }
     ///     }
     ///
-    /// ![](dark-blue-shadowed-progress-view-ex.gif)
+    /// ![A gif showing a view with a VStack containing a ProgressView with a
+    /// custom style; a circular gray progress spinner sits above a progress bar filled
+    /// 75% by a dark blue bar with a dramatic shadow.](dark-blue-custom-progress-view-spinner-ex.gif)
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
@@ -31397,7 +31572,9 @@ extension ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.gif)
+/// ![A gif showing a view with a VStack containing a ProgressView with a
+/// custom style; a circular gray progress spinner sits above a progress bar filled
+/// 75% by a dark blue bar with a dramatic shadow.](dark-blue-custom-progress-view-spinner-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressViewStyleConfiguration {
@@ -33400,7 +33577,10 @@ public struct RotationGesture : Gesture {
 ///         }
 ///     }
 ///
-/// ![TextField Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+/// ![A gif displaying a view with a rounded border TextField with the
+/// placeholder "Fruit" and padding; as the text field is populated by text,
+/// the text is stored in a state variable that is simultaneously displayed in
+/// the text line above the input box.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -33545,7 +33725,8 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
-/// ![RoundedRectangle corner radius, fill, and frame example](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
+/// ![A view containing a RoundedRectangle with a corner radius of 20, blue
+/// fill, and a frame of width 250 and height 150.](923684A5-EAF0-455B-987B-DD7FAE5B8952.png)
 ///
 /// The example below uses the same modifiers, but defines a corner size
 /// rather than a corner radius.
@@ -33560,7 +33741,8 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
-/// ![RoundedRectangle corner size, fill, and frame example](4E1D6264-F9BA-4558-804A-72643AFD2A3B.png)
+/// ![A view containing a RoundedRectangle with a corner size of width 30 and
+/// height 10, blue fill, and a frame of width 250 and height 150.](4E1D6264-F9BA-4558-804A-72643AFD2A3B.png)
 ///
 /// The RoundedRectangle initializer includes an optional parameter for
 /// specifying the `style`, a ``RoundedCornerStyle`` that can either be `circular`
@@ -33580,7 +33762,9 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
-/// ![RoundedRectangle init example](F25C23E2-86B8-42F5-8EB9-19E8D02A5177.png)
+/// ![A view containing two RoundedRectangles, each with a corner radius of 50
+/// and a frame of width 250 and height 150, but with differing corner radius
+/// styles: circular and continuous, respectively.](F25C23E2-86B8-42F5-8EB9-19E8D02A5177.png)
 ///
 /// To add a border, use the `Shape/stroke(:lineWidth:)` modifier, and use
 /// the ``RoundedRectangle/inset(by:)`` modifier to inset the RoundedRectangle by
@@ -33597,7 +33781,8 @@ extension RoundedCornerStyle : Hashable {
 /// }
 /// ```
 ///
-/// ![RoundedRectangle inset and stroke example](97611155-5069-4DFB-808C-7BBA7DD5DBAA.png)
+/// ![A view containing a RoundedRectangle inset by 10 with a corner radius of
+/// 40, a blue stroke with line width 20, and a frame of width 250 and height 150.](97611155-5069-4DFB-808C-7BBA7DD5DBAA.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RoundedRectangle : Shape {
@@ -37931,7 +38116,10 @@ extension Spacer : View {
 /// }
 /// ```
 ///
-/// ![](stack-nav-view-style-ex.gif)
+/// ![A gif displaying a stack style NavigationView containing a NavigationLink
+/// that reads "Stack the second screen! 🥞" and causes a stacked text view
+/// reading "I'm stacked on the pancakes 📚" with the navigation title "Second
+/// Screen" to appear, covering the first view.](stack-nav-view-style-ex.gif)
 ///
 @available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
 @available(macOS, unavailable)
@@ -37963,7 +38151,10 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](stack-nav-view-style-ex.gif)
+    /// ![A gif displaying a stack style NavigationView containing a NavigationLink
+    /// that reads "Stack the second screen! 🥞" and causes a stacked text view
+    /// reading "I'm stacked on the pancakes 📚" with the navigation title "Second
+    /// Screen" to appear, covering the first view.](stack-nav-view-style-ex.gif)
     ///
     public init() { }
 }
@@ -39869,7 +40060,11 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![A gif that jumps between the three children in a TabView by clicking the corresponding symbols on the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+/// ![A gif that jumps between the three text views, "Bananas 🍌🍌",
+/// "Apples 🍏🍏", and "Peaches 🍑🍑", within a TabView by clicking the
+/// corresponding symbols on the tab-bar: each tab bar item is a filled circle
+/// with the page number above the two matching emojis corresponding to the
+/// those in the text views.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 /// [<-]
 /// [tabview-style ->]
@@ -39993,7 +40188,9 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![A gif that jumps between the three children in a TabView by clicking the various symbols on the tab-bar; the tab selection is written to a state variable.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
+/// ![A gif that jumps between the three children in a TabView by clicking the
+/// various symbols on the tab-bar; the tab selection is written to a state
+/// variable.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-5.gif)
 ///
 /// In this example, each tab item is assigned a unique tag using the
 /// ``View/tag(_:)`` view modifier. ``TabView`` in turn takes a binding to
@@ -40026,7 +40223,8 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// }
 /// ```
 ///
-/// ![A gif that jumps between the three children in a TabView without icons in the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
+/// ![A gif that jumps between the three children in a TabView without icons in
+/// the tab-bar.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-6.gif)
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct TabView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
@@ -40624,7 +40822,7 @@ extension Text {
     /// Creates an instance that displays localized dates and times using a specific style.
     ///
     /// Use this initializer along with ``Text/DateStyle`` to style the
-    /// date. See ``Text/DateStyle`` for the options of te style parameter.
+    /// date. See ``Text/DateStyle`` for the options of the style parameter.
     ///
     /// See
     /// [`Date`](https://developer.apple.com/documentation/foundation/date)
@@ -40640,7 +40838,8 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Init style example](text-init-style-ex.gif)
+    /// ![A gif displaying a timer style text view in which a 3 digit timer
+    /// count up from 1 to 4 seconds.](text-init-style-ex.gif)
     ///
     /// - Parameters:
     ///     - date: The target date to display.
@@ -41061,7 +41260,12 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Applying a font to a single text view or a view container](textfont-ex.png)
+    /// ![A view containing a VStack with a text view reading "Font applied to
+    /// a text view" in largeTitle font style followed by a child VStack
+    /// containing two text views, "These two text views have the same font"
+    /// and "applied to their parent view which have been styled as size 15,
+    /// light weight, and default design through application to the view
+    /// container by way of the system modifier.](textfont-ex.png)
     ///
     /// - Parameter font: The font to use when displaying this text.
     /// - Returns: Text that uses the font you specify.
@@ -41294,7 +41498,10 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![Underline Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
+    /// ![A view displaying three title font text items in a VStack, "Banana 🍌🍌" with no
+    /// underline, "Banana 🍌🍌" with an underline, and "Banana 🍌🍌"
+    /// with a yellow underline; all three text views use the underline
+    /// modifier.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-underline-example-1.png)
     ///
     /// - Parameters:
     ///   - active: A Boolean value that indicates whether the text has an
@@ -41772,7 +41979,9 @@ public struct TextEditor : View {
 ///         }
 ///     }
 ///
-/// ![A gif showing a view with a VStack containing a text field that once populated displays the corresponding text in a text item; the text field has a rounded border style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
+/// ![A gif showing a view with a VStack containing a text field that once
+/// populated displays the corresponding text in a text item; the text field has
+/// a rounded border style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-2.gif)
 ///
 /// [<-]
 /// The ``TextFieldStyle`` protocol and ``View/textFieldStyle(_:)`` modifier
@@ -44100,7 +44309,8 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// }
 /// ```
 ///
-/// ![LinearGradient Example 1](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
+/// ![A view displaying an orange square with linear gradient fill specificed
+/// by start and end UnitPoints.](1199EBDE-F3C9-4FA5-900B-98139BD6C0CC.png)
 ///
 /// To use a unit point as an anchor for rotation, pass it to the
 /// ``View/rotationEffect(_:anchor:)`` modifier:
@@ -44120,7 +44330,10 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 /// }
 /// ```
 ///
-/// ![](unitpoint-anchor.png)
+/// ![A view with a VStack containing two text views, one of which has been
+/// rotated 22 degrees clockwise around it's center using UnitPoint, and one
+/// which has been rotated 22 degrees clockwise around its leading edge; both
+/// views have a unrotated gray border to show the rotation effect.](unitpoint-anchor.png)
 ///
 /// You can get the same effect by creating your own custom `UnitPoint`s,
 /// using the ``UnitPoint/init(x:y:)`` initialzer:
@@ -44142,6 +44355,11 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
 ///     }
 /// }
 /// ```
+///
+/// ![A view with a VStack containing two text views, one of which has been
+/// rotated 22 degrees clockwise around it's center using custom UnitPoints, and one
+/// which has been rotated 22 degrees clockwise around its leading edge; both
+/// views have a unrotated gray border to show the rotation effect.](unitpoint-anchor.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct UnitPoint : Hashable {
@@ -44744,7 +44962,9 @@ extension VectorArithmetic : AdditiveArithmetic {
 /// }
 /// ```
 ///
-/// ![68519915-B4B5-4531-9D49-B9DF5172967B](68519915-B4B5-4531-9D49-B9DF5172967B.png)
+/// ![A view containing an HStack with a thin red rectangle with top vertical
+/// alignment and a VStack with two largeTitle font text views aligned directly
+/// below and to the right of the red rectangle.](68519915-B4B5-4531-9D49-B9DF5172967B.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VerticalAlignment : Equatable {
@@ -45417,7 +45637,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Index View Style Example 1](index-view-style-ex.gif)
+    /// ![A gif that flips back and forth between the two pages of a TabView,
+    /// one reading "Page 1️⃣" and the other fully pink, as reflected by the page
+    /// index indicators at the bottom of the page.](index-view-style-ex.gif)
     ///
     /// - Parameter style: The ``IndexViewStyle`` style to apply to this view.
     public func indexViewStyle<S>(_ style: S) -> some View where S : IndexViewStyle { }
@@ -45683,7 +45905,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](view-tab-view-style-ex3.gif)
+    /// ![A gif flipping through each page of a default tabview with three text items, "Bananas 🍌🍌",
+    /// "Apples 🍏🍏", and "Peaches 🍑🍑", using the tab items at the bottom of the frame; the tab
+    /// items are filled circles containing the page number](view-tab-view-style-ex3.gif)
     ///
     /// - Parameter style: The style to apply to this tab view.
     public func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle { }
@@ -45714,7 +45938,8 @@ extension View {
     ///         func tap() { /* implement here */ }
     ///     }
     ///
-    /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+    /// ![A view containing a VStack with three buttons; the first button is
+    /// plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
     ///
     public func buttonStyle<S>(_ style: S) -> some View where S : PrimitiveButtonStyle { }
 
@@ -45799,8 +46024,7 @@ extension View {
     ///
     /// ![A screenshot showing the image of a bus with a caption reading
     /// Downtown Bus. A view extension, using custom a modifier, renders the
-    ///  caption in blue text surrounded by a rounded
-    ///  rectangle.](SwiftUI-View-ViewModifier.png)
+    /// caption in blue text surrounded by a rounded rectangle.](SwiftUI-View-ViewModifier.png)
     ///
     /// - Parameter modifier: The modifier to apply to this view.
     @inlinable public func modifier<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
@@ -46378,9 +46602,6 @@ extension View {
     /// Sets the style for buttons within this view to a button style with a
     /// custom appearance and standard interaction behavior.
     ///
-    /// ![DefaultButtonStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
-    ///
-    ///
     ///     struct ExampleView: View {
     ///         var body: some View {
     ///              VStack {
@@ -46398,6 +46619,10 @@ extension View {
     ///
     ///          func tap() { /* implement here */ }
     ///      }
+    ///
+    /// ![A view containing a VStack with three buttons; the first button is
+    /// plain, the second is borderless, and the last is the default style.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/buttonstyle-plain-border-default-example-1.png)
+    ///
     public func buttonStyle<S>(_ style: S) -> some View where S : ButtonStyle { }
 
 }
@@ -46517,7 +46742,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](background.png)
+    /// ![A TextView reading "I have a floral background" with the corresponding
+    /// background text "🌸🌹🌺💐" aligned beneath it.](background.png)
     ///
     /// Check out ``View/overlay(_:alignment:)``, which is the opposite
     /// modifier.
@@ -46865,7 +47091,8 @@ extension View {
   ///         }
   ///     }
   ///
-  /// ![Foreground Color Cicles](foregroundcolor-circles.png)
+  /// ![A view containing a VStack with three circles, each with a different
+  /// foreground color: red, yellow, and green respecitvely, like a traffic light.](foregroundcolor-circles.png)
   ///
   /// But this modifier is very general and works in many places. For example,
   /// you can change the text color of any control, like a ``Button``,
@@ -46887,7 +47114,10 @@ extension View {
   ///         }
   ///     }
   ///
-  /// ![Foreground Color Controls](foregroundcolor-controls.png)
+  /// ![A view containing a VStack with three components, a button with the
+  /// foreground color red applied, a toggle with the foreground color pink,
+  /// and a date picker with the foreground color green applied; for the latter
+  /// two, the specified foreground color only affects the related text.](foregroundcolor-controls.png)
   ///
   /// Because this modifier is general, it's easy to use on a parent view,
   /// then have the color show up on all of the children:
@@ -46906,7 +47136,10 @@ extension View {
   ///         }
   ///     }
   ///
-  /// ![Foreground Color Parent](foregroundcolor-pink.png)
+  /// ![A view containing a VStack with three components, a button, a toggle,
+  /// and a date picker, all with th with the forground color green applied; the
+  /// pink foreground color applied to the VStack makes the text in each of the
+  /// components pink.](foregroundcolor-pink.png)
   ///
   /// - Note: There is a related modifier for ``Text`` views
   /// called ``Text/foregroundColor(_:)`` that acts
@@ -46988,7 +47221,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](15.39.23.png)]
+    /// ![A view containing a VStack with two text views, one with a gray border
+    /// and 20 point padding on just the left and bottom edges, the other with a yellow bording and
+    /// no padding.]](padding-97aab-ex.png)
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// ``View/padding(_:_:)``. To pad all outside edges of a view with an
@@ -47023,7 +47258,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](15.39.23.png)
+    /// ![A view containing a VStack with two text views, one with a gray border
+    /// and padding on the bottom edge, the other with a yellow bording and
+    /// no padding.](15.39.23.png)
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
     /// the edges of the view, see ``View/padding(_:)-97aab``. To pad all
@@ -47059,7 +47296,9 @@ extension View {
     ///     }
     /// }
     /// ```
-    /// ![](15.27.58.png)
+    /// ![A view containing a VStack with two text views, one with a gray border
+    /// and 10 point padding on each edge, the other with a yellow bording and
+    /// no padding.](15.27.58.png)
     ///
     /// - Parameter length: The amount to pad this view on each edge.
     ///
@@ -48443,7 +48682,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](view-tag-flavor.gif)
+    /// ![A gif that spins through a wheel style picker with three options,
+    /// vanilla, chocolate, and strawberry, all derived from the same enum and
+    /// tagged with raw values.](view-tag-flavor.gif)
     ///
     /// - Parameter tag: A [Hashable](https://developer.apple.com/documentation/swift/hashable) value
     ///   to use as the view's tag.
@@ -48528,7 +48769,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](listrowbackground.png)
+    /// ![A view containing a list with three text views, "vanilla",
+    /// "chocolate", and "strawberry", populated from an enum, each with
+    /// sparkles as a the list row background.](listrowbackground.png)
     ///
     /// - Parameter view: The ``View`` to use as the background behind the list
     ///   row view.
@@ -49167,7 +49410,7 @@ extension View {
     ///
     /// For example, the following code lays out an ellipse in a fixed 200 by
     /// 100 frame. Because a shape always occupies the space offered to it by
-    /// the layout system, the first ellipse is 200x100 points. The second
+    /// the layout system, the first ellipse is 200 by 100 points. The second
     /// ellipse is laid out in a frame with only a fixed height, so it occupies
     /// that height, and whatever width the layout system offers to its parent.
     ///
@@ -49186,7 +49429,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](15.54.23.png)
+    /// ![A view containing a VStack with two ellipses, the first with fill
+    /// color purple and an invisible frame of width 200 and height 100, and the
+    /// second with fill color blue and an invisible frame of height 100.](15.54.23.png)
     ///
     /// The `alignment` parameter specifies this view's alignment within the
     /// frame.
@@ -49201,7 +49446,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](15.56.14.png)
+    /// ![A gray bordered text view reading "Hello world!" with a frame of width
+    /// 200 and a height of 30 and top leading alignment, pushing the text
+    /// into the top left corner of the frame.](15.56.14.png)
     ///
     /// In the example above, the text is positioned at the top, leading corner
     /// of the frame. If the text is taller than the frame, its bounds may
@@ -49379,7 +49626,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](tab-item-ex1.gif)
+    /// ![A gif flipping through a TabView with two views using the
+    /// corresponding tab-bar items: one with a list dash symbol and the text
+    /// "Menu" and the other with a square and pencil symbol and the text "Order".](tab-item-ex1.gif)
     ///
     /// [[tabview-tabitem]]
     ///
@@ -49568,7 +49817,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Default Label Styles](default-labelstyle-comparison.png)
+    /// ![A view displaying a VStack with three labels; the first reads as
+    /// "<3 Banana" and is of default style, the second reads as "<3" and is of
+    /// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
     ///
     /// - Note: Creating label styles can be complex. See ``LabelStyle``
     /// for more.
@@ -49828,7 +50079,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](nav-view-ex8.gif)
+    /// ![A gif displaying a stack-based style NavigationView with the NavigationLink "Hello
+    /// Bananas" that once clicked results in the appearance of the stacked
+    /// text view "🍌🍌".](nav-view-ex8.gif)
     ///
     ///
     /// And the following forces a double-column navigation style, overriding the
@@ -49845,7 +50098,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](nav-view-ex9.gif)
+    /// ![A gif displaying a double-column style NavigationView with a NavigationLink
+    /// reading "Hello Bananas" in the left column that once clicked results in
+    /// the appearance of the text view "🍌🍌" in the right column.](nav-view-ex9.gif)
     ///
     /// - Parameter style: The desired style of the ``NavigationView``.
     @available(watchOS 7.0, *)
@@ -51214,6 +51469,8 @@ extension View {
     ///         }
     ///     }
     ///
+    /// [A gif displaying an orange circular style progress view spinnning.](progress-spinnner-orange-ex.gif)
+    ///
     /// You can also create your own ``ProgressViewStyle``:
     ///
     ///     struct ShadowedProgressViews: View {
@@ -51234,7 +51491,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](progress-view-style-ex2.png)
+    /// ![A gif showing a view with a VStack containing a ProgressView with a
+    /// custom style; a circular gray progress spinner sits above a progress bar filled
+    /// 75% by a dark blue bar with a dramatic shadow.](dark-blue-custom-progress-view-spinner-ex.gif)
     ///
     /// - Parameter style: The progress view style to use for this view.
     public func progressViewStyle<S>(_ style: S) -> some View where S : ProgressViewStyle { }
@@ -53178,7 +53437,12 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Nav Bar Item LeadingTrailing Example 2](Navigationbaritems-leading-trailing-ex2.png)
+    /// ![A NavigationView containing a list with three text items and the
+    /// navigation bar title "Today's Fruits", along with two HStacks,
+    /// one trailing and one leading, along the top of the page frame;
+    /// the leading navigation bar item is a button reading "Hours" and the
+    /// trailing navigation bar items are a button reading "Favorites" followed
+    /// by a button reading "Specials".](Navigationbaritems-leading-trailing-ex2.png)
     ///
     /// - Parameters:
     ///   - leading: A view that appears on the leading edge of the title.
@@ -53231,7 +53495,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Nav Bar Items Leading Example 2](navigationbaritems-leading-ex2.png)
+    /// ![A NavigationView containing a list with three text items and the
+    /// navigation bar title "Today's Flavors", along with leading navigation bar
+    /// items comprised of two buttons, one reading "Hours"
+    /// followed by another reading "Help".](navigationbaritems-leading-ex2.png)
     ///
     /// - Parameter leading: A view that appears on the leading edge of the
     ///   title.
@@ -53278,7 +53545,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![Nav bar items trailing example 2](Navigationbaritems-trailing-ex2.png)
+    /// ![A NavigationView containing a list with three text items and the
+    /// navigation bar title "Today's Flavors", along with trailing navigation bar
+    /// items comprised of two buttons, one reading "Hours"
+    /// followed by another reading "Help".](Navigationbaritems-trailing-ex2.png)
     ///
     /// - Parameter trailing: A view shown on the trailing edge of the title.
     @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(_:) with navigationBarLeading or navigationBarTrailing placement")
@@ -54880,7 +55150,10 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// }
 /// ```
 ///
-/// ![Toggle Animation](with-animation-2.gif)
+/// ![A gif displaying a view containing a button reating "Toggle" that once
+/// pressed triggers a toggle animation in which the text view "🍌" appears and
+/// slides down and up in a v-shape underneath the button in an ease-in-out
+/// style before dissapearing again on the right side of the button.](with-animation-2.gif)
 ///
 /// Or use ``withAnimation(_:_:)`` for a shake effect, like so:
 ///
@@ -54920,7 +55193,8 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// }
 /// ```
 ///
-/// ![Animatable Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
+/// ![A gif that displays a VStack containing the text "Banana🍌🍌", which has
+/// been animated to shake side to side / left to right ten times.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Animatable-example-1.gif)
 ///
 /// Alter the duration of your animation as follows:
 ///
@@ -54945,7 +55219,11 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// }
 /// ```
 ///
-/// ![Animation Basic](with-animation-1.gif)
+/// ![A gif displaying a view containing a button reading "Cloud the Banana"
+/// followed vertically by padding and then a ZStack containing two text views,
+/// "🍌🍌" and "☁️☁️☁️☁️", the latter of which has an opacity of 0.0.;
+/// when the button is clicked, the  opacity if the "☁️☁️☁️☁️" text increase
+/// to 1.0, covering the "🍌🍌" text.](with-animation-1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public func withAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result { }
