@@ -398,16 +398,19 @@ extension AccessibilityLabeledPairRole : Hashable {
 ///
 /// For example:
 ///
-/// ![6014639F-AD04-4B82-9FD7-EECD9109F555](6014639F-AD04-4B82-9FD7-EECD9109F555.png)
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        Button("I'm a button! 😏") {
-///            // Do something on button click
-///        }.accessibilityAddTraits(.isButton)
-///    }
+///     var body: some View {
+///         Button("I'm a button! 😏") {
+///             // Do something on button click
+///         }
+///         .accessibilityAddTraits(.isButton)
+///     }
 /// }
 /// ```
+///
+/// ![6014639F-AD04-4B82-9FD7-EECD9109F555](6014639F-AD04-4B82-9FD7-EECD9109F555.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct AccessibilityTraits : SetAlgebra {
 
@@ -814,19 +817,19 @@ public struct ActionSheet {
 ///
 /// ```
 /// struct ExampleAlertView: View {
-///    @State private var showAlert = false
+///     @State private var showAlert = false
 ///
-///    var body: some View {
-///        Button("Tap to view alert") {
-///            showAlert = true
-///        }
-///        .alert(isPresented: $showAlert) {
-///            Alert(
-///                title: Text("An important title!"),
-///                message: Text("A message that adds additional context on the alert.")
-///            )
-///        }
-///    }
+///     var body: some View {
+///         Button("Tap to view alert") {
+///             showAlert = true
+///         }
+///         .alert(isPresented: $showAlert) {
+///             Alert(
+///                 title: Text("An important title!"),
+///                 message: Text("A message that adds additional context on the alert.")
+///             )
+///         }
+///     }
 /// }
 /// ```
 ///
@@ -883,20 +886,20 @@ public struct Alert {
     ///
     /// ```
     /// struct ExampleAlertView: View {
-    ///    @State private var showAlert = false
+    ///     @State private var showAlert = false
     ///
-    ///    var body: some View {
-    ///        Button("Tap to view alert") {
-    ///            showAlert = true
-    ///        }
-    ///        .alert(isPresented: $showAlert) {
-    ///            Alert(
-    ///                title: Text("An important title!"),
-    ///                message: Text("A message that adds additional context on the alert."),
-    ///                dismissButton: .default(Text("I understand."))
-    ///            )
-    ///        }
-    ///    }
+    ///     var body: some View {
+    ///         Button("Tap to view alert") {
+    ///             showAlert = true
+    ///         }
+    ///         .alert(isPresented: $showAlert) {
+    ///             Alert(
+    ///                 title: Text("An important title!"),
+    ///                 message: Text("A message that adds additional context on the alert."),
+    ///                 dismissButton: .default(Text("I understand."))
+    ///             )
+    ///         }
+    ///     }
     /// }
     /// ```
     ///
@@ -915,21 +918,21 @@ public struct Alert {
     ///
     /// ```
     /// struct ExampleAlertView: View {
-    ///    @State private var showAlert = false
+    ///     @State private var showAlert = false
     ///
-    ///    var body: some View {
-    ///        Button("Tap to view alert") {
-    ///            showAlert = true
-    ///        }
-    ///        .alert(isPresented: $showAlert) {
-    ///            Alert(
-    ///                title: Text("Are you sure?"),
-    ///                message: Text("The following action will delete everything. Please confirm."),
-    ///                primaryButton: .destructive(Text("Delete")),
-    ///                secondaryButton: .cancel(Text("No, take me back!"))
-    ///            )
-    ///        }
-    ///    }
+    ///     var body: some View {
+    ///         Button("Tap to view alert") {
+    ///             showAlert = true
+    ///         }
+    ///         .alert(isPresented: $showAlert) {
+    ///             Alert(
+    ///                 title: Text("Are you sure?"),
+    ///                 message: Text("The following action will delete everything. Please confirm."),
+    ///                 primaryButton: .destructive(Text("Delete")),
+    ///                 secondaryButton: .cancel(Text("No, take me back!"))
+    ///             )
+    ///         }
+    ///     }
     /// }
     /// ```
     ///
@@ -948,11 +951,11 @@ public struct Alert {
         ///
         /// ```
         /// Alert(
-        ///    title: Text("An important title!"),
-        ///    message: Text("A message that adds additional context on the alert."),
-        ///    dismissButton: .default(Text("A default button"), action: {
-        ///        print("Default button pressed, do something.")
-        ///    })
+        ///     title: Text("An important title!"),
+        ///     message: Text("A message that adds additional context on the alert."),
+        ///     dismissButton: .default(Text("A default button"), action: {
+        ///         print("Default button pressed, do something.")
+        ///     })
         /// )
         /// ```
         public static func `default`(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
@@ -965,11 +968,11 @@ public struct Alert {
         ///
         /// ```
         /// Alert(
-        ///    title: Text("An important title!"),
-        ///    message: Text("A message that adds additional context on the alert."),
-        ///    dismissButton: .cancel(Text("A cancel button"), action: {
-        ///        print("Cancel button pressed, do something.")
-        ///    })
+        ///     title: Text("An important title!"),
+        ///     message: Text("A message that adds additional context on the alert."),
+        ///     dismissButton: .cancel(Text("A cancel button"), action: {
+        ///         print("Cancel button pressed, do something.")
+        ///     })
         /// )
         /// ```
         public static func cancel(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
@@ -985,11 +988,11 @@ public struct Alert {
         ///
         /// ```
         /// Alert(
-        ///    title: Text("An important title!"),
-        ///    message: Text("A message that adds additional context on the alert."),
-        ///    dismissButton: .cancel(action: {
-        ///        print("Cancel button pressed, do something.")
-        ///    })
+        ///     title: Text("An important title!"),
+        ///     message: Text("A message that adds additional context on the alert."),
+        ///     dismissButton: .cancel(action: {
+        ///         print("Cancel button pressed, do something.")
+        ///     })
         /// )
         /// ```
         public static func cancel(_ action: (() -> Void)? = {}) -> Alert.Button { }
@@ -1001,11 +1004,11 @@ public struct Alert {
         ///
         /// ```
         /// Alert(
-        ///    title: Text("An important title!"),
-        ///    message: Text("A message that adds additional context on the alert."),
-        ///    dismissButton: .destructive(Text("A destructive button"), action: {
-        ///        print("Destructive button pressed, do something.")
-        ///    })
+        ///     title: Text("An important title!"),
+        ///     message: Text("A message that adds additional context on the alert."),
+        ///     dismissButton: .destructive(Text("A destructive button"), action: {
+        ///         print("Destructive button pressed, do something.")
+        ///     })
         /// )
         /// ```
         public static func destructive(_ label: Text, action: (() -> Void)? = {}) -> Alert.Button { }
@@ -1071,7 +1074,7 @@ public struct Alert {
 ///         ZStack(alignment: Alignment.bottomLeading) { //Try changing this!
 ///             Text("Move me around 🤠")
 ///             Color.clear
-///        }
+///         }
 ///     }
 /// }
 /// ```
@@ -1210,8 +1213,8 @@ public struct Alert {
     ///         ZStack(alignment: .leading) {
     ///             Text("⬅️")
     ///             Color.clear
-    ///        }
-    ///    }
+    ///         }
+    ///     }
     /// }
     /// ```
     ///
@@ -1862,13 +1865,13 @@ extension Angle : Animatable {
 /// Every color will evenly distribute.
 ///
 /// ```
-///  struct AngularGradientView: View {
+/// struct AngularGradientView: View {
 ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
 ///
 ///     var body: some View {
 ///         Rectangle()
-///            .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
-///            .frame(width:200, height:200)
+///             .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+///             .frame(width:200, height:200)
 ///     }
 /// }
 /// ```
@@ -1882,14 +1885,14 @@ extension Angle : Animatable {
 /// over the first circle portion.
 ///
 /// ```
-///  struct AngularGradientView: View {
+/// struct AngularGradientView: View {
 ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
 ///
 ///     var body: some View {
 ///         VStack {
 ///             Rectangle()
-///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
-///                .frame(width:200, height:200)
+///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+///                 .frame(width:200, height:200)
 ///             Rectangle()
 ///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center,startAngle: .degrees(0), endAngle: .degrees(360 + 45)))
 ///                 .frame(width:200, height:200)
@@ -1908,14 +1911,14 @@ extension Angle : Animatable {
 /// first and last color of the gradient.
 ///
 /// ```
-///  struct AngularGradientView: View {
+/// struct AngularGradientView: View {
 ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
 ///
 ///     var body: some View {
 ///         VStack {
 ///             Rectangle()
-///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
-///                .frame(width:200, height:200)
+///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+///                 .frame(width:200, height:200)
 ///             Rectangle()
 ///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center,startAngle: .degrees(0), endAngle: .degrees(180)))
 ///                 .frame(width:200, height:200)
@@ -1937,14 +1940,14 @@ extension Angle : Animatable {
     /// An example,
     ///
     /// ```
-    ///  struct AngularGradientView: View {
+    /// struct AngularGradientView: View {
     ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
     ///
     ///     var body: some View {
     ///         VStack {
     ///             Rectangle()
-    ///                .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
-    ///                .frame(width:200, height:200)
+    ///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+    ///                 .frame(width:200, height:200)
     ///             Rectangle()
     ///                 .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center,startAngle: .degrees(0), endAngle: .degrees(180)))
     ///                 .frame(width:200, height:200)
@@ -1967,13 +1970,13 @@ extension Angle : Animatable {
     /// For example,
     ///
     /// ```
-    ///  struct ExampleView: View {
+    /// struct ExampleView: View {
     ///     let colors: [Color] = [.yellow, .red,.blue, .purple]
     ///
     ///     var body: some View {
     ///         Rectangle()
-    ///            .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
-    ///            .frame(width:200, height:200)
+    ///             .fill(AngularGradient(gradient: Gradient(colors: colors), center: .center))
+    ///             .frame(width:200, height:200)
     ///     }
     /// }
     /// ```
@@ -3738,7 +3741,7 @@ extension AnyTransition {
 ///         var body: some Scene {
 ///             WindowGroup {
 ///                 Text("Hello, world! 🌍🙋")
-///                    .font(.title)
+///                     .font(.title)
 ///             }
 ///         }
 ///     }
@@ -6404,10 +6407,10 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// ```
     /// struct ContentView: View {
-    ///    var body: some View {
-    ///        ProgressView(value: 0.75)
-    ///            .progressViewStyle(CircularProgressViewStyle())
-    ///    }
+    ///     var body: some View {
+    ///         ProgressView(value: 0.75)
+    ///             .progressViewStyle(CircularProgressViewStyle())
+    ///     }
     /// }
     /// ```
     ///
@@ -6425,10 +6428,10 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// ```
     /// struct ContentView: View {
-    ///    var body: some View {
-    ///        ProgressView()
-    ///            .progressViewStyle(CircularProgressViewStyle(tint: .orange))
-    ///    }
+    ///     var body: some View {
+    ///         ProgressView()
+    ///             .progressViewStyle(CircularProgressViewStyle(tint: .orange))
+    ///     }
     /// }
     /// ```
     ///
@@ -7855,8 +7858,8 @@ extension CommandsBuilder {
 /// specific date and time selections. Some variants may include rich editing
 /// controls in a popup.
 ///
-///      struct ExampleView: View {
-///          @State var date: Date = Date()
+///     struct ExampleView: View {
+///         @State var date: Date = Date()
 ///
 ///         var body: some View {
 ///             DatePicker("Date", selection: $date)
@@ -8904,13 +8907,13 @@ extension DatePickerStyle {
 ///         var body: some View {
 ///             VStack {
 ///                 Button("PlainBanana🍌🍌") { tap() }
-///                    .buttonStyle(PlainButtonStyle())
+///                     .buttonStyle(PlainButtonStyle())
 ///
 ///                 Button("BorderlessBanana🍌🍌") { tap() }
-///                    .buttonStyle(BorderlessButtonStyle())
+///                     .buttonStyle(BorderlessButtonStyle())
 ///
 ///                 Button("DefaultBanana🍌🍌") { tap() }
-///                    .buttonStyle(DefaultButtonStyle())
+///                     .buttonStyle(DefaultButtonStyle())
 ///             }
 ///             .font(.title2)
 ///         }
@@ -9395,10 +9398,10 @@ public struct DefaultPickerStyle : PickerStyle {
 ///
 /// ```
 /// struct ContentView: View {
-///    var body: some View {
-///        ProgressView()
-///            .progressViewStyle(DefaultProgressViewStyle())
-///    }
+///     var body: some View {
+///         ProgressView()
+///             .progressViewStyle(DefaultProgressViewStyle())
+///     }
 /// }
 /// ```
 ///
@@ -9410,10 +9413,10 @@ public struct DefaultPickerStyle : PickerStyle {
 ///
 /// ```
 /// struct ContentView: View {
-///    var body: some View {
-///        ProgressView(value: 5, total: 10)
-///            .progressViewStyle(DefaultProgressViewStyle())
-///    }
+///     var body: some View {
+///         ProgressView(value: 5, total: 10)
+///             .progressViewStyle(DefaultProgressViewStyle())
+///     }
 /// }
 /// ```
 ///
@@ -9433,10 +9436,10 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
     ///
     /// ```
     /// struct ContentView: View {
-    ///    var body: some View {
-    ///        ProgressView()
-    ///            .progressViewStyle(DefaultProgressViewStyle())
-    ///    }
+    ///     var body: some View {
+    ///         ProgressView()
+    ///             .progressViewStyle(DefaultProgressViewStyle())
+    ///     }
     /// }
     /// ```
     ///
@@ -10175,7 +10178,6 @@ public struct DragGesture : Gesture {
 /// Use `NSItemProvider` to define the specific data dragged from that view.
 ///
 /// ```
-/// //  Text to drag
 /// Text(text)
 ///     .font(.title)
 ///     .onDrag { NSItemProvider(object: "🍌🍌" as NSString) }
@@ -11550,28 +11552,29 @@ extension DynamicViewContent {
 /// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)-9f6b7``,
 /// but it can also be returned from instance methods. For example:
 ///
-/// ![F7952934-0389-4525-97DD-80CD08BD51B8](F7952934-0389-4525-97DD-80CD08BD51B8.png)
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        VStack {
-///            Text("Example view where Edge is returned as a value")
-///                .accessibilityScrollAction { edge in
-///                    switch edge {
-///                    case Edge.top:
-///                        print("Swiped down from top edge")
-///                    case Edge.leading:
-///                        print("Swiped left from leading edge")
-///                    case Edge.trailing:
-///                        print("Swiped right from trailing edge")
-///                    case Edge.bottom:
-///                        print("Swiped up from bottom edge")
-///                    }
-///                }
-///        }
-///    }
+///     var body: some View {
+///         VStack {
+///             Text("Example view where Edge is returned as a value")
+///                 .accessibilityScrollAction { edge in
+///                     switch edge {
+///                     case Edge.top:
+///                         print("Swiped down from top edge")
+///                     case Edge.leading:
+///                         print("Swiped left from leading edge")
+///                     case Edge.trailing:
+///                         print("Swiped right from trailing edge")
+///                     case Edge.bottom:
+///                         print("Swiped up from bottom edge")
+///                     }
+///                 }
+///         }
+///     }
 /// }
 /// ```
+///
+/// ![F7952934-0389-4525-97DD-80CD08BD51B8](F7952934-0389-4525-97DD-80CD08BD51B8.png)
 ///
 /// Note that for illustrative purposes, the enum values were expanded in this example.
 /// It would also be valid to use the shorthand, just specifying the values:
@@ -11598,15 +11601,15 @@ extension DynamicViewContent {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        VStack {
-    ///            Text("Text padded on the top and bottom edge.")
-    ///                .padding([Edge.Set.top, Edge.Set.bottom])
-    ///                .border(Color.gray)
-    ///            Text("Unpadded text")
-    ///                .border(Color.yellow)
-    ///        }
-    ///    }
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text padded on the top and bottom edge.")
+    ///                 .padding([Edge.Set.top, Edge.Set.bottom])
+    ///                 .border(Color.gray)
+    ///             Text("Unpadded text")
+    ///                 .border(Color.yellow)
+    ///         }
+    ///     }
     /// }
     /// ```
     ///
@@ -14453,10 +14456,10 @@ public struct FileDocumentWriteConfiguration {
 ///
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        Circle()
-///          .fill(Color.pink, style: FillStyle(eoFill: true))
-///    }
+///     var body: some View {
+///         Circle()
+///             .fill(Color.pink, style: FillStyle(eoFill: true))
+///     }
 /// }
 /// ```
 ///
@@ -14474,38 +14477,38 @@ public struct FileDocumentWriteConfiguration {
     ///
     /// ```
     /// struct EvenOddRuleView: View {
-    ///    var body: some View {
-    ///        VStack(spacing: 100) {
-    ///            VStack {
-    ///                OverlappingRectangles()
-    ///                    .fill(Color.pink, style: FillStyle(eoFill: true))
-    ///                    .frame(width: 150, height: 100)
+    ///     var body: some View {
+    ///         VStack(spacing: 100) {
+    ///             VStack {
+    ///                 OverlappingRectangles()
+    ///                     .fill(Color.pink, style: FillStyle(eoFill: true))
+    ///                     .frame(width: 150, height: 100)
     ///
-    ///                Text("isEOFilled: true")
-    ///            }
+    ///                 Text("isEOFilled: true")
+    ///             }
     ///
-    ///            VStack {
-    ///                OverlappingRectangles()
-    ///                    .fill(Color.pink, style: FillStyle(eoFill: false))
-    ///                    .frame(width: 150, height: 100)
+    ///             VStack {
+    ///                 OverlappingRectangles()
+    ///                     .fill(Color.pink, style: FillStyle(eoFill: false))
+    ///                     .frame(width: 150, height: 100)
     ///
-    ///                Text("isEOFilled: false")
-    ///            }
-    ///        }
-    ///    }
+    ///                 Text("isEOFilled: false")
+    ///             }
+    ///         }
+    ///     }
     /// }
     ///
     /// struct OverlappingRectangles: Shape {
-    ///    func path(in rect: CGRect) -> Path {
-    ///        let rectSize = CGSize(width: rect.height, height: rect.height)
+    ///     func path(in rect: CGRect) -> Path {
+    ///         let rectSize = CGSize(width: rect.height, height: rect.height)
     ///
-    ///        var path = Path()
+    ///         var path = Path()
     ///
-    ///        path.addRect(CGRect(origin: .zero, size: rectSize))
-    ///        path.addRect(CGRect(origin: CGPoint(x: rect.width-rect.height, y: -50), size: rectSize))
+    ///         path.addRect(CGRect(origin: .zero, size: rectSize))
+    ///         path.addRect(CGRect(origin: CGPoint(x: rect.width-rect.height, y: -50), size: rectSize))
     ///
-    ///        return path
-    ///    }
+    ///         return path
+    ///     }
     /// }
     /// ```
     ///
@@ -14644,7 +14647,7 @@ public struct FocusedValues {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text("Banana🍌🍌")
-///            .font(.largeTitle)
+///             .font(.largeTitle)
 ///     }
 /// }
 /// ```
@@ -14672,7 +14675,7 @@ public struct FocusedValues {
 /// struct ExampleView: View {
 ///     var body: some View {
 ///         Text("Banana🍌🍌")
-///            .font(Font.custom("American Typewriter", size: 32.0))
+///             .font(Font.custom("American Typewriter", size: 32.0))
 ///     }
 /// }
 /// ```
@@ -15220,7 +15223,7 @@ extension Font {
     ///             Text("Headline")
     ///                 .font(.headline)
     ///             Text("SubHeadline")
-    ///                .font(.subheadline)
+    ///                 .font(.subheadline)
     ///         }
     ///         Group {
     ///             Text("Body")
@@ -15232,7 +15235,7 @@ extension Font {
     ///             Text("Caption")
     ///                 .font(.caption)
     ///              Text("Caption2")
-    ///                .font(.caption2)
+    ///                 .font(.caption2)
     ///         }
     ///     }
     /// }
@@ -15259,7 +15262,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15271,7 +15274,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15298,7 +15301,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15310,7 +15313,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15337,7 +15340,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15349,7 +15352,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15377,7 +15380,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15389,7 +15392,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15417,7 +15420,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15429,7 +15432,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15456,7 +15459,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15468,7 +15471,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15495,7 +15498,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15507,7 +15510,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15534,7 +15537,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15546,7 +15549,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15573,7 +15576,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15585,7 +15588,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15612,7 +15615,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15624,7 +15627,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15651,7 +15654,7 @@ extension Font {
         ///             Text("Headline")
         ///                 .font(.headline)
         ///             Text("SubHeadline")
-        ///                .font(.subheadline)
+        ///                 .font(.subheadline)
         ///         }
         ///         Group {
         ///             Text("Body")
@@ -15663,7 +15666,7 @@ extension Font {
         ///             Text("Caption")
         ///                 .font(.caption)
         ///              Text("Caption2")
-        ///                .font(.caption2)
+        ///                 .font(.caption2)
         ///         }
         ///     }
         /// }
@@ -15841,12 +15844,12 @@ extension Font {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    @State private var toggleStatus: Bool = false
+    ///     @State private var toggleStatus: Bool = false
     ///
-    ///    var body: some View {
-    ///        Text("Some monospaced digits: 0123456789")
-    ///            .font(Font.system(size: 15).monospacedDigit())
-    ///    }
+    ///     var body: some View {
+    ///         Text("Some monospaced digits: 0123456789")
+    ///             .font(Font.system(size: 15).monospacedDigit())
+    ///     }
     /// }
     /// ```
     ///
@@ -16075,8 +16078,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16106,8 +16109,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16137,8 +16140,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16168,8 +16171,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16199,8 +16202,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16230,8 +16233,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16261,8 +16264,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16292,8 +16295,8 @@ extension Font {
         ///                     .fontWeight(Font.Weight.heavy)
         ///                 Text("black🍌")
         ///                     .fontWeight(Font.Weight.black)
-        ///            }
-        ///            .font(.title)
+        ///             }
+        ///             .font(.title)
         ///         }
         ///     }
         ///
@@ -16744,7 +16747,7 @@ extension Font {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         Text("Banana🍌🍌")
-    ///            .font(.custom("American Typewriter", size: 32.0))
+    ///             .font(.custom("American Typewriter", size: 32.0))
     ///     }
     /// }
     /// ```
@@ -16767,7 +16770,7 @@ extension Font {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         Text("Banana🍌🍌")
-    ///            .font(.custom("American Typewriter", size: 32.0, relativeTo: .title))
+    ///             .font(.custom("American Typewriter", size: 32.0, relativeTo: .title))
     ///     }
     /// }
     /// ```
@@ -16791,7 +16794,7 @@ extension Font {
     /// struct ExampleView: View {
     ///     var body: some View {
     ///         Text("Banana🍌🍌")
-    ///            .font(.custom("American Typewriter", fixedSize: 32.0))
+    ///             .font(.custom("American Typewriter", fixedSize: 32.0))
     ///     }
     /// }
     /// ```
@@ -17121,13 +17124,12 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
 ///
 /// ```
 /// struct ForegroundStyleRectangle: View {
-///    var body: some View {
-///        Rectangle()
-///            .fill(ForegroundStyle())
-///            .frame(width: 150, height: 150)
-///            .foregroundColor(Color.pink)
-///    }
-///
+///     var body: some View {
+///         Rectangle()
+///             .fill(ForegroundStyle())
+///             .frame(width: 150, height: 150)
+///             .foregroundColor(Color.pink)
+///     }
 /// }
 /// ```
 ///
@@ -17144,12 +17146,12 @@ extension ForEach where Data == Range<Int>, ID == Int, Content : View {
     ///
     /// ```
     /// struct ForegroundStyleRectangle: View {
-    ///    var body: some View {
-    ///        Rectangle()
-    ///            .fill(ForegroundStyle())
-    ///            .frame(width: 150, height: 150)
-    ///            .foregroundColor(Color.pink)
-    ///    }
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .fill(ForegroundStyle())
+    ///             .frame(width: 150, height: 150)
+    ///             .foregroundColor(Color.pink)
+    ///     }
     /// }
     /// ```
     ///
@@ -18784,16 +18786,16 @@ public struct GroupBoxStyleConfiguration {
 
 /// A standard grouped list style.
 ///
-///      struct ExampleView: View {
-///          var body: some View {
+///     struct ExampleView: View {
+///         var body: some View {
 ///             List {
-///              Text("Bananas 🍌🍌")
-///              Text("Apples 🍎🍎")
-///              Text("Peaches 🍑🍑")
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
 ///             }
 ///             .listStyle(GroupedListStyle())
-///          }
-///      }
+///         }
+///     }
 ///
 /// ![GroupedListStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-grouped-example-1.png)
 ///
@@ -21352,15 +21354,15 @@ extension Image.ResizingMode : Hashable {
 ///
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        TabView {
-///            Text("Tab 1")
-///            Text("Tab 2")
-///            Text("Tab 3")
-///        }
-///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-///    }
+///     var body: some View {
+///         TabView {
+///             Text("Tab 1")
+///             Text("Tab 2")
+///             Text("Tab 3")
+///         }
+///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///     }
 /// }
 /// ```
 ///
@@ -21496,16 +21498,16 @@ public struct InsetGroupedListStyle : ListStyle {
 /// ``List``. This style creates a gap between the borders of the list and the
 /// edge of the screen:
 ///
-///      struct ExampleView: View {
-///          var body: some View {
+///     struct ExampleView: View {
+///         var body: some View {
 ///             List {
-///                Text("Bananas 🍌🍌")
-///                Text("Apples 🍎🍎")
-///                Text("Peaches 🍑🍑")
+///                 Text("Bananas 🍌🍌")
+///                 Text("Apples 🍎🍎")
+///                 Text("Peaches 🍑🍑")
 ///             }
 ///             .listStyle(InsetListStyle())
-///          }
-///      }
+///         }
+///     }
 ///
 ///
 /// ![A view displaying an inset list with three items "Bananas 🍌🍌", "Apples 🍎🍎",
@@ -23359,8 +23361,7 @@ extension LayoutDirection {
 ///
 /// ```
 /// struct HorizontalEmojiView: View {
-///     var rows: [GridItem] =
-///             Array(repeating: .init(.fixed(20)), count: 2)
+///     var rows: [GridItem] = Array(repeating: .init(.fixed(20)), count: 2)
 ///
 ///     var body: some View {
 ///         ScrollView(.horizontal) {
@@ -23792,10 +23793,10 @@ extension LegibilityWeight {
 ///
 /// ```
 /// struct ContentView: View {
-///    var body: some View {
-///        ProgressView()
-///            .progressViewStyle(LinearProgressViewStyle())
-///    }
+///     var body: some View {
+///         ProgressView()
+///             .progressViewStyle(LinearProgressViewStyle())
+///     }
 /// }
 /// ```
 ///
@@ -24740,14 +24741,14 @@ public struct ListItemTint {
 /// ```
 /// struct ExampleView: View {
 ///     var body: some View {
-///          List {
-///               Section(header: Text("🍌🍌")) {
-///                    Text("🔥🔥")
-///               }
-///               Section(header: Text("🍎🍎")) {
-///                     Text("🔥🔥")
-///               }
-///          }
+///         List {
+///             Section(header: Text("🍌🍌")) {
+///                 Text("🔥🔥")
+///             }
+///             Section(header: Text("🍎🍎")) {
+///                 Text("🔥🔥")
+///             }
+///         }
 ///         .listStyle(GroupedListStyle())
 ///     }
 /// }
@@ -24756,7 +24757,7 @@ public struct ListItemTint {
 /// ![A view containing a list with two grouped sections.](8BDD107D-5866-4017-8B13-08DCF8F17495.png)
 ///
 /// Many SwiftUI list styles can be visualized
-/// [here](https:///swift-cast.com/2020/10/1/). All styles are explicitly
+/// [here](https://swift-cast.com/2020/10/1/). All styles are explicitly
 /// referenced below.
 ///
 /// - ``DefaultListStyle`` - provides the default list behavior and appearence
@@ -25601,16 +25602,16 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
 ///     @State private var selectedFruit = 0
 ///
 ///     var body: some View {
-///           VStack {
-///               Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
-///                   ForEach(0..<fruits.count) {
-///                       Text(self.fruits[$0])
-///                   }
-///               }
+///         VStack {
+///             Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
+///                 ForEach(0..<fruits.count) {
+///                     Text(self.fruits[$0])
+///                 }
+///             }
 ///
-///               Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
-///           }
-///           .pickerStyle(MenuPickerStyle())
+///             Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///         }
+///         .pickerStyle(MenuPickerStyle())
 ///     }
 /// }
 /// ```
@@ -26677,7 +26678,7 @@ extension NavigationLink {
 ///     var body: some View {
 ///         NavigationView {
 ///             Text("Hello Bananas🍌🍌")
-///                  .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
+///                 .navigationBarItems(leading: Text("🍌🍌"), trailing: Text("🍏🍏"))
 ///         }
 ///     }
 /// }
@@ -27508,15 +27509,15 @@ public struct OutlineSubgroupChildren : View {
 ///
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        TabView {
-///            Text("Tab 1")
-///            Text("Tab 2")
-///            Text("Tab 3")
-///        }
-///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-///    }
+///     var body: some View {
+///         TabView {
+///             Text("Tab 1")
+///             Text("Tab 2")
+///             Text("Tab 3")
+///         }
+///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+///     }
 /// }
 /// ```
 ///
@@ -27544,20 +27545,20 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///
         /// ```
         /// struct ExampleView: View {
-        ///    var body: some View {
-        ///        ZStack {
-        ///            Color.blue
-        ///                .ignoresSafeArea()
+        ///     var body: some View {
+        ///         ZStack {
+        ///             Color.blue
+        ///                 .ignoresSafeArea()
         ///
-        ///            TabView {
-        ///                Text("Tab 1")
-        ///                Text("Tab 2")
-        ///                Text("Tab 3")
-        ///            }
-        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
-        ///        }
-        ///    }
+        ///             TabView {
+        ///                 Text("Tab 1")
+        ///                 Text("Tab 2")
+        ///                 Text("Tab 3")
+        ///             }
+        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
+        ///         }
+        ///     }
         /// }
         /// ```
         ///
@@ -27573,20 +27574,20 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///
         /// ```
         /// struct ExampleView: View {
-        ///    var body: some View {
-        ///        ZStack {
-        ///            Color.blue
-        ///                .ignoresSafeArea()
+        ///     var body: some View {
+        ///         ZStack {
+        ///             Color.blue
+        ///                 .ignoresSafeArea()
         ///
-        ///            TabView {
-        ///                Text("Tab 1")
-        ///                Text("Tab 2")
-        ///                Text("Tab 3")
-        ///            }
-        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
-        ///        }
-        ///    }
+        ///             TabView {
+        ///                 Text("Tab 1")
+        ///                 Text("Tab 2")
+        ///                 Text("Tab 3")
+        ///             }
+        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
+        ///         }
+        ///     }
         /// }
         /// ```
         ///
@@ -27602,20 +27603,20 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///
         /// ```
         /// struct ExampleView: View {
-        ///    var body: some View {
-        ///        ZStack {
-        ///            Color.blue
-        ///                .ignoresSafeArea()
+        ///     var body: some View {
+        ///         ZStack {
+        ///             Color.blue
+        ///                 .ignoresSafeArea()
         ///
-        ///            TabView {
-        ///                Text("Tab 1")
-        ///                Text("Tab 2")
-        ///                Text("Tab 3")
-        ///            }
-        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        ///        }
-        ///    }
+        ///             TabView {
+        ///                 Text("Tab 1")
+        ///                 Text("Tab 2")
+        ///                 Text("Tab 3")
+        ///             }
+        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        ///         }
+        ///     }
         /// }
         /// ```
         ///
@@ -27631,20 +27632,20 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///
         /// ```
         /// struct ExampleView: View {
-        ///    var body: some View {
-        ///        ZStack {
-        ///            Color.blue
-        ///                .ignoresSafeArea()
+        ///     var body: some View {
+        ///         ZStack {
+        ///             Color.blue
+        ///                 .ignoresSafeArea()
         ///
-        ///            TabView {
-        ///                Text("Tab 1")
-        ///                Text("Tab 2")
-        ///                Text("Tab 3")
-        ///            }
-        ///            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        ///            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-        ///        }
-        ///    }
+        ///             TabView {
+        ///                 Text("Tab 1")
+        ///                 Text("Tab 2")
+        ///                 Text("Tab 3")
+        ///             }
+        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+        ///         }
+        ///     }
         /// }
         /// ```
         ///
@@ -27662,15 +27663,15 @@ public struct PageIndexViewStyle : IndexViewStyle {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        TabView {
-    ///            Text("Tab 1")
-    ///            Text("Tab 2")
-    ///            Text("Tab 3")
-    ///        }
-    ///        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-    ///        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-    ///    }
+    ///     var body: some View {
+    ///         TabView {
+    ///             Text("Tab 1")
+    ///             Text("Tab 2")
+    ///             Text("Tab 3")
+    ///         }
+    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+    ///     }
     /// }
     /// ```
     ///
@@ -28323,7 +28324,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///             path.addEllipse(in: rect)
     ///             path.addRect(path.boundingRect)
     ///         }
-    ///      }
+    ///     }
     /// }
     /// ```
     ///
@@ -29681,16 +29682,16 @@ public struct PlainButtonStyle : PrimitiveButtonStyle {
 /// The instance that describes the behavior and appearance of a plain list.
 ///
 ///
-///      struct ExampleView: View {
-///          var body: some View {
+///     struct ExampleView: View {
+///         var body: some View {
 ///             List {
 ///                 Text("Bananas 🍌🍌")
 ///                 Text("Apples 🍎🍎")
 ///                 Text("Peaches 🍑🍑")
 ///             }
 ///             .listStyle(PlainListStyle())
-///          }
-///      }
+///         }
+///     }
 ///
 /// ![A view diplaying a plain list with three items "Bananas 🍌🍌", "Apples
 /// 🍎🍎", "Peaches 🍑🍑", which are separated by thin gray lines.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/liststyle-plain-example-1.png)
@@ -30549,19 +30550,20 @@ extension PreviewPlatform : Hashable {
 ///
 /// ```
 /// struct ExampleView: View {
-///    var body: some View {
-///        Circle().fill(Color.green)
-///    }
+///     var body: some View {
+///         Circle()
+///             .fill(Color.green)
+///     }
 /// }
 ///
 /// struct ExampleViewPreview: PreviewProvider {
-///    static var previews: some View {
-///        ExampleView()
-///    }
+///     static var previews: some View {
+///         ExampleView()
+///     }
 ///
-///    static var platform: PreviewPlatform? {
-///        .iOS
-///    }
+///     static var platform: PreviewPlatform? {
+///         .iOS
+///     }
 /// }
 /// ```
 ///
@@ -32022,12 +32024,12 @@ extension ProjectionTransform {
 	///
     /// ```
     /// struct RadialView: View {
-    ///    let gradient = Gradient(colors: [.red, .yellow])
+    ///     let gradient = Gradient(colors: [.red, .yellow])
     ///
-    ///    var body: some View {
-    ///        Rectangle()
-    ///            .fill(RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
-    ///            .frame(width: 200, height: 200)
+    ///     var body: some View {
+    ///         Rectangle()
+    ///             .fill(RadialGradient(gradient: gradient, center: .center, startRadius: 1, endRadius: 100))
+    ///             .frame(width: 200, height: 200)
     ///     }
     /// }
     /// ```
@@ -40754,12 +40756,12 @@ extension Text {
     /// Concatenates two text views into one new text view.
     ///
     /// ```
-    ///struct ExampleView: View {
+    /// struct ExampleView: View {
     ///     var body: some View {
-    ///         Text("Banana🍌🍌")
-    ///             .font(.title)
-    ///         + Text("Apple🍎🍎")
-    ///             .font(.title)
+    ///         Group {
+    ///             Text("Banana🍌🍌") + Text("Apple🍎🍎")
+    ///         }
+    ///         .font(.title)
     ///     }
     /// }
     /// ```
@@ -41508,12 +41510,12 @@ extension Text.Case : Hashable {
     ///
     /// ```
     /// struct ContentView: View {
-    ///    var body: some View {
-    ///        Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
-    ///            .padding(20)
-    ///            .font(.system(size: 10))
-    ///            .multilineTextAlignment(.leading)
-    ///    }
+    ///     var body: some View {
+    ///         Text("Gregor's eyes then turned to the window, and the overcast weather--he could hear raindrops hitting against the metal window ledge--completely depressed him.")
+    ///             .padding(20)
+    ///             .font(.system(size: 10))
+    ///             .multilineTextAlignment(.leading)
+    ///     }
     /// }
     /// ```
     ///
@@ -42080,7 +42082,7 @@ public struct Toggle<Label> : View where Label : View {
     ///     var body: some View {
     ///         Toggle(isOn: $on) {
     ///             Text("Airplane Mode ✈️")
-    ///          }
+    ///         }
     ///     }
     /// }
     /// ```
@@ -42252,15 +42254,15 @@ extension Toggle where Label == Text {
 ///
 /// ```
 /// struct ExampleView: View {
-///    @State private var toggleStatus: Bool = false
+///     @State private var toggleStatus: Bool = false
 ///
-///    var body: some View {
-///        Toggle(isOn: $toggleStatus, label: {
-///            Text("Active")
-///        })
-///        .padding(50)
-///        .toggleStyle(CustomRectangleToggleStyle())
-///    }
+///     var body: some View {
+///         Toggle(isOn: $toggleStatus) {
+///             Text("Active")
+///         }
+///         .padding(50)
+///         .toggleStyle(CustomRectangleToggleStyle())
+///     }
 /// }
 /// ```
 ///
@@ -42308,15 +42310,15 @@ extension ToggleStyle {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    @State private var toggleStatus: Bool = false
+    ///     @State private var toggleStatus: Bool = false
     ///
-    ///    var body: some View {
-    ///        Toggle(isOn: $toggleStatus, label: {
-    ///            Text("Active")
-    ///        })
-    ///        .padding(50)
-    ///        .toggleStyle(CustomRectangleToggleStyle())
-    ///    }
+    ///     var body: some View {
+    ///         Toggle(isOn: $toggleStatus) {
+    ///             Text("Active")
+    ///         }
+    ///         .padding(50)
+    ///         .toggleStyle(CustomRectangleToggleStyle())
+    ///     }
     /// }
     /// ```
     ///
@@ -45234,10 +45236,10 @@ extension View {
     ///                 Button("🍑 Sheet") {
     ///                     item = Item(text: "🍑🍑")
     ///                 }
-    ///            }
-    ///              .fullScreenCover(item: $item,
-    ///                     onDismiss: { print("dismissed!") },
-    ///                     content: { ExampleSheet(item: $0) })
+    ///             }
+    ///             .fullScreenCover(item: $item,
+    ///                              onDismiss: { print("dismissed!") },
+    ///                              content: { ExampleSheet(item: $0) })
     ///         }
     ///     }
     ///
@@ -45492,7 +45494,7 @@ extension View {
     ///                     model.rows.remove(atOffsets: offsets)
     ///                 }
     ///             }
-    ///        }
+    ///         }
     ///     }
     ///
     /// ![](disable-delete-ex.gif)
@@ -46385,21 +46387,22 @@ extension View {
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
-    ///              VStack {
-    ///                  Button("Plain Banana🍌🍌") { tap() }
-    ///                      .buttonStyle(PlainButtonStyle())
+    ///             VStack {
+    ///                 Button("Plain Banana🍌🍌") { tap() }
+    ///                     .buttonStyle(PlainButtonStyle())
     ///
-    ///                  Button("Borderless Banana🍌🍌") { tap() }
-    ///                      .buttonStyle(BorderlessButtonStyle())
+    ///                 Button("Borderless Banana🍌🍌") { tap() }
+    ///                     .buttonStyle(BorderlessButtonStyle())
     ///
-    ///                  Button("Default Banana🍌🍌") { tap() }
-    ///                      .buttonStyle(DefaultButtonStyle())
-    ///              }
-    ///              .font(.title2)
-    ///          }
+    ///                 Button("Default Banana🍌🍌") { tap() }
+    ///                     .buttonStyle(DefaultButtonStyle())
+    ///             }
+    ///             .font(.title2)
+    ///         }
     ///
-    ///          func tap() { /* implement here */ }
-    ///      }
+    ///         func tap() { /* implement here */ }
+    ///     }
+    ///
     public func buttonStyle<S>(_ style: S) -> some View where S : ButtonStyle { }
 
 }
@@ -48576,8 +48579,8 @@ extension View {
     ///         }
     ///         .background(Color.white)
     ///         .drawingGroup()
-    ///      }
-    ///  }
+    ///     }
+    /// }
     ///  ```
     ///
     /// ![](drawinggroup.png)
@@ -50277,13 +50280,13 @@ extension View {
     /// the navigation bar title in the bounds of the navigation bar.
     ///
     ///     struct FlavorView: View {
-    ///        let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",  "Pistachio"]
+    ///         let items = ["Chocolate", "Vanilla", "Strawberry", "Mint Chip",  "Pistachio"]
     ///
-    ///        var body: some View {
+    ///         var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) { item in
-    ///                      Text(item)
-    ///                  }
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
+    ///                 }
     ///                 .navigationBarTitle(Text("Today's Flavors"), displayMode: .inline)
     ///             }
     ///         }
@@ -50323,9 +50326,9 @@ extension View {
     ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) { item in
-    ///                      Text(item)
-    ///                  }
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
+    ///                 }
     ///                 .navigationBarTitle("Today's Flavors", displayMode: .inline)
     ///             }
     ///         }
@@ -50371,9 +50374,9 @@ extension View {
     ///
     ///         var body: some View {
     ///             NavigationView {
-    ///                  List(items, id: \.self) { item in
-    ///                      Text(item)
-    ///                  }
+    ///                 List(items, id: \.self) { item in
+    ///                     Text(item)
+    ///                 }
     ///                 .navigationBarTitle(title, displayMode: .inline)
     ///             }
     ///         }
@@ -51523,25 +51526,25 @@ extension View {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    @State private var toggleColor: Bool = false
+    ///     @State private var toggleColor: Bool = false
     ///
-    ///    var body: some View {
-    ///        VStack {
-    ///            Text("Top text").border(Color.black)
-    ///            Spacer().frame(height: 50)
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Top text").border(Color.black)
+    ///             Spacer().frame(height: 50)
     ///
-    ///            Rectangle()
-    ///                .fill(toggleColor ? Color.red : Color.blue)
-    ///                .frame(width: 150, height: 150)
+    ///             Rectangle()
+    ///                 .fill(toggleColor ? Color.red : Color.blue)
+    ///                 .frame(width: 150, height: 150)
     ///
-    ///            Spacer().frame(height: 50)
-    ///            Text("Bottom text").border(Color.black)
-    ///        }
-    ///        .contentShape(Rectangle())
-    ///        .onTapGesture {
-    ///            self.toggleColor.toggle()
-    ///        }
-    ///    }
+    ///             Spacer().frame(height: 50)
+    ///             Text("Bottom text").border(Color.black)
+    ///         }
+    ///         .contentShape(Rectangle())
+    ///         .onTapGesture {
+    ///             self.toggleColor.toggle()
+    ///         }
+    ///     }
     /// }
     /// ```
     ///
@@ -51553,24 +51556,24 @@ extension View {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    @State private var toggleColor: Bool = false
+    ///     @State private var toggleColor: Bool = false
     ///
-    ///    var body: some View {
-    ///        VStack {
-    ///            Text("Top text").border(Color.black)
-    ///            Spacer().frame(height: 50)
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Top text").border(Color.black)
+    ///             Spacer().frame(height: 50)
     ///
-    ///            Rectangle()
-    ///                .fill(toggleColor ? Color.red : Color.blue)
-    ///                .frame(width: 150, height: 150)
+    ///             Rectangle()
+    ///                 .fill(toggleColor ? Color.red : Color.blue)
+    ///                 .frame(width: 150, height: 150)
     ///
-    ///            Spacer().frame(height: 50)
-    ///            Text("Bottom text").border(Color.black)
-    ///        }
-    ///        .onTapGesture {
-    ///            self.toggleColor.toggle()
-    ///        }
-    ///    }
+    ///             Spacer().frame(height: 50)
+    ///             Text("Bottom text").border(Color.black)
+    ///         }
+    ///         .onTapGesture {
+    ///             self.toggleColor.toggle()
+    ///         }
+    ///     }
     /// }
     /// ```
     ///
@@ -51854,20 +51857,20 @@ extension View {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        HStack {
-    ///            Text("This is a moderately long string.")
-    ///                .font(.largeTitle)
-    ///                .border(Color.gray)
+    ///     var body: some View {
+    ///         HStack {
+    ///             Text("This is a moderately long string.")
+    ///                 .font(.largeTitle)
+    ///                 .border(Color.gray)
     ///
-    ///            Spacer()
+    ///             Spacer()
     ///
-    ///            Text("This is a higher priority string.")
-    ///                .font(.largeTitle)
-    ///                .layoutPriority(1)
-    ///                .border(Color.gray)
-    ///        }
-    ///    }
+    ///             Text("This is a higher priority string.")
+    ///                 .font(.largeTitle)
+    ///                 .layoutPriority(1)
+    ///                 .border(Color.gray)
+    ///         }
+    ///     }
     /// }
     /// ```
     ///
@@ -53942,12 +53945,12 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        Text("🍌🍌")
-    ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
-    ///                return ViewDimensions[HorizontalAlignment.leading]
-    ///            })
-    ///    }
+    ///     var body: some View {
+    ///         Text("🍌🍌")
+    ///             .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
+    ///                 return ViewDimensions[HorizontalAlignment.leading]
+    ///             })
+    ///     }
     /// }
     /// ```
     public subscript(guide: HorizontalAlignment) -> CGFloat { get }
@@ -53960,12 +53963,12 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        Text("🍌🍌")
-    ///            .alignmentGuide(VerticalAlignment.center, computeValue: { ViewDimensions in
-    ///                return ViewDimensions[VerticalAlignment.center]
-    ///            })
-    ///    }
+    ///     var body: some View {
+    ///         Text("🍌🍌")
+    ///             .alignmentGuide(VerticalAlignment.center, computeValue: { ViewDimensions in
+    ///                 return ViewDimensions[VerticalAlignment.center]
+    ///             })
+    ///     }
     /// }
     /// ```
     public subscript(guide: VerticalAlignment) -> CGFloat { get }
@@ -53977,12 +53980,12 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        Text("🍌🍌")
-    ///            .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
-    ///                return ViewDimensions[HorizontalAlignment.leading]
-    ///            })
-    ///    }
+    ///     var body: some View {
+    ///         Text("🍌🍌")
+    ///             .alignmentGuide(HorizontalAlignment.leading, computeValue: { ViewDimensions in
+    ///                 return ViewDimensions[HorizontalAlignment.leading]
+    ///             })
+    ///     }
     /// }
     /// ```
     ///
@@ -53996,12 +53999,12 @@ public struct ViewDimensions {
     ///
     /// ```
     /// struct ExampleView: View {
-    ///    var body: some View {
-    ///        Text("🍌🍌")
-    ///            .alignmentGuide(VerticalAlignment.leading, computeValue: { ViewDimensions in
-    ///                return ViewDimensions[VerticalAlignment.leading]
-    ///            })
-    ///    }
+    ///     var body: some View {
+    ///         Text("🍌🍌")
+    ///             .alignmentGuide(VerticalAlignment.leading, computeValue: { ViewDimensions in
+    ///                 return ViewDimensions[VerticalAlignment.leading]
+    ///             })
+    ///     }
     /// }
     /// ```
     ///
@@ -54105,16 +54108,16 @@ extension ViewModifier {
     ///
     /// ```
     /// struct BorderedCaption: ViewModifier {
-    ///    func body(content: Content) -> some View {
-    ///        content
-    ///            .font(.caption2)
-    ///            .padding(10)
-    ///            .overlay(
-    ///                RoundedRectangle(cornerRadius: 15)
-    ///                    .stroke(lineWidth: 1)
-    ///            )
-    ///            .foregroundColor(.blue)
-    ///    }
+    ///     func body(content: Content) -> some View {
+    ///         content
+    ///             .font(.caption2)
+    ///             .padding(10)
+    ///             .overlay(
+    ///                 RoundedRectangle(cornerRadius: 15)
+    ///                     .stroke(lineWidth: 1)
+    ///             )
+    ///             .foregroundColor(.blue)
+    ///     }
     /// }
     /// ```
     ///
@@ -54159,16 +54162,16 @@ extension ViewModifier where Self.Body == Never {
     ///
     /// ```
     /// struct BorderedCaption: ViewModifier {
-    ///    func body(content: Content) -> some View {
-    ///        content
-    ///            .font(.caption2)
-    ///            .padding(10)
-    ///            .overlay(
-    ///                RoundedRectangle(cornerRadius: 15)
-    ///                    .stroke(lineWidth: 1)
-    ///            )
-    ///            .foregroundColor(.blue)
-    ///    }
+    ///     func body(content: Content) -> some View {
+    ///         content
+    ///             .font(.caption2)
+    ///             .padding(10)
+    ///             .overlay(
+    ///                 RoundedRectangle(cornerRadius: 15)
+    ///                     .stroke(lineWidth: 1)
+    ///             )
+    ///             .foregroundColor(.blue)
+    ///     }
     /// }
     /// ```
     ///
@@ -54208,34 +54211,34 @@ extension ViewModifier {
     ///
     /// ```
     /// struct ContentView: View {
-    ///    var body: some View {
-    ///        VStack {
-    ///            Text("Text without blue border and padded shadow")
-    ///            Text("Text with blue border and padded shadow")
-    ///                .modifier(BorderedCaption().concat(PaddedShadow()))
-    ///        }
-    ///    }
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Text without blue border and padded shadow")
+    ///             Text("Text with blue border and padded shadow")
+    ///                 .modifier(BorderedCaption().concat(PaddedShadow()))
+    ///         }
+    ///     }
     /// }
     ///
     /// struct BorderedCaption: ViewModifier {
-    ///    func body(content: Content) -> some View {
-    ///        content
-    ///            .font(.caption2)
-    ///            .padding(10)
-    ///            .overlay(
-    ///                RoundedRectangle(cornerRadius: 15)
-    ///                    .stroke(lineWidth: 1)
-    ///            )
-    ///            .foregroundColor(Color.blue)
-    ///    }
+    ///     func body(content: Content) -> some View {
+    ///         content
+    ///             .font(.caption2)
+    ///             .padding(10)
+    ///             .overlay(
+    ///                 RoundedRectangle(cornerRadius: 15)
+    ///                     .stroke(lineWidth: 1)
+    ///             )
+    ///             .foregroundColor(Color.blue)
+    ///     }
     /// }
     ///
     /// struct PaddedShadow: ViewModifier {
-    ///    func body(content: Content) -> some View {
-    ///        content
-    ///            .padding(50)
-    ///            .shadow(color: .blue, radius: 10)
-    ///    }
+    ///     func body(content: Content) -> some View {
+    ///         content
+    ///             .padding(50)
+    ///             .shadow(color: .blue, radius: 10)
+    ///     }
     /// }
     /// ```
     ///
@@ -54261,14 +54264,15 @@ extension ViewModifier {
 
 /// A date style that displays components as columns in a scrollable wheel.
 ///
-///      struct ExampleView: View {
-///          @State var date: Date = Date()
-///          var body: some View {
-///              DatePicker("Date",selection: $date)
-///                  .datePickerStyle(WheelDatePickerStyle())
-///                  .padding()
-///          }
-///      }
+///     struct ExampleView: View {
+///         @State var date: Date = Date()
+///
+///         var body: some View {
+///             DatePicker("Date",selection: $date)
+///                 .datePickerStyle(WheelDatePickerStyle())
+///                 .padding()
+///         }
+///     }
 ///
 /// ![A gif displaying a wheel style date picker, in which the week day month
 /// and date, the hour time, the minute time, and meridiam (am/pm) can be
@@ -54454,10 +54458,10 @@ extension Widget {
 ///
 ///     @main
 ///     struct GameWidgets: WidgetBundle {
-///        var body: some Widget {
-///            GameStatusWidget()
-///            CharacterDetailWidget()
-///        }
+///         var body: some Widget {
+///             GameStatusWidget()
+///             CharacterDetailWidget()
+///         }
 ///     }
 ///
 /// Learn more about how to create a widget via the ``Widget`` documentation.
@@ -54486,10 +54490,10 @@ extension WidgetBundle {
     ///
     ///     @main
     ///     struct GameWidgets: WidgetBundle {
-    ///        var body: some Widget {
-    ///            GameStatusWidget()
-    ///            CharacterDetailWidget()
-    ///        }
+    ///         var body: some Widget {
+    ///             GameStatusWidget()
+    ///             CharacterDetailWidget()
+    ///         }
     ///     }
     ///
     @WidgetBundleBuilder var body: Self.Body { get }
@@ -54504,11 +54508,11 @@ extension WidgetBundle {
 ///
 ///     @main
 ///     struct GameWidgets: WidgetBundle {
-///        @WidgetBundleBuilder
-///        var body: some Widget {
-///            GameStatusWidget()
-///            CharacterDetailWidget()
-///        }
+///         @WidgetBundleBuilder
+///         var body: some Widget {
+///             GameStatusWidget()
+///             CharacterDetailWidget()
+///         }
 ///     }
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
