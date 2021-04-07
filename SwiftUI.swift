@@ -3746,7 +3746,8 @@ extension AnyTransition {
 ///         }
 ///     }
 ///
-/// ![](app.png)
+/// ![An app containing a window group with a title font text view reading
+/// "Hello, world! 🌍🙋".](app.png)
 ///
 /// Precede the structure's declaration with the
 /// [`@main`](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626)
@@ -45833,7 +45834,7 @@ extension View {
     ///     }
     ///
     /// ![A gif displaying a view with a list containing two items, one of which
-    /// is deletable and the other in which delet has been disabled; the gif
+    /// is deletable and the other in which delete has been disabled; the gif
     /// shows the first item, which reads "Swipe ⬅️ to delete me" being deleted
     /// by swiping all the way left so that the red delete bar covers the item
     /// and it dissapears completely.](disable-delete-ex.gif)
@@ -45887,7 +45888,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](disable-move-ex.gif)
+    /// ![A gif displaying a view with navigation bar edit button and a list
+    /// containing two items, one of which can move positions in the list and
+    /// the other for which move has been disabled; when the edit button is
+    /// pressed, three gray bars appear on the moveable list item, which is
+    /// then dragged and dropped into a new psoition below the other item.](disable-move-ex.gif)
     ///
     /// - Parameter isDisabled: Whether the view's move functionality is disabled.
     @inlinable public func moveDisabled(_ isDisabled: Bool) -> some View { }
@@ -45916,7 +45921,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](ondrag-ex.gif)
+    /// ![A gif displaying a view containing mustache image being dragged around
+    /// the screen; the dragged item is a simple copy of the original, which
+    /// remains in the center of the view, and once dropped, the copy merges
+    /// with the original.](ondrag-ex.gif)
     ///
     /// - Parameter data: A function that returns an
     /// [`NSItemProvider`](https://developer.apple.com/documentation/foundation/nsitemprovider)
