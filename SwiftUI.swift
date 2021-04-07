@@ -6384,7 +6384,7 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](progress-spinner-gray.gif)
+/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
 ///
 /// You can also apply a tint to the spinner using
 /// `CircularProgressViewStyle`'s ``CircularProgressViewStyle/init(tint:)``:
@@ -6398,7 +6398,7 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![A gif displaying an orange circular style progress view spinnning.](progress-spinnner-orange-ex.gif)
+/// ![A gif displaying an orange circular style progress view spinning.](progress-spinner-orange-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct CircularProgressViewStyle : ProgressViewStyle {
@@ -6439,7 +6439,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![A gif displaying an orange circular style progress view spinnning.](progress-spinnner-orange-ex.gif)
+    /// ![A gif displaying an orange circular style progress view spinning.](progress-spinner-orange-ex.gif)
     ///
     public init(tint: Color) { }
 
@@ -9415,7 +9415,7 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
-/// ![A screenshot of a view displaying a grey spinner on a white background.](default-progress-view-style-ex1.png)
+/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
 ///
 /// In this instance, the style displays a spinner. However, if we initialize
 /// the ``ProgressView`` using ``ProgressView/init(value:total:)`` instead,
@@ -9430,7 +9430,10 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
-/// ![A screenshot of a view displaying a grey progress bar in the center of the screen, spanning the width of the screen with empty space on either side. The progress bar is at half capacity, denoted by a blue fill from the left side to the center.](default-progress-view-style-ex2.png)
+/// ![A screenshot of a view displaying a grey progress bar in the center of
+/// the screen, spanning the width of the screen with empty space on either side.
+/// The progress bar is at half capacity, denoted by a blue fill from the left
+/// side to the center.](default-progress-view-style-ex2.png)
 ///
 /// - Note: This style does not need to be specified explicitly unless
 /// you would like to override a style from higher up in the view hierarchy.
@@ -9453,7 +9456,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![](progress-spinner-gray.gif)
+    /// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
     ///
     public init() { }
 
@@ -31070,7 +31073,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
-/// ![](progress-spinner-gray.gif)
+/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
 ///
 /// When initialized with a value `ProgressView` looks like a
 /// loading bar that fills up from left to right.
@@ -31148,7 +31151,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-spinner-gray.gif)
+    /// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
     ///
     public init() where Label == EmptyView { }
 
@@ -31484,7 +31487,7 @@ extension ProgressView {
 /// }
 /// ```
 ///
-///![](progress-spinner-gray.gif)
+///![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
 ///
 /// ### Custom Styles
 ///
@@ -45397,7 +45400,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](date-picker-style-ex.gif)
+    /// ![A gif displaying a wheel style date picker, labelled with the text
+    /// "Date" on the lefthand side, in which the week day month and date, the
+    /// hour time, the minute time, and meridiam (am/pm) can be selected
+    /// separately by scrolling around a wheel; a light gray box highlights the
+    /// current selections.](date-picker-style-ex.gif)
     ///
     /// - Parameters:
     ///   - style: The desired date picker style, conforming to ``DatePickerStyle``.
@@ -45461,7 +45468,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](sheet-i-od-c-ex.gif)
+    /// ![A gif displaying a view containing a VStack with two buttons,
+    /// "🍌 Sheet" and "🍑 Sheet", which trigger the appearance of a sheets
+    /// reading "🍌🍌" and "🍑🍑" respectively, each with a "Tap to Dismiss"
+    /// button beneath the emojis; upon dismissal of either sheet, the console
+    /// prints "dismissed!" and the sheet slides back down until hidden.](sheet-i-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
@@ -45496,7 +45507,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](sheet-ip-od-c-ex.gif)
+    /// ![A gif displaying a view with a button reading "Open sesame 📬" which
+    /// triggers the presentation of a sheet with a button reading "CLOSE 📪";
+    /// upon dismissal of the sheet with the close button, the console prints
+    /// "dismissed!" and the sheet slides back down until hidden.](sheet-ip-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the sheet is presented.
@@ -45563,7 +45577,12 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](full-screen-cover-i-od-c-ex.gif)
+    /// ![A gif displaying a view containing a VStack with two buttons,
+    /// "🍌 Sheet" and "🍑 Sheet", which trigger the appearance of yellow
+    /// full screen covers reading "🍌🍌" and "🍑🍑" respectively, each  with a
+    /// "Tap to Dismiss" button beneath the emojis; upon dismissal of either
+    /// sheet, the console prints "dismissed!" and the sheet slides back down
+    /// until hidden.](full-screen-cover-i-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the full screen cover. The full screen
@@ -45611,7 +45630,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](full-screen-cover-ip-od-c-ex.gif)
+    /// ![A gif displaying a view with a button reading "Open sesame 📬" which
+    /// triggers the presentation of a full screen cover with a button reading
+    /// "CLOSE 📪"; upon dismissal of the sheet with the close button, the
+    /// console prints "dismissed!" and the sheet slides back down until hidden.](full-screen-cover-ip-od-c-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the modal view is presented.
@@ -45645,7 +45667,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](view-on-long-press-gesture-mdmdpp-ex.gif)
+    /// ![A gif displaying a text view reading "Press me" in title style font;
+    /// a green background appears behind the text when pressed cotninuously
+    /// for 1 full second or more.](view-on-long-press-gesture-mdmdpp-ex.gif)
     ///
     /// - Parameters:
     ///   - minimumDuration: How long it takes to detect a long press.
@@ -45686,7 +45710,12 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](disable-autocorrect-ex.gif)
+    /// ![A gif displaying a view with two text fields, the top one with the
+    /// placeholder "1234 Main St." and autocorrect disabled, and the other with
+    /// the placeholder "Label this address" and autocorrect enabled; when
+    /// "Avenue" is mistyped into the first field, it is not autocorrected, but
+    /// when "Home" is partially typed into the second, autocorrected completions
+    /// immediately appear.](disable-autocorrect-ex.gif)
     ///
     /// - Parameter disable: Whether autocorrection is disabled for the view.
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
@@ -45755,7 +45784,8 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](10.26.05.png)
+    /// ![A view containg a default style list with one item, "Mustache" with a
+    /// system image label, which can be dragged and dropped given the attached item provider.](10.26.05.png)
     ///
     /// - Parameter action: A function that returns an NSItemProvider.
     @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
@@ -45802,7 +45832,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](disable-delete-ex.gif)
+    /// ![A gif displaying a view with a list containing two items, one of which
+    /// is deletable and the other in which delet has been disabled; the gif
+    /// shows the first item, which reads "Swipe ⬅️ to delete me" being deleted
+    /// by swiping all the way left so that the red delete bar covers the item
+    /// and it dissapears completely.](disable-delete-ex.gif)
     ///
     /// - Parameter isDisabled: Whether the view's delete functionality is disabled.
     @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { }
@@ -47450,7 +47484,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](17.14.12.png)
+    /// ![A text view with a green border reading "Offset by passing horizontal
+    /// & vertical distance" thatt ahs been offsett by an x value of 20 and y
+    /// value of 50, as shown by a grey border in the pre-offset location.](17.14.12.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal distance to offset this view.
@@ -48089,7 +48125,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](17.15.53.png)
+    /// ![A text view reading "Rotation by passing an angle in degrees" that has
+    /// been rotated 22 degrees clockwise around it's center, as shown by a gray
+    /// border in the pre-rotated position.](17.15.53.png)
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
@@ -51563,7 +51601,7 @@ extension View {
     ///         }
     ///     }
     ///
-    /// [A gif displaying an orange circular style progress view spinnning.](progress-spinnner-orange-ex.gif)
+    /// [A gif displaying an orange circular style progress view spinning.](progress-spinner-orange-ex.gif)
     ///
     /// You can also create your own ``ProgressViewStyle``:
     ///
@@ -51764,9 +51802,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](17.18.05.png)
-    ///
-    /// [[rotation-effect]]
+    /// ![A text view reading "Rotation by passing an angle in degrees" that has
+    /// been rotated 45 degrees around the y-axis, as shown by a gray border in
+    /// the pre-rotated position; this transformation gives the text a 3D
+    /// appearance, as if it is fading into the depths of the frame.](17.18.05.png)
     ///
     /// - Parameters:
     ///   - angle: The angle at which to rotate the view.
