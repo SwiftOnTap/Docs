@@ -7852,19 +7852,17 @@ extension CommandsBuilder {
 /// specific date and time selections. Some variants may include rich editing
 /// controls in a popup.
 ///
+///     struct ExampleView: View {
+///         @State var date: Date = Date()
+///
+///         var body: some View {
+///             DatePicker("Date", selection: $date)
+///                 .datePickerStyle(CompactDatePickerStyle())
+///                 .padding()
+///         }
+///     }
+///
 /// ![CompactDatePickerStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
-///
-///
-///      struct ExampleView: View {
-///          @State var date: Date = Date()
-///
-///          var body: some View {
-///              DatePicker("Date", selection: $date)
-///                  .datePickerStyle(CompactDatePickerStyle())
-///                  .padding()
-///          }
-///      }
-///
 ///
 @available(iOS 14.0, macCatalyst 13.4, macOS 10.15.4, *)
 @available(tvOS, unavailable)
@@ -8402,7 +8400,8 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// ``DatePickerStyle``s provided by SwiftUI. The full list of styles is:
 /// - ``DefaultDatePickerStyle`` (iOS and macOS)
 /// - ``WheelDatePickerStyle`` (iOS)
-/// - ``GraphicalDatePickerStyle`` (macOS)
+/// - ``GraphicalDatePickerStyle`` (iOS and macOS)
+/// - ``CompactDatePickerStyle`` (iOS and macOS)
 /// - `FieldDatePickerStyle` (macOS)
 /// - `StepperFieldDatePickerStyle` (macOS)
 ///
@@ -8855,10 +8854,11 @@ public struct DatePickerComponents : OptionSet {
 /// to set a ``DatePicker``'s style.
 ///
 /// Though you cannot currently create your own date picker style,
-/// there are 5 date picker pre-made styles to choose from:
+/// there are 6 date picker pre-made styles to choose from:
 /// - ``WheelDatePickerStyle`` on iOS
 /// - ``DefaultDatePickerStyle`` on iOS and macOS
 /// - ``GraphicalDatePickerStyle`` on iOS and macOS
+/// - ``CompactDatePickerStyle`` on iOS and macOS
 /// - `FieldDatePickerStyle` on macOS
 /// - `StepperFieldDatePickerStyle` on macOS
 ///
@@ -21783,14 +21783,16 @@ extension InsettableShape {
 /// ```
 /// struct ShortcutEnabledView: View {
 ///     @State var bananas = ""
-
+///
+///     let key = KeyEquivalent("p") //Try changing this
+///
 ///     var body: some View {
-///         return VStack {
+///         VStack {
 ///             Text(bananas)
 ///             Button("Click or press command+P to print 🍌") {
 ///                 bananas += "🍌"
 ///             }
-///             .keyboardShortcut(KeyEquivalent("p"), modifiers: [.command])
+///             .keyboardShortcut(key, modifiers: [.command])
 ///         }
 ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
 ///     }
@@ -21817,7 +21819,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-up to print the 🍌") {
     ///                 bananas += "🍌"
@@ -21846,7 +21848,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-down to print the 🍌") {
     ///                 bananas += "🍌"
@@ -21875,7 +21877,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-left to print the 🍌") {
     ///                 bananas += "🍌"
@@ -21904,7 +21906,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-right to print the 🍌") {
     ///                 bananas += "🍌"
@@ -21933,7 +21935,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-ctrl-escape to print the 🍌") {
     ///                 bananas += "🍌"
@@ -21962,7 +21964,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-delete to print the 🍌") {
     ///                 bananas += "🍌"
@@ -21993,7 +21995,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-delete forward to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22025,7 +22027,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-home to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22057,7 +22059,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-end to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22086,7 +22088,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-page up to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22115,7 +22117,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-page down to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22144,7 +22146,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-control-clear to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22173,7 +22175,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-control-tab to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22202,7 +22204,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-control-option-space to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22231,7 +22233,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-control-return to print the 🍌") {
     ///                 bananas += "🍌"
@@ -22258,7 +22260,7 @@ public struct KeyEquivalent {
     ///     let p = Character("p")
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-control-p to print the 🍌!") {
     ///                 bananas += "🍌"
@@ -22289,7 +22291,7 @@ public struct KeyEquivalent {
     ///     @State var bananas = ""
     ///
     ///     var body: some View {
-    ///         return VStack {
+    ///         VStack {
     ///             Text(bananas)
     ///             Button("Press command-control-p to print the 🍌") {
     ///                 bananas += "🍌"
@@ -23842,9 +23844,9 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///  A button that opens a URL
 ///
 /// A ``Link`` opens a URL when the user clicks. There are three initializers:
-/// - A [`String`](https://developer.apple.com/documentation/swift/string)
-/// - A ``LocalizedStringKey``
-/// - A ``View``
+/// - [`String`](https://developer.apple.com/documentation/swift/string)
+/// - ``LocalizedStringKey``
+/// - ``View``
 ///
 /// For example:
 ///
@@ -25543,7 +25545,7 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     /// You can then apply this custom style to your ``Menu`` using the
     /// ``View/menuStyle(_:)`` view modifier:
     ///
-    ///     strut ContentView: View {
+    ///     struct ContentView: View {
     ///         var body: some View {
     ///             Menu {
     ///                 Button("Open in Preview", action: { })
@@ -38014,7 +38016,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// In this example, `TextField` requires a binding in order to read and write
 /// to a given value. The `text` state variable is converted to a
 /// `Binding<String>` using the dollar sign prefix (`$text`), and then passed
-/// to ``Textfield`` via its initializer.
+/// to ``TextField`` via its initializer.
 ///
 /// Note: The ``Binding`` type can also be used to create references to
 /// `@ObservedObject`, `@EnvironmentObject` and `@StateObject`. It is not
@@ -44990,10 +44992,11 @@ extension View {
     ///
     /// Use this modifier to change the style of a view hierarchy's date pickers.
     ///
-    /// There are currently 5 date picker styles:
+    /// There are currently 6 date picker styles:
     /// - ``WheelDatePickerStyle`` on iOS
     /// - ``DefaultDatePickerStyle`` on iOS and macOS
     /// - ``GraphicalDatePickerStyle`` on iOS and macOS
+    /// - ``CompactDatePickerStyle`` on iOS and macOS
     /// - `FieldDatePickerStyle` on macOS
     /// - `StepperFieldDatePickerStyle` on macOS
     ///
@@ -46362,14 +46365,20 @@ extension View {
     /// ```
     /// struct RedactedView: View {
     ///     var body: some View {
-    ///         ChildView()
-    ///             .redacted(reason: .placeholder)
+    ///         VStack {
+    ///             Text("There's nothing down there 👇")
+    ///             ChildView()
+    ///                 .redacted(reason: .placeholder)
+    ///         }
     ///     }
     /// }
     ///
     /// struct ChildView: View {
     ///     @Environment(\.redactionReasons) var redactionReasons
-    ///     var redacted: Bool { redactionReasons.contains(.placeholder) }
+    ///
+    ///     var redacted: Bool {
+    ///         redactionReasons.contains(.placeholder)
+    ///     }
     ///
     ///     var body: some View {
     ///         if !redacted {
