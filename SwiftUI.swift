@@ -4318,7 +4318,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+/// ![A gif of a text view displaying three strings stacked on top of each other on the left side of the screen, scrolling side to side.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum Axis : Int8, CaseIterable {
@@ -4345,7 +4345,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// }
     /// ```
     ///
-    /// ![ScrollView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
+    /// ![A gif of a text view displaying three strings stacked on top of each other on the left side of the screen, scrolling side to side.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-2.gif)
     ///
     case horizontal
 
@@ -4371,7 +4371,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// }
     /// ```
     ///
-    /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+    /// ![A gif of a text view displaying three strings stacked on top of each other at the top of the screen, scrolling up and down.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
     case vertical
 
     /// An efficient set of axes.
@@ -4402,7 +4402,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     /// }
     /// ```
     ///
-    /// ![ScrollView Example 3](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
+    /// ![A gif of a text view displaying three strings stacked on top of each other in the center of the screen, scrolling both up and down and side to side.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-3.gif)
     ///
     @frozen public struct Set : OptionSet {
 
@@ -4469,7 +4469,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         /// }
         /// ```
         ///
-        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        /// ![A gif of a text view displaying three strings stacked on top of each other on the left side of the screen, scrolling side to side.](horizontal-axis.gif)
         ///
         public static let horizontal: Axis.Set
 
@@ -4495,7 +4495,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
         /// }
         /// ```
         ///
-        /// ![ScrollView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
+        /// ![A gif of a text view displaying three strings stacked on top of each other at the top of the screen, scrolling up and down.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-1.gif)
         ///
         public static let vertical: Axis.Set
 
@@ -5369,7 +5369,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-color.png)
+    /// ![A screenshot with an image in the center of the screen where the ocean is visible with a pinkish hue.](blendmode-color.png)
     ///
     case color
 
@@ -5392,7 +5392,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-luminosity.png)
+    /// ![A screenshot with an image in the center of the screen that appears as a fairly even blend between space and ocean.](blendmode-luminosity.png)
     ///
     case luminosity
 
@@ -5416,7 +5416,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-sourceAtop.png)
+    /// ![A screenshot with an image in the center of the screen where only the space image is visible.](blendmode-sourceAtop.png)
     ///
     case sourceAtop
 
@@ -5440,7 +5440,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-destinationOver.png)
+    /// ![A screenshot with an image in the center of the screen where only the ocean image is visible.](blendmode-destinationOver.png)
     ///
     case destinationOver
 
@@ -5463,7 +5463,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-destinationOut.png)
+    /// ![A screenshot with an image in the center of the screen where the entire image is dark.](blendmode-destinationOut.png)
     ///
     case destinationOut
 
@@ -5488,7 +5488,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-plusDarker.png)
+    /// ![A screenshot with an image in the center of the screen where the left half of the image is significantly darker than the right.](blendmode-plusDarker.png)
     ///
     case plusDarker
 
@@ -5513,7 +5513,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-plusLighter.png)
+    /// ![A screenshot with an image in the center of the screen where the right half of the image is significantly brighter than the left.](blendmode-plusLighter.png)
     ///
     case plusLighter
 
@@ -8014,7 +8014,7 @@ extension ContainerRelativeShape : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](contentmode.png)
+/// ![A screenshot displaying two identical orange square outlines on top of each other. In the top one, there is a black ellipse that fits within the confines of the square. The bottom one has a black ellipse that fills the square vertically, taking up nearly all the space in the square.](contentmode.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public enum ContentMode : Hashable, CaseIterable {
@@ -8044,7 +8044,7 @@ extension ContainerRelativeShape : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](contentmode.png)
+    /// ![A screenshot displaying two identical orange square outlines on top of each other. In the top one, there is a black ellipse that fits within the confines of the square. The bottom one has a black ellipse that fills the square vertically, taking up nearly all the space in the square.](contentmode.png)
     ///
     case fit
 
@@ -8065,7 +8065,7 @@ extension ContainerRelativeShape : InsettableShape {
     ///                 .frame(width: 200, height: 200)
     ///                 .border(Color.orange)
     ///             Ellipse()
-    ///                 .aspectRatio(1.5, contentMode: ContentMode.fit)
+    ///                 .aspectRatio(1.5, contentMode: ContentMode.fill)
     ///                 .frame(width: 200, height: 200)
     ///                 .border(Color.orange)
     ///         }
@@ -8073,7 +8073,7 @@ extension ContainerRelativeShape : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](contentmode.png)
+    /// ![A screenshot displaying two identical orange square outlines on top of each other. In the top one, there is a black ellipse that fits within the confines of the square. The bottom one has a black ellipse that fills the square vertically, taking up nearly all the space in the square.](contentmode.png)
     ///
     case fill
 
@@ -8284,7 +8284,7 @@ public struct ContextMenu<MenuItems> where MenuItems : View {
 /// }
 /// ```
 ///
-/// ![Coordinate space example 1](E708E01A-7F5B-4779-ABC8-2CD7CDA525AC.png)
+/// ![A screenshot displaying two red rectangles spanning the height of the screen on either side of a white rectangle, also spanning the height of the screen. At the top of the white rectangle there is an orange button that reads "Button with coordinate spaces."](E708E01A-7F5B-4779-ABC8-2CD7CDA525AC.png)
 ///
 /// In this example, the center of the Button coordinates is retrieved. The global center
 /// means that the middle of the button is 160 pixels from the left of the screen, and 294 pixels
@@ -9405,7 +9405,7 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
-/// ![](default-progress-view-style-ex1.png)
+/// ![A screenshot of a view displaying a grey spinner on a white background.](default-progress-view-style-ex1.png)
 ///
 /// In this instance, the style displays a spinner. However, if we initialize
 /// the ``ProgressView`` using ``ProgressView/init(value:total:)`` instead,
@@ -9420,7 +9420,7 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
-/// ![](default-progress-view-style-ex2.png)
+/// ![A screenshot of a view displaying a grey progress bar in the center of the screen, spanning the width of the screen with empty space on either side. The progress bar is at half capacity, denoted by a blue fill from the left side to the center.](default-progress-view-style-ex2.png)
 ///
 /// - Note: This style does not need to be specified explicitly unless
 /// you would like to override a style from higher up in the view hierarchy.
@@ -9764,10 +9764,10 @@ extension DisclosureGroup where Label == Text {
 
 /// A divider that visually separates views in a stack.
 ///
-/// The ``Divider`` in iOS is either a horizontal or a vertical `1pt` thick line.
-/// The color and height of a ``Divider`` is determined by the system, and
+/// The `Divider` in iOS is either a horizontal or a vertical `1pt` thick line.
+/// The height of a `Divider` is determined by the system, and
 /// cannot be overriden. The system is responsible for adapting the appearance
-/// of ``Divider`` as best appropriate for the host platform.
+/// of `Divider` as best appropriate for the host platform.
 ///
 /// When contained in a stack, the divider stretches across the axis
 /// perpendicular to the axis of the stack. When not in a stack, the divider
@@ -9793,7 +9793,7 @@ extension DisclosureGroup where Label == Text {
 ///
 /// ![A view containing a VStack with two text lines, "My Awesome Book" and "My Name," separated by a horizontal divider in the form of a thin gray line.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Divider-example-1.png)
 ///
-/// Or use a ``Divider`` in an ``HStack`` to create a vertical line between
+/// Or use a `Divider` in an ``HStack`` to create a vertical line between
 /// horizontally laid out elements:
 ///
 /// ```
@@ -9811,6 +9811,30 @@ extension DisclosureGroup where Label == Text {
 /// ```
 ///
 /// ![A view containing an HStack with two text lines "This is a line of text" and "This is an unrelated line of text," separated by a vertical divider in the form of a thin gray line.](Horizontally-Split-Text.png)
+///
+/// The color of a divider can be modified using
+/// ``View/background(_:alignment:)``:
+///
+///
+/// ```
+/// struct ExampleView: View {
+///     var body: some View {
+///         VStack {
+///             Text("My Awesome Book")
+///
+///             Divider()
+///                 .background(Color.orange)
+///
+///             Text("My Name")
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![A screenshot containing two lines of text in a VStack separated by a
+/// divider. Using the background view modifier renders the divider
+/// in orange. The text reads "My Awesome Book" on top of the divider, and
+/// "My Name" underneath.](divider-colored.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Divider : View {
@@ -23203,7 +23227,7 @@ extension LabelStyleConfiguration.Icon : View {
 /// }
 /// ```
 ///
-/// ![](layoutdirection.png)
+/// ![A screenshot of a right facing arrow emoji centered on a screen with a white background.](layoutdirection.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum LayoutDirection : Hashable, CaseIterable {
@@ -23234,11 +23258,11 @@ public enum LayoutDirection : Hashable, CaseIterable {
     /// }
     /// ```
     ///
-    /// ![](layoutdirection.png)
+    /// ![A screenshot of a right facing arrow emoji centered on a screen with a white background.](layoutdirection.png)
     ///
     case leftToRight
 
-    /// The text is read and written from left to right.
+    /// The text is read and written from right to left.
     ///
     /// In this layout direction, the leading edge would be on the right side,
     /// and the trailing edge would be on the left side.
@@ -23339,7 +23363,7 @@ extension LayoutDirection {
     /// }
     /// ```
     ///
-    /// ![](layoutdirection.png)
+    /// ![A screenshot of a right facing arrow emoji centered on a screen with a white background.](layoutdirection.png)
     ///
     @available(iOS 14.0, tvOS 14.0, *)
     @available(macOS, unavailable)
@@ -30256,7 +30280,7 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 /// }
 /// ```
 ///
-/// ![](previewlayout-sizethatfits.png)
+/// ![An image of a text view in preview displaying the string "This box fits me snugly" outlined by a grey rectangle with no empty space on any side of the string.](previewlayout-sizethatfits.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewLayout {
@@ -30285,7 +30309,7 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
-    /// ![](previewlayout-device.png)
+    /// ![A screenshot of a text view in preview displaying the string "I am in a device!" in the center of the screen.](previewlayout-device.png)
     ///
     case device
 
@@ -30311,7 +30335,7 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
-    /// ![](previewlayout-sizethatfits.png)
+    /// ![An image of a text view in preview displaying the string "This box fits me snugly" outlined by a grey rectangle with no empty space on any side of the string.](previewlayout-sizethatfits.png)
     ///
     case sizeThatFits
 
@@ -30336,7 +30360,7 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
-    /// ![](previewlayout-fixed.png)
+    /// ![An image of a text view in preview displaying the string "I am in a 100 by 100 box" outlined by a grey square with little empty space on either side of the string.](previewlayout-fixed.png)
     ///
     case fixed(width: CGFloat, height: CGFloat)
 }
@@ -33418,7 +33442,7 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 
 /// Defines the shape of a rounded rectangle's corners.
 ///
-/// This rectanular corner style has two options:
+/// This rectangular corner style has two options:
 /// 1. ``RoundedCornerStyle/circular``: The corners are quarter circles or ovals
 /// 2. ``RoundedCornerStyle/continuous``: The corners are smooth
 ///
@@ -33438,7 +33462,7 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 /// }
 /// ```
 ///
-/// ![RoundedRectangle init example](3680DF67-1241-4339-AC78-4452B24086B0.png)
+/// ![A screenshot displaying two black rectangles with rounded corners stacked on top of each other, with empty space in between. The top rectangle has 'circular' corners, while the bottom has 'continuous', or smooth corners.](3680DF67-1241-4339-AC78-4452B24086B0.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum RoundedCornerStyle {
@@ -36229,18 +36253,18 @@ public struct ScrollViewProxy {
 ///         List {
 ///             Section {
 ///                 Text("I'm in the first 🥇 section")
-///                 Text("Numba 1️⃣")
+///                 Text("Number 1️⃣")
 ///             }
 ///             Section {
 ///                 Text("Second is the best 🥈")
-///                 Text("Preach✌️")
+///                 Text("Indeed✌️")
 ///             }
 ///         }
 ///     }
 /// }
 /// ```
 ///
-/// ![A white view showing a plain list with two sections, each with two text views.](section-1.png)
+/// ![A white view showing a plain list with two sections, each with two text views.](section-1-clean.png)
 ///
 /// And, for comparison, a ``Form``:
 ///
@@ -36250,18 +36274,18 @@ public struct ScrollViewProxy {
 ///         Form {
 ///             Section {
 ///                 Text("I'm in the first 🥇 section")
-///                 Text("Numba 1️⃣")
+///                 Text("Number 1️⃣")
 ///             }
 ///             Section {
 ///                 Text("Second is the best 🥈")
-///                 Text("Preach✌️")
+///                 Text("Indeed✌️")
 ///             }
 ///         }
 ///     }
 /// }
 /// ```
 ///
-/// ![A white view showing a form with two sections, each with two text views.](section-2.png)
+/// ![A white view showing a form with two sections, each with two text views.](section-2-clean.png)
 ///
 /// You can also (optionally) add **header** and **footer** content
 /// to a `Section`:
@@ -36276,11 +36300,11 @@ public struct ScrollViewProxy {
 ///         Form {
 ///             Section(header: Text("Section #1")) {
 ///                 Text("I'm in the first 🥇 section")
-///                 Text("Numba 1️⃣")
+///                 Text("Number 1️⃣")
 ///             }
 ///             Section(header: Text("Section #2"), footer: footer) {
 ///                 Text("Second is the best 🥈")
-///                 Text("Preach✌️")
+///                 Text("Indeed✌️")
 ///             }
 ///         }
 ///     }
@@ -36289,7 +36313,7 @@ public struct ScrollViewProxy {
 ///
 /// ![A white view showing a form with two sections, each with a header
 /// reading "Section #_" and two text views, and the second with a footer in small gray lettering
-/// eading "This is a disclaimer about section number 2. Use at your own risk."](section-3.png)
+/// reading "This is a disclaimer about section number 2. Use at your own risk."](section-3-clean.png)
 ///
 /// You can style a ``List``, and the `Section`s will automatically
 /// get styled accordingly.
@@ -36304,11 +36328,11 @@ public struct ScrollViewProxy {
 ///         List {
 ///             Section(header: Text("Section #1")) {
 ///                 Text("I'm in the first 🥇 section")
-///                 Text("Numba 1️⃣")
+///                 Text("Number 1️⃣")
 ///             }
 ///             Section(header: Text("Section #2"), footer: footer) {
 ///                 Text("Second is the best 🥈")
-///                 Text("Preach✌️")
+///                 Text("Indeed✌️")
 ///             }
 ///         }
 ///         .listStyle(InsetGroupedListStyle()) //Try changing this to SidebarListStyle()
@@ -36318,7 +36342,7 @@ public struct ScrollViewProxy {
 ///
 /// ![A white view showing an inset grouped list split into two sections, each with a header
 /// reading "Section #_" and two text views, and the second with a footer in small gray lettering
-/// eading "This is a disclaimer about section number 2. Use at your own risk."](section-4.png)
+/// eading "This is a disclaimer about section number 2. Use at your own risk."](section-4-clean.png)
 ///
 /// Beyond ``List`` and ``Form``, the four `lazy` layout elements also
 /// support `Section`:
@@ -36354,18 +36378,19 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     ///         List {
     ///             Section(header: Text("Section #1"), footer: Text("Disclaimer #1")) {
     ///                 Text("I'm in the first 🥇 section")
-    ///                 Text("Numba 1️⃣")
+    ///                 Text("Number 1️⃣")
     ///             }
     ///             Section(header: Text("Section #2"), footer: Text("Disclaimer #2")) {
     ///                 Text("Second is the best 🥈")
-    ///                 Text("Preach✌️")
+    ///                 Text("Indeed✌️")
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A white view showing a list divided into two sections, each with a header reading "Section #_" and a footer reading "Dislaimer #_".](section-init-1.png)
+    /// ![A white view showing a list divided into two sections, each with a
+    /// header reading "Section #_" and a footer reading "Dislaimer #_".](section-init-1-clean.png)
     ///
     /// You can actually make the `header` and `footer` any ``View``, though
     /// the initializer doesn't allow much space for it. If you want
@@ -36392,14 +36417,16 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     ///         List {
     ///             Section(header: header, footer: footer) {
     ///                 Text("I'm in the first 🥇 section")
-    ///                 Text("Numba 1️⃣")
+    ///                 Text("Number 1️⃣")
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A white view with one section containing a header, which displays an HStack made up of an image and the text "Section", as well as a footer, which reads "A disclaimer might go here", in footnote text.](section-init-2.png)
+    /// ![A white view with one section containing a header, which displays an
+    /// HStack made up of an image and the text "Section", as well as a footer,
+    /// which reads "A disclaimer might go here", in footnote text.](section-init-2-clean.png)
     ///
     /// - Parameters:
     ///   - header: A view placed on top
@@ -36429,14 +36456,15 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
     ///         List {
     ///             Section(footer: Text(message)) {
     ///                 Text("I'm in the first 🥇 section")
-    ///                 Text("Numba 1️⃣")
+    ///                 Text("Number 1️⃣")
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A white view displaying a list with two members and a footer reading "Disclaimer:..."](section-init-3.png)
+    /// ![A white view displaying a list with two members and a footer reading
+    /// "Disclaimer:..."](section-init-3-clean.png)
     ///
     /// Footer content will look different depending on the ``ListStyle``:
     ///
@@ -36448,7 +36476,7 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
     ///         List {
     ///             Section(footer: Text(message)) {
     ///                 Text("I'm in the first 🥇 section")
-    ///                 Text("Numba 1️⃣")
+    ///                 Text("Number 1️⃣")
     ///             }
     ///         }
     ///         .listStyle(InsetGroupedListStyle())
@@ -36456,7 +36484,8 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
     /// }
     /// ```
     ///
-    /// ![A white view displaying an inset grouped list with two members and a small footer below the edge of the list that reads "Disclaimer:..."](section-init-4.png)
+    /// ![A white view displaying an inset grouped list with two members and a
+    /// small footer below the edge of the list that reads "Disclaimer:..."](section-init-4-clean.png)
     ///
     /// - Parameters:
     ///   - footer: A view placed on bottom
@@ -36480,14 +36509,15 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
     ///         List {
     ///             Section(header: Text("Section #1")) {
     ///                 Text("I'm in the first 🥇 section")
-    ///                 Text("Numba 1️⃣")
+    ///                 Text("Number 1️⃣")
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A white view displaying a list with two items and a text header that reads "Section #1".](section-init-5.png)
+    /// ![A white view displaying a list with two items and a text header that
+    /// reads "Section #1".](section-init-5-clean.png)
     ///
     /// Header content can be any view, so you can style the parameter
     /// however you would like:
@@ -36508,14 +36538,15 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
     ///         List {
     ///             Section(header: header) {
     ///                 Text("I'm in the first 🥇 section")
-    ///                 Text("Numba 1️⃣")
+    ///                 Text("Number 1️⃣")
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A white view displaying a list with two items and a header containing an HStack made up of a small image and the text "Section #1".](section-init-6.png)
+    /// ![A white view displaying a list with two items and a header containing
+    /// an HStack made up of a small image and the text "Section #1".](section-init-6-clean.png)
     ///
     /// - Parameters:
     ///   - header: A view placed on top
@@ -36539,18 +36570,19 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
     ///         List {
     ///             Section {
     ///                 Text("I'm in the first 🥇 section")
-    ///                 Text("Numba 1️⃣")
+    ///                 Text("Number 1️⃣")
     ///             }
     ///             Section {
     ///                 Text("Second is the best 🥈")
-    ///                 Text("Preach✌️")
+    ///                 Text("Indeed✌️")
     ///             }
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A white view displaying a list with two sections, each without a header or footer, resulting in no line between.](section-1.png)
+    /// ![A white view displaying a list with two sections, each without a
+    /// header or footer, resulting in no line between.](section-1-clean.png)
     ///
     /// - Parameters
     ///   - content: The section contents
@@ -41488,7 +41520,7 @@ extension Text.Case : Hashable {
 ///
 /// This is used in conjuction with ``View/multilineTextAlignment(_:)``, for example:
 ///
-/// ![Text alignment center](B81ADC86-835C-4FED-BC53-B7E0F647CA60.png)
+/// ![A screenshot of a text view displaying a multi-line string in the center of the screen in black text, aligned in the center of the frame.](B81ADC86-835C-4FED-BC53-B7E0F647CA60.png)
 ///
 /// ```
 /// struct ContentView: View {
@@ -41519,7 +41551,7 @@ extension Text.Case : Hashable {
     /// }
     /// ```
     ///
-    /// ![Text alignment leading](textalignment-leading.png)
+    /// ![A screenshot of a text view displaying a string in the center of the screen in black text, aligned on the left side of the frame.](textalignment-leading.png)
     ///
     case leading
 
@@ -41538,7 +41570,7 @@ extension Text.Case : Hashable {
     /// }
     /// ```
     ///
-    /// ![Text alignment center](textalignment-center.png)
+    /// ![A screenshot of a text view displaying a string in the center of the screen in black text, aligned in the center of the frame.](textalignment-center.png)
     ///
     case center
 
@@ -41558,7 +41590,7 @@ extension Text.Case : Hashable {
     /// }
     /// ```
     ///
-    /// ![Text alignment trailing](textalignment-trailing.png)
+    /// ![A screenshot of a text view displaying a string in the center of the screen in black text, aligned on the right side of the frame.](textalignment-trailing.png)
     ///
     case trailing
 
@@ -51548,7 +51580,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Content shape example 1](contentshape-example-1.gif)
+    /// ![A gif with a colored square in the center of the screen that has text
+    /// both above and below it, with spacers in between. When anything in the
+    /// container is clicked, the square color toggles from red to blue. Setting
+    /// the content shape makes it so that the spacers are clickable as well.](contentshape-example-1.gif)
     ///
     /// For further clarification on how this works, see this animation of the
     /// same example from above **without** any defined `contentShape`. Notice how
@@ -51577,7 +51612,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Content shape example 2](contentshape-example-2.gif)
+    /// ![A gif with a colored square in the center of the screen that has text
+    /// both above and below it, with spacers in between. When the text or the
+    /// square itself are clicked, the square color toggles from red to blue. In
+    /// this case, the content shape was not set, so the spacers are not clickable.](contentshape-example-2.gif)
     ///
     /// - Parameters:
     ///   - shape: The hit testing shape for the view.
@@ -51879,8 +51917,10 @@ extension View {
     /// higher priority of the second ``Text`` element, even though all of their
     /// other attributes (font, font size and character count) are the same.
     ///
-    /// ![A screenshot showing twoText views different layout
-    /// priorities.](SwiftUI-View-layoutPriority.png)
+    /// ![A screenshot showing two Text views in an HStack; the second string
+    /// has layout priority so it reads normally and takes up the majority of
+    /// the screen, pushing the other string up against the left hand side of
+    /// the screen, making it relatively unreadable.](SwiftUI-View-layoutPriority.png)
     ///
     /// A parent layout offers the child views with the highest layout priority
     /// all the space offered to the parent minus the minimum space required for
@@ -51941,7 +51981,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](linear-gradient.png)
+    /// ![A screenshot that displays a rectangle that takes up the whole screen,
+    /// with a gradient of green to purple from left to right.](linear-gradient.png)
     ///
     /// Now if we apply a mask on a text view, we get the following result:
     ///
@@ -51966,7 +52007,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Mask Example](mask-example-1.png)
+    /// ![A screen shot that displays bold text "Bananas are some of the best
+    /// fruit" aligned to the left in the center of the screen. The mask modifier
+    /// on the gradient rectangle renders the text in the same gradient pattern
+    /// color as the rectangle behind it, while keeping the rest of the screen
+    /// white.](mask-example-1.png)
     ///
     /// This page was inspired by work from @philipcdavis on Github.
     ///
@@ -52119,9 +52164,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](defaultappstorage.png)
+    /// ![A screenshot with a text field on the left hand side of the center
+    /// of the screen that reads "Kanye West."](defaultappstorage.png)
     ///
-    /// - Parameter store: The default user defaults storage site for `@AppStorage`.
+    /// - Parameter store: The user defaults to use as the default store for `@AppStorage`.
     public func defaultAppStorage(_ store: UserDefaults) -> some View { }
 
 }
@@ -52933,7 +52979,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](projectiontransform.png)
+    /// ![A screenshot displaying a rectangular border in the center of the
+    /// screen, with text that reads "Projection effects using transforms"
+    /// extending at a 30 degree angle from its left side towards the top of
+    /// the screen.](projectiontransform.png)
     ///
     /// - Parameter transform: A ``ProjectionTransform`` to apply to the view.
     @inlinable public func projectionEffect(_ transform: ProjectionTransform) -> some View { }
@@ -53041,7 +53090,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](statusbar-hidden.png)
+    /// ![A screenshot of a text view that reads "I have no status bar" in
+    /// the center of the screen, with no status bar at the top.](statusbar-hidden.png)
     ///
     /// You can also show or hide the status bar with an animation by
     /// attaching the modifier to a ``State`` property and using
@@ -53062,7 +53112,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](status-bar-hidden.gif)
+    /// ![A gif with a button in the center of the screen that reads "Toggle
+    /// the status bar!" which causes the status bar at the top of the screen
+    /// to appear and reappear with each time it's pressed as a result of attaching
+    /// the statusBar modifier to the button.](status-bar-hidden.gif)
     ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   status bar.
@@ -53136,7 +53189,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](alert-item-content.gif)
+    /// ![A gif displaying two buttons in a VStack, denoted by a banana and
+    /// peach emoji, respectively. When pressed, each prompts an alert to
+    /// confirm the fruit, with the option to either confirm or cancel. The
+    /// alert is implemented as a modifier to the VStack, which determines the
+    /// prompted alert based on the binding value passed to its item parameter.](alert-item-content.gif)
     ///
     /// - Parameters:
     ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
@@ -53174,7 +53231,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](alert-is-presented.gif)
+    /// ![A gif with a blue button that reads "Open sesame"—when pressed,
+    /// an alert pops up that asks the user to confirm the alert, with the
+    /// option to either confirm or cancel.](alert-is-presented.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the alert is presented.
@@ -54059,7 +54118,9 @@ extension ViewDimensions : Equatable {
 /// }
 /// ```
 ///
-/// ![View modifier example 1](8786B2B4-A365-445D-96AB-DE5D5BD9F897.png)
+/// ![A screenshot displaying two lines of text in a VStack.
+/// A custom modifier applied directly to the view renders the second line in
+/// blue text surrounded by a rounded rectangle.](8786B2B4-A365-445D-96AB-DE5D5BD9F897.png)
 ///
 /// You can apply ``View/modifier(_:)`` directly to a view, but a more common and
 /// idiomatic approach uses ``View/modifier(_:)`` to define an extension to
@@ -54084,7 +54145,7 @@ extension ViewDimensions : Equatable {
 ///     }
 ///
 /// ![A screenshot showing the image of a bus with a caption reading
-/// Downtown Bus. A view extension, using custom a modifier, renders the
+/// Downtown Bus. A view extension, using a custom modifier, renders the
 ///  caption in blue text surrounded by a rounded
 ///  rectangle.](SwiftUI-View-ViewModifier.png)
 ///
@@ -54190,7 +54251,7 @@ extension ViewModifier where Self.Body == Never {
     /// }
     /// ```
     ///
-    /// ![](viewmodifier-body.png)
+    /// ![A screenshot of two text views stacked in the center of the screen; the first reads "Text without bordered caption" in normal black text, while the second on bottom has a rounded blue border and reads "Text with bordered caption" in smaller blue text.](viewmodifier-body.png)
     ///
     /// - Parameter content: The view to be modified.
     ///
@@ -54242,7 +54303,7 @@ extension ViewModifier {
     /// }
     /// ```
     ///
-    /// ![View modifier concat example 1](view-modifier-concat-example-1.png)
+    /// ![A screenshot of two text views stacked in the center of the screen; the first is in normal black text, while the second on bottom has a rounded blue border and a padded shadow.](view-modifier-concat-example-1.png)
     ///
     @inlinable public func concat<T>(_ modifier: T) -> ModifiedContent<Self, T> { }
 }
@@ -54411,7 +54472,7 @@ public struct WheelPickerStyle : PickerStyle {
 /// Your widget can now be styled similar to a standard SwiftUI view. For
 /// example, modify `Banana_WidgetEntryView` to create:
 ///
-/// ![Widget](widget-3.png)
+/// ![A screenshot of the home screen with a yellow filled widget roughly four times the size of a standard widget, overlayed with two banana emojis.](widget-3.png)
 ///
 /// ```
 /// struct Banana_WidgetEntryView : View {
