@@ -17645,8 +17645,7 @@ extension Gesture {
     /// Updates the provided gesture state property as the gesture's value
     /// changes.
     ///
-    /// Use this callback to update transient UI state as described in
-    /// <doc:Adding-Interactivity-with-Gestures>.
+    /// Use this callback to update transient UI state.
     ///
     /// - Parameters:
     ///   - state: A binding to a view's ``GestureState`` property.
@@ -36739,9 +36738,6 @@ public struct SegmentedPickerStyle : PickerStyle {
 }
 
 /// A gesture that's a sequence of two gestures.
-///
-/// Read <doc:Composing-SwiftUI-Gestures> to learn how you can create a sequence
-/// of two gestures.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SequenceGesture<First, Second> : Gesture where First : Gesture, Second : Gesture {
 
