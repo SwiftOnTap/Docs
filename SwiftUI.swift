@@ -19662,7 +19662,7 @@ extension Image {
     ///
     /// To follow along, save the following image as `"bird"` in your project.
     ///
-    /// ![Bird Image](bird.png)
+    /// ![Painting of a bird](bird.png)
     ///
     /// In the following example, we define a helper function called
     /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -19701,7 +19701,10 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird Orientation](image-orientation.png)
+    /// ![A screenshot with eight images of a bird in the center, arranged as a
+    /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+    /// up and towards each other, the second faces down and away from each other,
+    /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
     ///
     @frozen public enum Orientation : UInt8, CaseIterable, Hashable {
 
@@ -19720,7 +19723,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -19759,7 +19762,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case up
 
@@ -19778,7 +19784,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -19817,7 +19823,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case upMirrored
 
@@ -19836,7 +19845,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -19875,7 +19884,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case down
 
@@ -19894,7 +19906,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -19933,7 +19945,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case downMirrored
 
@@ -19952,7 +19967,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -19991,7 +20006,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case left
 
@@ -20010,7 +20028,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -20049,7 +20067,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case leftMirrored
 
@@ -20068,7 +20089,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -20107,7 +20128,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case right
 
@@ -20126,7 +20150,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// In the following example, we define a helper function called
         /// `image(_:)` so we can keep the code clean, and show all 8 orientations.
@@ -20165,7 +20189,10 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Orientation](image-orientation.png)
+        /// ![A screenshot with eight images of a bird in the center, arranged as a
+        /// VStack of pairs of birds, each arranged in an HStack. The first pair faces
+        /// up and towards each other, the second faces down and away from each other,
+        /// while the other two pairs are rotated using right and left orientations.](image-orientation.png)
         ///
         case rightMirrored
 
@@ -20240,7 +20267,7 @@ extension Image {
     ///
     /// To follow along, save the following image as `"bird"` in your project.
     ///
-    /// ![Bird Image](bird.png)
+    /// ![Image of a bird](bird.png)
     ///
     /// ```
     /// struct ContentView {
@@ -20261,7 +20288,9 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird Image Rendering Mode](image-renderingmode.png)
+    /// ![A screenshot with two bird images in an HStack in the center of the
+    /// screen; the one on the left is filled in red while the one on the right has
+    /// it's original coloring.](image-renderingmode.png)
     ///
     public enum TemplateRenderingMode {
 
@@ -20278,7 +20307,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// ```
         /// struct ContentView {
@@ -20299,7 +20328,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        /// ![A screenshot with two bird images in an HStack in the center of the
+        /// screen; the one on the left is filled in red while the one on the right has
+        /// it's original coloring.](image-renderingmode.png)
         ///
         case template
 
@@ -20315,7 +20346,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird"` in your project.
         ///
-        /// ![Bird Image](bird.png)
+        /// ![Image of a bird](bird.png)
         ///
         /// ```
         /// struct ContentView {
@@ -20336,7 +20367,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Image Rendering Mode](image-renderingmode.png)
+        /// ![A screenshot with two bird images in an HStack in the center of the
+        /// screen; the one on the left is filled in red while the one on the right has
+        /// it's original coloring.](image-renderingmode.png)
         ///
         case original
 
@@ -20408,7 +20441,9 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![](image-scale-ex.png)
+    /// ![A screenshot displaying three dice faces in an HStack, each showing
+    /// side 5, growing from left to right owed to small, medium, and large
+    /// scales with the imageScale modifier, respectively.](image-scale-ex.png)
     ///
     @available(macOS 11.0, *)
     public enum Scale {
@@ -20438,7 +20473,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![](image-scale-ex.png)
+        /// ![A screenshot displaying three dice faces in an HStack, each showing
+        /// side 5, growing from left to right owed to small, medium, and large
+        /// scales with the imageScale modifier, respectively.](image-scale-ex.png)
         ///
         case small
 
@@ -20467,7 +20504,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![](image-scale-ex.png)
+        /// ![A screenshot displaying three dice faces in an HStack, each showing
+        /// side 5, growing from left to right owed to small, medium, and large
+        /// scales with the imageScale modifier, respectively.](image-scale-ex.png)
         ///
         case medium
 
@@ -20496,7 +20535,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![](image-scale-ex.png)
+        /// ![A screenshot displaying three dice faces in an HStack, each showing
+        /// side 5, growing from left to right owed to small, medium, and large
+        /// scales with the imageScale modifier, respectively.](image-scale-ex.png)
         ///
         case large
 
@@ -20565,7 +20606,7 @@ extension Image {
     ///
     /// To follow along, save the following image as `"bird-small"` in your project.
     ///
-    /// ![Bird Small Image](bird-small.png)
+    /// ![Small image of a bird](bird-small.png)
     ///
     /// ```
     /// struct ContentView: View {
@@ -20592,7 +20633,9 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird Image Interpolation](image-interpolation.png)
+    /// ![A screenshot displaying four bird images in an HStack with increasing
+    /// levels of interpolation from left to right. The image appears blurrier as
+    /// the amount of interpolation is increased.](image-interpolation.png)
     ///
     public enum Interpolation {
 
@@ -20612,7 +20655,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird-small"` in your project.
         ///
-        /// ![Bird Small Image](bird-small.png)
+        /// ![Small image of a bird](bird-small.png)
         ///
         /// ```
         /// struct ContentView: View {
@@ -20639,7 +20682,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
+        /// ![A screenshot displaying four bird images in an HStack with increasing
+        /// levels of interpolation from left to right. The image appears blurrier as
+        /// the amount of interpolation is increased.](image-interpolation.png)
         ///
         case none
 
@@ -20659,7 +20704,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird-small"` in your project.
         ///
-        /// ![Bird Small Image](bird-small.png)
+        /// ![Small image of a bird](bird-small.png)
         ///
         /// ```
         /// struct ContentView: View {
@@ -20686,7 +20731,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
+        /// ![A screenshot displaying four bird images in an HStack with increasing
+        /// levels of interpolation from left to right. The image appears blurrier as
+        /// the amount of interpolation is increased.](image-interpolation.png)
         ///
         case low
 
@@ -20706,7 +20753,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird-small"` in your project.
         ///
-        /// ![Bird Small Image](bird-small.png)
+        /// ![Small image of a bird](bird-small.png)
         ///
         /// ```
         /// struct ContentView: View {
@@ -20733,7 +20780,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
+        /// ![A screenshot displaying four bird images in an HStack with increasing
+        /// levels of interpolation from left to right. The image appears blurrier as
+        /// the amount of interpolation is increased.](image-interpolation.png)
         ///
         case medium
 
@@ -20753,7 +20802,7 @@ extension Image {
         ///
         /// To follow along, save the following image as `"bird-small"` in your project.
         ///
-        /// ![Bird Small Image](bird-small.png)
+        /// ![Small image of a bird](bird-small.png)
         ///
         /// ```
         /// struct ContentView: View {
@@ -20780,7 +20829,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Image Interpolation](image-interpolation.png)
+        /// ![A screenshot displaying four bird images in an HStack with increasing
+        /// levels of interpolation from left to right. The image appears blurrier as
+        /// the amount of interpolation is increased.](image-interpolation.png)
         ///
         case high
 
