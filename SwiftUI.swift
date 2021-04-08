@@ -4944,9 +4944,9 @@ extension Binding : DynamicProperty {
 /// There are 21 different types of blend modes. To use the following example,
 /// drag in the following two photos and label them "ocean" and "space".
 ///
-/// ![Ocean](ocean.jpg)
+/// ![Image of the ocean](ocean.jpg)
 ///
-/// ![Space](space.jpg)
+/// ![Image of space](space.jpg)
 ///
 /// ```
 /// struct ContentView: View {
@@ -4965,7 +4965,7 @@ extension Binding : DynamicProperty {
 /// }
 /// ```
 ///
-/// ![Blended Image](blendmode-softLight.png)
+/// ![A screenshot displaying a blended image of the ocean and space.](blendmode-softLight.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
@@ -4988,7 +4988,9 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-normal.png)
+    /// ![A screenshot displaying the space image on top of the ocean image,
+    /// with the normal blendmode rendering as a regular stack, so only the space
+    /// image is visible.](blendmode-normal.png)
     ///
     case normal
 
@@ -5013,7 +5015,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-multiply.png)
+    /// ![A screenshot displaying a dark blend between the ocean and space images.](blendmode-multiply.png)
     ///
     case multiply
 
@@ -5048,11 +5050,11 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-screen.png)
+    /// ![A screenshot displaying a light blend between the ocean and space images.](blendmode-screen.png)
     ///
     case screen
 
-    /// The parts were the bottom layer is light become lighter, and dark
+    /// The parts where the bottom layer is light become lighter, and dark
     /// becomes darker.
     ///
     /// Overlay is a combo of ``BlendMode/multiply`` and ``BlendMode/screen``.
@@ -5083,7 +5085,9 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
+    /// ![A screenshot displaying a blend between the ocean and space images
+    /// in which the darks of the ocean appear darker, and the lights of the
+    /// sand and space appear lighter.](blendmode-overlay.png)
     ///
     case overlay
 
@@ -5106,7 +5110,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-darken.png)
+    /// ![A screenshot displaying a dark blend between space and the ocean, taking
+    /// the darker of the top and bottom pixels.](blendmode-darken.png)
     ///
     case darken
 
@@ -5129,7 +5134,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-lighten.png)
+    /// ![A screenshot displaying a light blend between space and the ocean, taking
+    /// the lighter of the top and bottom pixels.](blendmode-lighten.png)
     ///
     case lighten
 
@@ -5161,7 +5167,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-colorDodge.png)
+    /// ![A screenshot displaying a bright blend between space and the ocean.](blendmode-colorDodge.png)
     ///
     case colorDodge
 
@@ -5190,7 +5196,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-colorBurn.png)
+    /// ![A screenshot displaying a very dark blend between space and the ocean,
+    /// in which nearly all pixels which are not very light turn to black.](blendmode-colorBurn.png)
     case colorBurn
 
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
@@ -5222,7 +5229,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
+    /// ![A screenshot displaying a light blend between space and the ocean,
+    /// in which the light colors appear lighter and the dark colors appear slightly darker.](blendmode-overlay.png)
     ///
     case softLight
 
@@ -5248,7 +5256,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-hardLight.png)
+    /// ![A screenshot displaying a blend between space and the ocean that mostly
+    /// appears as space, the bottom layer.](blendmode-hardLight.png)
     ///
     case hardLight
 
@@ -5274,7 +5283,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-difference.png)
+    /// ![A colorful blend between space and the ocean.](blendmode-difference.png)
     ///
     case difference
 
@@ -5300,7 +5309,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-exclusion.png)
+    /// ![A light and colorful blend between space and the ocean.](blendmode-exclusion.png)
     ///
     case exclusion
 
@@ -5323,7 +5332,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-hue.png)
+    /// ![A screenshot displaying a blend between space and the ocean that maintains most features of
+    /// the ocean image, while appearing to take the hue of the space image.](blendmode-hue.png)
     ///
     case hue
 
@@ -5346,7 +5356,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-saturation.png)
+    /// ![A screenshot displaying a blend between the ocean and space that appears
+    /// to keep the brightness and hue of the ocean while taking the saturation of space.](blendmode-saturation.png)
     ///
     case saturation
 
@@ -27866,7 +27877,9 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](tab-view-auto-ex1.png)
+        /// ![A screenshot displaying a single yellow page in tabview that reads
+        /// "Bananas" in the center. No dots appear on the bottom of the page
+        /// since the view modifier hides them when there is only a single page.](tab-view-auto-ex1.png)
         ///
         /// If there are multiple pages, they are shown:
         ///
@@ -27885,7 +27898,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](tab-view-auto-ex2.gif)
+        /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+        /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+        /// the gif flips through each of the three tabs and since there are
+        /// multiple pages, dots are shown at the bottom.](tab-view-auto-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -27912,7 +27928,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](tab-view-auto-ex2.gif)
+        /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+        /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+        /// the gif flips through each of the three tabs and since
+        /// indexDisplayMode is set to always, dots are shown at the bottom.](tab-view-auto-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -27940,7 +27959,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](pg-tab-view-style-ex2.gif)
+        /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+        /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+        /// the gif flips through each of the three tabs and since
+        /// indexDisplayMode is set to never, no dots are shown at the bottom.](pg-tab-view-style-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -27975,7 +27997,10 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](pg-tab-view-style-ex2.gif)
+    /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+    /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+    /// the gif flips through each of the three tabs and since
+    /// indexDisplayMode is set to never, no dots are shown at the bottom.](pg-tab-view-style-ex2.gif)
     ///
     /// - Notes: If you want more control over the look of the dots,
     /// see ``View/indexViewStyle(_:)``.
@@ -31313,7 +31338,8 @@ extension ProgressView {
 /// }
 /// ```
 ///
-///![](progress-view-default-ex.png)
+///![A screenshot of a progress view displaying a circular grey spinner in the
+/// center of the screen.](progress-view-default-ex.png)
 ///
 /// ### Custom Styles
 ///
@@ -31340,7 +31366,8 @@ extension ProgressView {
 ///         }
 ///     }
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.gif)
+/// ![A gif displaying a custom progress view style that renders a grey spinner
+/// with a dark blue progress bar underneath it that shows 50% capacity.](dark-blue-shadowed-progress-view-ex.gif)
 ///
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -31388,7 +31415,8 @@ extension ProgressViewStyle {
     ///         }
     ///     }
     ///
-    /// ![](dark-blue-shadowed-progress-view-ex.gif)
+    /// ![A gif displaying a custom progress view style that renders a grey spinner
+    /// with a dark blue progress bar underneath it that shows 50% capacity.](dark-blue-shadowed-progress-view-ex.gif)
     ///
     /// - Parameter configuration: The properties of the progress view, such as
     ///  its preferred progress type.
@@ -31452,7 +31480,9 @@ extension ProgressViewStyle {
 /// }
 /// ```
 ///
-/// ![](custom-progressview.png)
+/// ![A screenshot of a custom progress view that renders as an orange semicircle
+/// occupying the right hand side of the screen with two text views at its center,
+/// reading "Progress is happening!" and "50% done".](custom-progressview.png)
 ///
 /// You can also just pass this property wholesale to ``ProgressView``'s
 /// ``ProgressView/init(_:)-1a15a``:
@@ -31477,7 +31507,8 @@ extension ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![](dark-blue-shadowed-progress-view-ex.gif)
+/// ![A gif displaying a custom progress view style that renders a grey spinner
+/// with a dark blue progress bar underneath it that shows 50% capacity.](dark-blue-shadowed-progress-view-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ProgressViewStyleConfiguration {
@@ -31538,7 +31569,8 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](progressviestyle-fractioncompleted.png)
+    /// ![A screenshot of a custom progress view that renders as an orange semicircle
+    /// occupying the right hand side of the screen.](progressviestyle-fractioncompleted.png)
     ///
     public let fractionCompleted: Double?
 
@@ -31633,7 +31665,9 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](custom-progressview.png)
+    /// ![A screenshot of a custom progress view that renders as an orange semicircle
+    /// occupying the right hand side of the screen with two text views at its center,
+    /// reading "Progress is happening!" and "50% done".](custom-progressview.png)
     ///
     public var currentValueLabel: ProgressViewStyleConfiguration.CurrentValueLabel?
 }
@@ -36105,7 +36139,8 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](show-indicators-ex.gif)
+    /// ![A gif that scrolls through a series of text views of fruits in a VStack
+    /// with no indicators visible, as showsIndicators is set to false.](show-indicators-ex.gif)
     ///
     public var showsIndicators: Bool
 
@@ -45922,7 +45957,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](allow-hit-testing-ex.png)
+    /// ![A screenshot with a button in the center of the screen that reads
+    /// "Can't touch this" to denote that the button is not clickable given
+    /// that user interaction was disabled by the view modifier.](allow-hit-testing-ex.png)
     ///
     /// - Parameter enabled: A boolean for whether the view allows user interaction.
     @inlinable public func allowsHitTesting(_ enabled: Bool) -> some View { }
@@ -45950,7 +45987,10 @@ extension View {
     ///
     /// Whenever a view is rendered, even a previously rendered child view, `onAppear` will run. For example:
     ///
-    /// ![On Appear Again](on-appear.gif)
+    /// ![A gif with a toggle in the center of the screen with text above it that
+    /// reads "We've created: _# bananas." Each time the toggle is clicked, a
+    /// banana emoji appears below it and the number in the above text increases by
+    /// one, since the action passed to onAppear is to increment banana count.](on-appear.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -45998,7 +46038,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](view-on-dissapear-perform-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "DO IT",
+    /// with text underneath it in a VStack that reads "When I disappear, this
+    /// finger emoji will become a banana." When pressed, the view disappears
+    /// to reveal a banana emoji.](view-on-dissapear-perform-ex.gif)
     ///
     /// - Parameter action: The action to perform. If `action` is `nil`, the
     ///   call has no effect.
@@ -46062,7 +46105,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](context-menu-card-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Press and
+    /// hold for cards." When held, the view modifier renders a context menu with four items,
+    /// each reading a different suit in a standard deck of cards.](context-menu-card-ex.gif)
     ///
     /// - Parameter menuItems: A ``contextMenu`` that contains one or more menu items.
     /// - Returns: A view that adds a contextual menu to this view.
@@ -46117,7 +46162,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](context-menu-card-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Press and
+    /// hold for cards." When held, the view modifier renders a context menu with four items,
+    /// each reading a different suit in a standard deck of cards.](context-menu-card-ex.gif)
     ///
     /// - Parameter contextMenu: A context menu container for views that you
     ///   present as menu items in a contextual menu.
@@ -46150,7 +46197,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](menustyle-modifier.png)
+    /// ![A screenshot with a button in the center of the screen that reads "PDF,"
+    /// which holds down to reveal a menu with two options: Save as PDF or Open
+    /// in Preview which are displayed in a borderless box as rendered by
+    /// passing BorderlessButtonMenuStyle to the modifier.](menustyle-modifier.png)
     ///
     /// Existing menu styles include:
     /// - ``DefaultMenuStyle``
@@ -46189,7 +46239,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](view-menu-style-pdf-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "PDF" surrounded
+    /// by a rectangular red border, which holds down to reveal a menu with two
+    /// options: Save as PDF or Open in Preview which are displayed in a borderless
+    /// box as rendered by passing BorderlessButtonMenuStyle to the modifier.](view-menu-style-pdf-ex.gif)
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
@@ -46230,7 +46283,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](gesture-including-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Double tap me"
+    /// followed by a 2 emoji. When double tapped, the gesture view modifier adds
+    /// another 2 emoji to the end of the string.](gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -46277,7 +46332,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](high-priority-gesture-including-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Double tap me"
+    /// followed by a 2 emoji. When double tapped, the gesture view modifier would
+    /// like to add a 2 emoji to the end of the string, but the highPriorityGesture
+    /// modifier makes it so that a 1 emoji is added with each single tap. Due to its
+    /// priority, the 1 emoji will be added with each single tap and no 2 emoji is added.](high-priority-gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -46320,7 +46379,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](simultaneous-gesture-including-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Double tap me"
+    /// followed by a 2 emoji. When double tapped, the gesture view modifier would
+    /// like to add a 2 emoji to the end of the string. Since it is used in conjunction
+    /// with the simultaneousGesture modifier, both the 1 and 2 emojis are added
+    /// simultaneously. So, with each double tap, two 1 emojis are added, as well as one 2 emoji.](simultaneous-gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -46380,6 +46443,12 @@ extension View {
     /// }
     ///
     /// ```
+    ///
+    /// ![A gif with a button in the center of the screen that reads "Import Files."
+    /// When clicked, it shows the fileImporter which appears as a popup with the
+    /// header "Recents" and an option to Cancel. The bottom of the screen gives
+    /// the user the option to select Recents or "Browse," which in turn prompts
+    /// a sign in to iCloud.](film-importer-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the interface should be shown.
@@ -46443,7 +46512,11 @@ extension View {
     ///
     /// ```
     ///
-    /// ![](film-importer-is-presented-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Import Files."
+    /// When clicked, it shows the fileImporter which appears as a popup with the
+    /// header "Recents" and an option to Cancel. The bottom of the screen gives
+    /// the user the option to select Recents or "Browse," which in turn prompts
+    /// a sign in to iCloud.](film-importer-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the interface should be shown.
@@ -46527,7 +46600,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](redacted-1.png)
+    /// ![A screenshot with two labels in the center of the screen; the first
+    /// reads "Taylor Swift" with a person icon to the left of it, while the second
+    /// below it is redacted and replaced by a grey box and a grey rectangle.](redacted-1.png)
     ///
     /// Your child view can also read the redacted reason from its environment:
     ///
@@ -46557,7 +46632,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](redacted-2.png)
+    /// ![A screenshot with text in the center of the screen that reads
+    /// "There is nothing down there" to demonstrate that the redacted code produces
+    /// nothing in this case.](redacted-2.png)
     ///
     /// - Parameter reason: The reason for redacting the content.
     public func redacted(reason: RedactionReasons) -> some View { }
@@ -46585,7 +46662,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](unredacted.png)
+    /// ![A screenshot with text in the center of the screen that reads
+    /// "You can't redact me" to demonstrate how the view modifier removes
+    /// redaction reasons for the ChildView and unredacts its text.](unredacted.png)
     ///
     public func unredacted() -> some View { }
 
@@ -46643,7 +46722,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](overlay.png)
+    /// ![A screenshot with text across the center that reads "I'm covered by
+    /// clouds," which is obscured by cloud emojis rendered by the overlay view modifier.
+    /// The alignment of the text defaults to center.](overlay.png)
     ///
     /// Check out ``View/background(_:alignment:)``, which is the opposite
     /// modifier.
@@ -46669,7 +46750,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](border-1.png)
+    /// ![A screenshot with text in the center fit directly into a purple
+    /// rectangular border which reads "Purple border inside the view bounds,"
+    /// demonstrating that the border is rendered inside the view bounds by default.](border-1.png)
     ///
     /// To place a border around the outside of this view, apply padding of the
     /// same width before adding the border:
@@ -46684,7 +46767,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](border-2.png)
+    /// ![A screenshot with text in the center fit with minor empty space into a purple
+    /// rectangular border which reads "Purple border outside the view bounds,"
+    /// demonstrating that the border is rendered outside the view bounds
+    /// when padding is added that matches the width of the border itself.](border-2.png)
     ///
     /// A border doesn't have to be a plain color - it can be any ``ShapeStyle``, for example,
     /// a ``LinearGradient``:
@@ -46738,7 +46824,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](aspectratio-2.png)
+    /// ![A screenshot with a grey square border in the center of the screen,
+    /// and a purple filled ellipse within it. The ellipse has a 3:4 aspect ratio,
+    /// which makes it so that its width is 3/4 of its height, and the height
+    /// scales to fit the frame of the square.](aspectratio-2.png)
     ///
     /// - Parameters:
     ///   - aspectRatio: The ratio of width to height to use for the resulting
@@ -46773,7 +46862,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](aspectratio-1.png)
+    /// ![A screenshot with a grey square border in the center of the screen,
+    /// and a purple filled ellipse within it, extending both above and below it.
+    /// The ellipse has a 3:4 aspect ratio, which makes it so that its width is
+    /// 3/4 of its height, and the width scales to fit the frame of the square.](aspectratio-1.png)
     ///
     /// - Parameters:
     ///   - aspectRatio: A size that specifies the ratio of width to height to
@@ -46803,7 +46895,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaledtofit.png)
+    /// ![A screenshot with a grey rectangular border in the center of the screen,
+    /// with a pink filled circle set within it, which is rendered by the view
+    /// modifier to fit directly within the height confines of the rectangle.](scaledtofit.png)
     ///
     /// This method is equivalent to calling
     /// ``View/aspectRatio(_:contentMode:)-6576a`` with a `nil` aspectRatio and
@@ -46831,7 +46925,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaledtofill.png)
+    /// ![A screenshot with a grey rectangular border in the center of the screen,
+    /// with a pink filled circle set within it, which is rendered by the view
+    /// modifier to fill the rectangle along its width, extending both above and below
+    /// the height confines.](scaledtofill.png)
     ///
     /// This method is equivalent to calling
     /// ``View/aspectRatio(_:contentMode:)-6576a`` with a `nil` aspectRatio and
@@ -46866,7 +46963,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](fixedsize-2.png)
+    /// ![A screenshot with a square frame in the center and text that reads
+    /// "A single line of text, too long to fit in a box." The text extends outside
+    /// the confines of the box on either side, as rendered by fixing the horizontal
+    /// dimension so that its ideal width is maintained.](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -46901,7 +47001,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](fixedsize-1.png)
+    /// ![A screenshot with a square frame in the center, with text fit within it
+    /// on two lines that reads "A single line of text, too long to fit in a box."
+    /// Without the fixedSize modifier, the text adjusts to fit.](fixedsize-1.png)
     ///
     /// The `fixedSize()` modifier can be used to create a view that maintains
     /// the *ideal size* of its children both dimensions:
@@ -46917,7 +47019,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](fixedsize-2.png)
+    /// ![A screenshot with a square frame in the center and text that reads
+    /// "A single line of text, too long to fit in a box." The text extends outside
+    /// the confines of the box on either side, as rendered by fixing the horizontal
+    /// dimension so that its ideal width is maintained.](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -47184,7 +47289,9 @@ extension View {
     ///     }
     /// }
     /// ```
-    /// ![](offset-2.png)
+    /// ![A screenshot with a grey rectangular frame in the center of the screen,
+    /// underneath which the actual text is offset below and to the right by CGSize
+    /// and confined within a green rectangle.](offset-2.png)
     ///
     /// - Parameter offset: The distance to offset this view.
     ///
@@ -47342,7 +47449,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](position-2.png)
+    /// ![A screenshot with text near the top of the screen that reads
+    /// "Position by passing a CGPoint()" which is rendered at the new center
+    /// of the view using the position modifier.](position-2.png)
     ///
     /// - Parameter position: The point at which to place the center of this
     ///   view.
@@ -47367,7 +47476,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](position.png)
+    /// ![A screenshot with text near the top of the screen that reads
+    /// "Position by passing the x and y coordinates" which is rendered at the new center
+    /// of the view using the position modifier.](position.png)
     ///
     /// - Parameters:
     ///   - x: The x-coordinate at which to place the center of this view.
@@ -47405,7 +47516,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](ignoressafearea.png)
+    /// ![A screenshot with a fully pink background that extends outside the
+    /// safe area as rendered by the view modifier. The text in the center
+    /// reads "I am everywhere" to demonstrate that the pink extends to every
+    /// part of the screen.](ignoressafearea.png)
     ///
     /// Depending on the surrounding view hierarchy, SwiftUI may not honor an
     /// `edgesIgnoringSafeArea(_:)` request. This can happen, for example, if
@@ -47455,7 +47569,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](ignoressafearea.png)
+    /// ![A screenshot with a fully pink background that extends outside the
+    /// safe area as rendered by the view modifier. The text in the center
+    /// reads "I am everywhere" to demonstrate that the pink extends to every
+    /// part of the screen.](ignoressafearea.png)
     ///
     /// - Parameters:
     ///   - regions: the kinds of rectangles removed from the safe area
@@ -47586,7 +47703,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](zindex.png)
+    /// ![A screenshot with two rectangles in a VStack, the top one yellow and
+    /// the bottom orange. The orange rectangle is rotated 45 degrees such that
+    /// it overlaps with the yellow rectangle above it. However, since the value
+    /// 1 is passed to the zIndex view modifier for the yellow rectangle, it
+    /// has priority in the order and is thus the top layer.](zindex.png)
     ///
     /// - Parameter value: A relative front-to-back ordering for this view; the
     ///   default is `0`.
@@ -47617,7 +47738,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](transformeffect.png)
+    /// ![A screenshot displaying a rectangular border in the center of the
+    /// screen, with text that reads "Projection effects using transforms"
+    /// extending at a 30 degree angle from its left side towards the top of
+    /// the screen.](transformeffect.png)
     ///
     /// - Parameter transform: A
     /// [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
@@ -47664,7 +47788,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](action-sheet-item-ex.gif)
+    /// ![A gif with a VStack in the center of the screen with two button options:
+    /// Eat a banana or Eat a peach. When tapped, each prompts the same food alert
+    /// that pops up from the bottom of the screen. The alerts are rendered uniquely
+    /// by passing the item a binding value for whichever selection the user makes.](action-sheet-item-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the action
@@ -47702,7 +47829,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](action-sheet-is-presented-ex.gif)
+    /// ![A gif with a single button in the center of the screen that reads "Eat"
+    /// followed by a banana emoji. When pressed, the button prompts an action sheet
+    /// from the bottom of the screen asking the user to confirm or cancel. This
+    /// is accomplished by setting the showActionSheet value to true whenever
+    /// the button is interacted with.](action-sheet-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the action sheet should be
@@ -47757,7 +47888,13 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](accentcolor.png)
+    /// ![A screenshot with two buttons and a slider contained within a VStack.
+    /// The first button reads "Regular Button" in blue text, while the second
+    /// reads "Accented Button" in purple text. The slider is also purple. In this
+    /// case, there are two VStacks set within the outer VStack, the second of which
+    /// contains the accented button and the slider. The accentColor view modifier is
+    /// applied to the second VStack, changing the colors of the second two items to
+    /// be purple.](accentcolor.png)
     ///
     /// Another common use of `accentColor(_:)` by mixing it with
     /// The ``Color`` property
@@ -47774,11 +47911,15 @@ extension View {
     ///
     /// In light mode, this produces:
     ///
-    /// ![Light Primary](color-primary-light.png)
+    /// ![A screenshot in light mode with text in the center that reads "Bananas"
+    /// in black text. Passing .primary to the accentColor modifier makes it so
+    /// that in light mode the text is black and thus visible.](color-primary-light.png)
     ///
     /// And in dark mode:
     ///
-    /// ![Dark Primary](color-primary-dark.png)
+    /// ![A screenshot in dark mode with text in the center that reads "Bananas"
+    /// in white text. Passing .primary to the accentColor modifier makes it so
+    /// that in dark mode the text is white and thus visible.](color-primary-dark.png)
     ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
@@ -47808,7 +47949,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Disabled Example](disabled-example.gif)
+    /// ![A gif with a toggle in the center of the screen that reads "Disable
+    /// the Banana," set in a VStack with a "Banana" button underneath it. When
+    /// toggled to on, the Banana button disables and fades to grey.](disabled-example.gif)
     ///
     /// Another example:
     ///
@@ -47821,7 +47964,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](disabled.png)
+    /// ![A screenshot with a button in the center of the screen that reads
+    /// "Can't touch this" in light grey text to denote that the button is not clickable given
+    /// that user interaction was disabled by the view modifier.](disabled.png)
     ///
     /// - Parameter disabled: A Boolean value that determines whether users can
     ///   interact with this view.
@@ -47883,7 +48028,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaleeffect-3.png)
+    /// ![A screenshot with a grey rectangular frame in the center of the screen
+    /// and a red envelope icon set within it. The icon is anchored on the leading
+    /// edge so it pushes up against the left hand side, but its width and height scales
+    /// are set to 0.9 and 1.3, respectively, so it doesn't fill out the whole width
+    /// of the frame, but it extends both above and below its height.](scaleeffect-3.png)
     ///
     /// - Parameters:
     ///   - scale: A [`CGSize`](https://developer.apple.com/documentation/CoreGraphics/CGSize) that
@@ -47913,7 +48062,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaleeffect-2.png)
+    /// ![A screenshot with a grey rectangular frame in the center of the screen
+    /// and a red envelope icon set over it. The icon is anchored on the leading
+    /// edge so it pushes up against the left hand side, but its width and height are
+    /// scaled by 2, so it extends from the left beyond the confines of the right
+    /// side of the border as well as above and below it.](scaleeffect-2.png)
     ///
     /// - Parameters:
     ///   - s: The amount to scale the view in the view in both the horizontal
@@ -47942,7 +48095,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaleeffect.png)
+    /// ![A screenshot displaying a grey rectangular frame in the center of the screen
+    /// and a red envelope icon set within it in the bottom right hand corner.
+    /// The icon is anchored on the trailing bottom edge, but both it's vertical and
+    /// horizontal dimensions are scaled down half. The scaleEffect view modifier
+    /// renders the icon as taking up a quarter of its original frame.](scaleeffect.png)
     ///
     /// - Parameters:
     ///   - x: An amount that represents the horizontal amount to scale the
@@ -47978,7 +48135,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](blur.png)
+    /// ![A screenshot that displays two text views in a VStack; the first
+    /// reads "This is some text" in normal black font, while the second uses the
+    /// blur modifier and reads "This is some blurry text" in blurry, less
+    /// readable font.](blur.png)
     ///
     /// - Parameters:
     ///   - radius: The radial size of the blur. A blur is more diffuse when its
@@ -47993,11 +48153,11 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Brightenen the view by the specified amount.
+    /// Brighten the view by the specified amount.
     ///
     /// Use `brightness(_:)` to brighten the intensity of the colors in a view.
-    /// The example below shows a series of red squares, with their brightness
-    /// increasing from 0 (fully red) to 100% (white) in 20% increments.
+    /// The example below shows a series of yellow squares, with their brightness
+    /// increasing from 0 (fully yellow) to 100% (white) in 20% increments.
     ///
     /// ```
     /// struct ContentView: View {
@@ -48012,8 +48172,10 @@ extension View {
     ///     }
     /// }
     /// ```
-    //
-    /// ![](brightness.png)
+    ///
+    /// ![A screenshot displaying a series of six rectangles arranged in a
+    /// VStack with increasing brightness from top to bottom in 20% increments.
+    /// The colors change from pure yellow on top to white on bottom.](brightness.png)
     ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
@@ -48068,7 +48230,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](color-invert.png)
+    /// ![A screenshot displaying two squares in an HStack, each with an interior
+    /// circle. The first is a red square with a green circle which reads
+    /// "Normal," while the second is an inverted version of the first. It swaps
+    /// the red and green for their complementary colors, teal and purple, using
+    /// the colorInvert view modifier. It's text reads "Inverted."](color-invert.png)
     ///
     /// - Returns: A view that inverts its colors.
     @inlinable public func colorInvert() -> some View { }
@@ -48116,7 +48282,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](color-multiply.png)
+    /// ![A screenshot displaying two squares in an HStack, each with an interior
+    /// circle. The first is a red square with a green circle which reads
+    /// "Normal," while the second is a duplicate with the colorMultiply modifier
+    /// applied with purple. The result is a darker red square and a grey circle.
+    /// It's text reads "Multiply."](color-multiply.png)
     ///
     /// - Parameter color: The color to bias this view toward.
     ///
@@ -48167,7 +48337,13 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](contrast.png)
+    /// ![A screenshot displaying a VStack of seven identical red squares, each
+    /// containing a contrasting green circle. For each square, the contrast
+    /// modifier is used to change the contrast of the circle/square view in
+    /// 20% increments, ranging from -20% contrast to 100%. At -20%, the shape
+    /// appears as a blue square with a purple circle, and at 100% the colors
+    /// are normal red and green as they were initialized. From 0 to 20%, the
+    /// red and green colors brighten to reveal increasing contrast.](contrast.png)
     ///
     /// - Parameter amount: The intensity of color contrast to apply. negative
     ///   values invert colors in addition to applying contrast.
@@ -48198,7 +48374,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](grayscale.png)
+    /// ![A screenshot displaying six rectangles in a VStack, with increasing
+    /// grayscale amounts from top to bottom. The first rectangle appears fully
+    /// yellow, and the color is gradually reduced in intensity until it appears
+    /// as fully grey in the bottom rectangle.](grayscale.png)
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -48231,7 +48410,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](huerotation.png)
+    /// ![A screenshot displaying six rectangles in a VStack, beginning with a
+    /// fully yellow filled rectangle, and applying the hueRotation view modifier to rotate
+    /// the hue with each succeeding rectangle. The colors shift from yellow to
+    /// green to blue from top to bottom.](huerotation.png)
     ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
@@ -48272,7 +48454,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](preferredcolorscheme.png)
+    /// ![A screenshot displaying a button and a slider arranged in a VStack,
+    /// which applies the preferredColorScheme view modifier using dark, making it
+    /// such that the color scheme for the whole view appears in dark mode.](preferredcolorscheme.png)
     ///
     /// - Parameter colorScheme: The color scheme for this view.
     ///
@@ -48287,12 +48471,12 @@ extension View {
     /// A view modifier that adds a luminance to alpha effect to this view.
     ///
     /// The `luminanceToAlpha()` modifier creates a semitransparent mask out of
-    /// the view to which you you apply. The dark regions in a view become
+    /// the view to which you apply it. The dark regions in a view become
     /// transparent, and the bright regions become opaque black. Medium
     /// brightness regions become a partially opaque gray color.
     ///
     /// The example below shows two views: the first is a red square with an
-    /// overlaid green circle; the second is a copy of the first view with where
+    /// overlaid green circle; the second is a copy of the first view where
     /// the `luminanceToAlpha()` modifier's masking operation transforms the
     /// view's brightness levels into an equivalent grayscale version of the
     /// first view:
@@ -48319,7 +48503,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](luminancetoalpha.png)
+    /// ![A screenshot displaying two squares with overlaid circles in an HStack;
+    /// The first is a red square with a green circle, while the second is a copy
+    /// of the first where the luminanceToAlpha view modifier transforms the
+    /// brightness levels such that it appears as an equivalent grayscale version,
+    /// with a darker gray circle set within a lighten gray square.](luminancetoalpha.png)
     ///
     /// - Returns: A view that applies a luminance to alpha effect to this view.
     @inlinable public func luminanceToAlpha() -> some View { }
@@ -48348,7 +48536,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](saturation-modifier.png)
+    /// ![A screenshot displaying six rounded rectangles in a VStack, with
+    /// increasing levels of saturation applied from top to bottom. At full
+    /// saturation, the yellow fill is fully visible, whereas the yello rectangle
+    /// appears grey at its least saturated in the top rectangle.](saturation-modifier.png)
     ///
     /// See related symbol ``View/contrast(_:)``.
     ///
@@ -48396,7 +48587,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Slide transition](with-animation-2.gif)
+    /// ![A gif displaying a "Toggle" button in blue that slides a banana into
+    /// the view when clicked using the transition view modifier. When the
+    /// button is clicked again, the banana slides out of view with the same animation.](with-animation-2.gif)
     ///
     /// ### Using ``withAnimation(_:_:)``
     ///
@@ -48420,7 +48613,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Slide transition](with-animation-2.gif)
+    /// ![A gif displaying a "Toggle" button in blue that slides a banana into
+    /// the view when clicked using the transition view modifier. When the
+    /// button is clicked again, the banana slides out of view with the same animation.
+    /// In this case, withAnimation is used rather than the animation view modifier.](with-animation-2.gif)
     @inlinable public func transition(_ t: AnyTransition) -> some View { }
 
 }
@@ -48451,7 +48647,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](opacity-modifier.png)
+    /// ![A screenshot displaying six rounded rectangles in a VStack, with
+    /// increasing levels of opacity from top to bottom. At the top, the yellow
+    /// rectangle is fully transparent, as opacity is set to 0, whereas at the
+    /// bottom the rectangle has opacity set to 1, making it fully yellow.](opacity-modifier.png)
     ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
@@ -48490,6 +48689,12 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![A gif displaying two buttons in a VStack, followed by a banana emoji.
+    /// The user has the option to Move the banana or Transport the banana, each
+    /// prompting a different animation; when the move banana button is clicked,
+    /// the banana slides to its offset, whereas transport moves the banana
+    /// without animation.](animation_val.gif)
     ///
     /// - Parameters:
     ///   - animation: The animation to apply. If ``animation`` is `nil`, the view
@@ -48560,9 +48765,9 @@ extension View {
     /// Test `blendMode(_:)` with images. To use the following example, drag in
     /// the following two photos and label them "ocean" and "space".
     ///
-    /// ![New York](ocean.jpg)
+    /// ![An image of the ocean](ocean.jpg)
     ///
-    /// ![Space](space.jpg)
+    /// ![An image of space](space.jpg)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -48635,7 +48840,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modiier that composites this view's contents into an offscreen image before final
+    /// A view modifier that composites this view's contents into an offscreen image before final
     /// display.
     ///
     /// The `drawingGroup(opaque:colorMode:)` modifier flattens a subtree of
@@ -48666,7 +48871,10 @@ extension View {
     /// }
     ///  ```
     ///
-    /// ![](drawinggroup.png)
+    /// ![A screenshot displaying a single view with a red rectangle in the center
+    /// of the screen that reads "DrawingGroup" in vaguely blurry black text. The
+    /// drawingGroup modifier renders the two separate views in the ZStack as one view,
+    /// lending a shadow to the text owed to the second view using the blur modifier.](drawinggroup.png)
     ///
     /// - Note: Views backed by native platform views may not render into the
     ///   image. Instead, they log a warning and display a placeholder image to
@@ -48724,7 +48932,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](compositinggroup.png)
+    /// ![A screenshot with a red rectangle in the center of the screen and
+    /// slightly blurred black text that reads "CompositingGroup."](compositinggroup.png)
     ///
     /// - Returns: A view that wraps this view in a compositing group.
     @inlinable public func compositingGroup() -> some View { }
@@ -48769,7 +48978,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](previewdevice.png)
+    /// ![An image of a preview on an iPhone SE as specified by the previewDevice
+    /// view modifier with text that reads "Preview on iPhone SE."](previewdevice.png)
     ///
     ///- Parameter value: The device to display the preview on.
     @inlinable public func previewDevice(_ value: PreviewDevice?) -> some View { }
@@ -48797,7 +49007,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](previewlayout-sizethatfits.png)
+    /// ![An image of a preview in Xcode in which the preview box fits directly
+    /// around text which reads "This box fits me snugly." Using the previewLayout
+    /// view modifier, the preview renders a direct fit by passing .sizeThatFits
+    /// to the modifier.](previewlayout-sizethatfits.png)
     ///
     /// The default value is ``PreviewLayout/device``.
     @inlinable public func previewLayout(_ value: PreviewLayout) -> some View { }
@@ -48824,7 +49037,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](previewdisplayname.png)
+    /// ![An image of a preview in Xcode in which the name at the top of the
+    /// preview is switched from its default value of "Preview" to instead be
+    /// a banana emoji. Text within the preview itself reads "My name is"
+    /// followed by a banana emoji.](previewdisplayname.png)
     ///
     /// The default value is `nil`.
     ///
@@ -48857,7 +49073,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](widgetpreviewcontext.png)
+    /// ![An image of a preview in Xcode that shows a widget in which the time
+    /// reads "4:11 PM." By passing systemSmall to the WidgetPreviewContext,
+    /// the widget shows up smaller in preview.](widgetpreviewcontext.png)
     ///
     /// For more on getting started with widgets, check out
     /// [this tutorial](https://www.raywenderlich.com/11303363-getting-started-with-widgets).
@@ -48919,7 +49137,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](anchorpreference.png)
+    /// ![A screenshot displaying a black rectangular border in the center of
+    /// the screen with text reading "I have a box around me."](anchorpreference.png)
 	///
 	/// - Parameters:
 	///   - key: The key type of the preference key.
@@ -48955,7 +49174,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](clipshape.png)
+    /// ![A screenshot displaying a black circle in the center of the screen
+    /// which reads "pped text in a c," showing only a portion of the original
+    /// text which reads "Clipped text in a circle." The clipShape view modifier
+    /// cuts of the text on either side by enclosing it in the circle.](clipshape.png)
     ///
     /// The resulting view shows only the portion of the text that lies within
     /// the bounds of the circle.
@@ -48990,7 +49212,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](clipped-modifier.png)
+    /// ![A screenshot displaying a rectangular frame in the center of the
+    /// screen which reads "s long text string is clip," showing only a portion
+    /// of the original text which reads "This long text string is clipped."
+    /// Using the clipped view modifier makes it so that the text outside of
+    /// the frame gets cut off.](clipped-modifier.png)
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -49022,7 +49248,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](cornerradius-modifier.png)
+    /// ![A screenshot displaying a black rectangle with rounded corners that
+    /// reads "Rounded Corners" in white text. The text view is modified by
+    /// cornerRadius which makes it so that its frame has rounded corners.](cornerradius-modifier.png)
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -49054,7 +49282,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-1.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a light grey shadow surrounding it, as rendered by the shadow view
+    /// modifier with only the radius specified.](shadow-1.png)
     ///
     /// Modify the color:
     ///
@@ -49069,7 +49299,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-2.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a red shadow surrounding it, as rendered by the shadow view
+    /// modifier with both the radius and color specified.](shadow-2.png)
     ///
     /// Modify the x offset:
     ///
@@ -49084,7 +49316,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-3.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a red shadow offset to the right hand side, as rendered by the shadow view
+    /// modifier with radius, color, and x offset specified.](shadow-3.png)
     ///
     /// Modify the x & y offset:
     ///
@@ -49099,7 +49333,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-4.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a red shadow offset to its lower right hand side, as rendered by the shadow view
+    /// modifier with radius, color, x, and y offset specified.](shadow-4.png)
     ///
     /// - Parameters:
     ///   - color: The shadow's color.
@@ -49142,7 +49378,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](togglestyle-modifier.png)
+    /// ![A screenshot displaying two toggles in a VStack, with the toggleStyle
+    /// view modifier applied to the VStack itself, making it so that both items
+    /// the container have a SwitchToggleStyle. The top toggle reads "Vibrate
+    /// on Ring" and the bottom reads "Vibrate on Silent." Both toggles are
+    /// switched to "on," with their sliders switched to the right side.](togglestyle-modifier.png)
     ///
     /// - Parameter style: The style to set.
     public func toggleStyle<S>(_ style: S) -> some View where S : ToggleStyle { }
@@ -49199,7 +49439,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](image-scale.png)
+    /// ![A screenshot displaying three heart icons in a VStack, each with a label
+    /// to its right hand side to specify the scale used. From top to bottom, the
+    /// icons apply the imageScale modifier as small, medium, and large,
+    /// respectively.](image-scale.png)
     ///
     /// - Parameter scale: One of the relative sizes provided by the image scale
     ///   enumeration.
@@ -49240,7 +49483,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](font-modifier.png)
+    /// ![A screenshot displaying three text views arranged in a VStack; the
+    /// first directly applies large title font using the font view modifier,
+    /// which overrides the smaller default 16 pt font used for the succeeding
+    /// two lines.](font-modifier.png)
     ///
     /// - Parameter font: The default font to use in this view.
     ///
@@ -49338,7 +49584,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](frame.png)
+    /// ![A screenshot displaying a single text view which reads "My frame
+    /// is unaffected," demonstrating that the frame modifier has no effect on
+    /// the text view's display.](frame.png)
     @available(*, deprecated, message: "Please pass one or more parameters.")
     @inlinable public func frame() -> some View { }
 
@@ -49389,12 +49637,14 @@ extension View {
     ///                        minHeight: 50.0, idealHeight: 100.0, maxHeight: 200.0)
     ///         }
     ///         .frame(width: 150.0, height: 150.0)
-    ///         .border(Color.oragne)
+    ///         .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](frame-custom.png)
+    /// ![A screenshot displaying an orange frame surrounding a black rectangle
+    /// in the center of the screen. There is empty space between the rectangle
+    /// and the frame on either side.](frame-custom.png)
     ///
     /// - Parameters:
     ///   - minWidth: The minimum width of the resulting frame.
@@ -49538,7 +49788,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](popover-item-ex.gif)
+    /// ![A gif displaying two buttons in a VStack that each read "Popover,"
+    /// paired with a banana and peach emoji, respectively. When clicked, each
+    /// prompts a popover which is applied to the VStack, distinguished by
+    /// a binding passed to the popover. The popover displays two emojis of the
+    /// selected fruit and an option to "Tap to dismiss" below.](popover-item-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the popover.
@@ -49590,7 +49844,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](popover-is-presented-ex.gif)
+    /// ![A gif with a single button in the center which reads "Open sesame,"
+    /// which prompts a popover when clicked with a button to Close. When the
+    /// initial button is pressed, it toggles the value of showPopover to trigger
+    /// the modifier.](popover-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the popover is presented.
@@ -49641,7 +49898,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Custom Label Style](custom-labelstyle-comparison.png)
+    /// ![A screenshot displaying two labels in a VStack with a custom label
+    /// style applied. The labels read Banana and Apple and each has a heart
+    /// icon beneath it, the color of which is dictated by the custom label style.](custom-labelstyle-comparison.png)
     ///
     /// This modifier also accepts the default label styles that ship with
     /// SwiftUI:
@@ -49662,7 +49921,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Default Label Styles](default-labelstyle-comparison.png)
+    /// ![A screenshot displaying three labels reading "Banana" in a VStack with default label
+    /// styles applied. The first uses DefaultLabelStyle which pairs a black
+    /// heart icon to the left of the text, while the second uses IconOnlyLabelStyle
+    /// which shows only the heart, and the third uses TitleOnlyLabelStyle,
+    /// showing the text by itself.](default-labelstyle-comparison.png)
     ///
     /// - Note: Creating label styles can be complex. See ``LabelStyle``
     /// for more.
@@ -49698,7 +49961,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](on-hover-perform-ex.gif)
+    /// ![A gif displaying a text view that reads "Come here," which, when
+    /// hovered over with the cursor, changes to read "HOVERING." The onHover
+    /// view modifier determines when the user hovers and switches the text.](on-hover-perform-ex.gif)
     ///
     /// - Parameter action: The action to perform whenever the pointer enters or
     ///   exits this view's frame. If the pointer is in the view's frame, the
@@ -49748,7 +50013,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](hidden.png)
+    /// ![A screenshot displaying two text views, with the second hidden by the
+    /// hidden view modifier. Thus, the screenshot only reads "The invisible
+    /// man hides below," with no other text view visible.](hidden.png)
     ///
     /// - Returns: A hidden view.
     @inlinable public func hidden() -> some View { }
@@ -49779,7 +50046,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](keyboardtype.png)
+    /// ![A screenshot displaying a keyboard and an incomplete email that reads
+    /// "someone@example.c" Here, the keyboardType modifier is applied to the
+    /// TextField to specify emailAddress as the acceptable type.](keyboardtype.png)
     ///
     /// There are several different kinds of specialized keyboard types
     /// available though the
@@ -49817,7 +50086,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](auto-cap-ex.gif)
+    /// ![A gif displaying a text field in which the user types "Blossoms, Peach"
+    /// and the autocapitalization view modifier renders each words with a capital
+    /// letter as it is typed.](auto-cap-ex.gif)
     ///
     /// The
     /// [`UITextAutocapitalizationType`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
@@ -49988,7 +50259,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](flipsforrighttoleftlayoutdirection.png)
+    /// ![A screenshot displaying a text view in the center of the screen which
+    /// reads the Hebrew word "שָׁלוֹם," where the flipsForRightToLeftLayoutDirection
+    /// view modifier is applied to accomodate the language's reading from right
+    /// to left.](flipsforrighttoleftlayoutdirection.png)
     ///
     /// - Parameter enabled: A Boolean value that indicates whether this view
     ///   flips its content horizontally when the layout direction is
@@ -50026,7 +50300,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](textcontenttype.png)
+    /// ![A screenshot displaying a keyboard on the lower half of the screen
+    /// and a text field above which reads "billjames2@icloud.com" Since the
+    /// textContentType is set to emailAddress, the keyboard suggest "com" as
+    /// the last part of the email.](textcontenttype.png)
     ///
     /// - Parameter textContentType: One of the content types available in the
     ///   `UITextContentType` enumeration that identify the semantic meaning
@@ -50074,7 +50351,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](labelshidden.png)
+    /// ![A screenshot displaying two toggles in a VStack, where the first applies
+    /// the labelsHidden view modifier and the second does not. The result is a
+    /// lone toggle on top with no associated label, and a separate toggle below
+    /// with a label that reads "I am not."](labelshidden.png)
     ///
     /// - Note: This modifier does not work for all labels. It applies to
     ///   labels that are external/separate from the rest of the control's
@@ -50125,7 +50405,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](key-board-short-cut-modifiers.gif)
+    /// ![A gif displaying a button that reads "Click or press command+ctrl+P
+    /// to print" followed by a banana emoji. Each time the user clicks the button or
+    /// uses the defined shortcut, a new banana emoji appears above the button as
+    /// rendered by the keyboardShortcut view modifier applied to the button.](key-board-short-cut-modifiers.gif)
     ///
     /// - Parameters:
     ///   - key: A key of type ``KeyEquivalent``.
@@ -50170,7 +50453,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](key-board-short-cut-modifiers.gif)
+    /// ![A gif displaying a button that reads "Click or press command+ctrl+P
+    /// to print" followed by a banana emoji. Each time the user clicks the button or
+    /// uses the defined shortcut, a new banana emoji appears above the button as
+    /// rendered by the keyboardShortcut view modifier applied to the button.](key-board-short-cut-modifiers.gif)
     ///
     /// You can also use ``KeyboardShortcut`` actions directly:
     ///
@@ -50191,7 +50477,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](key-board-short-cut-ex2.gif)
+    /// ![A gif displaying a window that reads "Press ENTER to save or ESC
+    /// to cancel," which uses the default keyboard shortcut actions directly on
+    /// each button.](key-board-short-cut-ex2.gif)
     ///
     public func keyboardShortcut(_ shortcut: KeyboardShortcut) -> some View { }
 
@@ -50254,7 +50542,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationbartitle.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in large bold text above the list.](navigationbartitle.png)
     ///
     /// - Parameter title: A description of this view to display in the
     ///   navigation bar.
@@ -50296,7 +50586,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationbartitle.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in large bold text above the list.](navigationbartitle.png)
     ///
     /// - Parameter titleKey: A key to a localized description of this view to
     ///   display in the navigation bar.
@@ -50334,7 +50626,9 @@ extension View {
     ///             }
     ///         }
     ///     }
-    /// ![](navigationbartitle.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in large bold text above the list.](navigationbartitle.png)
     ///
     /// - Parameter title: A title for this view to display in the navigation
     ///   bar.
@@ -50375,7 +50669,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationtitle-string.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in bold text above the list. The displayMode passed
+    /// to the modifier places the title in the bounds of the bar.](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -50417,7 +50714,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationtitle-string.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in bold text above the list. The displayMode passed
+    /// to the modifier places the title in the bounds of the bar.](navigationtitle-string.png)
     ///
     /// If the `titleKey` can't be found, the title uses the text of the key
     /// name instead.
@@ -50465,7 +50765,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationtitle-string.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in bold text above the list. The displayMode passed
+    /// to the modifier places the title in the bounds of the bar.](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -50507,7 +50810,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](nav-bar-bbh-ex.gif)
+    /// ![A gif displaying a button that reads "Tap to fall into the trap
+    /// door," which taps to reveal a new text view which reads "Ha! You
+    /// cannot return." Since the view modifier hides the back button for the
+    /// view, there is no way for the user to get back to the original
+    /// navigation view.](nav-bar-bbh-ex.gif)
     ///
     /// - Parameter hidesBackButton: A Boolean value that indicates whether to
     ///   hide the back button.
@@ -50555,7 +50862,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](multilinetextalignment.png)
+    /// ![A screenshot displaying multiline text that is center aligned on the
+    /// screen.](multilinetextalignment.png)
     ///
     /// - Parameter alignment: A value that you use to left-, right-, or
     ///   center-align the text within a view.
@@ -50587,7 +50895,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](truncationmode.png)
+    /// ![A screenshot displaying a block of multiline text that is too long for
+    /// its frame; the truncationMode view modifier cuts it off at the end of the
+    /// frame, including an ellipses to denote the truncation.](truncationmode.png)
     ///
     /// - Parameter mode: The truncation mode that specifies where to truncate
     ///   the text within the text view, if needed. You can truncate at the
@@ -50618,7 +50928,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](linespacing.png)
+    /// ![A screenshot displaying a block of multiline text with the lineSpacing
+    /// view modifier applied, rendering the text with space between each line.](linespacing.png)
     ///
     /// - Parameter lineSpacing: The amount of space between the bottom of one
     ///   line and the top of the next line in points.
@@ -50658,7 +50969,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](allowstightening.png)
+    /// ![A screenshot displaying two text views in a VStack, each reading
+    /// "This is a wiiiiide text element," but the first applies the allowsTightening
+    /// view modifier and is therefore able to fit an extra character. Still,
+    /// neither fits the whole string, but the view modifier renders a closer match.](allowstightening.png)
     ///
     /// - Parameter flag: A Boolean value that indicates whether the space
     ///   between characters compresses when necessary.
@@ -50692,7 +51006,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](linelimit.png)
+    /// ![A screenshot displaying a block of multiline text rendered as only
+    /// two lines by the lineLimit view modifier. The result is a text view that
+    /// reads "This is a long string that demonstrates the effect..."](linelimit.png)
     ///
     /// - Parameter number: The line limit. If `nil`, no line limit applies.
     ///
@@ -50727,7 +51043,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](minimumscalefactor.png)
+    /// ![A screenshot displaying a text view and a text field in an HStack;
+    /// the view modifier renders the first text as small as half of the actual
+    /// font size, but the line of text still doesn't fully fit in its frame. The
+    /// text reads "This is a long label that will be scal..." before it runs
+    /// into the text field.](minimumscalefactor.png)
     ///
     /// - Parameter factor: A fraction between 0 and 1 (inclusive) you use to
     ///   specify the minimum amount of text scaling that this view permits.
@@ -50751,7 +51071,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](textcase-uppercase.png)
+    /// ![A screenshot displaying a text field modified to present in all
+    /// uppercase letters. The display reads "THIS IS ALL CAPS TEXT!" since
+    /// the modifier is passed the .uppercase case.](textcase-uppercase.png)
     ///
     /// - Parameter textCase: One of the ``Text/Case`` enumerations; the
     ///   default is `nil`.
@@ -50791,7 +51113,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](on-tap-gesture-count-perform-ex1.gif)
+    /// ![A gif displaying two text views in a VStack, reading "Tap me once
+    /// for a banana emoji" and "Tap me twice for a peach emoji." When tapped,
+    /// the background color of the VStack changes according to the view modifier
+    /// applied to each text view, which makes it yellow on one tap and orange on two.](on-tap-gesture-count-perform-ex1.gif)
     ///
     public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View { }
 
@@ -50824,7 +51149,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](listrowinsets.png)
+    /// ![A screenshot displaying three colored bars at the top of the screen,
+    /// each inset so as not to span the entire width of the screen. Each colored
+    /// bar is inset at its top edge and trailing edge using the view modifier, so
+    /// they extend just beyond half the width of the screen and there is some
+    /// empty space between them.](listrowinsets.png)
     ///
     /// - Parameter insets: ``EdgeInsets`` to apply to the edges of the view.
     ///
@@ -51234,7 +51563,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Background preference value example 1](backgroundpreference-example-1.png)
+    /// ![A screenshot displaying a text view that reads "Bullseye" with a small
+    /// red circle in its background.](backgroundpreference-example-1.png)
     ///
     @inlinable public func backgroundPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
 
@@ -51403,7 +51733,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](listitemtint-orange.png)
+    /// ![A screenshot displaying a single list item that reads "Airplane Mode"
+    /// with a circular airplane icon to its left. The view modifier render the
+    /// icon as orange.](listitemtint-orange.png)
     ///
     /// - Parameter tint: The tint effect to use, or nil to not override the
     ///   inherited tint.
@@ -51431,7 +51763,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](listitemtint-orange.png)
+    /// ![A screenshot displaying a single list item that reads "Airplane Mode"
+    /// with a circular airplane icon to its left. The view modifier render the
+    /// icon as orange.](listitemtint-orange.png)
     ///
     /// - Parameter color: The color to use to tint the content, or nil to not
     ///   override the inherited tint.
@@ -51577,7 +51911,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](coordinate-space-ex.png)
+    /// ![A gif displaying a red square overlaid with a small black
+    /// circle. Underneath, the text reads "Location: 0, 0". When the cursor is
+    /// used to drag the circle around the square, the coordinates in the location
+    /// text change to reflect the new location of the circle within the
+    /// coordinate space.](coordinate-space-ex.png)
     ///
     /// Here, the ``VStack`` in the `ContentView` named `"stack"` is composed of a
     /// red frame with a custom ``Circle`` view ``View/overlay(_:alignment:)``
@@ -53063,7 +53401,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](help-localized.png)
+    /// ![A screenshot displaying a button with help text underneath that reads
+    /// "Compose a new message"](help-localized.png)
     ///
     /// - Parameter textKey: The key for the localized text to use as help.
     public func help(_ textKey: LocalizedStringKey) -> some View { }
@@ -53089,7 +53428,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](help-text.png)
+    /// ![A screenshot displaying a slider with help text underneath reading
+    /// "Adjust the opacity"](help-text.png)
     ///
     /// - Parameter text: The Text view to use as help.
     public func help(_ text: Text) -> some View { }
@@ -53116,7 +53456,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](help-orange.png)
+    /// ![A screenshot displaying an orange pin icon with help text underneath
+    /// that reads "I am orange" followed by an orange block emoji.](help-orange.png)
     ///
     /// - Parameter text: The text to use as help.
     public func help<S>(_ text: S) -> some View where S : StringProtocol { }
@@ -54248,7 +54589,10 @@ extension ViewModifier {
     /// }
     /// ```
     ///
-    /// ![](viewmodifier-body.png)
+    /// ![A screenshot of two text views in a VStack in the center of the screen;
+    /// the first reads "Text without bordered caption" in normal black text,
+    /// while the second on bottom has a rounded blue border and reads "Text
+    /// with bordered caption" in smaller blue text.](viewmodifier-body.png)
     ///
     /// - Parameter content: The view to be modified.
     ///
@@ -54302,7 +54646,10 @@ extension ViewModifier where Self.Body == Never {
     /// }
     /// ```
     ///
-    /// ![A screenshot of two text views stacked in the center of the screen; the first reads "Text without bordered caption" in normal black text, while the second on bottom has a rounded blue border and reads "Text with bordered caption" in smaller blue text.](viewmodifier-body.png)
+    /// ![A screenshot of two text views stacked in the center of the screen;
+    /// the first reads "Text without bordered caption" in normal black text,
+    /// while the second on bottom has a rounded blue border and reads "Text
+    /// with bordered caption" in smaller blue text.](viewmodifier-body.png)
     ///
     /// - Parameter content: The view to be modified.
     ///
