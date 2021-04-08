@@ -29848,7 +29848,7 @@ public enum PopoverAttachmentAnchor {
     case point(UnitPoint)
 }
 
-/// The `PreferenceKey protocol enables a way to send data _up_ the view hierarchy.
+/// The `PreferenceKey` protocol enables a way to send data _up_ the view hierarchy.
 ///
 /// `PreferenceKey` allows for a child view to communicate with a parent, similar to how an
 /// ``Environment`` allows for data to be sent down the view hierarchy. An excellent
