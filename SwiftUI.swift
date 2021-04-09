@@ -5151,9 +5151,9 @@ extension Binding : DynamicProperty {
 /// There are 21 different types of blend modes. To use the following example,
 /// drag in the following two photos and label them "ocean" and "space".
 ///
-/// ![Ocean](ocean.jpg)
+/// ![Image of the ocean](ocean.jpg)
 ///
-/// ![Space](space.jpg)
+/// ![Image of space](space.jpg)
 ///
 /// ```
 /// struct ContentView: View {
@@ -5172,7 +5172,7 @@ extension Binding : DynamicProperty {
 /// }
 /// ```
 ///
-/// ![Blended Image](blendmode-softLight.png)
+/// ![A screenshot displaying a blended image of the ocean and space.](blendmode-softLight.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum BlendMode {
 
@@ -5195,7 +5195,9 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-normal.png)
+    /// ![A screenshot displaying the space image on top of the ocean image,
+    /// with the normal blendmode rendering as a regular stack, so only the space
+    /// image is visible.](blendmode-normal.png)
     ///
     case normal
 
@@ -5220,7 +5222,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-multiply.png)
+    /// ![A screenshot displaying a dark blend between the ocean and space images.](blendmode-multiply.png)
     ///
     case multiply
 
@@ -5255,11 +5257,11 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-screen.png)
+    /// ![A screenshot displaying a light blend between the ocean and space images.](blendmode-screen.png)
     ///
     case screen
 
-    /// The parts were the bottom layer is light become lighter, and dark
+    /// The parts where the bottom layer is light become lighter, and dark
     /// becomes darker.
     ///
     /// Overlay is a combo of ``BlendMode/multiply`` and ``BlendMode/screen``.
@@ -5290,7 +5292,9 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
+    /// ![A screenshot displaying a blend between the ocean and space images
+    /// in which the darks of the ocean appear darker, and the lights of the
+    /// sand and space appear lighter.](blendmode-overlay.png)
     ///
     case overlay
 
@@ -5313,7 +5317,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-darken.png)
+    /// ![A screenshot displaying a dark blend between space and the ocean, taking
+    /// the darker of the top and bottom pixels.](blendmode-darken.png)
     ///
     case darken
 
@@ -5336,7 +5341,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-lighten.png)
+    /// ![A screenshot displaying a light blend between space and the ocean, taking
+    /// the lighter of the top and bottom pixels.](blendmode-lighten.png)
     ///
     case lighten
 
@@ -5368,7 +5374,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-colorDodge.png)
+    /// ![A screenshot displaying a bright blend between space and the ocean.](blendmode-colorDodge.png)
     ///
     case colorDodge
 
@@ -5397,7 +5403,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-colorBurn.png)
+    /// ![A screenshot displaying a very dark blend between space and the ocean,
+    /// in which nearly all pixels which are not very light turn to black.](blendmode-colorBurn.png)
     case colorBurn
 
     /// Basically, every light color gets a little lighter, and every dark color gets darker.
@@ -5429,7 +5436,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-overlay.png)
+    /// ![A screenshot displaying a light blend between space and the ocean,
+    /// in which the light colors appear lighter and the dark colors appear slightly darker.](blendmode-overlay.png)
     ///
     case softLight
 
@@ -5455,7 +5463,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-hardLight.png)
+    /// ![A screenshot displaying a blend between space and the ocean that mostly
+    /// appears as space, the bottom layer.](blendmode-hardLight.png)
     ///
     case hardLight
 
@@ -5481,7 +5490,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-difference.png)
+    /// ![A colorful blend between space and the ocean.](blendmode-difference.png)
     ///
     case difference
 
@@ -5507,7 +5516,7 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-exclusion.png)
+    /// ![A light and colorful blend between space and the ocean.](blendmode-exclusion.png)
     ///
     case exclusion
 
@@ -5530,7 +5539,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-hue.png)
+    /// ![A screenshot displaying a blend between space and the ocean that maintains most features of
+    /// the ocean image, while appearing to take the hue of the space image.](blendmode-hue.png)
     ///
     case hue
 
@@ -5553,7 +5563,8 @@ public enum BlendMode {
     /// }
     /// ```
     ///
-    /// ![Blend Mode](blendmode-saturation.png)
+    /// ![A screenshot displaying a blend between the ocean and space that appears
+    /// to keep the brightness and hue of the ocean while taking the saturation of space.](blendmode-saturation.png)
     ///
     case saturation
 
@@ -25573,7 +25584,9 @@ extension List where SelectionValue == Never {
 /// }
 /// ```
 ///
-/// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
+/// ![A screenshot displaying a single list item that reads "Airplane Mode"
+/// with a circular airplane icon to its left. The view modifier renders the
+/// icon as orange.](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ListItemTint {
@@ -25597,7 +25610,9 @@ public struct ListItemTint {
     /// }
     /// ```
     ///
-    /// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
+    /// ![A screenshot displaying a single list item that reads "Airplane Mode"
+    /// with a circular airplane icon to its left. The view modifier renders the
+    /// icon as orange.](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
     ///
     public static func fixed(_ tint: Color) -> ListItemTint { }
 
@@ -25621,7 +25636,9 @@ public struct ListItemTint {
     /// }
     /// ```
     ///
-    /// ![5E2E8D9E-6DB2-459B-A171-F3F614F21682](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
+    /// ![A screenshot displaying a single list item that reads "Airplane Mode"
+    /// with a circular airplane icon to its left. The view modifier renders the
+    /// icon as orange.](5E2E8D9E-6DB2-459B-A171-F3F614F21682.png)
     ///
 
     public static func preferred(_ tint: Color) -> ListItemTint { }
@@ -25642,7 +25659,9 @@ public struct ListItemTint {
     /// }
     /// ```
     ///
-    /// ![](list-item-tint-monochrome-ex.png)
+    /// ![A screenshot displaying a single label in the center of the screen
+    /// that reads "General" with a gear icon to its left with a monochrome tint
+    /// applied. The label appears as a dark grey on screen.](list-item-tint-monochrome-ex.png)
     ///
     public static let monochrome: ListItemTint
 }
@@ -25740,7 +25759,7 @@ extension ListStyle {
 /// ### Creating a localized string key
 ///
 /// The most straightforward way to create a localized string key is
-/// using its initializer:
+/// by using its initializer:
 ///
 ///     let hello = LocalizedStringKey("Hello")
 ///
@@ -25767,7 +25786,8 @@ extension ListStyle {
 ///         }
 ///     }
 ///
-/// ![](localization-1.png)
+/// ![A screenshot displaying a button and a text view in a VStack each reading
+/// "Hola" followed by a man emoji.](localization-1.png)
 ///
 /// Also, since SwiftUI is localization-first, if you pass a string literal
 /// to these initializers, they will be interpreted as localized string keys!
@@ -25778,7 +25798,8 @@ extension ListStyle {
 ///         }
 ///     }
 ///
-/// ![](localizedstringkey-2.png)
+/// ![A screenshot displaying a single text view that reads "¡Esto se localiza!"
+/// the Spanish translation of the text that is passed to the view.](localizedstringkey-2.png)
 ///
 /// However, if your variable is already a string, the intializer will
 /// not localize the string:
@@ -25794,7 +25815,10 @@ extension ListStyle {
 ///         }
 ///     }
 ///
-/// ![](localization-3.png)
+/// ![A screenshot displaying two text views in a VStack; the first does not use
+/// a localized string key and displays as "Hello" followed by a woman emoji, but
+/// the second does use a localized string key and instead displays as "Hola"
+/// followed by a man emoji.](localization-3.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct LocalizedStringKey : Equatable, ExpressibleByStringInterpolation {
@@ -26221,7 +26245,9 @@ public struct LongPressGesture : Gesture {
 ///         }
 ///     }
 ///
-/// ![](magnification-gesture-ex.gif)
+/// ![A gif displaying a black circle in the center of the screen that is rendered
+/// as both larger and smaller than its original size as the user interacts with its
+/// magnification.](magnification-gesture-ex.gif)
 ///
 /// The circle's size resets to its original size when the gesture finishes.
 @available(iOS 13.0, macOS 10.15, *)
@@ -26328,7 +26354,7 @@ public struct MagnificationGesture : Gesture {
 /// 3. ``View``
 ///
 /// The following example presents a menu of three buttons and a submenu, which
-/// contains three buttons of its own.
+/// contains two buttons of its own.
 ///
 /// ```
 /// struct MenuView: View {
@@ -26345,7 +26371,10 @@ public struct MagnificationGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![](menu-ex1.gif)
+/// ![A gif displaying a single button in the center of the screen that reads
+/// "Actions" which holds down to present a menu with three different options:
+/// Copy, Delete..., or Duplicate. If selected, the Copy button prompts the
+/// appearance of a submenu, which has the option to Copy or Copy Formatted.](menu-ex1.gif)
 ///
 /// You can create the menu's title with a ``LocalizedStringKey``, as seen in
 /// the previous example, or with a ``ViewBuilder`` that creates multiple views,
@@ -26365,7 +26394,9 @@ public struct MagnificationGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![](menu-ex2.gif)
+/// ![A gif displaying a single label in the center of the screen that reads
+/// "PDF" which holds down to reveal a menu with the options to Save as PDF or
+/// Open in Preview.](menu-ex2.gif)
 ///
 /// ### Styling Menus
 ///
@@ -26385,7 +26416,10 @@ public struct MagnificationGesture : Gesture {
 /// }
 /// ```
 ///
-/// ![](menu-ex3.gif)
+/// ![A gif displaying a single button in the center of the screen that reads
+/// "Editing" which holds down to reveal a menu with the options to Set Out Point
+/// or Set In Point. The menu uses the menuStyle view modifier to apply a default
+/// style.](menu-ex3.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -26423,7 +26457,9 @@ extension Menu {
     /// }
     /// ```
     ///
-    /// ![](label-init-image-ex.gif)
+    /// ![A gif displaying a single label in the center of the screen that reads
+    /// "PDF" which holds down to reveal a menu with the options to Save as PDF or
+    /// Open in Preview.](label-init-image-ex.gif)
     ///
     /// - Parameters:
     ///     - content: A group of menu items.
@@ -26447,7 +26483,10 @@ extension Menu {
     /// }
     /// ```
     ///
-    /// ![](menu-96799.gif)
+    /// ![A gif displaying a single button in the center of the screen that reads
+    /// "Actions" which holds down to present a menu with three different options:
+    /// Copy, Delete..., or Duplicate. If selected, the Copy button prompts the
+    /// appearance of a submenu, which has the option to Copy or Copy Formatted.](menu-96799.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the link's localized title, which describes
@@ -26472,7 +26511,10 @@ extension Menu {
     /// }
     /// ```
     ///
-    /// ![](menu-96799.gif)
+    /// ![A gif displaying a single button in the center of the screen that reads
+    /// "Actions" which holds down to present a menu with three different options:
+    /// Copy, Delete..., or Duplicate. If selected, the Copy button prompts the
+    /// appearance of a submenu, which has the option to Copy or Copy Formatted.](menu-96799.gif)
     ///
     /// - Parameters:
     ///     - title: A string that describes the contents of the menu.
@@ -28072,7 +28114,8 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![20B2CBEC-08BB-4349-B451-C6DE14BD68A3](20B2CBEC-08BB-4349-B451-C6DE14BD68A3.png)
+/// ![A screenshot displaying a large black circle which is slightly offset
+/// to the right side and lower half of the screen.](20B2CBEC-08BB-4349-B451-C6DE14BD68A3.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct OffsetShape<Content> : Shape where Content : Shape {
@@ -28093,7 +28136,10 @@ extension NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](offset-shape-shape.png)
+    /// ![A screenshot displaying two large circles in a ZStack; the bottom applies
+    /// the shape property and a low opacity to display where the shape originally was
+    /// in the center of the screen, while the top layer is a large black circle
+    /// which is slightly offset to the right side and lower half of the screen.](offset-shape-shape.png)
     ///
     public var shape: Content
 
@@ -28112,7 +28158,9 @@ extension NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](offset-shape-offset.png)
+    /// ![A screenshot displaying a large black circle which is slightly offset
+    /// to the right side and lower half of the screen by applying the offset
+    /// instance property with a specified width and height.](offset-shape-offset.png)
     ///
     public var offset: CGSize
 
@@ -28127,7 +28175,9 @@ extension NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](offset-shape-init.png)
+    /// ![A screenshot displaying a large black circle which is slightly offset
+    /// to the right side and lower half of the screen by specifying an offset
+    /// in the initializer.](offset-shape-init.png)
     ///
     /// - Parameters:
     ///   - shape: The original shape that you want to move.
@@ -28521,7 +28571,10 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
-        /// ![PageIndexViewStyle automatic background display mode](pageindexviewstyle-automatic-example.png)
+        /// ![A screenshot displaying a blue background that reads "Tab 1" in the
+        /// center of the screen with three dots at the bottom of the screen. Applying
+        /// the automatic property for backgroundDisplayMode renders the tabview
+        /// background as a light oval when held down by the user.](pageindexviewstyle-automatic-example.png)
         ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
@@ -28550,7 +28603,11 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
-        /// ![PageIndexViewStyle interactive background display mode](page-index-view-style-background-display-mode-interactive.gif)
+        /// ![A gif that displays a blue background that reads "Tab 1" in the
+        /// center of the screen with three dots at the bottom of the screen. As
+        /// the user swipes, the dot moves between the three pages. When the page
+        /// index view (the dots) is held down (interacted with), a light oval
+        /// background emerges behind it.](page-index-view-style-background-display-mode-interactive.gif)
         ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
@@ -28579,7 +28636,11 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
-        /// ![](background-display-mode-always.png)
+        /// ![A screenshot displaying a blue background that reads "Tab 1" in the
+        /// center of the screen with three dots at the bottom of the screen surrounded
+        /// by a light grey oval background. Applying the always property for
+        /// backgroundDisplayMode renders the tabview background as a light oval
+        /// in any case.](background-display-mode-always.png)
         ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
@@ -28608,7 +28669,10 @@ public struct PageIndexViewStyle : IndexViewStyle {
         /// }
         /// ```
         ///
-        /// ![PageIndexViewStyle never background display mode](pageindexviewstyle-automatic-example.png)
+        /// ![A screenshot displaying a blue background that reads "Tab 1" in the
+        /// center of the screen with three dots at the bottom of the screen with
+        /// no surrounding background. Applying the never property for
+        /// backgroundDisplayMode renders no tabview background in any case.](pageindexviewstyle-automatic-example.png)
         ///
         /// Note that the ``ZStack`` was used to apply a background color to the screen so that
         /// the background styles on the page index view were more clear.
@@ -28750,7 +28814,9 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](tab-view-auto-ex1.png)
+        /// ![A screenshot displaying a single yellow page in tabview that reads
+        /// "Bananas" in the center. No dots appear on the bottom of the page
+        /// since the view modifier hides them when there is only a single page.](tab-view-auto-ex1.png)
         ///
         /// If there are multiple pages, they are shown:
         ///
@@ -28769,7 +28835,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](tab-view-auto-ex2.gif)
+        /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+        /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+        /// the gif flips through each of the three tabs and since there are
+        /// multiple pages, dots are shown at the bottom.](tab-view-auto-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -28796,7 +28865,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](tab-view-auto-ex2.gif)
+        /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+        /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+        /// the gif flips through each of the three tabs and since
+        /// indexDisplayMode is set to always, dots are shown at the bottom.](tab-view-auto-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -28824,7 +28896,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](pg-tab-view-style-ex2.gif)
+        /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+        /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+        /// the gif flips through each of the three tabs and since
+        /// indexDisplayMode is set to never, no dots are shown at the bottom.](pg-tab-view-style-ex2.gif)
         ///
         /// - Notes: If you want more control over the look of the dots,
         /// see ``View/indexViewStyle(_:)``.
@@ -28859,7 +28934,10 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](pg-tab-view-style-ex2.gif)
+    /// ![A gif displaying a tabview with three text items, "Bananas 🍌🍌",
+    /// "Apples 🍏🍏", and "Peaches 🍑🍑", each with a yellow background;
+    /// the gif flips through each of the three tabs and since
+    /// indexDisplayMode is set to never, no dots are shown at the bottom.](pg-tab-view-style-ex2.gif)
     ///
     /// - Notes: If you want more control over the look of the dots,
     /// see ``View/indexViewStyle(_:)``.
@@ -28996,7 +29074,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path.png)
+    /// ![A screenshot displaying an orange line segment extending from the upper left
+    /// hand corner of the screen to the middle right hand side. The path is
+    /// initialized using a CGPath.](path.png)
     ///
     /// - Parameter path: A CGPath to define the path.
     public init(_ path: CGPath) { }
@@ -29032,7 +29112,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-3.png)
+    /// ![A screenshot displaying an orange border surrounding the screen with a
+    /// line segment extending from the upper left hand corner to the center. The path is
+    /// initialized using a CGMutablePath.](path-3.png)
     ///
     /// - Parameter path: A CGMutablePath to define the path.
     public init(_ path: CGMutablePath) { }
@@ -29057,7 +29139,8 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-2.png)
+    /// ![A screenshot displaying an orange border surrounding the screen which is
+    /// initialized from a CGRect.](path-2.png)
     ///
     /// - Parameter path: A CGRect to define the path.
     public init(_ rect: CGRect) { }
@@ -29085,7 +29168,8 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-rounded.png)
+    /// ![A screenshot displaying an orange rounded rectangular path occupying
+    /// most of the screen which is initialized using a CGRect and cornerSize.](path-rounded.png)
     ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
@@ -29116,7 +29200,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-rounded.png)
+    /// ![A screenshot displaying an orange rounded rectangular path occupying
+    /// most of the screen which is initialized using a CGRect and cornerSize,
+    /// as well as by specifying the style as continuous to render a smooth border.](path-rounded.png)
     ///
     /// - Parameters:
     ///   - rect: A CGRect to define the sides of the path.
@@ -29141,7 +29227,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](ellipse.png)
+    /// ![A screenshot displaying an orange elliptical path touching all four
+    /// edges of the screen. The path is rendered by passing a rectangle to the
+    /// ellipseIn initializer.](ellipse.png)
     ///
     /// - Parameter ellipseIn: The rectangle defining the outside of the ellipse.
     public init(ellipseIn rect: CGRect) { }
@@ -29163,7 +29251,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path.png)
+    /// ![A screenshot displaying an orange line segment extending from the upper left
+    /// hand corner of the screen to the middle right hand side. The path is
+    /// initialized using a closure.](path.png)
     ///
     /// - Parameter callback: A closure that takes in an empty path which
     /// can be mutated.
@@ -29192,7 +29282,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path.png)
+    /// ![A screenshot displaying an orange line segment extending from the upper left
+    /// hand corner of the screen to the middle right hand side. The path is
+    /// initialized using a string.](path.png)
     ///
     /// - Parameter string: The string description of the path, obtained from `description`.
     public init?(_ string: String) { }
@@ -29223,7 +29315,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-description-ex.png)
+    /// ![A screenshot displaying a thin black line segment originating at the
+    /// upper left hand corner of the screen and extending about an inch towards
+    /// the center. The description property holds a string description of this path.](path-description-ex.png)
     ///
     public var description: String { get }
 
@@ -29245,11 +29339,13 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-cg.png)
+    /// ![A screenshot displaying a thin black line segment originating at the
+    /// upper left hand corner of the screen and extending about an inch towards
+    /// the center. The cgPath property holds the path as a CGPath.](path-cg.png)
     ///
     public var cgPath: CGPath { get }
 
-    /// A Boolean property that cointains whether the path is empty.
+    /// A Boolean property that contains whether the path is empty.
     ///
     /// ```
     /// struct EmptyPathView: View {
@@ -29263,11 +29359,12 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-is-empty.png)
+    /// ![A screenshot with a terminal inset above it that reads "true." In this
+    /// case, the path is empty so the property returns true.](path-is-empty.png)
     ///
     public var isEmpty: Bool { get }
 
-    /// A property that contains the outter bounding rectangle of the path.
+    /// A property that contains the outer bounding rectangle of the path.
     ///
     /// ```
     /// struct OddShapeView: View {
@@ -29287,7 +29384,10 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-bounding-rect.png)
+    /// ![A screenshot displaying a thin black elliptical path that touches all
+    /// four edges of the screen and is contained within a bounding rectangle.
+    /// The rectangle is rendered as a direct container for the ellipse by using
+    /// the boundingRect property.](path-bounding-rect.png)
     ///
     public var boundingRect: CGRect { get }
 
@@ -29311,7 +29411,11 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-contains.png)
+    /// ![A screenshot with a terminal inset above it that reads "true." The
+    /// screenshot displays a thin black line segment originating at the
+    /// upper left hand corner of the screen and extending about an inch towards
+    /// the center. The segment starts at x:0, y:0 and goes to x:100 and y:100,
+  /// so the boolean for contains x:50, y:50 returns true.](path-contains.png)
     ///
     public func contains(_ p: CGPoint, eoFill: Bool = false) -> Bool { }
 
@@ -29358,7 +29462,8 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-element.png)
+    /// ![A screenshot displaying a thin black elliptical path that touches all four
+    /// edges of the screen. The path is made up of elements defined in the code block.](path-element.png)
     ///
     @frozen public enum Element : Equatable {
 
@@ -29380,7 +29485,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](path-element-move.png)
+        /// ![A screenshot displaying a short line segment originating at the upper
+        /// left hand corner of the screen and extending directly to the right. Here,
+        /// the move element is used to define the upper left hand corner as the starting
+        /// point for the path.](path-element-move.png)
         ///
         case move(to: CGPoint)
 
@@ -29402,7 +29510,9 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](path-element-move.png)
+        /// ![A screenshot displaying a short line segment originating at the upper
+        /// left hand corner of the screen and extending directly to the right. Here,
+        /// the addLine element is used to define the line itself and the new current point.](path-element-move.png)
         ///
         case line(to: CGPoint)
 
@@ -29427,7 +29537,9 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](QUADCURVE.png)
+        /// ![A screenshot displaying a thin black quadcurve originating at the
+        /// upper left hand corner of the screen, which curves into the screen
+        /// and then promptly back out as rendered by the addQuadCurve element.](QUADCURVE.png)
         ///
         case quadCurve(to: CGPoint, control: CGPoint)
 
@@ -29453,7 +29565,10 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](path-element-curve.png)
+        /// ![A screenshot displaying a small curve originating at the upper
+        /// left hand corner of the screen which curves into the screen, then down,
+        /// and then further to the right into the screen. The inflection points of
+        /// this curve are dictated by the control points as passed to addCurve.](path-element-curve.png)
         ///
         case curve(to: CGPoint, control1: CGPoint, control2: CGPoint)
 
@@ -29480,7 +29595,8 @@ public struct PageTabViewStyle : TabViewStyle {
         /// }
         /// ```
         ///
-        /// ![](lazy-triangle.png)
+        /// ![A screenshot displaying a small triangle in the upper left hand
+        /// corner of the screen which is closed using the closeSubpath element.](lazy-triangle.png)
         ///
         case closeSubpath
 
@@ -29534,7 +29650,8 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](path-element.png)
+    /// ![A screenshot displaying a thin black elliptical path which touches
+    /// all four corners of the screen.](path-element.png)
     ///
     public func forEach(_ body: (Path.Element) -> Void) { }
 
@@ -29567,7 +29684,9 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](strokedpath.png)
+    /// ![A screenshot displaying a rectangular border around the screen which
+    /// appears as a series of small rectangles and dots. The strokedPath instance
+    /// method renders the style according to the requirements set by the user.](strokedpath.png)
     ///
     public func strokedPath(_ style: StrokeStyle) -> Path { }
 
@@ -29591,7 +29710,10 @@ public struct PageTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![](trimmed-path.png)
+    /// ![A screenshot displaying a clipped quad curve. The trimmedPath method
+    /// clips the first and last quarter of the path, so instead of originating
+    /// in the upper left corner, it is inset to the right and only vaguely curves
+    /// back out to the left side of the screen.](trimmed-path.png)
     ///
     public func trimmedPath(from: CGFloat, to: CGFloat) -> Path { }
 
@@ -29648,7 +29770,10 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-element-move.png)
+    /// ![A screenshot displaying a short line segment originating at the upper
+    /// left hand corner of the screen and extending directly to the right. Here,
+    /// the move element is used to define the upper left hand corner as the starting
+    /// point for the path.](path-element-move.png)
     ///
     /// - Parameter p: The point to move the path to.
     public mutating func move(to p: CGPoint) { }
@@ -29668,7 +29793,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-element-move.png)
+    /// ![A screenshot displaying a short line segment originating at the upper
+    /// left hand corner of the screen and extending directly to the right. Here,
+    /// the addLine element is used to define the line itself and the new current point.](path-element-move.png)
     ///
     /// - Parameter p: The point to draw a line to.
     public mutating func addLine(to p: CGPoint) { }
@@ -29689,7 +29816,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](QUADCURVE.png)
+    /// ![A screenshot displaying a thin black quadcurve originating at the
+    /// upper left hand corner of the screen, which curves into the screen
+    /// and then promptly back out as rendered by the addQuadCurve element.](QUADCURVE.png)
     ///
     /// - Parameters:
     ///   - p: The point to end the quad curve at.
@@ -29713,7 +29842,10 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-element-curve.png)
+    /// ![A screenshot displaying a small curve originating at the upper
+    /// left hand corner of the screen which curves into the screen, then down,
+    /// and then further to the right into the screen. The inflection points of
+    /// this curve are dictated by the control points as passed to addCurve.](path-element-curve.png)
     ///
     /// - Parameters:
     ///   - p: The point to end the curve at.
@@ -29738,7 +29870,8 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](lazy-triangle.png)
+    /// ![A screenshot displaying a small triangle in the upper left hand
+    /// corner of the screen which is closed using the closeSubpath element.](lazy-triangle.png)
     ///
     public mutating func closeSubpath() { }
 
@@ -29768,7 +29901,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-addrect-transform.png)
+    /// ![A screenshot displaying a thin black rectangle in the upper left corner
+    /// of the screen, which spans half the width of the screen and a quarter of the
+    /// height, as rendered by the transform applied to the path.](path-addrect-transform.png)
     ///
     /// - Parameters:
     ///   - rect: The rectangle to use for adding the rectangular path.
@@ -29815,7 +29950,9 @@ extension Path {
     ///   - transform: The affine transform to apply to the rounded
     ///   rectangle subpath.
     ///
-    /// ![](add-rr.png)
+    /// ![A screenshot displaying a thin black rounded rectangle in the upper left corner
+    /// of the screen, which spans half the width of the screen and a quarter of the
+    /// height, as rendered by the transform applied to the path.](add-rr.png)
     ///
     public mutating func addRoundedRect(in rect: CGRect, cornerSize: CGSize, style: RoundedCornerStyle = .circular, transform: CGAffineTransform = .identity) { }
 
@@ -29844,7 +29981,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-add-ellipse.png)
+    /// ![A screenshot displaying a thin black ellipse in the upper left corner
+    /// of the screen, which spans half the width of the screen and a quarter of the
+    /// height, as rendered by the transform applied to the path.](path-add-ellipse.png)
     ///
     /// - Parameters:
     ///   - rect: The bounding rectangle for the oval subpath.
@@ -29880,7 +30019,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](add-Rects.png)
+    /// ![A screenshot displaying one rectangle inset within another in the upper
+    /// left corner of the screen. The path transform renders both rectangles at the
+    /// same scale and maintains their relative positions.](add-Rects.png)
     ///
     /// - Parameters:
     ///   - rects: The rectangles for the rectangular subpaths.
@@ -29916,7 +30057,11 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-addlines.png)
+    /// ![A screenshot displaying a thin black path made up of two line segments;
+    /// the first extends from the upper left corner towards the center of the screen,
+    /// while the second extends directly to the right from the endpoint of the first.
+    /// The path is made up of a series of three CGPoints (including zero as a start
+    /// point) connected by the addLines method.](path-addlines.png)
     ///
     /// - Parameter lines: The ordered points specifying the connecting places
     /// for the new subpath to be added.
@@ -29953,7 +30098,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-relativearc.png)
+    /// ![A screenshot displaying a thin black arc in the upper half of the screen,
+    /// which is rendered by the addRelativeArc method with a new center defined
+    /// in the upper left, inset from the corner.](path-relativearc.png)
     ///
     /// - Parameters:
     ///   - center: The center point of the relative arc.
@@ -29995,7 +30142,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-addarc.png)
+    /// ![A screenshot displaying a thin black arc in the upper half of the screen,
+    /// which is rendered by the addArc method with a new center defined
+    /// in the upper left, inset from the corner.](path-addarc.png)
     ///
     /// - Parameters:
     ///   - center: The center point of the relative arc.
@@ -30035,7 +30184,10 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-addarc-2.png)
+    /// ![A screenshot displaying a thin black arc that originates in the upper left
+    /// corner of the screen and extends towards the center before turning back up
+    /// towards the top. The arc is rendered by specifying two lines tangent to it
+    /// along with a radius.](path-addarc-2.png)
     ///
     /// - Parameters:
     ///   - p1: The first point that defines the tangent line of the arc.
@@ -30066,7 +30218,8 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-addpath.png)
+    /// ![A screenshot displaying a thin black rectangular path inset slightly
+    /// from the edges of the screen.](path-addpath.png)
     ///
     /// - Parameters:
     ///   - path: The path to add as a subpath to this path.
@@ -30098,7 +30251,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-currentpoint.png)
+    /// ![A screenshot displaying a set of three identical arcs each attached
+    /// by a line segment. currentPoint is used to specify where each new arc needs
+    /// to start in order for them all to be evenly connected.](path-currentpoint.png)
     public var currentPoint: CGPoint? { get }
 
     /// Returns a path constructed by applying the transform to all points of
@@ -30121,7 +30276,9 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-applying.png)
+    /// ![A screenshot displaying a thin black rectangle that spans the left side
+    /// of the screen. The transform applies to the entire path and scales the x
+    /// axis down so that the rectangle only occupies the left side.](path-applying.png)
     ///
     /// - Parameter transform: The affine transform to apply to this path.
     public func applying(_ transform: CGAffineTransform) -> Path { }
@@ -30144,7 +30301,8 @@ extension Path {
     /// }
     /// ```
     ///
-    /// ![](path-offset.png)
+    /// ![A screenshot displaying a thin black elliptical path that is offset
+    /// to the lower right of the screen, cutting off its right side and bottom.](path-offset.png)
     ///
     /// - Parameters:
     ///   - dx: The number of points of horizontal offset to the right.
@@ -30322,7 +30480,9 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
     /// }
     /// ```
     ///
-    /// ![](picker-init.png)
+    /// ![A screenshot displaying a picker with three options represented by
+    /// three different emojis, with the first highlighted in grey as the current
+    /// selection. The picker has a custom label which does not appear in this view.](picker-init.png)
     ///
     /// - Parameters:
     ///     - selection: A binding to the currently selected option.
@@ -30359,7 +30519,9 @@ extension Picker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](picker-init.png)
+    /// ![A screenshot displaying a picker with three options represented by
+    /// three different emojis, with the first highlighted in grey as the current
+    /// selection. The picker has a localized string label which does not appear in this view.](picker-init.png)
     ///
     /// - Parameters:
     ///     - titleKey: A localized string key used for the picker's label.
@@ -30383,7 +30545,9 @@ extension Picker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](picker-init.png)
+    /// ![A screenshot displaying a picker with three options represented by
+    /// three different emojis, with the first highlighted in grey as the current
+    /// selection. The picker has a string label which does not appear in this view.](picker-init.png)
     ///
     /// - Parameters:
     ///     - title: A string used for the pikcer's label.
@@ -30463,7 +30627,10 @@ extension PickerStyle {
 /// }
 /// ```
 ///
-/// ![](pinned-scroll-headers-ex.gif)
+/// ![A gif displaying 100 rows in a scrollable view, each of which is labeled
+/// with its row number. As the user scrolls through the top half, a label that reads
+/// "**Top Half**" is pinned to the top of the screen. Once the user passes row 50,
+/// the label switches to read "**Bottom Half**"](pinned-scroll-headers-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct PinnedScrollableViews : OptionSet {
@@ -30535,7 +30702,10 @@ public struct PinnedScrollableViews : OptionSet {
     /// }
     /// ```
     ///
-    /// ![](pinned-scroll-headers-ex.gif)
+    /// ![A gif displaying 100 rows in a scrollable view, each of which is labeled
+    /// with its row number. As the user scrolls through the top half, a label that reads
+    /// "**Top Half**" is pinned to the top of the screen. Once the user passes row 50,
+    /// the label switches to read "**Bottom Half**"](pinned-scroll-headers-ex.gif)
     ///
     public static let sectionHeaders: PinnedScrollableViews
 
@@ -30571,7 +30741,11 @@ public struct PinnedScrollableViews : OptionSet {
     /// }
     /// ```
     ///
-    /// ![](pinned-scroll-footers-ex.gif)
+    /// ![A gif displaying 100 rows in a scrollable view, each of which is labeled
+    /// with its row number. As the user scrolls through the top half, a label that reads
+    /// "**Top Half**" is pinned to the bottom of the screen. Once the user passes row 50,
+    /// the label switches to read "**Bottom Half**" and continues to be pinned
+    /// to the bottom of the screen.](pinned-scroll-footers-ex.gif)
     ///
     public static let sectionFooters: PinnedScrollableViews
 
@@ -30676,13 +30850,17 @@ public struct PlainListStyle : ListStyle {
 ///         }
 ///     }
 ///
-/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+/// ![A gif displaying a text view in the center of the screen with a text field
+/// left aligned underneath it. The text field reads "Fruit" when no text is entered,
+/// and when the user types "Bananas" into the field, it appears in the text view above.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PlainTextFieldStyle : TextFieldStyle {
 
 	/// Creates a plain text field style.
     ///
-    /// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+    /// ![A gif displaying a text view in the center of the screen with a text field
+    /// left aligned underneath it. The text field reads "Fruit" when no text is entered,
+    /// and when the user types "Bananas" into the field, it appears in the text view above.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
     ///
     ///     struct ExampleView: View {
     ///         @State var myFruit: String = ""
@@ -30708,7 +30886,7 @@ public enum PopoverAttachmentAnchor {
     case point(UnitPoint)
 }
 
-/// The `PreferenceKey protocol enables a way to send data _up_ the view hierarchy.
+/// The `PreferenceKey` protocol enables a way to send data _up_ the view hierarchy.
 ///
 /// `PreferenceKey` allows for a child view to communicate with a parent, similar to how an
 /// ``Environment`` allows for data to be sent down the view hierarchy. An excellent
@@ -30903,7 +31081,7 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 ///
 /// While this is a ``Binding`` environment value, most often
 /// the wrapped value will be accessed. The wrapped value
-/// is of type `PresentatinMode`. See that structure for more info
+/// is of type `PresentationMode`. See that structure for more info
 /// on its properties.
 ///
 /// Below is a simple example of programmatically dismissing a
@@ -30932,7 +31110,9 @@ public struct PreferredColorSchemeKey : PreferenceKey {
 ///         }
 ///     }
 ///
-/// ![](presentation-mode-dismiss-ex.gif)
+/// ![A gif displaying a single button that reads "Open sesame" which prompts a new
+/// view when pressed with a button that reads "Close." When that button is pressed,
+/// the presentationMode environment value programatically dismisses the sheet.](presentation-mode-dismiss-ex.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PresentationMode {
@@ -30978,7 +31158,8 @@ public struct PresentationMode {
     ///         }
     ///     }
     ///
-    /// ![](presentation-mode-is-presented-ex.gif)
+    /// ![A gif displaying a single button that reads "Open sesame" which prompts a new
+    /// view when pressed with a text view that reads "hello!"](presentation-mode-is-presented-ex.gif)
     ///
     public var isPresented: Bool { get }
 
@@ -31019,7 +31200,9 @@ public struct PresentationMode {
     ///         }
     ///     }
     ///
-    /// ![](presentation-mode-dismiss-ex.gif)
+    /// ![A gif displaying a single button that reads "Open sesame" which prompts a new
+    /// view when pressed with a button that reads "Close." When that button is pressed,
+    /// the presentationMode environment value programatically dismisses the sheet.](presentation-mode-dismiss-ex.gif)
     ///
     public mutating func dismiss() { }
 }
@@ -31867,7 +32050,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
+    /// ![A gif displaying a default gray circular style progress view spinning.](progress-spinner-gray.gif)
     ///
     public init() where Label == EmptyView { }
 
@@ -31883,7 +32066,8 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-spinner-runner.gif)
+    /// ![A gif displaying a grey progress spinner with a custom label underneath it
+    /// that reads "We're working on it" as rendered by passing the label to the intializer.](progress-spinner-runner.gif)
     ///
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
@@ -31908,7 +32092,9 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-spinner-runner.gif)
+    /// ![A gif displaying a grey progress spinner with a custom label underneath it
+    /// that reads "We're working on it" as rendered by passing the localized
+    /// string key label to the intializer.](progress-spinner-runner.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
@@ -31936,7 +32122,9 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](progress-spinner-runner.gif)
+    /// ![A gif displaying a grey progress spinner with a custom label underneath it
+    /// that reads "We're working on it" as rendered by passing the
+    /// string label to the intializer.](progress-spinner-runner.gif)
     ///
     public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
 }
@@ -31959,7 +32147,9 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](progressview-init.png)
+    /// ![A screenshot displaying a blue progress bar across the center of the
+    /// screen which shows 50% fill, as rendered by passing a value of 1 out of a
+    /// total 2 to the ProgressView initializer.](progressview-init.png)
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -31986,7 +32176,10 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](200-tasks.png)
+    /// ![A screenshot displaying a blue progress bar across the center of the
+    /// screen which shows 50% fill, as rendered by passing a value of 1 out of a
+    /// total 2 to the ProgressView initializer. The custom label above it reads
+    /// "We are halfway done."](200-tasks-fixed.png)
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -32020,7 +32213,11 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](progressview-init-3.png)
+    /// ![A screenshot displaying a blue progress bar across the center of the
+    /// screen which shows 50% fill, as rendered by passing a value of 1 out of a
+    /// total 2 to the ProgressView initializer. The custom label above it reads
+    /// "We are halfway done" while the current value label below it reads
+    /// "100 of 200 tasks" in light grey text.](progressview-init-3-fixed.png)
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -32056,7 +32253,10 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](progressview-init-2.png)
+    /// ![A screenshot displaying a blue progress bar across the center of the
+    /// screen which shows 50% fill, as rendered by passing a value of 1 out of a
+    /// total 2 to the ProgressView initializer. The custom label above it reads
+    /// "We are halfway done" based on the localized string key passed to the initializer.](progressview-init-2.png)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
@@ -32092,7 +32292,10 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](progressview-init-2.png)
+    /// ![A screenshot displaying a blue progress bar across the center of the
+    /// screen which shows 50% fill, as rendered by passing a value of 1 out of a
+    /// total 2 to the ProgressView initializer. The custom label above it reads
+    /// "We are halfway done" based on the title string passed to the initializer.](progressview-init-2.png)
     ///
     /// - Parameters:
     ///     - title: The string that describes the task in progress.
@@ -32128,7 +32331,10 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](progressview-init-4.png)
+    /// ![A screenshot displaying a light grey progress bar spanning the center
+    /// of the screen with text above it which reads "0% completed" and below
+    /// which reads "0 of 4" in smaller grey text. In this case the bar is rendered
+    /// by the passing 4 units to a Progress object.](progressview-init-4.png)
     ///
     /// - Parameter progress: The `Progress` object for displaying the bar.
     public init(_ progress: Progress) where Label == EmptyView, CurrentValueLabel == EmptyView { }
@@ -32172,7 +32378,9 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![](progress-view-init-1a15a.png)
+    /// ![A screenshot displaying a light grey spinner and a blue progress bar
+    /// in a VStack. A custom progress view style passed to the progressViewStyle
+    /// modifier renders both the spinner and bar with shadows.](progress-view-init-1a15a.png)
     ///
     public init(_ configuration: ProgressViewStyleConfiguration) where Label == ProgressViewStyleConfiguration.Label, CurrentValueLabel == ProgressViewStyleConfiguration.CurrentValueLabel { }
 }
@@ -32203,7 +32411,7 @@ extension ProgressView {
 /// }
 /// ```
 ///
-///![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
+///![A gif displaying a default gray circular style progress view spinning.](progress-spinner-gray.gif)
 ///
 /// ### Custom Styles
 ///
@@ -32346,7 +32554,9 @@ extension ProgressViewStyle {
 /// }
 /// ```
 ///
-/// ![](custom-progressview.png)
+/// ![A screenshot of a custom progress view that renders as an orange semicircle
+/// occupying the right hand side of the screen with two text views at its center,
+/// reading "Progress is happening!" and "50% done".](custom-progressview.png)
 ///
 /// You can also just pass this property wholesale to ``ProgressView``'s
 /// ``ProgressView/init(_:)-1a15a``:
@@ -32434,7 +32644,8 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](progressviestyle-fractioncompleted.png)
+    /// ![A screenshot of a custom progress view that renders as an orange semicircle
+    /// occupying the right hand side of the screen.](progressviestyle-fractioncompleted.png)
     ///
     public let fractionCompleted: Double?
 
@@ -32529,7 +32740,9 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](custom-progressview.png)
+    /// ![A screenshot of a custom progress view that renders as an orange semicircle
+    /// occupying the right hand side of the screen with two text views at its center,
+    /// reading "Progress is happening!" and "50% done".](custom-progressview.png)
     ///
     public var currentValueLabel: ProgressViewStyleConfiguration.CurrentValueLabel?
 }
@@ -32604,7 +32817,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m11.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the top left value in the projection transform
+    /// matrix, which renders as a large, flattened trash can emoji shifted to
+    /// the right.](m11.png)
     public var m11: CGFloat
 
     /// The top middle value in the projection transform matrix.
@@ -32624,7 +32840,10 @@ public struct ProgressViewStyleConfiguration {
     ///     }
     /// }
     /// ```
-    /// ![](m12.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the top middle value in the projection transform
+    /// matrix, which renders as a rotated, flattened trash can emoji in the
+    /// center of the screen.](m12.png)
     public var m12: CGFloat
 
     /// The top right value in the projection transform matrix.
@@ -32645,7 +32864,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m13.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the top right value in the projection transform
+    /// matrix, which renders as a trash can emoji with a warped bottom in the
+    /// center of the screen.](m13.png)
     public var m13: CGFloat
 
     /// The center left value in the projection transform matrix.
@@ -32666,7 +32888,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m21.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the center left value in the projection transform
+    /// matrix, which renders as a trash can emoji with its bottom stretched
+    /// out to the right in the center of the screen.](m21.png)
     public var m21: CGFloat
 
     /// The center value in the projection transform matrix.
@@ -32687,7 +32912,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m22.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using center value in the projection transform
+    /// matrix, which renders as a large, flattened trash can emoji shifted to
+    /// the right.](m22.png)
     public var m22: CGFloat
 
     /// The center right value in the projection transform matrix.
@@ -32708,7 +32936,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m23.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the center right value in the projection transform
+    /// matrix, which renders as a trash can emoji with its top stretched
+    /// out to the right in the center of the screen.](m23.png)
     public var m23: CGFloat
 
     /// The bottom left value in the projection transform matrix.
@@ -32729,7 +32960,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m31.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the bottom left value in the projection transform
+    /// matrix, which renders as a normal looking trash can emoji shifted
+    /// to the right side of the screen.](m31.png)
     public var m31: CGFloat
 
     /// The bottom center value in the projection transform matrix.
@@ -32747,7 +32981,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m32.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the bottom center value in the projection transform
+    /// matrix, which renders as a normal looking trash can emoji shifted
+    /// to the bottom half of the screen.](m32.png)
     public var m32: CGFloat
 
     /// The bottom right value in the projection transform matrix.
@@ -32765,12 +33002,15 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m33.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the bottom right value in the projection transform
+    /// matrix, which renders as a blown up trash can emoji shifted
+    /// to the bottom right half of the screen.](m33.png)
     public var m33: CGFloat
 
     /// Creates a projection transform equal to the identity matrix.
     ///
-    /// Use this initilizer to create a matrix that does nothing so that
+    /// Use this initializer to create a matrix that does nothing so that
     /// you can modify it afterwards.
     ///
     /// ```
@@ -32786,7 +33026,10 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](m11.png)
+    /// ![A screenshot displaying a text view of a trash can emoji that applies
+    /// a projection transform using the top left value in the projection transform
+    /// matrix, which renders as a large, flattened trash can emoji shifted to
+    /// the right.](m11.png)
     @inlinable public init() { }
 
     /// Creates a projection transform from a `CGAffineTransform`.
@@ -32806,7 +33049,8 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![471A4641-6C43-4407-A9E5-9DD446D77365](471A4641-6C43-4407-A9E5-9DD446D77365.png)
+    /// ![A screenshot displaying a trash can emoji rendered upside down on the
+    /// left half of the screen by applying a projection transform with a rotation angle.](471A4641-6C43-4407-A9E5-9DD446D77365.png)
     ///
     /// - Parameter m: The Core Graphics affine transform matrix.
     @inlinable public init(_ m: CGAffineTransform) { }
@@ -32833,7 +33077,9 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](projectiontransform-isidentity.png)
+    /// ![A screenshot displaying a normal sized trash can emoji in the center of
+    /// the screen. The isIdentity variable returns true as the projection transform
+    /// is the identity matrix.](projectiontransform-isidentity.png)
     @inlinable public var isIdentity: Bool { get }
 
     /// Whether the projection transform matrix is an affine transform.
@@ -32857,7 +33103,9 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![471A4641-6C43-4407-A9E5-9DD446D77365](471A4641-6C43-4407-A9E5-9DD446D77365.png)
+    /// ![A screenshot displaying a normal sized, upside down trash can emoji in the center of
+    /// the screen. The isAffine variable returns true as the projection transform
+    /// is an affine transform (preserves lines and parallelism).](471A4641-6C43-4407-A9E5-9DD446D77365.png)
     @inlinable public var isAffine: Bool { get }
 
     /// Inverts the projection transform matrix if it's invertible.
@@ -32879,7 +33127,8 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](projectiontransform-invert.png)
+    /// ![A screenshot displaying a rotated trash can emoji rendered by the invert
+    /// function to face the bottom left of the screen.](projectiontransform-invert.png)
     ///
     /// - Returns: A Boolean of whether the matrix was successfully inverted.
     public mutating func invert() -> Bool { }
@@ -32908,7 +33157,9 @@ public struct ProgressViewStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](projectiontransform-inverted.png)
+    /// ![A screenshot displaying two trash can emojis in a VStack, both rotated
+    /// by a projection transform, with the second rotated as an inversion of the first.
+    /// The result is a view in which both trash can tops lean towards each other.](projectiontransform-inverted.png)
     ///
     /// - Returns: An inverted projection transform matrix.
     public func inverted() -> ProjectionTransform { }
@@ -32934,7 +33185,7 @@ extension ProjectionTransform {
 	/// Concatenates two projection transform matrices together to make a new one.
     ///
     /// Projection matrix concatenation is mathematically equivalent to
-    /// multiplication. Matrix multiplicaiton is *not* commutative.
+    /// multiplication. Matrix multiplication is *not* commutative.
     ///
     /// ```
     /// struct RotatedTrashCanView: View {
@@ -32950,7 +33201,8 @@ extension ProjectionTransform {
     /// }
     /// ```
     ///
-    /// ![](projectiontransform-concatenating.png)
+    /// ![A screenshot displaying a trash can emoji rendered upside down by
+    /// concatenating two projection transforms to total the effect at a 3 radian rotation.](projectiontransform-concatenating.png)
 	///
 	/// - Parameter rhs: The projection transform matrix to concatenate.
 	/// - Returns: A new concatenated projection transform matrix.
@@ -32982,7 +33234,10 @@ extension ProjectionTransform {
 /// }
 /// ```
 ///
-/// ![RadialGradient Example 1](3CAA9064-F9B5-4B66-92F4-D1402CCB1CC2.png)
+/// ![A screenshot displaying a large square in the center of the screen with a
+/// radial gradient applied at a start radius of 1 and end radius of 100. The
+/// gradient uses red and yellow, so at small radii the square appears red, but
+/// as it moves out the gradient transitions to yellow.](3CAA9064-F9B5-4B66-92F4-D1402CCB1CC2.png)
 ///
 /// The gradient applies the color function as the distance from a center point,
 /// scaled to fit within the defined start and end radii. The gradient maps the
@@ -33005,7 +33260,10 @@ extension ProjectionTransform {
     /// }
     /// ```
     ///
-    /// ![RadialGradient Example 1](radial-gradient-example.png)
+    /// ![A screenshot displaying a large square in the center of the screen with a
+    /// radial gradient applied at a start radius of 1 and end radius of 100. The
+    /// gradient uses red and yellow, so at small radii the square appears red, but
+    /// as it moves out the gradient transitions to yellow.](radial-gradient-example.png)
     ///
 	/// - Parameters:
 	///   - gradient: The gradient containing the colors to transition through.
@@ -33037,7 +33295,8 @@ extension ProjectionTransform {
 /// }
 /// ```
 ///
-/// ![Rectangle fill and frame example](1663CD41-6656-4213-8758-CDBA336DFD50.png)
+/// ![A screenshot displaying a filled blue rectangle at the center of the screen
+/// which renders with width of 250 and height of 150 given the frame applied. ](1663CD41-6656-4213-8758-CDBA336DFD50.png)
 ///
 /// To add a border, use the ``Shape/stroke(_:lineWidth:)`` modifier, and use
 /// the ``Rectangle/inset(by:)`` modifier to inset the rectangle by half of the
@@ -33054,7 +33313,9 @@ extension ProjectionTransform {
 /// }
 /// ```
 ///
-/// ![Rectangle inset and stroke example](F421C7B6-8DF5-4A8C-8DA0-2DD4799C9759.png)
+/// ![A screenshot displaying a rectangle which renders as a blue rectangular border by applying
+/// an inset to the original rectangle and increasing the lineWidth of the stroke
+/// to keep it at its original size.](F421C7B6-8DF5-4A8C-8DA0-2DD4799C9759.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Rectangle : Shape {
@@ -33087,7 +33348,9 @@ extension ProjectionTransform {
     /// }
     /// ```
     ///
-    /// ![Rectangle init example](rectangle-example-4.png)
+    /// ![A screenshot displaying a black filled rectangle that occupies the
+    /// entire screen; since no frame is set, the rectangle aligns itself inside
+    /// of its containing view by default, which renders as a black screen.](rectangle-example-4.png)
     @inlinable public init() { }
 
     /// The type defining the data to animate.
@@ -33128,7 +33391,7 @@ extension Rectangle : InsettableShape {
 /// The reasons to apply a redaction to data displayed on screen.
 ///
 /// Use this type with the ``View/redacted(reason:)`` view modifier to
-/// "redact" a view's contents. For now, that simply means to reaplace
+/// "redact" a view's contents. For now, that simply means to replace
 /// the view with a placeholder.
 ///
 /// In the future, this type may get more optionality, but as of now,
@@ -33146,7 +33409,9 @@ extension Rectangle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](redactionreasons.png)
+/// ![A screenshot displaying two labels in a VStack, each composed of a person
+/// icon followed by text. The first reads "Taylor Swift" next to the icon, while
+/// the second is redacted and has a grey square followed by a grey rectangle.](redactionreasons.png)
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct RedactionReasons : OptionSet {
 
@@ -33183,7 +33448,10 @@ public struct RedactionReasons : OptionSet {
     /// }
     /// ```
     ///
-    /// ![](redactionreasons.png)
+    /// ![A screenshot displaying two labels in a VStack, each composed of a person
+    /// icon followed by text. The first reads "Taylor Swift" next to the icon, while
+    /// the second is redacted and has a grey square followed by a grey rectangle.
+    /// Displayed data appears as a generic placeholder.](redactionreasons.png)
     public static let placeholder: RedactionReasons
 
     /// The element type of the option set.
@@ -34167,7 +34435,9 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
 /// }
 /// ```
 ///
-/// ![](rotatedshape.png)
+/// ![A screenshot displaying a large orange rectangular border surrounding
+/// a smaller black filled rectangle which is rotated 30 degrees by the
+/// rotatedShape initializer.](rotatedshape.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct RotatedShape<Content> : Shape where Content : Shape {
 
@@ -34189,7 +34459,11 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
     /// }
     /// ```
     ///
-    /// ![](rotatedshape-shape.png)
+    /// ![A screenshot displaying a ZStack containing two rectangles. The bottom
+    /// layer is a rotated black filled rectangle, rendered by the rotatedShape
+    /// initializer. The top layer calls on the shape property to reproduce the
+    /// original shape before it was rotated, with an added opacity and color view
+    /// modifier to make it appear a light orange. ](rotatedshape-shape.png)
     public var shape: Content
 
     /// The amount to rotate the original shape.
@@ -34209,7 +34483,10 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
     /// }
     /// ```
     ///
-    /// ![](rotatedshape-angle.png)
+    /// ![A screenshot displaying a black rectangle rotated by 30 degrees using
+    /// the rotatedShape initializer, with text at the top of the screen that reads
+    /// "Rotated: 30.000000 degrees." The text view uses the angle property to
+    /// pull the value from the rotatedShape object.](rotatedshape-angle.png)
     public var angle: Angle
 
     /// The anchor point to rotate the shape around.
@@ -34230,7 +34507,10 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
     /// }
     /// ```
     ///
-    /// ![](rotatedshape-anchor.png)
+    /// ![A screenshot displaying a black rectangle rotated by 30 degrees using
+    /// the rotatedShape initializer, with text at the top of the screen that reads
+    /// "Anchored at (0.500000, 0.500000)." The text view uses the anchor property to
+    /// pull the location of the anchor from the rotatedShape object.](rotatedshape-anchor.png)
     public var anchor: UnitPoint
 
     /// Creates a rotated shape from an original shape, an angle, and an anchor point.
@@ -34247,7 +34527,10 @@ public struct ReferenceFileDocumentConfiguration<Document> where Document : Refe
     /// }
     /// ```
     ///
-    /// ![](rotatedshape.png)
+    /// ![A screenshot displaying an orange rectangular border around the screen,
+    /// with an identically sized black filled rectangle anchored at its bottom left
+    /// corner. The initializer renders the black rectangle at a 30 degree rotation
+    /// from its anchor, which is specified as bottomLeading in its initialization.](rotatedshape-fixed.png)
     ///
     /// - Parameters:
     ///   - shape: The original shape to rotate.
@@ -34607,7 +34890,10 @@ extension RoundedCornerStyle : Hashable {
     /// }
     /// ```
     ///
-    /// ![RoundedRectangle cornerSize example](roundedrectangle-example-6.png)
+    /// ![A screeenshot displaying two black filled rounded rectangles in a VStack initialized
+    /// with cornerSize. The first uses a cornerSize width that is larger than its
+    /// height, which produces a smoother rounded corner, whereas the second uses a
+    /// height double its width, which produces sharper corners.](roundedrectangle-example-6.png)
     public var cornerSize: CGSize
 
     /// The rounded corner style of your rounded rectangle's corners.
@@ -34628,7 +34914,10 @@ extension RoundedCornerStyle : Hashable {
     /// }
     /// ```
     ///
-    /// ![RoundedRectangle init example](roundedrectangle-example-3.png)
+    /// ![A screenshot displaying two black filled rounded rectangles in a VStack;
+    /// the first uses a circular style which renders with slightly sharper edges,
+    /// whereas the second uses a continuous style, which renders as slightly
+    /// smoother on all edges.](roundedrectangle-example-3.png)
     ///
     /// - See also: ``RoundedCornerStyle``
     public var style: RoundedCornerStyle
@@ -34658,7 +34947,10 @@ extension RoundedCornerStyle : Hashable {
     /// }
     /// ```
     ///
-    /// ![RoundedRectangle init with cornerSize example](roundedrectangle-example-3.png)
+    /// ![A screenshot displaying two black filled rounded rectangles in a VStack
+    /// which specify the width and height of their corners in the RoundedRectangle
+    /// initializer. The dimensions are the same, but the second also applies a
+    /// continuous style, which makes it appear slightly smoother.](roundedrectangle-example-3.png)
     @inlinable public init(cornerSize: CGSize, style: RoundedCornerStyle = .circular) { }
 
     /// Creates a RoundedRectangle with specified rounded corner radius.
@@ -34681,7 +34973,10 @@ extension RoundedCornerStyle : Hashable {
     /// }
     /// ```
     ///
-    /// ![RoundedRectangle init with cornerRadius example](roundedrectangle-example-3.png)
+    /// ![A screenshot displaying two black filled rounded rectangles in a VStack
+    /// which specify the radii of their corners in the RoundedRectangle
+    /// initializer. The dimensions are the same, but the second also applies a
+    /// continuous style, which makes it appear slightly smoother.](roundedrectangle-example-3.png)
     @inlinable public init(cornerRadius: CGFloat, style: RoundedCornerStyle = .circular) { }
 
     /// Used to describe a RoundedRectangle as a path in a `CGRect`.
@@ -34762,7 +35057,10 @@ extension RoundedRectangle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![0689E6DD-9B1A-43A0-84F2-CBA2EC6EEF13](0689E6DD-9B1A-43A0-84F2-CBA2EC6EEF13.png)
+/// ![A screenshot displaying a pink background that extends to every edge
+/// of the screen, with text in the center that reads "I am everywhere (except
+/// the software keyboard)." The ignoresSafeArea view modifier is applied to specify
+/// which edges should ignore safe areas, in this case top and bottom.](0689E6DD-9B1A-43A0-84F2-CBA2EC6EEF13.png)
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct SafeAreaRegions : OptionSet {
 
@@ -34821,7 +35119,11 @@ extension RoundedRectangle : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](safearearegions-container.png)
+    /// ![A screenshot displaying a pink background that extends to every edge
+    /// of the screen, with text in the center that reads "I am everywhere (except
+    /// the software keyboard)." The ignoresSafeArea view modifier is applied to specify
+    /// which edges should ignore safe areas, in this case top and bottom. The
+    /// container variable clarifies to the view modifier which container it acts on.](safearearegions-container.png)
     public static let container: SafeAreaRegions
 
     /// The safe area matching the current extent of any software
@@ -34841,7 +35143,11 @@ extension RoundedRectangle : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](safearearegions-keyboard.png)
+    /// ![A screenshot displaying a pink background with the keyboard visible
+    /// and a text field that reads "I am behind the keyboard." Since the
+    /// ignoresSafeArea view modifier acts on the keyboard, when the keyboard
+    /// pops up the text field stays in the same place. Without that view
+    /// modifier, the keyboard would shift it up towards the top of the screen.](safearearegions-keyboard.png)
     public static let keyboard: SafeAreaRegions
 
     /// All safe area regions.
@@ -34860,7 +35166,11 @@ extension RoundedRectangle : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](safearearegions-all.png)
+    /// ![A screenshot displaying a pink background permeating the whole screen
+    /// with the keyboard visible on the lower half and a text field directly
+    /// above it which reads "I am everywhere." Since all safe area regions
+    /// are ignored, the text field remains in place (rather than shifted up)
+    /// and the pink background extends to all edges.](safearearegions-all.png)
     public static let all: SafeAreaRegions
 
     /// The element type of the option set.
@@ -35142,7 +35452,10 @@ extension RoundedRectangle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](scaledshape.png)
+/// ![A screenshot displaying an orange rectangular border near the edges of
+/// the screen. Inset within this border is a black filled rectangle that is
+/// scaled down to half the size of its surrounding border by applying a 0.5 scale
+/// in the scaledShape initializer.](scaledshape.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct ScaledShape<Content> : Shape where Content : Shape {
 
@@ -35164,7 +35477,11 @@ extension RoundedRectangle : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](scaledshape-2.png)
+    /// ![A screenshot displaying a large red circle in the center of the screen
+    /// with a smaller darker circle overlaid. The smaller circle is a scaled down
+    /// version of the larger one, rendered by the scaledShape initializer. By
+    /// calling on the shape property of the scaledShape, the original sized circle is
+    /// accessible in the ZStack.](scaledshape-2.png)
     public var shape: Content
 
     /// The scale factor.
@@ -35184,7 +35501,10 @@ extension RoundedRectangle : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](scaledshape-scale.png)
+    /// ![A screenshot displaying a black filled circle in the center of the
+    /// screen with text at the top of the screen that describes the scale
+    /// factors in both dimensions. The scale factors are retrieved by the
+    /// scale property of the scaledShape object.](scaledshape-scale.png)
     public var scale: CGSize
 
     /// The unit point to scale the view from.
@@ -35204,7 +35524,11 @@ extension RoundedRectangle : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](scaledshape-anchor.png)
+    /// ![A screenshot displaying a black filled circle in the center of the
+    /// screen with text at the top of the screen that describes the location of
+    /// anchor in both dimensions. The anchor location is retrieved by the
+    /// anchor property of the scaledShape object. In this case the anchor is
+  /// located at the center of the screen, so the reading is (0.500000,0.500000).](scaledshape-anchor.png)
     ///
     public var anchor: UnitPoint
 
@@ -35214,7 +35538,7 @@ extension RoundedRectangle : InsettableShape {
     /// struct HugeShapeView: View {
     ///     var body: some View {
     ///         ScaledShape(shape: Rectangle(),
-    ///                     scale: CGSize(width: 2, height: 2),
+    ///                     scale: CGSize(width: 0.5, height: 0.5),
     ///                     anchor: .center)
     ///         .border(Color.orange)
     ///         .padding()
@@ -35222,7 +35546,11 @@ extension RoundedRectangle : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](scaledshape-init.png)
+    /// ![A screenshot displaying an orange rectangular border near the edges of
+    /// the screen. Inset within this border is a black filled rectangle that is
+    /// scaled down to half the size of its surrounding border by applying a 0.5 scale
+    /// in the scaledShape initializer. The anchor is also specified by the initializer
+    /// to ensure the shape is scaled from the center of the screen.](scaledshape-init.png)
     ///
     /// - Parameters:
     ///   - shape: The shape to be scaled.
@@ -36290,7 +36618,8 @@ extension ScenePhase : Hashable {
 ///         }
 ///     }
 ///
-/// ![](scenestorage-1.png)
+/// ![A screenshot displaying a keyboard view on a white background with a
+/// text field above it that reads "Kanye."](scenestorage-1.png)
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct SceneStorage<Value> : DynamicProperty {
 
@@ -36949,7 +37278,9 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](scroll-view-init-shows-indicators-content-ex2.gif)
+    /// ![A gif displaying a list of fruits in an HStack, where the axis has been
+    /// changed to horizontal to modify the scroll direction. This way, the user
+    /// is able to scroll horizontally through the list of fruit in the HStack.](scroll-view-init-shows-indicators-content-ex2.gif)
     ///
     /// You can also allow the the ``ScrollView`` to scroll both horizontally
     /// and vertically:
@@ -36974,7 +37305,9 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](scroll-view-axes-ex2.gif)
+    /// ![A gif displaying a VStack of several HStacks of fruits. Since the axis
+    /// has been changed to include both horizontal and vertical to modify scroll direction, the user is able
+    /// to scroll up and down and also sideways to see all of the available items.](scroll-view-axes-ex2.gif)
     ///
     public var axes: Axis.Set
 
@@ -37009,7 +37342,8 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![](show-indicators-ex.gif)
+    /// ![A gif that scrolls through a series of text views of fruits in a VStack
+    /// with no indicators visible, as showsIndicators is set to false.](show-indicators-ex.gif)
     ///
     public var showsIndicators: Bool
 
@@ -37565,7 +37899,9 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// }
 /// ```
 ///
-/// ![](secure-field-ex.gif)
+/// ![A gif displaying a secure text field being used, in which each character
+/// typed is displayed as a dot on the screen. Once the user confirms the password,
+/// a text view appears that reads "Password has been entered."](secure-field-ex.gif)
 ///
 /// ![A secure text field user interface element designed to pass data into a state object.](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -37621,7 +37957,11 @@ extension SecureField where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](localized-string-key-ex.gif)
+    /// ![A gif displaying a secure text field being used, in which each character
+    /// typed is displayed as a dot on the screen. The text field has a localized
+    /// string key placeholder, so it reads "Password" before anything is entered.
+    /// Once the user confirms the password, a text view appears that reads
+    /// "Password has been entered."](localized-string-key-ex.gif)
     ///
     /// - Parameters:
     ///   - titleKey: The localized string key placeholder, which is visible when the field is empty.
@@ -38573,7 +38913,9 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
 /// }
 /// ```
 ///
-/// ![81619922-BF1E-403F-BFB7-B578677D5EAE](81619922-BF1E-403F-BFB7-B578677D5EAE.png)
+/// ![A screenshot displaying a light grey slider on a white background with
+/// the controlling point slid all the way to the left side since the initial value is
+/// set to 0.](81619922-BF1E-403F-BFB7-B578677D5EAE.png)
 ///
 /// In general, a slider has these four options:
 /// 1. Add a **label**
@@ -38617,7 +38959,10 @@ extension Slider {
     /// }
     /// ```
     ///
-    /// ![](slider.png)
+    /// ![A screenshot displaying a slider at half capacity with minimumValueLabel
+    /// and maximumValueLabel set to be a chick emoji and a rooster emoji, respectively.
+    /// The left hand side of the slide is the minimum label and the right side is
+    /// the max. The slider itself is also labeled "Age" which is not visible in this view.](slider.png)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -38648,7 +38993,12 @@ extension Slider {
     /// }
     /// ```
     ///
-    /// ![](slider.png)
+    /// ![A screenshot displaying a slider at half capacity with minimumValueLabel
+    /// and maximumValueLabel set to be a chick emoji and a rooster emoji, respectively.
+    /// The left hand side of the slide is the minimum label and the right side is
+    /// the max. The slider itself is also labeled "Age" which is not visible in this view.
+    /// In this case, a step size is also specified in the initializer which makes the
+    /// movement of the slider discrete, rather than a smooth movement from side to side.](slider.png)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -38766,7 +39116,8 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](slider-init-visoec-ex.gif)
+    /// ![A gif displaying a slider from 0 to 100 initialized with a step size of 10. A text
+    /// view above it reads "Value:" followed by the current value of the slider.](slider-init-visoec-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -38796,7 +39147,9 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
 /// }
 /// ```
 ///
-/// ![90EBB832-008C-455C-A969-28C1363B874C](90EBB832-008C-455C-A969-28C1363B874C.png)
+/// ![A screenshot displaying text reading "Ouch I'm crammed" which is pushed
+/// up against the right side of the screen. Arranging the text in an HStack next
+/// to a spacer places the text as far right as possible.](90EBB832-008C-455C-A969-28C1363B874C.png)
 ///
 /// A spacer can also be framed to take a specific amount of space:
 ///
@@ -38813,7 +39166,9 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
 /// }
 /// ```
 ///
-/// ![C543EFB6-447B-452F-8928-102A3554A7FC](C543EFB6-447B-452F-8928-102A3554A7FC.png)
+/// ![A screenshot displaying text at the bottom of the screen that reads "I'm
+/// 15 points off the ground." The text is arranged in a VStack sandwiched by a
+/// spacer on either side, but the bottom spacer is framed to only take up 15 points.](C543EFB6-447B-452F-8928-102A3554A7FC.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Spacer {
 
@@ -38838,7 +39193,10 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](spacer-min-length-ex.gif)
+    /// ![A gif displaying a spacer in an HStack followed by a button that reads
+    /// "Cram!" and a text view that reads "Ouch I'm crammed." The button action
+    /// sets the minimum length of the spacer to 300 points, so when it is clicked,
+    /// it pushes the text and button over to the right in order to fulfill its minimum length.](spacer-min-length-ex.gif)
     ///
     public var minLength: CGFloat?
 
@@ -38861,7 +39219,9 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](spacer-init-1.png)
+    /// ![A screenshot displaying text reading "Ouch I'm crammed" which is pushed
+    /// up against the right side of the screen. Arranging the text in an HStack next
+    /// to a spacer places the text as far right as possible.](spacer-init-1.png)
     ///
     /// Spacers ordinarily take up only as much space is left by other views. However,
     /// your spacer can also specify a minimum length:
@@ -38877,7 +39237,10 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](spacer-init-2.png)
+    /// ![A screenshot displaying a text view pushed all the way up against the
+    /// right hand side of the screen that reads "I'm REALLY crammed." Setting the
+    /// minimum length of the spacer makes it so that the text has to be pushed
+    /// in order to fulfill the minimum length of the spacer.](spacer-init-2.png)
     ///
     /// - Parameter minLength: The minimum amount of space the spacer will take up.
     @inlinable public init(minLength: CGFloat? = nil) { }
@@ -39137,7 +39500,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](wrapped-value-ex.gif)
+    /// ![A gif displaying a text view that reads "Apple" with a button underneath
+    /// it that reads "Change Text." When clicked, the text changes to read "Banana."
+    /// The initial value provided to the @State attribute is Apple.](wrapped-value-ex.gif)
     ///
     /// - Parameter wrappedValue: An initial wrappedValue for a state.
     public init(wrappedValue value: Value) { }
@@ -39171,7 +39536,10 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](initial-value-ex.gif)
+    /// ![A gif displaying a text field that reads "Ron Wayne;" when deleted, it
+    /// reveals light grey text that reads "Type your name." Initializing the State
+    /// property in the structure's initializer places the starting name, but it can
+    /// be changed by the user.](initial-value-ex.gif)
     ///
     /// - Parameter value: An initial value of the state.
     public init(initialValue value: Value) { }
@@ -39217,7 +39585,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     ///         }
     ///     }
     ///
-    /// ![](state-projectedvalue.png)
+    /// ![A screenshot displaying a keyboard on the lower half of the screen and a
+    /// text field above that reads "The Wedding, pt. 2." The state property title is
+    /// projected as a binding to the text field. ](state-projectedvalue.png)
     public var projectedValue: Binding<Value> { get }
 }
 
@@ -39559,7 +39929,11 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![](stepper-ex.gif)
+/// ![A gif displaying a stepper on the right side of the screen and a number
+/// on the left which reflects the value that the stepper has reached. When the user
+/// selects the plus button, the number is incremented by 1, and when the user selects
+/// the minus button, the number is decremented by 1. The initial value passed
+/// to the text is 0, a local state variable.](stepper-ex.gif)
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -39602,7 +39976,11 @@ public struct Stepper<Label> : View where Label : View {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-oi-od-oec-l-ex.gif)
+    /// ![A gif with a colored stepper across the center of the screen that reads
+    /// a value and a color with the plus/minus on the right side. The initial
+    /// value is 0 and the color orange, but as the stepper is incremented, the
+    /// array of colors is cycled through and each time the background is
+    /// re-rendered to reflect the updated color.](stepper-init-oi-od-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///     - onIncrement: The closure to execute when the user clicks or taps
@@ -39653,7 +40031,10 @@ extension Stepper {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-v-s-oec-l-ex.gif)
+    /// ![A gif displaying a stepper that reads a current value and a step size,
+    /// with the plus/minus on the right side. Here, the initial value is set to
+    /// 1 and the step set to 5, so each time the user increments the value increases
+    /// by 5.](stepper-init-v-s-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///   - value: The ``Binding`` to a value that you provide.
@@ -39694,7 +40075,10 @@ extension Stepper {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-v-i-s-oec-l-ex.gif)
+    /// ![A gif displaying a stepper that reads the current value in a closed range
+    /// from 1 to 50. The text reads "Current: # in 1...50 stepping by 5." The
+    /// value starts at 0 and each time the user increments, the current number
+    /// changes to reflect where the stepper is at in its range.](stepper-init-v-i-s-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A ``Binding`` to a value that you provide.
@@ -39758,7 +40142,11 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-oi-od-oec-l-ex.gif)
+    /// ![A gif with a colored stepper across the center of the screen that reads
+    /// a value and a color with the plus/minus on the right side. The initial
+    /// value is 0 and the color orange, but as the stepper is incremented, the
+    /// array of colors is cycled through and each time the background is
+    /// re-rendered to reflect the updated color.](stepper-init-oi-od-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
@@ -39812,7 +40200,9 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-oi-od-oec-ex.gif)
+    /// ![A gif displaying a stepper that reads "Step through colors." When incremented,
+    /// the background of the stepper re-renders to reflect an updated color in its array.
+    /// This initializer uses a string title as the text for the label.](stepper-init-oi-od-oec-ex.gif)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
@@ -39850,7 +40240,10 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-v-s-oec-l-ex.gif)
+    /// ![A gif displaying a stepper that reads a current value and a step size,
+    /// with the plus/minus on the right side. Here, the initial value is set to
+    /// 1 and the step set to 5, so each time the user increments the value increases
+    /// by 5.](stepper-init-v-s-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
@@ -39888,7 +40281,9 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](stepper-string.png)
+    /// ![A screenshot displaying a stepper that reads "Step me up" on the left side.
+    /// The step is initialized to 5 in the stepper, but there is no display of
+    /// the value, so nothing actually happens when the user increments or decrements.](stepper-string.png)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
@@ -39928,7 +40323,11 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-75f88-ex.gif)
+    /// ![A gif displaying a stepper with the localized string key label "Step city,"
+    /// and text above it that reads "Current Stepper Value:" followed by the current
+    /// value. The step is initialized to 5 and the value set to 0, as well as
+    /// a closed range from 1 to 50. As the user increments the stepper, the value
+    /// increases by 5, but nothing else in the view changes.](stepper-init-75f88-ex.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
@@ -39969,7 +40368,10 @@ extension Stepper where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](stepper-init-v-i-s-oec-l-ex.gif)
+    /// ![A gif displaying a stepper that reads the current value in a closed range
+    /// from 1 to 50. The text reads "Current: # in 1...50 stepping by 5." The
+    /// value starts at 0 and each time the user increments, the current number
+    /// changes to reflect where the stepper is at in its range.](stepper-init-v-i-s-oec-l-ex.gif)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
@@ -46925,7 +47327,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](allow-hit-testing-ex.png)
+    /// ![A screenshot with a button in the center of the screen that reads
+    /// "Can't touch this" to denote that the button is not clickable given
+    /// that user interaction was disabled by the view modifier.](allow-hit-testing-ex.png)
     ///
     /// - Parameter enabled: A boolean for whether the view allows user interaction.
     @inlinable public func allowsHitTesting(_ enabled: Bool) -> some View { }
@@ -46953,7 +47357,10 @@ extension View {
     ///
     /// Whenever a view is rendered, even a previously rendered child view, `onAppear` will run. For example:
     ///
-    /// ![On Appear Again](on-appear.gif)
+    /// ![A gif with a toggle in the center of the screen with text above it that
+    /// reads "We've created: _# bananas." Each time the toggle is clicked, a
+    /// banana emoji appears below it and the number in the above text increases by
+    /// one, since the action passed to onAppear is to increment banana count.](on-appear.gif)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -47001,7 +47408,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](view-on-dissapear-perform-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "DO IT",
+    /// with text underneath it in a VStack that reads "When I disappear, this
+    /// finger emoji will become a banana." When pressed, the view disappears
+    /// to reveal a banana emoji.](view-on-dissapear-perform-ex.gif)
     ///
     /// - Parameter action: The action to perform. If `action` is `nil`, the
     ///   call has no effect.
@@ -47065,7 +47475,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](context-menu-card-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Press and
+    /// hold for cards." When held, the view modifier renders a context menu with four items,
+    /// each reading a different suit in a standard deck of cards.](context-menu-card-ex.gif)
     ///
     /// - Parameter menuItems: A ``contextMenu`` that contains one or more menu items.
     /// - Returns: A view that adds a contextual menu to this view.
@@ -47120,7 +47532,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](context-menu-card-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Press and
+    /// hold for cards." When held, the view modifier renders a context menu with four items,
+    /// each reading a different suit in a standard deck of cards.](context-menu-card-ex.gif)
     ///
     /// - Parameter contextMenu: A context menu container for views that you
     ///   present as menu items in a contextual menu.
@@ -47153,7 +47567,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](menustyle-modifier.png)
+    /// ![A screenshot with a button in the center of the screen that reads "PDF,"
+    /// which holds down to reveal a menu with two options: Save as PDF or Open
+    /// in Preview which are displayed in a borderless box as rendered by
+    /// passing BorderlessButtonMenuStyle to the modifier.](menustyle-modifier.png)
     ///
     /// Existing menu styles include:
     /// - ``DefaultMenuStyle``
@@ -47192,7 +47609,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](view-menu-style-pdf-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "PDF" surrounded
+    /// by a rectangular red border, which holds down to reveal a menu with two
+    /// options: Save as PDF or Open in Preview which are displayed in a borderless
+    /// box as rendered by passing BorderlessButtonMenuStyle to the modifier.](view-menu-style-pdf-ex.gif)
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
@@ -47233,7 +47653,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](gesture-including-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Double tap me"
+    /// followed by a 2 emoji. When double tapped, the gesture view modifier adds
+    /// another 2 emoji to the end of the string.](gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -47280,7 +47702,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](high-priority-gesture-including-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Double tap me"
+    /// followed by a 2 emoji. When double tapped, the gesture view modifier would
+    /// like to add a 2 emoji to the end of the string, but the highPriorityGesture
+    /// modifier makes it so that a 1 emoji is added with each single tap. Due to its
+    /// priority, the 1 emoji will be added with each single tap and no 2 emoji is added.](high-priority-gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -47323,7 +47749,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](simultaneous-gesture-including-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Double tap me"
+    /// followed by a 2 emoji. When double tapped, the gesture view modifier would
+    /// like to add a 2 emoji to the end of the string. Since it is used in conjunction
+    /// with the simultaneousGesture modifier, both the 1 and 2 emojis are added
+    /// simultaneously. So, with each double tap, two 1 emojis are added, as well as one 2 emoji.](simultaneous-gesture-including-ex.gif)
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
@@ -47383,6 +47813,12 @@ extension View {
     /// }
     ///
     /// ```
+    ///
+    /// ![A gif with a button in the center of the screen that reads "Import Files."
+    /// When clicked, it shows the fileImporter which appears as a popup with the
+    /// header "Recents" and an option to Cancel. The bottom of the screen gives
+    /// the user the option to select Recents or "Browse," which in turn prompts
+    /// a sign in to iCloud.](film-importer-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the interface should be shown.
@@ -47446,7 +47882,11 @@ extension View {
     ///
     /// ```
     ///
-    /// ![](film-importer-is-presented-ex.gif)
+    /// ![A gif with a button in the center of the screen that reads "Import Files."
+    /// When clicked, it shows the fileImporter which appears as a popup with the
+    /// header "Recents" and an option to Cancel. The bottom of the screen gives
+    /// the user the option to select Recents or "Browse," which in turn prompts
+    /// a sign in to iCloud.](film-importer-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the interface should be shown.
@@ -47530,7 +47970,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](redacted-1.png)
+    /// ![A screenshot with two labels in the center of the screen; the first
+    /// reads "Taylor Swift" with a person icon to the left of it, while the second
+    /// below it is redacted and replaced by a grey box and a grey rectangle.](redacted-1.png)
     ///
     /// Your child view can also read the redacted reason from its environment:
     ///
@@ -47560,7 +48002,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](redacted-2.png)
+    /// ![A screenshot with text in the center of the screen that reads
+    /// "There is nothing down there" to demonstrate that the redacted code produces
+    /// nothing in this case.](redacted-2.png)
     ///
     /// - Parameter reason: The reason for redacting the content.
     public func redacted(reason: RedactionReasons) -> some View { }
@@ -47588,7 +48032,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](unredacted.png)
+    /// ![A screenshot with text in the center of the screen that reads
+    /// "You can't redact me" to demonstrate how the view modifier removes
+    /// redaction reasons for the ChildView and unredacts its text.](unredacted.png)
     ///
     public func unredacted() -> some View { }
 
@@ -47647,7 +48093,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](overlay.png)
+    /// ![A screenshot with text across the center that reads "I'm covered by
+    /// clouds," which is obscured by cloud emojis rendered by the overlay view modifier.
+    /// The alignment of the text defaults to center.](overlay.png)
     ///
     /// Check out ``View/background(_:alignment:)``, which is the opposite
     /// modifier.
@@ -47673,7 +48121,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](border-1.png)
+    /// ![A screenshot with text in the center fit directly into a purple
+    /// rectangular border which reads "Purple border inside the view bounds,"
+    /// demonstrating that the border is rendered inside the view bounds by default.](border-1.png)
     ///
     /// To place a border around the outside of this view, apply padding of the
     /// same width before adding the border:
@@ -47688,7 +48138,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](border-2.png)
+    /// ![A screenshot with text in the center fit with minor empty space into a purple
+    /// rectangular border which reads "Purple border outside the view bounds,"
+    /// demonstrating that the border is rendered outside the view bounds
+    /// when padding is added that matches the width of the border itself.](border-2.png)
     ///
     /// A border doesn't have to be a plain color - it can be any ``ShapeStyle``, for example,
     /// a ``LinearGradient``:
@@ -47742,7 +48195,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](aspectratio-2.png)
+    /// ![A screenshot with a grey square border in the center of the screen,
+    /// and a purple filled ellipse within it. The ellipse has a 3:4 aspect ratio,
+    /// which makes it so that its width is 3/4 of its height, and the height
+    /// scales to fit the frame of the square.](aspectratio-2.png)
     ///
     /// - Parameters:
     ///   - aspectRatio: The ratio of width to height to use for the resulting
@@ -47777,7 +48233,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](aspectratio-1.png)
+    /// ![A screenshot with a grey square border in the center of the screen,
+    /// and a purple filled ellipse within it, extending both above and below it.
+    /// The ellipse has a 3:4 aspect ratio, which makes it so that its width is
+    /// 3/4 of its height, and the width scales to fit the frame of the square.](aspectratio-1.png)
     ///
     /// - Parameters:
     ///   - aspectRatio: A size that specifies the ratio of width to height to
@@ -47807,7 +48266,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaledtofit.png)
+    /// ![A screenshot with a grey rectangular border in the center of the screen,
+    /// with a pink filled circle set within it, which is rendered by the view
+    /// modifier to fit directly within the height confines of the rectangle.](scaledtofit.png)
     ///
     /// This method is equivalent to calling
     /// ``View/aspectRatio(_:contentMode:)-6576a`` with a `nil` aspectRatio and
@@ -47835,7 +48296,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaledtofill.png)
+    /// ![A screenshot with a grey rectangular border in the center of the screen,
+    /// with a pink filled circle set within it, which is rendered by the view
+    /// modifier to fill the rectangle along its width, extending both above and below
+    /// the height confines.](scaledtofill.png)
     ///
     /// This method is equivalent to calling
     /// ``View/aspectRatio(_:contentMode:)-6576a`` with a `nil` aspectRatio and
@@ -47870,7 +48334,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](fixedsize-2.png)
+    /// ![A screenshot with a square frame in the center and text that reads
+    /// "A single line of text, too long to fit in a box." The text extends outside
+    /// the confines of the box on either side, as rendered by fixing the horizontal
+    /// dimension so that its ideal width is maintained.](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -47905,7 +48372,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](fixedsize-1.png)
+    /// ![A screenshot with a square frame in the center, with text fit within it
+    /// on two lines that reads "A single line of text, too long to fit in a box."
+    /// Without the fixedSize modifier, the text adjusts to fit.](fixedsize-1.png)
     ///
     /// The `fixedSize()` modifier can be used to create a view that maintains
     /// the *ideal size* of its children both dimensions:
@@ -47921,7 +48390,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](fixedsize-2.png)
+    /// ![A screenshot with a square frame in the center and text that reads
+    /// "A single line of text, too long to fit in a box." The text extends outside
+    /// the confines of the box on either side, as rendered by fixing the horizontal
+    /// dimension so that its ideal width is maintained.](fixedsize-2.png)
     ///
     /// This can result in the view exceeding the parent's bounds, which may or
     /// may not be the effect you want.
@@ -48201,7 +48673,9 @@ extension View {
     ///     }
     /// }
     /// ```
-    /// ![](offset-2.png)
+    /// ![A screenshot with a grey rectangular frame in the center of the screen,
+    /// underneath which the actual text is offset below and to the right by CGSize
+    /// and confined within a green rectangle.](offset-2.png)
     ///
     /// - Parameter offset: The distance to offset this view.
     ///
@@ -48361,7 +48835,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](position-2.png)
+    /// ![A screenshot with text near the top of the screen that reads
+    /// "Position by passing a CGPoint()" which is rendered at the new center
+    /// of the view using the position modifier.](position-2.png)
     ///
     /// - Parameter position: The point at which to place the center of this
     ///   view.
@@ -48386,7 +48862,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](position.png)
+    /// ![A screenshot with text near the top of the screen that reads
+    /// "Position by passing the x and y coordinates" which is rendered at the new center
+    /// of the view using the position modifier.](position.png)
     ///
     /// - Parameters:
     ///   - x: The x-coordinate at which to place the center of this view.
@@ -48424,7 +48902,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](ignoressafearea.png)
+    /// ![A screenshot with a fully pink background that extends outside the
+    /// safe area as rendered by the view modifier. The text in the center
+    /// reads "I am everywhere" to demonstrate that the pink extends to every
+    /// part of the screen.](ignoressafearea.png)
     ///
     /// Depending on the surrounding view hierarchy, SwiftUI may not honor an
     /// `edgesIgnoringSafeArea(_:)` request. This can happen, for example, if
@@ -48474,7 +48955,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](ignoressafearea.png)
+    /// ![A screenshot with a fully pink background that extends outside the
+    /// safe area as rendered by the view modifier. The text in the center
+    /// reads "I am everywhere" to demonstrate that the pink extends to every
+    /// part of the screen.](ignoressafearea.png)
     ///
     /// - Parameters:
     ///   - regions: the kinds of rectangles removed from the safe area
@@ -48605,7 +49089,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](zindex.png)
+    /// ![A screenshot with two rectangles in a VStack, the top one yellow and
+    /// the bottom orange. The orange rectangle is rotated 45 degrees such that
+    /// it overlaps with the yellow rectangle above it. However, since the value
+    /// 1 is passed to the zIndex view modifier for the yellow rectangle, it
+    /// has priority in the order and is thus the top layer.](zindex.png)
     ///
     /// - Parameter value: A relative front-to-back ordering for this view; the
     ///   default is `0`.
@@ -48636,7 +49124,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](transformeffect.png)
+    /// ![A screenshot displaying a rectangular border in the center of the
+    /// screen, with text that reads "Projection effects using transforms"
+    /// extending at a 30 degree angle from its left side towards the top of
+    /// the screen.](transformeffect.png)
     ///
     /// - Parameter transform: A
     /// [`CGAffineTransform`](https://developer.apple.com/documentation/coregraphics/cgaffinetransform).
@@ -48683,7 +49174,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](action-sheet-item-ex.gif)
+    /// ![A gif with a VStack in the center of the screen with two button options:
+    /// Eat a banana or Eat a peach. When tapped, each prompts the same food alert
+    /// that pops up from the bottom of the screen. The alerts are rendered uniquely
+    /// by passing the item a binding value for whichever selection the user makes.](action-sheet-item-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the action
@@ -48721,7 +49215,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](action-sheet-is-presented-ex.gif)
+    /// ![A gif with a single button in the center of the screen that reads "Eat"
+    /// followed by a banana emoji. When pressed, the button prompts an action sheet
+    /// from the bottom of the screen asking the user to confirm or cancel. This
+    /// is accomplished by setting the showActionSheet value to true whenever
+    /// the button is interacted with.](action-sheet-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the action sheet should be
@@ -48776,7 +49274,13 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](accentcolor.png)
+    /// ![A screenshot with two buttons and a slider contained within a VStack.
+    /// The first button reads "Regular Button" in blue text, while the second
+    /// reads "Accented Button" in purple text. The slider is also purple. In this
+    /// case, there are two VStacks set within the outer VStack, the second of which
+    /// contains the accented button and the slider. The accentColor view modifier is
+    /// applied to the second VStack, changing the colors of the second two items to
+    /// be purple.](accentcolor.png)
     ///
     /// Another common use of `accentColor(_:)` by mixing it with
     /// The ``Color`` property
@@ -48793,11 +49297,15 @@ extension View {
     ///
     /// In light mode, this produces:
     ///
-    /// ![Light Primary](color-primary-light.png)
+    /// ![A screenshot in light mode with text in the center that reads "Bananas"
+    /// in black text. Passing .primary to the accentColor modifier makes it so
+    /// that in light mode the text is black and thus visible.](color-primary-light.png)
     ///
     /// And in dark mode:
     ///
-    /// ![Dark Primary](color-primary-dark.png)
+    /// ![A screenshot in dark mode with text in the center that reads "Bananas"
+    /// in white text. Passing .primary to the accentColor modifier makes it so
+    /// that in dark mode the text is white and thus visible.](color-primary-dark.png)
     ///
     /// - Parameter accentColor: The color to use as an accent color. If `nil`,
     ///   the accent color continues to be inherited
@@ -48827,7 +49335,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Disabled Example](disabled-example.gif)
+    /// ![A gif with a toggle in the center of the screen that reads "Disable
+    /// the Banana," set in a VStack with a "Banana" button underneath it. When
+    /// toggled to on, the Banana button disables and fades to grey.](disabled-example.gif)
     ///
     /// Another example:
     ///
@@ -48840,7 +49350,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](disabled.png)
+    /// ![A screenshot with a button in the center of the screen that reads
+    /// "Can't touch this" in light grey text to denote that the button is not clickable given
+    /// that user interaction was disabled by the view modifier.](disabled.png)
     ///
     /// - Parameter disabled: A Boolean value that determines whether users can
     ///   interact with this view.
@@ -48904,7 +49416,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaleeffect-3.png)
+    /// ![A screenshot with a grey rectangular frame in the center of the screen
+    /// and a red envelope icon set within it. The icon is anchored on the leading
+    /// edge so it pushes up against the left hand side, but its width and height scales
+    /// are set to 0.9 and 1.3, respectively, so it doesn't fill out the whole width
+    /// of the frame, but it extends both above and below its height.](scaleeffect-3.png)
     ///
     /// - Parameters:
     ///   - scale: A [`CGSize`](https://developer.apple.com/documentation/CoreGraphics/CGSize) that
@@ -48934,7 +49450,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaleeffect-2.png)
+    /// ![A screenshot with a grey rectangular frame in the center of the screen
+    /// and a red envelope icon set over it. The icon is anchored on the leading
+    /// edge so it pushes up against the left hand side, but its width and height are
+    /// scaled by 2, so it extends from the left beyond the confines of the right
+    /// side of the border as well as above and below it.](scaleeffect-2.png)
     ///
     /// - Parameters:
     ///   - s: The amount to scale the view in the view in both the horizontal
@@ -48963,7 +49483,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](scaleeffect.png)
+    /// ![A screenshot displaying a grey rectangular frame in the center of the screen
+    /// and a red envelope icon set within it in the bottom right hand corner.
+    /// The icon is anchored on the trailing bottom edge, but both it's vertical and
+    /// horizontal dimensions are scaled down half. The scaleEffect view modifier
+    /// renders the icon as taking up a quarter of its original frame.](scaleeffect.png)
     ///
     /// - Parameters:
     ///   - x: An amount that represents the horizontal amount to scale the
@@ -48999,7 +49523,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](blur.png)
+    /// ![A screenshot that displays two text views in a VStack; the first
+    /// reads "This is some text" in normal black font, while the second uses the
+    /// blur modifier and reads "This is some blurry text" in blurry, less
+    /// readable font.](blur.png)
     ///
     /// - Parameters:
     ///   - radius: The radial size of the blur. A blur is more diffuse when its
@@ -49014,11 +49541,11 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Brightenen the view by the specified amount.
+    /// Brighten the view by the specified amount.
     ///
     /// Use `brightness(_:)` to brighten the intensity of the colors in a view.
-    /// The example below shows a series of red squares, with their brightness
-    /// increasing from 0 (fully red) to 100% (white) in 20% increments.
+    /// The example below shows a series of yellow squares, with their brightness
+    /// increasing from 0 (fully yellow) to 100% (white) in 20% increments.
     ///
     /// ```
     /// struct ContentView: View {
@@ -49033,8 +49560,10 @@ extension View {
     ///     }
     /// }
     /// ```
-    //
-    /// ![](brightness.png)
+    ///
+    /// ![A screenshot displaying a series of six rectangles arranged in a
+    /// VStack with increasing brightness from top to bottom in 20% increments.
+    /// The colors change from pure yellow on top to white on bottom.](brightness.png)
     ///
     /// - Parameter amount: A value between 0 (no effect) and 1 (full white
     ///   brightening) that represents the intensity of the brightness effect.
@@ -49089,7 +49618,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](color-invert.png)
+    /// ![A screenshot displaying two squares in an HStack, each with an interior
+    /// circle. The first is a red square with a green circle which reads
+    /// "Normal," while the second is an inverted version of the first. It swaps
+    /// the red and green for their complementary colors, teal and purple, using
+    /// the colorInvert view modifier. It's text reads "Inverted."](color-invert.png)
     ///
     /// - Returns: A view that inverts its colors.
     @inlinable public func colorInvert() -> some View { }
@@ -49137,7 +49670,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](color-multiply.png)
+    /// ![A screenshot displaying two squares in an HStack, each with an interior
+    /// circle. The first is a red square with a green circle which reads
+    /// "Normal," while the second is a duplicate with the colorMultiply modifier
+    /// applied with purple. The result is a darker red square and a grey circle.
+    /// It's text reads "Multiply."](color-multiply.png)
     ///
     /// - Parameter color: The color to bias this view toward.
     ///
@@ -49188,7 +49725,13 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](contrast.png)
+    /// ![A screenshot displaying a VStack of seven identical red squares, each
+    /// containing a contrasting green circle. For each square, the contrast
+    /// modifier is used to change the contrast of the circle/square view in
+    /// 20% increments, ranging from -20% contrast to 100%. At -20%, the shape
+    /// appears as a blue square with a purple circle, and at 100% the colors
+    /// are normal red and green as they were initialized. From 0 to 20%, the
+    /// red and green colors brighten to reveal increasing contrast.](contrast.png)
     ///
     /// - Parameter amount: The intensity of color contrast to apply. negative
     ///   values invert colors in addition to applying contrast.
@@ -49219,7 +49762,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](grayscale.png)
+    /// ![A screenshot displaying six rectangles in a VStack, with increasing
+    /// grayscale amounts from top to bottom. The first rectangle appears fully
+    /// yellow, and the color is gradually reduced in intensity until it appears
+    /// as fully grey in the bottom rectangle.](grayscale.png)
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -49252,7 +49798,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](huerotation.png)
+    /// ![A screenshot displaying six rectangles in a VStack, beginning with a
+    /// fully yellow filled rectangle, and applying the hueRotation view modifier to rotate
+    /// the hue with each succeeding rectangle. The colors shift from yellow to
+    /// green to blue from top to bottom.](huerotation.png)
     ///
     /// - Parameter angle: The hue rotation angle to apply to the colors in this
     ///   view.
@@ -49293,7 +49842,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](preferredcolorscheme.png)
+    /// ![A screenshot displaying a button and a slider arranged in a VStack,
+    /// which applies the preferredColorScheme view modifier using dark, making it
+    /// such that the color scheme for the whole view appears in dark mode.](preferredcolorscheme.png)
     ///
     /// - Parameter colorScheme: The color scheme for this view.
     ///
@@ -49308,12 +49859,12 @@ extension View {
     /// A view modifier that adds a luminance to alpha effect to this view.
     ///
     /// The `luminanceToAlpha()` modifier creates a semitransparent mask out of
-    /// the view to which you you apply. The dark regions in a view become
+    /// the view to which you apply it. The dark regions in a view become
     /// transparent, and the bright regions become opaque black. Medium
     /// brightness regions become a partially opaque gray color.
     ///
     /// The example below shows two views: the first is a red square with an
-    /// overlaid green circle; the second is a copy of the first view with where
+    /// overlaid green circle; the second is a copy of the first view where
     /// the `luminanceToAlpha()` modifier's masking operation transforms the
     /// view's brightness levels into an equivalent grayscale version of the
     /// first view:
@@ -49340,7 +49891,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](luminancetoalpha.png)
+    /// ![A screenshot displaying two squares with overlaid circles in an HStack;
+    /// The first is a red square with a green circle, while the second is a copy
+    /// of the first where the luminanceToAlpha view modifier transforms the
+    /// brightness levels such that it appears as an equivalent grayscale version,
+    /// with a darker gray circle set within a lighten gray square.](luminancetoalpha.png)
     ///
     /// - Returns: A view that applies a luminance to alpha effect to this view.
     @inlinable public func luminanceToAlpha() -> some View { }
@@ -49369,7 +49924,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](saturation-modifier.png)
+    /// ![A screenshot displaying six rounded rectangles in a VStack, with
+    /// increasing levels of saturation applied from top to bottom. At full
+    /// saturation, the yellow fill is fully visible, whereas the yello rectangle
+    /// appears grey at its least saturated in the top rectangle.](saturation-modifier.png)
     ///
     /// See related symbol ``View/contrast(_:)``.
     ///
@@ -49417,7 +49975,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Slide transition](with-animation-2.gif)
+    /// ![A gif displaying a "Toggle" button in blue that slides a banana into
+    /// the view when clicked using the transition view modifier. When the
+    /// button is clicked again, the banana slides out of view with the same animation.](with-animation-2.gif)
     ///
     /// ### Using ``withAnimation(_:_:)``
     ///
@@ -49441,7 +50001,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Slide transition](with-animation-2.gif)
+    /// ![A gif displaying a "Toggle" button in blue that slides a banana into
+    /// the view when clicked using the transition view modifier. When the
+    /// button is clicked again, the banana slides out of view with the same animation.
+    /// In this case, withAnimation is used rather than the animation view modifier.](with-animation-2.gif)
     @inlinable public func transition(_ t: AnyTransition) -> some View { }
 
 }
@@ -49472,7 +50035,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](opacity-modifier.png)
+    /// ![A screenshot displaying six rounded rectangles in a VStack, with
+    /// increasing levels of opacity from top to bottom. At the top, the yellow
+    /// rectangle is fully transparent, as opacity is set to 0, whereas at the
+    /// bottom the rectangle has opacity set to 1, making it fully yellow.](opacity-modifier.png)
     ///
     /// - Parameter opacity: A value between 0 (fully transparent) and 1 (fully
     ///   opaque).
@@ -49511,6 +50077,12 @@ extension View {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![A gif displaying two buttons in a VStack, followed by a banana emoji.
+    /// The user has the option to Move the banana or Transport the banana, each
+    /// prompting a different animation; when the move banana button is clicked,
+    /// the banana slides to its offset, whereas transport moves the banana
+    /// without animation.](animation_val.gif)
     ///
     /// - Parameters:
     ///   - animation: The animation to apply. If ``animation`` is `nil`, the view
@@ -49583,9 +50155,9 @@ extension View {
     /// Test `blendMode(_:)` with images. To use the following example, drag in
     /// the following two photos and label them "ocean" and "space".
     ///
-    /// ![New York](ocean.jpg)
+    /// ![An image of the ocean](ocean.jpg)
     ///
-    /// ![Space](space.jpg)
+    /// ![An image of space](space.jpg)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -49660,7 +50232,7 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modiier that composites this view's contents into an offscreen image before final
+    /// A view modifier that composites this view's contents into an offscreen image before final
     /// display.
     ///
     /// The `drawingGroup(opaque:colorMode:)` modifier flattens a subtree of
@@ -49691,7 +50263,10 @@ extension View {
     /// }
     ///  ```
     ///
-    /// ![](drawinggroup.png)
+    /// ![A screenshot displaying a single view with a red rectangle in the center
+    /// of the screen that reads "DrawingGroup" in vaguely blurry black text. The
+    /// drawingGroup modifier renders the two separate views in the ZStack as one view,
+    /// lending a shadow to the text owed to the second view using the blur modifier.](drawinggroup.png)
     ///
     /// - Note: Views backed by native platform views may not render into the
     ///   image. Instead, they log a warning and display a placeholder image to
@@ -49749,7 +50324,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](compositinggroup.png)
+    /// ![A screenshot with a red rectangle in the center of the screen and
+    /// slightly blurred black text that reads "CompositingGroup."](compositinggroup.png)
     ///
     /// - Returns: A view that wraps this view in a compositing group.
     @inlinable public func compositingGroup() -> some View { }
@@ -49794,7 +50370,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](previewdevice.png)
+    /// ![An image of a preview on an iPhone SE as specified by the previewDevice
+    /// view modifier with text that reads "Preview on iPhone SE."](previewdevice.png)
     ///
     ///- Parameter value: The device to display the preview on.
     @inlinable public func previewDevice(_ value: PreviewDevice?) -> some View { }
@@ -49822,7 +50399,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](previewlayout-sizethatfits.png)
+    /// ![An image of a preview in Xcode in which the preview box fits directly
+    /// around text which reads "This box fits me snugly." Using the previewLayout
+    /// view modifier, the preview renders a direct fit by passing .sizeThatFits
+    /// to the modifier.](previewlayout-sizethatfits.png)
     ///
     /// The default value is ``PreviewLayout/device``.
     @inlinable public func previewLayout(_ value: PreviewLayout) -> some View { }
@@ -49849,7 +50429,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](previewdisplayname.png)
+    /// ![An image of a preview in Xcode in which the name at the top of the
+    /// preview is switched from its default value of "Preview" to instead be
+    /// a banana emoji. Text within the preview itself reads "My name is"
+    /// followed by a banana emoji.](previewdisplayname.png)
     ///
     /// The default value is `nil`.
     ///
@@ -49882,7 +50465,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](widgetpreviewcontext.png)
+    /// ![An image of a preview in Xcode that shows a widget in which the time
+    /// reads "4:11 PM." By passing systemSmall to the WidgetPreviewContext,
+    /// the widget shows up smaller in preview.](widgetpreviewcontext.png)
     ///
     /// For more on getting started with widgets, check out
     /// [this tutorial](https://www.raywenderlich.com/11303363-getting-started-with-widgets).
@@ -49944,7 +50529,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](anchorpreference.png)
+    /// ![A screenshot displaying a black rectangular border in the center of
+    /// the screen with text reading "I have a box around me."](anchorpreference.png)
 	///
 	/// - Parameters:
 	///   - key: The key type of the preference key.
@@ -49980,7 +50566,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](clipshape.png)
+    /// ![A screenshot displaying a black circle in the center of the screen
+    /// which reads "pped text in a c," showing only a portion of the original
+    /// text which reads "Clipped text in a circle." The clipShape view modifier
+    /// cuts of the text on either side by enclosing it in the circle.](clipshape.png)
     ///
     /// The resulting view shows only the portion of the text that lies within
     /// the bounds of the circle.
@@ -50015,7 +50604,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](clipped-modifier.png)
+    /// ![A screenshot displaying a rectangular frame in the center of the
+    /// screen which reads "s long text string is clip," showing only a portion
+    /// of the original text which reads "This long text string is clipped."
+    /// Using the clipped view modifier makes it so that the text outside of
+    /// the frame gets cut off.](clipped-modifier.png)
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -50047,7 +50640,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](cornerradius-modifier.png)
+    /// ![A screenshot displaying a black rectangle with rounded corners that
+    /// reads "Rounded Corners" in white text. The text view is modified by
+    /// cornerRadius which makes it so that its frame has rounded corners.](cornerradius-modifier.png)
     ///
     /// - Parameter antialiased: A Boolean value that indicates whether the
     ///   rendering system applies smoothing to the edges of the clipping
@@ -50079,7 +50674,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-1.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a light grey shadow surrounding it, as rendered by the shadow view
+    /// modifier with only the radius specified.](shadow-1.png)
     ///
     /// Modify the color:
     ///
@@ -50094,7 +50691,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-2.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a red shadow surrounding it, as rendered by the shadow view
+    /// modifier with both the radius and color specified.](shadow-2.png)
     ///
     /// Modify the x offset:
     ///
@@ -50109,7 +50708,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-3.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a red shadow offset to the right hand side, as rendered by the shadow view
+    /// modifier with radius, color, and x offset specified.](shadow-3.png)
     ///
     /// Modify the x & y offset:
     ///
@@ -50124,7 +50725,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](shadow-4.png)
+    /// ![A screenshot displaying a white square in the center of the screen
+    /// with a red shadow offset to its lower right hand side, as rendered by the shadow view
+    /// modifier with radius, color, x, and y offset specified.](shadow-4.png)
     ///
     /// - Parameters:
     ///   - color: The shadow's color.
@@ -50167,7 +50770,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](togglestyle-modifier.png)
+    /// ![A screenshot displaying two toggles in a VStack, with the toggleStyle
+    /// view modifier applied to the VStack itself, making it so that both items
+    /// the container have a SwitchToggleStyle. The top toggle reads "Vibrate
+    /// on Ring" and the bottom reads "Vibrate on Silent." Both toggles are
+    /// switched to "on," with their sliders switched to the right side.](togglestyle-modifier.png)
     ///
     /// - Parameter style: The style to set.
     public func toggleStyle<S>(_ style: S) -> some View where S : ToggleStyle { }
@@ -50224,7 +50831,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](image-scale.png)
+    /// ![A screenshot displaying three heart icons in a VStack, each with a label
+    /// to its right hand side to specify the scale used. From top to bottom, the
+    /// icons apply the imageScale modifier as small, medium, and large,
+    /// respectively.](image-scale.png)
     ///
     /// - Parameter scale: One of the relative sizes provided by the image scale
     ///   enumeration.
@@ -50265,7 +50875,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](font-modifier.png)
+    /// ![A screenshot displaying three text views arranged in a VStack; the
+    /// first directly applies large title font using the font view modifier,
+    /// which overrides the smaller default 16 pt font used for the succeeding
+    /// two lines.](font-modifier.png)
     ///
     /// - Parameter font: The default font to use in this view.
     ///
@@ -50367,7 +50980,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](frame.png)
+    /// ![A screenshot displaying a single text view which reads "My frame
+    /// is unaffected," demonstrating that the frame modifier has no effect on
+    /// the text view's display.](frame.png)
     @available(*, deprecated, message: "Please pass one or more parameters.")
     @inlinable public func frame() -> some View { }
 
@@ -50418,12 +51033,14 @@ extension View {
     ///                        minHeight: 50.0, idealHeight: 100.0, maxHeight: 200.0)
     ///         }
     ///         .frame(width: 150.0, height: 150.0)
-    ///         .border(Color.oragne)
+    ///         .border(Color.orange)
     ///     }
     /// }
     /// ```
     ///
-    /// ![](frame-custom.png)
+    /// ![A screenshot displaying an orange frame surrounding a black rectangle
+    /// in the center of the screen. There is empty space between the rectangle
+    /// and the frame on either side.](frame-custom.png)
     ///
     /// - Parameters:
     ///   - minWidth: The minimum width of the resulting frame.
@@ -50569,7 +51186,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](popover-item-ex.gif)
+    /// ![A gif displaying two buttons in a VStack that each read "Popover,"
+    /// paired with a banana and peach emoji, respectively. When clicked, each
+    /// prompts a popover which is applied to the VStack, distinguished by
+    /// a binding passed to the popover. The popover displays two emojis of the
+    /// selected fruit and an option to "Tap to dismiss" below.](popover-item-ex.gif)
     ///
     /// - Parameters:
     ///   - item: A binding to an optional source of truth for the popover.
@@ -50621,7 +51242,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](popover-is-presented-ex.gif)
+    /// ![A gif with a single button in the center which reads "Open sesame,"
+    /// which prompts a popover when clicked with a button to Close. When the
+    /// initial button is pressed, it toggles the value of showPopover to trigger
+    /// the modifier.](popover-is-presented-ex.gif)
     ///
     /// - Parameters:
     ///   - isPresented: A binding to whether the popover is presented.
@@ -50672,7 +51296,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Custom Label Style](custom-labelstyle-comparison.png)
+    /// ![A screenshot displaying two labels in a VStack with a custom label
+    /// style applied. The labels read Banana and Apple and each has a heart
+    /// icon beneath it, the color of which is dictated by the custom label style.](custom-labelstyle-comparison.png)
     ///
     /// This modifier also accepts the default label styles that ship with
     /// SwiftUI:
@@ -50693,9 +51319,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A view displaying a VStack with three labels; the first reads as
-    /// "<3 Banana" and is of default style, the second reads as "<3" and is of
-    /// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
+    /// ![A screenshot displaying three labels reading "Banana" in a VStack with label
+    /// styles applied. The first uses DefaultLabelStyle which pairs a black
+    /// heart icon to the left of the text, while the second uses IconOnlyLabelStyle
+    /// which shows only the heart, and the third uses TitleOnlyLabelStyle,
+    /// showing the text by itself.](default-labelstyle-comparison.png)
     ///
     /// - Note: Creating label styles can be complex. See ``LabelStyle``
     /// for more.
@@ -50731,7 +51359,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](on-hover-perform-ex.gif)
+    /// ![A gif displaying a text view that reads "Come here," which, when
+    /// hovered over with the cursor, changes to read "HOVERING." The onHover
+    /// view modifier determines when the user hovers and switches the text.](on-hover-perform-ex.gif)
     ///
     /// - Parameter action: The action to perform whenever the pointer enters or
     ///   exits this view's frame. If the pointer is in the view's frame, the
@@ -50781,7 +51411,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](hidden.png)
+    /// ![A screenshot displaying two text views, with the second hidden by the
+    /// hidden view modifier. Thus, the screenshot only reads "The invisible
+    /// man hides below," with no other text view visible.](hidden.png)
     ///
     /// - Returns: A hidden view.
     @inlinable public func hidden() -> some View { }
@@ -50812,7 +51444,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](keyboardtype.png)
+    /// ![A screenshot displaying a keyboard and an incomplete email that reads
+    /// "someone@example.c" Here, the keyboardType modifier is applied to the
+    /// TextField to specify emailAddress as the acceptable type.](keyboardtype.png)
     ///
     /// There are several different kinds of specialized keyboard types
     /// available though the
@@ -50850,7 +51484,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](auto-cap-ex.gif)
+    /// ![A gif displaying a text field in which the user types "Blossoms, Peach"
+    /// and the autocapitalization view modifier renders each words with a capital
+    /// letter as it is typed.](auto-cap-ex.gif)
     ///
     /// The
     /// [`UITextAutocapitalizationType`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
@@ -51025,7 +51661,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](flipsforrighttoleftlayoutdirection.png)
+    /// ![A screenshot displaying a text view in the center of the screen which
+    /// reads the Hebrew word "שָׁלוֹם," where the flipsForRightToLeftLayoutDirection
+    /// view modifier is applied to accomodate the language's reading from right
+    /// to left.](flipsforrighttoleftlayoutdirection.png)
     ///
     /// - Parameter enabled: A Boolean value that indicates whether this view
     ///   flips its content horizontally when the layout direction is
@@ -51063,7 +51702,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](textcontenttype.png)
+    /// ![A screenshot displaying a keyboard on the lower half of the screen
+    /// and a text field above which reads "billjames2@icloud.com" Since the
+    /// textContentType is set to emailAddress, the keyboard suggest "com" as
+    /// the last part of the email.](textcontenttype.png)
     ///
     /// - Parameter textContentType: One of the content types available in the
     ///   `UITextContentType` enumeration that identify the semantic meaning
@@ -51111,7 +51753,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](labelshidden.png)
+    /// ![A screenshot displaying two toggles in a VStack, where the first applies
+    /// the labelsHidden view modifier and the second does not. The result is a
+    /// lone toggle on top with no associated label, and a separate toggle below
+    /// with a label that reads "I am not."](labelshidden.png)
     ///
     /// - Note: This modifier does not work for all labels. It applies to
     ///   labels that are external/separate from the rest of the control's
@@ -51162,7 +51807,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](key-board-short-cut-modifiers.gif)
+    /// ![A gif displaying a button that reads "Click or press command+ctrl+P
+    /// to print" followed by a banana emoji. Each time the user clicks the button or
+    /// uses the defined shortcut, a new banana emoji appears above the button as
+    /// rendered by the keyboardShortcut view modifier applied to the button.](key-board-short-cut-modifiers.gif)
     ///
     /// - Parameters:
     ///   - key: A key of type ``KeyEquivalent``.
@@ -51207,7 +51855,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](key-board-short-cut-modifiers.gif)
+    /// ![A gif displaying a button that reads "Click or press command+ctrl+P
+    /// to print" followed by a banana emoji. Each time the user clicks the button or
+    /// uses the defined shortcut, a new banana emoji appears above the button as
+    /// rendered by the keyboardShortcut view modifier applied to the button.](key-board-short-cut-modifiers.gif)
     ///
     /// You can also use ``KeyboardShortcut`` actions directly:
     ///
@@ -51228,7 +51879,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](key-board-short-cut-ex2.gif)
+    /// ![A gif displaying a window that reads "Press ENTER to save or ESC
+    /// to cancel," which uses the default keyboard shortcut actions directly on
+    /// each button.](key-board-short-cut-ex2.gif)
     ///
     public func keyboardShortcut(_ shortcut: KeyboardShortcut) -> some View { }
 
@@ -51291,7 +51944,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationbartitle.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in large bold text above the list.](navigationbartitle.png)
     ///
     /// - Parameter title: A description of this view to display in the
     ///   navigation bar.
@@ -51333,7 +51988,9 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationbartitle.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in large bold text above the list.](navigationbartitle.png)
     ///
     /// - Parameter titleKey: A key to a localized description of this view to
     ///   display in the navigation bar.
@@ -51371,7 +52028,9 @@ extension View {
     ///             }
     ///         }
     ///     }
-    /// ![](navigationbartitle.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in large bold text above the list.](navigationbartitle.png)
     ///
     /// - Parameter title: A title for this view to display in the navigation
     ///   bar.
@@ -51412,7 +52071,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationtitle-string.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in bold text above the list. The displayMode passed
+    /// to the modifier places the title in the bounds of the bar.](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -51454,7 +52116,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationtitle-string.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in bold text above the list. The displayMode passed
+    /// to the modifier places the title in the bounds of the bar.](navigationtitle-string.png)
     ///
     /// If the `titleKey` can't be found, the title uses the text of the key
     /// name instead.
@@ -51502,7 +52167,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](navigationtitle-string.png)
+    /// ![A screenshot displaying a navigation bar with a series of ice cream
+    /// flavors, with a navigationBarTitle view modifier applied to the list to
+    /// read "Today's Flavors" in bold text above the list. The displayMode passed
+    /// to the modifier places the title in the bounds of the bar.](navigationtitle-string.png)
     ///
     /// - Parameters:
     ///   - title: A title for this view to display in the navigation bar.
@@ -51544,7 +52212,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](nav-bar-bbh-ex.gif)
+    /// ![A gif displaying a button that reads "Tap to fall into the trap
+    /// door," which taps to reveal a new text view which reads "Ha! You
+    /// cannot return." Since the view modifier hides the back button for the
+    /// view, there is no way for the user to get back to the original
+    /// navigation view.](nav-bar-bbh-ex.gif)
     ///
     /// - Parameter hidesBackButton: A Boolean value that indicates whether to
     ///   hide the back button.
@@ -51592,7 +52264,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](multilinetextalignment.png)
+    /// ![A screenshot displaying multiline text that is center aligned on the
+    /// screen.](multilinetextalignment.png)
     ///
     /// - Parameter alignment: A value that you use to left-, right-, or
     ///   center-align the text within a view.
@@ -51624,7 +52297,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](truncationmode.png)
+    /// ![A screenshot displaying a block of multiline text that is too long for
+    /// its frame; the truncationMode view modifier cuts it off at the end of the
+    /// frame, including an ellipses to denote the truncation.](truncationmode.png)
     ///
     /// - Parameter mode: The truncation mode that specifies where to truncate
     ///   the text within the text view, if needed. You can truncate at the
@@ -51655,7 +52330,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](linespacing.png)
+    /// ![A screenshot displaying a block of multiline text with the lineSpacing
+    /// view modifier applied, rendering the text with space between each line.](linespacing.png)
     ///
     /// - Parameter lineSpacing: The amount of space between the bottom of one
     ///   line and the top of the next line in points.
@@ -51695,7 +52371,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](allowstightening.png)
+    /// ![A screenshot displaying two text views in a VStack, each reading
+    /// "This is a wiiiiide text element," but the first applies the allowsTightening
+    /// view modifier and is therefore able to fit an extra character. Still,
+    /// neither fits the whole string, but the view modifier renders a closer match.](allowstightening.png)
     ///
     /// - Parameter flag: A Boolean value that indicates whether the space
     ///   between characters compresses when necessary.
@@ -51729,7 +52408,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](linelimit.png)
+    /// ![A screenshot displaying a block of multiline text rendered as only
+    /// two lines by the lineLimit view modifier. The result is a text view that
+    /// reads "This is a long string that demonstrates the effect..."](linelimit.png)
     ///
     /// - Parameter number: The line limit. If `nil`, no line limit applies.
     ///
@@ -51764,7 +52445,11 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](minimumscalefactor.png)
+    /// ![A screenshot displaying a text view and a text field in an HStack;
+    /// the view modifier renders the first text as small as half of the actual
+    /// font size, but the line of text still doesn't fully fit in its frame. The
+    /// text reads "This is a long label that will be scal..." before it runs
+    /// into the text field.](minimumscalefactor.png)
     ///
     /// - Parameter factor: A fraction between 0 and 1 (inclusive) you use to
     ///   specify the minimum amount of text scaling that this view permits.
@@ -51788,7 +52473,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](textcase-uppercase.png)
+    /// ![A screenshot displaying a text field modified to present in all
+    /// uppercase letters. The display reads "THIS IS ALL CAPS TEXT!" since
+    /// the modifier is passed the .uppercase case.](textcase-uppercase.png)
     ///
     /// - Parameter textCase: One of the ``Text/Case`` enumerations; the
     ///   default is `nil`.
@@ -51828,7 +52515,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](on-tap-gesture-count-perform-ex1.gif)
+    /// ![A gif displaying two text views in a VStack, reading "Tap me once
+    /// for a banana emoji" and "Tap me twice for a peach emoji." When tapped,
+    /// the background color of the VStack changes according to the view modifier
+    /// applied to each text view, which makes it yellow on one tap and orange on two.](on-tap-gesture-count-perform-ex1.gif)
     ///
     public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View { }
 
@@ -51861,7 +52551,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](listrowinsets.png)
+    /// ![A screenshot displaying three colored bars at the top of the screen,
+    /// each inset so as not to span the entire width of the screen. Each colored
+    /// bar is inset at its top edge and trailing edge using the view modifier, so
+    /// they extend just beyond half the width of the screen and there is some
+    /// empty space between them.](listrowinsets.png)
     ///
     /// - Parameter insets: ``EdgeInsets`` to apply to the edges of the view.
     ///
@@ -52271,7 +52965,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Background preference value example 1](backgroundpreference-example-1.png)
+    /// ![A screenshot displaying a text view that reads "Bullseye" with a small
+    /// red circle in its background.](backgroundpreference-example-1.png)
     ///
     @inlinable public func backgroundPreferenceValue<Key, T>(_ key: Key.Type = Key.self, @ViewBuilder _ transform: @escaping (Key.Value) -> T) -> some View where Key : PreferenceKey, T : View { }
 
@@ -52444,7 +53139,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](listitemtint-orange.png)
+    /// ![A screenshot displaying a single list item that reads "Airplane Mode"
+    /// with a circular airplane icon to its left. The view modifier render the
+    /// icon as orange.](listitemtint-orange.png)
     ///
     /// - Parameter tint: The tint effect to use, or nil to not override the
     ///   inherited tint.
@@ -52472,7 +53169,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](listitemtint-orange.png)
+    /// ![A screenshot displaying a single list item that reads "Airplane Mode"
+    /// with a circular airplane icon to its left. The view modifier render the
+    /// icon as orange.](listitemtint-orange.png)
     ///
     /// - Parameter color: The color to use to tint the content, or nil to not
     ///   override the inherited tint.
@@ -52619,7 +53318,11 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](coordinate-space-ex.png)
+    /// ![A gif displaying a red square overlaid with a small black
+    /// circle. Underneath, the text reads "Location: 0, 0". When the cursor is
+    /// used to drag the circle around the square, the coordinates in the location
+    /// text change to reflect the new location of the circle within the
+    /// coordinate space.](coordinate-space-ex.png)
     ///
     /// Here, the ``VStack`` in the `ContentView` named `"stack"` is composed of a
     /// red frame with a custom ``Circle`` view ``View/overlay(_:alignment:)``
@@ -54105,7 +54808,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](help-localized.png)
+    /// ![A screenshot displaying a button with help text underneath that reads
+    /// "Compose a new message"](help-localized.png)
     ///
     /// - Parameter textKey: The key for the localized text to use as help.
     public func help(_ textKey: LocalizedStringKey) -> some View { }
@@ -54131,7 +54835,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](help-text.png)
+    /// ![A screenshot displaying a slider with help text underneath reading
+    /// "Adjust the opacity"](help-text.png)
     ///
     /// - Parameter text: The Text view to use as help.
     public func help(_ text: Text) -> some View { }
@@ -54158,7 +54863,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](help-orange.png)
+    /// ![A screenshot displaying an orange pin icon with help text underneath
+    /// that reads "I am orange" followed by an orange block emoji.](help-orange.png)
     ///
     /// - Parameter text: The text to use as help.
     public func help<S>(_ text: S) -> some View where S : StringProtocol { }
@@ -55301,7 +56007,10 @@ extension ViewModifier {
     /// }
     /// ```
     ///
-    /// ![](viewmodifier-body.png)
+    /// ![A screenshot of two text views in a VStack in the center of the screen;
+    /// the first reads "Text without bordered caption" in normal black text,
+    /// while the second on bottom has a rounded blue border and reads "Text
+    /// with bordered caption" in smaller blue text.](viewmodifier-body.png)
     ///
     /// - Parameter content: The view to be modified.
     ///
@@ -55355,7 +56064,10 @@ extension ViewModifier where Self.Body == Never {
     /// }
     /// ```
     ///
-    /// ![A screenshot of two text views stacked in the center of the screen; the first reads "Text without bordered caption" in normal black text, while the second on bottom has a rounded blue border and reads "Text with bordered caption" in smaller blue text.](viewmodifier-body.png)
+    /// ![A screenshot of two text views stacked in the center of the screen;
+    /// the first reads "Text without bordered caption" in normal black text,
+    /// while the second on bottom has a rounded blue border and reads "Text
+    /// with bordered caption" in smaller blue text.](viewmodifier-body.png)
     ///
     /// - Parameter content: The view to be modified.
     ///
