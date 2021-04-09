@@ -783,7 +783,10 @@ public struct AccessibilityTraits : SetAlgebra {
 /// }
 /// ```
 ///
-/// ![](action-sheet-main-ex.gif)
+/// ![A gif displaying a view with a button reading "Eat 🍌", that once pressed
+/// triggers the appearance of an action sheet titled "Food alert" with two
+/// options, "Change to 🍑" and "Confirm", and a text message beneath the title
+/// reading "You have made a selection".](action-sheet-main-ex.gif)
 ///
 /// Notes:
 /// - The system can override your button order. In the example above,
@@ -833,7 +836,10 @@ public struct ActionSheet {
 /// }
 /// ```
 ///
-/// ![Example alert 1](alert-example-1.gif)
+/// ![A gif displaying a view with a button reading "Tap to view alert", that
+/// once pressed triggers the appearance of an alert titled "An important title!"
+/// with the text message "A message that adds additional context on the alert." a
+/// and an "OK" button that hides the alert when pressed.](alert-example-1.gif)
 ///
 /// If the `dismissButton` value is left unspecified (as it was in this example),
 /// it will default to a dismiss button with the text "Ok".
@@ -863,7 +869,11 @@ public struct ActionSheet {
 /// }
 /// ```
 ///
-/// ![Example alert 2](alert-example-2.gif)
+/// ![A gif displaying a view with a button reading "Tap to view alert", that
+/// once pressed triggers the appearance of an alert titled "Are you sure?"
+/// with the text message "The following action will delete everything. Please
+/// confirm."; the alert has two buttons, a primary destructive button reading
+/// "Delete" and a secondary cancel button reading "No, take me back!"](alert-example-2.gif)
 ///
 /// For illustrative purposes, the alert button values used the expanded syntax in this example.
 /// It is also valid to use the shorthand syntax when declaring alert buttons: `.default(_:action:)`,
@@ -903,7 +913,10 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![Example alert 3](alert-example-3.gif)
+    /// ![A gif displaying a view with a button reading "Tap to view alert", that
+    /// once pressed triggers the appearance of an alert titled "An important title!"
+    /// with the text message "A message that adds additional context on the alert." a
+    /// and a defaukt dismiss button that reads "I understand".](alert-example-3.gif)
     ///
     public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { }
 
@@ -936,7 +949,11 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![Example alert 4](alert-example-2.gif)
+    /// ![A gif displaying a view with a button reading "Tap to view alert", that
+    /// once pressed triggers the appearance of an alert titled "Are you sure?"
+    /// with the text message "The following action will delete everything. Please
+    /// confirm."; the alert has two buttons, a primary destructive button reading
+    /// "Delete" and a secondary cancel button reading "No, take me back!"](alert-example-2.gif)
     ///
     public init(title: Text, message: Text? = nil, primaryButton: Alert.Button, secondaryButton: Alert.Button) { }
 
@@ -1053,7 +1070,9 @@ public struct Alert {
 /// }
 /// ```
 ///
-/// ![Alignment on top](alignment-initalizer.png)
+/// ![A view containing a ZStack with center horizontal alignment and top
+/// vertical alignment and the text "I'm top aligned 🤠"; The text
+/// is displayed at the top center of the frame.](alignment-initalizer.png)
 ///
 /// #### The ``Alignment`` static properties
 ///
@@ -1079,7 +1098,9 @@ public struct Alert {
 /// }
 /// ```
 ///
-/// ![Alignment bottom leading](alignment-bottom-leading.png)
+/// ![A view containing a ZStack with bottomLeading alignment and the text
+/// "Move me around 🤠"; The text is displayed in the bottom left corner of
+/// the frame.](alignment-bottom-leading.png)
 ///
 /// ### Using an ``Alignment``
 ///
@@ -1101,7 +1122,9 @@ public struct Alert {
 /// }
 /// ```
 ///
-/// ![Alignment leading](alignment-leading.png)
+/// ![A view containing a clear background with the text view "Move me around
+/// 🤠" and text alignment leading; The text is displayed on the
+/// leftmost edge halfway down the frame.](alignment-leading.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Alignment : Equatable {
@@ -1130,7 +1153,9 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.11.38.png)
+    /// ![A view that returns a ZStack with the text "Move me around 🤠" with a
+    /// topLeading vertical alignment and center horizontal alignment; The text
+    /// is displayed at the top center of the frame.](14.11.38.png)
     ///
     public var horizontal: HorizontalAlignment
 
@@ -1158,7 +1183,9 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.14.47.png)
+    /// ![A view that returns a ZStack with the text "Move me around 🤠" with a
+    /// topLeading horizontal alignment and center vertical alignment; The text
+    /// is displayed at the left edge halfway down the frame.](14.14.47.png)
     ///
     public var vertical: VerticalAlignment
 
@@ -1181,7 +1208,9 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.18.52.png)
+    /// ![A view that returns a ZStack with the text "Move me around 🤠" with a
+    /// leading horizontal alignment and top vertical alignment; The text
+    /// is displayed at the top left corner of the frame.](14.18.52.png)
     ///
     /// - Parameters:
     ///   - horizontal: The alignment on the horizontal axis.
@@ -1201,7 +1230,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.22.04.png)
+    /// ![A view containingg a ZStack with the text "🤠" and center alignment;
+    /// The text is displayed at the very center of the frame.](14.22.04.png)
     ///
     public static let center: Alignment
 
@@ -1218,7 +1248,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.23.18.png)
+    /// ![A view containingg a ZStack with the text "⬅️" and leading alignment;
+    /// The text is displayed at the leftmost edge halfway down the frame.](14.23.18.png)
     ///
     public static let leading: Alignment
 
@@ -1235,7 +1266,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.27.25.png)
+    /// ![A view containingg a ZStack with the text "➡️" and trailing alignment;
+    /// The text is displayed at the rightmost edge halfway down the frame.](14.27.25.png)
     ///
     public static let trailing: Alignment
 
@@ -1252,7 +1284,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.28.22.png)
+    /// ![A view containingg a ZStack with the text "⬆️" and top alignment;
+    /// The text is displayed at the topmost edge halfway across the frame.](14.28.22.png)
     ///
     public static let top: Alignment
 
@@ -1269,7 +1302,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.29.14.png)
+    /// ![A view containingg a ZStack with the text "⬇️" and top alignment;
+    /// The text is displayed at the bottommost edge halfway across the frame.](14.29.14.png)
     ///
     public static let bottom: Alignment
 
@@ -1286,7 +1320,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.30.26.png)
+    /// ![A view containingg a ZStack with the text "↖️" and topLeading alignment;
+    /// The text is displayed in the top left corner of the frame.](14.30.26.png)
     ///
     public static let topLeading: Alignment
 
@@ -1303,7 +1338,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.31.17.png)
+    /// ![A view containingg a ZStack with the text "↖️" and topTrailing alignment;
+    /// The text is displayed in the top right corner of the frame.](14.31.17.png)
     ///
     public static let topTrailing: Alignment
 
@@ -1320,7 +1356,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.33.12.png)
+    /// ![A view containingg a ZStack with the text "↙️" and bottomLeading alignment;
+    /// The text is displayed in the bottom left corner of the frame.](14.33.12.png)
     ///
     public static let bottomLeading: Alignment
 
@@ -1337,7 +1374,8 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![](14.35.44.png)
+    /// ![A view containingg a ZStack with the text "↙️" and bottomTrailing alignment;
+    /// The text is displayed in the bottom right corner of the frame.](14.35.44.png)
     ///
     public static let bottomTrailing: Alignment
 
@@ -1569,7 +1607,10 @@ extension Anchor.Source {
 /// }
 /// ```
 ///
-/// ![Rectangle with rotation by angle](angle.png)
+/// ![A view containing a VStack with two rectangle, each with a frame width and
+/// height of 100, a 15 degree rotation effect, and border color orange, which
+/// illustrates the rotation by remaining in the original position; one rectangles
+/// rotation effect is defined by the init modifier and the other with the angle modifier.](angle.png)
 ///
 /// ### Using an `Angle` with drawing
 ///
@@ -1601,7 +1642,10 @@ extension Anchor.Source {
 /// }
 /// ```
 ///
-/// ![Angle example with drawing](angle-2.png)
+/// ![A view containing an arch, which has been defined by a shape struct in the
+/// code, with stroke color orange and line width 20; the orange arch completes
+/// 270 degrees of a circle, as defined by the parameter type angle and degress
+/// parameter of 270.](angle-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Angle {
@@ -1625,7 +1669,10 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](angle-radians.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by an
+    /// radians, a frame width and height of 100, and border color
+    /// orange, which illustrates the clockwise rotation by remaining in the
+    /// original position.](angle-radians.png)
     ///
     public var radians: Double
 
@@ -1648,7 +1695,10 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](angle-degress.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by an
+    /// degrees, a frame width and height of 100, and border color
+    /// orange, which illustrates the clockwise rotation by remaining in the
+    /// original position.](angle-degress.png)
     ///
     ///
     @inlinable public var degrees: Double
@@ -1668,7 +1718,9 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](angle-zero.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by an
+    /// empty Angle() struct, a frame width and height of 100, and border color
+    /// orange, which illustrates lack of rotation by the rectangle.](angle-zero.png)
     ///
     @inlinable public init() { }
 
@@ -1689,7 +1741,10 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](angle-radians.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by
+    /// radians in Angle(), a frame width and height of 100, and border color
+    /// orange, which illustrates the clockwise rotation of the
+    /// rectangle by remaining in the original position.](angle-radians.png)
     ///
     /// - Parameter radians: The number of radians in the angle.
     @inlinable public init(radians: Double) { }
@@ -1711,7 +1766,10 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](angle-degrees.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by
+    /// degrees in Angle(), a frame width and height of 100, and border color
+    /// orange, which illustrates the 15 degree clockwise rotation of the rectangle by
+    /// remaining in the original position.](angle-degrees.png)
     ///
     /// - Parameter degrees: The number of degrees in the angle.
     @inlinable public init(degrees: Double) { }
@@ -1732,7 +1790,10 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](angle-radians.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by
+    /// radians, a frame width and height of 100, and border color
+    /// orange, which illustrates the clockwise rotation of the rectangle by
+    /// remaining in the original position.](angle-radians.png)
     ///
     /// - Parameter radians: The number of radians the new angle should be.
     @inlinable public static func radians(_ radians: Double) -> Angle { }
@@ -1753,7 +1814,10 @@ extension Anchor.Source {
     /// }
     /// ```
     ///
-    /// ![](angle-degrees.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by
+    /// degrees, a frame width and height of 100, and border color
+    /// orange, which illustrates the clockwise rotation of the rectangle by
+    /// remaining in the original position](angle-degrees.png)
     ///
     /// - Parameter degrees: The number of degrees the new angle should be.
     @inlinable public static func degrees(_ degrees: Double) -> Angle { }
@@ -1832,7 +1896,9 @@ extension Angle : Animatable {
     /// }
     /// ```
     ///
-    /// ![](angle-zero.png)
+    /// ![A view containing a rectangle, with a rotation effect defined by
+    /// the zero type property, a frame width and height of 100, and border color
+    /// orange, which illustrates the lack of rotation of the rectangle.](angle-zero.png)
     ///
     @inlinable public static var zero: Angle { get }
 
@@ -1876,7 +1942,10 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ![AngularGradient Example 1](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
+/// ![A view containing a rectangle with a frame of wifth and height 200 and an
+/// angular gradient fill in which the end and start angles make a complete
+/// circle; this results in a square that fades from yellow to red to blue to
+/// purple starting and the center and going clockwise.](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
 ///
 /// ## End Angle - Start Angle > 2π
 ///
@@ -1901,7 +1970,11 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ![AngularGradient Example 2](89BED914-29DA-4009-9EA1-96E1849E55F0.png)
+/// ![A view containing a VStack with two rectangles, one with an angular
+/// gradient fill in which the end and start angles make a complete
+/// circle and the other in which the total angle is greater than a circle;
+/// this results in both squares fading from yellow to red to blue to
+/// purple, one starting at the center and the other at the bottom right corner.](89BED914-29DA-4009-9EA1-96E1849E55F0.png)
 ///
 /// ## End Angle - Start Angle < 2π
 ///
@@ -1927,7 +2000,11 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ![AngularGradient Example 3](94015C67-FC57-44CC-9EA4-F982A47AEB7D.png)
+/// ![A view containing a VStack with two rectangles, one with an angular
+/// gradient fill in which the end and start angles make a complete
+/// circle and the other in which the total angle is less than a circle;
+/// this results in both squares fading from yellow to red to blue to
+/// purple, one starting at the center and the other at the top center.](94015C67-FC57-44CC-9EA4-F982A47AEB7D.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AngularGradient : ShapeStyle, View {
@@ -1956,7 +2033,11 @@ extension Angle : Animatable {
     /// }
     /// ```
     ///
-    /// ![AngularGradient Example 3](angular-gradient-example-3.png)
+    /// ![A view containing a VStack with two rectangles, one with an angular
+    /// gradient fill in which the end and start angles make a complete
+    /// circle and the other in which the total angle is less than a circle;
+    /// this results in both squares fading from yellow to red to blue to
+    /// purple, one starting at the center and the other at the top center.](angular-gradient-example-3.png)
     ///
 	/// - Parameters:
 	///   - gradient: The gradient with the colors to use.
@@ -1981,7 +2062,10 @@ extension Angle : Animatable {
     /// }
     /// ```
     ///
-    /// ![AngularGradient Example 1](angular-gradient-example-1.png)
+    /// ![A view containing a rectangle with a frame of wifth and height 200 and an
+    /// angular gradient fill in which the end and start angles make a complete
+    /// circle; this results in a square that fades from yellow to red to blue to
+    /// purple starting at the center and going clockwise.](angular-gradient-example-1.png)
     ///
     /// - Parameters:
     ///   - gradient: The gradient with the colors to use.
@@ -2373,7 +2457,11 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// }
 /// ```
 ///
-/// ![Animation Example 1](animation-ex.gif)
+/// ![A gif displaying a view containing state variable flag and a VStack with
+/// a rectangle and a button reading "Animate"; when the button is pressed, flag
+/// is toggled and the properties of the rectangle change, resulting in it
+/// changing from yellow to red, growing in size, and rotating 90 degrees, all
+/// in an easeInOut animation timing curve type.](animation-ex.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Animation : Equatable {
@@ -2420,7 +2508,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-spring-noparams-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle change
+    /// in a fashion where the animation happens very quickly in the beginning,
+    /// then overshoots the target, and returns back with a spring effect.](animation-spring-noparams-ex.gif)
     ///
     /// Here, `spring(response:dampingFraction:blendDuration:)`'s parameters
     /// have been adjusted to pronounce the spring:
@@ -2444,7 +2535,10 @@ extension Animation {
     ///     }
     /// }
     /// ```
-    /// ![](animation-spring-pronounced-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle change
+    /// in a a pronounced spring fashion, as defined by the adjusted response,
+    /// dampingFraction, and blendDuration parameters of spring.](animation-spring-pronounced-ex.gif)
     ///
     /// When mixed with other ``Animation/spring(response:dampingFraction:blendDuration:)``
     /// or ``Animation/interactiveSpring(response:dampingFraction:blendDuration:)``
@@ -2498,7 +2592,9 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-interactive-spring-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle change
+    /// in a fashion without the spring effect showing.](animation-interactive-spring-ex.gif)
     ///
     /// When passed the same parameters, `interactiveSpring(response:dampingFraction:blendDuration:)`
     /// and ``Animation/spring(response:dampingFraction:blendDuration:)`` produce the same result:
@@ -2523,7 +2619,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-interactive-spring-pronounced-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle change
+    /// in a a pronounced spring fashion, as defined by the adjusted response,
+    /// dampingFraction, and blendDuration parameters of interactive spring.](animation-interactive-spring-pronounced-ex.gif)
     ///
     /// ```
     /// struct AnimateView: View {
@@ -2545,7 +2644,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-spring-pronounced-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle change
+    /// in a a pronounced spring fashion, as defined by the adjusted response,
+    /// dampingFraction, and blendDuration parameters of spring.](animation-spring-pronounced-ex.gif)
     ///
     public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { }
 }
@@ -2575,7 +2677,9 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-default-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle change
+    /// immediately, as defined by the default type property.](animation-default-ex.gif)
     ///
     public static let `default`: Animation
 }
@@ -2606,7 +2710,11 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-easeinout-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change over three seconds, as defined by the duration parameter,
+    /// in a fashion where the effect starts out slower and ends slower, while
+    /// moving most quickly in the middle.](animation-easeinout-ex.gif)
     ///
 	/// - Parameter duration: How long the effect should last.
     public static func easeInOut(duration: Double) -> Animation { }
@@ -2636,7 +2744,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-ease-in-out-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change in a fashion where the effect starts out slower and ends slower,
+    /// while moving most quickly in the middle.](animation-ease-in-out-ex.gif)
     ///
     public static var easeInOut: Animation { get }
 
@@ -2664,7 +2775,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-ease-in-duration-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change over three seconds, as defined by the duration parameter,
+    /// in a fashion where the effect starts out slower and then ends more quickly.](animation-ease-in-duration-ex.gif)
     ///
     /// - Parameter duration: How long the effect should last.
     public static func easeIn(duration: Double) -> Animation { }
@@ -2695,7 +2809,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-ease-in-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change in a fashion where the effect starts out slower and then ends more
+    /// quickly.](animation-ease-in-ex.gif)
     ///
     public static var easeIn: Animation { get }
 
@@ -2723,7 +2840,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-ease-out-duration-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change over three seconds, as defined by the duration parameter,
+    /// in a fashion where the effect starts out more quickly and then slows down.](animation-ease-out-duration-ex.gif)
     ///
     /// - Parameter duration: How long the effect should last.
     public static func easeOut(duration: Double) -> Animation { }
@@ -2754,7 +2874,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-ease-out-ex.gif)
+    /// !A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change in a fashion where the effect starts out more quickly and then
+    ///  slows down.](animation-ease-out-ex.gif)
     ///
     public static var easeOut: Animation { get }
 
@@ -2782,7 +2905,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-linear-duration-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change over three seconds, as defined by the duration parameter,
+    /// in a fashion where the effect happens at a constant speed throughout.](animation-linear-duration-ex.gif)
     ///
     /// - Parameter duration: How long the effect should last.
     public static func linear(duration: Double) -> Animation { }
@@ -2813,7 +2939,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-linear-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change in a fashion where the effect happens at a constant speed
+    /// throughout.](animation-linear-ex.gif)
     ///
     public static var linear: Animation { get }
 
@@ -2849,7 +2978,11 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-timing-curve-ex.gif)
+    /// ![A gif displaying a view containing state variable flag and a VStack with
+    /// a rectangle and a button reading "Animate"; when the button is pressed, flag
+    /// is toggled and the properties of the rectangle change, resulting in it
+    /// changing from yellow to red, growing in size, and rotating 90 degrees,
+    /// in a fashion defined by a fully customized timing curve.](animation-timing-curve-ex.gif)
     ///
     /// - Parameters:
     ///   - c0x: The x-coordinate of the first control point.
@@ -2891,7 +3024,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-interpolating-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change repeatedly in a persistent spring animation, as specified using a
+    /// physics spring model.](animation-interpolating-ex.gif)
     ///
     /// - Parameters:
     ///   - mass: The mass of the object attached to the spring.
@@ -2929,7 +3065,9 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-delay-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, there is a one second delay and
+    /// then the properties of the rectangle change in an easeInOut fashion.](animation-delay-ex.gif)
 	///
 	/// - Parameter delay: How long the animation will wait before starting, in seconds.
     public func delay(_ delay: Double) -> Animation { }
@@ -2965,7 +3103,9 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-speed-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the properties of the rectangle
+    /// change quickly in an easeInOut fashion, as specified by a higher speed.](animation-speed-ex.gif)
     ///
     public func speed(_ speed: Double) -> Animation { }
 }
@@ -2995,7 +3135,10 @@ extension Animation {
     /// }
     /// ```
     ///
-    /// ![](animation-rep-count-ex.gif)
+    /// ![A gif displaying a view with a yellow rectangle and a button reading
+    /// "Animate"; when the button is pressed, the animation of the rectangles
+    /// spinning and changing color occurs twice, as as defined by the
+    /// repeatCount instance method.](animation-rep-count-ex.gif)
 	///
 	/// - Parameters:
 	///   - repeatCount: The number of times the animation should repeat.
@@ -3188,7 +3331,10 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
 /// }
 /// ```
 ///
-/// ![](any-transition-using-ex.gif)
+/// ![A gif displaying a view containing a button that reads "Slide the banana
+/// ➡️" that triggers the slide transition of the text view "🍌" when pressed;
+/// the "🍌" slides down from beneath the button, displacing it until it slides
+/// up again on the other side.](any-transition-using-ex.gif)
 ///
 /// - Note: By default, views transition using ``AnyTransition/opacity``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -3218,7 +3364,10 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-offset-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Offset the banana ↘️"
+    /// that triggers the offset transition of the text view "🍌" when pressed;
+    /// the "🍌" moves from its current place under the banana to the outside of the
+    /// frame down and to the right, as defined by a CGSize.](any-transition-offset-ex.gif)
 	///
 	/// - Parameter offset: The amount you want to move the view during the transition.
     public static func offset(_ offset: CGSize) -> AnyTransition { }
@@ -3243,7 +3392,10 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-offset-xy-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Offset the banana ↘️"
+    /// that triggers the offset transition of the text view "🍌" when pressed;
+    /// the "🍌" moves from its current place under the banana to the outside of the
+    /// frame down and to the right, as defined by the x and y offsets.](any-transition-offset-xy-ex.gif)
     ///
     /// - Parameters:
     ///   - x: The number of points you want to move the view to the right. Negative means move left. Defaults to 0.
@@ -3274,7 +3426,9 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-scale-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Scale the banana ⤵️"
+    /// that triggers the scale down of the text view "🍌" when pressed;
+    /// the "🍌" shrinks to nothing, disappearing under the button.](any-transition-scale-ex.gif)
     ///
     public static var scale: AnyTransition { get }
 
@@ -3298,7 +3452,9 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-scale-anchor-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "SCALE THE BANANA ⤴️"
+    /// that triggers the scale up of the text view "🍌" when pressed; the "🍌",
+    /// anchored at the center, becomes so big that it can't fit in the frame.](any-transition-scale-anchor-ex.gif)
     ///
     /// - Parameters:
     ///   - scale: The amount you want to scale the view.
@@ -3333,7 +3489,10 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-opacity-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Fade the banana 🎚"
+    /// that triggers a transition of the text view "🍌" from transparent to
+    /// opaque on first click, and from opaque to transparent on second click; the "🍌",
+    /// appears from under the button and then fades back into oblivion.](any-transition-opacity-ex.gif)
     ///
     public static let opacity: AnyTransition
 }
@@ -3362,7 +3521,10 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-slide-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Slide the banana
+    /// ➡️" that triggers the slide transition of the text view "🍌" when pressed;
+    /// the "🍌" slides down from beneath the button, displacing it until it slides
+    /// up again on the other side.](any-transition-slide-ex.gif)
     ///
     /// - SeeAlso: ``AnyTransition/move(edge:)``
     public static var slide: AnyTransition { get }
@@ -3398,7 +3560,11 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-combined-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Slide AND fade
+    /// the banana ➡️🎚" that triggers both the slide and fade transitions of
+    /// the text view "🍌" when pressed; the "🍌" appears and slides down from
+    /// beneath the button, displacing it until it slides up again on the other
+    /// side while fading into oblivion.](any-transition-combined-ex.gif)
     ///
     public func combined(with other: AnyTransition) -> AnyTransition { }
 }
@@ -3456,7 +3622,11 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-modifier-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "OP fade the
+    /// banana 🎚❗️" that triggers the transition of the text view "🍌" when
+    /// pressed; the custom trnasition acts the same as the opacity transition,
+    /// as defined by and an active OpacityModifier of value 0 and identity
+    /// OpacityModifier of value 1.](any-transition-modifier-ex.gif)
     ///
     public static func modifier<E>(active: E, identity: E) -> AnyTransition where E : ViewModifier { }
 }
@@ -3515,7 +3685,9 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-anim-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Scale the banana ⤴️"
+    /// that triggers the scale up of the text view "🍌" when pressed; the examples
+    /// show that the same result occurs using the animation modifier or not.](any-transition-anim-ex.gif)
     ///
     public func animation(_ animation: Animation?) -> AnyTransition { }
 }
@@ -3546,7 +3718,9 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-identity-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Apparate the banana."
+    /// that triggers the transitioning of the text view "🍌" with no effects when pressed;
+    /// the view simply disappears behind the button.](any-transition-identity-ex.gif)
     ///
     public static let identity: AnyTransition
 }
@@ -3573,7 +3747,10 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-move-edge-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Move the banana ➡️"
+    /// that triggers the moving transition of the text view "🍌" when pressed;
+    /// the view slides up the the trailing edge of the button and dissapears, as
+    /// defined by the edge parameter.](any-transition-move-edge-ex.gif)
     ///
     /// See ``AnyTransition`` for more on how to use this transition.
     public static func move(edge: Edge) -> AnyTransition { }
@@ -3603,7 +3780,11 @@ extension AnyTransition {
     /// }
     /// ```
     ///
-    /// ![](any-transition-asymmetric-ex.gif)
+    /// ![A gif displaying a view containing a button that reads "Slide the banana in ➡️,
+    /// fade banana out 🎚" that triggers composite transition of the text view "🍌"
+    /// when pressed; the "🍌" slides into view from the left and then fades out
+    /// of view in the center, as defined by the insertion anf removal parameters
+    /// of the asymmetrical transition.](any-transition-asymmetric-ex.gif)
     ///
     /// See ``AnyTransition`` for more on how to use this transition.
     public static func asymmetric(insertion: AnyTransition, removal: AnyTransition) -> AnyTransition { }
@@ -3697,8 +3878,6 @@ extension AnyTransition {
     ///
     /// See ``AnyView`` for the uses and dangers of using this structure.
     ///
-    /// ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     var body: some View {
@@ -3706,13 +3885,15 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![An AnyView containing the text view "Hello, world!", resulting in the
+    /// type erasure of the view.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
+    ///
     public init<V>(_ view: V) where V : View { }
 
     /// Creates an instance that type-erases the parameter.
     ///
     /// See ``AnyView`` for the uses and dangers of using this structure.
-    ///
-    /// ![AnyView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
     ///
     /// ```
     /// struct ExampleView: View {
@@ -3721,6 +3902,10 @@ extension AnyTransition {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![An AnyView containing the text view "Hello, world!" in an erasing instance,
+    /// resulting in type erasure of the parameter.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/anyview-example-1.png)
+    ///
     public init<V>(erasing view: V) where V : View { }
 
     /// The type of view representing the body of this view.
@@ -3896,7 +4081,8 @@ extension App {
 /// 		}
 /// 	}
 ///
-/// ![](app-storage-ex.gif)
+/// ![A gif displaying a view with a textfield with default text "Kanye" and an
+/// input bound to the appstorage string variable "name."](app-storage-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
@@ -3944,7 +4130,8 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.40.39.png)
+    /// ![A view containing a toggle named "Airplane mode" where the isOn
+    /// input is bound to the appstorage boolean variable "airplane-mode."](16.40.39.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a boolean value is not specified
@@ -3965,7 +4152,8 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.42.01.png)
+    /// ![A view containing a stepper called "🍩 count: \(count)" where the value
+    /// input is bound to the appstorage Int variable "count".]16.42.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value is not specified
@@ -3987,7 +4175,8 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.42.46.png)
+    /// ![A view containing a text view reading "🔆 \(level)" and a slider where the value
+    /// input is bound to the appstorage Double variable "level".](16.42.46.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a double value is not specified
@@ -4008,7 +4197,8 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.34.17.png)
+    /// ![A view containing a textfield where the text input is bound to
+    /// the appstorage Double variable "name".](16.34.17.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value is not specified
@@ -4029,7 +4219,8 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.44.14.png)
+    /// ![A view containing a textview "Check out \(url)" where the text url is
+    /// bound to the appstorage url variable "url".](16.44.14.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a url value is not specified for
@@ -4066,7 +4257,8 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.47.01.png)
+    /// ![A view containing a button "Make Aaron the 🐐" where the name and age
+    /// inputs are bound to the appstorage variables "name" and "age".](16.47.01.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a data value is not specified for
@@ -4099,7 +4291,9 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.58.02.png)
+    /// ![A view containing a picker titled whose text options "a", "b", and
+    /// "c", are tagged to an enum bound to the appstorage variable "value",
+    /// which is in turn used to populate the selection input of the picker.](16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value
@@ -4131,7 +4325,9 @@ extension AppStorage {
     ///         }
     ///     }
     ///
-    /// ![](16.58.02.png)
+    /// ![A view containing a picker titled whose text options "a", "b", and
+    /// "c", are tagged to an enum which is referenced by the appstorage variable "value",
+    /// which is in turn used to populate the selection input of the picker.](16.58.02.png)
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value
@@ -4160,7 +4356,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](17.15.34.png)
+    /// ![A view containing two buttons, "on" and "off"; the appstorage boolean
+    /// variable "airplane-mode" defaults to nil as there is no restored value.](17.15.34.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4183,7 +4380,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](17.16.17.png)
+    /// ![A view containing two buttons, "none ☹️" and "LOTS 🍩"; the appstorage
+    /// Int optional variable "count" defaults to nil as there is no restored value.](17.16.17.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4206,7 +4404,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](17.18.26.png)
+    /// ![A view containing two buttons, "MAX 🔆" and "min 🔅"; the appstorage
+    /// Double optional variable "count" defaults to nil as there is no restored value.](17.18.26.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4228,7 +4427,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///
     /// Defaults to nil if there is no restored value.
     ///
-    /// ![](17.19.59.png)
+    /// ![A view containing a button "Save 🐐" with name = "Kanye"; the appstorage
+    /// String optional variable "name" defaults to nil as there is no restored value.](17.19.59.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4250,7 +4450,8 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](17.31.44.png)
+    /// ![A view containing a button "Save the 🍌" with the SwiftOnTap website url; the appstorage
+    /// url optional variable "url" defaults to nil as there is no restored value.](17.31.44.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4283,7 +4484,9 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](17.33.08.png)
+    /// ![A view containing a button "Make Aaron the 🐐" witht wo static variables
+    /// and a print statement; the appstorage Data optional variable "person"
+    /// defaults to nil as there is no restored value.](17.33.08.png)
     ///
     /// - Parameters:
     ///   - key: The key to read and write the value to in the user defaults
@@ -4624,7 +4827,8 @@ extension Axis : RawRepresentable {
 /// }
 /// ```
 ///
-/// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
+/// ![A view containing two circles, one filled background style, making it
+/// invisible, and the other with default black fill.](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct BackgroundStyle {
@@ -4647,7 +4851,8 @@ extension Axis : RawRepresentable {
     /// }
     /// ```
     ///
-    /// ![5D82A564-E230-45DB-8E6F-5D977044ACFC](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
+    /// ![A view containing two circles, one filled background style, making it
+    /// invisible, and the other with default black fill.](5D82A564-E230-45DB-8E6F-5D977044ACFC.png)
     ///
     @inlinable public init() { }
 }
@@ -5585,7 +5790,8 @@ extension BlendMode : Hashable {
 /// }
 /// ```
 ///
-/// ![DefaultMenu Example 1](default-menu-example.gif)
+/// ![A gif displaying a view containing a borderless button style menu "PDF" that once clicked displays
+/// two buttons, "Open in Preview" and "Save as PDF", each with no action attached.](default-menu-example.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -5611,7 +5817,8 @@ public struct BorderlessButtonMenuStyle : MenuStyle {
     /// }
     /// ```
     ///
-    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    /// ![A gif displaying a view containing a borderless button style menu "PDF" that once clicked displays
+    /// two buttons, "Open in Preview" and "Save as PDF", each with no action attached.](default-menu-example.gif)
     ///
     public init() { }
 
@@ -5790,7 +5997,7 @@ public struct Button<Label> : View where Label : View {
     ///         }
     ///     }
     ///
-    /// ![](button-init.png)
+    /// ![Button with text reading "Sign in".](button-signin.png)
     ///
     /// You can also use multiple trailing closure syntax to accomplish
     /// the same task:
@@ -5805,7 +6012,7 @@ public struct Button<Label> : View where Label : View {
     ///         }
     ///     }
     ///
-    /// ![](button-init.png)
+    /// ![Button with a textview reading "Sign in" as its label. ](button-init.png)
     ///
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
@@ -5852,7 +6059,8 @@ extension Button where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](button-init-0ffce-ex.gif)
+    /// ![A gif displaying a view with the "Sign in" button being clicked; no
+    /// effect results as the button has no action.](button-init-0ffce-ex.gif)
     ///
     /// - Parameters:
     ///   - titleKey: The key for the button's localized title, that describes
@@ -5876,7 +6084,8 @@ extension Button where Label == Text {
     ///         }
     ///     }
     ///
-    /// ![](button-init-0ffce-ex.gif)
+    /// ![A gif displaying the clicking of a button labeled "Sign in", as generated
+    /// by a string in the view; no effect results as the button has no action.](button-init-0ffce-ex.gif)
     ///
     /// - Parameters:
     ///   - title: A string that describes the purpose of the button's `action`.
@@ -5916,7 +6125,8 @@ extension Button where Label == PrimitiveButtonStyleConfiguration.Label {
     ///         }
     ///     }
     ///
-    /// ![](button-init-red-outline-ex.gif)
+    /// ![A gif displaying the clicking of a red bordered button labeled "Sign
+    /// in"; the button style is defined by a custom primitive button style struct.](button-init-red-outline-ex.gif)
     ///
     /// - Parameter configuration: A configuration for a style with a custom
     ///   appearance and custom interaction behavior.
@@ -6120,7 +6330,8 @@ public struct ButtonStyleConfiguration {
 /// }
 /// ```
 ///
-/// ![Capsule fill and frame example](capsule-example-1.png)
+/// ![A view containing a capsule shape with orange fill and a frame of width
+/// 250 and height 100.](capsule-example-1.png)
 ///
 /// To add a border, use the ``Shape/stroke(_:lineWidth:)`` modifier, and use
 /// the ``Capsule/inset(by:)`` modifier to inset the Capsule by half of the
@@ -6137,7 +6348,8 @@ public struct ButtonStyleConfiguration {
 /// }
 /// ```
 ///
-/// ![Capsule inset and stroke example](capsule-example-2.png)
+/// ![A view containing a capsule shape inset by 10 with an orange stroke of lineWidth
+/// 20 and a frame of width 250 and height 100.](capsule-example-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Capsule : Shape {
@@ -6171,7 +6383,9 @@ public struct ButtonStyleConfiguration {
     /// }
     /// ```
     ///
-    /// ![](18.59.51.png)
+    /// ![A view containing two capsule shapes, both with default black fill and
+    /// and a frame of width 250 and height 100; one is of the circular style
+    /// while the next is of the continuous style.](18.59.51.png)
     ///
     @inlinable public init(style: RoundedCornerStyle = .circular) { }
 
@@ -6244,7 +6458,7 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// ![Circle init example](Circle-example-1.png)
+/// ![A view containing a circle with default black fill.](Circle-example-1.png)
 ///
 /// Define a Circle with a specific color and frame with the ``Shape/fill()``
 /// and ``View/frame(width:height:)`` modifiers. For example:
@@ -6259,7 +6473,8 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// ![Circle fill and frame example](Circle-example-2.png)
+/// ![A view containing a blue filled circle with a frame of width 200 and
+/// height 200.](Circle-example-2.png)
 ///
 /// To add a border, use the ``Shape/stroke(:lineWidth:)`` modifier, and use
 /// the ``Circle/inset(by:)`` modifier to inset the circle by half of the border
@@ -6275,7 +6490,7 @@ extension Capsule : InsettableShape {
 /// }
 /// ```
 ///
-/// ![Circle inset and stroke example](Circle-example-3.png)
+/// ![A view containing a circle inset by 10 with a blue strok of lineWidth 20.](Circle-example-3.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Circle : Shape {
@@ -6310,7 +6525,7 @@ extension Capsule : InsettableShape {
     /// }
     /// ```
     ///
-    /// ![Circle init example](Circle-example-1.png)
+    /// ![A view containing a circle with default black fill.](Circle-example-1.png)
     ///
     @inlinable public init() { }
 
@@ -6371,7 +6586,9 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![](circularprogressview-1.png)
+/// ![A view containing a default progress view that displays as a gray loading
+/// filled three quarters of the way with blue, as defined by the ProgressView
+/// value being 0.75.](circularprogressview-1.png)
 ///
 /// But when you apply `CircularProgressViewStyle`
 /// with ``View/progressViewStyle(_:)``, it becomes a spinner:
@@ -6419,7 +6636,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![Circular progress view example 1](circularprogressviewstyle-example-1.gif)
+    /// ![A gif displaying a gray circular style progress view spinnning.](circularprogressviewstyle-example-1.gif)
     ///
     /// - Note: To give the spinner a tint color, use ``CircularProgressViewStyle/init(tint:)``
     /// instead.
@@ -6567,7 +6784,8 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///     }
     ///
     ///
-    /// ![Description](color-description.png)
+    /// ![A text view populated by the description property of the color
+    /// yellow, resulting in the centered text "yellow."](color-description.png)
     ///
     public var description: String { get }
 
@@ -6604,7 +6822,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.17.28.png)
+    /// ![A view displaying a light pink color created from an instance of CGColor.](19.17.28.png)
     ///
     public init(_ cgColor: CGColor) { }
 }
@@ -6668,7 +6886,8 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![Color RGB](color-rgb-init.png)
+    /// ![A view displaying a light pink color created from a RGB and opacity
+    /// value.](color-rgb-init.png)
     ///
     /// - Note: The colorspace value defaults to sRGB, which is standard for apps. Note
     /// also that red, green, blue, and opacity are all specified in values from
@@ -6691,7 +6910,8 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![Color White/Opacity](color-white-opacity.png)
+    /// ![A view displaying a gray color created from a grayscale value and opacity
+    /// value.](color-white-opacity.png)
     ///
     /// - Note: Both the white and the opacity must be specified from 0.0 to 1.0. If
     /// either of these values are given to you as integers, they will need to
@@ -6711,7 +6931,8 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![Hue Color Init](color-hue-init.png)
+    /// ![A view displaying a bright teal color as defined by hue, saturation,
+    /// brightness, and opacity values.](color-hue-init.png)
     ///
     /// - Note: Apple's HSB scale is not the traditional 360, 100, 100. Instead all HSB values are from 0 to 1.
     ///
@@ -6736,7 +6957,8 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.20.57.png)
+    /// ![A view containing a link that reads "Banana🍌 Docs", with the type
+    /// showing in blue as defined by the default accent color.](19.20.57.png)
     ///
     /// The accent color reflects the broad theme color that can be applied to
     /// views and controls. If an explicit value hasn't been set, the default
@@ -6772,7 +6994,8 @@ extension Color {
     /// }
     /// ```
     ///
-    /// ![](color-clear-1.png)
+    /// ![A view containing a ZStack with topleading alignment and the text
+    /// "I'm inside a ZStack" showing within a fitted orange border.](color-clear-1.png)
     ///
     /// Even though we said `alignment: .topLeading`, the ``Text`` is still
     /// in the middle of the screen. This is because, as you can
@@ -6794,7 +7017,8 @@ extension Color {
     /// }
     /// ```
     ///
-    /// ![](color-clear-2.png)
+    /// ![A view containing a ZStack with topleading alignment, clear color, and the text
+    /// "I'm inside a ZStack" showing in the upper left corner of an orange bordered page.](color-clear-2.png)
     ///
     /// A second use for `Color.clear` is as a placeholder
     /// when the ``Color`` on screen is changing. For example, below
@@ -6823,7 +7047,11 @@ extension Color {
     /// }
     /// ```
     ///
-    /// ![](color-clear-ex3.gif)
+    /// ![A gif displaying a view containing a ZStack with a color variable and
+    /// a VStack with two buttons, "Tap me for 🟠🍑🎃" and "Press me for 🟨🌕🍋";
+    /// when the first button is pressed, the screen background turns orange, and
+    /// when the second is pressed it turns yellow, by way of the color variable
+    ///  being updated.](color-clear-ex3.gif)
     ///
     public static let clear: Color
 
@@ -6835,7 +7063,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.22.27.png)
+    /// ![A view displaying the color black.](19.22.27.png)
     ///
     public static let black: Color
 
@@ -6848,7 +7076,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.22.43.png)
+    /// ![A view displaying the color white.](19.22.43.png)
     ///
     public static let white: Color
 
@@ -6861,7 +7089,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.22.56.png)
+    /// ![A view displaying the color gray.](19.22.56.png)
     ///
     public static let gray: Color
 
@@ -6874,7 +7102,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.23.07.png)
+    /// ![A view displaying the color red.](19.23.07.png)
     ///
     public static let red: Color
 
@@ -6887,7 +7115,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.23.20.png)
+    /// ![A view displaying the color green.](19.23.20.png)
     ///
     public static let green: Color
 
@@ -6900,7 +7128,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.23.36.png)
+    /// ![A view displaying the color blue.](19.23.36.png)
     ///
     public static let blue: Color
 
@@ -6913,7 +7141,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.23.49.png)
+    /// ![A view displaying the color orange.](19.23.49.png)
     ///
     public static let orange: Color
 
@@ -6926,7 +7154,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.24.14.png)
+    /// ![A view displaying the color yellow.](19.24.14.png)
     ///
     public static let yellow: Color
 
@@ -6939,7 +7167,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.24.29.png)
+    /// ![A view displaying the color pink.](19.24.29.png)
     ///
     public static let pink: Color
 
@@ -6952,7 +7180,7 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![](19.24.41.png)
+    /// ![A view displaying the color purple.](19.24.41.png)
     ///
     public static let purple: Color
 
@@ -6968,10 +7196,14 @@ extension Color {
     ///     }
     ///
     /// Light Mode:
-    /// ![Light Primary](color-primary-light.png)
+    /// ![A view within a light mode simulator with the text "Bananas 🍌🍌" and
+    /// the accent color set to primary; the view displays as a white Background
+    /// with black text.](color-primary-light.png)
     ///
     /// Dark Mode:
-    /// ![Dark Primary](color-primary-dark.png)
+    /// ![A view within a dark mode simulator with the text "Bananas 🍌🍌" and
+    /// the accent color set to primary; the view displays as a black background
+    /// with white text.](color-primary-dark.png)
     ///
     /// If you are in light mode, this will be black. If, on the other hand, you
     /// are in dark mode, this will be white. It is automatically updated for
@@ -6998,7 +7230,8 @@ extension Color {
     /// To declare a color with a `name` create your color in the
     /// `Assets.xcassets` folder.
     ///
-    /// ![Create Color Name](color-name-showcase.png)
+    /// ![A screenshot of the Assets.xcassets folder within an XCode project
+    /// containing a custom color named pink.](color-name-showcase.png)
     ///
     /// Create a light theme and dark theme color to adjust your view depending
     /// on the user's environment.
@@ -7015,10 +7248,12 @@ extension Color {
     ///     }
     ///
     /// Light theme:
-    /// ![Color Light Theme](color-name-light.png)
+    /// ![A view within a light mode simulator with a light pink background,
+    /// as defined by color "Pink".](color-name-light.png)
     ///
     /// Dark theme:
-    /// ![Color Dark Theme](color-name-dark.png)
+    /// ![A view within a dark mode simulator with a dark pink, almost maroon,
+    /// background, as defined by color "Pink".](color-name-dark.png)
     ///
     /// - Parameters:
     ///   - name: the name of the color resource to lookup.
@@ -7040,7 +7275,8 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![UIColor Init](color-uicolor-init.png)
+    /// ![A view displaying a bright, highlighter yellow color as created from
+    /// an instance of UIColor.](color-uicolor-init.png)
     ///
     public init(_ color: UIColor) { }
 }
@@ -7061,7 +7297,8 @@ extension Color {
     ///         }
     ///     }
     ///
-    /// ![Color Opacity](color-opacity.png)
+    /// ![A view displaying the text "Banana 🍌🍌", shrouded by a pink
+    /// background, as defined by the instance method opacity being set to 0.80.](color-opacity.png)
     ///
 	/// This is different from the ``View/opacity(_:)`` modifier because it
 	/// returns a ``Color`` object rather than `some View`.
@@ -12761,7 +12998,9 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
-/// ![2B8CB1C2-A204-47A8-AF0D-95C69028ECAC](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
+/// ![A view displaying the text "some text"; the main view intializes an app
+/// model through a state object and a child view, which uses an environment
+/// object to display the text declared int he app model.](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
 ///
 /// - An app model, `AppModel` is initialized in a `@StateObject` in the
 /// `ContentView`.
@@ -12803,7 +13042,10 @@ extension EnvironmentKey {
 ///
 /// ```
 ///
-/// ![6181BC35-A419-499C-B394-64E170CECAD1](6181BC35-A419-499C-B394-64E170CECAD1.png)
+/// ![A view displaying the text "some text"; the main view intializes an
+/// app model through a state object and an intermediate view, which initializes
+/// a child view, which uses an environment object to display the text
+/// declared in the app model.](6181BC35-A419-499C-B394-64E170CECAD1.png)
 ///
 /// In this example, `ChildView` is initialized by an `IntermediateView`,
 /// which in turn is initialized by `ContentView`. This example is different
@@ -12847,7 +13089,9 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
-/// ![](bindings-ex.gif)
+/// ![A gif flipping a toggle named "Flag" on and off; the main view intializes an
+/// app model containing the bool for flag through a state object and
+/// a child view, which uses an environment object to display the toggle.](bindings-ex.gif)
 ///
 ///  In this example, `AppModel` contains a boolean, `flag`, which is
 /// represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a
@@ -12917,12 +13161,15 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
-/// ![](environment-object-ex4.gif)
+/// ![A gif displaying an iOS 14 screen with a button "present" that once
+/// pressed reveals a sheet with a toggle named "Flag"; the main view contains
+/// the button and the sheet and intializes an app model containing the bool for
+/// flag through a state object and a child view, which uses an environment
+/// object to display the toggle.](environment-object-ex4.gif)
 ///
 /// To fix it, the ``View/environmentObject(_:)`` modifier would need to be
 /// added directly to the sheet's content, like this:
 ///
-/// ![47F26343-D59C-4824-B43C-34B068EF0A5A](47F26343-D59C-4824-B43C-34B068EF0A5A.png)
 /// ```
 /// class AppModel: ObservableObject {
 ///     @Published var flag: Bool = false
@@ -12954,7 +13201,12 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
-/// ![](environment-object-ex5.gif)
+/// ![A gif displaying an iOS 13 screen with a button "present" that once
+/// pressed reveals a sheet with a toggle named "Flag"; the main view contains
+/// the button and the sheet, which contains an environment object, and intializes
+/// an app model containing the bool for flag through a state object, and a child
+/// view, which uses an the same environment object in the sheet and to display
+/// the toggle.](environment-object-ex5.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct EnvironmentObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
@@ -22969,7 +23221,9 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
     /// }
     /// ```
     ///
-    /// ![](18.04.32.png)
+    /// ![A view containing a bordered label with the title "Lightning" preceded by a
+    /// black-filled lightning bold symbol from the SF symbols collection surrounded
+    /// red border with padding between.](18.04.32.png)
     ///
     /// - Parameter configuration: The label style to use.
     public init(_ configuration: LabelStyleConfiguration) { }
@@ -27104,7 +27358,9 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](wrapped-value-ex.gif)
+/// ![A gif displaying a view containing a VStaxk with a text object "Apple"
+/// derived from the related app model and a button that reads "Change Text";
+/// when pressed, the button updates the text to "Banana" using the app model.](wrapped-value-ex.gif)
 ///
 /// In the example above, `ExampleView` will update its displayed text to
 /// "Banana" when the button labeled "Change Text" is pressed. This is because
@@ -27138,7 +27394,9 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](observed-object-ex3.gif)
+/// ![A gif displaying a main view with an observed object variable and a text field
+/// reading "Enter fruit name"; when text is entered, it is bound to the
+/// related app models published variable called fruitName.](observed-object-ex3.gif)
 ///
 /// In this example, a two-way connection is established between
 /// `appModel.fruitName` and ``TextField``, by using the `$` prefix to
@@ -27175,7 +27433,10 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](observed-object-ex3.gif)
+/// ![A main view with a state object variable containing an oberservable object
+/// that it passes to the child view with an observed object variable, which
+/// displays a text field reading "Enter fruit name"; when text is entered,
+/// it is bound to the related app model's published variable called fruitName.](observed-object-ex3.gif)
 ///
 /// It is a common pattern for a parent view to create a `@StateObject` to
 /// hold an observable object, and then to pass it down to a child using an
@@ -27216,7 +27477,11 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](observed-object-ex4.gif)
+/// ![A gif displaying view containing a VStack with a toggle description reading
+/// "The value is: _", populated with true or false dependent on the bool value,
+/// and a toggle called "Refresh" that is used to change the bool value; flipping
+/// the toggle caused "Initialized" to be printed once in the console because
+/// the view uses a state object.](observed-object-ex4.gif)
 ///
 /// `ExampleView` creates a vertical stack of a ``Toggle``, and a view that
 /// describes the toggle, `ToggleDescription`.
@@ -27264,7 +27529,11 @@ extension NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](state-object-ex3.gif)
+/// ![A gif displaying view containing a VStack with a toggle description reading
+/// "The value is: _", populated with true or false dependent on the bool value,
+/// and a toggle called "Refresh" that is used to change the bool value; flipping
+/// the toggle caused "Initialized" to be printed each time in the console because
+/// the view uses an observed object.](state-object-ex3.gif)
 ///
 /// This example is identical to the previous example **except** for the fact
 /// that `@StateObject` has been replaced with `@ObservedObject`. Run this
@@ -31085,7 +31354,8 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
-/// ![](progressview.png)
+/// ![A ProgressView displaying a gray loading bar filled halfway left to right
+/// by blue, as defined by the ProgressView value being 0.5.](progressview.png)
 ///
 /// `ProgressView` has many custom initializers, differing in the **label**
 /// type and whether it is a **spinner** or a **linear** progress bar. Explore
@@ -38270,7 +38540,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](wrapped-value-ex.gif)
+/// ![A gif displaying a view containing a VStack with a text object derived
+/// from a state variable and a button that reads "Change Text";
+/// when pressed, the button updates the text through the variable.](wrapped-value-ex.gif)
 ///
 /// In this example, pressing the button labeled "Change Text" modifies the `foo` state variable. This causes `ExampleView`'s `body` to be recomputed by the SwiftUI runtime. This new `body` is then queued for the next render cycle, upon which the view's display is updated on the screen.
 ///
@@ -38307,7 +38579,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](wrapped-value-ex.gif)
+/// ![A gif displaying a view containing a VStack with a text object derived
+/// from the child view and a button that reads "Change Text";
+/// when pressed, the button updates the text through the state variable.](wrapped-value-ex.gif)
 ///
 /// In this example, `foo` is passed to `ChildView` by initializer.
 ///
@@ -38345,7 +38619,9 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](state-ex3.gif)
+/// ![A gif displaying a view with a text field containg a call to a state
+/// variable and textfield reading "Placeholder"; when populated with new text,
+/// the text above the text field updates as well.](state-ex3.gif)
 ///
 /// In this example, `TextField` requires a binding in order to read and write
 /// to a given value. The `text` state variable is converted to a
@@ -38379,7 +38655,10 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![](wrapped-value-ex.gif)
+/// ![A gif displaying a view containing a VStack with a text object that
+/// contains a state variable and a button that reads "Change Text";
+/// when pressed, the button updates the text by calling to a function, which
+/// calls to the state variable.](wrapped-value-ex.gif)
 ///
 /// In this example, the button labeled "Change text" calls the function `changeText`, which modifies `foo`.
 ///
@@ -38531,7 +38810,8 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
+/// ![A view displaying the text "Hello World"; the view instantiates an
+/// observable object class AppModel and stores it in a @StateObject.](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
 ///
 /// ### How it works
 ///
@@ -38581,7 +38861,9 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![](state-object-ex2.gif)
+/// ![A gif displaying a toggle named "Flag" switching on and off; the view
+/// instantiates an observable object class AppModel with a bool variable called
+/// flag that acts as a binding for isOn in the toggle by way of a@StateObject.](state-object-ex2.gif)
 ///
 /// In this example, `AppModel` contains a boolean, `flag`, which is
 /// represented by a ``Toggle`` in `ChildView`. ``Toggle`` requires a
@@ -38621,7 +38903,11 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![](state-object-ex3.gif)
+/// ![A gif displaying view containing a VStack with a toggle description reading
+/// "The value is: _", populated with true or false dependent on the bool value,
+/// and a toggle called "Refresh" that is used to change the bool value; flipping
+/// the toggle caused "Initialized" to be printed once in the console because
+/// the view uses a state object.](state-object-ex3.gif)
 ///
 /// `ExampleView` creates a vertical stack of a ``Toggle``, and a view that
 /// describes the toggle, `ToggleDescription`.
@@ -38669,7 +38955,11 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![](state-object-ex3.gif)
+/// ![A gif displaying view containing a VStack with a toggle description reading
+/// "The value is: _", populated with true or false dependent on the bool value,
+/// and a toggle called "Refresh" that is used to change the bool value; flipping
+/// the toggle caused "Initialized" to be printed each time in the console because
+/// the view uses an observed object.](state-object-ex3.gif)
 ///
 /// This example is identical to the previous example **except** for the
 /// fact that `@StateObject` has been replaced with `@ObservedObject`. Run
@@ -38727,7 +39017,8 @@ extension State where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![B96E266D-DFC6-40A9-B6C1-56C609F308D0](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
+/// ![A view displaying the text "Hello world"; the main app instantiates a state
+/// object and passes it down to the view as an environment object.](B96E266D-DFC6-40A9-B6C1-56C609F308D0.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct StateObject<ObjectType> : DynamicProperty where ObjectType : ObservableObject {
@@ -55033,9 +55324,11 @@ extension WidgetConfiguration {
 /// }
 /// ```
 ///
-/// ![](windowgroup.png)
+/// ![A Mac view displaying a window group with the text "Bananas"; the text
+/// view has a fram of width 500 and height 300.](windowgroup.png)
 ///
-/// ![](windowgroup-ios.png)
+/// ![An iOS view displaying a window group with the text "Bananas"; the text
+/// view has a fram of width 500 and height 300.](windowgroup-ios.png)
 ///
 /// Note:
 /// - The default implementation of a ``WindowGroup`` allows multiple instances
@@ -55066,12 +55359,15 @@ extension WidgetConfiguration {
 /// }
 /// ```
 ///
-/// ![](windowgroup-3.png)
+/// ![A Mac view displaying a window group with the text "Bananas" and the
+/// window title "Fruit App"; the text view has a frame of width 500 and height 300.](windowgroup-3.png)
 ///
 /// - Note: The system may use the provided window title as a part of some default
 /// window command names. For example, the **"New Window"** command would become
 /// **"New Fruit App Window"**.
+///
 /// [window-commands ->]
+///
 /// ### Adding commands to a window group
 ///
 /// On macOS, a window can provide a set of contextual commands as menu items
@@ -55097,7 +55393,9 @@ extension WidgetConfiguration {
 /// }
 /// ```
 ///
-/// ![](windowgroup-4.png)
+/// ![A Mac view displaying a window group with the text "Bananas" and the
+/// command menu option "Some Commands", which contains the text "A Command" in
+/// it's dropdown; the text view has a frame of width 500 and height 300.](windowgroup-4.png)
 /// [<-]
 /// ### Disabling creating multiple window instances
 ///
