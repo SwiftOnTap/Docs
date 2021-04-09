@@ -7354,7 +7354,11 @@ extension Color.RGBColorSpace : Hashable {
 ///         }
 ///     }
 ///
-/// ![Color Picker](color-picker-vid.gif)
+/// ![A gif displaying a view with a 100 x 100 rounded rectangle with a fill
+/// derived from the state variable "color" and a ColorPicker titled
+/// "Choose a color! 🎨", whose selection input is bound to the state variable;
+/// the gif shows "Choose a color! 🎨" being clicked and the color picker menu
+/// sliding up where various colors are chosen and reflected in the rectangle.](color-picker-vid.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -8146,8 +8150,8 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 ///     var body: some View {
 ///         VStack {
 ///             ContainerRelativeShape()
-///                 .fill(Color.pink)
-///                 .overlay(Text("time"))
+///                 .fill(Color.yellow)
+///                 .overlay(Text("Time"))
 ///             ContainerRelativeShape()
 ///                 .fill(Color.blue)
 ///                 .overlay(Text(entry.date, style: .time))
@@ -8156,7 +8160,9 @@ public struct CompactDatePickerStyle : DatePickerStyle {
 /// }
 /// ```
 ///
-/// ![](containerrelativeshape.png)
+/// ![A view containing a VStack with two ContainerRelativeShapes, one with yellow
+/// fill and the text "Time" and the other with blue fill and a textview displaying
+/// the time; the view styles a widget shown on an IPhone homescreen.](containerrelativeshape.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen public struct ContainerRelativeShape : Shape {
@@ -8191,7 +8197,7 @@ public struct CompactDatePickerStyle : DatePickerStyle {
     ///     var body: some View {
     ///         VStack {
     ///             ContainerRelativeShape()
-    ///                 .fill(Color.pink)
+    ///                 .fill(Color.yellow)
     ///                 .overlay(Text("time"))
     ///             ContainerRelativeShape()
     ///                 .fill(Color.blue)
@@ -8201,7 +8207,10 @@ public struct CompactDatePickerStyle : DatePickerStyle {
     /// }
     /// ```
     ///
-    /// ![](containerrelativeshape.png)
+    /// ![A view containing a VStack with two ContainerRelativeShapes, one with yellow
+    /// fill and the text "Time" and the other with blue fill and a textview displaying
+    /// the time; the view styles a widget shown on an IPhone homescreen.](containerrelativeshape.png)
+    ///
     @inlinable public init() { }
 
     /// The type defining the data to animate.
@@ -8643,7 +8652,9 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// }
 /// ```
 ///
-/// ![](date-picker-ex1.gif)
+/// ![Gif displays a date picker view consisting of a calendar in
+/// which a date is selected and a a time selector in which an hour and minute
+/// can be entered and a toggle flips between AM and PM.](date-picker-ex1.gif)
 ///
 /// ### Styling Date Pickers
 ///
@@ -8672,7 +8683,10 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// }
 /// ```
 ///
-/// ![](date-picker-ex2.gif)
+/// ![A gif displaying a wheel style date picker, in which the week day month
+/// and date, the hour time, the minute time, and meridiam (am/pm) can be
+/// selected separately by scrolling around a wheel; a light gray box highlights
+/// the current selections.](date-picker-ex2.gif)
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -8712,7 +8726,8 @@ extension DatePicker {
     /// }
     /// ```
     ///
-    /// ![](19.54.55.png)
+    /// ![A view containing a textview with the current data nad a date picker
+    /// labelled by two symbols, a calendar and a clock.](19.54.55.png)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8739,7 +8754,9 @@ extension DatePicker {
     /// }
     /// ```
     ///
-    /// ![](19.56.49.png)
+    /// ![A view containing a textview with the current data and a date picker
+    /// labelled by two symbols, a calendar and a clock; once clicked, the picker
+    /// displays a calendar with a time input and AM/PM switch.](19.56.49.png)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8767,7 +8784,9 @@ extension DatePicker {
     /// }
     /// ```
     ///
-    /// ![](19.57.44.png)
+    /// ![A view containing a textview with the current data and a date picker
+    /// labelled by two symbols, a calendar and a clock; once clicked, the picker
+    /// displays a calendar with a time input and AM/PM switch.](19.57.44.png)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8795,7 +8814,9 @@ extension DatePicker {
     /// }
     /// ```
     ///
-    /// ![](19.58.32.png)
+    /// ![A view containing a textview with the current data and a date picker
+    /// labelled by two symbols, a calendar and a clock; once clicked, the picker
+    /// displays a calendar with a time input and AM/PM switch.](19.58.32.png)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8828,7 +8849,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](19.59.27.png)
+    /// ![A view containing a textview with the current date and a date picker
+    /// titled "Date" by a localized string key; once clicked, the picker
+    /// displays a calendar with a time input and AM/PM switch.](19.59.27.png)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8855,7 +8878,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](20.04.21.png)
+    /// ![A view containing a textview with the current date in number format and
+    ///  a date picker titled "Date and time" by a localized string key; once
+    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.04.21.png)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8883,7 +8908,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](20.07.29.png)
+    /// ![A view containing a textview with the current date and
+    ///  a date picker titled "Date and time" by a localized string key; once
+    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.07.29.png)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8911,7 +8938,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](20.06.14.png)
+    /// ![A view containing a textview with the current date and
+    ///  a date picker titled "Date and time" by a localized string key; once
+    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.06.14.png)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8938,7 +8967,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](20.08.39.png)
+    /// ![A view containing a textview with the current date and a date
+    ///  picker titled "Date 📆 and time ⏰"; once
+    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.08.39.png)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -8965,7 +8996,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](20.10.41.png)
+    /// ![A view containing a textview with the current date and a date
+    ///  picker titled "Date 📆 and time ⏰"; once
+    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.10.41.png)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -8993,7 +9026,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](20.11.14.png)
+    /// ![A view containing a textview with the current date and a date
+    ///  picker titled "Date 📆 and time ⏰"; once
+    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.11.14.png)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -9021,7 +9056,9 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](20.12.09.png)
+    /// ![A view containing a textview with the current date and a date
+    ///  picker titled "Date 📆 and time ⏰"; once
+    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.12.09.png)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -9425,7 +9462,8 @@ public struct DefaultListStyle : ListStyle {
 /// }
 /// ```
 ///
-/// ![DefaultMenu Example 1](default-menu-example.gif)
+/// ![A gif displaying a view containing a default style menu "PDF" that once clicked displays
+/// two buttons, "Open in Preview" and "Save as PDF", each with no action attached.](default-menu-example.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
