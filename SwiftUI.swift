@@ -9484,7 +9484,8 @@ public struct DefaultMenuStyle : MenuStyle {
     /// }
     /// ```
     ///
-    /// ![DefaultMenu Example 1](default-menu-example.gif)
+    /// ![A gif displaying a view containing a default style menu "PDF" that
+    /// once clicked displays two buttons, "Open in Preview" and "Save as PDF", each with no action.](default-menu-example.gif)
     ///
     public init() { }
 
@@ -9526,7 +9527,10 @@ public struct DefaultMenuStyle : MenuStyle {
 /// }
 /// ```
 ///
-/// ![](default-nav-view-style-ex1.gif)
+/// ![A gif displaying an iOS default style NavigationView containing a NavigationLink
+/// that reads "Stack the second screen! 🥞" and causes a stacked text view
+/// reading "I'm stacked on the pancakes 📚" with the navigation title "Second
+/// Screen" to appear, covering the first view.](default-nav-view-style-ex1.gif)
 ///
 /// On macOS, ``DoubleColumnNavigationViewStyle`` is the default:
 ///
@@ -9548,7 +9552,10 @@ public struct DefaultMenuStyle : MenuStyle {
 /// }
 /// ```
 ///
-/// ![](default-nav-view-style-ex2.gif)
+/// ![A gif displaying a macOS default style NavigationView containing a NavigationLink
+/// in the left column that reads "I'm in the sidebar ⬅️" and causes a text view
+/// reading "I just appeared in the middle 🤠" with the navigation title "Second
+/// Screen" to appear in the right column.](default-nav-view-style-ex2.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultNavigationViewStyle : NavigationViewStyle {
@@ -9579,7 +9586,10 @@ public struct DefaultNavigationViewStyle : NavigationViewStyle {
     /// }
     /// ```
     ///
-    /// ![](default-nav-view-style-ex1.gif)
+    /// ![A gif displaying an iOS default style NavigationView containing a NavigationLink
+    /// that reads "Stack the second screen! 🥞" and causes a stacked text view
+    /// reading "I'm stacked on the pancakes 📚" with the navigation title "Second
+    /// Screen" to appear, covering the first view.](default-nav-view-style-ex1.gif)
     ///
     public init() { }
 }
@@ -9784,7 +9794,11 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+/// ![A gif that jumps between the three text views, "Bananas 🍌🍌",
+/// "Apples 🍏🍏", and "Peaches 🍑🍑", within an iOS default style TabView
+/// by clicking the corresponding symbols on the tab-bar: each tab bar item is
+/// a filled circle with the page number above the two matching emojis
+/// corresponding to the those in the text views.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 /// Since this is the default style,
 /// if you omit the line `.tabViewStyle(DefaultTabViewStyle())`, you
@@ -9815,7 +9829,11 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// }
 /// ```
 ///
-/// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+/// ![A gif that jumps between the three text views, "Bananas 🍌🍌",
+/// "Apples 🍏🍏", and "Peaches 🍑🍑", within a TabView by clicking the
+/// corresponding symbols on the tab-bar: each tab bar item is a filled circle
+/// with the page number above the two matching emojis corresponding to the
+/// those in the text views.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public struct DefaultTabViewStyle : TabViewStyle {
@@ -9851,7 +9869,11 @@ public struct DefaultTabViewStyle : TabViewStyle {
     /// }
     /// ```
     ///
-    /// ![TabView Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
+    /// ![A gif that jumps between the three text views, "Bananas 🍌🍌",
+    /// "Apples 🍏🍏", and "Peaches 🍑🍑", within an iOS default style TabView
+    /// by clicking the corresponding symbols on the tab-bar: each tab bar item is
+    /// a filled circle with the page number above the two matching emojis
+    /// corresponding to the those in the text views.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
     ///
     public init() { }
 }
@@ -9874,7 +9896,8 @@ public struct DefaultTabViewStyle : TabViewStyle {
 ///         }
 ///     }
 ///
-/// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+/// ![A gif showing a view with a VStack containing an iOS default style textfield
+/// that once populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct DefaultTextFieldStyle : TextFieldStyle {
@@ -9892,7 +9915,8 @@ public struct DefaultTextFieldStyle : TextFieldStyle {
     ///         }
     ///     }
     ///
-    /// ![TextField Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+    /// ![A gif showing a view with a VStack containing an iOS default style textfield
+    /// that once populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
     ///
     public init() { }
 }
@@ -10146,7 +10170,9 @@ public struct Divider : View {
     /// }
     /// ```
     ///
-    /// ![](20.20.56.png)
+    /// ![A screenshot containing two lines of text in an HStack separated by a
+    /// divider; The text reads "This is a line of text" to the left of the
+    /// divider, and "This is an unrelated line of text" to the right.](20.20.56.png)
     ///
     public init() { }
 
@@ -10384,7 +10410,7 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 ///         DragGesture()
 ///             .onChanged { value in
 ///                 self.location = value.location
-///                self.isDragging = true
+///                 self.isDragging = true
 ///
 ///             }
 ///             .onEnded {_ in self.isDragging = false}
@@ -10400,7 +10426,8 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 /// }
 /// ```
 ///
-/// ![DragGesture Example 1](drag-gesture-example.gif)
+/// ![A gif displaying a view contining a drag gesture and a circle, connected
+/// by state variables; when  dragged, the circle turns from yellow to red.](drag-gesture-example.gif)
 ///
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, *)
 @available(tvOS, unavailable)
@@ -12105,7 +12132,9 @@ extension Edge : RawRepresentable {
 /// }
 /// ```
 ///
-/// ![](20.24.08.png)
+/// ![A view containing a default rectangle with padding insets, a static
+/// variable defined by EdgeInsets; the black rectangle fills up most of the
+/// frame up until the edges, where a gap remains due to the insets.](20.24.08.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EdgeInsets : Equatable {
@@ -12127,7 +12156,10 @@ extension Edge : RawRepresentable {
     /// }
     /// ```
     ///
-    /// ![](20.25.10.png)
+    /// ![A view containing a default rectangle with padding insets, a static
+    /// variable defined by EdgeInsets; the black rectangle fills up most of the
+    /// frame, limited only by the 20 point top edge inset, which creates
+    /// gap between the shape and the top edge of the frame.](20.25.10.png)
     ///
     public var top: CGFloat
 
@@ -12145,7 +12177,10 @@ extension Edge : RawRepresentable {
     /// }
     /// ```
     ///
-    /// ![](20.26.11.png)
+    /// ![A view containing a default rectangle with padding insets, a static
+    /// variable defined by EdgeInsets; the black rectangle fills up most of the
+    /// frame, limited only by the 20 point leading edge inset, which creates
+    /// gap between the shape and the left edge of the frame.](20.26.11.png)
     ///
     public var leading: CGFloat
 
@@ -12163,7 +12198,10 @@ extension Edge : RawRepresentable {
     /// }
     /// ```
     ///
-    /// ![](20.26.55.png)
+    /// ![A view containing a default rectangle with padding insets, a static
+    /// variable defined by EdgeInsets; the black rectangle fills up most of the
+    /// frame, limited only by the 20 point bottom edge inset, which creates
+    /// gap between the shape and the bottom edge of the frame.](20.26.55.png)
     ///
     public var bottom: CGFloat
 
@@ -12181,7 +12219,10 @@ extension Edge : RawRepresentable {
     /// }
     /// ```
     ///
-    /// ![](20.27.41.png)
+    /// ![A view containing a default rectangle with padding insets, a static
+    /// variable defined by EdgeInsets; the black rectangle fills up most of the
+    /// frame, limited only by the 20 point trailing edge inset, which creates
+    /// gap between the shape and the right edge of the frame.](20.27.41.png)
     ///
     public var trailing: CGFloat
 
@@ -12198,7 +12239,10 @@ extension Edge : RawRepresentable {
     /// }
     /// ```
     ///
-    /// ![](20.29.02.png)
+    /// ![A view containing a default rectangle with padding insets, a static
+    /// variable defined by EdgeInsets; the black rectangle fills up most of the
+    /// frame, limited only by the inset values, which create gaps between the
+    /// shape and the edge of the frame.](20.29.02.png)
     ///
     /// - Parameters:
     ///   - top: Inset distance from the top edge.
@@ -12221,7 +12265,10 @@ extension Edge : RawRepresentable {
     /// }
     /// ```
     ///
-    /// ![](20.27.41.png)
+    /// ![A view containing a default rectangle with padding insets, a static
+    /// variable defined by EdgeInsets; the black rectangle fills up most of the
+    /// frame, limited only by the 20 point trailing edge inset, which creates
+    /// gap between the shape and the right edge of the frame.](20.27.41.png)
     ///
     @inlinable public init() { }
 
@@ -12256,7 +12303,10 @@ extension EdgeInsets {
     // }
     /// ```
     ///
-    /// ![](22.00.40.png)
+    /// ![A view containing a default rectangle with padding insets, a static
+    /// variable defined by the NSDirectionalEdgeInsets within EdgeInsets; the
+    /// black rectangle fills up most of the frame, limited only by the edge
+    /// insets, which create gaps between the shape and the edges of the frame.](22.00.40.png)
     ///
     /// - Parameter nsEdgeInsets: The NSEdgeInsets to use for creating an
     /// edge inset.
@@ -12462,7 +12512,8 @@ extension EditMode : Hashable {
 /// }
 /// ```
 ///
-/// ![Ellipse fill and frame example](ellipse-example-1.png)
+/// ![A view containing a purple filled ellipse with a frame of width 250 and
+/// height 150.](ellipse-example-1.png)
 ///
 /// To add a border, use the ``Shape/stroke(_:lineWidth:)`` modifier, and use
 /// the ``Ellipse/inset(by:)`` modifier to inset the Ellipse by half of the
@@ -12479,7 +12530,8 @@ extension EditMode : Hashable {
 /// }
 /// ```
 ///
-/// ![Ellipse inset and stroke example](ellipse-example-2.png)
+/// ![A view containing an ellipse with an inset of 10, a purple stroke / outline
+/// of line width 20, and a frame of width 250 and height 150.](ellipse-example-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Ellipse : Shape {
@@ -12498,7 +12550,7 @@ extension EditMode : Hashable {
     /// }
     /// ```
     ///
-    /// ![Ellipse path example](ellipse-example-3.png)
+    /// ![A view containing a default ellipse.](ellipse-example-3.png)
     ///
     public func path(in rect: CGRect) -> Path { }
 
@@ -12690,7 +12742,10 @@ public struct EmptyCommands : Commands {
 ///         }
 ///     }
 ///
-/// ![](22.16.06.png)
+/// ![A view containing a text view reading "Hello, World!" and a ViewModifier
+/// that returns either an outside custom ViewModifier or EmptyModifier; the
+/// custom modifier is applied to the text view, resulting in "Hello, World!"
+/// having a yellow background and red outline.](22.16.06.png)
 ///
 /// In order to stack multiple modifiers, including the EmptyModifier, see
 /// ``ViewModifier/concat(_:)``
@@ -12814,7 +12869,10 @@ public struct EmptyCommands : Commands {
     /// }
     /// ```
     ///
-    /// ![](22.17.47.png)
+    /// ![A view containing a VStack with two text views, "Hello" and "World"
+    /// separated by an EmptyView with frame of width 1000 and height 1000 and
+    /// red background color; the view displays as a VStack with just the two
+    /// text views, "Hello" on one line and "World" on the next. ](22.17.47.png)
     ///
     @inlinable public init() { }
 
@@ -12897,7 +12955,9 @@ public struct EmptyCommands : Commands {
     ///         }
     ///     }
     ///
-    /// ![](22.19.46.png)
+    /// ![A view that displays the text view "This is ⬛️ content" when the
+    /// colorscheme is dark and "This is  ⬜️ content" otherwise; the view uses
+    /// an environment variable to determine the current colorscheme.](22.19.46.png)
     ///
     /// SwiftUI automatically updates any parts of `MyView` that depend on
     /// the property when the associated environment value changes.
@@ -12926,7 +12986,9 @@ public struct EmptyCommands : Commands {
     ///         }
     ///     }
     ///
-    /// ![](22.19.46.png)
+    /// ![A view that displays the text view "This is ⬛️ content" when the
+    /// colorscheme is dark and "This is  ⬜️ content" otherwise; the view uses
+    /// an environment variable to determine the current colorscheme.](22.19.46.png)
     ///
     @inlinable public var wrappedValue: Value { get }
 }
@@ -13319,7 +13381,9 @@ extension EnvironmentKey {
     ///
     /// ```
     ///
-    /// ![](22.34.04.png)
+    /// ![An observable model containing the text view "some text" that is
+    /// passed down through three nested view by a state object and environment
+    /// object; the text is displayed in the last view.](22.34.04.png)
     ///
     public init() { }
 }
@@ -13837,7 +13901,10 @@ extension EnvironmentValues {
     ///         }
     ///     }
     ///
-    /// ![](eviron-vals-presentation-mode.gif)
+    /// ![A gif displaying a view with a button reading "Open sesame 📬" which
+    /// triggers the presentation of a sheet with a button reading "CLOSE 📪";
+    /// upon dismissal of the sheet with the close button, the console prints
+    /// "dismissed!" and the sheet slides back down until hidden.](eviron-vals-presentation-mode.gif)
     ///
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public var presentationMode: Binding<PresentationMode> { get }
@@ -13880,7 +13947,8 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
 /// }
 /// ```
 ///
-/// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
+/// ![An EquitableView containing a call to a view with the text
+/// "I can be optimized using equatable! ⚖️".](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct EquatableView<Content> : View where Content : Equatable, Content : View {
@@ -13908,10 +13976,11 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
     ///         Text("I can be optimized using equatable! ⚖️")
     ///     }
     /// }
-    ///
-    /// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
-    ///
     /// ```
+    ///
+    /// ![An EquitableView containing a call to a view with the text
+    /// "I can be optimized using equatable! ⚖️".](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
+    ///
     public var content: Content
 
     /// Creates a new equatable view from a view.
@@ -13938,7 +14007,8 @@ extension EnvironmentalModifier : ViewModifier where Self.Body == Never {
     /// }
     /// ```
     ///
-    /// ![4A467FF0-5515-40A4-88FF-E2DEC025836D](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
+    /// ![An EquitableView containing a call to a view with the text
+    /// "I can be optimized using equatable! ⚖️".](4A467FF0-5515-40A4-88FF-E2DEC025836D.png)
     ///
     /// - Parameter content: The view you want to use as the body of the equatable view.
     @inlinable public init(content: Content) { }
@@ -14803,7 +14873,8 @@ public struct FileDocumentWriteConfiguration {
 /// }
 /// ```
 ///
-/// ![3D0FC026-AFA8-4995-8F6B-D48485049731](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
+/// ![A view containinf a circle with pink fill with eoFill set to true, causing
+/// the use of the even-odd rule in the rendering of the shape.](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct FillStyle : Equatable {
@@ -14852,7 +14923,13 @@ public struct FileDocumentWriteConfiguration {
     /// }
     /// ```
     ///
-    /// ![FillStyle even-odd rule example 1](fillstyle-eof-example.png)
+    /// ![A view containing a VStack with two VStacks, each with a custom
+    /// OverlappingRectangle shape with pink fill and a frame of width 150 and
+    /// height 100 as well as a text view; as stated by the text view beneath
+    /// each, isOEFilled is set to true for the first and false for the second,
+    /// resulting in the first having a blank white space wjere the overlap of
+    /// the rectangles occurs and the second being completelt pink filled, even
+    /// through the overlap.](fillstyle-eof-example.png)
     ///
     /// When `isEOFilled` is `false`, the style uses the non-zero winding number
     /// rule.
@@ -14876,7 +14953,8 @@ public struct FileDocumentWriteConfiguration {
     /// }
     /// ```
     ///
-    /// ![3D0FC026-AFA8-4995-8F6B-D48485049731](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
+    /// ![A view containing a circle with pink fill, eoFill set to true, and
+    /// antialiased set to true.](3D0FC026-AFA8-4995-8F6B-D48485049731.png)
     ///
     /// - Parameters:
     ///   - eoFill: A Boolean value that indicates whether to use the even-odd
@@ -15569,7 +15647,8 @@ extension Font {
     ///         }
     ///     }
     ///
-    /// ![](22.54.51.png)
+    /// ![A view containing the text view "Bananas 🍌🍌" in the system font
+    /// style title.](22.54.51.png)
     ///
     /// Your app can easily modify the system font by providing an alternate `design`. For example:
     ///
@@ -15580,7 +15659,9 @@ extension Font {
     ///         }
     ///     }
     ///
-    /// ![](22.55.10.png)
+    /// ![A view containing the text view "Bananas 🍌🍌" in the system font
+    /// style title and with monospaced design, which creates smnall gaps
+    /// between the letters of the word.](22.55.10.png)
     ///
     /// - Parameters:
     ///   - style: The ``Font/TextStyle`` of the font.
@@ -15608,35 +15689,40 @@ extension Font {
     ///     var body: some View {
     ///         Group {
     ///             Text("Large Title")
-    ///                 .font(.largeTitle)
+    ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
     ///             Text("Title")
-    ///                 .font(.title)
+    ///                 .font(.system(Font.TextStyle.title, design: .rounded))
     ///             Text("Title 2")
-    ///                 .font(.title2)
+    ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
     ///             Text("Title 3")
-    ///                 .font(.title3)
+    ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
     ///             Text("Headline")
-    ///                 .font(.headline)
+    ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
     ///             Text("SubHeadline")
-    ///                 .font(.subheadline)
+    ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
     ///         }
     ///         Group {
     ///             Text("Body")
-    ///                 .font(.body)
+    ///                 .font(.system(Font.TextStyle.body, design: .rounded))
     ///             Text("Callout")
-    ///                 .font(.callout)
-    ///            Text("Footnote")
-    ///                 .font(.footnote)
+    ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+    ///             Text("Footnote")
+    ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
     ///             Text("Caption")
-    ///                 .font(.caption)
-    ///              Text("Caption2")
-    ///                 .font(.caption2)
+    ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+    ///             Text("Caption2")
+    ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![TextStyle Example 1](text-style-example.png)
+    /// ![A view with two groups, one containing text views with the text
+    /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+    /// applied to the font, and the other containing text views with the text
+    /// styles body, callout, caption, caption2, and footnote applied through
+    /// a custom system font with rounded design; the text item for each example reads as the
+    /// applied text styles name.](text-style-example.png)
     ///
     public enum TextStyle : CaseIterable {
 
@@ -15647,35 +15733,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case largeTitle
 
@@ -15686,35 +15777,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case title
 
@@ -15725,35 +15821,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title2
@@ -15765,35 +15866,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case title3
@@ -15805,35 +15911,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case headline
 
@@ -15844,35 +15955,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case subheadline
 
@@ -15883,35 +15999,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case body
 
@@ -15922,35 +16043,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case callout
 
@@ -15961,35 +16087,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case footnote
 
@@ -16000,35 +16131,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         case caption
 
@@ -16039,35 +16175,40 @@ extension Font {
         ///     var body: some View {
         ///         Group {
         ///             Text("Large Title")
-        ///                 .font(.largeTitle)
+        ///                 .font(.system(Font.TextStyle.largeTitle, design: .rounded))
         ///             Text("Title")
-        ///                 .font(.title)
+        ///                 .font(.system(Font.TextStyle.title, design: .rounded))
         ///             Text("Title 2")
-        ///                 .font(.title2)
+        ///                 .font(.system(Font.TextStyle.title2, design: .rounded))
         ///             Text("Title 3")
-        ///                 .font(.title3)
+        ///                 .font(.system(Font.TextStyle.title3, design: .rounded))
         ///             Text("Headline")
-        ///                 .font(.headline)
+        ///                 .font(.system(Font.TextStyle.headline, design: .rounded))
         ///             Text("SubHeadline")
-        ///                 .font(.subheadline)
+        ///                 .font(.system(Font.TextStyle.subheadline, design: .rounded))
         ///         }
         ///         Group {
         ///             Text("Body")
-        ///                 .font(.body)
+        ///                 .font(.system(Font.TextStyle.body, design: .rounded))
         ///             Text("Callout")
-        ///                 .font(.callout)
-        ///            Text("Footnote")
-        ///                 .font(.footnote)
+        ///                 .font(.system(Font.TextStyle.callout, design: .rounded))
+        ///             Text("Footnote")
+        ///                 .font(.system(Font.TextStyle.caption, design: .rounded))
         ///             Text("Caption")
-        ///                 .font(.caption)
-        ///              Text("Caption2")
-        ///                 .font(.caption2)
+        ///                 .font(.system(Font.TextStyle.caption2, design: .rounded))
+        ///             Text("Caption2")
+        ///                 .font(.system(Font.TextStyle.footnote, design: .rounded))
         ///         }
         ///     }
         /// }
         /// ```
         ///
-        /// ![TextStyle Example 1](text-style-example.png)
+        /// ![A view with two groups, one containing text views with the text
+        /// styles largeTitle, title, title, title2, title3, headline, and subheadline
+        /// applied to the font, and the other containing text views with the text
+        /// styles body, callout, caption, caption2, and footnote applied through
+        /// a custom system font with rounded design; the text item for each example reads as the
+        /// applied text styles name.](text-style-example.png)
         ///
         @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
         case caption2
@@ -16134,7 +16275,8 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// ![A view displaying two text lines in a VStack: "I'm italicized text"
+    /// in italic text font and "And I'm bold" in bold text font.](font-bold-italic.png)
     ///
     /// There is a related ``Text`` modifier called ``Text/italic()`` that
     /// gets applied directly to the text view:
@@ -16153,7 +16295,9 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Italic Modifier Comparison](font-text-italic.png)
+    /// ![A view displaying two italicized text lines in a VStack both reading
+    /// "We are the same 👯‍," one using the italic property and one using the
+    /// Font modifier called italic().](font-text-italic.png)
     ///
     public func italic() -> Font { }
 
@@ -16177,7 +16321,10 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Small Caps](font-smallcaps.png)
+    /// ![A view containing a VStack with three text views, "My Text Is Small
+    /// Caps" in all small capitals, "Mine's Lowercase Small Caps" in lowercase
+    /// small capitals, and "And Mine's Uppercase Small Caps" in uppercase small
+    /// capitals, as defined in the system font.](font-smallcaps.png)
     ///
     public func smallCaps() -> Font { }
 
@@ -16203,7 +16350,10 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Small Caps](font-smallcaps.png)
+    /// ![A view containing a VStack with three text views, "My Text Is Small
+    /// Caps" in all small capitals, "Mine's Lowercase Small Caps" in lowercase
+    /// small capitals, and "And Mine's Uppercase Small Caps" in uppercase small
+    /// capitals, as defined in the system font.](font-smallcaps.png)
     ///
     public func lowercaseSmallCaps() -> Font { }
 
@@ -16229,7 +16379,10 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Small Caps](font-smallcaps.png)
+    /// ![A view containing a VStack with three text views, "My Text Is Small
+    /// Caps" in all small capitals, "Mine's Lowercase Small Caps" in lowercase
+    /// small capitals, and "And Mine's Uppercase Small Caps" in uppercase small
+    /// capitals, as defined in the system font.](font-smallcaps.png)
     ///
     public func uppercaseSmallCaps() -> Font { }
 
@@ -16248,18 +16401,19 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![monospacedDigit example 1](monospaced-digit-example-1.png)
+    /// ![A view containing the text "Some monospaced digits: 0123456789" with
+    /// the monospaced system font, which ensuring a fixed width for each digit.](monospaced-digit-example-1.png)
     ///
     /// Note that this does not actually update the font to use the `.monospace` design.
     /// Rather, it updates digits to have a "fixed" width. For an example of the difference
     /// between a normal proportional font and a monospaced font on digits see:
     ///
     /// Proportional font:
-    /// ![Proportional font example](monospaced-digit-proportional-font.png)
+    /// !["0123456789" with proportional font spacing.](monospaced-digit-proportional-font.png)
     ///
     /// Monospaced font:
     ///
-    /// ![Monospaced font example](monospaced-digit-mono-font.png)
+    /// !["0123456789" with monospacing.](monospaced-digit-mono-font.png)
     ///
     ///
     /// [Image credits to Lior Azi](https://blog.usejournal.com/proportional-vs-monospaced-numbers-when-to-use-which-one-in-order-to-avoid-wiggling-labels-e31b1c83e4d0)
@@ -16286,7 +16440,8 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![](23.06.26.png)
+    /// ![A view containing a Vstack with the text "This is black text" set to
+    /// black weight by the system font modifier.](23.06.26.png)
     ///
     public func weight(_ weight: Font.Weight) -> Font { }
 
@@ -16308,7 +16463,8 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Bold and Italic](font-bold-italic.png)
+    /// ![A view displaying two text lines in a VStack: "I'm italicized text"
+    /// in italic text font and "And I'm bold" in bold text font.](font-bold-italic.png)
     ///
     /// This is slightly different than using the ``Font`` modifier ``Font/weight(_:)``
     /// and passing the ``Font/Weight/bold`` property. See the difference:
@@ -16326,7 +16482,9 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Bold Comparison](font-bold-comparison.png)
+    /// ![A view displaying two text lines in a VStack: "I use the `.bold()`
+    /// modifier", bolded using the .bold() modifier, and "I use the `.bold`
+    /// property" bolded using the .bold property.](font-bold-comparison.png)
     ///
     /// There is a related ``Text`` modifier called ``Text/bold()`` that
     /// gets applied directly to the text view:
@@ -16345,7 +16503,9 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Bold Modifier Comparison](font-bold-twins.png)
+    /// ![A view displaying two bolded text lines in a VStack both reading
+    /// "We are the same 👯‍," one using the bold property and one using the
+    /// Font modifier called bold().](font-bold-twins.png)
     ///
     public func bold() -> Font { }
 
@@ -16369,7 +16529,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Leading](font-leading.png)
+    /// ![A view containing an HStack with three text views, "This is loose text
+    /// that keeps going onto many lines to illustrate leading." with loose
+    /// leading / line spacing, "This is standard text that keeps going onto
+    /// many lines to illustrate leading." with standard leading / line spacing,
+    /// and "This is tight text that keeps going onto many lines to illustrate
+    /// leading." with tight leading / line spacing.](font-leading.png)
     ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public func leading(_ leading: Font.Leading) -> Font { }
@@ -16783,7 +16948,12 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Leading](font-leading.png)
+    /// ![A view containing an HStack with three text views, "This is loose text
+    /// that keeps going onto many lines to illustrate leading." with loose
+    /// leading / line spacing, "This is standard text that keeps going onto
+    /// many lines to illustrate leading." with standard leading / line spacing,
+    /// and "This is tight text that keeps going onto many lines to illustrate
+    /// leading." with tight leading / line spacing.](font-leading.png)
     ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public enum Leading {
@@ -16810,7 +16980,12 @@ extension Font {
         /// }
         /// ```
         ///
-        /// ![Font Leading](font-leading.png)
+        /// ![A view containing an HStack with three text views, "This is loose text
+        /// that keeps going onto many lines to illustrate leading." with loose
+        /// leading / line spacing, "This is standard text that keeps going onto
+        /// many lines to illustrate leading." with standard leading / line spacing,
+        /// and "This is tight text that keeps going onto many lines to illustrate
+        /// leading." with tight leading / line spacing.](font-leading.png)
         ///
         case standard
 
@@ -16834,7 +17009,12 @@ extension Font {
         /// }
         /// ```
         ///
-        /// ![Font Leading](font-leading.png)
+        /// ![A view containing an HStack with three text views, "This is loose text
+        /// that keeps going onto many lines to illustrate leading." with loose
+        /// leading / line spacing, "This is standard text that keeps going onto
+        /// many lines to illustrate leading." with standard leading / line spacing,
+        /// and "This is tight text that keeps going onto many lines to illustrate
+        /// leading." with tight leading / line spacing.](font-leading.png)
         ///
         case tight
 
@@ -16858,7 +17038,12 @@ extension Font {
         /// }
         /// ```
         ///
-        /// ![Font Leading](font-leading.png)
+        /// ![A view containing an HStack with three text views, "This is loose text
+        /// that keeps going onto many lines to illustrate leading." with loose
+        /// leading / line spacing, "This is standard text that keeps going onto
+        /// many lines to illustrate leading." with standard leading / line spacing,
+        /// and "This is tight text that keeps going onto many lines to illustrate
+        /// leading." with tight leading / line spacing.](font-leading.png)
         ///
         case loose
 
@@ -17013,7 +17198,10 @@ extension Font {
     /// }
     /// ```
     ///
-    /// ![Font Design](font-design.png)
+    /// ![A view containing a VStack with four text items, "default" in default
+    /// system font design, "serif" in serif system font design, "rounded" in
+    /// rounded system font design, and "monospaced" in monospaced system font
+    /// design.](font-design.png)
     ///
     public enum Design : Hashable {
 
@@ -17039,7 +17227,10 @@ extension Font {
         /// }
         /// ```
         ///
-        /// ![Font Design](font-design.png)
+        /// ![A view containing a VStack with four text items, "default" in default
+        /// system font design, "serif" in serif system font design, "rounded" in
+        /// rounded system font design, and "monospaced" in monospaced system font
+        /// design.](font-design.png)
         ///
         case `default`
 
@@ -17065,7 +17256,10 @@ extension Font {
         /// }
         /// ```
         ///
-        /// ![Font Design](font-design.png)
+        /// ![A view containing a VStack with four text items, "default" in default
+        /// system font design, "serif" in serif system font design, "rounded" in
+        /// rounded system font design, and "monospaced" in monospaced system font
+        /// design.](font-design.png)
         ///
         @available(watchOS 7.0, *)
         case serif
@@ -17092,7 +17286,10 @@ extension Font {
         /// }
         /// ```
         ///
-        /// ![Font Design](font-design.png)
+        /// ![A view containing a VStack with four text items, "default" in default
+        /// system font design, "serif" in serif system font design, "rounded" in
+        /// rounded system font design, and "monospaced" in monospaced system font
+        /// design.](font-design.png)
         ///
         case rounded
 
@@ -17118,7 +17315,10 @@ extension Font {
         /// }
         /// ```
         ///
-        /// ![Font Design](font-design.png)
+        /// ![A view containing a VStack with four text items, "default" in default
+        /// system font design, "serif" in serif system font design, "rounded" in
+        /// rounded system font design, and "monospaced" in monospaced system font
+        /// design.](font-design.png)
         ///
         @available(watchOS 7.0, *)
         case monospaced
@@ -17671,15 +17871,15 @@ public struct Form<Content> : View where Content : View {
     ///         Form {
     ///             Section(header: Text("Contact Information")) {
     ///                 TextField("First Name", text: $first)
-    ///                 TextField("Last Name ", text: $last)
+    ///                 TextField("Last Name", text: $last)
     ///                 TextField("Email", text: $email)
     ///             }
     ///             Section(header: Text("Preferences")) {
     ///                 Toggle(isOn: $not) {
-    ///                     Text("Notifications ")
+    ///                     Text("Notifications")
     ///                 }
     ///                 Toggle(isOn: self.$dark) {
-    ///                         Text("Dark Mode ")
+    ///                         Text("Dark Mode")
     ///                 }
     ///             }
     ///         }
@@ -17687,7 +17887,12 @@ public struct Form<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![Form Example 2](form-example-2.png)
+    /// ![A view containing a form with two sections, the first with the header
+    /// "Contact Information" and the text fields "First Name", "Last Name", and
+    /// "Email", and the second with the header "Preferences" and two toggles,
+    /// "Notifications" and "Dark Mode"; the text inputs for each of the textfields
+    /// and the isOn parameter for each of the toggles are bound to state variables
+    /// also defined in the view.](form-example-2.png)
     ///
 	/// - Parameter content: A closure that returns the view to the ``Form``.
 	///
@@ -17748,7 +17953,9 @@ extension GeometryEffect {
 /// }
 /// ```
 ///
-/// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
+/// ![A view containing a GeometryReader with a GeometryProxy, green color, and
+/// frame height and width defined by the proxy; the view results in a green
+/// rectangle in the upper left corner of the frame.](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct GeometryProxy {
@@ -17806,7 +18013,8 @@ public struct GeometryProxy {
 /// }
 /// ```
 ///
-/// ![A view displaying a green geometry reader frame in the upper left quadrant of the view.](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
+/// ![A view displaying a green geometry reader frame in the upper left quadrant
+/// of the view.](CA77AB4E-DB8C-453A-8A64-A86209607321.png)
 ///
 /// Note: `GeometryReader` **fills into** its parent container, and the current
 /// default alignment of its content is ``Alignment/topLeading``. The example
@@ -17958,7 +18166,9 @@ public struct GeometryProxy {
     /// }
     /// ```
     ///
-    /// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
+    /// ![A view containing a GeometryReader with green color, and
+    /// frame height and width defined by the proxy; the view results in a green
+    /// rectangle in the upper left corner of the frame.](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
     ///
     public var content: (GeometryProxy) -> Content
 
@@ -17987,7 +18197,9 @@ public struct GeometryProxy {
     /// }
     /// ```
     ///
-    /// ![042F385D-3CF9-43E7-BC4E-DB4A5D1381A1](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
+    /// ![A view containing a GeometryReader with green color, and
+    /// frame height and width defined by the proxy; the view results in a green
+    /// rectangle in the upper left corner of the frame.](042F385D-3CF9-43E7-BC4E-DB4A5D1381A1.png)
     ///
     /// - Parameter content: A closure that takes the geometry of the parent
     /// view and returns a content view.
@@ -18356,7 +18568,9 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![Rectangle Example](B1E517B3-0F3F-49F7-ABEC-F4C609FC166C.png)
+/// ![A view containing a rounded rectangle wit corner radius 10, padding, and a
+/// linear gradient fill; the linear gradient goes from green to blue to purple
+/// with a leading startPoint and trailing endPoint.](B1E517B3-0F3F-49F7-ABEC-F4C609FC166C.png)
 ///
 /// A gradient is made up of a list of ``Gradient/Stop``s
 /// A stop contains a color along with the a value from 0 to 1 indicating
@@ -18404,7 +18618,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     /// }
     /// ```
     ///
-    /// ![](gradient-stop-ex.png)
+    /// ![A view containing a rounded rectangle with corner radius 10, padding, and a
+    /// linear gradient fill; the linear gradient goes from blue to purple
+    /// 80% across the page, as defined by the gradient stop properties color
+    /// and location, with a leading startPoint and trailing endPoint.](gradient-stop-ex.png)
     ///
     @frozen public struct Stop : Equatable {
 
@@ -18439,7 +18656,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         /// }
         /// ```
         ///
-        /// ![](gradient-stop-ex.png)
+        /// ![A view containing a rounded rectangle with corner radius 10, padding, and a
+        /// linear gradient fill; the linear gradient goes from blue to purple
+        /// 80% across the page, as defined by the gradient stop properties color
+        /// and location, with a leading startPoint and trailing endPoint.](gradient-stop-ex.png)
         ///
         public var color: Color
 
@@ -18476,7 +18696,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         /// }
         /// ```
         ///
-        /// ![](gradient-stop-ex.png)
+        /// ![A view containing a rounded rectangle with corner radius 10, padding, and a
+        /// linear gradient fill; the linear gradient goes from blue to purple
+        /// 80% across the page, as defined by the gradient stop properties color
+        /// and location, with a leading startPoint and trailing endPoint.](gradient-stop-ex.png)
         ///
         public var location: CGFloat
 
@@ -18509,7 +18732,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
         /// }
         /// ```
         ///
-        /// ![](gradient-stop-ex.png)
+        /// ![A view containing a rounded rectangle with corner radius 10, padding, and a
+        /// linear gradient fill; the linear gradient goes from blue to purple
+        /// 80% across the page, as defined by the gradient stop properties color
+        /// and location, with a leading startPoint and trailing endPoint.](gradient-stop-ex.png)
         ///
         /// - Parameters:
         ///   - color: The color for the stop.
@@ -18558,7 +18784,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     /// }
     /// ```
     ///
-    /// ![](gradient-stops-ex.png)
+    /// ![A view containing a rounded rectangle with corner radius 10, padding, and a
+    /// linear gradient fill; the linear gradient goes from blue to purple
+    /// 80% across the page, as defined by an array of gradient stops with color
+    /// and location properties and the leading startPoint and trailing endPoint.](gradient-stops-ex.png)
     ///
     public var stops: [Gradient.Stop]
 
@@ -18591,7 +18820,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     /// }
     /// ```
     ///
-    /// ![](gradient-stop-ex.png)
+    /// ![A view containing a rounded rectangle with corner radius 10, padding, and a
+    /// linear gradient fill; the linear gradient goes from blue to purple
+    /// 80% across the page, as defined by an array of gradient stops with color
+    /// and location properties and the leading startPoint and trailing endPoint.](gradient-stop-ex.png)
     ///
     /// - Parameter stops: The list of gradient stops.
     public init(stops: [Gradient.Stop]) { }
@@ -18614,7 +18846,10 @@ extension GestureState where Value : ExpressibleByNilLiteral {
     /// }
     /// ```
     ///
-    /// ![](gradient-init-colors-ex.png)
+    /// ![A view containing a rounded rectangle with corner radius 10, padding, and a
+    /// linear gradient fill; the linear gradient goes from blue to purple
+    /// 80% across the page, as defined by an array of gradient stops with color
+    /// and location properties and the leading startPoint and trailing endPoint.](gradient-init-colors-ex.png)
     ///
     /// - Parameter colors: The list of colors to evenly space in the gradient.
     public init(colors: [Color]) { }
@@ -19012,7 +19247,10 @@ extension Group : View where Content : View {
     /// }
     /// ```
   ///
-  /// ![](group-init-content-97249.png)
+  /// ![A view containing a VStack with two groups, othe first with the text views
+  /// "1", "2", "3", "4", and "5", and the next with the text views "6", "7", "8",
+  /// "9", and "10"; the two sets of text views are split because a a view builder
+  /// can generally only take 10 views at once.](group-init-content-97249.png)
 	///
 	/// - Parameter content: A view content builder.
     @inlinable public init(@ViewBuilder content: () -> Content) { }
@@ -19313,7 +19551,8 @@ public struct GroupedListStyle : ListStyle {
     ///         }
     ///     }
     ///
-    /// ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
+    /// ![A view containing an HStack with top alignment, 32 point spacing, and
+    /// the three text views "🍌🍌", "🍏🍏", and "🍑🍑".](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
     ///
     /// - Parameters:
     ///   - alignment: The guide for aligning the subviews in this stack. It has
@@ -19496,7 +19735,9 @@ extension HorizontalAlignment {
     /// }
     /// ```
     ///
-    /// ![](horizontalalignment-leading.png)
+    /// ![A view cotnaining a VStack with leading horizontal alignment and four
+    /// text views, "⬅️", "Leading", "Center", "Trailing", the last three of which
+    /// are combined in an HStack.](horizontalalignment-leading.png)
     ///
     public static let leading: HorizontalAlignment
 
@@ -19530,7 +19771,9 @@ extension HorizontalAlignment {
     /// }
     /// ```
     ///
-    /// ![](horizontalalignment-center.png)
+    /// ![A view cotnaining a VStack with center horizontal alignment and four
+    /// text views, "🤠", "Leading", "Center", "Trailing", the last three of which
+    /// are combined in an HStack.](horizontalalignment-center.png)
     ///
     public static let center: HorizontalAlignment
 
@@ -19564,7 +19807,9 @@ extension HorizontalAlignment {
     /// }
     /// ```
     ///
-    /// ![](horizontalalignment-trailing.png)
+    /// ![A view cotnaining a VStack with trailing horizontal alignment and four
+    /// text views, "➡️", "Leading", "Center", "Trailing", the last three of which
+    /// are combined in an HStack.](horizontalalignment-trailing.png)
     ///
     public static let trailing: HorizontalAlignment
 }
@@ -19595,9 +19840,12 @@ extension HorizontalAlignment {
 /// }
 /// ```
 ///
-/// ![10D7AAEA-D933-499B-A64B-143CEF3D8E0E](10D7AAEA-D933-499B-A64B-143CEF3D8E0E.png)
+/// ![A view containing a VStack with 75 point padding and background color blue;
+/// within the VStack is a red filled rectangle with an 100 x 100 frame and the
+/// automatic hover effect, appearing as a red square hovering within the larger
+/// blue square.](10D7AAEA-D933-499B-A64B-143CEF3D8E0E.png)
 ///
-/// See the individual HoverEffect value pages for a visualization of each effect.
+/// See the individual `HoverEffect` value pages for a visualization of each effect.
 @available(iOS 13.4, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -19624,7 +19872,10 @@ public struct HoverEffect {
     /// }
     /// ```
     ///
-    /// ![Hover effect automatic example](hovereffect-automatic-example.gif)
+    /// ![A view containing a VStack with 75 point padding and background color blue;
+    /// within the VStack is a red filled rectangle with an 100 x 100 frame and the
+    /// automatic hover effect, appearing as a red square hovering within the larger
+    /// blue square.](hovereffect-automatic-example.gif)
     ///
     public static let automatic: HoverEffect
 
@@ -19648,7 +19899,10 @@ public struct HoverEffect {
     /// }
     /// ```
     ///
-    /// ![Hover effect highlight example](hovereffect-highlight-example.gif)
+    /// ![A view containing a VStack with 75 point padding and background color blue;
+    /// within the VStack is a red filled rectangle with an 100 x 100 frame and the
+    /// highlight hover effect, appearing as a red square hovering within the larger
+    /// blue square.](hovereffect-highlight-example.gif)
     ///
     public static let highlight: HoverEffect
 
@@ -19672,7 +19926,10 @@ public struct HoverEffect {
     /// }
     /// ```
     ///
-    /// ![Hover effect lift example](hovereffect-lift-example.gif)
+    /// ![A view containing a VStack with 75 point padding and background color blue;
+    /// within the VStack is a red filled rectangle with an 100 x 100 frame and the
+    /// lift hover effect, appearing as a red square hovering within the larger
+    /// blue square, pronounced with shadow.](hovereffect-lift-example.gif)
     ///
     public static let lift: HoverEffect
 }
@@ -19765,7 +20022,8 @@ public struct IconOnlyLabelStyle : LabelStyle {
 ///
 /// **First**, create an image in your Assets folder.
 ///
-/// ![An image in the XCode Assets folder that describes how to import images](image-assets.png)
+/// ![A screenshot of the XCode Assets folder in which an image of the ocean has
+/// been imported.](image-assets.png)
 ///
 /// To follow along, save the following image as `"ocean"` in your project.
 ///
@@ -19781,7 +20039,7 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![Simple Image](image-basic.png)
+/// ![A view displaying the ocean image.](image-basic.png)
 ///
 /// **Third**, remember to add the ``Image/resizable(capInsets:resizingMode:)`` modifier to make your image resizable.
 ///
@@ -19799,7 +20057,8 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![A resizable image, scaled to fit the view, with a 10 point corner radius, and padding.](ocean-image.png)
+/// ![A view displaying the resizable ocean image, scaled to fit the view, with
+/// a 10 point corner radius, and padding.](ocean-image.png)
 ///
 /// ### Resizing Images
 ///
@@ -19832,7 +20091,8 @@ public struct IconOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![1285236D-2F00-4099-8A5A-3CC5E76A5000](1285236D-2F00-4099-8A5A-3CC5E76A5000.png)
+/// ![A view displaying a resizable system image, called "photo" which has been
+/// scaled to fit the view and has a 10 point corner radius and padding.](1285236D-2F00-4099-8A5A-3CC5E76A5000.png)
 ///
 /// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
 /// symbol names easier to find. SF Symbols helps to maintain a consistent
@@ -19870,7 +20130,8 @@ extension Image {
     ///
     /// **First**, create an image in your Assets folder.
     ///
-    /// ![Image in assets folder](image-assets.png)
+    /// ![A screenshot of the XCode Assets folder in which an image of the ocean has
+    /// been imported.](image-assets.png)
     ///
     /// To follow along, save the following image as `"ocean"` in your project.
     ///
@@ -19886,7 +20147,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Simple Image](image-basic.png)
+    /// ![A view displaying the ocean image.](image-basic.png)
     ///
     /// Note that the asset name of your image will also be used for
     /// accessiblity purposes. To make these names different, see the
@@ -19912,7 +20173,8 @@ extension Image {
     ///
     /// **First**, create an image in your Assets folder.
     ///
-    /// ![Image in assets folder](image-assets.png)
+    /// ![A screenshot of the XCode Assets folder in which an image of the ocean has
+    /// been imported.](image-assets.png)
     ///
     /// To follow along, save the following image as `"ocean"` in your project.
     ///
@@ -19929,7 +20191,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Simple Image](image-basic.png)
+    /// ![A view displaying the ocean image.(image-basic.png)
     ///
     /// Note that the ``label`` parameter is required for
     /// accessiblity purposes. To use a the asset name for accessibility, see the
@@ -19956,7 +20218,8 @@ extension Image {
     ///
     /// **First**, create an image in your Assets folder.
     ///
-    /// ![Image in assets folder](image-assets.png)
+    /// ![A screenshot of the XCode Assets folder in which an image of the ocean has
+    /// been imported.](image-assets.png)
     ///
     /// To follow along, save the following image as `"ocean"` in your project.
     ///
@@ -19972,7 +20235,8 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Simple Image](image-basic.png)
+    /// ![A view displaying the "ocean" image; the name "ocean" won't be used
+    /// for accessiblity because the intializer property decorative was used.](image-basic.png)
     ///
     /// Note that your image will name no alternative for accessibility.
     /// To use the asset name of your image for
@@ -20007,7 +20271,8 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![](image-system-name-init.png)
+    /// ![A view displaying the small system symbol image "photo" using the initalizer
+    /// property systemName.](image-system-name-init.png)
     ///
     /// The [SF Symbols Mac app](https://developer.apple.com/sf-symbols/) makes the
     /// symbol names easier to find. SF Symbols helps to maintain a consistent
@@ -20068,7 +20333,9 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird Image Rendering Mode](image-renderingmode.png)
+    /// ![A view containing an HStack with two bird images, the first in template
+    /// rendering mode, filled like a silhouette with the foreground color red,
+    /// and the second with original rendering mode, showing normally.](image-renderingmode.png)
 	///
 	/// The modifier does nothing if renderingMode is `nil`.
 	///
@@ -21351,7 +21618,9 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird Image Interpolation](image-interpolation.png)
+    /// ![A view containing an HStack with four small bird images, the first
+    /// with interpolation none, the second with low interpolation, the third
+    /// with medium interpolation, and th efourth with high interpolation.](image-interpolation.png)
     ///
 	///
 	/// - Parameter interpolation: The image's interpolation property.
@@ -21386,7 +21655,8 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![](image-antialiased-ex.png)
+    /// ![A view containing an HStack with two bird images, the first the
+    /// antialiased set to true, and the second with antialiased set to false.](image-antialiased-ex.png)
     ///
     /// - Parameter isAntialiased: Whether the image is antialiased.
     public func antialiased(_ isAntialiased: Bool) -> Image { }
@@ -21418,7 +21688,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird on screen](image-bird.png)
+    /// ![A view containing a bird image derived from a CGImage.](image-bird.png)
     ///
     /// The main benefit of using this initializer is that it gives you
     /// the option to scale and re-orient your image. See
@@ -21436,7 +21706,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird left mirrored](image-leftmirrored.png)
+    /// ![A view containing a left mirrored bird image derived frin a CGImage.](image-leftmirrored.png)
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -21473,7 +21743,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird on screen](image-bird.png)
+    /// ![A view displaying a bird image.](image-bird.png)
     ///
     /// The main benefit of using this initializer is that it gives you
     /// the option to scale and re-orient your image. See
@@ -21491,7 +21761,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird left mirrored](image-leftmirrored.png)
+    /// ![A view containing a bird image with left mirrored orientation.](image-leftmirrored.png)
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -21527,7 +21797,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird on screen](image-bird.png)
+    /// ![A view containing a bird image derived from a UIImage.(image-bird.png)
     ///
     public init(uiImage: UIImage) { }
 }
@@ -21565,7 +21835,9 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+    /// ![A view containing a VStack with two small bird images, one of which
+    /// has been stretched, and the other of which has been tiled in a square;
+    /// both images have been modified using resizingMode in the resizable modifier.](bird-tile-stretch.png)
     ///
     public enum ResizingMode {
 
@@ -21600,7 +21872,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        /// ![A view containing a VStack with two small bird images, one of which
+        /// has been stretched, and the other of which has been tiled in a square;
+        /// both images have been modified using resizingMode in the resizable modifier.](bird-tile-stretch.png)
         ///
         case tile
 
@@ -21635,7 +21909,9 @@ extension Image {
         /// }
         /// ```
         ///
-        /// ![Bird Stretched and Tiled](bird-tile-stretch.png)
+        /// ![A view containing a VStack with two small bird images, one of which
+        /// has been stretched, and the other of which has been tiled in a square;
+        /// both images have been modified using resizingMode in the resizable modifier.](bird-tile-stretch.png)
         ///
         case stretch
 
@@ -21705,7 +21981,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![Bird on screen](image-bird.png)
+    /// ![A view containing the bird image, which has been altered using the empty resizable modifier.](image-bird.png)
     ///
     /// - Parameters:
     ///   - capInsets: The values to use for the cap insets.
@@ -21921,7 +22197,12 @@ extension IndexViewStyle {
 /// }
 /// ```
 ///
-/// ![Inline Example](picker-style-2.gif)
+/// ![A view containing a state variable that links to an enum, a variable called
+/// fruitName with a switch statement for three fuit cases, a text view reading
+/// "My Favorite Fruit: \(fruitName)", and an inline style picker titled
+/// "My Picker" with the text items "Banana 🍌🍌", "Apple 🍎🍎", and "Peach 🍑🍑",
+/// each of which have been tagged to the state variable; the gif scrolls through
+/// the picker options, showing that the text view chnages accordingly.](picker-style-2.gif)
 ///
 /// [<-]
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -21964,7 +22245,12 @@ public struct InlinePickerStyle : PickerStyle {
     /// }
     /// ```
     ///
-    /// ![Inline Example](picker-style-2.gif)
+    /// ![A view containing a state variable that links to an enum, a variable called
+    /// fruitName with a switch statement for three fuit cases, a text view reading
+    /// "My Favorite Fruit: \(fruitName)", and an inline style picker titled
+    /// "My Picker" with the text items "Banana 🍌🍌", "Apple 🍎🍎", and "Peach 🍑🍑",
+    /// each of which have been tagged to the state variable; the gif scrolls through
+    /// the picker options, showing that the text view chnages accordingly.](picker-style-2.gif)
     ///
     public init() { }
 }
@@ -22330,7 +22616,12 @@ extension InsettableShape {
 /// }
 /// ```
 ///
-/// ![](key-equivalent-ex.gif)
+/// ![A view on macOs containing a state variable bananas initialized as an
+/// empty string and the KeyEquivalent "p" followed by a VStack with a text view
+/// calling bananas, a button reading "Click or press command+P to print 🍌",
+/// and a keyboard shortcut with command as the modifier; the gif shows that when
+/// the button is clicked or command and the p key are pressed, "🍌" is appended
+/// to the bananas string, as reflected in its display on teh screen.](key-equivalent-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -22362,7 +22653,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](key-equivalent-up-arrow-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-up to print the 🍌", and a keyboard shortcut upArrow
+    /// with command as the modifier; the gif shows that when the button is
+    /// clicked or command and upArrow key are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](key-equivalent-up-arrow-ex.gif)
     ///
     public static let upArrow: KeyEquivalent
 
@@ -22391,7 +22687,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-down-arrow-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-down to print the 🍌", and a keyboard shortcut
+    /// downArrow with command as the modifier; the gif shows that when the button
+    /// is clicked or command and downArrow key are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-down-arrow-ex.gif)
     ///
     public static let downArrow: KeyEquivalent
 
@@ -22420,7 +22721,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-left-arrow-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-left to print the 🍌", and a keyboard shortcut
+    /// leftArrow with command as the modifier; the gif shows that when the button
+    /// is clicked or command and leftArrow key are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-left-arrow-ex.gif)
     ///
     public static let leftArrow: KeyEquivalent
 
@@ -22449,7 +22755,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-right-arrow-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-right to print the 🍌", and a keyboard shortcut
+    /// rightArrow with command as the modifier; the gif shows that when the button
+    /// is clicked or command and rightArrow key are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-right-arrow-ex.gif)
     ///
     public static let rightArrow: KeyEquivalent
 
@@ -22478,7 +22789,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](escape-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-ctrl-escape to print the 🍌", and a keyboard shortcut
+    /// escape with command and control as the modifiers; the gif shows that when the button
+    /// is clicked or command, control, and escape are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](escape-ex.gif)
     ///
     public static let escape: KeyEquivalent
 
@@ -22507,7 +22823,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](delete-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-delete to print the 🍌", and a keyboard shortcut
+    /// delete with command as the modifier; the gif shows that when the button
+    /// is clicked or command and delete are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](delete-ex.gif)
     ///
     public static let delete: KeyEquivalent
 
@@ -22538,7 +22859,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](delete-forward-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-delete forward to print the 🍌", and a keyboard shortcut
+    /// deleteForward with command as the modifier; the gif shows that when the button
+    /// is clicked or command and deleteForward are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](delete-forward-ex.gif)
     ///
     public static let deleteForward: KeyEquivalent
 
@@ -22570,7 +22896,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](home-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-home to print the 🍌", and a keyboard shortcut
+    /// home with command as the modifier; the gif shows that when the button
+    /// is clicked or command and home are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](home-ex.gif)
     ///
     public static let home: KeyEquivalent
 
@@ -22602,7 +22933,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](end-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-end to print the 🍌", and a keyboard shortcut
+    /// end with command as the modifier; the gif shows that when the button
+    /// is clicked or command and end are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](end-ex.gif)
     ///
     public static let end: KeyEquivalent
 
@@ -22631,7 +22967,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](page-up-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-page up to print the 🍌", and a keyboard shortcut
+    /// pageUp with command as the modifier; the gif shows that when the button
+    /// is clicked or command and pageUp are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](page-up-ex.gif)
     ///
     public static let pageUp: KeyEquivalent
 
@@ -22660,7 +23001,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-page-down-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-page down to print the 🍌", and a keyboard shortcut
+    /// pageDown with command as the modifier; the gif shows that when the button
+    /// is clicked or command and pageDown are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-page-down-ex.gif)
     ///
     public static let pageDown: KeyEquivalent
 
@@ -22689,7 +23035,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-clear-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-ctrl-clear to print the 🍌", and a keyboard shortcut
+    /// clear with command and control as the modifiers; the gif shows that when the button
+    /// is clicked or command, control, and clear are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-clear-ex.gif)
     ///
     public static let clear: KeyEquivalent
 
@@ -22718,7 +23069,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-tab-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-ctrl-tab to print the 🍌", and a keyboard shortcut
+    /// tab with command and control as the modifiers; the gif shows that when the button
+    /// is clicked or command, control, and tab are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-tab-ex.gif)
     ///
     public static let tab: KeyEquivalent
 
@@ -22747,7 +23103,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-space-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-control-option-space to print the 🍌", and a keyboard shortcut
+    /// space with command, control, and option as the modifiers; the gif shows that when the button
+    /// is clicked or command, control, option, and space are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-space-ex.gif)
     ///
     public static let space: KeyEquivalent
 
@@ -22776,7 +23137,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-return-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-control-return to print the 🍌", and a keyboard shortcut
+    /// return with command and control as the modifiers; the gif shows that when the button
+    /// is clicked or command, control, and return are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-return-ex.gif)
     ///
     public static let `return`: KeyEquivalent
 
@@ -22803,7 +23169,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-character-ex.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-control-p to print the 🍌", and a keyboard shortcut
+    /// for the KeyEquivalent p with command and control as the modifiers; the gif shows that when the button
+    /// is clicked or command, control, and p are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-character-ex.gif)
     ///
     public var character: Character
 
@@ -22834,7 +23205,12 @@ public struct KeyEquivalent {
     /// }
     /// ```
     ///
-    /// ![](ke-init-ex1.gif)
+    /// ![A view on macOs containing a state variable bananas initialized as an
+    /// empty string and  a VStack with a text view calling bananas, a button
+    /// reading "Press command-control-p to print the 🍌", and a keyboard shortcut
+    /// for the KeyEquivalent p with command and control as the modifiers; the gif shows that when the button
+    /// is clicked or command, control, and p are pressed, "🍌" is appended
+    /// to the bananas string, as reflected in its display on the screen.](ke-init-ex1.gif)
     ///
     public init(_ character: Character) { }
 }
@@ -22893,7 +23269,10 @@ public struct KeyboardShortcut {
     /// }
     /// ```
     ///
-    /// ![](keyboard-shortcut-default.png)
+    /// ![A macOS view containing the text "Press ENTER to save or ESC to cancel."
+    /// and an HStack with two buttons, "Cancel" which prints "cancel" and uses
+    /// the keyboardShortcut cancelAction and "Save" which prints "save" and uses
+    /// the keyboardShortcut defaultAction.](keyboard-shortcut-default.png)
     ///
     public static let defaultAction: KeyboardShortcut
 
@@ -22918,7 +23297,10 @@ public struct KeyboardShortcut {
     /// }
     /// ```
     ///
-    /// ![](keyboard-shortcut-default.png)
+    /// ![A macOS view containing the text "Press ENTER to save or ESC to cancel."
+    /// and an HStack with two buttons, "Cancel" which prints "cancel" and uses
+    /// the keyboardShortcut cancelAction and "Save" which prints "save" and uses
+    /// the keyboardShortcut defaultAction.](keyboard-shortcut-default.png)
     ///
     public static let cancelAction: KeyboardShortcut
 
@@ -22945,7 +23327,10 @@ public struct KeyboardShortcut {
     /// }
     /// ```
     ///
-    /// ![](keyboard-shortcut-key-ex.png)
+    /// ![A macOS view containing the KeyboardShortcut escape with command
+    /// and control as modifiers and the shortcut key return; the view returns
+    /// the a button reading "Press command-control-return to print the 🍌" that
+    /// prints "🍌".](keyboard-shortcut-key-ex.png)
     ///
     public var key: KeyEquivalent
 
@@ -22972,7 +23357,10 @@ public struct KeyboardShortcut {
     /// }
     /// ```
     ///
-    /// ![](keyboard-shortcut-key-ex.png)
+    /// ![A macOS view containing the KeyboardShortcut escape and the shortcut
+    /// key modifiers command and control; the view returns
+    /// button reading "Press command-control-return to print the 🍌" that
+    /// prints "🍌".](keyboard-shortcut-key-ex.png)
     ///
     public var modifiers: EventModifiers
 
@@ -22992,7 +23380,9 @@ public struct KeyboardShortcut {
     /// }
     /// ```
     ///
-    /// ![](keyboard-shortcut-key-ex.png)
+    /// ![A macOS view containing the KeyboardShortcut escape with command and
+    /// control as modifiers; the view returns button reading "Press
+    /// command-control-return to print the 🍌" that prints "🍌".](keyboard-shortcut-key-ex.png)
     ///
     public init(_ key: KeyEquivalent, modifiers: EventModifiers = .command) { }
 }
@@ -23146,7 +23536,9 @@ public struct Label<Title, Icon> : View where Title : View, Icon : View {
     /// }
     /// ```
     ///
-    /// ![](label-title-icon-ex.png)
+    /// ![A view containing label with the text "Meaning of life" with a green
+    /// border and a green system icon rendering a 42 within a circle to left
+    /// of it.](label-title-icon-ex.png)
     ///
     /// - Parameters:
     ///   - title: A view builder for the label's title view.
@@ -23489,7 +23881,9 @@ extension LabelStyle {
 /// }
 /// ```
 ///
-/// ![Custom Label Style](custom-labelstyle-comparison.png)
+/// ![A view containing a VStack with two labels, the first with the title
+/// "Banana" and a yellow filled heart icon and the second with the title
+/// "Apple" and a red filled heart icon.](custom-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LabelStyleConfiguration {
@@ -24243,7 +24637,9 @@ extension LegibilityWeight {
 /// }
 /// ```
 ///
-/// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
+/// ![A view containing a rounded rectangle with a 10 point corner, padding, and a
+/// linear gradient fill; the linear gradient goes from green to blue to purple
+/// with a leading startPoint and trailing endPoint.](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
 ///
 /// The gradient applies the color function along an axis, as defined by its
 /// start and end points. The gradient maps the unit-space points into the
@@ -24266,7 +24662,9 @@ extension LegibilityWeight {
     /// }
     /// ```
     ///
-    /// ![Rectangle Example](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
+    /// ![A view containing a rounded rectangle with a 10 point corner, padding, and a
+    /// linear gradient fill; the linear gradient goes from green to blue to purple
+    /// with a leading startPoint and trailing endPoint.](390A2D8E-6ABA-4FDD-A9F0-12EF6EEE7414.png)
 	///
 	/// - Parameters:
 	///   - gradient: The gradient containing the ordered colors to be used.
@@ -24294,7 +24692,8 @@ extension LegibilityWeight {
 /// }
 /// ```
 ///
-/// ![](progressview.png)
+/// ![A ProgressView displaying a gray loading bar filled halfway left to right
+/// by blue, as defined by the ProgressView value being 0.5.](progressview.png)
 ///
 /// A ``ProgressView`` initialized with ``ProgressView/init()``, on the
 /// other hand, defaults to a "spinner" style:
@@ -24307,7 +24706,7 @@ extension LegibilityWeight {
 /// }
 /// ```
 ///
-/// ![](linear-progress-view-style-ex2.png)
+/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
 ///
 /// To turn it into a linear progress view, apply this style
 /// with the ``View/progressViewStyle(_:)`` modifier:
@@ -24321,7 +24720,7 @@ extension LegibilityWeight {
 /// }
 /// ```
 ///
-/// ![Linear progress view example 1](04B8FA7C-F4B6-4661-ADA4-16EA1E340EBD.png)
+/// ![A linear style progress view, displayed as a gray loading bar.](04B8FA7C-F4B6-4661-ADA4-16EA1E340EBD.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct LinearProgressViewStyle : ProgressViewStyle {
@@ -24339,7 +24738,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![Linear progress view example 1](linearprogressview-example-1.png)
+    /// ![A linear style progress view, displayed as a gray loading bar.](linearprogressview-example-1.png)
     ///
     /// - Note: This style will use a default blue color for the loaded
     /// portion of the bar, and gray for the unload portion. To change
@@ -24356,12 +24755,13 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     /// struct ContentView: View {
     ///     var body: some View {
     ///         ProgressView(value: 5, total: 10)
-    ///             .progressViewStyle(LinearProgressViewStyle(tint: .red))
+    ///             .progressViewStyle(LinearProgressViewStyle(tint: .orange))
     ///     }
     /// }
     /// ```
     ///
-    /// ![](linearprogress.png)
+    /// ![A linear style ProgressView displaying a gray loading bar filled halfway left to right
+    /// by orange, as defined by the ProgressView value being 5 and the total being 10.](linearprogress.png)
     ///
     public init(tint: Color) { }
 
@@ -24405,7 +24805,9 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![Link](link.gif)
+/// ![A gif displaying a view containing a static string variable set to the SwiftOnTap
+/// url and a Group with an if statement creating a link from the url string and
+/// a link "View SwiftOnTap" that brings the user to the SwiftOnTap websit once clicked.](link.gif)
 ///
 /// ### Creating a `Link` with a ``View``
 /// [[link-view]]
@@ -24483,7 +24885,9 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///         }
 ///     }
 ///
-/// ![Link](link.gif)
+/// ![A gif displaying a view containing a static string variable set to the SwiftOnTap
+/// url and a Group with an if statement creating a link from the url string and
+/// a link "View SwiftOnTap" that brings the user to the SwiftOnTap websit once clicked.](link.gif)
 ///
 /// Now that SwiftUI supports `if let`, it is possible to directly create
 /// properties like the `URL` and create ``View``s that use that data. Just as
@@ -24514,7 +24918,10 @@ public struct Link<Label> : View where Label : View {
     /// }
     /// ```
     ///
-    /// ![Link View](link-view.gif)
+    /// ![A gif displaying a view containing a static string variable set to the SwiftOnTap
+    /// url and a Group with an if statement creating a link from the url string and
+    /// a link that brings the user to the SwiftOnTap websit once clicked in the form
+    /// of a pink filled rounded rectangle with padding.](link-view.gif)
     ///
     /// [<-]
     ///
@@ -42382,7 +42789,8 @@ public struct TextEditor : View {
 ///         }
 ///     }
 ///
-/// ![A gif showing a view with a VStack containing a text field that once populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+/// ![A gif showing a view with a VStack containing a text field that once
+/// populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 ///
 /// [textfield-style ->]
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
