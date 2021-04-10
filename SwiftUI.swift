@@ -915,8 +915,8 @@ public struct Alert {
     ///
     /// ![A gif displaying a view with a button reading "Tap to view alert", that
     /// once pressed triggers the appearance of an alert titled "An important title!"
-    /// with the text message "A message that adds additional context on the alert." a
-    /// and a defaukt dismiss button that reads "I understand".](alert-example-3.gif)
+    /// with the text message "A message that adds additional context on the alert."
+    /// and a default dismiss button that reads "I understand".](alert-example-3.gif)
     ///
     public init(title: Text, message: Text? = nil, dismissButton: Alert.Button? = nil) { }
 
@@ -1230,7 +1230,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "🤠" and center alignment;
+    /// ![A view containing a ZStack with the text "🤠" and center alignment;
     /// The text is displayed at the very center of the frame.](14.22.04.png)
     ///
     public static let center: Alignment
@@ -1248,7 +1248,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "⬅️" and leading alignment;
+    /// ![A view containing a ZStack with the text "⬅️" and leading alignment;
     /// The text is displayed at the leftmost edge halfway down the frame.](14.23.18.png)
     ///
     public static let leading: Alignment
@@ -1266,7 +1266,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "➡️" and trailing alignment;
+    /// ![A view containing a ZStack with the text "➡️" and trailing alignment;
     /// The text is displayed at the rightmost edge halfway down the frame.](14.27.25.png)
     ///
     public static let trailing: Alignment
@@ -1284,7 +1284,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "⬆️" and top alignment;
+    /// ![A view containing a ZStack with the text "⬆️" and top alignment;
     /// The text is displayed at the topmost edge halfway across the frame.](14.28.22.png)
     ///
     public static let top: Alignment
@@ -1302,7 +1302,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "⬇️" and top alignment;
+    /// ![A view containing a ZStack with the text "⬇️" and top alignment;
     /// The text is displayed at the bottommost edge halfway across the frame.](14.29.14.png)
     ///
     public static let bottom: Alignment
@@ -1320,7 +1320,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "↖️" and topLeading alignment;
+    /// ![A view containing a ZStack with the text "↖️" and topLeading alignment;
     /// The text is displayed in the top left corner of the frame.](14.30.26.png)
     ///
     public static let topLeading: Alignment
@@ -1338,7 +1338,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "↖️" and topTrailing alignment;
+    /// ![A view containing a ZStack with the text "↖️" and topTrailing alignment;
     /// The text is displayed in the top right corner of the frame.](14.31.17.png)
     ///
     public static let topTrailing: Alignment
@@ -1356,7 +1356,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "↙️" and bottomLeading alignment;
+    /// ![A view containing a ZStack with the text "↙️" and bottomLeading alignment;
     /// The text is displayed in the bottom left corner of the frame.](14.33.12.png)
     ///
     public static let bottomLeading: Alignment
@@ -1374,7 +1374,7 @@ public struct Alert {
     /// }
     /// ```
     ///
-    /// ![A view containingg a ZStack with the text "↙️" and bottomTrailing alignment;
+    /// ![A view containing a ZStack with the text "↙️" and bottomTrailing alignment;
     /// The text is displayed in the bottom right corner of the frame.](14.35.44.png)
     ///
     public static let bottomTrailing: Alignment
@@ -1644,7 +1644,7 @@ extension Anchor.Source {
 ///
 /// ![A view containing an arch, which has been defined by a shape struct in the
 /// code, with stroke color orange and line width 20; the orange arch completes
-/// 270 degrees of a circle, as defined by the parameter type angle and degress
+/// 270 degrees of a circle, as defined by the parameter type angle and degrees
 /// parameter of 270.](angle-2.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -1698,7 +1698,7 @@ extension Anchor.Source {
     /// ![A view containing a rectangle, with a rotation effect defined by an
     /// degrees, a frame width and height of 100, and border color
     /// orange, which illustrates the clockwise rotation by remaining in the
-    /// original position.](angle-degress.png)
+    /// original position.](angle-degrees.png)
     ///
     ///
     @inlinable public var degrees: Double
@@ -1942,7 +1942,7 @@ extension Angle : Animatable {
 /// }
 /// ```
 ///
-/// ![A view containing a rectangle with a frame of wifth and height 200 and an
+/// ![A view containing a rectangle with a frame of width and height 200 and an
 /// angular gradient fill in which the end and start angles make a complete
 /// circle; this results in a square that fades from yellow to red to blue to
 /// purple starting and the center and going clockwise.](491E0F0F-86BB-4B03-B05A-C6ABEA7CDC13.png)
@@ -2062,7 +2062,7 @@ extension Angle : Animatable {
     /// }
     /// ```
     ///
-    /// ![A view containing a rectangle with a frame of wifth and height 200 and an
+    /// ![A view containing a rectangle with a frame of width and height 200 and an
     /// angular gradient fill in which the end and start angles make a complete
     /// circle; this results in a square that fades from yellow to red to blue to
     /// purple starting at the center and going clockwise.](angular-gradient-example-1.png)
@@ -2537,7 +2537,7 @@ extension Animation {
     /// ```
     /// ![A gif displaying a view with a yellow rectangle and a button reading
     /// "Animate"; when the button is pressed, the properties of the rectangle change
-    /// in a a pronounced spring fashion, as defined by the adjusted response,
+    /// in a pronounced spring fashion, as defined by the adjusted response,
     /// dampingFraction, and blendDuration parameters of spring.](animation-spring-pronounced-ex.gif)
     ///
     /// When mixed with other ``Animation/spring(response:dampingFraction:blendDuration:)``
@@ -2621,7 +2621,7 @@ extension Animation {
     ///
     /// ![A gif displaying a view with a yellow rectangle and a button reading
     /// "Animate"; when the button is pressed, the properties of the rectangle change
-    /// in a a pronounced spring fashion, as defined by the adjusted response,
+    /// in a pronounced spring fashion, as defined by the adjusted response,
     /// dampingFraction, and blendDuration parameters of interactive spring.](animation-interactive-spring-pronounced-ex.gif)
     ///
     /// ```
@@ -2646,7 +2646,7 @@ extension Animation {
     ///
     /// ![A gif displaying a view with a yellow rectangle and a button reading
     /// "Animate"; when the button is pressed, the properties of the rectangle change
-    /// in a a pronounced spring fashion, as defined by the adjusted response,
+    /// in a pronounced spring fashion, as defined by the adjusted response,
     /// dampingFraction, and blendDuration parameters of spring.](animation-spring-pronounced-ex.gif)
     ///
     public static func interactiveSpring(response: Double = 0.15, dampingFraction: Double = 0.86, blendDuration: Double = 0.25) -> Animation { }
@@ -3624,7 +3624,7 @@ extension AnyTransition {
     ///
     /// ![A gif displaying a view containing a button that reads "OP fade the
     /// banana 🎚❗️" that triggers the transition of the text view "🍌" when
-    /// pressed; the custom trnasition acts the same as the opacity transition,
+    /// pressed; the custom transition acts the same as the opacity transition,
     /// as defined by and an active OpacityModifier of value 0 and identity
     /// OpacityModifier of value 1.](any-transition-modifier-ex.gif)
     ///
@@ -3749,7 +3749,7 @@ extension AnyTransition {
     ///
     /// ![A gif displaying a view containing a button that reads "Move the banana ➡️"
     /// that triggers the moving transition of the text view "🍌" when pressed;
-    /// the view slides up the the trailing edge of the button and dissapears, as
+    /// the view slides up the the trailing edge of the button and disappears, as
     /// defined by the edge parameter.](any-transition-move-edge-ex.gif)
     ///
     /// See ``AnyTransition`` for more on how to use this transition.
@@ -4484,7 +4484,7 @@ extension AppStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![A view containing a button "Make Aaron the 🐐" witht wo static variables
+    /// ![A view containing a button "Make Aaron the 🐐" with two static variables
     /// and a print statement; the appstorage Data optional variable "person"
     /// defaults to nil as there is no restored value.](17.33.08.png)
     ///
@@ -6613,7 +6613,7 @@ extension Circle : InsettableShape {
 /// }
 /// ```
 ///
-/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
+/// ![A gif displaying a default gray circular style progress view spinning.](progress-spinner-gray.gif)
 ///
 /// You can also apply a tint to the spinner using
 /// `CircularProgressViewStyle`'s ``CircularProgressViewStyle/init(tint:)``:
@@ -6647,7 +6647,7 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![A gif displaying a gray circular style progress view spinnning.](circularprogressviewstyle-example-1.gif)
+    /// ![A gif displaying a gray circular style progress view spinning.](circularprogressviewstyle-example-1.gif)
     ///
     /// - Note: To give the spinner a tint color, use ``CircularProgressViewStyle/init(tint:)``
     /// instead.
@@ -8664,7 +8664,7 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 /// ```
 ///
 /// ![Gif displays a date picker view consisting of a calendar in
-/// which a date is selected and a a time selector in which an hour and minute
+/// which a date is selected and a time selector in which an hour and minute
 /// can be entered and a toggle flips between AM and PM.](date-picker-ex1.gif)
 ///
 /// ### Styling Date Pickers
@@ -8737,8 +8737,9 @@ extension DatePicker {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current data nad a date picker
-    /// labelled by two symbols, a calendar and a clock.](19.54.55.png)
+    /// ![A view containing a textview with the current data and a date picker
+    /// labelled by two symbols, a calendar and a clock; once clicked, the picker
+    /// displays a calendar with a time input and AM/PM switch.](date-picker-init-sdcl-ex.gif)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8767,7 +8768,8 @@ extension DatePicker {
     ///
     /// ![A view containing a textview with the current data and a date picker
     /// labelled by two symbols, a calendar and a clock; once clicked, the picker
-    /// displays a calendar with a time input and AM/PM switch.](19.56.49.png)
+    /// displays a calendar with a closed date range available and a time input
+    /// with an AM/PM switch.](date-picker-init-closed-range-ex.gif)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8797,7 +8799,8 @@ extension DatePicker {
     ///
     /// ![A view containing a textview with the current data and a date picker
     /// labelled by two symbols, a calendar and a clock; once clicked, the picker
-    /// displays a calendar with a time input and AM/PM switch.](19.57.44.png)
+    /// displays a calendar with a date range that has a defined starting point
+    /// available and a time input with an AM/PM switch.](date-picker-init-from-range-ex.gif)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8827,7 +8830,8 @@ extension DatePicker {
     ///
     /// ![A view containing a textview with the current data and a date picker
     /// labelled by two symbols, a calendar and a clock; once clicked, the picker
-    /// displays a calendar with a time input and AM/PM switch.](19.58.32.png)
+    /// displays a calendar with a date range that has a defined end point
+    /// available and a time input with an AM/PM switch.](date-picker-init-through-range-ex.gif)
     ///
     /// - Parameters:
     ///   - selection: The binding Date value of the date picker.
@@ -8862,7 +8866,7 @@ extension DatePicker where Label == Text {
     ///
     /// ![A view containing a textview with the current date and a date picker
     /// titled "Date" by a localized string key; once clicked, the picker
-    /// displays a calendar with a time input and AM/PM switch.](19.59.27.png)
+    /// displays a calendar and a time input with an AM/PM switch.](date-picker-init-localized-label-ex.gif)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8890,8 +8894,9 @@ extension DatePicker where Label == Text {
     /// ```
     ///
     /// ![A view containing a textview with the current date in number format and
-    ///  a date picker titled "Date and time" by a localized string key; once
-    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.04.21.png)
+    /// a date picker titled "Date and time" by a localized string key; once clicked,
+    /// the picker displays a calendar with a closed date range and a time input
+    /// with an AM/PM switch.](date-picker-init-closed-localized-ex.gif)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8919,9 +8924,10 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current date and
-    ///  a date picker titled "Date and time" by a localized string key; once
-    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.07.29.png)
+    /// ![A view containing a textview with the current date and  a date picker titled
+    /// "Date and time" by a localized string key; once clicked, the picker
+    /// displays a calendar with a date range that has a defined start point
+    /// and a time input with an AM/PM switch.](date-picker-init-from-localized-ex.gif)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -9712,7 +9718,7 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
-/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
+/// ![A gif displaying a default gray circular style progress view spinning.](progress-spinner-gray.gif)
 ///
 /// In this instance, the style displays a spinner. However, if we initialize
 /// the ``ProgressView`` using ``ProgressView/init(value:total:)`` instead,
@@ -9753,7 +9759,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
     /// }
     /// ```
     ///
-    /// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
+    /// ![A gif displaying a default gray circular style progress view spinning.](progress-spinner-gray.gif)
     ///
     public init() { }
 
@@ -18891,7 +18897,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///     }
 ///
 /// ![Gif displays a graphical date picker view consisting of a calendar in
-/// which a date is selected and a a time selector in which an hour and minute
+/// which a date is selected and a time selector in which an hour and minute
 /// can be entered and a toggle flips between AM and PM.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
 ///
 @available(iOS 14.0, macOS 10.15, *)
@@ -19260,7 +19266,7 @@ extension Group : View where Content : View {
   ///
   /// ![A view containing a VStack with two groups, othe first with the text views
   /// "1", "2", "3", "4", and "5", and the next with the text views "6", "7", "8",
-  /// "9", and "10"; the two sets of text views are split because a a view builder
+  /// "9", and "10"; the two sets of text views are split because a view builder
   /// can generally only take 10 views at once.](group-init-content-97249.png)
 	///
 	/// - Parameter content: A view content builder.
@@ -24717,7 +24723,7 @@ extension LegibilityWeight {
 /// }
 /// ```
 ///
-/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
+/// ![A gif displaying a default gray circular style progress view spinning.](progress-spinner-gray.gif)
 ///
 /// To turn it into a linear progress view, apply this style
 /// with the ``View/progressViewStyle(_:)`` modifier:
@@ -31971,7 +31977,7 @@ public struct PrimitiveButtonStyleConfiguration {
 ///         }
 ///     }
 ///
-/// ![A gif displaying a default gray circular style progress view spinnning.](progress-spinner-gray.gif)
+/// ![A gif displaying a default gray circular style progress view spinning.](progress-spinner-gray.gif)
 ///
 /// When initialized with a value `ProgressView` looks like a
 /// loading bar that fills up from left to right.
@@ -46976,7 +46982,7 @@ extension View {
     /// is deletable and the other in which delete has been disabled; the gif
     /// shows the first item, which reads "Swipe ⬅️ to delete me" being deleted
     /// by swiping all the way left so that the red delete bar covers the item
-    /// and it dissapears completely.](disable-delete-ex.gif)
+    /// and it disappears completely.](disable-delete-ex.gif)
     ///
     /// - Parameter isDisabled: Whether the view's delete functionality is disabled.
     @inlinable public func deleteDisabled(_ isDisabled: Bool) -> some View { }
@@ -48512,7 +48518,7 @@ extension View {
     /// enum MyFruit: String {
     ///     case banana = "Banana 🍌🍌"
     ///     case apple = "Apple 🍎🍎"
-    ///    case peach = "Peach 🍑🍑"
+    ///     case peach = "Peach 🍑🍑"
     /// }
     ///
     /// struct ExampleView: View {
@@ -48536,7 +48542,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![Segmented Example 1](picker-style-6.gif)
+    /// ![A gif displaying a view containing a VStack with the text view
+    /// "My Favorite Fruit: \(favoriteFruit.rawValue)" and a picker titled
+    /// "My Picker", with thre text items, "Banana 🍌🍌", "Apple 🍎🍎", and
+    /// "Peach 🍑🍑", each tagged to the enum MyFruit.](picker-style-6.gif)
     ///
     public func pickerStyle<S>(_ style: S) -> some View where S : PickerStyle { }
 
