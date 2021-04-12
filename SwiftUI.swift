@@ -11755,7 +11755,10 @@ public struct DropProposal {
 ///         }
 ///     }
 ///
-/// ![](dynamic-prop-ex1.gif)
+/// ![A gif displaying a text view that reads "Load count: " with a button
+/// underneath that reads "RELOAD." When pressed, the load count is incremented by
+/// 1 and the text toggles from body text to title text, growing in size. This
+/// update is rendered with each click by the dynamic property.](dynamic-prop-ex1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol DynamicProperty { }
@@ -11791,7 +11794,10 @@ extension DynamicProperty {
     ///         }
     ///     }
     ///
-    /// ![](dynamic-prop-ex1.gif)
+    /// ![A gif displaying a text view that reads "Load count: " with a button
+    /// underneath that reads "RELOAD." When pressed, the load count is incremented by
+    /// 1 and the text toggles from body text to title text, growing in size. This
+    /// update is rendered with each click by the dynamic property update function.](dynamic-prop-ex1.gif)
     ///
     mutating func update() { }
 }
@@ -11828,6 +11834,12 @@ extension DynamicProperty {
     ///             Button("RELOAD ❗️") { reloadSwitch.toggle() }
     ///         }
     ///     }
+    ///
+    /// ![A gif displaying a text view that reads "Load count: " with a button
+    /// underneath that reads "RELOAD." When pressed, the load count is incremented by
+    /// 1 and the text toggles from body text to title text, growing in size. This
+    /// update is rendered with each click by the dynamic property update function.](dynamic-prop-ex1.gif)
+    ///
     public mutating func update() { }
 }
 
@@ -22409,7 +22421,8 @@ public struct InsetListStyle : ListStyle {
 /// }
 /// ```
 ///
-/// ![](insettableshape.png)
+/// ![A screenshot displaying a thin green arc covering 270 degrees counterclockwise
+/// from the top of the screen.](insettableshape.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol InsettableShape : Shape { }
@@ -22458,7 +22471,8 @@ extension InsettableShape : Shape {
     /// }
     /// ```
     ///
-    /// ![](insettableshape.png)
+    /// ![A screenshot displaying a thin green arc covering 270 degrees counterclockwise
+    /// from the top of the screen.](insettableshape.png)
     ///
     func inset(by amount: CGFloat) -> Self.InsetShape { }
 }
@@ -22494,7 +22508,8 @@ extension InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](strokeborder-style.png)
+    /// ![A screenshot displaying a blue/green circular gradient border inset within
+    /// a thin black rectangular border hugging the edges of the screen.](strokeborder-style.png)
     ///
     /// - Parameters:
     ///   - content: The ``ShapeStyle`` to fill the border with.
@@ -22527,7 +22542,8 @@ extension InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](insettableshape-strokeborder.png)
+    /// ![A screenshot displaying a solid black circular border inset within
+    /// a thin black rectangular border hugging the edges of the screen.](insettableshape-strokeborder.png)
     ///
     /// - Parameters:
     ///   - style: The ``StrokeStyle`` for filling the border.
@@ -22558,7 +22574,8 @@ extension InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](strokeborder-style.png)
+    /// ![A screenshot displaying a blue/green circular gradient border inset within
+    /// a thin black rectangular border hugging the edges of the screen.](strokeborder-style.png)
     ///
     /// - Parameters:
     ///   - content: The ``ShapeStyle`` to fill the border with.
@@ -22585,7 +22602,8 @@ extension InsettableShape {
     /// }
     /// ```
     ///
-    /// ![](insettableshape-strokeborder.png)
+    /// ![A screenshot displaying a solid black circular border inset within
+    /// a thin black rectangular border hugging the edges of the screen.](insettableshape-strokeborder.png)
     ///
     /// - Parameters:
     ///   - lineWidth: The border width.
@@ -23759,7 +23777,9 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// }
 /// ```
 ///
-/// ![Custom Label Style](custom-labelstyle-comparison.png)
+/// ![A screenshot displaying two custom labels in a VStack that read "Banana"
+/// and "Apple," each with a heart emoji underneath it corresponding to the color
+/// defined in the label style.](custom-labelstyle-comparison.png)
 ///
 /// And here's a comparison of the 3 default label styles:
 ///
@@ -23779,9 +23799,10 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// }
 /// ```
 ///
-/// ![A view displaying a VStack with three labels; the first reads as
-/// "<3 Banana" and is of default style, the second reads as "<3" and is of
-/// icon only style, and the third reads as "Banana" and is of title on style.](default-labelstyle-comparison.png)
+/// ![A screenshot displaying three default labels in a VStack that read "Banana"
+/// with a black heart icon to its left, a black heart icon by itself, and
+/// "Banana" by itself. These displays are dictated by their corresponding
+/// label styles, which render them differently in each case.](default-labelstyle-comparison.png)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol LabelStyle { }
@@ -23839,7 +23860,9 @@ extension LabelStyle {
     /// }
     /// ```
     ///
-    /// ![Custom Label Style](custom-labelstyle-comparison.png)
+    /// ![A screenshot displaying two custom labels in a VStack that read "Banana"
+    /// and "Apple," each with a heart emoji underneath it corresponding to the color
+    /// defined in the custom label style.](custom-labelstyle-comparison.png)
     ///
     /// - Note: Any ``LabelStyle`` must implement this function. That means
     /// that even the default styles like ``TitleOnlyLabelStyle`` and
@@ -27814,7 +27837,10 @@ public struct NavigationView<Content> : View where Content : View {
 /// }
 /// ```
 ///
-/// ![](nav-view-style-ex1.gif)
+/// ![A gif displaying a navigation view with a button that reads "Hello Bananas."
+/// When pressed, the view slides to reveal a new view with two banana emojis and
+/// a button in the upper left hand corner with the option to go back. The
+/// StackNavigationViewStyle renders the swipe appearance.](nav-view-style-ex1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
 public protocol NavigationViewStyle { }
@@ -30936,7 +30962,8 @@ public enum PopoverAttachmentAnchor {
 /// }
 /// ```
 ///
-/// ![48FAD8ED-F1A7-4BC2-B801-A5EB9C765728](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
+/// ![A screenshot displaying a text view that reads "View that sets a
+/// preference key when loaded."](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
 ///
 /// It is also possible to use more complicated data structures as a preference key
 /// by changing the type of the defaultValue. For example:
@@ -30971,7 +30998,8 @@ public enum PopoverAttachmentAnchor {
 /// }
 /// ```
 ///
-/// ![1EDB1FAE-72D3-4B34-AD1F-F848987DF57B](1EDB1FAE-72D3-4B34-AD1F-F848987DF57B.png)
+/// ![A screenshot displaying a text view that reads "View that sets a
+/// preference key when loaded."](1EDB1FAE-72D3-4B34-AD1F-F848987DF57B.png)
 ///
 /// For a detailed explanation of how view preferences work, check out
 /// [this article](https://medium.com/@crystalminds/introducing-view-preferences-in-swiftui-e193c346b68d)
@@ -31036,7 +31064,9 @@ extension PreferenceKey {
     /// }
     /// ```
     ///
-    /// ![](preferencekey-reduce.png)
+    /// ![A screenshot displaying two text views in a VStack that read "First
+    /// view that sets a preference" and "Second view that sets a preference"
+    /// which are combined via the reduce function.](preferencekey-reduce.png)
     ///
     /// For additional details on how the reduce function works, see
     /// [this Medium article](https://medium.com/swlh/dissecting-the-reduce-method-on-preferencekey-8a3571cfbc2b).
@@ -36667,7 +36697,8 @@ extension ScenePhase : Hashable {
     /// 		}
     /// 	}
     ///
-    /// ![](scenestorage-1.png)
+    /// ![A screenshot displaying a keyboard on the lower half of the screen
+    /// and a text field above that reads "Kanye."](scenestorage-1.png)
     ///
     /// - See also: ``State`` and ``State/projectedValue``
     public var projectedValue: Binding<Value> { get }
@@ -36686,7 +36717,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-2.png)
+    /// ![A screenshot displaying a toggle with the label "Airplane Mode"
+    /// with the toggle switched to off.](scenestorage-2.png)
     ///
     /// - Parameter wrappedValue: The default value if a boolean is not
     ///   available for the given key.
@@ -36703,7 +36735,9 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scene-storage-init-10da5-ex.gif)
+    /// ![A gif displaying a stepper with a label that reads "count:" which
+    /// increments or decrements by 1 in accordance with the user's actions.
+    /// Scene storage stores the value of 0 for the view.](scene-storage-init-10da5-ex.gif)
     ///
     /// - Parameter wrappedValue: The default value if an integer is not
     ///   available for the given key.
@@ -36721,7 +36755,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scene-storage-init-70ae4-ex.gif)
+    /// ![A gif displaying a slider with a label above it that reads a value of the slider between
+    /// 0 and 1.](scene-storage-init-70ae4-ex.gif)
     ///
     /// - Parameter wrappedValue: The default value if a double is not available
     ///   for the given key.
@@ -36738,7 +36773,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-1.png)
+    /// ![A screenshot displaying a keyboard on the lower half of the screen
+    /// and a text field above that reads "Kanye."](scenestorage-1.png)
     ///
     /// - Parameter wrappedValue: The default value if a string is not available
     ///   for the given key.
@@ -36755,7 +36791,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-3.png)
+    /// ![A screenshot displaying a plain text view that reads "Check out
+    /// https://swiftontap.com"](scenestorage-3-fixed.png)
     ///
     /// - Parameter wrappedValue: The default value if a URL is not available
     ///   for the given key.
@@ -36783,7 +36820,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-4.png)
+    /// ![A screenshot displaying a button in the center of the screen that
+    /// reads "Make Aaron the " followed by a goat emoji.](scenestorage-4.png)
     ///
     /// Avoid storing large data blobs, such as image data, as it can negatively
     /// affect performance of your app.
@@ -36815,7 +36853,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-5.png)
+    /// ![A screenshot displaying a picker with three options: a, b, or c. Scene
+    /// storage sets the initial value in the enum to a for each new view.](scenestorage-5.png)
     ///
     /// - Parameter wrappedValue: The default value if an integer value is not
     ///   available for the given key.
@@ -36844,7 +36883,8 @@ extension SceneStorage {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-5.png)
+    /// ![A screenshot displaying a picker with three options: a, b, or c. Scene
+    /// storage sets the initial value in the enum to a for each new view.](scenestorage-5.png)
     ///
     /// - Parameter wrappedValue: The default value if a String value is not
     ///   available for the given key.
@@ -36868,7 +36908,8 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-6.png)
+    /// ![A screenshot displaying two buttons in the center of the screen; the
+    /// first reads "on" and the second reads "off."](scenestorage-6.png)
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Bool? { }
@@ -36886,7 +36927,10 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-7.png)
+    /// ![A screenshot displaying two buttons in the center of the screen; the
+    /// first reads "none" and the second reads "LOTS." The scene storage
+    /// property saves and restores the optional integer, which has no effect on
+    /// this view.](scenestorage-7.png)
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Int? { }
@@ -36904,7 +36948,10 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-8.png)
+    /// ![A screenshot displaying two buttons in the center of the screen; the
+    /// first reads "MAX" and the second reads "min." The scene storage
+    /// property saves and restores the optional double, which has no effect on
+    /// this view.](scenestorage-8.png)
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Double? { }
@@ -36921,7 +36968,10 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-9.png)
+    /// ![A screenshot displaying a single button in the center of the screen
+    /// reading "Save" followed by the goat emoji. The scene storage
+    /// property saves and restores the optional String "Aaron", which has no effect on
+    /// this view.](scenestorage-9.png)
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == String? { }
@@ -36938,7 +36988,10 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-10.png)
+    /// ![A screenshot displaying a single button in the center of the screen
+    /// reading "Save the" followed by the banana emoji. The scene storage
+    /// property saves and restores the optional url, which has no effect on
+    /// this view.](scenestorage-10.png)
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == URL? { }
@@ -36966,7 +37019,10 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
     ///         }
     ///     }
     ///
-    /// ![](scenestorage-11.png)
+    /// ![A screenshot displaying a single button in the center of the screen
+    /// reading "Make Aaron the" followed by the goat emoji. The scene storage
+    /// property saves and restores the optional data, which has no effect on
+    /// this view.](scenestorage-11.png)
     ///
     /// - Parameter key: a key used to save and restore the value.
     public init(_ key: String) where Value == Data? { }
@@ -37251,10 +37307,10 @@ public struct ScrollView<Content> : View where Content : View {
     /// }
     /// ```
     ///
-    /// ![A gif that displays a scroll view with a VStack containing a button reading
-    /// "Jump to # 32" directly above text elements reading "Item #_",
-    /// where _ is filled by the numbers 1-101; when the button is clicked, the view
-    /// jumps down to the text "Item #32".](scroll-view-content-ex.gif)
+    /// ![A gif that displays a scroll view with a VStack containing several
+    /// fruits paired with emojis. The content displayed in this case is the
+    /// fruits; only vertical scroll is enabled since no direction is passed to the
+    /// initializer.](scroll-view-content-ex.gif)
     ///
     /// The `content` is usually a ``VStack`` or an ``HStack``, but it
     /// can be any ``View`` that requires scrolling.
@@ -38150,7 +38206,8 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// }
 /// ```
 ///
-/// ![D07AE93B-5C76-4604-B601-456F32FBE16C](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
+/// ![A screenshot displaying a solid black capsule occupying most of the screen
+/// space. Here, a predefined shape is used.](D07AE93B-5C76-4604-B601-456F32FBE16C.png)
 ///
 /// Check out these shapes directly for more info on how to use them.
 ///
@@ -38177,7 +38234,9 @@ extension SequenceGesture.Value : Equatable where First.Value : Equatable, Secon
 /// }
 /// ```
 ///
-/// ![09FB69B8-A5EF-4E46-9B27-4B59DF735287](09FB69B8-A5EF-4E46-9B27-4B59DF735287.png)
+/// ![A screenshot displaying a solid black rectangle taking up the entirety of
+/// the screen space besides the safe areas. The rectangle is created using
+/// the path method.](09FB69B8-A5EF-4E46-9B27-4B59DF735287.png)
 ///
 /// For more info on how to create a path from a bounding rectangle,
 /// check out the ``Path`` structure.
@@ -38212,7 +38271,9 @@ extension Shape : Animatable, View {
     /// }
     /// ```
     ///
-    /// ![](rectangle-example-4.png)
+    /// ![A screenshot displaying a solid black rectangle taking up the entirety of
+    /// the screen space besides the safe areas. The rectangle is created using
+    /// the path method from a rectangle parameter.](rectangle-example-4.png)
     ///
     /// - Parameter rect: The frame of reference for describing this shape.
     ///
@@ -38266,7 +38327,8 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](infinity-1.png)
+    /// ![A screenshot displaying a green infinity symbol at the top left of the
+    /// screen with sharp edges, rather than round.](infinity-1.png)
     ///
     /// That looks good. But what if we want to trim the shape? We can cut the
     /// path short using `trim(from:to:)`:
@@ -38281,7 +38343,9 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](infinity-2.png)
+    /// ![A screenshot displaying a green infinity symbol at the top left of the
+    /// screen with sharp edges, rather than round; however, since the trim
+    /// method is applied to the shape, it is rendered without its upper left component.](infinity-2.png)
     ///
     /// Changing the parameters of `trim(from:to:)` to
     /// `.trim(from: 0, to: 1)` draws the full infinity symbol, while
@@ -38314,13 +38378,14 @@ extension Shape {
     ///             .overlay(
     ///                 Circle()
     ///                     .offset(CGSize(width: -100, height: 50))
-    ///                     .stroke()
+    ///                     .stroke(Color.orange)
     ///             )
     ///     }
     /// }
     /// ```
     ///
-    /// ![](offset-3.png)
+    /// ![A screenshot displaying a solid black circle with an offset orange
+    /// circle overlaid, shifted down and to the left of the screen.](offset-3.png)
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -38343,13 +38408,14 @@ extension Shape {
     ///             .overlay(
     ///                 Circle()
     ///                     .offset(CGPoint(x: -100, y: 50))
-    ///                     .stroke()
+    ///                     .stroke(Color.orange)
     ///             )
     ///     }
     /// }
     /// ```
     ///
-    /// ![](offset-3.png)
+    /// ![A screenshot displaying a solid black circle with an offset orange
+    /// circle overlaid, shifted down and to the left of the screen.](offset-3.png)
     ///
     /// - Parameter offset: The amount, in points, by which you offset the
     ///   shape. Negative numbers are to the left and up; positive numbers are
@@ -38372,13 +38438,15 @@ extension Shape {
     ///             .overlay(
     ///                 Circle()
     ///                     .offset(x: -100, y: 50)
-    ///                     .stroke()
+    ///                     .stroke(Color.orange)
     ///             )
     ///     }
     /// }
     /// ```
     ///
-    /// ![](offset-3.png)
+    /// ![A screenshot displaying a solid black circle with an offset orange
+    /// circle overlaid, shifted down and to the left of the screen. The offset
+    /// is specified in both dimensions within the method.](offset-3.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal amount, in points, by which you offset the shape.
@@ -38410,7 +38478,12 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](scale.png)
+    /// ![A screenshot displaying a solid red circle in the center of the screen
+    /// with a solid black ellipse stacked on top of it in a ZStack. The ellipse
+    /// has been scaled down significantly in the x direction and halved in the y
+    /// direction, with its anchor set at the top. This causes it to stick out from
+    /// the top of the red circle; scaling it differently in each dimension strips it
+    /// of its circular shape.](scale.png)
     ///
     /// - Parameters:
     ///   - x: The multiplication factor used to resize this shape along its
@@ -38437,7 +38510,10 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](scale-2.png)
+    /// ![A screenshot displaying two circles in a ZStack, which appear as one
+    /// thick red donut shape since the upper layer is a white circle. The white
+    /// circle is scaled down to half its original size and anchored in the center,
+    /// rendering as the donut shape described.](scale-2.png)
     ///
     /// - Parameter scale: The multiplication factor used to resize this shape.
     ///   A value of `0` scales the shape to have no size, `0.5` scales to half
@@ -38466,7 +38542,10 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](rotation.png)
+    /// ![A screenshot displaying a solid black rectangle in the center of the
+    /// screen, rotated at 45 degrees from its original position. By applying the
+    /// border method, an orange border is overlaid that shows the rectangle's original
+    /// position.](rotation.png)
     ///
     /// - Parameters:
     ///   - angle: The angle of rotation to apply. Positive angles rotate
@@ -38496,7 +38575,9 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](transform.png)
+    /// ![A screenshot displaying an orange rectangular frame in the center of the
+    /// screen with a solid black rectangle behind it that has been transformed
+    /// so that its bottom right corner is dragged out to the right.](transform.png)
     ///
     /// - Parameter transform: The affine transformation matrix to apply to this
     ///   shape.
@@ -38527,7 +38608,9 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](size.png)
+    /// ![A screenshot displaying a small black square in the upper left hand
+    /// corner of the screen. Using the size method, the rectangle is anchored
+    /// at the left corner, and the dimensions passed to CGSize dictate its size.](size.png)
     ///
     /// - Parameter size: The new rectangle size.
     @inlinable public func size(_ size: CGSize) -> some Shape { }
@@ -38552,7 +38635,10 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](size.png)
+    /// ![A screenshot displaying a small black square in the upper left hand
+    /// corner of the screen. Using the size method, the rectangle is anchored
+    /// at the left corner, and the dimensions passed to the width and height
+    /// parameters dictate its size.](size.png)
     ///
     /// - Parameters:
     ///   - width: The shape's new bounding rectangle width.
@@ -38580,7 +38666,8 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](fill-style.png)
+    /// ![A screenshot displaying a solid pink circle in the center of the screen
+    /// by applying the fill method.](fill-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient to use when filling this shape.
@@ -38608,7 +38695,8 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](fill-style.png)
+    /// ![A screenshot displaying a solid pink circle in the center of the screen
+    /// by applying the fill method with a style parameter.](fill-style.png)
     ///
     /// - Parameter style: The style options that determine how the fill
     ///   renders.
@@ -38641,7 +38729,8 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](stroke-style.png)
+    /// ![A screenshot displaying a dashed purple capsule touching all four
+    /// edges of the screen, rendered with dashes by stroke style.](stroke-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient with which to stroke this shape.
@@ -38671,7 +38760,8 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](stroke.png)
+    /// ![A screenshot displaying a circular purple border in the center of
+    /// the screen.](stroke.png)
     ///
     /// - Parameters style: The stroke characteristics --- such as the line's width and
     /// whether the stroke is dashed --- that determine how to render this
@@ -38720,7 +38810,8 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](stroke-style.png)
+    /// ![A screenshot displaying a dashed purple capsule touching all four
+    /// edges of the screen, rendered with dashes by stroke style.](stroke-style.png)
     ///
     /// - Parameters:
     ///   - content: The color or gradient with which to stroke this shape.
@@ -38747,7 +38838,8 @@ extension Shape {
     /// }
     /// ```
     ///
-    /// ![](stroke.png)
+    /// ![A screenshot displaying a circular purple border in the center of
+    /// the screen.](stroke.png)
     ///
     @inlinable public func stroke(lineWidth: CGFloat = 1) -> some Shape { }
 
@@ -40451,7 +40543,9 @@ extension Stepper where Label == Text {
 /// }
 /// ```
 ///
-/// ![](stroke-style.png)
+/// ![A screenshot displaying a purple capsule shape made up of purple dashes
+/// that touches all four edges of the screen. StrokeStyle is used to specify
+/// the style of the dashes that make up the capsule shape.](stroke-style.png)
 ///
 /// In addition, two special kinds of ``Shape``s have their own methods
 /// for adding strokes with custom styles:
@@ -40479,7 +40573,9 @@ extension Stepper where Label == Text {
 /// }
 /// ```
 ///
-/// ![](insettableshape-strokeborder.png)
+/// ![A screenshot displaying a thin black rectangular border hugging the edges
+/// of the screen with a thick black circular border inset. Here, there is no value
+/// passed to dash, so the circle appears as a consistent thick line.](insettableshape-strokeborder.png)
 ///
 /// - ``Path``: A path is a special kind of customizable shape. Use path's
 /// special stroking method, ``Path/strokedPath(_:)``, to return another path,
@@ -40507,7 +40603,9 @@ extension Stepper where Label == Text {
 /// }
 /// ```
 ///
-/// ![](strokedpath.png)
+/// ![A screenshot displaying a black rectangular border hugging the edges
+/// of the screen made up of two dashes followed by a dot. Setting the lineJoin
+/// parameter as bevel places the dot between the dashes.](strokedpath.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct StrokeStyle : Equatable {
@@ -40530,7 +40628,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](strokestyle-linewidth.png)
+    /// ![A screenshot displaying a large circle in the center of the screen
+    /// which has its lineWidth set to 16 points, rendering as a thick black
+    /// border.](strokestyle-linewidth.png)
     ///
     /// - Note: If you just want to specify a stroke's line width,
     /// you can do this directly using ``Shape/stroke(lineWidth:)``.
@@ -40585,7 +40685,8 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](linecap-square.png)
+    /// ![A pink semicircle in the center of the screen with square edges,
+    /// appearing as if the circle had its bottom half sliced off.](linecap-square.png)
     ///
     /// You can see the edges protrude slightly as squares.
     /// If we change the `lineCap` to `.round`, we can see the corners
@@ -40604,7 +40705,8 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](linecap-round.png)
+    /// ![A pink semicircle in the center of the screen with round edges on either
+    /// end, rendered by setting the linecap to round.](linecap-round.png)
     ///
     /// That's a bit softer. Finally, `.butt` is just standard, cut-off
     /// line caps as you would expect:
@@ -40622,7 +40724,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](linecap-butt.png)
+    /// ![An orange semicircle in the center of the screen with flat edges,
+    /// appearing as if the circle had its bottom half sliced off. Here, the
+    /// edges protrude slightly less than they would had the square case been used.](linecap-butt.png)
     ///
     public var lineCap: CGLineCap
 
@@ -40667,7 +40771,8 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](linejoin.png)
+    /// ![Two thin black line segments that originate on either side of the
+    /// center of the screen and join at a point in the upper half.](linejoin.png)
     ///
     /// Now apply `.bevel` line join, and some ``StrokeStyle/lineWidth`` so we can see
     /// the effect:
@@ -40686,7 +40791,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](bevel.png)
+    /// ![Two thick pink line segments that originate on either side of the center
+    /// of the screen and join at a bevel in the upper half, giving the point a
+    /// flat top.](bevel.png)
     ///
     /// You can see the "chopped off" corners.
     /// If we change the `lineJoin` to `.round`, we can see the corners
@@ -40706,7 +40813,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](linejoin-round.png)
+    /// ![Two thick purple line segments that originate on either side of the center
+    /// of the screen and meet at a rounded point in the upper half, as rendered
+    /// by changing the lineJoin style to .round.](linejoin-round.png)
     ///
     /// That's a bit softer. Finally, `.miter` is just standard, sharp
     /// corners as you would expect:
@@ -40725,7 +40834,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](linejoin-miter.png)
+    /// ![Two thick purple line segments that originate on either side of the center
+    /// of the screen and join at a sharp point in the upper half, as rendered
+    /// by changing the lineJoin style to .miter.](linejoin-miter.png)
     public var lineJoin: CGLineJoin
 
     /// The limit on the ratio of the miter length to stroke width.
@@ -40769,7 +40880,8 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](linejoin.png)
+    /// ![Two thin black line segments that originate on either side of the
+    /// center of the screen and join at a point in the upper half.](linejoin.png)
     ///
     /// Now, stroke it with `50` pt ``StrokeStyle/lineWidth``, and
     /// compare `miter` ``StrokeStyle/lineJoin`` with `bevel`
@@ -40792,7 +40904,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](miter-bevel.png)
+    /// ![Two arches in a VStack; the first is made up of two thick pink lines
+    /// that join using miter and form a sharp point, the second is made up of two
+    /// thick purple lines that join at a bevel and form a flat top.](miter-bevel.png)
     ///
     /// So what is the **miter length**? We can figure this out using math. In the
     /// top image above, miter length is the distance from the inside of the
@@ -40804,7 +40918,7 @@ extension Stepper where Label == Text {
     /// of the corner on top
     /// is the square root of 2, or about `1.4142135`, times the line width, `50`:
     ///
-    /// ![](square-root-of-2.png)
+    /// ![An isosceles right triangle with sides 1 and hypotenuse square root 2.](square-root-of-2.png)
     ///
     /// ### What is miter limit?
     ///
@@ -40837,7 +40951,11 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](miter-limit.png)
+    /// ![Two arches in a VStack; the first is made up of two thick pink lines
+    /// that join using miter and form a sharp point, the second is made up of two
+    /// thick orange lines that join at a bevel and form a flat top. Both use
+    /// the miter style for joining lines, but in the second the actual miter in the
+    /// shape exceeds the set miter limit, so it turns to a bevel.](miter-limit.png)
     ///
     /// So if the actual miter in the shape exceeds the `miterLimit` that
     /// you set, your ``ShapeStyle/lineJoin`` turns from `miter` to `bevel`!
@@ -40879,7 +40997,8 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](dash-1.png)
+    /// ![A thick horizontal pink line spanning the center of the screen. The
+    /// empty dash array renders a solid line.](dash-1.png)
     ///
     /// If we specify a dash array of `[40]`, then there is only one element.
     /// This means the first line gets drawn `40` pts long, then the pattern
@@ -40898,7 +41017,10 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](dash-2.png)
+    /// ![A thick dashed, horizontal pink line spanning the center of the screen.
+    /// Here, the dash array is passed a single value of 40, so there is a single
+    /// pattern that repeats with the white space as long as its corresponding
+    /// pink space.](dash-2.png)
     ///
     /// Next, we specify a dash array of `[60, 20]`. This begins by drawing
     /// a `60` pt line, then a `20` pt space. Then the pattern repeats
@@ -40916,7 +41038,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](dash-3.png)
+    /// ![A thick dashed, horizontal pink line spanning the center of the screen.
+    /// Here, the dash array is passed two values of 60 and 20, so the pink lines
+    /// extend 60 points followed by 20 points of white space.](dash-3.png)
     ///
     /// Finally, we specify a dash array of `[30, 10, 5]`. This begins by
     /// drawing a `30` pt line, then a `10` pt space, then a `5` pt line.
@@ -40936,7 +41060,10 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](dash-4.png)
+    /// ![A thick dashed, horizontal pink line spanning the center of the screen.
+    /// Here, the dash array is passed three values of 30, 10 and 5, so the pink lines
+    /// are no longer uniform. Instead, there is a pink dash 30 points long, followed
+    /// by a 10 point space, followed by a 5 point dash, and then a 30 point space.](dash-4.png)
     ///
     /// We could continue this pattern indefinitely.
     ///
@@ -40987,7 +41114,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](dashphase.png)
+    /// ![Two dashed pink lines in a VStack that span the center of the screen.
+    /// The lines are identical, but the first applies a dash phase of 15 pts, which
+    /// moves it "back" in its cycle, making the first dash appear shorter.](dashphase.png)
     ///
     public var dashPhase: CGFloat
 
@@ -41021,7 +41150,9 @@ extension Stepper where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](weird-circle.png)
+    /// ![A large black circle in the center of the screen with a stroke that
+    /// alternates between a thick black dash, white space, and a thin black dash.
+    /// The custom stroke style is set within the initializer.](weird-circle.png)
     ///
    	/// - Parameters:
    	///   - lineWidth: The stroke line width.
@@ -41057,10 +41188,10 @@ extension StrokeStyle : Animatable {
 ///
 /// This view produces basically the same thing as another
 /// view with the ``View/onReceive(_:perform:)`` modifier applied to it.
-/// Whenver possible, use ``View/onReceive(_:perform:)``, as it results
+/// Whenever possible, use ``View/onReceive(_:perform:)``, as it results
 /// in cleaner code.
 ///
-/// The following example shows `SubscriptionView` used to exactly reproduct
+/// The following example shows `SubscriptionView` used to exactly reproduce
 /// a view with ``View/onReceive(_:perform:)``.
 ///
 /// ```
@@ -41083,7 +41214,9 @@ extension StrokeStyle : Animatable {
 /// }
 /// ```
 ///
-/// ![](subscription-view-init-ex.gif)
+/// ![A gif displaying two identical timers in a VStack, the first rendered
+/// with SubscriptionView and the second with onReceive. The timers read as
+/// "2021-03-30 00:06:11 +0000". ](subscription-view-init-ex.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct SubscriptionView<PublisherType, Content> : View where PublisherType : Publisher, Content : View, PublisherType.Failure == Never {
@@ -41108,7 +41241,9 @@ extension StrokeStyle : Animatable {
     /// }
     /// ```
     ///
-    /// ![](subscription-view-init-cpa.ex.gif)
+    /// ![A gif displaying a running timer in the center of the screen, where
+    /// the content passed to the SubscriptionView is a text view which displays
+    /// the timer.](subscription-view-init-cpa.ex.gif)
     ///
     public var content: Content
 
@@ -41150,7 +41285,9 @@ extension StrokeStyle : Animatable {
     /// }
     /// ```
     ///
-    /// ![](subscription-view-init-cpa.ex.gif)
+    /// ![A gif displaying a running timer in the center of the screen, where
+    /// the publisher passed to the SubscriptionView is a timer which dictates
+    /// the actions of the view.](subscription-view-init-cpa.ex.gif)
     ///
     public var publisher: PublisherType
 
@@ -41177,11 +41314,13 @@ extension StrokeStyle : Animatable {
     /// }
     /// ```
     ///
-    /// ![](subscription-view-init-cpa.ex.gif)
+    /// ![A gif displaying a running timer in the center of the screen, where
+    /// the action is called whenever the SubscriptionView receives a new time
+    /// from the publisher property.](subscription-view-init-cpa.ex.gif)
     ///
     public var action: (PublisherType.Output) -> Void
 
-    /// Create a view with content the subscribes to a publisher with an action.
+    /// Create a view with content that subscribes to a publisher with an action.
     ///
     /// ```
     /// struct TimerView: View {
@@ -41196,7 +41335,8 @@ extension StrokeStyle : Animatable {
     /// }
     /// ```
     ///
-    /// ![](subscription-view-init-cpa.ex.gif)
+    /// ![A gif displaying a running timer in the center of the screen, which
+    /// has been initialized to create a view that subscribes to a timer.](subscription-view-init-cpa.ex.gif)
     ///
     /// - Parameters:
     ///   - content: The content that you want displayed in the view.
@@ -41249,7 +41389,8 @@ public struct SwitchToggleStyle : ToggleStyle {
     /// }
     /// ```
     ///
-    /// ![SwitchToggleStyle Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
+    /// ![A gif displaying a switch toggle in the center of the screen reading
+    /// "Banana" on the left side. When the toggle is switched, nothing happens.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/togglestyle-switch-example-1.gif)
     public init() { }
 
     /// Creates a switch style with a tint color.
@@ -41593,7 +41734,10 @@ extension TabView where SelectionValue == Int {
     /// }
     /// ```
     ///
-    /// ![](tab-view-init-selection-content-ex1.gif)
+    /// ![A gif displaying three text views stacked in a tabview, with tabitem
+    /// applied to each childview. At the bottom of the screen is a small grey
+    /// bar with three emojis, each representing a tab item. When tapped, each tab
+    /// takes the user to the appropriate text view.](tab-view-init-selection-content-ex1.gif)
     ///
     /// For more ways to use tab-style views, see ``TabView``.
     public init(@ViewBuilder content: () -> Content) { }
@@ -41626,7 +41770,10 @@ extension TabView where SelectionValue == Int {
 /// }
 /// ```
 ///
-/// ![TabView Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
+/// ![A gif displaying a tab view composed of three pages, each with a yellow
+/// background reading the name of a different fruit. Applying the tabViewStyle
+/// renders the view such that there are dots at the bottom of the page for
+/// ease of use.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-2.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol TabViewStyle { }
@@ -41784,7 +41931,8 @@ public struct TapGesture : Gesture {
     /// }
     /// ```
     ///
-    /// ![](text-init-verbatim.png)
+    /// ![A screenshot displaying a plain view that reads "pencil" in the center
+    /// of the screen which is passed as a string literal.](text-init-verbatim.png)
     ///
     /// If you want to localize a string literal before displaying it, use the
     /// ``Text/init(_:tableName:bundle:comment:)`` initializer instead. If you
@@ -41808,7 +41956,8 @@ public struct TapGesture : Gesture {
     /// }
     /// ```
     ///
-    /// ![](text-verbatim.png)
+    /// ![A screenshot displaying a plain view that reads "Don't localize me" in the center
+    /// of the screen which is passed as a string variable.](text-verbatim.png)
     ///
     /// SwiftUI doesn't call the `init(_:)` method when you initialize a text
     /// view with a string literal as the input. Instead, a string literal
@@ -41887,7 +42036,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](text-nsobject.png)
+    /// ![A screenshot displaying a plain text view that reads "20 KB." The text
+    /// is formatted using ByteCountFormatter, which displays the byte count rather
+    /// than the actual text passed to the view.](text-nsobject.png)
     ///
     /// - Paramters:
     ///   - subject: The item to be formatted and then displayed by the ``Text`` view.
@@ -41920,7 +42071,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](text-nsobject.png)
+    /// ![A screenshot displaying a plain text view that reads "20 KB." The text
+    /// is formatted using ByteCountFormatter, which displays the byte count rather
+    /// than the actual text passed to the view.](text-nsobject.png)
     ///
     /// - Paramters:
     ///   - subject: The item to be formatted and then displayed by the ``Text`` view.
@@ -41963,7 +42116,8 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](text-date-style-ex.gif)
+    /// ![A gif displaying 5 different date styles in a VStack. From top to bottom,
+    /// these read "4:57 PM," "March 29, 2021," "_ sec," "+_ seconds," "0:02."](text-date-style-ex.gif)
     ///
     public struct DateStyle {
 
@@ -41983,7 +42137,8 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](datestyle-time.png)
+        /// ![A screenshot with a text view that reads "3:31 PM." The date style
+        /// used is .time so the text renders as only a time.](datestyle-time.png)
         public static let time: Text.DateStyle
 
         /// A style displaying a date.
@@ -42002,7 +42157,8 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](datestyle-date.png)
+        /// ![A screenshot with a text view that reads "March 25, 2021." The date style
+        /// used is .date so the text renders as only a date.](datestyle-date.png)
         public static let date: Text.DateStyle
 
         /// A style displaying a date as relative to now.
@@ -42021,7 +42177,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](text-date-style-relative-ex.gif)
+        /// ![A gif displaying a single text view in the center of the screen that
+        /// reads "_ sec" and counts up. Since the relative date style is used, the
+        /// text renders as a count in seconds from when the view appears.](text-date-style-relative-ex.gif)
         ///
         public static let relative: Text.DateStyle
 
@@ -42041,7 +42199,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](text-date-style-offset-ex.gif)
+        /// ![A gif displaying a single text view in the center of the screen that
+        /// reads "+_ seconds" and counts up. Since the offset date style is used, the
+        /// text renders as a count in seconds from when the view appears.](text-date-style-offset-ex.gif)
         ///
         public static let offset: Text.DateStyle
 
@@ -42061,7 +42221,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](text-date-style-timer-ex.gif)
+        /// ![A gif displaying a single text view in the center of the screen that
+        /// reads "0:0_" and counts up. Since the timer date style is used, the
+        /// text renders as a count in seconds from when the view appears.](text-date-style-timer-ex.gif)
         ///
         public static let timer: Text.DateStyle
     }
@@ -42112,7 +42274,8 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](text-closedrange.png)
+    /// ![A screenshot displaying a text view that reads "3:20-3:30 PM," a localized
+    /// range between two dates, each styled as a time.](text-closedrange.png)
     ///
     /// - Parameters:
     ///     - dates: The range of dates to display
@@ -42132,7 +42295,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](text-dateinterval.png)
+    /// ![A screenshot displaying a text view that reads "3:20-3:30 PM," a localized
+    /// range between two dates, each styled as a time, that is passed directly
+    /// to the text view using DateInterval.](text-dateinterval.png)
     ///
     /// - Parameters:
     ///     - interval: The date interval to display
@@ -42210,7 +42375,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![plus Example 1](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-plus-example-1.png)
+    /// ![A screenshot displaying a single text view that reads "Banana" followed by
+    /// two banana emojis, no space, and "Apple" followed by two apple emojis.
+    /// The text views are concatenated into one view, which has no space.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-plus-example-1.png)
     ///
     /// - Parameters:
     ///   - lhs: The first text view with text to combine.
@@ -42243,7 +42410,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](text-truncationmode.png)
+    /// ![A screenshot displaying a text view that reads "ab...yz" in the center
+    /// of the screen. The truncation mode applied is middle, so the middle of
+    /// the long string is cut out and replaced by an ellipsis.](text-truncationmode.png)
     public enum TruncationMode {
 
         /// Truncate at the beginning of the line.
@@ -42265,7 +42434,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](truncationmode-head.png)
+        /// ![A screenshot displaying a text view that reads "...wxyz" in the center
+        /// of the screen. The truncation mode applied is head, so the front end of
+        /// the long string is cut out and replaced by an ellipsis.](truncationmode-head.png)
         case head
 
         /// Truncate at the end of the line.
@@ -42284,7 +42455,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](truncationmode-tail.png)
+        /// ![A screenshot displaying a text view that reads "abcd..." in the center
+        /// of the screen. The truncation mode applied is tail, so the tail end of
+        /// the long string is cut out and replaced by an ellipsis.](truncationmode-tail.png)
         case tail
 
         /// Truncate in the middle of the line.
@@ -42303,7 +42476,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](truncationmode-middle.png)
+        /// ![A screenshot displaying a text view that reads "ab...yz" in the center
+        /// of the screen. The truncation mode applied is middle, so the middle of
+        /// the long string is cut out and replaced by an ellipsis.](truncationmode-middle.png)
         case middle
 
         /// Returns a Boolean value indicating whether two values are equal.
@@ -42355,7 +42530,9 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](text-case.png)
+    /// ![A screenshot displaying a single text view in the center of the screen
+    /// that reads "HELLO." The text case modifier is applied with uppercase, which
+    /// renders the text in all uppercase letters.](text-case.png)
     ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public enum Case {
@@ -42376,7 +42553,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](text-case.png)
+        /// ![A screenshot displaying a single text view in the center of the screen
+        /// that reads "HELLO." The text case modifier is applied with uppercase, which
+        /// renders the text in all uppercase letters.](text-case.png)
         ///
         /// See the similar modifier for [`String`](https://developer.apple.com/documentation/swift/string):
         /// [`uppercased()`](https://developer.apple.com/documentation/swift/stringprotocol/2908613-uppercased).
@@ -42398,7 +42577,9 @@ extension Text {
         /// }
         /// ```
         ///
-        /// ![](text-case-lowercase.png)
+        /// ![A screenshot displaying a single text view in the center of the screen
+        /// that reads "hello." The text case modifier is applied with lowercase, which
+        /// renders the text in all lowercase letters.](text-case-lowercase.png)
         ///
         /// See the similar modifier for [`String`](https://developer.apple.com/documentation/swift/string):
         /// [`lowercased()`](https://developer.apple.com/documentation/swift/stringprotocol/2906197-lowercased).
@@ -42780,7 +42961,11 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](kearning.png)
+    /// ![A screenshot displaying three text views in a VStack, each reading
+    /// "ABCDEF." The first applies negative kerning, the second applies no kerning,
+    /// and the third applies positive kerning. The result is that the first
+    /// renders incredibly tight spacing between letters, and the third has excess
+    /// space between letters.](kearning.png)
     ///
     /// The last character in the first case, which uses negative kerning,
     /// experiences cropping because the kerning affects the trailing edge of
@@ -42824,7 +43009,11 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](tracking.png)
+    /// ![A screenshot displaying three text views in a VStack, each reading
+    /// "ABCDEF." The first applies negative tracking, the second applies no tracking,
+    /// and the third applies positive tracking. The result is that the first
+    /// renders incredibly tight spacing between letters, and the third has excess
+    /// space between letters.](tracking.png)
     ///
     /// The code above uses an unusually large amount of tracking to make it
     /// easy to see the effect.
@@ -42853,7 +43042,7 @@ extension Text {
     /// ```
     /// struct BaselineOffsetView: View {
     ///     var body: some View {
-    ///         HStack(alignment: .top) {
+    ///         HStack(alignment: .center) {
     ///             Text("Hello")
     ///                 .baselineOffset(-10)
     ///                 .border(Color.red)
@@ -42868,7 +43057,12 @@ extension Text {
     /// }
     /// ```
     ///
-    /// ![](baselineoffset.png)
+    /// ![A screenshot displaying three text views in an HStack, each reading
+    /// "Hello" with a grey background behind the whole stack. The first text
+    /// has a negative offset applied, rendering it at the bottom of the grey
+    /// background. The second has no offset applied, so it sits in the middle of the
+    /// background. The third has a positive offset applied, rendering it at the top of
+    /// the background.](baselineoffset-fixed.png)
     ///
     /// By drawing a border around each text view, you can see how the text
     /// moves, and how that affects the view.
@@ -43103,7 +43297,9 @@ public struct TextEditingCommands : Commands {
 ///         }
 ///     }
 ///
-/// ![](text-editor.png)
+/// ![A screenshot displaying a keyboard on the lower half of the screen with
+/// text that reads "This is some editable text..." which can be edited
+/// by the user with as many lines as necessary.](text-editor.png)
 ///
 /// ### Styling a text editor
 ///
@@ -43124,7 +43320,9 @@ public struct TextEditingCommands : Commands {
 ///         }
 ///     }
 ///
-/// ![](texteditor-2.png)
+/// ![A screenshot displaying a keyboard on the lower half of the screen with
+/// text that reads "This is some editable text..." which has a style applied
+/// such that the font is Helvetica Neue with a large 13 pt.](texteditor-2.png)
 ///
 /// If you want to change the spacing or font scaling aspects of the text, you
 /// can use modifiers like ``View/lineLimit(_:)``,
@@ -43145,7 +43343,9 @@ public struct TextEditingCommands : Commands {
 ///         }
 ///     }
 ///
-/// ![](texteditor-3.png)
+/// ![A screenshot displaying a keyboard on the lower half of the screen with
+/// text that reads "This is some editable text..." which has a style applied
+/// such that the spacing between lines is 5 pt.](texteditor-3.png)
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -43171,7 +43371,9 @@ public struct TextEditor : View {
     ///         }
     ///     }
     ///
-    /// ![](texteditor-2.png)
+    /// ![A screenshot displaying a keyboard on the lower half of the screen with
+    /// text that reads "This is some editable text..." which has a style applied
+    /// such that the font is Helvetica Neue with a large 13 pt.](texteditor-2.png)
     ///
     /// You can define the styling for the text within the view, including the
     /// text color, font, and line spacing. You define these styles by applying
@@ -43346,7 +43548,9 @@ extension TextField where Label == Text {
 /// }
 /// ```
 ///
-/// ![](text-field-style.gif)
+/// ![A gif displaying a text field in the center of the screen that reads
+/// "iMessage" before any text is input by the user. The RoundedBorderTextFieldStyle
+/// renders the text field in a rounded box.](text-field-style.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol TextFieldStyle { }
@@ -43481,7 +43685,8 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C](BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C.png)
+/// ![A screenshot displaying a toggle reading "Vibrate on Ring" which is
+/// switched to off.](BF5FBFF1-E2E6-4B8D-A00F-528D2D61561C.png)
 ///
 /// For the common case of text-only labels, you can use the convenience
 /// initializer that takes a title string (or localized string key) as its first
@@ -43497,7 +43702,8 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![75A3C8E1-A542-4D7D-8370-91C70DE6C502](75A3C8E1-A542-4D7D-8370-91C70DE6C502.png)
+/// ![A screenshot displaying a toggle reading "Vibrate on Ring" which is
+/// switched to on.](75A3C8E1-A542-4D7D-8370-91C70DE6C502.png)
 ///
 /// ### Styling Toggles
 ///
@@ -43524,7 +43730,9 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 /// }
 /// ```
 ///
-/// ![3BE5966E-7786-4581-AF97-A7A2B18CEEA6](3BE5966E-7786-4581-AF97-A7A2B18CEEA6.png)
+/// ![A screenshot displaying two toggles in a VStack reading "Vibrate on Ring"
+/// and "Vibrate on Silent" which are both switched to on and each have the
+/// SwitchToggleStyle applied.](3BE5966E-7786-4581-AF97-A7A2B18CEEA6.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Toggle<Label> : View where Label : View {
 
@@ -43542,7 +43750,8 @@ public struct Toggle<Label> : View where Label : View {
     /// }
     /// ```
     ///
-    /// ![](toggle-init-2.png)
+    /// ![A screenshot displaying a toggle switched to off with a custom label
+    /// that reads "Airplane Mode."](toggle-init-2.png)
     ///
     /// - Parameters:
     ///   - isOn: A boolean binding connected to whether the toggle is on.
@@ -43589,7 +43798,10 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
     ///         }
     ///     }
     ///
-    /// ![](toggle-init.png)
+    /// ![A screenshot displaying a switch toggle in the center of the screen
+    /// with a custom label of two banana emojis and a red border surrounding
+    /// the entire toggle area, including the label. The custom toggle style
+    /// used only modifies the current toggle style.](toggle-init.png)
     ///
     /// - Parameter configuration: A toggle style configuration, passed from makeBody(configuration:).
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -43613,7 +43825,9 @@ extension Toggle where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](toggle-init-2.png)
+    /// ![A screenshot displaying a toggle switched to off with a custom label
+    /// that reads "Airplane Mode" which is passed as a localized string key to
+    /// the initializer.](toggle-init-2.png)
     ///
     /// Conveniently, if you pass the ``Toggle`` a
     /// [`String`](https://developer.apple.com/documentation/swift/string)
@@ -43658,7 +43872,9 @@ extension Toggle where Label == Text {
     /// }
     /// ```
     ///
-    /// ![](toggle-init-2.png)
+    /// ![A screenshot displaying a toggle switched to off with a custom label
+    /// that reads "Airplane Mode" which is passed as a string variable to
+    /// the initializer.](toggle-init-2.png)
     ///
     /// - Note: If you'd like to localize your text, use ``Toggle/init(_:isOn:)-00a8a``
     /// instead.
@@ -43721,7 +43937,10 @@ extension Toggle where Label == Text {
 /// }
 /// ```
 ///
-/// ![Toggle style example 1](togglestyle-example-1.gif)
+/// ![A gif displaying a toggle in the center of the screen with a label that
+/// reads "Active" and a custom style toggle that renders as a black rectangle
+/// with a red dot on its left when switched to off and a green dot on its right
+/// when switched to on.](togglestyle-example-1.gif)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ToggleStyle { }
@@ -43777,7 +43996,10 @@ extension ToggleStyle {
     /// }
     /// ```
     ///
-    /// ![Toggle style example 1](togglestyle-example-1.gif)
+    /// ![A gif displaying a toggle in the center of the screen with a label that
+    /// reads "Active" and a custom style toggle that renders as a black rectangle
+    /// with a red dot on its left when switched to off and a green dot on its right
+    /// when switched to on.](togglestyle-example-1.gif)
     ///
     /// - Parameter configuration: The properties of the toggle, such as its
     ///   label and its “on” state.
@@ -44151,7 +44373,10 @@ public struct ToolbarItemGroup<Content> : ToolbarContent where Content : View {
 /// }
 /// ```
 ///
-/// ![Toolbar item placement example 1](9B900A7C-AA39-4C5B-9022-EFFF9308F236.png)
+/// ![A screenshot displaying a text view with two banana emojis in the center
+/// of the screen and a button on the bottom that reads "Bottom bar button."
+/// The button is placed at the bottom using the toolbar modifier with bottomBar
+/// placement.](9B900A7C-AA39-4C5B-9022-EFFF9308F236.png)
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct ToolbarItemPlacement {
 
@@ -44367,7 +44592,9 @@ extension Transaction {
 /// }
 /// ```
 ///
-/// ![](transformedshape.png)
+/// ![A screenshot displaying an orange square border in the center of the screen
+/// with a black filled square of the same size anchored at its top left corner,
+/// rotated by 0.5 radians towards the bottom of the screen.](transformedshape.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TransformedShape<Content> : Shape where Content : Shape {
 
@@ -44390,7 +44617,10 @@ extension Transaction {
     /// }
     /// ```
     ///
-    /// ![](transformedshape-shape.png)
+    /// ![A screenshot displaying a red transparent square in the center of the screen
+    /// with a black filled square of the same size anchored at its top left corner,
+    /// rotated by 0.5 radians towards the bottom of the screen. Here, the shape property
+    /// is called on the transformedShape to render the original square, modified to red.](transformedshape-shape.png)
     public var shape: Content
 
     /// The affine transformation to apply to the original shape
@@ -44412,7 +44642,11 @@ extension Transaction {
     /// }
     /// ```
     ///
-    /// ![](transformedshape-transform.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its top left corner,
+    /// rotated by 0.5 radians towards the bottom of the screen. Text above it reads
+    /// "Identity transform? No." The "yes" or "no" in the text is prompted by
+    /// the isidentity property of the transform variable.](transformedshape-transform.png)
     public var transform: CGAffineTransform
 
     /// Creates a new shape from an original shape and an affine transform.
@@ -44429,7 +44663,9 @@ extension Transaction {
     /// }
     /// ```
     ///
-    /// ![](transformedshape.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its top left corner,
+    /// rotated by 0.5 radians towards the bottom of the screen.](transformedshape.png)
     ///
     /// - Parameters:
     ///   - shape: The original shape to be affine transformed.
@@ -44487,7 +44723,9 @@ extension Transaction {
 ///         }
 ///     }
 ///
-/// ![](tupleview.png)
+/// ![A screenshot displaying a single text view that reads "I am first" in
+/// the center of the screen. The display should show two text views, but the
+/// view created only displays the first view it's passed.](tupleview.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct TupleView<T> : View {
@@ -44523,7 +44761,9 @@ extension Transaction {
     ///         }
     ///     }
     ///
-    /// ![](tupleview.png)
+    /// ![A screenshot displaying a single text view that reads "I am first" in
+    /// the center of the screen. The value parameter is extracted from the tuple
+    /// view returned by the view builder.](tupleview.png)
     ///
     public var value: T
 
@@ -44558,7 +44798,10 @@ extension Transaction {
     ///         }
     ///     }
     ///
-    /// ![](tupleview.png)
+    /// ![A screenshot displaying a single text view that reads "I am first" in
+    /// the center of the screen. The display should show two text views, but the
+    /// view created only displays the first view it's passed due to constraints
+    /// imposed in the initializer.](tupleview.png)
     ///
     /// - Parameter value: A tuple of any number of views.
     @inlinable public init(_ value: T) { }
@@ -45640,7 +45883,10 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unitpoint-rotation-center.png)
+    /// ![A screenshot displaying a rectangular border in the center of the screen
+    /// with text rotated 22 degrees clockwise around its center reading "I'm
+    /// rotated around my center." It's anchored in the center because the anchor is
+    /// set at x coordinate 0.5.](unitpoint-rotation-center.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public var x: CGFloat
@@ -45673,7 +45919,10 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unitpoint-rotation-center.png)
+    /// ![A screenshot displaying a rectangular border in the center of the screen
+    /// with text rotated 22 degrees clockwise around its center reading "I'm
+    /// rotated around my center." It's anchored in the center because the anchor is
+    /// set at both x and y coordinate 0.5.](unitpoint-rotation-center.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public var y: CGFloat
@@ -45700,7 +45949,11 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unitpoint-zero.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its top left corner,
+    /// rotated by 0.5 radians towards the bottom of the screen. The anchor is set
+    /// as a unitpoint which initializes to 0 for both x and y, which refers to the top
+    /// left corner.](unitpoint-zero.png)
     @inlinable public init() { }
 
     /// Creates a unit point from x and y values.
@@ -45727,7 +45980,10 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unitpoint-rotation-center.png)
+    /// ![A screenshot displaying a rectangular border in the center of the screen
+    /// with text rotated 22 degrees clockwise around its center reading "I'm
+    /// rotated around my center." It's anchored in the center because the anchor is
+    /// set at both x and y coordinate 0.5 as rendered by the unitpoint intializer.](unitpoint-rotation-center.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     ///
@@ -45752,7 +46008,10 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unitpoint-zero.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its top left corner,
+    /// rotated by 0.5 radians towards the bottom of the screen. The anchor is set
+    /// using the .zero property.](unitpoint-zero.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let zero: UnitPoint
@@ -45774,7 +46033,10 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unitpoint-center.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its center,
+    /// rotated by 0.5 radians towards the bottom of the screen. The anchor is set
+    /// using the .center property which causes it to rotate around its center.](unitpoint-center.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let center: UnitPoint
@@ -45927,7 +46189,11 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](topleading.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its top left corner,
+    /// rotated by 0.5 radians towards the bottom of the screen. The anchor is set
+    /// using the topLeading property, which has the same effect as anchoring it
+    /// at zero in this case.](topleading.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let topLeading: UnitPoint
@@ -45949,7 +46215,11 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](toptrailing.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its top right corner,
+    /// rotated by 0.5 radians towards the top of the screen. The anchor is set
+    /// using the topTrailing property, which forces its rotation around the top right
+    /// side of the original shape.](toptrailing.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let topTrailing: UnitPoint
@@ -45971,7 +46241,11 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](bottomleading.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its bottom left corner,
+    /// rotated by 0.5 radians towards the bottom of the screen. The anchor is set
+    /// using the bottomLeading property, which forces its rotation around the bottom left
+    /// corner of the original shape.](bottomleading.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottomLeading: UnitPoint
@@ -45993,7 +46267,11 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](bottomtrailing.png)
+    /// ![A screenshot displaying an orange square border in the center of the screen
+    /// with a black filled square of the same size anchored at its bottom right corner,
+    /// rotated by 0.5 radians towards the top of the screen. The anchor is set
+    /// using the bottomTrailing property, which forces its rotation around the bottom right
+    /// corner of the original shape.](bottomtrailing.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottomTrailing: UnitPoint
@@ -46319,7 +46597,10 @@ extension VerticalAlignment {
     /// }
     /// ```
     ///
-    /// ![](top.png)
+    /// ![A screenshot displaying two text views in a VStack that read "Align 1"
+    /// and "Align 2" respectively. The VStack is arranged to the right of a
+    /// rectangle in an HStack, with the alignment of the HStack set as top, which
+    /// renders both the red rectangle and the text views at the top of the container.](top.png)
     public static let top: VerticalAlignment
 
     /// A guide marking the vertical center of the view.
@@ -46353,7 +46634,12 @@ extension VerticalAlignment {
     /// }
     /// ```
     ///
-    /// ![](center.png)
+    /// ![A screenshot displaying two text views in a VStack that read "Align 1"
+    /// and "Align 2" respectively. The VStack is arranged to the right of a
+    /// rectangle in an HStack, with the alignment of the HStack set as center, which
+    /// renders both the red rectangle and the text views in the center of the container.
+    /// since the rectangle height is set very low, it appears as a line between the
+    /// text views.](center.png)
     public static let center: VerticalAlignment
 
     /// A guide marking the bottom edge of the view.
@@ -46387,7 +46673,12 @@ extension VerticalAlignment {
     /// }
     /// ```
     ///
-    /// ![](bottom.png)
+    /// ![A screenshot displaying two text views in a VStack that read "Align 1"
+    /// and "Align 2" respectively. The VStack is arranged to the right of a
+    /// rectangle in an HStack, with the alignment of the HStack set as bottom, which
+    /// renders both the red rectangle and the text views at the bottom of the container.
+    /// Since the rectangle height is set very low, it appears as a line below the
+    /// text views.](bottom.png)
     public static let bottom: VerticalAlignment
 
     /// A guide marking the topmost text baseline view.
@@ -46421,7 +46712,10 @@ extension VerticalAlignment {
     /// }
     /// ```
     ///
-    /// ![](firsttextbaseline.png)
+    /// ![A screenshot displaying two text views in a VStack that read "Align 1"
+    /// and "Align 2" respectively. The VStack is arranged to the right of a
+    /// rectangle in an HStack, with the alignment of the HStack set as firstTextBaseline, which
+    /// renders the red rectangle in line with the bottom of the first text view.](firsttextbaseline.png)
     public static let firstTextBaseline: VerticalAlignment
 
     /// A guide marking the bottom-most text baseline in a view.
@@ -46455,7 +46749,10 @@ extension VerticalAlignment {
     /// }
     /// ```
     ///
-    /// ![](lasttextbaseline.png)
+    /// ![A screenshot displaying two text views in a VStack that read "Align 1"
+    /// and "Align 2" respectively. The VStack is arranged to the right of a
+    /// rectangle in an HStack, with the alignment of the HStack set as lastTextBaseline, which
+    /// renders the red rectangle in line with the bottom of the second text view.](lasttextbaseline.png)
     public static let lastTextBaseline: VerticalAlignment
 }
 
@@ -53046,7 +53343,10 @@ extension View {
     ///         }
     ///     }
     ///
-    /// ![](on-change-perform-ex1.gif)
+    /// ![A gif displaying a text field with a text view above it that reads
+    /// "Hi !" before anything is entered in the field. Once the text is changed,
+    /// onChange renders the text view such that the name is put between "Hi" and
+    /// the exclamation point.](on-change-perform-ex1.gif)
     ///
     /// - Parameters:
     ///   - value: The value to check against when determining whether
@@ -55383,7 +55683,7 @@ extension View {
     /// }
     /// ```
     //
-    /// ![](buildblock-view.png)
+    /// ![A screenshot displaying an empty view.](buildblock-view.png)
     ///
     public static func buildBlock() -> EmptyView { }
 
@@ -55407,7 +55707,8 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![](buildblock-1-view.png)
+    /// ![A screenshot displaying a single text view that reads "I am all alone"
+    /// in the center of the screen.](buildblock-1-view.png)
     ///
     public static func buildBlock<Content>(_ content: Content) -> Content where Content : View { }
 }
@@ -55441,7 +55742,7 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildif-view.png)
+    /// ![A screenshot displaying a single text view that reads "Show me!"](buildif-view.png)
     public static func buildIf<Content>(_ content: Content?) -> Content? where Content : View { }
 
     /// Provides support for "if" statements in multi-statement closures,
@@ -55472,7 +55773,8 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildeither-first-view.png)
+    /// ![A screenshot displaying a single text view that reads "I am on screen!"
+    /// The second view is not displayed since showView is set to true.](buildeither-first-view.png)
     public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
 
     /// Provides support for "if-else" statements in multi-statement closures,
@@ -55503,7 +55805,8 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildeither-first-view.png)
+    /// ![A screenshot displaying a single text view that reads "I am on screen!"
+    /// The first view is not displayed since showView is set to false.](buildeither-first-view.png)
     public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _ConditionalContent<TrueContent, FalseContent> where TrueContent : View, FalseContent : View { }
 }
 
@@ -55537,7 +55840,7 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildeither-first-view.png)
+    /// ![A screenshot displaying a single text view that reads "I am on screen!"](buildeither-first-view.png)
     public static func buildLimitedAvailability<Content>(_ content: Content) -> AnyView where Content : View { }
 }
 
@@ -55565,7 +55868,8 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-2-view.png)
+    /// ![A screenshot displaying a tuple view from two views in a ViewBuilder
+    /// that read "I am on screen" and "Me too."](buildblock-2-view.png)
     public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> TupleView<(C0, C1)> where C0 : View, C1 : View { }
 }
 
@@ -55594,7 +55898,8 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-3-view.png)
+    /// ![A screenshot displaying a tuple view from three views in a ViewBuilder
+    /// that read "I am on screen," "Me too," and "What a party."](buildblock-3-view.png)
     public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleView<(C0, C1, C2)> where C0 : View, C1 : View, C2 : View { }
 }
 
@@ -55624,7 +55929,8 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-4-view.png)
+    /// ![A screenshot displaying a tuple view from four views in a ViewBuilder
+    /// that read "I am on screen," "Me too," "What a party," and "Lets go!!"](buildblock-4-view.png)
     ///
     public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleView<(C0, C1, C2, C3)> where C0 : View, C1 : View, C2 : View, C3 : View { }
 }
@@ -55656,7 +55962,9 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-5-view.png)
+    /// ![A screenshot displaying a tuple view from five views in a ViewBuilder
+    /// that read "I am on screen," "Me too," "What a party," "Lets go!!" and
+    /// "Where's the food?"](buildblock-5-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleView<(C0, C1, C2, C3, C4)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View { }
 }
 
@@ -55688,7 +55996,9 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-6-view.png)
+    /// ![A screenshot displaying a tuple view from six views in a ViewBuilder
+    /// that read "I am on screen," "Me too," "What a party," "Lets go!!"
+    /// "Where's the food?" and "I am #6."](buildblock-6-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleView<(C0, C1, C2, C3, C4, C5)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View { }
 }
 
@@ -55721,7 +56031,9 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-7-view.png)
+    /// ![A screenshot displaying a tuple view from seven views in a ViewBuilder
+    /// that read "I am on screen," "Me too," "What a party," "Lets go!!"
+    /// "Where's the food?" "I am #6," and "This is getting crowded."](buildblock-7-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleView<(C0, C1, C2, C3, C4, C5, C6)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View { }
 }
 
@@ -55755,7 +56067,9 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-8-view.png)
+    /// ![A screenshot displaying a tuple view from eight views in a ViewBuilder
+    /// that read "I am on screen," "Me too," "What a party," "Lets go!!"
+    /// "Where's the food?" "I am #6," "This is getting crowded," and "Nearing capacity!"](buildblock-8-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View { }
 }
 
@@ -55790,7 +56104,10 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-9-view.png)
+    /// ![A screenshot displaying a tuple view from nine views in a ViewBuilder
+    /// that read "I am on screen," "Me too," "What a party," "Lets go!!"
+    /// "Where's the food?" "I am #6," "This is getting crowded," "Nearing
+    /// capacity!" and "Room for one more?"](buildblock-9-view.png)
     ///
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View { }
 }
@@ -55830,7 +56147,10 @@ extension ViewBuilder {
     /// }
     /// ```
     ///
-    /// ![](buildblock-10-view.png)
+    /// ![A screenshot displaying a tuple view from ten views in a ViewBuilder
+    /// that read "I am on screen," "Me too," "What a party," "Lets go!!"
+    /// "Where's the food?" "I am #6," "This is getting crowded," "Nearing
+    /// capacity!" "Room for one more?" and "No more views!!"](buildblock-10-view.png)
     public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> TupleView<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> where C0 : View, C1 : View, C2 : View, C3 : View, C4 : View, C5 : View, C6 : View, C7 : View, C8 : View, C9 : View { }
 }
 
@@ -56795,7 +57115,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
 ///         }
 ///     }
 ///
-/// ![](zstack.png)
+/// ![A screenshot displaying two text views in a ZStack; the bottom layer is text
+/// that reads "I am obscured by clouds," where the top layer is a set of cloud emojis
+/// that obscure the text.](zstack.png)
 ///
 /// Learn more about the properties of each alignment choice via the
 /// ``Alignment`` struct.
@@ -56818,7 +57140,9 @@ public struct WindowGroup<Content> : Scene where Content : View {
     ///         }
     ///     }
     ///
-    /// ![](zstack-2.png)
+    /// ![A screenshot displaying two text views in a ZStack; the bottom layer is text
+    /// that reads "I am obscured by clouds and rain," where the subsequent layers
+    /// are a set of cloud and rain emojis that obscure the text.](zstack-2.png)
     ///
     /// - Parameters:
     ///   - alignment: The guide for aligning the subviews in this stack on both
