@@ -1,4 +1,4 @@
-import Combine
+presses the Return keyAn action to performimport Combine
 import CoreData
 import CoreFoundation
 import CoreGraphics
@@ -8458,6 +8458,38 @@ extension CustomizableToolbarContent : ToolbarContent where Self.Body : Customiz
 ///
 /// ![](date-picker-ex1.gif)
 ///
+/// You can limit the `DatePicker` to specific ranges of dates, allowing
+/// selections only before or after a certain date, or between two dates. The
+/// following example shows a date-and-time picker that only permits selections
+/// within the year 2021 (in the `UTC` time zone).
+///
+/// struct ContentView: View {
+///     @State private var date = Date()
+///
+///     let dateRange: ClosedRange<Date> = {
+///         let calendar = Calendar.current
+///         let startComponents = DateComponents(year: 2021, month: 1, day: 1)
+///         let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
+///         return calendar.date(from:startComponents)!
+///             ...
+///             calendar.date(from:endComponents)!
+///     }()
+///
+///     var body: some View {
+///         DatePicker(
+///             "Start Date",
+///              selection: $date,
+///              in: dateRange,
+///              displayedComponents: [.date, .hourAndMinute]
+///         )
+///     }
+/// }
+///
+/// ![A gif displaying a SwiftUI standard date picker on iOS, with the label Start Date, and
+/// buttons for the time 9:58 AM and the date April 12,
+/// 2021. The user can only pick within the set range year 2021, so when another
+/// year is selected, the picker defaults back to 2021.](datepicker-selectrange.gif)
+///
 /// ### Styling Date Pickers
 ///
 /// You can customize the appearance and interaction of date pickers using one of the
@@ -8912,7 +8944,8 @@ public struct DatePickerComponents : OptionSet {
     public typealias ArrayLiteralElement = DatePickerComponents
 }
 
-/// A specification for the appearance and interaction of a ``DatePicker``.
+/// A type that specifies the appearance and interaction of all date pickers
+/// within a view hierarchy.
 ///
 /// Use this protocol with the ``View/datePickerStyle(_:)`` view modifier
 /// to set a ``DatePicker``'s style.
@@ -18272,7 +18305,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 
 /// An interactive calendar or clock.
 ///
-/// This style is useful when wanting to allow browsing through days in a calendar, or when the look of a clock face is appropriate.
+/// This style is useful when you want to allow browsing through days in a calendar, or when the look of a clock face is appropriate.
 ///
 ///     struct ExampleView: View {
 ///         @State var date: Date = Date()
@@ -18293,7 +18326,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 @available(watchOS, unavailable)
 public struct GraphicalDatePickerStyle : DatePickerStyle {
 
-	/// Create a graphical date picker style.
+	/// Creates an instance of the graphical date picker style.
     public init() { }
 }
 
@@ -18904,7 +18937,11 @@ public struct GroupedListStyle : ListStyle {
 
 /// A view that arranges children horizontally.
 ///
-/// ``HStack`` is a horizontal stack of views.
+/// ``HStack`` is a horizontal stack of views. Unlike ``LazyHStack``, which only
+/// renders the views when your app needs to display them onscreen, an `HStack`
+/// renders the views all at once, regardless of whether they are on or offscreen.
+/// Use the regular `HStack` when you have a small number of child views or don't
+/// want the delayed rendering behavior of the "lazy" version.
 ///
 ///
 ///     struct ExampleView: View {
@@ -18940,7 +18977,7 @@ public struct GroupedListStyle : ListStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct HStack<Content> : View where Content : View {
 
-    /// Creates an instance with the given spacing and vertical alignment.
+    /// Creates a horizontal stack with the given spacing and vertical alignment.
     ///
     ///     struct ExampleView: View {
     ///         var body: some View {
@@ -18955,8 +18992,8 @@ public struct GroupedListStyle : ListStyle {
     /// ![HStack Example 2](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/hstack-example-2.png)
     ///
     /// - Parameters:
-    ///   - alignment: The guide for aligning the subviews in this stack. It has
-    ///     the same vertical screen coordinate for all children.
+    ///   - alignment: The guide for aligning the subviews in this stack. This guide has
+    ///     the same vertical screen coordinate for every child view.
     ///   - spacing: The distance between adjacent subviews, or `nil` if you
     ///     want the stack to choose a default distance for each pair of
     ///     subviews.
@@ -19060,7 +19097,7 @@ public struct GroupedListStyle : ListStyle {
     ///
     /// In addition to the 3 out-of-the-box horizontal alignments,
     /// leading, center, and trailing, you can also create your own
-    /// custom horizontal alignment. Do this by passing this intializer
+    /// custom horizontal alignment. Do this by passing this initializer
     /// a ``AlignmentID.Type`` from an ``AlignmentID``.
     ///
     /// Use this in the initializers of 3 structures:
@@ -25014,7 +25051,7 @@ extension ListStyle {
 /// ![A screenshot displaying a single text view that reads "¡Esto se localiza!"
 /// the Spanish translation of the text that is passed to the view.](localizedstringkey-2.png)
 ///
-/// However, if your variable is already a string, the intializer will
+/// However, if your variable is already a string, the initializer will
 /// not localize the string:
 ///
 ///     struct ContentView: View {
@@ -25055,7 +25092,7 @@ extension ListStyle {
 
     /// Creates an instance initialized to the given string value.
     ///
-    /// Use this intializer when you would not like localization.
+    /// Use this initializer when you would not like localization.
     ///
     ///     struct SameInEveryLanguageView: View {
     ///         let text = LocalizedStringKey(stringLiteral: "Aloha")
@@ -31259,7 +31296,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// ```
     ///
     /// ![A gif displaying a grey progress spinner with a custom label underneath it
-    /// that reads "We're working on it" as rendered by passing the label to the intializer.](progress-spinner-runner.gif)
+    /// that reads "We're working on it" as rendered by passing the label to the initializer.](progress-spinner-runner.gif)
     ///
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
@@ -31286,7 +31323,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     ///
     /// ![A gif displaying a grey progress spinner with a custom label underneath it
     /// that reads "We're working on it" as rendered by passing the localized
-    /// string key label to the intializer.](progress-spinner-runner.gif)
+    /// string key label to the initializer.](progress-spinner-runner.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the progress view's localized title that
@@ -31316,7 +31353,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     ///
     /// ![A gif displaying a grey progress spinner with a custom label underneath it
     /// that reads "We're working on it" as rendered by passing the
-    /// string label to the intializer.](progress-spinner-runner.gif)
+    /// string label to the initializer.](progress-spinner-runner.gif)
     ///
     public init<S>(_ title: S) where Label == Text, S : StringProtocol { }
 }
@@ -37089,7 +37126,17 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// A text field for entering private text, usually a password.
 ///
 /// A secure field is just like a ``TextField``, except the entered text is shown as dots instead of
-/// as the actual text.
+/// as the actual text. Typically, you use this for entering passwords and other sensitive information.
+///
+/// A `SecureField` uses a binding to a string value, and a closure that
+/// executes when the user commits their edits, such as by pressing the
+/// Return key. The field updates the bound string on every keystroke or
+/// other edit, so you can read its value at any time from another control,
+/// such as a Done button.
+///
+/// The following example shows a SecureField bound to the string password. If
+/// the user commits their edit in the secure field, the onCommit closure displays
+/// a message to confirm that a password has been entered.
 ///
 /// ```
 /// struct PasswordView: View {
@@ -37174,7 +37221,7 @@ extension SecureField where Label == Text {
     /// - Parameters:
     ///   - titleKey: The localized string key placeholder, which is visible when the field is empty.
     ///   - text: A binding variable to the displayed and edited text.
-    ///   - onCommit: The function called when the user hits the return key.
+    ///   - onCommit: The function called when the user presses the Return key.
     public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onCommit: @escaping () -> Void = {}) { }
 
     /// Creates a text field for entering private text, usually a password, with a String placeholder.
@@ -37182,7 +37229,7 @@ extension SecureField where Label == Text {
     /// - Parameters:
     ///   - title: The string placeholder, which is visible when the field is empty.
     ///   - text: A binding variable to the displayed and edited text.
-    ///   - onCommit: The function called when the user hits the return key.
+    ///   - onCommit: The function called when the user presses the Return key.
     public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 }
 
@@ -38056,7 +38103,7 @@ public struct SidebarListStyle : ListStyle {
 }
 
 /// A gesture containing two gestures that can happen at the same time with
-/// neither of them preceeding the other.
+/// neither of them preceding the other.
 ///
 /// A simultaneous gesture is a container-event handler that evaluates its two
 /// child gestures at the same time. Its value is a struct with two optional
@@ -38249,7 +38296,9 @@ extension Slider {
     ///   - bounds: A range of possible values. Defaults to `0...1`.
     ///   - step: The distance between values on the slider. Defaults to 1.
     ///   - onEditingChanged: A function called when editing begins and ends, which takes a boolean
-    ///   parameter equal to true when editing begins, and false when it ends.
+    ///   parameter equal to true when editing begins, and false when it ends. For
+    ///   example, on iOS, editing begins when the user starts to drag the thumb
+    ///   along the slider's track.
     ///   - minimumValueLabel: A view used as a label on the minimum value side of the slider.
     ///   - maximumValueLabel: A view used as a label on the maximum value side of the slider.
     ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
@@ -41042,7 +41091,7 @@ public struct TapGesture : Gesture {
 
     /// Creates a text view that displays a stored string without localization.
     ///
-    /// Use this intializer to create a text view that displays — without
+    /// Use this initializer to create a text view that displays — without
     /// localization — the text in a string variable.
     ///
     /// ```
@@ -41406,7 +41455,7 @@ extension Text {
 
     /// Creates a text view that displays localized content identified by a key.
     ///
-    /// Use this intializer to look for the `key` parameter in a localization
+    /// Use this initializer to look for the `key` parameter in a localization
     /// table and display the associated string value in the initialized text
     /// view. If the initializer can't find the key in the table, or if no table
     /// exists, the text view displays the string representation of the key
@@ -42484,9 +42533,20 @@ public struct TextEditor : View {
 
 /// A view for editable text.
 ///
-/// ``TextField`` provides an interface to display and modify editable text.
+/// `TextField` provides an interface to display and modify editable text.
 ///
-/// ``TextField`` has 4 different initializers, and is most commonly
+/// You create a text field with a label and a binding to a value. If the
+/// value is a string, the text field updates this value continuously as the
+/// user types or otherwise edits the text in the field. For non-string types,
+/// it updates the value when the user commits their edits, such as by pressing
+/// the Return key.
+///
+/// The text field also allows you to provide two closures that customize its
+/// behavior. The `onEditingChanged` property informs your app when the user
+/// begins or ends editing the text. The `onCommit` property executes when the
+/// user commits their edits.
+///
+/// `TextField` has 4 different initializers, and is most commonly
 /// initialized with a `@State` variable and placeholder text.
 ///
 ///
@@ -42502,7 +42562,18 @@ public struct TextEditor : View {
 ///         }
 ///     }
 ///
-/// ![A gif showing a view with a VStack containing a text field that once populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+/// ![A gif showing a view with a VStack containing a text field that once
+/// populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
+///
+/// ### Styling Text Fields
+///
+/// SwiftUI provides a default text field style that reflects an appearance and
+/// behavior appropriate to the platform. The default style also takes the
+/// current context into consideration, like whether the text field is in a
+/// container that presents text fields with a special style. Beyond this, you
+/// can customize the appearance and interaction of text fields using the
+/// ``View/textFieldStyle(_:)`` modifier, passing in an instance of
+/// ``TextFieldStyle``.
 ///
 /// [textfield-style ->]
 /// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
@@ -42545,28 +42616,28 @@ extension TextField where Label == Text {
     /// - Parameters:
     ///   - titleKey: The key for the localized title of the text field,
     ///     describing its purpose.
-    ///   - text: The text to be displayed and edited.
-    ///   - onEditingChanged: An action thats called when the user
+    ///   - text: The text to display and edit.
+    ///   - onEditingChanged: An action to perform when the user
     ///     begins editing ``text`` and after the user finishes editing ``text``.
-    ///     The closure recieves a Boolean indicating whether the text field is
-    ///     currently being edited.
+    ///     The closure receives a Boolean value that indicates the editing
+    ///     status: `true` when the user begins editing, `false` when they
+    ///     finish.
     ///   - onCommit: An action to perform when the user performs an action
-    ///     (for example, when the user hits the return key) while the text
-    ///     field has focus.
+    ///     (usually pressing the Return key) while the secure field has focus.
     public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
 
     /// Creates a text field with a text label generated from a title string.
     ///
     /// - Parameters:
     ///   - title: The title of the text view, describing its purpose.
-    ///   - text: The text to be displayed and edited.
-    ///   - onEditingChanged: An action thats called when the user
+    ///   - text: The text to display and edit.
+    ///   - onEditingChanged: An action to perform when the user
     ///     begins editing ``text`` and after the user finishes editing ``text``.
-    ///     The closure recieves a Boolean indicating whether the text field is
-    ///     currently being edited.
+    ///     The closure receives a Boolean value that indicates the editing
+    ///     status: `true` when the user begins editing, `false` when they
+    ///     finish.
     ///   - onCommit: An action to perform when the user performs an action
-    ///     (for example, when the user hits the return key) while the text
-    ///     field has focus.
+    ///     (usually pressing the Return key) while the secure field has focus.
     public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 
     /// Create an instance which binds over an arbitrary type, `T`.
@@ -42579,12 +42650,13 @@ extension TextField where Label == Text {
     ///     string the user edits and the underlying value of type `T`.
     ///     In the event that `formatter` is unable to perform the conversion,
     ///     `binding.value` isn't modified.
-    ///   - onEditingChanged: An action thats called when the user
+    ///   - onEditingChanged: An action to perform when the user
     ///     begins editing ``text`` and after the user finishes editing ``text``.
-    ///     The closure recieves a Boolean indicating whether the text field is
-    ///     currently being edited.
+    ///     The closure receives a Boolean value that indicates the editing
+    ///     status: `true` when the user begins editing, `false` when they
+    ///     finish.
     ///   - onCommit: An action to perform when the user performs an action
-    ///     (for example, when the user hits the return key) while the text
+    ///     (for example, when the user presses the Return key) while the text
     ///     field has focus.
     public init<T>(_ titleKey: LocalizedStringKey, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
 
@@ -42597,12 +42669,13 @@ extension TextField where Label == Text {
     ///     string the user edits and the underlying value of type `T`.
     ///     In the event that `formatter` is unable to perform the conversion,
     ///     `binding.value` isn't modified.
-    ///   - onEditingChanged: An action thats called when the user
+    ///   - onEditingChanged: An action to perform when the user
     ///     begins editing ``text`` and after the user finishes editing ``text``.
-    ///     The closure recieves a Boolean indicating whether the text field is
-    ///     currently being edited.
+    ///     The closure receives a Boolean value that indicates the editing
+    ///     status: `true` when the user begins editing, `false` when they
+    ///     finish.
     ///   - onCommit: An action to perform when the user performs an action
-    ///     (for example, when the user hits the return key) while the text
+    ///     (for example, when the user presses the Return key) while the text
     ///     field has focus.
     public init<S, T>(_ title: S, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 }
@@ -42869,7 +42942,6 @@ extension Toggle where Label == ToggleStyleConfiguration.Label {
     /// but otherwise preserves the toggle's current style:
     ///
     ///     struct RedBorderedToggleStyle: ToggleStyle {
-    ///         typealias Body = Toggle
     ///         func makeBody(configuration: Configuration) -> some View {
     ///             Toggle(configuration)
     ///                 .border(Color.red)
@@ -43855,7 +43927,7 @@ extension Transaction {
 
     /// Creates a tuple view.
     ///
-    /// You usually won't use this intializer directly. Instead, if you are
+    /// You usually won't use this initializer directly. Instead, if you are
     /// working with ``TupleView``s, the tuple view will usually be
     /// constructed behind the scenes using the ``ViewBuilder`` property
     /// wrapper. See that page for more info.
@@ -45010,7 +45082,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// `x` and `y` values of `0`. This corresponds to the top leading
     /// edge of the view.
     ///
-    /// This intializer is equivalent to ``UnitPoint``'s ``UnitPoint/zero``
+    /// This initializer is equivalent to ``UnitPoint``'s ``UnitPoint/zero``
     /// static constant.
     ///
     /// ```
@@ -45060,7 +45132,7 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// ![A screenshot displaying a rectangular border in the center of the screen
     /// with text rotated 22 degrees clockwise around its center reading "I'm
     /// rotated around my center." It's anchored in the center because the anchor is
-    /// set at both x and y coordinate 0.5 as rendered by the unitpoint intializer.](unitpoint-rotation-center.png)
+    /// set at both x and y coordinate 0.5 as rendered by the unitpoint initializer.](unitpoint-rotation-center.png)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     ///
@@ -45452,7 +45524,11 @@ extension UserInterfaceSizeClass : Hashable {
 
 /// A view that arranges children vertically.
 ///
-/// ``VStack`` is a vertical stack of views.
+/// `VStack` is a vertical stack of views. Unlike ``LazyVStack``, which only
+/// renders the views when your app needs to display them onscreen, a `VStack`
+/// renders the views all at once, regardless of whether they are on or offscreen.
+/// Use the regular `VStack` when you have a small number of child views or don't
+/// want the delayed rendering behavior of the "lazy" version.
 ///
 ///     struct ExampleView: View {
 ///         var body: some View {
@@ -45576,7 +45652,7 @@ extension VectorArithmetic : AdditiveArithmetic {
     /// In addition to the 5 out-of-the-box vertical alignments,
     /// top, center, and bottom, firstTextBaseline, and lastTextBaseline,
     ///  you can also create your own
-    /// custom vertical alignment. Do this by passing this intializer
+    /// custom vertical alignment. Do this by passing this initializer
     /// a ``AlignmentID.Type`` from an ``AlignmentID``.
     ///
     /// Use this in the initializers of 3 structures:
@@ -47009,15 +47085,15 @@ extension View {
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
-    ///   - mask: The ``GestureMask`` to use.
+    ///   - mask: A value that controls how adding this gesture to the view
+    ///   affects other gestures recognized by the view and its subviews.
     public func gesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
 
 
     /// A view modifier that connects a gesture to the view, with higher priority than existing gestures.
     ///
-    /// Use this modifier to attach a gesture to a view. Using this modifier will ensure
-    /// that the gesture is not overridden by any gestures already defined
-    /// in the view.
+    /// Use this method when you need to define a high priority gesture
+    /// to take precedence over the view's existing gestures.
     ///
     /// Make sure that your first parameter conforms to the ``Gesture`` protocol. For
     /// more information about the second parameter, check out ``GestureMask``.
@@ -47060,7 +47136,8 @@ extension View {
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
-    ///   - mask: The ``GestureMask`` to use.
+    ///   - mask: A value that controls how adding this gesture to the view
+    ///   affects other gestures recognized by the view and its subviews.
     public func highPriorityGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
 
 
@@ -47107,7 +47184,8 @@ extension View {
     ///
     /// - Parameters:
     ///   - gesture: The gesture to connect to the view.
-    ///   - mask: The ``GestureMask`` to use.
+    ///   - mask: A value that controls how adding this gesture to the view
+    ///   affects other gestures recognized by the view and its subviews.
     public func simultaneousGesture<T>(_ gesture: T, including mask: GestureMask = .all) -> some View where T : Gesture { }
 
 }
@@ -50430,14 +50508,12 @@ extension View {
     ///             TabView {
     ///                 View1()
     ///                     .tabItem {
-    ///                         Image(systemName: "list.dash")
-    ///                         Text("Menu")
+    ///                         Label("Menu", systemImage: "list.dash")
     ///                     }
     ///
     ///                 View2()
     ///                     .tabItem {
-    ///                         Image(systemName: "square.and.pencil")
-    ///                         Text("Order")
+    ///                         Label("Order", systemImage: "square.and.pencil")
     ///                     }
     ///             }
     ///         }
@@ -50717,25 +50793,63 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// A view modifier that hides this view.
+    /// A view modifier that hides this view unconditionally.
     ///
     /// Hidden views are invisible and can't receive or respond to interactions.
+    /// However, they do remain in the view hierarchy and affect layout. Use
+    /// this modifier if you want to include a view for layout purposes, but
+    /// don't want it to display.
     ///
     /// ```
-    /// struct PartiallyHiddenView: View {
+    /// struct ContentView: View {
     ///     var body: some View {
-    ///         VStack {
-    ///             Text("The invisible man hides below")
-    ///             Text("🧔")
+    ///         HStack {
+    ///             Image(systemName: "a.circle.fill")
+    ///             Image(systemName: "b.circle.fill")
+    ///             Image(systemName: "c.circle.fill")
     ///                 .hidden()
+    ///             Image(systemName: "d.circle.fill")
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying two text views, with the second hidden by the
-    /// hidden view modifier. Thus, the screenshot only reads "The invisible
-    /// man hides below," with no other text view visible.](hidden.png)
+    /// The third circle takes up space, because it's still present, but
+    /// SwiftUI doesn't draw it onscreen.
+    ///
+    /// ![A row of circles with the letters A, B, and D, with a gap where
+    /// the circle with the letter C should be.](hidden-fixed.png)
+    ///
+    /// If you want to conditionally include a view in the view hierarchy, use
+    /// an `if` statement instead:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State private var isHidden = false
+    ///
+    ///     var body: some View {
+    ///         VStack {
+    ///             HStack {
+    ///                 Image(systemName: "a.circle.fill")
+    ///                 Image(systemName: "b.circle.fill")
+    ///                 if !isHidden {
+    ///                     Image(systemName: "c.circle.fill")
+    ///                 }
+    ///                 Image(systemName: "d.circle.fill")
+    ///             }
+    ///             Toggle("Hide", isOn: $isHidden)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// Depending on the current value of the `isHidden` state variable in the
+    /// example above, controlled by the ``Toggle`` instance, SwiftUI draws
+    /// the circle or completely omits it from the layout.
+    ///
+    /// ![A gif displaying a toggle on the left which is off and has four equally
+    /// spaced circles above it: A, B, C, and D. When the toggle is switched on,
+    /// it has three equally spaced circles above it: A, B, and D.](hidden-conditional.gif)
     ///
     /// - Returns: A hidden view.
     @inlinable public func hidden() -> some View { }
@@ -51809,34 +51923,42 @@ extension View {
 
     /// A view modifier that adds an action to perform when this view recognizes a tap gesture.
     ///
-    /// Use this modifier as a shorthand for performing an function
-    /// when a ``TapGesture`` is sensed on a ``View``.
+    /// Use this method to perform a specific `action` when the user clicks or
+    /// taps on the view or container `count` times.
     ///
-    /// - Important: Do not use this modifier in place of ``Button``, ``NavigationLink``,
-    /// or other purpose-built controls for acting on tap gestures. Among
-    /// other benefits, those controls *dim slightly* when they are tapped,
-    /// while applying this modifier will not add this effect.
+    /// > Note: If you are creating a control that's functionally equivalent
+    /// to a ``Button``, use ``ButtonStyle`` to create a customized button
+    /// instead.
+    ///
+    /// In the example below, the color of the heart images changes to a random
+    /// color from the `colors` array whenever the user clicks or taps on the
+    /// view twice:
     ///
     /// ```
     /// struct ContentView: View {
-    ///     @State var color = Color.clear
+    ///     let colors: [Color] = [.gray, .red, .orange, .yellow,
+    ///                            .green, .blue, .purple, .pink]
+    ///     @State private var fgColor: Color = .gray
     ///
     ///     var body: some View {
-    ///         VStack {
-    ///             Text("Tap me once for a 🍌")
-    ///                 .onTapGesture { color = .yellow }
-    ///             Text("Tap me twice for a 🍑")
-    ///                 .onTapGesture(count: 2) { color = .orange }
-    ///         }
-    ///         .background(color)
+    ///         Image(systemName: "heart.fill")
+    ///             .resizable()
+    ///             .frame(width: 200, height: 200)
+    ///             .foregroundColor(fgColor)
+    ///             .onTapGesture(count: 2, perform: {
+    ///                 fgColor = colors.randomElement()!
+    ///             })
     ///     }
     /// }
     /// ```
     ///
-    /// ![A gif displaying two text views in a VStack, reading "Tap me once
-    /// for a banana emoji" and "Tap me twice for a peach emoji." When tapped,
-    /// the background color of the VStack changes according to the view modifier
-    /// applied to each text view, which makes it yellow on one tap and orange on two.](on-tap-gesture-count-perform-ex1.gif)
+    /// ![A gif displaying a grey heart icon that cycles through various colors
+    /// as the user double taps.](ontapgesture.gif)
+    ///
+    /// - Parameters:
+    ///    - count: The number of taps or clicks required to trigger the action
+    ///      closure provided in `action`. Defaults to `1`.
+    ///    - action: The action to perform.
     ///
     public func onTapGesture(count: Int = 1, perform action: @escaping () -> Void) -> some View { }
 
@@ -52750,17 +52872,76 @@ extension View {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension View {
 
-    /// Applies the given transaction mutation function to all transactions used
-    /// within the view.
+    /// Use this modifier to change or replace the animation used in a view.
+    /// Consider three identical animations controlled by a
+    /// button that executes all three animations simultaneously:
     ///
-    /// Use this modifier on leaf views rather than container views. The
+    ///  * The first animation rotates the "Rotation" ``Text`` view by 360
+    ///    degrees.
+    ///  * The second uses the `transaction(_:)` modifier to change the
+    ///    animation by adding a delay to the start of the animation
+    ///    by two seconds and then increases the rotational speed of the
+    ///    "Rotation\nModified" ``Text`` view animation by a factor of 2.
+    ///  * The third animation uses the `transaction(_:)` modifier to
+    ///    replace the rotation animation affecting the "Animation\nReplaced"
+    ///    ``Text`` view with a spring animation.
+    ///
+    /// The following code implements these animations:
+    ///
+    ///     struct ContentView: View {
+    ///         @State var flag = false
+    ///
+    ///         var body: some View {
+    ///             VStack(spacing: 50) {
+    ///                 HStack(spacing: 30) {
+    ///                     Text("Rotation")
+    ///                         .rotationEffect(Angle(degrees:
+    ///                                                 self.flag ? 360 : 0))
+    ///
+    ///                     Text("Rotation\nModified")
+    ///                         .rotationEffect(Angle(degrees:
+    ///                                                 self.flag ? 360 : 0))
+    ///                         .transaction { view in
+    ///                             view.animation =
+    ///                                 view.animation?.delay(2.0).speed(2)
+    ///                         }
+    ///
+    ///                     Text("Animation\nReplaced")
+    ///                         .rotationEffect(Angle(degrees:
+    ///                                                 self.flag ? 360 : 0))
+    ///                         .transaction { view in
+    ///                             view.animation = .interactiveSpring(
+    ///                                 response: 0.60,
+    ///                                 dampingFraction: 0.20,
+    ///                                 blendDuration: 0.25)
+    ///                         }
+    ///                 }
+    ///
+    ///                 Button("Animate") {
+    ///                     withAnimation(.easeIn(duration: 2.0)) {
+    ///                         self.flag.toggle()
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// ![A gif displaying three text views in an HStack that read "Rotation,"
+    /// "Rotation Modified," and "Animation Replaced," with a button below reading
+    /// "Animate." When clicked, the first text view animates with a 360 degree
+    /// rotation, the second has a delay with a faster rotation, and the third
+    /// has a transaction applied with a spring to enhance the effect.](transaction-anim.gif)
+    ///
+    /// Use this modifier on leaf views such as ``Image`` or ``Button`` rather
+    /// than container views such as ``VStack`` or ``HStack``. The
     /// transformation applies to all child views within this view; calling
-    /// `transaction(_:)` on a container view can lead to unbounded scope.
+    /// `transaction(_:)` on a container view can lead to unbounded scope of
+    /// execution depending on the depth of the view hierarchy.
     ///
     /// - Parameter transform: The transformation to apply to transactions
     ///   within this view.
     ///
-    /// - Returns: A view that wraps this view and applies `transformation` to
+    /// - Returns: A view that wraps this view and applies a transformation to
     ///   all transactions used within the view.
     @inlinable public func transaction(_ transform: @escaping (inout Transaction) -> Void) -> some View { }
 
