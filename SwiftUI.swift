@@ -1,4 +1,4 @@
-import Combine
+specifiedimport Combine
 import CoreData
 import CoreFoundation
 import CoreGraphics
@@ -8924,7 +8924,7 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current date and  a date picker titled
+    /// ![A view containing a textview with the current date and a date picker titled
     /// "Date and time" by a localized string key; once clicked, the picker
     /// displays a calendar with a date range that has a defined start point
     /// and a time input with an AM/PM switch.](date-picker-init-from-localized-ex.gif)
@@ -8955,9 +8955,10 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current date and
-    ///  a date picker titled "Date and time" by a localized string key; once
-    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.06.14.png)
+    /// ![A view containing a textview with the current date and a date picker titled
+    /// "Date and time" by a localized string key; once clicked, the picker
+    /// displays a calendar with a date range that has a defined end point
+    /// and a time input with an AM/PM switch.](date-picker-init-through-localized-ex.gif)
     ///
     /// - Parameters:
     ///   - titleKey: The date picker label as a localized string key.
@@ -8984,9 +8985,10 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current date and a date
-    ///  picker titled "Date 📆 and time ⏰"; once
-    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.08.39.png)
+    /// ![A view containing a textview with the current date and a date picker
+    /// with the string label "Date 📆 and time ⏰"; once clicked, the picker
+    /// displays a calendar with an unlimited date range and a time input with
+    /// an AM/PM switch.](date-picker-init-unlim-str-ex.gif)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -9013,9 +9015,10 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current date and a date
-    ///  picker titled "Date 📆 and time ⏰"; once
-    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.10.41.png)
+    /// ![A view containing a textview with the current date and a date picker
+    /// with the string label "Date 📆 and time ⏰"; once clicked, the picker
+    /// displays a calendar with a closed date range and a time input with an
+    /// AM/PM switch.](date-picker-init-closed-str-ex.gif)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -9043,9 +9046,10 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current date and a date
-    ///  picker titled "Date 📆 and time ⏰"; once
-    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.11.14.png)
+    /// ![A view containing a textview with the current date and a date picker
+    /// with the string label "Date 📆 and time ⏰"; once clicked, the picker
+    /// displays a calendar with a date range that has a defined start-point and
+    /// a time input with an AM/PM switch.](date-picker-init-from-str-ex.gif)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -9073,9 +9077,10 @@ extension DatePicker where Label == Text {
     /// }
     /// ```
     ///
-    /// ![A view containing a textview with the current date and a date
-    ///  picker titled "Date 📆 and time ⏰"; once
-    /// clicked, the picker displays a calendar with a time input and AM/PM switch.](20.12.09.png)
+    /// ![A view containing a textview with the current date and a date picker
+    /// with the string label "Date 📆 and time ⏰"; once clicked, the picker
+    /// displays a calendar with a date range that has a defined end-point and
+    /// a time input with an AM/PM switch.](date-picker-init-through-str-ex.gif)
     ///
     /// - Parameters:
     ///   - title: The date picker label as a string.
@@ -9733,7 +9738,7 @@ public struct DefaultPickerStyle : PickerStyle {
 /// }
 /// ```
 ///
-/// ![A screenshot of a view displaying a grey progress bar in the center of
+/// ![A screenshot of a view displaying a gray progress bar in the center of
 /// the screen, spanning the width of the screen with empty space on either side.
 /// The progress bar is at half capacity, denoted by a blue fill from the left
 /// side to the center.](default-progress-view-style-ex2.png)
@@ -14944,7 +14949,7 @@ public struct FileDocumentWriteConfiguration {
     /// OverlappingRectangle shape with pink fill and a frame of width 150 and
     /// height 100 as well as a text view; as stated by the text view beneath
     /// each, isOEFilled is set to true for the first and false for the second,
-    /// resulting in the first having a blank white space wjere the overlap of
+    /// resulting in the first having a blank white space where the overlap of
     /// the rectangles occurs and the second being completelt pink filled, even
     /// through the overlap.](fillstyle-eof-example.png)
     ///
@@ -19752,7 +19757,7 @@ extension HorizontalAlignment {
     /// }
     /// ```
     ///
-    /// ![A view cotnaining a VStack with leading horizontal alignment and four
+    /// ![A view containing a VStack with leading horizontal alignment and four
     /// text views, "⬅️", "Leading", "Center", "Trailing", the last three of which
     /// are combined in an HStack.](horizontalalignment-leading.png)
     ///
@@ -19788,7 +19793,7 @@ extension HorizontalAlignment {
     /// }
     /// ```
     ///
-    /// ![A view cotnaining a VStack with center horizontal alignment and four
+    /// ![A view containing a VStack with center horizontal alignment and four
     /// text views, "🤠", "Leading", "Center", "Trailing", the last three of which
     /// are combined in an HStack.](horizontalalignment-center.png)
     ///
@@ -19824,7 +19829,7 @@ extension HorizontalAlignment {
     /// }
     /// ```
     ///
-    /// ![A view cotnaining a VStack with trailing horizontal alignment and four
+    /// ![A view containing a VStack with trailing horizontal alignment and four
     /// text views, "➡️", "Leading", "Center", "Trailing", the last three of which
     /// are combined in an HStack.](horizontalalignment-trailing.png)
     ///
@@ -21637,7 +21642,7 @@ extension Image {
     ///
     /// ![A view containing an HStack with four small bird images, the first
     /// with interpolation none, the second with low interpolation, the third
-    /// with medium interpolation, and th efourth with high interpolation.](image-interpolation.png)
+    /// with medium interpolation, and the fourth with high interpolation.](image-interpolation.png)
     ///
 	///
 	/// - Parameter interpolation: The image's interpolation property.
@@ -21723,7 +21728,7 @@ extension Image {
     /// }
     /// ```
     ///
-    /// ![A view containing a left mirrored bird image derived frin a CGImage.](image-leftmirrored.png)
+    /// ![A view containing a left mirrored bird image derived from a CGImage.](image-leftmirrored.png)
     ///
     /// - Parameters:
     ///   - cgImage: the base graphical image
@@ -23502,7 +23507,7 @@ public struct KeyboardShortcut {
 /// ```
 ///
 /// ![A view containing a VStack with three icon only labels, each with a different
-/// icon from the SF symbols collection: a rain cloude, a snowflake, and a shining un.](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
+/// icon from the SF symbols collection: a rain cloud, a snowflake, and a shining sun.](9F864CBF-1FA1-4989-9F8B-8ED0515E1C56.png)
 ///
 /// It's also possible to make labels using views to compose the label's icon
 /// programmatically, rather than using a pre-made image. In this example, the
@@ -24824,7 +24829,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///
 /// ![A gif displaying a view containing a static string variable set to the SwiftOnTap
 /// url and a Group with an if statement creating a link from the url string and
-/// a link "View SwiftOnTap" that brings the user to the SwiftOnTap websit once clicked.](link.gif)
+/// a link "View SwiftOnTap" that brings the user to the SwiftOnTap website once clicked.](link.gif)
 ///
 /// ### Creating a `Link` with a ``View``
 /// [[link-view]]
@@ -24904,7 +24909,7 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
 ///
 /// ![A gif displaying a view containing a static string variable set to the SwiftOnTap
 /// url and a Group with an if statement creating a link from the url string and
-/// a link "View SwiftOnTap" that brings the user to the SwiftOnTap websit once clicked.](link.gif)
+/// a link "View SwiftOnTap" that brings the user to the SwiftOnTap website once clicked.](link.gif)
 ///
 /// Now that SwiftUI supports `if let`, it is possible to directly create
 /// properties like the `URL` and create ``View``s that use that data. Just as
@@ -24937,7 +24942,7 @@ public struct Link<Label> : View where Label : View {
     ///
     /// ![A gif displaying a view containing a static string variable set to the SwiftOnTap
     /// url and a Group with an if statement creating a link from the url string and
-    /// a link that brings the user to the SwiftOnTap websit once clicked in the form
+    /// a link that brings the user to the SwiftOnTap website once clicked in the form
     /// of a pink filled rounded rectangle with padding.](link-view.gif)
     ///
     /// [<-]
@@ -25667,7 +25672,7 @@ public struct ListItemTint {
     ///
     /// ![A screenshot displaying a single label in the center of the screen
     /// that reads "General" with a gear icon to its left with a monochrome tint
-    /// applied. The label appears as a dark grey on screen.](list-item-tint-monochrome-ex.png)
+    /// applied. The label appears as a dark gray on screen.](list-item-tint-monochrome-ex.png)
     ///
     public static let monochrome: ListItemTint
 }
@@ -28644,7 +28649,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///
         /// ![A screenshot displaying a blue background that reads "Tab 1" in the
         /// center of the screen with three dots at the bottom of the screen surrounded
-        /// by a light grey oval background. Applying the always property for
+        /// by a light gray oval background. Applying the always property for
         /// backgroundDisplayMode renders the tabview background as a light oval
         /// in any case.](background-display-mode-always.png)
         ///
@@ -30487,7 +30492,7 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
     /// ```
     ///
     /// ![A screenshot displaying a picker with three options represented by
-    /// three different emojis, with the first highlighted in grey as the current
+    /// three different emojis, with the first highlighted in gray as the current
     /// selection. The picker has a custom label which does not appear in this view.](picker-init.png)
     ///
     /// - Parameters:
@@ -30526,7 +30531,7 @@ extension Picker where Label == Text {
     /// ```
     ///
     /// ![A screenshot displaying a picker with three options represented by
-    /// three different emojis, with the first highlighted in grey as the current
+    /// three different emojis, with the first highlighted in gray as the current
     /// selection. The picker has a localized string label which does not appear in this view.](picker-init.png)
     ///
     /// - Parameters:
@@ -30552,7 +30557,7 @@ extension Picker where Label == Text {
     /// ```
     ///
     /// ![A screenshot displaying a picker with three options represented by
-    /// three different emojis, with the first highlighted in grey as the current
+    /// three different emojis, with the first highlighted in gray as the current
     /// selection. The picker has a string label which does not appear in this view.](picker-init.png)
     ///
     /// - Parameters:
@@ -31405,7 +31410,7 @@ public struct PreviewDevice : RawRepresentable, ExpressibleByStringLiteral {
 /// }
 /// ```
 ///
-/// ![An image of a text view in preview displaying the string "This box fits me snugly" outlined by a grey rectangle with no empty space on any side of the string.](previewlayout-sizethatfits.png)
+/// ![An image of a text view in preview displaying the string "This box fits me snugly" outlined by a gray rectangle with no empty space on any side of the string.](previewlayout-sizethatfits.png)
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum PreviewLayout {
@@ -31460,7 +31465,7 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
-    /// ![An image of a text view in preview displaying the string "This box fits me snugly" outlined by a grey rectangle with no empty space on any side of the string.](previewlayout-sizethatfits.png)
+    /// ![An image of a text view in preview displaying the string "This box fits me snugly" outlined by a gray rectangle with no empty space on any side of the string.](previewlayout-sizethatfits.png)
     ///
     case sizeThatFits
 
@@ -31485,7 +31490,7 @@ public enum PreviewLayout {
     /// }
     /// ```
     ///
-    /// ![An image of a text view in preview displaying the string "I am in a 100 by 100 box" outlined by a grey square with little empty space on either side of the string.](previewlayout-fixed.png)
+    /// ![An image of a text view in preview displaying the string "I am in a 100 by 100 box" outlined by a gray square with little empty space on either side of the string.](previewlayout-fixed.png)
     ///
     case fixed(width: CGFloat, height: CGFloat)
 }
@@ -32072,7 +32077,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![A gif displaying a grey progress spinner with a custom label underneath it
+    /// ![A gif displaying a gray progress spinner with a custom label underneath it
     /// that reads "We're working on it" as rendered by passing the label to the intializer.](progress-spinner-runner.gif)
     ///
     /// - Parameters:
@@ -32098,7 +32103,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![A gif displaying a grey progress spinner with a custom label underneath it
+    /// ![A gif displaying a gray progress spinner with a custom label underneath it
     /// that reads "We're working on it" as rendered by passing the localized
     /// string key label to the intializer.](progress-spinner-runner.gif)
     ///
@@ -32128,7 +32133,7 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![A gif displaying a grey progress spinner with a custom label underneath it
+    /// ![A gif displaying a gray progress spinner with a custom label underneath it
     /// that reads "We're working on it" as rendered by passing the
     /// string label to the intializer.](progress-spinner-runner.gif)
     ///
@@ -32223,7 +32228,7 @@ extension ProgressView {
     /// screen which shows 50% fill, as rendered by passing a value of 1 out of a
     /// total 2 to the ProgressView initializer. The custom label above it reads
     /// "We are halfway done" while the current value label below it reads
-    /// "100 of 200 tasks" in light grey text.](progressview-init-3-fixed.png)
+    /// "100 of 200 tasks" in light gray text.](progressview-init-3-fixed.png)
     ///
     /// - Parameters:
     ///     - value: The completed amount of the task to this point, in a range
@@ -32337,9 +32342,9 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a light grey progress bar spanning the center
+    /// ![A screenshot displaying a light gray progress bar spanning the center
     /// of the screen with text above it which reads "0% completed" and below
-    /// which reads "0 of 4" in smaller grey text. In this case the bar is rendered
+    /// which reads "0 of 4" in smaller gray text. In this case the bar is rendered
     /// by the passing 4 units to a Progress object.](progressview-init-4.png)
     ///
     /// - Parameter progress: The `Progress` object for displaying the bar.
@@ -32384,7 +32389,7 @@ extension ProgressView {
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a light grey spinner and a blue progress bar
+    /// ![A screenshot displaying a light gray spinner and a blue progress bar
     /// in a VStack. A custom progress view style passed to the progressViewStyle
     /// modifier renders both the spinner and bar with shadows.](progress-view-init-1a15a.png)
     ///
@@ -33417,7 +33422,7 @@ extension Rectangle : InsettableShape {
 ///
 /// ![A screenshot displaying two labels in a VStack, each composed of a person
 /// icon followed by text. The first reads "Taylor Swift" next to the icon, while
-/// the second is redacted and has a grey square followed by a grey rectangle.](redactionreasons.png)
+/// the second is redacted and has a gray square followed by a gray rectangle.](redactionreasons.png)
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct RedactionReasons : OptionSet {
 
@@ -33456,7 +33461,7 @@ public struct RedactionReasons : OptionSet {
     ///
     /// ![A screenshot displaying two labels in a VStack, each composed of a person
     /// icon followed by text. The first reads "Taylor Swift" next to the icon, while
-    /// the second is redacted and has a grey square followed by a grey rectangle.
+    /// the second is redacted and has a gray square followed by a gray rectangle.
     /// Displayed data appears as a generic placeholder.](redactionreasons.png)
     public static let placeholder: RedactionReasons
 
@@ -37909,7 +37914,6 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
 /// typed is displayed as a dot on the screen. Once the user confirms the password,
 /// a text view appears that reads "Password has been entered."](secure-field-ex.gif)
 ///
-/// ![A secure text field user interface element designed to pass data into a state object.](34BEFDFE-DA85-421E-8958-6D0B5D6F124A.png)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct SecureField<Label> : View where Label : View {
 
@@ -38919,9 +38923,10 @@ extension SimultaneousGesture.Value : Hashable where First.Value : Hashable, Sec
 /// }
 /// ```
 ///
-/// ![A screenshot displaying a light grey slider on a white background with
-/// the controlling point slid all the way to the left side since the initial value is
-/// set to 0.](81619922-BF1E-403F-BFB7-B578677D5EAE.png)
+/// ![A gif displaying a light gray slider on a white background where the
+/// controlling point is being slid all the way from the edge of left side to
+/// that of the right and back again; blue color fills the slider to the left
+/// of the controlling point, shifting as the value changes.](slider-ex.gif)
 ///
 /// In general, a slider has these four options:
 /// 1. Add a **label**
@@ -38965,10 +38970,11 @@ extension Slider {
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a slider at half capacity with minimumValueLabel
-    /// and maximumValueLabel set to be a chick emoji and a rooster emoji, respectively.
-    /// The left hand side of the slide is the minimum label and the right side is
-    /// the max. The slider itself is also labeled "Age" which is not visible in this view.](slider.png)
+    /// ![A gif displaying a slider starting at half capacity sliding back and
+    /// forth with minimumValueLabel and maximumValueLabel set to be a chick
+    /// emoji and a rooster emoji, respectively. The left hand side of the slide
+    /// is the minimum label and the right side is the max. The slider itself is
+    /// also labeled "Age" which is not visible in this view.](slider-init-vioecmvll-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -38999,12 +39005,13 @@ extension Slider {
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a slider at half capacity with minimumValueLabel
-    /// and maximumValueLabel set to be a chick emoji and a rooster emoji, respectively.
-    /// The left hand side of the slide is the minimum label and the right side is
-    /// the max. The slider itself is also labeled "Age" which is not visible in this view.
-    /// In this case, a step size is also specified in the initializer which makes the
-    /// movement of the slider discrete, rather than a smooth movement from side to side.](slider.png)
+    /// ![A gif displaying a slider starting at half capacity sliding back and
+    /// forth with minimumValueLabel and maximumValueLabel set to be a chick emoji
+    /// and a rooster emoji, respectively. The left hand side of the slide is the
+    /// minimum label and the right side is the max. The slider itself is also labeled
+    /// "Age" which is not visible in this view. In this case, a step size is also
+    /// specified in the initializer which makes the movement of the slider discrete,
+    /// rather than a smooth movement from side to side.](slider-init-visoecmvll-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -39037,7 +39044,8 @@ extension Slider where ValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](slider-2.png)
+    /// ![A gif displaying a slider starting at half capacity sliding back and
+    /// forth; The slider itself is labeled "Age" which is not visible in this view.](slider-init-vioecl-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -39064,7 +39072,11 @@ extension Slider where ValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](slider-2.png)
+    /// ![A gif displaying a slider starting at half capacity sliding back and
+    /// forth; The slider itself is labeled "Age" which is not visible in this view.
+    /// In this case, a step size is also specified in the initializer which makes
+    /// the movement of the slider discrete, rather than a smooth movement from
+    /// side to side.](slider-init-visoecl-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -39095,7 +39107,9 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// }
     /// ```
     ///
-    /// ![](slider-2.png)
+    /// ![A gif displaying a light gray slider on a white background sliding
+    /// back and forth; blue color fills the slider to the left of the controlling
+    /// point, shifting as the value changes.](slider-init-vioecl-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -39123,7 +39137,7 @@ extension Slider where Label == EmptyView, ValueLabel == EmptyView {
     /// ```
     ///
     /// ![A gif displaying a slider from 0 to 100 initialized with a step size of 10. A text
-    /// view above it reads "Value:" followed by the current value of the slider.](slider-init-visoec-ex.gif)
+    /// view above it reads "Value:" followed by the current value of the slider.](slider-init-value-step-ex.gif)
     ///
     /// - Parameters:
     ///   - value: A binding connected to the slider value.
@@ -39543,7 +39557,7 @@ public struct StackNavigationViewStyle : NavigationViewStyle {
     /// ```
     ///
     /// ![A gif displaying a text field that reads "Ron Wayne;" when deleted, it
-    /// reveals light grey text that reads "Type your name." Initializing the State
+    /// reveals light gray text that reads "Type your name." Initializing the State
     /// property in the structure's initializer places the starting name, but it can
     /// be changed by the user.](initial-value-ex.gif)
     ///
@@ -40333,7 +40347,7 @@ extension Stepper where Label == Text {
     /// and text above it that reads "Current Stepper Value:" followed by the current
     /// value. The step is initialized to 5 and the value set to 0, as well as
     /// a closed range from 1 to 50. As the user increments the stepper, the value
-    /// increases by 5, but nothing else in the view changes.](stepper-init-75f88-ex.gif)
+    /// increases by 5, but nothing else in the view changes.](stepper-step-5-from-0.gif)
     ///
     /// - Parameters:
     ///     - titleKey: The key for the stepper's localized title describing
@@ -45787,7 +45801,12 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unipoint-leading-ex.gif)
+    /// ![A gif displaying a view containing a VStack with a slider and a
+    /// an orange bordered 100 x 100 rectangle with a leading anchor; the square
+    /// rotates 360 degrees lockwise around the center point of the leading side
+    /// of the border as the slider is moved right and counterclockwise as it is
+    /// moved back left, as the shape's degrees value is controlled by the slider
+    /// value, which is bound to a state variable.](unipoint-leading-ex.gif)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let leading: UnitPoint
@@ -45814,7 +45833,12 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unipoint-trailing-ex.gif)
+    /// ![A gif displaying a view containing a VStack with a slider and a
+    /// an orange bordered 100 x 100 rectangle with a trailing anchor; the square
+    /// rotates 360 degrees lockwise around the center point of the trailing side
+    /// of the border as the slider is moved right and counterclockwise as it is
+    /// moved back left, as the shape's degrees value is controlled by the slider
+    /// value, which is bound to a state variable.](unipoint-trailing-ex.gif)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let trailing: UnitPoint
@@ -45841,7 +45865,12 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unipoint-top-ex.gif)
+    /// ![A gif displaying a view containing a VStack with a slider and a
+    /// an orange bordered 100 x 100 rectangle with a top anchor; the square
+    /// rotates 360 degrees lockwise around the center point of the top side
+    /// of the border as the slider is moved right and counterclockwise as it is
+    /// moved back left, as the shape's degrees value is controlled by the slider
+    /// value, which is bound to a state variable.](unipoint-top-ex.gif)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     ///
@@ -45869,7 +45898,12 @@ public struct UIViewRepresentableContext<Representable> where Representable : UI
     /// }
     /// ```
     ///
-    /// ![](unipoint-bottom-ex.gif)
+    /// ![A gif displaying a view containing a VStack with a slider and a
+    /// an orange bordered 100 x 100 rectangle with a bottom anchor; the square
+    /// rotates 360 degrees lockwise around the center point of the bottom side
+    /// of the border as the slider is moved right and counterclockwise as it is
+    /// moved back left, as the shape's degrees value is controlled by the slider
+    /// value, which is bound to a state variable.](unipoint-bottom-ex.gif)
     ///
     /// See ``UnitPoint`` for more on how and when to use unit points.
     public static let bottom: UnitPoint
@@ -47978,7 +48012,7 @@ extension View {
     ///
     /// ![A screenshot with two labels in the center of the screen; the first
     /// reads "Taylor Swift" with a person icon to the left of it, while the second
-    /// below it is redacted and replaced by a grey box and a grey rectangle.](redacted-1.png)
+    /// below it is redacted and replaced by a gray box and a gray rectangle.](redacted-1.png)
     ///
     /// Your child view can also read the redacted reason from its environment:
     ///
@@ -48201,7 +48235,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot with a grey square border in the center of the screen,
+    /// ![A screenshot with a gray square border in the center of the screen,
     /// and a purple filled ellipse within it. The ellipse has a 3:4 aspect ratio,
     /// which makes it so that its width is 3/4 of its height, and the height
     /// scales to fit the frame of the square.](aspectratio-2.png)
@@ -48239,7 +48273,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot with a grey square border in the center of the screen,
+    /// ![A screenshot with a gray square border in the center of the screen,
     /// and a purple filled ellipse within it, extending both above and below it.
     /// The ellipse has a 3:4 aspect ratio, which makes it so that its width is
     /// 3/4 of its height, and the width scales to fit the frame of the square.](aspectratio-1.png)
@@ -48272,7 +48306,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot with a grey rectangular border in the center of the screen,
+    /// ![A screenshot with a gray rectangular border in the center of the screen,
     /// with a pink filled circle set within it, which is rendered by the view
     /// modifier to fit directly within the height confines of the rectangle.](scaledtofit.png)
     ///
@@ -48302,7 +48336,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot with a grey rectangular border in the center of the screen,
+    /// ![A screenshot with a gray rectangular border in the center of the screen,
     /// with a pink filled circle set within it, which is rendered by the view
     /// modifier to fill the rectangle along its width, extending both above and below
     /// the height confines.](scaledtofill.png)
@@ -48575,8 +48609,8 @@ extension View {
     /// ```
     ///
     /// ![A view containing a VStack with two text views, one with a gray border
-    /// and 20 point padding on just the left and bottom edges, the other with a yellow bording and
-    /// no padding.]](padding-97aab-ex.png)
+    /// and 20 point padding on just the left and bottom edges, the other with a yellow border and
+    /// no padding.](padding-97aab-ex.png)
     ///
     /// To pad selected outside edges of a view with an amount you specify, see
     /// ``View/padding(_:_:)``. To pad all outside edges of a view with an
@@ -48612,7 +48646,7 @@ extension View {
     /// ```
     ///
     /// ![A view containing a VStack with two text views, one with a gray border
-    /// and padding on the bottom edge, the other with a yellow bording and
+    /// and padding on the bottom edge, the other with a yellow border and
     /// no padding.](15.39.23.png)
     ///
     /// To pad the view's insets, which affects the amount of padding _inside_
@@ -48650,7 +48684,7 @@ extension View {
     /// }
     /// ```
     /// ![A view containing a VStack with two text views, one with a gray border
-    /// and 10 point padding on each edge, the other with a yellow bording and
+    /// and 10 point padding on each edge, the other with a yellow border and
     /// no padding.](15.27.58.png)
     ///
     /// - Parameter length: The amount to pad this view on each edge.
@@ -48682,7 +48716,7 @@ extension View {
     ///     }
     /// }
     /// ```
-    /// ![A screenshot with a grey rectangular frame in the center of the screen,
+    /// ![A screenshot with a gray rectangular frame in the center of the screen,
     /// underneath which the actual text is offset below and to the right by CGSize
     /// and confined within a green rectangle.](offset-2.png)
     ///
@@ -48714,7 +48748,7 @@ extension View {
     ///
     /// ![A text view with a green border reading "Offset by passing horizontal
     /// & vertical distance" thatt ahs been offsett by an x value of 20 and y
-    /// value of 50, as shown by a grey border in the pre-offset location.](17.14.12.png)
+    /// value of 50, as shown by a gray border in the pre-offset location.](17.14.12.png)
     ///
     /// - Parameters:
     ///   - x: The horizontal distance to offset this view.
@@ -49346,7 +49380,7 @@ extension View {
     ///
     /// ![A gif with a toggle in the center of the screen that reads "Disable
     /// the Banana," set in a VStack with a "Banana" button underneath it. When
-    /// toggled to on, the Banana button disables and fades to grey.](disabled-example.gif)
+    /// toggled to on, the Banana button disables and fades to gray.](disabled-example.gif)
     ///
     /// Another example:
     ///
@@ -49360,7 +49394,7 @@ extension View {
     /// ```
     ///
     /// ![A screenshot with a button in the center of the screen that reads
-    /// "Can't touch this" in light grey text to denote that the button is not clickable given
+    /// "Can't touch this" in light gray text to denote that the button is not clickable given
     /// that user interaction was disabled by the view modifier.](disabled.png)
     ///
     /// - Parameter disabled: A Boolean value that determines whether users can
@@ -49425,7 +49459,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot with a grey rectangular frame in the center of the screen
+    /// ![A screenshot with a gray rectangular frame in the center of the screen
     /// and a red envelope icon set within it. The icon is anchored on the leading
     /// edge so it pushes up against the left hand side, but its width and height scales
     /// are set to 0.9 and 1.3, respectively, so it doesn't fill out the whole width
@@ -49459,7 +49493,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot with a grey rectangular frame in the center of the screen
+    /// ![A screenshot with a gray rectangular frame in the center of the screen
     /// and a red envelope icon set over it. The icon is anchored on the leading
     /// edge so it pushes up against the left hand side, but its width and height are
     /// scaled by 2, so it extends from the left beyond the confines of the right
@@ -49492,7 +49526,7 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a grey rectangular frame in the center of the screen
+    /// ![A screenshot displaying a gray rectangular frame in the center of the screen
     /// and a red envelope icon set within it in the bottom right hand corner.
     /// The icon is anchored on the trailing bottom edge, but both it's vertical and
     /// horizontal dimensions are scaled down half. The scaleEffect view modifier
@@ -49682,7 +49716,7 @@ extension View {
     /// ![A screenshot displaying two squares in an HStack, each with an interior
     /// circle. The first is a red square with a green circle which reads
     /// "Normal," while the second is a duplicate with the colorMultiply modifier
-    /// applied with purple. The result is a darker red square and a grey circle.
+    /// applied with purple. The result is a darker red square and a gray circle.
     /// It's text reads "Multiply."](color-multiply.png)
     ///
     /// - Parameter color: The color to bias this view toward.
@@ -49774,7 +49808,7 @@ extension View {
     /// ![A screenshot displaying six rectangles in a VStack, with increasing
     /// grayscale amounts from top to bottom. The first rectangle appears fully
     /// yellow, and the color is gradually reduced in intensity until it appears
-    /// as fully grey in the bottom rectangle.](grayscale.png)
+    /// as fully gray in the bottom rectangle.](grayscale.png)
     ///
     /// - Parameter amount: The intensity of grayscale to apply from 0.0 to less
     ///   than 1.0. Values closer to 0.0 are more colorful, and values closer to
@@ -49936,7 +49970,7 @@ extension View {
     /// ![A screenshot displaying six rounded rectangles in a VStack, with
     /// increasing levels of saturation applied from top to bottom. At full
     /// saturation, the yellow fill is fully visible, whereas the yello rectangle
-    /// appears grey at its least saturated in the top rectangle.](saturation-modifier.png)
+    /// appears gray at its least saturated in the top rectangle.](saturation-modifier.png)
     ///
     /// See related symbol ``View/contrast(_:)``.
     ///
@@ -50684,7 +50718,7 @@ extension View {
     /// ```
     ///
     /// ![A screenshot displaying a white square in the center of the screen
-    /// with a light grey shadow surrounding it, as rendered by the shadow view
+    /// with a light gray shadow surrounding it, as rendered by the shadow view
     /// modifier with only the radius specified.](shadow-1.png)
     ///
     /// Modify the color:
@@ -56831,7 +56865,7 @@ public struct WindowGroup<Content> : Scene where Content : View {
 /// ![A gif displaying a view containing a button reating "Toggle" that once
 /// pressed triggers a toggle animation in which the text view "🍌" appears and
 /// slides down and up in a v-shape underneath the button in an ease-in-out
-/// style before dissapearing again on the right side of the button.](with-animation-2.gif)
+/// style before disappearing again on the right side of the button.](with-animation-2.gif)
 ///
 /// Or use ``withAnimation(_:_:)`` for a shake effect, like so:
 ///
