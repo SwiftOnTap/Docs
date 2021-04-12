@@ -45894,11 +45894,13 @@ extension VerticalAlignment {
 /// protocol. Implement the required ``View/body-swift.variable`` computed
 /// property to provide the content for your custom view.
 ///
-///     struct MyView: View {
+///     struct ContentView: View {
 ///         var body: some View {
 ///             Text("Hello, World!")
 ///         }
 ///     }
+///
+/// ![A custom view that reads "Hello, World!" in the center of the screen.](view-simple.png)
 ///
 /// Assemble the view's body by combining one or more of the primitive views
 /// provided by SwiftUI, like the ``Text`` instance in the example above, plus
@@ -45911,8 +45913,16 @@ extension VerticalAlignment {
 /// characteristics. For example, adding the ``View/opacity(_:)`` modifier to a
 /// text view returns a new view with some amount of transparency:
 ///
-///     Text("Hello, World!")
-///         .opacity(0.5) // Display partially transparent text.
+///     struct ContentView: View {
+///         var body: some View {
+///             Text("Hello, World!")
+///                 .opacity(0.5) // Display partially transparent text.
+///         }
+///     }
+///
+/// ![A custom view that reads "Hello, World!" in the center of the screen
+/// with an opacity modifier applied to make the text a lighter grey color, rather
+/// than black.](view-simple.png)
 ///
 /// The effects of a modifier typically propagate to any child views that don't
 /// explicitly override the modifier. For example, a ``VStack`` instance on its
@@ -45923,13 +45933,23 @@ extension VerticalAlignment {
 /// you can locally override the stack's modifier by adding another to a
 /// specific child view:
 ///
-///     VStack {
-///         Text("Title")
-///             .font(.headline) // Override the font of this one view.
-///         Text("First body line.")
-///         Text("Second body line.")
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Text("Title")
+///                 .font(.headline) // Override the font of this one view.
+///             Text("First body line.")
+///             Text("Second body line.")
+///         }
+///         .font(.body) // Set a default for text in the stack.
 ///     }
-///     .font(.body) // Set a default for text in the stack.
+/// }
+/// ```
+///
+/// ![A screenshot of three text views in a VStack, where the second and third
+/// are displayed in body font, but the first has a modifier applied directly
+/// to render it in headline font.](view-modfont.png)
 ///
 /// You commonly chain modifiers, each wrapping the result of the previous one.
 /// For example, you can wrap a text view in an invisible box with a given width
@@ -45937,31 +45957,42 @@ extension VerticalAlignment {
 /// layout, and then use the ``View/border(_:width:)`` modifier to draw an
 /// outline around that:
 ///
-///     Text("Title")
-///         .frame(width: 100)
-///         .border(Color.gray)
-///
-/// The order in which you apply modifiers matters. For example, the border that
-/// results from the above code outlines the full width of the frame.
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("Title")
+///             .frame(width: 100)
+///             .border(Color.gray)
+///     }
+/// }
+/// ```
 ///
 /// ![A screenshot of a text view displaying the string "Title", outlined by a
 /// gray rectangle that's wider than the string it encloses, leaving empty space
-/// inside the rectangle on either side of the string. A caption reads, "Apply
-/// the frame first."](SwiftUI-View-1.png)
+/// inside the rectangle on either side of the string.](view-chain.png)
 ///
-/// If you instead apply the border first, it outlines the text view, which
+/// The order in which you apply modifiers matters. For example, the border that
+/// results from the above code outlines the full width of the frame. If you
+/// instead apply the border first, it outlines the text view, which
 /// never takes more space than it needs to render its contents.
 ///
-///     Text("Title")
-///         .border(Color.gray) // Apply the border first this time.
-///         .frame(width: 100)
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("Title")
+///             .border(Color.gray) //apply the border first this time
+///             .frame(width: 100)
+///     }
+/// }
+/// ```
 ///
 /// Wrapping that view in another invisible one with a fixed 100 point width
 /// affects the layout of the composite view, but has no effect on the border.
 ///
 /// ![A screenshot of a text view displaying the string "Title", outlined by a
-/// gray rectangle that hugs the text. A caption reads, "Apply the border
-/// first."](SwiftUI-View-2.png)
+/// gray rectangle that properly contains it, leaving no empty space
+/// inside the rectangle on either side of the string.](view-border.png)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol View { }
 extension View {
