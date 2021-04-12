@@ -1,4 +1,4 @@
-presses the Return keyAn action to performimport Combine
+import Combine
 import CoreData
 import CoreFoundation
 import CoreGraphics
@@ -8289,8 +8289,8 @@ extension ContentSizeCategory {
 /// }
 /// ```
 ///
-/// ![A screenshot of a context menu showing four menu items: Hearts, Clubs,
-/// Spades and Diamonds.](context-menu.png)
+/// ![A gif of a context menu showing four menu items: Hearts, Clubs,
+/// Spades and Diamonds.](context-menu.gif)
 ///
 @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use `contextMenu(menuItems:)` instead.")
 @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Use `contextMenu(menuItems:)` instead.")
@@ -45975,6 +45975,8 @@ extension VerticalAlignment {
 /// results from the above code outlines the full width of the frame. If you
 /// instead apply the border first, it outlines the text view, which
 /// never takes more space than it needs to render its contents.
+/// Wrapping that view in another invisible one with a fixed 100 point width
+/// affects the layout of the composite view, but has no effect on the border.
 ///
 /// ```
 /// struct ContentView: View {
@@ -45985,9 +45987,6 @@ extension VerticalAlignment {
 ///     }
 /// }
 /// ```
-///
-/// Wrapping that view in another invisible one with a fixed 100 point width
-/// affects the layout of the composite view, but has no effect on the border.
 ///
 /// ![A screenshot of a text view displaying the string "Title", outlined by a
 /// gray rectangle that properly contains it, leaving no empty space
@@ -50874,13 +50873,13 @@ extension View {
     /// }
     /// ```
     ///
-    /// Depending on the current value of the `isHidden` state variable in the
-    /// example above, controlled by the ``Toggle`` instance, SwiftUI draws
-    /// the circle or completely omits it from the layout.
-    ///
     /// ![A gif displaying a toggle on the left which is off and has four equally
     /// spaced circles above it: A, B, C, and D. When the toggle is switched on,
     /// it has three equally spaced circles above it: A, B, and D.](hidden-conditional.gif)
+    ///
+    /// Depending on the current value of the `isHidden` state variable in the
+    /// example above, controlled by the ``Toggle`` instance, SwiftUI draws
+    /// the circle or completely omits it from the layout.
     ///
     /// - Returns: A hidden view.
     @inlinable public func hidden() -> some View { }
@@ -52907,13 +52906,13 @@ extension View {
     /// Consider three identical animations controlled by a
     /// button that executes all three animations simultaneously:
     ///
-    ///  * The first animation rotates the "Rotation" ``Text`` view by 360
+    /// - The first animation rotates the "Rotation" ``Text`` view by 360
     ///    degrees.
-    ///  * The second uses the `transaction(_:)` modifier to change the
+    /// - The second uses the `transaction(_:)` modifier to change the
     ///    animation by adding a delay to the start of the animation
     ///    by two seconds and then increases the rotational speed of the
     ///    "Rotation\nModified" ``Text`` view animation by a factor of 2.
-    ///  * The third animation uses the `transaction(_:)` modifier to
+    /// - The third animation uses the `transaction(_:)` modifier to
     ///    replace the rotation animation affecting the "Animation\nReplaced"
     ///    ``Text`` view with a spring animation.
     ///
