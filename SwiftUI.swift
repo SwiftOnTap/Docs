@@ -51698,7 +51698,7 @@ extension View {
     /// example, a label with a minimum scale factor of `0.5` draws its text in
     /// a font size as small as half of the actual font if needed.
     ///
-    /// In the example below, the ```HStack`` contains a ``Text`` label with a
+    /// In the example below, the ``HStack`` contains a ``Text`` label with a
     /// line limit of `1`, that is next to a ``TextField``. To allow the label
     /// to fit into the available space, the `minimumScaleFactor(_:)` modifier
     /// shrinks the text as needed to fit into the available space.
