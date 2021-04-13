@@ -52777,7 +52777,7 @@ extension View {
     ///             Circle()
     ///                 .frame(width: 25, height: 25)
     ///                 .gesture(drag)
-    ///                 .padding(5)
+    ///                 .position(location)
     ///         }
     ///
     ///         var drag: some Gesture {
@@ -52787,10 +52787,10 @@ extension View {
     ///     }
     ///
     /// ![A gif displaying a red square overlaid with a small black
-    /// circle. Underneath, the text reads "Location: 0, 0". When the cursor is
-    /// used to drag the circle around the square, the coordinates in the location
-    /// text change to reflect the new location of the circle within the
-    /// coordinate space.](coordinate-space-ex.png)
+    /// circle in its top left corner. Underneath, the text reads "Location: 0, 0".
+    /// When the cursor is used to drag the circle around and outside the square,
+    /// the coordinates in the location text change to reflect the new location
+    /// of the circle within the coordinate space.](coord-space-name.gif)
     ///
     /// Here, the ``VStack`` in the `ContentView` named `"stack"` is composed of a
     /// red frame with a custom ``Circle`` view ``View/overlay(_:alignment:)``
