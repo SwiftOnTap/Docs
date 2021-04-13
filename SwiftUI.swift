@@ -7633,13 +7633,131 @@ extension ColorRenderingMode : Hashable {
 /// The color scheme enumerates the user setting options for Light or Dark Mode.
 /// It also provides the light or dark options for any particular view when the
 /// app wants to override the user setting.
+///
+/// Color scheme has two cases:
+/// -``colorscheme/light``
+/// -``colorschem/dark``
+///
+/// They can be applied using the ``View/preferredColorScheme(_:)`` modifier. For example:
+///
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Text("Some Text🖤🤍")
+///                 .padding()
+///             Button(action: {}) {
+///                 Text("A Button🖤🤍")
+///             }
+///             .padding()
+///             List {
+///                 Text("Dark🖤")
+///                 Text("or")
+///                 Text("Light🤍")
+///                 Text("Mode")
+///                 Text("?")
+///             }
+///         }
+///         .preferredColorScheme(.light)
+///     }
+/// }
+///
+/// ![A view containing a VStack with a textview reading "Some Text🖤🤍", a button
+/// reading "A Button🖤🤍", and a list with 5 text items; the colorscheme is set
+/// to light, making the background white and the text in the views black (or blue
+/// in the case of the button).](color-scheme-light-ex.png)
+///
+/// struct ContentView: View {
+///     var body: some View {
+///         VStack {
+///             Text("Some Text🖤🤍")
+///                 .padding()
+///             Button(action: {}) {
+///                 Text("A Button🖤🤍")
+///             }
+///             .padding()
+///             List {
+///                 Text("Dark🖤")
+///                 Text("or")
+///                 Text("Light🤍")
+///                 Text("Mode")
+///                 Text("?")
+///             }
+///         }
+///         .preferredColorScheme(.dark)
+///     }
+/// }
+///
+/// ![A view containing a VStack with a textview reading "Some Text🖤🤍", a button
+/// reading "A Button🖤🤍", and a list with 5 text items; the colorscheme is set
+/// to dark, making the background black and the text in the views white (or blue
+/// in the case of the button).](color-scheme-dark-ex.png)
+///
+
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum ColorScheme : CaseIterable {
 
-	/// The color scheme referring to light mode in a device.
+  	/// The color scheme referring to light mode in a device.
+    ///
+    /// This ``ColorScheme`` can be applied using the ``View/preferredColorScheme(_:)`` modifier. For example:
+    ///
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Some Text🖤🤍")
+    ///                 .padding()
+    ///             Button(action: {}) {
+    ///                 Text("A Button🖤🤍")
+    ///             }
+    ///             .padding()
+    ///             List {
+    ///                 Text("Dark🖤")
+    ///                 Text("or")
+    ///                 Text("Light🤍")
+    ///                 Text("Mode")
+    ///                 Text("?")
+    ///             }
+    ///         }
+    ///         .preferredColorScheme(.light)
+    ///     }
+    /// }
+    ///
+    /// ![A view containing a VStack with a textview reading "Some Text🖤🤍", a button
+    /// reading "A Button🖤🤍", and a list with 5 text items; the colorscheme is set
+    /// to light, making the background white and the text in the views black (or blue
+    /// in the case of the button).](color-scheme-light-ex.png)
+    ///
     case light
 
     /// The color scheme referring to dark mode in a device.
+    ///
+    /// This ``ColorScheme`` can be applied using the ``View/preferredColorScheme(_:)`` modifier. For example:
+    ///
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         VStack {
+    ///             Text("Some Text🖤🤍")
+    ///                 .padding()
+    ///             Button(action: {}) {
+    ///                 Text("A Button🖤🤍")
+    ///             }
+    ///             .padding()
+    ///             List {
+    ///                 Text("Dark🖤")
+    ///                 Text("or")
+    ///                 Text("Light🤍")
+    ///                 Text("Mode")
+    ///                 Text("?")
+    ///             }
+    ///         }
+    ///         .preferredColorScheme(.dark)
+    ///     }
+    /// }
+    ///
+    /// ![A view containing a VStack with a textview reading "Some Text🖤🤍", a button
+    /// reading "A Button🖤🤍", and a list with 5 text items; the colorscheme is set
+    /// to dark, making the background black and the text in the views white (or blue
+    /// in the case of the button).](color-scheme-dark-ex.png)
+    ///
     case dark
 
     /// Returns a Boolean value indicating whether two values are equal.
