@@ -2376,7 +2376,7 @@ extension AnimatableModifier : Animatable, ViewModifier {
 /// 2. How the ``View`` depends on this numerical value --- often using
 /// a view modifier
 /// 3. The timing curve describing how this change happens --- this is the
-/// `Animation`
+/// ``Animation``
 ///
 /// For example, say I want the screen to be **green** sometimes, but **red**
 /// at other times. The current color of the screen would be stored as a
@@ -4112,7 +4112,10 @@ extension App {
     ///         }
     ///     }
     ///
-    /// ![](16.34.17.png)
+    /// ![A gif displaying a textfield with default contents and text input
+    /// bound to an AppStorage variable assigned the string "Kanye"; the text is
+    /// deleted and "JOhn" is typed, which will now be stored even when the app
+    /// is reloaded.](appstorage-projected-val-ex.gif)
     ///
     public var projectedValue: Binding<Value> { get }
 }
@@ -10532,7 +10535,7 @@ public struct DragGesture : Gesture {
 /// - ``DropDelegate/validateDrop(info:)-ff0e6`` validates if a drop can be made.
 /// - ``DropDelegate/dropEntered(info:)-4bfcb`` provides custom behavior when
 /// an object is dragged over the `onDrop` view.
-/// - ``DropDelegate/dropExited(info:)-3d540`` provides custom behavior when an
+/// - ``DropDelegate/dropExited(info:)-096d2`` provides custom behavior when an
 /// object is dragged off of the `onDrop` view.
 /// - ``DropDelegate/dropUpdated(info:)-686f2`` provides custom behavior when
 /// the drop is updated.
@@ -10589,7 +10592,7 @@ public struct DragGesture : Gesture {
 ///
 /// #### Conforming to DropDelegate
 ///
-/// Implement `DropDelegate/performDrop(info:)-2a687` to create a structure that conforms to ``DropDelegate``.
+/// Implement ``DropDelegate/performDrop(info:)-2a687`` to create a structure that conforms to ``DropDelegate``.
 ///
 /// ```
 /// struct ExampleView: View {
@@ -10893,8 +10896,6 @@ extension DropDelegate {
 
     /// Specifies the behavior of a drop.
     ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
-    ///
     /// ```
     /// struct ExampleView: View {
     ///     @State var backgroundColor: Color = .black
@@ -10956,11 +10957,12 @@ extension DropDelegate {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-2.gif)
+    ///
     func performDrop(info: DropInfo) -> Bool { }
 
     /// Provide custom behavior when an object is dragged over the `onDrop` view.
-    ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-4.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -11029,11 +11031,12 @@ extension DropDelegate {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-4.gif)
+    ///
     func dropEntered(info: DropInfo) { }
 
     /// Provide custom behavior when the drop is updated.
-    ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-5.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -11106,11 +11109,12 @@ extension DropDelegate {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-5.gif)
+    ///
     func dropUpdated(info: DropInfo) -> DropProposal? { }
 
     /// Provide custom behavior when an object is dragged off of the `onDrop` view.
-    ///
-    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-6.gif)
     ///
     /// ```
     /// struct ContentView: View {
@@ -11178,6 +11182,9 @@ extension DropDelegate {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Simple Drop](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/dropdelegate-example-6.gif)
+    ///
     func dropExited(info: DropInfo) { }
 }
 
@@ -17568,7 +17575,7 @@ extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Id
     /// the following error:
     ///
     /// `Initializer 'init(_:rowContent:)' requires that ‘SomeType’ conform
-    /// to 'Identifiable`
+    /// to 'Identifiable'`
     ///
     /// An array of primitive types, such as strings & ints, will throw this
     /// error. Identify these items with `id: \.self` – because they themselves
@@ -29385,19 +29392,20 @@ public struct PageTabViewStyle : TabViewStyle {
     /// A Boolean property that contains whether the path is empty.
     ///
     /// ```
-    /// struct EmptyPathView: View {
+    /// struct ContentView: View {
     ///     let path = Path()
     ///
     ///     var body: some View {
-    ///         path
-    ///             .stroke()
-    ///             .onAppear { print(path.isEmpty) } //true
+    ///
+    ///         if path.isEmpty { //true
+    ///             Text("Path is empty")
+    ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A screenshot with a terminal inset above it that reads "true." In this
-    /// case, the path is empty so the property returns true.](path-is-empty.png)
+    /// ![A screenshot of a text view reading "Path is empty". In this
+    /// case, the path is empty so isEmpty returns true and triggers the text.](path-is-empty.png)
     ///
     public var isEmpty: Bool { get }
 
@@ -30392,7 +30400,11 @@ extension Path {
 /// }
 /// ```
 ///
-/// ![Picker Ice Cream](picker-ex1.gif)
+/// ![A gif displaying a view containing a default wheel style picker with three
+/// options, "Chocolate 🍫", "Vanilla 🍦", and "Strawberry 🍓", and a textview
+/// that reads "Selected flavor: \(selectedFlavor.rawValue)"; each picker option
+/// is tagged to the a Flavor enum within the state variable selectedFlavor,
+/// which is used to populate the textview with the chosen flavor.](picker-ex1.gif)
 ///
 /// You append a tag to each text view so that the type of each selection
 /// matches the type of the bound state variable.
@@ -30417,7 +30429,9 @@ extension Path {
 /// }
 /// ```
 ///
-/// ![](picker-ex2.gif)
+/// ![A gif displaying a view containing a default wheel style picker with three
+/// options, "Chocolate", "Vanilla", and "Strawberry"; the picker uses a ForEach
+/// construct to populate its options.](picker-ex2.gif)
 ///
 /// In this case, ``ForEach`` automatically assigns a tag to the selection
 /// views, using each option's `id`, which it can do because `Flavor` conforms
@@ -30470,7 +30484,11 @@ extension Path {
 /// }
 /// ```
 ///
-/// ![](picker-ex3.gif)
+/// ![A gif displaying a view containing a default wheel style picker with three
+/// options, "Chocolate", "Vanilla", and "Strawberry", and a textview
+/// that reads "suggestedTopping: \(suggestedTopping.rawValue)"; a ForEach
+/// construct containing the  Flavor enum populates the options and returns a
+/// suggested topping for each, which is used to populate the textview.](picker-ex3.gif)
 ///
 /// ### Styling Pickers
 ///
@@ -30497,7 +30515,9 @@ extension Path {
 /// }
 /// ```
 ///
-/// ![Picker Segmented with Ice Cream](picker-segmented-ice-cream.png)
+/// ![A gif displaying a view containing a segmented style picker with two
+/// options, "chocolate" and "vanilla".](picker-ex4.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Picker<Label, SelectionValue, Content> : View where Label : View, SelectionValue : Hashable, Content : View {
 
@@ -30509,17 +30529,17 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
     ///
     ///     var body: some View {
     ///         Picker(selection: $selection, label: Label("Pick emoji", systemImage: "face.smiling")) {
-    ///             Text("🍑").tag(1)
-    ///             Text("🗿").tag(2)
-    ///             Text("🍌").tag(3)
+    ///             Text("🍌").tag(1)
+    ///             Text("🍎").tag(2)
+    ///             Text("🍑").tag(3)
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a picker with three options represented by
-    /// three different emojis, with the first highlighted in gray as the current
-    /// selection. The picker has a custom label which does not appear in this view.](picker-init.png)
+    /// ![A gif displaying a picker with three options represented by three
+    /// different emojis, with the current selection first highlighted in gray.
+    /// The picker has a custom label which does not appear in this view.](picker-init-slc-ex.gif)
     ///
     /// - Parameters:
     ///     - selection: A binding to the currently selected option.
@@ -30548,17 +30568,17 @@ extension Picker where Label == Text {
     ///
     ///     var body: some View {
     ///         Picker(LocalizedStringKey("Pick emoji"), selection: $selection) {
-    ///             Text("🍑").tag(1)
-    ///             Text("🗿").tag(2)
-    ///             Text("🍌").tag(3)
+    ///             Text("🍌").tag(1)
+    ///             Text("🍎").tag(2)
+    ///             Text("🍑").tag(3)
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a picker with three options represented by
-    /// three different emojis, with the first highlighted in gray as the current
-    /// selection. The picker has a localized string label which does not appear in this view.](picker-init.png)
+    /// ![A gif displaying a picker with three options represented by three
+    /// different emojis, with the current selection first highlighted in gray.
+    /// The picker has a localized string label which does not appear in this view.](picker-init-slc-ex.gif)
     ///
     /// - Parameters:
     ///     - titleKey: A localized string key used for the picker's label.
@@ -30574,17 +30594,17 @@ extension Picker where Label == Text {
     ///
     ///     var body: some View {
     ///         Picker("Pick emoji 🤑", selection: $selection) {
-    ///             Text("🍑").tag(1)
-    ///             Text("🗿").tag(2)
-    ///             Text("🍌").tag(3)
+    ///             Text("🍌").tag(1)
+    ///             Text("🍎").tag(2)
+    ///             Text("🍑").tag(3)
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a picker with three options represented by
-    /// three different emojis, with the first highlighted in gray as the current
-    /// selection. The picker has a string label which does not appear in this view.](picker-init.png)
+    /// ![A gif displaying a picker with three options represented by three
+    /// different emojis, with the current selection first highlighted in gray.
+    /// The picker has a string label which does not appear in this view.](picker-init.png)
     ///
     /// - Parameters:
     ///     - title: A string used for the pikcer's label.
@@ -43417,7 +43437,7 @@ public struct TextEditor : View {
 /// populated displays the corresponding text in a text item.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TextField-example-1.gif)
 ///
 /// [textfield-style ->]
-/// `TextField` can be styled with the ``View/textFieldStyle(_:)`` modifier.
+/// ``TextField`` can be styled with the ``View/textFieldStyle(_:)`` modifier.
 ///
 ///     struct ExampleView: View {
 ///         @State var myFruit: String = ""
@@ -50516,6 +50536,9 @@ extension View {
     /// }
     /// ```
     ///
+    /// ![A screenshot of the "ocean" and "space" images blended together, where
+    /// the "space" photo has a softLight blendMode](view-blend-mode.png)
+    ///
     /// - Parameter blendMode: The ``BlendMode`` for compositing this view.
     ///
     /// - Returns: A view that applies ``blendMode`` to this view.
@@ -51824,9 +51847,9 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A gif displaying a text field in which the user types "Blossoms, Peach"
+    /// ![A gif displaying a text field in which the user types "Blossom, Peach"
     /// and the autocapitalization view modifier renders each words with a capital
-    /// letter as it is typed.](auto-cap-ex.gif)
+    /// letter as it is typed.](view-auto-cap-ex.gif)
     ///
     /// The
     /// [`UITextAutocapitalizationType`](https://developer.apple.com/documentation/uikit/uitextautocapitalizationtype)
