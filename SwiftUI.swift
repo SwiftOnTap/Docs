@@ -31727,10 +31727,6 @@ public enum PreviewPlatform {
     /// ``PreviewProvider/platform-b6bd6``
     /// property to change the way a view is displayed in a preview.
     ///
-    /// *I tried to use this to change the preview platform, but I couldn't get anything
-    /// to work. It seems right now that the only way to change your preview
-    /// device is by actually changing your build target.*
-    ///
     /// ```
     /// struct ContentView: View {
     ///     var body: some View {
@@ -31746,6 +31742,9 @@ public enum PreviewPlatform {
     ///     static var platform: PreviewPlatform? { .watchOS }
     /// }
     /// ```
+    ///
+    /// Note: Currently, it seems that the only way to change your preview
+    /// device is by actually changing your build target.
     case watchOS
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -37271,7 +37270,11 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// }
 /// ```
 ///
-/// ![A gif that displays a scroll view with a VStack containing three text elements being scrolled up and down wihtout a visible scroll indicator.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/ScrollView-example-6.gif)
+/// ![A gif that displays a scroll view with a VStack containing a button reading
+/// "Jump to # 32" directly above text elements reading "Item #_",
+/// where _ is filled by the numbers 1-101; when the button is clicked, the view
+/// jumps down to the location in the scroll where the text "Item #32" is at the
+/// bottom edge of the screen.](scroll-view-proxy-ex1.gif)
 ///
 /// In this example, clicking the button reading "Jump to #32", will cause the
 /// ``ScrollView`` to scroll to the item with the ID of the value `32`.
@@ -37304,8 +37307,10 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// ```
 ///
 /// ![A gif that displays a scroll view with a VStack containing a button reading
-/// "Jump to # 32" directly above text elements; the text elements read "Item #_",
-/// where _ is filled by the numbers 1-101.](scrollviewproxy-ex7.gif)
+/// "Jump to # 32" directly above text elements reading "Item #_",
+/// where _ is filled by the numbers 1-101; when the button is clicked, the view
+/// jumps down to the location in the scroll where the text "Item #32" is at the
+/// top edge of the screen, as defined by anchor.](scrollviewproxy-ex7.gif)
 ///
 /// In this example, the `ScrollView` still scrolls to "Item #32", but this
 /// ``Text`` is seen at the top of the `ScrollView`, rather than it's
@@ -37343,7 +37348,8 @@ extension SceneStorage where Value : ExpressibleByNilLiteral {
 /// ![A gif that displays a scroll view with a VStack containing a button reading
 /// "Jump to # 32" directly above text elements reading "Item #_",
 /// where _ is filled by the numbers 1-101; when the button is clicked, the view
-/// jumps down to the text "Item #32".](scrollviewproxy-ex7.gif)
+/// jumps down to the location in the scroll where the text "Item #32" is at the
+/// top edge of the screen, as defined by the anchor.](scrollviewproxy-ex7.gif)
 ///
 /// [<-]
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -40458,13 +40464,15 @@ extension Stepper where Label == Text {
     ///         let title = "Step me 🆙"
     ///
     ///         var body: some View {
+    ///             Text("Step count: \(value)")
     ///             Stepper(title, value: $value, step: step)
     ///         }
     ///     }
     ///
-    /// ![A screenshot displaying a stepper that reads "Step me up" on the left side.
-    /// The step is initialized to 5 in the stepper, but there is no display of
-    /// the value, so nothing actually happens when the user increments or decrements.](stepper-string.png)
+    /// ![A screenshot displaying a textview "Step count: \(value)" above
+    /// a stepper that reads "Step me up" on the left side; the step is initialized
+    /// to 5 in the stepper and changes by 5 when the increment and decrement
+    /// buttons are pressed.](stepper-init-value-step-oec-ex.gif)
     ///
     /// - Parameters:
     ///     - title: A string describing the purpose of the stepper.
