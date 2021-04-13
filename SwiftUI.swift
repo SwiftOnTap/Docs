@@ -18326,7 +18326,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 @available(watchOS, unavailable)
 public struct GraphicalDatePickerStyle : DatePickerStyle {
 
-	/// Creates an instance of the graphical date picker style.
+    /// Creates an instance of the graphical date picker style.
     public init() { }
 }
 
