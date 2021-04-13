@@ -50952,7 +50952,7 @@ extension View {
     /// A view modifier that sets the text content type for this view, which the system uses to
     /// offer suggestions while the user enters text on an iOS or tvOS device.
     ///
-    /// Use `textContentType(_:) to set the content type for this view.
+    /// Use `textContentType(_:)` to set the content type for this view.
     /// This is especially useful for auto-complete purposes.
     ///
     /// Available content type values can be found in the
