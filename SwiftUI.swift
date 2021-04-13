@@ -8131,7 +8131,42 @@ extension CommandsBuilder {
 ///         }
 ///     }
 ///
-/// ![A gif displaying the selection of a date using a calendar and time using a text input and am/pm switch in a compact date picker.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+/// ![A gif displaying the selection of a date using a calendar and time using a
+/// text input and am/pm switch in a compact date picker.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+///
+/// The difference between ``DefaultDatePickerStyle`` and `CompactDatePickerStyle`
+/// can be seen more clearly here:
+///
+/// ```
+/// struct ComparisonView: View {
+///     @State var date: Date = Date()
+///
+///     var body: some View {
+///         List {
+///             Section (header: Text("To Do")) {
+///                 HStack{
+///                     Text("Laundry")
+///                     DatePicker("Date", selection: $date)
+///                         .datePickerStyle(CompactDatePickerStyle())
+///                         .padding()
+///                 }
+///                 HStack{
+///                     Text("Wash car")
+///                     DatePicker("Date", selection: $date)
+///                         .datePickerStyle(DefaultDatePickerStyle())
+///                         .padding()
+///                 }
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![A gif displaying a list with the section header "To Do" containing two
+/// items, each with HStack made up of a textview and a datepicker; the first
+/// datepicker is of the CompactDatePickerStyle and fits the list row, while the
+/// other is of the DefaultDatePickerStyle and is cut off slightly by the right
+/// edge of the frame. ](compact-date-picker-style-ex2.gif)
 ///
 @available(iOS 14.0, macCatalyst 13.4, macOS 10.15.4, *)
 @available(tvOS, unavailable)
@@ -9269,7 +9304,8 @@ public struct DefaultButtonStyle : PrimitiveButtonStyle {
 ///         }
 ///     }
 ///
-/// ![A gif displaying the selection of a date using a calendar and time using a text input and am/pm switch in a default date picker.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-compact-example-1.gif)
+/// ![A gif displaying the selection of a date using a calendar and time using a
+/// text input and am/pm switch in a default date picker.](default-date-picker-style-ex.gif)
 ///
 @available(iOS 13.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -18922,7 +18958,7 @@ extension GestureState where Value : ExpressibleByNilLiteral {
 ///
 /// ![Gif displays a graphical date picker view consisting of a calendar in
 /// which a date is selected and a time selector in which an hour and minute
-/// can be entered and a toggle flips between AM and PM.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-graphical-example-1.gif)
+/// can be entered and a toggle flips between AM and PM.](graphical-date-picker-style-ex.gif)
 ///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
@@ -26601,6 +26637,11 @@ extension Menu where Label == MenuStyleConfiguration.Label, Content == MenuStyle
     ///         }
     ///     }
     ///
+    /// ![A gif with a button in the center of the screen that reads "PDF" with
+    /// the system doc image preceding it, all surrounded by a rectangular red border,
+    /// which holds down to reveal a menu with two options: Save as PDF or Open in Preview
+    /// box as rendered by passing BorderlessButtonMenuStyle to the modifier.](menu-init-ex.gif)
+    ///
     /// - Parameter configuration: The ``MenuStyleConfiguration`` value
     /// passed to ``MenuStyle/makeBody(configuration:)``.
     ///
@@ -26829,6 +26870,11 @@ extension MenuStyle {
 ///             .menuStyle(RedBorderMenuStyle())
 ///         }
 ///     }
+///
+/// ![A gif with a button in the center of the screen that reads "PDF" with
+/// the system doc image preceding it, all surrounded by a rectangular red border,
+/// which holds down to reveal a menu with two options: Save as PDF or Open in Preview
+/// box as rendered by passing BorderlessButtonMenuStyle to the modifier.](menu-init-ex.gif
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -32683,7 +32729,7 @@ public struct ProgressViewStyleConfiguration {
     ///     var color = Color.orange
     ///     var style = StrokeStyle(lineWidth: CGFloat(30), lineCap: .round)
     ///
-    ///     func makebody(configuration: ProgressViewStyleConfiguration) -> some View {
+    ///     func makeBody(configuration: ProgressViewStyleConfiguration) -> some View {
     ///         let frac = CGFloat(configuration.fractionCompleted ?? 0)
     ///
     ///         return Circle()
@@ -32700,7 +32746,7 @@ public struct ProgressViewStyleConfiguration {
     /// struct ContentView: View {
     ///     var body: some View {
     ///         ProgressView(value: 5, total: 10)
-    ///             .progressViewStyle(ArcProgressViewStyle)
+    ///             .progressViewStyle(ArcProgressViewStyle())
     ///     }
     /// }
     /// ```
@@ -35797,6 +35843,9 @@ extension Scene {
     ///     }
     ///
     /// Now when you leave the app via multitasking, you get a message:
+    ///
+    /// ![A screenshot of a custom scene with the message "Come back! 👋", which
+    /// results when you leave the app via multitasking.](scene-onchange-of-perform-ex.png)
     ///
     /// - Parameters:
     ///   - value: The value to watch for changes.
@@ -41876,7 +41925,17 @@ public struct TapGesture : Gesture {
 ///
 /// ![A text view displaying the date.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/text-example-2.png)
 ///
-/// `Text` also accepts 12 unique modifiers to customize your string.
+/// `Text` also accepts 10 unique modifiers to customize your string.
+/// - ``Text/foregroundColor(_:)``
+/// - ``Text/font(_:)``
+/// - ``Text/fontWeight(_:)``
+/// - ``Text/bold()``
+/// - ``Text/italic()``
+/// - ``Text/strikethrough(_:color:)``
+/// - ``Text/underline(_:color:)``
+/// - ``Text/kerning(_:)``
+/// - ``Text/tracking(_:)``
+/// - ``Text/baselineOffset(_:)``
 ///
 /// ```
 /// struct ExampleView: View {
@@ -42351,7 +42410,7 @@ extension Text {
     /// typically contains the unlocalized string.
     ///
     /// If you initialize a text view with a string variable rather than a
-    /// string literal, the view triggers the `Text/init(_:)-9d1g4`
+    /// string literal, the view triggers the ``Text/init(_:)-40ffd``
     /// initializer instead, because it assumes that you don't want localization
     /// in that case. If you do want to localize the value stored in a string
     /// variable, you can choose to call the `init(_:tableName:bundle:comment:)`
@@ -47924,10 +47983,10 @@ extension View {
     /// }
     /// ```
     ///
-    /// ![A screenshot with a button in the center of the screen that reads "PDF,"
+    /// ![A gif displaying a button in the center of the screen that reads "PDF,"
     /// which holds down to reveal a menu with two options: Save as PDF or Open
     /// in Preview which are displayed in a borderless box as rendered by
-    /// passing BorderlessButtonMenuStyle to the modifier.](menustyle-modifier.png)
+    /// passing BorderlessButtonMenuStyle to the modifier.](view-menu-style-pdf-ex.gif)
     ///
     /// Existing menu styles include:
     /// - ``DefaultMenuStyle``
@@ -47969,7 +48028,7 @@ extension View {
     /// ![A gif with a button in the center of the screen that reads "PDF" surrounded
     /// by a rectangular red border, which holds down to reveal a menu with two
     /// options: Save as PDF or Open in Preview which are displayed in a borderless
-    /// box as rendered by passing BorderlessButtonMenuStyle to the modifier.](view-menu-style-pdf-ex.gif)
+    /// box as rendered by passing BorderlessButtonMenuStyle to the modifier.](menu-style-ex2.gif)
     ///
     /// - Parameter style: Your desired ``MenuStyle``.
     /// - Returns: A view with styled menus.
@@ -52231,20 +52290,21 @@ extension View {
     ///
     ///     var body: some View {
     ///         Text(message)
-    ///
+    ///             .offset(y: 180)
     ///         HStack {
     ///             Button("Cancel") { message = "Canceled." }
     ///                 .keyboardShortcut(.cancelAction)
     ///             Button("Save") { message = "Saved." }
     ///                 .keyboardShortcut(.defaultAction)
     ///         }
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///     }
     /// }
     /// ```
     ///
     /// ![A gif displaying a window that reads "Press ENTER to save or ESC
     /// to cancel," which uses the default keyboard shortcut actions directly on
-    /// each button.](key-board-short-cut-ex2.gif)
+    /// each button.](keyboard-sc-ex2.gif)
     ///
     public func keyboardShortcut(_ shortcut: KeyboardShortcut) -> some View { }
 
@@ -56540,7 +56600,7 @@ extension ViewModifier {
 /// ![A gif displaying a wheel style date picker, in which the week day month
 /// and date, the hour time, the minute time, and meridiam (am/pm) can be
 /// selected separately by scrolling around a wheel; a light gray box highlights
-/// the current selections.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/date-pickerstyle-wheel-example-1.gif)
+/// the current selections.](wheel-date-picker-ex.gif)
 ///
 ///
 @available(iOS 13.0, *)
