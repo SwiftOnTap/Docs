@@ -4077,12 +4077,15 @@ extension App {
 ///         @AppStorage("name") var name: String = "Kanye"
 ///
 /// 		var body: some View {
-/// 			TextField(name, text: $name)
+///         Text("Stored string: \(name)")
+/// 			  TextField(name, text: $name)
 /// 		}
 /// 	}
 ///
-/// ![A gif displaying a view with a textfield with default text "Kanye" and an
-/// input bound to the appstorage string variable "name."](app-storage-ex.gif)
+/// ![A gif displaying a view containing a textview reading "Stored string: \(name)"
+/// and a textfield with default text "Kanye" and an input bound to the appstorage
+/// string variable "name."; when the textfield input is changed to "John", so is
+/// the stored string variable, as shown in the textview.](app-storage-ex.gif)
 ///
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @frozen @propertyWrapper public struct AppStorage<Value> : DynamicProperty {
@@ -13154,7 +13157,7 @@ extension EnvironmentKey {
 ///
 /// ```
 /// class AppModel: ObservableObject {
-///     let text: String = "some text"
+///     let text: String = "This text was passed through views by way of an environment 🌿🕊🌏 object!"
 /// }
 ///
 /// struct ContentView: View {
@@ -13175,9 +13178,10 @@ extension EnvironmentKey {
 /// }
 /// ```
 ///
-/// ![A view displaying the text "some text"; the main view intializes an app
+/// ![A view displaying the text "This text was passed through views by way of
+/// an environment 🌿🕊🌏 object!"; the main view intializes an app
 /// model through a state object and a child view, which uses an environment
-/// object to display the text declared int he app model.](2B8CB1C2-A204-47A8-AF0D-95C69028ECAC.png)
+/// object to display the text declared in the app model.](view-environ-obj-ex.png)
 ///
 /// - An app model, `AppModel` is initialized in a `@StateObject` in the
 /// `ContentView`.
@@ -47349,7 +47353,9 @@ extension View {
     ///     }
     ///
     /// ![A view containg a default style list with one item, "Mustache" with a
-    /// system image label, which can be dragged and dropped given the attached item provider.](10.26.05.png)
+    /// system image label, which can be dragged and dropped given the attached
+    /// item provider; the gif shows the list tiem being dragged and dropped
+    /// into the photos app, where the related image appears.](view-item-provider-ex.gif)
     ///
     /// - Parameter action: A function that returns an NSItemProvider.
     @inlinable public func itemProvider(_ action: (() -> NSItemProvider?)?) -> some View { }
