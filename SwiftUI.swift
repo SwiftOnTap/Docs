@@ -4657,15 +4657,15 @@ extension BackgroundStyle : ShapeStyle {
 
 /// This type handles shared values across views.
 ///
-/// ``Binding`` is a property wrapper that creates a connection between stored
+/// `Binding` is a property wrapper that creates a connection between stored
 /// data, and a view that displays and changes that data. It is a **two-way
 /// connection** to a source of truth. It is used to both read the latest
-/// value, as well as to set a new value. ``Binding`` defines a **getter**
+/// value, as well as to set a new value. `Binding` defines a **getter**
 /// and a **setter** for a value.
 ///
-/// ### Structure of a ``Binding``
+/// ### Structure of a `Binding`
 ///
-/// A ``Binding`` is essentially the following structure:
+/// A `Binding` is essentially the following structure:
 ///
 /// ```
 /// struct Binding<Value> {
@@ -4674,11 +4674,11 @@ extension BackgroundStyle : ShapeStyle {
 /// }
 /// ```
 ///
-/// ### Creating a ``Binding`` from `@State`
+/// ### Creating a `Binding` from `@State`
 ///
-/// A ``Binding`` typically represents a reference to a mutable source of
+/// A `Binding` typically represents a reference to a mutable source of
 /// truth - such as `@State`, `@ObservedObject` or a reference-writable keypath
-/// of an object. To create a ``Binding`` from a mutable source of truth,
+/// of an object. To create a `Binding` from a mutable source of truth,
 /// prefix the variable name for the source of truth with a dollar sign (`$`).
 ///
 /// For example, a ``TextField`` can be bound to a state variable:
@@ -4709,7 +4709,7 @@ extension BackgroundStyle : ShapeStyle {
 /// Recall, a `Binding` is a **two-way connection** to a source of truth.
 /// It is used to both read the latest value, as well as to set a new value.
 /// In the previous example, the view's initial render will display an
-/// editable text of "🍌🍌" on the screen - `TextField` reads the current
+/// editable text of "🍌🍌" on the screen - ``TextField`` reads the current
 /// value of the source of truth ``text`` via the  `Binding` `$text`. When
 /// the user starts editing, ``TextField`` *writes back* new values to the
 /// source of truth `text` via the `Binding`  `$text` once again.
@@ -10180,7 +10180,7 @@ public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 ///         DragGesture()
 ///             .onChanged { value in
 ///                 self.location = value.location
-///                self.isDragging = true
+///                 self.isDragging = true
 ///
 ///             }
 ///             .onEnded {_ in self.isDragging = false}
@@ -18811,8 +18811,46 @@ extension GroupBox where Label == EmptyView {
 /// This protocol is used to create a style for a GroupBox
 ///
 /// By using GroupBoxStyle, the style can be used for a ``GroupBox`` across your application.
-/// To configure the current ``GroupBoxStyle`` for a view hiearchy, you only need to use the
+/// To configure the current ``GroupBoxStyle`` for a view hierarchy, you only need to use the
 /// `.groupBoxStyle()` modifier.
+///
+/// The `GroupBoxStyle` protocol only requires that the user creates a `makeBody`
+/// function which accepts an instance of `GroupBoxStyleConfiguration` and returns a
+/// view. Here, a custom `GroupBoxStyle` called `OrangeGroupBox` is used to style a
+/// single ``GroupBox``. The custom style applies a variety of view modifiers
+/// to create a light orange groupbox with some spacing between its label and
+/// content:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         GroupBox(
+///             label: Label("Employee", systemImage: "person.fill")
+///                 .foregroundColor(.red)
+///         ) { Text("Aaron") }
+///         .groupBoxStyle(OrangeGroupBox())
+///     }
+/// }
+///
+/// struct OrangeGroupBox: GroupBoxStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.content
+///             .frame(maxWidth: 200, maxHeight: 30)
+///             .padding()
+///             .background(RoundedRectangle(cornerRadius: 5).fill(Color.orange))
+///             .opacity(0.4)
+///             .overlay(configuration.label.padding(.leading, 4), alignment: .topLeading)
+///     }
+/// }
+/// ```
+///
+/// ![A screenshot displaying a light orange group box in the center of the screen which
+/// has a person icon in its upper left corner followed by the label "Employee."
+/// The content reads "Aaron" in light grey text owed to the lower opacity in
+/// the custom style.](gbox-style-orange.png)
+///
+/// See ``DefaultGroupBoxStyle`` for an example of a custom label applied with
+/// the default style.
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -41141,13 +41179,34 @@ extension Text {
     /// view:
     ///
     /// ```
-    /// struct BookView: View {
+    /// struct ContentView: View {
     ///     let image = Image(systemName: "book")
     ///     var body: some View {
     ///         Text(image) + Text("The Art of War")
     ///     }
     /// }
     /// ```
+    ///
+    /// ![A screenshot displaying a single text view that is the product of
+    /// concatenating two text views; an image of a book is followed by text
+    /// that reads "The Art of War."](text-init-image.png)
+    ///
+    /// We can take this a step further by concatenating the views in parentheses
+    /// and applying modifiers to the joined text:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    /// let image = Image(systemName: "book")
+    /// var body: some View {
+    ///     (Text(image) + Text("The Art of War"))
+    ///         .foregroundColor(.blue)
+    ///         .font(.largeTitle)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![A screenshot displaying a text view in blue with large title font; an 
+    /// image of a book is followed by text that reads "The Art of War."](text-init-image-mod.png)
     ///
     /// - Parameter image: The Image view to turn into a view of type ``Text``
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
