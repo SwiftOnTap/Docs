@@ -18811,35 +18811,55 @@ extension GroupBox where Label == EmptyView {
 /// This protocol is used to create a style for a GroupBox
 ///
 /// By using GroupBoxStyle, the style can be used for a ``GroupBox`` across your application.
-/// To configure the current ``GroupBoxStyle`` for a view hierarchy, you only need to use the
+/// To configure the current `GroupBoxStyle` for a view hierarchy, you only need to use the
 /// `.groupBoxStyle()` modifier.
 ///
-/// The `GroupBoxStyle` protocol only requires that the user creates a `makeBody`
-/// function which accepts an instance of `GroupBoxStyleConfiguration` and returns a
-/// view. Here, a custom `GroupBoxStyle` called `OrangeGroupBox` is used to style a
-/// single ``GroupBox``. The custom style applies a variety of view modifiers
-/// to create a light orange groupbox with some spacing between its label and
-/// content:
+/// The `GroupBoxStyle` protocol only requires that the user creates a
+/// ``GroupBoxStyle/makeBody(configuration:)`` function which accepts an
+/// instance of ``GroupBoxStyleConfiguration`` and returns a view. Here, we create
+/// a custom `GroupBoxStyle` called `OrangeGroupBoxStyle`. The custom style
+/// applies a variety of view modifiers to the `content` property of the `configuration`
+/// parameter to create a light orange `GroupBox` with some spacing between its
+/// label and content:
 ///
 /// ```
-/// struct ContentView: View {
-///     var body: some View {
-///         GroupBox(
-///             label: Label("Employee", systemImage: "person.fill")
-///                 .foregroundColor(.red)
-///         ) { Text("Aaron") }
-///         .groupBoxStyle(OrangeGroupBox())
+/// struct OrangeGroupBoxStyle: GroupBoxStyle {
+///     var background: some View {
+///         RoundedRectangle(cornerRadius: 5)
+///             .fill(Color.orange)
 ///     }
-/// }
 ///
-/// struct OrangeGroupBox: GroupBoxStyle {
 ///     func makeBody(configuration: Configuration) -> some View {
 ///         configuration.content
 ///             .frame(maxWidth: 200, maxHeight: 30)
 ///             .padding()
-///             .background(RoundedRectangle(cornerRadius: 5).fill(Color.orange))
+///             .background(background)
 ///             .opacity(0.4)
-///             .overlay(configuration.label.padding(.leading, 4), alignment: .topLeading)
+///             .overlay(configuration
+///                         .label
+///                         .padding(.leading, 4),
+///                      alignment: .topLeading
+///             )
+///     }
+/// }
+/// ```
+///
+/// We can then apply the custom style by initializing a `GroupBox` with
+/// ``GroupBox/init(label:content:)`` and passing our style to the
+/// ``View/GroupBoxStyle(_:)`` view modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     var label: some View {
+///         Label("Employee", systemImage: "person.fill")
+///             .foregroundColor(.red)
+///     }
+///
+///     var body: some View {
+///         GroupBox(
+///             label: label
+///         ) { Text("Aaron") }
+///         .groupBoxStyle(OrangeGroupBoxStyle())
 ///     }
 /// }
 /// ```
@@ -41181,6 +41201,7 @@ extension Text {
     /// ```
     /// struct ContentView: View {
     ///     let image = Image(systemName: "book")
+    ///
     ///     var body: some View {
     ///         Text(image) + Text("The Art of War")
     ///     }
@@ -41196,16 +41217,17 @@ extension Text {
     ///
     /// ```
     /// struct ContentView: View {
-    /// let image = Image(systemName: "book")
-    /// var body: some View {
-    ///     (Text(image) + Text("The Art of War"))
-    ///         .foregroundColor(.blue)
-    ///         .font(.largeTitle)
+    ///     let image = Image(systemName: "book")
+    ///
+    ///     var body: some View {
+    ///         (Text(image) + Text("The Art of War"))
+    ///             .foregroundColor(.blue)
+    ///             .font(.largeTitle)
     ///     }
     /// }
     /// ```
     ///
-    /// ![A screenshot displaying a text view in blue with large title font; an 
+    /// ![A screenshot displaying a text view in blue with large title font; an
     /// image of a book is followed by text that reads "The Art of War."](text-init-image-mod.png)
     ///
     /// - Parameter image: The Image view to turn into a view of type ``Text``
