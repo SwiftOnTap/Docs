@@ -7642,7 +7642,10 @@ extension ColorRenderingMode : Hashable {
 /// which automatically sets the ``ColorScheme'' for the ``View``, or the
 /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
 /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
-/// hierarchy. For example:
+/// hierarchy.
+///
+/// A light mode effect, with a light background and darker text, can be achieved
+/// using the `.light` case. For example:
 ///
 /// ```
 /// struct ContentView: View {
@@ -7657,18 +7660,23 @@ extension ColorRenderingMode : Hashable {
 /// and the colorscheme is set to light, making the background white and the
 /// text black.](color-scheme-light-ex.png)
 ///
+/// A dark mode effect, with a dark background and lighter text, can be achieved
+/// using the `.dark` case. For example:
+///
+/// ```
 /// struct ContentView: View {
 ///     var body: some View {
 ///         Text("Dark🖤 or Light🤍 Mode?")
 ///             .preferredColorScheme(ColorScheme.dark)
 ///     }
 /// }
+/// ```
 ///
 /// ![A view containing a VStack with a textview reading "Dark🖤 or Light🤍 Mode?"
 /// and the colorscheme is set to dark, making the background black and the
 /// text white.](color-scheme-dark-ex.png)
 ///
-/// These `ColorScheme`s can also be used in ``EnvironmentValues/ColorScheme``.
+/// These `ColorScheme`s can also be used in ``EnvironmentValues/colorScheme``.
 /// Take this example, where different `text` renders depending on the system's
 /// current color scheme setting:
 ///
@@ -7678,7 +7686,7 @@ extension ColorRenderingMode : Hashable {
 ///
 ///     var body: some View {
 ///         Text(scheme == ColorScheme.light ? "Light 🤍" : "Dark 🖤")
-///    }
+///     }
 /// }
 /// ```
 ///
@@ -7702,7 +7710,7 @@ public enum ColorScheme : CaseIterable {
  /// struct ContentView: View {
  ///     var body: some View {
  ///         Text("Dark🖤 or Light🤍 Mode?")
- ///             .colorScheme(ColorScheme.light)
+ ///             .colorScheme(.light)
  ///     }
  /// }
  /// ```
@@ -7725,7 +7733,7 @@ public enum ColorScheme : CaseIterable {
  /// struct ContentView: View {
  ///     var body: some View {
  ///         Text("Dark🖤 or Light🤍 Mode?")
- ///             .colorScheme(ColorScheme.light)
+ ///             .colorScheme(.light)
  ///     }
  /// }
  /// ```
