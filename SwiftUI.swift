@@ -6302,10 +6302,40 @@ extension ButtonStyle {
 
 /// The properties of a button.
 ///
-/// This property represents the view state of the `Button` that ``ButtonStyle`` modifies.
-//`ButtonStyleConfiguration` consits of a label representing the button view,
-/// and `isPressed`, which indicates whether or not the button is currently
+/// This property represents the view state of the ``Button`` that ``ButtonStyle`` modifies.
+/// `ButtonStyleConfiguration` consists of a label representing the button view,
+/// and ``ButtonStyleConfiguration/isPressed``, which indicates whether or not the button is currently
 /// being pressed.
+///
+/// Once `.label` has been inititated, modifiers can be applied to the button view.
+/// ``ButtonStyleConfiguration/isPressed`` can be used within these modifiers to
+/// create press reactions. For example, a custon ``ButtonStyle`` could be created as so:
+///
+/// ```
+/// struct MyButtonStyle: ButtonStyle {
+///     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
+///         configuration.label
+///             .padding()
+///             .background(configuration.isPressed ? RoundedRectangle(cornerRadius: 10).fill(Color.blue) : RoundedRectangle(cornerRadius: 10).fill(Color.gray))
+///     }
+/// }
+/// ```
+///
+/// This new ``ButtonStyle`` could then be applied to a ``Button`` within a ``View``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Button("Press me!", action: { })
+///             .buttonStyle(MyButtonStyle())
+///     }
+/// }
+/// ```
+///
+/// ![A gif displaying a gray button reading "Press Me!" that turns blue once
+/// pressed; the button is of a custom buttonstyle, which specifies the
+/// color change using .isPressed within the .background modifier.](button-style-config-ex.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -19158,7 +19188,7 @@ public struct GraphicalDatePickerStyle : DatePickerStyle {
 /// A description of a single grid item, such as a row or a column.
 ///
 /// You use ``GridItem`` instances to configure the layout of items in
-/// `LazyHGrid` and ``LazyVGrid`` views. Each grid item specifies layout
+/// ``LazyHGrid`` and ``LazyVGrid`` views. Each grid item specifies layout
 /// properties like spacing and alignment, which the grid view uses to size and
 /// position all items in a given column or row.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
