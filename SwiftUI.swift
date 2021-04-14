@@ -7819,7 +7819,7 @@ public enum ColorScheme : CaseIterable {
 
     /// A collection of all values of this type.
     public static var allCases: [ColorScheme] { get }
-    }
+}
 
 extension ColorScheme {
 
@@ -19630,6 +19630,25 @@ extension Group : Commands where Content : Commands {
 
 /// A stylized view with an optional label that is associated with a logical
 /// grouping of content.
+///
+/// You create a `GroupBox` by providing an optional label, which describes the
+/// grouping of UI elements within, and the actual content. For example:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         GroupBox(label: Label("GroupBox Label", systemImage: "smiley"))
+///         {
+///             Text("Content within GroupBox")
+///             Text("More text content!")
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![A view containing a GroupBox with the label "GroupBox Label" paired with a
+/// smiley face systemImage and two text view contained wihtin.](group-box-ex.png)
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
