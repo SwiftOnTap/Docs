@@ -6302,10 +6302,12 @@ extension ButtonStyle {
 
 /// The properties of a button.
 ///
-/// This property represents the view state of the ``Button`` that ``ButtonStyle`` modifies.
-/// `ButtonStyleConfiguration` consists of a label representing the button view,
-/// and ``ButtonStyleConfiguration/isPressed``, which indicates whether or not the button is currently
-/// being pressed.
+/// This property represents the view state of the ``Button`` control that
+/// ``View/buttonStyle(_:)-d2d0a`` modifies. The ``ButtonStyle`` protocol has one
+/// requirement, the ``ButtonStyle/makeBody(configuration:)``, which accepts
+/// the paramater `ButtonStyleConfiguration`. The properties of `ButtonStyleConfiguration`
+/// consist of a label representing the button view and ``ButtonStyleConfiguration/isPressed``,
+/// which indicates whether or not the button is currently being pressed.
 ///
 /// Once `.label` has been inititated, modifiers can be applied to the button view.
 /// ``ButtonStyleConfiguration/isPressed`` can be used within these modifiers to
@@ -6316,7 +6318,11 @@ extension ButtonStyle {
 ///     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
 ///         configuration.label
 ///             .padding()
-///             .background(configuration.isPressed ? RoundedRectangle(cornerRadius: 10).fill(Color.blue) : RoundedRectangle(cornerRadius: 10).fill(Color.gray))
+///             .background(buttonBackground(configuration.isPressed))
+///     }
+///     func buttonBackground(_ isPressed: Bool) -> some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(isPressed ? Color.blue : Color.gray)
 ///     }
 /// }
 /// ```
@@ -7763,7 +7769,7 @@ public enum ColorScheme : CaseIterable {
     /// struct ContentView: View {
     ///     var body: some View {
     ///         Text("Dark🖤 or Light🤍 Mode?")
-    ///             .colorScheme(.light)
+    ///             .colorScheme(.dark)
     ///     }
     /// }
     /// ```
