@@ -6302,10 +6302,46 @@ extension ButtonStyle {
 
 /// The properties of a button.
 ///
-/// This property represents the view state of the `Button` that ``ButtonStyle`` modifies.
-//`ButtonStyleConfiguration` consits of a label representing the button view,
-/// and `isPressed`, which indicates whether or not the button is currently
-/// being pressed.
+/// This property represents the view state of the ``Button`` control that
+/// ``View/buttonStyle(_:)-d2d0a`` modifies. The ``ButtonStyle`` protocol has one
+/// requirement, the ``ButtonStyle/makeBody(configuration:)``, which accepts
+/// the paramater `ButtonStyleConfiguration`. The properties of `ButtonStyleConfiguration`
+/// consist of a label representing the button view and ``ButtonStyleConfiguration/isPressed``,
+/// which indicates whether or not the button is currently being pressed.
+///
+/// Once `.label` has been inititated, modifiers can be applied to the button view.
+/// ``ButtonStyleConfiguration/isPressed`` can be used within these modifiers to
+/// create press reactions. For example, a custon ``ButtonStyle`` could be created as so:
+///
+/// ```
+/// struct MyButtonStyle: ButtonStyle {
+///     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
+///         configuration.label
+///             .padding()
+///             .background(buttonBackground(configuration.isPressed))
+///     }
+///     func buttonBackground(_ isPressed: Bool) -> some View {
+///         RoundedRectangle(cornerRadius: 10)
+///             .fill(isPressed ? Color.blue : Color.gray)
+///     }
+/// }
+/// ```
+///
+/// This new ``ButtonStyle`` could then be applied to a ``Button`` within a ``View``:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Button("Press me!", action: { })
+///             .buttonStyle(MyButtonStyle())
+///     }
+/// }
+/// ```
+///
+/// ![A gif displaying a gray button reading "Press Me!" that turns blue once
+/// pressed; the button is of a custom buttonstyle, which specifies the
+/// color change using .isPressed within the .background modifier.](button-style-config-ex.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -7633,13 +7669,115 @@ extension ColorRenderingMode : Hashable {
 /// The color scheme enumerates the user setting options for Light or Dark Mode.
 /// It also provides the light or dark options for any particular view when the
 /// app wants to override the user setting.
+///
+/// Color scheme has two cases:
+/// - ``ColorScheme/light``
+/// - ``ColorScheme/dark``
+///
+/// These can be applied using either the ``View/colorScheme(_:)`` modifier,
+/// which automatically sets the ``ColorScheme'' for the ``View``, or the
+/// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
+/// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
+/// hierarchy.
+///
+/// A light mode effect, with a light background and darker text, can be achieved
+/// using the `.light` case. For example:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("Dark🖤 or Light🤍 Mode?")
+///             .preferredColorScheme(ColorScheme.light)
+///     }
+/// }
+/// ```
+///
+/// ![A view containing a VStack with a textview reading "Dark🖤 or Light🤍 Mode?"
+/// and the colorscheme is set to light, making the background white and the
+/// text black.](color-scheme-light-ex.png)
+///
+/// A dark mode effect, with a dark background and lighter text, can be achieved
+/// using the `.dark` case. For example:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Text("Dark🖤 or Light🤍 Mode?")
+///             .preferredColorScheme(ColorScheme.dark)
+///     }
+/// }
+/// ```
+///
+/// ![A view containing a VStack with a textview reading "Dark🖤 or Light🤍 Mode?"
+/// and the colorscheme is set to dark, making the background black and the
+/// text white.](color-scheme-dark-ex.png)
+///
+/// These `ColorScheme`s can also be used in ``EnvironmentValues/colorScheme``.
+/// Take this example, where different `text` renders depending on the system's
+/// current color scheme setting:
+///
+/// ```
+/// struct ContentView: View {
+///     @Environment(\.colorScheme) var scheme
+///
+///     var body: some View {
+///         Text(scheme == ColorScheme.light ? "Light 🤍" : "Dark 🖤")
+///     }
+/// }
+/// ```
+///
+/// ![A gif displaying a light mode view reading "Light 🤍" that changes to a
+/// dark mode view reading "Dark 🖤" when dark mode is turned on in the phone
+/// settings; the view uses EnvironmentValues toe nable this reaction.](color-scheme-ex2.gif)
+///
+
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum ColorScheme : CaseIterable {
 
-	/// The color scheme referring to light mode in a device.
+    /// The color scheme referring to light mode in a device.
+    ///
+    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)``
+    /// modifier, which automatically sets the ``ColorScheme'' for the ``View``, or the
+    /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
+    /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
+    /// hierarchy. For example:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Dark🖤 or Light🤍 Mode?")
+    ///             .colorScheme(.light)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![A view containing a VStack with a textview reading "Dark🖤 or Light🤍 Mode?"
+    /// and the colorscheme is set to light, making the background white and the
+    /// text black.](color-scheme-light-ex.png)
+    ///
     case light
 
     /// The color scheme referring to dark mode in a device.
+    ///
+    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)``
+    /// modifier, which automatically sets the ``ColorScheme'' for the ``View``, or the
+    /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
+    /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
+    /// hierarchy. For example:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         Text("Dark🖤 or Light🤍 Mode?")
+    ///             .colorScheme(.dark)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![A view containing a VStack with a textview reading "Dark🖤 or Light🤍 Mode?"
+    /// and the colorscheme is set to dark, making the background black and the
+    /// text white.](color-scheme-dark-ex.png)
+    ///
     case dark
 
     /// Returns a Boolean value indicating whether two values are equal.
@@ -19056,7 +19194,7 @@ public struct GraphicalDatePickerStyle : DatePickerStyle {
 /// A description of a single grid item, such as a row or a column.
 ///
 /// You use ``GridItem`` instances to configure the layout of items in
-/// `LazyHGrid` and ``LazyVGrid`` views. Each grid item specifies layout
+/// ``LazyHGrid`` and ``LazyVGrid`` views. Each grid item specifies layout
 /// properties like spacing and alignment, which the grid view uses to size and
 /// position all items in a given column or row.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -19492,6 +19630,25 @@ extension Group : Commands where Content : Commands {
 
 /// A stylized view with an optional label that is associated with a logical
 /// grouping of content.
+///
+/// You create a `GroupBox` by providing an optional label, which describes the
+/// grouping of UI elements within, and the actual content. For example:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         GroupBox(label: Label("GroupBox Label", systemImage: "smiley"))
+///         {
+///             Text("Content within GroupBox")
+///             Text("More text content!")
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![A view containing a GroupBox with the label "GroupBox Label" paired with a
+/// smiley face systemImage and two text view contained wihtin.](group-box-ex.png)
+///
 @available(iOS 14.0, macOS 10.15, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -51658,13 +51815,26 @@ extension View {
     ///
     /// Use this method to change the style of your ``GroupBox``.
     ///
-    /// There is currently one pre-built style, called
-    /// ``DefaultGroupBoxStyle``, and the protocol
-    /// ``GroupBoxStyle`` lets you creat your own custom styles.
+    /// There is currently only one pre-built style, called ``DefaultGroupBoxStyle``:
     ///
-    /// See ``GroupBoxStyle`` for info on creating custom group box styles.
+    /// ```
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         GroupBox(label: Label("Default GroupBox", systemImage: "smiley"))
+    ///         {
+    ///             Text("GroupBox content!")
+    ///         }
+    ///         .padding()
+    ///         .groupBoxStyle(DefaultGroupBoxStyle())
+    ///     }
+    /// }
+    /// ```
     ///
+    /// ![A view containing a GroupBox labeled "Default GroupBox" coupled with a
+    /// smiley face system image and a text view within. Padding and the
+    /// DefaultGroupBoxStyle have been applied to the GroupBox.](group-box-style-ex.png)
     ///
+    /// The protocol ``GroupBoxStyle`` lets you create your own custom styles.
     ///
     /// - Parameter style: The style to apply to boxes within this view.
     public func groupBoxStyle<S>(_ style: S) -> some View where S : GroupBoxStyle { }
