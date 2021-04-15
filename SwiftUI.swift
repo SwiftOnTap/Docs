@@ -31246,6 +31246,9 @@ public enum PopoverAttachmentAnchor {
 /// this can produce unintended effects as a result of modifying state during a view update. In
 /// these scenarios, it may be better to use view preferences.
 ///
+/// `PreferenceKey` requires a ``PreferenceKey/defaultValue`` and a ``PreferenceKey/reduce(value:nextValue:)``,
+/// which defines the logic used to combine multiple outputted values into one.
+///
 /// For example, to set a preference key from a view and use it to change a state:
 ///
 /// ```
@@ -31277,7 +31280,7 @@ public enum PopoverAttachmentAnchor {
 /// preference key when loaded."](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
 ///
 /// It is also possible to use more complicated data structures as a preference key
-/// by changing the type of the defaultValue. For example:
+/// by changing the type of the ``PreferenceKey/defaultValue``. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -54236,6 +54239,15 @@ extension View {
 extension View {
 
     /// Sets a value for the given preference.
+    ///
+    /// This ``View`` modifier is used to set the value for a particular preference.
+    /// `preference(key:value:)` takes two parameters, `key`, which states the relevant
+    /// ``PreferenceKey`` type and `value`, the new value for the given preference.
+    ///
+    ///
+    /// - Parameters:
+    ///   - key: The type of ``PreferenceKey`` being set.
+    ///   - value: The new content of the key.
     @inlinable public func preference<K>(key: K.Type = K.self, value: K.Value) -> some View where K : PreferenceKey { }
 
 }
