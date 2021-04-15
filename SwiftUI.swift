@@ -44092,14 +44092,15 @@ public struct TitleOnlyLabelStyle : LabelStyle {
 ///             Toggle("Vibrate on Ring 🔔", isOn: $vibrateOnRing)
 ///             Toggle("Vibrate on Silent 🔕", isOn: $vibrateOnSilent)
 ///         }
-///         .toggleStyle(SwitchToggleStyle())
+///         .toggleStyle(SwitchToggleStyle(tint: .orange))
 ///     }
 /// }
 /// ```
 ///
-/// ![A screenshot displaying two toggles in a VStack reading "Vibrate on Ring"
-/// and "Vibrate on Silent" which are both switched to on and each have the
-/// SwitchToggleStyle applied.](3BE5966E-7786-4581-AF97-A7A2B18CEEA6.png)
+/// ![A gif displaying two toggles in a VStack reading "Vibrate on Ring"
+/// and "Vibrate on Silent" with an orange tint color being switched on and off;
+/// the tint is applied using SwitchToggleStyle.](toggle-styling-orange-ex.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct Toggle<Label> : View where Label : View {
 
