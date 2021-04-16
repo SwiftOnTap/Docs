@@ -27744,24 +27744,23 @@ public struct NavigationLink<Label, Destination> : View where Label : View, Dest
     ///
     /// A ``NavigationLink`` should be placed within a ``NavigationView`` and can
     /// be initialized with ``NavigationLink/init(destination:label:)``. To use this
-    /// initializer, one need only provide the `destination`, the ``View`` that is
-    /// linked. There is no need to provide a `label`, as the parameter is a ``ViewBuilder``.
+    /// initializer, provide the `destination`, the ``View`` that is linked.
+    /// The`label` parameter can be passed in a trailing ``ViewBuilder`` closure.
     ///
     /// ```
-    /// struct ContentView: View {
-    ///
-    ///     struct MenuView: View {
-    ///         var body: some View {
-    ///             List {
-    ///                 Text("🥞")
-    ///                 Text("🥓")
-    ///                 Text("🍔")
-    ///                 Text("🍰")
-    ///             }
-    ///             .navigationTitle("Menu")
+    /// struct MenuView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Text("🥞")
+    ///             Text("🥓")
+    ///             Text("🍔")
+    ///             Text("🍰")
     ///         }
+    ///         .navigationTitle("Menu")
     ///     }
+    /// }
     ///
+    /// struct ContentView: View {
     ///     var body: some View {
     ///         NavigationView {
     ///             NavigationLink(destination: MenuView()) {
@@ -31375,15 +31374,6 @@ extension PreferenceKey {
     /// within the ``PreferenceKey`` struct.
     ///
     /// ```
-    /// struct ContentView: View {
-    ///     @State private var customPreferenceKey: Int = 0
-    ///
-    ///     var body: some View {
-    ///         Text("View that sets a preference key when loaded")
-    ///             .preference(key: CustomPreferenceKey.self, value: 1)
-    ///     }
-    /// }
-    ///
     /// struct CustomPreferenceKey: PreferenceKey {
     ///     typealias Value = Int
     ///     static var defaultValue: Int = 0
@@ -31392,9 +31382,12 @@ extension PreferenceKey {
     ///     }
     /// }
     ///
-    /// struct ContentView_Previews: PreviewProvider {
-    ///     static var previews: some View {
-    ///         ContentView()
+    /// struct ContentView: View {
+    ///     @State private var customPreferenceKey: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Text("View that sets a preference key when loaded")
+    ///             .preference(key: CustomPreferenceKey.self, value: 1)
     ///     }
     /// }
     /// ```
@@ -31413,23 +31406,33 @@ extension PreferenceKey {
     ///
     /// Furthermore, this typealias need not be stated explicitly as the
     /// ``PreferenceKey/defaultValue`` states the type in its declaration.
+    /// The following ``PreferenceKey`` uses the `CustomData` ``Equatable``
+    /// for `Value` and defines a ``PreferenceKey/reduce(value:nextvalue:)``
+    /// function that replaces any old ouput with the new preference value.
     ///
     /// ```
-    /// struct ContentView: View {
-    ///
-    ///     var body: some View {
-    ///         Text("View that sets a preference with a custom value key when loaded")
-    ///             .preference(key: CustomPreferenceKey.self, value: CustomData(var1: "Hello", var2: 1))
-    ///     }
-    /// }
-    ///
     /// struct CustomPreferenceKey: PreferenceKey {
-    ///     static var defaultValue: CustomData = CustomData(var1: "", var2: 0)
+    ///     static var defaultValue = CustomData(var1: "", var2: 0)
     ///     static func reduce(value: inout CustomData, nextValue: () -> CustomData) {
     ///         value = nextValue()
     ///     }
     /// }
     /// ```
+    ///
+    /// This ``PreferenceKey`` can now be used within a view and set with the
+    /// `.preference(key:value:)` modifier:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let key = CustomPreferenceKey.Self
+    ///     let value = CustomData(var1: "Hello", var2: 1)
+    ///
+    ///     var body: some View {
+    ///         Text("View that sets a preference with a custom value key when loaded")
+    ///             .preference(key, value)
+    ///     }
+    /// ```
+    ///
     /// [A screenshot of a text view reading "View that sets a preference with a
     /// custom value key when loaded", with the preference modifier applied; the
     /// preference key's value is set with a custom equatable.](pref-key-value-ex2.png)
