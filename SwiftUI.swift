@@ -6082,9 +6082,58 @@ extension ButtonStyle {
 /// The properties of a button.
 ///
 /// This property represents the view state of the `Button` that ``ButtonStyle`` modifies.
-//`ButtonStyleConfiguration` consits of a label representing the button view,
-/// and `isPressed`, which indicates whether or not the button is currently
+/// `ButtonStyleConfiguration` consists of a label representing the button view,
+/// and ``ButtonStyleConfiguration/isPressed``, which indicates whether or not the button is currently
 /// being pressed.
+///
+/// Here, we create a custom `MyButtonStyle`, which has a
+/// ``RoundedRectangle`` background as well as a ``View/scaleEffect(_:anchor:)-1dc80``
+/// view modifier applied to the label which acts on the ``ButtonStyleConfiguration/isPressed``
+/// property.
+///
+/// ```
+/// struct MyButtonStyle: ButtonStyle {
+///     var background: some View {
+///         RoundedRectangle(cornerRadius: 10, style: .continuous)
+///             .fill(Color.orange)
+///             .opacity(0.3)
+///     }
+///
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.label
+///             .padding(20)
+///             .background(background)
+///             .scaleEffect(configuration
+///                             .isPressed ? 0.95 : 1)
+///     }
+/// }
+/// ```
+///
+/// We can then apply the custom style to a button using the
+/// ``View/buttonStyle(_:)-d2d0a`` view modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     @State private var showBananas = false
+///
+///     var body: some View {
+///         VStack(alignment: .center) {
+///             Button("Tap to toggle bananas") {
+///                 showBananas.toggle()
+///             }
+///             .buttonStyle(MyButtonStyle())
+///
+///             if showBananas {
+///                 Text("🍌🍌")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![A gif that reads "Tap to toggle bananas" in the center of the
+/// screen. When tapped, two banana emojis appear beneath the text
+/// view.](button-style-config.gif)
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {
 
@@ -18835,10 +18884,10 @@ extension GroupBox where Label == EmptyView {
 ///             .padding()
 ///             .background(background)
 ///             .opacity(0.4)
-///             .overlay(configuration
-///                         .label
-///                         .padding(.leading, 4),
-///                      alignment: .topLeading
+///             .overlay(
+///                 configuration.label
+///                     .padding(.leading, 4),
+///                 alignment: .topLeading
 ///             )
 ///     }
 /// }
@@ -18856,9 +18905,9 @@ extension GroupBox where Label == EmptyView {
 ///     }
 ///
 ///     var body: some View {
-///         GroupBox(
-///             label: label
-///         ) { Text("Aaron") }
+///         GroupBox( label: label) {
+///             Text("Aaron")
+///         }
 ///         .groupBoxStyle(OrangeGroupBoxStyle())
 ///     }
 /// }
@@ -31223,6 +31272,54 @@ extension PrimitiveButtonStyle {
 }
 
 /// The properties of a button.
+///
+/// The ``PrimitiveButtonStyle`` definition is very similar to that of
+/// ``ButtonStyle``, except that in the case of the former, we pass a
+/// `PrimitiveButtonStyleConfiguration` to the ``PrimitiveButtonStyle/makeBody(configuration:)``.
+/// function. `PrimitiveButtonStyleConfiguration` comes with the button
+/// `label` as a property, but replaces the ``buttonStyleConfiguration/isPressed``
+/// property with a ``PrimitiveButtonStyleConfiguration/trigger()`` function.
+///
+/// Here, we create a custom `TripleTapOnlyStyle`, which has a
+/// ``View/onTapGesture(count:perform:)`` added to the label to trigger the
+/// button action with three consecutive taps.
+///
+/// ```
+/// struct TripleTapOnlyStyle: PrimitiveButtonStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.label
+///             .onTapGesture(count: 3,
+///                           perform: configuration.trigger)
+///     }
+/// }
+/// ```
+///
+/// We can then apply the custom style to a button using the
+/// ``View/buttonStyle(_:)-d2d0a`` view modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     @State private var showBananas = false
+///
+///     var body: some View {
+///         VStack(alignment: .center) {
+///             Button("Triple tap to toggle bananas") {
+///                 showBananas.toggle()
+///             }
+///             .buttonStyle(TripleTapOnlyStyle())
+///
+///             if showBananas {
+///                 Text("🍌🍌")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![A gif that reads "Triple tap to toggle bananas" in the center of the
+/// screen. When tripple tapped, two banana emojis appear beneath the text
+/// view.](prim-button-style.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PrimitiveButtonStyleConfiguration {
 
