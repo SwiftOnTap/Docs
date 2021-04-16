@@ -31370,6 +31370,70 @@ public protocol PreferenceKey { }
 extension PreferenceKey {
 
     /// The type of value produced by this preference.
+    ///
+    /// The `Value` associated with a particular preference is set
+    /// within the ``PreferenceKey`` struct.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     @State private var customPreferenceKey: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Text("View that sets a preference key when loaded")
+    ///             .preference(key: CustomPreferenceKey.self, value: 1)
+    ///     }
+    /// }
+    ///
+    /// struct CustomPreferenceKey: PreferenceKey {
+    ///     typealias Value = Int
+    ///     static var defaultValue: Int = 0
+    ///     static func reduce(value: inout Int, nextValue: () -> Int) {
+    ///         value = nextValue()
+    ///     }
+    /// }
+    ///
+    /// struct ContentView_Previews: PreviewProvider {
+    ///     static var previews: some View {
+    ///         ContentView()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![A screenshot of a text view reading "View that sets a preference when
+    /// loaded", with the preference modifier applied.](pref-key-value-ex1.png)
+    ///
+    /// You can also set a `Value` using a custom ``Equatable``:
+    ///
+    /// ```
+    /// struct CustomData: Equatable {
+    ///     let var1: String
+    ///     let var2: Int
+    /// }
+    /// ```
+    ///
+    /// Furthermore, this typealias need not be stated explicitly as the
+    /// ``PreferenceKey/defaultValue`` states the type in its declaration.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///
+    ///     var body: some View {
+    ///         Text("View that sets a preference with a custom value key when loaded")
+    ///             .preference(key: CustomPreferenceKey.self, value: CustomData(var1: "Hello", var2: 1))
+    ///     }
+    /// }
+    ///
+    /// struct CustomPreferenceKey: PreferenceKey {
+    ///     static var defaultValue: CustomData = CustomData(var1: "", var2: 0)
+    ///     static func reduce(value: inout CustomData, nextValue: () -> CustomData) {
+    ///         value = nextValue()
+    ///     }
+    /// }
+    /// ```
+    /// [A screenshot of a text view reading "View that sets a preference with a
+    /// custom value key when loaded", with the preference modifier applied; the
+    /// preference key's value is set with a custom equatable.](pref-key-value-ex2.png)
+    ///
     associatedtype Value
 
     /// The default value of the preference if none is explicitly set.
