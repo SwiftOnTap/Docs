@@ -6324,8 +6324,7 @@ extension ButtonStyle {
 ///         configuration.label
 ///             .padding(20)
 ///             .background(background)
-///             .scaleEffect(configuration
-///                             .isPressed ? 0.95 : 1)
+///             .scaleEffect(configuration.isPressed ? 0.95 : 1)
 ///     }
 /// }
 /// ```
@@ -19742,7 +19741,7 @@ extension GroupBox where Label == EmptyView {
 ///     }
 ///
 ///     var body: some View {
-///         GroupBox( label: label) {
+///         GroupBox(label: label) {
 ///             Text("Aaron")
 ///         }
 ///         .groupBoxStyle(OrangeGroupBoxStyle())
@@ -32362,8 +32361,7 @@ extension PrimitiveButtonStyle {
 /// struct TripleTapOnlyStyle: PrimitiveButtonStyle {
 ///     func makeBody(configuration: Configuration) -> some View {
 ///         configuration.label
-///             .onTapGesture(count: 3,
-///                           perform: configuration.trigger)
+///             .onTapGesture(count: 3) { configuration.trigger }
 ///     }
 /// }
 /// ```
