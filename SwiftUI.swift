@@ -27741,6 +27741,45 @@ extension NavigationBarItem.TitleDisplayMode : Hashable {
 public struct NavigationLink<Label, Destination> : View where Label : View, Destination : View {
 
     /// Creates an instance that presents `destination`.
+    ///
+    /// A ``NavigationLink`` should be placed within a ``NavigationView`` and can
+    /// be initialized with ``NavigationLink/init(destination:label:)``. To use this
+    /// initializer, one need only provide the `destination`, the ``View`` that is
+    /// linked. There is no need to provide a `label`, as the parameter is a ``ViewBuilder``.
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///
+    ///     struct MenuView: View {
+    ///         var body: some View {
+    ///             List {
+    ///                 Text("🥞")
+    ///                 Text("🥓")
+    ///                 Text("🍔")
+    ///                 Text("🍰")
+    ///             }
+    ///             .navigationTitle("Menu")
+    ///         }
+    ///     }
+    ///
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             NavigationLink(destination: MenuView()) {
+    ///                 Text("Menu")
+    ///             }
+    ///             .navigationTitle("Besty's Diner")
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// ![A gif displaying a view with the title "Betsy's Diner" and a NavigationLink
+    /// reading "Menu"; when the link is clicked, another view reading "Menu" with
+    /// 4 food emoji items in a list and a back button reading "Betsy's Diner"
+    /// slides left over the current view.](nav-link-menu-ex.gif)
+    ///
+    /// - Parameters
+    ///   - destination: A view for the navigation link to present.
+    ///   - label: A view builder that produces a label describing the destination.
     public init(destination: Destination, @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that presents `destination` when active.
