@@ -31386,14 +31386,14 @@ extension PreferenceKey {
     ///     @State private var customPreferenceKey: Int = 0
     ///
     ///     var body: some View {
-    ///         Text("View that sets a preference key when loaded")
+    ///         Text("I set a preference key when I load😃")
     ///             .preference(key: CustomPreferenceKey.self, value: 1)
     ///     }
     /// }
     /// ```
     ///
-    /// ![A screenshot of a text view reading "View that sets a preference when
-    /// loaded", with the preference modifier applied.](pref-key-value-ex1.png)
+    /// ![A screenshot of a text view reading "I set a preference key when I
+    /// load😃", with the preference modifier applied.](pref-key-value-ex1.png)
     ///
     /// You can also set a `Value` using a custom ``Equatable``:
     ///
@@ -31428,13 +31428,13 @@ extension PreferenceKey {
     ///     let value = CustomData(var1: "Hello", var2: 1)
     ///
     ///     var body: some View {
-    ///         Text("View that sets a preference with a custom value key when loaded")
+    ///         Text("I set a preference key with a custom value when I load😎")
     ///             .preference(key, value)
     ///     }
     /// ```
     ///
-    /// [A screenshot of a text view reading "View that sets a preference with a
-    /// custom value key when loaded", with the preference modifier applied; the
+    /// [A screenshot of a text view reading "I set a preference key with a
+    /// custom value when I load😎", with the preference modifier applied; the
     /// preference key's value is set with a custom equatable.](pref-key-value-ex2.png)
     ///
     associatedtype Value
