@@ -33811,9 +33811,11 @@ extension Rectangle : InsettableShape {
 /// ```
 /// struct RedactedView: View {
 ///     var body: some View {
-///         Label("Taylor Swift", systemImage: "person.fill")
-///         Label("Kanye West", systemImage: "person.fill")
-///             .redacted(reason: .placeholder)
+///         VStack {
+///             Label("Taylor Swift", systemImage: "person.fill")
+///             Label("Kanye West", systemImage: "person.fill")
+///                 .redacted(reason: .placeholder)
+///         }
 ///     }
 /// }
 /// ```
