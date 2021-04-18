@@ -6302,27 +6302,29 @@ extension ButtonStyle {
 
 /// The properties of a button.
 ///
-/// This property represents the view state of the ``Button`` control that
-/// ``View/buttonStyle(_:)-d2d0a`` modifies. The ``ButtonStyle`` protocol has one
-/// requirement, the ``ButtonStyle/makeBody(configuration:)``, which accepts
-/// the paramater `ButtonStyleConfiguration`. The properties of `ButtonStyleConfiguration`
-/// consist of a label representing the button view and ``ButtonStyleConfiguration/isPressed``,
-/// which indicates whether or not the button is currently being pressed.
+/// This property represents the view state of the `Button` that ``ButtonStyle`` modifies.
+/// `ButtonStyleConfiguration` consists of a label representing the button view,
+/// and ``ButtonStyleConfiguration/isPressed``, which indicates whether or not the button is currently
+/// being pressed.
 ///
-/// Once `.label` has been inititated, modifiers can be applied to the button view.
-/// ``ButtonStyleConfiguration/isPressed`` can be used within these modifiers to
-/// create press reactions. For example, a custon ``ButtonStyle`` could be created as so:
+/// Here, we create a custom `MyButtonStyle`, which has a
+/// ``RoundedRectangle`` background as well as a ``View/scaleEffect(_:anchor:)-1dc80``
+/// view modifier applied to the label which acts on the ``ButtonStyleConfiguration/isPressed``
+/// property.
 ///
 /// ```
 /// struct MyButtonStyle: ButtonStyle {
-///     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
-///         configuration.label
-///             .padding()
-///             .background(buttonBackground(configuration.isPressed))
+///     var background: some View {
+///         RoundedRectangle(cornerRadius: 10, style: .continuous)
+///             .fill(Color.orange)
+///             .opacity(0.3)
 ///     }
-///     func buttonBackground(_ isPressed: Bool) -> some View {
-///         RoundedRectangle(cornerRadius: 10)
-///             .fill(isPressed ? Color.blue : Color.gray)
+///
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.label
+///             .padding(20)
+///             .background(background)
+///             .scaleEffect(configuration.isPressed ? 0.95 : 1)
 ///     }
 /// }
 /// ```
@@ -19718,10 +19720,10 @@ extension GroupBox where Label == EmptyView {
 ///             .padding()
 ///             .background(background)
 ///             .opacity(0.4)
-///             .overlay(configuration
-///                         .label
-///                         .padding(.leading, 4),
-///                      alignment: .topLeading
+///             .overlay(
+///                 configuration.label
+///                     .padding(.leading, 4),
+///                 alignment: .topLeading
 ///             )
 ///     }
 /// }
@@ -19739,9 +19741,9 @@ extension GroupBox where Label == EmptyView {
 ///     }
 ///
 ///     var body: some View {
-///         GroupBox(
-///             label: label
-///         ) { Text("Aaron") }
+///         GroupBox(label: label) {
+///             Text("Aaron")
+///         }
 ///         .groupBoxStyle(OrangeGroupBoxStyle())
 ///     }
 /// }
@@ -32343,6 +32345,53 @@ extension PrimitiveButtonStyle {
 }
 
 /// The properties of a button.
+///
+/// The ``PrimitiveButtonStyle`` definition is very similar to that of
+/// ``ButtonStyle``, except that in the case of the former, we pass a
+/// `PrimitiveButtonStyleConfiguration` to the ``PrimitiveButtonStyle/makeBody(configuration:)``.
+/// function. `PrimitiveButtonStyleConfiguration` comes with the button
+/// `label` as a property, but replaces the ``buttonStyleConfiguration/isPressed``
+/// property with a ``PrimitiveButtonStyleConfiguration/trigger()`` function.
+///
+/// Here, we create a custom `TripleTapOnlyStyle`, which has a
+/// ``View/onTapGesture(count:perform:)`` added to the label to trigger the
+/// button action with three consecutive taps.
+///
+/// ```
+/// struct TripleTapOnlyStyle: PrimitiveButtonStyle {
+///     func makeBody(configuration: Configuration) -> some View {
+///         configuration.label
+///             .onTapGesture(count: 3) { configuration.trigger }
+///     }
+/// }
+/// ```
+///
+/// We can then apply the custom style to a button using the
+/// ``View/buttonStyle(_:)-d2d0a`` view modifier:
+///
+/// ```
+/// struct ContentView: View {
+///     @State private var showBananas = false
+///
+///     var body: some View {
+///         VStack(alignment: .center) {
+///             Button("Triple tap to toggle bananas") {
+///                 showBananas.toggle()
+///             }
+///             .buttonStyle(TripleTapOnlyStyle())
+///
+///             if showBananas {
+///                 Text("🍌🍌")
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ![A gif that reads "Triple tap to toggle bananas" in the center of the
+/// screen. When tripple tapped, two banana emojis appear beneath the text
+/// view.](prim-button-style.gif)
+///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct PrimitiveButtonStyleConfiguration {
 
