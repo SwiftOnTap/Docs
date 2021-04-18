@@ -27801,6 +27801,44 @@ extension NavigationBarItem.TitleDisplayMode : Hashable {
 public struct NavigationLink<Label, Destination> : View where Label : View, Destination : View {
 
     /// Creates an instance that presents `destination`.
+    ///
+    /// A ``NavigationLink`` should be placed within a ``NavigationView`` and can
+    /// be initialized with ``NavigationLink/init(destination:label:)``. To use this
+    /// initializer, provide the `destination`, the ``View`` that is linked.
+    /// The`label` parameter can be passed in a trailing ``ViewBuilder`` closure.
+    ///
+    /// ```
+    /// struct MenuView: View {
+    ///     var body: some View {
+    ///         List {
+    ///             Text("🥞")
+    ///             Text("🥓")
+    ///             Text("🍔")
+    ///             Text("🍰")
+    ///         }
+    ///         .navigationTitle("Menu")
+    ///     }
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     var body: some View {
+    ///         NavigationView {
+    ///             NavigationLink(destination: MenuView()) {
+    ///                 Text("Menu")
+    ///             }
+    ///             .navigationTitle("Besty's Diner")
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    /// ![A gif displaying a view with the title "Betsy's Diner" and a NavigationLink
+    /// reading "Menu"; when the link is clicked, another view reading "Menu" with
+    /// 4 food emoji items in a list and a back button reading "Betsy's Diner"
+    /// slides left over the current view.](nav-link-menu-ex.gif)
+    ///
+    /// - Parameters
+    ///   - destination: A view for the navigation link to present.
+    ///   - label: A view builder that produces a label describing the destination.
     public init(destination: Destination, @ViewBuilder label: () -> Label) { }
 
     /// Creates an instance that presents `destination` when active.
@@ -31306,6 +31344,9 @@ public enum PopoverAttachmentAnchor {
 /// this can produce unintended effects as a result of modifying state during a view update. In
 /// these scenarios, it may be better to use view preferences.
 ///
+/// `PreferenceKey` requires a ``PreferenceKey/defaultValue`` and a ``PreferenceKey/reduce(value:nextValue:)``,
+/// which defines the logic used to combine multiple outputted values into one.
+///
 /// For example, to set a preference key from a view and use it to change a state:
 ///
 /// ```
@@ -31337,7 +31378,7 @@ public enum PopoverAttachmentAnchor {
 /// preference key when loaded."](48FAD8ED-F1A7-4BC2-B801-A5EB9C765728.png)
 ///
 /// It is also possible to use more complicated data structures as a preference key
-/// by changing the type of the defaultValue. For example:
+/// by changing the type of the ``PreferenceKey/defaultValue``. For example:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -31388,6 +31429,74 @@ public protocol PreferenceKey { }
 extension PreferenceKey {
 
     /// The type of value produced by this preference.
+    ///
+    /// The `Value` associated with a particular preference is set
+    /// within the ``PreferenceKey`` struct.
+    ///
+    /// ```
+    /// struct CustomPreferenceKey: PreferenceKey {
+    ///     typealias Value = Int
+    ///     static var defaultValue: Int = 0
+    ///     static func reduce(value: inout Int, nextValue: () -> Int) {
+    ///         value = nextValue()
+    ///     }
+    /// }
+    ///
+    /// struct ContentView: View {
+    ///     @State private var customPreferenceKey: Int = 0
+    ///
+    ///     var body: some View {
+    ///         Text("I set a preference key when I load😃")
+    ///             .preference(key: CustomPreferenceKey.self, value: 1)
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![A screenshot of a text view reading "I set a preference key when I
+    /// load😃", with the preference modifier applied.](pref-key-value-ex1.png)
+    ///
+    /// You can also set a `Value` using a custom ``Equatable``:
+    ///
+    /// ```
+    /// struct CustomData: Equatable {
+    ///     let var1: String
+    ///     let var2: Int
+    /// }
+    /// ```
+    ///
+    /// Furthermore, this typealias need not be stated explicitly as the
+    /// ``PreferenceKey/defaultValue`` states the type in its declaration.
+    /// The following ``PreferenceKey`` uses the `CustomData` ``Equatable``
+    /// for `Value` and defines a ``PreferenceKey/reduce(value:nextvalue:)``
+    /// function that replaces any old ouput with the new preference value.
+    ///
+    /// ```
+    /// struct CustomPreferenceKey: PreferenceKey {
+    ///     static var defaultValue = CustomData(var1: "", var2: 0)
+    ///     static func reduce(value: inout CustomData, nextValue: () -> CustomData) {
+    ///         value = nextValue()
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// This ``PreferenceKey`` can now be used within a view and set with the
+    /// `.preference(key:value:)` modifier:
+    ///
+    /// ```
+    /// struct ContentView: View {
+    ///     let key = CustomPreferenceKey.Self
+    ///     let value = CustomData(var1: "Hello", var2: 1)
+    ///
+    ///     var body: some View {
+    ///         Text("I set a preference key with a custom value when I load😎")
+    ///             .preference(key, value)
+    ///     }
+    /// ```
+    ///
+    /// [A screenshot of a text view reading "I set a preference key with a
+    /// custom value when I load😎", with the preference modifier applied; the
+    /// preference key's value is set with a custom equatable.](pref-key-value-ex2.png)
+    ///
     associatedtype Value
 
     /// The default value of the preference if none is explicitly set.
@@ -54368,6 +54477,15 @@ extension View {
 extension View {
 
     /// Sets a value for the given preference.
+    ///
+    /// This ``View`` modifier is used to set the value for a particular preference.
+    /// `preference(key:value:)` takes two parameters, `key`, which states the relevant
+    /// ``PreferenceKey`` type and `value`, the new value for the given preference.
+    ///
+    ///
+    /// - Parameters:
+    ///   - key: The type of ``PreferenceKey`` being set.
+    ///   - value: The new content of the key.
     @inlinable public func preference<K>(key: K.Type = K.self, value: K.Value) -> some View where K : PreferenceKey { }
 
 }
