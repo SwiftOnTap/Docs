@@ -7675,7 +7675,7 @@ extension ColorRenderingMode : Hashable {
 /// - ``ColorScheme/dark``
 ///
 /// These can be applied using either the ``View/colorScheme(_:)`` modifier,
-/// which automatically sets the ``ColorScheme'' for the ``View``, or the
+/// which automatically sets the ``ColorScheme`` for the ``View``, or the
 /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
 /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
 /// hierarchy.
@@ -7713,7 +7713,7 @@ extension ColorRenderingMode : Hashable {
 /// text white.](color-scheme-dark-ex.png)
 ///
 /// These `ColorScheme`s can also be used in ``EnvironmentValues/colorScheme``.
-/// Take this example, where different `text` renders depending on the system's
+/// Take this example, where different ``Text`` renders depending on the system's
 /// current color scheme setting:
 ///
 /// ```
@@ -7736,8 +7736,8 @@ public enum ColorScheme : CaseIterable {
 
     /// The color scheme referring to light mode in a device.
     ///
-    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)``
-    /// modifier, which automatically sets the ``ColorScheme'' for the ``View``, or the
+    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)`` modifier,
+    /// which automatically sets the ``ColorScheme`` for the ``View``, or the
     /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
     /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
     /// hierarchy. For example:
@@ -7759,8 +7759,8 @@ public enum ColorScheme : CaseIterable {
 
     /// The color scheme referring to dark mode in a device.
     ///
-    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)``
-    /// modifier, which automatically sets the ``ColorScheme'' for the ``View``, or the
+    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)`` modifier,
+    /// which automatically sets the ``ColorScheme`` for the ``View``, or the
     /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
     /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
     /// hierarchy. For example:
