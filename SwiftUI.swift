@@ -47257,8 +47257,17 @@ extension VerticalAlignment {
 /// A type that represents part of your app's user interface and provides
 /// modifiers that you use to configure views.
 ///
+/// Conform to this protocol in order to organize an app's UI into customizable,
+/// related parts.
+///
+/// ### `View` Conformance
+///
 /// You create custom views by declaring types that conform to the ``View``
-/// protocol. Implement the required ``View/body-swift.variable`` computed
+/// protocol.
+///
+/// #### Requirements
+///
+/// Implement the required ``View/body-swift.variable`` computed
 /// property to provide the content for your custom view.
 ///
 ///     struct ContentView: View {
@@ -47269,9 +47278,13 @@ extension VerticalAlignment {
 ///
 /// ![A custom view that reads "Hello, World!" in the center of the screen.](view-simple.png)
 ///
+/// ### Using `View`
+///
 /// Assemble the view's body by combining one or more of the primitive views
 /// provided by SwiftUI, like the ``Text`` instance in the example above, plus
 /// other custom views that you define, into a hierarchy of views.
+///
+/// ### Default Implementations
 ///
 /// The ``View`` protocol provides a large set of modifiers, defined as protocol
 /// methods with default implementations, that you use to position and configure
