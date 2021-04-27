@@ -7666,7 +7666,7 @@ extension ColorRenderingMode : Equatable {
 extension ColorRenderingMode : Hashable {
 }
 
-/// The possible types of color schemes, like Dark Mode.
+/// Indicates the type of color scheme, such as Dark Mode.
 ///
 /// The color scheme enumerates the user setting options for Light or Dark Mode.
 /// It also provides the light or dark options for any particular view when the
@@ -7677,7 +7677,7 @@ extension ColorRenderingMode : Hashable {
 /// - ``ColorScheme/dark``
 ///
 /// These can be applied using either the ``View/colorScheme(_:)`` modifier,
-/// which automatically sets the ``ColorScheme'' for the ``View``, or the
+/// which automatically sets the ``ColorScheme`` for the ``View``, or the
 /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
 /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
 /// hierarchy.
@@ -7715,7 +7715,7 @@ extension ColorRenderingMode : Hashable {
 /// text white.](color-scheme-dark-ex.png)
 ///
 /// These `ColorScheme`s can also be used in ``EnvironmentValues/colorScheme``.
-/// Take this example, where different `text` renders depending on the system's
+/// Take this example, where different ``Text`` renders depending on the system's
 /// current color scheme setting:
 ///
 /// ```
@@ -7738,8 +7738,8 @@ public enum ColorScheme : CaseIterable {
 
     /// The color scheme referring to light mode in a device.
     ///
-    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)``
-    /// modifier, which automatically sets the ``ColorScheme'' for the ``View``, or the
+    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)`` modifier,
+    /// which automatically sets the ``ColorScheme`` for the ``View``, or the
     /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
     /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
     /// hierarchy. For example:
@@ -7761,8 +7761,8 @@ public enum ColorScheme : CaseIterable {
 
     /// The color scheme referring to dark mode in a device.
     ///
-    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)``
-    /// modifier, which automatically sets the ``ColorScheme'' for the ``View``, or the
+    /// This ``ColorScheme`` can be applied using either the ``View/colorScheme(_:)`` modifier,
+    /// which automatically sets the ``ColorScheme`` for the ``View``, or the
     /// ``View/preferredColorScheme(_:)`` modifier, which is overridden by
     /// declarations of ``View/preferredColorScheme(_:)`` higher up in the ``View``
     /// hierarchy. For example:
@@ -12199,7 +12199,7 @@ extension DynamicViewContent {
 
 /// An enumeration to indicate one edge of a rectangle.
 ///
-/// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)-9f6b7``,
+/// ``Edge`` is most frequently used to specify padding with ``View/padding(_:)-97aab``,
 /// but it can also be returned from instance methods. For example:
 ///
 /// ```
@@ -23021,9 +23021,6 @@ public struct KeyEquivalent {
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
     ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
-    ///
     /// ```
     /// struct ShortcutEnabledView: View {
     ///     @State var bananas = ""
@@ -23048,15 +23045,15 @@ public struct KeyEquivalent {
     /// clicked or command and upArrow key are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](key-equivalent-up-arrow-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let upArrow: KeyEquivalent
 
     /// Down Arrow (U+F701) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23082,15 +23079,15 @@ public struct KeyEquivalent {
     /// is clicked or command and downArrow key are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-down-arrow-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let downArrow: KeyEquivalent
 
     /// Left Arrow (U+F702) key equivalent.
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23116,15 +23113,15 @@ public struct KeyEquivalent {
     /// is clicked or command and leftArrow key are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-left-arrow-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let leftArrow: KeyEquivalent
 
     /// Right Arrow (U+F703) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23150,15 +23147,15 @@ public struct KeyEquivalent {
     /// is clicked or command and rightArrow key are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-right-arrow-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let rightArrow: KeyEquivalent
 
     /// Escape (U+001B) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23184,15 +23181,15 @@ public struct KeyEquivalent {
     /// is clicked or command, control, and escape are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](escape-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let escape: KeyEquivalent
 
     /// Delete (U+0008) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23218,15 +23215,15 @@ public struct KeyEquivalent {
     /// is clicked or command and delete are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](delete-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let delete: KeyEquivalent
 
     /// Delete Forward (U+F728) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// - Note: Many keyboards don't have this key.
     ///
@@ -23254,15 +23251,15 @@ public struct KeyEquivalent {
     /// is clicked or command and deleteForward are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](delete-forward-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let deleteForward: KeyEquivalent
 
     /// Home (U+F729) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// - Note: Many keyboards don't have this key. If yours doesn't, press
     /// fn+left arrow instead.
@@ -23291,15 +23288,15 @@ public struct KeyEquivalent {
     /// is clicked or command and home are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](home-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let home: KeyEquivalent
 
     /// End (U+F72B)
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// - Note: Many keyboards don't have this key. If yours doesn't, press
     /// fn+right arrow instead.
@@ -23328,15 +23325,15 @@ public struct KeyEquivalent {
     /// is clicked or command and end are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](end-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let end: KeyEquivalent
 
     /// Page Up (U+F72C) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23362,15 +23359,15 @@ public struct KeyEquivalent {
     /// is clicked or command and pageUp are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](page-up-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let pageUp: KeyEquivalent
 
     /// Page Down (U+F72D) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23396,15 +23393,15 @@ public struct KeyEquivalent {
     /// is clicked or command and pageDown are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-page-down-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let pageDown: KeyEquivalent
 
     /// Clear (U+F739) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23430,15 +23427,15 @@ public struct KeyEquivalent {
     /// is clicked or command, control, and clear are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-clear-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let clear: KeyEquivalent
 
     /// Tab (U+0009) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23464,15 +23461,15 @@ public struct KeyEquivalent {
     /// is clicked or command, control, and tab are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-tab-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let tab: KeyEquivalent
 
     /// Space (U+0020) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23498,15 +23495,15 @@ public struct KeyEquivalent {
     /// is clicked or command, control, option, and space are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-space-ex.gif)
     ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
+    ///
     public static let space: KeyEquivalent
 
     /// Return (U+000D) key equivalent
     ///
     /// Use this property with the ``View/keyboardShortcut(_:modifiers:)``
     /// view modifier to add keyboard shortcuts to a view.
-    ///
-    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
-    /// objects, which are used extensively in ``Commands``.
     ///
     /// ```
     /// struct ShortcutEnabledView: View {
@@ -23531,6 +23528,9 @@ public struct KeyEquivalent {
     /// return with command and control as the modifiers; the gif shows that when the button
     /// is clicked or command, control, and return are pressed, "🍌" is appended
     /// to the bananas string, as reflected in its display on the screen.](ke-return-ex.gif)
+    ///
+    /// ``KeyEquivalent``s are also used in constructing ``KeyboardShortcut``
+    /// objects, which are used extensively in ``Commands``.
     ///
     public static let `return`: KeyEquivalent
 
@@ -24050,9 +24050,10 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// A protocol for creating styles for Label views.
 ///
 /// Use this protocol to create a label style that can easily be reused, or
-/// to quickly implement one of the out-of-the-box label styles.
+/// to quickly implement one of the built-in label styles. These can all be applied
+/// to a `Label` with the ``View/labelStyle(_:)`` modifier.
 ///
-/// ### Making a `LabelStyle`
+/// ### Styling a ``Label`` with a `LabelStyle`
 ///
 /// There are two ways to style a ``Label``:
 /// - By creating a `struct` that
@@ -24060,7 +24061,7 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// - By using a default `struct` that conforms
 /// to this protocol.
 ///
-/// #### Conforming to `LabelStyle`
+/// #### Creating Your Own `LabelStyle`
 ///
 /// To create your own label style by conforming to the `LabelStyle` protocol,
 /// there is only one required
@@ -24089,7 +24090,7 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// This label style does two things: it stacks the title and icon vertically,
 /// and colors the icon. See below for how to use this custom label style.
 ///
-/// #### Default `LabelStyle` Structures
+/// #### Built-in `LabelStyle` Structures
 ///
 /// If you don't want to create your own label style, there are 3 default
 /// styles. These are `struct`s that conform to the `LabelStyle` protocol
@@ -24104,12 +24105,12 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// All 3 styles have only one initializer, which takes no parameters.
 /// See below for how to use them.
 ///
-/// ### Using a ``LabelStyle``
+/// ### Using a `LabelStyle`
 ///
 /// To use a `LabelStyle`, pass it to a ``Label``'s ``View/labelStyle(_:)``
 /// modifier.
 ///
-/// Here is our custom label style from earlier:
+/// Here is an example that uses our custom label style from earlier:
 ///
 /// ```
 /// struct ContentView: View {
@@ -24129,7 +24130,7 @@ extension Label where Title == LabelStyleConfiguration.Title, Icon == LabelStyle
 /// and "Apple," each with a heart emoji underneath it corresponding to the color
 /// defined in the label style.](custom-labelstyle-comparison.png)
 ///
-/// And here's a comparison of the 3 default label styles:
+/// And here is a comparison of the 3 built-in label styles:
 ///
 /// ```
 /// struct ContentView: View {
@@ -26824,6 +26825,8 @@ public struct Menu<Label, Content> : View where Label : View, Content : View {
 extension Menu {
 
     /// Creates a menu with a view label.
+    ///
+    /// Use this initializer to create a ``Menu``.
     ///
     /// ```
     /// struct MenuView: View {
@@ -33848,9 +33851,22 @@ extension ProjectionTransform {
 
 /// A rectangle shape.
 ///
-/// A Rectangle is a rectangular ``Shape`` that by default, aligns itself inside
-/// of the view containing it. To define a Rectangle with a specific color and
-/// frame, use the ``Shape/fill(_:style:)`` and ``View/frame(width:height:alignment:)`` modifiers:
+/// A Rectangle is a four-sided ``Shape`` with 90 degree angle corners that automatically
+/// aligns itself inside of the view containing it. By default, a `Rectangle` has
+/// black fill and takes up the space of it's container:
+///
+/// ```
+/// struct ContentView: View {
+///     var body: some View {
+///         Rectangle()
+///     }
+/// }
+/// ```
+///
+/// ![A default rectangle filling the screen.](rectangle-default.png)
+///
+/// To define a `Rectangle` with a specific color and frame, use the ``Shape/fill(_:style:)``
+/// and ``View/frame(width:height:alignment:)`` modifiers:
 ///
 /// ```
 /// struct ExampleView: View {
@@ -35269,7 +35285,9 @@ public struct RoundedBorderTextFieldStyle : TextFieldStyle {
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public enum RoundedCornerStyle {
 
-    /// Quarter-circle rounded rect corners.
+    /// Quarter-circle rounded rectangle corners.
+    ///
+    /// Use this case along with the
     ///
     /// In the example below, the top rectangle uses ``RoundedCornerStyle/circular``
     /// corners.
@@ -47371,8 +47389,17 @@ extension VerticalAlignment {
 /// A type that represents part of your app's user interface and provides
 /// modifiers that you use to configure views.
 ///
+/// Conform to this protocol in order to organize an app's UI into customizable,
+/// related parts.
+///
+/// ### `View` Conformance
+///
 /// You create custom views by declaring types that conform to the ``View``
-/// protocol. Implement the required ``View/body-swift.variable`` computed
+/// protocol.
+///
+/// #### Requirements
+///
+/// Implement the required ``View/body-swift.variable`` computed
 /// property to provide the content for your custom view.
 ///
 ///     struct ContentView: View {
@@ -47383,9 +47410,13 @@ extension VerticalAlignment {
 ///
 /// ![A custom view that reads "Hello, World!" in the center of the screen.](view-simple.png)
 ///
+/// ### Using `View`
+///
 /// Assemble the view's body by combining one or more of the primitive views
 /// provided by SwiftUI, like the ``Text`` instance in the example above, plus
 /// other custom views that you define, into a hierarchy of views.
+///
+/// ### Default Implementations
 ///
 /// The ``View`` protocol provides a large set of modifiers, defined as protocol
 /// methods with default implementations, that you use to position and configure
