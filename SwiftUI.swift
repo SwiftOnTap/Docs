@@ -14515,17 +14515,24 @@ public struct FetchedResults<Result> : RandomAccessCollection where Result : NSF
 
     /// Accesses the element at the specified position.
     ///
-    /// The following example accesses an element of an array through its
-    /// subscript to print its value:
-    ///
-    ///     var streets = ["Adams", "Bryant", "Channing", "Douglas", "Evarts"]
-    ///     print(streets[1])
-    ///     // Prints "Bryant"
-    ///
     /// You can subscript a collection with any valid index other than the
     /// collection's end index. The end index refers to the position one past
     /// the last element of a collection, so it doesn't correspond with an
     /// element.
+    ///
+    /// The following example accesses an element of an array through its
+    /// subscript to print its value:
+    ///
+    ///     struct ContentView: View {
+    ///         var basicArray = ["First element", "Second element", "Third element"]
+    ///
+    ///         var body: some View {
+    ///             Text("The element at index 1 is: \(basicArray[1])")
+    ///         }
+    ///     }
+    ///
+    /// ![A screenshot of a view displaying the text "The element at index 1 is: Second Element",
+    /// where the element content has been called in the text view using a subscript.](subscript-position-ex.png)
     ///
     /// - Parameter position: The position of the element to access. `position`
     ///   must be a valid index of the collection that is not equal to the
