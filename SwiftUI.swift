@@ -44160,16 +44160,22 @@ extension TextField where Label == Text {
 /// ``View/textFieldStyle(_:)`` to change the
 /// style of ``TextField`` views.
 ///
-/// There are currently only 3 styles available on iOS:
+/// There are currently 3 system-provided styles available on iOS:
 ///     - ``DefaultTextFieldStyle``
 ///     - ``PlainTextFieldStyle``
 ///     - ``RoundedBorderTextFieldStyle``
 ///     - ``SquareBorderTextFieldStyle`` (macOS only)
 ///
-/// There is currently no way to create your own text field styles.
-/// The best way to create a custom text field is by placing
-/// your ``TextField`` in a ``ZStack``, and styling the elements around it.
-///
+/// You can create custom text field styles using the `TextFieldStyle` protocol:
+/// ```
+/// struct MyTextFieldStyle: TextFieldStyle {
+///     public func _body(configuration field: TextField<_Label>) -> some View {
+///        field.textFieldStyle(PlainTextFieldStyle())
+///        // style here
+///     }
+/// }
+/// ```
+/// 
 /// ```
 /// struct TextFieldView: View {
 ///     @State private var input = ""
