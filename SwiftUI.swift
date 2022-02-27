@@ -28940,7 +28940,7 @@ public struct OutlineSubgroupChildren : View {
 ///                 Text($0)
 ///             }
 ///         }
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 ///     }
 /// }
@@ -29163,7 +29163,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///     }
 /// }
 /// ```
@@ -42036,7 +42036,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ### Page-style navigation
 ///
 /// **In iOS 14+ only**, you can place child views in a ``TabView`` with a
-/// `View.tabViewStyle(PageTabViewStyle())` attached to the ``TabView``
+/// `View.tabViewStyle(.page)` attached to the ``TabView``
 /// for a page-style style navigation.
 ///
 /// The following example creates a paginated view with the three ``Text`` child
@@ -42052,7 +42052,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///     }
 /// }
 /// ```
@@ -42073,7 +42073,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///                     .foregroundColor(Color.white)
 ///             }
 ///         }
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///         .background(Color.black)
 ///     }
 /// }
@@ -42342,7 +42342,7 @@ extension TabView where SelectionValue == Int {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///     }
 /// }
 /// ```
@@ -47910,7 +47910,7 @@ extension View {
     ///             Text("Page 1️⃣")
     ///             Color.pink
     ///         }
-    ///         .tabViewStyle(PageTabViewStyle())
+    ///         .tabViewStyle(.page)
     ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     ///     }
     /// }
@@ -48140,7 +48140,7 @@ extension View {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle())
+    ///         .tabViewStyle(.page)
     ///     }
     /// }
     /// ```
