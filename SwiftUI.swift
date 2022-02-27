@@ -10072,7 +10072,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 ///                     Text("🍑🍑")
 ///                 }
 ///         }
-///         .tabViewStyle(DefaultTabViewStyle())
+///         .tabViewStyle(.automatic)
 ///         .font(.headline)
 ///     }
 /// }
@@ -10085,7 +10085,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// corresponding to the those in the text views.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 /// Since this is the default style,
-/// if you omit the line `.tabViewStyle(DefaultTabViewStyle())`, you
+/// if you omit the line `.tabViewStyle(.automatic)`, you
 /// get the same result:
 ///
 /// ```
@@ -10147,7 +10147,7 @@ public struct DefaultTabViewStyle : TabViewStyle {
     ///                     Text("🍑🍑")
     ///                 }
     ///         }
-    ///         .tabViewStyle(DefaultTabViewStyle())
+    ///         .tabViewStyle(.automatic)
     ///         .font(.headline)
     ///     }
     /// }
@@ -48193,7 +48193,7 @@ extension View {
     ///             Text("Peaches 🍑🍑")
     ///                 .tabItem { Image(systemName: "3.circle.fill") }
     ///         }
-    ///         .tabViewStyle(DefaultTabViewStyle())
+    ///         .tabViewStyle(.automatic)
     ///     }
     /// }
     /// ```
