@@ -22531,7 +22531,7 @@ extension Image.ResizingMode : Hashable {
 ///             Text("Tab 2")
 ///             Text("Tab 3")
 ///         }
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///         .tabViewStyle(.page(indexDisplayMode: .always))
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
 ///     }
 /// }
@@ -28965,7 +28965,7 @@ public struct OutlineSubgroupChildren : View {
 ///             Text("Tab 2")
 ///             Text("Tab 3")
 ///         }
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///         .tabViewStyle(.page(indexDisplayMode: .always))
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
 ///     }
 /// }
@@ -29007,7 +29007,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
         ///         }
         ///     }
@@ -29039,7 +29039,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
         ///         }
         ///     }
@@ -29072,7 +29072,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         ///         }
         ///     }
@@ -29105,7 +29105,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
         ///         }
         ///     }
@@ -29135,7 +29135,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
     ///             Text("Tab 2")
     ///             Text("Tab 3")
     ///         }
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    ///         .tabViewStyle(.page(indexDisplayMode: .always))
     ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     ///     }
     /// }
@@ -29187,7 +29187,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+///         .tabViewStyle(.page(indexDisplayMode: .never))
 ///     }
 /// }
 /// ```
@@ -29215,7 +29215,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///         .tabViewStyle(.page(indexDisplayMode: .never))
     ///     }
     /// }
     /// ```
@@ -29252,7 +29252,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        ///         .tabViewStyle(.page(indexDisplayMode: .automatic))
         ///     }
         /// }
         /// ```
@@ -29273,7 +29273,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        ///         .tabViewStyle(.page(indexDisplayMode: .automatic))
         ///     }
         /// }
         /// ```
@@ -29303,7 +29303,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///         .tabViewStyle(.page(indexDisplayMode: .always))
         ///     }
         /// }
         /// ```
@@ -29334,7 +29334,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        ///         .tabViewStyle(.page(indexDisplayMode: .never))
         ///     }
         /// }
         /// ```
@@ -29372,7 +29372,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///         .tabViewStyle(.page(indexDisplayMode: .never))
     ///     }
     /// }
     /// ```
@@ -42102,7 +42102,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///             }
 ///         }
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+///         .tabViewStyle(.page(indexDisplayMode: .never))
 ///     }
 /// }
 /// ```
@@ -48170,7 +48170,7 @@ extension View {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///         .tabViewStyle(.page(indexDisplayMode: .never))
     ///     }
     /// }
     /// ```
