@@ -32646,6 +32646,35 @@ extension ProgressView where CurrentValueLabel == EmptyView {
     /// ![A gif displaying a gray progress spinner with a custom label underneath it
     /// that reads "We're working on it" as rendered by passing the label to the intializer.](progress-spinner-runner.gif)
     ///
+    ///
+    /// ```
+    /// struct CounterView: View {
+    ///     var body: some View {
+    ///         VStack(spacing: 70) {
+    ///             ProgressView {
+    ///                 Text("We're working on it 🏃‍♀️")
+    ///             }
+    ///
+    ///             ProgressView("waiting…")
+    ///                 .font(.system(size: 30))
+    ///
+    ///             ProgressView("Uploading…")
+    ///                 .font(.title)
+    ///                 .foregroundColor(.red)
+    ///
+    ///             ProgressView("Downloading…")
+    ///                 .tint(.orange)
+    ///                 .scaleEffect(2)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    ///
+    /// ![A gif displaying a gray progress spinner with a custom label underneath it that reads "We're working on it" as rendered by passing the label to the
+    ///  intializer.](progress-spinner-runner-custom.gif)
+    ///
+    ///
     /// - Parameters:
     ///     - label: A view builder that creates a view that describes the task
     ///       in progress.
