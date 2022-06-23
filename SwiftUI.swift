@@ -12324,10 +12324,10 @@ extension DynamicViewContent {
         /// An edge set containing all 4 edges.
         public static let all: Edge.Set
 
-        /// An edge set containing the top and bottom edges.
+        /// An edge set containing the leading and trailing edges.
         public static let horizontal: Edge.Set
 
-        /// An edge set containing the leading and trailing edges.
+        /// An edge set containing the top and bottom edges.
         public static let vertical: Edge.Set
 
         /// Creates an instance containing just `e`
