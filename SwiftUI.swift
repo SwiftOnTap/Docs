@@ -10072,7 +10072,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 ///                     Text("🍑🍑")
 ///                 }
 ///         }
-///         .tabViewStyle(DefaultTabViewStyle())
+///         .tabViewStyle(.automatic)
 ///         .font(.headline)
 ///     }
 /// }
@@ -10085,7 +10085,7 @@ public struct DefaultProgressViewStyle : ProgressViewStyle {
 /// corresponding to the those in the text views.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/TabView-example-1.gif)
 ///
 /// Since this is the default style,
-/// if you omit the line `.tabViewStyle(DefaultTabViewStyle())`, you
+/// if you omit the line `.tabViewStyle(.automatic)`, you
 /// get the same result:
 ///
 /// ```
@@ -10147,7 +10147,7 @@ public struct DefaultTabViewStyle : TabViewStyle {
     ///                     Text("🍑🍑")
     ///                 }
     ///         }
-    ///         .tabViewStyle(DefaultTabViewStyle())
+    ///         .tabViewStyle(.automatic)
     ///         .font(.headline)
     ///     }
     /// }
@@ -22531,7 +22531,7 @@ extension Image.ResizingMode : Hashable {
 ///             Text("Tab 2")
 ///             Text("Tab 3")
 ///         }
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///         .tabViewStyle(.page(indexDisplayMode: .always))
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
 ///     }
 /// }
@@ -28940,7 +28940,7 @@ public struct OutlineSubgroupChildren : View {
 ///                 Text($0)
 ///             }
 ///         }
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 ///     }
 /// }
@@ -28965,7 +28965,7 @@ public struct OutlineSubgroupChildren : View {
 ///             Text("Tab 2")
 ///             Text("Tab 3")
 ///         }
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+///         .tabViewStyle(.page(indexDisplayMode: .always))
 ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
 ///     }
 /// }
@@ -29007,7 +29007,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
         ///         }
         ///     }
@@ -29039,7 +29039,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
         ///         }
         ///     }
@@ -29072,7 +29072,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         ///         }
         ///     }
@@ -29105,7 +29105,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
         ///                 Text("Tab 2")
         ///                 Text("Tab 3")
         ///             }
-        ///             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///             .tabViewStyle(.page(indexDisplayMode: .always))
         ///             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
         ///         }
         ///     }
@@ -29135,7 +29135,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
     ///             Text("Tab 2")
     ///             Text("Tab 3")
     ///         }
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+    ///         .tabViewStyle(.page(indexDisplayMode: .always))
     ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     ///     }
     /// }
@@ -29163,7 +29163,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///     }
 /// }
 /// ```
@@ -29187,7 +29187,7 @@ public struct PageIndexViewStyle : IndexViewStyle {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+///         .tabViewStyle(.page(indexDisplayMode: .never))
 ///     }
 /// }
 /// ```
@@ -29215,7 +29215,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///         .tabViewStyle(.page(indexDisplayMode: .never))
     ///     }
     /// }
     /// ```
@@ -29252,7 +29252,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        ///         .tabViewStyle(.page(indexDisplayMode: .automatic))
         ///     }
         /// }
         /// ```
@@ -29273,7 +29273,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        ///         .tabViewStyle(.page(indexDisplayMode: .automatic))
         ///     }
         /// }
         /// ```
@@ -29303,7 +29303,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        ///         .tabViewStyle(.page(indexDisplayMode: .always))
         ///     }
         /// }
         /// ```
@@ -29334,7 +29334,7 @@ public struct PageTabViewStyle : TabViewStyle {
         ///         }
         ///         .foregroundColor(Color.white)
         ///         .background(Color.yellow)
-        ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        ///         .tabViewStyle(.page(indexDisplayMode: .never))
         ///     }
         /// }
         /// ```
@@ -29372,7 +29372,7 @@ public struct PageTabViewStyle : TabViewStyle {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///         .tabViewStyle(.page(indexDisplayMode: .never))
     ///     }
     /// }
     /// ```
@@ -42065,7 +42065,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 /// ### Page-style navigation
 ///
 /// **In iOS 14+ only**, you can place child views in a ``TabView`` with a
-/// `View.tabViewStyle(PageTabViewStyle())` attached to the ``TabView``
+/// `View.tabViewStyle(.page)` attached to the ``TabView``
 /// for a page-style style navigation.
 ///
 /// The following example creates a paginated view with the three ``Text`` child
@@ -42081,7 +42081,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///     }
 /// }
 /// ```
@@ -42102,7 +42102,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///                     .foregroundColor(Color.white)
 ///             }
 ///         }
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///         .background(Color.black)
 ///     }
 /// }
@@ -42131,7 +42131,7 @@ public struct SwitchToggleStyle : ToggleStyle {
 ///             }
 ///         }
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+///         .tabViewStyle(.page(indexDisplayMode: .never))
 ///     }
 /// }
 /// ```
@@ -42371,7 +42371,7 @@ extension TabView where SelectionValue == Int {
 ///         }
 ///         .foregroundColor(Color.white)
 ///         .background(Color.yellow)
-///         .tabViewStyle(PageTabViewStyle())
+///         .tabViewStyle(.page)
 ///     }
 /// }
 /// ```
@@ -47939,7 +47939,7 @@ extension View {
     ///             Text("Page 1️⃣")
     ///             Color.pink
     ///         }
-    ///         .tabViewStyle(PageTabViewStyle())
+    ///         .tabViewStyle(.page)
     ///         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     ///     }
     /// }
@@ -48169,7 +48169,7 @@ extension View {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle())
+    ///         .tabViewStyle(.page)
     ///     }
     /// }
     /// ```
@@ -48199,7 +48199,7 @@ extension View {
     ///         }
     ///         .foregroundColor(Color.white)
     ///         .background(Color.yellow)
-    ///         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    ///         .tabViewStyle(.page(indexDisplayMode: .never))
     ///     }
     /// }
     /// ```
@@ -48222,7 +48222,7 @@ extension View {
     ///             Text("Peaches 🍑🍑")
     ///                 .tabItem { Image(systemName: "3.circle.fill") }
     ///         }
-    ///         .tabViewStyle(DefaultTabViewStyle())
+    ///         .tabViewStyle(.automatic)
     ///     }
     /// }
     /// ```
