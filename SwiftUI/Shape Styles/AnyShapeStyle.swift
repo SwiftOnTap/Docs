@@ -3,5 +3,5 @@
 @frozen public struct AnyShapeStyle : ShapeStyle {
 
     /// Create an instance from `style`.
-    public init<S>(_ style: S) where S : ShapeStyle
+    public init<S>(_ style: S) where S : ShapeStyle { }
 }
