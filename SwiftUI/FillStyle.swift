@@ -113,15 +113,5 @@
     ///     antialiasing when rendering the edges of a shape. If no value is specified
     ///     antialiased defaults to true.
     public init(eoFill: Bool = false, antialiased: Bool = true) { }
-
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (a: FillStyle, b: FillStyle) -> Bool { }
 }
 

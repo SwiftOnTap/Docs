@@ -519,3 +519,500 @@ extension EnvironmentValues {
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public var presentationMode: Binding<PresentationMode> { get }
 }
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// The symbol variant to use in this environment.
+    ///
+    /// You set this environment value indirectly by using the
+    /// ``View/symbolVariant(_:)`` view modifier. However, you access the
+    /// environment variable directly using the ``View/environment(_:_:)``
+    /// modifier. Do this when you want to use the ``SymbolVariants/none``
+    /// variant to ignore the value that's already in the environment:
+    ///
+    ///     HStack {
+    ///         Image(systemName: "heart")
+    ///         Image(systemName: "heart")
+    ///             .environment(\.symbolVariants, .none)
+    ///     }
+    ///     .symbolVariant(.fill)
+    ///
+    /// ![A screenshot of two heart symbols. The first is filled while the
+    /// second is outlined.](SymbolVariants-none-1)
+    public var symbolVariants: SymbolVariants
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// The prominence to apply to section headers within a view.
+    ///
+    /// The default is ``Prominence/standard``.
+    public var headerProminence: Prominence
+}
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension EnvironmentValues {
+
+    /// The menu indicator visibility to apply to controls within a view.
+    public var menuIndicatorVisibility: Visibility
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// A Boolean value that indicates whether the VoiceOver screen reader is in use.
+    ///
+    /// The state changes as the user turns on or off the VoiceOver screen reader.
+    public var accessibilityVoiceOverEnabled: Bool { get }
+
+    /// A Boolean value that indicates whether the Switch Control motor accessibility feature is in use.
+    ///
+    /// The state changes as the user turns on or off the Switch Control feature.
+    public var accessibilitySwitchControlEnabled: Bool { get }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// The current Dynamic Type size.
+    ///
+    /// This value changes as the user's chosen Dynamic Type size changes. The
+    /// default value is device-dependent.
+    ///
+    /// When limiting the Dynamic Type size, consider if adding a
+    /// large content view with ``View/accessibilityShowsLargeContentViewer()``
+    /// would be appropriate.
+    ///
+    /// On macOS, this value cannot be changed by users and does not affect the
+    /// text size.
+    public var dynamicTypeSize: DynamicTypeSize
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// The current symbol rendering mode, or `nil` denoting that the
+    /// mode is picked automatically using the current image and
+    /// foreground style as parameters.
+    public var symbolRenderingMode: SymbolRenderingMode?
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// A Boolean value that indicates when the user is searching.
+    ///
+    /// You can read this value like any of the other ``EnvironmentValues``,
+    /// by creating a property with the ``Environment`` property wrapper:
+    ///
+    ///     @Environment(\.isSearching) private var isSearching
+    ///
+    /// Get the value to find out when the user interacts with a search
+    /// field that's produced by one of the searchable modifiers, like
+    /// ``View/searchable(text:placement:prompt:)-18a8f``:
+    ///
+    ///     struct SearchingExample: View {
+    ///         @State private var text = ""
+    ///
+    ///         var body: some View {
+    ///             NavigationView {
+    ///                 SearchedView()
+    ///                     .searchable(text: $text)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     struct SearchedView: View {
+    ///         @Environment(\.isSearching) private var isSearching
+    ///
+    ///         var body: some View {
+    ///             Text(isSearching ? "Searching!" : "Not searching.")
+    ///         }
+    ///     }
+    ///
+    /// When the user first taps or clicks in a search field, the
+    /// `isSearching` property becomes `true`. When the user cancels the
+    /// search operation, the property becomes `false`. To programmatically
+    /// set the value to `false` and dismiss the search operation, use
+    /// ``EnvironmentValues/dismissSearch``.
+    public var isSearching: Bool { get }
+
+    /// An action that ends the current search interaction.
+    ///
+    /// Use this environment value to get the ``DismissSearchAction`` instance
+    /// for the current ``Environment``. Then call the instance to dismiss
+    /// the current search interaction. You call the instance directly because
+    /// it defines a ``DismissSearchAction/callAsFunction()`` method that Swift
+    /// calls when you call the instance.
+    ///
+    /// When you dismiss search, SwiftUI:
+    ///
+    /// * Sets ``EnvironmentValues/isSearching`` to `false`.
+    /// * Clears any text from the search field.
+    /// * Removes focus from the search field.
+    ///
+    /// > Note: Calling this instance has no effect if the user isn't
+    /// interacting with a search field.
+    ///
+    /// Use this action to dismiss a search operation based on
+    /// another user interaction. For example, consider a searchable
+    /// view with a ``Button`` that presents more information about the first
+    /// matching item from a collection:
+    ///
+    ///     struct ContentView: View {
+    ///         @State private var text = ""
+    ///
+    ///         var body: some View {
+    ///             NavigationView {
+    ///                 SearchResults(searchText: text)
+    ///                     .searchable(text: $text)
+    ///             }
+    ///         }
+    ///     }
+    ///
+    ///     private struct SearchResults: View {
+    ///         let searchText: String
+    ///
+    ///         let items = ["a", "b", "c"]
+    ///         var filteredItems: [String] { items.filter { $0 == searchText.lowercased() } }
+    ///
+    ///         @State private var isPresented = false
+    ///
+    ///         var body: some View {
+    ///             if let item = filteredItems.first {
+    ///                 Button("Details about \(item)") {
+    ///                     isPresented = true
+    ///                 }
+    ///                 .sheet(isPresented: $isPresented) {
+    ///                     NavigationView {
+    ///                         DetailView(item: item)
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// The button becomes visible only after the user enters search text
+    /// that produces a match. When the user taps the button, SwiftUI shows
+    /// a sheet that provides more information about the item, including
+    /// an Add button for adding the item to a stored list of items:
+    ///
+    ///     private struct DetailView: View {
+    ///         let item: String
+    ///
+    ///         @Environment(\.dismiss) private var dismiss
+    ///         @Environment(\.dismissSearch) private var dismissSearch
+    ///
+    ///         var body: some View {
+    ///             Text("Information about \(item).")
+    ///                 .toolbar {
+    ///                     Button("Add") {
+    ///                         // Store the item here...
+    ///
+    ///                         dismiss()
+    ///                         dismissSearch()
+    ///                     }
+    ///                 }
+    ///         }
+    ///     }
+    ///
+    /// The user can dismiss the sheet by dragging it down, effectively
+    /// canceling the operation, leaving the in-progress search interaction
+    /// intact. Alternatively, the user can tap the Add button to store the
+    /// item. Because the user is likely to be done with both the detail view
+    /// and the search interaction at this point, the button's closure also
+    /// uses the ``EnvironmentValues/dismiss`` property to dismiss the sheet,
+    /// and the `dismissSearch` property to reset the search field.
+    public var dismissSearch: DismissSearchAction { get }
+
+    /// The current placement of search suggestions.
+    ///
+    /// Search suggestions render based on the platform and surrounding context
+    /// in which you place the searchable modifier containing suggestions.
+    /// You can render search suggestions in two ways:
+    ///
+    /// * In a menu attached to the search field.
+    /// * Inline with the main content of the app.
+    ///
+    /// You find the current search suggestion placement by querying the
+    /// ``EnvironmentValues/searchSuggestionsPlacement`` in your
+    /// search suggestions.
+    ///
+    ///     enum FruitSuggestion: String, Identifiable {
+    ///         case apple, banana, orange
+    ///         var id: Self { self }
+    ///     }
+    ///
+    ///     @State private var text: String = ""
+    ///     @State private var suggestions: [FruitSuggestion] = []
+    ///
+    ///     var body: some View {
+    ///         MainContent()
+    ///             .searchable(text: $text) {
+    ///                 FruitSuggestions(suggestions: suggestions)
+    ///             }
+    ///     }
+    ///
+    ///     struct FruitSuggestions: View {
+    ///         var suggestions: [FruitSuggestion]
+    ///
+    ///         @Environment(\.searchSuggestionsPlacement)
+    ///         private var placement
+    ///
+    ///         var body: some View {
+    ///             if shouldRender {
+    ///                 ForEach(suggestions) { suggestion in
+    ///                     Text(suggestion.rawValue.capitalized)
+    ///                         .searchCompletion(suggestion.rawValue)
+    ///                 }
+    ///             }
+    ///         }
+    ///
+    ///         var shouldRender: Bool {
+    ///             #if os(iOS)
+    ///             placement == .menu
+    ///             #else
+    ///             true
+    ///             #endif
+    ///         }
+    ///     }
+    ///
+    /// In the above example, search suggestions only render in iOS
+    /// if the searchable modifier displays them in a menu. You might want
+    /// to do this to render suggestions in your own list alongside
+    /// your own search results when they would render in a list.
+    @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+    public var searchSuggestionsPlacement: SearchSuggestionsPlacement { get }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// A refresh action stored in a view's environment.
+    ///
+    /// When this environment value contains an instance of the
+    /// ``RefreshAction`` structure, certain built-in views in the corresponding
+    /// ``Environment`` begin offering a refresh capability. They apply the
+    /// instance's handler to any refresh operation that the user initiates.
+    /// By default, the environment value is `nil`, but you can use the
+    /// ``View/refreshable(action:)`` modifier to create and store a new
+    /// refresh action that uses the handler that you specify:
+    ///
+    ///     List(mailbox.conversations) { conversation in
+    ///         ConversationCell(conversation)
+    ///     }
+    ///     .refreshable {
+    ///         await mailbox.fetch()
+    ///     }
+    ///
+    /// On iOS and iPadOS, the ``List`` in the example above offers a
+    /// pull to refresh gesture because it detects the refresh action. When
+    /// the user drags the list down and releases, the list calls the action's
+    /// handler. Because SwiftUI declares the handler as asynchronous, it can
+    /// safely make long-running asynchronous calls, like fetching network data.
+    ///
+    /// ### Refreshing custom views
+    ///
+    /// You can also offer refresh capability in your custom views.
+    /// Read the `refresh` environment value to get the ``RefreshAction``
+    /// instance for a given ``Environment``. If you find
+    /// a non-`nil` value, change your view's appearance or behavior to offer
+    /// the refresh to the user, and call the instance to conduct the
+    /// refresh. You can call the refresh instance directly because it defines
+    /// a ``RefreshAction/callAsFunction()`` method that Swift calls
+    /// when you call the instance:
+    ///
+    ///     struct RefreshableView: View {
+    ///         @Environment(\.refresh) private var refresh
+    ///
+    ///         var body: some View {
+    ///             Button("Refresh") {
+    ///                 Task {
+    ///                     await refresh?()
+    ///                 }
+    ///             }
+    ///             .disabled(refresh == nil)
+    ///         }
+    ///     }
+    ///
+    /// Be sure to call the handler asynchronously by preceding it
+    /// with `await`. Because the call is asynchronous, you can use
+    /// its lifetime to indicate progress to the user. For example,
+    /// you can reveal an indeterminate ``ProgressView`` before
+    /// calling the handler, and hide it when the handler completes.
+    ///
+    /// If your code isn't already in an asynchronous context, create a
+    /// <doc://com.apple.documentation/documentation/Swift/Task> for the
+    /// method to run in. If you do this, consider adding a way for the
+    /// user to cancel the task. For more information, see
+    /// [Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
+    /// in *The Swift Programming Language*.
+    public var refresh: RefreshAction? { get }
+}
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension EnvironmentValues {
+
+    /// The keyboard shortcut that buttons in this environment will be triggered
+    /// with.
+    ///
+    /// This is particularly useful in button styles when a button's appearance
+    /// depends on the shortcut associated with it. On macOS, for example, when
+    /// a button is bound to the Return key, it is typically drawn with a
+    /// special emphasis. This happens automatically when using the built-in
+    /// button styles, and can be implemented manually in custom styles using
+    /// this environment key:
+    ///
+    ///     private struct MyButtonStyle: ButtonStyle {
+    ///         @Environment(\.keyboardShortcut)
+    ///         private var shortcut: KeyboardShortcut?
+    ///
+    ///         func makeBody(configuration: Configuration) -> some View {
+    ///             let labelFont = Font.body
+    ///                 .weight(shortcut == .defaultAction ? .bold : .regular)
+    ///             configuration.label
+    ///                 .font(labelFont)
+    ///         }
+    ///     }
+    ///
+    /// If no keyboard shortcut has been applied to the view or its ancestor,
+    /// then the environment value will be `nil`.
+    public var keyboardShortcut: KeyboardShortcut? { get }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// An action that dismisses the current presentation.
+    ///
+    /// Use this environment value to get the ``DismissAction`` instance
+    /// for the current ``Environment``. Then call the instance
+    /// to perform the dismissal. You call the instance directly because
+    /// it defines a ``DismissAction/callAsFunction()``
+    /// method that Swift calls when you call the instance.
+    ///
+    /// For example, you can create a button that calls the ``DismissAction``:
+    ///
+    ///     private struct SheetContents: View {
+    ///         @Environment(\.dismiss) private var dismiss
+    ///
+    ///         var body: some View {
+    ///             Button("Done") {
+    ///                 dismiss()
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// If you present the `SheetContents` view in a sheet, the user can dismiss
+    /// the sheet by tapping or clicking the sheet's button:
+    ///
+    ///     private struct DetailView: View {
+    ///         @State private var isSheetPresented = false
+    ///
+    ///         var body: some View {
+    ///             Button("Show Sheet") {
+    ///                 isSheetPresented = true
+    ///             }
+    ///             .sheet(isPresented: $isSheetPresented) {
+    ///                 SheetContents()
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// Be sure that you define the action in the appropriate environment.
+    /// For example, don't reorganize the `DetailView` in the example above
+    /// so that it creates the `dismiss` property and calls it from the
+    /// ``View/sheet(item:onDismiss:content:)`` view modifier's `content`
+    /// closure:
+    ///
+    ///     private struct DetailView: View {
+    ///         @State private var isSheetPresented = false
+    ///         @Environment(\.dismiss) private var dismiss // Applies to DetailView.
+    ///
+    ///         var body: some View {
+    ///             Button("Show Sheet") {
+    ///                 isSheetPresented = true
+    ///             }
+    ///             .sheet(isPresented: $isSheetPresented) {
+    ///                 Button("Done") {
+    ///                     dismiss() // Fails to dismiss the sheet.
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    ///
+    /// If you do this, the sheet fails to dismiss because the action applies
+    /// to the environment where you declared it, which is that of the detail
+    /// view, rather than the sheet. In fact, if you've presented the detail
+    /// view in a ``NavigationView``, the dismissal pops the detail view
+    /// the navigation stack.
+    ///
+    /// The dismiss action has no effect on a view that isn't currently
+    /// presented. If you need to query whether SwiftUI is currently presenting
+    /// a view, read the ``EnvironmentValues/isPresented`` environment value.
+    public var dismiss: DismissAction { get }
+
+    /// A Boolean value that indicates whether the view associated with this
+    /// environment is currently presented.
+    ///
+    /// You can read this value like any of the other ``EnvironmentValues``
+    /// by creating a property with the ``Environment`` property wrapper:
+    ///
+    ///     @Environment(\.isPresented) private var isPresented
+    ///
+    /// Read the value inside a view if you need to know when SwiftUI
+    /// presents that view. For example, you can take an action when SwiftUI
+    /// presents a view by using the ``View/onChange(of:perform:)``
+    /// modifier:
+    ///
+    ///     .onChange(of: isPresented) { isPresented in
+    ///         if isPresented {
+    ///             // Do something when first presented.
+    ///         }
+    ///     }
+    ///
+    /// This behaves differently than ``View/onAppear(perform:)``, which
+    /// SwiftUI can call more than once for a given presentation, like
+    /// when you navigate back to a view that's already in the
+    /// navigation hierarchy.
+    ///
+    /// To dismiss the currently presented view, use
+    /// ``EnvironmentValues/dismiss``.
+    public var isPresented: Bool { get }
+}
+
+@available(iOS 15.0, macOS 10.15, watchOS 9.0, *)
+@available(tvOS, unavailable)
+extension EnvironmentValues {
+
+    /// The size to apply to controls within a view.
+    ///
+    /// The default is ``ControlSize/regular``.
+    @available(tvOS, unavailable)
+    public var controlSize: ControlSize
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EnvironmentValues {
+
+    /// The material underneath the current view.
+    ///
+    /// This value is `nil` if the current background isn't one of the standard
+    /// materials. If you set a material, the standard content styles enable
+    /// their vibrant rendering modes.
+    ///
+    /// You set this value by calling one of the background modifiers that takes
+    /// a ``ShapeStyle``, like ``View/background(_:ignoresSafeAreaEdges:)``
+    /// or ``View/background(_:in:fillStyle:)-89n7j``, and passing in a
+    /// ``Material``. You can also set the value manually, using
+    /// `nil` to disable vibrant rendering, or a ``Material`` instance to
+    /// enable the vibrancy style associated with the specified material.
+    public var backgroundMaterial: Material?
+}
+

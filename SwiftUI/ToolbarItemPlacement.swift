@@ -153,6 +153,52 @@ public struct ToolbarItemPlacement {
     /// On iOS, tvOS and watchOS, destructiveAction items will be placed in the
     /// trailing edge of the navigation bar.
     public static let destructiveAction: ToolbarItemPlacement
+    
+    /// The item is placed in the keyboard section.
+    ///
+    /// On iOS, keyboard items are above the software keyboard when present,
+    /// or at the bottom of the screen when a hardware keyboard is attached.
+    ///
+    /// On macOS, keyboard items will be placed inside the Touch Bar.
+    ///
+    /// A `FocusedValue`can be used to adjust the content of the keyboard bar
+    /// based on the currently focused view. In the example below, the keyboard
+    /// bar gains additional buttons only when the appropriate `TextField` is
+    /// focused.
+    ///
+    ///     enum Field {
+    ///         case suit
+    ///         case rank
+    ///     }
+    ///
+    ///     struct KeyboardBarDemo : View {
+    ///         @FocusedValue(\.field) var field: Field?
+    ///
+    ///         var body: some View {
+    ///             HStack {
+    ///                 TextField("Suit", text: $suitText)
+    ///                     .focusedValue(\.field, .suit)
+    ///                 TextField("Rank", text: $rankText)
+    ///                     .focusedValue(\.field, .rank)
+    ///             }
+    ///             .toolbar {
+    ///                 ToolbarItemGroup(placement: .keyboard) {
+    ///                     if field == .suit {
+    ///                         Button("♣️", action: {})
+    ///                         Button("♥️", action: {})
+    ///                         Button("♠️", action: {})
+    ///                         Button("♦️", action: {})
+    ///                     }
+    ///                     DoneButton()
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    ///
+    @available(iOS 15.0, macOS 12.0, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public static let keyboard: ToolbarItemPlacement
 
     /// The item is placed in the leading edge of the navigation bar. Applies
     /// to iOS, iPadOS, tvOS, and Mac Catalyst.

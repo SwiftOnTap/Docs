@@ -11,8 +11,8 @@
     /// SwiftUI passes anchored geometry values around the view tree via
     /// preference keys. It then converts them back into the local coordinate
     /// space using a ``GeometryProxy`` value.
-    @frozen public struct Source {
-    }
+    @frozen public struct Source { }
+    
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -24,6 +24,7 @@ extension Anchor.Source where Value == CGRect {
     /// An anchor source rect defined as the entire bounding rect of the current
     /// view.
     public static var bounds: Anchor<CGRect>.Source { get }
+    
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)

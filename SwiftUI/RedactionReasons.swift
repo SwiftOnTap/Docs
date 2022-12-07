@@ -71,6 +71,26 @@ public struct RedactionReasons : OptionSet {
     /// To inherit all the default implementations from the `OptionSet` protocol,
     /// the `Element` type must be `Self`, the default.
     public typealias Element = RedactionReasons
+    
+    /// Displayed data should be obscured to protect private information.
+    ///
+    /// Views marked with `privacySensitive` will be automatically redacted
+    /// using a standard styling. To apply a custom treatment the redaction
+    /// reason can be read out of the environment.
+    ///
+    ///     struct BankingContentView: View {
+    ///         @Environment(\.redactionReasons) var redactionReasons
+    ///
+    ///         var body: some View {
+    ///             if redactionReasons.contains(.privacy) {
+    ///                 FullAppCover()
+    ///             } else {
+    ///                 AppContent()
+    ///             }
+    ///         }
+    ///     }
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    public static let privacy: RedactionReasons
 
     /// The type of the elements of an array literal.
     public typealias ArrayLiteralElement = RedactionReasons

@@ -82,14 +82,5 @@
     /// The dot-product of this animated pair with itself.
     public var magnitudeSquared: Double { get }
 
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (a: AnimatablePair<First, Second>, b: AnimatablePair<First, Second>) -> Bool { }
 }
 

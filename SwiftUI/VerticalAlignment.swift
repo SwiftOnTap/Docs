@@ -13,15 +13,11 @@
 ///
 /// There are 5 possible vertical alignments:
 ///
-///
-///
 /// 1. ``VerticalAlignment/top``
 /// 2. ``VerticalAlignment/center``
 /// 3. ``VerticalAlignment/bottom``
 /// 4. ``VerticalAlignment/firstTextBaseline``
 /// 5. ``VerticalAlignment/lastTextBaseline``
-///
-///
 ///
 /// See the example below.
 ///
@@ -49,7 +45,7 @@
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct VerticalAlignment : Equatable {
-
+    
     /// Creates an instance with the given identifier.
     ///
     /// In addition to the 5 out-of-the-box vertical alignments,
@@ -85,16 +81,7 @@
     /// - Parameter id: An identifier that uniquely identifies the vertical
     ///   alignment.
     public init(_ id: AlignmentID.Type) { }
-
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (a: VerticalAlignment, b: VerticalAlignment) -> Bool { }
+    
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)

@@ -177,6 +177,30 @@
         /// - Parameter literal: A string literal containing the characters
         ///   that appear next in the string literal.
         public mutating func appendLiteral(_ literal: String) { }
+        
+        /// Appends the formatted representation  of a nonstring type
+        /// supported by a corresponding format style.
+        ///
+        /// Don't call this method directly; it's used by the compiler when
+        /// interpreting string interpolations.
+        ///
+        /// The following example shows how to use a string interpolation to
+        /// format a
+        /// <doc://com.apple.documentation/documentation/Foundation/Date>
+        /// with a
+        /// <doc://com.apple.documentation/documentation/Foundation/Date/FormatStyle> and
+        /// append it to static text. The resulting interpolation implicitly
+        /// creates a ``LocalizedStringKey``, which a ``Text`` uses to provide
+        /// its content.
+        ///
+        ///     Text("The time is \(myDate, format: Date.FormatStyle(date: .omitted, time:.complete))")
+        ///
+        /// - Parameters:
+        ///   - input: The instance to format and append.
+        ///   - format: A format style to use when converting `input` into a string
+        ///   representation.
+        @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+        public mutating func appendInterpolation<F>(_ input: F.FormatInput, format: F) where F : FormatStyle, F.FormatInput : Equatable, F.FormatOutput == String { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
@@ -272,6 +296,58 @@
         ///        print(message)
         ///     // Prints "If one cookie costs 2 dollars, 3 cookies cost 6 dollars."
         public mutating func appendInterpolation<T>(_ value: T, specifier: String) where T : _FormatSpecifiable { }
+        
+        /// Appends an attributed string to a string interpolation.
+        ///
+        /// Don't call this method directly; it's used by the compiler when
+        /// interpreting string interpolations.
+        ///
+        /// The following example shows how to use a string interpolation to
+        /// format an
+        /// <doc://com.apple.documentation/documentation/Foundation/AttributedString>
+        /// and append it to static text. The resulting interpolation implicitly
+        /// creates a ``LocalizedStringKey``, which a ``Text`` view uses to provide
+        /// its content.
+        ///
+        ///     struct ContentView: View {
+        ///
+        ///         var nextDate: AttributedString {
+        ///             var result = Calendar.current
+        ///                 .nextWeekend(startingAfter: Date.now)!
+        ///                 .start
+        ///                 .formatted(
+        ///                     .dateTime
+        ///                     .month(.wide)
+        ///                     .day()
+        ///                     .attributed
+        ///                 )
+        ///             result.backgroundColor = .green
+        ///             result.foregroundColor = .white
+        ///             return result
+        ///         }
+        ///
+        ///         var body: some View {
+        ///             Text("Our next catch-up is on \(nextDate)!")
+        ///         }
+        ///     }
+        ///
+        /// For this example, assume that the app runs on a device set to a
+        /// Russian locale, and has the following entry in a Russian-localized
+        /// `Localizable.strings` file:
+        ///
+        ///     "Our next catch-up is on %@!" = "Наша следующая встреча состоится %@!";
+        ///
+        /// The attributed string `nextDate` replaces the format specifier
+        /// `%@`,  maintaining its color and date-formatting attributes, when
+        /// the ``Text`` view renders its contents:
+        ///
+        /// ![A text view with Russian text, ending with a date that uses white
+        /// text on a green
+        /// background.](LocalizedStringKey-AttributedString-Russian)
+        ///
+        /// - Parameter attributedString: The attributed string to append.
+        @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+        public mutating func appendInterpolation(_ attributedString: AttributedString) { }
 
         /// Interpolates the given value’s textual representation into the
         /// string literal being created.
