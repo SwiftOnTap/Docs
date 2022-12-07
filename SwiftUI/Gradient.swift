@@ -41,7 +41,7 @@
 /// ``Gradient/init(colors:)``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct Gradient : Equatable {
-
+    
     /// One color stop in the gradient.
     ///
     /// Create a list of stops to make a ``Gradient``.
@@ -82,7 +82,7 @@
     /// and location, with a leading startPoint and trailing endPoint.](gradient-stop-ex.png)
     ///
     @frozen public struct Stop : Equatable {
-
+        
         /// The color for the stop.
         ///
         /// Use this property to specify the color of a gradient stop.
@@ -120,7 +120,7 @@
         /// and location, with a leading startPoint and trailing endPoint.](gradient-stop-ex.png)
         ///
         public var color: Color
-
+        
         /// The parametric location of the stop.
         ///
         /// Use this property to sepcify the location of a gradient stop.
@@ -160,7 +160,7 @@
         /// and location, with a leading startPoint and trailing endPoint.](gradient-stop-ex.png)
         ///
         public var location: CGFloat
-
+        
         /// Creates a color stop with a color and location.
         ///
         /// Use this property to sepcify the location and color of a gradient stop.
@@ -199,18 +199,9 @@
         ///   - color: The color for the stop.
         ///   - location: The parametric location of the stop.
         public init(color: Color, location: CGFloat) { }
-
-        /// Returns a Boolean value indicating whether two values are equal.
-        ///
-        /// Equality is the inverse of inequality. For any values `a` and `b`,
-        /// `a == b` implies that `a != b` is `false`.
-        ///
-        /// - Parameters:
-        ///   - lhs: A value to compare.
-        ///   - rhs: Another value to compare.
-        public static func == (a: Gradient.Stop, b: Gradient.Stop) -> Bool { }
+        
     }
-
+    
     /// The array of color stops.
     ///
     /// Use this property to specify the colors and their locations in a
@@ -248,7 +239,7 @@
     /// and location properties and the leading startPoint and trailing endPoint.](gradient-stops-ex.png)
     ///
     public var stops: [Gradient.Stop]
-
+    
     /// Creates a gradient from an array of color stops.
     ///
     /// Use this initializer to create a gradient directly from an array
@@ -285,7 +276,7 @@
     ///
     /// - Parameter stops: The list of gradient stops.
     public init(stops: [Gradient.Stop]) { }
-
+    
     /// Creates a gradient from an array of colors.
     ///
     /// The gradient synthesizes its location values to evenly space the colors
@@ -311,15 +302,6 @@
     ///
     /// - Parameter colors: The list of colors to evenly space in the gradient.
     public init(colors: [Color]) { }
-
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (a: Gradient, b: Gradient) -> Bool { }
+    
 }
 

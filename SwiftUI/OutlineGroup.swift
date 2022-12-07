@@ -61,8 +61,7 @@
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct OutlineGroup<Data, ID, Parent, Leaf, Subgroup> where Data : RandomAccessCollection, ID : Hashable {
-}
+public struct OutlineGroup<Data, ID, Parent, Leaf, Subgroup> where Data : RandomAccessCollection, ID : Hashable { }
 
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
@@ -195,3 +194,121 @@ extension OutlineGroup : View where Parent : View, Leaf : View, Subgroup : View 
     public typealias Body = some View
 }
 
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension OutlineGroup where ID == Data.Element.ID, Parent : View, Parent == Leaf, Subgroup == DisclosureGroup<Parent, OutlineSubgroupChildren>, Data.Element : Identifiable {
+
+    /// Creates an outline group from a binding to a root data element and a key
+    /// path to its children.
+    ///
+    /// This initializer creates an instance that uniquely identifies views
+    /// across updates based on the identity of the underlying data element.
+    ///
+    /// All generated disclosure groups begin in the collapsed state.
+    ///
+    /// Make sure that the identifier of a data element only changes if you
+    /// mean to replace that element with a new element, one with a new
+    /// identity. If the ID of an element changes, then the content view
+    /// generated from that element will lose any current state and animations.
+    ///
+    /// - Parameters:
+    ///   - root: The root of a collection of tree-structured, identified
+    ///     data.
+    ///   - children: A key path to a property whose non-`nil` value gives the
+    ///     children of a data element. A non-`nil` but empty value denotes an
+    ///     element capable of having children that's currently childless, such
+    ///     as an empty directory in a file system. On the other hand, if the
+    ///     property at the key path is `nil`, then the outline group treats the
+    ///     data element as a leaf in the tree, like a regular file in a file
+    ///     system.
+    ///   - content: A view builder that produces a content view based on a
+    ///     data element.
+    public init<C, E>(_ root: Binding<E>, children: WritableKeyPath<E, C?>, @ViewBuilder content: @escaping (Binding<E>) -> Leaf) where Data == Binding<C>, ID == E.ID, C : MutableCollection, C : RandomAccessCollection, E : Identifiable, E == C.Element { }
+
+    /// Creates an outline group from a binding to a collection of root data
+    /// elements and a key path to its children.
+    ///
+    /// This initializer creates an instance that uniquely identifies views
+    /// across updates based on the identity of the underlying data element.
+    ///
+    /// All generated disclosure groups begin in the collapsed state.
+    ///
+    /// Make sure that the identifier of a data element only changes if you
+    /// mean to replace that element with a new element, one with a new
+    /// identity. If the ID of an element changes, then the content view
+    /// generated from that element will lose any current state and animations.
+    ///
+    /// - Parameters:
+    ///   - data: A collection of tree-structured, identified data.
+    ///   - children: A key path to a property whose non-`nil` value gives the
+    ///     children of `data`. A non-`nil` but empty value denotes an element
+    ///     capable of having children that's currently childless, such as an
+    ///     empty directory in a file system. On the other hand, if the property
+    ///     at the key path is `nil`, then the outline group treats `data` as a
+    ///     leaf in the tree, like a regular file in a file system.
+    ///   - content: A view builder that produces a content view based on an
+    ///     element in `data`.
+    public init<C, E>(_ data: Binding<C>, children: WritableKeyPath<E, C?>, @ViewBuilder content: @escaping (Binding<E>) -> Leaf) where Data == Binding<C>, ID == E.ID, C : MutableCollection, C : RandomAccessCollection, E : Identifiable, E == C.Element { }
+}
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension OutlineGroup where Parent : View, Parent == Leaf, Subgroup == DisclosureGroup<Parent, OutlineSubgroupChildren> {
+
+    /// Creates an outline group from a binding to a root data element, the key
+    /// path to its identifier, and a key path to its children.
+    ///
+    /// This initializer creates an instance that uniquely identifies views
+    /// across updates based on the identity of the underlying data element.
+    ///
+    /// All generated disclosure groups begin in the collapsed state.
+    ///
+    /// Make sure that the identifier of a data element only changes if you
+    /// mean to replace that element with a new element, one with a new
+    /// identity. If the ID of an element changes, then the content view
+    /// generated from that element will lose any current state and animations.
+    ///
+    /// - Parameters:
+    ///   - root: The root of a collection of tree-structured, identified
+    ///     data.
+    ///   - id: The key path to a data element's identifier.
+    ///   - children: A key path to a property whose non-`nil` value gives the
+    ///     children of a data element. A non-`nil` but empty value denotes an
+    ///     element capable of having children that's currently childless, such
+    ///     as an empty directory in a file system. On the other hand, if the
+    ///     property at the key path is `nil`, then the outline group treats the
+    ///     data element as a leaf in the tree, like a regular file in a file
+    ///     system.
+    ///   - content: A view builder that produces a content view based on a
+    ///     data element.
+    public init<C, E>(_ root: Binding<E>, id: KeyPath<E, ID>, children: WritableKeyPath<E, C?>, @ViewBuilder content: @escaping (Binding<E>) -> Leaf) where Data == Binding<C>, C : MutableCollection, C : RandomAccessCollection, E == C.Element { }
+
+    /// Creates an outline group from a binding to a collection of root data
+    /// elements, the key path to a data element's identifier, and a key path to
+    /// its children.
+    ///
+    /// This initializer creates an instance that uniquely identifies views
+    /// across updates based on the identity of the underlying data element.
+    ///
+    /// All generated disclosure groups begin in the collapsed state.
+    ///
+    /// Make sure that the identifier of a data element only changes if you
+    /// mean to replace that element with a new element, one with a new
+    /// identity. If the ID of an element changes, then the content view
+    /// generated from that element will lose any current state and animations.
+    ///
+    /// - Parameters:
+    ///   - data: A collection of tree-structured, identified data.
+    ///   - id: The key path to a data element's identifier.
+    ///   - children: A key path to a property whose non-`nil` value gives the
+    ///     children of `data`. A non-`nil` but empty value denotes an element
+    ///     capable of having children that's currently childless, such as an
+    ///     empty directory in a file system. On the other hand, if the property
+    ///     at the key path is `nil`, then the outline group treats `data` as a
+    ///     leaf in the tree, like a regular file in a file system.
+    ///   - content: A view builder that produces a content view based on an
+    ///     element in `data`.
+    public init<C, E>(_ data: Binding<C>, id: KeyPath<E, ID>, children: WritableKeyPath<E, C?>, @ViewBuilder content: @escaping (Binding<E>) -> Leaf) where Data == Binding<C>, C : MutableCollection, C : RandomAccessCollection, E == C.Element { }
+}

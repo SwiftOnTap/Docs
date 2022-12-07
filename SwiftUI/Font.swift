@@ -1380,6 +1380,52 @@ extension Font {
     /// Font modifier called bold().](font-bold-twins.png)
     ///
     public func bold() -> Font { }
+    
+    /// Returns a fixed-width font from the same family as the base font.
+    ///
+    /// If there's no suitable font face in the same family, SwiftUI
+    /// returns a default fixed-width font.
+    ///
+    /// The following example adds the `monospaced()` modifier to the default
+    /// system font, then applies this font to a ``Text`` view:
+    ///
+    ///     struct ContentView: View {
+    ///         let myFont = Font
+    ///             .system(size: 24)
+    ///             .monospaced()
+    ///
+    ///         var body: some View {
+    ///             Text("Hello, world!")
+    ///                 .font(myFont)
+    ///                 .padding()
+    ///                 .navigationTitle("Monospaced")
+    ///         }
+    ///     }
+    ///
+    ///
+    /// ![A macOS window showing the text Hello, world in a 24-point
+    /// fixed-width font.](Environment-Font-monospaced-1)
+    ///
+    /// SwiftUI may provide different fixed-width replacements for standard
+    /// user interface fonts (such as ``Font/title``, or a system font created
+    /// with ``Font/system(_:design:)``) than for those same fonts when created
+    /// by name with ``Font/custom(_:size:)``.
+    ///
+    /// The ``View/font(_:)`` modifier applies the font to all text within
+    /// the view. To mix fixed-width text with other styles in the same
+    /// `Text` view, use the ``Text/init(_:)-1a4oh`` initializer to use an
+    /// appropropriately-styled
+    /// <doc://com.apple.documentation/documentation/Foundation/AttributedString>
+    /// for the text view's content. You can use the
+    /// <doc://com.apple.documentation/documentation/Foundation/AttributedString/3796160-init>
+    /// initializer to provide a Markdown-formatted string containing the
+    /// backtick-syntax (\`…\`) to apply code voice to specific ranges
+    /// of the attributed string.
+    ///
+    /// - Returns: A fixed-width font from the same family as the base font,
+    /// if one is available, and a default fixed-width font otherwise.
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    public func monospaced() -> Font { }
 
     /// Create a version of `self` that uses leading (line spacing) adjustment.
     ///

@@ -98,6 +98,217 @@ extension ModifiedContent : Scene where Content : Scene, Modifier : _SceneModifi
     public var body: ModifiedContent<Content, Modifier>.Body { get }
 }
 
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
+
+    /// Add additional accessibility information to the view.
+    ///
+    /// Use this method to add information you want accessibility users to be
+    /// able to access about this element, beyond the basics of label, value,
+    /// and hint. For example, `accessibilityCustomContent` can be used to add
+    /// information about the orientation of a photograph, or the number of
+    /// people found in the picture.
+    ///
+    /// - Parameter key: Key used to specify the identifier and label of the
+    ///   of the additional accessibility information entry.
+    /// - Parameter value: Text value for the additional accessibility
+    ///   information. For example: "landscape." A value of `nil` will remove
+    ///   any entry of additional information added earlier for any `key` with
+    ///   the same identifier.
+    /// - Note: Repeated calls of `accessibilityCustomContent` with `key`s
+    ///   having different identifiers will create new entries of
+    ///   additional information.
+    ///   Calling `accessibilityAdditionalContent` repeatedly with `key`s
+    ///   having matching identifiers will replace the previous entry.
+    public func accessibilityCustomContent(_ key: AccessibilityCustomContentKey, _ value: Text?, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Content, Modifier> { }
+
+    /// Add additional accessibility information to the view.
+    ///
+    /// Use this method to add information you want accessibility users to be
+    /// able to access about this element, beyond the basics of label, value,
+    /// and hint. For example, `accessibilityCustomContent` can be used to add
+    /// information about the orientation of a photograph, or the number of
+    /// people found in the picture.
+    ///
+    /// - Parameter key: Key used to specify the identifier and label of the
+    ///   of the additional accessibility information entry.
+    /// - Parameter valueKey: Text value for the additional accessibility
+    ///   information. For example: "landscape." A value of `nil` will remove
+    ///   any entry of additional information added earlier for any `key` with
+    ///   the same identifier.
+    /// - Parameter importance: Importance of the accessibility information.
+    ///   High-importance information gets read out immediately, while
+    ///   default-importance information must be explicitly asked for by the
+    ///   user.
+    /// - Note: Repeated calls of `accessibilityCustomContent` with `key`s
+    ///   having different identifiers will create new entries of
+    ///   additional information.
+    ///   Calling `accessibilityAdditionalContent` repeatedly with `key`s
+    ///   having matching identifiers will replace the previous entry.
+    public func accessibilityCustomContent(_ key: AccessibilityCustomContentKey, _ valueKey: LocalizedStringKey, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Content, Modifier> { }
+
+    /// Add additional accessibility information to the view.
+    ///
+    /// Use this method to add information you want accessibility users to be
+    /// able to access about this element, beyond the basics of label, value,
+    /// and hint. For example, `accessibilityCustomContent` can be used to add
+    /// information about the orientation of a photograph, or the number of
+    /// people found in the picture.
+    ///
+    /// - Parameter key: Key used to specify the identifier and label of the
+    ///   of the additional accessibility information entry.
+    /// - Parameter value: Text value for the additional accessibility
+    ///   information. For example: "landscape." A value of `nil` will remove
+    ///   any entry of additional information added earlier for any `key` with
+    ///   the same identifier.
+    /// - Parameter importance: Importance of the accessibility information.
+    ///   High-importance information gets read out immediately, while
+    ///   default-importance information must be explicitly asked for by the
+    ///   user.
+    /// - Note: Repeated calls of `accessibilityCustomContent` with `key`s
+    ///   having different identifiers will create new entries of
+    ///   additional information.
+    ///   Calling `accessibilityAdditionalContent` repeatedly with `key`s
+    ///   having matching identifiers will replace the previous entry.
+    public func accessibilityCustomContent<V>(_ key: AccessibilityCustomContentKey, _ value: V, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Content, Modifier> where V : StringProtocol { }
+
+    /// Add additional accessibility information to the view.
+    ///
+    /// Use this method to add information you want accessibility users to be
+    /// able to access about this element, beyond the basics of label, value,
+    /// and hint. For example: `accessibilityCustomContent` can be used to add
+    /// information about the orientation of a photograph, or the number of
+    /// people found in the picture.
+    ///
+    /// - Parameter label: Localized text describing to the user what
+    ///   is contained in this additional information entry. For example:
+    ///   "orientation".
+    /// - Parameter value: Text value for the additional accessibility
+    ///   information. For example: "landscape."
+    /// - Parameter importance: Importance of the accessibility information.
+    ///   High-importance information gets read out immediately, while
+    ///   default-importance information must be explicitly asked for by the
+    ///   user.
+    /// - Note: Repeated calls of `accessibilityCustomContent` with different
+    ///   labels will create new entries of additional information. Calling
+    ///   `accessibilityAdditionalContent` repeatedly with the same label will
+    ///   instead replace the previous value and importance.
+    public func accessibilityCustomContent(_ label: Text, _ value: Text, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Content, Modifier> { }
+
+    /// Add additional accessibility information to the view.
+    ///
+    /// Use this method to add information you want accessibility users to be
+    /// able to access about this element, beyond the basics of label, value,
+    /// and hint. For example: `accessibilityCustomContent` can be used to add
+    /// information about the orientation of a photograph, or the number of
+    /// people found in the picture.
+    ///
+    /// - Parameter label: Localized text describing to the user what
+    ///   is contained in this additional information entry. For example:
+    ///   "orientation".
+    /// - Parameter value: Text value for the additional accessibility
+    ///   information. For example: "landscape."
+    /// - Parameter importance: Importance of the accessibility information.
+    ///   High-importance information gets read out immediately, while
+    ///   default-importance information must be explicitly asked for by the
+    ///   user.
+    /// - Note: Repeated calls of `accessibilityCustomContent` with different
+    ///   labels will create new entries of additional information. Calling
+    ///   `accessibilityAdditionalContent` repeatedly with the same label will
+    ///   instead replace the previous value and importance.
+    public func accessibilityCustomContent(_ labelKey: LocalizedStringKey, _ value: Text, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Content, Modifier> { }
+
+    /// Add additional accessibility information to the view.
+    ///
+    /// Use this method to add information you want accessibility users to be
+    /// able to access about this element, beyond the basics of label, value,
+    /// and hint. For example, `accessibilityCustomContent` can be used to add
+    /// information about the orientation of a photograph, or the number of
+    /// people found in the picture.
+    ///
+    /// - Parameter labelKey: Localized text describing to the user what
+    ///   is contained in this additional information entry. For example:
+    ///   "orientation".
+    /// - Parameter value: Text value for the additional accessibility
+    ///   information. For example: "landscape."
+    /// - Parameter importance: Importance of the accessibility information.
+    ///   High-importance information gets read out immediately, while
+    ///   default-importance information must be explicitly asked for by the
+    ///   user.
+    /// - Note: Repeated calls of `accessibilityCustomContent` with different
+    ///   labels will create new entries of additional information. Calling
+    ///   `accessibilityAdditionalContent` repeatedly with the same label will
+    ///   instead replace the previous value and importance.
+    public func accessibilityCustomContent(_ labelKey: LocalizedStringKey, _ valueKey: LocalizedStringKey, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Content, Modifier> { }
+
+    /// Add additional accessibility information to the view.
+    ///
+    /// Use this method to add information you want accessibility users to be
+    /// able to access about this element, beyond the basics of label, value,
+    /// and hint. For example, `accessibilityCustomContent` can be used to add
+    /// information about the orientation of a photograph, or the number of
+    /// people found in the picture.
+    ///
+    /// - Parameter labelKey: Localized text describing to the user what
+    ///   is contained in this additional information entry. For example:
+    ///   "orientation".
+    /// - Parameter value: Text value for the additional accessibility
+    ///   information. For example: "landscape."
+    /// - Parameter importance: Importance of the accessibility information.
+    ///   High-importance information gets read out immediately, while
+    ///   default-importance information must be explicitly asked for by the
+    ///   user.
+    /// - Note: Repeated calls of `accessibilityCustomContent` with different
+    ///   labels will create new entries of additional information. Calling
+    ///   `accessibilityAdditionalContent` repeatedly with the same label will
+    ///   instead replace the previous value and importance.
+    public func accessibilityCustomContent<V>(_ labelKey: LocalizedStringKey, _ value: V, importance: AXCustomContent.Importance = .default) -> ModifiedContent<Content, Modifier> where V : StringProtocol { }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
+
+    /// Explicitly set whether this Accessibility element responds to user
+    /// interaction and would thus be interacted with by technologies such as
+    /// Switch Control, Voice Control or Full Keyboard Access.
+    ///
+    /// If this is not set, the value is inferred from the traits of the
+    /// Accessibility element, the presence of Accessibility actions on the
+    /// element, or the presence of gestures on the element or containing views.
+    public func accessibilityRespondsToUserInteraction(_ respondsToUserInteraction: Bool = true) -> ModifiedContent<Content, Modifier> { }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
+
+    /// Sets an accessibility text content type.
+    ///
+    /// Use this modifier to set the content type of this accessibility
+    /// element. Assistive technologies can use this property to choose
+    /// an appropriate way to output the text. For example, when
+    /// encountering a source coding context, VoiceOver could
+    /// choose to speak all punctuation.
+    ///
+    /// The default content type ``AccessibilityTextContentType/plain``.
+    ///
+    /// - Parameter value: The accessibility content type from the available
+    /// ``AccessibilityTextContentType`` options.
+    public func accessibilityTextContentType(_ textContentType: AccessibilityTextContentType) -> ModifiedContent<Content, Modifier> { }
+
+    /// Set the level of this heading.
+    ///
+    /// Use this modifier to set the level of this heading in relation to other headings. The system speaks
+    ///  the level number of levels ``AccessibilityHeadingLevel/h1``
+    ///  through ``AccessibilityHeadingLevel/h6`` alongside the text.
+    ///
+    /// The default heading level if you don’t use this modifier
+    /// is ``AccessibilityHeadingLevel/unspecified``.
+    ///
+    /// - Parameter level: The heading level to associate with this element
+    ///   from the available ``AccessibilityHeadingLevel`` levels.
+    public func accessibilityHeading(_ level: AccessibilityHeadingLevel) -> ModifiedContent<Content, Modifier> { }
+}
+
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 
