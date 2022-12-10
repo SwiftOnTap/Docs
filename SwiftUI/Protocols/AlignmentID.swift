@@ -54,6 +54,7 @@
 /// [this article](https://swiftui-lab.com/alignment-guides/).
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol AlignmentID { }
+
 extension AlignmentID {
 
     /// The value of the corresponding guide in the given context when not

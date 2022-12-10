@@ -49,6 +49,7 @@
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol Widget { }
+
 extension Widget {
 
     /// The type of configuration representing the content of the widget.

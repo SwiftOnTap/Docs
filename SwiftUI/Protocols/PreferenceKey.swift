@@ -92,6 +92,7 @@
 ///  - In order to pass information _down_ the View hierarchy, see ``Environment``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol PreferenceKey { }
+
 extension PreferenceKey {
 
     /// The type of value produced by this preference.

@@ -18,6 +18,7 @@
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol WidgetBundle { }
+
 extension WidgetBundle {
 
     /// The type of widget that represents the content of the bundle.
