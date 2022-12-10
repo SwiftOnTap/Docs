@@ -70,8 +70,7 @@
 ///
 /// - Note: By default, views transition using ``AnyTransition/opacity``.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-@frozen public struct AnyTransition {
-}
+@frozen public struct AnyTransition { }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension AnyTransition {

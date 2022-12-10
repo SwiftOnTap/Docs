@@ -118,6 +118,7 @@
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol FileDocument { }
+
 extension FileDocument {
 
     /// The file types the ``FileDocument`` document is able to open.

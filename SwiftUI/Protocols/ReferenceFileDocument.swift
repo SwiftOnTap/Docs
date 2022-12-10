@@ -111,11 +111,11 @@
 ///             UTType(importedAs: "com.example.plain-text")
 ///         }
 ///     }
-///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol ReferenceFileDocument : ObservableObject { }
+
 extension ReferenceFileDocument : ObservableObject {
 
     /// The type of the the document snapshot used for serialization

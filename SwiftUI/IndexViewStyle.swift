@@ -26,6 +26,6 @@
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 public protocol IndexViewStyle { }
-extension IndexViewStyle {
-}
+
+extension IndexViewStyle { }
 
