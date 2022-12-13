@@ -15,7 +15,7 @@
 ///             }
 ///             Section {
 ///                 Text("Second is the best 🥈")
-///                 Text("Indeed✌️")
+///                 Text("Indeed ✌️")
 ///             }
 ///         }
 ///     }
@@ -36,7 +36,7 @@
 ///             }
 ///             Section {
 ///                 Text("Second is the best 🥈")
-///                 Text("Indeed✌️")
+///                 Text("Indeed ✌️")
 ///             }
 ///         }
 ///     }
@@ -62,7 +62,7 @@
 ///             }
 ///             Section(header: Text("Section #2"), footer: footer) {
 ///                 Text("Second is the best 🥈")
-///                 Text("Indeed✌️")
+///                 Text("Indeed ✌️")
 ///             }
 ///         }
 ///     }
@@ -90,7 +90,7 @@
 ///             }
 ///             Section(header: Text("Section #2"), footer: footer) {
 ///                 Text("Second is the best 🥈")
-///                 Text("Indeed✌️")
+///                 Text("Indeed ✌️")
 ///             }
 ///         }
 ///         .listStyle(InsetGroupedListStyle()) //Try changing this to SidebarListStyle()
@@ -113,8 +113,7 @@
 /// using ``PinnedScrollableViews``. See those pages for more.
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public struct Section<Parent, Content, Footer> {
-}
+public struct Section<Parent, Content, Footer> { }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Section : View where Parent : View, Content : View, Footer : View {
@@ -140,7 +139,7 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     ///             }
     ///             Section(header: Text("Section #2"), footer: Text("Disclaimer #2")) {
     ///                 Text("Second is the best 🥈")
-    ///                 Text("Indeed✌️")
+    ///                 Text("Indeed ✌️")
     ///             }
     ///         }
     ///     }
@@ -190,6 +189,10 @@ extension Section : View where Parent : View, Content : View, Footer : View {
     ///   - header: A view placed on top
     ///   - footer: A view placed on bottom
     ///   - content: The section contents
+    @available(iOS, deprecated: 100000.0, renamed: "Section(content:header:footer:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Section(content:header:footer:)")
+    @available(tvOS, deprecated: 100000.0, renamed: "Section(content:header:footer:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Section(content:header:footer:)")
     public init(header: Parent, footer: Footer, @ViewBuilder content: () -> Content) { }
 
     /// The child view displayed in the ``Section``.
@@ -248,6 +251,10 @@ extension Section where Parent == EmptyView, Content : View, Footer : View {
     /// - Parameters:
     ///   - footer: A view placed on bottom
     ///   - content: The section contents
+    @available(iOS, deprecated: 100000.0, renamed: "Section(content:footer:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Section(content:footer:)")
+    @available(tvOS, deprecated: 100000.0, renamed: "Section(content:footer:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Section(content:footer:)")
     public init(footer: Footer, @ViewBuilder content: () -> Content) { }
 }
 
@@ -326,6 +333,10 @@ extension Section where Parent : View, Content : View, Footer == EmptyView {
     /// - Parameters:
     ///   - header: A view placed on top
     ///   - content: The section contents
+    @available(iOS, deprecated: 100000.0, renamed: "Section(content:header:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Section(content:header:)")
+    @available(tvOS, deprecated: 100000.0, renamed: "Section(content:header:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Section(content:header:)")
     public init(header: Parent, @ViewBuilder content: () -> Content) { }
 }
 
@@ -364,3 +375,35 @@ extension Section where Parent == EmptyView, Content : View, Footer == EmptyView
     public init(@ViewBuilder content: () -> Content) { }
 }
 
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+extension Section where Parent : View, Content : View, Footer : View {
+
+    /// Creates a section with a header, footer, and the provided section
+    /// content.
+    ///
+    /// - Parameters:
+    ///   - content: The section's content.
+    ///   - header: A view to use as the section's header.
+    ///   - footer: A view to use as the section's footer.
+    public init(@ViewBuilder content: () -> Content, @ViewBuilder header: () -> Parent, @ViewBuilder footer: () -> Footer)
+}
+
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+extension Section where Parent == EmptyView, Content : View, Footer : View {
+
+    /// Creates a section with a footer and the provided section content.
+    /// - Parameters:
+    ///   - content: The section's content.
+    ///   - footer: A view to use as the section's footer.
+    public init(@ViewBuilder content: () -> Content, @ViewBuilder footer: () -> Footer)
+}
+
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+extension Section where Parent : View, Content : View, Footer == EmptyView {
+
+    /// Creates a section with a header and the provided section content.
+    /// - Parameters:
+    ///   - content: The section's content.
+    ///   - header: A view to use as the section's header.
+    public init(@ViewBuilder content: () -> Content, @ViewBuilder header: () -> Parent)
+}

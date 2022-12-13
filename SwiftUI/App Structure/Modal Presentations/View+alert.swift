@@ -54,6 +54,10 @@ extension View {
     ///   - item: A binding value passed to `content` to build the sheet. The sheet will show
     ///   when this value is not `nil`.
     ///   - content: A view builder closure that takes in the `item` and returns the alert.
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
     public func alert<Item>(item: Binding<Item?>, content: (Item) -> Alert) -> some View where Item : Identifiable { }
 
 
@@ -93,6 +97,10 @@ extension View {
     /// - Parameters:
     ///   - isPresented: A binding to whether the alert is presented.
     ///   - content: A closure returning the ``Alert``.
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use `alert(title:isPresented:presenting::actions:) instead.")
     public func alert(isPresented: Binding<Bool>, content: () -> Alert) -> some View { }
 
 }

@@ -41,8 +41,10 @@ public struct SwitchToggleStyle : ToggleStyle {
     public init() { }
 
     /// Creates a switch style with a tint color.
-    @available(iOS 14.0, macOS 11.0, watchOS 7.0, *)
+    @available(iOS, introduced: 14.0, deprecated: 100000.0, message: "Use ``View/tint(_:)`` instead.")
+    @available(macOS, introduced: 11.0, deprecated: 100000.0, message: "Use ``View/tint(_:)`` instead.")
     @available(tvOS, unavailable)
+    @available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "Use ``View/tint(_:)`` instead.")
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a toggle.

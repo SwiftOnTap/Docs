@@ -143,7 +143,29 @@ extension TextField where Label == Text {
     ///     finish.
     ///   - onCommit: An action to perform when the user performs an action
     ///     (usually pressing the Return key) while the secure field has focus.
-    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void) { }
+    
+    /// Creates a text field with a text label generated from a localized title
+    /// string.
+    ///
+    /// - Parameters:
+    ///   - titleKey: The key for the localized title of the text field,
+    ///     describing its purpose.
+    ///   - text: The text to display and edit.
+    ///   - onEditingChanged: The action to perform when the user
+    ///     begins editing `text` and after the user finishes editing `text`.
+    ///     The closure receives a Boolean value that indicates the editing
+    ///     status: `true` when the user begins editing, `false` when they
+    ///     finish.
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    public init(_ titleKey: LocalizedStringKey, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void) { }
 
     /// Creates a text field with a text label generated from a title string.
     ///
@@ -157,46 +179,47 @@ extension TextField where Label == Text {
     ///     finish.
     ///   - onCommit: An action to perform when the user performs an action
     ///     (usually pressing the Return key) while the secure field has focus.
-    public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
-
-    /// Create an instance which binds over an arbitrary type, `T`.
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, onCommit: @escaping () -> Void) where S : StringProtocol { }
+    
+    /// Creates a text field with a text label generated from a title string.
     ///
     /// - Parameters:
-    ///   - titleKey: The key for the localized title of the text field,
-    ///     describing its purpose.
-    ///   - value: The underlying value to be edited.
-    ///   - formatter: A formatter to use when converting between the
-    ///     string the user edits and the underlying value of type `T`.
-    ///     In the event that `formatter` is unable to perform the conversion,
-    ///     `binding.value` isn't modified.
-    ///   - onEditingChanged: An action to perform when the user
-    ///     begins editing ``text`` and after the user finishes editing ``text``.
+    ///   - title: The title of the text view, describing its purpose.
+    ///   - text: The text to display and edit.
+    ///   - onEditingChanged: The action to perform when the user
+    ///     begins editing `text` and after the user finishes editing `text`.
+    ///     The closure receives a Boolean value that indicates the editing
+    ///     status: `true` when the user begins editing, `false` when they
+    ///     finish.
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    public init<S>(_ title: S, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void) where S : StringProtocol { }
+    
+    /// Creates a text field with a text label generated from a title string.
+    ///
+    /// - Parameters:
+    ///   - title: The title of the text view, describing its purpose.
+    ///   - text: The text to display and edit.
+    ///   - onEditingChanged: The action to perform when the user
+    ///     begins editing `text` and after the user finishes editing `text`.
     ///     The closure receives a Boolean value that indicates the editing
     ///     status: `true` when the user begins editing, `false` when they
     ///     finish.
     ///   - onCommit: An action to perform when the user performs an action
     ///     (for example, when the user presses the Return key) while the text
     ///     field has focus.
-    public init<T>(_ titleKey: LocalizedStringKey, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) { }
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Renamed TextField.init(_:text:onEditingChanged:). Use View.onSubmit(of:_:) for functionality previously provided by the onCommit parameter. Use FocusState<T> and View.focused(_:equals:) for functionality previously provided by the onEditingChanged parameter.")
+    public init<S>(_ title: S, text: Binding<String>, onCommit: @escaping () -> Void) where S : StringProtocol { }
 
-    /// Create an instance which binds over an arbitrary type, `T`.
-    ///
-    /// - Parameters:
-    ///   - title: The title of the text field, describing its purpose.
-    ///   - value: The underlying value to be edited.
-    ///   - formatter: A formatter to use when converting between the
-    ///     string the user edits and the underlying value of type `T`.
-    ///     In the event that `formatter` is unable to perform the conversion,
-    ///     `binding.value` isn't modified.
-    ///   - onEditingChanged: An action to perform when the user
-    ///     begins editing ``text`` and after the user finishes editing ``text``.
-    ///     The closure receives a Boolean value that indicates the editing
-    ///     status: `true` when the user begins editing, `false` when they
-    ///     finish.
-    ///   - onCommit: An action to perform when the user performs an action
-    ///     (for example, when the user presses the Return key) while the text
-    ///     field has focus.
-    public init<S, T>(_ title: S, value: Binding<T>, formatter: Formatter, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) where S : StringProtocol { }
 }
 
 extension TextField where Label == Text {

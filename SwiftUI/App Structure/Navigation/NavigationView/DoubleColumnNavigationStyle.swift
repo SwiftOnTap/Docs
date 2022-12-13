@@ -31,7 +31,9 @@
 /// the appearance of the text view "I just appeared in the middle 🤠" with the
 /// navigation title "Second Screen" in the right column.](doub-column-nav-view-style-ex1.gif)
 ///
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
+@available(iOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+@available(macOS, introduced: 10.15, deprecated: 100000.0, message: "replace styled NavigationView with NavigationSplitView instead")
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
 @available(watchOS, unavailable)
 public struct DoubleColumnNavigationViewStyle : NavigationViewStyle {
 

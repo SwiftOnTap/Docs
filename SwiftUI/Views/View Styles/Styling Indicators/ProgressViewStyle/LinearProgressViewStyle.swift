@@ -82,6 +82,10 @@ public struct LinearProgressViewStyle : ProgressViewStyle {
     /// ![A linear style ProgressView displaying a gray loading bar filled halfway left to right
     /// by orange, as defined by the ProgressView value being 5 and the total being 10.](linearprogress.png)
     ///
+    @available(iOS, introduced: 14.0, deprecated: 100000.0, message: "Use ``View/tint(_)`` instead.")
+    @available(macOS, introduced: 11.0, deprecated: 100000.0, message: "Use ``View/tint(_)`` instead.")
+    @available(tvOS, introduced: 14.0, deprecated: 100000.0, message: "Use ``View/tint(_)`` instead.")
+    @available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "Use ``View/tint(_)`` instead.")
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.

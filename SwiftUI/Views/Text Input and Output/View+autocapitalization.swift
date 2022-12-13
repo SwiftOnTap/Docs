@@ -30,8 +30,9 @@ extension View {
     ///
     /// - Parameter style: One of the autocapitalization modes defined in the
     /// `UITextAutocapitalizationType` enumeration.
-    @available(iOS 13.0, tvOS 13.0, *)
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "use textInputAutocapitalization(_:)")
     @available(macOS, unavailable)
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "use textInputAutocapitalization(_:)")
     @available(watchOS, unavailable)
     public func autocapitalization(_ style: UITextAutocapitalizationType) -> some View { }
 

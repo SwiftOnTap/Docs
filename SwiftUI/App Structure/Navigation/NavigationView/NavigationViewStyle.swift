@@ -26,8 +26,40 @@
 /// a button in the upper left hand corner with the option to go back. The
 /// StackNavigationViewStyle renders the swipe appearance.](nav-view-style-ex1.gif)
 ///
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 7.0, *)
+@available(iOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+@available(macOS, introduced: 10.15, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+@available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
 public protocol NavigationViewStyle { }
-extension NavigationViewStyle {
+
+@available(iOS, introduced: 15.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationSplitView")
+@available(macOS, introduced: 12.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationSplitView")
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension NavigationViewStyle where Self == ColumnNavigationViewStyle {
+
+    /// A navigation view style represented by a series of views in columns.
+    public static var columns: ColumnNavigationViewStyle { get }
 }
 
+@available(iOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+@available(macOS, introduced: 10.15, deprecated: 100000.0, message: "replace styled NavigationView with NavigationSplitView instead")
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+@available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+extension NavigationViewStyle where Self == DefaultNavigationViewStyle {
+
+    /// The default navigation view style in the current context of the view
+    /// being styled.
+    public static var automatic: DefaultNavigationViewStyle { get }
+}
+
+@available(iOS, introduced: 13.0, deprecated: 100000.0, message: "replace stack-styled NavigationView with NavigationStack")
+@available(macOS, unavailable)
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "replace stack-styled NavigationView with NavigationStack")
+@available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "replace stack-styled NavigationView with NavigationStack")
+extension NavigationViewStyle where Self == StackNavigationViewStyle {
+
+    /// A navigation view style represented by a view stack that only shows a
+    /// single top view at a time.
+    public static var stack: StackNavigationViewStyle { get }
+}

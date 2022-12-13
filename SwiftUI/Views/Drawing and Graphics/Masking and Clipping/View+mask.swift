@@ -83,6 +83,10 @@ extension View {
     ///
     /// - Parameter mask: The view whose alpha the rendering system applies to
     ///   the specified view.
+    @available(iOS, deprecated: 100000.0, message: "Use overload where mask accepts a @ViewBuilder instead.")
+    @available(macOS, deprecated: 100000.0, message: "Use overload where mask accepts a @ViewBuilder instead.")
+    @available(tvOS, deprecated: 100000.0, message: "Use overload where mask accepts a @ViewBuilder instead.")
+    @available(watchOS, deprecated: 100000.0, message: "Use overload where mask accepts a @ViewBuilder instead.")
     @inlinable public func mask<Mask>(_ mask: Mask) -> some View where Mask : View { }
 
 }

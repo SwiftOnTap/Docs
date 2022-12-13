@@ -384,3 +384,81 @@ extension View {
 
 }
 
+@available(iOS, introduced: 13.4, deprecated: 100000.0, message: "Provide `UTType`s as the `supportedContentTypes` instead.")
+@available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Provide `UTType`s as the `supportedContentTypes` instead.")
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension View {
+
+    /// Defines the destination for a drag and drop operation, using the same
+    /// size and position as this view, handling dropped content with the given
+    /// closure.
+    ///
+    /// - Parameters:
+    ///   - supportedTypes: The uniform type identifiers that describe the
+    ///     types of content this view can accept through drag and drop.
+    ///     If the drag and drop operation doesn't contain any of the supported
+    ///     types, then this drop destination doesn't activate and `isTargeted`
+    ///     doesn't update.
+    ///   - isTargeted: A binding that updates when a drag and drop operation
+    ///     enters or exits the drop target area. The binding's value is `true`
+    ///     when the cursor is inside the area, and `false` when the cursor is
+    ///     outside.
+    ///   - action: A closure that takes the dropped content and responds
+    ///     appropriately. The parameter to `action` contains the dropped
+    ///     items, with types specified by `supportedTypes`. Return `true`
+    ///     if the drop operation was successful; otherwise, return `false`.
+    /// - Returns: A view that provides a drop destination for a drag
+    ///   operation of the specified types.
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping (_ providers: [NSItemProvider]) -> Bool) -> some View
+
+
+    /// Defines the destination for a drag and drop operation with the same size
+    /// and position as this view, handling dropped content and the drop
+    /// location with the given closure.
+    ///
+    /// - Parameters:
+    ///   - supportedTypes: The uniform type identifiers that describe the
+    ///     types of content this view can accept through drag and drop.
+    ///     If the drag and drop operation doesn't contain any of the supported
+    ///     types, then this drop destination doesn't activate and `isTargeted`
+    ///     doesn't update.
+    ///   - isTargeted: A binding that updates when a drag and drop operation
+    ///     enters or exits the drop target area. The binding's value is `true`
+    ///     when the cursor is inside the area, and `false` when the cursor is
+    ///     outside.
+    ///   - action: A closure that takes the dropped content and responds
+    ///     appropriately. The first parameter to `action` contains the dropped
+    ///     items, with types specified by `supportedTypes`. The second
+    ///     parameter contains the drop location in this view's coordinate
+    ///     space. Return `true` if the drop operation was successful;
+    ///     otherwise, return `false`.
+    /// - Returns: A view that provides a drop destination for a drag
+    ///   operation of the specified types.
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public func onDrop(of supportedTypes: [String], isTargeted: Binding<Bool>?, perform action: @escaping (_ providers: [NSItemProvider], _ location: CGPoint) -> Bool) -> some View
+
+
+    /// Defines the destination for a drag and drop operation with the same size
+    /// and position as this view, with behavior controlled by the given
+    /// delegate.
+    ///
+    /// - Parameters:
+    ///   - supportedTypes: The uniform type identifiers that describe the
+    ///     types of content this view can accept through drag and drop.
+    ///     If the drag and drop operation doesn't contain any of the supported
+    ///     types, then this drop destination doesn't activate and `isTargeted`
+    ///     doesn't update.
+    ///   - delegate: A type that conforms to the `DropDelegate` protocol. You
+    ///     have comprehensive control over drop behavior when you use a
+    ///     delegate.
+    /// - Returns: A view that provides a drop destination for a drag
+    ///   operation of the specified types.
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public func onDrop(of supportedTypes: [String], delegate: DropDelegate) -> some View
+
+}

@@ -77,8 +77,10 @@
 /// - If your action sheet requires a parameter, you can pass one in by
 /// using the ``View/actionSheet(item:content:)`` view modifier instead.
 ///
-@available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(iOS, introduced: 13.0, deprecated: 100000.0, message: "use `View.confirmationDialog(title:isPresented:titleVisibility:presenting::actions:)`instead.")
 @available(macOS, unavailable)
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "use `View.confirmationDialog(title:isPresented:titleVisibility:presenting:actions:)`instead.")
+@available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use `View.confirmationDialog(title:isPresented:titleVisibility:presenting:actions:)`instead.")
 public struct ActionSheet {
 
     /// Creates an action sheet with the provided buttons.

@@ -188,6 +188,11 @@ public struct Picker<Label, SelectionValue, Content> : View where Label : View, 
     ///     - selection: A binding to the currently selected option.
     ///     - label: A view used for the picker's label.
     ///     - content: A closure that returns the picker's options.
+    ///
+    @available(iOS, deprecated: 100000.0, renamed: "Picker(selection:content:label:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Picker(selection:content:label:)")
+    @available(tvOS, deprecated: 100000.0, renamed: "Picker(selection:content:label:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Picker(selection:content:label:)")
     public init(selection: Binding<SelectionValue>, label: Label, @ViewBuilder content: () -> Content) { }
 
     /// The content and behavior of the view.

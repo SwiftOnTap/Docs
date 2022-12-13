@@ -49,20 +49,6 @@ extension ModifiedContent where Modifier == AccessibilityAttachmentModifier {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension ModifiedContent : Equatable where Content : Equatable, Modifier : Equatable {
-
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    public static func == (a: ModifiedContent<Content, Modifier>, b: ModifiedContent<Content, Modifier>) -> Bool { }
-}
-
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ModifiedContent : View where Content : View, Modifier : ViewModifier {
 
     /// The content and behavior of the view.
@@ -70,8 +56,7 @@ extension ModifiedContent : View where Content : View, Modifier : ViewModifier {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension ModifiedContent : ViewModifier where Content : ViewModifier, Modifier : ViewModifier {
-}
+extension ModifiedContent : ViewModifier where Content : ViewModifier, Modifier : ViewModifier { }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ModifiedContent : DynamicViewContent where Content : DynamicViewContent, Modifier : ViewModifier {
