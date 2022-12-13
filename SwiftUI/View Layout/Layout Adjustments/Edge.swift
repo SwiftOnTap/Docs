@@ -189,11 +189,6 @@
     ///     // Prints "true"
     public var rawValue: Int8 { get }
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [Edge]
-
-    /// A collection of all values of this type.
-    public static var allCases: [Edge] { get }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)

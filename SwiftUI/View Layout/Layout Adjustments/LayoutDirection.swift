@@ -94,11 +94,6 @@ public enum LayoutDirection : Hashable, CaseIterable {
     ///
     case rightToLeft
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [LayoutDirection]
-
-    /// A collection of all values of this type.
-    public static var allCases: [LayoutDirection] { get }
 }
 
 extension LayoutDirection {

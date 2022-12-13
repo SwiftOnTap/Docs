@@ -14,11 +14,6 @@ public enum ColorSchemeContrast : CaseIterable, Equatable, Hashable {
     /// the app's foreground and background colors.
     case increased
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [ColorSchemeContrast]
-
-    /// A collection of all values of this type.
-    public static var allCases: [ColorSchemeContrast] { get }
 }
 
 extension ColorSchemeContrast {

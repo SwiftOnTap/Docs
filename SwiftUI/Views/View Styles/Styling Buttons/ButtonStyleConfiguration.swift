@@ -18,7 +18,7 @@
 ///             .opacity(0.3)
 ///     }
 ///
-///     func makeBody(configuration: Configuration) -> some View {
+///     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
 ///         configuration.label
 ///             .padding(20)
 ///             .background(background)
@@ -41,6 +41,10 @@
 /// ![A gif displaying a gray button reading "Press Me!" that turns blue once
 /// pressed; the button is of a custom buttonstyle, which specifies the
 /// color change using .isPressed within the .background modifier.](button-style-config-ex.gif)
+///
+/// `ButtonStyle` defines an internal typealias called `Configuration`, which
+/// is just set to `ButtonStyleConfiguration`. So, in general, your
+/// `makeBody` function can just be type annotated with `Configuration`.
 ///
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ButtonStyleConfiguration {

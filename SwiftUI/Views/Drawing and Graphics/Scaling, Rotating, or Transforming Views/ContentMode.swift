@@ -95,10 +95,5 @@
     ///
     case fill
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [ContentMode]
-
-    /// A collection of all values of this type.
-    public static var allCases: [ContentMode] { get }
 }
 

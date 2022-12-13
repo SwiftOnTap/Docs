@@ -34,12 +34,6 @@
     /// some platforms.
     case hidden
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [Visibility]
-
-    /// A collection of all values of this type.
-    public static var allCases: [Visibility] { get }
-
 }
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)

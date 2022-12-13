@@ -260,11 +260,6 @@
     /// - Parameter rawValue: The raw value to use for the new instance.
     public init?(rawValue: Int8) { }
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [Axis]
-
-    /// A collection of all values of this type.
-    public static var allCases: [Axis] { get }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)

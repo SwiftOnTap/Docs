@@ -94,9 +94,6 @@
     /// - Parameter rawValue: The raw value to use for the new instance.
     public init?(rawValue: Int8) { }
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [VerticalEdge]
-
     /// The raw type that can be used to represent all values of the conforming
     /// type.
     ///
@@ -104,9 +101,6 @@
     /// value of the `RawValue` type, but there may be values of the `RawValue`
     /// type that don't have a corresponding value of the conforming type.
     public typealias RawValue = Int8
-
-    /// A collection of all values of this type.
-    public static var allCases: [VerticalEdge] { get }
 
     /// The corresponding value of the raw type.
     ///
