@@ -13,9 +13,6 @@
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct InterfaceOrientation : CaseIterable, Identifiable, Equatable {
 
-    /// A collection of all values of this type.
-    public static var allCases: [InterfaceOrientation] { get }
-
     /// The stable identity of the entity associated with this instance.
     public var id: String { get }
 
@@ -30,9 +27,6 @@ public struct InterfaceOrientation : CaseIterable, Identifiable, Equatable {
 
     /// The device is in landscape mode, with the top of the device on the right.
     public static let landscapeRight: InterfaceOrientation
-
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [InterfaceOrientation]
 
     /// A type representing the stable identity of the entity associated with
     /// an instance.

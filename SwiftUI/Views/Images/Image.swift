@@ -913,11 +913,6 @@ extension Image {
         ///     // Prints "true"
         public var rawValue: UInt8 { get }
 
-        /// A type that can represent a collection of all values of this type.
-        public typealias AllCases = [Image.Orientation]
-
-        /// A collection of all values of this type.
-        public static var allCases: [Image.Orientation] { get }
     }
 }
 

@@ -76,13 +76,5 @@
     ///
     case trailing
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [TextAlignment]
-
-    /// A collection of all values of this type.
-    ///
-    /// This will return an array of all available TextAlignment values:
-    /// `.leading`, `.center`, and `.trailing`
-    public static var allCases: [TextAlignment] { get }
 }
 

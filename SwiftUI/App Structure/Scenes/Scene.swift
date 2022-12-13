@@ -7,9 +7,9 @@
 /// Scenes can either be custom, or one of the primitives like ``WindowGroup`` or
 /// ``DocumentGroup``.
 ///
-/// ### Creating a Scene
+/// ### Creating a `Scene`
 ///
-/// #### Using primitive Scenes
+/// #### Using primitive `Scene`s
 ///
 /// Primitive scenes like `WindowGroup` can go directly in the body of your ``App``.
 ///
@@ -24,7 +24,7 @@
 ///
 /// ![A white view that displays the text ""This is an entire app! 🙌""](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/Scene-example-1.png)
 ///
-/// #### Using custom Scenes
+/// #### Using custom `Scene`s
 ///
 /// Just like how custom ``View``s are made out of a `var body` of smaller  ``View``s,
 /// custom ``Scene``s are made out of a `var body` of smaller ``Scene``s.
@@ -65,6 +65,7 @@
 ///
 ///     struct StateAdaptingScene: Scene {
 ///         @Environment(\.scenePhase) private var scenePhase
+///
 ///         var body: some Scene {
 ///             WindowGroup {
 ///                 Text(scenePhase == .active ? "Active!" : "Inactive")
@@ -126,7 +127,7 @@ extension Scene {
     /// This method is most often used to watch for changes in a scene's status (active, inactive, etc.)
     ///
     /// There is a different, but related, method called ``View/onChange(of:perform:)`` that
-    /// can be used on `Views`.
+    /// can be used on `View`s.
     ///
     ///     struct CustomScene: Scene {
     ///         @Environment(\.scenePhase) private var scenePhase

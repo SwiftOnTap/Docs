@@ -86,6 +86,7 @@
 /// it provides more customization.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public protocol ButtonStyle { }
+
 extension ButtonStyle {
 
     /// A view that represents the body of a button.

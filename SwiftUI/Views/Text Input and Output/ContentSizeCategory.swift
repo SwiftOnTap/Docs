@@ -46,11 +46,6 @@ public enum ContentSizeCategory : Hashable, CaseIterable {
     @available(iOS 13.4, macOS 10.15.4, tvOS 13.4, watchOS 6.2, *)
     public var isAccessibilityCategory: Bool { get }
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [ContentSizeCategory]
-
-    /// A collection of all values of this type.
-    public static var allCases: [ContentSizeCategory] { get }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)

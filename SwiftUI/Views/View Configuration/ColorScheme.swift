@@ -114,11 +114,6 @@ public enum ColorScheme : CaseIterable, Equatable, Hashable {
     ///
     case dark
 
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [ColorScheme]
-
-    /// A collection of all values of this type.
-    public static var allCases: [ColorScheme] { get }
 }
 
 extension ColorScheme {

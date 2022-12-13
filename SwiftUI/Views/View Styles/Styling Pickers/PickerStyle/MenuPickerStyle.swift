@@ -7,19 +7,23 @@
 /// ``InlinePickerStyle`` when there are fewer than five options.
 ///
 /// ```
-/// struct ExampleView: View {
-///     var fruits = ["Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", "Grapes🍇🍇" ]
+/// struct ContentView: View {
+///     var fruits = ["Banana🍌🍌",
+///                   "Apple🍎🍎",
+///                   "Peach🍑🍑",
+///                   "Watermelon🍉🍉",
+///                   "Grapes🍇🍇" ]
 ///     @State private var selectedFruit = 0
 ///
 ///     var body: some View {
 ///         VStack {
 ///             Picker(selection: $selectedFruit, label: Text("Select Favorite Fruit")) {
-///                 ForEach(0..<fruits.count) {
-///                     Text(self.fruits[$0])
+///                 ForEach(0..<fruits.count, id: \.self) {
+///                     Text(fruits[$0])
 ///                 }
 ///             }
 ///
-///             Text("Your Favorite Fruit: \(self.fruits[selectedFruit])")
+///             Text("Your Favorite Fruit: \(fruits[selectedFruit])")
 ///         }
 ///         .pickerStyle(MenuPickerStyle())
 ///     }
@@ -30,7 +34,7 @@
 /// labeled as "Select Favorite Fruit" that once clicked displays the five menu
 /// options, "Banana🍌🍌","Apple🍎🍎", "Peach🍑🍑", "Watermelon🍉🍉", and
 /// "Grapes🍇🍇", followed by text reading "Your Favorite Fruit: _", which is
-/// populated once a menu item is selected.](https://bananadocs-documentation-assets.s3-us-west-2.amazonaws.com/pickerstyle-menu-example-1.gif)
+/// populated once a menu item is selected.](menupickerstyle.gif)
 ///
 /// [pickerstyle-menu ->]
 /// Your app can also use explicit tags to identify picker content.
