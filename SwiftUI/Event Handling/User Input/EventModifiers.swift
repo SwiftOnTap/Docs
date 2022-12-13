@@ -30,6 +30,10 @@
     public static let numericPad: EventModifiers
 
     /// The Function key.
+    @available(iOS, deprecated: 15.0, message: "Function modifier is reserved for system applications")
+    @available(macOS, deprecated: 12.0, message: "Function modifier is reserved for system applications")
+    @available(tvOS, deprecated: 15.0, message: "Function modifier is reserved for system applications")
+    @available(watchOS, deprecated: 8.0, message: "Function modifier is reserved for system applications")
     public static let function: EventModifiers
 
     /// All possible modifier keys.

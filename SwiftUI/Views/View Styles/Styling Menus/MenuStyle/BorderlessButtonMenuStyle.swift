@@ -24,7 +24,8 @@
 /// ![A gif displaying a view containing a borderless button style menu "PDF" that once clicked displays
 /// two buttons, "Open in Preview" and "Save as PDF", each with no action attached.](default-menu-example.gif)
 ///
-@available(iOS 14.0, macOS 11.0, *)
+@available(iOS, introduced: 14.0, deprecated: 100000.0, message: "Use .menuStyle(.button) and .buttonStyle(.borderless).")
+@available(macOS, introduced: 11.0, deprecated: 100000.0, message: "Use .menuStyle(.button) and .buttonStyle(.borderless).")
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct BorderlessButtonMenuStyle : MenuStyle {

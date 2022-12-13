@@ -49,8 +49,10 @@ extension View {
     ///     If the identity changes, the system dismisses a currently-presented
     ///     action sheet and replace it with a new one.
     ///   - content: A closure returning the action sheet to present.
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "use `confirmationDialog(title:isPresented:titleVisibility:presenting::actions:)`instead.")
     @available(macOS, unavailable)
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "use `confirmationDialog(title:isPresented:titleVisibility:presenting:actions:)`instead.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use `confirmationDialog(title:isPresented:titleVisibility:presenting:actions:)`instead.")
     public func actionSheet<T>(item: Binding<T?>, content: (T) -> ActionSheet) -> some View where T : Identifiable { }
 
 
@@ -88,8 +90,10 @@ extension View {
     ///   - isPresented: A binding to whether the action sheet should be
     ///     shown.
     ///   - content: A closure returning the ``ActionSheet`` to present.
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "use `confirmationDialog(title:isPresented:titleVisibility:presenting::actions:)`instead.")
     @available(macOS, unavailable)
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "use `confirmationDialog(title:isPresented:titleVisibility:presenting:actions:)`instead.")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "use `confirmationDialog(title:isPresented:titleVisibility:presenting:actions:)`instead.")
     public func actionSheet(isPresented: Binding<Bool>, content: () -> ActionSheet) -> some View { }
 
 }

@@ -10,7 +10,4 @@
    <FileRef
       location = "group:SwiftUI">
    </FileRef>
-   <FileRef
-      location = "group:SwiftUI.swift">
-   </FileRef>
 </Workspace>

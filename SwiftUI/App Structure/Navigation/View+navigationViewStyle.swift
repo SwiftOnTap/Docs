@@ -50,7 +50,10 @@ extension View {
     /// the appearance of the text view "🍌🍌" in the right column.](nav-view-ex9.gif)
     ///
     /// - Parameter style: The desired style of the ``NavigationView``.
-    @available(watchOS 7.0, *)
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
+    @available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "replace styled NavigationView with NavigationStack or NavigationSplitView instead")
     public func navigationViewStyle<S>(_ style: S) -> some View where S : NavigationViewStyle { }
 
 }

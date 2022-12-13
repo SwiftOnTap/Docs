@@ -30,8 +30,10 @@
 /// reading "I'm stacked on the pancakes 📚" with the navigation title "Second
 /// Screen" to appear, covering the first view.](stack-nav-view-style-ex.gif)
 ///
-@available(iOS 13.0, tvOS 13.0, watchOS 7.0, *)
+@available(iOS, introduced: 13.0, deprecated: 100000.0, message: "replace stack-styled NavigationView with NavigationStack")
 @available(macOS, unavailable)
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "replace stack-styled NavigationView with NavigationStack")
+@available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "replace stack-styled NavigationView with NavigationStack")
 public struct StackNavigationViewStyle : NavigationViewStyle {
 
     /// Creates a stack navigation view style.

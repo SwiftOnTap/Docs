@@ -35,8 +35,10 @@ extension View {
     /// immediately appear.](disable-autocorrect-ex.gif)
     ///
     /// - Parameter disable: Whether autocorrection is disabled for the view.
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
-    @available(watchOS, unavailable)
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "autocorrectionDisabled(_:)")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "autocorrectionDisabled(_:)")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "autocorrectionDisabled(_:)")
+    @available(watchOS, introduced: 8.0, deprecated: 100000.0, renamed: "autocorrectionDisabled(_:)")
     public func disableAutocorrection(_ disable: Bool?) -> some View { }
 
 }

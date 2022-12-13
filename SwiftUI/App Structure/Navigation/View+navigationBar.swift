@@ -26,6 +26,10 @@ extension View {
     ///
     /// - Parameter hidden: A Boolean value that indicates whether to hide the
     ///   navigation bar.
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(.hidden)")
+    @available(macOS, unavailable)
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use toolbar(.hidden)")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Use toolbar(.hidden)")
     @available(macOS, unavailable)
     public func navigationBarHidden(_ hidden: Bool) -> some View { }
 

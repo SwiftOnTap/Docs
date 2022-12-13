@@ -23,13 +23,17 @@
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct GroupBox<Label, Content> : View where Label : View, Content : View {
-
-    /// Creates a group box from a label and a view builder of content.
-    ///
+    
+    /// Creates a group box with the provided label and view content.
     /// - Parameters:
-    ///   - label: The label to associate with the grouped content.
-    ///   - content: The grouped content to appear with the label.
-    public init(label: Label, @ViewBuilder content: () -> Content) { }
+    ///   - content: A ``ViewBuilder`` that produces the content for the
+    ///     group box.
+    ///   - label: A ``ViewBuilder`` that produces a label for the group
+    ///     box.
+    @available(iOS 14.0, macOS 10.15, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public init(@ViewBuilder content: () -> Content, @ViewBuilder label: () -> Label) { }
 
     /// The content and behavior of the view.
     public var body: some View { get }
@@ -80,4 +84,19 @@ extension GroupBox where Label == Text {
     ///   - content: A ``SwiftUI/ViewBuilder`` that produces the content for the
     ///     group box.
     public init<S>(_ title: S, @ViewBuilder content: () -> Content) where S : StringProtocol { }
+}
+
+@available(iOS 14.0, macOS 10.15, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension GroupBox {
+    
+    /// Creates a group box from a label and a view builder of content.
+    ///
+    /// - Parameters:
+    ///   - label: The label to associate with the grouped content.
+    ///   - content: The grouped content to appear with the label.
+    @available(iOS, deprecated: 100000.0, renamed: "GroupBox(content:label:)")
+    @available(macOS, deprecated: 100000.0, renamed: "GroupBox(content:label:)")
+    public init(label: Label, @ViewBuilder content: () -> Content) { }
 }

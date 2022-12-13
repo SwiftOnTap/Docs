@@ -1,5 +1,8 @@
 /// Some options for specifying the preferred size of your content.
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "DynamicTypeSize")
+@available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "DynamicTypeSize")
+@available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "DynamicTypeSize")
+@available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "DynamicTypeSize")
 public enum ContentSizeCategory : Hashable, CaseIterable {
 
     /// Extra small content size.

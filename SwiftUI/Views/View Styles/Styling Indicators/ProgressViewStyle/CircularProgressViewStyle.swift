@@ -88,6 +88,10 @@ public struct CircularProgressViewStyle : ProgressViewStyle {
     ///
     /// ![A gif displaying an orange circular style progress view spinning.](progress-spinner-orange-ex.gif)
     ///
+    @available(iOS, introduced: 14.0, deprecated: 100000.0, message: "Use ``View/tint(_:)`` instead.")
+    @available(macOS, introduced: 11.0, deprecated: 100000.0, message: "Use ``View/tint(_:)`` instead.")
+    @available(tvOS, introduced: 14.0, deprecated: 100000.0, message: "Use ``View/tint(_:)`` instead.")
+    @available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "Use ``View/tint(_:)`` instead.")
     public init(tint: Color) { }
 
     /// Creates a view representing the body of a progress view.

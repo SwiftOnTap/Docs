@@ -91,7 +91,11 @@ extension ToolbarItem : CustomizableToolbarContent where ID == String {
     ///   - showsByDefault: Whether the item appears by default in the toolbar,
     ///     or only shows if the user explicitly adds it via customization.
     ///   - content: The content of the item.
-    public init(id: String, placement: ToolbarItemPlacement = .automatic, showsByDefault: Bool = true, @ViewBuilder content: () -> Content) { }
+    @available(iOS, introduced: 14.0, deprecated: 100000.0, message: "Use the CustomizableToolbarContent/defaultCustomization(_:options) modifier with a value of .hidden")
+    @available(macOS, introduced: 11.0, deprecated: 100000.0, message: "Use the CustomizableToolbarContent/defaultCustomization(_:options) modifier with a value of .hidden")
+    @available(tvOS, introduced: 14.0, deprecated: 100000.0, message: "Use the CustomizableToolbarContent/defaultCustomization(_:options) modifier with a value of .hidden")
+    @available(watchOS, introduced: 7.0, deprecated: 100000.0, message: "Use the CustomizableToolbarContent/defaultCustomization(_:options) modifier with a value of .hidden")
+    public init(id: String, placement: ToolbarItemPlacement = .automatic, showsByDefault: Bool, @ViewBuilder content: () -> Content) { }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)

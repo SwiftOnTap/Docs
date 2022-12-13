@@ -77,6 +77,9 @@ extension Slider {
     ///   - maximumValueLabel: A view used as a label on the maximum value side of the slider.
     ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
+    @available(iOS, deprecated: 100000.0, renamed: "Slider(value:in:label:minimumValueLabel:maximumValueLabel:onEditingChanged:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Slider(value:in:label:minimumValueLabel:maximumValueLabel:onEditingChanged:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Slider(value:in:label:minimumValueLabel:maximumValueLabel:onEditingChanged:)")
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
     /// Creates a slider with a label, max/min labels, and a step size.
@@ -116,6 +119,10 @@ extension Slider {
     ///   - minimumValueLabel: A view used as a label on the minimum value side of the slider.
     ///   - maximumValueLabel: A view used as a label on the maximum value side of the slider.
     ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
+    @available(tvOS, unavailable)
+    @available(iOS, deprecated: 100000.0, renamed: "Slider(value:in:step:label:minimumValueLabel:maximumValueLabel:onEditingChanged:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Slider(value:in:step:label:minimumValueLabel:maximumValueLabel:onEditingChanged:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Slider(value:in:step:label:minimumValueLabel:maximumValueLabel:onEditingChanged:)")
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, minimumValueLabel: ValueLabel, maximumValueLabel: ValueLabel, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 
@@ -148,6 +155,9 @@ extension Slider where ValueLabel == EmptyView {
     ///   parameter equal to true when editing begins, and false when it ends.
     ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
+    @available(iOS, deprecated: 100000.0, renamed: "Slider(value:in:label:onEditingChanged:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Slider(value:in:label:onEditingChanged:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Slider(value:in:label:onEditingChanged:)")
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V> = 0...1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 
     /// Creates a slider with a label and a step size.
@@ -180,6 +190,9 @@ extension Slider where ValueLabel == EmptyView {
     ///   parameter equal to true when editing begins, and false when it ends.
     ///   - label: A view used as a label for the slider. Mainly used for accessibility on iOS.
     @available(tvOS, unavailable)
+    @available(iOS, deprecated: 100000.0, renamed: "Slider(value:in:step:label:onEditingChanged:)")
+    @available(macOS, deprecated: 100000.0, renamed: "Slider(value:in:step:label:onEditingChanged:)")
+    @available(watchOS, deprecated: 100000.0, renamed: "Slider(value:in:step:label:onEditingChanged:)")
     public init<V>(value: Binding<V>, in bounds: ClosedRange<V>, step: V.Stride = 1, onEditingChanged: @escaping (Bool) -> Void = { _ in }, @ViewBuilder label: () -> Label) where V : BinaryFloatingPoint, V.Stride : BinaryFloatingPoint { }
 }
 

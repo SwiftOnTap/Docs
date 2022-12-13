@@ -150,8 +150,10 @@ extension EnvironmentValues {
     ///
     /// When the value is `nil`, SwiftUI uses the system default. The default
     /// value is `nil`.
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
-    @available(watchOS, unavailable)
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "autocorrectionDisabled")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "autocorrectionDisabled")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "autocorrectionDisabled")
+    @available(watchOS, introduced: 8.0, deprecated: 100000.0, renamed: "autocorrectionDisabled")
     public var disableAutocorrection: Bool?
 }
 
@@ -161,6 +163,10 @@ extension EnvironmentValues {
     /// The preferred size of the content.
     ///
     /// The default value is ``ContentSizeCategory/large``.
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "dynamicTypeSize")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "dynamicTypeSize")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "dynamicTypeSize")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "dynamicTypeSize")
     public var sizeCategory: ContentSizeCategory
 }
 
@@ -516,6 +522,10 @@ extension EnvironmentValues {
     /// upon dismissal of the sheet with the close button, the console prints
     /// "dismissed!" and the sheet slides back down until hidden.](eviron-vals-presentation-mode.gif)
     ///
+    @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use isPresented or dismiss")
+    @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Use isPresented or dismiss")
+    @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use isPresented or dismiss")
+    @available(watchOS, introduced: 6.0, deprecated: 100000.0, message: "Use isPresented or dismiss")
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public var presentationMode: Binding<PresentationMode> { get }
 }
