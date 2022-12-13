@@ -27,19 +27,6 @@
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct RedactionReasons : OptionSet {
 
-    /// The raw value.
-    public let rawValue: Int
-
-    /// Creates a new set from a raw value.
-    ///
-    /// Do not use this initializer directly. Rather, use one of the
-    /// static constants of the strucutre:
-    /// - ``RedactionReasons/placeholder``
-    ///
-    /// - Parameter rawValue: The raw value with which to create the
-    ///   reasons for redaction.
-    public init(rawValue: Int) { }
-
     /// Displayed data should appear as generic placeholders.
     ///
     /// Text and images will be automatically masked to appear as
@@ -95,12 +82,5 @@ public struct RedactionReasons : OptionSet {
     /// The type of the elements of an array literal.
     public typealias ArrayLiteralElement = RedactionReasons
 
-    /// The raw type that can be used to represent all values of the conforming
-    /// type.
-    ///
-    /// Every distinct value of the conforming type has a corresponding unique
-    /// value of the `RawValue` type, but there may be values of the `RawValue`
-    /// type that don't have a corresponding value of the conforming type.
-    public typealias RawValue = Int
 }
 

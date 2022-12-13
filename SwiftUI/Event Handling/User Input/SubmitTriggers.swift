@@ -7,34 +7,6 @@
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct SubmitTriggers : OptionSet {
 
-    /// The raw type that can be used to represent all values of the conforming
-    /// type.
-    ///
-    /// Every distinct value of the conforming type has a corresponding unique
-    /// value of the `RawValue` type, but there may be values of the `RawValue`
-    /// type that don't have a corresponding value of the conforming type.
-    public typealias RawValue = Int
-
-    /// The corresponding value of the raw type.
-    ///
-    /// A new instance initialized with `rawValue` will be equivalent to this
-    /// instance. For example:
-    ///
-    ///     enum PaperSize: String {
-    ///         case A4, A5, Letter, Legal
-    ///     }
-    ///
-    ///     let selectedSize = PaperSize.Letter
-    ///     print(selectedSize.rawValue)
-    ///     // Prints "Letter"
-    ///
-    ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-    ///     // Prints "true"
-    public let rawValue: SubmitTriggers.RawValue
-
-    /// Creates a set of submit triggers.
-    public init(rawValue: SubmitTriggers.RawValue) { }
-
     /// Defines triggers originating from text input controls like `TextField`
     /// and `SecureField`.
     public static let text: SubmitTriggers

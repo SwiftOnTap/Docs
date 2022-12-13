@@ -88,41 +88,6 @@
     ///
     @frozen public struct BlendMode : RawRepresentable, Equatable {
 
-        /// The corresponding value of the raw type.
-        ///
-        /// A new instance initialized with `rawValue` will be equivalent to this
-        /// instance. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     let selectedSize = PaperSize.Letter
-        ///     print(selectedSize.rawValue)
-        ///     // Prints "Letter"
-        ///
-        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        ///     // Prints "true"
-        public let rawValue: Int32
-
-        /// Creates a new instance with the specified raw value.
-        ///
-        /// If there is no value of the type that corresponds with the specified raw
-        /// value, this initializer returns `nil`. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     print(PaperSize(rawValue: "Legal"))
-        ///     // Prints "Optional("PaperSize.Legal")"
-        ///
-        ///     print(PaperSize(rawValue: "Tabloid"))
-        ///     // Prints "nil"
-        ///
-        /// - Parameter rawValue: The raw value to use for the new instance.
-        @inlinable public init(rawValue: Int32) { }
-
         /// A mode that paints source image samples over the background image
         /// samples.
         ///
@@ -377,13 +342,6 @@
         /// * `D` is the background.
         @inlinable public static var plusLighter: GraphicsContext.BlendMode { get }
 
-        /// The raw type that can be used to represent all values of the conforming
-        /// type.
-        ///
-        /// Every distinct value of the conforming type has a corresponding unique
-        /// value of the `RawValue` type, but there may be values of the `RawValue`
-        /// type that don't have a corresponding value of the conforming type.
-        public typealias RawValue = Int32
     }
 
     /// The opacity of drawing operations in the context.
@@ -469,41 +427,6 @@
     /// to add a clipping layer.
     @frozen public struct ClipOptions : OptionSet {
 
-        /// The corresponding value of the raw type.
-        ///
-        /// A new instance initialized with `rawValue` will be equivalent to this
-        /// instance. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     let selectedSize = PaperSize.Letter
-        ///     print(selectedSize.rawValue)
-        ///     // Prints "Letter"
-        ///
-        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        ///     // Prints "true"
-        public let rawValue: UInt32
-
-        /// Creates a new option set from the given raw value.
-        ///
-        /// This initializer always succeeds, even if the value passed as `rawValue`
-        /// exceeds the static properties declared as part of the option set. This
-        /// example creates an instance of `ShippingOptions` with a raw value beyond
-        /// the highest element, with a bit mask that effectively contains all the
-        /// declared static members.
-        ///
-        ///     let extraOptions = ShippingOptions(rawValue: 255)
-        ///     print(extraOptions.isStrictSuperset(of: .all))
-        ///     // Prints "true"
-        ///
-        /// - Parameter rawValue: The raw value of the option set to create. Each bit
-        ///   of `rawValue` potentially represents an element of the option set,
-        ///   though raw values may include bits that are not defined as distinct
-        ///   values of the `OptionSet` type.
-        @inlinable public init(rawValue: UInt32) { }
-
         /// An option to invert the shape or layer alpha as the clip mask.
         ///
         /// When you use this option, SwiftUI uses `1 - alpha` instead of
@@ -518,14 +441,6 @@
         /// To inherit all the default implementations from the `OptionSet` protocol,
         /// the `Element` type must be `Self`, the default.
         public typealias Element = GraphicsContext.ClipOptions
-
-        /// The raw type that can be used to represent all values of the conforming
-        /// type.
-        ///
-        /// Every distinct value of the conforming type has a corresponding unique
-        /// value of the `RawValue` type, but there may be values of the `RawValue`
-        /// type that don't have a corresponding value of the conforming type.
-        public typealias RawValue = UInt32
     }
 
     /// The bounding rectangle of the intersection of all current clip
@@ -753,41 +668,6 @@
     /// ``GraphicsContext``.
     @frozen public struct ShadowOptions : OptionSet {
 
-        /// The corresponding value of the raw type.
-        ///
-        /// A new instance initialized with `rawValue` will be equivalent to this
-        /// instance. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     let selectedSize = PaperSize.Letter
-        ///     print(selectedSize.rawValue)
-        ///     // Prints "Letter"
-        ///
-        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        ///     // Prints "true"
-        public let rawValue: UInt32
-
-        /// Creates a new option set from the given raw value.
-        ///
-        /// This initializer always succeeds, even if the value passed as `rawValue`
-        /// exceeds the static properties declared as part of the option set. This
-        /// example creates an instance of `ShippingOptions` with a raw value beyond
-        /// the highest element, with a bit mask that effectively contains all the
-        /// declared static members.
-        ///
-        ///     let extraOptions = ShippingOptions(rawValue: 255)
-        ///     print(extraOptions.isStrictSuperset(of: .all))
-        ///     // Prints "true"
-        ///
-        /// - Parameter rawValue: The raw value of the option set to create. Each bit
-        ///   of `rawValue` potentially represents an element of the option set,
-        ///   though raw values may include bits that are not defined as distinct
-        ///   values of the `OptionSet` type.
-        @inlinable public init(rawValue: UInt32) { }
-
         /// An option that causes the filter to draw the shadow above the
         /// object, rather than below it.
         @inlinable public static var shadowAbove: GraphicsContext.ShadowOptions { get }
@@ -816,13 +696,6 @@
         /// the `Element` type must be `Self`, the default.
         public typealias Element = GraphicsContext.ShadowOptions
 
-        /// The raw type that can be used to represent all values of the conforming
-        /// type.
-        ///
-        /// Every distinct value of the conforming type has a corresponding unique
-        /// value of the `RawValue` type, but there may be values of the `RawValue`
-        /// type that don't have a corresponding value of the conforming type.
-        public typealias RawValue = UInt32
     }
 
     /// Options that configure the graphics context filter that creates blur.
@@ -831,41 +704,6 @@
     /// ``Filter/blur(radius:options:)`` to create a ``Filter`` that adds
     /// blur to an object that you draw into a ``GraphicsContext``.
     @frozen public struct BlurOptions : OptionSet {
-
-        /// The corresponding value of the raw type.
-        ///
-        /// A new instance initialized with `rawValue` will be equivalent to this
-        /// instance. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     let selectedSize = PaperSize.Letter
-        ///     print(selectedSize.rawValue)
-        ///     // Prints "Letter"
-        ///
-        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        ///     // Prints "true"
-        public let rawValue: UInt32
-
-        /// Creates a new option set from the given raw value.
-        ///
-        /// This initializer always succeeds, even if the value passed as `rawValue`
-        /// exceeds the static properties declared as part of the option set. This
-        /// example creates an instance of `ShippingOptions` with a raw value beyond
-        /// the highest element, with a bit mask that effectively contains all the
-        /// declared static members.
-        ///
-        ///     let extraOptions = ShippingOptions(rawValue: 255)
-        ///     print(extraOptions.isStrictSuperset(of: .all))
-        ///     // Prints "true"
-        ///
-        /// - Parameter rawValue: The raw value of the option set to create. Each bit
-        ///   of `rawValue` potentially represents an element of the option set,
-        ///   though raw values may include bits that are not defined as distinct
-        ///   values of the `OptionSet` type.
-        @inlinable public init(rawValue: UInt32) { }
 
         /// An option that causes the filter to ensure the result is completely
         /// opaque.
@@ -887,14 +725,6 @@
         /// To inherit all the default implementations from the `OptionSet` protocol,
         /// the `Element` type must be `Self`, the default.
         public typealias Element = GraphicsContext.BlurOptions
-
-        /// The raw type that can be used to represent all values of the conforming
-        /// type.
-        ///
-        /// Every distinct value of the conforming type has a corresponding unique
-        /// value of the `RawValue` type, but there may be values of the `RawValue`
-        /// type that don't have a corresponding value of the conforming type.
-        public typealias RawValue = UInt32
     }
 
     /// Options that configure a filter that you add to a graphics context.
@@ -902,41 +732,6 @@
     /// You can use filter options to configure a ``Filter`` that you apply
     /// to a ``GraphicsContext`` with the ``addFilter(_:options:)`` method.
     @frozen public struct FilterOptions : OptionSet {
-
-        /// The corresponding value of the raw type.
-        ///
-        /// A new instance initialized with `rawValue` will be equivalent to this
-        /// instance. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     let selectedSize = PaperSize.Letter
-        ///     print(selectedSize.rawValue)
-        ///     // Prints "Letter"
-        ///
-        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        ///     // Prints "true"
-        public let rawValue: UInt32
-
-        /// Creates a new option set from the given raw value.
-        ///
-        /// This initializer always succeeds, even if the value passed as `rawValue`
-        /// exceeds the static properties declared as part of the option set. This
-        /// example creates an instance of `ShippingOptions` with a raw value beyond
-        /// the highest element, with a bit mask that effectively contains all the
-        /// declared static members.
-        ///
-        ///     let extraOptions = ShippingOptions(rawValue: 255)
-        ///     print(extraOptions.isStrictSuperset(of: .all))
-        ///     // Prints "true"
-        ///
-        /// - Parameter rawValue: The raw value of the option set to create. Each bit
-        ///   of `rawValue` potentially represents an element of the option set,
-        ///   though raw values may include bits that are not defined as distinct
-        ///   values of the `OptionSet` type.
-        @inlinable public init(rawValue: UInt32) { }
 
         /// An option that causes the filter to perform calculations in a
         /// linear color space.
@@ -951,13 +746,6 @@
         /// the `Element` type must be `Self`, the default.
         public typealias Element = GraphicsContext.FilterOptions
 
-        /// The raw type that can be used to represent all values of the conforming
-        /// type.
-        ///
-        /// Every distinct value of the conforming type has a corresponding unique
-        /// value of the `RawValue` type, but there may be values of the `RawValue`
-        /// type that don't have a corresponding value of the conforming type.
-        public typealias RawValue = UInt32
     }
 
     /// Adds a filter that applies to subsequent drawing operations.
@@ -1124,41 +912,6 @@
     /// create for a ``Shading`` instance for use in a ``GraphicsContext``.
     @frozen public struct GradientOptions : OptionSet {
 
-        /// The corresponding value of the raw type.
-        ///
-        /// A new instance initialized with `rawValue` will be equivalent to this
-        /// instance. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     let selectedSize = PaperSize.Letter
-        ///     print(selectedSize.rawValue)
-        ///     // Prints "Letter"
-        ///
-        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        ///     // Prints "true"
-        public let rawValue: UInt32
-
-        /// Creates a new option set from the given raw value.
-        ///
-        /// This initializer always succeeds, even if the value passed as `rawValue`
-        /// exceeds the static properties declared as part of the option set. This
-        /// example creates an instance of `ShippingOptions` with a raw value beyond
-        /// the highest element, with a bit mask that effectively contains all the
-        /// declared static members.
-        ///
-        ///     let extraOptions = ShippingOptions(rawValue: 255)
-        ///     print(extraOptions.isStrictSuperset(of: .all))
-        ///     // Prints "true"
-        ///
-        /// - Parameter rawValue: The raw value of the option set to create. Each bit
-        ///   of `rawValue` potentially represents an element of the option set,
-        ///   though raw values may include bits that are not defined as distinct
-        ///   values of the `OptionSet` type.
-        @inlinable public init(rawValue: UInt32) { }
-
         /// An option that repeats the gradient outside its nominal range.
         ///
         /// Use this option to cause the gradient to repeat its pattern in
@@ -1196,13 +949,6 @@
         /// the `Element` type must be `Self`, the default.
         public typealias Element = GraphicsContext.GradientOptions
 
-        /// The raw type that can be used to represent all values of the conforming
-        /// type.
-        ///
-        /// Every distinct value of the conforming type has a corresponding unique
-        /// value of the `RawValue` type, but there may be values of the `RawValue`
-        /// type that don't have a corresponding value of the conforming type.
-        public typealias RawValue = UInt32
     }
 
     /// Returns a version of a shading resolved with the current values
