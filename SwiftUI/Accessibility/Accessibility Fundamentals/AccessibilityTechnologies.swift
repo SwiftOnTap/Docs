@@ -1,13 +1,83 @@
 /// Accessibility technologies available to the system.
+///
+/// Use this struct with the`@` ``AccessibilityFocusState`` property wrapper
+/// to read and set the accessibility focus. You can then read the state using
+/// the ``View/accessibilityFocused(_:)`` modifier.
+///
+/// Accessibility options:
+/// - ``AccessibilityTechnologies/voiceOver``: Use the voice over screen reader.
+/// - ``AccessibilityTechnologies/switchControl``: Use switch control,
+/// which allows the user to control the entire sustem using controller buttons, a
+/// breath-controlled switch or similar hardware.
+///
+///     struct ContentView: View {
+///            @AccessibilityFocusState(for: AccessibilityTechnologies.voiceOver) var labelFocused
+///
+///             var body: some View {
+///                 VStack {
+///                     Button("Jump VoiceOver 🔊 focus to the 2!") {
+///                         labelFocused = true
+///                     }
+///
+///                     Text("2️⃣")
+///                         .font(.title)
+///                         .accessibilityFocused($labelFocused)
+///                 }
+///             }
+///     }
+///
+/// ![A screenshot displaying a button that says "Jump VoiceOver 🔊 focus to the 2!" followed by a text label with a large title that says "2️⃣"](voice-over-focus.png)
+///
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct AccessibilityTechnologies : SetAlgebra {
 
     /// The value that represents the VoiceOver screen reader, allowing use
     /// of the system without seeing the screen visually.
+    ///
+    ///     struct ContentView: View {
+    ///            @AccessibilityFocusState(for: .voiceOver) var labelFocused
+    ///
+    ///             var body: some View {
+    ///                 VStack {
+    ///                     Button("Jump VoiceOver 🔊 focus to the 2!") {
+    ///                         labelFocused = true
+    ///                     }
+    ///
+    ///                     Text("2️⃣")
+    ///                         .font(.title)
+    ///                         .accessibilityFocused($labelFocused)
+    ///                 }
+    ///             }
+    ///     }
+    ///
+    /// ![A screenshot displaying a button that says "Jump VoiceOver 🔊 focus to the 2!" followed by a text label with a large title that says "2️⃣"](voice-over-focus.png)
+    ///
+    /// VoiceOver changes system interactions and allows the user to access their device based on
+    /// spoken descriptions. To read more, see [this link](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios) .
     public static var voiceOver: AccessibilityTechnologies
 
     /// The value that represents a Switch Control, allowing the use of the
     /// entire system using controller buttons, a breath-controlled switch or similar hardware.
+    ///
+    ///     struct ContentView: View {
+    ///            @AccessibilityFocusState(for: .switchControl) var labelFocused
+    ///
+    ///             var body: some View {
+    ///                 VStack {
+    ///                     Button("Jump Switch Control 🎚️ focus to the 2!") {
+    ///                         labelFocused = true
+    ///                     }
+    ///
+    ///                     Text("2️⃣")
+    ///                         .font(.title)
+    ///                         .accessibilityFocused($labelFocused)
+    ///                 }
+    ///             }
+    ///     }
+    ///
+    /// ![A screenshot displaying a button that says "Jump Switch Control 🎚️ focus to the 2!" followed by a text label with a large title that says "2️⃣"](switch-control-focus.png)
+    ///
+    /// To read more about switch control, see [this link.](https://support.apple.com/en-us/HT201370)
     public static var switchControl: AccessibilityTechnologies
 
     /// Creates a new accessibility technologies structure with an empy accessibility technology set.

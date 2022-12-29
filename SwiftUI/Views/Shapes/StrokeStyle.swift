@@ -453,7 +453,7 @@
     /// shape exceeds the set miter limit, so it turns to a bevel.](miter-limit.png)
     ///
     /// So if the actual miter in the shape exceeds the `miterLimit` that
-    /// you set, your ``ShapeStyle/lineJoin`` turns from `miter` to `bevel`!
+    /// you set, your ``StrokeStyle/lineJoin`` turns from `miter` to `bevel`!
     /// That's what it means to have limited miters.
     ///
     public var miterLimit: CGFloat

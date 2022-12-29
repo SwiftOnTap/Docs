@@ -4,8 +4,8 @@
 ///
 ///
 ///
-/// 1. Used directly via its initializer ``RotatedShape/init(shape:offset:)``.
-/// 2. The return value of ``Shape/offset(_:)`` and ``Shape/offset(x:y:)``.
+/// 1. Used directly via its initializer ``OffsetShape/init(shape:offset:)``.
+/// 2. The return value of ``Shape/offset(_:)-45f3b`` and ``Shape/offset(x:y:)``.
 ///
 ///
 ///
