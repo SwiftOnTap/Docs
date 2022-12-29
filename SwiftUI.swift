@@ -3253,7 +3253,7 @@ extension Animation : CustomStringConvertible, CustomDebugStringConvertible, Cus
     public var customMirror: Mirror { get }
 }
 
-/// A type-erased gesture.
+/// A type-erased gesture. See `Gesture` for information on the gesture protocol.
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen public struct AnyGesture<Value> : Gesture {
 
